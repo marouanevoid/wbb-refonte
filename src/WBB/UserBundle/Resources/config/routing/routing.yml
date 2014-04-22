@@ -1,0 +1,3 @@
+wbb_fos_user:
+    resource: "@WBBUserBundle/Resources/config/routing/fosuser.yml"
+    prefix:   /

@@ -1,0 +1,7 @@
+parameters:
+#    wbb_core.example.class: WBB\CoreBundle\Example
+
+services:
+#    wbb_core.example:
+#        class: %wbb_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

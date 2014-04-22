@@ -1,0 +1,13 @@
+#Bundle User
+WBB\UserBundle\Entity\User:
+    user:
+        username: admin
+        email: b.hakkari@void.fr
+        plainPassword: pass4admin
+        roles: [ROLE_SUPER_ADMIN]
+        enabled: true
+        locked: false
+        firstname: 'Badr'
+        lastname:  'HAKKARI'
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>

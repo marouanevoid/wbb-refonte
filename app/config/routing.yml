@@ -1,0 +1,11 @@
+wbb_bar:
+    resource: "@WBBBarBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wbb_core:
+    resource: "@WBBCoreBundle/Resources/config/routing/routing.yml"
+    prefix:   /
+
+wbb_user:
+    resource: "@WBBUserBundle/Resources/config/routing/routing.yml"
+    prefix:   /

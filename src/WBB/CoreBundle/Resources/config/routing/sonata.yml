@@ -1,0 +1,26 @@
+# Sonata Routing
+sonata_user_admin_security_login:
+    pattern:  /admin/login
+    defaults: { _controller:WBBUserBundle:AdminSecurity:login }
+
+sonata_user_admin_security_check:
+    pattern:  /admin/login_check
+    defaults: { _controller:WBBUserBundle:AdminSecurity:check }
+
+sonata_user_admin_security_logout:
+    pattern:  /admin/logout
+    defaults: { _controller:WBBUserBundle:AdminSecurity:logout }
+
+sonata_admin_homepage:
+    pattern: /admin
+    defaults:
+        _controller: SonataAdminBundle:Core:dashboard
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin

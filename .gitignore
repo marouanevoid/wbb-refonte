@@ -1,0 +1,16 @@
+/web/bundles/
+/web/media/
+/web/uploads/
+/web/css/
+/web/js/
+/app/bootstrap.php.cache
+/app/config/parameters.yml
+/app/cache/
+/app/logs/
+/build/
+/vendor/
+/bin/
+/.idea/
+*.php~
+/nbproject/private/
+/nbproject/

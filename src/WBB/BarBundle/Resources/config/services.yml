@@ -1,0 +1,18 @@
+parameters:
+
+    #Admin Classes
+    wbb_bar.bar.admin.class: WBB\BarBundle\Admin\BarAdmin
+
+    #Entities
+    wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
+
+services:
+
+    #Admin Class
+    wbb.bar.admin.bar:
+        class: %wbb_bar.bar.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.bar.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setTranslationDomain, ["WBBBarBundle"]]

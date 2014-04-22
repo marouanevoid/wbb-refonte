@@ -1,0 +1,19 @@
+parameters:
+
+    #Admin Classes
+    wbb_user.user.admin.class: WBB\UserBundle\Admin\UserAdmin
+
+    #Entities
+    wbb_user.user.entity.class: WBB\UserBundle\Entity\User
+
+services:
+
+    #Admin Class
+    wbb.user.admin.user:
+        class: %wbb_user.user.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_user, label: users, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_user.user.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setUserManager, ["@fos_user.user_manager"]]
+            - [setTranslationDomain, ["WBBUserBundle"]]
