@@ -118,6 +118,14 @@ class BarAdmin extends Admin
                 ->add('reservation')
                 ->add('description')
             ->end()
+            ->with('Medias')
+                ->add('medias', 'sonata_type_collection', array('required' => false),
+                    array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                        'sortable'  => 'position'
+                    ))
+            ->end()
             ->with('Order')
                 ->add('onTop')
                 ->add('status')
@@ -136,5 +144,19 @@ class BarAdmin extends Admin
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))  => 'lastname',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('email', 'show', 'label'))     => 'email',
         );
+    }
+
+    public function prePersist($object)
+    {
+        foreach ($object->getMedias() as $media) {
+            $media->setBar($object);
+        }
+    }
+
+    public function preUpdate($object)
+    {
+        foreach ($object->getMedias() as $media) {
+            $media->setBar($object);
+        }
     }
 }

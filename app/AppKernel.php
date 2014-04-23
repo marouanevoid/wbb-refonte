@@ -26,10 +26,15 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
             // DataFixtures
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Hautelook\AliceBundle\HautelookAliceBundle(),
+
+            //MediaBundle
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
 
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),

@@ -9,3 +9,11 @@ wbb_core:
 wbb_user:
     resource: "@WBBUserBundle/Resources/config/routing/routing.yml"
     prefix:   /
+
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media

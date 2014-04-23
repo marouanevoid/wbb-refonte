@@ -49,13 +49,16 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
+        types:
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings:
+                    SonataMediaBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -71,6 +74,7 @@ fos_user:
     firewall_name: main
     user_class: WBB\UserBundle\Entity\User
 
+# Sonata Admin bundle
 sonata_admin:
     title:      "WBB - Administration"
     #title_logo: /bundles/wwbcore/images/common/logo.png
@@ -94,7 +98,7 @@ sonata_admin:
 #    templates:
 #        layout: SonataAdminBundle::base_admin.html.twig
 
-# Sonata Admin bundle
+# Sonata Blocks
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -102,6 +106,31 @@ sonata_block:
             contexts:   [admin]
         sonata.block.service.text:
         sonata.block.service.rss:
+
+#Sonata Media Bundle
+sonata_media:
+    default_context: default
+    db_driver: doctrine_orm
+    contexts:
+        default:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+                large: { width: 1024, quality: 70}
+    cdn:
+        server:
+            path: /uploads/media
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     true
 
 #Fake Data Generator
 hautelook_alice:

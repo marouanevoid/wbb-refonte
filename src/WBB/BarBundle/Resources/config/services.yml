@@ -2,9 +2,11 @@ parameters:
 
     #Admin Classes
     wbb_bar.bar.admin.class: WBB\BarBundle\Admin\BarAdmin
+    wbb_bar.bar_media.admin.class: WBB\BarBundle\Admin\BarMediaAdmin
 
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
+    wbb_bar.bar_media.entity.class: WBB\BarBundle\Entity\BarMedia
 
 services:
 
@@ -16,3 +18,11 @@ services:
         arguments: [null, %wbb_bar.bar.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
+
+    wbb.bar.admin.bar_media:
+            class: %wbb_bar.bar_media.admin.class%
+            tags:
+              - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+            arguments: [null, %wbb_bar.bar_media.entity.class%, SonataAdminBundle:CRUD]
+            calls:
+                - [setTranslationDomain, ["WBBBarBundle"]]

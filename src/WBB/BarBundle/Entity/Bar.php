@@ -4,6 +4,7 @@ namespace WBB\BarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use WBB\BarBundle\Entity\BarMedia;
 
 /**
  * Bar
@@ -166,6 +167,11 @@ class Bar
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="bars")
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BarMedia", mappedBy="bar", cascade={"persist"})
+     */
+    private $medias;
 
     /**
      * @var \DateTime
@@ -721,5 +727,47 @@ class Bar
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->medias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add media
+     *
+     * @param BarMedia $media
+     * @return Bar
+     */
+    public function addMedia(BarMedia $media)
+    {
+        $this->medias[] = $media;
+        $media->setBar($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param BarMedia $medias
+     */
+    public function removeMedia(BarMedia $medias)
+    {
+        $this->medias->removeElement($medias);
+        $medias->setBar(null);
+    }
+
+    /**
+     * Get medias
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias()
+    {
+        return $this->medias;
     }
 }
