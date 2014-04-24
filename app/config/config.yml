@@ -136,3 +136,8 @@ sonata_media:
 hautelook_alice:
     locale: fr_FR
     seed: 1
+
+#Foursquare API Configuration
+jcroll_foursquare_api:
+    client_id:     %foursquare_client_id%
+    client_secret: %foursquare_client_secret%

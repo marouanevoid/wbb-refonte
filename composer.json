@@ -30,7 +30,9 @@
         "sonata-project/media-bundle": "2.2.*",
 
         "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "hautelook/alice-bundle": "dev-master"
+        "friendsofsymfony/jsrouting-bundle": "1.*",
+        "hautelook/alice-bundle": "dev-master",
+        "jcroll/foursquare-api-bundle": "1.0.*"
     },
     "scripts": {
         "post-install-cmd": [

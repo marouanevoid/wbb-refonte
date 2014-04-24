@@ -36,6 +36,9 @@ class AppKernel extends Kernel
             //MediaBundle
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
 
+            //Foursquare
+            new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),
