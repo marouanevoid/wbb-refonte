@@ -1,6 +1,6 @@
 <?php
 
-namespace BMWi\ForumBundle\Controller;
+namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,11 +12,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * FSAdminController
- *
- * @Route("/admin/fs")
  */
 class FSAdminController extends Controller
 {
+
+    public function testFSAction($venue)
+    {
+        $client = $this->container->get('jcroll_foursquare_client');
+        $command = $client->getCommand('venues', array('venue_id' => $venue));
+        $results = $command->execute();
+
+        var_dump($results);die;
+    }
+
     /**
      * listAction
      *
