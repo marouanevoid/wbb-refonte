@@ -75,6 +75,13 @@ class Bar
     /**
      * @var string
      *
+     * @ORM\Column(name="foursquare", type="string", length=255, nullable=true)
+     */
+    private $foursquare;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="twitter", type="string", length=255, nullable=true)
      */
     private $twitter;
@@ -167,6 +174,11 @@ class Bar
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="bars")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bars")
+     */
+    private $city;
 
     /**
      * @ORM\OneToMany(targetEntity="BarMedia", mappedBy="bar", cascade={"persist"})
@@ -769,5 +781,51 @@ class Bar
     public function getMedias()
     {
         return $this->medias;
+    }
+
+    /**
+     * Set foursquare
+     *
+     * @param string $foursquare
+     * @return Bar
+     */
+    public function setFoursquare($foursquare)
+    {
+        $this->foursquare = $foursquare;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquare
+     *
+     * @return string 
+     */
+    public function getFoursquare()
+    {
+        return $this->foursquare;
+    }
+
+    /**
+     * Set city
+     *
+     * @param \WBB\CoreBundle\Entity\City $city
+     * @return Bar
+     */
+    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \WBB\CoreBundle\Entity\City 
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

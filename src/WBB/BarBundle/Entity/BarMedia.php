@@ -46,6 +46,16 @@ class BarMedia
      */
     private $media;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     */
+    private $media2;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     */
+    private $media3;
+
 
     /**
      * Get id
@@ -147,5 +157,51 @@ class BarMedia
     public function getMedia()
     {
         return $this->media;
+    }
+
+    /**
+     * Set media2
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $media2
+     * @return BarMedia
+     */
+    public function setMedia2(\Application\Sonata\MediaBundle\Entity\Media $media2 = null)
+    {
+        $this->media2 = $media2;
+
+        return $this;
+    }
+
+    /**
+     * Get media2
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMedia2()
+    {
+        return $this->media2;
+    }
+
+    /**
+     * Set media3
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $media3
+     * @return BarMedia
+     */
+    public function setMedia3(\Application\Sonata\MediaBundle\Entity\Media $media3 = null)
+    {
+        $this->media3 = $media3;
+
+        return $this;
+    }
+
+    /**
+     * Get media3
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMedia3()
+    {
+        return $this->media3;
     }
 }

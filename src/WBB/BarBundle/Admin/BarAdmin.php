@@ -95,7 +95,9 @@ class BarAdmin extends Admin
 
         $formMapper
             ->with('General')
+                ->add('user', 'sonata_type_model')
                 ->add('name')
+                ->add('city', 'sonata_type_model')
                 ->add('latitude')
                 ->add('langitude')
                 ->add('adresse')

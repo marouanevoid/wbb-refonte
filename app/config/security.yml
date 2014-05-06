@@ -2,10 +2,6 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
 
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN]
-
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
@@ -49,3 +45,27 @@ security:
             - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin(.*), role: [ROLE_SUPER_ADMIN] }
+
+
+    role_hierarchy:
+        ROLE_SUPER_ADMIN:
+            - ROLE_USER
+            - WBB_BAR_ALL
+        ROLE_MODERATOR:
+            - ROLE_USER
+            - WBB_BAR_ALL
+        ROLE_PUBLISHER:
+            - ROLE_USER
+            - WBB_BAR_ALL
+        ROLE_EDITORIAL_EXPERT:
+        ROLE_BAR_EXPERT:
+        ROLE_BAR_OWNER:
+
+        WBB_BAR_ALL:
+            - ROLE_WBB_BAR_LIST
+            - ROLE_WBB_BAR_VIEW
+            - ROLE_WBB_BAR_CREATE
+            - ROLE_WBB_BAR_EDIT
+            - ROLE_WBB_BAR_DELETE
+
+

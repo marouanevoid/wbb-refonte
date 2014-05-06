@@ -77,8 +77,13 @@ class UserAdmin extends Admin
                         'multiple' => true,
                         'required' => false,
                         'choices'  => array(
-                            'ROLE_SUPER_ADMIN' => 'Administrateur',
-                            'ROLE_ADMIN' => 'Utilisateur'
+                            'ROLE_SUPER_ADMIN'      =>  'Administrator',
+                            'ROLE_MODERATOR'        =>  'Moderator',
+                            'ROLE_PUBLISHER'        =>  'Publisher',
+                            'ROLE_EDITORIAL_EXPERT' =>  'Editorial Expert',
+                            'ROLE_BAR_EXPERT'       =>  'Bar Expert',
+                            'ROLE_BAR_OWNER'        =>  'Bar Owner',
+                            'ROLE_USER'             =>  'User'
                         )
                     ))
                     ->add('locked', null, array('required' => false))

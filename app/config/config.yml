@@ -77,6 +77,8 @@ fos_user:
 # Sonata Admin bundle
 sonata_admin:
     title:      "WBB - Administration"
+    security:
+            handler: sonata.admin.security.handler.role
     #title_logo: /bundles/wwbcore/images/common/logo.png
     dashboard:
         blocks:
