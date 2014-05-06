@@ -1,7 +1,7 @@
 parameters:
 
     #Admin Classes
-    wbb_user.user.admin.class: WBB\UserBundle\Admin\UserAdmin
+    wbb_user.user.admin.class: WBB\UserBundle\Controller\Admin\UserAdmin
 
     #Entities
     wbb_user.user.entity.class: WBB\UserBundle\Entity\User

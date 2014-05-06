@@ -828,4 +828,9 @@ class Bar
     {
         return $this->city;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

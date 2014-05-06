@@ -1,7 +1,38 @@
 parameters:
-#    wbb_core.example.class: WBB\CoreBundle\Example
+
+    #Admin Classes
+    wbb_core.country.admin.class: WBB\CoreBundle\Controller\Admin\CountryAdmin
+    wbb_core.city.admin.class: WBB\CoreBundle\Controller\Admin\CityAdmin
+    wbb_core.citysuburb.admin.class: WBB\CoreBundle\Controller\Admin\CitySuburbAdmin
+
+    #Entities
+    wbb_core.country.entity.class: WBB\CoreBundle\Entity\Country
+    wbb_core.city.entity.class: WBB\CoreBundle\Entity\City
+    wbb_core.citysuburb.entity.class: WBB\CoreBundle\Entity\CitySuburb
 
 services:
-#    wbb_core.example:
-#        class: %wbb_core.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+
+    #Admin Class
+    wbb.core.admin.country:
+        class: %wbb_core.country.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_city, label: countries, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_core.country.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setTranslationDomain, ["WBBCoreBundle"]]
+
+    wbb.core.admin.city:
+            class: %wbb_core.city.admin.class%
+            tags:
+              - { name: sonata.admin, manager_type: orm, group: wbb_city, label: cities, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+            arguments: [null, %wbb_core.city.entity.class%, SonataAdminBundle:CRUD]
+            calls:
+                - [setTranslationDomain, ["WBBCoreBundle"]]
+
+    wbb.core.admin.citysuburb:
+            class: %wbb_core.citysuburb.admin.class%
+            tags:
+              - { name: sonata.admin, manager_type: orm, group: wbb_city, label: suburbs, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+            arguments: [null, %wbb_core.citysuburb.entity.class%, SonataAdminBundle:CRUD]
+            calls:
+                - [setTranslationDomain, ["WBBCoreBundle"]]

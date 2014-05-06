@@ -4,9 +4,9 @@
  * Fichier créer par : Badr HAKKARI <b.hakkari@void.fr>
  */
 
-namespace WBB\UserBundle\Admin;
+namespace WBB\UserBundle\Controller\Admin;
 
-use WBB\CoreBundle\Admin\Admin;
+use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

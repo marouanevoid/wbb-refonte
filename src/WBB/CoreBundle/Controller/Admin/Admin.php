@@ -4,7 +4,7 @@
  * Fichier créer par : Badr HAKKARI <b.hakkari@void.fr>
  */
 
-namespace WBB\CoreBundle\Admin;
+namespace WBB\CoreBundle\Controller\Admin;
 
 use Sonata\AdminBundle\Admin\Admin as BaseAdmin;
 

@@ -4,15 +4,14 @@
  * Fichier créer par : Badr HAKKARI <b.hakkari@void.fr>
  */
 
-namespace WBB\BarBundle\Admin;
+namespace WBB\CoreBundle\Controller\Admin;
 
-use WBB\CoreBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class BarMediaAdmin extends Admin
+class CityAdmin extends Admin
 {
     /**
      * {@inheritdoc}
@@ -21,15 +20,11 @@ class BarMediaAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('media', 'sonata_type_model_list', array(
-                    'required' => false
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'default'
-                    )
-                ))
-                ->add('alt')
-                ->add('position', 'hidden')
+                ->add('name')
+                ->add('country')
+                ->add('seoDescription')
+                ->add('suburbs', 'sonata_type_collection')
+                ->add('onTopCity')
             ->end();
     }
 }

@@ -1,8 +1,8 @@
 parameters:
 
     #Admin Classes
-    wbb_bar.bar.admin.class: WBB\BarBundle\Admin\BarAdmin
-    wbb_bar.bar_media.admin.class: WBB\BarBundle\Admin\BarMediaAdmin
+    wbb_bar.bar.admin.class: WBB\BarBundle\Controller\Admin\BarAdmin
+    wbb_bar.bar_media.admin.class: WBB\BarBundle\Controller\Admin\BarMediaAdmin
 
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar

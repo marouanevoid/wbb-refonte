@@ -31,28 +31,28 @@ class City
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="string", length=255)
+     * @ORM\Column(name="latitude", type="string", length=255, nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="string", length=255)
+     * @ORM\Column(name="longitude", type="string", length=255, nullable=true)
      */
     private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_description", type="text")
+     * @ORM\Column(name="seo_description", type="text", nullable=true)
      */
     private $seoDescription;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTopCity", type="boolean")
+     * @ORM\Column(name="onTopCity", type="boolean", nullable=true)
      */
     private $onTopCity;
 
@@ -290,5 +290,10 @@ class City
     public function getBars()
     {
         return $this->bars;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
