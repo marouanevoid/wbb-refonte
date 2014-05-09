@@ -25,12 +25,12 @@ interface FeedInterface
     public function findByHash($id);
 
     /**
-     * createFeed
+     * createObject
      *
      * @param string   $hash
      * @param Bar $bar
      *
-     * @return Feed
+     * @return Object
      */
-    public function createFeed($hash, Bar $bar = null);
+    public function createObject($hash, Bar $bar = null);
 }

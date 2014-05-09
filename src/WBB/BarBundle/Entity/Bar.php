@@ -2,9 +2,12 @@
 
 namespace WBB\BarBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use WBB\BarBundle\Entity\BarMedia;
+use WBB\CoreBundle\Entity\City;
+use WBB\CoreBundle\Entity\CitySuburb;
+use WBB\UserBundle\Entity\User;
 
 /**
  * Bar
@@ -183,6 +186,20 @@ class Bar
      * @ORM\Column(name="status", type="integer", nullable=true)
      */
     private $status;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="foursquare_excluded_tips", type="array")
+     */
+    private $fsExcludedTips;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="foursquare_selected_images", type="array")
+     */
+    private $fsSelectedImgs;
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="bars")
@@ -740,10 +757,10 @@ class Bar
     /**
      * Set user
      *
-     * @param \WBB\UserBundle\Entity\User $user
+     * @param User $user
      * @return Bar
      */
-    public function setUser(\WBB\UserBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -753,7 +770,7 @@ class Bar
     /**
      * Get user
      *
-     * @return \WBB\UserBundle\Entity\User 
+     * @return User
      */
     public function getUser()
     {
@@ -764,7 +781,7 @@ class Bar
      */
     public function __construct()
     {
-        $this->medias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     /**
@@ -828,10 +845,10 @@ class Bar
     /**
      * Set city
      *
-     * @param \WBB\CoreBundle\Entity\City $city
+     * @param City $city
      * @return Bar
      */
-    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
+    public function setCity(City $city = null)
     {
         $this->city = $city;
 
@@ -841,7 +858,7 @@ class Bar
     /**
      * Get city
      *
-     * @return \WBB\CoreBundle\Entity\City 
+     * @return City
      */
     public function getCity()
     {
@@ -879,10 +896,10 @@ class Bar
     /**
      * Set suburb
      *
-     * @param \WBB\CoreBundle\Entity\CitySuburb $suburb
+     * @param CitySuburb $suburb
      * @return Bar
      */
-    public function setSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburb = null)
+    public function setSuburb(CitySuburb $suburb = null)
     {
         $this->suburb = $suburb;
 
@@ -892,10 +909,70 @@ class Bar
     /**
      * Get suburb
      *
-     * @return \WBB\CoreBundle\Entity\CitySuburb 
+     * @return CitySuburb
      */
     public function getSuburb()
     {
         return $this->suburb;
+    }
+
+    /**
+     * Set fsExcludedTips
+     *
+     * @param array $fsExcludedTips
+     * @return Bar
+     */
+    public function setFsExcludedTips($fsExcludedTips)
+    {
+        $this->fsExcludedTips = $fsExcludedTips;
+
+        return $this;
+    }
+
+    /**
+     * Get fsExcludedTips
+     *
+     * @return array 
+     */
+    public function getFsExcludedTips()
+    {
+        return $this->fsExcludedTips;
+    }
+
+    public function addFsExcludedTip($hash)
+    {
+        $this->fsExcludedTips[] = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Set fsExcludedTips
+     *
+     * @param $fsSelectedImgs
+     * @return Bar
+     */
+    public function setFsSelectedImgs($fsSelectedImgs)
+    {
+        $this->fsSelectedImgs = $fsSelectedImgs;
+
+        return $this;
+    }
+
+    /**
+     * Get fsExcludedTips
+     *
+     * @return array
+     */
+    public function getFsSelectedImgs()
+    {
+        return $this->fsSelectedImgs;
+    }
+
+    public function addFsSelectedImg($hash)
+    {
+        $this->fsSelectedImgs[] = $hash;
+
+        return $this;
     }
 }

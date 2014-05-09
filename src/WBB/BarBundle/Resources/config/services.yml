@@ -31,4 +31,4 @@ services:
     # Feed
 #    wbb.foursquare.feed:
 #        class: %bmwi_forum.facebook.feed.class%
-#        arguments: [ @fos_facebook.api, @feed.repository, %foursquare_tips_limit% ]
+#        arguments: [ @service_container, @doctrine.orm.entity_manager, %foursquare_tips_limit% ]

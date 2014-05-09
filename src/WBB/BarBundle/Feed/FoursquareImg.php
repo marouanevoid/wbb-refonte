@@ -7,7 +7,7 @@ use WBB\BarBundle\Entity\Bar;
 /**
  * Foursquare
  */
-class FoursquareTips implements FeedInterface
+class FoursquareImg implements FeedInterface
 {
     private $container;
     private $em;
@@ -41,12 +41,12 @@ class FoursquareTips implements FeedInterface
         if($next > 0) $params['offset'] = $next;
 
         $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('venues/tips', $params);
+        $command = $client->getCommand('venues/photos', $params);
         $tips = $command->execute();
 
         return json_decode(array(
-            'type' => 'fsTips',
-            'data' => $tips['response']['tips']['items']
+            'type' => 'fsImg',
+            'data' => $tips['response']['photos']['items']
         ));
     }
 
@@ -60,14 +60,14 @@ class FoursquareTips implements FeedInterface
     public function findByHash($id)
     {
 
-        $params = array( 'tip_id' => $id);
+        $params = array( 'photo_id' => $id);
 
         $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('tips', $params);
+        $command = $client->getCommand('photos', $params);
         $tip = $command->execute();
 
         return json_decode(array(
-            'data' => $tip['response']['tip']
+            'data' => $tip['response']['photo']
         ));
     }
 
@@ -81,9 +81,9 @@ class FoursquareTips implements FeedInterface
      */
     public function createObject($hash, Bar $bar = null)
     {
-        $bar->addFsExcludedTip($hash);
+        $bar->addFsSelectedImg($hash);
         $this->em->persist($bar);
-        $this->em->flush($bar);
+        $this->em->flush();
 
         return $bar;
     }
