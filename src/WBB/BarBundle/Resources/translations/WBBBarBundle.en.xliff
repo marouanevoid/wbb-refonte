@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="breadcrumb.link_bar_list">
+                <source>breadcrumb.link_bar_list</source>
+                <target>Detail Bar Page</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_user">
+                <source>form.label_user</source>
+                <target>Link to owner / Add owner</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_city">
+                <source>form.label_city</source>
+                <target>City</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_latitude">
+                <source>form.label_latitude</source>
+                <target>Latitude</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_longitude">
+                <source>form.label_longitude</source>
+                <target>Longitude</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_address">
+                <source>form.label_address</source>
+                <target>Address</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_phone">
+                <source>form.label_phone</source>
+                <target>Phone</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_email">
+                <source>form.label_email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_website">
+                <source>form.label_website</source>
+                <target>Website</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_twitter">
+                <source>form.label_twitter</source>
+                <target>Twitter</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_facebook">
+                <source>form.label_facebook</source>
+                <target>Facebook</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_instagram">
+                <source>form.label_instagram</source>
+                <target>Instagram</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_is_credit_card">
+                <source>form.label_is_credit_card</source>
+                <target>Credit Card</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_is_coat_check">
+                <source>form.label_is_coat_check</source>
+                <target>Coat Check</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_is_reservation">
+                <source>form.label_is_reservation</source>
+                <target>Reservation</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_parking">
+                <source>form.label_parking</source>
+                <target>Parking</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_price">
+                <source>form.label_price</source>
+                <target>Price</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_menu">
+                <source>form.label_menu</source>
+                <target>Menu</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_reservation">
+                <source>form.label_reservation</source>
+                <target>Reservation</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target>Description</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_seo_description">
+                <source>form.label_seo_description</source>
+                <target>SEO Description</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_medias">
+                <source>form.label_medias</source>
+                <target>Medias</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_media">
+                <source>form.label_media</source>
+                <target>Media</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_video1">
+                <source>form.label_video1</source>
+                <target>MP4 media file</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_video2">
+                <source>form.label_video2</source>
+                <target>WebM/OGG media file</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_alt">
+                <source>form.label_alt</source>
+                <target>Alternative text</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_position">
+                <source>form.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_on_top">
+                <source>form.label_on_top</source>
+                <target>On Top Bars</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+
+            <!--<trans-unit id="">-->
+                <!--<source></source>-->
+                <!--<target></target>-->
+            <!--</trans-unit>-->
+
+        </body>
+    </file>
+</xliff>

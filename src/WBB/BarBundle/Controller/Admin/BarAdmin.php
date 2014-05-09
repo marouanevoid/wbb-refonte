@@ -6,6 +6,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -65,7 +66,7 @@ class BarAdmin extends Admin
                 ->add('name')
                 ->add('latitude')
                 ->add('langitude')
-                ->add('adresse')
+                ->add('address')
                 ->add('phone')
                 ->add('email')
                 ->add('website')
@@ -99,8 +100,8 @@ class BarAdmin extends Admin
                 ->add('name')
                 ->add('city', 'sonata_type_model')
                 ->add('latitude')
-                ->add('langitude')
-                ->add('adresse')
+                ->add('longitude')
+                ->add('address')
                 ->add('phone')
                 ->add('email')
                 ->add('website')
@@ -114,7 +115,22 @@ class BarAdmin extends Admin
                 ->add('isCreditCard')
                 ->add('isCoatCheck')
                 ->add('parking')
-                ->add('price')
+                ->add('parking', 'choice', array(
+                    'required' => false,
+                    'choices'  => array(
+                        1 => 'Oui',
+                        0 => 'Non'
+                    )
+                ))
+                ->add('price', 'choice', array(
+                    'required' => false,
+                    'choices'  => array(
+                        1 => 1,
+                        2 => 2,
+                        3 => 3,
+                        4 => 4
+                    )
+                ))
                 ->add('menu')
                 ->add('isReservation')
                 ->add('reservation')
@@ -130,7 +146,14 @@ class BarAdmin extends Admin
             ->end()
             ->with('Order')
                 ->add('onTop')
-                ->add('status')
+                ->add('status', 'choice', array(
+                    'required' => false,
+                    'choices'  => array(
+                        Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
+                        Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
+                        Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
+                    )
+                ))
             ->end()
         ;
     }

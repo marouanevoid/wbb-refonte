@@ -75,15 +75,15 @@ class Country
     }
 
     /**
-     * Add cities
+     * Add city
      *
-     * @param \WBB\CoreBundle\Entity\City $cities
+     * @param \WBB\CoreBundle\Entity\City $city
      * @return Country
      */
-    public function addCity(\WBB\CoreBundle\Entity\City $cities)
+    public function addCity(\WBB\CoreBundle\Entity\City $city)
     {
-        $this->cities[] = $cities;
-
+        $this->cities[] = $city;
+        $city->setCountry($this);
         return $this;
     }
 

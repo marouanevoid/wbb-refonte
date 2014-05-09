@@ -14,6 +14,13 @@ use WBB\BarBundle\Entity\BarMedia;
  */
 class Bar
 {
+    const BAR_STATUS_ENABLED_VALUE = 2;
+    const BAR_STATUS_ENABLED_TEXT = "Enabled";
+    const BAR_STATUS_PENDING_VALUE = 1;
+    const BAR_STATUS_PENDING_TEXT = "Pending";
+    const BAR_STATUS_DISABLED_VALUE = 0;
+    const BAR_STATUS_DISABLED_TEXT = "Disabled";
+
     /**
      * @var integer
      *
@@ -40,16 +47,16 @@ class Bar
     /**
      * @var string
      *
-     * @ORM\Column(name="langitude", type="string", length=20, nullable=true)
+     * @ORM\Column(name="longitude", type="string", length=20, nullable=true)
      */
-    private $langitude;
+    private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $adresse;
+    private $address;
 
     /**
      * @var string
@@ -157,6 +164,13 @@ class Bar
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="seo_description", type="string", length=255, nullable=true)
+     */
+    private $seoDescription;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="onTop", type="boolean", nullable=true)
@@ -179,6 +193,11 @@ class Bar
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bars")
      */
     private $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="bars")
+     */
+    private $suburb;
 
     /**
      * @ORM\OneToMany(targetEntity="BarMedia", mappedBy="bar", cascade={"persist"})
@@ -259,49 +278,49 @@ class Bar
     }
 
     /**
-     * Set langitude
+     * Set longitude
      *
-     * @param string $langitude
+     * @param string $longitude
      * @return Bar
      */
-    public function setLangitude($langitude)
+    public function setLongitude($longitude)
     {
-        $this->langitude = $langitude;
+        $this->longitude = $longitude;
 
         return $this;
     }
 
     /**
-     * Get langitude
+     * Get longitude
      *
      * @return string 
      */
-    public function getLangitude()
+    public function getLongitude()
     {
-        return $this->langitude;
+        return $this->longitude;
     }
 
     /**
-     * Set adresse
+     * Set address
      *
-     * @param string $adresse
+     * @param string $address
      * @return Bar
      */
-    public function setAdresse($adresse)
+    public function setAddress($address)
     {
-        $this->adresse = $adresse;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get adresse
+     * Get address
      *
      * @return string 
      */
-    public function getAdresse()
+    public function getAddress()
     {
-        return $this->adresse;
+        return $this->address;
     }
 
     /**
@@ -832,5 +851,51 @@ class Bar
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Set seoDescription
+     *
+     * @param string $seoDescription
+     * @return Bar
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get seoDescription
+     *
+     * @return string 
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
+    }
+
+    /**
+     * Set suburb
+     *
+     * @param \WBB\CoreBundle\Entity\CitySuburb $suburb
+     * @return Bar
+     */
+    public function setSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburb = null)
+    {
+        $this->suburb = $suburb;
+
+        return $this;
+    }
+
+    /**
+     * Get suburb
+     *
+     * @return \WBB\CoreBundle\Entity\CitySuburb 
+     */
+    public function getSuburb()
+    {
+        return $this->suburb;
     }
 }

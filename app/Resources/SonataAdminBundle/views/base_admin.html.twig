@@ -1,0 +1,27 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+{% block footer %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/wbbcore/css/wysihtml5/bootstrap-wysihtml5.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/vendor/wysihtml5/wysihtml5-0.3.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/vendor/wysihtml5/bootstrap-wysihtml5.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            if ($('.wysihtml5').length > 0) {
+                $('.wysihtml5').height('200px');
+                $('.wysihtml5').width($('.wysihtml5').width());
+                $('.wysihtml5').wysihtml5({
+                    "html": true,
+                    "link": false,
+                    "image": false,
+                    "color": false
+                });
+            }
+        });
+    </script>
+{% endblock %}

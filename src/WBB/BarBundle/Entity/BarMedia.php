@@ -49,12 +49,12 @@ class BarMedia
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
-    private $media2;
+    private $video1;
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
-    private $media3;
+    private $video2;
 
 
     /**
@@ -160,48 +160,48 @@ class BarMedia
     }
 
     /**
-     * Set media2
+     * Set video1
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $media2
+     * @param \Application\Sonata\MediaBundle\Entity\Media $video1
      * @return BarMedia
      */
-    public function setMedia2(\Application\Sonata\MediaBundle\Entity\Media $media2 = null)
+    public function setVideo1(\Application\Sonata\MediaBundle\Entity\Media $video1 = null)
     {
-        $this->media2 = $media2;
+        $this->video1 = $video1;
 
         return $this;
     }
 
     /**
-     * Get media2
+     * Get video1
      *
      * @return \Application\Sonata\MediaBundle\Entity\Media 
      */
-    public function getMedia2()
+    public function getVideo1()
     {
-        return $this->media2;
+        return $this->video1;
     }
 
     /**
-     * Set media3
+     * Set video2
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $media3
+     * @param \Application\Sonata\MediaBundle\Entity\Media $video2
      * @return BarMedia
      */
-    public function setMedia3(\Application\Sonata\MediaBundle\Entity\Media $media3 = null)
+    public function setVideo2(\Application\Sonata\MediaBundle\Entity\Media $video2 = null)
     {
-        $this->media3 = $media3;
+        $this->video2 = $video2;
 
         return $this;
     }
 
     /**
-     * Get media3
+     * Get video2
      *
      * @return \Application\Sonata\MediaBundle\Entity\Media 
      */
-    public function getMedia3()
+    public function getVideo2()
     {
-        return $this->media3;
+        return $this->video2;
     }
 }

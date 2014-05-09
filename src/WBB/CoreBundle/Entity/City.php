@@ -227,14 +227,15 @@ class City
     }
 
     /**
-     * Add suburbs
+     * Add suburb
      *
-     * @param \WBB\CoreBundle\Entity\CitySuburb $suburbs
+     * @param \WBB\CoreBundle\Entity\CitySuburb $suburb
      * @return City
      */
-    public function addSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburbs)
+    public function addSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburb)
     {
-        $this->suburbs[] = $suburbs;
+        $this->suburbs[] = $suburb;
+        $suburb->setCity($this);
 
         return $this;
     }
@@ -260,14 +261,15 @@ class City
     }
 
     /**
-     * Add bars
+     * Add bar
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param \WBB\BarBundle\Entity\Bar $bar
      * @return City
      */
-    public function addBar(\WBB\BarBundle\Entity\Bar $bars)
+    public function addBar(\WBB\BarBundle\Entity\Bar $bar)
     {
-        $this->bars[] = $bars;
+        $this->bars[] = $bar;
+        $bar->setCity($this);
 
         return $this;
     }

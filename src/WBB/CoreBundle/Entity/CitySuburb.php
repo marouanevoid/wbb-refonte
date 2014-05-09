@@ -33,6 +33,11 @@ class CitySuburb
      */
     private $city;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="suburb", cascade={"persist"})
+     */
+    private $bars;
+
 
     /**
      * Get id
@@ -93,5 +98,45 @@ class CitySuburb
     public function __toString()
     {
         return $this->getName();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->bars = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add bars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @return CitySuburb
+     */
+    public function addBar(\WBB\BarBundle\Entity\Bar $bars)
+    {
+        $this->bars[] = $bars;
+
+        return $this;
+    }
+
+    /**
+     * Remove bars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $bars
+     */
+    public function removeBar(\WBB\BarBundle\Entity\Bar $bars)
+    {
+        $this->bars->removeElement($bars);
+    }
+
+    /**
+     * Get bars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBars()
+    {
+        return $this->bars;
     }
 }

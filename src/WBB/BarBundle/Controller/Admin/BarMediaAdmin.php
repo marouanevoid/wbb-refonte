@@ -28,6 +28,20 @@ class BarMediaAdmin extends Admin
                         'context' => 'default'
                     )
                 ))
+                ->add('video1', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
+                ))
+                ->add('video2', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
+                ))
                 ->add('alt')
                 ->add('position', 'hidden')
             ->end();
