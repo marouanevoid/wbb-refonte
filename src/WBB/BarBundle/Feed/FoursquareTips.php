@@ -2,6 +2,7 @@
 
 namespace WBB\BarBundle\Feed;
 
+use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\FoursquareTips as FSEntity;
 
 /**
@@ -11,35 +12,43 @@ class FoursquareTips implements FeedInterface
 {
     private $service;
     private $repository;
+    private $limit;
 
     /**
      * __construct
      *
      * @param $service
      * @param $repository
+     * @param $limit
      */
-    public function __construct($service, $repository)
+    public function __construct($service, $repository, $limit)
     {
         $this->service    = $service;
         $this->repository = $repository;
+        $this->limit = $limit;
     }
 
     /**
      * find
      *
      * @param null $id
+     * @param int $next
      * @return array
      */
-    public function find($id = null)
+    public function find($id = null, $next = 0)
     {
+        $params = array( 'venue_id' => $id, 'limit' => $this->limit);
+
+        if($next > 0) $params['offset'] = $next;
+
         $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('venues', array('venue_id' => $id));
+        $command = $client->getCommand('venues/tips', $params);
         $tips = $command->execute();
 
-        return array(
+        return json_decode(array(
             'type' => 'fsTips',
-            'data' => $tips
-        );
+            'data' => $tips['response']['tips']['items']
+        ));
     }
 
     /**
@@ -51,34 +60,34 @@ class FoursquareTips implements FeedInterface
      */
     public function findByHash($id)
     {
-        $response = $this->twitter->query('statuses/show', 'GET', 'json', array('id' => $id));
 
-        return json_decode($response->getContent());
+        $params = array( 'tip_id' => $id);
+
+        $client = $this->container->get('jcroll_foursquare_client');
+        $command = $client->getCommand('tips', $params);
+        $tip = $command->execute();
+
+        return json_decode(array(
+            'data' => $tip['response']['tip']
+        ));
     }
 
     /**
      * createFeed
      *
-     * @param string   $hash
-     * @param Thematic $thematic
+     * @param string $hash
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @internal param \WBB\BarBundle\Feed\Thematic $thematic
      *
      * @return Feed
      */
-    public function createFeed($hash, Thematic $thematic = null)
+    public function createFeed($hash, Bar $bar = null)
     {
         $tweet = $this->findByHash($hash);
 
         $feed = new Feed();
         $feed
             ->setHash($hash)
-            ->setContent($this->parseTwitter($tweet->text))
-            ->setEnabled(true)
-            ->setPostedAt(new \DateTime($tweet->created_at))
-            ->setUserLogin($tweet->user->screen_name)
-            ->setUsername($tweet->user->name)
-            ->setSource(Feed::SOURCE_TWITTER)
-            ->setUserPhoto($tweet->user->profile_image_url)
-            ->setThematic($thematic)
         ;
 
         return $feed;

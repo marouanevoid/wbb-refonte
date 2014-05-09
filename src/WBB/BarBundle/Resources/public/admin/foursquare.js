@@ -1,20 +1,20 @@
 $(function() {
-    foursquareFeed = new FoursquareFeed();
-    foursquareFeed.init();
+    bmwiFeed = new BmwiFeed();
+    bmwiFeed.init();
 });
 
-function FoursquareFeed() {
-    var foursquareFeed = this;
+function BmwiFeed() {
+    var bmwiFeed = this;
     var options  = {};
 
-    foursquareFeed.init = function() {
-        foursquareFeed.tabs();
-        foursquareFeed.more();
-        foursquareFeed.add();
+    bmwiFeed.init = function() {
+        bmwiFeed.tabs();
+        bmwiFeed.more();
+        bmwiFeed.add();
         $('.loader').hide();
     }
 
-    foursquareFeed.tabs = function() {
+    bmwiFeed.tabs = function() {
         $('a[data-toggle="tab"]').on('shown', function (e) {
             var elementId = e.target.toString().match(/#.+/gi)[0];
 
@@ -22,29 +22,29 @@ function FoursquareFeed() {
                 e.preventDefault();
                 window.location.reload(true);
             } else {
-                var content = $(elementId).find(".content_fsfeeds");
+                var content = $(elementId).find(".content_tweets");
 
-                if (content.find('.fsfeed').length < 1) {
-                    foursquareFeed.load(elementId.substring(1), content);
+                if (content.find('.tweet').length < 1) {
+                    bmwiFeed.load(elementId.substring(1), content);
                 };
             }
 
         })
     }
 
-    foursquareFeed.more = function() {
+    bmwiFeed.more = function() {
         $('.more').on('click', function() {
             var id = $(this).data('next');
             var type    = $(this).parents('.tab-pane').attr('id');
-            var content = $(this).parents(".fsfeeds").find(".content_fsfeeds");
-            foursquareFeed.load(type, content, id);
+            var content = $(this).parents(".tweets").find(".content_tweets");
+            bmwiFeed.load(type, content, id);
         })
     }
 
-    foursquareFeed.add = function() {
+    bmwiFeed.add = function() {
         $(document).on('click', '.add', function(){
             var loader = $(this).parent('.mt_footer').find('.loader');
-            var container = $(this).parents('.fsfeed');
+            var container = $(this).parents('.tweet');
 
             var hash = container.attr('id');
             var thematic = $('#thematic-'+hash).val();
@@ -60,7 +60,7 @@ function FoursquareFeed() {
                 dataType: "json",
                 success: function(msg) {
                     loader.hide();
-                    $(container).addClass('fsfeed_disabled');
+                    $(container).addClass('tweet_disabled');
                     $(container).find('.mt_footer').empty();
                 },
                 error: function(response) {
@@ -70,7 +70,7 @@ function FoursquareFeed() {
         });
     }
 
-    foursquareFeed.load = function(type, container, next) {
+    bmwiFeed.load = function(type, container, next) {
         var query = null;
         next = next || false;
         query = {
@@ -78,8 +78,8 @@ function FoursquareFeed() {
             next: next !== false ? next:''
         };
 
-        loader = $(container).parent('.fsfeeds').find('.fsfeeds_action .loader');
-        nextBtn = $(container).parent('.fsfeeds').find('input.more');
+        loader = $(container).parent('.tweets').find('.tweets_action .loader');
+        nextBtn = $(container).parent('.tweets').find('input.more');
 
         loader.show();
         $.ajax({
@@ -97,7 +97,7 @@ function FoursquareFeed() {
                 });
 
                 $.each(response.data, function(key, feed){
-                    var feedHtml = feed.disable ? $("#fsfeedDisabled").html():$("#fsfeed").html();
+                    var feedHtml = feed.disable ? $("#tweetDisabled").html():$("#tweet").html();
                     var template = null;
 
                     if (response.type == 'twitter') {

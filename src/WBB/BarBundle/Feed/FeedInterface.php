@@ -10,9 +10,10 @@ interface FeedInterface
      * find
      *
      * @param null $id
+     * @param int $next
      * @return array
      */
-    public function find($id = null);
+    public function find($id = null, $next = 0);
 
     /**
      * findByHash

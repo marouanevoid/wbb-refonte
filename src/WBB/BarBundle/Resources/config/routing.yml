@@ -1,3 +1,5 @@
 wbb_bar_test:
-    pattern:  /test/{venue}
+    pattern:  /feed/fsTips/{venue}
     defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
+    options:
+            expose: true

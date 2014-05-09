@@ -31,7 +31,19 @@
                         </li>
                     {% endfor %}
                     <li class="">
-                        <a href="#{{ admin.uniqid }}_foursquare_tab" data-toggle="tab">
+                        <a href="#{{ admin.uniqid }}_fs_tips_tab" data-toggle="tab">
+                            <i class="icon-exclamation-sign has-errors hide"></i>
+                            Foursquare
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#{{ admin.uniqid }}_fs_img_tab" data-toggle="tab">
+                            <i class="icon-exclamation-sign has-errors hide"></i>
+                            Foursquare
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#{{ admin.uniqid }}_instg_tab" data-toggle="tab">
                             <i class="icon-exclamation-sign has-errors hide"></i>
                             Foursquare
                         </a>
@@ -58,7 +70,21 @@
                                 </fieldset>
                             </div>
                         {% endfor %}
-                        <div class="tab-pane " id="{{ admin.uniqid }}_foursquare_tab">
+                        <div class="tab-pane " id="{{ admin.uniqid }}_fs_tips_tab">
+                            <fieldset>
+                                <div class="sonata-ba-collapsed-fields">
+                                    <input type="text" id="test_ignore"/>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="tab-pane " id="{{ admin.uniqid }}_fs_img_tab">
+                            <fieldset>
+                                <div class="sonata-ba-collapsed-fields">
+                                    <input type="text" id="test_ignore"/>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="tab-pane " id="{{ admin.uniqid }}_instg_tab">
                             <fieldset>
                                 <div class="sonata-ba-collapsed-fields">
                                     <input type="text" id="test_ignore"/>

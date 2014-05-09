@@ -18,11 +18,18 @@ class FSAdminController extends Controller
 
     public function testFSAction($venue)
     {
-        $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('venues', array('venue_id' => $venue));
-        $results = $command->execute();
+        $params = array( 'venue_id' => $venue, 'limit' => 4);
 
-        var_dump($results);die;
+        //if($next > 0) $params['offset'] = $next;
+
+        $client = $this->container->get('jcroll_foursquare_client');
+        $command = $client->getCommand('venues/tips', $params);
+        $tips = $command->execute();
+
+        return new JsonResponse(array(
+            'type' => 'fsTips',
+            'data' => $tips['response']['tips']['items']
+        ));
     }
 
     /**

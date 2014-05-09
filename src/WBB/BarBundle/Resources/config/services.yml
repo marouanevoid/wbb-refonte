@@ -27,3 +27,8 @@ services:
             arguments: [null, %wbb_bar.bar_media.entity.class%, SonataAdminBundle:CRUD]
             calls:
                 - [setTranslationDomain, ["WBBBarBundle"]]
+
+    # Feed
+#    wbb.foursquare.feed:
+#        class: %bmwi_forum.facebook.feed.class%
+#        arguments: [ @fos_facebook.api, @feed.repository, %foursquare_tips_limit% ]
