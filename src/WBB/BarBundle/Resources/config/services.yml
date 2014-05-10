@@ -8,6 +8,10 @@ parameters:
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
     wbb_bar.bar_media.entity.class: WBB\BarBundle\Entity\BarMedia
 
+    #Feed Classes
+    wbb_feed.foursquare_tips.class: WBB\BarBundle\Feed\FoursquareTips
+    wbb_feed.foursquare_imgs.class: WBB\BarBundle\Feed\FoursquareImgs
+
 services:
 
     #Admin Class
@@ -29,6 +33,10 @@ services:
                 - [setTranslationDomain, ["WBBBarBundle"]]
 
     # Feed
-#    wbb.foursquare.feed:
-#        class: %bmwi_forum.facebook.feed.class%
-#        arguments: [ @service_container, @doctrine.orm.entity_manager, %foursquare_tips_limit% ]
+    wbb.fstips.feed:
+        class: %wbb_feed.foursquare_tips.class%
+        arguments: [ @service_container, @doctrine.orm.entity_manager, %foursquare_tips_limit% ]
+
+    wbb.fsimgs.feed:
+            class: %wbb_feed.foursquare_imgs.class%
+            arguments: [ @service_container, @doctrine.orm.entity_manager, %foursquare_tips_limit% ]

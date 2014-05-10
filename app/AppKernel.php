@@ -39,6 +39,9 @@ class AppKernel extends Kernel
             //Foursquare
             new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),
 
+            //Guzzle
+//            new Misd\GuzzleBundle\MisdGuzzleBundle(),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),

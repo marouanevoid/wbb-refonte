@@ -3,15 +3,19 @@
 namespace WBB\BarBundle\Feed;
 
 use WBB\BarBundle\Entity\Bar;
+use Guzzle\Http\Client;
 
 /**
  * Foursquare
  */
-class FoursquareTips implements FeedInterface
+class Instagram implements FeedInterface
 {
     private $container;
     private $em;
     private $limit;
+    private $client;
+
+    protected $baseUrl = 'https://api.instagram.com/v1/';
 
     /**
      * __construct
@@ -25,6 +29,7 @@ class FoursquareTips implements FeedInterface
         $this->container    = $container;
         $this->em           = $em;
         $this->limit        = $limit;
+        $this->client       = new Client($this->baseUrl);
     }
 
     /**
@@ -36,18 +41,22 @@ class FoursquareTips implements FeedInterface
      */
     public function find($id = null, $next = 0)
     {
+        $data = $this->client->get("users/$id/media/recent/?client_id=$this->container->getParameter('instagram_client_id')")->send()->getBody();
+
+        var_dump($data);die;
+
         $params = array( 'venue_id' => $id, 'limit' => $this->limit);
 
         if($next > 0) $params['offset'] = $next;
 
         $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('venues/tips', $params);
+        $command = $client->getCommand('venues/photos', $params);
         $tips = $command->execute();
 
-        return array(
-            'type' => 'fsTips',
-            'data' => $tips['response']['tips']['items']
-        );
+        return json_decode(array(
+            'type' => 'fsImg',
+            'data' => $tips['response']['photos']['items']
+        ));
     }
 
     /**
@@ -60,15 +69,15 @@ class FoursquareTips implements FeedInterface
     public function findByHash($id)
     {
 
-        $params = array( 'tip_id' => $id);
+        $params = array( 'photo_id' => $id);
 
         $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('tips', $params);
+        $command = $client->getCommand('photos', $params);
         $tip = $command->execute();
 
-        return array(
-            'data' => $tip['response']['tip']
-        );
+        return json_decode(array(
+            'data' => $tip['response']['photo']
+        ));
     }
 
     /**
@@ -81,9 +90,9 @@ class FoursquareTips implements FeedInterface
      */
     public function createObject($hash, Bar $bar = null)
     {
-        $bar->addFsExcludedTip($hash);
+        $bar->addFsSelectedImg($hash);
         $this->em->persist($bar);
-        $this->em->flush($bar);
+        $this->em->flush();
 
         return $bar;
     }

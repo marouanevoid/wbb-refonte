@@ -32,7 +32,8 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "friendsofsymfony/jsrouting-bundle": "1.*",
         "hautelook/alice-bundle": "dev-master",
-        "jcroll/foursquare-api-bundle": "1.0.*"
+        "jcroll/foursquare-api-bundle": "1.0.*",
+        "guzzle/guzzle": "v3.8"
     },
     "scripts": {
         "post-install-cmd": [

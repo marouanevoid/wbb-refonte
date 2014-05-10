@@ -7,7 +7,7 @@ use WBB\BarBundle\Entity\Bar;
 /**
  * Foursquare
  */
-class FoursquareImg implements FeedInterface
+class FoursquareImgs implements FeedInterface
 {
     private $container;
     private $em;
@@ -44,10 +44,10 @@ class FoursquareImg implements FeedInterface
         $command = $client->getCommand('venues/photos', $params);
         $tips = $command->execute();
 
-        return json_decode(array(
-            'type' => 'fsImg',
+        return array(
+            'type' => 'fsImgs',
             'data' => $tips['response']['photos']['items']
-        ));
+        );
     }
 
     /**
@@ -66,9 +66,9 @@ class FoursquareImg implements FeedInterface
         $command = $client->getCommand('photos', $params);
         $tip = $command->execute();
 
-        return json_decode(array(
+        return array(
             'data' => $tip['response']['photo']
-        ));
+        );
     }
 
     /**

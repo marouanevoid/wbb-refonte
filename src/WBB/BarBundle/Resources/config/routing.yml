@@ -3,3 +3,15 @@ wbb_bar_test:
     defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
     options:
             expose: true
+
+wbb_bar_feeds_list:
+    pattern:  /feed/list/{type}/{id}
+    defaults: { _controller: WBBBarBundle:FSAdmin:list }
+    options:
+            expose: true
+
+wbb_bar_feed_add:
+    pattern:  /feed/save/{type}/{hash}/{bar}
+    defaults: { _controller: WBBBarBundle:FSAdmin:add }
+    options:
+            expose: true
