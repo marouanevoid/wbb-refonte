@@ -217,9 +217,16 @@ class Bar
     private $suburb;
 
     /**
-     * @ORM\OneToMany(targetEntity="BarMedia", mappedBy="bar", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="BarMedia", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $medias;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BarOpening", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"openingDay" = "ASC"})
+     */
+    private $openings;
 
     /**
      * @var \DateTime
@@ -974,5 +981,38 @@ class Bar
         $this->fsSelectedImgs[] = $hash;
 
         return $this;
+    }
+
+    /**
+     * Add openings
+     *
+     * @param \WBB\BarBundle\Entity\BarOpening $openings
+     * @return Bar
+     */
+    public function addOpening(\WBB\BarBundle\Entity\BarOpening $openings)
+    {
+        $this->openings[] = $openings;
+
+        return $this;
+    }
+
+    /**
+     * Remove openings
+     *
+     * @param \WBB\BarBundle\Entity\BarOpening $openings
+     */
+    public function removeOpening(\WBB\BarBundle\Entity\BarOpening $openings)
+    {
+        $this->openings->removeElement($openings);
+    }
+
+    /**
+     * Get openings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOpenings()
+    {
+        return $this->openings;
     }
 }

@@ -154,6 +154,11 @@ class BarAdmin extends Admin
                         Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
                     )
                 ))
+                ->add('openings', 'sonata_type_collection', array('required' => false),
+                    array(
+                        'edit' => 'inline',
+                        'inline' => 'table'
+                    ))
             ->end()
         ;
     }
@@ -176,12 +181,18 @@ class BarAdmin extends Admin
         foreach ($object->getMedias() as $media) {
             $media->setBar($object);
         }
+        foreach ($object->getOpenings() as $opening) {
+            $opening->setBar($object);
+        }
     }
 
     public function preUpdate($object)
     {
         foreach ($object->getMedias() as $media) {
             $media->setBar($object);
+        }
+        foreach ($object->getOpenings() as $opening) {
+            $opening->setBar($object);
         }
     }
 }

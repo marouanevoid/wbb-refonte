@@ -3,10 +3,12 @@ parameters:
     #Admin Classes
     wbb_bar.bar.admin.class: WBB\BarBundle\Controller\Admin\BarAdmin
     wbb_bar.bar_media.admin.class: WBB\BarBundle\Controller\Admin\BarMediaAdmin
+    wbb_bar.bar_opening.admin.class: WBB\BarBundle\Controller\Admin\BarOpeningAdmin
 
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
     wbb_bar.bar_media.entity.class: WBB\BarBundle\Entity\BarMedia
+    wbb_bar.bar_opening.entity.class: WBB\BarBundle\Entity\BarOpening
 
     #Feed Classes
     wbb_feed.foursquare_tips.class: WBB\BarBundle\Feed\FoursquareTips
@@ -31,6 +33,14 @@ services:
             arguments: [null, %wbb_bar.bar_media.entity.class%, SonataAdminBundle:CRUD]
             calls:
                 - [setTranslationDomain, ["WBBBarBundle"]]
+
+    wbb.bar.admin.bar_opening:
+                class: %wbb_bar.bar_opening.admin.class%
+                tags:
+                  - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: openings, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+                arguments: [null, %wbb_bar.bar_opening.entity.class%, SonataAdminBundle:CRUD]
+                calls:
+                    - [setTranslationDomain, ["WBBBarBundle"]]
 
     # Feed
     wbb.fstips.feed:
