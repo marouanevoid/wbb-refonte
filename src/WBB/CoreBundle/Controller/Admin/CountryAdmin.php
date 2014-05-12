@@ -23,4 +23,34 @@ class CountryAdmin extends Admin
                 ->add('name')
             ->end();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper->addIdentifier('name', null, array('editable' => true));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
+        $filterMapper
+            ->add('name')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->with('General')
+                ->add('name')
+            ->end()
+        ;
+    }
 }

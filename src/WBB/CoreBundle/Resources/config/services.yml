@@ -16,7 +16,7 @@ services:
     wbb.core.admin.country:
         class: %wbb_core.country.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_city, label: countries, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_location, label: countries, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_core.country.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
@@ -24,7 +24,7 @@ services:
     wbb.core.admin.city:
             class: %wbb_core.city.admin.class%
             tags:
-              - { name: sonata.admin, manager_type: orm, group: wbb_city, label: cities, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+              - { name: sonata.admin, manager_type: orm, group: wbb_location, label: cities, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
             arguments: [null, %wbb_core.city.entity.class%, SonataAdminBundle:CRUD]
             calls:
                 - [setTranslationDomain, ["WBBCoreBundle"]]
@@ -32,7 +32,7 @@ services:
     wbb.core.admin.citysuburb:
             class: %wbb_core.citysuburb.admin.class%
             tags:
-              - { name: sonata.admin, manager_type: orm, group: wbb_city, label: suburbs, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+              - { name: sonata.admin, manager_type: orm, group: wbb_location, label: suburbs, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
             arguments: [null, %wbb_core.citysuburb.entity.class%, SonataAdminBundle:CRUD]
             calls:
                 - [setTranslationDomain, ["WBBCoreBundle"]]

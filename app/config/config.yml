@@ -97,6 +97,7 @@ sonata_admin:
         groups:
             wbb_user: ~
             wbb_bar: ~
+            wbb_location: ~
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
         layout: SonataAdminBundle::base_admin.html.twig
