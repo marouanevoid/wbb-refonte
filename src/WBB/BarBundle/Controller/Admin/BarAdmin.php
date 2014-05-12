@@ -154,6 +154,8 @@ class BarAdmin extends Admin
                         Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
                     )
                 ))
+            ->end()
+            ->with('Openings')
                 ->add('openings', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
