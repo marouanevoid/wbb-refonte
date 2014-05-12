@@ -4,11 +4,13 @@ parameters:
     wbb_bar.bar.admin.class: WBB\BarBundle\Controller\Admin\BarAdmin
     wbb_bar.bar_media.admin.class: WBB\BarBundle\Controller\Admin\BarMediaAdmin
     wbb_bar.bar_opening.admin.class: WBB\BarBundle\Controller\Admin\BarOpeningAdmin
+    wbb_bar.trend.admin.class: WBB\BarBundle\Controller\Admin\TrendAdmin
 
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
     wbb_bar.bar_media.entity.class: WBB\BarBundle\Entity\BarMedia
     wbb_bar.bar_opening.entity.class: WBB\BarBundle\Entity\BarOpening
+    wbb_bar.trend.entity.class: WBB\BarBundle\Entity\Trend
 
     #Feed Classes
     wbb_feed.foursquare_tips.class: WBB\BarBundle\Feed\FoursquareTips
@@ -39,6 +41,14 @@ services:
                 tags:
                   - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: openings, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
                 arguments: [null, %wbb_bar.bar_opening.entity.class%, SonataAdminBundle:CRUD]
+                calls:
+                    - [setTranslationDomain, ["WBBBarBundle"]]
+
+    wbb.bar.admin.trend:
+                class: %wbb_bar.trend.admin.class%
+                tags:
+                  - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: trends, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+                arguments: [null, %wbb_bar.trend.entity.class%, SonataAdminBundle:CRUD]
                 calls:
                     - [setTranslationDomain, ["WBBBarBundle"]]
 

@@ -27,4 +27,47 @@ class CityAdmin extends Admin
                 ->add('onTopCity')
             ->end();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('name', null, array('editable' => true))
+            ->add('country')
+            ->add('seoDescription')
+            ->add('onTopCity', null, array('editable' => true))
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
+        $filterMapper
+            ->add('name')
+            ->add('country')
+            ->add('seoDescription')
+            ->add('suburbs')
+            ->add('onTopCity')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->with('General')
+                ->add('name')
+                ->add('country')
+                ->add('seoDescription')
+                ->add('suburbs')
+                ->add('onTopCity')
+            ->end()
+        ;
+    }
 }
