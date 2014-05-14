@@ -308,4 +308,14 @@ class Trend
 
         return $result;
     }
+
+    public function __construct(){
+        $this->setIsAlcohol(true);
+        $this->setIsAtmosphere(true);
+        $this->setIsCocktail(true);
+        $this->setIsMood(true);
+        $this->setIsOccasion(true);
+        $this->setIsStyle(true);
+        $this->setOnTop(true);
+    }
 }

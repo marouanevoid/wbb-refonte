@@ -201,6 +201,7 @@ class City
     public function __construct()
     {
         $this->suburbs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setOnTopCity(true);
     }
 
     /**

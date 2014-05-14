@@ -59,7 +59,13 @@ security:
             - WBB_BAR_ALL
         ROLE_EDITORIAL_EXPERT:
         ROLE_BAR_EXPERT:
+            - ROLE_USER
+            - WBB_BAR_ALL
         ROLE_BAR_OWNER:
+            - ROLE_USER
+            - WBB_BAR_ALL
+
+
 
         WBB_BAR_ALL:
             - ROLE_WBB_BAR_LIST

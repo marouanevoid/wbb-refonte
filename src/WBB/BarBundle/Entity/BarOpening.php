@@ -131,7 +131,7 @@ class BarOpening
     public static function getOpeningHours()
     {
         $hours = array();
-        for($i=0;$i<25;$i++)
+        for($i=0;$i<24;$i++)
         {
             if($i<10)
                 $hours[$i] = "0$i";

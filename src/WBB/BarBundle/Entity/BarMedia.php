@@ -165,7 +165,7 @@ class BarMedia
      * @param \Application\Sonata\MediaBundle\Entity\Media $video1
      * @return BarMedia
      */
-    public function setVideo1(\Application\Sonata\MediaBundle\Entity\Media $video1 = null)
+    public function setVideo1(Media $video1 = null)
     {
         $this->video1 = $video1;
 
@@ -188,7 +188,7 @@ class BarMedia
      * @param \Application\Sonata\MediaBundle\Entity\Media $video2
      * @return BarMedia
      */
-    public function setVideo2(\Application\Sonata\MediaBundle\Entity\Media $video2 = null)
+    public function setVideo2(Media $video2 = null)
     {
         $this->video2 = $video2;
 
@@ -203,5 +203,10 @@ class BarMedia
     public function getVideo2()
     {
         return $this->video2;
+    }
+
+    public function __toString()
+    {
+        return $this->alt;
     }
 }
