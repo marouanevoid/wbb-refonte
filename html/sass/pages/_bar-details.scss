@@ -1,0 +1,85 @@
+.bar-details {
+
+  .sub-header {
+    height: 14em;
+    .columns { height: 100% }
+    .city-selector { color: $color-brown }
+    .title { text-align: center;
+      h1 { font-weight: bold; margin-bottom: 0.25em }
+      h3 { text-transform: none; color: $color-medium-gray; }
+    }
+
+    .star-share {
+      color: $color-brown; text-align: right;
+      .btn-round { margin-left: 1em; }
+    }
+  }
+
+  aside{
+
+    .informations{
+      background: $color-cream; padding: 1em;
+      .contain{
+        background: #fff; padding: 1em;
+        .gmap { position: relative;
+          .get-directions { position: absolute; text-align: center; z-index: 10; width: 100%; height: 100%; left: 0; top: 0; background-image: url("../images/icons/pin.gmap.png"); background-repeat: no-repeat; background-size: 34px 96px; background-position: center center;
+            .btn-small-radius { display: inline-block; margin-top: 24%; background-color: #ffffff; color: $color-brown; }
+          }
+          img { display: block; width: 100%; height: auto; }
+        }
+        p { padding: 1em; position: relative;
+          .btn-small-round { margin: 1em 1em 0 0; font-size: 1em;
+            &.www      { border-color: $color-brown; }
+            &.twitter  { border-color: #00c3f3; }
+            &.facebook { border-color: #2960a3; }
+          }
+          .btn-small-radius { display: block; position: absolute; bottom: 0.5em; right: 0.5em; }
+        }
+        hr { border-color: $color-subtle-yellow; margin: 0 10px 1em 10px!important; }
+      }
+    }
+  }
+
+  .also-like {
+    h1 { color: $color-brown; }
+  }
+
+  .insider-tips {
+    background-color: $color-cream;
+  }
+
+  .also-appears {
+    a { display: block; position: relative; margin-bottom:0.5em;
+      img{ margin-left: 0.25em; vertical-align: middle }
+      &:before { content: ''; display: inline-block; width: 8px; height: 13px; background-image: url('../images/misc/chevron.png'); background-size: 100% 100%; }
+    }
+    .h2 { text-transform: uppercase; font-weight: bold; }
+    .h3 { text-transform: none; font-weight: normal; color: $color-brown; }
+  }
+
+
+
+
+  @media only screen and (max-width: $grid-breakpoint-mobile) {
+
+    .sub-header { margin-top: 28px; margin-bottom: 28px;
+
+      .columns { height: 60px; margin-top: 12px; margin-bottom: 12px;}
+      .city-selector { display: none; }
+
+      .star-share { text-align: center;
+        .btn-round {  }
+      }
+    }
+
+    .main { text-align: center;
+      .also-appears.desktop { display: none; }
+    }
+
+    aside { margin-top: 50px; width: 100% !important; margin-left: 0 !important;
+      .informations { background: none; padding: 0;
+        .contain { padding: 0; }
+      }
+    }
+  }
+}

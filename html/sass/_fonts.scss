@@ -1,0 +1,40 @@
+$fonts: Avenir Avenir-Roman normal normal,
+        Avenir Avenir-Heavy bold normal;
+
+@each $font in $fonts
+{
+  $family : nth($font, 1);
+  $src    : nth($font, 2);
+  $weight : nth($font, 3);
+  $style  : nth($font, 4);
+
+  @font-face {
+    font-family: "#{$family}";
+    src: url('../fonts/#{$src}.eot');
+    src: url('../fonts/#{$src}.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/#{$src}.woff') format('woff'),
+    url('../fonts/#{$src}.ttf') format('truetype'),
+    url('../fonts/#{$src}.svg#') format('svg');
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+
+/* Load SVG for Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+  @each $font in $fonts
+  {
+    $family : nth($font, 1);
+    $src    : nth($font, 2);
+    $weight : nth($font, 3);
+    $style  : nth($font, 4);
+
+    @font-face {
+      font-family: "#{$family}";
+      src: url('../fonts/#{$src}.svg#') format('svg');
+      font-weight: #{$weight};
+      font-style: #{$style};
+    }
+  }
+}

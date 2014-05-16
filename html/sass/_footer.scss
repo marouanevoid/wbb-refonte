@@ -1,0 +1,37 @@
+/* Footer
+--------------------------------------------------- */
+
+    footer {
+      width: 100%; background-color: $color-dark-gray;
+      .left, .right{ height: $footer-height }
+      .left { float: left;
+
+        nav {
+          a { color: $color-subtle-yellow; }
+          a+a:before{ font-size: 0.6em; padding: 0 0.8em; color: $color-subtle-yellow; content: '•' }
+        }
+
+        .copy { margin-top: 1.5em; color: $color-subtle-yellow; }
+
+      }
+
+      .right { float: right; color: $color-subtle-yellow;
+
+        .social-icons,
+        .keep-in-touch { border-left: 1px solid #5c5549; height: 100%; padding:0 3em; }
+
+        .social-icons {
+          float: left; height: 100%;
+          a { padding:0 1em; }
+        }
+
+        .keep-in-touch {
+          float: left; text-align: right; border-left: 1px solid #5c5549; padding-right: 0;
+          h3 { color: $color-subtle-yellow; font-weight: bold; text-align: center }
+          .fb-like{ display: inline-block!important; width: auto!important }
+          .fb-like, iframe{ vertical-align: middle; margin: 0 2px }
+        }
+
+
+      }
+    }

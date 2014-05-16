@@ -1,0 +1,30 @@
+article.tip {
+
+  background-color: #fff; height: 250px; position: relative;
+
+  .content { position: absolute; left: 8.3%; top: 8.3%; width: 83.4%; height: 83.4%;
+    h3 { color: $color-brown; }
+    h4 { color: $color-medium-gray; }
+    textarea { height: 75px; }
+    .excerpt { height: 100%; font-size: 1.4em; line-height: 130%; overflow: hidden; text-overflow: ellipsis; text-align: center;
+      td { vertical-align: middle;
+        img { margin-bottom: 3%; }
+      }
+    }
+    hr { border-color: #cdd0d1; }
+    .author { width: 100%;
+      td {
+        vertical-align: middle; line-height: 130%; font-size: 1.4em;
+        img{ margin-right: 1em; display: block }
+      }
+      td+td { width: 100% }
+    }
+  }
+
+  .form form{
+    .count{ float: left }
+    input[type=submit]{ float: right }
+  }
+
+  .expert .excerpt { font-size: 1.6em; line-height: 150% }
+}

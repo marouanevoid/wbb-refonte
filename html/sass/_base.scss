@@ -1,0 +1,258 @@
+/* Reset & Basics (Inspired by E. Meyers)
+--------------------------------------------------- */
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline; }
+	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+		display: block; }
+	body {
+		line-height: 1; }
+	ol, ul {
+		list-style: none; }
+	blockquote, q {
+		quotes: none; }
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none; }
+	table {
+		border-collapse: collapse;
+		border-spacing: 0; }
+
+
+/* Vcenter
+--------------------------------------------------- */
+    .table { display: table; width: 100%; height: 100%;
+      .td { display: table-cell; width: 100%; height: 100%; vertical-align: middle; }
+    }
+
+
+
+/* Text Align
+--------------------------------------------------- */
+    .align-left    { text-align: left; }
+    .align-center  { text-align: center; }
+    .align-right   { text-align: right; }
+    .align-justify { text-align: justify; }
+
+
+/* Sizer
+--------------------------------------------------- */
+    img.sizer{ width: 100%; height: auto; display: block }
+
+
+/* Basic Styles
+--------------------------------------------------- */
+	body {
+		background: #fff;
+		font: 10px "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color: $color-medium-gray;
+		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+		-webkit-text-size-adjust: 100%;
+ }
+
+
+/* Buttons
+--------------------------------------------------- */
+    .btn-radius { margin-left: 1em; padding: 0.8em 1.2em; border-radius: 2em; line-height: 1em;
+      &.border { border: 1px solid; }
+      &.with-icon{ padding-right: 2.4em }
+      img { vertical-align: sub; margin-right: 1em; }
+    }
+
+    .btn-small-radius { padding: 0.5em 1em; border-radius: 2em; line-height: 1em;
+      &.border { border: 1px solid; }
+      img { vertical-align: sub; margin-right: 1em; }
+    }
+
+    .btn-round { display: inline-block; padding: 1em; width: 2em; height: 2em; border-radius: 50%; border: 1px solid; line-height: 1em;
+      img { display: block; width: 100%; height: auto }
+    }
+
+    .btn-small-round { display: inline-block; padding: 0.5em; border-radius: 50%; border: 1px solid #000; line-height: 1em;
+      img { display: block; margin: auto }
+    }
+
+
+/* Form Button
+--------------------------------------------------- */
+    .button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+      background: none;
+      padding: 0.5em 1.5em;
+      border-radius: 2em;
+      border: 1px solid $color-brown;
+      color: $color-brown;
+      display: inline-block;
+      font-size: 1.4em;
+      font-weight: normal;
+      text-decoration: none;
+      cursor: pointer;
+      line-height: normal;
+      font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+    /* Fix for odd Mozilla border & padding issues */
+    button::-moz-focus-inner,
+    input::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+
+    .button.large{ padding: 0.9em 2.8em }
+
+
+/* Typography
+--------------------------------------------------- */
+	h1, h2, h3, h4, .h1, .h2, .h3, .h4 { font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; color: $color-dark-gray; margin: 0; padding: 0;
+      a { font-weight: inherit; }
+    }
+    h1, h2, h3, h4, .h1, .h2, .h3, .h4 { line-height: 1em }
+    p, .p { line-height: 150%; }
+	h1, .h1 { font-size: 3em; text-transform: uppercase; font-weight: bold }
+	h2, .h2 { font-size: 2em; }
+	h3, .h3 { font-size: 1.6em; text-transform: uppercase; }
+	h4, .h4 { font-size: 1.4em; }
+    p { font-size: 1.6em; }
+
+    aside p { font-size: 1.4em }
+
+    p img { margin: 0; }
+
+	em { font-style: italic; }
+
+    b { font-weight: bold; }
+
+    strong { color: $color-dark-gray; }
+
+/*	Blockquotes  */
+	blockquote, blockquote p { font-size: 1.7em; line-height: 140%; color: #777; font-style: italic; }
+	blockquote { margin: 0 0 2em; padding: 1em 2em 0 2em; border-left: 1px solid #ddd; }
+	blockquote cite { display: block; font-size: 1.2em; color: #555; }
+	blockquote cite:before { content: "\2014 \0020"; }
+	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: #555; }
+
+	hr { border: solid $color-brown; border-width: 1px 0 0; clear: both; height: 0; }
+
+
+/* Forms
+--------------------------------------------------- */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    select {
+      resize: none;
+      border: 1px solid $color-brown;
+      padding: 7% 5%;
+      width: 90%;
+      outline: none;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+      font: 1.4em "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 150%;
+      color: $color-medium-gray;
+      margin: 0;
+      background: #fff; }
+    select {
+      padding: 0; }
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border: 1px solid #aaa;
+      color: #444;
+      -moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+      -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+      box-shadow:  0 0 3px rgba(0,0,0,.2); }
+    textarea {
+      min-height: 60px; }
+    label,
+    legend {
+      display: block;
+      font-weight: bold;
+      font-size: 13px;  }
+    select {
+      width: 220px; }
+    input[type="checkbox"] {
+      display: inline; }
+    label span,
+    legend span {
+      font-weight: normal;
+      font-size: 13px;
+      color: #444; }
+
+
+@media only screen and (max-width: 479px) {
+
+  /* Display
+  --------------------------------------------------- */
+  .mobile-out { display: none !important; }
+
+}
+
+
+/* Links
+--------------------------------------------------- */
+    a { color: $color-brown }
+	a, a:visited { text-decoration: none; outline: 0; }
+	a:hover, a:focus { color: #000; }
+
+
+/* Images
+--------------------------------------------------- */
+	img.scale-with-grid {
+		max-width: 100%;
+		height: auto; }
+
+
+/* Margins & Paddings
+--------------------------------------------------- */
+	.remove-margin-bottom  { margin-bottom: 0 !important; }
+	.s-margin-bottom       { margin-bottom: $margin-padding-s !important; }
+	.m-margin-bottom       { margin-bottom: $margin-padding-m !important; }
+	.l-margin-bottom       { margin-bottom: $margin-padding-l !important; }
+    .xl-margin-bottom      { margin-bottom: $margin-padding-xl !important; }
+    .xxl-margin-bottom     { margin-bottom: $margin-padding-xxl !important; }
+
+    .remove-margin-top     { margin-top: 0 !important; }
+    .s-margin-top          { margin-top: $margin-padding-s !important; }
+    .m-margin-top          { margin-top: $margin-padding-m !important; }
+    .l-margin-top          { margin-top: $margin-padding-l !important; }
+    .xl-margin-top         { margin-top: $margin-padding-xl !important; }
+    .xxl-margin-top        { margin-top: $margin-padding-xxl !important; }
+
+    .remove-margin         { margin-top: 0px !important; margin-bottom: 0px !important; }
+    .s-margin              { margin-top: $margin-padding-s !important; margin-bottom: $margin-padding-m !important; }
+    .m-margin              { margin-top: $margin-padding-m !important; margin-bottom: $margin-padding-m !important; }
+    .l-margin              { margin-top: $margin-padding-l !important; margin-bottom: $margin-padding-l !important; }
+    .xl-margin             { margin-top: $margin-padding-xl !important; margin-bottom: $margin-padding-xl !important; }
+    .xxl-margin            { margin-top: $margin-padding-xxl !important; margin-bottom: $margin-padding-xl !important; }
+
+    .remove-padding-bottom { padding-bottom: 0 !important; }
+    .s-padding-bottom      { padding-bottom: $margin-padding-s !important; }
+    .m-padding-bottom      { padding-bottom: $margin-padding-m !important; }
+    .l-padding-bottom      { padding-bottom: $margin-padding-l !important; }
+    .xl-padding-bottom     { padding-bottom: $margin-padding-xl !important; }
+    .xxl-padding-bottom    { padding-bottom: $margin-padding-xxl !important; }
+
+    .remove-padding-top    { padding-top: 0 !important; }
+    .s-padding-top         { padding-top: $margin-padding-s !important; }
+    .m-padding-top         { padding-top: $margin-padding-m !important; }
+    .l-padding-top         { padding-top: $margin-padding-l !important; }
+    .xl-padding-top        { padding-top: $margin-padding-xl !important; }
+    .xxl-padding-top       { padding-top: $margin-padding-xxl !important; }
+
+    .remove-padding        { padding-top: 0px !important; padding-bottom: 0px !important; }
+    .s-padding             { padding-top: $margin-padding-s !important; padding-bottom: $margin-padding-m !important; }
+    .m-padding             { padding-top: $margin-padding-m !important; padding-bottom: $margin-padding-m !important; }
+    .l-padding             { padding-top: $margin-padding-l !important; padding-bottom: $margin-padding-l !important; }
+    .xl-padding            { padding-top: $margin-padding-xl !important; padding-bottom: $margin-padding-xl !important; }
+    .xxl-padding           { padding-top: $margin-padding-xxl !important; padding-bottom: $margin-padding-xl !important; }

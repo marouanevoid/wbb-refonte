@@ -1,0 +1,44 @@
+/* Header
+--------------------------------------------------- */
+    header { white-space: nowrap; width: 100%; background-color: $color-dark-gray;
+      table { width: 100%;
+        tr {
+          td { vertical-align: middle; }
+        }
+      }
+    }
+
+      header.desktop {
+
+        .logo { border-right: 1px solid grey;
+          a { text-decoration: none }
+          img{ margin-right: 5em; display: block; width: 15.7em; height: auto }
+        }
+
+        .twelve.columns{ height: 13em; table{ height: 100% } }
+
+        nav { text-align: left; margin-left: 1em;
+          a { margin-left: 2em; display: inline-block; color: $color-subtle-yellow; }
+        }
+
+
+        .bar-finder { text-transform: none; color: $color-subtle-yellow; width: 100%; text-align: right;
+          > img { margin: 0 1em }
+          .finder img{ margin-right: 0.5em }
+          img { vertical-align: middle; }
+          a{ color: $color-subtle-yellow }
+        }
+
+        .register { text-align: right; padding-left: 4.5em; color: $color-brown;
+          .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em }
+      }
+    }
+
+    header.mobile {
+
+      .logo { padding: 1em 0 1.5em 0; width: 100%; text-align: center; }
+      .nav-icon { text-align: left; }
+      .search-pin-icon { text-align: right;
+        a:nth-child(1) { margin-right: 1.3em; }
+      }
+    }

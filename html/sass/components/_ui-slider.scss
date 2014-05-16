@@ -1,0 +1,26 @@
+.ui-slider{
+
+  width: 100%; position: relative; overflow: hidden;
+  .ui-slide{ width: 100%; position: absolute; left: 0; top: 0; height: 100% }
+  .arrows{
+    position: absolute; bottom: 0; right:0; z-index: 5;
+    a{
+      display: block; float: left; width: 4em; height: 4em; background: #fff; margin-left: 1px; cursor: pointer;
+      span{ width: 1.5em; height: 1.5em; margin-top: 1.25em; margin-left: 1.25em; background: url("") no-repeat center; background-size: auto 100%; display: block }
+      &.left span{ background-image: url("../images/misc/arrow.left.png") }
+      &.right span{ background-image: url("../images/misc/arrow.right.png") }
+    }
+  }
+
+  &.type-bar{
+    margin:1px 0;
+    .image{
+      width: 25%; float: left; outline:1px solid #fff; position: relative;
+      img{ width: 100%; height: auto; display: block }
+      span{ width: 4em; height: 4em; background: url('') no-repeat center; background-size: 100% 100%; display: block; position: absolute; top: 1em; right: 1em }
+      &.instagram span{ background-image: url("../images/icons/pin.instagram.png") }
+      &.foursquare span{ background-image: url("../images/icons/pin.foursquare.png") }
+    }
+    .image:first-child{ width: 50% }
+  }
+}
