@@ -952,6 +952,13 @@ class Bar
 
         return $this;
     }
+    
+    public function removeFsExcludedTips($hash)
+    {
+        if(($key = array_search($hash, $this->fsExcludedTips)) !== false) {
+            unset($this->fsExcludedTips[$key]);
+        }
+    }
 
     /**
      * Set fsExcludedTips
@@ -981,6 +988,13 @@ class Bar
         $this->fsSelectedImgs[] = $hash;
 
         return $this;
+    }
+    
+    public function removeFsSelectedImgs($hash)
+    {
+        if(($key = array_search($hash, $this->fsSelectedImgs)) !== false) {
+            unset($this->fsSelectedImgs[$key]);
+        }
     }
 
     /**

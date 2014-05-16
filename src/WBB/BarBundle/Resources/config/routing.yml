@@ -15,3 +15,9 @@ wbb_bar_feed_add:
     defaults: { _controller: WBBBarBundle:FSAdmin:add }
     options:
             expose: true
+            
+wbb_bar_feed_remove:
+    pattern:  /feed/remove/{type}/{hash}/{bar}
+    defaults: { _controller: WBBBarBundle:FSAdmin:remove }
+    options:
+            expose: true

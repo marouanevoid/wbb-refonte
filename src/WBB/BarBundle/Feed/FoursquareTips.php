@@ -87,4 +87,21 @@ class FoursquareTips implements FeedInterface
 
         return $bar;
     }
+    
+    /**
+     * removeObject
+     *
+     * @param string $hash
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     *
+     * @return Object
+     */
+    public function removeObject($hash, Bar $bar = null)
+    {
+        $bar->removeFsExcludedTips($hash);
+        $this->em->persist($bar);
+        $this->em->flush();
+
+        return $bar->getFsExcludedTips();
+    }
 }

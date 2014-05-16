@@ -87,4 +87,21 @@ class FoursquareImgs implements FeedInterface
 
         return $bar;
     }
+    
+    /**
+     * createFeed
+     *
+     * @param string $hash
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     *
+     * @return Object
+     */
+    public function removeObject($hash, Bar $bar = null)
+    {
+        $bar->removeFsSelectedImgs($hash);
+        $this->em->persist($bar);
+        $this->em->flush();
+
+        return $bar->getFsSelectedImgs();
+    }
 }

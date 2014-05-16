@@ -63,8 +63,24 @@ class FSAdminController extends Controller
      */
     public function addAction($type, $hash, Bar $bar = null)
     {
-        $feed = $this->get("wbb.$type.feed")->createFeed($hash, $bar);
+        $feed = $this->get("wbb.$type.feed")->createObject($hash, $bar);
 
         return new JsonResponse(array('feed' => $feed->getId()));
+    }
+    
+    /**
+     * removeAction
+     *
+     * @param $type
+     * @param string $hash
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     *
+     * @return JsonResponse
+     */
+    public function removeAction($type, $hash, Bar $bar = null)
+    {
+        $objects = $this->get("wbb.$type.feed")->removeObject($hash, $bar);
+
+        return new JsonResponse(array('objects' => $objects));
     }
 }

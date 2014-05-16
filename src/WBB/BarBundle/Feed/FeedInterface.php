@@ -33,4 +33,14 @@ interface FeedInterface
      * @return Object
      */
     public function createObject($hash, Bar $bar = null);
+    
+    /**
+     * removeObject
+     *
+     * @param string   $hash
+     * @param Bar $bar
+     *
+     * @return Object
+     */
+    public function removeObject($hash, Bar $bar = null);
 }
