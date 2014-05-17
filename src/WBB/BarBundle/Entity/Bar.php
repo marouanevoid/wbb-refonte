@@ -232,7 +232,7 @@ class Bar
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -240,7 +240,7 @@ class Bar
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -789,6 +789,14 @@ class Bar
     public function __construct()
     {
         $this->medias = new ArrayCollection();
+        $this->openings = new ArrayCollection();
+        $this->fsSelectedImgs = array();
+        $this->fsExcludedTips = array();
+
+        $this->isCoatCheck      = true;
+        $this->isCreditCard     = true;
+        $this->onTop            = true;
+        $this->isReservation    = true;
     }
 
     /**

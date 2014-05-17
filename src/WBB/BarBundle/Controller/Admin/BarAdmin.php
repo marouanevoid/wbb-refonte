@@ -135,6 +135,7 @@ class BarAdmin extends Admin
                 ->add('isReservation')
                 ->add('reservation')
                 ->add('description')
+                ->add('seoDescription')
             ->end()
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection', array('required' => false),

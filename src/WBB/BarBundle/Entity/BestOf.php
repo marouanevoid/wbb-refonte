@@ -3,6 +3,8 @@
 namespace WBB\BarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * BestOf
@@ -38,9 +40,33 @@ class BestOf
     /**
      * @var string
      *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @var FileUpload
+     */
+    private $file;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="sponsor", type="string", length=255)
      */
     private $sponsor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sponsor_image", type="string", length=255)
+     */
+    private $sponsorImage;
+
+    /**
+     * @var FileUpload
+     */
+    private $sponsorImageFile;
 
     /**
      * @var string
@@ -63,6 +89,31 @@ class BestOf
      */
     private $onTop;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bestofs")
+     */
+    private $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="bestofs")
+     */
+    private $country;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * Get id
@@ -210,5 +261,307 @@ class BestOf
     public function getOnTop()
     {
         return $this->onTop;
+    }
+
+
+    /**
+     * Set image
+     *
+     * @param  string   $image
+     * @return BestOf
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        if (isset($this->image)) {
+            $this->temp = $this->image;
+            $this->image = null;
+        } else {
+            $this->image = 'initial';
+        }
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setSponsorImageFile(UploadedFile $file = null)
+    {
+        $this->sponsorImageFile = $file;
+        if (isset($this->sponsorImage)) {
+            $this->temp = $this->sponsorImage;
+            $this->sponsorImage = null;
+        } else {
+            $this->sponsorImage = 'initial';
+        }
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getSponsorImageFile()
+    {
+        return $this->sponsorImageFile;
+    }
+
+    public function getAbsolutePath($sponsor = null)
+    {
+        if($sponsor){
+            return null === $this->sponsorImage
+                ? null
+                : $this->getUploadRootDir(true).'/'.$this->sponsorImage;
+        }else{
+            return null === $this->image
+                ? null
+                : $this->getUploadRootDir().'/'.$this->image;
+        }
+    }
+
+    public function getWebPath($sponsor = null)
+    {
+        if($sponsor){
+            return null === $this->sponsorImage
+                ? null
+                : $this->getUploadDir(true).'/'.$this->sponsorImage;
+        }else{
+            return null === $this->image
+                ? null
+                : $this->getUploadDir().'/'.$this->image;
+        }
+    }
+
+    protected function getUploadRootDir($sponsor = null)
+    {
+        if($sponsor)
+            return __DIR__.'/../../../../web/'.$this->getUploadDir(true);
+        else
+            return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir($sponsor = null)
+    {
+        if($sponsor){
+            return "uploads/sponsor";
+        }else{
+            return 'uploads/bestof';
+        }
+    }
+
+    private $temp;
+
+    /**
+     * preUpload
+     */
+    public function preUpload($sponsor = null)
+    {
+        if($sponsor){
+            if (null !== $this->getSponsorImageFile()) {
+                $filename = sha1(uniqid(mt_rand(), true));
+                $this->sponsorImage = $filename.'.'.$this->getSponsorImageFile()->guessExtension();
+            }
+        }else{
+            if (null !== $this->getFile()) {
+                $filename = sha1(uniqid(mt_rand(), true));
+                $this->image = $filename.'.'.$this->getFile()->guessExtension();
+            }
+        }
+    }
+
+    /**
+     * upload
+     */
+    public function upload($sponsor = null)
+    {
+        if($sponsor){
+            if (null === $this->getSponsorImageFile()) {
+                return;
+            }
+
+            $this->getSponsorImageFile()->move($this->getUploadRootDir(true), $this->sponsorImage);
+
+            if (isset($this->temp) && file_exists($this->getUploadRootDir(true).'/'.$this->temp)) {
+                unlink($this->getUploadRootDir(true).'/'.$this->temp);
+                $this->temp = null;
+            }
+            $this->sponsorImageFile = null;
+        }else{
+            if (null === $this->getFile()) {
+                return;
+            }
+
+            $this->getFile()->move($this->getUploadRootDir(), $this->image);
+
+            if (isset($this->temp) && file_exists($this->getUploadRootDir().'/'.$this->temp)) {
+                unlink($this->getUploadRootDir().'/'.$this->temp);
+                $this->temp = null;
+            }
+            $this->file = null;
+        }
+    }
+
+    /**
+     * removeUpload
+     */
+    public function removeUpload($sponsor = null)
+    {
+        if($sponsor){
+            if ($file = $this->getAbsolutePath(true)) {
+                unlink($file);
+            }
+        }else{
+            if ($file = $this->getAbsolutePath()) {
+                unlink($file);
+            }
+        }
+    }
+
+    /**
+     * Set sponsorImage
+     *
+     * @param string $sponsorImage
+     * @return BestOf
+     */
+    public function setSponsorImage($sponsorImage)
+    {
+        $this->sponsorImage = $sponsorImage;
+
+        return $this;
+    }
+
+    /**
+     * Get sponsorImage
+     *
+     * @return string 
+     */
+    public function getSponsorImage()
+    {
+        return $this->sponsorImage;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return BestOf
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return BestOf
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set city
+     *
+     * @param \WBB\CoreBundle\Entity\City $city
+     * @return BestOf
+     */
+    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \WBB\CoreBundle\Entity\City 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \WBB\CoreBundle\Entity\Country $country
+     * @return BestOf
+     */
+    public function setCountry(\WBB\CoreBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \WBB\CoreBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

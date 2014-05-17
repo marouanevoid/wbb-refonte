@@ -3,6 +3,7 @@
 namespace WBB\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * City
@@ -62,14 +63,35 @@ class City
     private $country;
 
     /**
-     * @ORM\OneToMany(targetEntity="CitySuburb", mappedBy="city", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="CitySuburb", mappedBy="city", cascade={"all"})
      */
     private $suburbs;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="city", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="city", cascade={"all"})
      */
     private $bars;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BestOf", mappedBy="city", cascade={"all"})
+     */
+    private $bestofs;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * Get id
@@ -298,5 +320,84 @@ class City
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return City
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return City
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Add bestofs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofs
+     * @return City
+     */
+    public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
+    {
+        $this->bestofs[] = $bestofs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofs
+     */
+    public function removeBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
+    {
+        $this->bestofs->removeElement($bestofs);
+    }
+
+    /**
+     * Get bestofs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBestofs()
+    {
+        return $this->bestofs;
     }
 }
