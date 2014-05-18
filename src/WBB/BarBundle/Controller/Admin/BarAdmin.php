@@ -98,7 +98,9 @@ class BarAdmin extends Admin
             ->with('General')
                 ->add('user', 'sonata_type_model')
                 ->add('name')
+                ->add('foursquare')
                 ->add('city', 'sonata_type_model')
+                ->add('suburb', 'sonata_type_model')
                 ->add('latitude')
                 ->add('longitude')
                 ->add('address')
@@ -114,7 +116,6 @@ class BarAdmin extends Admin
             ->with('Details')
                 ->add('isCreditCard')
                 ->add('isCoatCheck')
-                ->add('parking')
                 ->add('parking', 'choice', array(
                     'required' => false,
                     'choices'  => array(
@@ -135,7 +136,7 @@ class BarAdmin extends Admin
                 ->add('isReservation')
                 ->add('reservation')
                 ->add('description')
-                ->add('seoDescription')
+                ->add('seoDescription', 'textarea')
             ->end()
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection', array('required' => false),

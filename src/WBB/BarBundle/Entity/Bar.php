@@ -169,7 +169,7 @@ class Bar
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="seo_description", type="string", length=255, nullable = true)
      */
     private $seoDescription;
 

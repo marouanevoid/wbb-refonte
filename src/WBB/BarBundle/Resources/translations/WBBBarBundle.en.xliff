@@ -99,7 +99,7 @@
 
             <trans-unit id="form.label_reservation">
                 <source>form.label_reservation</source>
-                <target>Reservation</target>
+                <target>Reservation Link</target>
             </trans-unit>
 
             <trans-unit id="form.label_description">

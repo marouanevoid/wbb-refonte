@@ -18,13 +18,24 @@ class CityAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $imageOptions = array('required' => false);
+        if (($object = $this->getSubject()) && $object->getImage()) {
+            $path = $object->getWebPath();
+            $imageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
+        }
+        
         $formMapper
             ->with('General')
                 ->add('name')
                 ->add('country')
                 ->add('seoDescription')
-                ->add('suburbs', 'sonata_type_collection')
+                ->add('file', 'file', $imageOptions)
+                ->add('suburbs', 'sonata_type_collection', array('required'=>false))
                 ->add('onTopCity')
+                ->add('bestofs', null, array('expanded' => false, 'by_reference' => false, 'multiple' => true))
+                ->add('trends', null, array('expanded' => false, 'by_reference' => false, 'multiple' => true), array(
+                        'sortable'  => 'position'
+                    ))
             ->end();
     }
 

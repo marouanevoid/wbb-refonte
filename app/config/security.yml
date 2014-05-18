@@ -49,25 +49,35 @@ security:
 
     role_hierarchy:
         ROLE_SUPER_ADMIN:
-            - ROLE_USER
+            - ROLE_ADMIN
             - WBB_BAR_ALL
+            - WBB_CITY_ALL
         ROLE_MODERATOR:
-            - ROLE_USER
+            - ROLE_ADMIN
             - WBB_BAR_ALL
         ROLE_PUBLISHER:
-            - ROLE_USER
+            - ROLE_ADMIN
             - WBB_BAR_ALL
         ROLE_EDITORIAL_EXPERT:
         ROLE_BAR_EXPERT:
-            - ROLE_USER
+            - ROLE_ADMIN
             - WBB_BAR_ALL
         ROLE_BAR_OWNER:
-            - ROLE_USER
+            - ROLE_ADMIN
             - WBB_BAR_ALL
+        ROLE_ADMIN:
+            - ROLE_USER
 
 
 
         WBB_BAR_ALL:
+            - ROLE_WBB_BAR_LIST
+            - ROLE_WBB_BAR_VIEW
+            - ROLE_WBB_BAR_CREATE
+            - ROLE_WBB_BAR_EDIT
+            - ROLE_WBB_BAR_DELETE
+            
+        WBB_CITY_ALL:
             - ROLE_WBB_BAR_LIST
             - ROLE_WBB_BAR_VIEW
             - ROLE_WBB_BAR_CREATE

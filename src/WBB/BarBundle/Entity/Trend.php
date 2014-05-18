@@ -84,6 +84,13 @@ class Trend
      * @ORM\Column(name="onTop", type="boolean", nullable=true)
      */
     private $onTop;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="smallint", nullable=true)
+     */
+    private $position;
 
     /**
      * @var \DateTime
@@ -100,6 +107,11 @@ class Trend
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="trends")
+     */
+    private $city;
 
 
     /**
@@ -380,5 +392,55 @@ class Trend
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Trend
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set city
+     *
+     * @param \WBB\CoreBundle\Entity\City $city
+     * @return Trend
+     */
+    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \WBB\CoreBundle\Entity\City 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+    
+    public function __toString() {
+        return $this->getName();
     }
 }

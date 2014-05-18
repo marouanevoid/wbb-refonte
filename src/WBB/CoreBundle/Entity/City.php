@@ -11,8 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="wbb_city")
  * @ORM\Entity
  */
-class City
-{
+class City {
+
     /**
      * @var integer
      *
@@ -51,6 +51,18 @@ class City
     private $seoDescription;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @var FileUpload
+     */
+    private $file;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="onTopCity", type="boolean", nullable=true)
@@ -76,6 +88,11 @@ class City
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BestOf", mappedBy="city", cascade={"all"})
      */
     private $bestofs;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Trend", mappedBy="city", cascade={"all"})
+     */
+    private $trends;
 
     /**
      * @var \DateTime
@@ -98,8 +115,7 @@ class City
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -109,8 +125,7 @@ class City
      * @param string $name
      * @return City
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -121,8 +136,7 @@ class City
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -132,8 +146,7 @@ class City
      * @param string $latitude
      * @return City
      */
-    public function setLatitude($latitude)
-    {
+    public function setLatitude($latitude) {
         $this->latitude = $latitude;
 
         return $this;
@@ -144,8 +157,7 @@ class City
      *
      * @return string 
      */
-    public function getLatitude()
-    {
+    public function getLatitude() {
         return $this->latitude;
     }
 
@@ -155,8 +167,7 @@ class City
      * @param string $longitude
      * @return City
      */
-    public function setLongitude($longitude)
-    {
+    public function setLongitude($longitude) {
         $this->longitude = $longitude;
 
         return $this;
@@ -167,8 +178,7 @@ class City
      *
      * @return string 
      */
-    public function getLongitude()
-    {
+    public function getLongitude() {
         return $this->longitude;
     }
 
@@ -178,8 +188,7 @@ class City
      * @param string $seoDescription
      * @return City
      */
-    public function setSeoDescription($seoDescription)
-    {
+    public function setSeoDescription($seoDescription) {
         $this->seoDescription = $seoDescription;
 
         return $this;
@@ -190,8 +199,7 @@ class City
      *
      * @return string 
      */
-    public function getSeoDescription()
-    {
+    public function getSeoDescription() {
         return $this->seoDescription;
     }
 
@@ -201,8 +209,7 @@ class City
      * @param boolean $onTopCity
      * @return City
      */
-    public function setOnTopCity($onTopCity)
-    {
+    public function setOnTopCity($onTopCity) {
         $this->onTopCity = $onTopCity;
 
         return $this;
@@ -213,15 +220,14 @@ class City
      *
      * @return boolean 
      */
-    public function getOnTopCity()
-    {
+    public function getOnTopCity() {
         return $this->onTopCity;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->suburbs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setOnTopCity(true);
     }
@@ -232,8 +238,7 @@ class City
      * @param \WBB\CoreBundle\Entity\Country $country
      * @return City
      */
-    public function setCountry(\WBB\CoreBundle\Entity\Country $country = null)
-    {
+    public function setCountry(\WBB\CoreBundle\Entity\Country $country = null) {
         $this->country = $country;
 
         return $this;
@@ -244,8 +249,7 @@ class City
      *
      * @return \WBB\CoreBundle\Entity\Country 
      */
-    public function getCountry()
-    {
+    public function getCountry() {
         return $this->country;
     }
 
@@ -255,8 +259,7 @@ class City
      * @param \WBB\CoreBundle\Entity\CitySuburb $suburb
      * @return City
      */
-    public function addSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburb)
-    {
+    public function addSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburb) {
         $this->suburbs[] = $suburb;
         $suburb->setCity($this);
 
@@ -268,8 +271,7 @@ class City
      *
      * @param \WBB\CoreBundle\Entity\CitySuburb $suburbs
      */
-    public function removeSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburbs)
-    {
+    public function removeSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburbs) {
         $this->suburbs->removeElement($suburbs);
     }
 
@@ -278,8 +280,7 @@ class City
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getSuburbs()
-    {
+    public function getSuburbs() {
         return $this->suburbs;
     }
 
@@ -289,8 +290,7 @@ class City
      * @param \WBB\BarBundle\Entity\Bar $bar
      * @return City
      */
-    public function addBar(\WBB\BarBundle\Entity\Bar $bar)
-    {
+    public function addBar(\WBB\BarBundle\Entity\Bar $bar) {
         $this->bars[] = $bar;
         $bar->setCity($this);
 
@@ -302,8 +302,7 @@ class City
      *
      * @param \WBB\BarBundle\Entity\Bar $bars
      */
-    public function removeBar(\WBB\BarBundle\Entity\Bar $bars)
-    {
+    public function removeBar(\WBB\BarBundle\Entity\Bar $bars) {
         $this->bars->removeElement($bars);
     }
 
@@ -312,13 +311,11 @@ class City
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getBars()
-    {
+    public function getBars() {
         return $this->bars;
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return $this->getName();
     }
 
@@ -328,8 +325,7 @@ class City
      * @param \DateTime $createdAt
      * @return City
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -340,8 +336,7 @@ class City
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -351,8 +346,7 @@ class City
      * @param \DateTime $updatedAt
      * @return City
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -363,8 +357,7 @@ class City
      *
      * @return \DateTime 
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -374,8 +367,7 @@ class City
      * @param \WBB\BarBundle\Entity\BestOf $bestofs
      * @return City
      */
-    public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
-    {
+    public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs) {
         $this->bestofs[] = $bestofs;
 
         return $this;
@@ -386,8 +378,7 @@ class City
      *
      * @param \WBB\BarBundle\Entity\BestOf $bestofs
      */
-    public function removeBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
-    {
+    public function removeBestof(\WBB\BarBundle\Entity\BestOf $bestofs) {
         $this->bestofs->removeElement($bestofs);
     }
 
@@ -396,8 +387,143 @@ class City
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getBestofs()
-    {
+    public function getBestofs() {
         return $this->bestofs;
+    }
+
+    /**
+     * Set image
+     *
+     * @param  string   $image
+     * @return BestOf
+     */
+    public function setImage($image) {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage() {
+        return $this->image;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null) {
+        $this->file = $file;
+        if (isset($this->image)) {
+            $this->temp = $this->image;
+            $this->image = null;
+        } else {
+            $this->image = 'initial';
+        }
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile() {
+        return $this->file;
+    }
+
+    public function getAbsolutePath() {
+
+        return null === $this->image ? null : $this->getUploadRootDir() . '/' . $this->image;
+    }
+
+    public function getWebPath() {
+
+        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
+    }
+
+    protected function getUploadRootDir() {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir() {
+        return 'uploads/cities';
+    }
+
+    private $temp;
+
+    /**
+     * preUpload
+     */
+    public function preUpload() {
+        if (null !== $this->getFile()) {
+            $filename = sha1(uniqid(mt_rand(), true));
+            $this->image = $filename . '.' . $this->getFile()->guessExtension();
+        }
+    }
+
+    /**
+     * upload
+     */
+    public function upload() {
+
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        $this->getFile()->move($this->getUploadRootDir(), $this->image);
+
+        if (isset($this->temp) && file_exists($this->getUploadRootDir() . '/' . $this->temp)) {
+            unlink($this->getUploadRootDir() . '/' . $this->temp);
+            $this->temp = null;
+        }
+        $this->file = null;
+    }
+
+    /**
+     * removeUpload
+     */
+    public function removeUpload() {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
+    }
+
+
+    /**
+     * Add trends
+     *
+     * @param \WBB\BarBundle\Entity\Trend $trends
+     * @return City
+     */
+    public function addTrend(\WBB\BarBundle\Entity\Trend $trends)
+    {
+        $this->trends[] = $trends;
+
+        return $this;
+    }
+
+    /**
+     * Remove trends
+     *
+     * @param \WBB\BarBundle\Entity\Trend $trends
+     */
+    public function removeTrend(\WBB\BarBundle\Entity\Trend $trends)
+    {
+        $this->trends->removeElement($trends);
+    }
+
+    /**
+     * Get trends
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrends()
+    {
+        return $this->trends;
     }
 }
