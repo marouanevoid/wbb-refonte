@@ -55,6 +55,9 @@
   .insider-tips {
     background-color: $color-cream;
     .load-more{ padding: 0.8em 1.6em; display: inline-block; font-size: 1.4em }
+    .load-target{ display: none }
+    .line+.line .box{ margin-top: 2.32% }
+    .box{ position: relative }
   }
 
   .also-appears {
@@ -107,9 +110,8 @@
     }
 
     .insider-tips {
-      .box { margin-top: 1em;
-        &:nth-child(3) { margin-bottom: 4em; }
-      }
+      padding-bottom: 5%;
+      .box { margin-top: 1em }
     }
   }
 }

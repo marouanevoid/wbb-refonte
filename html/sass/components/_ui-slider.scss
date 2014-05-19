@@ -5,10 +5,16 @@
   .arrows{
     position: absolute; bottom: 0; right:0; z-index: 5;
     a{
-      display: block; float: left; width: 4em; height: 4em; background: #fff; margin-left: 1px; cursor: pointer;
-      span{ width: 1.5em; height: 1.5em; margin-top: 1.25em; margin-left: 1.25em; background: url("") no-repeat center; background-size: auto 100%; display: block }
-      &.left span{ background-image: url("../images/misc/arrow.left.png") }
-      &.right span{ background-image: url("../images/misc/arrow.right.png") }
+      display: block; float: left; width: 4em; height: 4em; background: #fff; margin-left: 1px; cursor: pointer; position: relative; @include transition( background 0.2s ease-in-out );
+      &::after, &::before{ width: 1.5em; height: 1.5em; top: 1.25em; left: 1.25em; background: url("") no-repeat center; background-size: auto 100%; content: ''; position: absolute; @include transition( opacity 0.2s ease-in-out ) }
+      &::after{ @include opacity(0); z-index: 1 }
+      &.left::after{ background-image: url("../images/misc/arrow.left-white.png") }
+      &.left::before{ background-image: url("../images/misc/arrow.left.png") }
+      &.right::after{ background-image: url("../images/misc/arrow.right-white.png") }
+      &.right::before{ background-image: url("../images/misc/arrow.right.png") }
+
+      &:hover{ background: $color-brown }
+      &:hover::after{ @include opacity(1) }
     }
   }
 

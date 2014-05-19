@@ -32,14 +32,15 @@
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/ratio.metabolism.js"></script>
+    <script type="text/javascript" src="js/libs/loadMore.metabolism.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
 
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-        //var BASEURL = "/pr0d/wbb/";
-        var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
+        var BASEURL = "/pr0d/wbb/";
+        //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = {};
     </script>
 

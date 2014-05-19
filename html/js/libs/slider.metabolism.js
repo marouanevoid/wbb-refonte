@@ -98,7 +98,7 @@ meta.Slider = function(config){
 
             that.context.$slider.append
                 (
-                    '<div class="arrows"><a class="left"><span/></a><a class="right"><span/></a>'
+                    '<div class="arrows"><a class="left"/><a class="right"/>'
                 );
 
             that.context.$arrows = that.context.$slider.find('.arrows a');
