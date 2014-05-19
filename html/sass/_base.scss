@@ -1,6 +1,9 @@
 /* Reset & Basics (Inspired by E. Meyers)
 --------------------------------------------------- */
-	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address,
+    big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
+    dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside,
+    canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
 		padding: 0;
 		border: 0;
@@ -17,7 +20,6 @@
 		quotes: none; }
 	blockquote:before, blockquote:after,
 	q:before, q:after {
-		content: '';
 		content: none; }
 	table {
 		border-collapse: collapse;
@@ -56,28 +58,6 @@
  }
 
 
-/* Buttons
---------------------------------------------------- */
-    .btn-radius { margin-left: 1em; padding: 0.8em 1.2em; border-radius: 2em; line-height: 1em;
-      &.border { border: 1px solid; }
-      &.with-icon{ padding-right: 2.4em }
-      img { vertical-align: sub; margin-right: 1em; }
-    }
-
-    .btn-small-radius { padding: 0.5em 1em; border-radius: 2em; line-height: 1em;
-      &.border { border: 1px solid; }
-      img { vertical-align: sub; margin-right: 1em; }
-    }
-
-    .btn-round { display: inline-block; padding: 1em; width: 2em; height: 2em; border-radius: 50%; border: 1px solid; line-height: 1em;
-      img { display: block; width: 100%; height: auto }
-    }
-
-    .btn-small-round { display: inline-block; padding: 0.5em; border-radius: 50%; border: 1px solid #000; line-height: 1em;
-      img { display: block; margin: auto }
-    }
-
-
 /* Form Button
 --------------------------------------------------- */
     .button,
@@ -110,7 +90,8 @@
 
 /* Typography
 --------------------------------------------------- */
-	h1, h2, h3, h4, .h1, .h2, .h3, .h4 { font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; color: $color-dark-gray; margin: 0; padding: 0;
+	h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+      font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; color: $color-dark-gray; margin: 0; padding: 0;
       a { font-weight: inherit; }
     }
     h1, h2, h3, h4, .h1, .h2, .h3, .h4 { line-height: 1em }
@@ -167,11 +148,7 @@
     input[type="password"]:focus,
     input[type="email"]:focus,
     textarea:focus {
-      border: 1px solid #aaa;
-      color: #444;
-      -moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
-      -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
-      box-shadow:  0 0 3px rgba(0,0,0,.2); }
+      @include box-shadow(inset 0 0 2px $color-brown) }
     textarea {
       min-height: 60px; }
     label,
@@ -201,9 +178,9 @@
 
 /* Links
 --------------------------------------------------- */
-    a { color: $color-brown }
+    a { color: $color-brown; @include transition(color ease-in-out 0.2s); cursor: pointer }
 	a, a:visited { text-decoration: none; outline: 0; }
-	a:hover, a:focus { color: #000; }
+	a:hover, a:focus { color: $color-brown-dark }
 
 
 /* Images
@@ -256,3 +233,42 @@
     .l-padding             { padding-top: $margin-padding-l !important; padding-bottom: $margin-padding-l !important; }
     .xl-padding            { padding-top: $margin-padding-xl !important; padding-bottom: $margin-padding-xl !important; }
     .xxl-padding           { padding-top: $margin-padding-xxl !important; padding-bottom: $margin-padding-xl !important; }
+
+  /* Buttons
+  --------------------------------------------------- */
+  .btn-radius {
+    display: inline-block; margin-left: 1em; padding: 0.8em 1.2em; border-radius: 2em; line-height: 1em; white-space: nowrap;
+    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s);
+    &.border { border: 1px solid; }
+    &.with-icon{
+      padding-right: 2.4em; padding-left: 2.4em; position: relative;
+      &:after, &:before{ width: 16px!important; height: 16px!important; top: 50%!important; margin-top: -8px; left: 1em!important; background-size: 200px 200px!important }
+    }
+  }
+
+  .btn-small-radius {
+    display: inline-block; padding: 0.5em 1em; border-radius: 2em; line-height: 1em; @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s);
+    &.border { border: 1px solid; }
+  }
+
+  .btn-round {
+    display: inline-block; width: 40px; height: 40px; border-radius: 50%; border: 1px solid; position: relative;
+  }
+
+  .btn-small-round { display: inline-block; border-radius: 50%; border: 1px solid #000; width: 30px; height: 30px; position: relative }
+
+  .btn-small-round, .btn-round, .btn-radius.with-icon{
+    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, opacity 0.2s);
+    &:after, &:before{
+      position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: url("../images/sprite.png") no-repeat center;
+      background-size: 256px 256px; z-index: 1; content: ''; display: block; @include transition(opacity ease-in-out 0.2s);
+    }
+    &:after{ z-index: 2; opacity: 0 }
+    &:hover:after{ opacity: 1 }
+  }
+
+@media only screen and (max-width: $grid-breakpoint-mobile) {
+
+  body{ font-size: 10px!important }
+  h1, .h1{ font-size: 2.5em }
+}

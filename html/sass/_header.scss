@@ -29,8 +29,11 @@
           a{ color: $color-subtle-yellow }
         }
 
-        .register { text-align: right; padding-left: 4.5em; color: $color-brown;
+        .register {
+          text-align: right; padding-left: 4.5em; color: $color-brown;
+          a:hover{ color: $color-subtle-yellow }
           .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em }
+          .btn-radius:hover { background-color: $color-subtle-yellow; color: $color-brown }
       }
     }
 

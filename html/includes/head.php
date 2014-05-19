@@ -27,7 +27,7 @@
 
     <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.easing.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.transit.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.velocity.min.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
@@ -38,6 +38,7 @@
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
+        //var BASEURL = "/pr0d/wbb/";
         var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = {};
     </script>

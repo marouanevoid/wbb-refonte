@@ -6,10 +6,7 @@
 
         <div class="three columns vcenter city-selector h4">
             You are in
-            <a class="btn-radius with-icon border" href="">
-                <img src="images/icons/pin.place.png" alt="icon.pin" width="12" height="16"/>
-                New York
-            </a>
+            <a class="btn-radius with-icon border brown place" href="">New York</a>
         </div>
 
         <div class="six columns title vcenter">
@@ -18,19 +15,19 @@
         </div>
 
         <div class="three columns star-share vcenter">
-            <a class="btn-round" href="">
-                <img src="images/icons/star.png" alt="icon.star" width="20" height="20"/>
-            </a>
-            <a class="btn-round" href="">
-                <img src="images/icons/share.png" alt="icon.share" width="20" height="20"/>
-            </a>
+            <a class="btn-round brown star" href=""></a>
+            <a class="btn-round brown share" href=""></a>
         </div>
 
     </section>
 
 
     <!-- SLIDER -->
-    <div class="container full">
+    <div class="container full gallery">
+        <div class="main">
+            <?php $j = 1 ?>
+            <?php include('components/slider/image.php') ?>
+        </div>
         <?php include('components/slider.php') ?>
     </div>
 
@@ -71,10 +68,10 @@
                 <!-- ALSO APPEARS -->
                 <?php if( !$is_mobile ): ?>
                     <div class="also-appears">
+                        <hr class="l-margin"/>
                         <?php include('components/also-appears.php') ?>
                     </div>
                 <?php endif ?>
-
             </div>
 
             <!-- ASIDE -->
@@ -85,7 +82,7 @@
 
                         <div class="gmap">
                             <div class="get-directions h4">
-                                <a href="" class="btn-small-radius border">Get Directions</a>
+                                <a href="" class="btn-small-radius border brown">Get Directions</a>
                             </div>
                             <img src="http://maps.googleapis.com/maps/api/staticmap?center=354+West+Hubbard+Street+New+York,NY&zoom=16&size=660x240&maptype=roadmap&sensor=false"/>
                         </div>
@@ -94,16 +91,11 @@
                             354 West Hubbard Street<br/>
                             New York, NY<br/>
                             (555) 555-5555<br/>
-                            <a href="">info@macaonyc.com</a><br/>
-                            <a href="" class="btn-small-round www">
-                                <img src="images/icons/www.png" alt="www" width="22" height="22"/>
-                            </a>
-                            <a href="" class="btn-small-round twitter">
-                                <img src="images/icons/twitter.png" alt="twitter" width="22" height="22"/>
-                            </a>
-                            <a href="" class="btn-small-round facebook">
-                                <img src="images/icons/facebook.png" alt="facebook" width="22" height="22"/>
-                            </a>
+                            <a href="">info@macaonyc.com</a>
+                            <br/>
+                            <a href="" class="btn-small-round www brown"></a>
+                            <a href="" class="btn-small-round twitter"></a>
+                            <a href="" class="btn-small-round facebook"></a>
                         </p>
 
                         <hr class="s-margin"/>
@@ -115,17 +107,17 @@
                             Parking: Street<br/>
                             Price: $$$$  <a href="">(View menu)</a><br/>
                             Reservation: Yes<br/>
-                            <a href="" class="btn-small-radius border">Make a Reservation</a>
+                            <a href="" class="btn-small-radius border brown">Make a Reservation</a>
                         </p>
-
                     </div>
                 </div>
 
-                <div class="block side-ad m-margin-top">
-                    <img src="tmp/ad.side.jameson.png" alt="ad.jameson" width="300" height="250"/>
-                    <div class="txt">Advertising</div>
-                </div>
-
+                <?php if( !$is_mobile ): ?>
+                    <div class="block side-ad m-margin-top">
+                        <img src="tmp/ad.side.jameson.png" alt="ad.jameson" width="300" height="250"/>
+                        <div class="txt">Advertising</div>
+                    </div>
+                <?php endif ?>
             </aside>
 
         </article>
@@ -134,10 +126,24 @@
     <!-- INSIDER TIPS -->
     <?php include('components/insider-tips.php') ?>
 
+    <!-- ALSO APPEARS -->
+    <?php if( $is_mobile ): ?>
+        <div class="container">
+            <div class="twelve columns">
+                <div class="also-appears">
+                    <?php include('components/also-appears.php') ?>
+                    <hr class="l-margin-top"/>
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
+
     <!-- ALSO LIKE -->
     <?php include('components/also-like.php') ?>
 
     <!-- AD -->
-    <?php include('components/footer-ad.php') ?>
+    <?php if( !$is_mobile ): ?>
+        <?php include('components/footer-ad.php') ?>
+    <?php endif ?>
 
 <?php include('includes/foot.php') ?>

@@ -16,12 +16,12 @@
 /**
  * indigen namespace.
  */
-var metabolism = metabolism || {};
+var meta = meta || {};
 
 /**
  *
  */
-metabolism.Utils = function() {
+meta.Utils = function() {
 
     var that = this;
 
@@ -212,4 +212,4 @@ if (!Array.prototype.indexOf) {
 }
 
 var console = console || {log:function(){}};
-var UTILS = new metabolism.Utils();
+var UTILS = new meta.Utils();

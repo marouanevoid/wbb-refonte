@@ -15,6 +15,15 @@
     }
   }
 
+  .gallery{
+    .main{
+      width: 50%; float: left; position: relative;
+      .btn-round{ position: absolute; top: 1em; right: 1em; z-index: 2 }
+      img{ width: 100%; height: auto; display: block }
+    }
+    .ui-slider{ outline:1px solid #fff; width: 50%; float: left }
+  }
+
   aside{
 
     .informations{
@@ -22,36 +31,38 @@
       .contain{
         background: #fff; padding: 1em;
         .gmap { position: relative;
-          .get-directions { position: absolute; text-align: center; z-index: 10; width: 100%; height: 100%; left: 0; top: 0; background-image: url("../images/icons/pin.gmap.png"); background-repeat: no-repeat; background-size: 34px 96px; background-position: center center;
-            .btn-small-radius { display: inline-block; margin-top: 24%; background-color: #ffffff; color: $color-brown; }
+          .get-directions {
+            position: absolute; text-align: center; z-index: 10; width: 100%; height: 100%; left: 0; top: 0;
+            background-image: url("../images/icons/pin.gmap.png"); background-repeat: no-repeat;
+            background-size: 34px 96px; background-position: center center;
+            .btn-small-radius { margin-top: 24%; background: #fff }
           }
           img { display: block; width: 100%; height: auto; }
         }
         p { padding: 1em; position: relative;
-          .btn-small-round { margin: 1em 1em 0 0; font-size: 1em;
-            &.www      { border-color: $color-brown; }
-            &.twitter  { border-color: #00c3f3; }
-            &.facebook { border-color: #2960a3; }
-          }
-          .btn-small-radius { display: block; position: absolute; bottom: 0.5em; right: 0.5em; }
+          .btn-small-round { margin: 1em 1em 0 0; }
+          .btn-small-radius { position: absolute; bottom: 0.5em; right: 0.5em; }
         }
-        hr { border-color: $color-subtle-yellow; margin: 0 10px 1em 10px!important; }
+        hr { border-color: $color-brown; margin: 0 10px 1em 10px!important; }
       }
     }
   }
 
   .also-like {
-    h1 { color: $color-brown; }
+    .h1 { color: $color-brown; }
   }
 
   .insider-tips {
     background-color: $color-cream;
+    .load-more{ padding: 0.8em 1.6em; display: inline-block; font-size: 1.4em }
   }
 
   .also-appears {
     a { display: block; position: relative; margin-bottom:0.5em;
       img{ margin-left: 0.25em; vertical-align: middle }
-      &:before { content: ''; display: inline-block; width: 8px; height: 13px; background-image: url('../images/misc/chevron.png'); background-size: 100% 100%; }
+      &:before {
+        content: ''; display: inline-block; width: 8px; height: 13px; background-image: url('../images/misc/chevron.png'); background-size: 100% 100%;
+      }
     }
     .h2 { text-transform: uppercase; font-weight: bold; }
     .h3 { text-transform: none; font-weight: normal; color: $color-brown; }
@@ -76,9 +87,28 @@
       .also-appears.desktop { display: none; }
     }
 
+    .gallery{
+      .main{ width: 100% }
+      .ui-slider{
+        width: 100%;
+        .ui-slide .image{ width: 33.33% }
+        .ui-slide .image:last-of-type{ display: none }
+        .arrows{ display: none }
+        img.sizer{ width: 33.33% }
+      }
+    }
+
     aside { margin-top: 50px; width: 100% !important; margin-left: 0 !important;
       .informations { background: none; padding: 0;
-        .contain { padding: 0; }
+        .contain { padding: 0;
+          p .btn-small-radius { display: inline-block; position: static; margin-top: 1em; }
+        }
+      }
+    }
+
+    .insider-tips {
+      .box { margin-top: 1em;
+        &:nth-child(3) { margin-bottom: 4em; }
       }
     }
   }

@@ -12,6 +12,7 @@
 /* Colors
 --------------------------------------------------- */
     $color-brown:         #b3955f;
+    $color-brown-dark:    #7e613f;
     $color-subtle-yellow: #ffe4af;
     $color-cream:         #faf3e1;
     $color-dark-gray:     #333333;
@@ -24,3 +25,8 @@
     $margin-padding-l:   50px;
     $margin-padding-xl:  75px;
     $margin-padding-xxl: 100px;
+
+@mixin reduceFlickering()
+{
+  backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-backface-visibility: hidden
+}

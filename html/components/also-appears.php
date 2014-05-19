@@ -1,4 +1,3 @@
-<hr class="l-margin"/>
 <div class="m-margin-top h2">This bar appears also in</div>
 <div class="m-margin-top h3">
     <ul>

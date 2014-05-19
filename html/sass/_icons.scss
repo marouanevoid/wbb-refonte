@@ -1,0 +1,67 @@
+.btn-small-radius, .btn-round, .btn-radius, .btn-small-round{
+
+  &.brown{ color: $color-brown; border-color: $color-brown }
+  &.brown:hover{ background: $color-brown!important; color: #fff }
+
+  &.dark{ color: $color-dark-gray; background: $color-dark-gray; opacity: 0.8 }
+  &.dark:hover{ opacity: 1 }
+}
+
+.btn-round{
+
+  &.star{
+    &:before{ background-position: 0 0 }
+    &:after{ background-position: 0 -40px }
+  }
+
+  &.dark.star{
+    &:before{ background-position: -160px -80px }
+    &:after{ display: none }
+  }
+
+  &.share{
+    &:before{ background-position: -40px 0 }
+    &:after{ background-position: -40px -40px }
+  }
+
+  &.foursquare{
+    &:before{ background-position: -120px -80px }
+    &:after{ display: none }
+  }
+
+  &.instagram{
+    &:before{ background-position: -80px -80px }
+    &:after{ display: none }
+  }
+
+}
+
+.btn-radius.with-icon{
+
+  &.place{
+    &:before{ background-position: -164px -8px }
+    &:after{ background-position: -164px -39px }
+  }
+}
+
+.btn-small-round{
+
+  &.www{
+    &:before{ background-position:-5px -125px }
+    &:after{ background-position: -5px -165px }
+  }
+
+  &.twitter{
+    border-color: #00c3f3;
+    &:hover{ background: #00c3f3 }
+    &:before{ background-position:-45px -125px }
+    &:after{ background-position: -45px -165px }
+  }
+
+  &.facebook{
+    border-color: #2960a3;
+    &:hover{ background: #2960a3 }
+    &:before{ background-position:-85px -125px }
+    &:after{ background-position: -85px -165px }
+  }
+}

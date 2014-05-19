@@ -8,9 +8,11 @@
 
         <div class="line">
 
-            <div class="three columns box">
-                <?php include('components/tips/form.php') ?>
-            </div>
+            <?php if( !$is_mobile ): ?>
+                <div class="three columns box">
+                    <?php include('components/tips/form.php') ?>
+                </div>
+            <?php endif ?>
 
             <div class="six columns box">
                 <?php include('components/tips/expert.php') ?>
@@ -20,12 +22,24 @@
                 <?php include('components/tips/regular.php') ?>
             </div>
 
+            <?php if( $is_mobile ): ?>
+                <div class="twelve columns align-center m-margin">
+                    <a class="btn-radius border load-more brown">Load More</a>
+                </div>
+            <?php endif ?>
         </div>
 
-        <div class="twelve columns align-center m-margin">
-            <a class="button large load-more">Load More</a>
-        </div>
+        <?php if( $is_mobile ): ?>
+            <div class="three columns box">
+                <?php include('components/tips/form.php') ?>
+            </div>
+        <?php endif ?>
 
+        <?php if( !$is_mobile ): ?>
+            <div class="twelve columns align-center m-margin">
+                <a class="btn-radius border load-more brown">Load More</a>
+            </div>
+        <?php endif ?>
     </div>
 
 </section>

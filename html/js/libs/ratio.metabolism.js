@@ -17,12 +17,12 @@
 /**
  * metabolism namespace.
  */
-var metabolism = metabolism || {};
+var meta = meta || {};
 
 /**
  *
  */
-metabolism.Ratio = function(config) {
+meta.Ratio = function(config) {
 
     var that = this;
 

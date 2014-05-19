@@ -28,3 +28,14 @@ article.tip {
 
   .expert .excerpt { font-size: 1.6em; line-height: 150% }
 }
+
+
+@media only screen and (max-width: $grid-breakpoint-mobile) {
+
+  article.tip {
+    height: auto; padding: 2em;
+    .content { position:  static; width: 100% }
+    hr{ margin-top: 15px }
+  }
+
+}

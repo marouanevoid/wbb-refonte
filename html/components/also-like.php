@@ -2,8 +2,8 @@
 
     <div class="container m-padding-bottom">
 
-        <div class="twelve columns align-center l-margin-top m-margin-bottom">
-            <h1>You May Also Like</h1>
+        <div class="h1 twelve columns align-center l-margin-top m-margin-bottom">
+            You May Also Like
         </div>
 
         <?php for($i=1; $i<5; $i++) : ?>
