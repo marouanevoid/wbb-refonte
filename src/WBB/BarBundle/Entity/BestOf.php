@@ -33,7 +33,7 @@ class BestOf
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -52,14 +52,14 @@ class BestOf
     /**
      * @var string
      *
-     * @ORM\Column(name="sponsor", type="string", length=255)
+     * @ORM\Column(name="sponsor", type="string", length=255, nullable=true)
      */
     private $sponsor;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sponsor_image", type="string", length=255)
+     * @ORM\Column(name="sponsor_image", type="string", length=255, nullable=true)
      */
     private $sponsorImage;
 
@@ -71,21 +71,21 @@ class BestOf
     /**
      * @var string
      *
-     * @ORM\Column(name="seoDescription", type="string", length=255)
+     * @ORM\Column(name="seoDescription", type="string", length=255, nullable=true)
      */
     private $seoDescription;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="byTrend", type="boolean")
+     * @ORM\Column(name="byTrend", type="boolean", nullable=true)
      */
     private $byTrend;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTop", type="boolean")
+     * @ORM\Column(name="onTop", type="boolean", nullable=true)
      */
     private $onTop;
 
@@ -568,5 +568,10 @@ class BestOf
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function __construct(){
+        $this->setOnTop(true);
+        $this->setByTrend(true);
     }
 }
