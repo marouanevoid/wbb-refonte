@@ -4,6 +4,7 @@ namespace WBB\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * City
@@ -88,6 +89,11 @@ class City {
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BestOf", mappedBy="city", cascade={"all"})
      */
     private $bestofs;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="cities")
+     */
+    private $article;
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Trend", mappedBy="city", cascade={"all"})
@@ -525,5 +531,28 @@ class City {
     public function getTrends()
     {
         return $this->trends;
+    }
+
+    /**
+     * Set article
+     *
+     * @param \WBB\BarBundle\Entity\Article $article
+     * @return City
+     */
+    public function setArticle(\WBB\BarBundle\Entity\Article $article = null)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return \WBB\BarBundle\Entity\Article 
+     */
+    public function getArticle()
+    {
+        return $this->article;
     }
 }

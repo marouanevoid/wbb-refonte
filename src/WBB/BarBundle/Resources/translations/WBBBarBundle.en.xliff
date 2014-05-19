@@ -152,10 +152,450 @@
                 <target>Status</target>
             </trans-unit>
 
-            <!--<trans-unit id="">-->
-                <!--<source></source>-->
-                <!--<target></target>-->
-            <!--</trans-unit>-->
+            <!-- TipAdmin [BEGIN] -->
+            <!-- breadcrumb -->
+            <trans-unit id="breadcrumb.link_tip_list">
+                <source>breadcrumb.link_tip_list</source>
+                <target>Detail Tip Page</target>
+            </trans-unit>
+            <!-- id -->
+            <trans-unit id="form.label_id">
+                <source>form.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="filter.label_id">
+                <source>filter.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <!-- description (dupliqué)-->
+            <!--<trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target>Description</target>
+            </trans-unit>-->
+            <trans-unit id="list.label_description">
+                <source>list.label_description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="filter.label_description">
+                <source>filter.label_description</source>
+                <target>Description</target>
+            </trans-unit>
+            <!-- bar -->
+            <trans-unit id="form.label_bar">
+                <source>form.label_bar</source>
+                <target>Bar</target>
+            </trans-unit>
+            <trans-unit id="list.label_bar">
+                <source>list.label_bar</source>
+                <target>Bar</target>
+            </trans-unit>
+            <trans-unit id="filter.label_bar">
+                <source>filter.label_bar</source>
+                <target>Bar</target>
+            </trans-unit>
+            <!-- user (dupliqué)-->
+            <!--<trans-unit id="form.label_user">
+                <source>form.label_user</source>
+                <target>User</target>
+            </trans-unit>-->
+            <trans-unit id="list.label_user">
+                <source>list.label_user</source>
+                <target>User</target>
+            </trans-unit>
+            <trans-unit id="filter.label_user">
+                <source>filter.label_user</source>
+                <target>User</target>
+            </trans-unit>
+            <!-- status (dupliqué)-->
+            <!--<trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Status</target>
+            </trans-unit>-->
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="filter.label_status">
+                <source>filter.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+            <!-- createdAt -->
+            <trans-unit id="form.label_created_at">
+                <source>form.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="list.label_created_at">
+                <source>list.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_created_at">
+                <source>filter.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <!-- updatedAt -->
+            <trans-unit id="form.label_updated_at">
+                <source>form.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <trans-unit id="list.label_updated_at">
+                <source>list.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_updated_at">
+                <source>filter.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <!-- TipAdmin [END] -->
+
+            <!-- AdAdmin [BEGIN] -->
+            <!-- breadcrumb -->
+            <trans-unit id="breadcrumb.link_ad_list">
+                <source>breadcrumb.link_ad_list</source>
+                <target>Detail Ad Page</target>
+            </trans-unit>
+
+            <!-- id (dupliqué)-->
+            <!--<trans-unit id="form.label_id">
+                <source>form.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="filter.label_id">
+                <source>filter.label_id</source>
+                <target>Id</target>
+            </trans-unit>-->
+            <!-- name (dupliqué)-->
+            <!--<trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Name</target>
+            </trans-unit>-->
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="filter.label_name">
+                <source>filter.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <!-- position (Dupliqué) -->
+            <!-- <trans-unit id="form.label_position">
+                <source>form.label_position</source>
+                <target>Position</target>
+            </trans-unit>-->
+            <trans-unit id="list.label_position">
+                <source>list.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="filter.label_position">
+                <source>filter.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+            <!-- tag -->
+            <trans-unit id="form.label_tag">
+                <source>form.label_tag</source>
+                <target>Tag</target>
+            </trans-unit>
+            <trans-unit id="list.label_tag">
+                <source>list.label_tag</source>
+                <target>Tag</target>
+            </trans-unit>
+            <trans-unit id="filter.label_tag">
+                <source>filter.label_tag</source>
+                <target>Tag</target>
+            </trans-unit>
+            <!-- link -->
+            <trans-unit id="form.label_link">
+                <source>form.label_link</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="list.label_link">
+                <source>list.label_link</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="filter.label_link">
+                <source>filter.label_link</source>
+                <target>Link</target>
+            </trans-unit>
+            <!-- countries -->
+            <trans-unit id="form.label_countries">
+                <source>form.label_countries</source>
+                <target>Countries</target>
+            </trans-unit>
+            <trans-unit id="list.label_countries">
+                <source>list.label_countries</source>
+                <target>Countries</target>
+            </trans-unit>
+            <trans-unit id="filter.label_countries">
+                <source>filter.label_countries</source>
+                <target>Countries</target>
+            </trans-unit>
+            <!-- beginAt -->
+            <trans-unit id="form.label_begin_at">
+                <source>form.label_begin_at</source>
+                <target>Begin at</target>
+            </trans-unit>
+            <trans-unit id="list.label_begin_at">
+                <source>list.label_begin_at</source>
+                <target>Begin at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_begin_at">
+                <source>filter.label_begin_at</source>
+                <target>Begin at</target>
+            </trans-unit>
+            <!-- endAt -->
+            <trans-unit id="form.label_end_at">
+                <source>form.label_end_at</source>
+                <target>End at</target>
+            </trans-unit>
+            <trans-unit id="list.label_end_at">
+                <source>list.label_end_at</source>
+                <target>End at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_end_at">
+                <source>filter.label_end_at</source>
+                <target>End at</target>
+            </trans-unit>
+            <!-- createdAt (dupliqué)-->
+            <!--<trans-unit id="form.label_created_at">
+                <source>form.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="list.label_created_at">
+                <source>list.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_created_at">
+                <source>filter.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>-->
+            <!-- updatedAt (dupliqué)-->
+            <!--<trans-unit id="form.label_updated_at">
+                <source>form.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <trans-unit id="list.label_updated_at">
+                <source>list.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_updated_at">
+                <source>filter.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>-->
+            <!-- AdAdmin [END] -->
+
+
+            <!-- AdAdmin [BEGIN] -->
+            <!-- breadcrumb -->
+            <trans-unit id="breadcrumb.link_article_list">
+                <source>breadcrumb.link_article_list</source>
+                <target>Detail Article Page</target>
+            </trans-unit>
+
+            <!-- id (dupliqué)-->
+            <!--<trans-unit id="form.label_id">
+                <source>form.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="filter.label_id">
+                <source>filter.label_id</source>
+                <target>Id</target>
+            </trans-unit>-->
+            <!-- title -->
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="list.label_title">
+                <source>list.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="filter.label_title">
+                <source>filter.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+
+            <!-- shareText -->
+            <trans-unit id="form.label_share_text">
+                <source>form.label_share_text</source>
+                <target>Share text</target>
+            </trans-unit>
+            <trans-unit id="list.label_share_text">
+                <source>list.label_share_text</source>
+                <target>Share text</target>
+            </trans-unit>
+            <trans-unit id="filter.label_share_text">
+                <source>filter.label_share_text</source>
+                <target>Share text</target>
+            </trans-unit>
+            <!-- quoteAuthor -->
+            <trans-unit id="form.label_quote_author">
+                <source>form.label_quote_author</source>
+                <target>Quote author</target>
+            </trans-unit>
+            <trans-unit id="list.label_quote_author">
+                <source>list.label_quote_author</source>
+                <target>Quote author</target>
+            </trans-unit>
+            <trans-unit id="filter.label_quote_author">
+                <source>filter.label_quote_author</source>
+                <target>Quote author</target>
+            </trans-unit>
+            <!-- quoteText -->
+            <trans-unit id="form.label_quote_text">
+                <source>form.label_quote_text</source>
+                <target>Quote text</target>
+            </trans-unit>
+            <trans-unit id="list.label_quote_text">
+                <source>list.label_quote_text</source>
+                <target>Quote text</target>
+            </trans-unit>
+            <trans-unit id="filter.label_quote_text">
+                <source>filter.label_quote_text</source>
+                <target>Quote text</target>
+            </trans-unit>
+            <!-- seoDescription (dupliqué) -->
+            <!--<trans-unit id="form.label_seo_description">
+                <source>form.label_seo_description</source>
+                <target>Seo description</target>
+            </trans-unit>-->
+            <trans-unit id="list.label_seo_description">
+                <source>list.label_seo_description</source>
+                <target>Seo description</target>
+            </trans-unit>
+            <trans-unit id="filter.label_seo_description">
+                <source>filter.label_seo_description</source>
+                <target>Seo description</target>
+            </trans-unit>
+            <!-- richDescription -->
+            <trans-unit id="form.label_rich_description">
+                <source>form.label_rich_description</source>
+                <target>Rich description</target>
+            </trans-unit>
+            <trans-unit id="list.label_rich_description">
+                <source>list.label_rich_description</source>
+                <target>Rich description</target>
+            </trans-unit>
+            <trans-unit id="filter.label_rich_description">
+                <source>filter.label_rich_description</source>
+                <target>Rich description</target>
+            </trans-unit>
+            <!-- isAnInterview -->
+            <trans-unit id="form.label_is_an_interview">
+                <source>form.label_is_an_interview</source>
+                <target>Is an interview</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_an_interview">
+                <source>list.label_is_an_interview</source>
+                <target>Is an interview</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_an_interview">
+                <source>filter.label_is_an_interview</source>
+                <target>Is an interview</target>
+            </trans-unit>
+            <!-- isOnTop -->
+            <trans-unit id="form.label_is_on_top">
+                <source>form.label_is_on_top</source>
+                <target>Is on top</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_on_top">
+                <source>list.label_is_on_top</source>
+                <target>Is on top</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_on_top">
+                <source>filter.label_is_on_top</source>
+                <target>Is on top</target>
+            </trans-unit>
+            <!-- bars -->
+            <trans-unit id="form.label_bars">
+                <source>form.label_bars</source>
+                <target>Related bars</target>
+            </trans-unit>
+            <trans-unit id="list.label_bars">
+                <source>list.label_bars</source>
+                <target>Related bars</target>
+            </trans-unit>
+            <trans-unit id="filter.label_bars">
+                <source>filter.label_bars</source>
+                <target>Related bars</target>
+            </trans-unit>
+            <!-- cities -->
+            <trans-unit id="form.label_cities">
+                <source>form.label_cities</source>
+                <target>Related cities</target>
+            </trans-unit>
+            <trans-unit id="list.label_cities">
+                <source>list.label_cities</source>
+                <target>Related cities</target>
+            </trans-unit>
+            <trans-unit id="filter.label_cities">
+                <source>filter.label_cities</source>
+                <target>Related cities</target>
+            </trans-unit>
+            <!-- user (dupliqué) -->
+            <!--<trans-unit id="form.label_user">
+                <source>form.label_user</source>
+                <target>User</target>
+            </trans-unit>
+            <trans-unit id="list.label_user">
+                <source>list.label_user</source>
+                <target>User</target>
+            </trans-unit>
+            <trans-unit id="filter.label_user">
+                <source>filter.label_user</source>
+                <target>User</target>
+            </trans-unit> -->
+            <!-- medias (dupliqué) -->
+            <!--<trans-unit id="form.label_medias">
+                <source>form.label_medias</source>
+                <target>Medias</target>
+            </trans-unit>-->
+            <trans-unit id="list.label_medias">
+                <source>list.label_medias</source>
+                <target>Medias</target>
+            </trans-unit>
+            <trans-unit id="filter.label_medias">
+                <source>filter.label_medias</source>
+                <target>Medias</target>
+            </trans-unit>
+
+            <!-- createdAt (dupliqué) -->
+            <!--<trans-unit id="form.label_created_at">
+                <source>form.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="list.label_created_at">
+                <source>list.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_created_at">
+                <source>filter.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>-->
+            <!-- updatedAt (dupliqué) -->
+            <!--<trans-unit id="form.label_updated_at">
+                <source>form.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <trans-unit id="list.label_updated_at">
+                <source>list.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+            <trans-unit id="filter.label_updated_at">
+                <source>filter.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>-->
+            <!-- AdAdmin [END] -->
 
         </body>
     </file>

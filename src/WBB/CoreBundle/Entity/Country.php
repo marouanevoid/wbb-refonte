@@ -40,6 +40,11 @@ class Country
     private $bestofs;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\WBB\BarBundle\Entity\Ad", inversedBy="countries")
+     */
+    private $ad;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -211,5 +216,28 @@ class Country
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set ad
+     *
+     * @param \WBB\BarBundle\Entity\Ad $ad
+     * @return Country
+     */
+    public function setAd(\WBB\BarBundle\Entity\Ad $ad = null)
+    {
+        $this->ad = $ad;
+
+        return $this;
+    }
+
+    /**
+     * Get ad
+     *
+     * @return \WBB\BarBundle\Entity\Ad 
+     */
+    public function getAd()
+    {
+        return $this->ad;
     }
 }

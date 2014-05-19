@@ -40,6 +40,11 @@ class User extends BaseUser
     private $bars;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Tip", mappedBy="user")
+     */
+    private $tips;
+
+    /**
      * @var datetime
      *
      * @Gedmo\Timestampable(on="create")
@@ -194,5 +199,34 @@ class User extends BaseUser
     public function getBars()
     {
         return $this->bars;
+    }
+
+    /**
+     * Add tips
+     *
+     * @param \WBB\BarBundle\Entity\Tip $tips
+     * @return User
+     */
+    public function addTip(\WBB\BarBundle\Entity\Tip $tips){
+        $this->tips[] = $tips;
+        return $this;
+    }
+
+    /**
+     * Remove tips
+     *
+     * @param \WBB\BarBundle\Entity\Tip $tips
+     */
+    public function removeTip(\WBB\BarBundle\Entity\Tip $tips){
+        $this->tips->removeElement($tips);
+    }
+
+    /**
+     * Get tips
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTips(){
+        return $this->tips;
     }
 }

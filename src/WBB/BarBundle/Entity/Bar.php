@@ -229,6 +229,17 @@ class Bar
     private $openings;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tip", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"openingDay" = "ASC"})
+     */
+    private $tips;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="bars")
+     */
+    private $article;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -1036,5 +1047,61 @@ class Bar
     public function getOpenings()
     {
         return $this->openings;
+    }
+
+    /**
+     * Add tips
+     *
+     * @param \WBB\BarBundle\Entity\Tip $tips
+     * @return Bar
+     */
+    public function addTip(\WBB\BarBundle\Entity\Tip $tips)
+    {
+        $this->tips[] = $tips;
+
+        return $this;
+    }
+
+    /**
+     * Remove tips
+     *
+     * @param \WBB\BarBundle\Entity\Tip $tips
+     */
+    public function removeTip(\WBB\BarBundle\Entity\Tip $tips)
+    {
+        $this->tips->removeElement($tips);
+    }
+
+    /**
+     * Get tips
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTips()
+    {
+        return $this->tips;
+    }
+
+    /**
+     * Set article
+     *
+     * @param \WBB\BarBundle\Entity\Article $article
+     * @return Bar
+     */
+    public function setArticle(\WBB\BarBundle\Entity\Article $article = null)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return \WBB\BarBundle\Entity\Article 
+     */
+    public function getArticle()
+    {
+        return $this->article;
     }
 }

@@ -185,6 +185,7 @@ class BarAdmin extends Admin
         foreach ($object->getMedias() as $media) {
             $media->setBar($object);
         }
+
         foreach ($object->getOpenings() as $opening) {
             $opening->setBar($object);
         }
@@ -195,6 +196,7 @@ class BarAdmin extends Admin
         foreach ($object->getMedias() as $media) {
             $media->setBar($object);
         }
+
         foreach ($object->getOpenings() as $opening) {
             $opening->setBar($object);
         }
