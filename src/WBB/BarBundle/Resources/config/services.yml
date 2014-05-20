@@ -112,8 +112,8 @@ services:
             arguments: [ @service_container, @doctrine.orm.entity_manager, %foursquare_tips_limit% ]
 
     #Repositories
-        bar.repository:
-            class: WBB\BarBundle\Repository\BarRepository
-            factory_service: doctrine.orm.default_entity_manager
-            factory_method: getRepository
-            arguments: ['WBBBarBundle:Bar']
+    bar.repository:
+        class: WBB\BarBundle\Repository\BarRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBBarBundle:Bar']
