@@ -33,19 +33,19 @@
                     <li class="">
                         <a href="#{{ admin.uniqid }}_fs_tips_tab" data-toggle="tab">
                             <i class="icon-exclamation-sign has-errors hide"></i>
-                            Foursquare
+                            Foursquare tips
                         </a>
                     </li>
                     <li class="">
                         <a href="#{{ admin.uniqid }}_fs_img_tab" data-toggle="tab">
                             <i class="icon-exclamation-sign has-errors hide"></i>
-                            Foursquare
+                            Foursquare images
                         </a>
                     </li>
                     <li class="">
                         <a href="#{{ admin.uniqid }}_instg_tab" data-toggle="tab">
                             <i class="icon-exclamation-sign has-errors hide"></i>
-                            Foursquare
+                            Instagram
                         </a>
                     </li>
                 </ul>
@@ -73,17 +73,31 @@
                         <div class="tab-pane " id="{{ admin.uniqid }}_fs_tips_tab">
                             <fieldset>
                                 <div class="sonata-ba-collapsed-fields">
-                                    <input type="text" id="test_ignore"/>
+                                    <div class="tips">
+                                        <div class="content_tips"></div>
+                                        <div class="tips_action">
+                                            <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                                        </div>
+                                        <div></div>
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>
+
                         <div class="tab-pane " id="{{ admin.uniqid }}_fs_img_tab">
                             <fieldset>
                                 <div class="sonata-ba-collapsed-fields">
-                                    <input type="text" id="test_ignore"/>
+                                    <div class="imgs">
+                                        <div class="content_imgs"></div>
+                                        <div class="imgs_action">
+                                            <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                                        </div>
+                                        <div></div>
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>
+
                         <div class="tab-pane " id="{{ admin.uniqid }}_instg_tab">
                             <fieldset>
                                 <div class="sonata-ba-collapsed-fields">
