@@ -43,4 +43,11 @@ interface FeedInterface
      * @return Object
      */
     public function removeObject($hash, Bar $bar = null);
+
+    /**
+     * listAll
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @return array
+     */
+    public function listAll(Bar $bar);
 }

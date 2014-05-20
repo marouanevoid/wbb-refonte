@@ -104,4 +104,13 @@ class FoursquareImgs implements FeedInterface
 
         return $bar->getFsSelectedImgs();
     }
+
+    /**
+     * listAll
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @return array
+     */
+    public function listAll(Bar $bar){
+        $bar->getFsSelectedImgs();
+    }
 }

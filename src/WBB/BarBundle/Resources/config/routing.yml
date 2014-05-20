@@ -4,8 +4,14 @@ wbb_bar_test:
     options:
             expose: true
 
+wbb_bar_feeds_find:
+    pattern:  /feed/find/{type}/{id}
+    defaults: { _controller: WBBBarBundle:FSAdmin:find }
+    options:
+            expose: true
+
 wbb_bar_feeds_list:
-    pattern:  /feed/list/{type}/{id}
+    pattern:  /feed/list/{type}/{bar}
     defaults: { _controller: WBBBarBundle:FSAdmin:list }
     options:
             expose: true

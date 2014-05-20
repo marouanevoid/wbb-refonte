@@ -40,16 +40,29 @@ class FSAdminController extends Controller
     }
 
     /**
-     * listAction
+     * findAction
      *
      * @param $type
      * @param $id
      *
      * @return JsonResponse
      */
-    public function listAction($type, $id)
+    public function findAction($type, $id)
     {
         return new JsonResponse($this->get("wbb.{$type}.feed")->find($id));
+    }
+
+    /**
+     * listAction
+     *
+     * @param $type
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     *
+     * @return JsonResponse
+     */
+    public function listAction($type, $bar)
+    {
+        return new JsonResponse($this->get("wbb.{$type}.feed")->listAll($bar));
     }
 
     /**

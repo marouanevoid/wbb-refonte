@@ -104,4 +104,13 @@ class FoursquareTips implements FeedInterface
 
         return $bar->getFsExcludedTips();
     }
+
+    /**
+     * listAll
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @return array
+     */
+    public function listAll(Bar $bar){
+        $bar->getFsExcludedTips();
+    }
 }
