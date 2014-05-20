@@ -111,6 +111,6 @@ class FoursquareImgs implements FeedInterface
      * @return array
      */
     public function listAll(Bar $bar){
-        $bar->getFsSelectedImgs();
+        return $bar->getFsSelectedImgs();
     }
 }

@@ -111,6 +111,6 @@ class FoursquareTips implements FeedInterface
      * @return array
      */
     public function listAll(Bar $bar){
-        $bar->getFsExcludedTips();
+        return $bar->getFsExcludedTips();
     }
 }
