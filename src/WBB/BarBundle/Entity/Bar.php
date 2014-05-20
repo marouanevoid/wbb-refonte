@@ -967,7 +967,8 @@ class Bar
 
     public function addFsExcludedTip($hash)
     {
-        $this->fsExcludedTips[] = $hash;
+        if(!in_array($hash, $this->fsExcludedTips))
+            $this->fsExcludedTips[] = $hash;
 
         return $this;
     }
@@ -1004,7 +1005,8 @@ class Bar
 
     public function addFsSelectedImg($hash)
     {
-        $this->fsSelectedImgs[] = $hash;
+        if(!in_array($hash, $this->fsSelectedImgs))
+            $this->fsSelectedImgs[] = $hash;
 
         return $this;
     }
