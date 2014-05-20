@@ -60,9 +60,10 @@ class FSAdminController extends Controller
      *
      * @return JsonResponse
      */
-    public function listAction($type, $bar)
+    public function listAction($type, Bar $bar)
     {
-        return new JsonResponse($this->get("wbb.{$type}.feed")->listAll($bar));
+        $entity = $this->getEntity($bar, 'bar');
+        return new JsonResponse($this->get("wbb.{$type}.feed")->listAll($entity));
     }
 
     /**
@@ -76,7 +77,8 @@ class FSAdminController extends Controller
      */
     public function addAction($type, $hash, Bar $bar = null)
     {
-        $feed = $this->get("wbb.$type.feed")->createObject($hash, $bar);
+        $entity = $this->getEntity($bar, 'bar');
+        $feed = $this->get("wbb.$type.feed")->createObject($hash, $entity);
 
         return new JsonResponse(array('feed' => $feed->getId()));
     }
@@ -92,8 +94,21 @@ class FSAdminController extends Controller
      */
     public function removeAction($type, $hash, Bar $bar = null)
     {
-        $objects = $this->get("wbb.$type.feed")->removeObject($hash, $bar);
+        $entity = $this->getEntity($bar, 'bar');
+        $objects = $this->get("wbb.$type.feed")->removeObject($hash, $entity);
 
         return new JsonResponse(array('objects' => $objects));
+    }
+
+    /**
+     * Gets an entity based on a id
+     */
+    private function getEntity($id, $entityName)
+    {
+        $entity = $this->container->get("$entityName.repository")->findOneById($id);
+        if (!$entity) {
+            throw $this->createNotFoundException("$entityName with id: $id not found!");
+        }
+        return $entity;
     }
 }

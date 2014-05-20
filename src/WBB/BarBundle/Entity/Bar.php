@@ -13,7 +13,7 @@ use WBB\UserBundle\Entity\User;
  * Bar
  *
  * @ORM\Table(name="wbb_bar")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BarRepository")
  */
 class Bar
 {
