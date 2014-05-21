@@ -1,9 +1,17 @@
-wbb_bar_test:
-    pattern:  /feed/fsTips/{venue}
-    defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
-    options:
-            expose: true
+#wbb_bar_test:
+#    pattern:  /feed/fsTips/{venue}
+#    defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
+#    options:
+#            expose: true
 
+#Actions
+wbb_bar_details:
+    pattern: /bar/{id}/details
+    requirements:
+          id: \d+
+    defaults: { _controller: WBBBarBundle:Bar:details }
+
+#Services
 wbb_bar_feeds_find:
     pattern:  /feed/find/{type}/{id}
     defaults: { _controller: WBBBarBundle:FSAdmin:find }
