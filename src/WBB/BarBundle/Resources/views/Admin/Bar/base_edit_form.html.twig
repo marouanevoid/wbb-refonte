@@ -30,6 +30,7 @@
                             </a>
                         </li>
                     {% endfor %}
+                    {% if admin.id(object) %}
                     <li class="">
                         <a href="#{{ admin.uniqid }}_fs_tips_tab" data-toggle="tab">
                             <i class="icon-exclamation-sign has-errors hide"></i>
@@ -48,6 +49,7 @@
                             Instagram
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
                 {% endblock %}
 
@@ -70,6 +72,7 @@
                                 </fieldset>
                             </div>
                         {% endfor %}
+                        {% if admin.id(object) %}
                         <div class="tab-pane " id="{{ admin.uniqid }}_fs_tips_tab">
                             <fieldset>
                                 <div class="sonata-ba-collapsed-fields">
@@ -105,6 +108,7 @@
                                 </div>
                             </fieldset>
                         </div>
+                        {% endif %}
                     </div>
                 {% endblock %}
 

@@ -38,6 +38,14 @@ file that was distributed with this source code.
     {{ parent() }}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript">
+        var barId = "{{ admin.id(object) }}";
+        var venue;
+        $(document).ready(function() {
+            venue = $("#{{ admin.uniqid }}_foursquare").val();
+        });
+
+    </script>
     <script src="{{ asset('bundles/wbbbar/js/admin/foursquare.js') }}"></script>
     <script type="text/template" id="tips">
         <div class="fstip" id="{0}">
