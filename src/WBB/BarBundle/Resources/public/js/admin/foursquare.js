@@ -1,3 +1,24 @@
+function in_array(needle, haystack, argStrict) {
+    var key = '',
+        strict = !! argStrict;
+
+    if (strict) {
+        for (key in haystack) {
+            if (haystack[key] === needle) {
+                return true;
+            }
+        }
+    } else {
+        for (key in haystack) {
+            if (haystack[key] == needle) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 $(function() {
     foursquareTips = new foursquareTips();
     foursquareTips.init();
@@ -65,24 +86,39 @@ function foursquareTips() {
 
         $.ajax({
             type: "POST",
-            url:  Routing.generate('wbb_bar_feeds_find',
-                { type: "fstips", id: "43695300f964a5208c291fe3"}),
+            url:  Routing.generate('wbb_bar_feeds_list',
+                { type: "fstips", bar: 1}),
             dataType: 'json',
-            success: function(response) {
-                loader.hide();
-                var template = null;
-                $.each(response.data, function(key, feed){
-                    var tipsHtml = $("#tips").html();
-                    template = tipsHtml.format(
-                        feed.id, feed.text, feed.likes.count, feed.user.firstName, feed.user.photo.prefix+'60x60'+feed.user.photo.suffix
-                    );
+            success: function(r) {
+                $.ajax({
+                    type: "POST",
+                    url:  Routing.generate('wbb_bar_feeds_find',
+                        { type: "fstips", id: "43695300f964a5208c291fe3"}),
+                    dataType: 'json',
+                    success: function(response) {
+                        loader.hide();
+                        var template = null;
+                        $.each(response.data, function(key, feed){
+                            var tipsHtml = $("#tips").html();
+                            var checked = "";
+                            if(in_array(feed.id, r)) {
+                                checked = "checked";
+                            }
+                            template = tipsHtml.format(
+                                feed.id, feed.text, feed.likes.count, feed.user.firstName, feed.user.photo.prefix+'40x40'+feed.user.photo.suffix, checked
+                            );
 
-                    container.append(template);
+                            container.append(template);
+                        });
+                    },
+                    error: function(e) {
+                        console.log(e);
+                        loader.hide();
+                    }
                 });
             },
             error: function(e) {
                 console.log(e);
-                loader.hide();
             }
         });
     }
@@ -150,27 +186,45 @@ function foursquareImages() {
 
         $.ajax({
             type: "POST",
-            url:  Routing.generate('wbb_bar_feeds_find',
-                { type: "fsimgs", id: "43695300f964a5208c291fe3"}),
+            url:  Routing.generate('wbb_bar_feeds_list',
+                { type: "fsimgs", bar: 1}),
             dataType: 'json',
-            success: function(response) {
-                loader.hide();
-                var template = null;
-                $.each(response.data, function(key, feed){
-                    console.log(feed);
-                    var imgsHtml = $("#imgs").html();
-                    template = imgsHtml.format(
-                        feed.id, feed.prefix+"200x200"+feed.suffix
-                    );
+            success: function(r) {
+                $.ajax({
+                    type: "POST",
+                    url:  Routing.generate('wbb_bar_feeds_find',
+                        { type: "fsimgs", id: "43695300f964a5208c291fe3"}),
+                    dataType: 'json',
+                    success: function(response) {
+                        loader.hide();
+                        var template = null;
+                        $.each(response.data, function(key, feed){
+                            //console.log(feed);
+                            var imgsHtml = $("#imgs").html();
+                            var checked = "";
+                            if(in_array(feed.id, r)) {
+                                checked = "checked";
+                            }
+                            template = imgsHtml.format(
+                                feed.id, feed.prefix+"200x200"+feed.suffix, checked
+                            );
 
-                    container.append(template);
+                            container.append(template);
+                        });
+                    },
+                    error: function(e) {
+                        console.log(e);
+                        loader.hide();
+                    }
                 });
             },
             error: function(e) {
                 console.log(e);
-                loader.hide();
             }
         });
+
+
+
     }
 }
 
