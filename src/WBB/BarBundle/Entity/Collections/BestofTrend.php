@@ -167,10 +167,10 @@ class BestofTrend
     /**
      * Set bestof
      *
-     * @param \WBB\BarBundle\Entity\Collections\Bestof $bestof
+     * @param \WBB\BarBundle\Entity\Bestof $bestof
      * @return BestofTrend
      */
-    public function setBestof(\WBB\BarBundle\Entity\Collections\Bestof $bestof = null)
+    public function setBestof(\WBB\BarBundle\Entity\Bestof $bestof = null)
     {
         $this->bestof = $bestof;
 
@@ -180,7 +180,7 @@ class BestofTrend
     /**
      * Get bestof
      *
-     * @return \WBB\BarBundle\Entity\Collections\Bestof 
+     * @return \WBB\BarBundle\Entity\Bestof
      */
     public function getBestof()
     {
