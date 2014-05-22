@@ -81,16 +81,14 @@ class Article {
     private $isOnTop;
 
     /**
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
-     * @ORM\OrderBy({"openingDay" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Bar", mappedBy="article", cascade={"remove", "persist"})
      */
-    private $bars;
-
+    private $bars; 
+    
     /**
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="city", cascade={"all"}, orphanRemoval=true)
-     * @ORM\OrderBy({"openingDay" = "ASC"})
+     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="article", cascade={"remove", "persist"})
      */
-    private $cities;
+    private $cities;    
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="tips")
@@ -98,8 +96,7 @@ class Article {
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="ArticleMedia", mappedBy="article", cascade={"all"}, orphanRemoval=true)
-     * @ORM\OrderBy({"position" = "ASC"})
+     * @ORM\OneToMany(targetEntity="ArticleMedia", mappedBy="article", cascade={"remove", "persist"})
      */
     private $medias;
 

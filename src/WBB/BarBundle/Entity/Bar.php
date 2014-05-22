@@ -238,11 +238,12 @@ class Bar
      * @ORM\OneToMany(targetEntity="Tip", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      */
     private $tips;
-
+    
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="bars")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="bars", cascade={"remove"})
+     * @ORM\JoinColumn(name="bar_id", referencedColumnName="id")
      */
-    private $article;
+    private $article;      
 
     /**
      * @var \DateTime
