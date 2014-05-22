@@ -98,7 +98,7 @@ class Article {
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="ArticleMedia", mappedBy="article", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\ArticleMedia", mappedBy="article", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $medias;

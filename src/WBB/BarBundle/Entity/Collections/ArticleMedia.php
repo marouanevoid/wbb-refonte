@@ -1,6 +1,6 @@
 <?php
 
-namespace WBB\BarBundle\Entity;
+namespace WBB\BarBundle\Entity\Collections;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -25,7 +25,7 @@ class ArticleMedia {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="medias")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="medias")
      */
     private $article;
 

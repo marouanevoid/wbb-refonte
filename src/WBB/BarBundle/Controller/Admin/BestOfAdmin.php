@@ -90,6 +90,15 @@ class BestOfAdmin extends Admin
                 ->add('seoDescription')
                 ->add('byTrend')
                 ->add('onTop')
+                ->add('ordered')
+            ->end()
+            ->with('Trends')
+                ->add('trends', 'sonata_type_collection', array('required' => false),
+                    array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                        'sortable'  => 'position'
+                    ))
             ->end()
         ;
     }
@@ -126,12 +135,20 @@ class BestOfAdmin extends Admin
     public function prePersist($object)
     {   $object->preUpload();
         $object->preUpload(true);
+
+        foreach ($object->getTrends() as $trend) {
+            $trend->setBar($object);
+        }
     }
 
     public function preUpdate($object)
     {
         $object->preUpload();
         $object->preUpload(true);
+
+        foreach ($object->getTrends() as $trend) {
+            $trend->setBar($object);
+        }
     }
 
     /**
