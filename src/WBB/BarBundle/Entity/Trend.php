@@ -107,9 +107,14 @@ class Trend
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="BarTrend", mappedBy="trend", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTrend", mappedBy="trend", cascade={"all"}, orphanRemoval=true)
      */
     private $bars;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestofTrend", mappedBy="trend", cascade={"all"}, orphanRemoval=true)
+     */
+    private $bestofs;
 
 
     /**
@@ -445,10 +450,10 @@ class Trend
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\BarTrend $bars
+     * @param \WBB\BarBundle\Entity\Collections\BarTrend|\WBB\BarBundle\Entity\Collections\BarTrend $bars
      * @return Trend
      */
-    public function addBar(\WBB\BarBundle\Entity\BarTrend $bars)
+    public function addBar(\WBB\BarBundle\Entity\Collections\BarTrend $bars)
     {
         $this->bars[] = $bars;
 
@@ -458,9 +463,9 @@ class Trend
     /**
      * Remove bars
      *
-     * @param \WBB\BarBundle\Entity\BarTrend $bars
+     * @param \WBB\BarBundle\Entity\Collections\BarTrend $bars
      */
-    public function removeBar(\WBB\BarBundle\Entity\BarTrend $bars)
+    public function removeBar(\WBB\BarBundle\Entity\Collections\BarTrend $bars)
     {
         $this->bars->removeElement($bars);
     }
@@ -473,5 +478,38 @@ class Trend
     public function getBars()
     {
         return $this->bars;
+    }
+
+    /**
+     * Add bestofs
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $bestofs
+     * @return Trend
+     */
+    public function addBestof(\WBB\BarBundle\Entity\Collections\BestofTrend $bestofs)
+    {
+        $this->bestofs[] = $bestofs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofs
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $bestofs
+     */
+    public function removeBestof(\WBB\BarBundle\Entity\Collections\BestofTrend $bestofs)
+    {
+        $this->bestofs->removeElement($bestofs);
+    }
+
+    /**
+     * Get bestofs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBestofs()
+    {
+        return $this->bestofs;
     }
 }

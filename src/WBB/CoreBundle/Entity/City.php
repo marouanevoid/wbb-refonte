@@ -54,7 +54,7 @@ class City {
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -97,7 +97,7 @@ class City {
     private $article;    
     
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Trend", mappedBy="city", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTrend", mappedBy="city", cascade={"all"})
      */
     private $trends;
 
@@ -500,40 +500,6 @@ class City {
         }
     }
 
-
-    /**
-     * Add trends
-     *
-     * @param \WBB\BarBundle\Entity\Trend $trends
-     * @return City
-     */
-    public function addTrend(\WBB\BarBundle\Entity\Trend $trends)
-    {
-        $this->trends[] = $trends;
-
-        return $this;
-    }
-
-    /**
-     * Remove trends
-     *
-     * @param \WBB\BarBundle\Entity\Trend $trends
-     */
-    public function removeTrend(\WBB\BarBundle\Entity\Trend $trends)
-    {
-        $this->trends->removeElement($trends);
-    }
-
-    /**
-     * Get trends
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTrends()
-    {
-        return $this->trends;
-    }
-
     /**
      * Set article
      *
@@ -555,5 +521,38 @@ class City {
     public function getArticle()
     {
         return $this->article;
+    }
+
+    /**
+     * Add trends
+     *
+     * @param \WBB\CoreBundle\Entity\Collections\CityTrend $trends
+     * @return City
+     */
+    public function addTrend(\WBB\CoreBundle\Entity\Collections\CityTrend $trends)
+    {
+        $this->trends[] = $trends;
+
+        return $this;
+    }
+
+    /**
+     * Remove trends
+     *
+     * @param \WBB\CoreBundle\Entity\Collections\CityTrend $trends
+     */
+    public function removeTrend(\WBB\CoreBundle\Entity\Collections\CityTrend $trends)
+    {
+        $this->trends->removeElement($trends);
+    }
+
+    /**
+     * Get trends
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrends()
+    {
+        return $this->trends;
     }
 }

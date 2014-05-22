@@ -8,6 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
+use WBB\BarBundle\Entity\Collections\BarMedia;
 
 /**
  * Bar
@@ -217,13 +218,13 @@ class Bar
     private $suburb;
 
     /**
-     * @ORM\OneToMany(targetEntity="BarMedia", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarMedia", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $medias;
 
     /**
-     * @ORM\OneToMany(targetEntity="BarTrend", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTrend", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $trends;
@@ -1117,10 +1118,10 @@ class Bar
     /**
      * Add trends
      *
-     * @param \WBB\BarBundle\Entity\BarTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BarTrend $trends
      * @return Bar
      */
-    public function addTrend(\WBB\BarBundle\Entity\BarTrend $trends)
+    public function addTrend(\WBB\BarBundle\Entity\Collections\BarTrend $trends)
     {
         $this->trends[] = $trends;
 
@@ -1130,9 +1131,9 @@ class Bar
     /**
      * Remove trends
      *
-     * @param \WBB\BarBundle\Entity\BarTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BarTrend $trends
      */
-    public function removeTrend(\WBB\BarBundle\Entity\BarTrend $trends)
+    public function removeTrend(\WBB\BarBundle\Entity\Collections\BarTrend $trends)
     {
         $this->trends->removeElement($trends);
     }

@@ -144,7 +144,7 @@
 
             <trans-unit id="form.label_on_top">
                 <source>form.label_on_top</source>
-                <target>On Top Bars</target>
+                <target>On Top</target>
             </trans-unit>
 
             <trans-unit id="form.label_status">

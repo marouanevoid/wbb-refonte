@@ -1,6 +1,6 @@
 <?php
 
-namespace WBB\BarBundle\Entity;
+namespace WBB\BarBundle\Entity\Collections;
 
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
@@ -38,7 +38,7 @@ class BarMedia
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Bar", inversedBy="medias")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="medias")
      */
     private $bar;
 

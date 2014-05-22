@@ -29,11 +29,27 @@ class CityAdmin extends Admin
                 ->add('name')
                 ->add('country')
                 ->add('seoDescription')
-                ->add('file', 'file', $imageOptions)
-                ->add('suburbs', 'sonata_type_collection', array('required'=>false))
                 ->add('onTopCity')
-                ->add('bestofs', null, array('expanded' => false, 'by_reference' => false, 'multiple' => true))
-                ->add('trends', null, array('expanded' => false, 'by_reference' => false, 'multiple' => true), array(
+            ->end()
+            ->with('Picture')
+                ->add('file', 'file', $imageOptions)
+            ->end()
+            ->with('Suburbs')
+                ->add('suburbs', 'sonata_type_collection', array('required'=>false),array(
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ))
+            ->end()
+            ->with('Related Best Of')
+                ->add('bestofs', null, array('expanded' => false, 'by_reference' => false, 'multiple' => true),array(
+                    'sortable'  => 'position'
+                ))
+            ->end()
+            ->with('Trends')
+                ->add('trends', 'sonata_type_collection', array('required' => false),
+                    array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
                         'sortable'  => 'position'
                     ))
             ->end();
@@ -80,5 +96,35 @@ class CityAdmin extends Admin
                 ->add('onTopCity')
             ->end()
         ;
+    }
+
+    public function prePersist($object)
+    {
+        foreach ($object->getSuburbs() as $suburb) {
+            $suburb->setCity($object);
+        }
+
+        foreach ($object->getBestofs() as $bestof) {
+            $bestof->setCity($object);
+        }
+
+        foreach ($object->getTrends() as $trend) {
+            $trend->setCity($object);
+        }
+    }
+
+    public function preUpdate($object)
+    {
+        foreach ($object->getSuburbs() as $suburb) {
+            $suburb->setCity($object);
+        }
+
+        foreach ($object->getBestofs() as $bestof) {
+            $bestof->setCity($object);
+        }
+
+        foreach ($object->getTrends() as $trend) {
+            $trend->setCity($object);
+        }
     }
 }
