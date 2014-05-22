@@ -17,13 +17,15 @@ use WBB\BarBundle\Entity\Bar;
 class FSAdminController extends Controller
 {
 
-    public function testFSAction($venue)
+    public function testFSAction()
     {
-        $client = new Client("https://api.instagram.com/v1/users/3/media/recent/?client_id=03af4f044b524a4ca9958053b7a6cb18");
+        $client = new Client("https://api.instagram.com");
 
-        $request = $client->get();
+        $response = $client->get("/v1/users/3/media/recent/?client_id=03af4f044b524a4ca9958053b7a6cb18")->send();
 
-        var_dump($request->send());die;
+        $data = json_decode($response->getBody());
+
+        var_dump($data);die;
 
         $params = array( 'venue_id' => $venue, 'limit' => 4);
 

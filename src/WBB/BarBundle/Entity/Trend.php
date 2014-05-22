@@ -84,13 +84,6 @@ class Trend
      * @ORM\Column(name="onTop", type="boolean", nullable=true)
      */
     private $onTop;
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="position", type="smallint", nullable=true)
-     */
-    private $position;
 
     /**
      * @var \DateTime
@@ -112,6 +105,11 @@ class Trend
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="trends")
      */
     private $city;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BarTrend", mappedBy="trend", cascade={"all"}, orphanRemoval=true)
+     */
+    private $bars;
 
 
     /**
@@ -442,5 +440,38 @@ class Trend
     
     public function __toString() {
         return $this->getName();
+    }
+
+    /**
+     * Add bars
+     *
+     * @param \WBB\BarBundle\Entity\BarTrend $bars
+     * @return Trend
+     */
+    public function addBar(\WBB\BarBundle\Entity\BarTrend $bars)
+    {
+        $this->bars[] = $bars;
+
+        return $this;
+    }
+
+    /**
+     * Remove bars
+     *
+     * @param \WBB\BarBundle\Entity\BarTrend $bars
+     */
+    public function removeBar(\WBB\BarBundle\Entity\BarTrend $bars)
+    {
+        $this->bars->removeElement($bars);
+    }
+
+    /**
+     * Get bars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBars()
+    {
+        return $this->bars;
     }
 }

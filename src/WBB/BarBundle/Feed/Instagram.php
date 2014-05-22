@@ -14,8 +14,9 @@ class Instagram implements FeedInterface
     private $em;
     private $limit;
     private $client;
+    private $clientId;
 
-    protected $baseUrl = 'https://api.instagram.com/v1/';
+    protected $baseUrl = "https://api.instagram.com";
 
     /**
      * __construct
@@ -23,13 +24,15 @@ class Instagram implements FeedInterface
      * @param $container
      * @param $em
      * @param $limit
+     * @param $clientId
      */
-    public function __construct($container, $em, $limit)
+    public function __construct($container, $em, $limit, $clientId)
     {
         $this->container    = $container;
         $this->em           = $em;
         $this->limit        = $limit;
         $this->client       = new Client($this->baseUrl);
+        $this->clientId     = $clientId;
     }
 
     /**
@@ -41,21 +44,17 @@ class Instagram implements FeedInterface
      */
     public function find($id = null, $next = 0)
     {
-        $data = $this->client->get("users/$id/media/recent/?client_id=$this->container->getParameter('instagram_client_id')")->send()->getBody();
+        $url = "/v1/users/$id/media/recent/?count=$this->limit&client_id=$this->clientId";
 
-        var_dump($data);die;
+        if($next > 0) $url .= "max_id=$next";
 
-        $params = array( 'venue_id' => $id, 'limit' => $this->limit);
+        $response = $this->client->get($url)->send();
 
-        if($next > 0) $params['offset'] = $next;
-
-        $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('venues/photos', $params);
-        $tips = $command->execute();
+        $data = json_decode($response->getBody());
 
         return json_decode(array(
-            'type' => 'fsImg',
-            'data' => $tips['response']['photos']['items']
+            'type' => 'instagram',
+            'data' => $data
         ));
     }
 

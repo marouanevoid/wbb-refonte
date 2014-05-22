@@ -45,14 +45,7 @@ class TrendAdmin extends Admin
         $listMapper
             ->addIdentifier('name', null, array('editable' => true))
             ->add('energyLevel')
-            ->add('isStyle', null, array('editable' => true))
-            ->add('isOccasion', null, array('editable' => true))
-            ->add('isAtmosphere', null, array('editable' => true))
-            ->add('isAlcohol', null, array('editable' => true))
-            ->add('isCocktail', null, array('editable' => true))
-            ->add('isMood', null, array('editable' => true))
-            ->add('onTop', null, array('editable' => true))
-        ;
+            ->add('onTop', null, array('editable' => true));
     }
 
     /**

@@ -1,8 +1,6 @@
-#wbb_bar_test:
-#    pattern:  /feed/fsTips/{venue}
-#    defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
-#    options:
-#            expose: true
+wbb_bar_test:
+    pattern:  /feed/test
+    defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
 
 #Actions
 wbb_bar_details:

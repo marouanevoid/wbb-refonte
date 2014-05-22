@@ -136,10 +136,18 @@ class BarAdmin extends Admin
                 ->add('isReservation')
                 ->add('reservation')
                 ->add('description')
-                ->add('seoDescription', 'textarea')
+                ->add('seoDescription', 'textarea', array('required' => false))
             ->end()
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection', array('required' => false),
+                    array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                        'sortable'  => 'position'
+                    ))
+            ->end()
+            ->with('New Trends')
+                ->add('trends', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -186,6 +194,10 @@ class BarAdmin extends Admin
             $media->setBar($object);
         }
 
+        foreach ($object->getTrends() as $trend) {
+            $trend->setBar($object);
+        }
+
         foreach ($object->getOpenings() as $opening) {
             $opening->setBar($object);
         }
@@ -195,6 +207,10 @@ class BarAdmin extends Admin
     {
         foreach ($object->getMedias() as $media) {
             $media->setBar($object);
+        }
+
+        foreach ($object->getTrends() as $trend) {
+            $trend->setBar($object);
         }
 
         foreach ($object->getOpenings() as $opening) {

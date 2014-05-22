@@ -223,6 +223,12 @@ class Bar
     private $medias;
 
     /**
+     * @ORM\OneToMany(targetEntity="BarTrend", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private $trends;
+
+    /**
      * @ORM\OneToMany(targetEntity="BarOpening", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"openingDay" = "ASC"})
      */
@@ -230,7 +236,6 @@ class Bar
 
     /**
      * @ORM\OneToMany(targetEntity="Tip", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
-     * @ORM\OrderBy({"openingDay" = "ASC"})
      */
     private $tips;
 
@@ -801,6 +806,7 @@ class Bar
     {
         $this->medias = new ArrayCollection();
         $this->openings = new ArrayCollection();
+        $this->trends = new ArrayCollection();
         $this->fsSelectedImgs = array();
         $this->fsExcludedTips = array();
 
@@ -1105,5 +1111,38 @@ class Bar
     public function getArticle()
     {
         return $this->article;
+    }
+
+    /**
+     * Add trends
+     *
+     * @param \WBB\BarBundle\Entity\BarTrend $trends
+     * @return Bar
+     */
+    public function addTrend(\WBB\BarBundle\Entity\BarTrend $trends)
+    {
+        $this->trends[] = $trends;
+
+        return $this;
+    }
+
+    /**
+     * Remove trends
+     *
+     * @param \WBB\BarBundle\Entity\BarTrend $trends
+     */
+    public function removeTrend(\WBB\BarBundle\Entity\BarTrend $trends)
+    {
+        $this->trends->removeElement($trends);
+    }
+
+    /**
+     * Get trends
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrends()
+    {
+        return $this->trends;
     }
 }
