@@ -52,7 +52,6 @@ function foursquareTips() {
             var container = $(this).parents('.fstip');
 
             var hash = container.attr('id');
-            var barId = 1;
             var type = 'fstips';
             var act = 'wbb_bar_feed_add';
 
@@ -87,13 +86,13 @@ function foursquareTips() {
         $.ajax({
             type: "POST",
             url:  Routing.generate('wbb_bar_feeds_list',
-                { type: "fstips", bar: 1}),
+                { type: "fstips", bar: barId}),
             dataType: 'json',
             success: function(r) {
                 $.ajax({
                     type: "POST",
                     url:  Routing.generate('wbb_bar_feeds_find',
-                        { type: "fstips", id: "43695300f964a5208c291fe3"}),
+                        { type: "fstips", id: venue}),
                     dataType: 'json',
                     success: function(response) {
                         loader.hide();
@@ -152,7 +151,6 @@ function foursquareImages() {
             var container = $(this).parents('.fsimg');
 
             var hash = container.attr('id');
-            var barId = 1;
             var type = 'fsimgs';
             var act = 'wbb_bar_feed_add';
 
@@ -187,13 +185,13 @@ function foursquareImages() {
         $.ajax({
             type: "POST",
             url:  Routing.generate('wbb_bar_feeds_list',
-                { type: "fsimgs", bar: 1}),
+                { type: "fsimgs", bar: barId}),
             dataType: 'json',
             success: function(r) {
                 $.ajax({
                     type: "POST",
                     url:  Routing.generate('wbb_bar_feeds_find',
-                        { type: "fsimgs", id: "43695300f964a5208c291fe3"}),
+                        { type: "fsimgs", id: venue}),
                     dataType: 'json',
                     success: function(response) {
                         loader.hide();
