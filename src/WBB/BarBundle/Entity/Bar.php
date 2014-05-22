@@ -8,6 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
+use WBB\BarBundle\Entity\Collections\BarMedia;
 
 /**
  * Bar
