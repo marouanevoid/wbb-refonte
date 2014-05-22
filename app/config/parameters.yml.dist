@@ -1,22 +1,23 @@
+# This file is auto-generated during the composer install
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: wbb-refonte
+    database_user: wbb_refonte
+    database_password: LkekBmgrRW
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
 
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
 
-    foursquare_client_id: "IO0TI5QMTBY5U2P2JHWIYF2D3NHM30V2F5VT3W3011BPMQ4W"
-    foursquare_client_secret: "B5ADSJPXA5VP20DYFII1FIU0LCJFT0AFIEGWGURACLG3HNZ2"
+    foursquare_client_id: IO0TI5QMTBY5U2P2JHWIYF2D3NHM30V2F5VT3W3011BPMQ4W
+    foursquare_client_secret: B5ADSJPXA5VP20DYFII1FIU0LCJFT0AFIEGWGURACLG3HNZ2
 
-    foursquare_tips_limit: 20
+    feeds_limit: 20
 
-    instagram_client_id: "03af4f044b524a4ca9958053b7a6cb18"
+    instagram_client_id: 03af4f044b524a4ca9958053b7a6cb18
