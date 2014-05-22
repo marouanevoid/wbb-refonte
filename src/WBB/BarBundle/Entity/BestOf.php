@@ -90,6 +90,13 @@ class BestOf
     private $onTop;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ordered", type="boolean", nullable=true)
+     */
+    private $ordered;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bestofs")
      */
     private $city;
@@ -98,6 +105,12 @@ class BestOf
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="bestofs")
      */
     private $country;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestofTrend", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private $trends;
 
     /**
      * @var \DateTime
@@ -573,5 +586,62 @@ class BestOf
     public function __construct(){
         $this->setOnTop(true);
         $this->setByTrend(true);
+        $this->setOrdered(true);
+    }
+
+    /**
+     * Add trends
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $trends
+     * @return BestOf
+     */
+    public function addTrend(\WBB\BarBundle\Entity\Collections\BestofTrend $trends)
+    {
+        $this->trends[] = $trends;
+
+        return $this;
+    }
+
+    /**
+     * Remove trends
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $trends
+     */
+    public function removeTrend(\WBB\BarBundle\Entity\Collections\BestofTrend $trends)
+    {
+        $this->trends->removeElement($trends);
+    }
+
+    /**
+     * Get trends
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrends()
+    {
+        return $this->trends;
+    }
+
+    /**
+     * Set ordered
+     *
+     * @param boolean $ordered
+     * @return BestOf
+     */
+    public function setOrdered($ordered)
+    {
+        $this->ordered = $ordered;
+
+        return $this;
+    }
+
+    /**
+     * Get ordered
+     *
+     * @return boolean 
+     */
+    public function getOrdered()
+    {
+        return $this->ordered;
     }
 }

@@ -4,7 +4,7 @@
  * Fichier créer par : Badr HAKKARI <b.hakkari@void.fr>
  */
 
-namespace WBB\BarBundle\Controller\Admin;
+namespace WBB\BarBundle\Controller\Admin\Collections;
 
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
