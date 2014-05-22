@@ -46,7 +46,7 @@ services:
     wbb.bar.admin.bar_media:
         class: %wbb_bar.bar_media.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_bar.bar_media.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
@@ -54,7 +54,7 @@ services:
     wbb.bar.admin.bar_trend:
         class: %wbb_bar.bar_trend.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: bar_trends, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bar_trends, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_bar.bar_trend.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
@@ -86,7 +86,7 @@ services:
     wbb.bar.admin.bestof_trend:
         class: %wbb_bar.bestof_trend.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: bestof_trend, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bestof_trend, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_bar.bestof_trend.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
@@ -118,7 +118,7 @@ services:
     wbb.bar.admin.article_media:
         class: %wbb_bar.article_media.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: article medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: article_medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_bar.article_media.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
