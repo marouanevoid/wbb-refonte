@@ -137,7 +137,7 @@ class BestOfAdmin extends Admin
         $object->preUpload(true);
 
         foreach ($object->getTrends() as $trend) {
-            $trend->setBar($object);
+            $trend->setBestof($object);
         }
     }
 
@@ -147,7 +147,7 @@ class BestOfAdmin extends Admin
         $object->preUpload(true);
 
         foreach ($object->getTrends() as $trend) {
-            $trend->setBar($object);
+            $trend->setBestof($object);
         }
     }
 

@@ -35,7 +35,7 @@ class CityAdmin extends Admin
                 ->add('file', 'file', $imageOptions)
             ->end()
             ->with('Suburbs')
-                ->add('suburbs', 'sonata_type_collection', array('required'=>false),array(
+                ->add('suburbs', 'sonata_type_collection', array('required'=>false), array(
                     'edit' => 'inline',
                     'inline' => 'table'
                 ))
