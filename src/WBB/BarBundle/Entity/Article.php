@@ -96,7 +96,7 @@ class Article {
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="ArticleMedia", mappedBy="article", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\ArticleMedia", mappedBy="article", cascade={"remove", "persist"})
      */
     private $medias;
 
