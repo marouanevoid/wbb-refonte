@@ -91,6 +91,11 @@ class Article {
     private $cities;    
 
     /**
+     * @ORM\OneToMany(targetEntity="BestOf", mappedBy="article", cascade={"remove", "persist"})
+     */
+    private $bestOfs;     
+    
+    /**
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="tips")
      */
     private $user;
@@ -304,23 +309,21 @@ class Article {
     /**
      * Add bar
      *
-     * @param Bar $bars
+     * @param Bar $bar
      * @return Article
      */
     public function addBar($bar){
         $this->bars[] = $bar;
-        $bar->setArticle($this);
         return $this;
     }
 
     /**
      * Remove bars
      *
-     * @param Bar $bars
+     * @param Bar $bar
      */
-    public function removeBar($bars){
-        $this->bars->removeElement($bars);
-        $bars->setArticle(null);
+    public function removeBar($bar){
+        $this->bars->removeElement($bar);
     }
 
     /**
@@ -340,18 +343,16 @@ class Article {
      */
     public function addCity($city){
         $this->cities[] = $city;
-        $city->setArticle($this);
         return $this;
     }
 
     /**
      * Remove city
      *
-     * @param City $cities
+     * @param City $citie
      */
-    public function removeCity($cities){
-        $this->cities->removeElement($cities);
-        $city->setArticle(null);
+    public function removeCity($citie){
+        $this->cities->removeElement($citie);
     }
 
     /**
@@ -363,6 +364,36 @@ class Article {
         return $this->cities;
     }
 
+
+    /**
+     * Add city
+     *
+     * @param BestOf $bestOf
+     * @return Article
+     */
+    public function addBestOf($bestOf){
+        $this->bestOfs[] = $bestOf;
+        return $this;
+    }
+
+    /**
+     * Remove bestOf
+     *
+     * @param BestOf $bestOf
+     */
+    public function removeBestOf($bestOf){
+        $this->cities->removeElement($bestOf);
+    }
+
+    /**
+     * Get bestOfs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBestOfs(){
+        return $this->bestOfs;
+    }    
+    
     /**
      * Set user
      *

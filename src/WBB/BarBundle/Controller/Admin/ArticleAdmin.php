@@ -113,6 +113,13 @@ class ArticleAdmin extends Admin {
                     'link_parameters' => array(
                         'context' => 'default'
                     )
+                ))           
+                ->add('bestOfs', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
                 ))
             ->end()
         ;
