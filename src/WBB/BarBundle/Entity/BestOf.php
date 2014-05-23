@@ -107,11 +107,17 @@ class BestOf
     private $country;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="bestofs")
+     */
+    private $article;    
+    
+    /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestofTrend", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $trends;
 
+    
     /**
      * @var \DateTime
      *
@@ -643,5 +649,25 @@ class BestOf
     public function getOrdered()
     {
         return $this->ordered;
+    }
+    
+    /**
+     * Set article
+     *
+     * @param Article $article
+     * @return BestOf
+     */
+    public function setArticle($article){
+        $this->article = $article;
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return Article
+     */
+    public function getArticle(){
+        return $this->article;
     }
 }

@@ -99,7 +99,38 @@ class ArticleAdmin extends Admin {
                     )
                 )
             ->end()
+            ->with('Related')                
+                ->add('bars', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
+                ))             
+                ->add('cities', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
+                ))           
+                ->add('bestOfs', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
+                ))
+            ->end()
         ;
     }
+    
+    public function getNewInstance(){
+        $newInstance = parent::getNewInstance();
+        $newInstance->setIsAnInterview(true);
+        $newInstance->setIsOnTop(true);
+
+        return $newInstance;
+    }    
 
 }

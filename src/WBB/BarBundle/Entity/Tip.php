@@ -42,9 +42,9 @@ class Tip {
     private $description;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="status", type="boolean", nullable=true)
+     * @ORM\Column(name="status", type="smallint", nullable=true)
      */
     private $status;
 
