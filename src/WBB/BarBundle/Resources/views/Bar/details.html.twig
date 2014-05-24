@@ -10,6 +10,15 @@
             i, m, n,
             html="";
     $(document).ready(function(){
+        $('#showOpenings').click(function(){
+           var link = $(this);
+           $('.openings').toggle();
+            if ($('.openings').is(':visible')) {
+                link.text('(Show less)');
+            } else {
+                link.text('(See all)');
+            }
+        });
         $.ajax({
             type: "POST",
             url:  Routing.generate('wbb_bar_feeds_list',
@@ -107,7 +116,7 @@
                             <div class="content">
                                 <div class="overlay"></div>
                                 <a class="btn-round dark"></a>
-                                <img src="{% path m.media, 'big' %}" width="320" height="240"/>
+                                <img src="{% path m.media, 'large' %}" width="320" height="240"/>
                             </div>
                         </div>
                      {% endfor %}
@@ -186,11 +195,19 @@
                         <hr class="s-margin"/>
 
                         <p>
-                            Hours:
-                            {% for opening in bar.openings|slice(0,1) %}
-                                {{ opening.fromHour }} - {{ opening.toHour }}<br>
+                            Hours: Today
+                            {% for opening in bar.openings %}
+                                {% if opening.openingDay == "now"|date("N") %}
+                                    {{ opening.fromHour }}:00 - {{ opening.toHour }}:00
+                                {% endif %}
                             {% endfor%}
-                            <a href="">(See all)</a><br/>
+                            <a href="#0" id="showOpenings">(See all)</a><br/>
+                            <span class="openings" style="display: none">
+                                {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+                                {% for opening in bar.openings %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : {{ opening.fromHour }}:00 - {{ opening.toHour }}:00<br />
+                                {% endfor%}
+                            </span>
                             Accepts Credit Cards: {% if bar.isCreditCard %}yes{% else %}no{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}yes{% else %}no{% endif %}<br/>
                             Parking: {{ bar.parking }}<br/>

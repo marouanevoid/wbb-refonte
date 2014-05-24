@@ -247,3 +247,7 @@ function nodeToString ( node ) {
     tmpNode = node = null; // prevent memory leaks in IE
     return str;
 }
+
+function showOpenings(){
+
+}
