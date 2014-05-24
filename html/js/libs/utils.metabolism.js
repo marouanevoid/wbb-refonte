@@ -138,7 +138,7 @@ meta.Utils = function() {
     {
         $('.has_sizer').each(function()
         {
-            var $sizer = $('<img src="'+BASEURL+'images/sizer/'+$(this).data("size")+'.png" class="sizer"/>');
+            var $sizer = $('<img src="/bundles/wbbcore/images/sizer/'+$(this).data("size")+'.png" class="sizer"/>');
 
             $sizer.load(function(){ $(window).resize() });
 
@@ -171,7 +171,7 @@ meta.Utils = function() {
             }
             else
             {
-                $this.replaceWith( '<img src="'+BASEURL+'images/'+$this.data( $this.data('img')?'img':'svg')+'.png"/>' );
+                $this.replaceWith( '<img src="/bundles/wbbcore/images/'+$this.data( $this.data('img')?'img':'svg')+'.png"/>' );
             }
         });
     };

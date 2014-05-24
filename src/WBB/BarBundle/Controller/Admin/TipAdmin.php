@@ -16,9 +16,8 @@ class TipAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
             ->addIdentifier('id')
-            ->add('description', null, array('editable' => true))
             ->add('user', null, array('editable' => true))
-            ->add('bar', null, array('editable' => true))
+            ->add('description', null, array('editable' => true))
             ->add('status', null, array('editable' => true))
         ;
     }
@@ -62,7 +61,14 @@ class TipAdmin extends Admin {
                 ->add('description')
                 ->add('user', 'sonata_type_model')
                 ->add('bar', 'sonata_type_model')
-                ->add('status')
+                ->add('status', 'choice', array(
+                    'required' => false,
+                    'choices'  => array(
+                        0 => 'pending',
+                        1 => 'enabled',
+                        2 => 'disabled'
+                    )
+                ))
             ->end()
         ;
     }

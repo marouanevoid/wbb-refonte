@@ -92,8 +92,10 @@ class BarAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $this->getSubject()->setUser($this->getUser());
-
+        if(is_object($this->getSubject())){
+            $this->getSubject()->setUser($this->getUser());
+        }
+        
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model')

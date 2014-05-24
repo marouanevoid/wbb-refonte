@@ -542,6 +542,19 @@
                 <source>filter.label_cities</source>
                 <target>Related cities</target>
             </trans-unit>
+            <!-- bestOfs -->
+            <trans-unit id="form.label_best_ofs">
+                <source>form.label_best_ofs</source>
+                <target>Related best of</target>
+            </trans-unit>
+            <trans-unit id="list.label_best_ofs">
+                <source>list.label_best_ofs</source>
+                <target>Related best of</target>
+            </trans-unit>
+            <trans-unit id="filter.label_best_ofs">
+                <source>filter.label_best_ofs</source>
+                <target>Related best of</target>
+            </trans-unit>
             <!-- user (dupliqué) -->
             <!--<trans-unit id="form.label_user">
                 <source>form.label_user</source>

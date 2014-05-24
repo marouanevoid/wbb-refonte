@@ -88,12 +88,13 @@ class City {
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BestOf", mappedBy="city", cascade={"all"})
      */
-    private $bestofs;
-
+    private $bestofs;  
+    
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="cities")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="cities", cascade={"remove"})
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
-    private $article;
+    private $article;    
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTrend", mappedBy="city", cascade={"all"})

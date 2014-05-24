@@ -26,6 +26,7 @@ class ArticleMedia {
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="medias")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     private $article;
 

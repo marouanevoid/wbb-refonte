@@ -52,7 +52,7 @@ meta.Slider = function(config){
         swipe       : false,
         speed       : 600,
         easing      : 'easeInOutCubic',
-        default_img : 'images/default.jpg',
+        default_img : '/bundles/wbbcore/images/default.jpg',
         animate_arrow   : false,
         autoplay_delay  : 5000,
         autoplay        : false,
