@@ -41,7 +41,7 @@ services:
         arguments: [null, %wbb_bar.bar.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
-            - [setTemplates, [{ edit:"WBBBarBundle:Admin:Bar/list.html.twig" }]]
+            - [setTemplates, [{ edit:"WBBBarBundle:Admin:Bar/edit.html.twig" }]]
 
     wbb.bar.admin.bar_media:
         class: %wbb_bar.bar_media.admin.class%
