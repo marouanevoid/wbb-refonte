@@ -95,4 +95,21 @@ class Instagram implements FeedInterface
 
         return $bar;
     }
+    public function removeObject($hash, Bar $bar = null)
+    {
+        $bar->removeFsSelectedImgs($hash);
+        $this->em->persist($bar);
+        $this->em->flush();
+
+        return $bar->getFsSelectedImgs();
+    }
+
+    /**
+     * listAll
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @return array
+     */
+    public function listAll(Bar $bar){
+        return $bar->getFsSelectedImgs();
+    }
 }

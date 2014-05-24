@@ -40,9 +40,10 @@ file that was distributed with this source code.
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script type="text/javascript">
         var barId = "{{ admin.id(object) }}";
-        var venue;
+        var venue, insta;
         $(document).ready(function() {
             venue = $("#{{ admin.uniqid }}_foursquare").val();
+            insta = $("#{{ admin.uniqid }}_instagram").val();
         });
 
     </script>
@@ -69,7 +70,17 @@ file that was distributed with this source code.
             <div style="clear:both;"></div>
             <div class="mt_footer">
                 <img class="loader" style="display:none;" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
-                <input type="checkbox" id="add-{0}" class="add btn btn-mini" name="excludedTips" value="{0}" {2} />
+                <input type="checkbox" id="add-{0}" class="add btn btn-mini" name="excludedFsImages" value="{0}" {2} />
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="instimgs">
+        <div class="instimg" id="{0}">
+            <img src="{1}">
+            <div style="clear:both;"></div>
+            <div class="mt_footer">
+                <img class="loader" style="display:none;" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                <input type="checkbox" id="add-{0}" class="add btn btn-mini" name="excludedImages" value="{0}" {2} />
             </div>
         </div>
     </script>
@@ -112,7 +123,7 @@ file that was distributed with this source code.
             display: block;
             float: left;
         }
-        .fsimg {
+        .fsimg, .instimg {
             width: 200px;
             display: block;
             float: left;
@@ -120,12 +131,12 @@ file that was distributed with this source code.
             margin-bottom: 20px;
             position: relative;
         }
-        .fsimg input{
+        .fsimg input, .instimg input {
             position: absolute;
             top: 10px;
             right: 10px;
         }
-        .fsimg .mt_footer img {
+        .fsimg .mt_footer img, .instimgs  .mt_footer img {
             position: absolute;
             top: 98px;
             left: 96px;
