@@ -65,13 +65,6 @@ class AdAdmin extends Admin {
         $formMapper
             ->with('General')
                 ->add('name')
-                ->add('image', 'sonata_type_model_list', array(
-                    'required' => false
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'default'
-                    )
-                ))
                 ->add('position', 'choice', array(
                     'required' => false,
                     'choices'  => array(
@@ -83,9 +76,16 @@ class AdAdmin extends Admin {
                 ))
                 ->add('tag')
                 ->add('link')
-                ->add('countries', 'sonata_type_model', array('multiple' => true))
+                ->add('image', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
+                ))
                 ->add('beginAt')
-                ->add('endAt')
+                ->add('endAt')                
+                ->add('countries', 'sonata_type_model', array('multiple' => true))
             ->end()
         ;
     }

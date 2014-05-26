@@ -284,6 +284,19 @@
                 <source>filter.label_name</source>
                 <target>Name</target>
             </trans-unit>
+            <!-- image -->
+            <trans-unit id="form.label_image">
+                <source>form.label_image</source>
+                <target>Image</target>
+            </trans-unit>
+            <trans-unit id="list.label_image">
+                <source>list.label_image</source>
+                <target>Image</target>
+            </trans-unit>
+            <trans-unit id="filter.label_image">
+                <source>filter.label_image</source>
+                <target>Image</target>
+            </trans-unit>
             <!-- position (Dupliqué) -->
             <!-- <trans-unit id="form.label_position">
                 <source>form.label_position</source>
