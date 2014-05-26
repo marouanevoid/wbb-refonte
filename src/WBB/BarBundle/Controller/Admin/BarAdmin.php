@@ -109,6 +109,15 @@ class BarAdmin extends Admin
                 ->add('phone')
                 ->add('email')
                 ->add('website')
+                ->add('onTop')
+                ->add('status', 'choice', array(
+                    'required' => false,
+                    'choices'  => array(
+                        Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
+                        Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
+                        Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
+                    )
+                ))
             ->end()
             ->with('Social')
                 ->add('twitter')
@@ -155,17 +164,6 @@ class BarAdmin extends Admin
                         'inline' => 'table',
                         'sortable'  => 'position'
                     ))
-            ->end()
-            ->with('Order')
-                ->add('onTop')
-                ->add('status', 'choice', array(
-                    'required' => false,
-                    'choices'  => array(
-                        Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
-                        Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
-                        Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
-                    )
-                ))
             ->end()
             ->with('Openings')
                 ->add('openings', 'sonata_type_collection', array('required' => false),

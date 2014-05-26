@@ -52,10 +52,10 @@ class Instagram implements FeedInterface
 
         $data = json_decode($response->getBody());
 
-        return json_decode(array(
+        return array(
             'type' => 'instagram',
             'data' => $data
-        ));
+        );
     }
 
     /**
@@ -67,16 +67,15 @@ class Instagram implements FeedInterface
      */
     public function findByHash($id)
     {
+        $url = "/v1/media/$id?client_id=$this->clientId";
+        $response = $this->client->get($url)->send();
 
-        $params = array( 'photo_id' => $id);
+        $data = json_decode($response->getBody());
 
-        $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('photos', $params);
-        $tip = $command->execute();
-
-        return json_decode(array(
-            'data' => $tip['response']['photo']
-        ));
+        return array(
+            'type' => 'instagram',
+            'data' => $data
+        );
     }
 
     /**
@@ -89,10 +88,36 @@ class Instagram implements FeedInterface
      */
     public function createObject($hash, Bar $bar = null)
     {
-        $bar->addFsSelectedImg($hash);
+        $bar->addInstagramExcludedImg($hash);
         $this->em->persist($bar);
         $this->em->flush();
 
         return $bar;
+    }
+
+    /**
+     * createFeed
+     *
+     * @param string $hash
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     *
+     * @return Object
+     */
+    public function removeObject($hash, Bar $bar = null)
+    {
+        $bar->removeInstagramExcludedImgs($hash);
+        $this->em->persist($bar);
+        $this->em->flush();
+
+        return $bar->getInstagramExcludedImgs();
+    }
+
+    /**
+     * listAll
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @return array
+     */
+    public function listAll(Bar $bar){
+        return $bar->getInstagramExcludedImgs();
     }
 }

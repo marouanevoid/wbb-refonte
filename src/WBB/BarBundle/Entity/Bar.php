@@ -203,6 +203,13 @@ class Bar
     private $fsSelectedImgs;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(name="instagram_excluded_imgs", type="array")
+     */
+    private $instagramExcludedImgs;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="bars")
      */
     private $user;
@@ -811,6 +818,7 @@ class Bar
         $this->trends = new ArrayCollection();
         $this->fsSelectedImgs = array();
         $this->fsExcludedTips = array();
+        $this->instagramExcludedImgs = array();
 
         $this->isCoatCheck      = true;
         $this->isCreditCard     = true;
@@ -1146,5 +1154,43 @@ class Bar
     public function getTrends()
     {
         return $this->trends;
+    }
+
+    /**
+     * Set instagramExcludedImgs
+     *
+     * @param array $instagramExcludedImgs
+     * @return Bar
+     */
+    public function setInstagramExcludedImgs($instagramExcludedImgs)
+    {
+        $this->instagramExcludedImgs = $instagramExcludedImgs;
+
+        return $this;
+    }
+
+    /**
+     * Get instagramExcludedImgs
+     *
+     * @return array 
+     */
+    public function getInstagramExcludedImgs()
+    {
+        return $this->instagramExcludedImgs;
+    }
+
+    public function addInstagramExcludedImg($hash)
+    {
+        if(!in_array($hash, $this->instagramExcludedImgs))
+            $this->instagramExcludedImgs[] = $hash;
+
+        return $this;
+    }
+
+    public function removeInstagramExcludedImgs($hash)
+    {
+        if(($key = array_search($hash, $this->instagramExcludedImgs)) !== false) {
+            unset($this->instagramExcludedImgs[$key]);
+        }
     }
 }
