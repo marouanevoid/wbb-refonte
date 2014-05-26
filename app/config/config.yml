@@ -127,6 +127,8 @@ sonata_media:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
                 large: { width: 1024, quality: 70}
+                slider_small : { width: 640 , height: 480, quality: 70 }
+                slider_large : { width: 1280 , height: 960, quality: 70 }
     cdn:
         server:
             path: /uploads/media
@@ -135,6 +137,10 @@ sonata_media:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     true
+
+    providers:
+        image:
+            resizer: sonata.media.resizer.square
 
 #Fake Data Generator
 hautelook_alice:
