@@ -302,14 +302,16 @@ function instagramImages() {
                         loader.hide();
                         var template = null;
                         $.each(response.data, function(key, feed){
-                            //console.log(feed);
+                            console.log("__________________________________________________");
+                            console.log(feed);
+                            console.log("__________________________________________________");
                             var imgsHtml = $("#instimgs").html();
                             var checked = "";
                             if(in_array(feed.id, r)) {
                                 checked = "checked";
                             }
                             template = imgsHtml.format(
-                                feed.id, feed.prefix+"200x200"+feed.suffix, checked
+                               // feed.id, feed.images.standard_resolution.url, checked
                             );
 
                             container.append(template);
