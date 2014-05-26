@@ -73,6 +73,7 @@ class ArticleAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->with('General')
+                ->add('user', 'sonata_type_model', array('btn_add' => false))
                 ->add('title')
                 ->add('shareText')
                 ->add('quoteAuthor')
@@ -80,8 +81,7 @@ class ArticleAdmin extends Admin {
                 ->add('seoDescription')
                 ->add('richDescription')
             ->end()
-            ->with('Details')
-                ->add('user', 'sonata_type_model')
+            ->with('Details') 
                 ->add('isAnInterview')
                 ->add('isOnTop')
             ->end()

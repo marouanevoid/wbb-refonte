@@ -58,8 +58,7 @@ class TipAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->with('General')
-                ->add('description')
-                ->add('user', 'sonata_type_model')
+                ->add('user', 'sonata_type_model', array('btn_add' => false))
                 ->add('bar', 'sonata_type_model')
                 ->add('status', 'choice', array(
                     'required' => false,
@@ -69,6 +68,7 @@ class TipAdmin extends Admin {
                         2 => 'disabled'
                     )
                 ))
+                ->add('description')
             ->end()
         ;
     }
