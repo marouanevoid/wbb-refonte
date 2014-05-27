@@ -12,7 +12,7 @@ parameters:
     wbb_core.city.entity.class: WBB\CoreBundle\Entity\City
     wbb_core.citysuburb.entity.class: WBB\CoreBundle\Entity\CitySuburb
     wbb_core.city_trend.entity.class: WBB\CoreBundle\Entity\Collections\CityTrend
-    wbb_core.city_bestof.entity.class: WBB\CoreBundle\Entity\Collections\CityBestOf
+    wbb_core.city_bestof.entity.class: WBB\CoreBundle\Entity\CityBestOf
 
 services:
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace WBB\CoreBundle\Entity\Collections;
+namespace WBB\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;

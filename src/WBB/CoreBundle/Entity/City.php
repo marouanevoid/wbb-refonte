@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\Article;
 use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Entity\CitySuburb;
-use WBB\CoreBundle\Entity\Collections\CityBestOf;
+use WBB\CoreBundle\Entity\CityBestOf;
 use WBB\CoreBundle\Entity\Collections\CityTrend;
 use WBB\CoreBundle\Entity\Country;
 
@@ -93,7 +93,7 @@ class City {
     private $bars;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityBestOf", mappedBy="city", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\CityBestOf", mappedBy="city", cascade={"all"})
      */
     private $bestofs;  
     
