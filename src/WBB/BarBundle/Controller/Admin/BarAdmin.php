@@ -98,11 +98,10 @@ class BarAdmin extends Admin
         
         $formMapper
             ->with('General')
-                ->add('user', 'sonata_type_model')
+                ->add('user')
                 ->add('name')
-                ->add('foursquare')
-                ->add('city', 'sonata_type_model')
-                ->add('suburb', 'sonata_type_model')
+                ->add('city', 'sonata_type_model', array('required' => false))
+                ->add('suburb', 'sonata_type_model', array('required' => false))
                 ->add('latitude')
                 ->add('longitude')
                 ->add('address')
@@ -120,6 +119,7 @@ class BarAdmin extends Admin
                 ))
             ->end()
             ->with('Social')
+                ->add('foursquare')
                 ->add('twitter')
                 ->add('facebook')
                 ->add('instagram')
@@ -130,8 +130,9 @@ class BarAdmin extends Admin
                 ->add('parking', 'choice', array(
                     'required' => false,
                     'choices'  => array(
-                        1 => 'Oui',
-                        0 => 'Non'
+                        2 => 'Premier Etage',
+                        1 => 'RDC',
+                        0 => 'RDJ'
                     )
                 ))
                 ->add('price', 'choice', array(

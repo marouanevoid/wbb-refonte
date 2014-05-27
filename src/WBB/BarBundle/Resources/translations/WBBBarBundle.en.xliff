@@ -12,6 +12,26 @@
                 <target>Link to owner / Add owner</target>
             </trans-unit>
 
+            <trans-unit id="form.label_suburb">
+                <source>form.label_suburb</source>
+                <target>Suburb</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_foursquare">
+                <source>form.label_foursquare</source>
+                <target>Foursquare</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_trends">
+                <source>form.label_trends</source>
+                <target>Trends</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_openings">
+                <source>form.label_openings</source>
+                <target>Bar Openings</target>
+            </trans-unit>
+
             <trans-unit id="form.label_name">
                 <source>form.label_name</source>
                 <target>Name</target>
@@ -171,11 +191,6 @@
                 <source>filter.label_id</source>
                 <target>Id</target>
             </trans-unit>
-            <!-- description (dupliqué)-->
-            <!--<trans-unit id="form.label_description">
-                <source>form.label_description</source>
-                <target>Description</target>
-            </trans-unit>-->
             <trans-unit id="list.label_description">
                 <source>list.label_description</source>
                 <target>Description</target>
@@ -197,11 +212,6 @@
                 <source>filter.label_bar</source>
                 <target>Bar</target>
             </trans-unit>
-            <!-- user (dupliqué)-->
-            <!--<trans-unit id="form.label_user">
-                <source>form.label_user</source>
-                <target>User</target>
-            </trans-unit>-->
             <trans-unit id="list.label_user">
                 <source>list.label_user</source>
                 <target>User</target>
@@ -210,11 +220,6 @@
                 <source>filter.label_user</source>
                 <target>User</target>
             </trans-unit>
-            <!-- status (dupliqué)-->
-            <!--<trans-unit id="form.label_status">
-                <source>form.label_status</source>
-                <target>Status</target>
-            </trans-unit>-->
             <trans-unit id="list.label_status">
                 <source>list.label_status</source>
                 <target>Status</target>
@@ -257,25 +262,6 @@
                 <source>breadcrumb.link_ad_list</source>
                 <target>Detail Ad Page</target>
             </trans-unit>
-
-            <!-- id (dupliqué)-->
-            <!--<trans-unit id="form.label_id">
-                <source>form.label_id</source>
-                <target>Id</target>
-            </trans-unit>
-            <trans-unit id="list.label_id">
-                <source>list.label_id</source>
-                <target>Id</target>
-            </trans-unit>
-            <trans-unit id="filter.label_id">
-                <source>filter.label_id</source>
-                <target>Id</target>
-            </trans-unit>-->
-            <!-- name (dupliqué)-->
-            <!--<trans-unit id="form.label_name">
-                <source>form.label_name</source>
-                <target>Name</target>
-            </trans-unit>-->
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
                 <target>Name</target>
@@ -284,11 +270,6 @@
                 <source>filter.label_name</source>
                 <target>Name</target>
             </trans-unit>
-            <!-- position (Dupliqué) -->
-            <!-- <trans-unit id="form.label_position">
-                <source>form.label_position</source>
-                <target>Position</target>
-            </trans-unit>-->
             <trans-unit id="list.label_position">
                 <source>list.label_position</source>
                 <target>Position</target>
@@ -362,32 +343,6 @@
                 <source>filter.label_end_at</source>
                 <target>End at</target>
             </trans-unit>
-            <!-- createdAt (dupliqué)-->
-            <!--<trans-unit id="form.label_created_at">
-                <source>form.label_created_at</source>
-                <target>Created at</target>
-            </trans-unit>
-            <trans-unit id="list.label_created_at">
-                <source>list.label_created_at</source>
-                <target>Created at</target>
-            </trans-unit>
-            <trans-unit id="filter.label_created_at">
-                <source>filter.label_created_at</source>
-                <target>Created at</target>
-            </trans-unit>-->
-            <!-- updatedAt (dupliqué)-->
-            <!--<trans-unit id="form.label_updated_at">
-                <source>form.label_updated_at</source>
-                <target>Updated at</target>
-            </trans-unit>
-            <trans-unit id="list.label_updated_at">
-                <source>list.label_updated_at</source>
-                <target>Updated at</target>
-            </trans-unit>
-            <trans-unit id="filter.label_updated_at">
-                <source>filter.label_updated_at</source>
-                <target>Updated at</target>
-            </trans-unit>-->
             <!-- AdAdmin [END] -->
 
 
@@ -398,20 +353,6 @@
                 <target>Detail Article Page</target>
             </trans-unit>
 
-            <!-- id (dupliqué)-->
-            <!--<trans-unit id="form.label_id">
-                <source>form.label_id</source>
-                <target>Id</target>
-            </trans-unit>
-            <trans-unit id="list.label_id">
-                <source>list.label_id</source>
-                <target>Id</target>
-            </trans-unit>
-            <trans-unit id="filter.label_id">
-                <source>filter.label_id</source>
-                <target>Id</target>
-            </trans-unit>-->
-            <!-- title -->
             <trans-unit id="form.label_title">
                 <source>form.label_title</source>
                 <target>Title</target>
@@ -464,11 +405,6 @@
                 <source>filter.label_quote_text</source>
                 <target>Quote text</target>
             </trans-unit>
-            <!-- seoDescription (dupliqué) -->
-            <!--<trans-unit id="form.label_seo_description">
-                <source>form.label_seo_description</source>
-                <target>Seo description</target>
-            </trans-unit>-->
             <trans-unit id="list.label_seo_description">
                 <source>list.label_seo_description</source>
                 <target>Seo description</target>
@@ -555,24 +491,6 @@
                 <source>filter.label_best_ofs</source>
                 <target>Related best of</target>
             </trans-unit>
-            <!-- user (dupliqué) -->
-            <!--<trans-unit id="form.label_user">
-                <source>form.label_user</source>
-                <target>User</target>
-            </trans-unit>
-            <trans-unit id="list.label_user">
-                <source>list.label_user</source>
-                <target>User</target>
-            </trans-unit>
-            <trans-unit id="filter.label_user">
-                <source>filter.label_user</source>
-                <target>User</target>
-            </trans-unit> -->
-            <!-- medias (dupliqué) -->
-            <!--<trans-unit id="form.label_medias">
-                <source>form.label_medias</source>
-                <target>Medias</target>
-            </trans-unit>-->
             <trans-unit id="list.label_medias">
                 <source>list.label_medias</source>
                 <target>Medias</target>
@@ -581,34 +499,6 @@
                 <source>filter.label_medias</source>
                 <target>Medias</target>
             </trans-unit>
-
-            <!-- createdAt (dupliqué) -->
-            <!--<trans-unit id="form.label_created_at">
-                <source>form.label_created_at</source>
-                <target>Created at</target>
-            </trans-unit>
-            <trans-unit id="list.label_created_at">
-                <source>list.label_created_at</source>
-                <target>Created at</target>
-            </trans-unit>
-            <trans-unit id="filter.label_created_at">
-                <source>filter.label_created_at</source>
-                <target>Created at</target>
-            </trans-unit>-->
-            <!-- updatedAt (dupliqué) -->
-            <!--<trans-unit id="form.label_updated_at">
-                <source>form.label_updated_at</source>
-                <target>Updated at</target>
-            </trans-unit>
-            <trans-unit id="list.label_updated_at">
-                <source>list.label_updated_at</source>
-                <target>Updated at</target>
-            </trans-unit>
-            <trans-unit id="filter.label_updated_at">
-                <source>filter.label_updated_at</source>
-                <target>Updated at</target>
-            </trans-unit>-->
-            <!-- AdAdmin [END] -->
 
         </body>
     </file>

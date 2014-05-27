@@ -21,6 +21,7 @@ class CitySuburbAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
+                ->add('city')
             ->end();
     }
 
@@ -39,6 +40,7 @@ class CitySuburbAdmin extends Admin
     {
         $filterMapper
             ->add('name')
+            ->add('city')
         ;
     }
 

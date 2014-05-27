@@ -2,9 +2,16 @@
 
 namespace WBB\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WBB\BarBundle\Entity\Article;
+use WBB\BarBundle\Entity\Bar;
+use WBB\CoreBundle\Entity\CitySuburb;
+use WBB\CoreBundle\Entity\Collections\CityBestOf;
+use WBB\CoreBundle\Entity\Collections\CityTrend;
+use WBB\CoreBundle\Entity\Country;
 
 /**
  * City
@@ -86,7 +93,7 @@ class City {
     private $bars;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BestOf", mappedBy="city", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityBestOf", mappedBy="city", cascade={"all"})
      */
     private $bestofs;  
     
@@ -235,17 +242,18 @@ class City {
      * Constructor
      */
     public function __construct() {
-        $this->suburbs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->suburbs = new ArrayCollection();
+
         $this->setOnTopCity(true);
     }
 
     /**
      * Set country
      *
-     * @param \WBB\CoreBundle\Entity\Country $country
+     * @param Country $country
      * @return City
      */
-    public function setCountry(\WBB\CoreBundle\Entity\Country $country = null) {
+    public function setCountry(Country $country = null) {
         $this->country = $country;
 
         return $this;
@@ -254,7 +262,7 @@ class City {
     /**
      * Get country
      *
-     * @return \WBB\CoreBundle\Entity\Country 
+     * @return Country
      */
     public function getCountry() {
         return $this->country;
@@ -263,10 +271,10 @@ class City {
     /**
      * Add suburb
      *
-     * @param \WBB\CoreBundle\Entity\CitySuburb $suburb
+     * @param CitySuburb $suburb
      * @return City
      */
-    public function addSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburb) {
+    public function addSuburb(CitySuburb $suburb) {
         $this->suburbs[] = $suburb;
         $suburb->setCity($this);
 
@@ -276,9 +284,9 @@ class City {
     /**
      * Remove suburbs
      *
-     * @param \WBB\CoreBundle\Entity\CitySuburb $suburbs
+     * @param CitySuburb $suburbs
      */
-    public function removeSuburb(\WBB\CoreBundle\Entity\CitySuburb $suburbs) {
+    public function removeSuburb(CitySuburb $suburbs) {
         $this->suburbs->removeElement($suburbs);
     }
 
@@ -294,10 +302,10 @@ class City {
     /**
      * Add bar
      *
-     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @param Bar $bar
      * @return City
      */
-    public function addBar(\WBB\BarBundle\Entity\Bar $bar) {
+    public function addBar(Bar $bar) {
         $this->bars[] = $bar;
         $bar->setCity($this);
 
@@ -307,9 +315,9 @@ class City {
     /**
      * Remove bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param Bar $bars
      */
-    public function removeBar(\WBB\BarBundle\Entity\Bar $bars) {
+    public function removeBar(Bar $bars) {
         $this->bars->removeElement($bars);
     }
 
@@ -366,36 +374,6 @@ class City {
      */
     public function getUpdatedAt() {
         return $this->updatedAt;
-    }
-
-    /**
-     * Add bestofs
-     *
-     * @param \WBB\BarBundle\Entity\BestOf $bestofs
-     * @return City
-     */
-    public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs) {
-        $this->bestofs[] = $bestofs;
-
-        return $this;
-    }
-
-    /**
-     * Remove bestofs
-     *
-     * @param \WBB\BarBundle\Entity\BestOf $bestofs
-     */
-    public function removeBestof(\WBB\BarBundle\Entity\BestOf $bestofs) {
-        $this->bestofs->removeElement($bestofs);
-    }
-
-    /**
-     * Get bestofs
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getBestofs() {
-        return $this->bestofs;
     }
 
     /**
@@ -503,10 +481,10 @@ class City {
     /**
      * Set article
      *
-     * @param \WBB\BarBundle\Entity\Article $article
+     * @param Article $article
      * @return City
      */
-    public function setArticle(\WBB\BarBundle\Entity\Article $article = null)
+    public function setArticle(Article $article = null)
     {
         $this->article = $article;
 
@@ -516,7 +494,7 @@ class City {
     /**
      * Get article
      *
-     * @return \WBB\BarBundle\Entity\Article 
+     * @return Article
      */
     public function getArticle()
     {
@@ -526,10 +504,10 @@ class City {
     /**
      * Add trends
      *
-     * @param \WBB\CoreBundle\Entity\Collections\CityTrend $trends
+     * @param CityTrend $trends
      * @return City
      */
-    public function addTrend(\WBB\CoreBundle\Entity\Collections\CityTrend $trends)
+    public function addTrend(CityTrend $trends)
     {
         $this->trends[] = $trends;
 
@@ -539,9 +517,9 @@ class City {
     /**
      * Remove trends
      *
-     * @param \WBB\CoreBundle\Entity\Collections\CityTrend $trends
+     * @param CityTrend $trends
      */
-    public function removeTrend(\WBB\CoreBundle\Entity\Collections\CityTrend $trends)
+    public function removeTrend(CityTrend $trends)
     {
         $this->trends->removeElement($trends);
     }
@@ -554,5 +532,38 @@ class City {
     public function getTrends()
     {
         return $this->trends;
+    }
+
+    /**
+     * Add bestofs
+     *
+     * @param CityBestOf $bestofs
+     * @return City
+     */
+    public function addBestof(CityBestOf $bestofs)
+    {
+        $this->bestofs[] = $bestofs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofs
+     *
+     * @param CityBestOf $bestofs
+     */
+    public function removeBestof(CityBestOf $bestofs)
+    {
+        $this->bestofs->removeElement($bestofs);
+    }
+
+    /**
+     * Get bestofs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBestofs()
+    {
+        return $this->bestofs;
     }
 }

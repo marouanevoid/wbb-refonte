@@ -101,6 +101,7 @@ sonata_admin:
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
         layout: SonataAdminBundle::layout.html.twig
+        short_object_description: WBBBarBundle:Admin:Helper/short-object-description.html.twig
 
 # Sonata Blocks
 sonata_block:
@@ -118,15 +119,15 @@ sonata_media:
     contexts:
         default:
             providers:
-                - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
                 - sonata.media.provider.image
-                - sonata.media.provider.file
 
             formats:
-                small: { width: 100 , quality: 70}
-                big:   { width: 500 , quality: 70}
-                large: { width: 1024, quality: 70}
+                small:          { width: 100 , quality: 70}
+                big:            { width: 500 , quality: 70}
+                large:          { width: 1024, quality: 70}
+                slider_small :  { width: 320 , quality: 240}
+                slider_large :  { width: 640 , quality: 480}
     cdn:
         server:
             path: /uploads/media
