@@ -1,18 +1,28 @@
 article.city {
-
   position: relative; text-align: center;
   .btn-round { z-index: 20; position: absolute; right: 10px; top: 10px; border: none; background-image: url("../images/color.333333.80.png");
     img { background-image: url("../images/also-like.icon.star.png"); background-size: 20px 20px; }
   }
-  .txt { position: absolute; z-index: 20; bottom: 1.5em; left: 2em; right: 2em; text-shadow: 0 0 5px #000;
-    h2 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: normal; margin-bottom: 0.3em; }
+  .txt { position: absolute; z-index: 20; bottom: 1.5em; left: 2em; right: 2em; text-shadow: 0 2px 3px rgba(0,0,0,.3);
+    h3 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: normal; margin-bottom: 0.3em; }
     h4 { color: $color-cream; }
   }
   .gradient {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; background-image: url("../images/also-like.box.gradient.png");
     background-position: bottom left; background-size: 100% 100%;
   }
-  img.scale-with-grid{ display: block;
+  img.scale-with-grid{ display: block;@include border-radius (2px);
     &.background { position: absolute; }
+  }
+}
+
+@media only screen and (max-width: $grid-breakpoint-mobile) {
+
+  article.city {
+    .txt {
+      bottom: 0.25em;
+      h3 { margin-bottom: 0; line-height: 100% }
+      h2 { line-height: 100% }
+    }
   }
 }

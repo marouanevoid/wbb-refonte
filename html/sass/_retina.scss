@@ -1,0 +1,32 @@
+@media(-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi)
+{
+  header.desktop .logo img{ background-image: url("../images/logo@2x.png") }
+
+  .btn-small-round, .btn-round, .btn-radius.with-icon, .finder-close {
+    &:after, &:before{
+      background-image: url("../images/sprite@2x.png");
+    }
+  }
+
+  footer {
+    .right {
+      .social-icons {
+        .facebook img{ background-image: url("../images/icons/facebook.yellow@2x.png") }
+        .twitter img{ background-image: url("../images/icons/twitter.yellow@2x.png") }
+        .instagram img{ background-image: url("../images/icons/instagram.yellow@2x.png") }
+        .pinterest img{ background-image: url("../images/icons/pinterest.yellow@2x.png") }
+      }
+    }
+  }
+
+  article.bar-w-pic {
+
+    .txt { position: absolute; z-index: 20; bottom: 2em; left: 2.5em; right: 2.5em;
+      .tags{
+        &:before{ background-image: url("../images/icons/tag@2x.png") }
+      }
+    }
+  }
+
+
+}

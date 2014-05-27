@@ -1,7 +1,8 @@
 .btn-small-radius, .btn-round, .btn-radius, .btn-small-round{
 
   &.brown{ color: $color-brown; border-color: $color-brown }
-  &.brown:hover{ background: $color-brown!important; color: #fff }
+  &.brown.active{ color: $color-cream; border-color: $color-cream }
+  &.brown:hover{ background: $color-brown!important; color: $color-cream; border-color: $color-brown }
 
   &.dark{ color: $color-dark-gray; background: $color-dark-gray; opacity: 0.8 }
   &.dark:hover{ opacity: 1 }
@@ -17,6 +18,11 @@
   &.dark.star{
     &:before{ background-position: -160px -80px }
     &:after{ display: none }
+  }
+
+  &.dark.star.active{
+    opacity: 1;
+    &:before{ background-position: -200px -160px }
   }
 
   &.share{
@@ -39,8 +45,28 @@
 .btn-radius.with-icon{
 
   &.place{
-    &:before{ background-position: -164px -8px }
-    &:after{ background-position: -164px -39px }
+    &:before{ background-position: -212px -0px }
+    &:after{ background-position: -212px -40px }
+  }
+
+  &.friend{
+    &:before{ background-position: -12px -200px }
+    &:after{ background-position: -12px -240px }
+  }
+
+  &.chillout{
+    &:before{ background-position: -52px -200px }
+    &:after{ background-position: -52px -240px }
+  }
+
+  &.casual{
+    &:before{ background-position: -92px -200px }
+    &:after{ background-position: -92px -240px }
+  }
+
+  &.party{
+    &:before{ background-position: -132px -200px }
+    &:after{ background-position: -132px -240px }
   }
 }
 
@@ -64,4 +90,8 @@
     &:before{ background-position:-85px -125px }
     &:after{ background-position: -85px -165px }
   }
+}
+
+.finder-close{
+  &:before{ background-position:-160px -120px }
 }

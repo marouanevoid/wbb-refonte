@@ -8,24 +8,17 @@
                 <tr>
 
                     <td class="logo">
-                        <a href="">
-                            <img src="images/logo.png" alt="logo" width="157" height="85"/>
+                        <a href="index.php">
+                            <img src="images/logo-placeholder.png" alt="logo" width="157" height="85"/>
                         </a>
                     </td>
 
-                    <td class="h3">
-                        <nav>
-                            <a href="">Cities</a>
-                            <a href="">Bar Guides</a>
-                            <a href="">Articles</a>
-                        </nav>
+                    <td>
+                        <?php include('components/header/nav.php') ?>
                     </td>
 
-                    <td class="bar-finder h3">
-                        <a href="" class="finder">
-                            <img src="images/icons/glass.png" alt="glass" width="10" height="16"/>
-                            Bar Finder
-                        </a>
+                    <td class="bar-finder">
+                        <?php include('components/header/bar-finder-link.php') ?>
 
                         <img src="images/misc/border.brown.png" alt="border" width="1" height="40"/>
 
@@ -34,16 +27,13 @@
                         </a>
                     </td>
 
-                    <td class="register h4">
-                        <a href="">Signin</a>
-                        or
-                        <a class="btn-radius" href="">Register</a>
+                    <td>
+                        <?php include('components/header/signin-register.php') ?>
                     </td>
                 </tr>
             </table>
-
         </div>
-
     </div>
-
 </header>
+
+<?php include('components/bar-finder.php') ?>

@@ -1,4 +1,4 @@
-<article class="bar">
+<article class="bar-w-pic">
 
     <a href="" class="btn-round dark star"></a>
 
@@ -10,4 +10,5 @@
 
     <div class="gradient"></div>
     <img class="scale-with-grid" src="tmp/bar.berry-park.png" alt="bar.berry-park" width="570" height="428"/>
+
 </article>

@@ -1,7 +1,6 @@
 <article class="city">
-
     <div class="txt">
-        <h2>Paris</h2>
+        <h3>Paris</h3>
         <h4>FR</h4>
     </div>
 

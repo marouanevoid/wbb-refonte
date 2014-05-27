@@ -28,6 +28,9 @@
     <script type="text/javascript" src="js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.easing.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.velocity.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.transform3d.js"></script>
+    <script type="text/javascript" src="js/plugins/modernizr.js"></script>
+    <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
@@ -35,6 +38,7 @@
     <script type="text/javascript" src="js/libs/loadMore.metabolism.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/anim.js"></script>
 
     <script type="text/javascript">
         var MARKET  = "FR";
@@ -48,12 +52,11 @@
 
 <body class="<?=$page?>">
 
-    <?php if( $is_mobile ): ?>
+    <div class="entire-content">
+        <div class="entire-content-scrollable">
 
-        <?php include('includes/mobile/header.php') ?>
-
-    <?php else: ?>
-
-        <?php include('includes/header.php') ?>
-
-    <?php endif ?>
+            <?php if( $is_mobile ): ?>
+                <?php include('includes/mobile/header.php') ?>
+            <?php else: ?>
+                <?php include('includes/header.php') ?>
+            <?php endif ?>

@@ -9,7 +9,11 @@
         <?php for($i=1; $i<5; $i++) : ?>
 
             <div class="three columns">
-                <?php include('components/bar.php') ?>
+                <?php if($is_mobile): ?>
+                    <?php include('components/bar-wo-pic.php') ?>
+                <?php else: ?>
+                    <?php include('components/bar-w-pic.php') ?>
+                <?php endif ?>
             </div>
 
         <?php endfor ?>

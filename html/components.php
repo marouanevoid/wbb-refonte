@@ -8,14 +8,14 @@
             <?php for($i=1; $i<4; $i++) : ?>
 
                 <div class="four columns l-margin-top">
-                    <?php include('components/bar.php') ?>
+                    <?php include('components/bar-w-pic.php') ?>
                 </div>
             <?php endfor ?>
 
             <?php for($i=1; $i<5; $i++) : ?>
 
                 <div class="three columns l-margin-top">
-                    <?php include('components/bar.php') ?>
+                    <?php include('components/bar-w-pic.php') ?>
                 </div>
             <?php endfor ?>
         </div>

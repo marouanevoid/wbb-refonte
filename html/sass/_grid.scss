@@ -90,7 +90,7 @@
         .container .nine.columns,
         .container .ten.columns,
         .container .eleven.columns,
-        .container .twelve.columns { width: 90%; margin-left: 5%; }
+        .container .twelve.columns { width: 90%; margin-left: 5%; margin-right: 5% }
 
         /* Offsets */
         .container .offset-by-one,
@@ -140,8 +140,5 @@
     .clear {
       clear: both;
       display: block;
-      overflow: hidden;
-      visibility: hidden;
-      width: 0;
       height: 0;
     }

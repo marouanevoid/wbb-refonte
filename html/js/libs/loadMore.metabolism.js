@@ -96,7 +96,7 @@ meta.LoadMore = function(config) {
             $target.removeClass('load-target');
             $target.after('<div class="'+that.config.class+' load-target"/>');
 
-            that._animate($target, $target.find('> *') );
+            that._animate($target, $target.find('> *').not('br') );
 
             that.context.page +=1;
             that.context.is_loading = false;

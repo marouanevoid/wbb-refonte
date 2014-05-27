@@ -1,13 +1,11 @@
 article.bestof {
 
   position: relative;
-  .btn-round { z-index: 20; position: absolute; right: 10px; top: 10px; border: none; background-image: url("../images/color.333333.80.png");
-    img { background-image: url("../images/also-like.icon.star.png"); background-size: 20px 20px; }
-  }
+  .btn-round { z-index: 21; position: absolute; right: 1em; top: 1em; }
   .txt { position: absolute; z-index: 20; bottom: 0; left: 0; right: 0; top: 0;
-    .circle { text-align: center; width: 20em; height: 20em; border-radius: 50%; margin: auto auto; background-image: url("../images/color.333333.80.png");
-      h2 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: bold; margin: 0.7em; }
-      h3 { color: $color-cream; text-transform: none; }
+    .circle { text-align: center; width: 20em; height: 20em; border-radius: 50%; margin: auto auto; background-image: url("../images/color.000000.60.png");
+      h2 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: bold; margin: 0.5em; }
+      h3 { color: $color-subtle-yellow; text-transform: none; }
     }
   }
   img.scale-with-grid{ display: block }
