@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Trend
  *
- * @ORM\Table()
+ * @ORM\Table(name="wbb_tag")
  * @ORM\Entity
  */
 class Trend

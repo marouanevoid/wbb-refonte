@@ -301,17 +301,14 @@ function instagramImages() {
                     success: function(response) {
                         loader.hide();
                         var template = null;
-                        $.each(response.data, function(key, feed){
-                            console.log("__________________________________________________");
-                            console.log(feed);
-                            console.log("__________________________________________________");
+                        $.each(response.data.data, function(key, feed){
                             var imgsHtml = $("#instimgs").html();
                             var checked = "";
                             if(in_array(feed.id, r)) {
                                 checked = "checked";
                             }
                             template = imgsHtml.format(
-                               // feed.id, feed.images.standard_resolution.url, checked
+                                feed.id, feed.images.low_resolution.url, checked
                             );
 
                             container.append(template);

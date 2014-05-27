@@ -1,3 +1,9 @@
 wbb_sonata:
     resource: "@WBBCoreBundle/Resources/config/routing/sonata.yml"
     prefix:   /
+
+get_suburbs_from_city:
+    pattern: /ajax/get-suburbs-from-city/{cityId}
+    defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getSuburbsFromCity}
+    options:
+        expose: true
