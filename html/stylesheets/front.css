@@ -772,6 +772,12 @@ img.scale-with-grid {
   h1, .h1 {
     font-size: 2.5em;
   }
+
+  /* line 309, ../sass/_base.scss */
+  .btn-radius.brown.load-more:hover {
+    background: transparent !important;
+    color: #b3955f !important;
+  }
 }
 /* Grid Math
 --------------------------------------------------- */

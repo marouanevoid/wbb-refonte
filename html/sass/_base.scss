@@ -305,4 +305,9 @@
 
     body{ font-size: 10px!important }
     h1, .h1{ font-size: 2.5em }
+
+    .btn-radius.brown.load-more:hover
+    {
+        background: transparent!important; color: $color-brown!important;
+    }
   }
