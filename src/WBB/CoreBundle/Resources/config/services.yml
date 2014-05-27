@@ -5,7 +5,7 @@ parameters:
     wbb_core.city.admin.class: WBB\CoreBundle\Controller\Admin\CityAdmin
     wbb_core.citysuburb.admin.class: WBB\CoreBundle\Controller\Admin\CitySuburbAdmin
     wbb_core.city_trend.admin.class: WBB\CoreBundle\Controller\Admin\Collections\CityTrendAdmin
-    wbb_core.city_bestof.admin.class: WBB\CoreBundle\Controller\Admin\Collections\CityBestOfAdmin
+    wbb_core.city_bestof.admin.class: WBB\CoreBundle\Controller\Admin\CityBestOfAdmin
 
     #Entities
     wbb_core.country.entity.class: WBB\CoreBundle\Entity\Country

@@ -4,7 +4,7 @@
  * Fichier créer par : Badr HAKKARI <b.hakkari@void.fr>
  */
 
-namespace WBB\CoreBundle\Controller\Admin\Collections;
+namespace WBB\CoreBundle\Controller\Admin;
 
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -14,7 +14,6 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class CityBestOfAdmin extends Admin
 {
-
     /**
      * {@inheritdoc}
      */
@@ -28,5 +27,4 @@ class CityBestOfAdmin extends Admin
                 ->add('position', 'hidden')
             ->end();
     }
-    
 }
