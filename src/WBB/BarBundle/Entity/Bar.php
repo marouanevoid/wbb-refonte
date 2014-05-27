@@ -1193,4 +1193,18 @@ class Bar
             unset($this->instagramExcludedImgs[$key]);
         }
     }
+
+    public function getTrendsIds()
+    {
+        $trends = array();
+        foreach($this->getTrends() as $trend)
+        {
+            $trends[] = $trend->getTrend()->getId();
+        }
+
+        if(sizeof($trends)>0)
+            return $trends;
+        else
+            return array(0);
+    }
 }
