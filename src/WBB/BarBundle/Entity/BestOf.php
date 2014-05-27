@@ -107,9 +107,9 @@ class BestOf
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="bestofs")
+     * @ORM\ManyToOne(targetEntity="News", inversedBy="bestofs")
      */
-    private $article;    
+    private $news;    
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestofTrend", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
@@ -652,22 +652,22 @@ class BestOf
     }
     
     /**
-     * Set article
+     * Set news
      *
-     * @param Article $article
+     * @param News $news
      * @return BestOf
      */
-    public function setArticle($article){
-        $this->article = $article;
+    public function setNews($news){
+        $this->news = $news;
         return $this;
     }
 
     /**
-     * Get article
+     * Get news
      *
-     * @return Article
+     * @return News
      */
-    public function getArticle(){
-        return $this->article;
+    public function getNews(){
+        return $this->news;
     }
 }

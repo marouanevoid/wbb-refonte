@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ArticleMediaAdmin extends Admin
+class NewsMediaAdmin extends Admin
 {
     /**
      * {@inheritdoc}

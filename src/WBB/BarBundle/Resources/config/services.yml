@@ -10,8 +10,8 @@ parameters:
     wbb_bar.bestof_trend.admin.class: WBB\BarBundle\Controller\Admin\Collections\BestofTrendAdmin
     wbb_bar.tip.admin.class: WBB\BarBundle\Controller\Admin\TipAdmin
     wbb_bar.ad.admin.class: WBB\BarBundle\Controller\Admin\AdAdmin
-    wbb_bar.article.admin.class: WBB\BarBundle\Controller\Admin\ArticleAdmin
-    wbb_bar.article_media.admin.class: WBB\BarBundle\Controller\Admin\Collections\ArticleMediaAdmin
+    wbb_bar.news.admin.class: WBB\BarBundle\Controller\Admin\NewsAdmin
+    wbb_bar.news_media.admin.class: WBB\BarBundle\Controller\Admin\Collections\NewsMediaAdmin
 
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
@@ -23,8 +23,8 @@ parameters:
     wbb_bar.bestof_trend.entity.class: WBB\BarBundle\Entity\Collections\BestofTrend
     wbb_bar.tip.entity.class: WBB\BarBundle\Entity\Tip
     wbb_bar.ad.entity.class: WBB\BarBundle\Entity\Ad
-    wbb_bar.article.entity.class: WBB\BarBundle\Entity\Article
-    wbb_bar.article_media.entity.class: WBB\BarBundle\Entity\Collections\ArticleMedia
+    wbb_bar.news.entity.class: WBB\BarBundle\Entity\News
+    wbb_bar.news_media.entity.class: WBB\BarBundle\Entity\Collections\NewsMedia
 
     #Feed Classes
     wbb_feed.foursquare_tips.class: WBB\BarBundle\Feed\FoursquareTips
@@ -107,19 +107,19 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.article:
-        class: %wbb_bar.article.admin.class%
+    wbb.bar.admin.news:
+        class: %wbb_bar.news.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: article, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.article.entity.class%, SonataAdminBundle:CRUD]
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: news, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.news.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.article_media:
-        class: %wbb_bar.article_media.admin.class%
+    wbb.bar.admin.news_media:
+        class: %wbb_bar.news_media.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: article_medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.article_media.entity.class%, SonataAdminBundle:CRUD]
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: news_medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.news_media.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 

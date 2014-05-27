@@ -91,10 +91,10 @@ class City {
     private $bestofs;  
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="cities", cascade={"remove"})
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"remove"})
+     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
-    private $article;    
+    private $news;    
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTrend", mappedBy="city", cascade={"all"})
@@ -501,26 +501,26 @@ class City {
     }
 
     /**
-     * Set article
+     * Set news
      *
-     * @param \WBB\BarBundle\Entity\Article $article
+     * @param \WBB\BarBundle\Entity\News $news
      * @return City
      */
-    public function setArticle(\WBB\BarBundle\Entity\Article $article = null)
+    public function setNews(\WBB\BarBundle\Entity\News $news = null)
     {
-        $this->article = $article;
+        $this->news = $news;
 
         return $this;
     }
 
     /**
-     * Get article
+     * Get news
      *
-     * @return \WBB\BarBundle\Entity\Article 
+     * @return \WBB\BarBundle\Entity\News 
      */
-    public function getArticle()
+    public function getNews()
     {
-        return $this->article;
+        return $this->news;
     }
 
     /**
