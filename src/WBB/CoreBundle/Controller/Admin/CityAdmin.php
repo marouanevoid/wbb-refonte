@@ -41,9 +41,12 @@ class CityAdmin extends Admin
                 ))
             ->end()
             ->with('Related Best Of')
-                ->add('bestofs', null, array('expanded' => false, 'by_reference' => false, 'multiple' => true),array(
-                    'sortable'  => 'position'
-                ))
+                ->add('bestofs', 'sonata_type_collection', array('required' => false),
+                    array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                        'sortable'  => 'position'
+                    ))
             ->end()
             ->with('Trends')
                 ->add('trends', 'sonata_type_collection', array('required' => false),
@@ -104,13 +107,13 @@ class CityAdmin extends Admin
             $suburb->setCity($object);
         }
 
-        foreach ($object->getBestofs() as $bestof) {
-            $bestof->setCity($object);
-        }
+//        foreach ($object->getBestofs() as $bestof) {
+//            $bestof->setCity($object);
+//        }
 
-        foreach ($object->getTrends() as $trend) {
-            $trend->setCity($object);
-        }
+//        foreach ($object->getTrends() as $trend) {
+//            $trend->setCity($object);
+//        }
     }
 
     public function preUpdate($object)
@@ -119,12 +122,12 @@ class CityAdmin extends Admin
             $suburb->setCity($object);
         }
 
-        foreach ($object->getBestofs() as $bestof) {
-            $bestof->setCity($object);
-        }
+//        foreach ($object->getBestofs() as $bestof) {
+//            $bestof->setCity($object);
+//        }
 
-        foreach ($object->getTrends() as $trend) {
-            $trend->setCity($object);
-        }
+//        foreach ($object->getTrends() as $trend) {
+//            $trend->setCity($object);
+//        }
     }
 }

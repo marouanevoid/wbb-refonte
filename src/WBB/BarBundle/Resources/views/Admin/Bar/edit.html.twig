@@ -84,6 +84,31 @@ file that was distributed with this source code.
             </div>
         </div>
     </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var city = $("#{{ admin.uniqId }}_city");
+            city.change(updateSuburbs());
+            city.change();
+
+            function updateSuburbs(){
+                return function () {
+                    var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
+                    var suburb = $("#{{ admin.uniqId }}_suburb");
+                    suburb.empty();
+                    suburb.trigger("list:updated");
+
+                    var url = Routing.generate('get_suburbs_from_city', {'cityId': cityId });
+                    $.post(url, { cityId: cityId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        suburb.empty().append(options);
+                        suburb.trigger("list:updated");
+                    },"text");
+
+                    suburb.val("option:first").attr("selected", true);
+                };
+            }
+        });
+    </script>
 {% endblock %}
 
 {% block stylesheets %}
