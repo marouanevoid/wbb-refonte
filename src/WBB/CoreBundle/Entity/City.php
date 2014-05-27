@@ -494,7 +494,6 @@ class City {
     /**
      * Get news
      *
-     * @return \WBB\BarBundle\Entity\News 
      */
     public function getNews()
     {
@@ -567,3 +566,4 @@ class City {
         return $this->bestofs;
     }
 }
+     * @return \WBB\BarBundle\Entity\News 

@@ -1,0 +1,6 @@
+{% block user_block %}
+    {% if app.user %}
+        {{ app.user }}
+        - <a href="{{ url('sonata_user_admin_security_logout') }}">{{ 'user_block_logout'|trans({}, 'WBBUserBundle') }}</a>
+    {% endif %}
+{% endblock %}
