@@ -566,4 +566,3 @@ class City {
         return $this->bestofs;
     }
 }
-     * @return \WBB\BarBundle\Entity\News 
