@@ -91,7 +91,10 @@ class CityBestOf
 
     public function __toString()
     {
-        return $this->bestof->getName();
+        if($this->bestof)
+            return $this->bestof->getName();
+        else
+            return '';
     }
 
     /**

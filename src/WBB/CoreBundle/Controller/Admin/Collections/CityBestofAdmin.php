@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class CityBestOfAdmin extends Admin
 {
+
     /**
      * {@inheritdoc}
      */
@@ -27,4 +28,5 @@ class CityBestOfAdmin extends Admin
                 ->add('position', 'hidden')
             ->end();
     }
+    
 }
