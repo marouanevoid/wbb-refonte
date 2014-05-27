@@ -96,7 +96,8 @@ class News {
     private $bestOfs;     
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="tips")
+     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news", cascade={"remove"})
+     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
     private $user;
 

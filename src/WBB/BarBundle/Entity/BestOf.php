@@ -107,7 +107,8 @@ class BestOf
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="bestofs")
+     * @ORM\ManyToOne(targetEntity="News", inversedBy="bestOfs", cascade={"remove"})
+     * @ORM\JoinColumn(name="best_of_id", referencedColumnName="id")
      */
     private $news;    
     
