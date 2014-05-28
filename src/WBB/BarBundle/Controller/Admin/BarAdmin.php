@@ -101,7 +101,7 @@ class BarAdmin extends Admin
                 ->add('user')
                 ->add('name')
                 ->add('city', 'sonata_type_model', array('required' => false))
-                ->add('suburb', 'sonata_type_model', array('required' => false))
+                ->add('suburb')
                 ->add('latitude')
                 ->add('longitude')
                 ->add('address')
