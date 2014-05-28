@@ -136,9 +136,9 @@ class BestOfAdmin extends Admin
     {   $object->preUpload();
         $object->preUpload(true);
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBestof($object);
-        }
+//        foreach ($object->getTags() as $tag) {
+//            $tag->setBestof($object);
+//        }
     }
 
     public function preUpdate($object)
@@ -146,9 +146,9 @@ class BestOfAdmin extends Admin
         $object->preUpload();
         $object->preUpload(true);
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBestof($object);
-        }
+//        foreach ($object->getTags() as $tag) {
+//            $tag->setBestof($object);
+//        }
     }
 
     /**
