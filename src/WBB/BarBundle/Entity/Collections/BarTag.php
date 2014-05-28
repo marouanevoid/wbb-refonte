@@ -1,17 +1,18 @@
 <?php
 
-namespace WBB\CoreBundle\Entity\Collections;
+namespace WBB\BarBundle\Entity\Collections;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * CityTrend
+ * BarTag
  *
- * @ORM\Table(name="wbb_city_trend")
+ * @ORM\Table(name="wbb_bar_tag")
  * @ORM\Entity
  */
-class CityTrend
+class BarTag
 {
     /**
      * @var integer
@@ -30,14 +31,14 @@ class CityTrend
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="trends")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="tags")
      */
-    private $city;
+    private $bar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bars")
      */
-    private $trend;
+    private $tag;
 
     /**
      * @var \DateTime
@@ -89,9 +90,32 @@ class CityTrend
         return $this->position;
     }
 
+    /**
+     * Set bar
+     *
+     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @return BarMedia
+     */
+    public function setBar(\WBB\BarBundle\Entity\Bar $bar = null)
+    {
+        $this->bar = $bar;
+
+        return $this;
+    }
+
+    /**
+     * Get bar
+     *
+     * @return \WBB\BarBundle\Entity\Bar
+     */
+    public function getBar()
+    {
+        return $this->bar;
+    }
+
     public function __toString()
     {
-        return $this->trend->getName();
+        return $this->tag->getName();
     }
 
     /**
@@ -141,48 +165,25 @@ class CityTrend
     }
 
     /**
-     * Set trend
+     * Set tag
      *
-     * @param \WBB\BarBundle\Entity\Trend $trend
-     * @return BarTrend
+     * @param \WBB\BarBundle\Entity\Tag $tag
+     * @return BarTag
      */
-    public function setTrend(\WBB\BarBundle\Entity\Trend $trend = null)
+    public function setTag(\WBB\BarBundle\Entity\Tag $tag = null)
     {
-        $this->trend = $trend;
+        $this->tag = $tag;
 
         return $this;
     }
 
     /**
-     * Get trend
+     * Get tag
      *
-     * @return \WBB\BarBundle\Entity\Trend 
+     * @return \WBB\BarBundle\Entity\Tag
      */
-    public function getTrend()
+    public function getTag()
     {
-        return $this->trend;
-    }
-
-    /**
-     * Set city
-     *
-     * @param \WBB\CoreBundle\Entity\City $city
-     * @return CityTrend
-     */
-    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return \WBB\CoreBundle\Entity\City 
-     */
-    public function getCity()
-    {
-        return $this->city;
+        return $this->tag;
     }
 }

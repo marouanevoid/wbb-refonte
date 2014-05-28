@@ -3,11 +3,11 @@ parameters:
     #Admin Classes
     wbb_bar.bar.admin.class: WBB\BarBundle\Controller\Admin\BarAdmin
     wbb_bar.bar_media.admin.class: WBB\BarBundle\Controller\Admin\Collections\BarMediaAdmin
-    wbb_bar.bar_trend.admin.class: WBB\BarBundle\Controller\Admin\Collections\BarTrendAdmin
+    wbb_bar.bar_tag.admin.class: WBB\BarBundle\Controller\Admin\Collections\BarTagAdmin
     wbb_bar.bar_opening.admin.class: WBB\BarBundle\Controller\Admin\BarOpeningAdmin
-    wbb_bar.trend.admin.class: WBB\BarBundle\Controller\Admin\TrendAdmin
+    wbb_bar.tag.admin.class: WBB\BarBundle\Controller\Admin\TagAdmin
     wbb_bar.bestof.admin.class: WBB\BarBundle\Controller\Admin\BestOfAdmin
-    wbb_bar.bestof_trend.admin.class: WBB\BarBundle\Controller\Admin\Collections\BestOfTrendAdmin
+    wbb_bar.bestof_tag.admin.class: WBB\BarBundle\Controller\Admin\Collections\BestOfTagAdmin
     wbb_bar.tip.admin.class: WBB\BarBundle\Controller\Admin\TipAdmin
     wbb_bar.ad.admin.class: WBB\BarBundle\Controller\Admin\AdAdmin
     wbb_bar.article.admin.class: WBB\BarBundle\Controller\Admin\ArticleAdmin
@@ -16,11 +16,11 @@ parameters:
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
     wbb_bar.bar_media.entity.class: WBB\BarBundle\Entity\Collections\BarMedia
-    wbb_bar.bar_trend.entity.class: WBB\BarBundle\Entity\Collections\BarTrend
+    wbb_bar.bar_tag.entity.class: WBB\BarBundle\Entity\Collections\BarTag
     wbb_bar.bar_opening.entity.class: WBB\BarBundle\Entity\BarOpening
-    wbb_bar.trend.entity.class: WBB\BarBundle\Entity\Trend
+    wbb_bar.tag.entity.class: WBB\BarBundle\Entity\Tag
     wbb_bar.bestof.entity.class: WBB\BarBundle\Entity\BestOf
-    wbb_bar.bestof_trend.entity.class: WBB\BarBundle\Entity\Collections\BestOfTrend
+    wbb_bar.bestof_tag.entity.class: WBB\BarBundle\Entity\Collections\BestOfTag
     wbb_bar.tip.entity.class: WBB\BarBundle\Entity\Tip
     wbb_bar.ad.entity.class: WBB\BarBundle\Entity\Ad
     wbb_bar.article.entity.class: WBB\BarBundle\Entity\Article
@@ -51,11 +51,11 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.bar_trend:
-        class: %wbb_bar.bar_trend.admin.class%
+    wbb.bar.admin.bar_tag:
+        class: %wbb_bar.bar_tag.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bar_trends, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.bar_trend.entity.class%, SonataAdminBundle:CRUD]
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bar_tags, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.bar_tag.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
@@ -67,11 +67,11 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.trend:
-        class: %wbb_bar.trend.admin.class%
+    wbb.bar.admin.tag:
+        class: %wbb_bar.tag.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: trends, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.trend.entity.class%, SonataAdminBundle:CRUD]
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: tags, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.tag.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
@@ -83,11 +83,11 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.bestof_trend:
-        class: %wbb_bar.bestof_trend.admin.class%
+    wbb.bar.admin.bestof_tag:
+        class: %wbb_bar.bestof_tag.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bestof_trend, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.bestof_trend.entity.class%, SonataAdminBundle:CRUD]
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bestof_tag, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.bestof_tag.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 

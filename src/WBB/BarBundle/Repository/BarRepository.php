@@ -25,12 +25,12 @@ class BarRepository extends EntityRepository
         $qb
             ->select($this->getAlias())
             ->innerjoin($this->getAlias().'.city', 'c')
-            ->innerjoin($this->getAlias().'.trends', 'bt')
-            ->innerjoin('bt.trend', 't')
+            ->innerjoin($this->getAlias().'.tags', 'bt')
+            ->innerjoin('bt.tag', 't')
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->andWhere($qb->expr()->in('t.id',':trends'))
+            ->andWhere($qb->expr()->in('t.id',':tags'))
             ->andWhere($qb->expr()->neq($this->getAlias().'.id', $bar->getId()))
-            ->setParameter('trends', $bar->getTrendsIds())
+            ->setParameter('tags', $bar->getTagsIds())
             ->setMaxResults($limit)
         ;
 

@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class CityTrendAdmin extends Admin
+class CityTagAdmin extends Admin
 {
     /**
      * {@inheritdoc}
@@ -21,7 +21,7 @@ class CityTrendAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('trend', 'sonata_type_model_list', array(
+                ->add('tag', 'sonata_type_model_list', array(
                     'required' => true
                 ))
                 ->add('position', 'hidden')

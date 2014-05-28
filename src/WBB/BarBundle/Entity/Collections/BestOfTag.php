@@ -7,12 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * BarTrend
+ * BarTag
  *
- * @ORM\Table(name="wbb_bar_trend")
+ * @ORM\Table(name="wbb_bestof_trend")
  * @ORM\Entity
  */
-class BarTrend
+class BestOfTag
 {
     /**
      * @var integer
@@ -31,14 +31,14 @@ class BarTrend
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="trends")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\BestOf", inversedBy="tags")
      */
-    private $bar;
+    private $bestof;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend", inversedBy="bars")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bestofs")
      */
-    private $trend;
+    private $tag;
 
     /**
      * @var \DateTime
@@ -90,32 +90,9 @@ class BarTrend
         return $this->position;
     }
 
-    /**
-     * Set bar
-     *
-     * @param \WBB\BarBundle\Entity\Bar $bar
-     * @return BarMedia
-     */
-    public function setBar(\WBB\BarBundle\Entity\Bar $bar = null)
-    {
-        $this->bar = $bar;
-
-        return $this;
-    }
-
-    /**
-     * Get bar
-     *
-     * @return \WBB\BarBundle\Entity\Bar
-     */
-    public function getBar()
-    {
-        return $this->bar;
-    }
-
     public function __toString()
     {
-        return $this->trend->getName();
+        return $this->tag->getName();
     }
 
     /**
@@ -165,25 +142,48 @@ class BarTrend
     }
 
     /**
-     * Set trend
+     * Set tag
      *
-     * @param \WBB\BarBundle\Entity\Trend $trend
-     * @return BarTrend
+     * @param \WBB\BarBundle\Entity\Tag $tag
+     * @return BarTag
      */
-    public function setTrend(\WBB\BarBundle\Entity\Trend $trend = null)
+    public function setTag(\WBB\BarBundle\Entity\Tag $tag = null)
     {
-        $this->trend = $trend;
+        $this->tag = $tag;
 
         return $this;
     }
 
     /**
-     * Get trend
+     * Get tag
      *
-     * @return \WBB\BarBundle\Entity\Trend 
+     * @return \WBB\BarBundle\Entity\Tag
      */
-    public function getTrend()
+    public function getTag()
     {
-        return $this->trend;
+        return $this->tag;
+    }
+
+    /**
+     * Set bestof
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestof
+     * @return BestOfTag
+     */
+    public function setBestof(\WBB\BarBundle\Entity\BestOf $bestof = null)
+    {
+        $this->bestof = $bestof;
+
+        return $this;
+    }
+
+    /**
+     * Get bestof
+     *
+     * @return \WBB\BarBundle\Entity\BestOf
+     */
+    public function getBestof()
+    {
+        return $this->bestof;
     }
 }

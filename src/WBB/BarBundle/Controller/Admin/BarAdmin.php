@@ -158,8 +158,8 @@ class BarAdmin extends Admin
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('New Trends')
-                ->add('trends', 'sonata_type_collection', array('required' => false),
+            ->with('New Tags')
+                ->add('tags', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -195,8 +195,8 @@ class BarAdmin extends Admin
             $media->setBar($object);
         }
 
-        foreach ($object->getTrends() as $trend) {
-            $trend->setBar($object);
+        foreach ($object->getTags() as $tag) {
+            $tag->setBar($object);
         }
 
         foreach ($object->getOpenings() as $opening) {
@@ -210,8 +210,8 @@ class BarAdmin extends Admin
             $media->setBar($object);
         }
 
-        foreach ($object->getTrends() as $trend) {
-            $trend->setBar($object);
+        foreach ($object->getTags() as $tag) {
+            $tag->setBar($object);
         }
 
         foreach ($object->getOpenings() as $opening) {

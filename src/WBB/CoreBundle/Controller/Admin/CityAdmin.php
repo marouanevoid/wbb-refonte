@@ -48,8 +48,8 @@ class CityAdmin extends Admin
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('Trends')
-                ->add('trends', 'sonata_type_collection', array('required' => false),
+            ->with('Tags')
+                ->add('tags', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -111,8 +111,8 @@ class CityAdmin extends Admin
 //            $bestof->setCity($object);
 //        }
 
-//        foreach ($object->getTrends() as $trend) {
-//            $trend->setCity($object);
+//        foreach ($object->getTags() as $tag) {
+//            $tag->setCity($object);
 //        }
     }
 
@@ -126,8 +126,8 @@ class CityAdmin extends Admin
 //            $bestof->setCity($object);
 //        }
 
-//        foreach ($object->getTrends() as $trend) {
-//            $trend->setCity($object);
+//        foreach ($object->getTags() as $tag) {
+//            $tag->setCity($object);
 //        }
     }
 }

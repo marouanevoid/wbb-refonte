@@ -25,7 +25,7 @@ class BestOfAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('sponsor', null, array('editable' => true))
-            ->add('byTrend', null, array('editable' => true))
+            ->add('byTag', null, array('editable' => true))
             ->add('onTop', null, array('editable' => true))
             ->add('city', null, array('editable' => true))
             ->add('country', null, array('editable' => true))
@@ -41,7 +41,7 @@ class BestOfAdmin extends Admin
             ->add('id')
             ->add('name')
             ->add('sponsor')
-            ->add('byTrend')
+            ->add('byTag')
             ->add('onTop')
             ->add('city')
             ->add('country')
@@ -88,12 +88,12 @@ class BestOfAdmin extends Admin
                 ->add('sponsor')
                 ->add('sponsorImageFile', 'file', $sponsorImageOptions)
                 ->add('seoDescription')
-                ->add('byTrend')
+                ->add('byTag')
                 ->add('onTop')
                 ->add('ordered')
             ->end()
-            ->with('Trends')
-                ->add('trends', 'sonata_type_collection', array('required' => false),
+            ->with('Tags')
+                ->add('tags', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -136,8 +136,8 @@ class BestOfAdmin extends Admin
     {   $object->preUpload();
         $object->preUpload(true);
 
-        foreach ($object->getTrends() as $trend) {
-            $trend->setBestof($object);
+        foreach ($object->getTags() as $tag) {
+            $tag->setBestof($object);
         }
     }
 
@@ -146,8 +146,8 @@ class BestOfAdmin extends Admin
         $object->preUpload();
         $object->preUpload(true);
 
-        foreach ($object->getTrends() as $trend) {
-            $trend->setBestof($object);
+        foreach ($object->getTags() as $tag) {
+            $tag->setBestof($object);
         }
     }
 
