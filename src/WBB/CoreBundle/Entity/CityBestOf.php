@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * CityBestof
+ * CityBestOf
  *
  * @ORM\Table(name="wbb_city_bestof")
  * @ORM\Entity

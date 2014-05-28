@@ -112,7 +112,7 @@ class BestOf
     private $article;    
     
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestofTrend", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTrend", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $trends;
@@ -598,10 +598,10 @@ class BestOf
     /**
      * Add trends
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BestOfTrend $trends
      * @return BestOf
      */
-    public function addTrend(\WBB\BarBundle\Entity\Collections\BestofTrend $trends)
+    public function addTrend(\WBB\BarBundle\Entity\Collections\BestOfTrend $trends)
     {
         $this->trends[] = $trends;
 
@@ -611,9 +611,9 @@ class BestOf
     /**
      * Remove trends
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BestOfTrend $trends
      */
-    public function removeTrend(\WBB\BarBundle\Entity\Collections\BestofTrend $trends)
+    public function removeTrend(\WBB\BarBundle\Entity\Collections\BestOfTrend $trends)
     {
         $this->trends->removeElement($trends);
     }

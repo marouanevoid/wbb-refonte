@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class BestofTrendAdmin extends Admin
+class BestOfTrendAdmin extends Admin
 {
     /**
      * {@inheritdoc}
