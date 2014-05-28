@@ -6,14 +6,14 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
-use WBB\BarBundle\Entity\Trend;
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class TrendAdmin extends Admin
+class TagAdmin extends Admin
 {
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class TrendAdmin extends Admin
                 ->add('name')
                 ->add('energyLevel', 'choice', array(
                     'required' => false,
-                    'choices'  => Trend::getEnergyLevels()
+                    'choices'  => Tag::getEnergyLevels()
                 ))
                 ->add('isStyle')
                 ->add('isOccasion')

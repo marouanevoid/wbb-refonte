@@ -231,10 +231,10 @@ class Bar
     private $medias;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTrend", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
-    private $trends;
+    private $tags;
 
     /**
      * @ORM\OneToMany(targetEntity="BarOpening", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
@@ -815,7 +815,7 @@ class Bar
     {
         $this->medias = new ArrayCollection();
         $this->openings = new ArrayCollection();
-        $this->trends = new ArrayCollection();
+        $this->tags = new ArrayCollection();
         $this->fsSelectedImgs = array();
         $this->fsExcludedTips = array();
         $this->instagramExcludedImgs = array();
@@ -1124,36 +1124,36 @@ class Bar
     }
 
     /**
-     * Add trends
+     * Add tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BarTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BarTag $tags
      * @return Bar
      */
-    public function addTrend(\WBB\BarBundle\Entity\Collections\BarTrend $trends)
+    public function addTag(\WBB\BarBundle\Entity\Collections\BarTag $tags)
     {
-        $this->trends[] = $trends;
+        $this->tags[] = $tags;
 
         return $this;
     }
 
     /**
-     * Remove trends
+     * Remove tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BarTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BarTag $tags
      */
-    public function removeTrend(\WBB\BarBundle\Entity\Collections\BarTrend $trends)
+    public function removeTag(\WBB\BarBundle\Entity\Collections\BarTag $tags)
     {
-        $this->trends->removeElement($trends);
+        $this->tags->removeElement($tags);
     }
 
     /**
-     * Get trends
+     * Get tags
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTrends()
+    public function getTags()
     {
-        return $this->trends;
+        return $this->tags;
     }
 
     /**
@@ -1194,16 +1194,16 @@ class Bar
         }
     }
 
-    public function getTrendsIds()
+    public function getTagsIds()
     {
-        $trends = array();
-        foreach($this->getTrends() as $trend)
+        $tags = array();
+        foreach($this->getTags() as $tag)
         {
-            $trends[] = $trend->getTrend()->getId();
+            $tags[] = $tag->getTag()->getId();
         }
 
-        if(sizeof($trends)>0)
-            return $trends;
+        if(sizeof($tags)>0)
+            return $tags;
         else
             return array(0);
     }

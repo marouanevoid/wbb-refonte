@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Trend
+ * Tag
  *
  * @ORM\Table(name="wbb_tag")
  * @ORM\Entity
  */
-class Trend
+class Tag
 {
     /**
      * @var integer
@@ -102,17 +102,17 @@ class Trend
     private $updatedAt;
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="trends")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="tags")
      */
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTrend", mappedBy="trend", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="tag", cascade={"all"}, orphanRemoval=true)
      */
     private $bars;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTrend", mappedBy="trend", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="tag", cascade={"all"}, orphanRemoval=true)
      */
     private $bestofs;
 
@@ -131,7 +131,7 @@ class Trend
      * Set name
      *
      * @param string $name
-     * @return Trend
+     * @return Tag
      */
     public function setName($name)
     {
@@ -154,7 +154,7 @@ class Trend
      * Set isStyle
      *
      * @param boolean $isStyle
-     * @return Trend
+     * @return Tag
      */
     public function setIsStyle($isStyle)
     {
@@ -177,7 +177,7 @@ class Trend
      * Set isOccasion
      *
      * @param boolean $isOccasion
-     * @return Trend
+     * @return Tag
      */
     public function setIsOccasion($isOccasion)
     {
@@ -200,7 +200,7 @@ class Trend
      * Set isAtmosphere
      *
      * @param boolean $isAtmosphere
-     * @return Trend
+     * @return Tag
      */
     public function setIsAtmosphere($isAtmosphere)
     {
@@ -223,7 +223,7 @@ class Trend
      * Set isAlcohol
      *
      * @param boolean $isAlcohol
-     * @return Trend
+     * @return Tag
      */
     public function setIsAlcohol($isAlcohol)
     {
@@ -246,7 +246,7 @@ class Trend
      * Set isCocktail
      *
      * @param boolean $isCocktail
-     * @return Trend
+     * @return Tag
      */
     public function setIsCocktail($isCocktail)
     {
@@ -269,7 +269,7 @@ class Trend
      * Set isMood
      *
      * @param boolean $isMood
-     * @return Trend
+     * @return Tag
      */
     public function setIsMood($isMood)
     {
@@ -292,7 +292,7 @@ class Trend
      * Set energyLevel
      *
      * @param integer $energyLevel
-     * @return Trend
+     * @return Tag
      */
     public function setEnergyLevel($energyLevel)
     {
@@ -315,7 +315,7 @@ class Trend
      * Set onTop
      *
      * @param boolean $onTop
-     * @return Trend
+     * @return Tag
      */
     public function setOnTop($onTop)
     {
@@ -355,7 +355,7 @@ class Trend
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return Trend
+     * @return Tag
      */
     public function setCreatedAt($createdAt)
     {
@@ -378,7 +378,7 @@ class Trend
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return Trend
+     * @return Tag
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -401,7 +401,7 @@ class Trend
      * Set position
      *
      * @param integer $position
-     * @return Trend
+     * @return Tag
      */
     public function setPosition($position)
     {
@@ -424,7 +424,7 @@ class Trend
      * Set city
      *
      * @param \WBB\CoreBundle\Entity\City $city
-     * @return Trend
+     * @return Tag
      */
     public function setCity(\WBB\CoreBundle\Entity\City $city = null)
     {
@@ -450,10 +450,10 @@ class Trend
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\Collections\BarTrend|\WBB\BarBundle\Entity\Collections\BarTrend $bars
-     * @return Trend
+     * @param \WBB\BarBundle\Entity\Collections\BarTag $bars
+     * @return Tag
      */
-    public function addBar(\WBB\BarBundle\Entity\Collections\BarTrend $bars)
+    public function addBar(\WBB\BarBundle\Entity\Collections\BarTag $bars)
     {
         $this->bars[] = $bars;
 
@@ -463,9 +463,9 @@ class Trend
     /**
      * Remove bars
      *
-     * @param \WBB\BarBundle\Entity\Collections\BarTrend $bars
+     * @param \WBB\BarBundle\Entity\Collections\BarTag $bars
      */
-    public function removeBar(\WBB\BarBundle\Entity\Collections\BarTrend $bars)
+    public function removeBar(\WBB\BarBundle\Entity\Collections\BarTag $bars)
     {
         $this->bars->removeElement($bars);
     }
@@ -483,10 +483,10 @@ class Trend
     /**
      * Add bestofs
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfTrend $bestofs
-     * @return Trend
+     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $bestofs
+     * @return Tag
      */
-    public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfTrend $bestofs)
+    public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfTag $bestofs)
     {
         $this->bestofs[] = $bestofs;
 
@@ -496,9 +496,9 @@ class Trend
     /**
      * Remove bestofs
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfTrend $bestofs
+     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $bestofs
      */
-    public function removeBestof(\WBB\BarBundle\Entity\Collections\BestOfTrend $bestofs)
+    public function removeBestof(\WBB\BarBundle\Entity\Collections\BestOfTag $bestofs)
     {
         $this->bestofs->removeElement($bestofs);
     }

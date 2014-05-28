@@ -22,9 +22,9 @@
                 <target>Foursquare</target>
             </trans-unit>
 
-            <trans-unit id="form.label_trends">
-                <source>form.label_trends</source>
-                <target>Trends</target>
+            <trans-unit id="form.label_tags">
+                <source>form.label_tags</source>
+                <target>Tags</target>
             </trans-unit>
 
             <trans-unit id="form.label_openings">

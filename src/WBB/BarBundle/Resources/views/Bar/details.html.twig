@@ -136,8 +136,8 @@
 
                 <p>
                     <strong>At a Glance: </strong>
-                    {% for tr in bar.trends %}
-                    {{ tr.trend }}{% if not loop.last %} ∙ {% endif %}
+                    {% for tr in bar.tags %}
+                    {{ tr.tag }}{% if not loop.last %} ∙ {% endif %}
                     {% endfor%}<br/>
                     <br/>
                     {{ bar.description }}
@@ -345,8 +345,8 @@
                         <h2>{{ b.name }}</h2>
                         <h3>{{ b.suburb.name }}, {{ b.city.name }}</h3>
                         <div class="tags">
-                            {% for tr in b.trends %}
-                                {{ tr.trend }}{% if not loop.last %}, {% endif %}
+                            {% for tr in b.tags %}
+                                {{ tr.tag }}{% if not loop.last %}, {% endif %}
                             {% endfor%}
                         </div>
                     </div>

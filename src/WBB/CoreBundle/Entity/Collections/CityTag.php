@@ -1,18 +1,17 @@
 <?php
 
-namespace WBB\BarBundle\Entity\Collections;
+namespace WBB\CoreBundle\Entity\Collections;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * BarTrend
+ * CityTag
  *
- * @ORM\Table(name="wbb_bestof_trend")
+ * @ORM\Table(name="wbb_city_tag")
  * @ORM\Entity
  */
-class BestOfTrend
+class CityTag
 {
     /**
      * @var integer
@@ -31,14 +30,14 @@ class BestOfTrend
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\BestOf", inversedBy="trends")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="tags")
      */
-    private $bestof;
+    private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend", inversedBy="bestofs")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
      */
-    private $trend;
+    private $tag;
 
     /**
      * @var \DateTime
@@ -92,7 +91,7 @@ class BestOfTrend
 
     public function __toString()
     {
-        return $this->trend->getName();
+        return $this->tag->getName();
     }
 
     /**
@@ -142,48 +141,48 @@ class BestOfTrend
     }
 
     /**
-     * Set trend
+     * Set tag
      *
-     * @param \WBB\BarBundle\Entity\Trend $trend
-     * @return BarTrend
+     * @param \WBB\BarBundle\Entity\Tag $tag
+     * @return BarTag
      */
-    public function setTrend(\WBB\BarBundle\Entity\Trend $trend = null)
+    public function setTag(\WBB\BarBundle\Entity\Tag $tag = null)
     {
-        $this->trend = $trend;
+        $this->tag = $tag;
 
         return $this;
     }
 
     /**
-     * Get trend
+     * Get tag
      *
-     * @return \WBB\BarBundle\Entity\Trend 
+     * @return \WBB\BarBundle\Entity\Tag
      */
-    public function getTrend()
+    public function getTag()
     {
-        return $this->trend;
+        return $this->tag;
     }
 
     /**
-     * Set bestof
+     * Set city
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestof
-     * @return BestOfTrend
+     * @param \WBB\CoreBundle\Entity\City $city
+     * @return CityTag
      */
-    public function setBestof(\WBB\BarBundle\Entity\BestOf $bestof = null)
+    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
     {
-        $this->bestof = $bestof;
+        $this->city = $city;
 
         return $this;
     }
 
     /**
-     * Get bestof
+     * Get city
      *
-     * @return \WBB\BarBundle\Entity\BestOf
+     * @return \WBB\CoreBundle\Entity\City 
      */
-    public function getBestof()
+    public function getCity()
     {
-        return $this->bestof;
+        return $this->city;
     }
 }
