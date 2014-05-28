@@ -135,9 +135,9 @@
             <div class="eight columns l-margin-top">
 
                 <p>
-                    <strong>At a Glance : </strong>
+                    <strong>At a Glance: </strong>
                     {% for tr in bar.trends %}
-                    {{ tr.trend }},
+                    {{ tr.trend }}{% if not loop.last %} ∙ {% endif %}
                     {% endfor%}<br/>
                     <br/>
                     {{ bar.description }}
@@ -187,9 +187,9 @@
                             {{ bar.phone }}<br/>
                             <a href="">info@macaonyc.com</a>
                             <br/>
-                            {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown"></a>{% endif %}
-                            {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter"></a>{% endif %}
-                            {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook"></a>{% endif %}
+                            {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank"></a>{% endif %}
+                            {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
+                            {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook" target="_blank"></a>{% endif %}
                         </p>
 
                         <hr class="s-margin"/>
@@ -211,9 +211,9 @@
                             Accepts Credit Cards: {% if bar.isCreditCard %}yes{% else %}no{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}yes{% else %}no{% endif %}<br/>
                             Parking: {{ bar.parking }}<br/>
-                            Price: {{ bar.price }}  {% if bar.menu %}<a href="{{ bar.menu }}">(View menu)</a>{% endif %}<br/>
+                            Price: {{ bar.price }}  {% if bar.menu %}<a href="{{ bar.menu }}" target="_blank">(View menu)</a>{% endif %}<br/>
                             Reservation: {% if bar.isReservation %}yes{% else %}no{% endif %}<br/>
-                            {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown">Make a Reservation</a>{% endif %}
+                            {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
                         </p>
                     </div>
                 </div>
@@ -335,70 +335,28 @@
                 You May Also Like
             </div>
 
-
+            {% for b in barLike %}
             <div class="three columns">
                 <article class="bar">
 
                     <a href="" class="btn-round dark star"></a>
 
                     <div class="txt">
-                        <h2>Berry Park</h2>
-                        <h3>Lower Manhattan, New York</h3>
-                        <div class="tags">rooftop, romance, ambiente</div>
+                        <h2>{{ b.name }}</h2>
+                        <h3>{{ b.suburb.name }}, {{ b.city.name }}</h3>
+                        <div class="tags">
+                            {% for tr in b.trends %}
+                                {{ tr.trend }}{% if not loop.last %}, {% endif %}
+                            {% endfor%}
+                        </div>
                     </div>
 
                     <div class="gradient"></div>
-                    <img class="scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/bar.berry-park.png') }}" alt="bar.berry-park" width="570" height="428"/>
+                    {% for m in b.medias|slice(0,1) %}
+                        <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                    {% endfor %}
                 </article>            </div>
-
-
-            <div class="three columns">
-                <article class="bar">
-
-                    <a href="" class="btn-round dark star"></a>
-
-                    <div class="txt">
-                        <h2>Berry Park</h2>
-                        <h3>Lower Manhattan, New York</h3>
-                        <div class="tags">rooftop, romance, ambiente</div>
-                    </div>
-
-                    <div class="gradient"></div>
-                    <img class="scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/bar.berry-park.png') }}" alt="bar.berry-park" width="570" height="428"/>
-                </article>            </div>
-
-
-            <div class="three columns">
-                <article class="bar">
-
-                    <a href="" class="btn-round dark star"></a>
-
-                    <div class="txt">
-                        <h2>Berry Park</h2>
-                        <h3>Lower Manhattan, New York</h3>
-                        <div class="tags">rooftop, romance, ambiente</div>
-                    </div>
-
-                    <div class="gradient"></div>
-                    <img class="scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/bar.berry-park.png') }}" alt="bar.berry-park" width="570" height="428"/>
-                </article>            </div>
-
-
-            <div class="three columns">
-                <article class="bar">
-
-                    <a href="" class="btn-round dark star"></a>
-
-                    <div class="txt">
-                        <h2>Berry Park</h2>
-                        <h3>Lower Manhattan, New York</h3>
-                        <div class="tags">rooftop, romance, ambiente</div>
-                    </div>
-
-                    <div class="gradient"></div>
-                    <img class="scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/bar.berry-park.png') }}" alt="bar.berry-park" width="570" height="428"/>
-                </article>            </div>
-
+            {% endfor %}
 
         </div>
 
