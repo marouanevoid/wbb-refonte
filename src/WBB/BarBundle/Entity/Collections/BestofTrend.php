@@ -36,7 +36,7 @@ class BestofTrend
     private $bestof;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend", inversedBy="bestofs")
      */
     private $trend;
 

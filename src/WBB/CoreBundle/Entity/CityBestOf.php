@@ -30,7 +30,7 @@ class CityBestOf
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="trends")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bestofs")
      */
     private $city;
 
