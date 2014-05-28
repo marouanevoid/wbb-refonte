@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * CityBestof
+ * CityBestOf
  *
  * @ORM\Table(name="wbb_city_bestof")
  * @ORM\Entity
@@ -30,7 +30,7 @@ class CityBestOf
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="trends")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bestofs")
      */
     private $city;
 

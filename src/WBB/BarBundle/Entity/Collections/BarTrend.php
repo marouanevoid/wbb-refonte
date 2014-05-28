@@ -36,7 +36,7 @@ class BarTrend
     private $bar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend", inversedBy="bars")
      */
     private $trend;
 

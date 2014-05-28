@@ -1,0 +1,39 @@
+.articles article{
+  border: 1px solid $color-brown; float: left; text-align: center; @include box-sizing(border-box);
+  h2 { text-transform: uppercase; font-weight: bold; }
+  p { padding: 0 6%; }
+  .img {
+    position: relative; width: 100%; height: 70%;
+    .cover{ position: absolute; top: -1px; left: -1px; right: -1px; bottom: 0; z-index:1; width:auto; height:auto; img{ width: 100%; height: auto; display: block } }
+    .plus-btn { position: absolute; margin-left: -2em; bottom: -2em; left: 50%; z-index: 2 }
+  }
+  .title { position: relative; width: 100%; height: 100%; }
+  .img+.title{ height: 30% }
+  .img+.title p{ margin-bottom: 0!important }
+  .plus-btn {
+    width: 4em; height: 4em; background: #fff; border-radius: 50%; text-align: center; display: inline-block;
+    border: 1px solid $color-brown; box-shadow: 0 0 0 4px #fff; position: relative; @include transition( background 0.2s ease-in-out );
+    &:after, &:before{ position: absolute; content:''; @include transition( background 0.2s ease-in-out ); }
+    &:after{ width: 1px; height: 50%; top: 25%; left: 50%; background: $color-brown }
+    &:before{ height: 1px; width: 50%; left: 25%; top: 50%; background: $color-brown; margin-top: -1px }
+    &:hover{ background: $color-brown }
+    &:hover:after, &:hover:before{ background: #fff }
+  }
+}
+
+.articles article.small { width: 50%; height: 40em; }
+.articles article.small+article.small { border-left: 0; }
+.articles article.small+article.small+article.large { border-top: 0; }
+
+.articles article.large { width: 100%; height: 80em; }
+
+@media only screen and (max-width: $grid-breakpoint-mobile) {
+
+  .articles article p{ height: 9em; overflow: hidden; text-overflow: ellipsis }
+  .articles article .img+.title p{ display: none }
+
+  .articles article.small,
+  .articles article.large { width: 100%; height: 35em }
+
+  .articles article.small+article.small { border-left: 1px solid $color-brown; border-top: 0; }
+}

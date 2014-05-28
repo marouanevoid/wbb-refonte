@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="wbb_bestof_trend")
  * @ORM\Entity
  */
-class BestofTrend
+class BestOfTrend
 {
     /**
      * @var integer
@@ -31,12 +31,12 @@ class BestofTrend
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bestof", inversedBy="trends")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\BestOf", inversedBy="trends")
      */
     private $bestof;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Trend", inversedBy="bestofs")
      */
     private $trend;
 
@@ -167,10 +167,10 @@ class BestofTrend
     /**
      * Set bestof
      *
-     * @param \WBB\BarBundle\Entity\Bestof $bestof
-     * @return BestofTrend
+     * @param \WBB\BarBundle\Entity\BestOf $bestof
+     * @return BestOfTrend
      */
-    public function setBestof(\WBB\BarBundle\Entity\Bestof $bestof = null)
+    public function setBestof(\WBB\BarBundle\Entity\BestOf $bestof = null)
     {
         $this->bestof = $bestof;
 
@@ -180,7 +180,7 @@ class BestofTrend
     /**
      * Get bestof
      *
-     * @return \WBB\BarBundle\Entity\Bestof
+     * @return \WBB\BarBundle\Entity\BestOf
      */
     public function getBestof()
     {

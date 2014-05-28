@@ -1,4 +1,4 @@
-article.bar {
+article.bar-w-pic {
 
   position: relative;
   .btn-round { z-index: 3; position: absolute; right: 1em; top: 1em; }
@@ -6,14 +6,15 @@ article.bar {
     h2 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: bold; margin-bottom: 0.5em; }
     h3 { color: $color-cream; text-transform: none; @include transition( margin ease-in-out 0.2s); margin-bottom: 0 }
     .tags{
-      font-size: 1.2em; color: $color-cream; font-weight: bold; padding-left: 2em; padding-top: 0.2em; position: absolute; bottom: 0; left: 0; width: 100%; @include opacity(0); @include transition( opacity ease-in-out 0.2s);
-      &:before{ content: ''; display: block; position: absolute; left: 0; top: 0; width: 1.2em; height: 1.2em; background: url("../images/icons/tag.png") center; background-size: 100% 100% }
+      font-size: 1.4em; color: $color-cream; font-weight: bold; padding-left: 2em; padding-top: 0.2em; position: absolute; bottom: 0; left: 0; width: 100%; @include opacity(0); @include transition( opacity ease-in-out 0.2s);
+      &:before{ content: ''; display: block; position: absolute; left: 0; top: 50%; width: 16px; height: 16px; margin-top:-6px; background: url("../images/icons/tag.png") center no-repeat; background-size: 100% auto }
     }
   }
   .gradient {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 2; background-image: url("../images/also-like.box.gradient.png");
     background-position: bottom left; background-size: 100% 100%;
   }
+
   img.scale-with-grid{ display: block; @include opacity(0.8); @include transition( opacity ease-in-out 0.2s); @include reduceFlickering() }
 
   &:hover
@@ -25,15 +26,10 @@ article.bar {
 }
 
 
-  @media only screen and (max-width: $grid-breakpoint-mobile) {
+@media only screen and (max-width: $grid-breakpoint-mobile) {
 
-    article.bar {
-      height: 12em; background-color: $color-cream; margin-top: 1.5em; position: relative;
-      .txt { top: 2.5em;
-        h2 { color: $color-dark-gray; position: absolute; top: 0; }
-        h3 { color: $color-brown; position: absolute; bottom: 0; }
-      }
-      .gradient { display: none; }
-      img.scale-with-grid{ display: none }
-    }
+  article.bar-w-pic
+  {
+    img.scale-with-grid{ @include opacity(1) }
   }
+}

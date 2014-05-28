@@ -7,7 +7,7 @@ parameters:
     wbb_bar.bar_opening.admin.class: WBB\BarBundle\Controller\Admin\BarOpeningAdmin
     wbb_bar.trend.admin.class: WBB\BarBundle\Controller\Admin\TrendAdmin
     wbb_bar.bestof.admin.class: WBB\BarBundle\Controller\Admin\BestOfAdmin
-    wbb_bar.bestof_trend.admin.class: WBB\BarBundle\Controller\Admin\Collections\BestofTrendAdmin
+    wbb_bar.bestof_trend.admin.class: WBB\BarBundle\Controller\Admin\Collections\BestOfTrendAdmin
     wbb_bar.tip.admin.class: WBB\BarBundle\Controller\Admin\TipAdmin
     wbb_bar.ad.admin.class: WBB\BarBundle\Controller\Admin\AdAdmin
     wbb_bar.news.admin.class: WBB\BarBundle\Controller\Admin\NewsAdmin
@@ -20,7 +20,7 @@ parameters:
     wbb_bar.bar_opening.entity.class: WBB\BarBundle\Entity\BarOpening
     wbb_bar.trend.entity.class: WBB\BarBundle\Entity\Trend
     wbb_bar.bestof.entity.class: WBB\BarBundle\Entity\BestOf
-    wbb_bar.bestof_trend.entity.class: WBB\BarBundle\Entity\Collections\BestofTrend
+    wbb_bar.bestof_trend.entity.class: WBB\BarBundle\Entity\Collections\BestOfTrend
     wbb_bar.tip.entity.class: WBB\BarBundle\Entity\Tip
     wbb_bar.ad.entity.class: WBB\BarBundle\Entity\Ad
     wbb_bar.news.entity.class: WBB\BarBundle\Entity\News

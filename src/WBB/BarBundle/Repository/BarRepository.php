@@ -2,7 +2,8 @@
 
 namespace WBB\BarBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use WBB\CoreBundle\Repository\EntityRepository;
+use WBB\BarBundle\Entity\Bar;
 
 /**
  * BarRepository
@@ -12,5 +13,41 @@ use Doctrine\ORM\EntityRepository;
  */
 class BarRepository extends EntityRepository
 {
+    const BAR_LOCATION_CITY = 1;
+    const BAR_LOCATION_COUNTRY = 2;
+    const BAR_LOCATION_WORLDWIDE = 3;
 
+
+    public function findYouMayAlsoLike(Bar $bar, $location = BarRepository::BAR_LOCATION_CITY, $limit = 4)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->innerjoin($this->getAlias().'.city', 'c')
+            ->innerjoin($this->getAlias().'.trends', 'bt')
+            ->innerjoin('bt.trend', 't')
+            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->in('t.id',':trends'))
+            ->andWhere($qb->expr()->neq($this->getAlias().'.id', $bar->getId()))
+            ->setParameter('trends', $bar->getTrendsIds())
+            ->setMaxResults($limit)
+        ;
+
+        if($location == BarRepository::BAR_LOCATION_CITY)
+        {
+            $qb
+                ->andWhere($qb->expr()->eq($this->getAlias().'.city', ':city'))
+                ->setParameter('city', $bar->getCity());
+        }
+
+        if($location == BarRepository::BAR_LOCATION_COUNTRY)
+        {
+            $qb
+                ->andWhere($qb->expr()->eq('c.country', ':country'))
+                ->setParameter('country', $bar->getCity()->getCountry());
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 } 

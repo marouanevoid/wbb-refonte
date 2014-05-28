@@ -8,13 +8,19 @@
 @import "icons";
 @import "header";
 
+@import "components/bar-finder";
+@import "components/subheader";
 @import "components/ui-slider";
 @import "components/tip";
-@import "components/bar";
+@import "components/bar-wo-pic";
+@import "components/bar-w-pic";
 @import "components/bestof";
 @import "components/city";
+@import "components/article-box";
 @import "components/ads";
 
 @import "pages/bar-details";
 
 @import "footer";
+
+@import "retina";

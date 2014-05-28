@@ -1,8 +1,11 @@
-    <?php if( isset($_GET['mobile']) ): ?>
-        <?php include('includes/mobile/footer.php') ?>
-    <?php else: ?>
-        <?php include('includes/footer.php') ?>
-    <?php endif ?>
+        <?php if( $is_mobile ): ?>
+            <?php include('includes/mobile/footer.php') ?>
+        <?php else: ?>
+            <?php include('includes/footer.php') ?>
+        <?php endif ?>
+
+        </div>
+    </div>
 
     <div id="fb-root"></div>
 
