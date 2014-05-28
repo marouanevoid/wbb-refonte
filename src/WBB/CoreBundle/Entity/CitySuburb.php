@@ -35,7 +35,7 @@ class CitySuburb
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="suburb", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="suburb", cascade={"all"})
      */
     private $bars;
 
