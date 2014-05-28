@@ -15,12 +15,12 @@ class Admin extends BaseAdmin
     /**
      * {@inheritdoc}
      */
-    protected $maxPerPage = 25;
+    protected $maxPerPage = 15;
 
     /**
      * {@inheritdoc}
      */
-    protected $maxPageLinks = 25;
+    protected $maxPageLinks = 15;
 
     /**
      * {@inheritdoc}
