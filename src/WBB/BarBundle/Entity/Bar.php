@@ -248,10 +248,10 @@ class Bar
     private $tips;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="bars", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="News", inversedBy="bars", cascade={"remove"})
      * @ORM\JoinColumn(name="bar_id", referencedColumnName="id")
      */
-    private $article;      
+    private $news;      
 
     /**
      * @var \DateTime
@@ -1101,26 +1101,26 @@ class Bar
     }
 
     /**
-     * Set article
+     * Set news
      *
-     * @param \WBB\BarBundle\Entity\Article $article
+     * @param \WBB\BarBundle\Entity\News $news
      * @return Bar
      */
-    public function setArticle(\WBB\BarBundle\Entity\Article $article = null)
+    public function setNews(\WBB\BarBundle\Entity\News $news = null)
     {
-        $this->article = $article;
+        $this->news = $news;
 
         return $this;
     }
 
     /**
-     * Get article
+     * Get news
      *
-     * @return \WBB\BarBundle\Entity\Article 
+     * @return \WBB\BarBundle\Entity\News 
      */
-    public function getArticle()
+    public function getNews()
     {
-        return $this->article;
+        return $this->news;
     }
 
     /**

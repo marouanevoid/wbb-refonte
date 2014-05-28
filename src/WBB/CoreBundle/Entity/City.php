@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WBB\BarBundle\Entity\Article;
+use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\CoreBundle\Entity\CityBestOf;
@@ -98,10 +98,10 @@ class City {
     private $bestofs;  
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="cities", cascade={"remove"})
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"remove"})
+     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
-    private $article;    
+    private $news;    
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTag", mappedBy="city", cascade={"all"})
@@ -479,26 +479,25 @@ class City {
     }
 
     /**
-     * Set article
+     * Set news
      *
-     * @param Article $article
+     * @param \WBB\BarBundle\Entity\News $news
      * @return City
      */
-    public function setArticle(Article $article = null)
+    public function setNews(\WBB\BarBundle\Entity\News $news = null)
     {
-        $this->article = $article;
+        $this->news = $news;
 
         return $this;
     }
 
     /**
-     * Get article
+     * Get news
      *
-     * @return Article
      */
-    public function getArticle()
+    public function getNews()
     {
-        return $this->article;
+        return $this->news;
     }
 
     /**

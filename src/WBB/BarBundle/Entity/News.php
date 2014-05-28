@@ -7,13 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Article
+ * News
  *
- * @ORM\Table(name="wbb_article")
+ * @ORM\Table(name="wbb_news")
  * @ORM\Entity
  */
 
-class Article {
+class News {
 
     /**
      * @var integer
@@ -81,27 +81,28 @@ class Article {
     private $isOnTop;
 
     /**
-     * @ORM\OneToMany(targetEntity="Bar", mappedBy="article", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="Bar", mappedBy="news", cascade={"remove", "persist"})
      */
     private $bars; 
     
     /**
-     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="article", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"remove", "persist"})
      */
     private $cities;    
 
     /**
-     * @ORM\OneToMany(targetEntity="BestOf", mappedBy="article", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="BestOf", mappedBy="news", cascade={"remove", "persist"})
      */
     private $bestOfs;     
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="tips")
+     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news", cascade={"remove"})
+     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\ArticleMedia", mappedBy="article", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\NewsMedia", mappedBy="news", cascade={"remove", "persist"})
      */
     private $medias;
 
@@ -148,7 +149,7 @@ class Article {
      * Set title
      *
      * @param string $title
-     * @return Article
+     * @return News
      */
     public function setTitle($title){
         $this->title = $title;
@@ -168,7 +169,7 @@ class Article {
      * Set shareText
      *
      * @param string $shareText
-     * @return Article
+     * @return News
      */
     public function setShareText($shareText){
         $this->shareText = $shareText;
@@ -189,7 +190,7 @@ class Article {
      * Set quoteAuthor
      *
      * @param string $quoteAuthor
-     * @return Article
+     * @return News
      */
     public function setQuoteAuthor($quoteAuthor){
         $this->quoteAuthor = $quoteAuthor;
@@ -209,7 +210,7 @@ class Article {
      * Set quoteText
      *
      * @param string $quoteText
-     * @return Article
+     * @return News
      */
     public function setQuoteText($quoteText){
         $this->quoteText = $quoteText;
@@ -229,7 +230,7 @@ class Article {
      * Set seoDescription
      *
      * @param string $seoDescription
-     * @return Article
+     * @return News
      */
     public function setSeoDescription($seoDescription){
         $this->seoDescription = $seoDescription;
@@ -249,7 +250,7 @@ class Article {
      * Set richDescription
      *
      * @param string $richDescription
-     * @return Article
+     * @return News
      */
     public function setRichDescription($richDescription){
         $this->richDescription = $richDescription;
@@ -269,7 +270,7 @@ class Article {
      * Set isAnInterview
      *
      * @param boolean $isAnInterview
-     * @return Article
+     * @return News
      */
     public function setIsAnInterview($isAnInterview){
         $this->isAnInterview = $isAnInterview;
@@ -290,7 +291,7 @@ class Article {
      * Set isOnTop
      *
      * @param boolean $isOnTop
-     * @return Article
+     * @return News
      */
     public function setIsOnTop($isOnTop){
         $this->isOnTop = $isOnTop;
@@ -310,7 +311,7 @@ class Article {
      * Add bar
      *
      * @param Bar $bar
-     * @return Article
+     * @return News
      */
     public function addBar($bar){
         $this->bars[] = $bar;
@@ -339,7 +340,7 @@ class Article {
      * Add city
      *
      * @param City $city
-     * @return Article
+     * @return News
      */
     public function addCity($city){
         $this->cities[] = $city;
@@ -369,7 +370,7 @@ class Article {
      * Add city
      *
      * @param BestOf $bestOf
-     * @return Article
+     * @return News
      */
     public function addBestOf($bestOf){
         $this->bestOfs[] = $bestOf;
@@ -418,22 +419,20 @@ class Article {
      * Add media
      *
      * @param BarMedia $media
-     * @return Article
+     * @return News
      */
     public function addMedia($media){
         $this->medias[] = $media;
-        $media->setArticle($this);
         return $this;
     }
 
     /**
      * Remove medias
      *
-     * @param ArticleMedia $medias
+     * @param NewsMedia $medias
      */
     public function removeMedia($medias){
         $this->medias->removeElement($medias);
-        $medias->setArticle(null);
     }
 
     /**

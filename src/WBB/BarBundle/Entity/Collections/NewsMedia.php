@@ -7,13 +7,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Application\Sonata\MediaBundle\Entity\Media;
 
 /**
- * Ad
+ * NewsMedia
  *
- * @ORM\Table(name="wbb_article_media")
+ * @ORM\Table(name="wbb_news_media")
  * @ORM\Entity
  */
 
-class ArticleMedia {
+class NewsMedia {
 
     /**
      * @var integer
@@ -25,10 +25,10 @@ class ArticleMedia {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Article", inversedBy="medias")
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="medias")
+     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
-    private $article;
+    private $news;
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
@@ -75,30 +75,30 @@ class ArticleMedia {
     }
 
     /**
-     * Set article
+     * Set news
      *
-     * @param \WBB\BarBundle\Entity\Article $article
-     * @return ArticleMedia
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return NewsMedia
      */
-    public function setArticle($article){
-        $this->article = $article;
+    public function setNews($news){
+        $this->news = $news;
         return $this;
     }
 
     /**
-     * Get article
+     * Get news
      *
-     * @return \WBB\BarBundle\Entity\Article
+     * @return \WBB\BarBundle\Entity\News
      */
-    public function getArticle(){
-        return $this->article;
+    public function getNews(){
+        return $this->news;
     }
 
     /**
      * Set media
      *
      * @param Media $media
-     * @return ArticleMedia
+     * @return NewsMedia
      */
     public function setMedia($media){
         $this->media = $media;
@@ -118,7 +118,7 @@ class ArticleMedia {
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return ArticleMedia
+     * @return NewsMedia
      */
     public function setCreatedAt($createdAt){
         $this->createdAt = $createdAt;
@@ -138,7 +138,7 @@ class ArticleMedia {
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return ArticleMedia
+     * @return NewsMedia
      */
     public function setUpdatedAt($updatedAt){
         $this->updatedAt = $updatedAt;

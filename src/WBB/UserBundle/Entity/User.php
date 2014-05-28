@@ -1,5 +1,4 @@
 <?php
-// src/Acme/UserBundle/Entity/User.php
 
 namespace WBB\UserBundle\Entity;
 
@@ -44,6 +43,11 @@ class User extends BaseUser
      */
     private $tips;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\News", mappedBy="user")
+     */
+    private $news;
+    
     /**
      * @var datetime
      *
@@ -229,4 +233,33 @@ class User extends BaseUser
     public function getTips(){
         return $this->tips;
     }
+
+    /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return User
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news){
+        $this->news[] = $news;
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news){
+        $this->news->removeElement($news);
+    }
+
+    /**
+     * Get news
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNews(){
+        return $this->news;
+    }    
 }
