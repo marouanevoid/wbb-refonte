@@ -363,9 +363,9 @@
 
             <!-- AdAdmin [BEGIN] -->
             <!-- breadcrumb -->
-            <trans-unit id="breadcrumb.link_article_list">
-                <source>breadcrumb.link_article_list</source>
-                <target>Detail Article Page</target>
+            <trans-unit id="breadcrumb.link_news_list">
+                <source>breadcrumb.link_news_list</source>
+                <target>Detail News Page</target>
             </trans-unit>
 
             <trans-unit id="form.label_title">
