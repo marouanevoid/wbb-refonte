@@ -121,20 +121,14 @@ class BestOfAdmin extends Admin
      */
     public function validate(ErrorElement $errorElement, $object)
     {
-        if (is_null($object->getImage()) && !is_object($object->getFile()) ) {
-            $errorElement->with('file')->addViolation('file')->end();
-        }
-
-        if (is_null($object->getSponsorImage()) && !is_object($object->getSponsorImageFile()) ) {
-            $errorElement->with('file')->addViolation('file')->end();
-        }
-
         $errorElement->with('file')->assertImage()->end();
+        $errorElement->with('sponsorImageFile')->assertImage()->end();
     }
 
     public function prePersist($object)
-    {   $object->preUpload();
-        $object->preUpload(true);
+    {
+        $object->upload();
+        $object->upload(true);
 
 //        foreach ($object->getTags() as $tag) {
 //            $tag->setBestof($object);
@@ -143,8 +137,8 @@ class BestOfAdmin extends Admin
 
     public function preUpdate($object)
     {
-        $object->preUpload();
-        $object->preUpload(true);
+        $object->upload();
+        $object->upload(true);
 
 //        foreach ($object->getTags() as $tag) {
 //            $tag->setBestof($object);
