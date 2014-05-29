@@ -44,7 +44,7 @@ services:
     wbb.core.admin.city.tag:
         class: %wbb_core.city_tag.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_location, label: city_tag, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_location_hidden, label: city_tag, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_core.city_tag.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
@@ -52,7 +52,7 @@ services:
     wbb.core.admin.city.bestof:
         class: %wbb_core.city_bestof.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_location, label: city_bestof, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_location_hidden, label: city_bestof, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_core.city_bestof.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
