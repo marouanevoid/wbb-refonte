@@ -40,6 +40,11 @@
     &:after{ display: none }
   }
 
+  &.close{
+    &:before{ background-position: -120px -0px }
+    &:after{ background-position: -120px -40px }
+  }
+
 }
 
 .btn-radius.with-icon{

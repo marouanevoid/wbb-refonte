@@ -14,7 +14,7 @@ section.bar-finder { background-color: #4b4d4e; width: 100%; white-space: nowrap
     height: 7.5em; margin: 3em 0; text-align: center; @include opacity(0);
     h2, h3, .h3 { color: $color-brown; }
     h2 { font-weight: bold; text-transform: uppercase; line-height: 1.2em; }
-    .h3 { text-transform: none; }
+    .ui-dropdown, .ui-radio, input[type=submit] { font-size: 1.6em }
 
     tr:nth-child(2) td { text-align: center; }
 

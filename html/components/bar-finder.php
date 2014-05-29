@@ -7,29 +7,57 @@
 
             <a class="finder-close"></a>
 
-            <table>
-                <tr>
-                    <td rowspan="2">
-                        <h2>Find Your<br/>Best Bar</h2>
-                    </td>
-                    <td><h3>City</h3></td>
-                    <td></td>
-                    <td><h3>To go out with</h3></td>
-                    <td></td>
-                    <td colspan="3"><h3>Mood</h3></td>
-                    <td></td>
-                </tr>
-                <tr class="h3">
-                    <td><a class="btn-radius with-icon border brown place" href="">Choose a city</a></td>
-                    <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
-                    <td><a class="btn-radius with-icon border brown friend" href="">Friends</a></td>
-                    <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
-                    <td><a class="btn-radius with-icon border brown chillout" href="">Chillout</a></td>
-                    <td><a class="btn-radius with-icon border brown casual" href="">Casual</a></td>
-                    <td><a class="btn-radius with-icon border brown party active" href="">Party</a></td>
-                    <td><a class="btn-radius border brown go" href="">Go</a></td>
-                </tr>
-            </table>
+            <form action="http://jerome.int/Pr0d/World%20Best%20Bar/Web/components.php" method="get">
+                <table>
+                    <tr>
+                        <td rowspan="2">
+                            <h2>Find Your<br/>Best Bar</h2>
+                        </td>
+                        <td><h3>City</h3></td>
+                        <td></td>
+                        <td><h3>To go out with</h3></td>
+                        <td></td>
+                        <td colspan="3"><h3>Mood</h3></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="ui-dropdown dark" name="city">
+                                <option disabled="disabled">Choose a city</option>
+                                <option>City 2</option>
+                                <option>City 3</option>
+                                <option>City 4</option>
+                                <option>City 5</option>
+                                <option>City 6</option>
+                            </select>
+                        </td>
+                        <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
+                        <td>
+                            <select class="ui-dropdown dark" name="go_out">
+                                <option disabled="disabled">Friend...</option>
+                                <option>City 2</option>
+                                <option>City 3</option>
+                                <option>City 4</option>
+                                <option>City 5</option>
+                                <option>City 6</option>
+                            </select>
+                        </td>
+                        <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
+                        <td>
+                            <input type="radio" name="mood" value="chillout" class="ui-radio checked dark" data-color="brown"/>
+                        <td>
+                            <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
+                        </td>
+                        <td>
+                            <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
+                        </td>
+                        <td>
+                            <input type="submit" class="btn-radius border brown go" value="Go"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
         </div>
 
     </div>

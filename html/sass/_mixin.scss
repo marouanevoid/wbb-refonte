@@ -1,0 +1,12 @@
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
+
+@mixin prefix($key, $value ) {
+  -webkit-#{$key}: $value;
+  -moz-#{$key}: $value;
+  #{$key}: $value;
+}
