@@ -103,31 +103,35 @@ class CityAdmin extends Admin
 
     public function prePersist($object)
     {
+        $object->upload();
+
         foreach ($object->getSuburbs() as $suburb) {
             $suburb->setCity($object);
         }
-
-//        foreach ($object->getBestofs() as $bestof) {
-//            $bestof->setCity($object);
-//        }
-
-//        foreach ($object->getTags() as $tag) {
-//            $tag->setCity($object);
-//        }
     }
 
     public function preUpdate($object)
     {
+        $object->upload();
+
         foreach ($object->getSuburbs() as $suburb) {
             $suburb->setCity($object);
         }
+    }
 
-//        foreach ($object->getBestofs() as $bestof) {
-//            $bestof->setCity($object);
-//        }
+    /**
+     * {@inheritdoc}
+     */
+    public function postUpdate($object)
+    {
+        $object->upload();
+    }
 
-//        foreach ($object->getTags() as $tag) {
-//            $tag->setCity($object);
-//        }
+    /**
+     * {@inheritdoc}
+     */
+    public function postRemove($object)
+    {
+        $object->removeUpload();
     }
 }
