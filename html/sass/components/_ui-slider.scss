@@ -29,6 +29,7 @@
       &.instagram span{ background-image: url("../images/icons/pin.instagram.png") }
       &.foursquare span{ background-image: url("../images/icons/pin.foursquare.png") }
     }
+    .arrows a.left { border-right: 1px solid $color-brown; }
   }
 
   &.type-bar{

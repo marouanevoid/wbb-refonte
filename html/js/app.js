@@ -143,7 +143,7 @@ meta.App = function() {
 
 $(document).ready(function()
 {
-    meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
-    meta.App();
+    new meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
+    new meta.App();
 });
 

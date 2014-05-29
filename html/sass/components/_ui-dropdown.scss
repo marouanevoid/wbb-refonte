@@ -1,0 +1,61 @@
+.ui-dropdown-container
+{
+  position: relative;
+  &.dropdown-open
+  {
+    .ui-dropdown{ position: absolute; z-index: 999; left: 0; top: 0 }
+    .ui-dropdown-placeholder{ display: block }
+
+    .ui-dropdown.drop-dark {
+      background: $color-light-gray; color: $color-subtle-yellow; border-color:$color-light-gray;
+      span:before { opacity: 1 }
+    }
+  }
+
+  .ui-dropdown-placeholder{ display: none }
+
+  select{ display: none }
+
+  .ui-dropdown {
+    width: 100%; box-sizing: border-box; padding-top:0; padding-bottom: 0; cursor: pointer; border-radius: 20px; background: #fff;
+    span{
+      display: block; height:34px; line-height:34px; position:relative; text-align: left; padding-right: 30px; white-space: nowrap;
+      &:after,&:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -160px 0; position: absolute; top: 0; right: -10px; width: 40px; height: 40px }
+      &:before{ background-position: -160px -40px; opacity: 0 }
+    }
+    .choice { width: 100%; display: none;  z-index: 100; box-sizing: border-box; text-align: left; font-size: 90%;
+      ul { padding: 0.6em 0; max-height: 100px; overflow-y: scroll; margin-bottom: 1.2em; overflow-x: hidden;
+        li {
+          padding-bottom: 1em; @include transition( color 0.2s ease-in-out);
+          &:last-child { padding-bottom: 0; }
+        }
+      }
+      ::-webkit-scrollbar { width: 12px; @include border-radius (10px) }
+      ::-webkit-scrollbar-track { @include border-radius (10px) }
+      ::-webkit-scrollbar-thumb { @include border-radius (10px); background: $color-brown }
+    }
+    &.drop-light {
+      color: $color-brown;
+      .choice li:hover{ color:$color-brown-dark }
+      ::-webkit-scrollbar { background: #ddd }
+      ::-webkit-scrollbar-thumb { border: 2px solid #ddd }
+    }
+    &.drop-dark {
+      background: $color-gray; color: $color-brown; border-color:$color-brown;
+      &:hover, &.active { background: $color-light-gray; color: $color-subtle-yellow; border-color:$color-light-gray; }
+      &:hover span:before, &.active span:before { opacity: 1 }
+      .choice li:hover{ color:#fff }
+      span{
+        &:before{ background-position: -160px -40px; z-index: 1; @include transition( opacity 0.2s ease-in-out) }
+      }
+      ::-webkit-scrollbar-track { background: $color-gray }
+      ::-webkit-scrollbar { background-color: $color-gray }
+      ::-webkit-scrollbar-thumb { border: 2px solid $color-gray }
+    }
+  }
+}
+
+html.mobile .ui-dropdown-container
+{
+  select{ position: absolute; left: 0; top: 0; height: 100%; width: 100%; z-index: 10; opacity: 0.01; display: block }
+}
