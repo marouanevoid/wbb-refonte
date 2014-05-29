@@ -26,6 +26,7 @@ security:
                 path:           /admin/logout
                 target:         /admin/login
             anonymous:          true
+            switch_user: true
 
         main:
             pattern: ^/.*
@@ -34,6 +35,7 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            switch_user: true
 
     access_control:
             - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -44,45 +46,189 @@ security:
             - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-            - { path: ^/admin(.*), role: [ROLE_SUPER_ADMIN] }
+            - { path: ^/admin(.*), role: [ROLE_ADMIN] }
 
 
     role_hierarchy:
-        ROLE_SUPER_ADMIN:
-            - ROLE_ADMIN
-            - WBB_BAR_ALL
-            - WBB_CITY_ALL
-        ROLE_MODERATOR:
-            - ROLE_ADMIN
-            - WBB_BAR_ALL
-        ROLE_PUBLISHER:
-            - ROLE_ADMIN
-            - WBB_BAR_ALL
-        ROLE_EDITORIAL_EXPERT:
-        ROLE_BAR_EXPERT:
-            - ROLE_ADMIN
-            - WBB_BAR_ALL
-        ROLE_BAR_OWNER:
-            - ROLE_ADMIN
-            - WBB_BAR_ALL
+
+        #User Roles
         ROLE_ADMIN:
             - ROLE_USER
             - ROLE_SONATA_ADMIN
 
+        ROLE_BAR_OWNER:
+            - ROLE_ADMIN
+            - ROLE_WBB_BAR_ALL
+            - ROLE_WBB_BAR_FS_IMGS
 
+        ROLE_BAR_EXPERT:
+            - ROLE_ADMIN
+            - ROLE_WBB_BAR_ALL
+            - ROLE_WBB_BAR_FS_IMGS
+            - ROLE_WBB_BESTOF_ALL
 
-        WBB_BAR_ALL:
-            - ROLE_WBB_BAR_LIST
-            - ROLE_WBB_BAR_VIEW
-            - ROLE_WBB_BAR_CREATE
-            - ROLE_WBB_BAR_EDIT
-            - ROLE_WBB_BAR_DELETE
-            
-        WBB_CITY_ALL:
-            - ROLE_WBB_BAR_LIST
-            - ROLE_WBB_BAR_VIEW
-            - ROLE_WBB_BAR_CREATE
-            - ROLE_WBB_BAR_EDIT
-            - ROLE_WBB_BAR_DELETE
+        ROLE_EDITORIAL_EXPERT:
+            - ROLE_ADMIN
+            - ROLE_WBB_BESTOF_ALL
+            - ROLE_WBB_NEWS_ALL
 
+        ROLE_PUBLISHER:
+            - ROLE_ADMIN
+            - ROLE_WBB_BAR_ALL
+            - ROLE_BAR_ID
+            - ROLE_WBB_BAR_FS_IMGS
+            - ROLE_WBB_BAR_INSTAGRAM
+            - ROLE_WBB_BESTOF_ALL
+            - ROLE_WBB_BAR_TAG_ALL
+            - ROLE_WBB_TIP_ALL
+            - ROLE_WBB_NEWS_ALL
+            - ROLE_WBB_AD_ALL
 
+        ROLE_MODERATOR:
+            - ROLE_ADMIN
+            - ROLE_WBB_BAR_ALL
+            - ROLE_WBB_BAR_FEED_ALL
+            - ROLE_BAR_ID
+            - ROLE_WBB_BESTOF_ALL
+            - ROLE_WBB_TIP_ALL
+            - ROLE_WBB_USERS_ALL
+
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
+            - ROLE_BAR_ID
+            - ROLE_WBB_BAR_FEED_ALL
+            - ROLE_ALLOWED_TO_SWITCH
+
+        # Roles attributs
+        ROLE_WBB_BAR_ALL:
+            - ROLE_WBB_BAR_ADMIN_BAR_LIST
+            - ROLE_WBB_BAR_ADMIN_BAR_VIEW
+            - ROLE_WBB_BAR_ADMIN_BAR_CREATE
+            - ROLE_WBB_BAR_ADMIN_BAR_EDIT
+            - ROLE_WBB_BAR_ADMIN_BAR_DELETE
+
+        ROLE_WBB_BAR_FEED_ALL:
+            - ROLE_WBB_BAR_FS_TIPS
+            - ROLE_WBB_BAR_FS_IMGS
+            - ROLE_WBB_BAR_INSTAGRAM
+
+        ROLE_LOCATION_ALL:
+            - ROLE_WBB_COUNTRY_ALL
+            - ROLE_WBB_CITY_ALL
+            - ROLE_WBB_CITY_SUBURB_ALL
+
+        ROLE_WBB_COUNTRY_ALL:
+            - ROLE_WBB_CORE_ADMIN_COUNTRY_LIST
+            - ROLE_WBB_CORE_ADMIN_COUNTRY_VIEW
+            - ROLE_WBB_CORE_ADMIN_COUNTRY_CREATE
+            - ROLE_WBB_CORE_ADMIN_COUNTRY_EDIT
+            - ROLE_WBB_CORE_ADMIN_COUNTRY_DELETE
+
+        ROLE_WBB_CITY_ALL:
+            - ROLE_WBB_CORE_ADMIN_CITY_LIST
+            - ROLE_WBB_CORE_ADMIN_CITY_VIEW
+            - ROLE_WBB_CORE_ADMIN_CITY_CREATE
+            - ROLE_WBB_CORE_ADMIN_CITY_EDIT
+            - ROLE_WBB_CORE_ADMIN_CITY_DELETE
+            - ROLE_WBB_CITY_TAG_ALL
+            - ROLE_WBB_CITY_BESTOF_ALL
+
+        ROLE_WBB_CITY_SUBURB_ALL:
+            - ROLE_WBB_CORE_ADMIN_CITY_SUBURB_LIST
+            - ROLE_WBB_CORE_ADMIN_CITY_SUBURB_VIEW
+            - ROLE_WBB_CORE_ADMIN_CITY_SUBURB_CREATE
+            - ROLE_WBB_CORE_ADMIN_CITY_SUBURB_EDIT
+            - ROLE_WBB_CORE_ADMIN_CITY_SUBURB_DELETE
+
+        ROLE_WBB_CITY_TAG_ALL:
+            - ROLE_WBB_CORE_ADMIN_CITY_TAG_LIST
+            - ROLE_WBB_CORE_ADMIN_CITY_TAG_VIEW
+            - ROLE_WBB_CORE_ADMIN_CITY_TAG_CREATE
+            - ROLE_WBB_CORE_ADMIN_CITY_TAG_EDIT
+            - ROLE_WBB_CORE_ADMIN_CITY_TAG_DELETE
+
+        ROLE_WBB_CITY_BESTOF_ALL:
+            - ROLE_WBB_CORE_ADMIN_CITY_BESTOF_LIST
+            - ROLE_WBB_CORE_ADMIN_CITY_BESTOF_VIEW
+            - ROLE_WBB_CORE_ADMIN_CITY_BESTOF_CREATE
+            - ROLE_WBB_CORE_ADMIN_CITY_BESTOF_EDIT
+            - ROLE_WBB_CORE_ADMIN_CITY_BESTOF_DELETE
+
+        ROLE_WBB_BAR_MEDIA_ALL:
+            - ROLE_WBB_BAR_ADMIN_BAR_MEDIA_LIST
+            - ROLE_WBB_BAR_ADMIN_BAR_MEDIA_VIEW
+            - ROLE_WBB_BAR_ADMIN_BAR_MEDIA_CREATE
+            - ROLE_WBB_BAR_ADMIN_BAR_MEDIA_EDIT
+            - ROLE_WBB_BAR_ADMIN_BAR_MEDIA_DELETE
+
+        ROLE_WBB_BAR_TAG_ALL:
+            - ROLE_WBB_BAR_ADMIN_BAR_TAG_LIST
+            - ROLE_WBB_BAR_ADMIN_BAR_TAG_VIEW
+            - ROLE_WBB_BAR_ADMIN_BAR_TAG_CREATE
+            - ROLE_WBB_BAR_ADMIN_BAR_TAG_EDIT
+            - ROLE_WBB_BAR_ADMIN_BAR_TAG_DELETE
+
+        ROLE_WBB_BAR_OPENING_ALL:
+            - ROLE_WBB_BAR_ADMIN_BAR_OPENING_LIST
+            - ROLE_WBB_BAR_ADMIN_BAR_OPENING_VIEW
+            - ROLE_WBB_BAR_ADMIN_BAR_OPENING_CREATE
+            - ROLE_WBB_BAR_ADMIN_BAR_OPENING_EDIT
+            - ROLE_WBB_BAR_ADMIN_BAR_OPENING_DELETE
+
+        ROLE_WBB_TAG_ALL:
+            - ROLE_WBB_BAR_ADMIN_TAG_LIST
+            - ROLE_WBB_BAR_ADMIN_TAG_VIEW
+            - ROLE_WBB_BAR_ADMIN_TAG_CREATE
+            - ROLE_WBB_BAR_ADMIN_TAG_EDIT
+            - ROLE_WBB_BAR_ADMIN_TAG_DELETE
+
+        ROLE_WBB_BESTOF_ALL:
+            - ROLE_WBB_BAR_ADMIN_BESTOF_LIST
+            - ROLE_WBB_BAR_ADMIN_BESTOF_VIEW
+            - ROLE_WBB_BAR_ADMIN_BESTOF_CREATE
+            - ROLE_WBB_BAR_ADMIN_BESTOF_EDIT
+            - ROLE_WBB_BAR_ADMIN_BESTOF_DELETE
+            - ROLE_WBB_BESTOF_TAG_ALL
+
+        ROLE_WBB_BESTOF_TAG_ALL:
+            - ROLE_WBB_BAR_ADMIN_BESTOF_TAG_LIST
+            - ROLE_WBB_BAR_ADMIN_BESTOF_TAG_VIEW
+            - ROLE_WBB_BAR_ADMIN_BESTOF_TAG_CREATE
+            - ROLE_WBB_BAR_ADMIN_BESTOF_TAG_EDIT
+            - ROLE_WBB_BAR_ADMIN_BESTOF_TAG_DELETE
+
+        ROLE_WBB_TIP_ALL:
+            - ROLE_WBB_BAR_ADMIN_TIP_LIST
+            - ROLE_WBB_BAR_ADMIN_TIP_VIEW
+            - ROLE_WBB_BAR_ADMIN_TIP_CREATE
+            - ROLE_WBB_BAR_ADMIN_TIP_EDIT
+            - ROLE_WBB_BAR_ADMIN_TIP_DELETE
+
+        ROLE_WBB_AD_ALL:
+            - ROLE_WBB_BAR_ADMIN_AD_LIST
+            - ROLE_WBB_BAR_ADMIN_AD_VIEW
+            - ROLE_WBB_BAR_ADMIN_AD_CREATE
+            - ROLE_WBB_BAR_ADMIN_AD_EDIT
+            - ROLE_WBB_BAR_ADMIN_AD_DELETE
+
+        ROLE_WBB_NEWS_ALL:
+            - ROLE_WBB_BAR_ADMIN_NEWS_LIST
+            - ROLE_WBB_BAR_ADMIN_NEWS_VIEW
+            - ROLE_WBB_BAR_ADMIN_NEWS_CREATE
+            - ROLE_WBB_BAR_ADMIN_NEWS_EDIT
+            - ROLE_WBB_BAR_ADMIN_NEWS_DELETE
+            - ROLE_WBB_NEWS_MEDIA_ALL
+
+        ROLE_WBB_NEWS_MEDIA_ALL:
+            - ROLE_WBB_BAR_ADMIN_NEWS_MEDIA_LIST
+            - ROLE_WBB_BAR_ADMIN_NEWS_MEDIA_VIEW
+            - ROLE_WBB_BAR_ADMIN_NEWS_MEDIA_CREATE
+            - ROLE_WBB_BAR_ADMIN_NEWS_MEDIA_EDIT
+            - ROLE_WBB_BAR_ADMIN_NEWS_MEDIA_DELETE
+
+        ROLE_WBB_USERS_ALL:
+            - ROLE_WBB_USER_ADMIN_USER_LIST
+            - ROLE_WBB_USER_ADMIN_USER_VIEW
+            - ROLE_WBB_USER_ADMIN_USER_CREATE
+            - ROLE_WBB_USER_ADMIN_USER_EDIT
+            - ROLE_WBB_USER_ADMIN_USER_DELETE
