@@ -71,7 +71,7 @@
                                                 }
                                                 html+='</div>';
                                             }
-//$('.ui-slide>div:nth-child(4n)').after('</div><div class="ui-slide">');
+                                            //$('.ui-slide>div:nth-child(4n)').after('</div><div class="ui-slide">');
                                             $(".loader").css('display','none');
                                             $('.ui-slider').append(html);
                                             initializeSliders();
@@ -212,12 +212,12 @@
                                 {% endif %}
                             {% endfor%}
                             <a href="#0" id="showOpenings">(See all)</a><br/>
-<span class="openings" style="display: none">
-{% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
-    {% for opening in bar.openings %}
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : {{ opening.fromHour }}:00 - {{ opening.toHour }}:00<br />
-    {% endfor%}
-</span>
+                            <span class="openings" style="display: none">
+                            {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+                                {% for opening in bar.openings %}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : {{ opening.fromHour }}:00 - {{ opening.toHour }}:00<br />
+                                {% endfor%}
+                            </span>
                             Accepts Credit Cards: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                             Parking: {{ bar.parking }}<br/>
