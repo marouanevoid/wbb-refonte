@@ -108,11 +108,11 @@
     <section class="container sub-header">
         <div class="three columns vcenter city-selector h4">
             You are in
-            <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name }}</a>
+            <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name|default('Unspecified') }}</a>
         </div>
         <div class="six columns title vcenter">
             <h1>{{ bar.name }}</h1>
-            <h3>{{ bar.suburb.name }}, {{ bar.city.name }}</h3>
+            <h3>{{ bar.suburb.name|default('Unspecified') }}, {{ bar.city.name|default('Unspecified') }}</h3>
         </div>
         <div class="three columns star-share vcenter">
             <a class="btn-round brown star" href=""></a>
