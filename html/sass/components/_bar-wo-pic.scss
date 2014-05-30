@@ -2,7 +2,7 @@ article.bar-wo-pic {
   height: 12em; background-color: $color-cream; margin-top: 1.5em; position: relative;
 
   .btn-round {
-    z-index: 21; position: absolute; right: 1em; top: 1em; border: 0;
+    z-index: 25; position: absolute; right: 1em; top: 1em; border: 0;
     &.star{
       background: none;
       &:before{ background-position: -200px -80px }

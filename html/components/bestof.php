@@ -9,6 +9,7 @@
         </div>
     </div>
 
-    <img class="scale-with-grid" src="tmp/bar.berry-park.png" alt="bar.berry-park" width="570" height="428"/>
+    <img class="scale-with-grid" src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
+    <a href="" class="overlay-link"></a>
 
 </article>

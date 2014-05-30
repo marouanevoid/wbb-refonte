@@ -7,4 +7,6 @@
         <h3>Lower Manhattan, New York</h3>
     </div>
 
+    <a href="bar-details.php" class="overlay-link"></a>
+
 </article>

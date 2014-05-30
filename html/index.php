@@ -37,27 +37,13 @@
     <div class="container full">
 
         <section class="bars">
-            <div class="ui-slider type-bar has_sizer arrows infinite dots" data-size="<?php if(!$is_mobile): ?>12x3<?php else: ?>4x3<?php endif ?>">
+            <div class="ui-slider type-bar has_sizer arrows infinite dots" data-size="<?php if(!$is_mobile): ?>12x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
 
-                <?php for($i=1; $i<3; $i++): ?>
+                <?php for($i=1; $i<7; $i++): ?>
 
-                    <?php if(!$is_mobile): ?>
-
-                        <div class="ui-slide">
-                            <?php for($j=1; $j<4; $j++) : ?>
-                                <?php include('components/bar-w-pic.php') ?>
-                            <?php endfor ?>
-                        </div>
-
-                    <?php else: ?>
-
-                        <?php for($j=1; $j<4; $j++) : ?>
-                            <div class="ui-slide">
-                                <?php include('components/bar-w-pic.php') ?>
-                            </div>
-                        <?php endfor ?>
-
-                    <?php endif; ?>
+                    <div class="ui-slide">
+                        <?php include('components/bar-w-pic.php') ?>
+                    </div>
 
                 <?php endfor ?>
             </div>
@@ -76,17 +62,12 @@
             </div>
 
             <div class="twelve columns">
-                <div class="ui-slider type-cities has_sizer arrows infinite" data-size="<?php if(!$is_mobile): ?>1x6<?php else: ?>8x3<?php endif ?>">
+                <div class="ui-slider type-cities has_sizer arrows infinite" data-size="<?php if(!$is_mobile): ?>1x6<?php else: ?>8x3<?php endif ?>" data-display="<?=$is_mobile?3:6?>">
 
-                    <?php for($i=1; $i<3; $i++): ?>
+                    <?php for($i=1; $i<10; $i++): ?>
 
                         <div class="ui-slide">
-
-                            <?php for($j=1; $j<($is_mobile?4:7); $j++) : ?>
-
-                                <?php include('components/city.php') ?>
-
-                            <?php endfor ?>
+                            <?php include('components/city.php') ?>
                         </div>
 
                     <?php endfor ?>
@@ -106,27 +87,13 @@
                 <h1>Latest Best Of</h1>
             </div>
 
-            <div class="ui-slider type-bestof has_sizer arrows infinite" data-size="<?php if(!$is_mobile): ?>3x3<?php else: ?>4x3<?php endif ?>">
+            <div class="ui-slider type-bestof has_sizer arrows infinite" data-size="<?php if(!$is_mobile): ?>3x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
 
-                <?php for($i=1; $i<3; $i++): ?>
-
-                    <?php if(!$is_mobile): ?>
+                <?php for($i=1; $i<7; $i++): ?>
 
                         <div class="ui-slide">
-                            <?php for($j=1; $j<4; $j++) : ?>
-                                <?php include('components/bestof.php') ?>
-                            <?php endfor ?>
+                            <?php include('components/bestof.php') ?>
                         </div>
-
-                    <?php else: ?>
-
-                        <?php for($j=1; $j<4; $j++) : ?>
-                            <div class="ui-slide">
-                                <?php include('components/bestof.php') ?>
-                            </div>
-                        <?php endfor ?>
-
-                    <?php endif; ?>
 
                 <?php endfor ?>
 
