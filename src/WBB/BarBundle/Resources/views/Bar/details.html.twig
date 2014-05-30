@@ -134,13 +134,15 @@
         <div class="ui-slider type-bar has_sizer arrows infinite" data-size="4x3">
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
             <div class="ui-slide" style="display:none">
-                {% for m in bar.medias|slice(1,50) %}
+                {% for m in bar.medias %}
+                    {% if not loop.first %}
                     <div class="image">
                         <div class="content">
                             <div class="overlay"></div>
                             <img src="{% path m.media, 'slider_small' %}"/>
                         </div>
                     </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -197,7 +199,7 @@
                             {{ bar.address }}<br/>
                             {{ bar.city }}<br/>
                             {{ bar.phone }}<br/>
-                            <a href="">info@macaonyc.com</a>
+                            <a href="mailto:{{ bar.email }}">{{ bar.email }}</a>
                             <br/>
                             {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank"></a>{% endif %}
                             {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
