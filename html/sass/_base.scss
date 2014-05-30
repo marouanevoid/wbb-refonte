@@ -55,7 +55,6 @@
 /* More
 --------------------------------------------------- */
     .more{ display: none }
-    .more+br{ display: none }
 
 
 /* Text Align
@@ -201,6 +200,7 @@
       font-weight: normal;
       font-size: 13px;
       color: #444; }
+    input[type="submit"], input[type="button"]{ -webkit-appearance:none }
 
 
 /* Links

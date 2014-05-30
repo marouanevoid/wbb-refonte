@@ -7,7 +7,7 @@
 
             <a class="finder-close"></a>
 
-            <form action="http://jerome.int/Pr0d/World%20Best%20Bar/Web/components.php" method="get">
+            <form>
                 <table>
                     <tr>
                         <td rowspan="2">
@@ -24,11 +24,11 @@
                         <td>
                             <select class="ui-dropdown dark" name="city">
                                 <option disabled="disabled">Choose a city</option>
-                                <option>City 2</option>
-                                <option>City 3</option>
-                                <option>City 4</option>
-                                <option>City 5</option>
-                                <option>City 6</option>
+                                <option value="cty2">City 2</option>
+                                <option value="cty3">City 3</option>
+                                <option value="cty4">City 4</option>
+                                <option value="cty5">City 5</option>
+                                <option value="cty6">City 6</option>
                             </select>
                         </td>
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
