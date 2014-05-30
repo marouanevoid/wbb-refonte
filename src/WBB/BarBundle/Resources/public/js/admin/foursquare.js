@@ -60,9 +60,9 @@ function foursquareTips() {
             loader.show();
             //feed/remove/{type}/{hash}/{bar}
             if($(this).is(':checked')){
-                act = 'wbb_bar_feed_add';
-            }else{
                 act = 'wbb_bar_feed_remove';
+            }else{
+                act = 'wbb_bar_feed_add';
             }
             $.ajax({
                 type: "GET",
@@ -101,9 +101,9 @@ function foursquareTips() {
                         var template = null;
                         $.each(response.data, function(key, feed){
                             var tipsHtml = $("#tips").html();
-                            var checked = "";
+                            var checked = "checked";
                             if(in_array(feed.id, r)) {
-                                checked = "checked";
+                                checked = "";
                             }
                             template = tipsHtml.format(
                                 feed.id, feed.text, feed.likes.count, feed.user.firstName, feed.user.photo.prefix+'40x40'+feed.user.photo.suffix, checked
@@ -262,9 +262,9 @@ function instagramImages() {
             loader.show();
             //feed/remove/{type}/{hash}/{bar}
             if($(this).is(':checked')){
-                act = 'wbb_bar_feed_add';
-            }else{
                 act = 'wbb_bar_feed_remove';
+            }else{
+                act = 'wbb_bar_feed_add';
             }
             $.ajax({
                 type: "GET",
@@ -303,9 +303,9 @@ function instagramImages() {
                         var template = null;
                         $.each(response.data.data, function(key, feed){
                             var imgsHtml = $("#instimgs").html();
-                            var checked = "";
+                            var checked = "checked";
                             if(in_array(feed.id, r)) {
-                                checked = "checked";
+                                checked = "";
                             }
                             template = imgsHtml.format(
                                 feed.id, feed.images.low_resolution.url, checked
