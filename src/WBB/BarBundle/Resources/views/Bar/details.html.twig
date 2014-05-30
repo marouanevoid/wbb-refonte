@@ -39,7 +39,6 @@
                                     i++;
                                 }
                             });
-
                             $.ajax({
                                 type: "POST",
                                 url:  Routing.generate('wbb_bar_feeds_list',
@@ -72,7 +71,7 @@
                                                 }
                                                 html+='</div>';
                                             }
-                                            //$('.ui-slide>div:nth-child(4n)').after('</div><div class="ui-slide">');
+//$('.ui-slide>div:nth-child(4n)').after('</div><div class="ui-slide">');
                                             $(".loader").css('display','none');
                                             $('.ui-slider').append(html);
                                             initializeSliders();
@@ -107,26 +106,21 @@
 {% block body %}
     <!-- SUBHEADER -->
     <section class="container sub-header">
-
         <div class="three columns vcenter city-selector h4">
             You are in
             <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name }}</a>
         </div>
-
         <div class="six columns title vcenter">
             <h1>{{ bar.name }}</h1>
             <h3>{{ bar.suburb.name }}, {{ bar.city.name }}</h3>
         </div>
-
         <div class="three columns star-share vcenter">
             <a class="btn-round brown star" href=""></a>
             <a class="btn-round brown share" href=""></a>
         </div>
-
     </section>
     <!-- SLIDER -->
     <div class="container full gallery">
-
         <div class="main">
             <div class="image">
                 <div class="content">
@@ -137,7 +131,6 @@
                 </div>
             </div>
         </div>
-
         <div class="ui-slider type-bar has_sizer arrows infinite" data-size="4x3">
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
             <div class="ui-slide" style="display:none">
@@ -150,28 +143,21 @@
                     </div>
                 {% endfor %}
             </div>
-
         </div>
     </div>
-
-
     <section class="container">
         <!-- MAIN CONTENT -->
         <article class="main">
-
             <div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>
-
             <div class="eight columns l-margin-top">
-
                 <p>
                     <strong>At a Glance: </strong>
-                    {% for tr in bar.trends %}
-                    {{ tr.trend }}{% if not loop.last %} ∙ {% endif %}
+                    {% for tr in bar.tags %}
+                    {{ tr.tag }}{% if not loop.last %} ∙ {% endif %}
                     {% endfor%}<br/>
                     <br/>
                     {{ bar.description }}
                 </p>
-
                 <!-- ALSO APPEARS -->
                 <div class="also-appears">
                     <hr class="l-margin"/>
@@ -194,22 +180,19 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>                    </div>
+                    </div>
+                </div>
             </div>
-
             <!-- ASIDE -->
             <aside class="columns four">
-
                 <div class="block informations">
                     <div class="contain">
-
                         <div class="gmap">
                             <div class="get-directions h4">
                                 <a href="http://maps.google.com/maps?q={{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a>
                             </div>
                             <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ bar.latitude }},{{ bar.longitude }}&zoom=16&size=660x240&maptype=roadmap&sensor=false"/>
                         </div>
-
                         <p>
                             {{ bar.address }}<br/>
                             {{ bar.city }}<br/>
@@ -220,9 +203,7 @@
                             {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
                             {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook" target="_blank"></a>{% endif %}
                         </p>
-
                         <hr class="s-margin"/>
-
                         <p>
                             Hours: Today
                             {% for opening in bar.openings %}
@@ -231,12 +212,12 @@
                                 {% endif %}
                             {% endfor%}
                             <a href="#0" id="showOpenings">(See all)</a><br/>
-                            <span class="openings" style="display: none">
-                                {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
-                                {% for opening in bar.openings %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : {{ opening.fromHour }}:00 - {{ opening.toHour }}:00<br />
-                                {% endfor%}
-                            </span>
+<span class="openings" style="display: none">
+{% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+    {% for opening in bar.openings %}
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : {{ opening.fromHour }}:00 - {{ opening.toHour }}:00<br />
+    {% endfor%}
+</span>
                             Accepts Credit Cards: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                             Parking: {{ bar.parking }}<br/>
@@ -246,27 +227,21 @@
                         </p>
                     </div>
                 </div>
-
                 <div class="block side-ad m-margin-top">
                     <img src="{{ asset('/bundles/wbbcore/images/tmp/ad.side.jameson.png') }}" alt="ad.jameson" width="300" height="250"/>
                     <div class="txt">Advertising</div>
                 </div>
             </aside>
-
         </article>
     </section>
 
     <!-- INSIDER TIPS -->
     <section class="insider-tips m-margin-top">
-
         <div class="container load-container">
-
             <div class="twelve columns align-center l-margin-top m-margin-bottom h1">
                 Insider Tips
             </div>
-
             <div class="line">
-
                 <div class="three columns box">
                     <article class="tip">
                         <div class="content form">
@@ -278,26 +253,22 @@
                             </form>
                             <br class="clear"/>
                         </div>
-                    </article>                </div>
-
+                    </article>
+                </div>
                 <div class="six columns box">
                     <article class="tip">
-
                         <table class="content expert">
-
                             <tr class="excerpt">
                                 <td colspan="2">
                                     “NY. This Portuguese/ Chinese fusion restaurant offers an exciting
                                     blend of exotic dishes that make dining at Macao a unique experience.”
                                 </td>
                             </tr>
-
                             <tr>
                                 <td colspan="2">
                                     <hr class="s-margin-bottom"/>
                                 </td>
                             </tr>
-
                             <tr class="author">
                                 <td>
                                     <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
@@ -309,12 +280,9 @@
                         </table>
                     </article>
                 </div>
-
                 <div class="three columns box">
                     <article class="tip">
-
                         <table class="content ">
-
                             <tr class="excerpt">
                                 <td colspan="2">
                                     <img src="{{ asset('/bundles/wbbcore/images/icons/pin.foursquare-blue.png') }}" alt="icon.foursquare" width="30" height="30"/><br/>
@@ -322,13 +290,11 @@
                                     blend of exotic dishes that make dining at Macao a unique experience.”
                                 </td>
                             </tr>
-
                             <tr>
                                 <td colspan="2">
                                     <hr class="s-margin-bottom"/>
                                 </td>
                             </tr>
-
                             <tr class="author">
                                 <td>
                                     <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
@@ -340,71 +306,50 @@
                         </table>
                     </article>
                 </div>
-
             </div>
-
             <div class="line load-target"></div>
-
-
             <div class="twelve columns align-center m-margin">
                 <a class="btn-radius border load-more brown" href="{{ asset('/bundles/wbbcore/images/tmp/data/tips.php') }}">Load More</a>
             </div>
-
         </div>
-
     </section>
     <!-- ALSO APPEARS -->
-
     <!-- ALSO LIKE -->
     <section class="also-like">
-
         <div class="container m-padding-bottom">
-
             <div class="h1 twelve columns align-center l-margin-top m-margin-bottom">
                 You May Also Like
             </div>
-
             {% for b in barLike %}
                 <div class="three columns">
                     <article class="bar">
-
                         <a href="" class="btn-round dark star"></a>
-
                         <div class="txt">
                             <h2>{{ b.name }}</h2>
                             <h3>{{ b.suburb.name }}, {{ b.city.name }}</h3>
                             <div class="tags">
-                                {% for tr in b.trends %}
-                                    {{ tr.trend }}{% if not loop.last %}, {% endif %}
+                                {% for tr in b.tags %}
+                                    {{ tr.tag }}{% if not loop.last %}, {% endif %}
                                 {% endfor%}
                             </div>
                         </div>
-
                         <div class="gradient"></div>
                         {% for m in b.medias|slice(0,1) %}
                             <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
                         {% endfor %}
-                    </article>            </div>
+                    </article>
+                </div>
             {% endfor %}
-
         </div>
-
     </section>
     <!-- AD -->
     <section class="footer-ad">
-
         <div class="container align-center">
-
             <div class="twelve columns">
-
                 <hr/>
-
                 <img class="m-margin scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/ad.pre-footer.chivas.png') }}" alt="ad.chivas" width="728" height="90"/>
-
             </div>
-
         </div>
-
     </section>
 {% endblock %}
 
