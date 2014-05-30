@@ -470,15 +470,15 @@
             <!-- bars -->
             <trans-unit id="form.label_bars">
                 <source>form.label_bars</source>
-                <target>Related bars</target>
+                <target>Link to bar</target>
             </trans-unit>
             <trans-unit id="list.label_bars">
                 <source>list.label_bars</source>
-                <target>Related bars</target>
+                <target>Link to bar</target>
             </trans-unit>
             <trans-unit id="filter.label_bars">
                 <source>filter.label_bars</source>
-                <target>Related bars</target>
+                <target>Link to bar</target>
             </trans-unit>
             <!-- cities -->
             <trans-unit id="form.label_cities">
