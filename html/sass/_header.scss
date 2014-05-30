@@ -10,24 +10,46 @@
     }
 
     header.desktop {
+
       .logo {
         border-right: 1px solid grey;
         a { text-decoration: none }
         img{ margin-right: 5em; display: block; width: 15.8em; height: auto; background: url("../images/logo.png") no-repeat center; background-size: 100% 100% }
       }
 
-      .twelve.columns{ height: 13em; table{ height: 100% } }
+      .twelve.columns { height: 13em; table{ height: 100% } }
 
-      nav { text-align: left; margin-left: 1em;
-        a { margin-left: 2em; display: inline-block; color: $color-subtle-yellow; }
+      .nav { width: 100%; height: 100%; overflow: hidden;
+        nav {
+          text-align: left; margin-left: 1em; position: relative;
+          a { margin-left: 2em; display: inline-block; color: $color-subtle-yellow; }
+        }
+        form{
+          position: relative; top: -50%; display: none;
+          input[type="text"] {
+            background-color: transparent; border: none; font-size: 3em; height: 100%; padding: 0 5%; width: 90%; font-weight: bold; color: $color-subtle-yellow;
+            &:focus { outline: none; @include box-shadow(none); }
+          }
+        }
       }
 
       .bar-finder {
-        color: $color-subtle-yellow; width: 100%; text-align: right;
-        > img { margin: 0 1em }
-        .finder img{ margin-right: 0.5em }
-        img { vertical-align: middle; }
-        a { color: $color-subtle-yellow; text-transform: none; padding: 0.3em 0 }
+        text-align: right; height: 100%; overflow: hidden;
+        .separator { margin: 0 1em; }
+
+        .search-mode{
+          display: none; position: relative; top: -50%;
+          > *{ vertical-align: middle }
+          .advanced-search { color: $color-brown; &:hover{ color: $color-subtle-yellow } }
+          .btn-round { display: inline-block; }
+        }
+
+        .normal-mode{
+          position: relative;
+          > *{ vertical-align: middle }
+          .finder { color: $color-subtle-yellow; text-transform: none; position: relative; top: 0.1em }
+          .search { color: $color-subtle-yellow; text-transform: none; padding: 0.3em 0; img{ vertical-align: middle } }
+        }
       }
 
       .register {
@@ -36,6 +58,22 @@
         .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em }
         .btn-radius:hover { background-color: $color-subtle-yellow; color: $color-brown }
       }
+
+      .search-result-proposal {
+        position: absolute; background-color: $color-gray; width: 100%; z-index: 50;
+        ul {
+          li {
+            font-size: 1.6em; color: $color-cream; border-bottom: 1px solid $color-dark-gray; @include transition( background 0.2s ease-in-out );
+            &:hover{ background: $color-light-gray; .twelve.columns a{ color: $color-subtle-yellow } }
+            .twelve.columns { height: auto;
+              a { display: block; padding: 1.5em 0; padding-left: 15em;
+                b { color: $color-subtle-yellow; }
+              }
+            }
+          }
+        }
+      }
+
     }
 
     header.mobile {

@@ -6,7 +6,7 @@ article.bar-w-pic {
     h2 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: bold; margin-bottom: 0.5em; }
     h3 { color: $color-cream; text-transform: none; @include transition( margin ease-in-out 0.2s); margin-bottom: 0 }
     .tags{
-      font-size: 1.4em; color: $color-cream; font-weight: bold; padding-left: 2em; padding-top: 0.2em; position: absolute; bottom: 0; left: 0; width: 100%; @include opacity(0); @include transition( opacity ease-in-out 0.2s);
+      font-size: 1.4em; color: $color-cream; padding-left: 2em; padding-top: 0.2em; position: absolute; bottom: 0; left: 0; width: 100%; @include opacity(0); @include transition( opacity ease-in-out 0.2s);
       &:before{ content: ''; display: block; position: absolute; left: 0; top: 50%; width: 16px; height: 16px; margin-top:-6px; background: url("../images/icons/tag.png") center no-repeat; background-size: 100% auto }
     }
   }

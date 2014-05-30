@@ -55,7 +55,6 @@
 /* More
 --------------------------------------------------- */
     .more{ display: none }
-    .more+br{ display: none }
 
 
 /* Text Align
@@ -201,6 +200,7 @@
       font-weight: normal;
       font-size: 13px;
       color: #444; }
+    input[type="submit"], input[type="button"]{ -webkit-appearance:none }
 
 
 /* Links
@@ -266,7 +266,7 @@
   --------------------------------------------------- */
   .btn-radius {
     display: inline-block; padding: 0.8em 1.2em; border-radius: 2em; line-height: 1em; white-space: nowrap;
-    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s);
+    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, border ease-in-out 0.2s);
     &.border { border: 1px solid; }
     &.with-icon{
       position: relative; padding-left: 2.7em; padding-right: 2em;
@@ -278,7 +278,7 @@
   }
 
   .btn-small-radius {
-    display: inline-block; padding: 0.5em 1em; border-radius: 2em; line-height: 1em; @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s);
+    display: inline-block; padding: 0.5em 1em; border-radius: 2em; line-height: 1em; @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, border ease-in-out 0.2s);
     &.border { border: 1px solid; }
   }
 
@@ -289,7 +289,7 @@
   .btn-small-round { display: inline-block; border-radius: 50%; border: 1px solid #000; width: 30px; height: 30px; position: relative }
 
   .btn-small-round, .btn-round, .btn-radius.with-icon {
-    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, opacity 0.2s);
+    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, opacity ease-in-out 0.2s, border ease-in-out 0.2s);
     &:hover:after, &.active:after{ opacity: 1 }
     .active:after{ opacity: 1 }
   }

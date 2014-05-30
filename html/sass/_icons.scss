@@ -40,6 +40,11 @@
     &:after{ display: none }
   }
 
+  &.close{
+    &:before{ background-position: -120px -0px }
+    &:after{ background-position: -120px -40px }
+  }
+
 }
 
 .btn-radius.with-icon{
@@ -89,6 +94,20 @@
     &:hover{ background: #2960a3 }
     &:before{ background-position:-85px -125px }
     &:after{ background-position: -85px -165px }
+  }
+
+  &.instagram{
+    border-color: #818a8c;
+    &:hover{ background: #818a8c }
+    &:before{ background-position:-165px -165px }
+    &:after{ background-position: -165px -205px }
+  }
+
+  &.foursquare{
+    border-color: #209fca;
+    &:hover{ background: #209fca }
+    &:before{ background-position:-125px -125px }
+    &:after{ background-position: -125px -165px }
   }
 }
 

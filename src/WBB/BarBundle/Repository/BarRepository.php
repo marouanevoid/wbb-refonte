@@ -34,14 +34,14 @@ class BarRepository extends EntityRepository
             ->setMaxResults($limit)
         ;
 
-        if($location == BarRepository::BAR_LOCATION_CITY)
+        if($location == BarRepository::BAR_LOCATION_CITY and !is_null($bar->getCity()))
         {
             $qb
                 ->andWhere($qb->expr()->eq($this->getAlias().'.city', ':city'))
                 ->setParameter('city', $bar->getCity());
         }
 
-        if($location == BarRepository::BAR_LOCATION_COUNTRY)
+        if($location == BarRepository::BAR_LOCATION_COUNTRY and !is_null($bar->getCity()) and !is_null($bar->getCity()->getCountry()))
         {
             $qb
                 ->andWhere($qb->expr()->eq('c.country', ':country'))

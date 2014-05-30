@@ -32,7 +32,8 @@
 
             <div class="main">
                 <?php $j = 1 ?>
-                <?php include('components/slider/image.php') ?>
+                <?php //include('components/slider/image.php') ?>
+                <?php include('components/slider/video.php') ?>
             </div>
 
             <div class="ui-slider type-bar-detail has_sizer arrows infinite" data-size="4x3" data-animation="latency">
@@ -79,24 +80,26 @@
                         And most are more than happy to oblige. Macao was a Portuguese colony in China for centuries, which accounts
                         for the unique menu structure and the melding of European and Asian cuisine - many of the appetizers and
                         entrees are offered cooked “Chinese style” or “Portugese style”.
-                        <br/>
-                        <br/>
-                        Meanwhile dishes such as curried chicken and okra turnovers and bacalao fried rice have been created
-                        to complement exotic and rather yummy cocktails such as the Drunken Dragon’s Milk, which combines
-                        green-tea vodka blended with coconut purée, pandan syrup, Chinese five spice bitters and Thai basil,
-                        and Yellow Fever, a concoction of rye, Benedictine and egg white. The décor is also influenced by Macao:
-                        lots of warm wood with a gorgeous glass-backed bar and antique brica- brac scattered.
-                        <br/>
-                        <br/>
-                        Macao was a Portuguese colony in China for centuries, which accounts for the unique menu structure and
-                        the melding of European and Asian cuisine - many of the appetizers and entrees are offered cooked “Chinese style”
-                        or “Portugese style”.
-                        <br/>
-                        <br/>
-                        From the team behind the acclaimed Employees Only and David Waltuck, chef and owner of Chanterelle,
-                        comes a new super-hip Tribeca spot. Taking its inspiration from the brothels and opium dens of old 1930s Macao,
-                        customers are encouraged to leave their inhibitions at the door and “embrace a little dose of erotic abandon”.
-                        And most are more than happy to oblige.
+                        <a class="see-more">Read More</a>
+                        <span class="more">
+                            <br/>
+                            Meanwhile dishes such as curried chicken and okra turnovers and bacalao fried rice have been created
+                            to complement exotic and rather yummy cocktails such as the Drunken Dragon’s Milk, which combines
+                            green-tea vodka blended with coconut purée, pandan syrup, Chinese five spice bitters and Thai basil,
+                            and Yellow Fever, a concoction of rye, Benedictine and egg white. The décor is also influenced by Macao:
+                            lots of warm wood with a gorgeous glass-backed bar and antique brica- brac scattered.
+                            <br/>
+                            <br/>
+                            Macao was a Portuguese colony in China for centuries, which accounts for the unique menu structure and
+                            the melding of European and Asian cuisine - many of the appetizers and entrees are offered cooked “Chinese style”
+                            or “Portugese style”.
+                            <br/>
+                            <br/>
+                            From the team behind the acclaimed Employees Only and David Waltuck, chef and owner of Chanterelle,
+                            comes a new super-hip Tribeca spot. Taking its inspiration from the brothels and opium dens of old 1930s Macao,
+                            customers are encouraged to leave their inhibitions at the door and “embrace a little dose of erotic abandon”.
+                            And most are more than happy to oblige.
+                        </span>
                     </p>
 
                     <!-- ALSO APPEARS -->
@@ -129,6 +132,8 @@
                                 <a href="" class="btn-small-round www brown"></a>
                                 <a href="" class="btn-small-round twitter"></a>
                                 <a href="" class="btn-small-round facebook"></a>
+                                <a href="" class="btn-small-round instagram"></a>
+                                <a href="" class="btn-small-round foursquare"></a>
                             </p>
 
                             <hr class="s-margin"/>

@@ -102,12 +102,6 @@ class BarAdmin extends Admin
                 ->add('name')
                 ->add('city', 'sonata_type_model', array('required' => false))
                 ->add('suburb')
-                ->add('latitude')
-                ->add('longitude')
-                ->add('address')
-                ->add('phone')
-                ->add('email')
-                ->add('website')
                 ->add('onTop')
                 ->add('status', 'choice', array(
                     'required' => false,
@@ -117,13 +111,25 @@ class BarAdmin extends Admin
                         Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
                     )
                 ))
-            ->end()
-            ->with('Social')
-                ->add('foursquare')
-                ->add('twitter')
-                ->add('facebook')
-                ->add('instagram')
-            ->end()
+            ->end();
+
+        if($this->getSecurityContext()->isGranted('ROLE_BAR_ID')){
+            $formMapper
+                ->with('Bar ID')
+                    ->add('latitude', 'hidden')
+                    ->add('longitude', 'hidden')
+                    ->add('address')
+                    ->add('phone')
+                    ->add('email')
+                    ->add('website')
+                    ->add('foursquare')
+                    ->add('twitter')
+                    ->add('facebook')
+                    ->add('instagram')
+                ->end();
+        }
+
+        $formMapper
             ->with('Details')
                 ->add('isCreditCard')
                 ->add('isCoatCheck')
@@ -146,8 +152,13 @@ class BarAdmin extends Admin
                 ))
                 ->add('menu')
                 ->add('isReservation')
-                ->add('reservation')
-                ->add('description')
+                ->add('reservation');
+
+        if($this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
+            $formMapper->add('description');
+        }
+
+        $formMapper
                 ->add('seoDescription', 'textarea', array('required' => false))
             ->end()
             ->with('Medias')

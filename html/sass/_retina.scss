@@ -28,5 +28,19 @@
     }
   }
 
+  section.bar-finder {
+    .finder-close {
+      background-image: url("../images/sprite@2x.png");
+    }
+  }
+
+  .ui-dropdown-container
+  {
+    .ui-dropdown {
+      span{
+        &:after,&:before{ background-image: url('../images/sprite@2x.png') }
+      }
+    }
+  }
 
 }

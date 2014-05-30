@@ -43,7 +43,7 @@ services:
             - [setTranslationDomain, ["WBBBarBundle"]]
             - [setTemplates, [{ edit:"WBBBarBundle:Admin:Bar/edit.html.twig" }]]
 
-    wbb.bar.admin.bar_media:
+    wbb.bar.admin.bar.media:
         class: %wbb_bar.bar_media.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
@@ -51,7 +51,7 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.bar_tag:
+    wbb.bar.admin.bar.tag:
         class: %wbb_bar.bar_tag.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bar_tags, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
@@ -59,7 +59,7 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.bar_opening:
+    wbb.bar.admin.bar.opening:
         class: %wbb_bar.bar_opening.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: openings, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
@@ -83,7 +83,7 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.bestof_tag:
+    wbb.bar.admin.bestof.tag:
         class: %wbb_bar.bestof_tag.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bestof_tag, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
@@ -115,7 +115,7 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.news_media:
+    wbb.bar.admin.news.media:
         class: %wbb_bar.news_media.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: news_medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }

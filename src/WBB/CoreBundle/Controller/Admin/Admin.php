@@ -10,8 +10,6 @@ use Sonata\AdminBundle\Admin\Admin as BaseAdmin;
 
 class Admin extends BaseAdmin
 {
-    private $container;
-
     /**
      * {@inheritdoc}
      */
@@ -41,12 +39,22 @@ class Admin extends BaseAdmin
     }
 
     /**
+     * get Security Context
+     *
+     * @return SecurityContext
+     */
+    public function getSecurityContext()
+    {
+        return $this->getContainer()->get('security.context');
+    }
+
+    /**
      * Get a user from the Security Context
      *
      * @return mixed
      */
     protected function getUser()
     {
-        return $this->getContainer()->get('security.context')->getToken()->getUser();
+        return $this->getSecurityContext()->getToken()->getUser();
     }
 }

@@ -13,18 +13,18 @@
                         </a>
                     </td>
 
-                    <td>
+                    <td class="nav">
                         <?php include('components/header/nav.php') ?>
+                        <form>
+                            <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
+                        </form>
                     </td>
 
                     <td class="bar-finder">
-                        <?php include('components/header/bar-finder-link.php') ?>
 
-                        <img src="images/misc/border.brown.png" alt="border" width="1" height="40"/>
+                        <?php include('components/header/bar-finder-normal.php') ?>
+                        <?php include('components/header/bar-finder-search.php') ?>
 
-                        <a href="" class="search">
-                            <img src="images/icons/search.png" alt="search" width="16" height="16"/>
-                        </a>
                     </td>
 
                     <td>
@@ -34,6 +34,11 @@
             </table>
         </div>
     </div>
+
+    <div class="search-result-proposal"><ul></ul><div>
+
 </header>
+
+
 
 <?php include('components/bar-finder.php') ?>
