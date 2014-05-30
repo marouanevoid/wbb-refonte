@@ -2,15 +2,15 @@
 
     <?php if($has_image): ?>
         <div class="img">
-            <div class="cover">
+            <a href="" class="cover">
                 <img src="tmp/article1.jpg" width="600" height="400" alt="article1"/>
-            </div>
+            </a>
             <a class="plus-btn" href=""></a>
         </div>
     <?php endif ?>
 
     <div class="title vcenter">
-        <h2>The Bar Project From<br/>Ballantine’s</h2>
+        <h2><a href="">The Bar Project From<br/>Ballantine’s</a></h2>
 
         <?php if($has_text):?>
             <p class="m-margin">

@@ -128,12 +128,18 @@ meta.App = function() {
     };
 
 
+    that._setupElements = function()
+    {
+        $('a.overlay-link').append('<img src="'+BASEURL+'images/blank.png"/>');
+    };
+
 
     /**
      *
      */
     that.__construct = function()
     {
+        that._setupElements();
         that._setupEvents();
     };
 
