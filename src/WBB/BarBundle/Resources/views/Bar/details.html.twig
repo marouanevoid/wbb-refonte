@@ -3,72 +3,103 @@
 {% block title %}{{ bar.name }} | World Best Bars{% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript">
-    var barId = "{{ bar.id }}",
-            venue  = "{{ bar.foursquare }}",
-            imgs = [],
-            i, m, n,
-            html="";
-    $(document).ready(function(){
-        $('#showOpenings').click(function(){
-           var link = $(this);
-           $('.openings').toggle();
-            if ($('.openings').is(':visible')) {
-                link.text('(Show less)');
-            } else {
-                link.text('(See all)');
-            }
-        });
-        $.ajax({
-            type: "POST",
-            url:  Routing.generate('wbb_bar_feeds_list',
-                    { type: "fsimgs", bar: barId }),
-            dataType: 'json',
-            success: function(r) {
-                $.ajax({
-                    type: "POST",
-                    url:  Routing.generate('wbb_bar_feeds_find',
-                            { type: "fsimgs", id: venue }),
-                    dataType: 'json',
-                    success: function(response) {
-                        i = 0;
-                        $.each(response.data, function(key, feed){
-                            if(!in_array(feed.id, r) && i<5) {
-                                html +='<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="'+feed.prefix+"640x480"+feed.suffix+'"/></div></div>';
-                                i++;
-                            }
-                        });
-                        $('.ui-slide').append(html);
-                        imgs = $('.image');
-                        $('.ui-slide').remove();
-                        html = "";
-                        for(n=0; n<Math.ceil(imgs.length/4); n++){
-                            html+='<div class="ui-slide">';
-                            for(m=n*4; m<(n+1)*4; m++){
-                                if(imgs[m]){
-                                    html+=nodeToString(imgs[m]);
+    <script type="text/javascript">
+        var barId = "{{ bar.id }}",
+                venue  = "{{ bar.foursquare }}",
+                insta = "{{ bar.instagram }}",
+                imgs = [],
+                i, m, n,
+                html="";
+        $(document).ready(function(){
+            $('#showOpenings').click(function(){
+                var link = $(this);
+                $('.openings').toggle();
+                if ($('.openings').is(':visible')) {
+                    link.text('(Show less)');
+                } else {
+                    link.text('(See all)');
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url:  Routing.generate('wbb_bar_feeds_list',
+                        { type: "fsimgs", bar: barId }),
+                dataType: 'json',
+                success: function(r) {
+                    $.ajax({
+                        type: "POST",
+                        url:  Routing.generate('wbb_bar_feeds_find',
+                                { type: "fsimgs", id: venue }),
+                        dataType: 'json',
+                        success: function(response) {
+                            i = 0;
+                            $.each(response.data, function(key, feed){
+                                if(!in_array(feed.id, r) && i<5) {
+                                    html +='<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="'+feed.prefix+"640x480"+feed.suffix+'"/></div></div>';
+                                    i++;
                                 }
-                            }
-                            html+='</div>';
-                        }
-                        //$('.ui-slide>div:nth-child(4n)').after('</div><div class="ui-slide">');
-                        $(".loader").css('display','none');
-                        $('.ui-slider').append(html);
-                        initializeSliders();
+                            });
 
-                    },
-                    error: function(e) {
-                        console.log(e);
-                        loader.hide();
-                    }
-                });
-            },
-            error: function(e) {
-                console.log(e);
-            }
+                            $.ajax({
+                                type: "POST",
+                                url:  Routing.generate('wbb_bar_feeds_list',
+                                        { type: "instagram", bar: barId}),
+                                dataType: 'json',
+                                success: function(r) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url:  Routing.generate('wbb_bar_feeds_find',
+                                                { type: "instagram", id: insta}),
+                                        dataType: 'json',
+                                        success: function(response) {
+                                            i = 0;
+                                            $.each(response.data.data, function(key, feed){
+                                                if(!in_array(feed.id, r) && i<5) {
+                                                    html +='<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="'+feed.images.standard_resolution.url+'"/></div></div>';
+                                                    i++;
+                                                }
+                                            });
+                                            $('.ui-slide').append(html);
+                                            imgs = $('.image');
+                                            $('.ui-slide').remove();
+                                            html = "";
+                                            for(n=0; n<Math.ceil(imgs.length/4); n++){
+                                                html+='<div class="ui-slide">';
+                                                for(m=n*4; m<(n+1)*4; m++){
+                                                    if(imgs[m]){
+                                                        html+=nodeToString(imgs[m]);
+                                                    }
+                                                }
+                                                html+='</div>';
+                                            }
+                                            //$('.ui-slide>div:nth-child(4n)').after('</div><div class="ui-slide">');
+                                            $(".loader").css('display','none');
+                                            $('.ui-slider').append(html);
+                                            initializeSliders();
+
+                                        },
+                                        error: function(e) {
+                                            console.log(e);
+                                        }
+                                    });
+                                },
+                                error: function(e) {
+                                    console.log(e);
+                                }
+                            });
+
+                        },
+                        error: function(e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
         });
-    });
-</script>
+    </script>
 {% endblock %}
 {% block bodyTag %}
 <body class="bar-details">
@@ -100,9 +131,8 @@
             <div class="image">
                 <div class="content">
                     <div class="overlay"></div>
-                    <a class="btn-round dark"></a>
                     {% for m in bar.medias|slice(0,1) %}
-                        <img src="{% path m.media, 'slider_large' %}"/>
+                        <img src="{% path m.media, 'slider_large' %}" />
                     {% endfor %}
                 </div>
             </div>
@@ -111,15 +141,14 @@
         <div class="ui-slider type-bar has_sizer arrows infinite" data-size="4x3">
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
             <div class="ui-slide" style="display:none">
-                     {% for m in bar.medias|slice(1,50) %}
-                        <div class="image">
-                            <div class="content">
-                                <div class="overlay"></div>
-                                <a class="btn-round dark"></a>
-                                <img src="{% path m.media, 'slider_small' %}"/>
-                            </div>
+                {% for m in bar.medias|slice(1,50) %}
+                    <div class="image">
+                        <div class="content">
+                            <div class="overlay"></div>
+                            <img src="{% path m.media, 'slider_small' %}"/>
                         </div>
-                     {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
 
         </div>
@@ -136,8 +165,8 @@
 
                 <p>
                     <strong>At a Glance: </strong>
-                    {% for tr in bar.tags %}
-                    {{ tr.tag }}{% if not loop.last %} ∙ {% endif %}
+                    {% for tr in bar.trends %}
+                    {{ tr.trend }}{% if not loop.last %} ∙ {% endif %}
                     {% endfor%}<br/>
                     <br/>
                     {{ bar.description }}
@@ -208,11 +237,11 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : {{ opening.fromHour }}:00 - {{ opening.toHour }}:00<br />
                                 {% endfor%}
                             </span>
-                            Accepts Credit Cards: {% if bar.isCreditCard %}yes{% else %}no{% endif %}<br/>
-                            Coat Check: {% if bar.isCoatCheck %}yes{% else %}no{% endif %}<br/>
+                            Accepts Credit Cards: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
+                            Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                             Parking: {{ bar.parking }}<br/>
                             Price: {{ bar.price }}  {% if bar.menu %}<a href="{{ bar.menu }}" target="_blank">(View menu)</a>{% endif %}<br/>
-                            Reservation: {% if bar.isReservation %}yes{% else %}no{% endif %}<br/>
+                            Reservation: {% if bar.isReservation %}Yes{% else %}No{% endif %}<br/>
                             {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
                         </p>
                     </div>
@@ -336,26 +365,26 @@
             </div>
 
             {% for b in barLike %}
-            <div class="three columns">
-                <article class="bar">
+                <div class="three columns">
+                    <article class="bar">
 
-                    <a href="" class="btn-round dark star"></a>
+                        <a href="" class="btn-round dark star"></a>
 
-                    <div class="txt">
-                        <h2>{{ b.name }}</h2>
-                        <h3>{{ b.suburb.name }}, {{ b.city.name }}</h3>
-                        <div class="tags">
-                            {% for tr in b.tags %}
-                                {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                            {% endfor%}
+                        <div class="txt">
+                            <h2>{{ b.name }}</h2>
+                            <h3>{{ b.suburb.name }}, {{ b.city.name }}</h3>
+                            <div class="tags">
+                                {% for tr in b.trends %}
+                                    {{ tr.trend }}{% if not loop.last %}, {% endif %}
+                                {% endfor%}
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="gradient"></div>
-                    {% for m in b.medias|slice(0,1) %}
-                        <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
-                    {% endfor %}
-                </article>            </div>
+                        <div class="gradient"></div>
+                        {% for m in b.medias|slice(0,1) %}
+                            <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                        {% endfor %}
+                    </article>            </div>
             {% endfor %}
 
         </div>

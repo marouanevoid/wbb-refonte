@@ -116,8 +116,8 @@ class BarAdmin extends Admin
         if($this->getSecurityContext()->isGranted('ROLE_BAR_ID')){
             $formMapper
                 ->with('Bar ID')
-                    ->add('latitude')
-                    ->add('longitude')
+                    ->add('latitude', 'hidden')
+                    ->add('longitude', 'hidden')
                     ->add('address')
                     ->add('phone')
                     ->add('email')
