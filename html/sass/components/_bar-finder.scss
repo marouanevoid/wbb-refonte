@@ -8,7 +8,7 @@ section.bar-finder { background-color: #4b4d4e; width: 100%; white-space: nowrap
     background-image: url("../images/sprite.png"); background-size: 256px 512px; background-position: -160px -120px; @include transition( border 0.2s ease-in-out ); border-top: 0 solid $color-medium-gray;
     &:hover{ border-top: 6px solid $color-medium-gray }
   }
-  .go { background-color: $color-brown; color: $color-cream }
+  .go { background-color: $color-brown; color: $color-cream; height: 34px; }
 
   table {
     height: 7.5em; margin: 3em 0; text-align: center; @include opacity(0);

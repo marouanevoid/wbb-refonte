@@ -10,3 +10,17 @@
   -moz-#{$key}: $value;
   #{$key}: $value;
 }
+
+@mixin lightScrollbar()
+{
+  ::-webkit-scrollbar { background: #ddd; width: 12px; @include border-radius (10px) }
+  ::-webkit-scrollbar-track { @include border-radius (10px) }
+  ::-webkit-scrollbar-thumb { border: 2px solid #ddd; @include border-radius (10px); background: $color-brown }
+}
+
+@mixin darkScrollbar()
+{
+  ::-webkit-scrollbar { background: $color-gray; width: 12px; @include border-radius (10px) }
+  ::-webkit-scrollbar-track { background: $color-gray; @include border-radius (10px) }
+  ::-webkit-scrollbar-thumb { border: 2px solid $color-gray; @include border-radius (10px); background: $color-brown }
+}

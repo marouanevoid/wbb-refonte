@@ -35,8 +35,7 @@ meta.Dropdown = function(config){
         that.config = $.extend(that.config, config);
         that._prepareComponent();
 
-        if( !$('html').hasClass('mobile') )
-            that._setupEvents();
+        that._setupEvents();
     };
 
     /* Public */
@@ -69,30 +68,42 @@ meta.Dropdown = function(config){
 
         var $dropdown = that.config.$dropdown_replacement;
 
-        that.config.$dropdown_value.click(function() {
+        if( !$('html').hasClass('mobile') )
+        {
+            that.config.$dropdown_value.click(function() {
 
-            if( $dropdown.hasClass("dropdown-open") ){
+                if( $dropdown.hasClass("dropdown-open") ){
 
-                $dropdown.find('.choice').velocity('slideUp',{ speed: that.config.speed, easing:that.config.easing, complete:function(){
-                    $dropdown.removeClass('dropdown-open')
-                }});
-            }
-            else{
-                that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
-                $dropdown.css({width:$dropdown.width()});
-                $dropdown.addClass('dropdown-open').find('.choice').velocity('slideDown',{ speed: that.config.speed, easing:that.config.easing});
-            }
-        });
+                    $dropdown.find('.choice').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
+                        $dropdown.removeClass('dropdown-open')
+                    }});
+                }
+                else{
+                    that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
+                    $dropdown.css({width:$dropdown.width()});
+                    $dropdown.addClass('dropdown-open').find('.choice').velocity('slideDown', {speed:that.config.speed, easing:that.config.easing});
+                }
+            });
 
-        $dropdown.find('.choice li').click(function(){
+            $dropdown.find('.choice li').click(function(){
 
-            that.config.$dropdown_value.text( $(this).text() );
-            that.config.$dropdown_value.click();
+                that.config.$dropdown_value.text( $(this).text() );
+                that.config.$dropdown_value.click();
 
-            var $options = that.config.$dropdown.find('option');
-            $options.removeAttr('selected');
-            $options.eq( $(this).index() ).attr('selected', 'selected');
-        })
+                var $options = that.config.$dropdown.find('option');
+
+                $options.removeAttr('selected');
+                $options.eq( $(this).index() ).attr('selected', 'selected');
+            });
+        }
+        else
+        {
+            $dropdown.find('select').on('change', function()
+            {
+                $dropdown.css({width : $dropdown.width()});
+                that.config.$dropdown_value.text( $(this).find('option:selected').text() );
+            });
+        }
     };
 
 
@@ -107,11 +118,11 @@ meta.Dropdown = function(config){
         $options.each(function()
         {
             if( !$(this).attr('disabled') )
-                html += "<li>"+$(this).val()+"</li>"
+                html += "<li>"+$(this).text()+"</li>"
         });
 
         html = that.config.template.replace('%options%', html);
-        html = html.replace('%name%', $options.first().val());
+        html = html.replace('%name%', $options.first().text());
         html = html.replace('%color%', 'drop-'+that.config.color);
 
         that.config.$dropdown_replacement = $(html);

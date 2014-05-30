@@ -1,16 +1,21 @@
 article.tip {
 
-  background-color: #fff; height: 250px; position: relative;
+  background-color: #fff; height: 29em; position: relative; @include lightScrollbar();
 
-  .content { position: absolute; left: 8.3%; top: 8.3%; width: 83.4%; height: 83.4%;
+  .content {
+    position: absolute; left: 8.3%; top: 8.3%; width: 83.4%; height: 83.4%;
     h3 { color: $color-brown; }
     h4 { color: $color-medium-gray; }
-    textarea { height: 75px; }
-    .excerpt { font-size: 1.4em; line-height: 130%; text-align: center; height: 100%;
-      td { vertical-align: middle;
+    textarea { height: 9em }
+    .excerpt {
+      font-size: 1.4em; line-height: 130%; text-align: center; height: 100%;
+      td {
+        vertical-align: middle;
         img { margin-bottom: 3%; }
+        .scroll{ max-height: 17em; overflow: auto }
       }
     }
+    &.expert .excerpt td .scroll{ max-height: 12em }
     hr { border-color: #cdd0d1; }
     .author { width: 100%;
       td {
@@ -27,7 +32,6 @@ article.tip {
     input[type=submit]{ float: right }
   }
 
-  .expert .excerpt { font-size: 1.6em; line-height: 150% }
 }
 
 
