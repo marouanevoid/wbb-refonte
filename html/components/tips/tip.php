@@ -4,13 +4,16 @@
 
         <tr class="excerpt">
             <td colspan="2">
+                <div class="scroll">
                 <?php if($is_foursquare): ?>
                     <img src="images/icons/pin.foursquare-blue.png" alt="icon.foursquare" width="30" height="30"/><br/>
                 <?php endif ?>
-                “NY. This Portuguese/ Chinese fusion restaurant offers an exciting
-                blend of exotic dishes that make dining at Macao a unique experience.”
+                “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
+                </div>
             </td>
         </tr>
+
+        <?php if($is_expert): ?>
 
         <tr>
             <td colspan="2">
@@ -24,8 +27,11 @@
             </td>
             <td>
                 <?=$is_expert?'<b>Expert</b>':''?>
-                Ryan Melon, Liquid Relations
+                Ryan Melon
             </td>
         </tr>
+
+        <?php endif ?>
+
     </table>
 </article>

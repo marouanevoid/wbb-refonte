@@ -1,0 +1,13 @@
+.ui-radio
+{
+  padding-top: 0; padding-bottom: 0; height: 34px; line-height: 34px;
+  input{ display:none }
+
+  &.radio-dark:hover {
+    background: $color-light-gray!important; color: $color-subtle-yellow; border-color:$color-light-gray;
+  }
+
+  &.radio-dark.active:hover {
+    border-color:$color-cream;
+  }
+}

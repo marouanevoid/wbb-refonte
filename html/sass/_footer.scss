@@ -22,7 +22,12 @@
 
         .social-icons {
           float: left; height: 100%;
-          a { padding:0 1em; }
+          a { padding:0 1em; @include transition( opacity 0.2s ease-in-out); img{ background-size: 100% 100%; background-position: center; background-repeat: no-repeat} }
+          a:hover { @include opacity(0.5) }
+          .facebook img{ background-image: url("../images/icons/facebook.yellow.png") }
+          .twitter img{ background-image: url("../images/icons/twitter.yellow.png") }
+          .instagram img{ background-image: url("../images/icons/instagram.yellow.png") }
+          .pinterest img{ background-image: url("../images/icons/pinterest.yellow.png") }
         }
 
         .keep-in-touch {

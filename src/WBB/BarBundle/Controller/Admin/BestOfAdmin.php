@@ -25,7 +25,7 @@ class BestOfAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('sponsor', null, array('editable' => true))
-            ->add('byTrend', null, array('editable' => true))
+            ->add('byTag', null, array('editable' => true))
             ->add('onTop', null, array('editable' => true))
             ->add('city', null, array('editable' => true))
             ->add('country', null, array('editable' => true))
@@ -41,7 +41,7 @@ class BestOfAdmin extends Admin
             ->add('id')
             ->add('name')
             ->add('sponsor')
-            ->add('byTrend')
+            ->add('byTag')
             ->add('onTop')
             ->add('city')
             ->add('country')
@@ -88,12 +88,12 @@ class BestOfAdmin extends Admin
                 ->add('sponsor')
                 ->add('sponsorImageFile', 'file', $sponsorImageOptions)
                 ->add('seoDescription')
-                ->add('byTrend')
+                ->add('byTag')
                 ->add('onTop')
                 ->add('ordered')
             ->end()
-            ->with('Trends')
-                ->add('trends', 'sonata_type_collection', array('required' => false),
+            ->with('Tags')
+                ->add('tags', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -121,34 +121,20 @@ class BestOfAdmin extends Admin
      */
     public function validate(ErrorElement $errorElement, $object)
     {
-        if (is_null($object->getImage()) && !is_object($object->getFile()) ) {
-            $errorElement->with('file')->addViolation('file')->end();
-        }
-
-        if (is_null($object->getSponsorImage()) && !is_object($object->getSponsorImageFile()) ) {
-            $errorElement->with('file')->addViolation('file')->end();
-        }
-
         $errorElement->with('file')->assertImage()->end();
+        $errorElement->with('sponsorImageFile')->assertImage()->end();
     }
 
     public function prePersist($object)
-    {   $object->preUpload();
-        $object->preUpload(true);
-
-        foreach ($object->getTrends() as $trend) {
-            $trend->setBestof($object);
-        }
+    {
+        $object->upload();
+        $object->upload(true);
     }
 
     public function preUpdate($object)
     {
-        $object->preUpload();
-        $object->preUpload(true);
-
-        foreach ($object->getTrends() as $trend) {
-            $trend->setBestof($object);
-        }
+        $object->upload();
+        $object->upload(true);
     }
 
     /**

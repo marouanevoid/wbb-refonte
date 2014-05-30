@@ -10,7 +10,7 @@ use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\CoreBundle\Entity\CityBestOf;
-use WBB\CoreBundle\Entity\Collections\CityTrend;
+use WBB\CoreBundle\Entity\Collections\CityTag;
 use WBB\CoreBundle\Entity\Country;
 
 /**
@@ -104,9 +104,9 @@ class City {
     private $news;    
     
     /**
-     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTrend", mappedBy="city", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTag", mappedBy="city", cascade={"all"})
      */
-    private $trends;
+    private $tags;
 
     /**
      * @var \DateTime
@@ -501,36 +501,36 @@ class City {
     }
 
     /**
-     * Add trends
+     * Add tags
      *
-     * @param CityTrend $trends
+     * @param CityTag $tags
      * @return City
      */
-    public function addTrend(CityTrend $trends)
+    public function addTag(CityTag $tags)
     {
-        $this->trends[] = $trends;
+        $this->tags[] = $tags;
 
         return $this;
     }
 
     /**
-     * Remove trends
+     * Remove tags
      *
-     * @param CityTrend $trends
+     * @param CityTag $tags
      */
-    public function removeTrend(CityTrend $trends)
+    public function removeTag(CityTag $tags)
     {
-        $this->trends->removeElement($trends);
+        $this->tags->removeElement($tags);
     }
 
     /**
-     * Get trends
+     * Get tags
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTrends()
+    public function getTags()
     {
-        return $this->trends;
+        return $this->tags;
     }
 
     /**

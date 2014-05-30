@@ -26,12 +26,35 @@
 		border-spacing: 0; }
 
 
+    .entire-content{ width: 100%; overflow: hidden }
+    .entire-content-scrollable{
+      position: relative;
+      //because of compass bug, set manually
+      -webkit-transition: -webkit-transform 0.5s ease-in-out;
+      -moz-transition: -moz-transform 0.5s ease-in-out;
+      -o-transition: -o-transform 0.5s ease-in-out;
+      transition: transform 0.5s ease-in-out }
+
+/* Full Width Container
+--------------------------------------------------- */
+    .full-cream { background-color: $color-cream; width: 100%; }
+
+
 /* Vcenter
 --------------------------------------------------- */
     .table { display: table; width: 100%; height: 100%;
       .td { display: table-cell; width: 100%; height: 100%; vertical-align: middle; }
     }
 
+
+/* Cover
+--------------------------------------------------- */
+    .cover { overflow: hidden; height: 100%; width: 100%; left: 0; top: 0; position: absolute; z-index: -1; }
+    .cover > * { position: relative; }
+
+/* More
+--------------------------------------------------- */
+    .more{ display: none }
 
 
 /* Text Align
@@ -42,6 +65,16 @@
     .align-justify { text-align: justify; }
 
 
+/* Colors
+--------------------------------------------------- */
+    .color-brown          { color: $color-brown; }
+    .color-brown-dark     { color: $color-brown-dark; }
+    .color-subtle-yellow  { color: $color-subtle-yellow; }
+    .color-cream          { color: $color-cream; }
+    .color-dark-gray      { color: $color-dark-gray; }
+    .color-medium-gray    { color: $color-medium-gray; }
+
+
 /* Sizer
 --------------------------------------------------- */
     img.sizer{ width: 100%; height: auto; display: block }
@@ -50,12 +83,13 @@
 /* Basic Styles
 --------------------------------------------------- */
 	body {
-		background: #fff;
-		font: 10px "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		color: $color-medium-gray;
-		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
-		-webkit-text-size-adjust: 100%;
- }
+      overflow-x: hidden;
+      position: relative;
+	  background: #fff;
+	  font: 10px "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	  color: $color-medium-gray;
+	  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+	  -webkit-text-size-adjust: 100%; }
 
 
 /* Form Button
@@ -76,6 +110,7 @@
       text-decoration: none;
       cursor: pointer;
       line-height: normal;
+      outline: none;
       font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
     /* Fix for odd Mozilla border & padding issues */
@@ -94,7 +129,7 @@
       font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; color: $color-dark-gray; margin: 0; padding: 0;
       a { font-weight: inherit; }
     }
-    h1, h2, h3, h4, .h1, .h2, .h3, .h4 { line-height: 1em }
+    h1, h2, h3, h4, .h1, .h2, .h3, .h4 { line-height: 120% }
     p, .p { line-height: 150%; }
 	h1, .h1 { font-size: 3em; text-transform: uppercase; font-weight: bold }
 	h2, .h2 { font-size: 2em; }
@@ -102,7 +137,7 @@
 	h4, .h4 { font-size: 1.4em; }
     p { font-size: 1.6em; }
 
-    aside p { font-size: 1.4em }
+    aside p, aside .p { font-size: 1.4em }
 
     p img { margin: 0; }
 
@@ -165,15 +200,7 @@
       font-weight: normal;
       font-size: 13px;
       color: #444; }
-
-
-@media only screen and (max-width: 479px) {
-
-  /* Display
-  --------------------------------------------------- */
-  .mobile-out { display: none !important; }
-
-}
+    input[type="submit"], input[type="button"]{ -webkit-appearance:none }
 
 
 /* Links
@@ -234,20 +261,24 @@
     .xl-padding            { padding-top: $margin-padding-xl !important; padding-bottom: $margin-padding-xl !important; }
     .xxl-padding           { padding-top: $margin-padding-xxl !important; padding-bottom: $margin-padding-xl !important; }
 
+
   /* Buttons
   --------------------------------------------------- */
   .btn-radius {
-    display: inline-block; margin-left: 1em; padding: 0.8em 1.2em; border-radius: 2em; line-height: 1em; white-space: nowrap;
-    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s);
+    display: inline-block; padding: 0.8em 1.2em; border-radius: 2em; line-height: 1em; white-space: nowrap;
+    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, border ease-in-out 0.2s);
     &.border { border: 1px solid; }
     &.with-icon{
-      padding-right: 2.4em; padding-left: 2.4em; position: relative;
-      &:after, &:before{ width: 16px!important; height: 16px!important; top: 50%!important; margin-top: -8px; left: 1em!important; background-size: 200px 200px!important }
+      position: relative; padding-left: 2.7em; padding-right: 2em;
+      &:after, &:before{
+        position: absolute!important; top: 50%!important; margin-top: -20px; left: 1.2em!important; width: 16px!important;
+        height: 40px!important;
+      }
     }
   }
 
   .btn-small-radius {
-    display: inline-block; padding: 0.5em 1em; border-radius: 2em; line-height: 1em; @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s);
+    display: inline-block; padding: 0.5em 1em; border-radius: 2em; line-height: 1em; @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, border ease-in-out 0.2s);
     &.border { border: 1px solid; }
   }
 
@@ -257,18 +288,26 @@
 
   .btn-small-round { display: inline-block; border-radius: 50%; border: 1px solid #000; width: 30px; height: 30px; position: relative }
 
-  .btn-small-round, .btn-round, .btn-radius.with-icon{
-    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, opacity 0.2s);
+  .btn-small-round, .btn-round, .btn-radius.with-icon {
+    @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, opacity ease-in-out 0.2s, border ease-in-out 0.2s);
+    &:hover:after, &.active:after{ opacity: 1 }
+    .active:after{ opacity: 1 }
+  }
+  .btn-small-round, .btn-round, .btn-radius.with-icon {
     &:after, &:before{
       position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: url("../images/sprite.png") no-repeat center;
-      background-size: 256px 256px; z-index: 1; content: ''; display: block; @include transition(opacity ease-in-out 0.2s);
+      background-size: 256px 512px; z-index: 1; content: ''; display: block; @include transition(opacity ease-in-out 0.2s);
     }
     &:after{ z-index: 2; opacity: 0 }
-    &:hover:after{ opacity: 1 }
   }
 
-@media only screen and (max-width: $grid-breakpoint-mobile) {
+  @media only screen and (max-width: $grid-breakpoint-mobile) {
 
-  body{ font-size: 10px!important }
-  h1, .h1{ font-size: 2.5em }
-}
+    body{ font-size: 10px!important }
+    h1, .h1{ font-size: 2.5em }
+
+    .btn-radius.brown.load-more:hover
+    {
+        background: transparent!important; color: $color-brown!important;
+    }
+  }

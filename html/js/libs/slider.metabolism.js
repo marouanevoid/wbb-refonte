@@ -52,7 +52,7 @@ meta.Slider = function(config){
         swipe       : false,
         speed       : 600,
         easing      : 'easeInOutCubic',
-        default_img : '/bundles/wbbcore/images/default.jpg',
+        default_img : 'images/default.jpg',
         animate_arrow   : false,
         autoplay_delay  : 5000,
         autoplay        : false,
@@ -94,12 +94,14 @@ meta.Slider = function(config){
 
     that._addComponents = function() {
 
+        that.context.$slider.wrapInner('<div class="ui-slides"/>');
+
         if( that.config.has_arrows ){
 
             that.context.$slider.append
-                (
-                    '<div class="arrows"><a class="left"/><a class="right"/>'
-                );
+            (
+                '<div class="arrows"><a class="left"/><a class="right"/></div>'
+            );
 
             that.context.$arrows = that.context.$slider.find('.arrows a');
 
@@ -273,6 +275,9 @@ meta.Slider = function(config){
         $current.css({zIndex:2});
 
         var $current_elements = $current.find('.content');
+
+        if( !$current_elements.length ) $current_elements = $current.find('article');
+
         $current_elements.each(function(index)
         {
             $(this).delay(index*latency).velocity({left:goto_left?'100%':'-100%', opacity:0.25}, that.config.speed, that.config.easing);
@@ -326,9 +331,9 @@ meta.Slider = function(config){
         that.arrow_interval = setInterval(function()
         {
             if( that.arrow_direction )
-                that.context.$arrows.filter('.arrow-right').animate({right:'-101.5%'}, 500, 'easeInOutCubic');
+                that.context.$arrows.filter('.arrow-right').velocity({right:'-101.5%'}, 500, 'easeInOutCubic');
             else
-                that.context.$arrows.filter('.arrow-right').animate({right:'-100%'}, 500, 'easeInOutCubic');
+                that.context.$arrows.filter('.arrow-right').velocity({right:'-100%'}, 500, 'easeInOutCubic');
 
             that.arrow_direction = !that.arrow_direction;
 
@@ -354,7 +359,7 @@ meta.Slider = function(config){
             clearInterval(that.arrow_interval);
             that.arrow_interval = false;
 
-            that.context.$arrows.filter('.arrow-right').animate({right:'-100%'}, 500, 'easeInOutCubic');
+            that.context.$arrows.filter('.arrow-right').velocity({right:'-100%'}, 500, 'easeInOutCubic');
         }
 
 
@@ -430,6 +435,8 @@ function initializeSliders()
 
         var $slider = $(this);
 
+        var animation = $slider.data('animation')?$slider.data('animation'):'slide';
+
         sliders.push( new meta.Slider(
         {
             $container      : $slider,
@@ -439,7 +446,8 @@ function initializeSliders()
             autoload        : $slider.hasClass('autoload'),
             swipe           : $slider.hasClass('swipe'),
             animate_arrow   : $slider.hasClass('animate-arrow'),
-            autoplay        : $slider.hasClass('autoplay')
+            autoplay        : $slider.hasClass('autoplay'),
+            animation       : animation
         }));
 
         $slider.addClass('ui-initialized');

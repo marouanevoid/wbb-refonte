@@ -56,6 +56,10 @@ class UserAdmin extends Admin
         ;
     }
 
+    protected $formOptions = array(
+        'validation_groups' => 'Profile'
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -77,7 +81,7 @@ class UserAdmin extends Admin
                         'multiple' => true,
                         'required' => false,
                         'choices'  => array(
-                            'ROLE_SUPER_ADMIN'      =>  'Administrator',
+                            'ROLE_SUPER_ADMIN'      =>  'Super Admin',
                             'ROLE_MODERATOR'        =>  'Moderator',
                             'ROLE_PUBLISHER'        =>  'Publisher',
                             'ROLE_EDITORIAL_EXPERT' =>  'Editorial Expert',

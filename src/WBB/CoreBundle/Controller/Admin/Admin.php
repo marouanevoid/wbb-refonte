@@ -10,17 +10,15 @@ use Sonata\AdminBundle\Admin\Admin as BaseAdmin;
 
 class Admin extends BaseAdmin
 {
-    private $container;
+    /**
+     * {@inheritdoc}
+     */
+    protected $maxPerPage = 15;
 
     /**
      * {@inheritdoc}
      */
-    protected $maxPerPage = 25;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected $maxPageLinks = 25;
+    protected $maxPageLinks = 15;
 
     /**
      * {@inheritdoc}
@@ -41,12 +39,22 @@ class Admin extends BaseAdmin
     }
 
     /**
+     * get Security Context
+     *
+     * @return SecurityContext
+     */
+    public function getSecurityContext()
+    {
+        return $this->getContainer()->get('security.context');
+    }
+
+    /**
      * Get a user from the Security Context
      *
      * @return mixed
      */
     protected function getUser()
     {
-        return $this->getContainer()->get('security.context')->getToken()->getUser();
+        return $this->getSecurityContext()->getToken()->getUser();
     }
 }

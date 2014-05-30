@@ -1,0 +1,25 @@
+article.bar-wo-pic {
+  height: 12em; background-color: $color-cream; margin-top: 1.5em; position: relative;
+
+  .btn-round {
+    z-index: 21; position: absolute; right: 1em; top: 1em; border: 0;
+    &.star{
+      background: none;
+      &:before{ background-position: -200px -80px }
+      &:after{ background-position: -200px -120px }
+      &.active:before{ background-position: -200px -120px }
+    }
+  }
+
+  .txt { top: 2.5em; position: absolute; z-index: 20; bottom: 2em; left: 2.5em; right: 2.5em;
+    h2 { color: $color-dark-gray; position: absolute; top: 0; text-transform: uppercase; font-weight: bold; margin-bottom: 0.5em;}
+    h3 { color: $color-brown; position: absolute; bottom: 0; text-transform: none; @include transition( margin ease-in-out 0.2s); margin-bottom: 0}
+  }
+
+  &:hover
+  {
+    .txt h3{ margin-bottom: inherit }
+  }
+
+  .gradient, .tags, img.scale-with-grid { display: none }
+}

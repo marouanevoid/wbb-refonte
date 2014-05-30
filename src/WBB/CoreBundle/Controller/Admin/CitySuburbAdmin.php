@@ -21,7 +21,6 @@ class CitySuburbAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
-                ->add('city')
             ->end();
     }
 

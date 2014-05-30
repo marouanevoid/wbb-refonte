@@ -1,49 +1,56 @@
 .bar-details {
 
-  .sub-header {
-    height: 14em;
-    .columns { height: 100% }
-    .city-selector { color: $color-brown }
-    .title { text-align: center;
-      h1 { font-weight: bold; margin-bottom: 0.25em }
-      h3 { text-transform: none; color: $color-medium-gray; }
-    }
-
-    .star-share {
-      color: $color-brown; text-align: right;
-      .btn-round { margin-left: 1em; }
-    }
-  }
-
   .gallery{
     .main{
-      width: 50%; float: left; position: relative;
-      .btn-round{ position: absolute; top: 1em; right: 1em; z-index: 2 }
-      img{ width: 100%; height: auto; display: block }
+      width: 50%; float: left; position: relative; overflow: hidden;
+      .image{
+        .btn-round{ position: absolute; top: 1em; right: 1em; z-index: 2 }
+        img{ width: 100%; height: auto; display: block; margin-top: -1px }
+      }
+      .video{
+        background: #000;
+        iframe{ position: absolute; top: 0; left: 0; width: 100%; height: 100% }
+      }
     }
-    .ui-slider{ outline:1px solid #fff; width: 50%; float: left }
+    .ui-slider{ width: 50%; float: left }
   }
 
-  aside{
+  .content
+  {
+    .trends {
+      font-size: 1.6em; margin-bottom: 2em;
+      li{ display: inline-block; margin-left: 0.7em }
+      li:after{ content: '.'; position: relative; margin-left: 1em; top: -0.25em }
+      li:first-child{ color:#333; margin-left: 0 }
+      li:last-child:after,li:first-child:after{ display: none }
+    }
+    p
+    {
+      .see-more{ display: none }
+      .more{ display: block }
+    }
 
-    .informations{
-      background: $color-cream; padding: 1em;
-      .contain{
-        background: #fff; padding: 1em;
-        .gmap { position: relative;
-          .get-directions {
-            position: absolute; text-align: center; z-index: 10; width: 100%; height: 100%; left: 0; top: 0;
-            background-image: url("../images/icons/pin.gmap.png"); background-repeat: no-repeat;
-            background-size: 34px 96px; background-position: center center;
-            .btn-small-radius { margin-top: 24%; background: #fff }
+    aside{
+
+      .informations{
+        background: $color-cream; padding: 1em;
+        .contain{
+          background: #fff; padding: 1em;
+          .gmap { position: relative;
+            .get-directions {
+              position: absolute; text-align: center; z-index: 10; width: 100%; height: 100%; left: 0; top: 0;
+              background-image: url("../images/icons/pin.gmap.png"); background-repeat: no-repeat;
+              background-size: 34px 96px; background-position: center center;
+              .btn-small-radius { margin-top: 24%; background: #fff }
+            }
+            img { display: block; width: 100%; height: auto; }
           }
-          img { display: block; width: 100%; height: auto; }
+          p, .p { padding: 1em; position: relative;
+            .btn-small-round { margin: 0.5em 0.5em 0 0; }
+            .btn-small-radius { position: absolute; bottom: 0.5em; right: 0.5em; }
+          }
+          hr { border-color: $color-brown; margin: 0 10px 1em 10px!important; }
         }
-        p { padding: 1em; position: relative;
-          .btn-small-round { margin: 1em 1em 0 0; }
-          .btn-small-radius { position: absolute; bottom: 0.5em; right: 0.5em; }
-        }
-        hr { border-color: $color-brown; margin: 0 10px 1em 10px!important; }
       }
     }
   }
@@ -61,12 +68,16 @@
   }
 
   .also-appears {
-    a { display: block; position: relative; margin-bottom:0.5em;
-      img{ margin-left: 0.25em; vertical-align: middle }
+    li{ margin-bottom:0.8em; position: relative;
       &:before {
-        content: ''; display: inline-block; width: 8px; height: 13px; background-image: url('../images/misc/chevron.png'); background-size: 100% 100%;
+        content: ''; display: inline-block; width: 8px; height: 13px; background-image: url('../images/misc/chevron.png'); background-size: 100% 100%; margin-right: 0.5em; vertical-align: baseline;
+      }
+      a {
+        display: inline-block;
+        img{ margin-left: 0.25em; vertical-align: middle }
       }
     }
+
     .h2 { text-transform: uppercase; font-weight: bold; }
     .h3 { text-transform: none; font-weight: normal; color: $color-brown; }
   }
@@ -76,35 +87,43 @@
 
   @media only screen and (max-width: $grid-breakpoint-mobile) {
 
-    .sub-header { margin-top: 28px; margin-bottom: 28px;
-
-      .columns { height: 60px; margin-top: 12px; margin-bottom: 12px;}
-      .city-selector { display: none; }
-
-      .star-share { text-align: center;
-        .btn-round {  }
-      }
-    }
-
-    .main { text-align: center;
+    .main {
+      text-align: center;
       .also-appears.desktop { display: none; }
     }
 
     .gallery{
-      .main{ width: 100% }
+      .main{ width: 100%; border-bottom: 1px solid #fff }
       .ui-slider{
         width: 100%;
         .ui-slide .image{ width: 33.33% }
+        .ui-slide .image:first-of-type{ border-left: 0 }
         .ui-slide .image:last-of-type{ display: none }
         .arrows{ display: none }
         img.sizer{ width: 33.33% }
       }
     }
 
-    aside { margin-top: 50px; width: 100% !important; margin-left: 0 !important;
-      .informations { background: none; padding: 0;
-        .contain { padding: 0;
-          p .btn-small-radius { display: inline-block; position: static; margin-top: 1em; }
+    .content
+    {
+      .trends {
+        text-align: center;
+        li{ margin-left: 0.1em }
+        li:after{ margin-left: 0.4em }
+      }
+      p
+      {
+        .see-more{ display: block; text-align: center; margin-top: 1em }
+        .more{ display: none }
+      }
+      aside {
+        margin-top: 50px; width: 100% !important; margin-left: 0 !important;
+        .informations {
+          background: none; padding: 0; text-align: center;
+          .contain {
+            padding: 0;
+            .p .btn-small-radius { display: inline-block; position: static; margin-top: 1em; }
+          }
         }
       }
     }

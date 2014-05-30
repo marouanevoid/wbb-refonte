@@ -48,8 +48,8 @@ class CityAdmin extends Admin
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('Trends')
-                ->add('trends', 'sonata_type_collection', array('required' => false),
+            ->with('Tags')
+                ->add('tags', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -103,31 +103,35 @@ class CityAdmin extends Admin
 
     public function prePersist($object)
     {
+        $object->upload();
+
         foreach ($object->getSuburbs() as $suburb) {
             $suburb->setCity($object);
         }
-
-//        foreach ($object->getBestofs() as $bestof) {
-//            $bestof->setCity($object);
-//        }
-
-//        foreach ($object->getTrends() as $trend) {
-//            $trend->setCity($object);
-//        }
     }
 
     public function preUpdate($object)
     {
+        $object->upload();
+
         foreach ($object->getSuburbs() as $suburb) {
             $suburb->setCity($object);
         }
+    }
 
-//        foreach ($object->getBestofs() as $bestof) {
-//            $bestof->setCity($object);
-//        }
+    /**
+     * {@inheritdoc}
+     */
+    public function postUpdate($object)
+    {
+        $object->upload();
+    }
 
-//        foreach ($object->getTrends() as $trend) {
-//            $trend->setCity($object);
-//        }
+    /**
+     * {@inheritdoc}
+     */
+    public function postRemove($object)
+    {
+        $object->removeUpload();
     }
 }

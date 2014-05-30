@@ -78,9 +78,9 @@ class BestOf
     /**
      * @var boolean
      *
-     * @ORM\Column(name="byTrend", type="boolean", nullable=true)
+     * @ORM\Column(name="byTag", type="boolean", nullable=true)
      */
-    private $byTrend;
+    private $byTag;
 
     /**
      * @var boolean
@@ -113,10 +113,10 @@ class BestOf
     private $news;    
     
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestofTrend", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
-    private $trends;
+    private $tags;
 
     
     /**
@@ -238,26 +238,26 @@ class BestOf
     }
 
     /**
-     * Set byTrend
+     * Set byTag
      *
-     * @param boolean $byTrend
+     * @param boolean $byTag
      * @return BestOf
      */
-    public function setByTrend($byTrend)
+    public function setByTag($byTag)
     {
-        $this->byTrend = $byTrend;
+        $this->byTag = $byTag;
 
         return $this;
     }
 
     /**
-     * Get byTrend
+     * Get byTag
      *
      * @return boolean 
      */
-    public function getByTrend()
+    public function getByTag()
     {
-        return $this->byTrend;
+        return $this->byTag;
     }
 
     /**
@@ -592,41 +592,41 @@ class BestOf
 
     public function __construct(){
         $this->setOnTop(true);
-        $this->setByTrend(true);
+        $this->setByTag(true);
         $this->setOrdered(true);
     }
 
     /**
-     * Add trends
+     * Add tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $tags
      * @return BestOf
      */
-    public function addTrend(\WBB\BarBundle\Entity\Collections\BestofTrend $trends)
+    public function addTag(\WBB\BarBundle\Entity\Collections\BestOfTag $tags)
     {
-        $this->trends[] = $trends;
+        $this->tags[] = $tags;
 
         return $this;
     }
 
     /**
-     * Remove trends
+     * Remove tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestofTrend $trends
+     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $tags
      */
-    public function removeTrend(\WBB\BarBundle\Entity\Collections\BestofTrend $trends)
+    public function removeTag(\WBB\BarBundle\Entity\Collections\BestOfTag $tags)
     {
-        $this->trends->removeElement($trends);
+        $this->tags->removeElement($tags);
     }
 
     /**
-     * Get trends
+     * Get tags
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTrends()
+    public function getTags()
     {
-        return $this->trends;
+        return $this->tags;
     }
 
     /**

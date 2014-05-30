@@ -1,5 +1,5 @@
-$fonts: Avenir Avenir-Roman normal normal,
-        Avenir Avenir-Heavy bold normal;
+$fonts: Avenir avenirltstd-roman normal normal avenir_lt_std55_roman,
+        Avenir avenirltstd-heavy bold normal avenir_lt_std85_heavy;
 
 @each $font in $fonts
 {
@@ -7,14 +7,15 @@ $fonts: Avenir Avenir-Roman normal normal,
   $src    : nth($font, 2);
   $weight : nth($font, 3);
   $style  : nth($font, 4);
+  $svg    : nth($font, 5);
 
   @font-face {
     font-family: "#{$family}";
-    src: url('../fonts/#{$src}.eot');
-    src: url('../fonts/#{$src}.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/#{$src}.woff') format('woff'),
-    url('../fonts/#{$src}.ttf') format('truetype'),
-    url('../fonts/#{$src}.svg#') format('svg');
+    src: url('../fonts/#{$src}-webfont.eot');
+    src: url('../fonts/#{$src}-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/#{$src}-webfont.woff') format('woff'),
+    url('../fonts/#{$src}-webfont.ttf') format('truetype'),
+    url('../fonts/#{$src}-webfont.svg##{$svg}') format('svg');
     font-weight: #{$weight};
     font-style: #{$style};
   }
@@ -29,10 +30,11 @@ $fonts: Avenir Avenir-Roman normal normal,
     $src    : nth($font, 2);
     $weight : nth($font, 3);
     $style  : nth($font, 4);
+    $svg    : nth($font, 5);
 
     @font-face {
       font-family: "#{$family}";
-      src: url('../fonts/#{$src}.svg#') format('svg');
+      src: url('../fonts/#{$src}-webfont.svg##{$svg}') format('svg');
       font-weight: #{$weight};
       font-style: #{$style};
     }

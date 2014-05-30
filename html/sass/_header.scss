@@ -1,6 +1,7 @@
 /* Header
 --------------------------------------------------- */
-    header { white-space: nowrap; width: 100%; background-color: $color-dark-gray;
+    header {
+      white-space: nowrap; width: 100%; background-color: $color-dark-gray;
       table { width: 100%;
         tr {
           td { vertical-align: middle; }
@@ -8,40 +9,128 @@
       }
     }
 
-      header.desktop {
+    header.desktop {
 
-        .logo { border-right: 1px solid grey;
-          a { text-decoration: none }
-          img{ margin-right: 5em; display: block; width: 15.7em; height: auto }
-        }
+      .logo {
+        border-right: 1px solid grey;
+        a { text-decoration: none }
+        img{ margin-right: 5em; display: block; width: 15.8em; height: auto; background: url("../images/logo.png") no-repeat center; background-size: 100% 100% }
+      }
 
-        .twelve.columns{ height: 13em; table{ height: 100% } }
+      .twelve.columns { height: 13em; table{ height: 100% } }
 
-        nav { text-align: left; margin-left: 1em;
+      .nav { width: 100%; height: 100%; overflow: hidden;
+        nav {
+          text-align: left; margin-left: 1em; position: relative;
           a { margin-left: 2em; display: inline-block; color: $color-subtle-yellow; }
         }
+        form{
+          position: relative; top: -50%; display: none;
+          input[type="text"] {
+            background-color: transparent; border: none; font-size: 3em; height: 100%; padding: 0 5%; width: 90%; font-weight: bold; color: $color-subtle-yellow;
+            &:focus { outline: none; @include box-shadow(none); }
+          }
+        }
+      }
 
+      .bar-finder {
+        text-align: right; height: 100%; overflow: hidden;
+        .separator { margin: 0 1em; }
 
-        .bar-finder { text-transform: none; color: $color-subtle-yellow; width: 100%; text-align: right;
-          > img { margin: 0 1em }
-          .finder img{ margin-right: 0.5em }
-          img { vertical-align: middle; }
-          a{ color: $color-subtle-yellow }
+        .search-mode{
+          display: none; position: relative; top: -50%;
+          > *{ vertical-align: middle }
+          .advanced-search { color: $color-brown; &:hover{ color: $color-subtle-yellow } }
+          .btn-round { display: inline-block; }
         }
 
-        .register {
-          text-align: right; padding-left: 4.5em; color: $color-brown;
-          a:hover{ color: $color-subtle-yellow }
-          .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em }
-          .btn-radius:hover { background-color: $color-subtle-yellow; color: $color-brown }
+        .normal-mode{
+          position: relative;
+          > *{ vertical-align: middle }
+          .finder { color: $color-subtle-yellow; text-transform: none; position: relative; top: 0.1em }
+          .search { color: $color-subtle-yellow; text-transform: none; padding: 0.3em 0; img{ vertical-align: middle } }
+        }
       }
+
+      .register {
+        text-align: right; padding-left: 4.5em; color: $color-brown;
+        a:hover{ color: $color-subtle-yellow }
+        .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em }
+        .btn-radius:hover { background-color: $color-subtle-yellow; color: $color-brown }
+      }
+
+      .search-result-proposal {
+        position: absolute; background-color: $color-gray; width: 100%; z-index: 50;
+        ul {
+          li {
+            font-size: 1.6em; color: $color-cream; border-bottom: 1px solid $color-dark-gray; @include transition( background 0.2s ease-in-out );
+            &:hover{ background: $color-light-gray; .twelve.columns a{ color: $color-subtle-yellow } }
+            .twelve.columns { height: auto;
+              a { display: block; padding: 1.5em 0; padding-left: 15em;
+                b { color: $color-subtle-yellow; }
+              }
+            }
+          }
+        }
+      }
+
     }
 
     header.mobile {
-
       .logo { padding: 1em 0 1.5em 0; width: 100%; text-align: center; }
-      .nav-icon { text-align: left; }
+      .nav-icon { text-align: left; a{ padding: 1em; margin-left: -1em; display: block } }
       .search-pin-icon { text-align: right;
         a:nth-child(1) { margin-right: 1.3em; }
+      }
+    }
+
+    aside.mobile-menu { position: absolute; width: 245px; height: 100%; left: -245px; top: 0; background-color: $color-dark-gray; background-image: url("../images/mobile.menu.inner-shadow.png"); background-position: top right; background-size: 7px 100%; background-repeat: repeat-y;
+
+      table { width: 100%;
+
+        tr td { width: 80%; border-bottom: 1px solid #5c5549; padding: 3em 10%; }
+
+        tr:nth-child(1) td { height: 2.5em; }
+
+        tr:nth-child(2) td {
+          a { display: block; margin-bottom: 2em; color: $color-subtle-yellow;
+            &:last-child { margin-bottom: 0; }
+          }
+        }
+
+        tr:nth-child(3) td {
+          a { color: $color-subtle-yellow; text-transform: none;
+            img { margin-right: 0.5em; vertical-align: sub; }
+          }
+        }
+
+        tr:nth-child(4) td {
+          .register {
+            text-align: left; color: $color-brown;
+            .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em }
+          }
+        }
+
+        tr:nth-child(5) td {
+          a { display: block; margin-bottom: 2em; color: $color-subtle-yellow;
+            &:last-child { margin-bottom: 0; }
+          }
+        }
+
+        tr:nth-child(6) td {
+          a { margin-right: 3em;
+            &:last-child { margin-right: 0; }
+          }
+        }
+
+        tr:nth-child(7) td {
+          h4 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: bold; }
+          .fb-like { display: inline-block!important; width: auto!important }
+          .fb-like, iframe { vertical-align: middle; margin-right: 2px }
+        }
+
+        tr:nth-child(8) td { border-bottom: 0;
+          .copy { color: $color-subtle-yellow; }
+        }
       }
     }

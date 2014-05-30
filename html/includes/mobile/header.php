@@ -1,3 +1,57 @@
+<aside class="mobile-menu">
+
+    <table>
+
+        <tr>
+            <td>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php include('components/header/nav.php') ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php include('components/header/bar-finder-link.php') ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php include('components/header/signin-register.php') ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php include('components/footer/nav.php') ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php include('components/footer/social-icons.php') ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php include('components/footer/keep-in-touch.php') ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php include('components/footer/copyright.php') ?>
+            </td>
+        </tr>
+    </table>
+</aside>
+
 <header class="mobile">
 
     <div class="container">
@@ -7,7 +61,7 @@
             <table>
                 <tr>
                     <td class="nav-icon">
-                        <a href="" class="finder">
+                        <a>
                             <img src="images/icons/nav.mobile.png" alt="nav.mobile" width="19" height="17"/>
                         </a>
                     </td>
@@ -19,10 +73,10 @@
                     </td>
 
                     <td class="search-pin-icon">
-                        <a href="" class="finder">
+                        <a href="">
                             <img src="images/icons/pin.border.png" alt="pin.border" width="12" height="16"/>
                         </a>
-                        <a href="" class="finder">
+                        <a href="">
                             <img src="images/icons/search.png" alt="search" width="16" height="16"/>
                         </a>
                     </td>
