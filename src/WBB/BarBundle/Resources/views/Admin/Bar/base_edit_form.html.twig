@@ -31,30 +31,38 @@
                         </li>
                     {% endfor %}
                     {% if admin.id(object) %}
-                        <li class="">
-                            <a href="#{{ admin.uniqid }}_map_tab" data-toggle="tab">
-                                <i class="icon-exclamation-sign has-errors hide"></i>
-                                Map
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#{{ admin.uniqid }}_fs_tips_tab" data-toggle="tab">
-                                <i class="icon-exclamation-sign has-errors hide"></i>
-                                Foursquare tips
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#{{ admin.uniqid }}_fs_img_tab" data-toggle="tab">
-                                <i class="icon-exclamation-sign has-errors hide"></i>
-                                Foursquare images
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#{{ admin.uniqid }}_instg_tab" data-toggle="tab">
-                                <i class="icon-exclamation-sign has-errors hide"></i>
-                                Instagram
-                            </a>
-                        </li>
+                        {% if is_granted('ROLE_BAR_ID') %}
+                            <li class="">
+                                <a href="#{{ admin.uniqid }}_map_tab" data-toggle="tab">
+                                    <i class="icon-exclamation-sign has-errors hide"></i>
+                                    Map
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_WBB_BAR_FS_TIPS') %}
+                            <li class="">
+                                <a href="#{{ admin.uniqid }}_fs_tips_tab" data-toggle="tab">
+                                    <i class="icon-exclamation-sign has-errors hide"></i>
+                                    Foursquare tips
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_WBB_BAR_FS_IMGS') %}
+                            <li class="">
+                                <a href="#{{ admin.uniqid }}_fs_img_tab" data-toggle="tab">
+                                    <i class="icon-exclamation-sign has-errors hide"></i>
+                                    Foursquare images
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_WBB_BAR_INSTAGRAM') %}
+                            <li class="">
+                                <a href="#{{ admin.uniqid }}_instg_tab" data-toggle="tab">
+                                    <i class="icon-exclamation-sign has-errors hide"></i>
+                                    Instagram
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
                 {% endblock %}
@@ -79,62 +87,67 @@
                             </div>
                         {% endfor %}
                         {% if admin.id(object) %}
-                            <div class="tab-pane " id="{{ admin.uniqid }}_map_tab">
-                                <fieldset>
-                                    <div class="sonata-ba-collapsed-fields">
-                                        <div class="mapcontainer" style="width: 600px; height: 400px;"></div>
-                                        <div class="mapinfos">
-                                            <div><label>Location:</label> <input type="text" id="mpAddress" style="width: 200px"/></div>
-                                            <div style="clear: left; height: 5px;"></div>
-                                            <div><label>Lat.:</label> <input type="text" id="lat"/></div>
-                                            <div style="clear: left; height: 5px;"></div>
-                                            <div><label>Long.:</label> <input type="text" id="lon"/></div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-
-                            <div class="tab-pane " id="{{ admin.uniqid }}_fs_tips_tab">
-                                <fieldset>
-                                    <div class="sonata-ba-collapsed-fields">
-                                        <div class="tips">
-                                            <div class="content_tips"></div>
-                                            <div class="tips_action">
-                                                <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                            {% if is_granted('ROLE_BAR_ID') %}
+                                <div class="tab-pane " id="{{ admin.uniqid }}_map_tab">
+                                    <fieldset>
+                                        <div class="sonata-ba-collapsed-fields">
+                                            <div class="mapcontainer" style="width: 600px; height: 400px;"></div>
+                                            <div class="mapinfos">
+                                                <div><label>Location:</label> <input type="text" id="mpAddress" style="width: 200px"/></div>
+                                                <div style="clear: left; height: 5px;"></div>
+                                                <div><label>Lat.:</label> <input type="text" id="lat"/></div>
+                                                <div style="clear: left; height: 5px;"></div>
+                                                <div><label>Long.:</label> <input type="text" id="lon"/></div>
                                             </div>
-                                            <div></div>
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-
-                            <div class="tab-pane " id="{{ admin.uniqid }}_fs_img_tab">
-                                <fieldset>
-                                    <div class="sonata-ba-collapsed-fields">
-                                        <div class="imgs">
-                                            <div class="content_imgs"></div>
-                                            <div class="imgs_action">
-                                                <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                                    </fieldset>
+                                </div>
+                            {% endif %}
+                            {% if is_granted('ROLE_WBB_BAR_FS_TIPS') %}
+                                <div class="tab-pane " id="{{ admin.uniqid }}_fs_tips_tab">
+                                    <fieldset>
+                                        <div class="sonata-ba-collapsed-fields">
+                                            <div class="tips">
+                                                <div class="content_tips"></div>
+                                                <div class="tips_action">
+                                                    <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                                                </div>
+                                                <div></div>
                                             </div>
-                                            <div></div>
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-
-                            <div class="tab-pane " id="{{ admin.uniqid }}_instg_tab">
-                                <fieldset>
-                                    <div class="sonata-ba-collapsed-fields">
-                                        <div class="instimgs">
-                                            <div class="content_instimgs"></div>
-                                            <div class="instimgs_action">
-                                                <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                                    </fieldset>
+                                </div>
+                            {% endif %}
+                            {% if is_granted('ROLE_WBB_BAR_FS_IMGS') %}
+                                <div class="tab-pane " id="{{ admin.uniqid }}_fs_img_tab">
+                                    <fieldset>
+                                        <div class="sonata-ba-collapsed-fields">
+                                            <div class="imgs">
+                                                <div class="content_imgs"></div>
+                                                <div class="imgs_action">
+                                                    <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                                                </div>
+                                                <div></div>
                                             </div>
-                                            <div></div>
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </div>
+                                    </fieldset>
+                                </div>
+                            {% endif %}
+                            {% if is_granted('ROLE_WBB_BAR_INSTAGRAM') %}
+                                <div class="tab-pane " id="{{ admin.uniqid }}_instg_tab">
+                                    <fieldset>
+                                        <div class="sonata-ba-collapsed-fields">
+                                            <div class="instimgs">
+                                                <div class="content_instimgs"></div>
+                                                <div class="instimgs_action">
+                                                    <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
+                                                </div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 {% endblock %}
