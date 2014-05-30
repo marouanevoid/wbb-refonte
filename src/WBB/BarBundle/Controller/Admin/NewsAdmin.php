@@ -21,7 +21,6 @@ class NewsAdmin extends Admin {
             ->add('quoteAuthor', null, array('editable' => true))
             ->add('quoteText', null, array('editable' => true))
             ->add('seoDescription', null, array('editable' => true))
-            ->add('richDescription', null, array('editable' => true))
             ->add('isAnInterview', null, array('editable' => true))
             ->add('isOnTop', null, array('editable' => true))
             ->add('createdAt', null, array('editable' => true))
@@ -80,8 +79,6 @@ class NewsAdmin extends Admin {
                 ->add('quoteText')
                 ->add('seoDescription')
                 ->add('richDescription')
-            ->end()
-            ->with('Details') 
                 ->add('isAnInterview')
                 ->add('isOnTop')
             ->end()
@@ -99,10 +96,21 @@ class NewsAdmin extends Admin {
                     )
                 )
             ->end()
-            ->with('Related')                
-                ->add('bars', 'sonata_type_model', array('multiple' => true))            
-                ->add('cities', 'sonata_type_model', array('multiple' => true))          
-                ->add('bestOfs', 'sonata_type_model', array('multiple' => true))
+            ->with('Related')    
+                ->add('bars', 'sonata_type_collection',
+                    array(
+                        'required'     => false,
+                        'by_reference' => false,
+                        'type_options' => array('delete' => true)
+                    ),
+                    array(
+                        'edit'      => 'inline',
+                        'inline'    => 'table',
+                        'sortable'  => 'position'
+                    )
+                )                      
+                ->add('cities', 'sonata_type_model', array('required' => false,'multiple' => true))          
+                ->add('bestOfs', 'sonata_type_model', array('required' => false,'multiple' => true))
             ->end()
         ;
     }
