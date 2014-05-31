@@ -8,6 +8,7 @@ parameters:
     wbb_bar.tag.admin.class: WBB\BarBundle\Controller\Admin\TagAdmin
     wbb_bar.bestof.admin.class: WBB\BarBundle\Controller\Admin\BestOfAdmin
     wbb_bar.bestof_tag.admin.class: WBB\BarBundle\Controller\Admin\Collections\BestOfTagAdmin
+    wbb_bar.bestof_bar.admin.class: WBB\BarBundle\Controller\Admin\Collections\BestOfBarAdmin
     wbb_bar.tip.admin.class: WBB\BarBundle\Controller\Admin\TipAdmin
     wbb_bar.ad.admin.class: WBB\BarBundle\Controller\Admin\AdAdmin
     wbb_bar.news.admin.class: WBB\BarBundle\Controller\Admin\NewsAdmin
@@ -21,6 +22,7 @@ parameters:
     wbb_bar.tag.entity.class: WBB\BarBundle\Entity\Tag
     wbb_bar.bestof.entity.class: WBB\BarBundle\Entity\BestOf
     wbb_bar.bestof_tag.entity.class: WBB\BarBundle\Entity\Collections\BestOfTag
+    wbb_bar.bestof_bar.entity.class: WBB\BarBundle\Entity\Collections\BestOfBar
     wbb_bar.tip.entity.class: WBB\BarBundle\Entity\Tip
     wbb_bar.ad.entity.class: WBB\BarBundle\Entity\Ad
     wbb_bar.news.entity.class: WBB\BarBundle\Entity\News
@@ -88,6 +90,14 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bestof_tag, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_bar.bestof_tag.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setTranslationDomain, ["WBBBarBundle"]]
+
+    wbb.bar.admin.bestof.bar:
+        class: %wbb_bar.bestof_bar.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: bestof_bar, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.bestof_bar.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 

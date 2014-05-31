@@ -100,6 +100,14 @@ class BestOfAdmin extends Admin
                         'sortable'  => 'position'
                     ))
             ->end()
+            ->with('Bars')
+                ->add('bars', 'sonata_type_collection', array('required' => false),
+                    array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                        'sortable'  => 'position'
+                    ))
+            ->end()
         ;
     }
 
