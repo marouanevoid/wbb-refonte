@@ -19,14 +19,13 @@ class BarController extends Controller
     public function detailsAction($id)
     {
         $bar = $this->container->get('bar.repository')->findOneById($id);
-
+        
         $youMayAlsoLike = $this->container->get('bar.repository')->findYouMayAlsoLike($bar);
-
         $size = sizeof($youMayAlsoLike);
 
         if($size < 4)
         {
-            $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, (4 - $size));
+            $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, (4 - $size), $youMayAlsoLike);
 
             foreach($temp as $tmp){
                 $youMayAlsoLike[] = $tmp;
@@ -36,7 +35,7 @@ class BarController extends Controller
 
             if($size < 4)
             {
-                $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_WORLDWIDE, (4 - $size));
+                $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_WORLDWIDE, (4 - $size), $youMayAlsoLike);
                 foreach($temp as $tmp){
                     $youMayAlsoLike[] = $tmp;
                 }
