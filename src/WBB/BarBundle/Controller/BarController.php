@@ -24,23 +24,18 @@ class BarController extends Controller
 
         $size = sizeof($youMayAlsoLike);
         $oneCity = true;
-        var_dump($oneCity);
 
         if($size < 4)
         {
             $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, (4 - $size));
 
             if(sizeof($temp) > 0){
-//                var_dump($temp);die;
                 $oneCity = false;
             }
-            var_dump(sizeof($temp));
-            var_dump($oneCity);
 
             foreach($temp as $tmp){
                 $youMayAlsoLike[] = $tmp;
             }
-
 
             $size += sizeof($temp);
 
@@ -51,9 +46,6 @@ class BarController extends Controller
                 if(sizeof($temp)>0){
                     $oneCity = false;
                 }
-
-                var_dump(sizeof($temp));
-                var_dump($oneCity);die;
 
                 foreach($temp as $tmp){
                     $youMayAlsoLike[] = $tmp;
