@@ -23,7 +23,8 @@ class BarRepository extends EntityRepository
         $ids = array(0);
         foreach($exceptBars as $bar)
         {
-            $ids[] = $bar->getId();
+            if($bar)
+                $ids[] = $bar->getId();
         }
         
         $qb = $this->createQuerybuilder($this->getAlias());
