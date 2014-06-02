@@ -20,22 +20,34 @@ class BarController extends Controller
     {
         $bar = $this->container->get('bar.repository')->findOneById($id);
         
-        $youMayAlsoLike = $this->container->get('bar.repository')->findYouMayAlsoLike($bar);
+        $youMayAlsoLike = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_CITY, null , 4);
+
         $size = sizeof($youMayAlsoLike);
+        $oneCity = true;
 
         if($size < 4)
         {
-            $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, (4 - $size), $youMayAlsoLike);
+            $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, (4 - $size));
+
+            if(sizeof($temp)>0){
+                $oneCity = false;
+            }
 
             foreach($temp as $tmp){
                 $youMayAlsoLike[] = $tmp;
             }
 
+
             $size += sizeof($temp);
 
             if($size < 4)
             {
-                $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_WORLDWIDE, (4 - $size), $youMayAlsoLike);
+                $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, (4 - $size));
+
+                if(sizeof($temp)>0){
+                    $oneCity = false;
+                }
+
                 foreach($temp as $tmp){
                     $youMayAlsoLike[] = $tmp;
                 }
@@ -44,7 +56,8 @@ class BarController extends Controller
 
         return $this->render('WBBBarBundle:Bar:details.html.twig', array(
             'bar'       => $bar,
-            'barLike'   => $youMayAlsoLike
+            'barLike'   => $youMayAlsoLike,
+            'oneCity'   => $oneCity
         ));
     }
 }
