@@ -21,10 +21,10 @@ class BarRepository extends EntityRepository
     public function findYouMayAlsoLike(Bar $bar, $location = BarRepository::BAR_LOCATION_CITY, $limit = 4, $exceptBars = array(0))
     {
         $ids = array(0);
-        foreach($exceptBars as $bar)
+        foreach($exceptBars as $exBar)
         {
-            if($bar)
-                $ids[] = $bar->getId();
+            if($exBar)
+                $ids[] = $exBar->getId();
         }
         
         $qb = $this->createQuerybuilder($this->getAlias());
