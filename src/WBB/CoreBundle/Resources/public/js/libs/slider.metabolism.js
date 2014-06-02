@@ -52,7 +52,7 @@ meta.Slider = function(config){
         swipe       : false,
         speed       : 600,
         easing      : 'easeInOutCubic',
-        default_img : 'images/default.jpg',
+        default_img : '/bundles/wbbcore/images/default.jpg',
         animate_arrow   : false,
         autoplay_delay  : 5000,
         autoplay        : false,
@@ -88,17 +88,21 @@ meta.Slider = function(config){
 
         that.config.has_arrows  = that.config.has_arrows && that.context.$slides.length > min_slide_length;
         that.config.has_dots    = that.config.has_dots && that.context.$slides.length > min_slide_length;
+
+        that.context.offset     = parseInt(10000/that.config.display_count)/100;
     };
 
 
 
     that._addComponents = function() {
 
+        that.context.$slider.wrapInner('<div class="ui-slides"/>');
+
         if( that.config.has_arrows ){
 
             that.context.$slider.append
                 (
-                    '<div class="arrows"><a class="left"/><a class="right"/>'
+                    '<div class="arrows"><a class="left"/><a class="right"/></div>'
                 );
 
             that.context.$arrows = that.context.$slider.find('.arrows a');
@@ -126,9 +130,22 @@ meta.Slider = function(config){
 
         if( !that.context.$slides.filter('.active').length ){
 
-            that.context.$slides.first().show().addClass('active');
+            if( that.config.display_count > 1 )
+            {
+                var $active_slides = that.context.$slides.slice(0, that.config.display_count);
+                $active_slides.show().addClass('active');
 
-            var $slides = that.context.$slides.eq(0).add( that.context.$slides.eq(1) );
+                $active_slides.each(function(index)
+                {
+                    $(this).css({left:index*that.context.offset+'%'});
+                })
+            }
+            else
+                that.context.$slides.first().show().addClass('active');
+
+            var $slides = that.context.$slides.filter('.active');
+            $slides = $slides.add( that.context.$slides.last()).add($slides.next());
+
             that._loadImages($slides);
         }
     };
@@ -253,13 +270,13 @@ meta.Slider = function(config){
 
                 that._animateSlidesWithLatency($current, $next, goto_left, callback);
 
-            break;
+                break;
 
             default:
 
                 that._animateSlidesWithFade($current, $next, goto_left, callback);
 
-            break;
+                break;
         }
     };
 
@@ -273,6 +290,9 @@ meta.Slider = function(config){
         $current.css({zIndex:2});
 
         var $current_elements = $current.find('.content');
+
+        if( !$current_elements.length ) $current_elements = $current.find('article');
+
         $current_elements.each(function(index)
         {
             $(this).delay(index*latency).velocity({left:goto_left?'100%':'-100%', opacity:0.25}, that.config.speed, that.config.easing);
@@ -303,15 +323,33 @@ meta.Slider = function(config){
 
     that._animateSlidesWithFade = function($current, $next, goto_left, callback)
     {
-        $current.css({zIndex:1})
-            .velocity({left:goto_left?'25%':'-25%', opacity:0}, that.config.speed, that.config.easing);
+        if($current.length==1)
+        {
+            $current.css({zIndex:1})
+                .velocity({left:goto_left?'25%':'-25%', opacity:0}, that.config.speed, that.config.easing);
 
-        $next.css({zIndex:2, opacity:0, left:goto_left?'-25%':'25%', display:'block'})
-            .velocity({left:0, opacity:1}, that.config.speed, that.config.easing, function()
-            {
-                $current.hide();
-                if(callback) callback();
-            });
+            $next.css({zIndex:2, opacity:0, left:goto_left?'-25%':'25%', display:'block'})
+                .velocity({left:0, opacity:1}, that.config.speed, that.config.easing, function()
+                {
+                    $current.hide();
+                    if(callback) callback();
+                });
+        }
+        else
+        {
+            $current.velocity({left:goto_left?'+='+that.context.offset+'%':'-='+that.context.offset+'%'}, that.config.speed, that.config.easing);
+
+            $next.css({left:goto_left?'-'+that.context.offset+'%':'100%', display:'block'})
+                .velocity({left:goto_left?'0%':(100-that.context.offset)+'%'}, that.config.speed, that.config.easing, function()
+                {
+                    if( goto_left )
+                        $current.last().hide();
+                    else
+                        $current.first().hide();
+
+                    if(callback) callback();
+                });
+        }
     };
 
 
@@ -358,14 +396,25 @@ meta.Slider = function(config){
         }
 
 
-        var goto_left = direction == "left";
-
-        var $current_slide  = that.context.$slides.filter('.active');
-
-        var $next_slide     = goto_left ? $current_slide.prev(that.config.slide) : $current_slide.next(that.config.slide);
+        var goto_left       = direction == "left";
+        var $current_slides  = that.context.$slides.filter('.active');
+        var $next_slide     = goto_left ? $current_slides.first().prev(that.config.slide) : $current_slides.last().next(that.config.slide);
 
         if(!$next_slide.length && that.config.infinite)
-            $next_slide = goto_left ? that.context.$slides.last() : that.context.$slides.first();
+        {
+            if( goto_left )
+            {
+                $next_slide = that.context.$slides.last();
+                $next_slide.insertBefore( that.context.$slides.first() );
+            }
+            else
+            {
+                $next_slide = that.context.$slides.first();
+                $next_slide.insertAfter( that.context.$slides.last() );
+            }
+
+            that.context.$slides = that.context.$slider.find(that.config.slide);
+        }
 
         that._setupSlide( $next_slide, direction );
     };
@@ -373,9 +422,15 @@ meta.Slider = function(config){
 
     that._setupSlide = function( $next_slide, direction ){
 
-        var $current_slide  = that.context.$slides.filter('.active');
+        console.log($next_slide)
+        var $current_slides  = that.context.$slides.filter('.active');
 
-        if(that.is_running || that.context.$slider.hasClass('loading') || $next_slide.index()==$current_slide.index() ) return;
+        if(
+            that.is_running || that.context.$slider.hasClass('loading') ||
+            $next_slide.index() == $current_slides.first().index() ||
+            $next_slide.index() == $current_slides.last().index()
+
+        ) return;
 
         that.is_running = true;
 
@@ -400,13 +455,15 @@ meta.Slider = function(config){
         {
             that.context.$dots.removeClass('active');
             that.context.$dots.eq($next_slide.index()).addClass('active');
-
-            console.log($next_slide.index())
         }
 
-        that._animateSlides($current_slide, $next_slide, goto_left, function(){
+        that._animateSlides($current_slides, $next_slide, goto_left, function(){
 
-            $current_slide.removeClass('active');
+            if(goto_left)
+                $current_slides.last().removeClass('active');
+            else
+                $current_slides.first().removeClass('active');
+
             $next_slide.addClass('active');
 
             that.is_running = false;
@@ -430,17 +487,21 @@ function initializeSliders()
 
         var $slider = $(this);
 
+        var animation = $slider.data('animation')?$slider.data('animation'):'slide';
+
         sliders.push( new meta.Slider(
-        {
-            $container      : $slider,
-            has_dots        : $slider.hasClass('dots'),
-            has_arrows      : $slider.hasClass('arrows'),
-            infinite        : $slider.hasClass('infinite'),
-            autoload        : $slider.hasClass('autoload'),
-            swipe           : $slider.hasClass('swipe'),
-            animate_arrow   : $slider.hasClass('animate-arrow'),
-            autoplay        : $slider.hasClass('autoplay')
-        }));
+            {
+                $container      : $slider,
+                has_dots        : $slider.hasClass('dots'),
+                has_arrows      : $slider.hasClass('arrows'),
+                infinite        : $slider.hasClass('infinite'),
+                autoload        : $slider.hasClass('autoload'),
+                swipe           : $slider.hasClass('swipe'),
+                animate_arrow   : $slider.hasClass('animate-arrow'),
+                autoplay        : $slider.hasClass('autoplay'),
+                display_count   : $slider.data('display'),
+                animation       : animation
+            }));
 
         $slider.addClass('ui-initialized');
     })

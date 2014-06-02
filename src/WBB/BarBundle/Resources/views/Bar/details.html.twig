@@ -8,8 +8,10 @@
                 venue  = "{{ bar.foursquare }}",
                 insta = "{{ bar.instagram }}",
                 imgs = [],
-                i, m, n,
-                html="";
+                i, m, n, reste, lastImages,
+                fsq = [],
+                ins = [],
+                html = "";
         $(document).ready(function(){
             $('#showOpenings').click(function(){
                 var link = $(this);
@@ -34,8 +36,8 @@
                         success: function(response) {
                             i = 0;
                             $.each(response.data, function(key, feed){
-                                if(!in_array(feed.id, r) && i<5) {
-                                    html +='<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="'+feed.prefix+"640x480"+feed.suffix+'"/></div></div>';
+                                if(in_array(feed.id, r) && i<5) {
+                                    fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="'+feed.prefix+"640x480"+feed.suffix+'"/></div></div>');
                                     i++;
                                 }
                             });
@@ -54,10 +56,16 @@
                                             i = 0;
                                             $.each(response.data.data, function(key, feed){
                                                 if(!in_array(feed.id, r) && i<5) {
-                                                    html +='<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="'+feed.images.standard_resolution.url+'"/></div></div>';
+                                                    ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="'+feed.images.standard_resolution.url+'"/></div></div>');
                                                     i++;
                                                 }
                                             });
+                                            for(i=0; i<=4; i+=2){
+                                                if(typeof ins[i] != 'undefined') { html+=ins[i]; }
+                                                if(typeof ins[i+1] != 'undefined') { html+=ins[i+1]; }
+                                                if(typeof fsq[i] != 'undefined') { html+=fsq[i]; }
+                                                if(typeof fsq[i+1] != 'undefined') { html+=fsq[i+1]; }
+                                            }
                                             $('.ui-slide').append(html);
                                             imgs = $('.image');
                                             $('.ui-slide').remove();
@@ -74,8 +82,18 @@
                                             //$('.ui-slide>div:nth-child(4n)').after('</div><div class="ui-slide">');
                                             $(".loader").css('display','none');
                                             $('.ui-slider').append(html);
+                                            reste  = 4-$('.ui-slide .image').length%4;
+                                            lastImages = $('.ui-slide .image').slice(-reste);
+                                            i=1;
+                                            $.each(lastImages, function(key, element){
+                                                if(i<=reste){
+                                                    $('.ui-slide:last-child').append('<div class="image">'+element.innerHTML+'</div>');
+                                                }
+                                                i++;
+                                            });
+                                            //$('.ui-slider:last-child').append();
+                                            //$('.ui-slider:last-child').append($('.ui-slide .image:nth-last-child('+reste+')'));
                                             initializeSliders();
-
                                         },
                                         error: function(e) {
                                             console.log(e);
@@ -105,22 +123,31 @@
 {% endblock %}
 {% block body %}
     <!-- SUBHEADER -->
-    <section class="container sub-header">
-        <div class="three columns vcenter city-selector h4">
-            You are in
-            <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name|default('Unspecified') }}</a>
-        </div>
-        <div class="six columns title vcenter">
-            <h1>{{ bar.name }}</h1>
-            <h3>{{ bar.suburb.name|default('Unspecified') }}, {{ bar.city.name|default('Unspecified') }}</h3>
-        </div>
-        <div class="three columns star-share vcenter">
-            <a class="btn-round brown star" href=""></a>
-            <a class="btn-round brown share" href=""></a>
-        </div>
+<div class="container">
+    <section class="sub-header">
+        <table>
+            <tr>
+                <td>
+                    <div class="city-selector h3">
+                        You are in
+                        <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name|default('Unspecified') }}</a>
+                    </div>                        </td>
+
+                <td class="title">
+                    <h1>{{ bar.name }}</h1>
+                    <h3>{{ bar.suburb.name|default('Unspecified') }}, {{ bar.city.name|default('Unspecified') }}</h3>
+                </td>
+
+                <td class="star-share">
+                    <a class="btn-round brown star" href=""></a><a class="btn-round brown share" href=""></a>
+                </td>
+            </tr>
+        </table>
     </section>
+</div>
     <!-- SLIDER -->
-    <div class="container full gallery">
+    <div class="container full">
+    <section class="gallery">
         <div class="main">
             <div class="image">
                 <div class="content">
@@ -131,7 +158,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui-slider type-bar has_sizer arrows infinite" data-size="4x3">
+        <div class="ui-slider type-bar-detail has_sizer arrows infinite" data-size="4x3" data-animation="latency">
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
             <div class="ui-slide" style="display:none">
                 {% for m in bar.medias %}
@@ -146,16 +173,18 @@
                 {% endfor %}
             </div>
         </div>
+    </section>
     </div>
-    <section class="container">
+<div class="container">
+<section class="content">
         <!-- MAIN CONTENT -->
         <article class="main">
             <div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>
             <div class="eight columns l-margin-top">
                 <p>
-                    <strong>At a Glance: </strong>
+                    <strong>At a Glance:&nbsp;&nbsp;</strong>
                     {% for tr in bar.tags %}
-                    {{ tr.tag }}{% if not loop.last %} ∙ {% endif %}
+                    {{ tr.tag }}{% if not loop.last %}&nbsp;&nbsp;∙&nbsp;&nbsp;{% endif %}
                     {% endfor%}<br/>
                     <br/>
                     {{ bar.description }}
@@ -204,6 +233,8 @@
                             {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank"></a>{% endif %}
                             {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
                             {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook" target="_blank"></a>{% endif %}
+                            {% if bar.foursquare %}<a href="https://www.foursquare.com/v/{{ bar.foursquare }}" class="btn-small-round foursquare" target="_blank"></a>{% endif %}
+                            {% if bar.instagram %}<a href="https://www.instagram.com/{{ bar.instagram }}" class="btn-small-round instagram" target="_blank"></a>{% endif %}
                         </p>
                         <hr class="s-margin"/>
                         <p>
@@ -223,7 +254,7 @@
                             Accepts Credit Cards: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                             Parking: {{ bar.parking }}<br/>
-                            Price: {{ bar.price }}  {% if bar.menu %}<a href="{{ bar.menu }}" target="_blank">(View menu)</a>{% endif %}<br/>
+                            Price: {% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %} {% if bar.menu %}<a href="{{ bar.menu }}" target="_blank">(View menu)</a>{% endif %}<br/>
                             Reservation: {% if bar.isReservation %}Yes{% else %}No{% endif %}<br/>
                             {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
                         </p>
@@ -236,7 +267,7 @@
             </aside>
         </article>
     </section>
-
+</div>
     <!-- INSIDER TIPS -->
     <section class="insider-tips m-margin-top">
         <div class="container load-container">
@@ -324,7 +355,7 @@
             </div>
             {% for b in barLike %}
                 <div class="three columns">
-                    <article class="bar">
+                    <article class="bar-w-pic">
                         <a href="" class="btn-round dark star"></a>
                         <div class="txt">
                             <h2>{{ b.name }}</h2>
@@ -335,6 +366,7 @@
                                 {% endfor%}
                             </div>
                         </div>
+                        <a href="/bar/{{ bar.id }}/details" class="overlay-link"></a>
                         <div class="gradient"></div>
                         {% for m in b.medias|slice(0,1) %}
                             <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>

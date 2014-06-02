@@ -1,4 +1,7 @@
-<header class="desktop">
+<div class="entire-content">
+    <div class="entire-content-scrollable">
+
+    <header class="desktop">
 
     <div class="container">
 
@@ -13,37 +16,120 @@
                         </a>
                     </td>
 
-                    <td class="h3">
-                        <nav>
+                    <td class="nav">
+                    <nav class="h3">
                             <a href="">Cities</a>
                             <a href="">Bar Guides</a>
                             <a href="">Articles</a>
                         </nav>
+                        <form>
+                            <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
+                        </form>
+
                     </td>
 
-                    <td class="bar-finder h3">
-                        <a href="" class="finder">
-                            <img src="{{ asset('/bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
-                            Bar Finder
-                        </a>
+                    <td class="bar-finder">
 
-                        <img src="{{ asset('/bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
+                        <div class="normal-mode">
+                            <a class="finder h3">
+                                <img src="{{ asset('/bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
+                                Bar Finder
+                            </a>
+                            <img class="separator" src="{{ asset('/bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
 
-                        <a href="" class="search">
-                            <img src="{{ asset('/bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
-                        </a>
+                            <a class="search">
+                                <img src="{{ asset('/bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
+                            </a>
+                        </div>                        <div class="search-mode">
+                            <a class="btn-round brown close"></a>
+
+                            <img class="separator" src="{{ asset('/bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
+
+                            <a href="" class="advanced-search h4">
+                                Advanced Search
+                            </a>
+                        </div>
                     </td>
 
-                    <td class="register h4">
-                        <a href="">Signin</a>
-                        or
-                        <a class="btn-radius" href="">Register</a>
-                    </td>
+
+                    <td>
+                        <span class="register h4">
+    <a href="">Signin</a>
+    or
+    <a class="btn-radius" href="">Register</a>
+</span>                    </td>
+
                 </tr>
             </table>
 
         </div>
 
     </div>
+        <div class="search-result-proposal"><ul></ul><div>
 
-</header>
+
+    </header>
+        <section class="bar-finder">
+            <div class="container">
+
+                <img class="finder-arrow" src="{{ asset('/bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
+
+                <div class="twelve columns">
+
+                    <a class="finder-close"></a>
+
+                    <form>
+                        <table>
+                            <tr>
+                                <td rowspan="2">
+                                    <h2>Find Your<br/>Best Bar</h2>
+                                </td>
+                                <td><h3>City</h3></td>
+                                <td></td>
+                                <td><h3>To go out with</h3></td>
+                                <td></td>
+                                <td colspan="3"><h3>Mood</h3></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="ui-dropdown dark" name="city">
+                                        <option disabled="disabled">Choose a city</option>
+                                        <option value="cty2">City 2</option>
+                                        <option value="cty3">City 3</option>
+                                        <option value="cty4">City 4</option>
+                                        <option value="cty5">City 5</option>
+                                        <option value="cty6">City 6</option>
+                                    </select>
+                                </td>
+                                <td><img src="{{ asset('/bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
+                                <td>
+                                    <select class="ui-dropdown dark" name="go_out">
+                                        <option disabled="disabled">Friend...</option>
+                                        <option>City 2</option>
+                                        <option>City 3</option>
+                                        <option>City 4</option>
+                                        <option>City 5</option>
+                                        <option>City 6</option>
+                                    </select>
+                                </td>
+                                <td><img src="{{ asset('/bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
+                                <td>
+                                    <input type="radio" name="mood" value="chillout" class="ui-radio checked dark" data-color="brown"/>
+                                <td>
+                                    <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
+                                </td>
+                                <td>
+                                    <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
+                                </td>
+                                <td>
+                                    <input type="submit" class="btn-radius border brown go" value="Go"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </div>
+
+            </div>
+        </section>

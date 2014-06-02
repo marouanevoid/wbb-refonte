@@ -127,8 +127,8 @@ sonata_media:
                 small:          { width: 100 , quality: 70}
                 big:            { width: 500 , quality: 70}
                 large:          { width: 1024, quality: 70}
-                slider_small :  { width: 640 , height: 480, quality: 70 }
-                slider_large :  { width: 1280 , height: 960, quality: 70 }
+                slider_small :  { width: 320 , height: 240, quality: 70 }
+                slider_large :  { width: 640 , height: 480, quality: 70 }
     cdn:
         server:
             path: /uploads/media
