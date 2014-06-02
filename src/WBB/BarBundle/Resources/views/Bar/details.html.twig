@@ -4,6 +4,9 @@
 
 {% block javascripts %}
     <script type="text/javascript">
+        /**
+         * TODO : Créer des fonction JS pour gérer cette partie
+         */
         var barId = "{{ bar.id }}",
                 venue  = "{{ bar.foursquare }}",
                 insta = "{{ bar.instagram }}",
@@ -153,7 +156,7 @@
                 <div class="content">
                     <div class="overlay"></div>
                     {% for m in bar.medias|slice(0,1) %}
-                        <img src="{% path m.media, 'slider_large' %}" />
+                        <img src="{% path m.media, 'large' %}" />
                     {% endfor %}
                 </div>
             </div>
@@ -162,9 +165,10 @@
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
             <div class="ui-slide" style="display:none">
                 {% for m in bar.medias %}
+
                     {% if not loop.first %}
                     <div class="image">
-                        <div class="content">
+                        <div class="content">{{ loop.index0 }}
                             <div class="overlay"></div>
                             <img src="{% path m.media, 'slider_small' %}"/>
                         </div>
@@ -280,7 +284,7 @@
                         <div class="content form">
                             <form>
                                 <h3>Leave a tip</h3>
-                                <textarea class="s-margin-top" name="" id="" placeholder="Type your tip ..."></textarea>
+                                <textarea class="s-margin-top" name="" id="" placeholder="Type a tip ..."></textarea>
                                 <div class="m-margin-top h4 count">499 left</div>
                                 <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
                             </form>
@@ -351,7 +355,7 @@
     <section class="also-like">
         <div class="container m-padding-bottom">
             <div class="h1 twelve columns align-center l-margin-top m-margin-bottom">
-                You May Also Like
+                {% if oneCity %}Related bars in {{ bar.city.name }}{% else %}You May Also Like{% endif %}
             </div>
             {% for b in barLike %}
                 <div class="three columns">

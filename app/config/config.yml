@@ -139,8 +139,8 @@ sonata_media:
             create:     true
 
     providers:
-        image:
-            resizer: sonata.media.resizer.square
+            image:
+                resizer: sonata.media.resizer.square
 
 #Fake Data Generator
 hautelook_alice:
