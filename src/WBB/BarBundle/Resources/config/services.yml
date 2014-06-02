@@ -152,3 +152,8 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBBarBundle:Bar']
+
+    #Resizer
+    sonata.media.resizer.custom:
+        class: WBB\BarBundle\Resizer\CustomResizer
+        arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
