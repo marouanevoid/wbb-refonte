@@ -28,6 +28,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
         "sonata-project/jquery-bundle": "1.8.*",
         "sonata-project/media-bundle": "2.2.*",
+        "sonata-project/formatter-bundle": "2.*",
 
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "friendsofsymfony/jsrouting-bundle": "1.*",
@@ -36,6 +37,8 @@
         "guzzle/guzzle": "v3.8",
         "sonata-project/formatter-bundle": "2.*",
         "stnw/date-picker-bundle" : "dev-master"
+
+        "suncat/mobile-detect-bundle": "0.9.*"
     },
     "scripts": {
         "post-install-cmd": [

@@ -35,6 +35,17 @@ class Instagram implements FeedInterface
         $this->clientId     = $clientId;
     }
 
+    public function getInstagramID($username)
+    {
+        $url = "/v1/users/search?q=$username&count=1&client_id=$this->clientId";
+
+        $response = $this->client->get($url)->send();
+
+        $data = json_decode($response->getBody());
+
+        return $data->data[0]->id;
+    }
+
     /**
      * find
      *
@@ -44,7 +55,8 @@ class Instagram implements FeedInterface
      */
     public function find($id = null, $next = 0)
     {
-        $url = "/v1/users/$id/media/recent/?count=$this->limit&client_id=$this->clientId";
+        $instID = $this->getInstagramID($id);
+        $url = "/v1/users/$instID/media/recent/?count=$this->limit&client_id=$this->clientId";
 
         if($next > 0) $url .= "max_id=$next";
 
@@ -67,7 +79,8 @@ class Instagram implements FeedInterface
      */
     public function findByHash($id)
     {
-        $url = "/v1/media/$id?client_id=$this->clientId";
+        $instID = $this->getInstagramID($id);
+        $url = "/v1/media/$instID?client_id=$this->clientId";
         $response = $this->client->get($url)->send();
 
         $data = json_decode($response->getBody());

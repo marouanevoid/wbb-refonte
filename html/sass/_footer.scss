@@ -7,8 +7,9 @@
       .left { float: left;
 
         nav {
-          a { color: $color-subtle-yellow; }
-          a+a:before{ font-size: 0.6em; padding: 0 0.8em; color: $color-subtle-yellow; content: '•' }
+          a { color: $color-subtle-yellow; margin-right: 1em; position: relative }
+          a+a:before{ font-size: 0.6em; padding: 0 0.8em; color: $color-subtle-yellow; content: '•'; position: absolute; left: -2em; }
+          a:hover{ color: $color-brown }
         }
 
         .copy { margin-top: 1.5em; color: $color-subtle-yellow; }

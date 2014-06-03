@@ -21,13 +21,21 @@
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.easing.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.velocity.min.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.transform3d.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/modernizr.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/placeholders.min.js"></script>
 
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/slider.metabolism.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/ratio.metabolism.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/loadMore.metabolism.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/libs/dropdown.metabolism.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/libs/radio.metabolism.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/libs/search.metabolism.js"></script>
 
     <script type="text/javascript" src="/bundles/wbbcore/js/app.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/anim.js"></script>
 
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
@@ -36,7 +44,7 @@
         var MARKET  = "US";
         var LANG    = "en";
         var BASEURL = "/";
-        var TRAD    = {};
+        var TRAD    = { loading: 'Loading...'};
     </script>
     {% block javascripts %}
     {% endblock %}

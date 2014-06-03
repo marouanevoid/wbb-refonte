@@ -23,12 +23,14 @@ class BarAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('isCreditCard', null, array('editable' => true))
-            ->add('isCoatCheck', null, array('editable' => true))
-            ->add('price', null, array('editable' => true))
-            ->add('isReservation', null, array('editable' => true))
+            ->add('city')
+            ->add('suburb')
+            ->add('website')
+            ->add('createdAt')
+            ->add('updatedAt')
             ->add('onTop', null, array('editable' => true))
-            ->add('status', null, array('editable' => true))
+            ->add('status', 'status')
+            ->add('user')
         ;
     }
 

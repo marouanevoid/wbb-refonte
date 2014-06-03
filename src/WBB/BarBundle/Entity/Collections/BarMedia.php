@@ -43,6 +43,11 @@ class BarMedia
     private $bar;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfBar", mappedBy="media", cascade={"all"}, orphanRemoval=true)
+     */
+    private $bestofs;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $media;
@@ -271,5 +276,45 @@ class BarMedia
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->bestofs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add bestofs
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     * @return BarMedia
+     */
+    public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
+    {
+        $this->bestofs[] = $bestofs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofs
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     */
+    public function removeBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
+    {
+        $this->bestofs->removeElement($bestofs);
+    }
+
+    /**
+     * Get bestofs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBestofs()
+    {
+        return $this->bestofs;
     }
 }

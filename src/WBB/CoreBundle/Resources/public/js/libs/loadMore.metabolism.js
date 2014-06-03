@@ -44,19 +44,24 @@ meta.LoadMore = function(config) {
     /* Public attributes. */
     that._setupEvents = function(){
 
-        that.config.$button.click(function(e)
+        that.config.$button.on('click', function(e)
         {
             e.preventDefault();
 
             if(that.context.is_loading) return;
 
-            that.context.is_loading = true;
 
-            var $button     = that.config.$button;
+            var $button     = $(this);
             var $target     = that.context.$container.find('.load-target');
             var url         = $button.attr('href')+that.config.page+that.context.page;
 
-            that._load(url, $target );
+            $button.data('text', $button.text());
+            $button.addClass('loading').text(TRAD.loading);
+
+            that._load(url, $target, function()
+            {
+                $button.removeClass('loading').text( $button.data('text'));
+            });
         });
     };
 
@@ -68,7 +73,7 @@ meta.LoadMore = function(config) {
     };
 
 
-    that._animate = function($target, $elements ){
+    that._animate = function($target, $elements, callback ){
 
         var target_height = $target.show().height();
 
@@ -78,6 +83,7 @@ meta.LoadMore = function(config) {
         $target.velocity({height:target_height}, that.config.speed, that.config.easing, function()
         {
             $target.removeAttr('style');
+            if(callback) callback();
         });
 
         $elements.each(function(index){
@@ -87,8 +93,11 @@ meta.LoadMore = function(config) {
     };
 
 
-    that._load = function( url, $target)
+    that._load = function( url, $target, callback)
     {
+        that.context.is_loading = true;
+
+        callback()
         $target.load(url, function()
         {
             $target.hide();
@@ -96,7 +105,7 @@ meta.LoadMore = function(config) {
             $target.removeClass('load-target');
             $target.after('<div class="'+that.config.class+' load-target"/>');
 
-            that._animate($target, $target.find('> *') );
+            that._animate($target, $target.find('> *').not('br'), callback );
 
             that.context.page +=1;
             that.context.is_loading = false;
