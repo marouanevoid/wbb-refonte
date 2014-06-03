@@ -20,14 +20,14 @@ class BarController extends Controller
     {
         $bar = $this->container->get('bar.repository')->findOneById($id);
         
-        $youMayAlsoLike = $this->container->get('bar.tag.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_CITY, null , 4);
+        $youMayAlsoLike = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_CITY, null , 4);
 
         $size = sizeof($youMayAlsoLike);
         $oneCity = true;
 
         if($size < 4)
         {
-            $temp = $this->container->get('bar.tag.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, (4 - $size));
+            $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, (4 - $size));
 
             if(sizeof($temp) > 0){
                 $oneCity = false;
@@ -41,7 +41,7 @@ class BarController extends Controller
 
             if($size < 4)
             {
-                $temp = $this->container->get('bar.tag.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, (4 - $size));
+                $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, (4 - $size));
 
                 if(sizeof($temp)>0){
                     $oneCity = false;
