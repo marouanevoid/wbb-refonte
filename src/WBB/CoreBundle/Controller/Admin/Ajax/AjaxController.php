@@ -16,7 +16,7 @@ class AjaxController extends Controller
         $suburbs = $city->getSuburbs();
 
         foreach($suburbs as $suburb){
-            if($bar->getSuburb()->getId() == $suburb->getId())
+            if($bar->getSuburb() and $bar->getSuburb()->getId() == $suburb->getId())
                 $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
             else
                 $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
