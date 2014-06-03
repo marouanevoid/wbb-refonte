@@ -172,7 +172,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
+        <div class="ui-slider type-bar-detail has_sizer arrows infinite" data-size="4x3" data-animation="latency">
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
             <div class="ui-slide" style="display:none">
                 {% for m in bar.medias %}
@@ -196,14 +196,15 @@
         <article class="main">
             {% if not is_mobile() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
             <div class="eight columns l-margin-top">
-                <p>
-                    <strong>At a Glance:&nbsp;&nbsp;</strong>
+
+                <ul class="trends">
+                    <li>At a Glance :</li>
                     {% for tr in bar.tags %}
-                    {{ tr.tag }}{% if not loop.last %}&nbsp;&nbsp;∙&nbsp;&nbsp;{% endif %}
-                    {% endfor%}<br/>
-                    <br/>
-                    {{ bar.description }}
-                </p>
+                        <li>{{ tr.tag }}</li>
+                    {% endfor%}
+                </ul>
+
+                    <p>{{ bar.description }}</p>
                 <!-- ALSO APPEARS -->
                 {% if not is_mobile() %}
                 <div class="also-appears">
@@ -244,7 +245,7 @@
                         <p>
                             {{ bar.address }}<br/>
                             {{ bar.city }}<br/>
-                            {{ bar.phone }}<br/>
+                            <a href='tel:{{ bar.phone }}'>{{ bar.phone }}</a><br/>
                             <a href="mailto:{{ bar.email }}">{{ bar.email }}</a>
                             <br/>
                             {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank"></a>{% endif %}
