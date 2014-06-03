@@ -11,7 +11,7 @@
                 venue  = "{{ bar.foursquare }}",
                 insta = "{{ bar.instagram }}",
                 imgs = [],
-                i, m, n, o, reste, lastImages,
+                i, m, n, reste, lastImages,
                 fsq = [],
                 ins = [],
                 html = "";
@@ -70,17 +70,15 @@
                                                 if(typeof fsq[i+1] != 'undefined') { html+=fsq[i+1]; }
                                             }
                                             $('.ui-slide').append(html);
-                                            imgs = $('.image');
+                                            imgs = $('.ui-slide .image');
                                             $('.ui-slide').remove();
                                             html = "";
-                                            o = 0;
                                             for(n=0; n<Math.ceil(imgs.length/4); n++){
                                                 html+='<div class="ui-slide">';
                                                 for(m=n*4; m<(n+1)*4; m++){
-                                                    if(imgs[m] && o>0){
+                                                    if(imgs[m]){
                                                         html+=nodeToString(imgs[m]);
                                                     }
-                                                    o++;
                                                 }
                                                 html+='</div>';
                                             }
