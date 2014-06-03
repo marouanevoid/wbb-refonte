@@ -73,7 +73,7 @@
                                             imgs = $('.image');
                                             $('.ui-slide').remove();
                                             html = "";
-                                            for(n=0; n<Math.ceil(imgs.length/4); n++){
+                                            for(n=1; n<Math.ceil(imgs.length/4); n++){
                                                 html+='<div class="ui-slide">';
                                                 for(m=n*4; m<(n+1)*4; m++){
                                                     if(imgs[m]){
@@ -153,14 +153,20 @@
     <div class="container full">
     <section class="gallery">
         <div class="main">
-            <div class="image">
-                <div class="content">
-                    <div class="overlay"></div>
-                    {% for m in bar.medias|slice(0,1) %}
-                        <img src="{% path m.media, 'slider_large' %}" />
-                    {% endfor %}
-                </div>
-            </div>
+            {% for m in bar.medias|slice(0,1) %}
+                {% if m.media.providerName == 'sonata.media.provider.youtube' %}
+                    <div class="video has_sizer" data-size="4x3">
+                        <iframe width="853" height="480" src="http://www.youtube.com/embed/{{ m.media.providerReference }}?autoplay=0&modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light&wmode=transparent" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                {% else %}
+                    <div class="image">
+                        <div class="content">
+                            <div class="overlay"></div>
+                            <img src="{% path m.media, 'slider_large' %}" />
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
         <div class="ui-slider type-bar-detail has_sizer arrows infinite" data-size="4x3" data-animation="latency">
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
@@ -310,29 +316,6 @@
                 <div class="three columns box">
                     <article class="tip">
 
-                        <table class="content ">
-
-                            <tbody>
-                            <tr class="excerpt">
-                                <td colspan="2">
-                                    <div class="scroll">
-                                        <img src="{{ asset('/bundles/wbbcore/images/icons/pin.foursquare-blue.png') }}" alt="icon.foursquare" width="30"
-                                             height="30"><br>
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes
-                                        that make dining at Macao a unique experience.”
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            </tbody>
-                        </table>
-                    </article>
-                </div>
-
-                <div class="three columns box">
-                    <article class="tip">
-
                         <table class="content expert">
 
                             <tr class="excerpt">
@@ -368,22 +351,67 @@
                 <div class="three columns box">
                     <article class="tip">
 
-                        <table class="content ">
+                        <table class="content expert">
 
-                            <tbody>
                             <tr class="excerpt">
                                 <td colspan="2">
                                     <div class="scroll">
-                                        <img src="{{ asset('/bundles/wbbcore/images/icons/pin.foursquare-blue.png') }}" alt="icon.foursquare" width="30"
-                                             height="30"><br>
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes
-                                        that make dining at Macao a unique experience.”
+                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
                                     </div>
                                 </td>
                             </tr>
 
+                            <tr>
+                                <td colspan="2">
+                                    <hr class="s-margin-bottom"/>
+                                </td>
+                            </tr>
 
-                            </tbody>
+                            <tr class="author">
+                                <td>
+                                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                                </td>
+                                <td>
+                                    <b>Expert</b>
+                                    Ryan Melon
+                                </td>
+                            </tr>
+
+
+                        </table>
+                    </article>
+                </div>
+
+                <div class="three columns box">
+                    <article class="tip">
+
+                        <table class="content expert">
+
+                            <tr class="excerpt">
+                                <td colspan="2">
+                                    <div class="scroll">
+                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <hr class="s-margin-bottom"/>
+                                </td>
+                            </tr>
+
+                            <tr class="author">
+                                <td>
+                                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                                </td>
+                                <td>
+                                    <b>Expert</b>
+                                    Ryan Melon
+                                </td>
+                            </tr>
+
+
                         </table>
                     </article>
                 </div>
