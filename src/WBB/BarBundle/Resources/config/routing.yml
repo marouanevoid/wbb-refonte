@@ -12,7 +12,7 @@ wbb_bar_details:
 #Services
 wbb_bar_feeds_find:
     pattern:  /feed/find/{type}/{id}
-    defaults: { _controller: WBBBarBundle:FSAdmin:find }
+    defaults: { _controller: WBBBarBundle:FSAdmin:find, id: 0 }
     options:
             expose: true
 

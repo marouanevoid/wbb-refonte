@@ -52,7 +52,10 @@ class FSAdminController extends Controller
      */
     public function findAction($type, $id)
     {
-        return new JsonResponse($this->get("wbb.{$type}.feed")->find($id));
+        if($id != 0)
+            return new JsonResponse($this->get("wbb.{$type}.feed")->find($id));
+        else
+            return new JsonResponse(null);
     }
 
     /**
