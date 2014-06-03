@@ -87,6 +87,8 @@ security:
         ROLE_MODERATOR:
             - ROLE_ADMIN
             - ROLE_WBB_BAR_ALL
+            - ROLE_WBB_BAR_MEDIA_ALL
+            - ROLE_WBB_BAR_TAG_ALL
             - ROLE_WBB_BAR_FEED_ALL
             - ROLE_BAR_ID
             - ROLE_WBB_BESTOF_ALL
