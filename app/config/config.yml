@@ -128,6 +128,9 @@ sonata_media:
     db_driver: doctrine_orm
     contexts:
         default:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
             providers:
                 - sonata.media.provider.youtube
                 - sonata.media.provider.image

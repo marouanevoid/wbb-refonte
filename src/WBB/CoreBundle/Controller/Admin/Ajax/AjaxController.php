@@ -7,15 +7,19 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AjaxController extends Controller
 {
-    public function getSuburbsFromCityAction($cityId)
+    public function getSuburbsFromCityAction($bar, $cityId)
     {
         $html = "";
+        $bar = $this->getDoctrine()->getRepository('WBBBarBundle:Bar')->find($bar);
         $city = $this->getDoctrine()->getRepository('WBBCoreBundle:City')->find($cityId);
 
         $suburbs = $city->getSuburbs();
 
         foreach($suburbs as $suburb){
-            $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
+            if($bar->getSuburb() and $bar->getSuburb()->getId() == $suburb->getId())
+                $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
+            else
+                $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
         }
 
         return new JsonResponse($html);
