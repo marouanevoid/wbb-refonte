@@ -1,0 +1,11 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% if value == 2 %}
+        Enabled
+    {% elseif value == 1 %}
+        Pending
+    {% else %}
+        Disabled
+    {% endif %}
+{% endblock %}

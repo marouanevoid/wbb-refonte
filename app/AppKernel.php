@@ -43,6 +43,9 @@ class AppKernel extends Kernel
             //Guzzle
 //            new Misd\GuzzleBundle\MisdGuzzleBundle(),
 
+            //Mobile Detecte
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
+
             // sonata formatter
             new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
