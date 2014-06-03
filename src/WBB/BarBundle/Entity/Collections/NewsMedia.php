@@ -25,6 +25,13 @@ class NewsMedia {
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="alt", type="string", length=255, nullable=true)
+     */
+    private $alt;    
+
+    /**
      * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="medias")
      * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
@@ -74,6 +81,30 @@ class NewsMedia {
         return $this->id;
     }
 
+
+    /**
+     * Set alt
+     *
+     * @param string $alt
+     * @return BarMedia
+     */
+    public function setAlt($alt)
+    {
+        $this->alt = $alt;
+
+        return $this;
+    }
+
+    /**
+     * Get alt
+     *
+     * @return string 
+     */
+    public function getAlt()
+    {
+        return $this->alt;
+    }    
+    
     /**
      * Set news
      *

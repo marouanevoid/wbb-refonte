@@ -51,6 +51,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
+            
+            // sonata datepiker
+            new Stnw\DatePickerBundle\StnwDatePickerBundle(),
 
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
