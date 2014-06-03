@@ -467,6 +467,32 @@
                 <source>filter.label_is_on_top</source>
                 <target>Is on top</target>
             </trans-unit>
+            <!-- sponsor -->
+            <trans-unit id="form.label_sponsor">
+                <source>form.label_sponsor</source>
+                <target>Sponsor</target>
+            </trans-unit>
+            <trans-unit id="list.label_sponsor">
+                <source>list.label_sponsor</source>
+                <target>Sponsor</target>
+            </trans-unit>
+            <trans-unit id="filter.label_sponsor">
+                <source>filter.label_sponsor</source>
+                <target>Sponsor</target>
+            </trans-unit>
+            <!-- sponsor image -->
+            <trans-unit id="form.label_sponsor_image">
+                <source>form.label_sponsor_image</source>
+                <target>Sponsor image</target>
+            </trans-unit>
+            <trans-unit id="list.label_sponsor_image">
+                <source>list.label_sponsor_image</source>
+                <target>Sponsor image</target>
+            </trans-unit>
+            <trans-unit id="filter.label_sponsor_image">
+                <source>filter.label_sponsor_image</source>
+                <target>Sponsor Image</target>
+            </trans-unit>
             <!-- bars -->
             <trans-unit id="form.label_bars">
                 <source>form.label_bars</source>
