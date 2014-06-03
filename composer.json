@@ -36,8 +36,7 @@
         "jcroll/foursquare-api-bundle": "1.0.*",
         "guzzle/guzzle": "v3.8",
         "sonata-project/formatter-bundle": "2.*",
-        "stnw/date-picker-bundle" : "dev-master"
-
+        "stnw/date-picker-bundle" : "dev-master",
         "suncat/mobile-detect-bundle": "0.9.*"
     },
     "scripts": {
