@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "56af6815c0652cd796fe84ec4615826b",
+    "hash": "3351b24393c5628e0b2d4d072b0d985b",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -3699,6 +3699,48 @@
             "time": "2014-04-17 12:52:34"
         },
         {
+            "name": "stnw/date-picker-bundle",
+            "version": "dev-master",
+            "target-dir": "Stnw/DatePickerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stnw/StnwDatePickerBundle.git",
+                "reference": "99e976127cf2ec98ecebeae00f1743586824a51e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stnw/StnwDatePickerBundle/zipball/99e976127cf2ec98ecebeae00f1743586824a51e",
+                "reference": "99e976127cf2ec98ecebeae00f1743586824a51e",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=v2.4.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Stnw\\DatePickerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sergey Studenikin",
+                    "email": "studenikin.s@gmail.com"
+                }
+            ],
+            "description": "DatePicker and DateTimePicker field type for Symfony2 and SonataAdminBundle.",
+            "keywords": [
+                "DatePickerType",
+                "DateTimePicker",
+                "DateTymePickerType",
+                "FormType",
+                "datepicker",
+                "picker"
+            ],
+            "time": "2014-06-02 14:20:34"
+        },
+        {
             "name": "stof/doctrine-extensions-bundle",
             "version": "dev-master",
             "target-dir": "Stof/DoctrineExtensionsBundle",
@@ -4095,16 +4137,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.3.16",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "069683a14eb361f892c9bdc9d10d4f5dac3c0ee3"
+                "reference": "2e47d2edd45080c046bc32dd2ca5c64f31086366"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/069683a14eb361f892c9bdc9d10d4f5dac3c0ee3",
-                "reference": "069683a14eb361f892c9bdc9d10d4f5dac3c0ee3",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/2e47d2edd45080c046bc32dd2ca5c64f31086366",
+                "reference": "2e47d2edd45080c046bc32dd2ca5c64f31086366",
                 "shasum": ""
             },
             "require": {
@@ -4125,6 +4167,7 @@
                 "symfony/doctrine-bridge": "self.version",
                 "symfony/dom-crawler": "self.version",
                 "symfony/event-dispatcher": "self.version",
+                "symfony/expression-language": "self.version",
                 "symfony/filesystem": "self.version",
                 "symfony/finder": "self.version",
                 "symfony/form": "self.version",
@@ -4141,7 +4184,11 @@
                 "symfony/proxy-manager-bridge": "self.version",
                 "symfony/routing": "self.version",
                 "symfony/security": "self.version",
+                "symfony/security-acl": "self.version",
                 "symfony/security-bundle": "self.version",
+                "symfony/security-core": "self.version",
+                "symfony/security-csrf": "self.version",
+                "symfony/security-http": "self.version",
                 "symfony/serializer": "self.version",
                 "symfony/stopwatch": "self.version",
                 "symfony/swiftmailer-bridge": "self.version",
@@ -4159,13 +4206,13 @@
                 "doctrine/orm": "~2.2,>=2.2.3",
                 "ircmaxell/password-compat": "1.0.*",
                 "monolog/monolog": "~1.3",
-                "ocramius/proxy-manager": ">=0.3.1,<0.4-dev",
+                "ocramius/proxy-manager": ">=0.3.1,<0.5-dev",
                 "propel/propel1": "1.6.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -4201,7 +4248,6 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-05-31 02:04:21"
         },
         {
             "name": "twig/extensions",
@@ -4412,7 +4458,7 @@
         "stof/doctrine-extensions-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
         "hautelook/alice-bundle": 20,
-        "liip/imagine-bundle": 20
+            "time": "2013-12-03 15:23:03"
     },
     "platform": {
         "php": ">=5.3.3"
