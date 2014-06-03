@@ -3050,6 +3050,7 @@ article.city:hover img.scale-with-grid {
 .bar-details .content .trends li {
     display: inline-block;
     margin-left: 0.7em;
+    line-height: 26px;
 }
 /* line 25, ../sass/pages/_bar-details.scss */
 .bar-details .content .trends li:after {
