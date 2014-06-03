@@ -35,6 +35,7 @@ class BarTagRepository extends EntityRepository
             ->where($qb->expr()->eq('b.onTop', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->in('t.id',':tags'))
             ->andWhere($qb->expr()->notIn('b.id',':exceptBars'))
+            ->groupBy('b')
             ->setParameter('tags', $bar->getTagsIds())
             ->setParameter('exceptBars', $ids)
             ->setMaxResults($limit)
