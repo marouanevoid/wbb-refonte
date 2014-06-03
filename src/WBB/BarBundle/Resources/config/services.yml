@@ -153,6 +153,12 @@ services:
         factory_method: getRepository
         arguments: ['WBBBarBundle:Bar']
 
+    bar.tag.repository:
+            class: WBB\BarBundle\Repository\BarTagRepository
+            factory_service: doctrine.orm.default_entity_manager
+            factory_method: getRepository
+            arguments: ['WBBBarBundle:BarTag']
+
     #Resizer
     sonata.media.resizer.custom:
         class: WBB\BarBundle\Resizer\CustomResizer
