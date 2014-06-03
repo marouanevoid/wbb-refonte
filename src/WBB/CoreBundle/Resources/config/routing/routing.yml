@@ -3,7 +3,7 @@ wbb_sonata:
     prefix:   /
 
 get_suburbs_from_city:
-    pattern: /ajax/get-suburbs-from-city/{cityId}
+    pattern: /ajax/get-suburbs-from-city/{bar}/{cityId}
     defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getSuburbsFromCity}
     options:
         expose: true

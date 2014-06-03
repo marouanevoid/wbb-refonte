@@ -107,7 +107,7 @@ file that was distributed with this source code.
                     suburb.empty();
                     suburb.trigger("list:updated");
 
-                    var url = Routing.generate('get_suburbs_from_city', {'cityId': cityId });
+                    var url = Routing.generate('get_suburbs_from_city', {'bar': {{ admin.id(object) }}, 'cityId': cityId });
                     $.post(url, { cityId: cityId }, function(data){
                         var options = JSON && JSON.parse(data) || $.parseJSON(data);
                         suburb.empty().append(options);
