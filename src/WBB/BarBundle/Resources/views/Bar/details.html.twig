@@ -11,7 +11,7 @@
                 venue  = "{{ bar.foursquare }}",
                 insta = "{{ bar.instagram }}",
                 imgs = [],
-                i, m, n, reste, lastImages,
+                i, m, n, o, reste, lastImages,
                 fsq = [],
                 ins = [],
                 html = "";
@@ -73,12 +73,14 @@
                                             imgs = $('.image');
                                             $('.ui-slide').remove();
                                             html = "";
-                                            for(n=1; n<Math.ceil(imgs.length/4); n++){
+                                            o = 0;
+                                            for(n=0; n<Math.ceil(imgs.length/4); n++){
                                                 html+='<div class="ui-slide">';
                                                 for(m=n*4; m<(n+1)*4; m++){
-                                                    if(imgs[m]){
+                                                    if(imgs[m] && o>0){
                                                         html+=nodeToString(imgs[m]);
                                                     }
+                                                    o++;
                                                 }
                                                 html+='</div>';
                                             }
