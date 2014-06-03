@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.3.*",
+        "symfony/symfony": "2.4",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
@@ -34,7 +34,8 @@
         "hautelook/alice-bundle": "dev-master",
         "jcroll/foursquare-api-bundle": "1.0.*",
         "guzzle/guzzle": "v3.8",
-        "sonata-project/formatter-bundle": "2.*"
+        "sonata-project/formatter-bundle": "2.*",
+        "stnw/date-picker-bundle" : "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

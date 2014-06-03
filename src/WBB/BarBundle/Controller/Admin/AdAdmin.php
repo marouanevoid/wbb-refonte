@@ -33,8 +33,8 @@ class AdAdmin extends Admin {
             ->add('tag')
             ->add('link')
             ->add('countries')
-            ->add('beginAt')
-            ->add('endAt')
+            ->add('beginAt', 'stnw_date_filter')
+            ->add('endAt', 'stnw_date_filter')
         ;
     }
 
@@ -83,8 +83,8 @@ class AdAdmin extends Admin {
                         'context' => 'default'
                     )
                 ))
-                ->add('beginAt')
-                ->add('endAt')                
+                ->add('beginAt', 'datePicker') 
+                ->add('endAt', 'datePicker')
                 ->add('countries', 'sonata_type_model', array('multiple' => true))
             ->end()
         ;

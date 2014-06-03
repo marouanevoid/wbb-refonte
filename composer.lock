@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "8371f7cd6d453203354a9f34e592712a",
+    "hash": "3351b24393c5628e0b2d4d072b0d985b",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -804,17 +805,17 @@
         },
         {
             "name": "egeloen/ckeditor-bundle",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "target-dir": "Ivory/CKEditorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
-                "reference": "12c81a2320168e05a6042bf3b3c03b80307e0b02"
+                "reference": "42d201a59fa0e1625f4dd7167a57a2337b9a528f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/12c81a2320168e05a6042bf3b3c03b80307e0b02",
-                "reference": "12c81a2320168e05a6042bf3b3c03b80307e0b02",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/42d201a59fa0e1625f4dd7167a57a2337b9a528f",
+                "reference": "42d201a59fa0e1625f4dd7167a57a2337b9a528f",
                 "shasum": ""
             },
             "require": {
@@ -857,7 +858,7 @@
             "keywords": [
                 "CKEditor"
             ],
-            "time": "2014-05-16 10:00:06"
+            "time": "2014-05-26 19:37:11"
         },
         {
             "name": "egeloen/json-builder",
@@ -3592,6 +3593,48 @@
             "time": "2014-04-17 12:52:34"
         },
         {
+            "name": "stnw/date-picker-bundle",
+            "version": "dev-master",
+            "target-dir": "Stnw/DatePickerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stnw/StnwDatePickerBundle.git",
+                "reference": "99e976127cf2ec98ecebeae00f1743586824a51e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stnw/StnwDatePickerBundle/zipball/99e976127cf2ec98ecebeae00f1743586824a51e",
+                "reference": "99e976127cf2ec98ecebeae00f1743586824a51e",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=v2.4.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Stnw\\DatePickerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sergey Studenikin",
+                    "email": "studenikin.s@gmail.com"
+                }
+            ],
+            "description": "DatePicker and DateTimePicker field type for Symfony2 and SonataAdminBundle.",
+            "keywords": [
+                "DatePickerType",
+                "DateTimePicker",
+                "DateTymePickerType",
+                "FormType",
+                "datepicker",
+                "picker"
+            ],
+            "time": "2014-06-02 14:20:34"
+        },
+        {
             "name": "stof/doctrine-extensions-bundle",
             "version": "dev-master",
             "target-dir": "Stof/DoctrineExtensionsBundle",
@@ -3772,20 +3815,21 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.0.1",
+            "version": "v1.2.1",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "fdba214b1e087c149843bde976263c53ac10c975"
+                "reference": "98e197da54df1f966dd5e8a4992135703569c987"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/fdba214b1e087c149843bde976263c53ac10c975",
-                "reference": "fdba214b1e087c149843bde976263c53ac10c975",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/98e197da54df1f966dd5e8a4992135703569c987",
+                "reference": "98e197da54df1f966dd5e8a4992135703569c987",
                 "shasum": ""
             },
             "require": {
+                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -3815,7 +3859,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-10-04 09:12:07"
+            "time": "2013-10-04 10:06:38"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -3936,16 +3980,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.3.15",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "424a567d2c1fb918a32f302b5c2bcb67d2661e76"
+                "reference": "2e47d2edd45080c046bc32dd2ca5c64f31086366"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/424a567d2c1fb918a32f302b5c2bcb67d2661e76",
-                "reference": "424a567d2c1fb918a32f302b5c2bcb67d2661e76",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/2e47d2edd45080c046bc32dd2ca5c64f31086366",
+                "reference": "2e47d2edd45080c046bc32dd2ca5c64f31086366",
                 "shasum": ""
             },
             "require": {
@@ -3966,6 +4010,7 @@
                 "symfony/doctrine-bridge": "self.version",
                 "symfony/dom-crawler": "self.version",
                 "symfony/event-dispatcher": "self.version",
+                "symfony/expression-language": "self.version",
                 "symfony/filesystem": "self.version",
                 "symfony/finder": "self.version",
                 "symfony/form": "self.version",
@@ -3982,7 +4027,11 @@
                 "symfony/proxy-manager-bridge": "self.version",
                 "symfony/routing": "self.version",
                 "symfony/security": "self.version",
+                "symfony/security-acl": "self.version",
                 "symfony/security-bundle": "self.version",
+                "symfony/security-core": "self.version",
+                "symfony/security-csrf": "self.version",
+                "symfony/security-http": "self.version",
                 "symfony/serializer": "self.version",
                 "symfony/stopwatch": "self.version",
                 "symfony/swiftmailer-bridge": "self.version",
@@ -4000,13 +4049,13 @@
                 "doctrine/orm": "~2.2,>=2.2.3",
                 "ircmaxell/password-compat": "1.0.*",
                 "monolog/monolog": "~1.3",
-                "ocramius/proxy-manager": ">=0.3.1,<0.4-dev",
+                "ocramius/proxy-manager": ">=0.3.1,<0.5-dev",
                 "propel/propel1": "1.6.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -4042,7 +4091,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-05-22 17:23:49"
+            "time": "2013-12-03 15:23:03"
         },
         {
             "name": "twig/extensions",
@@ -4252,7 +4301,8 @@
         "doctrine/doctrine-fixtures-bundle": 20,
         "stof/doctrine-extensions-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
-        "hautelook/alice-bundle": 20
+        "hautelook/alice-bundle": 20,
+        "stnw/date-picker-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"
