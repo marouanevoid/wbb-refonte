@@ -5,7 +5,7 @@
 {% block javascripts %}
     <script type="text/javascript">
         /**
-         * TODO : Créer des fonction JS pour gérer cette partie
+         * TODO : Créer des fonctions JS pour gérer cette partie
          */
         var barId = "{{ bar.id }}",
                 venue  = "{{ bar.foursquare }}",
@@ -134,7 +134,7 @@
     <section class="sub-header">
         <table>
             <tr>
-                {% if not is_mobile() %}
+                {% if not is_mobile() or is_tablet() %}
                 <td>
                     <div class="city-selector h3">
                         You are in
@@ -194,7 +194,7 @@
 <section class="content">
         <!-- MAIN CONTENT -->
         <article class="main">
-            {% if not is_mobile() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
+            {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
             <div class="eight columns l-margin-top">
 
                 <ul class="trends">
@@ -206,7 +206,7 @@
 
                     <p>{{ bar.description }}</p>
                 <!-- ALSO APPEARS -->
-                {% if not is_mobile() %}
+                {% if not is_mobile() or is_tablet() %}
                 <div class="also-appears">
                     <hr class="l-margin"/>
                     <div class="m-margin-top h2">This bar appears also in</div>
@@ -278,7 +278,7 @@
                         </div>
                     </div>
                 </div>
-                {% if not is_mobile() %}
+                {% if not is_mobile() or is_tablet() %}
                 <div class="block">
                     <div class="side-ad m-margin-top">
                         <img src="{{ asset('/bundles/wbbcore/images/tmp/ad.side.jameson.png') }}" alt="ad.jameson" width="300" height="250"/>
@@ -301,7 +301,7 @@
 
             <div class="line">
 
-                {% if not is_mobile() %}
+                {% if not is_mobile() or is_tablet() %}
                     <div class="three columns box">
                         <article class="tip">
                             <div class="content form">
@@ -425,7 +425,7 @@
 
             <div class="line load-target"></div>
 
-            {% if is_mobile() %}
+            {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
                 <a class="btn-radius border load-more brown" href="{{ asset('/bundles/wbbcore/images/tmp/data/tips.php') }}">Load More</a>
@@ -456,7 +456,7 @@
 
     </section>
     <!-- ALSO APPEARS -->
-    {% if is_mobile() %}
+    {% if is_mobile() and not is_tablet() %}
     <div class="container">
         <div class="twelve columns">
             <div class="also-appears">
@@ -493,7 +493,7 @@
             </div>
             {% for b in barLike %}
                 <div class="three columns">
-                    {% if is_mobile() %}
+                    {% if is_mobile() and not is_tablet() %}
                         <article class="bar-wo-pic">
                             <a href="" class="btn-round dark star"></a>
                             <div class="txt">
@@ -526,7 +526,7 @@
         </div>
     </section>
     <!-- AD -->
-    {% if not is_mobile() %}
+    {% if not is_mobile() or is_tablet() %}
 
         <section class="footer-ad">
             <div class="container align-center">
