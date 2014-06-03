@@ -271,7 +271,7 @@
                             </span>
                             Accepts Credit Cards: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
-                            Parking: {{ bar.parking }}<br/>
+                            {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
                             Price: {% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %} {% if bar.menu %}<a href="{{ bar.menu }}" target="_blank">(View menu)</a>{% endif %}<br/>
                             Reservation: {% if bar.isReservation %}Yes{% else %}No{% endif %}<br/>
                             {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
