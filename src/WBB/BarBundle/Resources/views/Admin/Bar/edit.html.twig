@@ -44,8 +44,10 @@ file that was distributed with this source code.
         var barId = "{{ admin.id(object) }}";
         var venue, insta;
         $(document).ready(function(){
-            venue = $("#{{ admin.uniqid }}_foursquare").val();
-            insta = $("#{{ admin.uniqid }}_instagram").val();
+            {#venue = $("#{{ admin.uniqid }}_foursquare").val();#}
+            venue = "{{ object.foursquare }}";
+            {#insta = $("#{{ admin.uniqid }}_instagram").val();#}
+            insta = "{{ object.instagram }}";
 
             $("#{{ admin.uniqid }}_foursquare").change(function(){
                 venue = $(this).val();
