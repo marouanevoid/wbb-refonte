@@ -85,10 +85,10 @@ class CustomResizer implements ResizerInterface
 
         $size = $media->getBox();
 
-        $ratios = [
+        $ratios = array(
             $settings['width'] / $size->getWidth(),
             $settings['height'] / $size->getHeight()
-        ];
+        );
 
         if ($this->mode === ImageInterface::THUMBNAIL_INSET)
             $ratio = min($ratios);
