@@ -830,6 +830,9 @@ class Bar
         $this->isCreditCard     = true;
         $this->onTop            = true;
         $this->isReservation    = true;
+
+        $this->latitude = 0;
+        $this->longitude = 0;
     }
 
     /**
