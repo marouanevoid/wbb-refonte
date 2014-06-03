@@ -28,7 +28,7 @@ class BarTagRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select('b')
+            ->select($this->getAlias().'bar')
             ->innerjoin($this->getAlias().'.bar', 'b')
             ->innerjoin('b.city', 'c')
             ->innerjoin($this->getAlias().'.tag', 't')
