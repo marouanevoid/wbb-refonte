@@ -151,7 +151,7 @@ class BarAdmin extends Admin
                 ->add('isReservation')
                 ->add('reservation');
 
-        if($this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
+        if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper->add('description');
         }
 
