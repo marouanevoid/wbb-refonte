@@ -30,7 +30,7 @@
                             </a>
                         </li>
                     {% endfor %}
-                    {% if admin.id(object) %}
+
                         {% if is_granted('ROLE_BAR_ID') %}
                             <li class="">
                                 <a href="#{{ admin.uniqid }}_map_tab" data-toggle="tab">
@@ -39,6 +39,7 @@
                                 </a>
                             </li>
                         {% endif %}
+                    {% if admin.id(object) %}
                         {% if is_granted('ROLE_WBB_BAR_FS_TIPS') %}
                             <li class="">
                                 <a href="#{{ admin.uniqid }}_fs_tips_tab" data-toggle="tab">
