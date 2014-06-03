@@ -42,18 +42,13 @@ class BarAdmin extends Admin
         $filterMapper
             ->add('id')
             ->add('name')
-            ->add('phone')
-            ->add('email')
-            ->add('website')
-            ->add('twitter')
-            ->add('facebook')
-            ->add('instagram')
-            ->add('isCreditCard')
-            ->add('isCoatCheck')
-            ->add('price')
-            ->add('isReservation')
             ->add('onTop')
-            ->add('status')
+            ->add('status', 'doctrine_orm_string', array(), 'choice',
+                    array('choices' => array(
+                            Bar::BAR_STATUS_PENDING_VALUE => 'Pending',
+                            Bar::BAR_STATUS_ENABLED_VALUE => 'Enabled',
+                            Bar::BAR_STATUS_DISABLED_VALUE => 'Disabled')
+                ))
         ;
     }
 

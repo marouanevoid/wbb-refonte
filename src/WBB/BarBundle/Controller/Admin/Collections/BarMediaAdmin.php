@@ -17,6 +17,16 @@ class BarMediaAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    protected $maxPerPage   = 5;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $maxPageLinks = 5;
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
