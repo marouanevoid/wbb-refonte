@@ -81,6 +81,14 @@ class NewsAdmin extends Admin {
                 ->add('richDescription')
                 ->add('isAnInterview')
                 ->add('isOnTop')
+                ->add('sponsor')
+                ->add('sponsorImage', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'default'
+                    )
+                ))
             ->end()
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection',
