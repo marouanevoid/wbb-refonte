@@ -271,7 +271,7 @@
                             </span>
                             Accepts Credit Cards: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
-                            {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
+                            Parking: {{ bar.parking }}<br/>
                             Price: {% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %} {% if bar.menu %}<a href="{{ bar.menu }}" target="_blank">(View menu)</a>{% endif %}<br/>
                             Reservation: {% if bar.isReservation %}Yes{% else %}No{% endif %}<br/>
                             {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
@@ -497,27 +497,27 @@
                         <article class="bar-wo-pic">
                             <a href="" class="btn-round dark star"></a>
                             <div class="txt">
-                                <h2>{{ b.name }}</h2>
-                                <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
+                                <h2>{{ b.bar.name }}</h2>
+                                <h3>{{ b.bar.suburb.name|default('Unspecified') }}, {{ b.bar.city.name|default('Unspecified') }}</h3>
                             </div>
-                            <a href="{{ path('wbb_bar_details',{id:b.id}) }}" class="overlay-link"></a>
+                            <a href="{{ path('wbb_bar_details',{id:b.bar.id}) }}" class="overlay-link"></a>
                         </article>
                     {% else %}
                     <article class="bar-w-pic">
                         <a href="" class="btn-round dark star"></a>
                         <div class="txt">
-                            <h2>{{ b.name }}</h2>
-                            <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
+                            <h2>{{ b.bar.name }}</h2>
+                            <h3>{{ b.bar.suburb.name|default('Unspecified') }}, {{ b.bar.city.name|default('Unspecified') }}</h3>
                             <div class="tags">
-                                {% for tr in b.tags %}
+                                {% for tr in b.bar.tags %}
                                     {{ tr.tag }}{% if not loop.last %}, {% endif %}
                                 {% endfor%}
                             </div>
                         </div>
-                        <a href="{{ path('wbb_bar_details',{id:b.id}) }}" class="overlay-link"></a>
+                        <a href="{{ path('wbb_bar_details',{id:b.bar.id}) }}" class="overlay-link"></a>
                         <div class="gradient"></div>
-                        {% for m in b.medias|slice(0,1) %}
-                            <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                        {% for m in b.bar.medias|slice(0,1) %}
+                            <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
                         {% endfor %}
                     </article>
                     {% endif %}

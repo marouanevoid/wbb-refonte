@@ -20,8 +20,8 @@ class BarTagRepository extends EntityRepository
         {
             foreach($exceptBars as $exBar)
             {
-                if($exBar)
-                    $ids[] = $exBar->getId();
+                if($exBar and $exBar->getBar())
+                    $ids[] = $exBar->getBar()->getId();
             }
         }
 
@@ -29,7 +29,6 @@ class BarTagRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->addSelect('b')
             ->innerjoin($this->getAlias().'.bar', 'b')
             ->innerjoin('b.city', 'c')
             ->innerjoin($this->getAlias().'.tag', 't')
