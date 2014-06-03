@@ -38,12 +38,14 @@
                         dataType: 'json',
                         success: function(response) {
                             i = 0;
-                            $.each(response.data, function(key, feed){
-                                if(in_array(feed.id, r) && i<5) {
-                                    fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="'+feed.prefix+"640x480"+feed.suffix+'"/></div></div>');
-                                    i++;
-                                }
-                            });
+                            if (typeof response.data != 'undefined') {
+                                $.each(response.data, function(key, feed){
+                                    if(in_array(feed.id, r) && i<5) {
+                                        fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="'+feed.prefix+"640x480"+feed.suffix+'"/></div></div>');
+                                        i++;
+                                    }
+                                });
+                            }
                             $.ajax({
                                 type: "POST",
                                 url:  Routing.generate('wbb_bar_feeds_list',
@@ -57,12 +59,14 @@
                                         dataType: 'json',
                                         success: function(response) {
                                             i = 0;
-                                            $.each(response.data.data, function(key, feed){
-                                                if(!in_array(feed.id, r) && i<5) {
-                                                    ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="'+feed.images.standard_resolution.url+'"/></div></div>');
-                                                    i++;
-                                                }
-                                            });
+                                            if (typeof response.data != 'undefined') {
+                                                $.each(response.data.data, function(key, feed){
+                                                    if(!in_array(feed.id, r) && i<5) {
+                                                        ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="'+feed.images.standard_resolution.url+'"/></div></div>');
+                                                        i++;
+                                                    }
+                                                });
+                                            }
                                             for(i=0; i<=4; i+=2){
                                                 if(typeof ins[i] != 'undefined') { html+=ins[i]; }
                                                 if(typeof ins[i+1] != 'undefined') { html+=ins[i+1]; }
@@ -168,7 +172,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="ui-slider type-bar-detail has_sizer arrows infinite" data-size="4x3" data-animation="latency">
+        <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
             <img class="loader" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
             <div class="ui-slide" style="display:none">
                 {% for m in bar.medias %}
@@ -251,10 +255,10 @@
                         </p>
                         <hr class="s-margin"/>
                         <div class="p">
-                            Hours: Today
+                            Hours:
                             {% for opening in bar.openings %}
                                 {% if opening.openingDay == "now"|date("N") %}
-                                    {{ opening.fromHour }}:00 - {{ opening.toHour }}:00
+                                    Today {{ opening.fromHour }}:00 - {{ opening.toHour }}:00
                                 {% endif %}
                             {% endfor%}
                             <a href="#0" id="showOpenings">(See all)</a><br/>
@@ -484,7 +488,7 @@
     <section class="also-like">
         <div class="container m-padding-bottom">
             <div class="h1 twelve columns align-center l-margin-top m-margin-bottom">
-                {% if oneCity %}Related bars in {{ bar.city.name }}{% else %}You May Also Like{% endif %}
+                {% if oneCity %}Related bars in {{ bar.city.name|default('Unspecified') }}{% else %}You May Also Like{% endif %}
             </div>
             {% for b in barLike %}
                 <div class="three columns">
@@ -493,23 +497,23 @@
                             <a href="" class="btn-round dark star"></a>
                             <div class="txt">
                                 <h2>{{ b.name }}</h2>
-                                <h3>{{ b.suburb.name }}, {{ b.city.name }}</h3>
+                                <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
                             </div>
-                            <a href="/bar/{{ bar.id }}/details" class="overlay-link"></a>
+                            <a href="{{ path('wbb_bar_details',{id:b.id}) }}" class="overlay-link"></a>
                         </article>
                     {% else %}
                     <article class="bar-w-pic">
                         <a href="" class="btn-round dark star"></a>
                         <div class="txt">
                             <h2>{{ b.name }}</h2>
-                            <h3>{{ b.suburb.name }}, {{ b.city.name }}</h3>
+                            <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
                             <div class="tags">
                                 {% for tr in b.tags %}
                                     {{ tr.tag }}{% if not loop.last %}, {% endif %}
                                 {% endfor%}
                             </div>
                         </div>
-                        <a href="/bar/{{ bar.id }}/details" class="overlay-link"></a>
+                        <a href="{{ path('wbb_bar_details',{id:b.id}) }}" class="overlay-link"></a>
                         <div class="gradient"></div>
                         {% for m in b.medias|slice(0,1) %}
                             <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
