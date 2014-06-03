@@ -133,9 +133,9 @@ class BarAdmin extends Admin
                 ->add('parking', 'choice', array(
                     'required' => false,
                     'choices'  => array(
-                        2 => 'Premier Etage',
-                        1 => 'RDC',
-                        0 => 'RDJ'
+                        'Premier Etage' => 'Premier Etage',
+                        'RDC'           => 'RDC',
+                        'RDJ'           => 'RDJ'
                     )
                 ))
                 ->add('price', 'choice', array(
