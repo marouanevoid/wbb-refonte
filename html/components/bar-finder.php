@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <select class="ui-dropdown dark" name="city">
+                            <select class="ui-dropdown dark" name="city" data-class="with-icon city">
                                 <option disabled="disabled">Choose a city</option>
                                 <option value="cty2">City 2</option>
                                 <option value="cty3">City 3</option>
@@ -33,7 +33,7 @@
                         </td>
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
                         <td>
-                            <select class="ui-dropdown dark" name="go_out">
+                            <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
                                 <option disabled="disabled">Friend...</option>
                                 <option>City 2</option>
                                 <option>City 3</option>
@@ -49,10 +49,10 @@
                             <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
                         </td>
                         <td>
-                            <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
+                            <input type="radio" name="mood" value="party" class="ui-radio dark"/>
                         </td>
                         <td>
-                            <input type="submit" class="btn-radius border brown go" value="Go"/>
+                            <input type="submit" class="btn-radius border brown go" value="GO"/>
                         </td>
                     </tr>
                 </table>

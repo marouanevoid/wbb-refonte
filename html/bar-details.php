@@ -36,7 +36,7 @@
                 <?php include('components/slider/video.php') ?>
             </div>
 
-            <div class="ui-slider type-bar-detail has_sizer arrows infinite" data-size="4x3" data-animation="latency">
+            <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
 
                 <?php for($i=1; $i<3; $i++): ?>
 

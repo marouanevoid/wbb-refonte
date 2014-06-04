@@ -24,3 +24,9 @@ article.city {
     }
   }
 }
+
+
+html.mobile article.city:hover
+{
+  img.scale-with-grid{ @include opacity(0.7) }
+}

@@ -35,6 +35,9 @@
       color: $color-brown; @include lightScrollbar();
       .choice li:hover{ color:$color-brown-dark }
     }
+    &.drop-cream {
+      background-color: #000000;
+    }
     &.drop-dark {
       background: $color-gray; color: $color-brown; border-color:$color-brown; @include darkScrollbar();
       &:hover, &.active { background: $color-light-gray; color: $color-subtle-yellow; border-color:$color-light-gray; }

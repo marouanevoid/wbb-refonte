@@ -31,7 +31,8 @@
     <script type="text/javascript" src="js/plugins/jquery.transform3d.js"></script>
     <script type="text/javascript" src="js/plugins/modernizr.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
-    <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.touchSwipe.min.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
@@ -40,6 +41,7 @@
     <script type="text/javascript" src="js/libs/dropdown.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/radio.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/search.metabolism.js"></script>
+    <script type="text/javascript" src="js/libs/map.metabolism.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/anim.js"></script>
@@ -47,8 +49,8 @@
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-        var BASEURL = "/";
-        //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
+        //var BASEURL = "/pr0d/wbb/";
+        var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = { loading: 'Loading...'};
     </script>
 
