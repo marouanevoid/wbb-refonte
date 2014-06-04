@@ -70,16 +70,6 @@
     .align-justify { text-align: justify; }
 
 
-/* Colors
---------------------------------------------------- */
-    .color-brown          { color: $color-brown; }
-    .color-brown-dark     { color: $color-brown-dark; }
-    .color-subtle-yellow  { color: $color-subtle-yellow; }
-    .color-cream          { color: $color-cream; }
-    .color-dark-gray      { color: $color-dark-gray; }
-    .color-medium-gray    { color: $color-medium-gray; }
-
-
 /* Sizer
 --------------------------------------------------- */
     img.sizer{ width: 100%; height: auto; display: block }
@@ -189,10 +179,13 @@
     input[type="password"],
     input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; line-height: 40px; color:$color-brown }
     input[type="submit"]{
-      border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; margin: 0; height: 42px; width: 40px; padding: 0;
-      background: url('../images/sprite.png') no-repeat #fff; background-size: 256px 512px;  background-position: -200px -200px;
       @include transition( background-color 0.2s ease-in-out);
-      &:hover{ background-position: -200px -240px; background-color: $color-brown }
+      &:hover{ background-color: $color-brown }
+    }
+    input[type="text"]+input[type="submit"]{
+      border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; width: 40px; padding: 0; height: 42px; margin: 0;
+      background: url('../images/sprite.png') no-repeat #fff; background-size: 256px 512px;  background-position: -200px -200px;
+      &:hover{ background-position: -200px -240px }
     }
     input[type="reset"]{
       border-radius: 50%; position: absolute; top: 4px; right: 4px; margin: 0; height: 34px; width: 34px; padding: 0;
@@ -324,6 +317,19 @@
     }
     &:after{ z-index: 2; opacity: 0 }
   }
+
+
+
+  /* Colors
+  --------------------------------------------------- */
+  .color-brown          { color: $color-brown; }
+  .color-brown-dark     { color: $color-brown-dark; }
+  .color-subtle-yellow  { color: $color-subtle-yellow; }
+  .color-cream          { color: $color-cream; }
+  .color-dark-gray      { color: $color-dark-gray; }
+  .color-medium-gray    { color: $color-medium-gray; }
+
+
 
   @media only screen and (max-width: $grid-breakpoint-mobile) {
 

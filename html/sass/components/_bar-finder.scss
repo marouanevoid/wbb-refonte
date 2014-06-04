@@ -17,7 +17,7 @@ section.bar-finder { background-color: #4b4d4e; width: 100%; white-space: nowrap
     span{ height: 40px; line-height: 40px }
   }
   .ui-radio{ height: 40px; line-height: 40px }
-  .go { position: static; border-radius: 20px; background-color: $color-brown; background-image: url(''); color: $color-cream; height: 40px; line-height:40px; width: 60px; @include transition( border 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out)  }
+  .go { padding: 0; background-color: $color-brown; color: $color-cream; height: 40px; line-height:40px; width: 60px; @include transition( border 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out)  }
   .go:after, .go:before { display: none }
   .go:hover { background-color: $color-subtle-yellow!important; color: $color-brown; border-color: $color-subtle-yellow!important; }
 

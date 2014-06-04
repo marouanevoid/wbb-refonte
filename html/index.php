@@ -111,7 +111,7 @@
     <section class="articles eight columns">
 
         <div class="h1 m-margin-bottom color-brown <?php if( $is_mobile ): ?>align-center<?php endif ?>">
-            Latest Articles
+            Latest News
         </div>
 
         <?php $is_small=true; $has_image=true; $has_text=false; include('components/article.php') ?>
