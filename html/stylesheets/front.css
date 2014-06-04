@@ -1283,12 +1283,12 @@ or wrap each row of columns in a <div class="row"> */
 }
 
 /* line 53, ../sass/_icons.scss */
-.btn-radius.with-icon.place:before {
-  background-position: -212px 0px;
+.btn-radius.with-icon.city:before {
+  background-position: -212px -2px;
 }
 /* line 54, ../sass/_icons.scss */
-.btn-radius.with-icon.place:after {
-  background-position: -212px -40px;
+.btn-radius.with-icon.city:after {
+  background-position: -212px -42px;
 }
 /* line 58, ../sass/_icons.scss */
 .btn-radius.with-icon.friend:before {
@@ -1594,6 +1594,7 @@ header.desktop .bar-finder .normal-mode .finder img {
   -moz-transition: opacity 0.2s ease-in-out;
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
+  margin-right: 0.5em;
 }
 /* line 51, ../sass/_header.scss */
 header.desktop .bar-finder .normal-mode .finder:hover {
@@ -1854,30 +1855,55 @@ section.bar-finder .finder-close:hover {
   border-top: 6px solid #818a8c;
 }
 /* line 11, ../sass/components/_bar-finder.scss */
+section.bar-finder .btn-radius.with-icon {
+  padding-right: 1.2em;
+  padding-left: 2.2em;
+}
+/* line 13, ../sass/components/_bar-finder.scss */
+section.bar-finder .btn-radius.with-icon:before, section.bar-finder .btn-radius.with-icon:after {
+  left: 0.8em !important;
+  top: 20px !important;
+}
+/* line 15, ../sass/components/_bar-finder.scss */
+section.bar-finder .ui-dropdown.btn-radius.with-icon {
+  padding-right: 1em;
+}
+/* line 17, ../sass/components/_bar-finder.scss */
+section.bar-finder .ui-dropdown.btn-radius.with-icon span {
+  height: 40px;
+  line-height: 40px;
+}
+/* line 19, ../sass/components/_bar-finder.scss */
+section.bar-finder .ui-radio {
+  height: 40px;
+  line-height: 40px;
+}
+/* line 20, ../sass/components/_bar-finder.scss */
 section.bar-finder .go {
   position: static;
-  border-radius: 25px;
+  border-radius: 20px;
   background-color: #b3955f;
   background-image: url("");
   color: #faf3e1;
-  height: 36px;
-  width: 56px;
+  height: 40px;
+  line-height: 40px;
+  width: 60px;
   -webkit-transition: border 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out;
   -moz-transition: border 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out;
   -o-transition: border 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out;
   transition: border 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-/* line 12, ../sass/components/_bar-finder.scss */
+/* line 21, ../sass/components/_bar-finder.scss */
 section.bar-finder .go:after, section.bar-finder .go:before {
   display: none;
 }
-/* line 13, ../sass/components/_bar-finder.scss */
+/* line 22, ../sass/components/_bar-finder.scss */
 section.bar-finder .go:hover {
   background-color: #ffe4af !important;
   color: #b3955f;
   border-color: #ffe4af !important;
 }
-/* line 15, ../sass/components/_bar-finder.scss */
+/* line 24, ../sass/components/_bar-finder.scss */
 section.bar-finder table {
   height: 7.5em;
   margin: 3em 0;
@@ -1885,50 +1911,55 @@ section.bar-finder table {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 17, ../sass/components/_bar-finder.scss */
+/* line 26, ../sass/components/_bar-finder.scss */
 section.bar-finder table h2, section.bar-finder table h3, section.bar-finder table .h3 {
   color: #b3955f;
 }
-/* line 18, ../sass/components/_bar-finder.scss */
+/* line 27, ../sass/components/_bar-finder.scss */
 section.bar-finder table h2 {
   font-weight: bold;
   text-transform: uppercase;
   line-height: 1.2em;
 }
-/* line 19, ../sass/components/_bar-finder.scss */
+/* line 28, ../sass/components/_bar-finder.scss */
+section.bar-finder table h3 {
+  font-size: 1.4em;
+  margin-bottom: 0.5em;
+}
+/* line 29, ../sass/components/_bar-finder.scss */
 section.bar-finder table .ui-dropdown, section.bar-finder table .ui-radio, section.bar-finder table input[type=submit] {
   font-size: 1.6em;
 }
-/* line 21, ../sass/components/_bar-finder.scss */
+/* line 31, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(2) td {
   text-align: center;
 }
-/* line 23, ../sass/components/_bar-finder.scss */
+/* line 33, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(2) td,
 section.bar-finder table tr:nth-child(1) td:nth-child(1) {
   vertical-align: middle;
 }
-/* line 26, ../sass/components/_bar-finder.scss */
+/* line 36, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(1) td:nth-child(2) {
   height: 100%;
 }
-/* line 27, ../sass/components/_bar-finder.scss */
+/* line 37, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(1) td:nth-child(1) {
-  width: 100%;
+  width: 20.8em;
   text-align: left;
 }
-/* line 29, ../sass/components/_bar-finder.scss */
+/* line 39, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(2) td:nth-child(2),
 section.bar-finder table tr:nth-child(2) td:nth-child(4) {
   padding: 2em;
 }
-/* line 32, ../sass/components/_bar-finder.scss */
+/* line 42, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(2) td:nth-child(6) {
   padding: 1em;
 }
-/* line 34, ../sass/components/_bar-finder.scss */
+/* line 44, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(2) td:nth-child(8) {
-  padding-left: 2em;
+  padding-left: 2.5em;
 }
 
 /* line 2, ../sass/components/_bar-filter.scss */
@@ -2601,6 +2632,7 @@ html.mobile .ui-dropdown-container select {
   padding-bottom: 0;
   height: 34px;
   line-height: 34px;
+  text-transform: capitalize;
 }
 /* line 4, ../sass/components/_ui-radio.scss */
 .ui-radio input {

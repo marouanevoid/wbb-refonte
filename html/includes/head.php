@@ -49,7 +49,7 @@
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-        var BASEURL = "/";
+        var BASEURL = "/pr0d/wbb/";
         //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = { loading: 'Loading...'};
     </script>

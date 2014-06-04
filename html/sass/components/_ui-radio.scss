@@ -1,6 +1,6 @@
 .ui-radio
 {
-  padding-top: 0; padding-bottom: 0; height: 34px; line-height: 34px;
+  padding-top: 0; padding-bottom: 0; height: 34px; line-height: 34px; text-transform: capitalize;
   input{ display:none }
 
   &.radio-dark:hover {

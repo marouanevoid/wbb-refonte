@@ -123,7 +123,7 @@ meta.Dropdown = function(config){
 
         html = that.config.template.replace('%options%', html);
         html = html.replace('%name%', $options.first().text());
-        html = html.replace('%color%', 'drop-'+that.config.color);
+        html = html.replace('%color%', 'drop-'+that.config.color+' '+that.config.$dropdown.data('class'));
 
         that.config.$dropdown_replacement = $(html);
         that.config.$dropdown.after(that.config.$dropdown_replacement);

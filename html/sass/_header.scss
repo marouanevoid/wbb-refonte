@@ -47,7 +47,7 @@
         .normal-mode{
           position: relative;
           > *{ vertical-align: middle }
-          .finder { color: $color-subtle-yellow; text-transform: none; position: relative; top: 0.1em; img{ @include transition( opacity 0.2s ease-in-out )} }
+          .finder { color: $color-subtle-yellow; text-transform: none; position: relative; top: 0.1em; img{ @include transition( opacity 0.2s ease-in-out ); margin-right: 0.5em } }
           .finder:hover{ color: $color-brown; img{ @include opacity(0.6) } }
           .search { @include transition( opacity 0.2s ease-in-out ); img{ vertical-align: middle } }
           .search:hover { @include opacity( 0.6) }
