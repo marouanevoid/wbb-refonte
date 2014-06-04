@@ -10,6 +10,7 @@
 @import "header";
 
 @import "components/bar-finder";
+@import "components/bar-filter";
 @import "components/subheader";
 @import "components/ui-slider";
 @import "components/ui-dropdown";
@@ -17,12 +18,14 @@
 @import "components/tip";
 @import "components/bar-wo-pic";
 @import "components/bar-w-pic";
+@import "components/bar-w-pic-list";
 @import "components/bestof";
 @import "components/city";
 @import "components/article-box";
 @import "components/ads";
 
 @import "pages/bar-details";
+@import "pages/cities";
 
 @import "footer";
 

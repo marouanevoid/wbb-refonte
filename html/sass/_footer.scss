@@ -32,8 +32,9 @@
         }
 
         .keep-in-touch {
-          float: left; text-align: right; border-left: 1px solid #5c5549; padding-right: 0;
+          float: left; text-align: right; border-left: 1px solid #5c5549; padding-right: 0; max-width: 300px;
           h3 { color: $color-subtle-yellow; font-weight: bold; text-align: center }
+          .socials{ height: 20px; overflow: hidden }
           .fb-like{ display: inline-block!important; width: auto!important }
           .fb-like, iframe{ vertical-align: middle; margin: 0 2px }
         }

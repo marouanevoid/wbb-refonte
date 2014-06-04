@@ -67,7 +67,7 @@
                     </td>
 
                     <td class="logo">
-                        <a href="">
+                        <a href="index.php">
                             <img src="images/logo.png" alt="logo" width="104" height="56"/>
                         </a>
                     </td>

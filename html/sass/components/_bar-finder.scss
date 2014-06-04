@@ -8,7 +8,9 @@ section.bar-finder { background-color: #4b4d4e; width: 100%; white-space: nowrap
     background-image: url("../images/sprite.png"); background-size: 256px 512px; background-position: -160px -120px; @include transition( border 0.2s ease-in-out ); border-top: 0 solid $color-medium-gray;
     &:hover{ border-top: 6px solid $color-medium-gray }
   }
-  .go { background-color: $color-brown; color: $color-cream; height: 34px; }
+  .go { position: static; border-radius: 25px; background-color: $color-brown; background-image: url(''); color: $color-cream; height: 36px; width: 56px; @include transition( border 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out)  }
+  .go:after, .go:before { display: none }
+  .go:hover { background-color: $color-subtle-yellow!important; color: $color-brown; border-color: $color-subtle-yellow!important; }
 
   table {
     height: 7.5em; margin: 3em 0; text-align: center; @include opacity(0);

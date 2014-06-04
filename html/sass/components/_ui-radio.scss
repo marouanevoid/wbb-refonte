@@ -10,4 +10,15 @@
   &.radio-dark.active:hover {
     border-color:$color-cream;
   }
+
+  &.collapsed {
+    padding: 0.6em 1.5em 0.4em 1.5em; text-transform: uppercase; font-weight: bold; float: left;
+    &:first-of-type { border-radius: 2em 0 0 2em; }
+    &:last-of-type { border-radius: 0 2em 2em 0;
+      &:after { clear: both; }
+    }
+    &.active { background-color: $color-brown; border: 1px solid $color-brown;
+      &:hover { border-color: $color-medium-gray; }
+    }
+  }
 }
