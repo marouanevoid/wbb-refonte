@@ -1,5 +1,5 @@
 {% extends "::base.html.twig" %}
-
+{% block meta %}<meta name="description" content="{{ bar.seoDescription }}" />{% endblock %}
 {% block title %}{{ bar.name }} | World Best Bars{% endblock %}
 
 {% block javascripts %}
@@ -204,7 +204,7 @@
                     {% endfor%}
                 </ul>
 
-                    <p>{{ bar.description }}</p>
+                    <p>{{ bar.description|raw }}</p>
                 <!-- ALSO APPEARS -->
                 {% if not is_mobile() or is_tablet() %}
                 <div class="also-appears">
