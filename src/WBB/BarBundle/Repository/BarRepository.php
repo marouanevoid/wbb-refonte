@@ -18,8 +18,18 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
-    public function findYouMayAlsoLike(Bar $bar, $location = BarRepository::BAR_LOCATION_CITY, $limit = 4)
+    public function findYouMayAlsoLike(Bar $bar, $location, $exceptBars = null, $limit = 4)
     {
+        $ids = array($bar->getId());
+        if($exceptBars != null)
+        {
+            foreach($exceptBars as $exBar)
+            {
+                if($exBar)
+                    $ids[] = $exBar->getId();
+            }
+        }
+
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
@@ -29,8 +39,9 @@ class BarRepository extends EntityRepository
             ->innerjoin('bt.tag', 't')
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->in('t.id',':tags'))
-            ->andWhere($qb->expr()->neq($this->getAlias().'.id', $bar->getId()))
+            ->andWhere($qb->expr()->notIn($this->getAlias().'.id',':exceptBars'))
             ->setParameter('tags', $bar->getTagsIds())
+            ->setParameter('exceptBars', $ids)
             ->setMaxResults($limit)
         ;
 

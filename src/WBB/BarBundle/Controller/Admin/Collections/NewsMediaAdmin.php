@@ -24,6 +24,7 @@ class NewsMediaAdmin extends Admin
                         'context' => 'default'
                     )
                 ))
+                ->add('alt')
             ->end();
     }
 }

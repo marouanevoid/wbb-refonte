@@ -15,6 +15,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            //new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
@@ -43,11 +44,17 @@ class AppKernel extends Kernel
             //Guzzle
 //            new Misd\GuzzleBundle\MisdGuzzleBundle(),
 
+            //Mobile Detecte
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
+
             // sonata formatter
             new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
+            
+            // sonata datepiker
+            new Stnw\DatePickerBundle\StnwDatePickerBundle(),
 
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),

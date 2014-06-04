@@ -21,11 +21,12 @@ class FSAdminController extends Controller
     {
         $client = new Client("https://api.instagram.com");
 
-        $response = $client->get("/v1/users/3/media/recent/?client_id=03af4f044b524a4ca9958053b7a6cb18")->send();
+        $response = $client->get("/v1/users/search?q=_mangetsu_&client_id=03af4f044b524a4ca9958053b7a6cb18")->send();
 
         $data = json_decode($response->getBody());
+        $temp = $data->data[0]->id;
 
-        var_dump($data);die;
+        var_dump($temp);die;
 
         $params = array( 'venue_id' => $venue, 'limit' => 4);
 
@@ -51,7 +52,12 @@ class FSAdminController extends Controller
      */
     public function findAction($type, $id)
     {
-        return new JsonResponse($this->get("wbb.{$type}.feed")->find($id));
+
+        if(is_numeric($id) && $id==0){
+            return new JsonResponse(null);
+        }else{
+            return new JsonResponse($this->get("wbb.{$type}.feed")->find($id));
+        }
     }
 
     /**

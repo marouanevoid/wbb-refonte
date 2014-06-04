@@ -23,12 +23,14 @@ class BarAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('isCreditCard', null, array('editable' => true))
-            ->add('isCoatCheck', null, array('editable' => true))
-            ->add('price', null, array('editable' => true))
-            ->add('isReservation', null, array('editable' => true))
+            ->add('city')
+            ->add('suburb')
+            ->add('website')
+            ->add('createdAt')
+            ->add('updatedAt')
             ->add('onTop', null, array('editable' => true))
-            ->add('status', null, array('editable' => true))
+            ->add('status', 'status')
+            ->add('user')
         ;
     }
 
@@ -40,18 +42,13 @@ class BarAdmin extends Admin
         $filterMapper
             ->add('id')
             ->add('name')
-            ->add('phone')
-            ->add('email')
-            ->add('website')
-            ->add('twitter')
-            ->add('facebook')
-            ->add('instagram')
-            ->add('isCreditCard')
-            ->add('isCoatCheck')
-            ->add('price')
-            ->add('isReservation')
             ->add('onTop')
-            ->add('status')
+            ->add('status', 'doctrine_orm_string', array(), 'choice',
+                    array('choices' => array(
+                            Bar::BAR_STATUS_PENDING_VALUE => 'Pending',
+                            Bar::BAR_STATUS_ENABLED_VALUE => 'Enabled',
+                            Bar::BAR_STATUS_DISABLED_VALUE => 'Disabled')
+                ))
         ;
     }
 
@@ -136,9 +133,9 @@ class BarAdmin extends Admin
                 ->add('parking', 'choice', array(
                     'required' => false,
                     'choices'  => array(
-                        2 => 'Premier Etage',
-                        1 => 'RDC',
-                        0 => 'RDJ'
+                        'Premier Etage' => 'Premier Etage',
+                        'RDC'           => 'RDC',
+                        'RDJ'           => 'RDJ'
                     )
                 ))
                 ->add('price', 'choice', array(
@@ -154,7 +151,7 @@ class BarAdmin extends Admin
                 ->add('isReservation')
                 ->add('reservation');
 
-        if($this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
+        if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper->add('description');
         }
 

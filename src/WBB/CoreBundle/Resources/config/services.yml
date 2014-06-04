@@ -36,7 +36,7 @@ services:
     wbb.core.admin.city.suburb:
         class: %wbb_core.citysuburb.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_location, label: suburbs, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_location_hidden, label: suburbs, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_core.citysuburb.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]

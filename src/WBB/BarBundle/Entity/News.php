@@ -107,6 +107,18 @@ class News {
     private $medias;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="sponsor", type="string", length=255, nullable=true)
+     */
+    private $sponsor;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     */
+    private $sponsorImage;    
+    
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -444,6 +456,46 @@ class News {
         return $this->medias;
     }
 
+    /**
+     * Set sponsor
+     *
+     * @param string $sponsor
+     * @return News
+     */
+    public function setSponsor($sponsor){
+        $this->sponsor = $sponsor;
+        return $this;
+    }
+
+    /**
+     * Get sponsor
+     *
+     * @return string 
+     */
+    public function getSponsor(){
+        return $this->sponsor;
+    }
+    
+    /**
+     * Set sponsorImage
+     *
+     * @param string $sponsorImage
+     * @return News
+     */
+    public function setSponsorImage($sponsorImage){
+        $this->sponsorImage = $sponsorImage;
+        return $this;
+    }
+
+    /**
+     * Get sponsorImage
+     *
+     * @return Media 
+     */
+    public function getSponsorImage(){
+        return $this->sponsorImage;
+    }    
+    
     /**
      * Set createdAt
      *

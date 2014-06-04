@@ -237,6 +237,12 @@ class Bar
     private $tags;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfBar", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private $bestofs;
+
+    /**
      * @ORM\OneToMany(targetEntity="BarOpening", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"openingDay" = "ASC"})
      */
@@ -824,6 +830,9 @@ class Bar
         $this->isCreditCard     = true;
         $this->onTop            = true;
         $this->isReservation    = true;
+
+        $this->latitude = 0;
+        $this->longitude = 0;
     }
 
     /**
@@ -1206,5 +1215,38 @@ class Bar
             return $tags;
         else
             return array(0);
+    }
+
+    /**
+     * Add bestofs
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     * @return Bar
+     */
+    public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
+    {
+        $this->bestofs[] = $bestofs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofs
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     */
+    public function removeBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
+    {
+        $this->bestofs->removeElement($bestofs);
+    }
+
+    /**
+     * Get bestofs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBestofs()
+    {
+        return $this->bestofs;
     }
 }

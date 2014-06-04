@@ -118,6 +118,26 @@ class BestOf
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfBar", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private $bars;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="bestofs")
+     */
+    private $inBestofs;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BestOf", inversedBy="inBestofs")
+     * @ORM\JoinTable(name="wbb_bestof_bestof",
+     *      joinColumns={@ORM\JoinColumn(name="bestof_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="in_bestof_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $bestofs;
+
     
     /**
      * @var \DateTime
@@ -670,5 +690,104 @@ class BestOf
      */
     public function getNews(){
         return $this->news;
+    }
+
+    /**
+     * Add bars
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bars
+     * @return BestOf
+     */
+    public function addBar(\WBB\BarBundle\Entity\Collections\BestOfBar $bars)
+    {
+        $this->bars[] = $bars;
+
+        return $this;
+    }
+
+    /**
+     * Remove bars
+     *
+     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bars
+     */
+    public function removeBar(\WBB\BarBundle\Entity\Collections\BestOfBar $bars)
+    {
+        $this->bars->removeElement($bars);
+    }
+
+    /**
+     * Get bars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBars()
+    {
+        return $this->bars;
+    }
+
+    /**
+     * Add inBestofs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $inBestofs
+     * @return BestOf
+     */
+    public function addInBestof(\WBB\BarBundle\Entity\BestOf $inBestofs)
+    {
+        $this->inBestofs[] = $inBestofs;
+
+        return $this;
+    }
+
+    /**
+     * Remove inBestofs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $inBestofs
+     */
+    public function removeInBestof(\WBB\BarBundle\Entity\BestOf $inBestofs)
+    {
+        $this->inBestofs->removeElement($inBestofs);
+    }
+
+    /**
+     * Get inBestofs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInBestofs()
+    {
+        return $this->inBestofs;
+    }
+
+    /**
+     * Add bestofs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofs
+     * @return BestOf
+     */
+    public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
+    {
+        $this->bestofs[] = $bestofs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofs
+     */
+    public function removeBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
+    {
+        $this->bestofs->removeElement($bestofs);
+    }
+
+    /**
+     * Get bestofs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBestofs()
+    {
+        return $this->bestofs;
     }
 }
