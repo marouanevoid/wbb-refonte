@@ -74,7 +74,7 @@
         &.disabled{ @include opacity(0) }
       }
       .left{ left: -3.3em; border-radius: 50% 0 0 50%; border-right: 0; margin-left: 0 }
-      .right{ right: -3.3em; border-radius: 0 50% 50% 0; border-left: 0; margin-right: -1px }
+      .right{ right: -3.3em; border-radius: 0 50% 50% 0; border-left: 0; margin-right: 0 }
     }
   }
 

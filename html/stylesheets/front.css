@@ -1517,18 +1517,22 @@ header.desktop .nav form input[type="text"] {
 /* line 22, ../sass/_mixin.scss */
 header.desktop .nav form input[type="text"].placeholder {
   color: #ffe4af;
+  font-weight: normal;
 }
 /* line 23, ../sass/_mixin.scss */
 header.desktop .nav form input[type="text"]:-moz-placeholder {
   color: #ffe4af;
+  font-weight: normal;
 }
 /* line 24, ../sass/_mixin.scss */
 header.desktop .nav form input[type="text"]::-moz-placeholder {
   color: #ffe4af;
+  font-weight: normal;
 }
 /* line 25, ../sass/_mixin.scss */
 header.desktop .nav form input[type="text"]::-webkit-input-placeholder {
   color: #ffe4af;
+  font-weight: normal;
 }
 /* line 32, ../sass/_header.scss */
 header.desktop .nav form input[type="text"]:focus {
@@ -2315,7 +2319,7 @@ section.bar-filter .sort-by > * {
   right: -3.3em;
   border-radius: 0 50% 50% 0;
   border-left: 0;
-  margin-right: -1px;
+  margin-right: 0;
 }
 /* line 81, ../sass/components/_ui-slider.scss */
 .ui-slider.type-cities {
