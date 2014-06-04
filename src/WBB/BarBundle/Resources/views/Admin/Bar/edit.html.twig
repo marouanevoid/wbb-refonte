@@ -44,9 +44,7 @@ file that was distributed with this source code.
         var barId = "{{ admin.id(object) }}";
         var venue, insta;
         $(document).ready(function(){
-            {#venue = $("#{{ admin.uniqid }}_foursquare").val();#}
             venue = "{{ object.foursquare }}";
-            {#insta = $("#{{ admin.uniqid }}_instagram").val();#}
             insta = "{{ object.instagram }}";
 
             $("#{{ admin.uniqid }}_foursquare").change(function(){
@@ -107,7 +105,7 @@ file that was distributed with this source code.
                     suburb.empty();
                     suburb.trigger("list:updated");
 
-                    var url = Routing.generate('get_suburbs_from_city', {'bar': {{ admin.id(object) }}, 'cityId': cityId });
+                    var url = Routing.generate('get_suburbs_from_city', {'bar': '{{ admin.id(object) }}', 'cityId': cityId });
                     $.post(url, { cityId: cityId }, function(data){
                         var options = JSON && JSON.parse(data) || $.parseJSON(data);
                         suburb.empty().append(options);

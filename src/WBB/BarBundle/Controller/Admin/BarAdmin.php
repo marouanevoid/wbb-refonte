@@ -40,14 +40,17 @@ class BarAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $filterMapper)
     {
         $filterMapper
-            ->add('id')
             ->add('name')
+            ->add('city')
+            ->add('suburb')
             ->add('onTop')
+            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
             ->add('status', 'doctrine_orm_string', array(), 'choice',
                     array('choices' => array(
-                            Bar::BAR_STATUS_PENDING_VALUE => 'Pending',
-                            Bar::BAR_STATUS_ENABLED_VALUE => 'Enabled',
-                            Bar::BAR_STATUS_DISABLED_VALUE => 'Disabled')
+                            Bar::BAR_STATUS_PENDING_VALUE   => 'Pending',
+                            Bar::BAR_STATUS_ENABLED_VALUE   => 'Enabled',
+                            Bar::BAR_STATUS_DISABLED_VALUE  => 'Disabled'
+                    )
                 ))
         ;
     }

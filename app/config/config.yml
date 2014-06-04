@@ -201,3 +201,10 @@ mobile_detect:
     switch_device_view:
         save_referer_path: true
     extension_class: WBB\CoreBundle\Twig\Extension\MobileDetectExtension
+
+#CreatedAt et UpdatedAt Extention
+stof_doctrine_extensions:
+   orm:
+       default:
+           timestampable: true
+           sluggable:  true
