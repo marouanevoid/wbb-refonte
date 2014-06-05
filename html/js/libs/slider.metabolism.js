@@ -227,7 +227,7 @@ meta.Slider = function(config){
                 swipeRight:function(){ that._slide('left') },
                 tap:function(event, target){
                     var $article  = $(target).closest('article');
-                    //document.location.href = $article.find('a.overlay-link').attr('href');
+                    document.location.href = $article.find('a.overlay-link').attr('href');
                 },
                 threshold:20
             });
