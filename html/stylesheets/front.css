@@ -2388,14 +2388,14 @@ section.bar-filter .sort-by > * {
 }
 /* line 76, ../sass/components/_ui-slider.scss */
 .ui-slider.type-cities .arrows .left, .ui-slider.type-bestof .arrows .left {
-  left: -3.3em;
+  left: -3.2em;
   border-radius: 50% 0 0 50%;
   border-right: 0;
   margin-left: 0;
 }
 /* line 77, ../sass/components/_ui-slider.scss */
 .ui-slider.type-cities .arrows .right, .ui-slider.type-bestof .arrows .right {
-  right: -3.3em;
+  right: -3.2em;
   border-radius: 0 50% 50% 0;
   border-left: 0;
   margin-right: 0;

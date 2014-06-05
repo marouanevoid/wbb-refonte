@@ -112,9 +112,19 @@ meta.App = function() {
     {
         $('.custom-scroll').each(function()
         {
-            $(this).niceScroll({autohidemode:false});
+            //$(this).niceScroll({autohidemode:false});
         });
     };
+
+
+    that._loadImages = function()
+    {
+        $('.force-load [data-src]').each(function()
+        {
+            $(this).attr('src', $(this).data('src'));
+        });
+    };
+
 
 
     /* Public attributes. */
@@ -139,6 +149,7 @@ meta.App = function() {
 
         that._barFinderEvents();
         that._mobileMenuEvents();
+        that._loadImages();
     };
 
 
