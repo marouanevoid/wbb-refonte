@@ -4060,23 +4060,6 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
   }
 
   /* line 14, ../sass/_retina.scss */
-  footer .right .social-icons .facebook img {
-    background-image: url("../images/icons/facebook.yellow@2x.png");
-  }
-  /* line 15, ../sass/_retina.scss */
-  footer .right .social-icons .twitter img {
-    background-image: url("../images/icons/twitter.yellow@2x.png");
-  }
-  /* line 16, ../sass/_retina.scss */
-  footer .right .social-icons .instagram img {
-    background-image: url("../images/icons/instagram.yellow@2x.png");
-  }
-  /* line 17, ../sass/_retina.scss */
-  footer .right .social-icons .pinterest img {
-    background-image: url("../images/icons/pinterest.yellow@2x.png");
-  }
-
-  /* line 24, ../sass/_retina.scss */
   article.bar-w-pic .txt {
     position: absolute;
     z-index: 20;
@@ -4084,26 +4067,26 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
     left: 2.5em;
     right: 2.5em;
   }
-  /* line 26, ../sass/_retina.scss */
+  /* line 16, ../sass/_retina.scss */
   article.bar-w-pic .txt .tags:before {
     background-image: url("../images/icons/tag@2x.png");
   }
 
-  /* line 32, ../sass/_retina.scss */
+  /* line 22, ../sass/_retina.scss */
   section.bar-finder .finder-close {
     background-image: url("../images/sprite@2x.png");
   }
 
-  /* line 41, ../sass/_retina.scss */
+  /* line 31, ../sass/_retina.scss */
   .ui-dropdown-container .ui-dropdown span:after, .ui-dropdown-container .ui-dropdown span:before {
     background-image: url("../images/sprite@2x.png");
   }
 
-  /* line 50, ../sass/_retina.scss */
+  /* line 40, ../sass/_retina.scss */
   footer .right .social-icons a img {
     background-image: url("../images/sprite@2x.png");
   }
-  /* line 51, ../sass/_retina.scss */
+  /* line 41, ../sass/_retina.scss */
   footer .right .social-icons a span:after {
     background-image: url("../images/sprite@2x.png");
   }
