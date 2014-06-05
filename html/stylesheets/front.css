@@ -2699,12 +2699,8 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   background: #4b4d4e;
   border-color: #4b4d4e;
 }
-/* line 53, ../sass/components/_ui-dropdown.scss */
-.ui-dropdown-container .ui-dropdown.drop-dark .jspDrag {
-  width: 75%;
-}
 
-/* line 60, ../sass/components/_ui-dropdown.scss */
+/* line 59, ../sass/components/_ui-dropdown.scss */
 html.mobile .ui-dropdown-container select {
   position: absolute;
   left: 0;
@@ -2879,22 +2875,26 @@ article.tip .form form .count {
   color: #999999;
 }
 /* line 32, ../sass/components/_tip.scss */
+article.tip .form form textarea {
+  overflow: hidden;
+}
+/* line 33, ../sass/components/_tip.scss */
 article.tip .form form input[type=submit] {
   float: right;
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 40, ../sass/components/_tip.scss */
+  /* line 41, ../sass/components/_tip.scss */
   article.tip {
     height: auto;
     padding: 2em;
   }
-  /* line 42, ../sass/components/_tip.scss */
+  /* line 43, ../sass/components/_tip.scss */
   article.tip .content {
     position: static;
     width: 100%;
   }
-  /* line 43, ../sass/components/_tip.scss */
+  /* line 44, ../sass/components/_tip.scss */
   article.tip hr {
     margin-top: 15px;
   }
@@ -4191,7 +4191,7 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
   top: 0;
   left: 0;
   cursor: pointer;
-  width: 70%;
+  width: 8px;
   margin: auto;
   margin-top: 2px;
 }

@@ -50,7 +50,6 @@
         &:before{ background-position: -160px -40px; z-index: 1; @include transition( opacity 0.2s ease-in-out) }
       }
       .jspTrack{ background: $color-gray; border-color: $color-gray }
-      .jspDrag{ width: 75% }
     }
   }
 }
