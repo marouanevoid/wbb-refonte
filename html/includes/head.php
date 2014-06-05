@@ -34,6 +34,8 @@
     <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.jscrollpane.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
@@ -50,8 +52,8 @@
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-        //var BASEURL = "/pr0d/wbb/";
-        var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
+        var BASEURL = "/pr0d/wbb/";
+        //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = { loading: 'Loading...'};
     </script>
 
