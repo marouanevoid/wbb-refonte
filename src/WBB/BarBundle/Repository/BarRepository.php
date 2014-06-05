@@ -18,6 +18,20 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
+    public function findBestBars()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->innerjoin($this->getAlias().'.city', 'c')
+            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+            ->where($qb->expr()->notIn($this->getAlias().'.id',':exceptBars'))
+            ->setParameter('exceptBars', '');
+        ;
+
+    }
+
     public function findYouMayAlsoLike($bar, $location, $exceptBars = null, $onTop = true, $tags = true, $limit = 4)
     {
         if($bar)
