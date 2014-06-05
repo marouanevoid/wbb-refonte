@@ -10,10 +10,14 @@ use WBB\BarBundle\Repository\BarRepository;
 class BarController extends Controller
 {
 
-    public function homeAction()
-    {
-
-    }
+//    public function homeAction()
+//    {
+//        $topBars    = $this->container->get('bar.repository')->findBestBars();
+//        $topCities  = shuffle($this->container->get('city.repository')->findTopCities());
+//        $topBestofs = $this->container->get('bestof.repository')->findTopBestOfs();
+//        $topNews    = '';
+//
+//    }
 
     /**
      * detailsAction

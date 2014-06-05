@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * BestOf
  *
  * @ORM\Table(name="wbb_bestof")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestOfRepository")
  */
 class BestOf
 {
