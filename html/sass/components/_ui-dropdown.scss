@@ -23,8 +23,10 @@
       &:after,&:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -160px 0; position: absolute; top: 50%; right: -10px; width: 40px; height: 40px; margin-top: -20px }
       &:before{ background-position: -160px -40px; opacity: 0 }
     }
-    .choice { width: 100%; display: none;  z-index: 100; box-sizing: border-box; text-align: left; font-size: 90%;
-      ul { padding: 0.6em 0; max-height: 100px; overflow-y: scroll; margin-bottom: 1.2em; overflow-x: hidden;
+    .choice {
+      overflow-x: hidden; max-height: 100px; overflow-y: scroll; width: 100%; display: none;  z-index: 100; box-sizing: border-box; text-align: left; font-size: 90%; margin-bottom: 1.2em!important;
+      .jspContainer{ height: 100px!important }
+      ul { padding: 0.6em 0;
         li {
           padding-bottom: 1em; @include transition( color 0.2s ease-in-out);
           &:last-child { padding-bottom: 0; }
@@ -46,6 +48,8 @@
       span{
         &:before{ background-position: -160px -40px; z-index: 1; @include transition( opacity 0.2s ease-in-out) }
       }
+      .jspTrack{ background: $color-gray; border-color: $color-gray }
+      .jspDrag{ width: 75% }
     }
   }
 }

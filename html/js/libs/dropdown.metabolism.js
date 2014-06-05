@@ -50,7 +50,7 @@ meta.Dropdown = function(config){
         template  : '<div class="ui-dropdown-container">'+
                         '<div class="btn-radius border ui-dropdown %color%">'+
                             '<span>%name%</span>'+
-                            '<div class="choice">'+
+                            '<div class="choice custom-scroll">'+
                                 '<ul>%options%</ul>'+
                             '</div>'+
                         '</div>'+
@@ -82,6 +82,7 @@ meta.Dropdown = function(config){
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
                     $dropdown.css({width:$dropdown.width()});
                     $dropdown.addClass('dropdown-open').find('.choice').velocity('slideDown', {speed:that.config.speed, easing:that.config.easing});
+
                 }
             });
 

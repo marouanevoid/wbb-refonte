@@ -1,0 +1,22 @@
+
+{% for t in tips.data %}
+	{% if t.id not in excluded %}
+	<div class="three columns box fstip" tipindex="{{ offset+loop.index }}">
+	    <article class="tip">
+
+	        <table class="content">
+
+	            <tr class="excerpt">
+	                <td colspan="2">
+	                    <div class="scroll">
+	                        <img src="/bundles/wbbcore/images/icons/pin.foursquare-blue.png" alt="icon.foursquare" width="30" height="30"/><br/>
+	                        “{{ t.text}}”
+	                    </div>
+	                </td>
+	            </tr>
+	        </table>
+	    </article>
+	</div>
+	{% endif %}
+{% endfor %}
+

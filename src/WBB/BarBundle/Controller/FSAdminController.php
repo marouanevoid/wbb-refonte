@@ -108,6 +108,19 @@ class FSAdminController extends Controller
         return new JsonResponse(array('objects' => $objects));
     }
 
+    public function tipsAction($id, $offset)
+    {
+
+        $bar = $this->container->get('bar.repository')->findOneById($id);
+        return $this->render('WBBBarBundle:Bar:tips.html.twig', array(
+            'bar'       => $bar,
+            'tips'      => $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset),
+            'excluded'  => $bar->getFsExcludedTips(),
+            'offset'    => $offset
+        )
+        );
+    }
+
     /**
      * Gets an entity based on a id
      */

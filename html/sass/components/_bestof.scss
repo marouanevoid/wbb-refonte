@@ -16,7 +16,8 @@ article.bestof {
   }
 }
 
-html.mobile article.bestof:hover
+html.mobile article.bestof
 {
-  img.scale-with-grid{ @include opacity(0.8) }
+  img.scale-with-grid{ @include opacity(1) }
+  &:hover img.scale-with-grid{ @include opacity(1) }
 }

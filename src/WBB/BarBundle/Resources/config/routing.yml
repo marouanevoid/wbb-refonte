@@ -8,9 +8,19 @@ homepage:
     pattern: /
     defaults: { _controller: WBBBarBundle:Bar:home }
 
+wbb_bar_tips:
+    pattern: /bar/{id}/{offset}/tips
+    requirements:
+          id: \d+
+          offset: \d+
+    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0}
+
 wbb_bar_details:
     pattern: /bar/{city}/{suburb}/{slug}
     defaults: { _controller: WBBBarBundle:Bar:details }
+
+
+
 
 #Services
 wbb_bar_feeds_find:

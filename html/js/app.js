@@ -110,9 +110,11 @@ meta.App = function() {
 
     that._customScroll = function()
     {
+        if( $('html').hasClass('webkit') ) return;
+
         $('.custom-scroll').each(function()
         {
-            //$(this).niceScroll({autohidemode:false});
+            $(this).jScrollPane({autoReinitialise: true});
         });
     };
 
@@ -150,6 +152,7 @@ meta.App = function() {
         that._barFinderEvents();
         that._mobileMenuEvents();
         that._loadImages();
+        that._customScroll();
     };
 
 
