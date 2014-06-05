@@ -176,6 +176,13 @@ class Bar
     /**
      * @var string
      *
+     * @ORM\Column(name="description_read_more", type="text", nullable=true)
+     */
+    private $readMore;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="seo_description", type="string", length=255, nullable = true)
      */
     private $seoDescription;
@@ -1283,5 +1290,28 @@ class Bar
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set readMore
+     *
+     * @param string $readMore
+     * @return Bar
+     */
+    public function setReadMore($readMore)
+    {
+        $this->readMore = $readMore;
+
+        return $this;
+    }
+
+    /**
+     * Get readMore
+     *
+     * @return string 
+     */
+    public function getReadMore()
+    {
+        return $this->readMore;
     }
 }

@@ -9,6 +9,12 @@ use WBB\BarBundle\Repository\BarRepository;
 
 class BarController extends Controller
 {
+
+    public function homeAction()
+    {
+
+    }
+
     /**
      * detailsAction
      *
