@@ -33,6 +33,7 @@
     <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
