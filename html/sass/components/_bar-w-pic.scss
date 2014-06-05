@@ -29,17 +29,11 @@
   }
 }
 
-
-@media only screen and (max-width: $grid-breakpoint-mobile) {
-
-  .bar-w-pic
+html.mobile .bar-w-pic{
+  img.scale-with-grid{ @include opacity(1) }
+  &:hover
   {
-    img.scale-with-grid{ @include opacity(1) }
+    .txt .tags{ @include opacity(0) }
+    .txt h3{ margin-bottom: 0 }
   }
-}
-
-html.mobile .bar-w-pic:hover{
-  img.scale-with-grid{ @include opacity(0.8) }
-  .txt .tags{ @include opacity(0) }
-  .txt h3{ margin-bottom: 0 }
 }

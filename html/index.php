@@ -118,9 +118,7 @@
         <?php $is_small=true; $has_image=false; $has_text=true; include('components/article.php') ?>
         <?php $is_small=false; $has_image=true; $has_text=true; include('components/article.php') ?>
 
-        <?php if( !$is_mobile ): ?>
-            <a class="btn-radius border brown h4 s-margin-top" href="">See all articles</a>
-        <?php endif ?>
+        <a class="btn-radius border brown h4 s-margin-top" href="">See all articles</a>
 
     </section>
 

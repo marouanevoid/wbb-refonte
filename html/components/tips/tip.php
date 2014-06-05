@@ -10,6 +10,8 @@
                 <?php endif ?>
                 “<span itemprop="description">
                     NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.
+                    NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.
+                    NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.
                 </span>”
                 </div>
             </td>
