@@ -154,7 +154,7 @@ class BarAdmin extends Admin
             ->add('reservation');
 
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
-            $formMapper->add('description', 'textarea', array('attr'=>array('cols'=>220, 'rows'=>20, 'class'=>'wysihtml5')));
+            $formMapper->add('description', 'textarea', array('required' => false, 'attr'=>array('cols'=>220, 'rows'=>20, 'class'=>'wysihtml5')));
         }
 
         $formMapper
