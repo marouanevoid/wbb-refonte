@@ -9,11 +9,14 @@ section.bar-finder { background-color: #4b4d4e; width: 100%; white-space: nowrap
     &:hover{ border-top: 6px solid $color-medium-gray }
   }
   .btn-radius.with-icon{
-    padding-right: 1.2em; padding-left: 2.2em;
+    padding-right: 1.2em; padding-left: 2.4em;
     &:before,&:after{ left: 0.8em!important; top: 20px!important }
   }
+  .ui-radio.btn-radius.with-icon{
+    padding-left: 2.2em;
+  }
   .ui-dropdown.btn-radius.with-icon{
-    padding-right: 1em;
+    padding-right: 1em; font-size: 1.5em;
     span{ height: 40px; line-height: 40px }
   }
   .ui-radio{ height: 40px; line-height: 40px }

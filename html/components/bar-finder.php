@@ -23,7 +23,7 @@
                     <tr>
                         <td>
                             <select class="ui-dropdown dark" name="city" data-class="with-icon city">
-                                <option disabled="disabled">Choose a city</option>
+                                <option disabled="disabled">Choose a City</option>
                                 <option value="cty2">City 2</option>
                                 <option value="cty3">City 3</option>
                                 <option value="cty4">City 4</option>
@@ -34,7 +34,7 @@
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
-                                <option disabled="disabled">Friend...</option>
+                                <option disabled="disabled">Friends...</option>
                                 <option>City 2</option>
                                 <option>City 3</option>
                                 <option>City 4</option>

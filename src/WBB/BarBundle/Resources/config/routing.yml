@@ -3,10 +3,13 @@ wbb_bar_test:
     defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
 
 #Actions
+
+homepage:
+    pattern: /
+    defaults: { _controller: WBBBarBundle:Bar:home }
+
 wbb_bar_details:
-    pattern: /bar/{id}/details
-    requirements:
-          id: \d+
+    pattern: /bar/{city}/{suburb}/{slug}
     defaults: { _controller: WBBBarBundle:Bar:details }
 
 

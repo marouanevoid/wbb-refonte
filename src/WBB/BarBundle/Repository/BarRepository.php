@@ -18,47 +18,78 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
-    public function findYouMayAlsoLike(Bar $bar, $location, $exceptBars = null, $limit = 4)
+    public function findBestBars()
     {
-        $ids = array($bar->getId());
-        if($exceptBars != null)
-        {
-            foreach($exceptBars as $exBar)
-            {
-                if($exBar)
-                    $ids[] = $exBar->getId();
-            }
-        }
-
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
             ->innerjoin($this->getAlias().'.city', 'c')
-            ->innerjoin($this->getAlias().'.tags', 'bt')
-            ->innerjoin('bt.tag', 't')
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->andWhere($qb->expr()->in('t.id',':tags'))
-            ->andWhere($qb->expr()->notIn($this->getAlias().'.id',':exceptBars'))
-            ->setParameter('tags', $bar->getTagsIds())
-            ->setParameter('exceptBars', $ids)
-            ->setMaxResults($limit)
+            ->where($qb->expr()->notIn($this->getAlias().'.id',':exceptBars'))
+            ->setParameter('exceptBars', '');
         ;
 
-        if($location == BarRepository::BAR_LOCATION_CITY and !is_null($bar->getCity()))
-        {
-            $qb
-                ->andWhere($qb->expr()->eq($this->getAlias().'.city', ':city'))
-                ->setParameter('city', $bar->getCity());
-        }
+    }
 
-        if($location == BarRepository::BAR_LOCATION_COUNTRY and !is_null($bar->getCity()) and !is_null($bar->getCity()->getCountry()))
+    public function findYouMayAlsoLike($bar, $location, $exceptBars = null, $onTop = true, $tags = true, $limit = 4)
+    {
+        if($bar)
         {
-            $qb
-                ->andWhere($qb->expr()->eq('c.country', ':country'))
-                ->setParameter('country', $bar->getCity()->getCountry());
-        }
+            $ids = array($bar->getId());
+            if($exceptBars != null)
+            {
+                foreach($exceptBars as $exBar)
+                {
+                    if($exBar and $exBar)
+                        $ids[] = $exBar->getId();
+                }
+            }
 
-        return $qb->getQuery()->getResult();
+            $qb = $this->createQuerybuilder($this->getAlias());
+
+            $qb
+                ->select($this->getAlias())
+                ->innerjoin($this->getAlias().'.city', 'c')
+                ->where($qb->expr()->notIn($this->getAlias().'.id',':exceptBars'))
+                ->setParameter('exceptBars', $ids)
+            ;
+
+            if($onTop == true){
+                $qb
+                    ->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+            }
+
+            if($tags == true){
+                $qb
+                    ->innerjoin($this->getAlias().'.tags', 'bt')
+                    ->innerjoin('bt.tag', 't')
+                    ->andWhere($qb->expr()->in('t.id',':tags'))
+                    ->setParameter('tags', $bar->getTagsIds());
+            }
+
+            if($location == BarRepository::BAR_LOCATION_CITY and !is_null($bar->getCity()))
+            {
+                $qb
+                    ->andWhere($qb->expr()->eq($this->getAlias().'.city', ':city'))
+                    ->setParameter('city', $bar->getCity());
+            }
+
+            if($location == BarRepository::BAR_LOCATION_COUNTRY and !is_null($bar->getCity()) and !is_null($bar->getCity()->getCountry()))
+            {
+                $qb
+                    ->andWhere($qb->expr()->eq('c.country', ':country'))
+                    ->setParameter('country', $bar->getCity()->getCountry());
+            }
+
+            $qb
+                ->groupBy($this->getAlias())
+                ->setMaxResults($limit);
+
+            return $qb->getQuery()->getResult();
+        }
+        else{
+            return null;
+        }
     }
 } 

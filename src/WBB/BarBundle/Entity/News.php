@@ -76,7 +76,7 @@ class News {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_on_top", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $isOnTop;
 

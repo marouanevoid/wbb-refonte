@@ -44,14 +44,16 @@ class BarAdmin extends Admin
             ->add('city')
             ->add('suburb')
             ->add('onTop')
-            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
             ->add('status', 'doctrine_orm_string', array(), 'choice',
-                    array('choices' => array(
-                            Bar::BAR_STATUS_PENDING_VALUE   => 'Pending',
-                            Bar::BAR_STATUS_ENABLED_VALUE   => 'Enabled',
-                            Bar::BAR_STATUS_DISABLED_VALUE  => 'Disabled'
-                    )
-                ))
+                array('choices' => array(
+                    Bar::BAR_STATUS_PENDING_VALUE   => 'Pending',
+                    Bar::BAR_STATUS_ENABLED_VALUE   => 'Enabled',
+                    Bar::BAR_STATUS_DISABLED_VALUE  => 'Disabled'
+                )
+            ))
+            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
+            ->add('updatedAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
+
         ;
     }
 
@@ -98,79 +100,89 @@ class BarAdmin extends Admin
         
         $formMapper
             ->with('General')
-                ->add('user')
-                ->add('name')
-                ->add('city', 'sonata_type_model', array('required' => false))
-                ->add('suburb')
+                ->add('user', null, array('attr' => array('data-tooltip' => 'Select the bar owner of your choice (Optional)')))
+                ->add('name', null, array('attr' => array('data-tooltip' => 'Name of the bar (Mandatory)')))
+                ->add('city', 'sonata_type_model', array('attr' => array('data-tooltip' => 'City (Mandatory)'),'required' => true))
+                ->add('suburb', 'sonata_type_model', array('attr' => array('data-tooltip' => 'Area (Mandatory)'), 'required' => true))
                 ->add('onTop')
                 ->add('status', 'choice', array(
                     'required' => false,
+                    'attr' => array('data-tooltip' => 'Status (Keep the "Pending" status until the bar page is completely finished).'),
                     'choices'  => array(
                         Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
                         Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
                         Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
                     )
                 ))
-            ->end();
-
-        if($this->getSecurityContext()->isGranted('ROLE_BAR_ID')){
-            $formMapper
-                ->with('Bar ID')
-                    ->add('latitude', 'hidden')
-                    ->add('longitude', 'hidden')
-                    ->add('address')
-                    ->add('phone')
-                    ->add('email')
-                    ->add('website')
-                    ->add('foursquare')
-                    ->add('twitter')
-                    ->add('facebook')
-                    ->add('instagram')
-                ->end();
-        }
+            ->end()
+            ->with('Bar Details');
+                if($this->getSecurityContext()->isGranted('ROLE_BAR_ID')){
+                    $formMapper
+                        ->add('latitude', 'hidden')
+                        ->add('longitude', 'hidden')
+                        ->add('address', null, array('attr' => array('data-tooltip' => 'Address (Mandatory)')))
+                        ->add('phone', null, array('attr' => array('data-tooltip' => 'Phone number (Mandatory)')))
+                        ->add('email')
+                        ->add('website')
+                        ->add('foursquare', null, array('attr' => array('data-tooltip' => 'Foursquare ID (Example : 4bfd2db02b83b71365a7a998)')))
+                        ->add('twitter', null, array('attr' => array('data-tooltip' => 'Twitter pseudo (Example : buddhabargroup)')))
+                        ->add('facebook', null, array('attr' => array('data-tooltip' => 'Facebook pseudo (Exemple : buddhabarofficial)')))
+                        ->add('instagram', null, array('attr' => array('data-tooltip' => 'Instagram pseudo (Example : buddhabarparis)')));
+                }
 
         $formMapper
-            ->with('Details')
-                ->add('isCreditCard')
-                ->add('isCoatCheck')
-                ->add('parking', 'choice', array(
-                    'required' => false,
-                    'choices'  => array(
-                        'Premier Etage' => 'Premier Etage',
-                        'RDC'           => 'RDC',
-                        'RDJ'           => 'RDJ'
-                    )
-                ))
-                ->add('price', 'choice', array(
-                    'required' => false,
-                    'choices'  => array(
-                        1 => 1,
-                        2 => 2,
-                        3 => 3,
-                        4 => 4
-                    )
-                ))
-                ->add('menu')
-                ->add('isReservation')
-                ->add('reservation');
+            ->add('isCreditCard')
+            ->add('isCoatCheck')
+            ->add('parking', 'choice', array(
+                'required' => false,
+                'choices'  => array(
+                    'Premier Etage' => 'Premier Etage',
+                    'RDC'           => 'RDC',
+                    'RDJ'           => 'RDJ'
+                )
+            ))
+            ->add('price', 'choice', array(
+                'required' => false,
+                'choices'  => array(
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4
+                )
+            ))
+            ->add('menu', null, array('attr' => array('data-tooltip' => 'Menu link (Example : http://www.url.com)')))
+            ->add('isReservation')
+            ->add('reservation', null, array('attr' => array('data-tooltip' => 'Reservation link (Example : http://www.url.com)')));
 
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
-            $formMapper->add('description');
+            $formMapper
+                ->add('description', 'textarea', array('required' => false, 'attr' => array('data-tooltip' => 'Bar Description (Mandatory)', 'class'=>'wysihtml5')))
+                ->add('readMore', 'textarea', array('required' => false, 'attr' => array('data-tooltip' => 'Bar Description (Mandatory)', 'class'=>'wysihtml5')));
         }
 
         $formMapper
-                ->add('seoDescription', 'textarea', array('required' => false))
+                ->add('seoDescription', 'textarea', array(
+                        'required' => false,
+                        'attr' => array(
+                            'data-tooltip' => 'SEO Description * (Mandatory) (160 caracters max)',
+                            'cols'=>220,
+                            'rows'=>20
+                        )
+                    )
+                )
             ->end()
             ->with('Medias')
-                ->add('medias', 'sonata_type_collection', array('required' => false),
+                ->add('medias', 'sonata_type_collection', array('required' => false, 'attr' => array('data-tooltip' => 'Medias (Add a WBB media is mandatory)')),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('New Tags')
-                ->add('tags', 'sonata_type_collection', array('required' => false),
+            ->with('Tags')
+                ->add('tags', 'sonata_type_collection', array(
+                    'required' => false,
+                    'attr' => array('data-tooltip' => 'Tags (Associate a tag minimum to the bar is mandatory)')),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',

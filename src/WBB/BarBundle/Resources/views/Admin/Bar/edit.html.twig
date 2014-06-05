@@ -21,7 +21,12 @@ file that was distributed with this source code.
 
 {% block actions %}
     <div class="sonata-actions btn-group">
-        {% include 'SonataAdminBundle:Button:show_button.html.twig' %}
+        {% if object.slug %}
+            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city, suburb:object.suburb, slug:object.slug}) }}" target="_blank">
+                <i class="icon-zoom-in"></i>
+                {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
+            </a>
+        {% endif %}
         {% include 'SonataAdminBundle:Button:history_button.html.twig' %}
         {% include 'SonataAdminBundle:Button:acl_button.html.twig' %}
         {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
@@ -94,6 +99,42 @@ file that was distributed with this source code.
     </script>
     <script type="text/javascript">
         $(document).ready(function(){
+
+            $("#{{ admin.uniqId }}_website").after(function(){
+                if($("#{{ admin.uniqId }}_website").val() != "")
+                {
+                    return '&nbsp;&nbsp;&nbsp;<a href="'+$("#{{ admin.uniqId }}_website").val()+'" target="_blank">Visit</a>';
+                }
+            });
+
+            $("#{{ admin.uniqId }}_foursquare").after(function(){
+                if($("#{{ admin.uniqId }}_foursquare").val() != "")
+                {
+                    return '&nbsp;&nbsp;&nbsp;<a href="https://foursquare.com/v/'+$("#{{ admin.uniqId }}_foursquare").val()+'" target="_blank">Visit</a>';
+                }
+            });
+
+            $("#{{ admin.uniqId }}_twitter").after(function(){
+                if($("#{{ admin.uniqId }}_twitter").val() != "")
+                {
+                    return '&nbsp;&nbsp;&nbsp;<a href="http://www.twitter.com/'+$("#{{ admin.uniqId }}_twitter").val()+'" target="_blank">Visit</a>';
+                }
+            });
+
+            $("#{{ admin.uniqId }}_facebook").after(function(){
+                if($("#{{ admin.uniqId }}_facebook").val() != "")
+                {
+                    return '&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/'+$("#{{ admin.uniqId }}_facebook").val()+'" target="_blank">Visit</a>';
+                }
+            });
+
+            $("#{{ admin.uniqId }}_instagram").after(function(){
+                if($("#{{ admin.uniqId }}_instagram").val() != "")
+                {
+                    return '&nbsp;&nbsp;&nbsp;<a href="https://www.instagram.com/'+$("#{{ admin.uniqId }}_instagram").val()+'" target="_blank">Visit</a>';
+                }
+            });
+
             var city = $("#{{ admin.uniqId }}_city");
             city.change(updateSuburbs());
             city.change();
@@ -105,7 +146,7 @@ file that was distributed with this source code.
                     suburb.empty();
                     suburb.trigger("list:updated");
 
-                    var url = Routing.generate('get_suburbs_from_city', {'bar': '{{ admin.id(object) }}', 'cityId': cityId });
+                    var url = Routing.generate('get_suburbs_from_city', {'bar': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'cityId': cityId });
                     $.post(url, { cityId: cityId }, function(data){
                         var options = JSON && JSON.parse(data) || $.parseJSON(data);
                         suburb.empty().append(options);

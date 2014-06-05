@@ -80,7 +80,6 @@ class CityAdmin extends Admin
             ->add('name')
             ->add('country')
             ->add('seoDescription')
-            ->add('suburbs')
             ->add('onTopCity')
         ;
     }
