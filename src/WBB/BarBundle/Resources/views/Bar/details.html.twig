@@ -90,7 +90,7 @@
                                             $(".loader").css('display','none');
                                             $('.ui-slider').append(html);
                                             reste  = 4-$('.ui-slide .image').length%4;
-                                            lastImages = $('.ui-slide .image').slice(-reste);
+                                            lastImages = $('.ui-slide .image').slice(reste);
                                             i=1;
                                             $.each(lastImages, function(key, element){
                                                 if(i<=reste){
@@ -124,7 +124,7 @@
         function initialise() {
             var myLatlng = new google.maps.LatLng({{ bar.latitude }},{{ bar.longitude }}); // Add the coordinates
             var mapOptions = {
-                zoom: 10, // The initial zoom level when your map loads (0-20)
+                zoom: 14, // The initial zoom level when your map loads (0-20)
                 minZoom: 6, // Minimum zoom level allowed (0-20)
                 maxZoom: 17, // Maximum soom level allowed (0-20)
                 zoomControl:true, // Set to true if using zoomControlOptions below, or false to remove all zoom controls.
@@ -184,10 +184,13 @@
             <tr>
                 {% if not is_mobile() or is_tablet() %}
                 <td>
-                    <div class="city-selector h3">
-                        You are in
-                        <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name|default('Unspecified') }}</a>
-                    </div>                        </td>
+                    {% if bar.city.onTopCity %}
+                        <div class="city-selector h3">
+                            You are in
+                            <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name|default('Unspecified') }}</a>
+                        </div>    
+                    {% endif %}                    
+                </td>
                 {% endif %}
                 <td class="title">
                     <h1>{{ bar.name }}</h1>
@@ -308,14 +311,37 @@
                             Hours:
                             {% for opening in bar.openings %}
                                 {% if opening.openingDay == "now"|date("N") %}
-                                    Today {{ opening.fromHour }}:00 - {{ opening.toHour }}:00
+                                    Today 
+                                    {% if opening.fromHour|number_format<=12 %}
+                                        {{ opening.fromHour }}:00 am
+                                    {% else %}
+                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                    {% endif %}
+                                     - 
+                                    {% if opening.toHour|number_format<=12 %}
+                                        {{ opening.toHour }}:00 am
+                                    {% else %}
+                                        {{ (opening.toHour|number_format)-12 }}:00 pm
+                                    {% endif %}
                                 {% endif %}
                             {% endfor%}
                             <a href="#0" id="showOpenings">(See all)</a><br/>
                             <span class="openings" style="display: none">
                             {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
                                 {% for opening in bar.openings %}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : {{ opening.fromHour }}:00 - {{ opening.toHour }}:00<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} : 
+                                    {% if opening.fromHour|number_format<=12 %}
+                                        {{ opening.fromHour }}:00 am
+                                    {% else %} 
+                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                    {% endif %}
+                                     - 
+                                    {% if opening.toHour|number_format<=12 %}
+                                        {{ opening.toHour }}:00 am
+                                    {% else %}
+                                        {{ (opening.toHour|number_format)-12 }}:00 pm
+                                    {% endif %}
+                                    <br />
                                 {% endfor%}
                             </span>
                             Accepts Credit Cards: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
@@ -477,7 +503,7 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ asset('/bundles/wbbcore/images/tmp/data/tips.php') }}">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}">Load More</a>
             </div>
 
                 <div class="three columns box">
@@ -491,13 +517,13 @@
                             </form>
                             <br class="clear"/>
                         </div>
-                    </article>
+                    </article> 
                 </div>
 
             {% else %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ asset('/bundles/wbbcore/images/tmp/data/tips.php') }}">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}">Load More</a>
             </div>
 
             {% endif %}
