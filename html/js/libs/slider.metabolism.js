@@ -171,20 +171,7 @@ meta.Slider = function(config){
 
         var $images = $container.find('img[data-src]');
 
-        var is_oldIE = $('html').hasClass('ie8') || $('html').hasClass('ie9');
-
-        $images.error(function(){
-
-            if( is_oldIE ) $(this).css({opacity:1});
-            else $(this).attr('src', BASEURL+that.config.default_img ).css({opacity:1});
-
-        }).load(function(){
-
-            $(this).css({opacity:1});
-        });
-
         $images.each(function(){
-
             $(this).attr('src', $(this).data('src'));
             $(this).removeAttr('data-src');
         })
