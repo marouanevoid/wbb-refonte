@@ -40,6 +40,8 @@
 
             <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
 
+                <div class="loader"></div>
+
                 <?php for($i=1; $i<3; $i++): ?>
 
                     <div class="ui-slide">
