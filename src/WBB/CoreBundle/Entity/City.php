@@ -17,7 +17,7 @@ use WBB\CoreBundle\Entity\Country;
  * City
  *
  * @ORM\Table(name="wbb_city")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\CityRepository")
  */
 class City {
 

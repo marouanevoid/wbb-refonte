@@ -23,12 +23,17 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
-            ->innerjoin($this->getAlias().'.city', 'c')
+            ->select("$this->getAlias(), COUNT(tp) AS HIDDEN nbTips")
+            ->innerjoin($this->getAlias().'.tips', 'tp')
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->where($qb->expr()->notIn($this->getAlias().'.id',':exceptBars'))
-            ->setParameter('exceptBars', '');
+            ->groupBy($this->getAlias())
+            ->orderBy('nbTips', 'DESC')
+            ->setMaxResults(6)
         ;
+
+        //TODO : Add Favoris count
+
+        return $qb->getQuery()->getResult();
 
     }
 

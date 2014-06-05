@@ -153,6 +153,12 @@ services:
         factory_method: getRepository
         arguments: ['WBBBarBundle:Bar']
 
+    bestof.repository:
+        class: WBB\BarBundle\Repository\BestOfRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBBarBundle:BestOf']
+
     bar.tag.repository:
             class: WBB\BarBundle\Repository\BarTagRepository
             factory_service: doctrine.orm.default_entity_manager

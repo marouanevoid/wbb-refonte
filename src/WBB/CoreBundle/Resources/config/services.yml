@@ -56,3 +56,10 @@ services:
         arguments: [null, %wbb_core.city_bestof.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
+
+    #Repositories
+    city.repository:
+        class: WBB\CoreBundle\Repository\CityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBCoreBundle:City']
