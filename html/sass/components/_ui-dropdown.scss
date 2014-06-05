@@ -9,6 +9,7 @@
     .ui-dropdown.drop-dark {
       background: $color-light-gray; color: $color-subtle-yellow; border-color:$color-light-gray;
       span:before { opacity: 1 }
+      &:after { opacity: 1 }
     }
   }
 

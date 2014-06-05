@@ -1336,137 +1336,141 @@ or wrap each row of columns in a <div class="row"> */
 .btn-radius.with-icon.friend:after {
   background-position: -12px -240px;
 }
-/* line 63, ../sass/_icons.scss */
+/* line 60, ../sass/_icons.scss */
+.btn-radius.with-icon.friend.active:after {
+  opacity: 1;
+}
+/* line 64, ../sass/_icons.scss */
 .btn-radius.with-icon.chillout:before {
   background-position: -52px -200px;
 }
-/* line 64, ../sass/_icons.scss */
+/* line 65, ../sass/_icons.scss */
 .btn-radius.with-icon.chillout:after {
   background-position: -52px -240px;
 }
-/* line 68, ../sass/_icons.scss */
+/* line 69, ../sass/_icons.scss */
 .btn-radius.with-icon.casual:before {
   background-position: -92px -200px;
 }
-/* line 69, ../sass/_icons.scss */
+/* line 70, ../sass/_icons.scss */
 .btn-radius.with-icon.casual:after {
   background-position: -92px -240px;
 }
-/* line 73, ../sass/_icons.scss */
+/* line 74, ../sass/_icons.scss */
 .btn-radius.with-icon.party:before {
   background-position: -132px -200px;
 }
-/* line 74, ../sass/_icons.scss */
+/* line 75, ../sass/_icons.scss */
 .btn-radius.with-icon.party:after {
   background-position: -132px -240px;
 }
-/* line 77, ../sass/_icons.scss */
+/* line 78, ../sass/_icons.scss */
 .btn-radius.with-icon.grid {
   padding-right: 1.2em !important;
 }
-/* line 78, ../sass/_icons.scss */
+/* line 79, ../sass/_icons.scss */
 .btn-radius.with-icon.grid:before {
   background-position: -0px -320px;
   width: 40px !important;
   left: 0.4em !important;
 }
-/* line 79, ../sass/_icons.scss */
+/* line 80, ../sass/_icons.scss */
 .btn-radius.with-icon.grid:after {
   background-position: -0px -280px;
   width: 40px !important;
   left: 0.4em !important;
 }
-/* line 82, ../sass/_icons.scss */
+/* line 83, ../sass/_icons.scss */
 .btn-radius.with-icon.list {
   padding-right: 1.2em !important;
 }
-/* line 83, ../sass/_icons.scss */
+/* line 84, ../sass/_icons.scss */
 .btn-radius.with-icon.list:before {
   background-position: -40px -320px;
   width: 40px !important;
   left: 0.4em !important;
 }
-/* line 84, ../sass/_icons.scss */
+/* line 85, ../sass/_icons.scss */
 .btn-radius.with-icon.list:after {
   background-position: -40px -280px;
   width: 40px !important;
   left: 0.4em !important;
 }
 
-/* line 91, ../sass/_icons.scss */
+/* line 92, ../sass/_icons.scss */
 .btn-small-round.www:before {
   background-position: -5px -125px;
 }
-/* line 92, ../sass/_icons.scss */
+/* line 93, ../sass/_icons.scss */
 .btn-small-round.www:after {
   background-position: -5px -165px;
 }
-/* line 95, ../sass/_icons.scss */
+/* line 96, ../sass/_icons.scss */
 .btn-small-round.twitter {
   border-color: #00c3f3;
 }
-/* line 97, ../sass/_icons.scss */
+/* line 98, ../sass/_icons.scss */
 .btn-small-round.twitter:hover {
   background: #00c3f3;
 }
-/* line 98, ../sass/_icons.scss */
+/* line 99, ../sass/_icons.scss */
 .btn-small-round.twitter:before {
   background-position: -45px -125px;
 }
-/* line 99, ../sass/_icons.scss */
+/* line 100, ../sass/_icons.scss */
 .btn-small-round.twitter:after {
   background-position: -45px -165px;
 }
-/* line 102, ../sass/_icons.scss */
+/* line 103, ../sass/_icons.scss */
 .btn-small-round.facebook {
   border-color: #2960a3;
 }
-/* line 104, ../sass/_icons.scss */
+/* line 105, ../sass/_icons.scss */
 .btn-small-round.facebook:hover {
   background: #2960a3;
 }
-/* line 105, ../sass/_icons.scss */
+/* line 106, ../sass/_icons.scss */
 .btn-small-round.facebook:before {
   background-position: -86px -125px;
 }
-/* line 106, ../sass/_icons.scss */
+/* line 107, ../sass/_icons.scss */
 .btn-small-round.facebook:after {
   background-position: -86px -165px;
 }
-/* line 109, ../sass/_icons.scss */
+/* line 110, ../sass/_icons.scss */
 .btn-small-round.instagram {
   border-color: #818a8c;
 }
-/* line 111, ../sass/_icons.scss */
+/* line 112, ../sass/_icons.scss */
 .btn-small-round.instagram:hover {
   background: #818a8c;
 }
-/* line 112, ../sass/_icons.scss */
+/* line 113, ../sass/_icons.scss */
 .btn-small-round.instagram:before {
   background-position: -165px -165px;
 }
-/* line 113, ../sass/_icons.scss */
+/* line 114, ../sass/_icons.scss */
 .btn-small-round.instagram:after {
   background-position: -165px -205px;
 }
-/* line 116, ../sass/_icons.scss */
+/* line 117, ../sass/_icons.scss */
 .btn-small-round.foursquare {
   border-color: #209fca;
 }
-/* line 118, ../sass/_icons.scss */
+/* line 119, ../sass/_icons.scss */
 .btn-small-round.foursquare:hover {
   background: #209fca;
 }
-/* line 119, ../sass/_icons.scss */
+/* line 120, ../sass/_icons.scss */
 .btn-small-round.foursquare:before {
   background-position: -125px -125px;
 }
-/* line 120, ../sass/_icons.scss */
+/* line 121, ../sass/_icons.scss */
 .btn-small-round.foursquare:after {
   background-position: -125px -165px;
 }
 
-/* line 125, ../sass/_icons.scss */
+/* line 126, ../sass/_icons.scss */
 .finder-close:before {
   background-position: -160px -120px;
 }
@@ -2509,15 +2513,19 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
 .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark span:before {
   opacity: 1;
 }
-/* line 15, ../sass/components/_ui-dropdown.scss */
+/* line 12, ../sass/components/_ui-dropdown.scss */
+.ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark:after {
+  opacity: 1;
+}
+/* line 16, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown-placeholder {
   display: none;
 }
-/* line 17, ../sass/components/_ui-dropdown.scss */
+/* line 18, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container select {
   display: none;
 }
-/* line 19, ../sass/components/_ui-dropdown.scss */
+/* line 20, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown {
   width: 100%;
   box-sizing: border-box;
@@ -2527,7 +2535,7 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   border-radius: 20px;
   background: #fff;
 }
-/* line 21, ../sass/components/_ui-dropdown.scss */
+/* line 22, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown span {
   display: block;
   height: 34px;
@@ -2537,7 +2545,7 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   padding-right: 30px;
   white-space: nowrap;
 }
-/* line 23, ../sass/components/_ui-dropdown.scss */
+/* line 24, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown span:after, .ui-dropdown-container .ui-dropdown span:before {
   content: '';
   background: url("../images/sprite.png") no-repeat;
@@ -2550,12 +2558,12 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   height: 40px;
   margin-top: -20px;
 }
-/* line 24, ../sass/components/_ui-dropdown.scss */
+/* line 25, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown span:before {
   background-position: -160px -40px;
   opacity: 0;
 }
-/* line 26, ../sass/components/_ui-dropdown.scss */
+/* line 27, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice {
   overflow-x: hidden;
   max-height: 100px;
@@ -2568,15 +2576,15 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   font-size: 90%;
   margin-bottom: 1.2em !important;
 }
-/* line 28, ../sass/components/_ui-dropdown.scss */
+/* line 29, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice .jspContainer {
   height: 100px !important;
 }
-/* line 29, ../sass/components/_ui-dropdown.scss */
+/* line 30, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice ul {
   padding: 0.6em 0;
 }
-/* line 30, ../sass/components/_ui-dropdown.scss */
+/* line 31, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice ul li {
   padding-bottom: 1em;
   -webkit-transition: color 0.2s ease-in-out;
@@ -2584,11 +2592,11 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   -o-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
-/* line 32, ../sass/components/_ui-dropdown.scss */
+/* line 33, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice ul li:last-child {
   padding-bottom: 0;
 }
-/* line 36, ../sass/components/_ui-dropdown.scss */
+/* line 37, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-light {
   color: #b3955f;
 }
@@ -2620,15 +2628,15 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   border-radius: 10px;
   background: #b3955f;
 }
-/* line 38, ../sass/components/_ui-dropdown.scss */
+/* line 39, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-light .choice li:hover {
   color: #7e613f;
 }
-/* line 40, ../sass/components/_ui-dropdown.scss */
+/* line 41, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-cream {
   background-color: #000000;
 }
-/* line 43, ../sass/components/_ui-dropdown.scss */
+/* line 44, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-dark {
   background: #4b4d4e;
   color: #b3955f;
@@ -2663,21 +2671,21 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   border-radius: 10px;
   background: #b3955f;
 }
-/* line 45, ../sass/components/_ui-dropdown.scss */
+/* line 46, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-dark:hover, .ui-dropdown-container .ui-dropdown.drop-dark.active {
   background: #6f7072;
   color: #ffe4af;
   border-color: #6f7072;
 }
-/* line 46, ../sass/components/_ui-dropdown.scss */
+/* line 47, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-dark:hover span:before, .ui-dropdown-container .ui-dropdown.drop-dark.active span:before {
   opacity: 1;
 }
-/* line 47, ../sass/components/_ui-dropdown.scss */
+/* line 48, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-dark .choice li:hover {
   color: white;
 }
-/* line 49, ../sass/components/_ui-dropdown.scss */
+/* line 50, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-dark span:before {
   background-position: -160px -40px;
   z-index: 1;
@@ -2686,17 +2694,17 @@ html.ie9 .ui-slider.type-bestof .ui-slide {
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
 }
-/* line 51, ../sass/components/_ui-dropdown.scss */
+/* line 52, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-dark .jspTrack {
   background: #4b4d4e;
   border-color: #4b4d4e;
 }
-/* line 52, ../sass/components/_ui-dropdown.scss */
+/* line 53, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-dark .jspDrag {
   width: 75%;
 }
 
-/* line 59, ../sass/components/_ui-dropdown.scss */
+/* line 60, ../sass/components/_ui-dropdown.scss */
 html.mobile .ui-dropdown-container select {
   position: absolute;
   left: 0;
@@ -4144,7 +4152,7 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
   position: absolute;
   top: 0;
   right: 0;
-  width: 10px;
+  width: 14px;
   height: 100%;
 }
 
@@ -4185,7 +4193,7 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
   cursor: pointer;
   width: 70%;
   margin: auto;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 /* line 66, ../sass/components/_jquery.jscrollpane.scss */

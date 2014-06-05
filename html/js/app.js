@@ -110,9 +110,7 @@ meta.App = function() {
 
     that._customScroll = function()
     {
-        if( $('html').hasClass('webkit') ) return;
-
-        $('.custom-scroll').each(function()
+        $('.custom-scroll').not('.jspScrollable').each(function()
         {
             $(this).jScrollPane({autoReinitialise: true});
         });
@@ -153,6 +151,15 @@ meta.App = function() {
         that._mobileMenuEvents();
         that._loadImages();
         that._customScroll();
+
+        $( document ).ajaxComplete(function() {
+
+            setTimeout(function()
+            {
+                that._customScroll();
+
+            }, 600);
+        });
     };
 
 

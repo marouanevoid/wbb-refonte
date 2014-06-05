@@ -202,8 +202,8 @@
 				if (!(isScrollableH || isScrollableV)) {
 					elem.removeClass('jspScrollable');
 					pane.css({
-            top: 0,
-            left: 0,
+                        top: 0,
+                        left: 0,
 						width: container.width() - originalPaddingTotalWidth
 					});
 					removeMousewheel();
@@ -349,7 +349,7 @@
 				scrollbarWidth = settings.verticalGutter + verticalTrack.outerWidth();
 
 				// Make the pane thinner to allow for the vertical scrollbar
-				pane.width(paneWidth - scrollbarWidth - originalPaddingTotalWidth);
+				pane.width(paneWidth - scrollbarWidth - originalPaddingTotalWidth - 10);
 
 				// Add margin to the left of the pane if scrollbars are on that side (to position
 				// the scrollbar on the left or right set it's left or right property in CSS)
@@ -490,7 +490,7 @@
 					} else if (verticalDragHeight < settings.verticalDragMinHeight) {
 						verticalDragHeight = settings.verticalDragMinHeight;
 					}
-					verticalDrag.height(verticalDragHeight-2 + 'px');
+					verticalDrag.height(verticalDragHeight-4 + 'px');
 					dragMaxY = verticalTrackHeight - verticalDragHeight;
 					_positionDragY(verticalDragPosition); // To update the state for the arrow buttons
 				}

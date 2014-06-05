@@ -75,14 +75,13 @@ meta.Dropdown = function(config){
                 if( $dropdown.hasClass("dropdown-open") ){
 
                     $dropdown.find('.choice').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
-                        $dropdown.removeClass('dropdown-open')
+                        $dropdown.removeClass('dropdown-open');
                     }});
                 }
                 else{
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
                     $dropdown.css({width:$dropdown.width()});
                     $dropdown.addClass('dropdown-open').find('.choice').velocity('slideDown', {speed:that.config.speed, easing:that.config.easing});
-
                 }
             });
 
