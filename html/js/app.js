@@ -120,7 +120,13 @@ meta.App = function() {
         $('a.see-more').click(function(e)
         {
             e.preventDefault();
-            $(this).next('.more').slideToggle(that.config.speed, that.config.easing);
+
+            if( $(this).hasClass('fade') )
+                $(this).velocity('fadeOut', { duration: speed, easing:easing});
+            else
+                $(this).velocity('slideUp', { duration: speed, easing:easing});
+
+            $(this).next('.more').velocity('slideDown', { duration: speed, easing:easing});
         });
 
         that._barFinderEvents();
