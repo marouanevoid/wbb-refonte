@@ -71,6 +71,20 @@ meta.Search = function(config){
         that.context.$form          = that.context.$header.find('.nav form');
         that.context.$input         = that.context.$form.find('input');
         that.context.$result        = that.context.$header.find('.search-result-proposal ul');
+
+        var is_trident = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
+        if( is_trident || $('html').hasClass('ie') )
+        {
+            var placeholder = that.context.$input.attr('placeholder');
+            var $placeholder = $('<span class="placeholder">'+placeholder+'</span>');
+
+            that.context.$input.removeAttr('placeholder');
+            that.context.$input.after($placeholder);
+
+            $placeholder.on('click', function(){ that.context.$input.focus() });
+            that.context.$input.on('keydown', function(){ $placeholder.hide() });
+            that.context.$input.on('keyup', function(){ if(that.context.$input.val() == "") $placeholder.show() });
+        }
     };
 
 
@@ -126,6 +140,7 @@ meta.Search = function(config){
             $(this).removeAttr('style');
             that.context.$input.val('');
             that.context.$result.empty();
+            that.context.$form.find('.placeholder').show();
         }});
 
         that.context.$searchHeader.velocity({top:'-50%', opacity:0}, { duration: that.config.speed, easing:that.config.easing, complete:function() {

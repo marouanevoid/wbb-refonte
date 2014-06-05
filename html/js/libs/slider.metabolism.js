@@ -50,7 +50,7 @@ meta.Slider = function(config){
         infinite    : false,
         autoload    : false,
         swipe       : false,
-        speed       : 600,
+        speed       : 400,
         easing      : 'easeInOutCubic',
         default_img : 'images/default.jpg',
         animate_arrow   : false,
@@ -379,14 +379,14 @@ meta.Slider = function(config){
         if($current.length==1)
         {
             $current.addClass('transform3d');
-            $next.css({transform:'translate3d('+(goto_left?'-100%':'100%')+', 0, 0)', display:'block'});
+            $next.css({transform:'translate3d('+(goto_left?'-100':'100')+'%, 0, 0)', display:'block'});
 
             setTimeout(function()
             {
                 $next.css({transform:'translate3d(0, 0, 0)'});
-                $current.css({transform:'translate3d('+(goto_left?'100%':'-100%')+', 0, 0)'});
+                $current.css({transform:'translate3d('+(goto_left?'100':'-100')+'%, 0, 0)'});
 
-            }, 10);
+            }, 20);
 
             setTimeout(function()
             {
@@ -398,17 +398,17 @@ meta.Slider = function(config){
         }
         else
         {
-            $next.css({transform:'translate3d('+(goto_left?'-100%': that.config.display_count*100)+'%, 0, 0)', display:'block'});
+            $next.css({transform:'translate3d('+(goto_left?'-100': that.config.display_count*100)+'%, 0, 0)', display:'block'});
 
             setTimeout(function()
             {
-                $next.css({transform:'translate3d('+(goto_left?'0%': (that.config.display_count-1)*100)+'%, 0, 0)'});
+                $next.css({transform:'translate3d('+(goto_left?'0': (that.config.display_count-1)*100)+'%, 0, 0)'});
                 $current.each(function(index)
                 {
                     $(this).css({transform:'translate3d('+(goto_left?(index+1)*100:(index-1)*100)+'%, 0, 0)'});
                 });
 
-            }, 10);
+            }, 20);
 
 
             setTimeout(function()
