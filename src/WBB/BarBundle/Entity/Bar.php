@@ -42,6 +42,12 @@ class Bar
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"id", "name"}, style="camel", separator="_")
+     * @ORM\Column(unique=true)
+     */
+    private $slug;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="latitude", type="string", length=20, nullable=true)
@@ -114,14 +120,14 @@ class Bar
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isCreditCard", type="boolean", nullable=true)
+     * @ORM\Column(name="is_credit_card", type="boolean", nullable=true)
      */
     private $isCreditCard;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isCoatCheck", type="boolean", nullable=true)
+     * @ORM\Column(name="is_coat_check", type="boolean", nullable=true)
      */
     private $isCoatCheck;
 
@@ -149,7 +155,7 @@ class Bar
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isReservation", type="boolean", nullable=true)
+     * @ORM\Column(name="is_reservation", type="boolean", nullable=true)
      */
     private $isReservation;
 
@@ -177,7 +183,7 @@ class Bar
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTop", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $onTop;
 
@@ -432,7 +438,13 @@ class Bar
      */
     public function setWebsite($website)
     {
-        $this->website = $website;
+        if ((strpos($website,'http://') !== false) or (strpos($website,'https://') !== false)) {
+            $this->website = $website;
+        }
+        else
+        {
+            $this->website = 'http://'.$website;
+        }
 
         return $this;
     }
@@ -1248,5 +1260,28 @@ class Bar
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Bar
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

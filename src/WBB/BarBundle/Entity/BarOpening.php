@@ -33,14 +33,14 @@ class BarOpening
     /**
      * @var integer
      *
-     * @ORM\Column(name="fromHour", type="smallint")
+     * @ORM\Column(name="from_hour", type="smallint")
      */
     private $fromHour;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="toHour", type="smallint")
+     * @ORM\Column(name="to_hour", type="smallint")
      */
     private $toHour;
 
@@ -161,11 +161,15 @@ class BarOpening
 
     public static function getOpeningDays()
     {
-        $days = array();
-        for($i=1;$i<8;$i++)
-        {
-            $days[$i] = "Day $i";
-        }
+        $days = array(
+            1 => 'Monday',
+            2 => 'Tuesday',
+            3 => 'Wednesday',
+            4 => 'Thursday',
+            5 => 'Friday',
+            6 => 'Saturday',
+            7 => 'Sunday'
+        );
 
         return $days;
     }

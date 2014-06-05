@@ -73,7 +73,7 @@ class City {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTopCity", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $onTopCity;
 

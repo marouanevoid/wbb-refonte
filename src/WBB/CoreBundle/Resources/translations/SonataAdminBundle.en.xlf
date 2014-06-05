@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="wbb_user">
+                <source>wbb_user</source>
+                <target>User Management</target>
+            </trans-unit>
+            
+            <trans-unit id="wbb_bar">
+                <source>wbb_bar</source>
+                <target>Bars Management</target>
+            </trans-unit>
+            
+            <trans-unit id="wbb_location">
+                <source>wbb_location</source>
+                <target>Cities Management</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

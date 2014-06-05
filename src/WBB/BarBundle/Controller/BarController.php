@@ -12,51 +12,111 @@ class BarController extends Controller
     /**
      * detailsAction
      *
-     * @param integer $id
+     * @param $city
+     * @param $suburb
+     * @param $slug
      *
      * @return Response
      */
-    public function detailsAction($id)
+    public function detailsAction($city, $suburb, $slug)
     {
-        $bar = $this->container->get('bar.repository')->findOneById($id);
-        
-        $youMayAlsoLike = $this->container->get('bar.tag.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_CITY, null , 4);
+        $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
 
-        $size = sizeof($youMayAlsoLike);
+        $response = $this->getYouMayAlsoLike($bar);
+
+        return $this->render('WBBBarBundle:Bar:details.html.twig', array(
+            'bar'       => $bar,
+            'barLike'   => $response['bars'],
+            'oneCity'   => $response['oneCity']
+        ));
+    }
+
+    private function getYouMayAlsoLike($bar)
+    {
+        //Get Bars OnTop + ByTags + InCity
+        $youMayAlsoLike = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_CITY);
         $oneCity = true;
-
+        $size = sizeof($youMayAlsoLike);
         if($size < 4)
         {
-            $temp = $this->container->get('bar.tag.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, (4 - $size));
-
+            //Get Bars OnTop + ByTags + InCountry
+            $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
+                BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, true, true ,(4 - $size)
+            );
             if(sizeof($temp) > 0){
                 $oneCity = false;
-            }
-
-            foreach($temp as $tmp){
-                $youMayAlsoLike[] = $tmp;
-            }
-
-            $size += sizeof($temp);
-
-            if($size < 4)
-            {
-                $temp = $this->container->get('bar.tag.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, (4 - $size));
-
-                if(sizeof($temp)>0){
-                    $oneCity = false;
-                }
-
                 foreach($temp as $tmp){
                     $youMayAlsoLike[] = $tmp;
                 }
             }
+
+            //Get Bars OnTop + ByTags + Worldwide
+            $size += sizeof($temp);
+            if($size < 4)
+            {
+                $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
+                    BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, true, true ,(4 - $size)
+                );
+
+                if(sizeof($temp)>0){
+                    $oneCity = false;
+                    foreach($temp as $tmp){
+                        $youMayAlsoLike[] = $tmp;
+                    }
+                }
+
+                //Get Bars OnTop + InCity
+                $size += sizeof($temp);
+                if($size < 4)
+                {
+                    $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
+                        BarRepository::BAR_LOCATION_CITY, $youMayAlsoLike, true, false ,(4 - $size)
+                    );
+
+                    if(sizeof($temp) > 0){
+                        foreach($temp as $tmp){
+                            $youMayAlsoLike[] = $tmp;
+                        }
+                    }
+
+                    //Get Bars OnTop + InCountry
+                    $size += sizeof($temp);
+                    if($size < 4)
+                    {
+                        $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
+                            BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, true, false ,(4 - $size)
+                        );
+
+                        if(sizeof($temp) > 0){
+                            $oneCity = false;
+                            foreach($temp as $tmp){
+                                $youMayAlsoLike[] = $tmp;
+                            }
+                        }
+
+                        //Get Bars OnTop + InWorldwide
+                        $size += sizeof($temp);
+                        if($size < 4)
+                        {
+                            $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
+                                BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, true, false ,(4 - $size)
+                            );
+
+                            if(sizeof($temp) > 0){
+                                $oneCity = false;
+                                foreach($temp as $tmp){
+                                    $youMayAlsoLike[] = $tmp;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-        return $this->render('WBBBarBundle:Bar:details.html.twig', array(
-            'bar'       => $bar,
-            'barLike'   => $youMayAlsoLike,
-            'oneCity'   => $oneCity
-        ));
+        return array(
+            'bars'      =>  $youMayAlsoLike,
+            'oneCity'   =>  $oneCity
+        );
     }
 }
