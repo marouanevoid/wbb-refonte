@@ -4,6 +4,6 @@ wbb_sonata:
 
 get_suburbs_from_city:
     pattern: /ajax/get-suburbs-from-city/{bar}/{cityId}
-    defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getSuburbsFromCity}
+    defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getSuburbsFromCity, bar: 0}
     options:
         expose: true

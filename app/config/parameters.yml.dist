@@ -21,5 +21,3 @@ parameters:
     feeds_limit: 20
 
     instagram_client_id: 03af4f044b524a4ca9958053b7a6cb18
-
-    wbb_website_url: http://wbb.dev

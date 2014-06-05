@@ -7,6 +7,46 @@
                 <target>Detail Bar Page</target>
             </trans-unit>
 
+            <trans-unit id="breadcrumb.link_tag_list">
+                <source>breadcrumb.link_tag_list</source>
+                <target>Tag list</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_best_of_list">
+                <source>breadcrumb.link_best_of_list</source>
+                <target>Best of list</target>
+            </trans-unit>
+
+            <trans-unit id="bars">
+                <source>bars</source>
+                <target>Bars</target>
+            </trans-unit>
+
+            <trans-unit id="tags">
+                <source>tags</source>
+                <target>Tags</target>
+            </trans-unit>
+
+            <trans-unit id="bestofs">
+                <source>bestofs</source>
+                <target>Best of</target>
+            </trans-unit>
+
+            <trans-unit id="tips">
+                <source>tips</source>
+                <target>Tips</target>
+            </trans-unit>
+
+            <trans-unit id="ad">
+                <source>ad</source>
+                <target>Ads</target>
+            </trans-unit>
+
+            <trans-unit id="news">
+                <source>news</source>
+                <target>News</target>
+            </trans-unit>
+
             <trans-unit id="form.label_user">
                 <source>form.label_user</source>
                 <target>Link to owner / Add owner</target>
@@ -463,6 +503,10 @@
                 <source>list.label_is_on_top</source>
                 <target>Is on top</target>
             </trans-unit>
+            <trans-unit id="list.label_on_top">
+                <source>list.label_on_top</source>
+                <target>On top</target>
+            </trans-unit>
             <trans-unit id="filter.label_is_on_top">
                 <source>filter.label_is_on_top</source>
                 <target>Is on top</target>
@@ -539,6 +583,134 @@
             <trans-unit id="filter.label_medias">
                 <source>filter.label_medias</source>
                 <target>Medias</target>
+            </trans-unit>
+            <trans-unit id="list.label_city">
+                <source>list.label_city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="list.label_suburb">
+                <source>list.label_suburb</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="list.label_website">
+                <source>list.label_website</source>
+                <target>Website</target>
+            </trans-unit>
+            <trans-unit id="filter.label_city">
+                <source>filter.label_city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="filter.label_suburb">
+                <source>filter.label_suburb</source>
+                <target>Suburb</target>
+            </trans-unit>
+            <trans-unit id="filter.label_on_top">
+                <source>filter.label_on_top</source>
+                <target>On Top</target>
+            </trans-unit>
+            <trans-unit id="form.label_opening_day">
+                <source>form.label_opening_day</source>
+                <target>Opening Day</target>
+            </trans-unit>
+            <trans-unit id="form.label_from_hour">
+                <source>form.label_from_hour</source>
+                <target>From</target>
+            </trans-unit>
+            <trans-unit id="form.label_to_hour">
+                <source>form.label_to_hour</source>
+                <target>To</target>
+            </trans-unit>
+            <trans-unit id="filter.label_energy_level">
+                <source>filter.label_energy_level</source>
+                <target>Energy level</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_style">
+                <source>filter.label_is_style</source>
+                <target>Style</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_occasion">
+                <source>filter.label_is_occasion</source>
+                <target>Occasion</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_atmosphere">
+                <source>filter.label_is_atmosphere</source>
+                <target>Atmosphere</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_alcohol">
+                <source>filter.label_is_alcohol</source>
+                <target>Alcohol</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_cocktail">
+                <source>filter.label_is_cocktail</source>
+                <target>Cocktail</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_mood">
+                <source>filter.label_is_mood</source>
+                <target>Mood</target>
+            </trans-unit>
+            <trans-unit id="form.label_energy_level">
+                <source>form.label_energy_level</source>
+                <target>Energy level</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_style">
+                <source>form.label_is_style</source>
+                <target>Style</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_occasion">
+                <source>form.label_is_occasion</source>
+                <target>Occasion</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_atmosphere">
+                <source>form.label_is_atmosphere</source>
+                <target>Atmosphere</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_alcohol">
+                <source>form.label_is_alcohol</source>
+                <target>Alcohol</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_cocktail">
+                <source>form.label_is_cocktail</source>
+                <target>Cocktail</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_mood">
+                <source>form.label_is_mood</source>
+                <target>Mood</target>
+            </trans-unit>
+            <trans-unit id="list.label_energy_level">
+                <source>list.label_energy_level</source>
+                <target>Energy level</target>
+            </trans-unit>
+            <trans-unit id="list.label_by_tag">
+                <source>list.label_by_tag</source>
+                <target>By Tag</target>
+            </trans-unit>
+            <trans-unit id="filter.label_by_tag">
+                <source>filter.label_by_tag</source>
+                <target>By Tag</target>
+            </trans-unit>
+            <trans-unit id="filter.label_country">
+                <source>filter.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="form.label_country">
+                <source>form.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="form.label_sponsor_image_file">
+                <source>form.label_sponsor_image_file</source>
+                <target>Sponsor Image</target>
+            </trans-unit>
+            <trans-unit id="form.label_file">
+                <source>form.label_file</source>
+                <target>Image</target>
+            </trans-unit>
+            <trans-unit id="form.label_by_tag">
+                <source>form.label_by_tag</source>
+                <target>By Tag</target>
+            </trans-unit>
+            <trans-unit id="form.label_ordered">
+                <source>form.label_ordered</source>
+                <target>Ordered</target>
             </trans-unit>
 
         </body>

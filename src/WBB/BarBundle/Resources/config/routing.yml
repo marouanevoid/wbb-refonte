@@ -4,9 +4,7 @@ wbb_bar_test:
 
 #Actions
 wbb_bar_details:
-    pattern: /bar/{id}/details
-    requirements:
-          id: \d+
+    pattern: /bar/{city}/{suburb}/{slug}
     defaults: { _controller: WBBBarBundle:Bar:details }
 
 #Services

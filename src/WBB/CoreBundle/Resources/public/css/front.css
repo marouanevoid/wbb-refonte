@@ -3095,18 +3095,11 @@ article.city:hover img.scale-with-grid {
     position: absolute;
     text-align: center;
     z-index: 10;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background-image: url("../images/icons/pin.gmap.png");
-    background-repeat: no-repeat;
-    background-size: 34px 96px;
-    background-position: center center;
+    left: 106px;
+    top: 80px;
 }
 /* line 46, ../sass/pages/_bar-details.scss */
 .bar-details .content aside .informations .contain .gmap .get-directions .btn-small-radius {
-    margin-top: 24%;
     background: white;
 }
 /* line 48, ../sass/pages/_bar-details.scss */
