@@ -9,6 +9,14 @@ wbb_bar_details:
           id: \d+
     defaults: { _controller: WBBBarBundle:Bar:details }
 
+
+wbb_bar_tips:
+    pattern: /bar/{id}/{offset}/tips
+    requirements:
+          id: \d+
+          offset: \d+
+    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0}
+
 #Services
 wbb_bar_feeds_find:
     pattern:  /feed/find/{type}/{id}
