@@ -184,10 +184,13 @@
             <tr>
                 {% if not is_mobile() or is_tablet() %}
                 <td>
-                    <div class="city-selector h3">
-                        You are in
-                        <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name|default('Unspecified') }}</a>
-                    </div>                        </td>
+                    {% if bar.city.onTopCity %}
+                        <div class="city-selector h3">
+                            You are in
+                            <a class="btn-radius with-icon border brown place" href="">{{ bar.city.name|default('Unspecified') }}</a>
+                        </div>    
+                    {% endif %}                    
+                </td>
                 {% endif %}
                 <td class="title">
                     <h1>{{ bar.name }}</h1>
