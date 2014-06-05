@@ -12,7 +12,7 @@
     header.desktop {
 
       .logo {
-        border-right: 1px solid grey;
+        border-right: 1px solid #5c5549;
         a { text-decoration: none }
         img{ margin-right: 5em; display: block; width: 15.8em; height: auto; background: url("../images/logo.png") no-repeat center; background-size: 100% 100% }
       }
@@ -31,6 +31,7 @@
             background-color: transparent; border: none; font-size: 3em; height: 100%; padding: 0 5%; width: 90%; font-weight: bold; color: $color-subtle-yellow; @include placeholder{ color: $color-subtle-yellow; font-weight: normal };
             &:focus { outline: none; @include box-shadow(none); }
           }
+          .placeholder{  font-size: 3em; color: $color-subtle-yellow; position: absolute; left: 35px; top: 0; pointer-events:none }
         }
       }
 
@@ -62,7 +63,7 @@
       }
 
       .search-result-proposal {
-        position: absolute; background-color: $color-gray; width: 100%; z-index: 50;
+        position: absolute; background-color: $color-gray; width: 100%; z-index: 999;
         ul {
           li {
             font-size: 1.6em; color: $color-cream; border-bottom: 1px solid $color-dark-gray; @include transition( background 0.2s ease-in-out );

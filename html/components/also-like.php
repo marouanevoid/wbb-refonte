@@ -1,4 +1,4 @@
-<section class="also-like">
+<section class="also-like force-load">
 
     <div class="container m-padding-bottom">
 

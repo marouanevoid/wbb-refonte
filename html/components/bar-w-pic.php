@@ -10,5 +10,5 @@
     <a href="bar-details.php" class="overlay-link"></a>
 
     <div class="gradient"></div>
-    <img class="scale-with-grid" src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
+    <img src="" class="scale-with-grid" data-src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
 </article>

@@ -55,7 +55,7 @@
     a.overlay-link{ position: absolute; left: 0; width: 100%; top: 0; height: 100%; z-index: 21; img{ width: 100%; height: 100%; display: block} }
     html.mobile a.overlay-link{ display: none }
 
-    .transform3d{ @include transition(transform 0.6s ease-in-out); -webkit-backface-visibility: hidden; -webkit-perspective: 1000; }
+    .transform3d{ @include transition(transform 0.4s ease-in-out); -webkit-backface-visibility: hidden; -webkit-perspective: 1000; }
 
 /* More
 --------------------------------------------------- */
@@ -183,6 +183,7 @@
       @include transition( background-color 0.2s ease-in-out);
       &:hover{ background-color: $color-brown }
     }
+    input[type="text"]::-ms-clear { display: none  }
     input[type="text"]+input[type="submit"]{
       border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; width: 40px; padding: 0; height: 42px; margin: 0;
       background: url('../images/sprite.png') no-repeat #fff; background-size: 256px 512px;  background-position: -200px -200px;
@@ -279,6 +280,14 @@
     .xl-padding            { padding-top: $margin-padding-xl !important; padding-bottom: $margin-padding-xl !important; }
     .xxl-padding           { padding-top: $margin-padding-xxl !important; padding-bottom: $margin-padding-xl !important; }
 
+
+  /* Scroll
+  --------------------------------------------------- */
+  .nicescroll-rails
+  {
+    border-radius: 10px; border: 1px solid $color-brown;
+    > div { background: $color-brown!important }
+  }
 
   /* Buttons
   --------------------------------------------------- */
