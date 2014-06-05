@@ -36,7 +36,7 @@
 
       .bar-finder {
         text-align: right; height: 100%; overflow: hidden;
-        .separator { margin: 0 1em; }
+        .separator { margin: 0 1.5em; }
         .search-mode{
           display: none; position: relative; top: -50%;
           > *{ vertical-align: middle }
@@ -57,7 +57,7 @@
       .register {
         text-align: right; padding-left: 4.5em; color: $color-brown;
         a:hover{ color: $color-subtle-yellow }
-        .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em }
+        .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em; font-size: 0.9em; line-height: 0.9em }
         .btn-radius:hover { background-color: $color-subtle-yellow; color: $color-brown }
       }
 

@@ -175,6 +175,7 @@
       color: $color-medium-gray;
       margin: 0;
       background: #fff; }
+    textarea{ overflow: auto }
     input[type="text"],
     input[type="password"],
     input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; line-height: 40px; color:$color-brown }

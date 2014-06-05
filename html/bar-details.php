@@ -140,7 +140,7 @@
 
                             <div class="p">
                                 Hours: Today 5:00 pm - 2:00 am
-                                <a href="" class="see-more">(See all)</a>
+                                <a href="" class="see-more fade">(See all)</a>
                                 <div class="more">
                                     Today 5:00 pm - 2:00 am<br/>
                                     Today 5:00 pm - 2:00 am<br/>

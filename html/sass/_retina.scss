@@ -43,4 +43,15 @@
     }
   }
 
+  footer {
+    .right {
+      .social-icons {
+        a {
+          img{ background-image: url("../images/sprite@2x.png") }
+          span:after{ background-image: url("../images/sprite@2x.png") }
+        }
+      }
+    }
+  }
+
 }
