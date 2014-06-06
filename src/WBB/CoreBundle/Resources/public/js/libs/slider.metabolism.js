@@ -570,3 +570,11 @@ function initializeSliders()
         $slider.addClass('ui-initialized');
     })
 }
+
+
+
+$(document).ready(function(){
+
+    initializeSliders();
+
+});
