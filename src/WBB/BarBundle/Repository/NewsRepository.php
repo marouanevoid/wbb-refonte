@@ -12,14 +12,15 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class NewsRepository extends EntityRepository
 {
-    public function findLatestNews()
+    public function findLatestNews($limit = 3)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select("$this->getAlias()")
+            ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.isOnTop', $qb->expr()->literal(true)))
-            ->orderBy('createdAt', 'DESC')
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setMaxResults($limit)
         ;
 
         return $qb->getQuery()->getResult();

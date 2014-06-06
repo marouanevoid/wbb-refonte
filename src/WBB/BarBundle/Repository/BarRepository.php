@@ -23,7 +23,7 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select("$this->getAlias(), COUNT(tp) AS HIDDEN nbTips")
+            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips")
             ->innerjoin($this->getAlias().'.tips', 'tp')
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->groupBy($this->getAlias())
@@ -35,6 +35,20 @@ class BarRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
 
+    }
+
+    public function findLatestBars($limit = 5)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findYouMayAlsoLike($bar, $location, $exceptBars = null, $onTop = true, $tags = true, $limit = 4)
