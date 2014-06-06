@@ -170,43 +170,6 @@
              $('#gmap').append('<div class="get-directions h4"><a href="https://www.google.fr/maps/dir//{{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a></div>')
         }
         google.maps.event.addDomListener(window, 'load', initialise); // Execute our 'initialise' function once the page has loaded.
-
-        new meta.Form(
-        {
-            $form : $('form#tips'),
-            onComplete:function($form, data)
-            {
-                var $count = $form.find(".count");
-                var count = $count.text();
-
-                $count.addClass('success').text(data.message);
-
-                $form.get(0).reset();
-
-                setTimeout(function()
-                {
-                    //restore state
-                    $count.removeClass('success').text(count);
-
-                }, 2000);
-            },
-            onError:function($form, message)
-            {
-                var $count = $form.find(".count");
-                var count = $count.text();
-
-                $count.addClass('error').text(message);
-                $form.find("textarea").addClass('error').focus();
-
-                setTimeout(function()
-                {
-                    //restore state
-                    $count.removeClass('error').text(count);
-                    $form.find("textarea").removeClass('error');
-
-                }, 2000);
-            }
-        })
     </script>
 {% endblock %}
 {% block bodyTag %}
@@ -261,7 +224,7 @@
             {% endfor %}
         </div>
         <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
-            <div class="loader"></div>
+            <div class="loader" style="display:block"></div>
             <div class="ui-slide" style="display:none">
                 {% for m in bar.medias %}
 
@@ -427,7 +390,7 @@
                     <div class="three columns box">
                         <article class="tip">
                             <div class="content form">
-                                <form action="tmp/data/addTip.php" id="tips">
+                                <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                     <h3>Leave a tip</h3>
                                     <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..."></textarea>
                                     <div class="m-margin-top h4 count">499 left</div>
@@ -439,7 +402,7 @@
                     </div>
                 {% endif %}
 
-
+                {% for tip in bar.tips|slice(0,3) %}
                 <div class="three columns box">
                     <article class="tip">
 
@@ -448,7 +411,7 @@
                             <tr class="excerpt">
                                 <td colspan="2">
                                     <div class="scroll">
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
+                                        “{{ tip.description }}”
                                     </div>
                                 </td>
                             </tr>
@@ -465,7 +428,7 @@
                                 </td>
                                 <td>
                                     <b>Expert</b>
-                                    Ryan Melon
+                                    {{ tip.user.getUserRole }}
                                 </td>
                             </tr>
 
@@ -473,75 +436,7 @@
                         </table>
                     </article>
                 </div>
-
-
-                <div class="three columns box">
-                    <article class="tip">
-
-                        <table class="content expert">
-
-                            <tr class="excerpt">
-                                <td colspan="2">
-                                    <div class="scroll">
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="2">
-                                    <hr class="s-margin-bottom"/>
-                                </td>
-                            </tr>
-
-                            <tr class="author">
-                                <td>
-                                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
-                                </td>
-                                <td>
-                                    <b>Expert</b>
-                                    Ryan Melon
-                                </td>
-                            </tr>
-
-
-                        </table>
-                    </article>
-                </div>
-
-                <div class="three columns box">
-                    <article class="tip">
-
-                        <table class="content expert">
-
-                            <tr class="excerpt">
-                                <td colspan="2">
-                                    <div class="scroll">
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="2">
-                                    <hr class="s-margin-bottom"/>
-                                </td>
-                            </tr>
-
-                            <tr class="author">
-                                <td>
-                                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
-                                </td>
-                                <td>
-                                    <b>Expert</b>
-                                    Ryan Melon
-                                </td>
-                            </tr>
-
-
-                        </table>
-                    </article>
-                </div>
+                {% endfor %}
 
             </div>
 
@@ -556,7 +451,7 @@
                 <div class="three columns box">
                     <article class="tip">
                         <div class="content form">
-                            <form action="tmp/data/addTip.php" id="tips">
+                            <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                 <h3>Leave a tip</h3>
                                 <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..."></textarea>
                                 <div class="m-margin-top h4 count">499 left</div>
@@ -661,6 +556,45 @@
         </section>
 
     {% endif %}
+
+    <script type="text/javascript">
+        new meta.Form(
+                {
+                    $form : $('form#tips'),
+                    onComplete:function($form, data)
+                    {
+                        var $count = $form.find(".count");
+                        var count = $count.text();
+
+                        $count.addClass('success').text(data.message);
+
+                        $form.get(0).reset();
+
+                        setTimeout(function()
+                        {
+                            //restore state
+                            $count.removeClass('success').text(count);
+
+                        }, 2000);
+                    },
+                    onError:function($form, message)
+                    {
+                        var $count = $form.find(".count");
+                        var count = $count.text();
+
+                        $count.addClass('error').text(message);
+                        $form.find("textarea").addClass('error').focus();
+
+                        setTimeout(function()
+                        {
+                            //restore state
+                            $count.removeClass('error').text(count);
+                            $form.find("textarea").removeClass('error');
+
+                        }, 2000);
+                    }
+                })
+    </script>
 {% endblock %}
 
 
