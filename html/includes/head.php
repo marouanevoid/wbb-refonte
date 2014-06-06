@@ -45,6 +45,7 @@
     <script type="text/javascript" src="js/libs/radio.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/search.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/map.metabolism.js"></script>
+    <script type="text/javascript" src="js/libs/form.metabolism.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/anim.js"></script>

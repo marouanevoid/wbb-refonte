@@ -35,11 +35,11 @@
                         <td>
                             <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
                                 <option disabled="disabled">Friends...</option>
-                                <option>City 2</option>
-                                <option>City 3</option>
-                                <option>City 4</option>
-                                <option>City 5</option>
-                                <option>City 6</option>
+                                <option>Friends</option>
+                                <option>Familly</option>
+                                <option>Wife</option>
+                                <option>Kids</option>
+                                <option>Mother</option>
                             </select>
                         </td>
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
