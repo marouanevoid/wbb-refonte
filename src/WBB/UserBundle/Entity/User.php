@@ -382,4 +382,24 @@ class User extends BaseUser
     {
         return $this->longitude;
     }
+
+    public function getUserRole()
+    {
+        $roles = $this->getRoles();
+        if(in_array('ROLE_SUPER_ADMIN',$roles)){
+            return 'Super Admin';
+        }elseif(in_array('ROLE_MODERATOR',$roles)){
+            return 'Moderator';
+        }elseif(in_array('ROLE_PUBLISHER', $roles)){
+            return 'Publisher';
+        }elseif(in_array('ROLE_EDITORIAL_EXPERT',$roles)){
+            return 'Editorial Expert';
+        }elseif(in_array('ROLE_BAR_EXPERT',$roles)){
+            return 'Bar Expert';
+        }elseif(in_array('ROLE_BAR_OWNER',$roles)){
+            return 'Bar Owner';
+        }else{
+            return 'User';
+        }
+    }
 }

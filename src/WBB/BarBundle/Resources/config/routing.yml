@@ -19,9 +19,6 @@ wbb_bar_details:
     pattern: /bar/{city}/{suburb}/{slug}
     defaults: { _controller: WBBBarBundle:Bar:details }
 
-
-
-
 #Services
 wbb_bar_feeds_find:
     pattern:  /feed/find/{type}/{id}
@@ -44,5 +41,11 @@ wbb_bar_feed_add:
 wbb_bar_feed_remove:
     pattern:  /feed/remove/{type}/{hash}/{bar}
     defaults: { _controller: WBBBarBundle:FSAdmin:remove }
+    options:
+            expose: true
+
+wbb_bar_tips_add:
+    pattern:  /tips/add/
+    defaults: { _controller: WBBBarBundle:Tips:add }
     options:
             expose: true
