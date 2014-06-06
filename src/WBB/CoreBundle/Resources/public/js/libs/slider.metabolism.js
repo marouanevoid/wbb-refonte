@@ -50,13 +50,14 @@ meta.Slider = function(config){
         infinite    : false,
         autoload    : false,
         swipe       : false,
-        speed       : 600,
+        speed       : 400,
         easing      : 'easeInOutCubic',
-        default_img : '/bundles/wbbcore/images/default.jpg',
+        default_img : 'images/default.jpg',
         animate_arrow   : false,
         autoplay_delay  : 5000,
         autoplay        : false,
-        animation       : 'latency'
+        animation       : 'latency',
+        use_3D          : false
     };
 
     that.context = {
@@ -88,8 +89,11 @@ meta.Slider = function(config){
 
         that.config.has_arrows  = that.config.has_arrows && that.context.$slides.length > min_slide_length;
         that.config.has_dots    = that.config.has_dots && that.context.$slides.length > min_slide_length;
+        that.config.swipe       = $('html').hasClass('mobile');
 
         that.context.offset     = parseInt(10000/that.config.display_count)/100;
+
+        that.config.use_3D      = Modernizr.csstransforms3d;
     };
 
 
@@ -101,24 +105,30 @@ meta.Slider = function(config){
         if( that.config.has_arrows ){
 
             that.context.$slider.append
-                (
-                    '<div class="arrows"><a class="left"/><a class="right"/></div>'
-                );
+            (
+                '<div class="arrows"><a class="left"/><a class="right"/></div>'
+            );
 
             that.context.$arrows = that.context.$slider.find('.arrows a');
 
             if( !that.config.infinite || (that.config.autoload && that.config.infinite) )
-                that.context.$arrows.filter('.left').hide();
+                that.context.$arrows.filter('.left').addClass('disabled');
         }
 
         if( that.config.has_dots ){
 
-            var html = new Array( that.context.$slides.length+1 ).join('<a></a>');
+            that.context.$slider.append
+            (
+                '<div class="dots"></div>'
+            );
+
+            that.context.$dots = that.context.$slider.find('.dots');
+
+            var html = new Array( that.context.$slides.length-that.config.display_count+2 ).join('<a></a>');
 
             that.context.$dots.append(html).find('a:first').addClass('active');
             that.context.$dots = that.context.$dots.find('a');
         }
-        else that.context.$dots.remove();
 
     };
 
@@ -137,11 +147,17 @@ meta.Slider = function(config){
 
                 $active_slides.each(function(index)
                 {
-                    $(this).css({left:index*that.context.offset+'%'});
+                    if( that.config.use_3D )
+                        $(this).css({transform:'translate3d('+index*100+'%,0,0)'});
+                    else
+                        $(this).css({left:index*that.context.offset+'%'});
+
                 })
             }
             else
                 that.context.$slides.first().show().addClass('active');
+
+            if( that.config.use_3D ) setTimeout(function(){ that.context.$slides.addClass('transform3d') }, 10)
 
             var $slides = that.context.$slides.filter('.active');
             $slides = $slides.add( that.context.$slides.last()).add($slides.next());
@@ -155,20 +171,7 @@ meta.Slider = function(config){
 
         var $images = $container.find('img[data-src]');
 
-        var is_oldIE = $('html').hasClass('ie8') || $('html').hasClass('ie9');
-
-        $images.error(function(){
-
-            if( is_oldIE ) $(this).css({opacity:1});
-            else $(this).attr('src', BASEURL+that.config.default_img ).css({opacity:1});
-
-        }).load(function(){
-
-            $(this).css({opacity:1});
-        });
-
         $images.each(function(){
-
             $(this).attr('src', $(this).data('src'));
             $(this).removeAttr('data-src');
         })
@@ -184,6 +187,8 @@ meta.Slider = function(config){
             that.context.$arrows.click(function(e)
             {
                 e.preventDefault();
+
+                if( $(this).hasClass('disabled') ) return;
 
                 if( $(this).hasClass('left') ) that._slide('left');
                 else  that._slide('right');
@@ -203,15 +208,18 @@ meta.Slider = function(config){
 
 
         if( that.config.swipe ){
-
             that.context.$slider.swipe(
-                {
-                    swipeLeft:function(){ that._slide('right') },
-                    swipeRight:function(){ that._slide('left') },
-                    longTap: function(event, target) {
-                        $(target).closest('.popin').click();
-                    }
-                });
+            {
+                swipeLeft:function(){ that._slide('right') },
+                swipeRight:function(){ that._slide('left') },
+                tap:function(event, target){
+                    var $article  = $(target).closest('article');
+                    var href = $article.find('a.overlay-link').attr('href');
+
+                    if( typeof(href) != "undefined") document.location.href = href;
+                },
+                threshold:20
+            });
         }
 
         if( that.config.autoplay ){
@@ -274,7 +282,10 @@ meta.Slider = function(config){
 
             default:
 
-                that._animateSlidesWithFade($current, $next, goto_left, callback);
+                if( that.config.use_3D )
+                    that._animateSlidesUsingTransform3D($current, $next, goto_left, callback);
+                else
+                    that._animateSlidesWithFade($current, $next, goto_left, callback);
 
                 break;
         }
@@ -337,10 +348,10 @@ meta.Slider = function(config){
         }
         else
         {
-            $current.velocity({left:goto_left?'+='+that.context.offset+'%':'-='+that.context.offset+'%'}, that.config.speed, that.config.easing);
+            $current.animate({left:goto_left?'+='+that.context.offset+'%':'-='+that.context.offset+'%'}, that.config.speed, that.config.easing);
 
             $next.css({left:goto_left?'-'+that.context.offset+'%':'100%', display:'block'})
-                .velocity({left:goto_left?'0%':(100-that.context.offset)+'%'}, that.config.speed, that.config.easing, function()
+                .animate({left:goto_left?'0%':(100-that.context.offset)+'%'}, that.config.speed, that.config.easing, function()
                 {
                     if( goto_left )
                         $current.last().hide();
@@ -349,6 +360,56 @@ meta.Slider = function(config){
 
                     if(callback) callback();
                 });
+        }
+    };
+
+    that._animateSlidesUsingTransform3D = function($current, $next, goto_left, callback)
+    {
+        if($current.length==1)
+        {
+            $current.addClass('transform3d');
+            $next.css({transform:'translate3d('+(goto_left?'-100':'100')+'%, 0, 0)', display:'block'});
+
+            setTimeout(function()
+            {
+                $next.css({transform:'translate3d(0, 0, 0)'});
+                $current.css({transform:'translate3d('+(goto_left?'100':'-100')+'%, 0, 0)'});
+
+            }, 20);
+
+            setTimeout(function()
+            {
+                $current.hide();
+
+                if(callback) callback();
+
+            }, that.config.speed+200);
+        }
+        else
+        {
+            $next.css({transform:'translate3d('+(goto_left?'-100': that.config.display_count*100)+'%, 0, 0)', display:'block'});
+
+            setTimeout(function()
+            {
+                $next.css({transform:'translate3d('+(goto_left?'0': (that.config.display_count-1)*100)+'%, 0, 0)'});
+                $current.each(function(index)
+                {
+                    $(this).css({transform:'translate3d('+(goto_left?(index+1)*100:(index-1)*100)+'%, 0, 0)'});
+                });
+
+            }, 20);
+
+
+            setTimeout(function()
+            {
+                if( goto_left )
+                    $current.last().hide();
+                else
+                    $current.first().hide();
+
+                if(callback) callback();
+
+            }, that.config.speed+200);
         }
     };
 
@@ -416,13 +477,12 @@ meta.Slider = function(config){
             that.context.$slides = that.context.$slider.find(that.config.slide);
         }
 
-        that._setupSlide( $next_slide, direction );
+        if($next_slide.length) that._setupSlide( $next_slide, direction );
     };
 
 
     that._setupSlide = function( $next_slide, direction ){
 
-        console.log($next_slide)
         var $current_slides  = that.context.$slides.filter('.active');
 
         if(
@@ -441,20 +501,25 @@ meta.Slider = function(config){
             if( !that.config.infinite || (that.config.infinite && that.config.autoload && goto_left) )
             {
                 if( ($next_slide.index() >= that.context.$slides.length-1 && !that.config.autoload) || $next_slide.index() == 0 )
-                    that.context.$arrows.filter('.'+(goto_left?'left':'right')).fadeOut(that.config.speed);
+                {
+                    that.context.$arrows.filter('.'+(goto_left?'left':'right')).addClass('disabled');
+                    that.context.$arrows.filter('.'+(goto_left?'right':'left')).removeClass('disabled');
+                }
                 else
-                    that.context.$arrows.filter('.'+(goto_left?'right':'left')).fadeIn(that.config.speed);
+                    that.context.$arrows.filter('.'+(goto_left?'right':'left')).removeClass('disabled');
             }
             else
             {
-                that.context.$arrows.filter('.'+(goto_left?'right':'left')).fadeIn(that.config.speed);
+                if( !that.config.infinite) that.context.$arrows.filter('.'+(goto_left?'right':'left')).removeClass('disabled');
             }
         }
 
         if(that.config.has_dots)
         {
             that.context.$dots.removeClass('active');
-            that.context.$dots.eq($next_slide.index()).addClass('active');
+
+            var index = goto_left ? $next_slide.index() : $next_slide.index()-that.config.display_count+1;
+            that.context.$dots.eq(index).addClass('active');
         }
 
         that._animateSlides($current_slides, $next_slide, goto_left, function(){
@@ -496,7 +561,6 @@ function initializeSliders()
                 has_arrows      : $slider.hasClass('arrows'),
                 infinite        : $slider.hasClass('infinite'),
                 autoload        : $slider.hasClass('autoload'),
-                swipe           : $slider.hasClass('swipe'),
                 animate_arrow   : $slider.hasClass('animate-arrow'),
                 autoplay        : $slider.hasClass('autoplay'),
                 display_count   : $slider.data('display'),
@@ -506,3 +570,11 @@ function initializeSliders()
         $slider.addClass('ui-initialized');
     })
 }
+
+
+
+$(document).ready(function(){
+
+    initializeSliders();
+
+});
