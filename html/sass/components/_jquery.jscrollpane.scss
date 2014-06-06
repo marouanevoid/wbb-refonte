@@ -16,6 +16,11 @@
 	position: absolute;
 }
 
+.jspPane:focus
+{
+	outline: none!important;
+}
+
 .jspVerticalBar
 {
 	position: absolute;

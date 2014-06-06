@@ -112,7 +112,7 @@ meta.App = function() {
     {
         $('.custom-scroll').not('.jspScrollable').each(function()
         {
-            $(this).jScrollPane({autoReinitialise: true});
+            $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
         });
     };
 
