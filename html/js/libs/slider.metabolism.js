@@ -124,7 +124,7 @@ meta.Slider = function(config){
 
             that.context.$dots = that.context.$slider.find('.dots');
 
-            var html = new Array( that.context.$slides.length+1 ).join('<a></a>');
+            var html = new Array( that.context.$slides.length-that.config.display_count+2 ).join('<a></a>');
 
             that.context.$dots.append(html).find('a:first').addClass('active');
             that.context.$dots = that.context.$dots.find('a');
@@ -214,7 +214,9 @@ meta.Slider = function(config){
                 swipeRight:function(){ that._slide('left') },
                 tap:function(event, target){
                     var $article  = $(target).closest('article');
-                    document.location.href = $article.find('a.overlay-link').attr('href');
+                    var href = $article.find('a.overlay-link').attr('href');
+
+                    if( typeof(href) != "undefined") document.location.href = href;
                 },
                 threshold:20
             });
@@ -515,7 +517,9 @@ meta.Slider = function(config){
         if(that.config.has_dots)
         {
             that.context.$dots.removeClass('active');
-            that.context.$dots.eq($next_slide.index()).addClass('active');
+
+            var index = goto_left ? $next_slide.index() : $next_slide.index()-that.config.display_count+1;
+            that.context.$dots.eq(index).addClass('active');
         }
 
         that._animateSlides($current_slides, $next_slide, goto_left, function(){

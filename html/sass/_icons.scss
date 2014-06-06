@@ -57,6 +57,7 @@
   &.friend{
     &:before{ background-position: -12px -200px }
     &:after{ background-position: -12px -240px }
+    &.active:after{ opacity: 1 }
   }
 
   &.chillout{

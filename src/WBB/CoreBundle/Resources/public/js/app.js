@@ -87,10 +87,10 @@ meta.App = function() {
             {
                 $is_animating = true;
 
-                $bar_finder.find('table').velocity({opacity: '1'}, speed, easing);
-                $bar_finder.find('.finder-arrow').velocity({top: '-15px', opacity: '1'}, speed, easing);
-                $bar_finder.find('.finder-close').velocity({opacity: '1'}, speed, easing);
-                $container.velocity('slideDown', { duration: speed, easing:easing, complete:function(){ $is_animating = false } });
+                $bar_finder.find('table').animate({opacity: '1'}, that.config.speed, that.config.easing);
+                $bar_finder.find('.finder-arrow').animate({top: '-15px', opacity: '1'}, that.config.speed, that.config.easing);
+                $bar_finder.find('.finder-close').animate({opacity: '1'}, that.config.speed, that.config.easing);
+                $container.slideDown(that.config.speed, that.config.easing, function(){ $is_animating = false });
             }
         });
 
@@ -100,10 +100,28 @@ meta.App = function() {
 
             $is_animating = true;
 
-            $bar_finder.find('table').velocity({opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-arrow').velocity({top: '0', opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-close').velocity({opacity: '0'}, speed/2, easing);
-            $container.velocity('slideUp', { duration: speed, easing:easing, complete:function(){ $is_animating = false } });
+            $bar_finder.find('table').animate({opacity: '0'}, speed, easing);
+            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, speed, easing);
+            $bar_finder.find('.finder-close').animate({opacity: '0'}, speed/2, easing);
+            $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
+        });
+    };
+
+
+    that._customScroll = function()
+    {
+        $('.custom-scroll').not('.jspScrollable').each(function()
+        {
+            $(this).jScrollPane({autoReinitialise: true});
+        });
+    };
+
+
+    that._loadImages = function()
+    {
+        $('.force-load [data-src]').each(function()
+        {
+            $(this).attr('src', $(this).data('src'));
         });
     };
 
@@ -120,17 +138,34 @@ meta.App = function() {
         $('a.see-more').click(function(e)
         {
             e.preventDefault();
-            $(this).next('.more').slideToggle(that.config.speed, that.config.easing);
+
+            if( $(this).hasClass('fade') )
+                $(this).velocity('fadeOut', { duration: speed, easing:easing});
+            else
+                $(this).velocity('slideUp', { duration: speed, easing:easing});
+
+            $(this).next('.more').velocity('slideDown', { duration: speed, easing:easing});
         });
 
         that._barFinderEvents();
         that._mobileMenuEvents();
+        that._loadImages();
+        that._customScroll();
+
+        $( document ).ajaxComplete(function() {
+
+            setTimeout(function()
+            {
+                that._customScroll();
+
+            }, 600);
+        });
     };
 
 
     that._setupElements = function()
     {
-        $('a.overlay-link').append('<img src="/bundles/wbbcore/images/blank.png"/>');
+        $('a.overlay-link').append('<img src="'+BASEURL+'images/blank.png"/>');
     };
 
 
@@ -141,6 +176,7 @@ meta.App = function() {
     {
         that._setupElements();
         that._setupEvents();
+        that._customScroll();
     };
 
     that.__construct();
@@ -153,35 +189,3 @@ $(document).ready(function()
     new meta.App();
 });
 
-/**
- *
- * TODO : mettre ce code dans un fichier séparé
- *
- **/
-function in_array(needle, haystack, argStrict) {
-    var key = '',
-        strict = !! argStrict;
-
-    if (strict) {
-        for (key in haystack) {
-            if (haystack[key] === needle) {
-                return true;
-            }
-        }
-    } else {
-        for (key in haystack) {
-            if (haystack[key] == needle) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-function nodeToString ( node ) {
-    var tmpNode = document.createElement( "div" );
-    tmpNode.appendChild( node.cloneNode( true ) );
-    var str = tmpNode.innerHTML;
-    tmpNode = node = null; // prevent memory leaks in IE
-    return str;
-}

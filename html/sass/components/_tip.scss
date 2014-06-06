@@ -29,6 +29,7 @@ article.tip {
 
   .form form{
     .count{ float: left; color: #999 }
+    textarea{ overflow: hidden }
     input[type=submit]{ float: right }
   }
 

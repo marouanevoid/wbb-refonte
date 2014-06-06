@@ -42,6 +42,7 @@ meta.Search = function(config){
 
     that.context = {};
     that.search_timeout = false;
+    that.show_results = false;
 
 
     /* Contructor. */
@@ -109,6 +110,8 @@ meta.Search = function(config){
                 });
 
                 that.context.$result.html( html );
+
+                that.show_results = true;
             }
         });
     };
@@ -141,6 +144,7 @@ meta.Search = function(config){
             that.context.$input.val('');
             that.context.$result.empty();
             that.context.$form.find('.placeholder').show();
+            that.show_results = false
         }});
 
         that.context.$searchHeader.velocity({top:'-50%', opacity:0}, { duration: that.config.speed, easing:that.config.easing, complete:function() {
@@ -167,7 +171,31 @@ meta.Search = function(config){
         that.context.$input.on('keydown', function(){
             clearInterval(that.search_timeout);
             that.search_timeout = setTimeout(function(){ that._search() }, that.config.throttle);
-        })
+        });
+
+        that.context.$result.on('click', 'a', function()
+        {
+            that.context.$input.val( $(this).text() );
+
+            that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
+            {
+                $(this).removeAttr('style');
+                that.context.$result.empty();
+                that.context.$form.submit();
+            }});
+        });
+
+        $(document).click(function(e)
+        {
+            if(that.show_results)
+            {
+                that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
+                {
+                    $(this).removeAttr('style');
+                    that.context.$result.empty();
+                }});
+            }
+        });
     };
 
 

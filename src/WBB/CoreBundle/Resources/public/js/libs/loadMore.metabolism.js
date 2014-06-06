@@ -61,7 +61,6 @@ meta.LoadMore = function(config) {
             that._load(url, $target, function()
             {
                 $button.removeClass('loading').text( $button.data('text'));
-                //alert($('.fstip:last-child').attr('tipindex'));
             });
         });
     };

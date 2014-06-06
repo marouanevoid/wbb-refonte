@@ -77,7 +77,7 @@ meta.Radio = function(config){
         that.config.$radios.each(function()
         {
             var html = that.config.template.replace('%color%', that.config.color);
-            html = html.replace('%class%', $(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light'));
+            html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light'));
             html = html.replace('%name%', $(this).val());
 
             $(this).wrap( html );

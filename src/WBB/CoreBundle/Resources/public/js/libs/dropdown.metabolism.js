@@ -50,7 +50,7 @@ meta.Dropdown = function(config){
         template  : '<div class="ui-dropdown-container">'+
                         '<div class="btn-radius border ui-dropdown %color%">'+
                             '<span>%name%</span>'+
-                            '<div class="choice">'+
+                            '<div class="choice custom-scroll">'+
                                 '<ul>%options%</ul>'+
                             '</div>'+
                         '</div>'+
@@ -75,7 +75,7 @@ meta.Dropdown = function(config){
                 if( $dropdown.hasClass("dropdown-open") ){
 
                     $dropdown.find('.choice').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
-                        $dropdown.removeClass('dropdown-open')
+                        $dropdown.removeClass('dropdown-open');
                     }});
                 }
                 else{
@@ -123,7 +123,7 @@ meta.Dropdown = function(config){
 
         html = that.config.template.replace('%options%', html);
         html = html.replace('%name%', $options.first().text());
-        html = html.replace('%color%', 'drop-'+that.config.color);
+        html = html.replace('%color%', 'drop-'+that.config.color+' '+that.config.$dropdown.data('class'));
 
         that.config.$dropdown_replacement = $(html);
         that.config.$dropdown.after(that.config.$dropdown_replacement);
