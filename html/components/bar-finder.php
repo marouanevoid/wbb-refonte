@@ -44,7 +44,7 @@
                         </td>
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
                         <td>
-                            <input type="radio" name="mood" value="chillout" class="ui-radio checked dark" data-color="brown"/>
+                            <input type="radio" name="mood" value="chillout" class="ui-radio dark" data-color="brown" checked="checked"/>
                         <td>
                             <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
                         </td>

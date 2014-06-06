@@ -1,50 +1,54 @@
+<div class="detect-scroll"></div>
 <aside class="mobile-menu">
 
     <table>
 
-        <tr>
+        <tr class="search">
             <td>
-
+                <form class="dark">
+                    <input type="text" placeholder="Search..."/>
+                    <input type="submit" value=" "/>
+                </form>
             </td>
         </tr>
 
-        <tr>
+        <tr class="header-nav">
             <td>
                 <?php include('components/header/nav.php') ?>
             </td>
         </tr>
 
-        <tr>
+        <tr class="links">
             <td>
                 <?php include('components/header/bar-finder-link.php') ?>
             </td>
         </tr>
 
-        <tr>
+        <tr class="signin">
             <td>
                 <?php include('components/header/signin-register.php') ?>
             </td>
         </tr>
 
-        <tr>
+        <tr class="footer-nav">
             <td>
                 <?php include('components/footer/nav.php') ?>
             </td>
         </tr>
 
-        <tr>
+        <tr class="socials">
             <td>
                 <?php include('components/footer/social-icons.php') ?>
             </td>
         </tr>
 
-        <tr>
+        <tr class="touch">
             <td>
                 <?php include('components/footer/keep-in-touch.php') ?>
             </td>
         </tr>
 
-        <tr>
+        <tr class="copyright">
             <td>
                 <?php include('components/footer/copyright.php') ?>
             </td>

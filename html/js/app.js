@@ -66,7 +66,24 @@ meta.App = function() {
                 else
                     $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
 
+                $('html,body').delay(that.config.speed).animate({scrollTop:0}, that.config.speed, that.config.easing);
+
+
             }
+        });
+
+        $('.detect-scroll').swipe(
+        {
+            swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
+            swipeRight:function(){ $('header.mobile .nav-icon a').click() },
+            tap:function(){ if( $(window).scrollTop() < 30 ) $('header.mobile .nav-icon a').click() },
+            threshold:1
+        });
+
+        $('.mobile-menu').swipe(
+        {
+            swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
+            threshold:10
         });
     };
 

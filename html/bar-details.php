@@ -10,7 +10,7 @@
                 <tr>
                     <?php if( !$is_mobile ): ?>
                         <td>
-                            <?php include('components/city-selector.php') ?>
+                            <?php include('components/city-btn.php') ?>
                         </td>
                     <?php endif ?>
 

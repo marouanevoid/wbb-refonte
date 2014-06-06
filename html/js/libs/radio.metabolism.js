@@ -60,8 +60,8 @@ meta.Radio = function(config){
         {
             e.preventDefault();
 
+            that.config.$radios.filter('.active').find('input').prop('checked', false);
             that.config.$radios.removeClass('active');
-            that.config.$radios.find('input').prop('checked', false);
 
             $(this).addClass('active');
             $(this).find('input').prop('checked', true);
@@ -80,7 +80,11 @@ meta.Radio = function(config){
             html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light'));
             html = html.replace('%name%', $(this).val());
 
-            $(this).wrap( html );
+            var $component = $(html);
+
+            if( $(this).is(':checked') ) $component.addClass('active');
+
+            $(this).wrap( $component );
         });
 
         that.config.$radios = that.config.$radios.parent();
@@ -98,7 +102,7 @@ var radios = [];
 
 function initializeRadios()
 {
-    $('input.ui-radio.checked').not('.ui-initialized').each(function(){
+    $('input.ui-radio:checked').not('.ui-initialized').each(function(){
 
         var $radio = $(this);
         var $radios = $( 'input.ui-radio[name="'+$(this).attr('name')+'"]' );

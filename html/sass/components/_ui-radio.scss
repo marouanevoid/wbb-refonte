@@ -10,6 +10,9 @@
   &.radio-dark.active:hover {
     border-color:$color-cream;
   }
+  &.radio-dark.active {
+    color:$color-subtle-yellow;
+  }
 
   &.collapsed {
     padding: 0.6em 1.5em 0.4em 1.5em; text-transform: uppercase; font-weight: bold; float: left;
