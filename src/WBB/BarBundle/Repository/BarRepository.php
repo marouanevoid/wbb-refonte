@@ -18,7 +18,7 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
-    public function findBestBars()
+    public function findBestBars($city = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -31,13 +31,17 @@ class BarRepository extends EntityRepository
             ->setMaxResults(6)
         ;
 
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
         //TODO : Add Favoris count
 
         return $qb->getQuery()->getResult();
 
     }
 
-    public function findLatestBars($limit = 5)
+    public function findLatestBars($city = null, $limit = 5)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 

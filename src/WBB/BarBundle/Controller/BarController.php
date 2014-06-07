@@ -15,8 +15,8 @@ class BarController extends Controller
         $response['topCities']  = shuffle($topCities);
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars();
         $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
-        $response['topNews']    = $this->container->get('news.repository')->findLatestNews();
-        $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars();
+        $response['topNews']    = $this->container->get('news.repository')->findLatestNews(null, 3);
+        $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars(null, 5);
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
