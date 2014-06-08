@@ -8,6 +8,10 @@ homepage:
     pattern: /
     defaults: { _controller: WBBBarBundle:Bar:home }
 
+city_homepage:
+    pattern: /top-{slug}
+    defaults: { _controller: WBBBarBundle:Bar:cityHome }
+
 wbb_bar_tips:
     pattern: /bar/{id}/tips/{offset}/{show}
     requirements:

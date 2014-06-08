@@ -17,7 +17,7 @@ class CityRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select("$this->getAlias()")
+            ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.onTopCity', $qb->expr()->literal(true)))
         ;
 

@@ -42,7 +42,7 @@ class Bar
     private $name;
 
     /**
-     * @Gedmo\Slug(fields={"id", "name"}, style="camel", separator="_")
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
      * @ORM\Column(unique=true)
      */
     private $slug;

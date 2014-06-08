@@ -38,6 +38,12 @@ class City {
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @ORM\Column(unique=true)
+     */
+    private $slug;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="latitude", type="string", length=255, nullable=true)
@@ -564,5 +570,28 @@ class City {
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return City
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

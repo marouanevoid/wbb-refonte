@@ -18,12 +18,12 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
-    public function findBestBars()
+    public function findBestBars($city = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select("$this->getAlias(), COUNT(tp) AS HIDDEN nbTips")
+            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips")
             ->innerjoin($this->getAlias().'.tips', 'tp')
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->groupBy($this->getAlias())
@@ -31,10 +31,28 @@ class BarRepository extends EntityRepository
             ->setMaxResults(6)
         ;
 
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
         //TODO : Add Favoris count
 
         return $qb->getQuery()->getResult();
 
+    }
+
+    public function findLatestBars($city = null, $limit = 5)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findYouMayAlsoLike($bar, $location, $exceptBars = null, $onTop = true, $tags = true, $limit = 4)
