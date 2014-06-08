@@ -66,7 +66,7 @@ meta.LoadMore = function(config) {
             {
                 $button.removeClass('loading').text( $button.data('text'));
                 //alert($('.fstip:last-child').data('index'));
-                if($('.fstip:last-child').length()>0){
+                if($('.fstip:last-child').length>0){
                     $('.load-more').data('offset', $('.fstip:last-child').data('index'));
                 }
             });
