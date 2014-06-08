@@ -108,7 +108,7 @@ class FSAdminController extends Controller
         return new JsonResponse(array('objects' => $objects));
     }
 
-    public function tipsAction($id, $offset)
+    public function tipsAction($id, $offset, $show)
     {
 
         $bar = $this->container->get('bar.repository')->findOneById($id);
@@ -116,7 +116,8 @@ class FSAdminController extends Controller
             'bar'       => $bar,
             'tips'      => $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset),
             'excluded'  => $bar->getFsExcludedTips(),
-            'offset'    => $offset
+            'offset'    => $offset,
+            'show'      => $show
         )
         );
     }

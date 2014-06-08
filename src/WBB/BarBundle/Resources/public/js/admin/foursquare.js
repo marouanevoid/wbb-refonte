@@ -199,7 +199,7 @@ function foursquareImages() {
                         loader.hide();
                         var template = null;
                         $.each(response.data, function(key, feed){
-                            //console.log(feed);
+                            console.log(feed);
                             var imgsHtml = $("#imgs").html();
                             var checked = "";
                             if(in_array(feed.id, r)) {

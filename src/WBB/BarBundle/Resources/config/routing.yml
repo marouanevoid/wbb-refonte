@@ -9,11 +9,12 @@ homepage:
     defaults: { _controller: WBBBarBundle:Bar:home }
 
 wbb_bar_tips:
-    pattern: /bar/{id}/{offset}/tips
+    pattern: /bar/{id}/tips/{offset}/{show}
     requirements:
           id: \d+
           offset: \d+
-    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0}
+          show: \d+
+    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0, show: 8 }
 
 wbb_bar_details:
     pattern: /bar/{city}/{suburb}/{slug}
