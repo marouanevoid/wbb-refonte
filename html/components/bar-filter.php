@@ -10,8 +10,8 @@
 
         <div class="six columns h2">
 
-            <input type="radio" name="filter" value="bar_list" class="ui-radio checked dark" data-color="brown" data-type="collapsed"/>
-            <input type="radio" name="filter" value="best of" class="ui-radio dark" data-color="brown" data-type="collapsed"/>
+            <input type="radio" name="filter" value="bar_list" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
+            <input type="radio" name="filter" value="best_of" class="ui-radio" data-color="brown" data-type="collapsed"/>
         </div>
 
         <div class="six columns sort-by h3">
@@ -27,26 +27,48 @@
                 <option value="cty6">City 6</option>
             </select>
 
-            <input type="radio" name="view-type" value="grid" class="ui-radio checked dark" data-color="brown"/>
-            <input type="radio" name="view-type" value="list" class="ui-radio dark" data-color="brown"/>
+            <input type="radio" name="view-type" value="grid" class="ui-radio" data-color="brown" checked="checked"/>
+            <input type="radio" name="view-type" value="list" class="ui-radio" data-color="brown"/>
         </div>
     </div>
 
     <div class="container">
-        <?php for($i=1; $i<9; $i++) : ?>
 
-            <div class="three columns m-margin-top">
-                <?php include('components/bar-w-pic.php') ?>
-            </div>
-        <?php endfor ?>
+        <div class="bars-w-pic">
+            <?php for($i=1; $i<9; $i++) : ?>
 
-        <?php for($i=1; $i<6; $i++) : ?>
+                <div class="three columns m-margin-top force-load">
+                    <?php include('components/bar-w-pic.php') ?>
+                </div>
+            <?php endfor ?>
+        </div>
 
-            <?php include('components/bar-w-pic-list.php') ?>
-        <?php endfor ?>
+        <div class="bars-w-pic-list s-margin-top" style="display: none">
+            <?php for($i=1; $i<6; $i++) : ?>
+
+                <?php include('components/bar-w-pic-list.php') ?>
+            <?php endfor ?>
+        </div>
 
         <div class="twelve columns align-center m-margin">
             <a class="h4 btn-radius border load-more brown" href="tmp/data/tips.php">See more bars</a>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $('input[name=view-type]').change(function()
+        {
+            if( $(this).val() == "grid")
+            {
+                $('.bars-w-pic').show();
+                $('.bars-w-pic-list').hide();
+            }
+            else
+            {
+                $('.bars-w-pic').hide();
+                $('.bars-w-pic-list').show();
+            }
+        })
+    </script>
+
 </section>

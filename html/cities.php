@@ -7,16 +7,20 @@
 <section class="cities-content">
 
     <div id="map"></div>
+    <div class="zoom">
+        <a class="plus btn-round brown"></a><br/>
+        <a class="minus btn-round brown"></a>
+    </div>
     <div class="selector">
         <div class="heading">
             <h3>Find your city</h3>
-            <form class="m-margin">
+            <form class="s-margin">
                 <input type="text" name="city" placeholder="Type your city name..."/>
                 <input type="submit" value=" "/>
                 <input type="reset" value=" "/>
             </form>
         </div>
-        <div class="scroll-cities scroll">
+        <div class="scroll-cities scroll custom-scroll">
             <ul>
                 <li id="">Alberdeen</li>
                 <li id="">Adelaide</li>
@@ -58,7 +62,7 @@
                 <li id="">Birmingham</li>
             </ul>
         </div>
-        <div class="scroll-bars scroll">
+        <div class="scroll-bars scroll custom-scroll">
             <ul></ul>
         </div>
     </div>
@@ -67,13 +71,20 @@
 
 <script type="text/javascript">
 
-    var $scroll = $('.cities-content .scroll');
+    var $cities_content = $('.cities-content');
+    var $cities = $('.cities-content .scroll-cities');
+    var $bars = $('.cities-content .scroll-bars');
     var $head = $('.cities-content .heading');
     var $selector = $('.cities-content .selector');
 
     $(window).resize(function()
     {
-        $scroll.height( $selector.height()-$head.height()-25 );
+        $cities_content.height( $(window).height()-$('header').height()-105 );
+
+        var cities_height = $selector.height()-$head.height()-20;
+
+        $cities.height( cities_height );
+        $bars.height( cities_height-40 );
     });
 
     $(document).ready(function(){ $(window).resize() });

@@ -1,10 +1,14 @@
-.bar-w-pic-list { width: 100%; float: left;
+.bar-w-pic-list {
+  width: 100%; float: left; position: relative;
   h2 { color: $color-brown; text-transform: uppercase; font-weight: bold; }
   h3 { text-transform: none; }
   .nine.columns {
-    .tags { font-size: 1.4em; color: $color-medium-gray;
-      &:before{ content: ''; display: inline-block; width: 16px; height: 16px; margin-right: 10px; background: url("../images/icons/tag-gray.png") center no-repeat; background-size: 100% auto; }
+    .tags { font-size: 1.5em; color: $color-medium-gray; position: absolute; bottom: 1.5em; left: 25%; margin-left: 1.16667%;
+      &:before{ vertical-align: middle; content: ''; display: inline-block; width: 16px; height: 16px; margin-right: 10px; background: url("../images/icons/tag-gray.png") center no-repeat; background-size: 100% auto; }
     }
   }
-  .separator { position: relative; top: -6px; }
+  .separator { position: absolute; bottom: 0; left:23.9%; right:1.16667%; hr{ padding: 0; margin: 0 } }
+  .scale-with-grid{ @include opacity(0.8); @include transition( opacity 0.2s ease-in-out )}
+
+  &:hover .scale-with-grid{ @include opacity(1) }
 }

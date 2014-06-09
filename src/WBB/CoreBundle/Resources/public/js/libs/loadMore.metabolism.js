@@ -137,10 +137,10 @@ meta.LoadMore = function(config) {
 
 $(document).ready(function()
 {
-   $('.load-more').each(function()
-   {
+    $('.load-more').each(function()
+    {
         new meta.LoadMore({$button:$(this)});
-   });
+    });
 
 });
 

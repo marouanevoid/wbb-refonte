@@ -23,10 +23,6 @@
     .txt .tags{ @include opacity(1) }
     .txt h3{ margin-bottom: 2em }
   }
-
-  &.list {
-    img.scale-with-grid { @include opacity(1); }
-  }
 }
 
 html.mobile .bar-w-pic{
