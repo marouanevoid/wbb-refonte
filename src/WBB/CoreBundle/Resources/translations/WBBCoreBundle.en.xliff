@@ -102,6 +102,21 @@
                 <target>Tags</target>
             </trans-unit>
 
+            <trans-unit id="list.label_acronym">
+                <source>list.label_acronym</source>
+                <target>Acronym</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_acronym">
+                <source>filter.label_acronym</source>
+                <target>Acronym</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_acronym">
+                <source>form.label_acronym</source>
+                <target>Acronym</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
