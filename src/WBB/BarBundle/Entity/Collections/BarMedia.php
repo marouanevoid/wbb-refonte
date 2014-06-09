@@ -229,7 +229,10 @@ class BarMedia
 
     public function __toString()
     {
-        return $this->alt;
+        if($this->alt)
+            return $this->alt;
+        else
+            return '';
     }
 
     /**
