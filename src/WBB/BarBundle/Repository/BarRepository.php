@@ -24,7 +24,7 @@ class BarRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips")
-            ->innerjoin($this->getAlias().'.tips', 'tp')
+            ->leftjoin($this->getAlias().'.tips', 'tp')
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->groupBy($this->getAlias())
             ->orderBy('nbTips', 'DESC')
