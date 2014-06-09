@@ -120,11 +120,11 @@
                         <article class="city">
                             <div class="txt">
                                 <h3> {{ c.name }} </h3>
-                                <h4>FR</h4>
+                                <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
                             </div>
                             <a href="" class="overlay-link"></a>
                             <img class="overlay" src="images/city.background-circle.png"/>
-                            <img src="" class="scale-with-grid" data-src="tmp/city.jpg" alt="city.paris"/>
+                            <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) }}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
 
-                            <img src="" class="scale-with-grid" data-src="{{ b.image }}" alt="{{ b.name }}" width="570" height="428"/>
+                            <img src="" class="scale-with-grid" data-src="{{ asset(b.webPath) }}" alt="{{ b.name }}" width="570" height="428"/>
                             <a href="" class="overlay-link"></a>
 
                         </article>
