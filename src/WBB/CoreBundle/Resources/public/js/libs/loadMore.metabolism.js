@@ -34,7 +34,6 @@ meta.LoadMore = function(config) {
     that.config = {
 
         $button : false,
-        page    : '?page=',
         class   : 'line',
         speed   : 500,
         easing  : 'easeInOutCubic'
@@ -53,7 +52,12 @@ meta.LoadMore = function(config) {
 
             var $button     = $(this);
             var $target     = that.context.$container.find('.load-target');
-            var url         = $button.attr('href')+that.config.page+that.context.page;
+            var show        = $button.data('show');
+            var offset      = $button.data('offset');
+            var url         = $button.attr('href');
+            url += '/'+offset+'/'+show;
+
+
 
             $button.data('text', $button.text());
             $button.addClass('loading').text(TRAD.loading);
@@ -61,6 +65,10 @@ meta.LoadMore = function(config) {
             that._load(url, $target, function()
             {
                 $button.removeClass('loading').text( $button.data('text'));
+                //alert($('.fstip:last-child').data('index'));
+                if($('.fstip:last-child').length>0){
+                    $('.load-more').data('offset', $('.fstip:last-child').data('index'));
+                }
             });
         });
     };

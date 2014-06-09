@@ -1,0 +1,284 @@
+{% extends "::base.html.twig" %}
+{% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
+{% block title %}World Best Bars{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".star").click(function(){
+                var btn = $(this);
+                $.ajax({
+                    type: "POST",
+                    url:  Routing.generate('wbb_bar_tips_add'),
+                    dataType: 'json',
+                    success: function(r) {
+                        if(btn.hasClass('active')){
+                            btn.removeClass('active');
+                        }else{
+                            btn.addClass('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+{% block bodyTag %}
+<body class="index">
+{% endblock %}
+{% block body %}
+<div class="full-cream l-padding-bottom">
+    <!-- SUBHEADER -->
+    <div class="container">
+            <section class="sub-header">
+                {% if not is_mobile() or is_tablet() %}
+                <table>
+                    <tr>
+                        <td>
+                            <div class="city-selector h3">
+                                You are in
+                                <select class="ui-dropdown" name="city" data-class="with-icon city">
+                                    <option disabled="disabled">Choose a City</option>
+                                    <option value="cty2">City 2</option>
+                                    <option value="cty3">City 3</option>
+                                    <option value="cty4">City 4</option>
+                                    <option value="cty5">City 5</option>
+                                    <option value="cty6">City 6</option>
+                                </select>
+                            </div>
+                        </td>
+
+                        <td class="title">
+                            <h1>Discover the World’s Best Bars</h1>
+                        </td>
+
+                        <td></td>
+                    </tr>
+                </table>
+                {% else %}
+                <h1>Discover the World’s Best Bars</h1>
+                {% endif %}
+            </section>
+    </div>
+
+    <!-- BARS -->
+    <div class="container full">
+
+        <section class="bars">
+            {% if is_mobile() and not is_tablet() %}
+            <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1">
+            {% else %}
+            <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
+            {% endif %}
+
+            {% for b in topBars %}
+                <div class="ui-slide">
+                    <article class="bar-w-pic">
+
+                        <a href="" class="btn-round dark star"></a>
+
+                        <div class="txt">
+                            <h2>{{ b.name }}</h2>
+                            <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
+                            <div class="tags">{% for t in b.tags %}
+                                    {{ t.tag }}{% if not loop.last %}, {% endif %}
+                                {% endfor%}</div>
+                        </div>
+                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb:b.suburb,slug:b.slug}) }}" class="overlay-link"></a>
+
+                        <div class="gradient"></div>
+                        {% for m in b.medias|slice(0,1) %}
+                            <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                        {% endfor %}
+                    </article>
+                </div>
+            {% endfor %}
+
+            </div>
+        </section>
+
+    </div>
+
+
+    <!-- CITIES -->
+    <div class="container">
+
+        <section class="cities">
+            <div class="twelve columns align-center l-margin-top m-margin-bottom">
+                <h1>Discover Bars from Top Cities</h1>
+                <h3 class="s-margin-top">Select your city</h3>
+            </div>
+
+            <div class="twelve columns">
+                {% if is_mobile() and not is_tablet() %}
+                    <div class="ui-slider type-cities has_sizer arrows infinite dots" data-size="8x3" data-display="3">
+                {% else %}
+                    <div class="ui-slider type-cities has_sizer arrows infinite dots" data-size="1x6" data-display="6">
+                {% endif %}
+                {% for c in topCities %}
+                        {{ dump(c) }}
+                    <div class="ui-slide">
+                        <article class="city">
+                            <div class="txt">
+                                <h3> {{ c.name }} </h3>
+                                <h4>FR</h4>
+                            </div>
+                            <a href="" class="overlay-link"></a>
+                            <img class="overlay" src="images/city.background-circle.png"/>
+                            <img src="" class="scale-with-grid" data-src="tmp/city.jpg" alt="city.paris"/>
+                        </article>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <!-- BEST OF -->
+    <div class="container">
+
+        <div class="twelve columns">
+
+            <section class="bestof">
+                <div class="align-center l-margin">
+                    <h1>Latest Best Of</h1>
+                </div>
+                {% if is_mobile() and not is_tablet() %}
+                    <div class="ui-slider type-bestof has_sizer arrows infinite dots" data-size="4x3" data-display="1">
+                {% else %}
+                        <div class="ui-slider type-bestof has_sizer arrows infinite dots" data-size="3x3" data-display="3">
+                {% endif %}
+
+                {% for b in topBestofs %}
+                    <div class="ui-slide">
+                        <article class="bestof">
+
+                            <a href="" class="btn-round dark star"></a>
+
+                            <div class="txt vcenter">
+                                <div class="circle vcenter">
+                                    <h2>{% if b.city.name %}{{ b.city.name }}'s Best{% else %}World's Best{% endif %}</h2>
+                                    <h3>{{ b.name }}</h3>
+                                </div>
+                            </div>
+
+                            <img src="" class="scale-with-grid" data-src="{{ b.image }}" alt="{{ b.name }}" width="570" height="428"/>
+                            <a href="" class="overlay-link"></a>
+
+                        </article>
+                    </div>
+                {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+
+    <!-- NEWS -->
+    <div class="container l-margin-top m-padding-bottom">
+
+        <!-- LATEST ARTICLES -->
+        <section class="articles eight columns">
+
+            {% if is_mobile() and not is_tablet() %}
+                <div class="h1 m-margin-bottom color-brown align-center">
+            {% else %}
+                <div class="h1 m-margin-bottom color-brown">
+            {% endif %}
+                Latest News
+            </div>
+            {% for n in topNews|slice(0,1) %}
+                <article class="small">
+                    <div class="img">
+                        <a href="" class="cover">
+                            {% for m in n.medias|slice(0,1) %}
+                                <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                            {% endfor %}
+                        </a>
+                        <a class="plus-btn" href=""></a>
+                    </div>
+                    <div class="title vcenter">
+                        <h2><a href="">{{ n.title }}</a></h2>
+                    </div>
+                </article>
+            {% endfor %}
+            {% for n in topNews|slice(1,1) %}
+                <article class="small">
+                    <div class="title vcenter">
+                        <h2><a href="">{{ n.title }}</a></h2>
+                        <p class="m-margin">
+                            {{ n.shareText }}
+                        </p>
+                        <a class="plus-btn" href=""></a>
+                    </div>
+
+                </article>
+            {% endfor %}
+            {% for n in topNews|slice(2,1) %}
+                <article class="large">
+                    <div class="img">
+                        <a href="" class="cover">
+                        {% for m in n.medias|slice(0,1) %}
+                            <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                        {% endfor %}
+                        </a>
+                        <a class="plus-btn" href=""></a>
+                    </div>
+                    <div class="title vcenter">
+                        <h2><a href="">{{ n.title }}</a></h2>
+                        <p class="m-margin">
+                            {{ n.shareText }}
+                        </p>
+                    </div>
+
+                </article>
+            {% endfor %}
+
+            <a class="btn-radius border brown h4 s-margin-top" href="">See all articles</a>
+
+        </section>
+
+        <!-- NEWLY ADDED BARS -->
+        <aside class="four columns">
+            {% if is_mobile() and not is_tablet() %}
+                <div class="h1 m-margin-bottom color-brown align-center l-margin-top">
+            {% else %}
+                <div class="h1 m-margin-bottom color-brown">
+            {% endif %}
+                Newly Added Bars
+            </div>
+            {% for b in latestBars %}
+                <article class="bar-wo-pic">
+
+                    <a href="" class="btn-round dark star"></a>
+
+                    <div class="txt">
+                        <h2>{{ b.name }}</h2>
+                        <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
+                    </div>
+
+                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb:b.suburb,slug:b.slug}) }}" class="overlay-link"></a>
+
+                </article>
+            {% endfor %}
+
+            <a class="btn-radius border brown h4 s-margin-top" href="">See all bars</a>
+
+            {% if not is_mobile() or is_tablet() %}
+                <div class="block">
+                    <div class="side-ad xl-margin-top">
+                        <img src="{{ asset('/bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                        <div class="txt">Advertising</div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </aside>
+
+    </div>
+{% endblock %}
+
+

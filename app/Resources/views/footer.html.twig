@@ -1,3 +1,16 @@
+<!-- AD -->
+{% if not is_mobile() or is_tablet() %}
+
+    <section class="footer-ad">
+        <div class="container align-center">
+            <div class="twelve columns">
+                <hr/>
+                <img class="m-margin scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
+            </div>
+        </div>
+    </section>
+
+{% endif %}
 {% if is_mobile() and not is_tablet() %}
 
 {% else %}
@@ -26,17 +39,17 @@
             <div class="right">
 
                 <div class="social-icons vcenter">
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/facebook.yellow.png') }}" alt="social-icon facebook" width="12" height="24"/>
+                    <a href="" class="facebook">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="13" height="24"/></span>
                     </a>
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/twitter.yellow.png') }}" alt="social-icon twitter" width="28" height="23"/>
+                    <a href="" class="twitter">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="28" height="24"/></span>
                     </a>
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/instagram.yellow.png') }}" alt="social-icon instagram" width="24" height="23"/>
+                    <a href="" class="instagram">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="25" height="24"/></span>
                     </a>
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/pinterest.yellow.png') }}" alt="social-icon pinterest" width="23" height="23"/>
+                    <a href="" class="pinterest">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="24" height="24"/></span>
                     </a>
                 </div>
 

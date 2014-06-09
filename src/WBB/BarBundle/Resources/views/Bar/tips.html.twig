@@ -1,9 +1,8 @@
-
+{% set s=0 %}
 {% for t in tips.data %}
-	{% if t.id not in excluded %}
-	<div class="three columns box fstip" tipindex="{{ offset+loop.index }}">
+	{% if t.id not in excluded and s<show %}
+	<div class="three columns box fstip" data-index="{{ offset+loop.index }}">
 	    <article class="tip">
-
 	        <table class="content">
 
 	            <tr class="excerpt">
@@ -17,6 +16,7 @@
 	        </table>
 	    </article>
 	</div>
+        {% set s=s+1 %}
 	{% endif %}
 {% endfor %}
 
