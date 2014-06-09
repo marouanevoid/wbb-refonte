@@ -3730,7 +3730,6 @@ html.mobile article.city:hover img.scale-with-grid {
     height: 100%;
     background: url("../images/loading.gif") no-repeat center black;
     z-index: 99;
-    display: none;
 }
 /* line 5, ../sass/pages/_bar-details.scss */
 .bar-details .gallery .main {
