@@ -52,7 +52,7 @@ meta.Slider = function(config){
         swipe       : false,
         speed       : 400,
         easing      : 'easeInOutCubic',
-        default_img : 'images/default.jpg',
+        default_img : '/bundles/wbbcore/images/default.jpg',
         animate_arrow   : false,
         autoplay_delay  : 5000,
         autoplay        : false,
@@ -570,11 +570,3 @@ function initializeSliders()
         $slider.addClass('ui-initialized');
     })
 }
-
-
-
-$(document).ready(function(){
-
-    initializeSliders();
-
-});
