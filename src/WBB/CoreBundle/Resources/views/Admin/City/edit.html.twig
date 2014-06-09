@@ -1,0 +1,15 @@
+{% extends base_template %}
+
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% include 'SonataAdminBundle:Button:show_button.html.twig' %}
+        <a class="btn sonata-action-element" href="{{ path('admin_wbb_core_country_list') }}" target="_blank">
+            <i class="icon-list"></i>
+            Countries List
+        </a>
+        {% include 'SonataAdminBundle:Button:history_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:acl_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
+    </div>
+{% endblock %}

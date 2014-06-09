@@ -98,9 +98,9 @@ sonata_admin:
             - { position: left, type: sonata.admin.block.admin_list }
 
         groups:
-            wbb_user: ~
-            wbb_bar: ~
             wbb_location: ~
+            wbb_bar: ~
+            wbb_user: ~
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
         layout: SonataAdminBundle::layout.html.twig

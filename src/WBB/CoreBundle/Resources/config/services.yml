@@ -20,7 +20,7 @@ services:
     wbb.core.admin.country:
         class: %wbb_core.country.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_location, label: countries, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_location_hidden, label: countries, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_core.country.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
@@ -32,6 +32,7 @@ services:
         arguments: [null, %wbb_core.city.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
+            - [setTemplates, [{ edit:"WBBCoreBundle:Admin:City/edit.html.twig", list: "WBBCoreBundle:Admin:City/list.html.twig"}]]
 
     wbb.core.admin.city.suburb:
         class: %wbb_core.citysuburb.admin.class%
