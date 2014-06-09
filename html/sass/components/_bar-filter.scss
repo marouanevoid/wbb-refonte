@@ -1,7 +1,9 @@
 section.bar-filter {
   .sort-by { text-transform: none; text-align: right; padding-top: 0.5em;
     .sort { text-transform: uppercase; }
+    .ui-dropdown-container { vertical-align: middle }
     .ui-dropdown { background-color: $color-cream; width: 150px; }
+    .ui-radio { height: 38px; line-height: 38px }
     > * { display: inline-block; margin-left: 0.5em; }
   }
 }

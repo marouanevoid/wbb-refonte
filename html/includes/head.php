@@ -53,13 +53,8 @@
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-<<<<<<< HEAD
-        //var BASEURL = "/pr0d/wbb/";
-        var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
-=======
-        var BASEURL = "/";
+        var BASEURL = "/pr0d/wbb/";
         //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
->>>>>>> 86eb44503b1236da036bcb3091ae705d765650b0
         var TRAD    = { loading: 'Loading...'};
     </script>
 

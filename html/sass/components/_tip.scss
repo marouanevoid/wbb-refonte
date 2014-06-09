@@ -34,16 +34,23 @@ article.tip {
     textarea{ overflow: hidden }
     input[type=submit]{ float: right }
   }
-
 }
 
-
-@media only screen and (max-width: $grid-breakpoint-mobile) {
-
-  article.tip {
-    height: auto; padding: 2em;
-    .content { position:  static; width: 100% }
-    hr{ margin-top: 15px }
+.insider-tips .six.columns.box
+{
+  left: 25%;
+  article.tip{
+    textarea{ height: 6em }
   }
-
 }
+
+
+  @media only screen and (max-width: $grid-breakpoint-mobile) {
+
+    article.tip {
+      height: auto; padding: 2em;
+      .content { position:  static; width: 100% }
+      hr{ margin-top: 15px }
+    }
+
+  }

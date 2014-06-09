@@ -1,6 +1,6 @@
 <article class="bar-w-pic-list">
 
-    <div class="three columns m-margin-top">
+    <div class="three columns s-margin-top">
 
         <div class="bar-w-pic list">
 
@@ -12,15 +12,15 @@
         </div>
     </div>
 
-    <div class="nine columns m-margin-top">
+    <div class="nine columns s-margin-top">
         <h2 class="s-margin-top">Berry Park</h2>
         <h3 class="xs-margin-top">Lower Manhattan, New York</h3>
         <p class="s-margin-top">
             From the team behind the acclaimed Employees Only and David Waltuck, chef and owner of Chanterelle,
             comes a new super-hip Tribeca spot. Taking its inspiration from the brothels and opium dens of old 1930s ...
         </p>
-        <div class="s-margin-top tags">rooftop, romance, ambiente</div>
+        <div class="tags">rooftop, romance, ambiente</div>
     </div>
-    <div class="twelve columns separator"><hr/></div>
+    <div class="separator"><hr/></div>
 </article>
 

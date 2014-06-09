@@ -11,6 +11,9 @@
       span:before { opacity: 1 }
       &:after { opacity: 1 }
     }
+
+    .drop-light{ background: #fff }
+
   }
 
   .ui-dropdown-placeholder{ display: none }
@@ -20,8 +23,8 @@
   .ui-dropdown {
     width: 100%; box-sizing: border-box; padding-top:0; padding-bottom: 0; cursor: pointer; border-radius: 20px; background: #fff;
     span{
-      display: block; height:34px; line-height:34px; position:relative; text-align: left; padding-right: 30px; white-space: nowrap;
-      &:after,&:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -160px 0; position: absolute; top: 50%; right: -10px; width: 40px; height: 40px; margin-top: -20px }
+      display: block; height:38px; line-height:38px; position:relative; text-align: left; padding-right: 30px; white-space: nowrap;
+      &:after,&:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -160px 0; position: absolute; top: 50%; right: -15px; width: 40px; height: 40px; margin-top: -20px }
       &:before{ background-position: -160px -40px; opacity: 0 }
     }
     .slide{ display: none; overflow-x: hidden!important }
@@ -39,6 +42,7 @@
     &.drop-light {
       color: $color-brown;
       .choice li:hover{ color:$color-brown-dark }
+      &:hover { background: #fff }
     }
     &.drop-cream {
       background-color: #000000;

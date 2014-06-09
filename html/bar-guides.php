@@ -69,7 +69,6 @@
         </div>
     </div>
 
-    <!-- BAR FILTER -->
     <?php include('components/bar-filter.php') ?>
 
     <!-- AD -->

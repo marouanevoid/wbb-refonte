@@ -62,7 +62,7 @@
             </div>
 
             <div class="twelve columns">
-                <div class="ui-slider type-cities has_sizer arrows infinite dots" data-size="<?php if(!$is_mobile): ?>1x6<?php else: ?>8x3<?php endif ?>" data-display="<?=$is_mobile?3:6?>">
+                <div class="ui-slider type-cities has_sizer arrows dots" data-size="<?php if(!$is_mobile): ?>1x6<?php else: ?>8x3<?php endif ?>" data-display="<?=$is_mobile?3:6?>">
 
                     <?php for($i=1; $i<10; $i++): ?>
 
@@ -89,7 +89,7 @@
                     <h1>Latest Best Of</h1>
                 </div>
 
-                <div class="ui-slider type-bestof has_sizer arrows infinite dots" data-size="<?php if(!$is_mobile): ?>3x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
+                <div class="ui-slider type-bestof has_sizer arrows dots" data-size="<?php if(!$is_mobile): ?>3x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
 
                     <?php for($i=1; $i<7; $i++): ?>
 

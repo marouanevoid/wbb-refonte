@@ -198,7 +198,7 @@
     textarea{ overflow: auto }
     input[type="text"],
     input[type="password"],
-    input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; line-height: 40px; color:$color-brown }
+    input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; line-height: 40px; color:$color-brown; @include placeholder{ color: $color-brown } }
     input[type="submit"]{
       @include transition( background-color 0.2s ease-in-out);
       &:hover{ background-color: $color-brown }
@@ -214,7 +214,7 @@
     input[type="text"]+input[type="submit"]{
       border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; width: 40px; padding: 0; height: 42px; margin: 0;
       background: url('../images/sprite.png') no-repeat #fff; background-size: 256px 512px;  background-position: -200px -200px;
-      &:hover{ background-position: -200px -240px }
+      &:hover{ background-position: -200px -240px; background-color: $color-brown }
     }
     form.dark input[type="text"]+input[type="submit"]{
       background: url('../images/sprite.png') no-repeat $color-gray; height: 40px; border-left:1px solid $color-dark-gray; box-shadow: none;

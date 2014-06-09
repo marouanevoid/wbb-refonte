@@ -11,14 +11,15 @@
     .ui-dropdown-container{
       display: inline-block;vertical-align: middle;
       .btn-radius {
-        &:hover{ background: #fff }
         margin-left: 0.5em; padding-left: 2.2em; padding-right: 0.5em; background: none; width: 170px;
-        span{ font-size: 95% }
+        span{
+          font-size: 95%; height: 34px; line-height: 34px;
+          &:before, &:after{ right: -10px }
+        }
         &:before{ left: 0.8em!important; top: 17px!important }
         &:after{ display: none }
       }
      }
-    .dropdown-open .btn-radius { background: #fff }
     select{ width: auto }
   }
   .title { text-align: center;
