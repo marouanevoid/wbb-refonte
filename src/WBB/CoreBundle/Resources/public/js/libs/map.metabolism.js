@@ -95,13 +95,49 @@ meta.Map = function(config){
                     mapTypeControl: false,
                     navigationControl: false,
                     scrollwheel: true,
+                    zoomControl : false,
+                    panControl: false,
                     streetViewControl: false,
                     styles: that.config.map
                 }
             }
         });
+    };
 
-         that.addMarkers('');
+
+    /**
+     *
+     */
+    that.reset = function() {
+
+        that.config.$map.gmap3({
+            map:{
+                options: {
+                    center:[25,0],
+                    zoom: 3
+                }
+            }
+        });
+    };
+
+
+    /**
+     *
+     */
+    that.zoomIn = function() {
+
+        var map = that.config.$map.gmap3('get');
+        if(map.getZoom() < 21 ) map.setZoom( map.getZoom()+1 );
+    };
+
+
+    /**
+     *
+     */
+    that.zoomOut = function() {
+
+        var map = that.config.$map.gmap3('get');
+        if(map.getZoom() >  3) map.setZoom( map.getZoom()-1 );
     };
 
 
@@ -145,6 +181,11 @@ meta.Map = function(config){
                             }
                         });
 
+                    },
+                    click: function(marker, event, context){
+
+                        document.location.href = context.tag;
+
                     }
                 },
                 cluster:{
@@ -158,7 +199,7 @@ meta.Map = function(config){
             }
         });
 
-        if(fit) that.config.$map.gmap3({}, "autofit");
+        if(fit) that.config.$map.gmap3({autofit:{maxZoom: 16}});
     };
 
 

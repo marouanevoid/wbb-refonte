@@ -64,7 +64,7 @@ meta.Radio = function(config){
             that.config.$radios.removeClass('active');
 
             $(this).addClass('active');
-            $(this).find('input').prop('checked', true);
+            $(this).find('input').prop('checked', true).trigger("change");
         })
     };
 
@@ -78,7 +78,7 @@ meta.Radio = function(config){
         {
             var html = that.config.template.replace('%color%', that.config.color);
             html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light'));
-            html = html.replace('%name%', $(this).val());
+            html = html.replace('%name%', $(this).val().replace(/_/g,' '));
 
             var $component = $(html);
 
