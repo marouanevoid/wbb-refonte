@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * BarTag
  *
- * @ORM\Table(name="wbb_bestof_trend")
+ * @ORM\Table(name="wbb_bestof_tag")
  * @ORM\Entity
  */
 class BestOfTag

@@ -9,15 +9,30 @@ use WBB\BarBundle\Repository\BarRepository;
 
 class BarController extends Controller
 {
+    public function homeAction()
+    {
+        $topCities = $this->container->get('city.repository')->findTopCities();
+        shuffle($topCities);
+        $response['topCities']  = $topCities;
+        $response['topBars']    = $this->container->get('bar.repository')->findBestBars();
+        $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
+        $response['topNews']    = $this->container->get('news.repository')->findLatestNews(null, 3);
+        $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars(null, 5);
 
-//    public function homeAction()
-//    {
-//        $topBars    = $this->container->get('bar.repository')->findBestBars();
-//        $topCities  = shuffle($this->container->get('city.repository')->findTopCities());
-//        $topBestofs = $this->container->get('bestof.repository')->findTopBestOfs();
-//        $topNews    = '';
-//
-//    }
+        return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
+    }
+
+    public function cityHomeAction($slug)
+    {
+        $city = $this->container->get('city.repository')->findOneBySlug($slug);
+
+        $response['topBars']    = $this->container->get('bar.repository')->findBestBars($city);
+        $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs($city);
+        $response['topNews']    = $this->container->get('news.repository')->findLatestNews($city);
+        $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars($city);
+
+        return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
+    }
 
     /**
      * detailsAction

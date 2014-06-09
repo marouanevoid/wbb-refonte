@@ -12,15 +12,19 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class BestOfRepository extends EntityRepository
 {
-    public function findTopBestOfs()
+    public function findTopBestOfs($city = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select("$this->getAlias()")
+            ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->orderBy('createdAt', 'DESC')
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
         ;
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
 
         return $qb->getQuery()->getResult();
     }

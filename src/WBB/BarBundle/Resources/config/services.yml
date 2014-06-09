@@ -69,14 +69,6 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
-    wbb.bar.admin.tag:
-        class: %wbb_bar.tag.admin.class%
-        tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: tags, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.tag.entity.class%, SonataAdminBundle:CRUD]
-        calls:
-            - [setTranslationDomain, ["WBBBarBundle"]]
-
     wbb.bar.admin.bestof:
         class: %wbb_bar.bestof.admin.class%
         tags:
@@ -101,19 +93,19 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
+    wbb.bar.admin.tag:
+        class: %wbb_bar.tag.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: tags, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.tag.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setTranslationDomain, ["WBBBarBundle"]]
+
     wbb.bar.admin.tip:
         class: %wbb_bar.tip.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: tips, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_bar.tip.entity.class%, SonataAdminBundle:CRUD]
-        calls:
-            - [setTranslationDomain, ["WBBBarBundle"]]
-
-    wbb.bar.admin.ad:
-        class: %wbb_bar.ad.admin.class%
-        tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: ad, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.ad.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
@@ -130,6 +122,14 @@ services:
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: news_medias, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_bar.news_media.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setTranslationDomain, ["WBBBarBundle"]]
+
+    wbb.bar.admin.ad:
+        class: %wbb_bar.ad.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: ad, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.ad.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
 
@@ -158,6 +158,12 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBBarBundle:BestOf']
+
+    news.repository:
+        class: WBB\BarBundle\Repository\NewsRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBBarBundle:News']
 
     bar.tag.repository:
             class: WBB\BarBundle\Repository\BarTagRepository

@@ -27,6 +27,21 @@
                     link.text('(See all)');
                 }
             });
+            $(".star").click(function(){
+                var btn = $(this);
+                $.ajax({
+                    type: "POST",
+                    url:  Routing.generate('wbb_bar_tips_add'),
+                    dataType: 'json',
+                    success: function(r) {
+                        if(btn.hasClass('active')){
+                            btn.removeClass('active');
+                        }else{
+                            btn.addClass('active');
+                        }
+                    }
+                });
+            });
             $.ajax({
                 type: "POST",
                 url:  Routing.generate('wbb_bar_feeds_list',
@@ -75,6 +90,7 @@
                                                 if(typeof fsq[i] != 'undefined') { html+=fsq[i]; }
                                                 if(typeof fsq[i+1] != 'undefined') { html+=fsq[i+1]; }
                                             }
+                                            console.log(html);
                                             $('.ui-slide').append(html);
                                             imgs = $('.ui-slide .image');
                                             $('.ui-slide').remove();
@@ -121,6 +137,11 @@
                     console.log(e);
                 }
             });
+            {% if bar.tips|length < 3 %}
+                $('.load-more').data('show',{{ 3-(bar.tips|length) }});
+                $('.load-more').trigger( "click" );
+                $('.load-more').data('show', 8);
+            {% endif %}
         });
         function initialise() {
             var myLatlng = new google.maps.LatLng({{ bar.latitude }},{{ bar.longitude }}); // Add the coordinates
@@ -145,7 +166,7 @@
             }
             var map = new google.maps.Map(document.getElementById('gmap'), mapOptions); // Render our map within the empty div
 
-            var image = new google.maps.MarkerImage("http://wbb.lapreprod.com/bundles/wbbcore/images/icons/pin2.gmap.png", null, null, null, new google.maps.Size(34,47)); // Create a variable for our marker image.
+            var image = new google.maps.MarkerImage("http://wbb.lapreprod.com/bundles/wbbcore/images/map.pin.png", null, null, null, new google.maps.Size(39,58)); // Create a variable for our marker image.
 
             var marker = new google.maps.Marker({ // Set the marker
                 position: myLatlng, // Position marker to coordinates
@@ -170,43 +191,6 @@
              $('#gmap').append('<div class="get-directions h4"><a href="https://www.google.fr/maps/dir//{{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a></div>')
         }
         google.maps.event.addDomListener(window, 'load', initialise); // Execute our 'initialise' function once the page has loaded.
-
-        new meta.Form(
-        {
-            $form : $('form#tips'),
-            onComplete:function($form, data)
-            {
-                var $count = $form.find(".count");
-                var count = $count.text();
-
-                $count.addClass('success').text(data.message);
-
-                $form.get(0).reset();
-
-                setTimeout(function()
-                {
-                    //restore state
-                    $count.removeClass('success').text(count);
-
-                }, 2000);
-            },
-            onError:function($form, message)
-            {
-                var $count = $form.find(".count");
-                var count = $count.text();
-
-                $count.addClass('error').text(message);
-                $form.find("textarea").addClass('error').focus();
-
-                setTimeout(function()
-                {
-                    //restore state
-                    $count.removeClass('error').text(count);
-                    $form.find("textarea").removeClass('error');
-
-                }, 2000);
-            }
-        })
     </script>
 {% endblock %}
 {% block bodyTag %}
@@ -235,7 +219,7 @@
                 </td>
 
                 <td class="star-share">
-                    <a class="btn-round brown star" href=""></a><a class="btn-round brown share" href=""></a>
+                    <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href="#0"></a>
                 </td>
             </tr>
         </table>
@@ -346,7 +330,7 @@
                             {% endif %}
                             <a href="mailto:{{ bar.email }}" itemprop="email">{{ bar.email }}</a>
                             <br/>
-                            {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank" itemprop="url"mazal ></a>{% endif %}
+                            {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank" itemprop="url" ></a>{% endif %}
                             {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
                             {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook" target="_blank"></a>{% endif %}
                             {% if bar.foursquare %}<a href="https://www.foursquare.com/v/{{ bar.foursquare }}" class="btn-small-round foursquare" target="_blank"></a>{% endif %}
@@ -354,43 +338,44 @@
                         </p>
                         <hr class="s-margin"/>
                         <div class="p">
-                            Hours:
-                            {% for opening in bar.openings %}
-                                {% if opening.openingDay == "now"|date("N") %}
-                                    Today 
-                                    {% if opening.fromHour|number_format<=12 %}
-                                        {{ opening.fromHour }}:00 am
-                                    {% else %}
-                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
-                                    {% endif %}
-                                     - 
-                                    {% if opening.toHour|number_format<=12 %}
-                                        {{ opening.toHour }}:00 am
-                                    {% else %}
-                                        {{ (opening.toHour|number_format)-12 }}:00 pm
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor%}
-                            <a href="" class="see-more fade">(See all)</a>
-                            <div class="more">
-                            {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+                            {% if bar.openings|length > 0 %}
+                                Hours:
                                 {% for opening in bar.openings %}
-                                    <time itemprop="openingHours">{{ days[opening.openingDay-1] }} :
-                                    {% if opening.fromHour|number_format<=12 %}
-                                        {{ opening.fromHour }}:00 am
-                                    {% else %} 
-                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                    {% if opening.openingDay == "now"|date("N") %}
+                                        Today
+                                        {% if opening.fromHour|number_format<=12 %}
+                                            {{ opening.fromHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                        {% endif %}
+                                        -
+                                        {% if opening.toHour|number_format<=12 %}
+                                            {{ opening.toHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.toHour|number_format)-12 }}:00 pm
+                                        {% endif %}
                                     {% endif %}
-                                     - 
-                                    {% if opening.toHour|number_format<=12 %}
-                                        {{ opening.toHour }}:00 am
-                                    {% else %}
-                                        {{ (opening.toHour|number_format)-12 }}:00 pm
-                                    {% endif %}
-                                    </time>
-                                    <br />
                                 {% endfor%}
-                            </div>
+                                <a href="#0" id="showOpenings">(See all)</a><br/>
+                                <span class="openings" style="display: none">
+                                {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+                                    {% for opening in bar.openings %}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} :
+                                        {% if opening.fromHour|number_format<=12 %}
+                                            {{ opening.fromHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                        {% endif %}
+                                        -
+                                        {% if opening.toHour|number_format<=12 %}
+                                            {{ opening.toHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.toHour|number_format)-12 }}:00 pm
+                                        {% endif %}
+                                        <br />
+                                    {% endfor%}
+                                </span>
+                            {% endif %}
                             Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                             {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
@@ -420,14 +405,14 @@
             <div class="twelve columns align-center l-margin-top m-margin-bottom h1">
                 Insider Tips
             </div>
-
+            <div class="line"></div>
             <div class="line">
 
                 {% if not is_mobile() or is_tablet() %}
                     <div class="three columns box">
                         <article class="tip">
                             <div class="content form">
-                                <form action="tmp/data/addTip.php" id="tips">
+                                <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                     <h3>Leave a tip</h3>
                                     <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..."></textarea>
                                     <div class="m-margin-top h4 count">499 left</div>
@@ -439,7 +424,7 @@
                     </div>
                 {% endif %}
 
-
+                {% for tip in bar.tips|slice(0,3) %}
                 <div class="three columns box">
                     <article class="tip">
 
@@ -448,7 +433,7 @@
                             <tr class="excerpt">
                                 <td colspan="2">
                                     <div class="scroll">
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
+                                        “{{ tip.description }}”
                                     </div>
                                 </td>
                             </tr>
@@ -465,7 +450,7 @@
                                 </td>
                                 <td>
                                     <b>Expert</b>
-                                    Ryan Melon
+                                    {{ tip.user.getUserRole }}
                                 </td>
                             </tr>
 
@@ -473,75 +458,7 @@
                         </table>
                     </article>
                 </div>
-
-
-                <div class="three columns box">
-                    <article class="tip">
-
-                        <table class="content expert">
-
-                            <tr class="excerpt">
-                                <td colspan="2">
-                                    <div class="scroll">
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="2">
-                                    <hr class="s-margin-bottom"/>
-                                </td>
-                            </tr>
-
-                            <tr class="author">
-                                <td>
-                                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
-                                </td>
-                                <td>
-                                    <b>Expert</b>
-                                    Ryan Melon
-                                </td>
-                            </tr>
-
-
-                        </table>
-                    </article>
-                </div>
-
-                <div class="three columns box">
-                    <article class="tip">
-
-                        <table class="content expert">
-
-                            <tr class="excerpt">
-                                <td colspan="2">
-                                    <div class="scroll">
-                                        “NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.”
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="2">
-                                    <hr class="s-margin-bottom"/>
-                                </td>
-                            </tr>
-
-                            <tr class="author">
-                                <td>
-                                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
-                                </td>
-                                <td>
-                                    <b>Expert</b>
-                                    Ryan Melon
-                                </td>
-                            </tr>
-
-
-                        </table>
-                    </article>
-                </div>
+                {% endfor %}
 
             </div>
 
@@ -550,13 +467,13 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}" data-show="8" data-offset="0">Load More</a>
             </div>
 
                 <div class="three columns box">
                     <article class="tip">
                         <div class="content form">
-                            <form action="tmp/data/addTip.php" id="tips">
+                            <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                 <h3>Leave a tip</h3>
                                 <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..."></textarea>
                                 <div class="m-margin-top h4 count">499 left</div>
@@ -570,7 +487,7 @@
             {% else %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}" data-show="8" data-offset="0">Load More</a>
             </div>
 
             {% endif %}
@@ -618,7 +535,7 @@
                 <div class="three columns">
                     {% if is_mobile() and not is_tablet() %}
                         <article class="bar-wo-pic">
-                            <a href="" class="btn-round dark star"></a>
+                            <a href="#0" class="btn-round dark star"></a>
                             <div class="txt">
                                 <h2>{{ b.name }}</h2>
                                 <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
@@ -627,7 +544,7 @@
                         </article>
                     {% else %}
                     <article class="bar-w-pic">
-                        <a href="" class="btn-round dark star"></a>
+                        <a href="#0" class="btn-round dark star"></a>
                         <div class="txt">
                             <h2>{{ b.name }}</h2>
                             <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
@@ -648,19 +565,45 @@
             {% endfor %}
         </div>
     </section>
-    <!-- AD -->
-    {% if not is_mobile() or is_tablet() %}
 
-        <section class="footer-ad">
-            <div class="container align-center">
-                <div class="twelve columns">
-                    <hr/>
-                    <img class="m-margin scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
-                </div>
-            </div>
-        </section>
+    <script type="text/javascript">
+        new meta.Form(
+                {
+                    $form : $('form#tips'),
+                    onComplete:function($form, data)
+                    {
+                        var $count = $form.find(".count");
+                        var count = $count.text();
 
-    {% endif %}
+                        $count.addClass('success').text(data.message);
+
+                        $form.get(0).reset();
+
+                        setTimeout(function()
+                        {
+                            //restore state
+                            $count.removeClass('success').text(count);
+
+                        }, 2000);
+                    },
+                    onError:function($form, message)
+                    {
+                        var $count = $form.find(".count");
+                        var count = $count.text();
+
+                        $count.addClass('error').text(message);
+                        $form.find("textarea").addClass('error').focus();
+
+                        setTimeout(function()
+                        {
+                            //restore state
+                            $count.removeClass('error').text(count);
+                            $form.find("textarea").removeClass('error');
+
+                        }, 2000);
+                    }
+                })
+    </script>
 {% endblock %}
 
 

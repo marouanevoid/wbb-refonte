@@ -108,6 +108,9 @@ class BestOfAdmin extends Admin
                         'sortable'  => 'position'
                     ))
             ->end()
+            ->with('Related Best of')
+                ->add('bestofs', null, array('required' => false))
+            ->end()
         ;
     }
 

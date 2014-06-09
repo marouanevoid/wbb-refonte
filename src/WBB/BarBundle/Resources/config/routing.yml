@@ -8,19 +8,21 @@ homepage:
     pattern: /
     defaults: { _controller: WBBBarBundle:Bar:home }
 
+city_homepage:
+    pattern: /top-{slug}
+    defaults: { _controller: WBBBarBundle:Bar:cityHome }
+
 wbb_bar_tips:
-    pattern: /bar/{id}/{offset}/tips
+    pattern: /bar/{id}/tips/{offset}/{show}
     requirements:
           id: \d+
           offset: \d+
-    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0}
+          show: \d+
+    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0, show: 8 }
 
 wbb_bar_details:
     pattern: /bar/{city}/{suburb}/{slug}
     defaults: { _controller: WBBBarBundle:Bar:details }
-
-
-
 
 #Services
 wbb_bar_feeds_find:
@@ -44,5 +46,11 @@ wbb_bar_feed_add:
 wbb_bar_feed_remove:
     pattern:  /feed/remove/{type}/{hash}/{bar}
     defaults: { _controller: WBBBarBundle:FSAdmin:remove }
+    options:
+            expose: true
+
+wbb_bar_tips_add:
+    pattern:  /tips/add/
+    defaults: { _controller: WBBBarBundle:Tips:add }
     options:
             expose: true
