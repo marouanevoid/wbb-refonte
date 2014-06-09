@@ -40,7 +40,14 @@ class TipsController extends Controller
                 $em->persist($tip);
                 $em->flush();
 
-                return new JsonResponse(array('code'=>200, 'message'=>'Tip submitted!', 'tip' => $tip));
+                return new JsonResponse(array(
+                    'code'=>200,
+                    'message'=>'Tip submitted!',
+                    'tip' => array(
+                        'text' => $tip->getDescription(),
+                        'user' => $tip->getUser()->getFullName()
+                    )
+                ));
             }
             else
             {

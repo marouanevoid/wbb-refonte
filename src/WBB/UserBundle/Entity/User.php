@@ -402,4 +402,9 @@ class User extends BaseUser
             return 'User';
         }
     }
+
+    public function getFullName()
+    {
+        return $this->getFirstname().' '.$this->getLastname();
+    }
 }
