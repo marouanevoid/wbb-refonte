@@ -12,7 +12,8 @@ class BarController extends Controller
     public function homeAction()
     {
         $topCities = $this->container->get('city.repository')->findTopCities();
-        $response['topCities']  = shuffle($topCities);
+        shuffle($topCities);
+        $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars();
         $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
         $response['topNews']    = $this->container->get('news.repository')->findLatestNews(null, 3);
