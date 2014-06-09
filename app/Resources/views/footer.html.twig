@@ -1,3 +1,16 @@
+<!-- AD -->
+{% if not is_mobile() or is_tablet() %}
+
+    <section class="footer-ad">
+        <div class="container align-center">
+            <div class="twelve columns">
+                <hr/>
+                <img class="m-margin scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
+            </div>
+        </div>
+    </section>
+
+{% endif %}
 {% if is_mobile() and not is_tablet() %}
 
 {% else %}

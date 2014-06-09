@@ -27,6 +27,21 @@
                     link.text('(See all)');
                 }
             });
+            $(".star").click(function(){
+                var btn = $(this);
+                $.ajax({
+                    type: "POST",
+                    url:  Routing.generate('wbb_bar_tips_add'),
+                    dataType: 'json',
+                    success: function(r) {
+                        if(btn.hasClass('active')){
+                            btn.removeClass('active');
+                        }else{
+                            btn.addClass('active');
+                        }
+                    }
+                });
+            });
             $.ajax({
                 type: "POST",
                 url:  Routing.generate('wbb_bar_feeds_list',
@@ -204,7 +219,7 @@
                 </td>
 
                 <td class="star-share">
-                    <a class="btn-round brown star" href=""></a><a class="btn-round brown share" href=""></a>
+                    <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href="#0"></a>
                 </td>
             </tr>
         </table>
@@ -315,7 +330,7 @@
                             {% endif %}
                             <a href="mailto:{{ bar.email }}" itemprop="email">{{ bar.email }}</a>
                             <br/>
-                            {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank" itemprop="url"mazal ></a>{% endif %}
+                            {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank" itemprop="url" ></a>{% endif %}
                             {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
                             {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook" target="_blank"></a>{% endif %}
                             {% if bar.foursquare %}<a href="https://www.foursquare.com/v/{{ bar.foursquare }}" class="btn-small-round foursquare" target="_blank"></a>{% endif %}
@@ -323,43 +338,44 @@
                         </p>
                         <hr class="s-margin"/>
                         <div class="p">
-                            Hours:
-                            {% for opening in bar.openings %}
-                                {% if opening.openingDay == "now"|date("N") %}
-                                    Today 
-                                    {% if opening.fromHour|number_format<=12 %}
-                                        {{ opening.fromHour }}:00 am
-                                    {% else %}
-                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
-                                    {% endif %}
-                                     - 
-                                    {% if opening.toHour|number_format<=12 %}
-                                        {{ opening.toHour }}:00 am
-                                    {% else %}
-                                        {{ (opening.toHour|number_format)-12 }}:00 pm
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor%}
-                            <a href="" class="see-more fade">(See all)</a>
-                            <div class="more">
-                            {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+                            {% if bar.openings|length > 0 %}
+                                Hours:
                                 {% for opening in bar.openings %}
-                                    <time itemprop="openingHours">{{ days[opening.openingDay-1] }} :
-                                    {% if opening.fromHour|number_format<=12 %}
-                                        {{ opening.fromHour }}:00 am
-                                    {% else %} 
-                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                    {% if opening.openingDay == "now"|date("N") %}
+                                        Today
+                                        {% if opening.fromHour|number_format<=12 %}
+                                            {{ opening.fromHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                        {% endif %}
+                                        -
+                                        {% if opening.toHour|number_format<=12 %}
+                                            {{ opening.toHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.toHour|number_format)-12 }}:00 pm
+                                        {% endif %}
                                     {% endif %}
-                                     - 
-                                    {% if opening.toHour|number_format<=12 %}
-                                        {{ opening.toHour }}:00 am
-                                    {% else %}
-                                        {{ (opening.toHour|number_format)-12 }}:00 pm
-                                    {% endif %}
-                                    </time>
-                                    <br />
                                 {% endfor%}
-                            </div>
+                                <a href="#0" id="showOpenings">(See all)</a><br/>
+                                <span class="openings" style="display: none">
+                                {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+                                    {% for opening in bar.openings %}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} :
+                                        {% if opening.fromHour|number_format<=12 %}
+                                            {{ opening.fromHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                        {% endif %}
+                                        -
+                                        {% if opening.toHour|number_format<=12 %}
+                                            {{ opening.toHour }}:00 am
+                                        {% else %}
+                                            {{ (opening.toHour|number_format)-12 }}:00 pm
+                                        {% endif %}
+                                        <br />
+                                    {% endfor%}
+                                </span>
+                            {% endif %}
                             Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                             Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                             {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
@@ -519,7 +535,7 @@
                 <div class="three columns">
                     {% if is_mobile() and not is_tablet() %}
                         <article class="bar-wo-pic">
-                            <a href="" class="btn-round dark star"></a>
+                            <a href="#0" class="btn-round dark star"></a>
                             <div class="txt">
                                 <h2>{{ b.name }}</h2>
                                 <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
@@ -528,7 +544,7 @@
                         </article>
                     {% else %}
                     <article class="bar-w-pic">
-                        <a href="" class="btn-round dark star"></a>
+                        <a href="#0" class="btn-round dark star"></a>
                         <div class="txt">
                             <h2>{{ b.name }}</h2>
                             <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
@@ -549,19 +565,6 @@
             {% endfor %}
         </div>
     </section>
-    <!-- AD -->
-    {% if not is_mobile() or is_tablet() %}
-
-        <section class="footer-ad">
-            <div class="container align-center">
-                <div class="twelve columns">
-                    <hr/>
-                    <img class="m-margin scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
-                </div>
-            </div>
-        </section>
-
-    {% endif %}
 
     <script type="text/javascript">
         new meta.Form(
