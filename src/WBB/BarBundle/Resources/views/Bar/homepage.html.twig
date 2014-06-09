@@ -123,7 +123,7 @@
                                 <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
                             </div>
                             <a href="" class="overlay-link"></a>
-                            <img class="overlay" src="images/city.background-circle.png"/>
+                            <img class="overlay" src="{{ asset('/bundles/wbbcore/images/city.background-circle.png') }}"/>
                             <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) }}" alt="{{ c.name }}"/>
                         </article>
                     </div>
