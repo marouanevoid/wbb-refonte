@@ -408,7 +408,8 @@ class City {
      *
      * @param UploadedFile $file
      */
-    public function setFile(UploadedFile $file = null) {
+    public function setFile(UploadedFile $file = null)
+    {
         $this->file = $file;
         if (isset($this->image)) {
             $this->temp = $this->image;

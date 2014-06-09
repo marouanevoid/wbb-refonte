@@ -138,11 +138,20 @@ class BestOfAdmin extends Admin
 
     public function prePersist($object)
     {
-        $object->upload();
-        $object->upload(true);
+        $object->preUpload();
+        $object->preUpload(true);
     }
 
     public function preUpdate($object)
+    {
+        $object->preUpload();
+        $object->preUpload(true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postPersist($object)
     {
         $object->upload();
         $object->upload(true);

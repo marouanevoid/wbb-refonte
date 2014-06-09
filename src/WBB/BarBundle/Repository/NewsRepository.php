@@ -18,7 +18,7 @@ class NewsRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->innerJoin($this->getAlias().'.cities', 'c')
+            ->leftJoin($this->getAlias().'.cities', 'c')
             ->where($qb->expr()->eq($this->getAlias().'.isOnTop', $qb->expr()->literal(true)))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->setMaxResults($limit)
