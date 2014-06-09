@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
  * @ORM\Table(name="wbb_user")
  */
 class User extends BaseUser
