@@ -102,7 +102,7 @@ class CityAdmin extends Admin
 
     public function prePersist($object)
     {
-        $object->upload();
+        $object->preUpload();
 
         foreach ($object->getSuburbs() as $suburb) {
             $suburb->setCity($object);
@@ -111,7 +111,7 @@ class CityAdmin extends Admin
 
     public function preUpdate($object)
     {
-        $object->upload();
+        $object->preUpload();
 
         foreach ($object->getSuburbs() as $suburb) {
             $suburb->setCity($object);
@@ -122,6 +122,14 @@ class CityAdmin extends Admin
      * {@inheritdoc}
      */
     public function postUpdate($object)
+    {
+        $object->upload();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postPersist($object)
     {
         $object->upload();
     }

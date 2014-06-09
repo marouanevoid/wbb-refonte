@@ -166,8 +166,8 @@ class BarAdmin extends Admin
                         'required' => false,
                         'attr' => array(
                             'data-tooltip' => 'SEO Description * (Mandatory) (160 caracters max)',
-                            'cols'=>220,
-                            'rows'=>20
+                            'cols'  =>  220,
+                            'rows'  =>  4
                         )
                     )
                 )
