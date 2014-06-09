@@ -17,3 +17,10 @@ services:
         calls:
             - [setUserManager, ["@fos_user.user_manager"]]
             - [setTranslationDomain, ["WBBUserBundle"]]
+
+    #User repository
+    user.repository:
+        class: WBB\UserBundle\Repository\UserRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBUserBundle:User']

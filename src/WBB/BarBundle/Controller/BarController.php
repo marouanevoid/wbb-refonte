@@ -4,7 +4,8 @@ namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Tip;
+use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
 
 class BarController extends Controller
@@ -46,13 +47,22 @@ class BarController extends Controller
     public function detailsAction($city, $suburb, $slug)
     {
         $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
-
+        $user = $this->container->get('user.repository')->findOneById(1);
         $response = $this->getYouMayAlsoLike($bar);
+
+        $tip = new Tip();
+        $tip
+            ->setUser($user)
+            ->setBar($bar)
+            ->setStatus(0);
+
+        $form = $this->createForm(new TipType(), $tip, array('em' => $this->container->get('doctrine.orm.entity_manager')));
 
         return $this->render('WBBBarBundle:Bar:details.html.twig', array(
             'bar'       => $bar,
             'barLike'   => $response['bars'],
-            'oneCity'   => $response['oneCity']
+            'oneCity'   => $response['oneCity'],
+            'tipForm'   => $form->createView()
         ));
     }
 

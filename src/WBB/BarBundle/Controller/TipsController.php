@@ -5,6 +5,8 @@ namespace WBB\BarBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use WBB\BarBundle\Entity\Tip;
+use WBB\BarBundle\Form\TipType;
 
 /**
  * TipsController
@@ -20,13 +22,30 @@ class TipsController extends Controller
      */
     public function addAction(Request $request)
     {
-        $tip = $request->request->get('tip');
+//        $idUser = $this->getUser()->getId();
+        $user = $this->container->get('user.repository')->findOneById(1);
 
-        if(strlen($tip) < 500 and strlen($tip) > 0){
-            return new JsonResponse(array('code'=>200, 'message'=>'Tip submitted!'));
-        }
-        else{
-            return new JsonResponse(array('code'=>300, 'message'=>'Tip is empty'));
+        $tip = new Tip();
+        $tip
+            ->setUser($user)
+            ->setStatus(0);
+
+        $form = $this->createForm(new TipType(), $tip, array('em' => $this->container->get('doctrine.orm.entity_manager')));
+
+        if ('POST' === $request->getMethod()) {
+            $form->submit($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($tip);
+                $em->flush();
+
+                return new JsonResponse(array('code'=>200, 'message'=>'Tip submitted!', 'tip' => $tip));
+            }
+            else
+            {
+                return new JsonResponse(array('code'=>500, 'message'=>'Unknown Error!'));
+            }
         }
     }
 }

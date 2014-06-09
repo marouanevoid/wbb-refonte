@@ -5,6 +5,7 @@ namespace WBB\BarBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WBB\CoreBundle\Form\DataTransformer\EntityToIDTransformer;
 
 class TipType extends AbstractType
 {
@@ -14,11 +15,16 @@ class TipType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $em = $options['em'];
+
         $builder
-            ->add('description')
-            ->add('status')
-            ->add('user', 'hidden')
-            ->add('bar')
+            ->add('description', 'textarea', array(
+                'attr' => array(
+                    'class' => 's-margin-top',
+                    'placeholder'=>'Type your tip ...'
+                )
+            ))
+            ->add($builder->create('bar', 'hidden')->addModelTransformer(new EntityToIDTransformer($em, 'WBBBarBundle', 'Bar')))
         ;
     }
     
@@ -27,9 +33,17 @@ class TipType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'WBB\BarBundle\Entity\Tip'
-        ));
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'WBB\BarBundle\Entity\Tip',
+                'csrf_protection' => false
+            ))
+            ->setRequired(array(
+                'em',
+            ))
+            ->setAllowedTypes(array(
+                'em' => 'Doctrine\Common\Persistence\ObjectManager',
+            ));
     }
 
     /**
