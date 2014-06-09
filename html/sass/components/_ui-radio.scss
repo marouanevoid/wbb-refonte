@@ -10,10 +10,10 @@
   }
 
   &.radio-dark.active:hover {
-    border-color:$color-cream;
+    border-color:$color-cream
   }
   &.radio-dark.active {
-    color:$color-subtle-yellow;
+    color:$color-subtle-yellow; background: $color-light-gray!important; border-color:$color-subtle-yellow!important;
   }
 
   &.collapsed {
@@ -23,5 +23,19 @@
       &:after { clear: both; }
     }
     &.active { border: 1px solid $color-brown }
+  }
+}
+
+@media only screen and (max-width: $grid-breakpoint-mobile) {
+  .ui-radio.collapsed{ width: 49%; padding-left: 0; padding-right: 0; text-align: center }
+  .ui-radio.btn-radius.with-icon
+  {
+    padding: 0!important; width: 38px; color: transparent;
+    &:after, &:before{ left: 0!important }
+
+    &.map{
+      &:after, &:before{ left: 12px!important }
+    }
+
   }
 }

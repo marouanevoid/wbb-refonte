@@ -61,6 +61,7 @@ meta.Dropdown = function(config){
     };
 
     that.active = false;
+    that.currentScroll = 0;
 
     /* Private. */
 
@@ -76,6 +77,8 @@ meta.Dropdown = function(config){
             that.config.$dropdown_value.click(function() {
 
                 if( !$dropdown.hasClass("dropdown-open") ){
+
+                    that.currentScroll = $(window).scrollTop();
 
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
                     $dropdown.css({width:$dropdown.width()});
@@ -94,11 +97,13 @@ meta.Dropdown = function(config){
 
                 $options.removeAttr('selected');
                 $options.eq( $(this).index()+1 ).attr('selected', 'selected');
+
+                $(document).click();
             });
 
-            $(document).click(function()
+            $(document).click(function(e)
             {
-                if( that.active )
+                if( !$(e.target).closest('.ui-dropdown').length && that.active )
                 {
                     that.active = false;
                     $dropdown.find('.slide').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
@@ -106,6 +111,14 @@ meta.Dropdown = function(config){
                     }});
                 }
             });
+
+            if( $('html').hasClass('ie9') )
+            {
+                $(window).scroll(function()
+                {
+                    that._lockscroll();
+                });
+            }
         }
         else
         {
@@ -117,6 +130,11 @@ meta.Dropdown = function(config){
         }
     };
 
+
+    that._lockscroll = function(){
+
+        if( that.active) $('html,body').scrollTop(that.currentScroll);
+    };
 
     /**
      *

@@ -41,4 +41,25 @@ body.cities {
       }
     }
   }
+
+  @media only screen and (max-width: $grid-breakpoint-mobile) {
+    .cities-content{
+      min-height:inherit;
+      .zoom{ right: 20px; bottom: 20px; top: auto; margin-top: 0 }
+      .selector{
+        border: 0; padding: 0; top: 0; left: 0; width: 100%; box-sizing: border-box; bottom: auto;
+        .heading{ padding: 1em }
+        form.s-margin{ margin-top: 5px!important }
+        h3{ display: none }
+        .scrolls{  display: none; padding: 10px; background: $color-cream }
+        .scroll ul{ line-height: 250% }
+        .scroll-cities, .scroll-bars{ padding: 0; margin: 0 }
+        .heading{ text-align: center }
+        .ui-radio.btn-radius.with-icon{ width: auto; color: $color-brown; padding-right: 1.2em!important; font-size: 1.4em; padding-left: 2.5em!important; }
+        .ui-radio.btn-radius.with-icon.active, .ui-radio.btn-radius.with-icon:hover{ color: $color-cream }
+        .ui-dropdown-container{ margin-bottom: 15px }
+      }
+      #map{ top: 118px }
+    }
+  }
 }

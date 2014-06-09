@@ -45,7 +45,7 @@ meta.Radio = function(config){
     that.config = {
         $radios   : false,
         color     : false,
-        template  : '<a class="ui-radio btn-radius with-icon border %color% %class%" href="">%name%</a>'
+        template  : '<a class="ui-radio btn-radius border %color% %class%">%name%</a>'
     };
 
 
@@ -77,7 +77,7 @@ meta.Radio = function(config){
         that.config.$radios.each(function()
         {
             var html = that.config.template.replace('%color%', that.config.color);
-            html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light'));
+            html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light')+($(this).hasClass('with-icon')?' with-icon':''));
             html = html.replace('%name%', $(this).val().replace(/_/g,' '));
 
             var $component = $(html);

@@ -7,17 +7,17 @@
     a {
       display: block; float: left; width: 4em; height: 4em; background: #fff;  cursor: pointer; position: relative; @include transition( background 0.2s ease-in-out, opacity 0.2s ease-in-out );
       &::after, &::before{ width: 1.5em; height: 1.5em; top: 1.25em; left: 1.25em; background: url("") no-repeat center; background-size: auto 100%; content: ''; position: absolute; @include transition( opacity 0.2s ease-in-out ) }
-      &::after{ @include opacity(0); z-index: 1 }
+      &::after{ opacity : 0; z-index: 1 }
       &.left::after{ background-image: url("../images/misc/arrow.left-white.png") }
       &.left::before{ background-image: url("../images/misc/arrow.left.png") }
       &.right::after{ background-image: url("../images/misc/arrow.right-white.png") }
       &.right::before{ background-image: url("../images/misc/arrow.right.png") }
 
       &:hover{ background: $color-brown }
-      &:hover::after{ @include opacity(1) }
+      &:hover::after{ opacity : 1 }
 
       &:hover.disabled{ background: #fff }
-      &:hover.disabled::after{ @include opacity(0) }
+      &:hover.disabled::after{ opacity : 0 }
       
       &.disabled{ opacity: 0.5; cursor: default; pointer-events:none }
     }
@@ -47,10 +47,10 @@
     .arrows{
       position: static;
       a{
-        top: 50%; margin-top: -2em; position: absolute; z-index: 99; @include opacity(0.8); background: $color-cream; @include transition(opacity 0.3s);
-        &:hover{ @include opacity(1) }
-        &:hover::after{ @include opacity(0) }
-        &.disabled{ @include opacity(0) }
+        top: 50%; margin-top: -2em; position: absolute; z-index: 99; opacity : 0.8; background: $color-cream; @include transition(opacity 0.3s);
+        &:hover{ opacity : 1 }
+        &:hover::after{ opacity : 0 }
+        &.disabled{ opacity : 0 }
       }
       .left{ left: 0; border-radius: 0 50% 50% 0 }
       .right{ right: 0; border-radius: 50% 0 0 50% }
@@ -70,8 +70,8 @@
       a{
         top: 50%; margin-top: -2em; position: absolute; z-index: 20; border: 1px solid $color-brown; background: transparent; @include transition(background 0.3s); width: 3.5em;
         &:hover{ background: $color-brown }
-        &:hover::after{ @include opacity(1) }
-        &.disabled{ @include opacity(0) }
+        &:hover::after{ opacity : 1 }
+        &.disabled{ opacity : 0 }
       }
       .left{ left: -3.5em; border-radius: 50% 0 0 50%; border-right: 0; margin-left: 0 }
       .right{ right: -3.5em; border-radius: 0 50% 50% 0; border-left: 0; margin-right: 0 }
