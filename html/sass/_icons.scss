@@ -15,6 +15,12 @@
     &:after{ background-position: 0 -40px }
   }
 
+  &.star.active{
+    border-color: $color-brown; background: $color-brown;
+    &:before{ background-position: -160px -240px }
+    &:after{ display: none }
+  }
+
   &.dark.star{
     &:before{ background-position: -160px -80px }
     &:after{ display: none }
@@ -59,7 +65,7 @@
 
 .btn-radius.with-icon{
 
-  &.city{
+  &.city, &.map{
     &:before{ background-position: -212px -2px }
     &:after{ background-position: -212px -42px }
   }
