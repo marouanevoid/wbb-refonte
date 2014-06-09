@@ -41,8 +41,8 @@ class AppKernel extends Kernel
             //Foursquare
             new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),
 
-            //Guzzle
-//            new Misd\GuzzleBundle\MisdGuzzleBundle(),
+            //Avalanche Imagine Bundle
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
 
             //Mobile Detecte
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
