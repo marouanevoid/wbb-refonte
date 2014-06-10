@@ -57,6 +57,7 @@ meta.LoadMore = function(config) {
             var offset      = $button.data('offset');
             var url         = $button.attr('href');
             url += '/'+offset+'/'+show;
+            alert(url);
 
             $button.data('text', $button.text());
             $button.addClass('loading').text(TRAD.loading);

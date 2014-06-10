@@ -141,9 +141,9 @@
                 }
             });
             {% if bar.tips|length < 3 %}
-                $('.load-more').data('show',{{ 4-(bar.tips|length) }});
-                $('.load-more').trigger( "click" );
-                $('.load-more').data('show', 9);
+                    $('.load-more').data('show',{{ 4-(bar.tips|length) }});
+                    $('.load-more').trigger( "click" );
+                    $('.load-more').data('show', 9);
             {% endif %}
         });
         function initialise() {
@@ -441,7 +441,7 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}" data-show="8" data-offset="0">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('c',{id:bar.id}) }}" data-show="8" data-offset="0">Load More</a>
             </div>
 
                 <div class="three columns box">

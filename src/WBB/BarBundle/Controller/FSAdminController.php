@@ -111,18 +111,27 @@ class FSAdminController extends Controller
     public function tipsAction($id, $offset, $show)
     {
         $bar = $this->container->get('bar.repository')->findOneById($id);
-        $foursquare = $bar->getFoursquare();
-        if(!empty($foursquare)){
-            $venue = $foursquare;
-        }else{
-            $venue = 'empty';
+
+        if(is_null($bar->getFoursquare()) or $bar->getFoursquare()=="")
+        {
+            $wbbTips = 0;
+            $tips = "";
+            $excluded = "";
         }
+        else
+        {
+            $wbbTips = 1;
+            $tips = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset);
+            $excluded = $bar->getFsExcludedTips();
+        }
+
         return $this->render('WBBBarBundle:Bar:feedTips.html.twig', array(
             'bar'       => $bar,
-            'tips'      => $this->get("wbb.fstips.feed")->find($venue, $offset),
-            'excluded'  => $bar->getFsExcludedTips(),
+            'tips'      => $tips,
+            'excluded'  => $excluded,
             'offset'    => $offset,
-            'show'      => $show
+            'show'      => $show,
+            'wbbTips'   => $wbbTips
         )
         );
     }
