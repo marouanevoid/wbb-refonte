@@ -126,7 +126,7 @@ class BarAdmin extends Admin
                         ->add('website')
                         ->add('foursquare', null, array('help' => 'Example : 4bfd2db02b83b71365a7a998'))
                         ->add('twitter', null, array('help' => 'Example : buddhabargroup'))
-                        ->add('facebook', null, array('help' => 'Exemple : buddhabarofficial'))
+                        ->add('facebook', null, array('help' => 'Example : buddhabarofficial'))
                         ->add('instagram', null, array('help' => 'Example : buddhabarparis'));
                 }
 
