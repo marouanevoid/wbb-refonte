@@ -3922,6 +3922,16 @@ html.mobile article.city:hover img.scale-with-grid {
     font-weight: normal;
     color: #b3955f;
 }
+/* line 120, ../sass/pages/_bar-details.scss */
+.bar-details .content p .see-more {
+    display: block;
+    text-align: center;
+    margin-top: 1em;
+}
+/* line 121, ../sass/pages/_bar-details.scss */
+.bar-details .content p .more {
+    display: none;
+}
 @media only screen and (max-width: 768px) {
     /* line 94, ../sass/pages/_bar-details.scss */
     .bar-details .main {
@@ -3972,16 +3982,6 @@ html.mobile article.city:hover img.scale-with-grid {
     /* line 116, ../sass/pages/_bar-details.scss */
     .bar-details .content .trends li:after {
         margin-left: 0.4em;
-    }
-    /* line 120, ../sass/pages/_bar-details.scss */
-    .bar-details .content p .see-more {
-        display: block;
-        text-align: center;
-        margin-top: 1em;
-    }
-    /* line 121, ../sass/pages/_bar-details.scss */
-    .bar-details .content p .more {
-        display: none;
     }
     /* line 123, ../sass/pages/_bar-details.scss */
     .bar-details .content aside {
