@@ -12,13 +12,14 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TipRepository extends EntityRepository
 {
-    public function findLatestTips($offset = 0, $limit = 8)
+    public function findLatestTips($bar, $offset = 0, $limit = 8)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.status', 1))
+            ->andWhere($qb->expr()->eq($this->getAlias().'.bar', $bar->getId()))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->setMaxResults($limit)
         ;
