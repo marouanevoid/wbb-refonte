@@ -265,6 +265,7 @@ class Bar
 
     /**
      * @ORM\OneToMany(targetEntity="Tip", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $tips;
     
