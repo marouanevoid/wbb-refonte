@@ -100,14 +100,14 @@ class BarAdmin extends Admin
         
         $formMapper
             ->with('General')
-                ->add('user', null, array('attr' => array('data-tooltip' => 'Select the bar owner of your choice (Optional)')))
-                ->add('name', null, array('attr' => array('data-tooltip' => 'Name of the bar (Mandatory)')))
-                ->add('city', 'sonata_type_model', array('attr' => array('data-tooltip' => 'City (Mandatory)'),'required' => true))
-                ->add('suburb', 'sonata_type_model', array('attr' => array('data-tooltip' => 'Area (Mandatory)'), 'required' => true))
+                ->add('user', null, array('help' => 'Select the bar owner of your choice (Optional)'))
+                ->add('name', null, array('help' => 'Name of the bar (Mandatory)'))
+                ->add('city', 'sonata_type_model', array('help' => 'City (Mandatory)','required' => true))
+                ->add('suburb', 'sonata_type_model', array('help' => 'Area (Mandatory)', 'required' => true))
                 ->add('onTop')
                 ->add('status', 'choice', array(
                     'required' => false,
-                    'attr' => array('data-tooltip' => 'Status (Keep the "Pending" status until the bar page is completely finished).'),
+                    'help' => 'Status (Keep the "Pending" status until the bar page is completely finished).',
                     'choices'  => array(
                         Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
                         Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
@@ -120,14 +120,14 @@ class BarAdmin extends Admin
                     $formMapper
                         ->add('latitude', 'hidden')
                         ->add('longitude', 'hidden')
-                        ->add('address', null, array('attr' => array('data-tooltip' => 'Address (Mandatory)')))
-                        ->add('phone', null, array('attr' => array('data-tooltip' => 'Phone number (Mandatory)')))
+                        ->add('address', null, array('help' => 'Address (Mandatory)'))
+                        ->add('phone', null, array('help' => 'Phone number (Mandatory)'))
                         ->add('email')
                         ->add('website')
-                        ->add('foursquare', null, array('attr' => array('data-tooltip' => 'Foursquare ID (Example : 4bfd2db02b83b71365a7a998)')))
-                        ->add('twitter', null, array('attr' => array('data-tooltip' => 'Twitter pseudo (Example : buddhabargroup)')))
-                        ->add('facebook', null, array('attr' => array('data-tooltip' => 'Facebook pseudo (Exemple : buddhabarofficial)')))
-                        ->add('instagram', null, array('attr' => array('data-tooltip' => 'Instagram pseudo (Example : buddhabarparis)')));
+                        ->add('foursquare', null, array('help' => 'Foursquare ID (Example : 4bfd2db02b83b71365a7a998)'))
+                        ->add('twitter', null, array('help' => 'Twitter pseudo (Example : buddhabargroup)'))
+                        ->add('facebook', null, array('help' => 'Facebook pseudo (Exemple : buddhabarofficial)'))
+                        ->add('instagram', null, array('help' => 'Instagram pseudo (Example : buddhabarparis)'));
                 }
 
         $formMapper
@@ -150,22 +150,22 @@ class BarAdmin extends Admin
                     4 => 4
                 )
             ))
-            ->add('menu', null, array('attr' => array('data-tooltip' => 'Menu link (Example : http://www.url.com)')))
+            ->add('menu', null, array('help' => 'Menu link (Example : http://www.url.com)'))
             ->add('isReservation')
-            ->add('reservation', null, array('attr' => array('data-tooltip' => 'Reservation link (Example : http://www.url.com)')));
+            ->add('reservation', null, array('help' => 'Reservation link (Example : http://www.url.com)'));
 
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper
-                ->add('description', 'textarea', array('required' => false, 'attr' => array('data-tooltip' => 'Bar Description (Mandatory)', 'class'=>'wysihtml5')))
-//                ->add('readMore', 'textarea', array('required' => false, 'attr' => array('data-tooltip' => 'Bar Description (Mandatory)', 'class'=>'wysihtml5')))
+                ->add('description', 'textarea', array('required' => false,'help' => 'Bar Description (Mandatory)', 'attr' => array('class'=>'wysihtml5')))
+//                ->add('readMore', 'textarea', array('required' => false, 'attr' => array('help' => 'Bar Description (Mandatory)', 'class'=>'wysihtml5')))
             ;
         }
 
         $formMapper
                 ->add('seoDescription', 'textarea', array(
                         'required' => false,
+                        'help' => 'SEO Description * (Mandatory) (160 caracters max)',
                         'attr' => array(
-                            'data-tooltip' => 'SEO Description * (Mandatory) (160 caracters max)',
                             'cols'=>220,
                             'rows'=>10
                         )
@@ -173,7 +173,7 @@ class BarAdmin extends Admin
                 )
             ->end()
             ->with('Medias')
-                ->add('medias', 'sonata_type_collection', array('required' => false, 'attr' => array('data-tooltip' => 'Medias (Add a WBB media is mandatory)')),
+                ->add('medias', 'sonata_type_collection', array('required' => false, 'help' => 'Medias (Add a WBB media is mandatory)'),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -183,7 +183,7 @@ class BarAdmin extends Admin
             ->with('Tags')
                 ->add('tags', 'sonata_type_collection', array(
                     'required' => false,
-                    'attr' => array('data-tooltip' => 'Tags (Associate a tag minimum to the bar is mandatory)')),
+                    'help' => 'Tags (Associate a tag minimum to the bar is mandatory)'),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
