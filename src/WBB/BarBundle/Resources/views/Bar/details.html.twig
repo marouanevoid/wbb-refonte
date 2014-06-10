@@ -280,10 +280,10 @@
                 </ul>
 
                     <p>
-                        {{ bar.description|raw|nl2br }} 
+                        {{ bar.getDescriptionIntro|raw|nl2br }}
                         <a class="see-more">Read More</a>
                         <span class="more">
-                            {{ bar.readMore|raw|nl2br }}
+                            {{ bar.getDescriptionMore|raw|nl2br }}
                         </span>
                     </p>
                 <!-- ALSO APPEARS -->
