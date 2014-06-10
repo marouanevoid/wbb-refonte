@@ -4428,11 +4428,19 @@ body.cities .cities-content .selector .scroll-bars li:first-child {
   margin-left: 0.5em;
 }
 /* line 11, ../sass/pages/_bar-guides.scss */
-.bar-guides section.bar-filter .bars-w-pic-list > article:first-child {
-  margin-top: 10px;
+.bar-guides section.bar-filter .bars-w-pic {
+  width: 97.6667%;
+  margin: auto;
+}
+/* line 14, ../sass/pages/_bar-guides.scss */
+.bar-guides section.bar-filter .bars-w-pic .three.columns {
+  width: 24.2%;
+  margin-left: 0.4%;
+  margin-right: 0.4%;
+  margin-top: 0.8% !important;
 }
 @media only screen and (max-width: 768px) {
-  /* line 18, ../sass/pages/_bar-guides.scss */
+  /* line 22, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bar-filter .sort-by {
     width: 100%;
     margin-left: 0;
@@ -4440,24 +4448,28 @@ body.cities .cities-content .selector .scroll-bars li:first-child {
     text-align: center;
     padding-top: 1em;
   }
-  /* line 21, ../sass/pages/_bar-guides.scss */
+  /* line 25, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bar-filter .sort-by > * {
     margin-left: 0.2em;
   }
-  /* line 22, ../sass/pages/_bar-guides.scss */
+  /* line 26, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bar-filter .sort-by .ui-dropdown {
     width: 120px;
     font-size: 90%;
   }
-  /* line 23, ../sass/pages/_bar-guides.scss */
+  /* line 27, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bar-filter .sort-by .btn-radius:last-of-type {
     margin-right: 0.2em;
   }
-  /* line 25, ../sass/pages/_bar-guides.scss */
+  /* line 29, ../sass/pages/_bar-guides.scss */
+  .bar-guides section.bar-filter .bars-w-pic {
+    width: 100%;
+  }
+  /* line 30, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bar-filter .bar-w-pic:nth-child(2n) {
     border-right: 1px solid transparent;
   }
-  /* line 29, ../sass/pages/_bar-guides.scss */
+  /* line 34, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic, .bar-guides section.bar-filter .bar-w-pic {
     width: 50%;
     float: left;
@@ -4465,48 +4477,48 @@ body.cities .cities-content .selector .scroll-bars li:first-child {
     border-left: 1px solid transparent;
     border-bottom: 1px solid transparent;
   }
-  /* line 31, ../sass/pages/_bar-guides.scss */
+  /* line 36, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic .txt, .bar-guides section.bar-filter .bar-w-pic .txt {
     font-size: 80%;
   }
-  /* line 32, ../sass/pages/_bar-guides.scss */
+  /* line 37, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic .btn-round, .bar-guides section.bar-filter .bar-w-pic .btn-round {
     width: 20px;
     height: 20px;
     right: 0.5em;
     top: 0.5em;
   }
-  /* line 34, ../sass/pages/_bar-guides.scss */
+  /* line 39, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic .btn-round:before, .bar-guides section.bar-filter .bar-w-pic .btn-round:before {
     background-size: 128px 256px;
     background-position: -80px -40px;
   }
-  /* line 37, ../sass/pages/_bar-guides.scss */
+  /* line 42, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic.list, .bar-guides section.bar-filter .bar-w-pic.list {
     width: 100%;
   }
-  /* line 41, ../sass/pages/_bar-guides.scss */
+  /* line 46, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic:first-child {
     width: 100%;
     float: none;
   }
-  /* line 43, ../sass/pages/_bar-guides.scss */
+  /* line 48, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic:first-child .txt {
     font-size: 100%;
   }
-  /* line 44, ../sass/pages/_bar-guides.scss */
+  /* line 49, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic:first-child .btn-round {
     width: 40px;
     height: 40px;
     right: 1em;
     top: 1em;
   }
-  /* line 46, ../sass/pages/_bar-guides.scss */
+  /* line 51, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic:first-child .btn-round:before {
     background-size: 256px 512px;
     background-position: -160px -80px;
   }
-  /* line 49, ../sass/pages/_bar-guides.scss */
+  /* line 54, ../sass/pages/_bar-guides.scss */
   .bar-guides section.bars .bar-w-pic:nth-child(2n+1) {
     border-right: 1px solid transparent;
   }

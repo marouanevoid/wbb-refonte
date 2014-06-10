@@ -87,7 +87,7 @@
 
     <section class="bar-filter">
 
-        <div class="container">
+        <div class="container s-margin-bottom">
 
             <div class="twelve columns">
                 <hr class="l-margin-top m-margin-bottom"/>
@@ -128,7 +128,7 @@
                 <div class="load-target"></div>
 
                 <div class="twelve columns align-center m-margin load-more-container">
-                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?mobile=<?=$is_mobile?>">See more bars</a>
+                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?<?=$is_mobile?'&mobile':''?>">See more bars</a>
                 </div>
 
             </div>
@@ -142,7 +142,7 @@
                 <div class="load-target"></div>
 
                 <div class="twelve columns align-center m-margin load-more-container">
-                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?list=1&mobile=<?=$is_mobile?>">See more bars</a>
+                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?list=1<?=$is_mobile?'&mobile':''?>">See more bars</a>
                 </div>
 
             </div>

@@ -8,7 +8,11 @@
       .ui-radio { height: 38px; line-height: 38px; vertical-align: middle }
       > * { display: inline-block; margin-left: 0.5em; }
     }
-    .bars-w-pic-list > article:first-child{ margin-top: 10px }
+    .bars-w-pic
+    {
+      width: 97.6667%; margin: auto;
+      .three.columns{ width: 24.2%; margin-left: 0.4%; margin-right: 0.4%; margin-top: 0.8%!important }
+    }
   }
 
   @media only screen and (max-width: $grid-breakpoint-mobile) {
@@ -22,6 +26,7 @@
         .ui-dropdown { width: 120px; font-size: 90% }
         .btn-radius:last-of-type{ margin-right: 0.2em }
       }
+      .bars-w-pic{ width: 100% }
       .bar-w-pic:nth-child(2n){border-right: 1px solid transparent;}
     }
 
