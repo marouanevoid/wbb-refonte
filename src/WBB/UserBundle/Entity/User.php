@@ -5,10 +5,12 @@ namespace WBB\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
  * @ORM\Table(name="wbb_user")
+ * @JMS\ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -16,6 +18,7 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
      */
     protected $id;
 
@@ -403,6 +406,10 @@ class User extends BaseUser
         }
     }
 
+
+    /**
+     * @JMS\VirtualProperty
+     */
     public function getFullName()
     {
         return $this->getFirstname().' '.$this->getLastname();

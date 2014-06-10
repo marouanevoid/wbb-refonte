@@ -1,0 +1,40 @@
+.search {
+
+  aside {
+    .h4 { color: $color-medium-gray; }
+    ul li { border-bottom: 1px solid $color-medium-gray; padding: $margin-padding-m 0;
+      &:first-of-type { padding-top: 0;
+        h3 { text-transform: none; color: $color-medium-gray; }
+      }
+      .drop-list { position: relative;
+        h3 { position: relative; top: 0.2em; }
+        .btn-round { position: absolute; top: -11px; right: 0; }
+      }
+      ul { display: none; margin-top: $margin-padding-s;
+        .ui-dropdown { margin-top: $margin-padding-xs; font-size: 1.2em; }
+        input[type="checkbox"] { margin-left: 0; }
+        h3 { color: $color-medium-gray; margin-top: $margin-padding-m; }
+        li { border-bottom: 0; padding: 0;
+          ul { display: block; max-height: 260px; overflow-y: scroll; }
+          input[type="radio"] { margin-top: $margin-padding-s; }
+          li input[type="checkbox"] { margin-left: $margin-padding-m; }
+        }
+      }
+    }
+    span {
+      [type="checkbox"] { @include opacity(1); margin-top: $margin-padding-xs; margin-bottom: $margin-padding-xs; margin-right: $margin-padding-m; }
+    }
+  }
+
+  .bar-filter {
+    .six.columns { margin: 0;
+      &:nth-of-type(1) { margin-right: 4.67%; }
+    }
+  }
+
+  .search-results {
+    .four.columns.bar { margin: 0;
+      &:nth-of-type(3n+2) { margin: 0 3.5%; }
+    }
+  }
+}

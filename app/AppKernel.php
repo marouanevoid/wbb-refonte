@@ -56,6 +56,9 @@ class AppKernel extends Kernel
             // sonata datepiker
             new Stnw\DatePickerBundle\StnwDatePickerBundle(),
 
+            //Serializer Bundle
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),

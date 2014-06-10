@@ -42,7 +42,7 @@
 
                 <div class="loader"></div>
 
-                <?php for($i=1; $i<3; $i++): ?>
+                <?php for($i=1; $i<5; $i++): ?>
 
                     <div class="ui-slide">
                         <?php for($j=2; $j<6; $j++): ?>

@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="search-result-proposal"><ul></ul><div>
+    <div class="search-result-proposal"><ul></ul></div>
 
 </header>
 

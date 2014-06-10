@@ -114,9 +114,9 @@
             Latest News
         </div>
 
-        <?php $is_small=true; $has_image=true; $has_text=false; include('components/article.php') ?>
-        <?php $is_small=true; $has_image=false; $has_text=true; include('components/article.php') ?>
-        <?php $is_small=false; $has_image=true; $has_text=true; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=false; $has_text=true; $has_quote=false; include('components/article.php') ?>
+        <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; include('components/article.php') ?>
 
         <a class="btn-radius border brown h4 s-margin-top" href="">See all articles</a>
 

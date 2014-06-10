@@ -9,12 +9,15 @@ use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Bar
  *
  * @ORM\Table(name="wbb_bar")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BarRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Bar
 {
@@ -33,6 +36,7 @@ class Bar
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
      */
     private $id;
 
@@ -40,12 +44,14 @@ class Bar
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @JMS\Expose
      */
     private $name;
 
     /**
      * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
      * @ORM\Column(unique=true)
+     * @JMS\Expose
      */
     private $slug;
 
@@ -719,7 +725,7 @@ class Bar
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = strip_tags($description, '<a><b><br><strong><u><i>');
 
         return $this;
     }

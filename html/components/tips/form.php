@@ -2,8 +2,8 @@
     <div class="content form">
         <form action="tmp/data/addTip.php" id="tips">
             <h3>Leave a tip</h3>
-            <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..." maxlength="499"></textarea>
-            <div class="m-margin-top h4 count">499 left</div>
+            <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..." maxlength="250"></textarea>
+            <div class="m-margin-top h4 count">250 left</div>
             <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
         </form>
         <br class="clear"/>
@@ -51,6 +51,6 @@
     $('form#tips textarea').keydown(function()
     {
         var length = $(this).val().length;
-        $('form#tips .count').text( 499-length+' left' );
+        $('form#tips .count').text( 250-length+' left' );
     });
 </script>

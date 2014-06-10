@@ -45,7 +45,7 @@
 
             <?php else : ?>
 
-                <div class="ui-slider type-bar has_sizer arrows infinite dots" data-size="12x3" data-display="3">
+                <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
 
                     <?php for($i=1; $i<7; $i++): ?>
 
@@ -70,7 +70,7 @@
                     <h1>Best Of</h1>
                 </div>
 
-                <div class="ui-slider type-bestof has_sizer arrows infinite dots" data-size="<?php if(!$is_mobile): ?>3x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
+                <div class="ui-slider type-bestof has_sizer arrows dots" data-size="<?php if(!$is_mobile): ?>3x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
 
                     <?php for($i=1; $i<7; $i++): ?>
 
@@ -87,7 +87,7 @@
 
     <section class="bar-filter">
 
-        <div class="container">
+        <div class="container s-margin-bottom">
 
             <div class="twelve columns">
                 <hr class="l-margin-top m-margin-bottom"/>
@@ -104,12 +104,10 @@
                 <span class="sort">Sort by :</span>
 
                 <select class="ui-dropdown light" name="city">
-                    <option disabled="disabled">Popularity</option>
-                    <option value="cty2">City 2</option>
-                    <option value="cty3">City 3</option>
-                    <option value="cty4">City 4</option>
-                    <option value="cty5">City 5</option>
-                    <option value="cty6">City 6</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="date">Date</option>
+                    <option value="distance">Distance</option>
+                    <option value="alphabet">Alphabetical order</option>
                 </select>
 
                 <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
@@ -119,41 +117,72 @@
 
         <div class="container">
 
-            <div class="bars-w-pic force-load  <?php if($is_mobile): ?>m-margin-top<?php endif ?>">
-                <?php for($i=1; $i<9; $i++) : ?>
+            <div class="bars-w-pic force-load  <?php if($is_mobile): ?>m-margin-top<?php endif ?> load-container">
 
+                <?php for($i=1; $i<13; $i++) : ?>
                     <?php if(!$is_mobile): ?><div class="three columns m-margin-top"><?php endif ?>
                         <?php include('components/bar-w-pic.php') ?>
                     <?php if(!$is_mobile): ?></div><?php endif ?>
                 <?php endfor ?>
+
+                <div class="load-target"></div>
+
+                <div class="twelve columns align-center m-margin load-more-container">
+                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?<?=$is_mobile?'&mobile':''?>">See more bars</a>
+                </div>
+
             </div>
 
-            <div class="bars-w-pic-list s-margin-top" style="display: none">
-                <?php for($i=1; $i<6; $i++) : ?>
+            <div class="bars-w-pic-list load-container" style="display: none">
 
+                <?php for($i=1; $i<6; $i++) : ?>
                     <?php include('components/bar-w-pic-list.php') ?>
                 <?php endfor ?>
+
+                <div class="load-target"></div>
+
+                <div class="twelve columns align-center m-margin load-more-container">
+                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?list=1<?=$is_mobile?'&mobile':''?>">See more bars</a>
+                </div>
+
             </div>
 
-            <div class="twelve columns align-center m-margin">
-                <a class="h4 btn-radius border load-more brown" href="tmp/data/tips.php">See more bars</a>
-            </div>
         </div>
 
         <script type="text/javascript">
+
             $('input[name=view-type]').change(function()
             {
                 if( $(this).val() == "grid")
                 {
-                    $('.bars-w-pic').show();
-                    $('.bars-w-pic-list').hide();
+                    $('.bars-w-pic-list').fadeOut(200, 'easeInOutCubic', function()
+                    {
+                        $('.bars-w-pic').show();
+
+                        var $elements = $('.bars-w-pic article');
+
+                        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+
+                            $(this).delay(60*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
+                        });
+                    });
                 }
                 else
                 {
-                    $('.bars-w-pic').hide();
-                    $('.bars-w-pic-list').show();
+                    $('.bars-w-pic').fadeOut(200, 'easeInOutCubic', function()
+                    {
+                        $('.bars-w-pic-list').show();
+
+                        var $elements = $('.bars-w-pic-list article');
+
+                        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+
+                            $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
+                        });
+                    });
                 }
-            })
+            });
+
         </script>
 
     </section>

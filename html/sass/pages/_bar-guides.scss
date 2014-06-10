@@ -1,14 +1,17 @@
 .bar-guides
 {
-
-
   section.bar-filter {
     .sort-by { text-transform: none; text-align: right; padding-top: 0.5em;
       .sort { text-transform: uppercase; }
       .ui-dropdown-container { vertical-align: middle }
-      .ui-dropdown { background-color: $color-cream; width: 150px; }
+      .ui-dropdown { background-color: $color-cream }
       .ui-radio { height: 38px; line-height: 38px; vertical-align: middle }
       > * { display: inline-block; margin-left: 0.5em; }
+    }
+    .bars-w-pic
+    {
+      width: 97.6667%; margin: auto;
+      .three.columns{ width: 24.2%; margin-left: 0.4%; margin-right: 0.4%; margin-top: 0.8%!important }
     }
   }
 
@@ -23,6 +26,7 @@
         .ui-dropdown { width: 120px; font-size: 90% }
         .btn-radius:last-of-type{ margin-right: 0.2em }
       }
+      .bars-w-pic{ width: 100% }
       .bar-w-pic:nth-child(2n){border-right: 1px solid transparent;}
     }
 
