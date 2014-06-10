@@ -361,7 +361,7 @@
                                 {% endfor%}
                                 <a href="#0" id="showOpenings">(See all)</a><br/>
                                 <span class="openings" style="display: none; margin-bottom: 30px">
-                                {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+                                {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
                                     {% for opening in bar.openings %}
                                         {{ days[opening.openingDay-1] }} :
                                         {% if opening.fromHour|number_format<=12 %}
