@@ -40,7 +40,13 @@ class TipsController extends Controller
                 $em->persist($tip);
                 $em->flush();
 
-                return new JsonResponse(array('code'=>200, 'message'=>'Tip submitted!', 'tip' => $tip));
+                $tipHTML = $this->renderView('WBBBarBundle:Bar:tip.html.twig', array('tip' => $tip));
+
+                return new JsonResponse(array(
+                    'code'=>200,
+                    'message'=>'Tip submitted!',
+                    'tip' => $tipHTML
+                ));
             }
             else
             {

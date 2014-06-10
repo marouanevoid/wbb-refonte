@@ -59,7 +59,7 @@ class TipAdmin extends Admin {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
-                ->add('bar', 'sonata_type_model')
+                ->add('bar', 'sonata_type_model', array('label'=> 'Link to Bar'))
                 ->add('status', 'choice', array(
                     'required' => false,
                     'choices'  => array(

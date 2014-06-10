@@ -110,9 +110,8 @@ class FSAdminController extends Controller
 
     public function tipsAction($id, $offset, $show)
     {
-
         $bar = $this->container->get('bar.repository')->findOneById($id);
-        return $this->render('WBBBarBundle:Bar:tips.html.twig', array(
+        return $this->render('WBBBarBundle:Bar:feedTips.html.twig', array(
             'bar'       => $bar,
             'tips'      => $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset),
             'excluded'  => $bar->getFsExcludedTips(),

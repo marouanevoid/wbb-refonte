@@ -28,4 +28,25 @@ class AjaxController extends Controller
 
         return new JsonResponse($html);
     }
+
+//    public function getSuburbsFromCityAction($bar, $cityId)
+//    {
+//        $html = "";
+//        $bar = null;
+//        if($bar > 0){
+//            $bar = $this->getDoctrine()->getRepository('WBBBarBundle:Bar')->find($bar);
+//        }
+//
+//        $city = $this->getDoctrine()->getRepository('WBBCoreBundle:City')->find($cityId);
+//
+//        $suburbs = $city->getSuburbs();
+//
+//        $response = array();
+//
+//        foreach($suburbs as $suburb){
+//            $response[] = array('id' => $suburb->getId(), 'text' => '"'.$suburb->getName().'"');
+//        }
+//
+//        return new JsonResponse($response);
+//    }
 }

@@ -1,0 +1,27 @@
+<div class="three columns box">
+    <article class="tip">
+        <table class="content expert">
+            <tr class="excerpt">
+                <td colspan="2">
+                    <div class="scroll">
+                        “{{ tip.description }}”
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr class="s-margin-bottom"/>
+                </td>
+            </tr>
+            <tr class="author">
+                <td>
+                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                </td>
+                <td>
+                    <b>{{ tip.user.getUserRole }}</b>
+                    {{ tip.user.fullname }}
+                </td>
+            </tr>
+        </table>
+    </article>
+</div>

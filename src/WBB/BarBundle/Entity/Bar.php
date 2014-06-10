@@ -25,6 +25,8 @@ class Bar
     const BAR_STATUS_DISABLED_VALUE = 0;
     const BAR_STATUS_DISABLED_TEXT = "Disabled";
 
+    const MOBILE_DESCRIPTION_CHARS_LIMIT = 500;
+
     /**
      * @var integer
      *
@@ -263,6 +265,7 @@ class Bar
 
     /**
      * @ORM\OneToMany(targetEntity="Tip", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $tips;
     
@@ -635,7 +638,13 @@ class Bar
      */
     public function setMenu($menu)
     {
-        $this->menu = $menu;
+        if ((strpos($menu,'http://') !== false) or (strpos($menu,'https://') !== false)) {
+            $this->menu = $menu;
+        }
+        else
+        {
+            $this->menu = 'http://'.$menu;
+        }
 
         return $this;
     }
@@ -681,7 +690,13 @@ class Bar
      */
     public function setReservation($reservation)
     {
-        $this->reservation = $reservation;
+        if ((strpos($reservation,'http://') !== false) or (strpos($reservation,'https://') !== false)) {
+            $this->reservation = $reservation;
+        }
+        else
+        {
+            $this->reservation = 'http://'.$reservation;
+        }
 
         return $this;
     }
@@ -1313,5 +1328,42 @@ class Bar
     public function getReadMore()
     {
         return $this->readMore;
+    }
+
+    public function splitDescription($getMore = false)
+    {
+        $fullArray = explode("<br>", $this->description);
+        $init = $fullArray[0];
+        $delta = abs(strlen($init) - self::MOBILE_DESCRIPTION_CHARS_LIMIT);
+        $more = "";
+        for ($i = 1 ; $i < count($fullArray) ; $i++) {
+            $cur = $fullArray[$i];
+            $curNb = strlen($cur);
+            $curDelta = abs((strlen($init) + $curNb) - self::MOBILE_DESCRIPTION_CHARS_LIMIT);
+
+            if ($curDelta < $delta) {
+                $init .= "<br>".$cur;
+                $delta = $curDelta;
+            } else {
+                $moreArray = array_slice($fullArray, $i);
+                $more = implode( "<br>" , $moreArray);
+                break;
+            }
+        }
+
+        if($getMore)
+            return $more;
+        else
+            return $init;
+    }
+
+    public function getDescriptionIntro()
+    {
+        return $this->splitDescription();
+    }
+
+    public function getDescriptionMore()
+    {
+        return $this->splitDescription(true);
     }
 }
