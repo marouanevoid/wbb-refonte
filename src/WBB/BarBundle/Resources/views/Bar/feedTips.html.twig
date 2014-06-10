@@ -1,7 +1,9 @@
 {% set s=0 %}
+{% if wbbTips==0 and bar.tips|length==0 %}
 <script type="text/javascript">
-    eval("{% if offset==0 and tips.data|length<=0 %}$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');{% endif %}");
+    eval("$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');$('.load-more').css('display','none');");
 </script>
+{% else %}
 {% for t in tips.data %}
 	{% if t.id not in excluded and s < show-1 %}
     {% set idx = offset+loop.index %}
@@ -26,4 +28,4 @@
         {% set s=s+1 %}
 	{% endif %}
 {% endfor %}
-
+{% endif %}

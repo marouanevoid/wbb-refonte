@@ -114,15 +114,24 @@ class FSAdminController extends Controller
 
         if(is_null($bar->getFoursquare()) or $bar->getFoursquare()=="")
         {
-            return new Response('');
+            $wbbTips = 0;
+            $tips = "";
+            $excluded = "";
+        }
+        else
+        {
+            $wbbTips = 1;
+            $tips = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset);
+            $excluded = $bar->getFsExcludedTips();
         }
 
         return $this->render('WBBBarBundle:Bar:feedTips.html.twig', array(
             'bar'       => $bar,
-            'tips'      => $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset),
-            'excluded'  => $bar->getFsExcludedTips(),
+            'tips'      => $tips,
+            'excluded'  => $excluded,
             'offset'    => $offset,
-            'show'      => $show
+            'show'      => $show,
+            'wbbTips'   => $wbbTips
         )
         );
     }
