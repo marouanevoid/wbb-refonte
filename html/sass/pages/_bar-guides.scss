@@ -1,15 +1,14 @@
 .bar-guides
 {
-
-
   section.bar-filter {
     .sort-by { text-transform: none; text-align: right; padding-top: 0.5em;
       .sort { text-transform: uppercase; }
       .ui-dropdown-container { vertical-align: middle }
-      .ui-dropdown { background-color: $color-cream; width: 150px; }
+      .ui-dropdown { background-color: $color-cream }
       .ui-radio { height: 38px; line-height: 38px; vertical-align: middle }
       > * { display: inline-block; margin-left: 0.5em; }
     }
+    .bars-w-pic-list > article:first-child{ margin-top: 10px }
   }
 
   @media only screen and (max-width: $grid-breakpoint-mobile) {

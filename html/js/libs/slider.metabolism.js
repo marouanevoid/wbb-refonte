@@ -312,9 +312,12 @@ meta.Slider = function(config){
         $next.css({zIndex:1, left:0, display:'block'});
 
         var $next_elements = $next.find('.overlay');
+        if( !$next_elements.length ) $next_elements = $next.find('article');
+
+        $next_elements.css({opacity:1, display:'block', left:0});
+
         $next_elements.each(function(index)
         {
-            $(this).css({opacity:1, display:'block'});
             $(this).delay(index*latency).velocity({opacity:0}, that.config.speed, that.config.easing);
         });
 
@@ -484,11 +487,14 @@ meta.Slider = function(config){
     that._setupSlide = function( $next_slide, direction ){
 
         var $current_slides  = that.context.$slides.filter('.active');
+        var next_slide_index = that.context.$slides.index($next_slide);
+        var first_slide_index = that.context.$slides.index($current_slides.first());
+        var last_slide_index = that.context.$slides.index($current_slides.last());
 
         if(
             that.is_running || that.context.$slider.hasClass('loading') ||
-            $next_slide.index() == $current_slides.first().index() ||
-            $next_slide.index() == $current_slides.last().index()
+            next_slide_index == first_slide_index ||
+            next_slide_index == last_slide_index
 
         ) return;
 
@@ -500,7 +506,7 @@ meta.Slider = function(config){
         {
             if( !that.config.infinite || (that.config.infinite && that.config.autoload && goto_left) )
             {
-                if( ($next_slide.index() >= that.context.$slides.length-1 && !that.config.autoload) || $next_slide.index() == 0 )
+                if( ( next_slide_index >= that.context.$slides.length-1 && !that.config.autoload) || next_slide_index == 0 )
                 {
                     that.context.$arrows.filter('.'+(goto_left?'left':'right')).addClass('disabled');
                     that.context.$arrows.filter('.'+(goto_left?'right':'left')).removeClass('disabled');
@@ -518,7 +524,7 @@ meta.Slider = function(config){
         {
             that.context.$dots.removeClass('active');
 
-            var index = goto_left ? $next_slide.index() : $next_slide.index()-that.config.display_count+1;
+            var index = goto_left ? next_slide_index : next_slide_index-that.config.display_count+1;
             that.context.$dots.eq(index).addClass('active');
         }
 
@@ -534,7 +540,7 @@ meta.Slider = function(config){
             that.is_running = false;
             if(!goto_left) that._loadImages( $next_slide.next(that.config.slide) );
 
-            $(document).trigger('Slider.slideEnded', [goto_left?'left':'right', $next_slide.index(), that.context.$slides.length, that.context.$slider ]);
+            $(document).trigger('Slider.slideEnded', [goto_left?'left':'right', next_slide_index, that.context.$slides.length, that.context.$slider ]);
         });
     };
 

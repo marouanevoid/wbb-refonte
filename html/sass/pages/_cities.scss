@@ -27,7 +27,7 @@ body.cities {
         li{ cursor: pointer; @include transition( color 0.2s ease-in-out )}
         li:hover{ color: $color-brown }
       }
-      .ui-dropdown-container{ font-size: 1.4em }
+      .ui-dropdown-container{ font-size: 1.4em; width: 100%!important }
       .scroll-bars{
         margin-top: 1em; display: none;
         a{ display: inline-block; vertical-align: top }

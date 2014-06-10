@@ -30,7 +30,7 @@
 
   &.type-bar-detail{
     .image{
-      height: 50%; width: 50%; float: left; border-left:1px solid #fff; border-bottom:1px solid #fff; position: relative; overflow: hidden; box-sizing: border-box;
+      width: 50%; float: left; border-left:1px solid #fff; border-bottom:1px solid #fff; position: relative; overflow: hidden; box-sizing: border-box;
       .content{ position: relative; background: #000;
         .overlay{ background: #000; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; display: none }
         img{ width: 100%; height: auto; display: block }
@@ -68,7 +68,7 @@
     .arrows{
       position: static;
       a{
-        top: 50%; margin-top: -2em; position: absolute; z-index: 20; border: 1px solid $color-brown; background: transparent; @include transition(background 0.3s); width: 3.5em;
+        top: 50%; margin-top: -2em; position: absolute; z-index: 20; border: 1px solid $color-brown; background: transparent; @include transition(background 0.3s, opacity 0.3s); width: 3.5em;
         &:hover{ background: $color-brown }
         &:hover::after{ opacity : 1 }
         &.disabled{ opacity : 0 }
