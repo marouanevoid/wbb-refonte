@@ -54,4 +54,9 @@ class TipsController extends Controller
             }
         }
     }
+
+    public function loadTipsAction($offset = 3, $limit = 8)
+    {
+        $tips = $this->container->get('tip.repository')->findLatestTips($offset, $limit);
+    }
 }
