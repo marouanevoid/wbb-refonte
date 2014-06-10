@@ -4490,3 +4490,9 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
         background-image: url("../images/sprite@2x.png");
     }
 }
+
+
+
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
+    display: none !important;
+}
