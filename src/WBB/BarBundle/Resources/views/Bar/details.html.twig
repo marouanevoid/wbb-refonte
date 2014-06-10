@@ -20,12 +20,15 @@
         $(document).ready(function(){
             $('#showOpenings').click(function(){
                 var link = $(this);
-                $('.openings').toggle();
-                if ($('.openings').is(':visible')) {
-                    link.text('(Show less)');
-                } else {
-                    link.text('(See all)');
-                }
+                $('.openings').show();
+                link.hide();
+                $('#hideOpenings').show();
+            });
+            $('#hideOpenings').click(function(){
+                var link = $(this);
+                $('.openings').hide();
+                link.show();
+                $('#showOpenings').show();
             });
             $(".star").click(function(){
                 var btn = $(this);
@@ -138,9 +141,9 @@
                 }
             });
             {% if bar.tips|length < 3 %}
-                $('.load-more').data('show',{{ 3-(bar.tips|length) }});
+                $('.load-more').data('show',{{ 4-(bar.tips|length) }});
                 $('.load-more').trigger( "click" );
-                $('.load-more').data('show', 8);
+                $('.load-more').data('show', 9);
             {% endif %}
         });
         function initialise() {
@@ -357,10 +360,10 @@
                                     {% endif %}
                                 {% endfor%}
                                 <a href="#0" id="showOpenings">(See all)</a><br/>
-                                <span class="openings" style="display: none">
+                                <span class="openings" style="display: none; margin-bottom: 30px">
                                 {% set days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
                                     {% for opening in bar.openings %}
-                                        &nbsp;&nbsp;&nbsp;&nbsp;{{ days[opening.openingDay-1] }} :
+                                        {{ days[opening.openingDay-1] }} :
                                         {% if opening.fromHour|number_format<=12 %}
                                             {{ opening.fromHour }}:00 am
                                         {% else %}
@@ -374,6 +377,7 @@
                                         {% endif %}
                                         <br />
                                     {% endfor%}
+                                    <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 30px;">(Show less)</a>
                                 </span>
                             {% endif %}
                             Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
@@ -409,7 +413,7 @@
             <div class="line">
 
                 {% if not is_mobile() or is_tablet() %}
-                    <div class="three columns box">
+                    <div class="three columns box"  id="tipsForm">
                         <article class="tip">
                             <div class="content form">
                                 <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
@@ -488,7 +492,7 @@
             {% else %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}" data-show="8" data-offset="0">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}" data-show="9" data-offset="0">Load More</a>
             </div>
 
             {% endif %}
@@ -603,7 +607,13 @@
 
                         }, 2000);
                     }
-                })
+                });
+
+        $('form#tips textarea').keydown(function()
+        {
+            var length = $(this).val().length;
+            $('form#tips .count').text( 499-length+' left' );
+        });
     </script>
 {% endblock %}
 

@@ -194,6 +194,14 @@ meta.Map = function(config){
                         content: "<div class='cluster'></div>",
                         width: 20,
                         height: 30
+                    },
+                    events: {
+                        click:function(cluster, event, data) {
+                            var gmap = that.config.$map.gmap3('get');
+
+                            gmap.panTo(data.data.latLng);
+                            gmap.setZoom(gmap.getZoom()+2);
+                        }
                     }
                 }
             }

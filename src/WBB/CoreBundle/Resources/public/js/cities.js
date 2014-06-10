@@ -69,7 +69,7 @@ meta.Cities = function() {
             $scrollBars.find('ul').html(html);
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
-            $(window).resize();
+            setTimeout(function(){ $(window).resize() }, 40);
         }
 
         that.context.map.addMarkers(markers, fit);
@@ -104,9 +104,10 @@ meta.Cities = function() {
         });
         html += '</select>';
 
-        that.context.$container.find('.heading').append(html);
+        that.context.$container.find('form').after(html);
 
         initializeDropdowns();
+
     };
 
     /**
@@ -132,6 +133,8 @@ meta.Cities = function() {
     that._showCitySelector = function()
     {
         that.context.$container.find('.scroll-cities').velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
+
+        setTimeout(function(){ $(window).resize() }, 40);
     };
 
 
