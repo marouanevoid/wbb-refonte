@@ -140,10 +140,30 @@ file that was distributed with this source code.
             city.change(updateSuburbs());
             city.change();
 
+            jQuery(document).on('sonata-admin-append-form-element',
+                function(){
+                    var suburb = $("#{{ admin.uniqId }}_suburb");
+                    var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
+                    suburb.enable(false);
+                    $.ajax({
+                        type: "POST",
+                        url:  Routing.generate('get_suburbs_from_city', {'bar': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'cityId': cityId }),
+                        dataType: 'json',
+                        success: function(r) {
+                            suburb.empty();
+                            suburb.append(r);
+                            suburb.trigger("list:updated");
+                            suburb.enable(true);
+                        }
+                    });
+                }
+            )
+
             function updateSuburbs(){
                 return function () {
                     var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
                     var suburb = $("#{{ admin.uniqId }}_suburb");
+
                     suburb.empty();
                     suburb.trigger("list:updated");
 
