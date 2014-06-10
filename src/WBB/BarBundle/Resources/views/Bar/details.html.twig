@@ -281,10 +281,11 @@
 
                     <p>
                         {{ bar.getDescriptionIntro|raw|nl2br }}
-                        <a class="see-more">Read More</a>
+                        {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
                         <span class="more">
                             {{ bar.getDescriptionMore|raw|nl2br }}
                         </span>
+                        {% endif %}
                     </p>
                 <!-- ALSO APPEARS -->
                 {% if not is_mobile() or is_tablet() %}
@@ -377,7 +378,7 @@
                                         {% endif %}
                                         <br />
                                     {% endfor%}
-                                    <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 30px;">(Show less)</a>
+                                    <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 20px;">(Show less)</a>
                                 </span>
                             {% endif %}
                             Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
@@ -419,7 +420,7 @@
                                 <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                     <h3>Leave a tip</h3>
                                     {{ form_widget(tipForm.description) }}
-                                    <div class="m-margin-top h4 count">499 left</div>
+                                    <div class="m-margin-top h4 count">250 left</div>
                                     <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
                                     {{ form_rest(tipForm) }}
                                 </form>
@@ -428,6 +429,8 @@
                         </article>
                     </div>
                 {% endif %}
+            </div>
+            <div class="line first">
                 {% for tip in bar.tips|slice(0,3) %}
                     {% include "WBBBarBundle:Bar:tip.html.twig" with { 'tip': tip } %}
                 {% endfor %}
