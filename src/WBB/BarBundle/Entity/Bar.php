@@ -1136,10 +1136,20 @@ class Bar
     /**
      * Get tips
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param bool $enabled
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTips()
+    public function getTips($enabled = false)
     {
+        if($enabled){
+            $tips = array();
+            foreach($this->tips as $tip){
+                if($tip->getStatus())
+                    $tips[] = $tip;
+            }
+            return $tips;
+        }
+
         return $this->tips;
     }
 

@@ -447,7 +447,7 @@
                 {% endif %}
             </div>
             <div class="line first">
-                {% for tip in bar.tips|slice(0,3) %}
+                {% for tip in bar.getTips(true)|slice(0,3) %}
                     {% include "WBBBarBundle:Bar:tip.html.twig" with { 'tip': tip } %}
                 {% endfor %}
             </div>
