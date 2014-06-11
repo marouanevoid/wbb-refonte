@@ -544,7 +544,7 @@
                                 {% endfor%}
                             </div>
                         </div>
-                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb:b.suburb,slug:b.slug}) }}" class="overlay-link"></a>
+                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
                         <div class="gradient"></div>
                         {% for m in b.medias|slice(0,1) %}
                             <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>

@@ -1144,7 +1144,7 @@ class Bar
         if($enabled){
             $tips = array();
             foreach($this->tips as $tip){
-                if($tip->getStatus())
+                if($tip->getStatus() == 1)
                     $tips[] = $tip;
             }
             return $tips;
