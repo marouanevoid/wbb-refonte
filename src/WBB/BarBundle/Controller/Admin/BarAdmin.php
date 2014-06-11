@@ -112,7 +112,9 @@ class BarAdmin extends Admin
                         Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
                         Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
                         Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
-                    )
+                    ),
+                    'empty_value' => false,
+                    'preferred_choices' => array(Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT)
                 ))
             ->end()
             ->with('Bar Details');
@@ -157,7 +159,6 @@ class BarAdmin extends Admin
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper
                 ->add('description', 'textarea', array('required' => false,'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
-//                ->add('readMore', 'textarea', array('required' => false, 'attr' => array('help' => 'Bar Description (Mandatory)', 'class'=>'wysihtml5')))
             ;
         }
 

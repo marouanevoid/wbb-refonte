@@ -29,6 +29,7 @@ class Bar
     const BAR_STATUS_DISABLED_TEXT = "Disabled";
 
     const MOBILE_DESCRIPTION_CHARS_LIMIT = 500;
+    const DESKTOP_DESCRIPTION_CHARS_LIMIT = 1000;
 
     /**
      * @var integer
@@ -180,13 +181,6 @@ class Bar
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_read_more", type="text", nullable=true)
-     */
-    private $readMore;
 
     /**
      * @var string
@@ -1142,10 +1136,20 @@ class Bar
     /**
      * Get tips
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param bool $enabled
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTips()
+    public function getTips($enabled = false)
     {
+        if($enabled){
+            $tips = array();
+            foreach($this->tips as $tip){
+                if($tip->getStatus())
+                    $tips[] = $tip;
+            }
+            return $tips;
+        }
+
         return $this->tips;
     }
 
@@ -1313,39 +1317,18 @@ class Bar
         return $this->slug;
     }
 
-    /**
-     * Set readMore
-     *
-     * @param string $readMore
-     * @return Bar
-     */
-    public function setReadMore($readMore)
+    public function splitDescription($getMore = false, $mobile = false)
     {
-        $this->readMore = $readMore;
+        $limit = ($mobile) ? self::MOBILE_DESCRIPTION_CHARS_LIMIT : self::DESKTOP_DESCRIPTION_CHARS_LIMIT;
 
-        return $this;
-    }
-
-    /**
-     * Get readMore
-     *
-     * @return string 
-     */
-    public function getReadMore()
-    {
-        return $this->readMore;
-    }
-
-    public function splitDescription($getMore = false)
-    {
         $fullArray = explode("<br>", $this->description);
         $init = $fullArray[0];
-        $delta = abs(strlen($init) - self::MOBILE_DESCRIPTION_CHARS_LIMIT);
+        $delta = abs(strlen($init) - $limit);
         $more = "";
         for ($i = 1 ; $i < count($fullArray) ; $i++) {
             $cur = $fullArray[$i];
             $curNb = strlen($cur);
-            $curDelta = abs((strlen($init) + $curNb) - self::MOBILE_DESCRIPTION_CHARS_LIMIT);
+            $curDelta = abs((strlen($init) + $curNb) - $limit);
 
             if ($curDelta < $delta) {
                 $init .= "<br>".$cur;
@@ -1363,13 +1346,13 @@ class Bar
             return $init;
     }
 
-    public function getDescriptionIntro()
+    public function getDescriptionIntro($mobile = false)
     {
-        return $this->splitDescription();
+        return $this->splitDescription(false, $mobile);
     }
 
-    public function getDescriptionMore()
+    public function getDescriptionMore($mobile = false)
     {
-        return $this->splitDescription(true);
+        return $this->splitDescription(true, $mobile);
     }
 }

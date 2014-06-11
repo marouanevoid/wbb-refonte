@@ -25,7 +25,7 @@ class CitySuburbAdmin extends Admin
                 ->add('name');
 
         if(!$this->hasParentFieldDescription()) {
-            $formMapper->add('city');
+            $formMapper->add('city', null, array('required' => true));
         }
 
         $formMapper->end();

@@ -29,7 +29,7 @@ class TipsController extends Controller
         $tip = new Tip();
         $tip
             ->setUser($user)
-            ->setStatus(0);
+            ->setStatus(1);
 
         $form = $this->createForm(new TipType(), $tip, array('em' => $this->container->get('doctrine.orm.entity_manager')));
 

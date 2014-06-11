@@ -54,7 +54,7 @@ class BarController extends Controller
         $tip
             ->setUser($user)
             ->setBar($bar)
-            ->setStatus(0);
+            ->setStatus(1);
 
         $form = $this->createForm(new TipType(), $tip, array('em' => $this->container->get('doctrine.orm.entity_manager')));
 
