@@ -126,7 +126,7 @@ class FSAdminController extends Controller
             }
             else
             {
-                $tips = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), 0, 9);
+                $tips = $this->get("wbb.fstips.feed")->find($bar->getwbbTipsFoursquare(), 0, 9);
                 $excluded = $bar->getFsExcludedTips();
             }
         }
