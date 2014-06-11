@@ -4,7 +4,7 @@
         eval("$('.load-more').data('limit','9');");
     </script>
 {% endif %}
-{% if offset==0 and wbbTips|length==0 and bar.tips|length==0 %}
+{% if offset==0 and wbbTips|length==0 and bar.getTips(true)|length==0 %}
     <script type="text/javascript">
         eval("$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');$('.load-more').css('display','none');");
     </script>
