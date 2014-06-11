@@ -22,8 +22,7 @@ class TipType extends AbstractType
                 'required' => true,
                 'attr' => array(
                     'class' => 's-margin-top',
-                    'placeholder' => 'Type a tip ...',
-                    'maxlength' => "250"
+                    'placeholder'=>'Type a tip ...'
                 )
             ))
             ->add($builder->create('bar', 'hidden')->addModelTransformer(new EntityToIDTransformer($em, 'WBBBarBundle', 'Bar')))
