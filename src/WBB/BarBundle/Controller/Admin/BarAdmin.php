@@ -112,7 +112,9 @@ class BarAdmin extends Admin
                         Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
                         Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
                         Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
-                    )
+                    ),
+                    'empty_value' => false,
+                    'preferred_choices' => array(Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT)
                 ))
             ->end()
             ->with('Bar Details');
