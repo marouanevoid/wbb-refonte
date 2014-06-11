@@ -31,6 +31,15 @@ class BarAdmin extends Admin
             ->add('onTop', null, array('editable' => true))
             ->add('status', 'status')
             ->add('user')
+            ->addIdentifier('_action', 'actions', array(
+                'field'   => 'name',
+                'label'    => 'Actions',
+                'actions' => array(
+                    'view'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
+                    'edit'   => array(),
+                    'delete' => array(),
+                )
+            ))
         ;
     }
 

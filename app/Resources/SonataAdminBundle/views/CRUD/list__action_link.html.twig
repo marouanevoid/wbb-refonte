@@ -1,0 +1,7 @@
+<a
+    href="{{ path(actions.route.name, { (actions.route.key): attribute(object, actions.route.value)  }) }}"
+    class="btn btn-small view_link" target="_blank"
+    title="{{  actions.label|trans({}, 'SonataAdminBundle') }}">
+    <i class="icon-list-alt"></i>
+    {{ actions.label|trans({}, 'SonataAdminBundle') }}
+</a>

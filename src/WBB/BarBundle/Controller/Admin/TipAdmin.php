@@ -73,4 +73,15 @@ class TipAdmin extends Admin {
         ;
     }
 
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+        '_page' => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt'
+    );
+
 }
