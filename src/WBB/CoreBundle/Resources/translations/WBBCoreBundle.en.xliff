@@ -64,7 +64,7 @@
 
             <trans-unit id="form.label_seo_description">
                 <source>form.label_seo_description</source>
-                <target>SEO Description</target>
+                <target>SEO Description *</target>
             </trans-unit>
 
             <trans-unit id="list.label_on_top_city">
@@ -84,7 +84,7 @@
 
             <trans-unit id="form.label_file">
                 <source>form.label_file</source>
-                <target>Main visual</target>
+                <target>Main visual *</target>
             </trans-unit>
 
             <trans-unit id="form.label_suburbs">

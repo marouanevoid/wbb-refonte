@@ -64,7 +64,7 @@
 
             <trans-unit id="form.label_tags">
                 <source>form.label_tags</source>
-                <target>Tags</target>
+                <target>Tags *</target>
             </trans-unit>
 
             <trans-unit id="form.label_openings">
@@ -94,12 +94,12 @@
 
             <trans-unit id="form.label_address">
                 <source>form.label_address</source>
-                <target>Address</target>
+                <target>Address *</target>
             </trans-unit>
 
             <trans-unit id="form.label_phone">
                 <source>form.label_phone</source>
-                <target>Phone number</target>
+                <target>Phone number*</target>
             </trans-unit>
 
             <trans-unit id="form.label_email">
@@ -164,7 +164,7 @@
 
             <trans-unit id="form.label_description">
                 <source>form.label_description</source>
-                <target>Bar Description</target>
+                <target>Bar Description *</target>
             </trans-unit>
 
             <trans-unit id="form.label_seo_description">
@@ -174,7 +174,7 @@
 
             <trans-unit id="form.label_medias">
                 <source>form.label_medias</source>
-                <target>Medias</target>
+                <target>Medias *</target>
             </trans-unit>
 
             <trans-unit id="form.label_media">

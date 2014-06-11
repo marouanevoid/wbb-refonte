@@ -166,7 +166,7 @@ class BarAdmin extends Admin
                 ->add('seoDescription', 'textarea', array(
                         'required' => false,
                         'label' => 'SEO Description *',
-                        'help' => 'Mandatory (160 caracters max)',
+                        'help' => 'Mandatory (160 characters max)',
                         'attr' => array(
                             'cols'=>220,
                             'rows'=>10
