@@ -50,6 +50,10 @@ body.cities {
   }
 
   @media only screen and (max-width: $grid-breakpoint-mobile) {
+
+    .entire-content-scrollable{ padding-top: 0 }
+    header.mobile{ position: static }
+
     .cities-content{
       min-height:inherit;
       .zoom{ right: 20px; bottom: 20px; top: auto; margin-top: 0 }

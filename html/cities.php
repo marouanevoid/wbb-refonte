@@ -58,13 +58,12 @@
         }
         else
         {
-            var content_height = $(window).height()-$('header').height()-1;
-            $cities_content.height(content_height);
+            $cities_content.height($(window).height()-$('header').height());
 
-            var map_height = content_height-$head.outerHeight();
+            var map_height = $(window).height()-$('header').height()-$head.outerHeight();
             $map.css({height:map_height, top:$head.outerHeight()});
             $cities.height( map_height-35 );
-            $bars.height( map_height-35 );
+            $bars.height( map_height-55 );
         }
     });
 
@@ -72,7 +71,6 @@
     {
         if( $(this).val() == "map")
         {
-            $('.cities-content .selector').css({height:'auto'});
             $('.cities-content .scrolls').hide();
             $('.cities-content .zoom').show();
         }

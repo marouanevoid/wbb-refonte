@@ -272,25 +272,28 @@ meta.Cities = function() {
         });
 
 
-        $selector.click(function()
+        if( !$('html').hasClass('mobile') )
         {
-            if( !that.context.filter_is_open )
+            $selector.click(function()
             {
-                that.context.filter_is_open = true;
-
-                $selector.height($selector.height());
-                that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
-                that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
-
-                $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
-
-                setTimeout(function()
+                if( !that.context.filter_is_open )
                 {
-                    that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
+                    that.context.filter_is_open = true;
 
-                }, 300);
-            }
-        });
+                    $selector.height($selector.height());
+                    that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
+                    that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+
+                    $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
+
+                    setTimeout(function()
+                    {
+                        that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
+
+                    }, 300);
+                }
+            });
+        }
 
 
         $(window).resize(function()

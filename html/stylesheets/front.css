@@ -4609,18 +4609,26 @@ body.cities .cities-content .selector .scrolls .scroll-cities li.active {
   color: #b3955f;
 }
 @media only screen and (max-width: 768px) {
-  /* line 53, ../sass/pages/_cities.scss */
+  /* line 54, ../sass/pages/_cities.scss */
+  body.cities .entire-content-scrollable {
+    padding-top: 0;
+  }
+  /* line 55, ../sass/pages/_cities.scss */
+  body.cities header.mobile {
+    position: static;
+  }
+  /* line 57, ../sass/pages/_cities.scss */
   body.cities .cities-content {
     min-height: inherit;
   }
-  /* line 55, ../sass/pages/_cities.scss */
+  /* line 59, ../sass/pages/_cities.scss */
   body.cities .cities-content .zoom {
     right: 20px;
     bottom: 20px;
     top: auto;
     margin-top: 0;
   }
-  /* line 56, ../sass/pages/_cities.scss */
+  /* line 60, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector {
     border: 0;
     padding: 0;
@@ -4630,38 +4638,38 @@ body.cities .cities-content .selector .scrolls .scroll-cities li.active {
     box-sizing: border-box;
     bottom: auto;
   }
-  /* line 58, ../sass/pages/_cities.scss */
+  /* line 62, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .heading {
     padding: 1em;
   }
-  /* line 59, ../sass/pages/_cities.scss */
+  /* line 63, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector form.s-margin {
     margin-top: 5px !important;
   }
-  /* line 60, ../sass/pages/_cities.scss */
+  /* line 64, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector h3 {
     display: none;
   }
-  /* line 61, ../sass/pages/_cities.scss */
+  /* line 65, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .scrolls {
     display: none;
     padding: 10px;
     background: #faf3e1;
   }
-  /* line 62, ../sass/pages/_cities.scss */
+  /* line 66, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .scroll ul {
     line-height: 250%;
   }
-  /* line 63, ../sass/pages/_cities.scss */
+  /* line 67, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .scroll-cities, body.cities .cities-content .selector .scroll-bars {
     padding: 0;
     margin: 0;
   }
-  /* line 64, ../sass/pages/_cities.scss */
+  /* line 68, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .heading {
     text-align: center;
   }
-  /* line 65, ../sass/pages/_cities.scss */
+  /* line 69, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .ui-radio.btn-radius.with-icon {
     width: auto;
     color: #b3955f;
@@ -4669,15 +4677,15 @@ body.cities .cities-content .selector .scrolls .scroll-cities li.active {
     font-size: 1.4em;
     padding-left: 2.5em !important;
   }
-  /* line 66, ../sass/pages/_cities.scss */
+  /* line 70, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .ui-radio.btn-radius.with-icon.active, body.cities .cities-content .selector .ui-radio.btn-radius.with-icon:hover {
     color: #faf3e1;
   }
-  /* line 67, ../sass/pages/_cities.scss */
+  /* line 71, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .ui-dropdown-container {
     margin-bottom: 15px;
   }
-  /* line 69, ../sass/pages/_cities.scss */
+  /* line 73, ../sass/pages/_cities.scss */
   body.cities .cities-content #map {
     top: 118px;
   }
