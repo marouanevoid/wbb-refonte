@@ -97,6 +97,11 @@
                 <target>Best ofs</target>
             </trans-unit>
 
+            <trans-unit id="form.label_city">
+                <source>form.label_city</source>
+                <target>City</target>
+            </trans-unit>
+
             <trans-unit id="form.label_tags">
                 <source>form.label_tags</source>
                 <target>Tags</target>
