@@ -22,6 +22,8 @@ class CityAdmin extends Admin
         if (($object = $this->getSubject()) && $object->getImage()) {
             $path = $object->getWebPath();
             $imageOptions['help'] = 'Associate a visual is mandatory for top cities<br /><img width="250px" src="/' . $path . '" />';
+        }else{
+            $imageOptions['help'] = 'Associate a visual is mandatory for top cities';
         }
         
         $formMapper
