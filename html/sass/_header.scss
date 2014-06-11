@@ -61,25 +61,10 @@
         .btn-radius { background-color: $color-brown; color: #ffffff; margin-left: 0.5em; font-size: 0.9em; line-height: 0.9em }
         .btn-radius:hover { background-color: $color-subtle-yellow; color: $color-brown }
       }
-
-      .search-result-proposal {
-        position: absolute; background-color: $color-gray; width: 100%; z-index: 999;
-        ul {
-          li {
-            font-size: 1.6em; color: $color-cream; border-bottom: 1px solid $color-dark-gray; @include transition( background 0.2s ease-in-out );
-            &:hover{ background: $color-light-gray; .twelve.columns a{ color: $color-subtle-yellow } }
-            .twelve.columns { height: auto;
-              a { display: block; padding: 1.5em 0; padding-left: 15em;
-                b { color: $color-subtle-yellow; }
-              }
-            }
-          }
-        }
-      }
-
     }
 
     header.mobile {
+      position: fixed; left: 0; top: 0; width: 100%; z-index: 999;
       .logo { padding: 0.5em 0 1.5em 0; width: 100%; text-align: center; }
       .nav-icon { text-align: left; a{ padding: 1em; margin-left: -1em; display: block } }
       .search-pin-icon { text-align: right;
@@ -87,7 +72,7 @@
       }
     }
 
-    .detect-scroll{ position: fixed; top: 0; left: 0; height: 100%; width: 40px; z-index: 9999 }
+    .detect-scroll{ position: fixed; top: 0; left: 0; height: 100%; width: 40px; z-index: 998 }
 
     aside.mobile-menu { position: absolute; width: 245px; height: 100%; left: -245px; top: 0; background-color: $color-dark-gray; background-image: url("../images/mobile.menu.inner-shadow.png"); background-position: top right; background-size: 7px 100%; background-repeat: repeat-y;
 

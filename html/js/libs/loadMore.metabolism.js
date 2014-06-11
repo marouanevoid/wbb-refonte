@@ -34,7 +34,7 @@ meta.LoadMore = function(config) {
     that.config = {
 
         $button : false,
-        page    : '?page=',
+        page    : '&page=',
         class   : 'line',
         speed   : 500,
         easing  : 'easeInOutCubic'
@@ -77,7 +77,7 @@ meta.LoadMore = function(config) {
 
         var target_height = $target.show().height();
 
-        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, that.config.speed, that.config.easing);
         });

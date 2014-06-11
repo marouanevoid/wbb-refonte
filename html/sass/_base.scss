@@ -54,12 +54,14 @@
     a.overlay-link{ position: absolute; left: 0; width: 100%; top: 0; height: 100%; z-index: 21; img{ width: 100%; height: 100%; display: block} }
     html.mobile a.overlay-link{ display: none }
 
+    .enable3d{ backface-visibility: hidden; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; @include transform( translate3d(0,0,0) )}
     .transform3d{ @include transition(transform 0.4s ease-in-out); backface-visibility: hidden; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; }
     .transform3d article > *{ backface-visibility: hidden; -webkit-backface-visibility: hidden }
 
 /* More
 --------------------------------------------------- */
     .more{ display: none }
+    .load-target{ clear: both }
 
 
 /* Text Align
@@ -88,54 +90,6 @@
 
     html{ height: 100% }
 
-
-/* Form Button
---------------------------------------------------- */
-    .button,
-    button,
-    input[type="submit"],
-    input[type="reset"],
-    input[type="button"] {
-      background: none;
-      padding: 0.5em 1.5em;
-      border-radius: 2em;
-      border: 1px solid $color-brown;
-      color: $color-brown;
-      display: inline-block;
-      font-size: 1.4em;
-      font-weight: normal;
-      text-decoration: none;
-      cursor: pointer;
-      line-height: normal;
-      outline: none;
-      font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
-    /* Fix for odd Mozilla border & padding issues */
-    button::-moz-focus-inner,
-    input::-moz-focus-inner {
-      border: 0;
-      padding: 0;
-    }
-
-    form.dark
-    {
-
-      .button,
-      button,
-      input[type="text"],
-      input[type="submit"],
-      input[type="reset"],
-      input[type="button"] {
-        background: $color-gray;
-        border: 0;
-        color: $color-subtle-yellow;
-        box-shadow: inset 0 1px 1px #000;
-        @include placeholder{ color:$color-subtle-yellow }
-      }
-    }
-
-
-    .button.large{ padding: 0.9em 2.8em }
 
 
 /* Typography
@@ -171,79 +125,6 @@
 
 	hr { border: solid $color-brown; border-width: 1px 0 0; clear: both; height: 0; }
 
-
-/* Forms
---------------------------------------------------- */
-    form{ position: relative }
-    input[type="text"],
-    input[type="password"],
-    input[type="email"],
-    textarea,
-    select {
-      resize: none;
-      border: 1px solid $color-brown;
-      padding: 7% 5%;
-      width: 90%;
-      outline: none;
-      -moz-border-radius: 4px;
-      -webkit-border-radius: 4px;
-      border-radius: 4px;
-      font: 1.4em "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      line-height: 150%;
-      color: $color-medium-gray;
-      margin: 0;
-      background: #fff;
-      @include transition(border 0.2s ease-in-out)
-    }
-    textarea{ overflow: auto }
-    input[type="text"],
-    input[type="password"],
-    input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; line-height: 40px; color:$color-brown; @include placeholder{ color: $color-brown } }
-    input[type="submit"]{
-      @include transition( background-color 0.2s ease-in-out);
-      &:hover{ background-color: $color-brown }
-    }
-
-  input[type="text"].error,
-  input[type="password"].error,
-  input[type="email"].error,
-  textarea.error{ border-color: $color-error }
-  textarea.error:focus{ box-shadow: inset 0 0 2px $color-error }
-
-    input[type="text"]::-ms-clear { display: none  }
-    input[type="text"]+input[type="submit"]{
-      border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; width: 40px; padding: 0; height: 42px; margin: 0;
-      background: url('../images/sprite.png') no-repeat #fff; background-size: 256px 512px;  background-position: -200px -200px;
-      &:hover{ background-position: -200px -240px; background-color: $color-brown }
-    }
-    form.dark input[type="text"]+input[type="submit"]{
-      background: url('../images/sprite.png') no-repeat $color-gray; height: 40px; border-left:1px solid $color-dark-gray; box-shadow: none;
-    }
-    input[type="reset"]{
-      border-radius: 50%; position: absolute; top: 4px; right: 4px; margin: 0; height: 34px; width: 34px; padding: 0;
-      background: url('../images/sprite.png') no-repeat #fff; background-size: 256px 512px;  background-position: -124px -4px;
-      @include transition( background-color 0.2s ease-in-out);
-      &:hover{ background-position: -124px -44px; background-color: $color-brown }
-    }
-    select { padding: 0 }
-    textarea:focus {
-      @include box-shadow(inset 0 0 2px $color-brown) }
-    textarea { min-height: 60px }
-    label,
-    legend {
-      display: block;
-      font-weight: bold;
-      font-size: 13px;  }
-    select {
-      width: 220px; }
-    input[type="checkbox"] {
-      display: inline; }
-    label span,
-    legend span {
-      font-weight: normal;
-      font-size: 13px;
-      color: #444; }
-    input[type="submit"], input[type="button"]{ -webkit-appearance:none }
 
 
 /* Links
@@ -311,14 +192,6 @@
     .xxl-padding           { padding-top: $margin-padding-xxl !important; padding-bottom: $margin-padding-xl !important; }
 
 
-  /* Scroll
-  --------------------------------------------------- */
-  .nicescroll-rails
-  {
-    border-radius: 10px; border: 1px solid $color-brown;
-    > div { background: $color-brown!important }
-  }
-
   /* Buttons
   --------------------------------------------------- */
   .btn-radius {
@@ -374,6 +247,7 @@
   @media only screen and (max-width: $grid-breakpoint-mobile) {
 
     body{ font-size: 10px!important; height: 100% }
+    .entire-content-scrollable{ padding-top: 80px }
     h1, .h1{ font-size: 2.5em }
 
     .btn-radius.brown.load-more:hover

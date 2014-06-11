@@ -4,6 +4,7 @@
 @import "config";
 
 @import "base";
+@import "form";
 @import "grid";
 @import "fonts";
 @import "icons";
@@ -22,6 +23,9 @@
 @import "components/city";
 @import "components/article-box";
 @import "components/ads";
+@import "components/search-bar-mobile";
+@import "components/search-result-proposal";
+@import "components/jquery.jscrollpane";
 
 @import "pages/bar-details";
 @import "pages/cities";
@@ -30,7 +34,6 @@
 @import "pages/news";
 
 @import "footer";
-@import "components/jquery.jscrollpane";
 
 @import "retina";
 //@import "debug";

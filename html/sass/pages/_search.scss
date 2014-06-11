@@ -1,40 +1,108 @@
 .search {
 
-  aside {
+  aside.filters {
+
     .h4 { color: $color-medium-gray; }
-    ul li { border-bottom: 1px solid $color-medium-gray; padding: $margin-padding-m 0;
-      &:first-of-type { padding-top: 0;
+
+    form{
+      margin-right: 3em;
+      .reset {
+        position: relative;
         h3 { text-transform: none; color: $color-medium-gray; }
+        input[type="reset"] { position: absolute; right: 0; bottom: -0.5em; }
       }
-      .drop-list { position: relative;
-        h3 { position: relative; top: 0.2em; }
-        .btn-round { position: absolute; top: -11px; right: 0; }
+      .submit{ text-align: right }
+      .reset+ul{ border-top: 1px solid $color-medium-gray; }
+
+      .btn-round{
+        width: 30px; height: 30px;
+        &.minus{
+          &:before{ background-position: -5px -365px }
+          &:after{ background-position: -5px -405px }
+        }
+        &.plus{
+          &:before{ background-position: -45px -365px }
+          &:after{ background-position: -45px -405px }
+        }
       }
-      ul { display: none; margin-top: $margin-padding-s;
-        .ui-dropdown { margin-top: $margin-padding-xs; font-size: 1.2em; }
-        input[type="checkbox"] { margin-left: 0; }
-        h3 { color: $color-medium-gray; margin-top: $margin-padding-m; }
-        li { border-bottom: 0; padding: 0;
-          ul { display: block; max-height: 260px; overflow-y: scroll; }
-          input[type="radio"] { margin-top: $margin-padding-s; }
-          li input[type="checkbox"] { margin-left: $margin-padding-m; }
+
+      ul{ margin-left: 1em }
+      > ul{ margin-left: 0; >li{ border-bottom: 1px solid $color-medium-gray; padding: $margin-padding-m 0 }  }
+      li{
+        .drop-btn { position: relative;
+          h3 { position: relative; top: 0.2em; }
+          .btn-round { position: absolute; top: -7px; right: 0; }
+        }
+
+        .drop-list {
+          display: none;
+          .ui-dropdown-container{ font-size: 1.4em; margin-top: $margin-padding-xs; margin-bottom: $margin-padding-m; width: 100%!important }
+          label { color: $color-medium-gray; margin-top: 1em; font-weight: normal; display: inline-block }
+          li {
+            .custom-scroll { height: 200px; overflow: auto }
+          }
         }
       }
     }
-    span {
-      [type="checkbox"] { @include opacity(1); margin-top: $margin-padding-xs; margin-bottom: $margin-padding-xs; margin-right: $margin-padding-m; }
-    }
+  }
+
+  .bar-filter-form{
+    .columns { margin: 0; }
+    .five.columns { padding-right: 61%; }
+    .sort-by { padding-top: 0.7em; text-align: right; margin-left: 4.66%; }
   }
 
   .bar-filter {
-    .six.columns { margin: 0;
-      &:nth-of-type(1) { margin-right: 4.67%; }
+    margin: 0; width: 75%!important;
+    .bar-w-pic-list
+    {
+      .three.columns { width: 32.5%; margin-left: 0.4%; margin-right: 0.4%; margin-top: 0.8%!important }
+      .nine.columns { width: 64.5%; margin-right: 0; margin-left: 2.2% }
+      .separator, .tags{ left: 32.9% }
+    }
+    .bars-w-pic
+    {
+      .three.columns { width: 32.5%; margin-left: 0.4%; margin-right: 0.4%; margin-top: 0.8%!important }
     }
   }
+}
 
-  .search-results {
-    .four.columns.bar { margin: 0;
-      &:nth-of-type(3n+2) { margin: 0 3.5%; }
+@media only screen and (max-width: $grid-breakpoint-mobile) {
+
+  .search {
+    aside.filters {
+      width: 100%!important; margin: 0!important; text-align: center; display: none;
+      form{
+        margin-left: 5%; margin-right: 5%;
+        li .drop-list .ui-dropdown-container{ margin-top: $margin-padding-m }
+        .reset
+        {
+          margin-top: $margin-padding-s;
+          h3{ text-transform: uppercase; color: $color-dark-gray; font-weight: bold; font-size: 225% }
+          input{ top: -7px }
+        }
+      }
+    }
+    .bar-filter-form{
+      margin-bottom: $margin-padding-m;
+      > .six.columns{
+        width: 100%;
+        .ui-radio{ font-size: 75% }
+      }
+      .sort-by{
+        margin: 0;
+        .filter-btn{ float: left; padding: 0; height: 38px; line-height: 40px; width: 40%; text-align: center }
+      }
+    }
+
+    .bar-filter {
+      .bars-w-pic{ margin-top: 0!important }
+      .bar-w-pic-list
+      {
+        .three.columns { width: 50%; margin-left: 0; margin-right: 0; margin-top: 0!important }
+        .nine.columns { width: 47%; margin-right: 0; margin-left: 3% }
+        .separator, .tags{ left: 50% }
+      }
     }
   }
 }

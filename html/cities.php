@@ -26,46 +26,7 @@
         </div>
         <div class="scrolls">
             <div class="scroll-cities scroll custom-scroll">
-                <ul>
-                    <li id="">Alberdeen</li>
-                    <li id="">Adelaide</li>
-                    <li id="">Amesterdam</li>
-                    <li id="">Antwerp</li>
-                    <li id="">Athens</li>
-                    <li id="">Atlanta</li>
-                    <li id="">Auckland</li>
-                    <li id="">Bali</li>
-                    <li id="">Bangkok</li>
-                    <li id="">Barcelona</li>
-                    <li id="">Bastile and the Marais</li>
-                    <li id="">Bath</li>
-                    <li id="">Beijing</li>
-                    <li id="">Berut</li>
-                    <li id="">Belfast</li>
-                    <li id="">Belgrade</li>
-                    <li id="">Bengaluru</li>
-                    <li id="">Berlin</li>
-                    <li id="">Birmingham</li>
-                    <li id="">Alberdeen</li>
-                    <li id="">Adelaide</li>
-                    <li id="">Amesterdam</li>
-                    <li id="">Antwerp</li>
-                    <li id="">Athens</li>
-                    <li id="">Atlanta</li>
-                    <li id="">Auckland</li>
-                    <li id="">Bali</li>
-                    <li id="">Bangkok</li>
-                    <li id="">Barcelona</li>
-                    <li id="">Bastile and the Marais</li>
-                    <li id="">Bath</li>
-                    <li id="">Beijing</li>
-                    <li id="">Berut</li>
-                    <li id="">Belfast</li>
-                    <li id="">Belgrade</li>
-                    <li id="">Bengaluru</li>
-                    <li id="">Berlin</li>
-                    <li id="">Birmingham</li>
-                </ul>
+                <ul></ul>
             </div>
             <div class="scroll-bars scroll custom-scroll">
                 <ul></ul>
@@ -86,7 +47,7 @@
 
     $(window).resize(function()
     {
-        if( $(window).height() > 640 )
+        if( !$('html').hasClass('mobile') )
         {
             $cities_content.height( $(window).height()-$('header').height()-105 );
 
@@ -97,9 +58,10 @@
         }
         else
         {
-            $cities_content.height($(window).height()-$('header').height());
+            var content_height = $(window).height()-$('header').height()-1;
+            $cities_content.height(content_height);
 
-            var map_height = $(window).height()-$('header').height()-$head.outerHeight();
+            var map_height = content_height-$head.outerHeight();
             $map.css({height:map_height, top:$head.outerHeight()});
             $cities.height( map_height-35 );
             $bars.height( map_height-35 );
@@ -110,6 +72,7 @@
     {
         if( $(this).val() == "map")
         {
+            $('.cities-content .selector').css({height:'auto'});
             $('.cities-content .scrolls').hide();
             $('.cities-content .zoom').show();
         }

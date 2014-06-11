@@ -1,5 +1,4 @@
-.bar-guides
-{
+
   section.bar-filter {
     .sort-by { text-transform: none; text-align: right; padding-top: 0.5em;
       .sort { text-transform: uppercase; }
@@ -19,9 +18,10 @@
 
     section.bar-filter
     {
+      width: 100%!important; margin: 0!important;
       .sort-by
       {
-        width: 100%; margin-left: 0; margin-right: 0; text-align: center; padding-top: 1em;
+        width: 100%!important; margin-left: 0!important; margin-right: 0!important; text-align: center; padding-top: 1em;
         > *{ margin-left: 0.2em }
         .ui-dropdown { width: 120px; font-size: 90% }
         .btn-radius:last-of-type{ margin-right: 0.2em }
@@ -54,5 +54,5 @@
       .bar-w-pic:nth-child(2n+1){border-right: 1px solid transparent;}
     }
   }
-}
+
 

@@ -7,7 +7,7 @@
 
             <a class="finder-close"></a>
 
-            <form>
+            <form action="search.php">
                 <table>
                     <tr>
                         <td rowspan="2">

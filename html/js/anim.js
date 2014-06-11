@@ -18,4 +18,26 @@ $( document ).ready(function() {
             }
         });
     //
+
+    // Search Bar Mobile Display
+
+        var openBtn=$('.search-pin-icon .search');
+        var closeBtn=$('.search-bar-mobile .close');
+        var searchBar=$('.search-bar-mobile');
+
+        openBtn.click(function() {
+            searchBar.fadeIn();
+            searchBar.find('.container').show();
+            setTimeout(function(){
+                searchBar.find('.container').css({transform:'translate3d(0,0%,0)'})
+            }, 10)
+        });
+        closeBtn.click(function() {
+            searchBar.fadeOut();
+            searchBar.find('.container').css({transform:'translate3d(0,-100%,0)'})
+            setTimeout(function(){
+                searchBar.hide()
+            }, 500)
+        });
+    //
 });

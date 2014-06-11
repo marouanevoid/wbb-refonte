@@ -77,15 +77,29 @@
                     </td>
 
                     <td class="search-pin-icon">
-                        <a href="">
-                            <img src="images/icons/pin.border.png" alt="pin.border" width="12" height="16"/>
-                        </a>
-                        <a href="">
-                            <img src="images/icons/search.png" alt="search" width="16" height="16"/>
-                        </a>
+
+                        <a href="cities.php"><img src="images/icons/pin.border.png" alt="pin.border" width="12" height="16"/></a>
+
+                        <a class="search"><img src="images/icons/search.png" alt="search" width="16" height="16"/></a>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
 </header>
+
+<div class="search-bar-mobile">
+
+    <div class="container">
+
+        <div class="twelve columns s-margin">
+            <form action="">
+                <input type="text"/>
+            </form>
+            <a class="btn-radius border h4 close">Cancel</a>
+        </div>
+    </div>
+
+    <div class="search-result-proposal"><ul></ul></div>
+
+</div>

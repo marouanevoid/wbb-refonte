@@ -161,7 +161,7 @@
 
                         var $elements = $('.bars-w-pic article');
 
-                        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+                        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
                             $(this).delay(60*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
                         });
@@ -175,7 +175,7 @@
 
                         var $elements = $('.bars-w-pic-list article');
 
-                        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+                        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
                             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
                         });

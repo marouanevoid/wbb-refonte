@@ -16,29 +16,36 @@ body.cities {
       a{ background-color: $color-cream }
     }
     .selector{
-      position: absolute; left: 5%; top: 10%; bottom: 10%; width: 23em; background: #fff; border: 1em solid $color-cream; padding: 25px;
+      position: absolute; left: 5%; top: 10%; bottom: auto; overflow: hidden; width: 23em; background: #fff; border: 10px solid $color-cream; padding: 25px; @include transition( height 0.3s );
       h3{ color: $color-brown }
       form{
         input[type=reset]{ display: none }
       }
-      .scroll ul{ font-size: 1.4em; line-height: 180% }
-      .scroll-cities{
-        overflow: auto; margin-left: 1em;
-        li{ cursor: pointer; @include transition( color 0.2s ease-in-out )}
-        li:hover{ color: $color-brown }
-      }
       .ui-dropdown-container{ font-size: 1.4em; width: 100%!important }
-      .scroll-bars{
-        margin-top: 1em; display: none;
-        a{ display: inline-block; vertical-align: top }
-        ul{ list-style: decimal inside; color:$color-brown }
-        b{ font-weight: normal; color: #333 }
-        span{ color: #666; font-size: 90% }
-        li{ border-top: 1px solid #999; padding: 0.7em 0.5em; @include transition(0.2s ease-in-out); cursor: pointer }
-        li:hover, li.active{ border-top-color: $color-cream; background: $color-cream }
-        li:hover+li, li.active+li{ border-top-color: $color-cream }
-        li:first-child{ border-top:0 }
+      .scrolls{
+        display: none;
+        .scroll ul{ font-size: 1.4em; line-height: 180% }
+        .scroll-cities{
+          overflow: auto; margin-left: 1em;
+          li{ cursor: pointer; @include transition( color 0.2s ease-in-out )}
+          li:hover{ color: $color-brown }
+        }
+        .scroll-bars{
+          margin-top: 1em; display: none;
+          a{ display: inline-block; vertical-align: top }
+          ul{ list-style: decimal inside; color:$color-brown }
+          b{ font-weight: normal; color: #333 }
+          span{ color: #666; font-size: 90% }
+          li{ border-top: 1px solid #999; padding: 0.7em 0.5em; @include transition(0.2s ease-in-out); cursor: pointer }
+          li:hover, li.active{ border-top-color: $color-cream; background: $color-cream }
+          li:hover+li, li.active+li{ border-top-color: $color-cream }
+          li:first-child{ border-top:0 }
+        }
+        .scroll-cities{
+          li.active{ color: $color-brown }
+        }
       }
+
     }
   }
 

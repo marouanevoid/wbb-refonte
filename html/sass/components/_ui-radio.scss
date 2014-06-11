@@ -30,12 +30,11 @@
   .ui-radio.collapsed{ width: 49%; padding-left: 0; padding-right: 0; text-align: center }
   .ui-radio.btn-radius.with-icon
   {
-    padding: 0!important; width: 38px; color: transparent;
-    &:after, &:before{ left: 0!important }
+    padding: 0!important; width: 38px; height: 38px; color: transparent; line-height: 38px;
+    &:after, &:before{ left: -1px!important; margin-top: -19px!important }
 
     &.map{
       &:after, &:before{ left: 12px!important }
     }
-
   }
 }
