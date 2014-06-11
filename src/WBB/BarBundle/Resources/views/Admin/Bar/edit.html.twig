@@ -22,7 +22,7 @@ file that was distributed with this source code.
 {% block actions %}
     <div class="sonata-actions btn-group">
         {% if object.slug %}
-            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city, suburb:object.suburb, slug:object.slug}) }}" target="_blank">
+            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city, suburb: object.suburb, slug:object.slug}) }}" target="_blank">
                 <i class="icon-zoom-in"></i>
                 {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
             </a>
@@ -49,7 +49,6 @@ file that was distributed with this source code.
         var barId = "{{ admin.id(object) }}";
         var venue, insta;
         $(document).ready(function(){
-            $( document ).tooltip();
             venue = "{{ object.foursquare }}";
             insta = "{{ object.instagram }}";
 
@@ -140,10 +139,31 @@ file that was distributed with this source code.
             city.change(updateSuburbs());
             city.change();
 
+            jQuery(document).on('sonata-admin-append-form-element',
+                function(){
+                    var suburb = $("#{{ admin.uniqId }}_suburb");
+                    var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
+                    var suburbId = $("#{{ admin.uniqId }}_suburb option:selected").val();
+                    suburb.enable(false);
+                    $.ajax({
+                        type: "POST",
+                        url:  Routing.generate('get_suburbs_from_city', {'bar': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'cityId': cityId, 'suburbId': suburbId }),
+                        dataType: 'json',
+                        success: function(r) {
+                            suburb.empty();
+                            suburb.append(r);
+                            suburb.trigger("list:updated");
+                            suburb.enable(true);
+                        }
+                    });
+                }
+            )
+
             function updateSuburbs(){
                 return function () {
                     var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
                     var suburb = $("#{{ admin.uniqId }}_suburb");
+
                     suburb.empty();
                     suburb.trigger("list:updated");
 

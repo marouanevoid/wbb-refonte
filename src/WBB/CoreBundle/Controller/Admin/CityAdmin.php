@@ -21,24 +21,27 @@ class CityAdmin extends Admin
         $imageOptions = array('required' => false);
         if (($object = $this->getSubject()) && $object->getImage()) {
             $path = $object->getWebPath();
-            $imageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
+            $imageOptions['help'] = 'Associate a visual is mandatory for top cities<br /><img width="250px" src="/' . $path . '" />';
         }
         
         $formMapper
             ->with('General')
-                ->add('name')
-                ->add('country')
-                ->add('seoDescription')
+                ->add('name', null, array('label' => 'Name of the City', 'help' => 'Mandatory'))
+                ->add('country', null, array('help' => 'Mandatory'))
+                ->add('seoDescription', null, array('help' => 'Mandatory (160 characters max)'))
                 ->add('onTopCity')
+                ->add('suburbs', 'sonata_type_collection',
+                    array(
+                        'required'  => false,
+                        'help'      => 'Associate an area minimum to the city is mandatory'
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table'
+                    )
+                )
             ->end()
-            ->with('Picture')
+            ->with('Media')
                 ->add('file', 'file', $imageOptions)
-            ->end()
-            ->with('Suburbs')
-                ->add('suburbs', 'sonata_type_collection', array('required'=>false), array(
-                    'edit' => 'inline',
-                    'inline' => 'table'
-                ))
             ->end()
             ->with('Related Best Of')
                 ->add('bestofs', 'sonata_type_collection', array('required' => false),

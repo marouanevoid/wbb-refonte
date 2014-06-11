@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\MediaBundle\Admin\ORM;
+namespace Application\Sonata\MediaBundle\Controller\Admin;
 
-use Sonata\MediaBundle\Admin\BaseMediaAdmin as Admin;
+use Sonata\MediaBundle\Admin\BaseMediaAdmin as BaseAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
-class MediaAdmin extends Admin
+class MediaAdmin extends BaseAdmin
 {
 
     /**
      * {@inheritdoc}
      */
-    protected $maxPerPage   = 5;
+    protected $maxPerPage   = 1;
 
     /**
      * {@inheritdoc}
      */
-    protected $maxPageLinks = 5;
+    protected $maxPageLinks = 1;
 
     /**
      * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $datagridMapper

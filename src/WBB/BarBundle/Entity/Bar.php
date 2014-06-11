@@ -9,12 +9,15 @@ use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Bar
  *
  * @ORM\Table(name="wbb_bar")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BarRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Bar
 {
@@ -26,6 +29,7 @@ class Bar
     const BAR_STATUS_DISABLED_TEXT = "Disabled";
 
     const MOBILE_DESCRIPTION_CHARS_LIMIT = 500;
+    const DESKTOP_DESCRIPTION_CHARS_LIMIT = 1000;
 
     /**
      * @var integer
@@ -33,6 +37,7 @@ class Bar
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
      */
     private $id;
 
@@ -40,12 +45,14 @@ class Bar
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @JMS\Expose
      */
     private $name;
 
     /**
      * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
      * @ORM\Column(unique=true)
+     * @JMS\Expose
      */
     private $slug;
 
@@ -174,13 +181,6 @@ class Bar
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_read_more", type="text", nullable=true)
-     */
-    private $readMore;
 
     /**
      * @var string
@@ -719,7 +719,7 @@ class Bar
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = strip_tags($description, '<a><b><br><strong><u><i>');
 
         return $this;
     }
@@ -1136,10 +1136,20 @@ class Bar
     /**
      * Get tips
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param bool $enabled
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTips()
+    public function getTips($enabled = false)
     {
+        if($enabled){
+            $tips = array();
+            foreach($this->tips as $tip){
+                if($tip->getStatus() == 1)
+                    $tips[] = $tip;
+            }
+            return $tips;
+        }
+
         return $this->tips;
     }
 
@@ -1307,41 +1317,23 @@ class Bar
         return $this->slug;
     }
 
-    /**
-     * Set readMore
-     *
-     * @param string $readMore
-     * @return Bar
-     */
-    public function setReadMore($readMore)
+    public function splitDescription($getMore = false, $mobile = false)
     {
-        $this->readMore = $readMore;
+        $limit = ($mobile) ? self::MOBILE_DESCRIPTION_CHARS_LIMIT : self::DESKTOP_DESCRIPTION_CHARS_LIMIT;
 
-        return $this;
-    }
-
-    /**
-     * Get readMore
-     *
-     * @return string 
-     */
-    public function getReadMore()
-    {
-        return $this->readMore;
-    }
-
-    public function splitDescription($getMore = false)
-    {
         $fullArray = explode("<br>", $this->description);
         $init = $fullArray[0];
-        $delta = abs(strlen($init) - self::MOBILE_DESCRIPTION_CHARS_LIMIT);
+        $delta = abs(strlen($init) - $limit);
         $more = "";
+        $curNb = 0;
+        $curDelta = 0;
+        $i = 1;
         for ($i = 1 ; $i < count($fullArray) ; $i++) {
             $cur = $fullArray[$i];
             $curNb = strlen($cur);
-            $curDelta = abs((strlen($init) + $curNb) - self::MOBILE_DESCRIPTION_CHARS_LIMIT);
-
-            if ($curDelta < $delta) {
+            $curSize = strlen($init) + $curNb;
+            $curDelta = abs($curSize - $limit);
+            if ($curDelta < $delta+1) {
                 $init .= "<br>".$cur;
                 $delta = $curDelta;
             } else {
@@ -1357,13 +1349,13 @@ class Bar
             return $init;
     }
 
-    public function getDescriptionIntro()
+    public function getDescriptionIntro($mobile = false)
     {
-        return $this->splitDescription();
+        return $this->splitDescription(false, $mobile);
     }
 
-    public function getDescriptionMore()
+    public function getDescriptionMore($mobile = false)
     {
-        return $this->splitDescription(true);
+        return $this->splitDescription(true, $mobile);
     }
 }

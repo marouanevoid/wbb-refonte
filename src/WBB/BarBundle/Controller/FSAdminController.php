@@ -108,15 +108,38 @@ class FSAdminController extends Controller
         return new JsonResponse(array('objects' => $objects));
     }
 
-    public function tipsAction($id, $offset, $show)
+    public function tipsAction($barID, $offset, $limit, $showwbb)
     {
-        $bar = $this->container->get('bar.repository')->findOneById($id);
+        $bar        = $this->container->get('bar.repository')->findOneById($barID);
+
+        if(is_null($bar->getFoursquare()) or $bar->getFoursquare()=="")
+        {
+            $tips = Array();
+            $excluded = Array();
+        }
+        else
+        {
+            if($showwbb==0)
+            {
+                $tips = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset, $limit);
+                $excluded = $bar->getFsExcludedTips();
+            }
+            else
+            {
+                $tips = $this->get("wbb.fstips.feed")->find($bar->getwbbTipsFoursquare(), 0, 9);
+                $excluded = $bar->getFsExcludedTips();
+            }
+        }
+        $wbbtips = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit);
+
         return $this->render('WBBBarBundle:Bar:feedTips.html.twig', array(
             'bar'       => $bar,
-            'tips'      => $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset),
-            'excluded'  => $bar->getFsExcludedTips(),
+            'tips'      => $tips,
+            'excluded'  => $excluded,
             'offset'    => $offset,
-            'show'      => $show
+            'limit'     => $limit,
+            'wbbTips'   => $wbbtips,
+            'showwbb'   => $showwbb
         )
         );
     }

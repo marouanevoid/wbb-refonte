@@ -1,0 +1,37 @@
+{% set s=0 %}
+{% for t in tips %}
+    {% if s < limit-1 %}
+        {% set idx = offset+loop.index %}
+        <div class="three columns box wbbtips{{ offset }}" data-index="{{ idx }}">
+            <article class="tip">
+                <table class="content expert">
+                    <tr class="excerpt">
+                        <td colspan="2">
+                            <div class="scroll">
+                                {{ t.description }}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr class="s-margin-bottom"/>
+                        </td>
+                    </tr>
+                    <tr class="author">
+                        <td>
+                            <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                        </td>
+                        <td>
+                            <b>{{ t.user.getUserRole }}</b>
+                            {{ t.user.fullname }}
+                        </td>
+                    </tr>
+                </table>
+            </article>
+            <script type="text/javascript">
+                eval("$('.load-more').data('offset', {{ idx }});{% if tips|length<limit %}$('.load-more').attr('href','{{ path('wbb_bar_tips',{barID:bar.id}) }}');$('.load-more').data('offset', 0);$('.load-more').data('limit', {{ 9 - (idx % 4)|abs }});alert('');$('.load-more').trigger( 'click' );{% endif %}");
+            </script>
+        </div>
+        {% set s=s+1 %}
+    {% endif %}
+{% endfor %}

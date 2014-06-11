@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/html/style.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('bundles/wbbcore/css/wysihtml5/bootstrap-wysihtml5.css') }}" type="text/css" media="all" />
+    <style>
+        span.help-block.sonata-ba-field-help {
+            clear: both;
+            float: left;
+            position: relative;
+            top: -10px;
+            color: #BBB;
+            font-size: 12px;
+            width: 100%;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
@@ -87,6 +98,5 @@
                 </form>
             {% endif %}
         {% endblock %}
-
     </div>
 {% endblock %}

@@ -110,7 +110,7 @@
                                             $(".loader").css('display','none');
                                             $('.ui-slider').append(html);
                                             reste  = 4-$('.ui-slide .image').length%4;
-                                            lastImages = $('.ui-slide .image').slice(reste);
+                                            lastImages = $('.ui-slide .image').slice(0,reste);
                                             i=1;
                                             $.each(lastImages, function(key, element){
                                                 if(i<=reste){
@@ -140,10 +140,16 @@
                     console.log(e);
                 }
             });
-            {% if bar.tips|length < 3 %}
-                $('.load-more').data('show',{{ 4-(bar.tips|length) }});
-                $('.load-more').trigger( "click" );
-                $('.load-more').data('show', 9);
+            {% if bar.getTips(true)|length < 4 %}
+                    $('.load-more').data('limit',{{ 4-(bar.getTips(true)|length) }});
+                    $('.load-more').data('offset',0);
+                    $('.load-more').data('showwbb',0);
+                    $('.load-more').trigger( "click" );
+                    $('.load-more').data('limit', 9);
+            {% endif %}
+            {% if bar.getTips(true)|length>3 %}
+                $('.load-more').data('offset',0);
+                $('.load-more').data('limit', 12);
             {% endif %}
         });
         function initialise() {
@@ -280,11 +286,22 @@
                 </ul>
 
                     <p>
-                        {{ bar.getDescriptionIntro|raw|nl2br }}
-                        <a class="see-more">Read More</a>
-                        <span class="more">
-                            {{ bar.getDescriptionMore|raw|nl2br }}
-                        </span>
+                        {% if is_mobile() and not is_tablet() %}
+                            {{ bar.getDescriptionIntro(true)|raw|nl2br }}
+                            {% if bar.getDescriptionMore(true) %}<a class="see-more">Read More</a>
+                                <span class="more">
+                                {{ bar.getDescriptionMore(true)|raw|nl2br }}
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            {{ bar.getDescriptionIntro|raw|nl2br }}
+                            {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
+                                <span class="more">
+                                {{ bar.getDescriptionMore|raw|nl2br }}
+                                </span>
+                            {% endif %}
+                        {% endif %}
+
                     </p>
                 <!-- ALSO APPEARS -->
                 {% if not is_mobile() or is_tablet() %}
@@ -377,7 +394,7 @@
                                         {% endif %}
                                         <br />
                                     {% endfor%}
-                                    <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 30px;">(Show less)</a>
+                                    <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 20px;">(Show less)</a>
                                 </span>
                             {% endif %}
                             Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
@@ -410,7 +427,7 @@
                 Insider Tips
             </div>
             <div class="line"></div>
-            <div class="line">
+            <div class="line wbbtips">
 
                 {% if not is_mobile() or is_tablet() %}
                     <div class="three columns box"  id="tipsForm">
@@ -419,7 +436,7 @@
                                 <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                     <h3>Leave a tip</h3>
                                     {{ form_widget(tipForm.description) }}
-                                    <div class="m-margin-top h4 count">499 left</div>
+                                    <div class="m-margin-top h4 count">250 left</div>
                                     <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
                                     {{ form_rest(tipForm) }}
                                 </form>
@@ -428,7 +445,9 @@
                         </article>
                     </div>
                 {% endif %}
-                {% for tip in bar.tips|slice(0,3) %}
+            </div>
+            <div class="line first">
+                {% for tip in bar.getTips(true)|slice(0,3) %}
                     {% include "WBBBarBundle:Bar:tip.html.twig" with { 'tip': tip } %}
                 {% endfor %}
             </div>
@@ -438,7 +457,7 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}" data-show="8" data-offset="0">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-offset="0" data-limit="9" data-showwbb="1">Load More</a>
             </div>
 
                 <div class="three columns box">
@@ -446,8 +465,8 @@
                         <div class="content form">
                             <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                 <h3>Leave a tip</h3>
-                                <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..."></textarea>
-                                <div class="m-margin-top h4 count">499 left</div>
+                                <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..." maxlength="250"></textarea>
+                                <div class="m-margin-top h4 count">250 left</div>
                                 <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
                             </form>
                             <br class="clear"/>
@@ -458,7 +477,7 @@
             {% else %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{id:bar.id}) }}" data-show="9" data-offset="0">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-offset="0"  data-limit="9" data-showwbb="1">Load More</a>
             </div>
 
             {% endif %}
@@ -525,7 +544,7 @@
                                 {% endfor%}
                             </div>
                         </div>
-                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb:b.suburb,slug:b.slug}) }}" class="overlay-link"></a>
+                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
                         <div class="gradient"></div>
                         {% for m in b.medias|slice(0,1) %}
                             <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
@@ -578,7 +597,7 @@
         $('form#tips textarea').keydown(function()
         {
             var length = $(this).val().length;
-            $('form#tips .count').text( 499-length+' left' );
+            $('form#tips .count').text( 250-length+' left' );
         });
     </script>
 {% endblock %}

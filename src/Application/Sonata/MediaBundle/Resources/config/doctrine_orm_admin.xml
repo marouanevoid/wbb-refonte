@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.media.admin.media.class">Application\Sonata\MediaBundle\Controller\Admin\MediaAdmin</parameter>
+        <parameter key="sonata.media.admin.media.controller">ApplicationSonataMediaBundle:MediaAdmin</parameter>
+        <parameter key="sonata.media.admin.media.translation_domain">SonataMediaBundle</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.media.admin.media" class="%sonata.media.admin.media.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_media" label_catalogue="%sonata.media.admin.media.translation_domain%" label="media" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument />
+            <argument>%sonata.media.admin.media.entity%</argument>
+            <argument>%sonata.media.admin.media.controller%</argument>
+            <argument type="service" id="sonata.media.pool" />
+
+            <call method="setModelManager">
+                <argument type="service" id="sonata.media.admin.media.manager" />
+            </call>
+            <call method="setTranslationDomain">
+                <argument>%sonata.media.admin.media.translation_domain%</argument>
+            </call>
+        </service>
+    </services>
+</container>
