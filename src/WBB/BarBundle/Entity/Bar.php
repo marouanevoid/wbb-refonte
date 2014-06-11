@@ -29,7 +29,7 @@ class Bar
     const BAR_STATUS_DISABLED_TEXT = "Disabled";
 
     const MOBILE_DESCRIPTION_CHARS_LIMIT = 500;
-    const DESKTOP_DESCRIPTION_CHARS_LIMIT = 1000;
+    const DESKTOP_DESCRIPTION_CHARS_LIMIT = 5000;
 
     /**
      * @var integer
