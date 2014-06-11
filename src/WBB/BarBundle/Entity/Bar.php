@@ -448,8 +448,7 @@ class Bar
      */
     public function setWebsite($website)
     {
-        if ((strpos($website,'http://') !== false) or (strpos($website,'https://') !== false))
-        {
+        if ((strpos($website,'http://') !== false) or (strpos($website,'https://') !== false)) {
             $this->website = $website;
         }
         else
@@ -639,8 +638,7 @@ class Bar
      */
     public function setMenu($menu)
     {
-        if ((strpos($menu,'http://') !== false) or (strpos($menu,'https://') !== false))
-        {
+        if ((strpos($menu,'http://') !== false) or (strpos($menu,'https://') !== false)) {
             $this->menu = $menu;
         }
         else
@@ -692,8 +690,7 @@ class Bar
      */
     public function setReservation($reservation)
     {
-        if ((strpos($reservation,'http://') !== false) or (strpos($reservation,'https://') !== false))
-        {
+        if ((strpos($reservation,'http://') !== false) or (strpos($reservation,'https://') !== false)) {
             $this->reservation = $reservation;
         }
         else
@@ -1037,8 +1034,7 @@ class Bar
     
     public function removeFsExcludedTips($hash)
     {
-        if(($key = array_search($hash, $this->fsExcludedTips)) !== false)
-        {
+        if(($key = array_search($hash, $this->fsExcludedTips)) !== false) {
             unset($this->fsExcludedTips[$key]);
         }
     }
@@ -1076,8 +1072,7 @@ class Bar
     
     public function removeFsSelectedImgs($hash)
     {
-        if(($key = array_search($hash, $this->fsSelectedImgs)) !== false)
-        {
+        if(($key = array_search($hash, $this->fsSelectedImgs)) !== false) {
             unset($this->fsSelectedImgs[$key]);
         }
     }
@@ -1146,11 +1141,9 @@ class Bar
      */
     public function getTips($enabled = false)
     {
-        if($enabled)
-        {
+        if($enabled){
             $tips = array();
-            foreach($this->tips as $tip)
-            {
+            foreach($this->tips as $tip){
                 if($tip->getStatus() == 1)
                     $tips[] = $tip;
             }
@@ -1249,8 +1242,7 @@ class Bar
 
     public function removeInstagramExcludedImgs($hash)
     {
-        if(($key = array_search($hash, $this->instagramExcludedImgs)) !== false)
-        {
+        if(($key = array_search($hash, $this->instagramExcludedImgs)) !== false) {
             unset($this->instagramExcludedImgs[$key]);
         }
     }
@@ -1333,14 +1325,15 @@ class Bar
         $init = $fullArray[0];
         $delta = abs(strlen($init) - $limit);
         $more = "";
-        for ($i = 1 ; $i < count($fullArray) ; $i++)
-        {
+        $curNb = 0;
+        $curDelta = 0;
+        $i = 1;
+        for ($i = 1 ; $i < count($fullArray) ; $i++) {
             $cur = $fullArray[$i];
             $curNb = strlen($cur);
             $curDelta = abs((strlen($init) + $curNb) - $limit);
 
-            if ($curDelta < $delta)
-            {
+            if ($curDelta < $delta) {
                 $init .= "<br>".$cur;
                 $delta = $curDelta;
             } else {
@@ -1351,9 +1344,9 @@ class Bar
         }
 
         if($getMore)
-            return $more;
+            return "more slice = ".$i." //  ".$more;
         else
-            return $init;
+            return "last size = ".$curNb." / last delta = ".$curDelta." / i = ".$i." sur ".count($fullArray)." // ".$init;
     }
 
     public function getDescriptionIntro($mobile = false)
