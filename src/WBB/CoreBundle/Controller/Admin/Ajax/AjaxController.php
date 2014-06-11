@@ -41,12 +41,12 @@ class AjaxController extends Controller
 //
 //        $suburbs = $city->getSuburbs();
 //
-//        $response = array();
+//        $response = array("more" => false);
 //
 //        foreach($suburbs as $suburb){
 //            $response[] = array('id' => $suburb->getId(), 'text' => '"'.$suburb->getName().'"');
 //        }
 //
-//        return new JsonResponse($response);
+//        return new JsonResponse( array("results" => $response));
 //    }
 }

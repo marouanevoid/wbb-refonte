@@ -49,17 +49,17 @@
 
             <trans-unit id="form.label_user">
                 <source>form.label_user</source>
-                <target>Link to owner / Add owner</target>
+                <target>Select the bar owner of your choice</target>
             </trans-unit>
 
             <trans-unit id="form.label_suburb">
                 <source>form.label_suburb</source>
-                <target>Suburb</target>
+                <target>Area</target>
             </trans-unit>
 
             <trans-unit id="form.label_foursquare">
                 <source>form.label_foursquare</source>
-                <target>Foursquare</target>
+                <target>Foursquare ID</target>
             </trans-unit>
 
             <trans-unit id="form.label_tags">
@@ -99,7 +99,7 @@
 
             <trans-unit id="form.label_phone">
                 <source>form.label_phone</source>
-                <target>Phone</target>
+                <target>Phone number</target>
             </trans-unit>
 
             <trans-unit id="form.label_email">
@@ -114,17 +114,17 @@
 
             <trans-unit id="form.label_twitter">
                 <source>form.label_twitter</source>
-                <target>Twitter</target>
+                <target>Twitter pseudo</target>
             </trans-unit>
 
             <trans-unit id="form.label_facebook">
                 <source>form.label_facebook</source>
-                <target>Facebook</target>
+                <target>Facebook pseudo</target>
             </trans-unit>
 
             <trans-unit id="form.label_instagram">
                 <source>form.label_instagram</source>
-                <target>Instagram</target>
+                <target>Instagram pseudo</target>
             </trans-unit>
 
             <trans-unit id="form.label_is_credit_card">
@@ -154,7 +154,7 @@
 
             <trans-unit id="form.label_menu">
                 <source>form.label_menu</source>
-                <target>Menu</target>
+                <target>Menu link</target>
             </trans-unit>
 
             <trans-unit id="form.label_reservation">
@@ -164,7 +164,7 @@
 
             <trans-unit id="form.label_description">
                 <source>form.label_description</source>
-                <target>Description</target>
+                <target>Bar Description</target>
             </trans-unit>
 
             <trans-unit id="form.label_seo_description">
