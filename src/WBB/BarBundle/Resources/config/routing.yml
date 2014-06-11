@@ -13,12 +13,13 @@ city_homepage:
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
 
 wbb_bar_tips:
-    pattern: /bar/{barID}/tips/{offset}/{limit}
+    pattern: /bar/{barID}/tips/{offset}/{limit}/{showwbb}
     requirements:
           id: \d+
           offset: \d+
           limit: \d+
-    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0, limit: 8 }
+          showwbb : \d+
+    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0 , limit: 8 , showwbb: 1 }
 
 wbb_bar_details:
     pattern: /bar/{city}/{suburb}/{slug}

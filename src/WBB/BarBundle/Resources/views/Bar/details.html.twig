@@ -110,7 +110,7 @@
                                             $(".loader").css('display','none');
                                             $('.ui-slider').append(html);
                                             reste  = 4-$('.ui-slide .image').length%4;
-                                            lastImages = $('.ui-slide .image').slice(reste);
+                                            lastImages = $('.ui-slide .image').slice(0,reste);
                                             i=1;
                                             $.each(lastImages, function(key, element){
                                                 if(i<=reste){
@@ -140,11 +140,16 @@
                     console.log(e);
                 }
             });
-            {% if bar.tips|length < 3 %}
+            {% if bar.tips|length < 4 %}
                     $('.load-more').data('limit',{{ 4-(bar.tips|length) }});
+                    $('.load-more').data('offset',0);
+                    $('.load-more').data('showwbb',0);
                     $('.load-more').trigger( "click" );
-                    alert('lancé');
                     $('.load-more').data('limit', 9);
+            {% endif %}
+            {% if bar.tips|length>3 %}
+                $('.load-more').data('offset',0);
+                $('.load-more').data('limit', 12);
             {% endif %}
         });
         function initialise() {
@@ -442,7 +447,7 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-limit="9" data-offset="0">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-offset="0" data-limit="9" data-showwbb="1">Load More</a>
             </div>
 
                 <div class="three columns box">
@@ -462,7 +467,7 @@
             {% else %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-limit="9" data-offset="0">Load More</a>
+                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-offset="0"  data-limit="9" data-showwbb="1">Load More</a>
             </div>
 
             {% endif %}

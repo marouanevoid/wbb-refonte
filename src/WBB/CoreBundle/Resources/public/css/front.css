@@ -4948,3 +4948,13 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
         background-image: url("../images/sprite@2x.png");
     }
 }
+.fb-like {
+    height: 20px;
+    overflow: hidden;
+}
+.fb_edge_comment_widget {
+    display: none !important;
+}
+.facebook_container {
+    position:absolute;
+}
