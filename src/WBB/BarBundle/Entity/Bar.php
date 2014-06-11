@@ -1325,6 +1325,9 @@ class Bar
         $init = $fullArray[0];
         $delta = abs(strlen($init) - $limit);
         $more = "";
+        $curNb = 0;
+        $curDelta = 0;
+        $i = 1;
         for ($i = 1 ; $i < count($fullArray) ; $i++) {
             $cur = $fullArray[$i];
             $curNb = strlen($cur);
@@ -1341,9 +1344,9 @@ class Bar
         }
 
         if($getMore)
-            return $more;
+            return "more slice = ".$i." //  ".$more;
         else
-            return $init;
+            return "last size = ".$curNb." / last delta = ".$curDelta." / i = ".$i." sur ".count($fullArray)." // ".$init;
     }
 
     public function getDescriptionIntro($mobile = false)
