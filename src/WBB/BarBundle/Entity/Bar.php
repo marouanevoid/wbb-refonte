@@ -29,7 +29,7 @@ class Bar
     const BAR_STATUS_DISABLED_TEXT = "Disabled";
 
     const MOBILE_DESCRIPTION_CHARS_LIMIT = 500;
-    const DESKTOP_DESCRIPTION_CHARS_LIMIT = 5000;
+    const DESKTOP_DESCRIPTION_CHARS_LIMIT = 1000;
 
     /**
      * @var integer
@@ -1331,9 +1331,9 @@ class Bar
         for ($i = 1 ; $i < count($fullArray) ; $i++) {
             $cur = $fullArray[$i];
             $curNb = strlen($cur);
-            $curDelta = abs((strlen($init) + $curNb) - $limit);
-
-            if ($curDelta < $delta) {
+            $curSize = strlen($init) + $curNb;
+            $curDelta = abs($curSize - $limit);
+            if ($curDelta < $delta+1) {
                 $init .= "<br>".$cur;
                 $delta = $curDelta;
             } else {
@@ -1344,9 +1344,9 @@ class Bar
         }
 
         if($getMore)
-            return "more slice = ".$i." //  ".$more;
+            return $more;
         else
-            return "last size = ".$curNb." / last delta = ".$curDelta." / i = ".$i." sur ".count($fullArray)." // ".$init;
+            return $init;
     }
 
     public function getDescriptionIntro($mobile = false)
