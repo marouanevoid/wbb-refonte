@@ -159,7 +159,6 @@ class BarAdmin extends Admin
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper
                 ->add('description', 'textarea', array('required' => false,'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
-//                ->add('readMore', 'textarea', array('required' => false, 'attr' => array('help' => 'Bar Description (Mandatory)', 'class'=>'wysihtml5')))
             ;
         }
 

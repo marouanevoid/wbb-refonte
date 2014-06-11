@@ -144,10 +144,11 @@ file that was distributed with this source code.
                 function(){
                     var suburb = $("#{{ admin.uniqId }}_suburb");
                     var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
+                    var suburbId = $("#{{ admin.uniqId }}_suburb option:selected").val();
                     suburb.enable(false);
                     $.ajax({
                         type: "POST",
-                        url:  Routing.generate('get_suburbs_from_city', {'bar': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'cityId': cityId }),
+                        url:  Routing.generate('get_suburbs_from_city', {'bar': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'cityId': cityId, 'suburbId': suburbId }),
                         dataType: 'json',
                         success: function(r) {
                             suburb.empty();

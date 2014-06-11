@@ -286,12 +286,22 @@
                 </ul>
 
                     <p>
-                        {{ bar.getDescriptionIntro|raw|nl2br }}
-                        {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
-                        <span class="more">
-                            {{ bar.getDescriptionMore|raw|nl2br }}
-                        </span>
+                        {% if is_mobile() and not is_tablet() %}
+                            {{ bar.getDescriptionIntro(true)|raw|nl2br }}
+                            {% if bar.getDescriptionMore(true) %}<a class="see-more">Read More</a>
+                                <span class="more">
+                                {{ bar.getDescriptionMore(true)|raw|nl2br }}
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            {{ bar.getDescriptionIntro|raw|nl2br }}
+                            {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
+                                <span class="more">
+                                {{ bar.getDescriptionMore|raw|nl2br }}
+                                </span>
+                            {% endif %}
                         {% endif %}
+
                     </p>
                 <!-- ALSO APPEARS -->
                 {% if not is_mobile() or is_tablet() %}

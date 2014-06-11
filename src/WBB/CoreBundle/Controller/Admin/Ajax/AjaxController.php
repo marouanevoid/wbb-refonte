@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AjaxController extends Controller
 {
-    public function getSuburbsFromCityAction($bar, $cityId)
+    public function getSuburbsFromCityAction($bar, $cityId, $suburbId)
     {
         $html = "";
         $bar = null;
@@ -20,10 +20,18 @@ class AjaxController extends Controller
         $suburbs = $city->getSuburbs();
 
         foreach($suburbs as $suburb){
-            if($bar and $bar->getSuburb() and $bar->getSuburb()->getId() == $suburb->getId())
-                $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
-            else
-                $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
+            if($suburbId > 0)
+            {
+                if($suburbId == $suburb->getId())
+                    $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
+                else
+                    $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
+            }else{
+                if($bar and $bar->getSuburb() and $bar->getSuburb()->getId() == $suburb->getId())
+                    $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
+                else
+                    $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
+            }
         }
 
         return new JsonResponse($html);
