@@ -46,8 +46,9 @@
                             eval("$('.load-more').data('offset', {{ idx }});");
                         </script>
                         {% if wbbTips|length<limit-1 and loop.last %}
+                            {% set r = 9-(wbbTips|length) %}
                             <script type="text/javascript">
-                                eval("$('.load-more').data('offset','0'); $('.load-more').data('showwbb','0'); $('.load-more').data('limit','9'); $('.load-more').trigger( 'click' );");
+                                eval("$('.load-more').data('limit','{{ r }}'); $('.load-more').data('offset','0'); $('.load-more').data('showwbb','0'); /*new meta.LoadMore({$button:$('.load-more')});*/ setTimeout(function(){$('.load-more').trigger('click'); $('.load-more').data('limit','9');}, 10);");
                             </script>
                         {% endif %}
                     </div>
