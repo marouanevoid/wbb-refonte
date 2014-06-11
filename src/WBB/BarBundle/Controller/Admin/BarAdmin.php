@@ -102,7 +102,7 @@ class BarAdmin extends Admin
             ->with('General')
                 ->add('user', null, array('help' => 'Optional'))
                 ->add('name', null, array('label'=>'Name of the bar', 'help' => 'Mandatory'))
-                ->add('city', null, array('help' => 'Mandatory','required' => true))
+                ->add('city', null, array('help' => 'Mandatory', 'required' => true))
                 ->add('suburb', null, array('help' => 'Mandatory', 'required' => true))
                 ->add('onTop')
                 ->add('status', 'choice', array(
@@ -125,7 +125,7 @@ class BarAdmin extends Admin
                         ->add('address', null, array('help' => 'Mandatory'))
                         ->add('phone', null, array('help' => 'Mandatory'))
                         ->add('email')
-                        ->add('website')
+                        ->add('website', null, array('help' => 'Example : http://www.url.com'))
                         ->add('foursquare', null, array('help' => 'Example : 4bfd2db02b83b71365a7a998'))
                         ->add('twitter', null, array('help' => 'Example : buddhabargroup'))
                         ->add('facebook', null, array('help' => 'Example : buddhabarofficial'))
