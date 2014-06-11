@@ -49,7 +49,7 @@
 
             <trans-unit id="form.label_country">
                 <source>form.label_country</source>
-                <target>Country</target>
+                <target>Country *</target>
             </trans-unit>
 
             <trans-unit id="list.label_seo_description">
@@ -84,12 +84,12 @@
 
             <trans-unit id="form.label_file">
                 <source>form.label_file</source>
-                <target>Image</target>
+                <target>Main visual</target>
             </trans-unit>
 
             <trans-unit id="form.label_suburbs">
                 <source>form.label_suburbs</source>
-                <target>Suburbs</target>
+                <target>Area(s) *</target>
             </trans-unit>
 
             <trans-unit id="form.label_bestofs">
@@ -99,7 +99,7 @@
 
             <trans-unit id="form.label_city">
                 <source>form.label_city</source>
-                <target>City</target>
+                <target>Name of the City *</target>
             </trans-unit>
 
             <trans-unit id="form.label_tags">
