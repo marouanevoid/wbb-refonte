@@ -102,8 +102,8 @@ class BarAdmin extends Admin
             ->with('General')
                 ->add('user', null, array('help' => 'Optional'))
                 ->add('name', null, array('label'=>'Name of the bar', 'help' => 'Mandatory'))
-                ->add('city', 'sonata_type_model', array('help' => 'Mandatory','required' => true))
-                ->add('suburb', 'sonata_type_model', array('help' => 'Mandatory', 'required' => true))
+                ->add('city', null, array('help' => 'Mandatory','required' => true))
+                ->add('suburb', null, array('help' => 'Mandatory', 'required' => true))
                 ->add('onTop')
                 ->add('status', 'choice', array(
                     'required' => false,
