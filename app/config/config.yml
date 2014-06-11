@@ -27,7 +27,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - 'StnwDatePickerBundle:Form:fields.html.twig'    
+            - 'StnwDatePickerBundle:Form:fields.html.twig'
+    globals:
+        feedsLimit: %feeds_limit%
 
 # Assetic Configuration
 assetic:
