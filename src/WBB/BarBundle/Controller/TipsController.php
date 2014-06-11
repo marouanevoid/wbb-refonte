@@ -60,11 +60,13 @@ class TipsController extends Controller
         $bar    = $this->container->get('bar.repository')->findOneById($barID);
         $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit);
 
-        $serializer = $this->container->get('jms_serializer');
 
-        $response = new Response($serializer->serialize($tips,'json'));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return $this->render('WBBBarBundle:Bar:wbbTips.html.twig', array(
+                'bar'       => $bar,
+                'tips'      => $tips,
+                'offset'    => $offset,
+                'limit'      => $limit
+            )
+        );
     }
 }

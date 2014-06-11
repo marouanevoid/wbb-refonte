@@ -1,31 +1,72 @@
 {% set s=0 %}
-{% if wbbTips==0 and bar.tips|length==0 %}
-<script type="text/javascript">
-    eval("$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');$('.load-more').css('display','none');");
-</script>
+{% set idx = offset %}
+{% if offset==0 and wbbTips|length==0 and bar.tips|length==0 %}
+    <script type="text/javascript">
+        eval("$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');$('.load-more').css('display','none');");
+    </script>
+{% elseif offset!=0 and wbbTips|length==0 and bar.tips|length==0 %}
+    <script type="text/javascript">
+        eval("$('.load-more').css('display','none');");
+    </script>
 {% else %}
-{% for t in tips.data %}
-	{% if t.id not in excluded and s < show-1 %}
-    {% set idx = offset+loop.index %}
-	<div class="three columns box fstip" data-index="{{ idx }}">
-	    <article class="tip">
-	        <table class="content">
+    {% if wbbTips|length>0 %}
+        {% set s=0 %}
+        {% for t in wbbTips %}
+            {% if s < limit-1 %}
+                {% set idx = idx+loop.index %}
+                <div class="three columns box wbbtips{{ offset }}" data-index="{{ idx }}">
+                    <article class="tip">
+                        <table class="content expert">
+                            <tr class="excerpt">
+                                <td colspan="2">
+                                    <div class="scroll">
+                                        {{ t.description }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <hr class="s-margin-bottom"/>
+                                </td>
+                            </tr>
+                            <tr class="author">
+                                <td>
+                                    <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                                </td>
+                                <td>
+                                    <b>{{ t.user.getUserRole }}</b>
+                                    {{ t.user.fullname }}
+                                </td>
+                            </tr>
+                        </table>
+                    </article>
+                </div>
+                {% set s=s+1 %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% for t in tips.data %}
+        {% if t.id not in excluded and s < limit-1 %}
+        {% set idx = idx+loop.index %}
+        <div class="three columns box fstip" data-index="{{ idx }}">
+            <article class="tip">
+                <table class="content">
 
-	            <tr class="excerpt">
-	                <td colspan="2">
-	                    <div class="scroll">
-	                        <img src="/bundles/wbbcore/images/icons/pin.foursquare-blue.png" alt="icon.foursquare" width="30" height="30"/><br/>
-	                        “{{ t.text}}”
-	                    </div>
-	                </td>
-	            </tr>
-	        </table>
-	    </article>
-        <script type="text/javascript">
-            eval("$('.load-more').data('offset', {{ idx }});{% if tips.data|length<show %}$('.load-more').css('display','none');{% endif %}");
-        </script>
-	</div>
-        {% set s=s+1 %}
-	{% endif %}
-{% endfor %}
+                    <tr class="excerpt">
+                        <td colspan="2">
+                            <div class="scroll">
+                                <img src="/bundles/wbbcore/images/icons/pin.foursquare-blue.png" alt="icon.foursquare" width="30" height="30"/><br/>
+                                “{{ t.text}}”
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </article>
+            <script type="text/javascript">
+                eval("$('.load-more').data('offset', {{ idx }});{% if tips.data|length<limit %}$('.load-more').css('display','none');{% endif %}");
+            </script>
+        </div>
+            {% set s=s+1 %}
+        {% endif %}
+    {% endfor %}
 {% endif %}

@@ -53,11 +53,10 @@ meta.LoadMore = function(config) {
 
             var $button     = $(this);
             var $target     = that.context.$container.find('.load-target');
-            var show        = $button.data('show');
+            var limit        = $button.data('limit');
             var offset      = $button.data('offset');
             var url         = $button.attr('href');
-            url += '/'+offset+'/'+show;
-            alert(url);
+            url += '/'+offset+'/'+limit;
 
             $button.data('text', $button.text());
             $button.addClass('loading').text(TRAD.loading);

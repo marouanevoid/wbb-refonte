@@ -108,19 +108,19 @@ class FSAdminController extends Controller
         return new JsonResponse(array('objects' => $objects));
     }
 
-    public function tipsAction($id, $offset, $show)
+    public function tipsAction($barID, $offset, $limit)
     {
-        $bar = $this->container->get('bar.repository')->findOneById($id);
+        $bar        = $this->container->get('bar.repository')->findOneById($barID);
 
         if(is_null($bar->getFoursquare()) or $bar->getFoursquare()=="")
         {
-            $wbbTips = 0;
+            $wbbtips = Array();
             $tips = "";
             $excluded = "";
         }
         else
         {
-            $wbbTips = 1;
+            $wbbtips = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit);
             $tips = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $offset);
             $excluded = $bar->getFsExcludedTips();
         }
@@ -130,8 +130,8 @@ class FSAdminController extends Controller
             'tips'      => $tips,
             'excluded'  => $excluded,
             'offset'    => $offset,
-            'show'      => $show,
-            'wbbTips'   => $wbbTips
+            'limit'     => $limit,
+            'wbbTips'   => $wbbtips
         )
         );
     }

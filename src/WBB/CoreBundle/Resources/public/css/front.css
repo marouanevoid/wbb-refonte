@@ -2500,6 +2500,7 @@ section.bar-finder table tr:nth-child(2) td:nth-child(8) {
 /* line 32, ../sass/components/_ui-slider.scss */
 .ui-slider.type-bar-detail .image {
     width: 50%;
+    height: 50%;
     float: left;
     border-left: 1px solid #fff;
     border-bottom: 1px solid #fff;
@@ -3935,6 +3936,7 @@ html.mobile article.city:hover img.scale-with-grid {
 .bar-details .content .trends li {
     display: inline-block;
     margin-left: 0.7em;
+    line-height: 26px;
 }
 /* line 26, ../sass/pages/_bar-details.scss */
 .bar-details .content .trends li:after {
@@ -4317,6 +4319,10 @@ body.cities .cities-content .selector .scroll-bars li:first-child {
     border-top: 0;
 }
 @media only screen and (max-width: 768px) {
+    .bar-details .gallery .ui-slider .ui-slide .image {
+        width: 33.33%;
+        height: auto;
+    }
     /* line 46, ../sass/pages/_cities.scss */
     body.cities .cities-content {
         min-height: inherit;
