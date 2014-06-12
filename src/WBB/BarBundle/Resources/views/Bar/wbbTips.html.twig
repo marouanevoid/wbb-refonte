@@ -29,7 +29,7 @@
                 </table>
             </article>
             <script type="text/javascript">
-                eval("$('.load-more').data('offset', {{ idx }});{% if tips|length<limit %}$('.load-more').attr('href','{{ path('wbb_bar_tips',{barID:bar.id}) }}');$('.load-more').data('offset', 0);$('.load-more').data('limit', {{ 9 - (idx % 4)|abs }});alert('');$('.load-more').trigger( 'click' );{% endif %}");
+                eval("$('.load-more').data('offset', {{ idx }});{% if tips|length<limit %}$('.load-more').attr('href','{{ path('wbb_bar_tips',{barID:bar.id}) }}');$('.load-more').data('offset', 0);$('.load-more').data('limit', {{ 9 - (idx % 4)|abs }});$('.load-more').trigger( 'click' );{% endif %}");
             </script>
         </div>
         {% set s=s+1 %}

@@ -78,7 +78,7 @@
                     </table>
                 </article>
                 <script type="text/javascript">
-                    eval("$('.load-more').data('showwbb', 0);$('.load-more').data('offset', {{ idx }});{% if tips.data|length<=limit %}$('.load-more').css('display','none');alert('');if($('.fstip')<=0 && $('.wbbtip')<=0){$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');$('.load-more').css('display','none');}{% endif %}");
+                    eval("$('.load-more').data('showwbb', 0);$('.load-more').data('offset', {{ idx }});{% if tips.data|length<=limit %}$('.load-more').css('display','none');if($('.fstip')<=0 && $('.wbbtip')<=0){$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');$('.load-more').css('display','none');}{% endif %}");
                 </script>
             </div>
                 {% set s=s+1 %}
