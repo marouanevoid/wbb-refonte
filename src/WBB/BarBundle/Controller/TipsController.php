@@ -24,7 +24,7 @@ class TipsController extends Controller
     public function addAction(Request $request)
     {
 //        $idUser = $this->getUser()->getId();
-        $user = $this->container->get('user.repository')->findOneById(1);
+        $user = $this->container->get('user.repository')->findOneById(5);
 
         $tip = new Tip();
         $tip
