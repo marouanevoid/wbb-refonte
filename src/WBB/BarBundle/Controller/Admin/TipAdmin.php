@@ -18,7 +18,9 @@ class TipAdmin extends Admin {
             ->addIdentifier('id')
             ->add('user', null, array('editable' => true))
             ->add('description', null, array('editable' => true))
-            ->add('status', null, array('editable' => true))
+            ->add('status', null, array(
+                'template' => 'WBBBarBundle:Admin:Tip\status_field.html.twig'
+            ))
         ;
     }
 
@@ -63,9 +65,9 @@ class TipAdmin extends Admin {
                 ->add('status', 'choice', array(
                     'required' => false,
                     'choices'  => array(
-                        0 => 'pending',
-                        1 => 'enabled',
-                        2 => 'disabled'
+                        0 => 'Pending',
+                        1 => 'Enabled',
+                        2 => 'Disabled'
                     )
                 ))
                 ->add('description')
