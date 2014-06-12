@@ -32,6 +32,7 @@ class BarMediaAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('media', 'sonata_type_model_list', array(
+                    'btn_list' => false,
                     'required' => false
                 ), array(
                     'link_parameters' => array(
