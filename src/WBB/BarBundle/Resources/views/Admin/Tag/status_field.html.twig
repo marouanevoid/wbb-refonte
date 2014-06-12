@@ -1,0 +1,13 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% if object.status == 1 %}
+            <strong>Chillout</strong>
+        {% elseif object.status == 2 %}
+            <strong>Casual</strong>
+        {% elseif object.status == 3 %}
+            <strong>Party</strong>
+        {% endif %}
+    </div>
+{% endblock %}
