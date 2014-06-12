@@ -2,11 +2,11 @@
 
 {% block field %}
     <div>
-        {% if object.status == 1 %}
+        {% if object.energyLevel == 1 %}
             <strong>Chillout</strong>
-        {% elseif object.status == 2 %}
+        {% elseif object.energyLevel == 2 %}
             <strong>Casual</strong>
-        {% elseif object.status == 3 %}
+        {% elseif object.energyLevel == 3 %}
             <strong>Party</strong>
         {% endif %}
     </div>
