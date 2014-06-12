@@ -83,6 +83,8 @@ meta.Form = function(config){
             if(data.code == 200)
             {
                 if( that.config.onComplete ) that.config.onComplete( that.form, data );
+                $('.line.first').prepend(data.tip);
+                $('.line.first .three:last-child').remove();
             }
             else
             {
