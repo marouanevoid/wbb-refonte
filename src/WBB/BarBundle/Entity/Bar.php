@@ -1252,7 +1252,8 @@ class Bar
         $tags = array();
         foreach($this->getTags() as $tag)
         {
-            $tags[] = $tag->getTag()->getId();
+            if($tag->getTag())
+                $tags[] = $tag->getTag()->getId();
         }
 
         if(sizeof($tags)>0)
