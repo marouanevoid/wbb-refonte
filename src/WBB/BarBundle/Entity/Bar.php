@@ -1333,7 +1333,7 @@ class Bar
             $curNb = strlen($cur);
             $curSize = strlen($init) + $curNb;
             $curDelta = abs($curSize - $limit);
-            if ($curDelta < $delta+1) {
+            if ($curDelta < $delta+3) {
                 $init .= "<br>".$cur;
                 $delta = $curDelta;
             } else {
