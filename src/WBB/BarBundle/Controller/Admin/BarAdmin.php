@@ -35,7 +35,7 @@ class BarAdmin extends Admin
                 'field'   => 'name',
                 'label'    => 'Actions',
                 'actions' => array(
-                    'view'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
+                    'show'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
                     'edit'   => array(),
                     'delete' => array(),
                 )
