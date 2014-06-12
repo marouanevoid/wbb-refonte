@@ -9,10 +9,12 @@ class AjaxController extends Controller
 {
     public function getSuburbsFromCityAction($bar, $cityId, $suburbId)
     {
+
+
         $html = "";
-        $bar = null;
+        $barObject = null;
         if($bar > 0){
-            $bar = $this->getDoctrine()->getRepository('WBBBarBundle:Bar')->find($bar);
+            $barObject = $this->getDoctrine()->getRepository('WBBBarBundle:Bar')->find($bar);
         }
 
         $city = $this->getDoctrine()->getRepository('WBBCoreBundle:City')->find($cityId);
@@ -27,7 +29,7 @@ class AjaxController extends Controller
                 else
                     $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
             }else{
-                if($bar and $bar->getSuburb() and $bar->getSuburb()->getId() == $suburb->getId())
+                if($barObject and $barObject->getSuburb() and $barObject->getSuburb()->getId() == $suburb->getId())
                     $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
                 else
                     $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
