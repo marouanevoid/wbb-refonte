@@ -12,7 +12,7 @@ services:
     wbb.user.admin.user:
         class: %wbb_user.user.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_user_hidden, label: users, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_user, label: users, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_user.user.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setUserManager, ["@fos_user.user_manager"]]
