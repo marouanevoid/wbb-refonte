@@ -144,6 +144,19 @@ meta.Map = function(config){
     /**
      *
      */
+    that.getMarker = function( id ) {
+
+        return that.config.$map.gmap3({
+            get: {
+                id: id
+            }
+        });
+    };
+
+
+    /**
+     *
+     */
     that.addMarkers = function( markers, fit ){
 
         that.config.$map.gmap3({
@@ -160,6 +173,12 @@ meta.Map = function(config){
                 },
                 events:{
                     mouseover: function(marker, event, context){
+
+                        if( typeof(context.id) != 'undefined')
+                            $('#'+context.id ).addClass('active');
+
+                        if( typeof(context.data) == 'undefined') return;
+
                         that.config.$map.gmap3({
                             overlay:{
                                 latLng: marker.getPosition(),
@@ -173,7 +192,10 @@ meta.Map = function(config){
                             }
                         });
                     },
-                    mouseout: function(){
+                    mouseout: function(marker, event, context){
+
+                        if( typeof(context.id) != 'undefined')
+                            $('#'+context.id ).removeClass('active');
 
                         that.config.$map.gmap3({
                             clear: {
@@ -184,8 +206,8 @@ meta.Map = function(config){
                     },
                     click: function(marker, event, context){
 
-                        document.location.href = context.tag;
-
+                        if( typeof(context.id) != 'undefined')
+                            $('#'+context.id ).click();
                     }
                 },
                 cluster:{

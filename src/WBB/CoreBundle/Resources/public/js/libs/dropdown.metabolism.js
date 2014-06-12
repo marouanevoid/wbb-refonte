@@ -79,9 +79,8 @@ meta.Dropdown = function(config){
                 if( !$dropdown.hasClass("dropdown-open") ){
 
                     that.currentScroll = $(window).scrollTop();
-
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
-                    $dropdown.css({width:$dropdown.width()});
+
                     $dropdown.addClass('dropdown-open').find('.slide').velocity('slideDown', {speed:that.config.speed, easing:that.config.easing, complete: function()
                     {
                         that.active = true;
@@ -147,7 +146,7 @@ meta.Dropdown = function(config){
         $options.each(function()
         {
             if( !$(this).attr('disabled') )
-                html += "<li>"+$(this).text()+"</li>"
+                html += "<li class='"+$(this).val()+"'>"+$(this).text()+"</li>"
         });
 
         html = that.config.template.replace('%options%', html);
@@ -162,6 +161,11 @@ meta.Dropdown = function(config){
 
         that.config.$dropdown_replacement.append(that.config.$dropdown);
 
+        if( !$('html').hasClass('mobile') )
+        {
+            var drop_width = that.config.$dropdown_replacement.width()+60;
+            that.config.$dropdown_replacement.css({width:Math.max(200, drop_width)});
+        }
     };
 
 

@@ -32,7 +32,9 @@ meta.Cities = function() {
         container : '.cities-content'
     };
 
-    that.context = {};
+    that.context = {
+        filter_is_open: false
+    };
 
 
     /**
@@ -59,8 +61,8 @@ meta.Cities = function() {
 
         $.each(bars, function(index, bar)
         {
-            if( display_list ) html += '<li><a href="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></a></li>';
-            markers.push({address:bar.address, data:'<b>'+bar.name+'</b>'+bar.address, options:{icon:'images/markers/'+(index+1)+'.png'}, tag:bar.url});
+            if( display_list ) html += '<li id="'+bar.id+'" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
+            markers.push({address:bar.address, data:'<b>'+bar.name+'</b>'+bar.address, options:{icon:'images/markers/'+(index+1)+'.png'}, id:bar.id});
         });
 
         if( display_list )
@@ -79,13 +81,39 @@ meta.Cities = function() {
     /**
      *
      */
+    that._showCities = function( cities, display_list, fit )
+    {
+        var html = "";
+        var markers = [];
+
+        $.each(cities, function(index, city)
+        {
+            if( display_list ) html += '<li id="'+city.id+'">'+city.name+'</li>';
+            markers.push({address:city.name, options:{icon:'images/map.pin.png'}, id:city.id});
+        });
+
+        if( display_list )
+        {
+            var $scrollCities = that.context.$container.find('.scroll-cities');
+            $scrollCities.find('ul').html(html);
+        }
+
+        that.context.map.addMarkers(markers, false);
+
+        if( fit ) that.context.map.reset();
+    };
+
+
+    /**
+     *
+     */
     that._hideBars = function()
     {
         var $scrollBars = that.context.$container.find('.scroll-bars');
         $scrollBars.find('ul').empty();
         $scrollBars.hide();
 
-        that._showAllBars();
+        that._showAllCities(true);
 
         that.context.map.reset();
 
@@ -154,6 +182,19 @@ meta.Cities = function() {
     /**
      *
      */
+    that._requestCities = function( callback )
+    {
+        $.get('tmp/data/cities.php', function( data )
+        {
+            if(data.code == 200 && callback)
+                callback(data.cities);
+        });
+    };
+
+
+    /**
+     *
+     */
     that._setupEvents = function()
     {
         var $scroll     = that.context.$container.find('.scroll');
@@ -161,23 +202,38 @@ meta.Cities = function() {
         var $head       = that.context.$container.find('.heading');
         var $selector   = that.context.$container.find('.selector');
 
-
-        $(window).resize(function()
-        {
-            $scroll.height( $selector.height()-$head.height()-25 );
-        });
-
-
-        that.context.$container.find('.scroll-cities').find('li').click(function()
+        that.context.$container.find('.scroll-cities').on('click', 'li', function()
         {
             that.context.$container.find('form input[name=city]').val( $(this).text() );
             that.context.$container.find('form').submit();
         });
 
 
+        that.context.$container.find('.scroll-bars').on('click', 'li', function()
+        {
+            document.location.href = $(this).data('link');
+        });
+
+
+        that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
+        {
+            var marker = that.context.map.getMarker( $(this).attr('id') );
+            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(google.maps.Animation.BOUNCE)
+        });
+
+
+        that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseleave', 'li', function()
+        {
+            var marker = that.context.map.getMarker( $(this).attr('id') );
+            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(null)
+        });
+
+
         that.context.$container.find('form').submit(function(e)
         {
             e.preventDefault();
+
+            $(this).find('input[name=city]').prop('disabled', true);
 
             var city_id = $(this).find('input[name=city]').val();
             var neighborhood_id = $(this).find('select[name=neighborhood]').val();
@@ -188,8 +244,10 @@ meta.Cities = function() {
             that._searchBars( city_id, neighborhood_id );
         });
 
+
         that.context.$container.find('form input[type=reset]').click(function(e)
         {
+            that.context.$container.find('form input[name=city]').prop('disabled', false);
             that.context.$container.find('form input[type=submit]').show();
             that.context.$container.find('form input[type=reset]').hide();
 
@@ -199,6 +257,7 @@ meta.Cities = function() {
 
             $(window).resize();
         });
+
 
         $zoom.find('a').click(function()
         {
@@ -213,17 +272,52 @@ meta.Cities = function() {
         });
 
 
+        if( !$('html').hasClass('mobile') )
+        {
+            $selector.click(function()
+            {
+                if( !that.context.filter_is_open )
+                {
+                    that.context.filter_is_open = true;
+
+                    $selector.height($selector.height());
+                    that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
+                    that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+
+                    $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
+
+                    setTimeout(function()
+                    {
+                        that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
+
+                    }, 300);
+                }
+            });
+        }
+
+
+        $(window).resize(function()
+        {
+            $scroll.height( $selector.height()-$head.height()-25 );
+
+            if( that.context.filter_is_open )
+            {
+                that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+                $selector.height(that.context.$container.height()*0.8-70);
+            }
+        });
+
     };
 
 
     /**
      *
      */
-    that._showAllBars = function()
+    that._showAllCities = function( fit )
     {
-        that._requestBars(false, false, function(neighborhoods, bars)
+        that._requestCities(function(cities)
         {
-            that._showBars(bars, false, false);
+            that._showCities(cities, true, fit);
         });
     };
 
@@ -240,7 +334,7 @@ meta.Cities = function() {
         that.context.$container = $(that.config.container);
 
         that._setupEvents();
-        that._showAllBars();
+        that._showAllCities(false);
     };
 
     that.__construct();

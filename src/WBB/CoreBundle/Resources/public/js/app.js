@@ -61,14 +61,13 @@ meta.App = function() {
             {
                 $body.addClass('menu-open');
 
-                if( Modernizr.csstransforms3d )
-                    $to_scroll.css({transform: 'translate3d(245px,0,0)'});
-                else
-                    $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
-
-                $('html,body').delay(that.config.speed).animate({scrollTop:0}, that.config.speed, that.config.easing);
-
-
+                $('html,body').animate({scrollTop:0}, that.config.speed, that.config.easing, function()
+                {
+                    if( Modernizr.csstransforms3d )
+                        $to_scroll.css({transform: 'translate3d(245px,0,0)'});
+                    else
+                        $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
+                });
             }
         });
 
@@ -76,7 +75,6 @@ meta.App = function() {
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
             swipeRight:function(){ $('header.mobile .nav-icon a').click() },
-            tap:function(){ if( $(window).scrollTop() < 30 ) $('header.mobile .nav-icon a').click() },
             threshold:1
         });
 

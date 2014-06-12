@@ -22,4 +22,16 @@ class CityRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findCitiesWithBars()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias().", COUNT(b) AS HIDDEN nbBars")
+            ->innerJoin($this->getAlias().".bars", "b")
+            ->having('nbBars > 0')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 } 

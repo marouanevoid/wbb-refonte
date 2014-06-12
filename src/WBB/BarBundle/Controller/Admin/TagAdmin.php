@@ -44,7 +44,9 @@ class TagAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name', null, array('editable' => true))
-            ->add('energyLevel')
+            ->add('energyLevel', null, array(
+                'template' => 'WBBBarBundle:Admin:Tag\status_field.html.twig'
+            ))
             ->add('onTop', null, array('editable' => true));
     }
 

@@ -336,7 +336,7 @@ class Tag
 
     public static function getEnergyLevels()
     {
-        $result = array(0,1,2,3,4,5);
+        $result = array(1 => 'Chillout', 2 => "Casual", 3 => "Party");
 
         return $result;
     }

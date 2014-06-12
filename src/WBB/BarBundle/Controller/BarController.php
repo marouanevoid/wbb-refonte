@@ -35,6 +35,19 @@ class BarController extends Controller
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
 
+    public function barGuideAction()
+    {
+        $topCities = $this->container->get('city.repository')->findTopCities();
+        shuffle($topCities);
+        $response['topCities']  = $topCities;
+        $response['topBars']    = $this->container->get('bar.repository')->findBestBars();
+        $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
+        $response['topNews']    = $this->container->get('news.repository')->findLatestNews(null, 3);
+        $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars(null, 5);
+
+        return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
+    }
+
     /**
      * detailsAction
      *
