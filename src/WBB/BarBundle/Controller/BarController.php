@@ -60,7 +60,7 @@ class BarController extends Controller
     public function detailsAction($city, $suburb, $slug)
     {
         $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
-        $user = $this->container->get('user.repository')->findOneById(5);
+        $user = $this->container->get('user.repository')->findOneById(1);
         $response = $this->getYouMayAlsoLike($bar);
 
         $tip = new Tip();
