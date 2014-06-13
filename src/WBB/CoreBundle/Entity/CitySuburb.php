@@ -31,7 +31,7 @@ class CitySuburb
 
     /**
      * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
-     * @ORM\Column(unique=false)
+     * @ORM\Column(unique=true)
      */
     private $slug;
 
