@@ -30,6 +30,12 @@ class CitySuburb
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @ORM\Column(unique=false)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="City", inversedBy="suburbs")
      */
     private $city;
@@ -201,5 +207,28 @@ class CitySuburb
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return CitySuburb
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

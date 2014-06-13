@@ -129,6 +129,20 @@ class NewsAdmin extends Admin {
         $newInstance->setIsOnTop(true);
 
         return $newInstance;
-    }    
+    }
+
+    public function prePersist($object)
+    {
+        foreach ($object->getMedias() as $media) {
+            $media->setNews($object);
+        }
+    }
+
+    public function preUpdate($object)
+    {
+        foreach ($object->getMedias() as $media) {
+            $media->setNews($object);
+        }
+    }
 
 }
