@@ -26,11 +26,15 @@ class BarController extends Controller
     public function cityHomeAction($slug)
     {
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
+        $topCities = $this->container->get('city.repository')->findTopCities();
+        shuffle($topCities);
 
+        $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars($city);
         $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs($city);
         $response['topNews']    = $this->container->get('news.repository')->findLatestNews($city);
         $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars($city);
+        $response['city']       = $city;
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
