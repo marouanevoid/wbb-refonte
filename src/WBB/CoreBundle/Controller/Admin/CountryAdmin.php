@@ -21,6 +21,7 @@ class CountryAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
+                ->add('acronym')
             ->end();
     }
 
@@ -29,7 +30,10 @@ class CountryAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name', null, array('editable' => true));
+        $listMapper
+            ->addIdentifier('acronym', null, array('editable' => true))
+            ->add('name', null, array('editable' => true))
+        ;
     }
 
     /**
@@ -39,6 +43,7 @@ class CountryAdmin extends Admin
     {
         $filterMapper
             ->add('name')
+            ->add('acronym')
         ;
     }
 

@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * BarTag
  *
  * @ORM\Table(name="wbb_bar_tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BarTagRepository")
  */
 class BarTag
 {

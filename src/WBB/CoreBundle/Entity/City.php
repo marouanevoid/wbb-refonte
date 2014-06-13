@@ -17,7 +17,7 @@ use WBB\CoreBundle\Entity\Country;
  * City
  *
  * @ORM\Table(name="wbb_city")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\CityRepository")
  */
 class City {
 
@@ -36,6 +36,12 @@ class City {
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @ORM\Column(unique=true)
+     */
+    private $slug;
 
     /**
      * @var string
@@ -73,7 +79,7 @@ class City {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTopCity", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $onTopCity;
 
@@ -402,7 +408,8 @@ class City {
      *
      * @param UploadedFile $file
      */
-    public function setFile(UploadedFile $file = null) {
+    public function setFile(UploadedFile $file = null)
+    {
         $this->file = $file;
         if (isset($this->image)) {
             $this->temp = $this->image;
@@ -564,5 +571,28 @@ class City {
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return City
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

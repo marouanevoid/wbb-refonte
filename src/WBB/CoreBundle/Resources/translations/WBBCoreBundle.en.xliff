@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="cities">
+                <source>cities</source>
+                <target>Cities</target>
+            </trans-unit>
+
+            <trans-unit id="countries">
+                <source>countries</source>
+                <target>Countries</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_country_list">
+                <source>breadcrumb.link_country_list</source>
+                <target>Countries list</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_city_list">
+                <source>breadcrumb.link_city_list</source>
+                <target>Cities list</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_name">
+                <source>filter.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_country">
+                <source>list.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_country">
+                <source>filter.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_country">
+                <source>form.label_country</source>
+                <target>Country *</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_seo_description">
+                <source>list.label_seo_description</source>
+                <target>SEO Description</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_seo_description">
+                <source>filter.label_seo_description</source>
+                <target>SEO Description</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_seo_description">
+                <source>form.label_seo_description</source>
+                <target>SEO Description *</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_on_top_city">
+                <source>list.label_on_top_city</source>
+                <target>On Top</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_on_top_city">
+                <source>filter.label_on_top_city</source>
+                <target>On Top</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_on_top_city">
+                <source>form.label_on_top_city</source>
+                <target>On Top</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_file">
+                <source>form.label_file</source>
+                <target>Main visual *</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_suburbs">
+                <source>form.label_suburbs</source>
+                <target>Area(s) *</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_bestofs">
+                <source>form.label_bestofs</source>
+                <target>Best ofs</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_city">
+                <source>form.label_city</source>
+                <target>Name of the City *</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_tags">
+                <source>form.label_tags</source>
+                <target>Tags</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_acronym">
+                <source>list.label_acronym</source>
+                <target>Acronym</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_acronym">
+                <source>filter.label_acronym</source>
+                <target>Acronym</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_acronym">
+                <source>form.label_acronym</source>
+                <target>Acronym</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

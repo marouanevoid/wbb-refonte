@@ -12,6 +12,7 @@
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "gedmo/doctrine-extensions": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
         "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
@@ -37,7 +38,10 @@
         "guzzle/guzzle": "v3.8",
         "sonata-project/formatter-bundle": "2.*",
         "stnw/date-picker-bundle" : "dev-master",
-        "suncat/mobile-detect-bundle": "0.9.*"
+        "suncat/mobile-detect-bundle": "0.9.*",
+        "avalanche123/imagine-bundle": "2.*",
+        "jms/serializer-bundle": "0.13.*@dev"
+
     },
     "scripts": {
         "post-install-cmd": [

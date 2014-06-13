@@ -25,7 +25,6 @@
 		border-collapse: collapse;
 		border-spacing: 0; }
 
-
     .entire-content{ width: 100%; overflow: hidden }
     .entire-content-scrollable{
       position: relative;
@@ -53,10 +52,16 @@
     .cover > * { position: relative; }
 
     a.overlay-link{ position: absolute; left: 0; width: 100%; top: 0; height: 100%; z-index: 21; img{ width: 100%; height: 100%; display: block} }
+    html.mobile a.overlay-link{ display: none }
+
+    .enable3d{ backface-visibility: hidden; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; @include transform( translate3d(0,0,0) )}
+    .transform3d{ @include transition(transform 0.4s ease-in-out); backface-visibility: hidden; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; }
+    .transform3d article > *{ backface-visibility: hidden; -webkit-backface-visibility: hidden }
 
 /* More
 --------------------------------------------------- */
     .more{ display: none }
+    .load-target{ clear: both }
 
 
 /* Text Align
@@ -65,16 +70,6 @@
     .align-center  { text-align: center; }
     .align-right   { text-align: right; }
     .align-justify { text-align: justify; }
-
-
-/* Colors
---------------------------------------------------- */
-    .color-brown          { color: $color-brown; }
-    .color-brown-dark     { color: $color-brown-dark; }
-    .color-subtle-yellow  { color: $color-subtle-yellow; }
-    .color-cream          { color: $color-cream; }
-    .color-dark-gray      { color: $color-dark-gray; }
-    .color-medium-gray    { color: $color-medium-gray; }
 
 
 /* Sizer
@@ -93,36 +88,8 @@
 	  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 	  -webkit-text-size-adjust: 100%; }
 
+    html{ height: 100% }
 
-/* Form Button
---------------------------------------------------- */
-    .button,
-    button,
-    input[type="submit"],
-    input[type="reset"],
-    input[type="button"] {
-      background: none;
-      padding: 0.5em 1.5em;
-      border-radius: 2em;
-      border: 1px solid $color-brown;
-      color: $color-brown;
-      display: inline-block;
-      font-size: 1.4em;
-      font-weight: normal;
-      text-decoration: none;
-      cursor: pointer;
-      line-height: normal;
-      outline: none;
-      font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
-    /* Fix for odd Mozilla border & padding issues */
-    button::-moz-focus-inner,
-    input::-moz-focus-inner {
-      border: 0;
-      padding: 0;
-    }
-
-    .button.large{ padding: 0.9em 2.8em }
 
 
 /* Typography
@@ -159,51 +126,6 @@
 	hr { border: solid $color-brown; border-width: 1px 0 0; clear: both; height: 0; }
 
 
-/* Forms
---------------------------------------------------- */
-    input[type="text"],
-    input[type="password"],
-    input[type="email"],
-    textarea,
-    select {
-      resize: none;
-      border: 1px solid $color-brown;
-      padding: 7% 5%;
-      width: 90%;
-      outline: none;
-      -moz-border-radius: 4px;
-      -webkit-border-radius: 4px;
-      border-radius: 4px;
-      font: 1.4em "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      line-height: 150%;
-      color: $color-medium-gray;
-      margin: 0;
-      background: #fff; }
-    select {
-      padding: 0; }
-    input[type="text"]:focus,
-    input[type="password"]:focus,
-    input[type="email"]:focus,
-    textarea:focus {
-      @include box-shadow(inset 0 0 2px $color-brown) }
-    textarea {
-      min-height: 60px; }
-    label,
-    legend {
-      display: block;
-      font-weight: bold;
-      font-size: 13px;  }
-    select {
-      width: 220px; }
-    input[type="checkbox"] {
-      display: inline; }
-    label span,
-    legend span {
-      font-weight: normal;
-      font-size: 13px;
-      color: #444; }
-    input[type="submit"], input[type="button"]{ -webkit-appearance:none }
-
 
 /* Links
 --------------------------------------------------- */
@@ -222,6 +144,7 @@
 /* Margins & Paddings
 --------------------------------------------------- */
 	.remove-margin-bottom  { margin-bottom: 0 !important; }
+	.xs-margin-bottom       { margin-bottom: $margin-padding-xs !important; }
 	.s-margin-bottom       { margin-bottom: $margin-padding-s !important; }
 	.m-margin-bottom       { margin-bottom: $margin-padding-m !important; }
 	.l-margin-bottom       { margin-bottom: $margin-padding-l !important; }
@@ -229,6 +152,7 @@
     .xxl-margin-bottom     { margin-bottom: $margin-padding-xxl !important; }
 
     .remove-margin-top     { margin-top: 0 !important; }
+    .xs-margin-top          { margin-top: $margin-padding-xs !important; }
     .s-margin-top          { margin-top: $margin-padding-s !important; }
     .m-margin-top          { margin-top: $margin-padding-m !important; }
     .l-margin-top          { margin-top: $margin-padding-l !important; }
@@ -236,13 +160,15 @@
     .xxl-margin-top        { margin-top: $margin-padding-xxl !important; }
 
     .remove-margin         { margin-top: 0px !important; margin-bottom: 0px !important; }
-    .s-margin              { margin-top: $margin-padding-s !important; margin-bottom: $margin-padding-m !important; }
+    .xs-margin              { margin-top: $margin-padding-xs !important; margin-bottom: $margin-padding-xs !important; }
+    .s-margin              { margin-top: $margin-padding-s !important; margin-bottom: $margin-padding-s !important; }
     .m-margin              { margin-top: $margin-padding-m !important; margin-bottom: $margin-padding-m !important; }
     .l-margin              { margin-top: $margin-padding-l !important; margin-bottom: $margin-padding-l !important; }
     .xl-margin             { margin-top: $margin-padding-xl !important; margin-bottom: $margin-padding-xl !important; }
     .xxl-margin            { margin-top: $margin-padding-xxl !important; margin-bottom: $margin-padding-xl !important; }
 
     .remove-padding-bottom { padding-bottom: 0 !important; }
+    .xs-padding-bottom      { padding-bottom: $margin-padding-xs !important; }
     .s-padding-bottom      { padding-bottom: $margin-padding-s !important; }
     .m-padding-bottom      { padding-bottom: $margin-padding-m !important; }
     .l-padding-bottom      { padding-bottom: $margin-padding-l !important; }
@@ -250,6 +176,7 @@
     .xxl-padding-bottom    { padding-bottom: $margin-padding-xxl !important; }
 
     .remove-padding-top    { padding-top: 0 !important; }
+    .xs-padding-top         { padding-top: $margin-padding-xs !important; }
     .s-padding-top         { padding-top: $margin-padding-s !important; }
     .m-padding-top         { padding-top: $margin-padding-m !important; }
     .l-padding-top         { padding-top: $margin-padding-l !important; }
@@ -257,7 +184,8 @@
     .xxl-padding-top       { padding-top: $margin-padding-xxl !important; }
 
     .remove-padding        { padding-top: 0px !important; padding-bottom: 0px !important; }
-    .s-padding             { padding-top: $margin-padding-s !important; padding-bottom: $margin-padding-m !important; }
+    .xs-padding             { padding-top: $margin-padding-xs !important; padding-bottom: $margin-padding-xs !important; }
+    .s-padding             { padding-top: $margin-padding-s !important; padding-bottom: $margin-padding-s !important; }
     .m-padding             { padding-top: $margin-padding-m !important; padding-bottom: $margin-padding-m !important; }
     .l-padding             { padding-top: $margin-padding-l !important; padding-bottom: $margin-padding-l !important; }
     .xl-padding            { padding-top: $margin-padding-xl !important; padding-bottom: $margin-padding-xl !important; }
@@ -303,9 +231,23 @@
     &:after{ z-index: 2; opacity: 0 }
   }
 
+
+
+  /* Colors
+  --------------------------------------------------- */
+  .color-brown          { color: $color-brown; }
+  .color-brown-dark     { color: $color-brown-dark; }
+  .color-subtle-yellow  { color: $color-subtle-yellow; }
+  .color-cream          { color: $color-cream; }
+  .color-dark-gray      { color: $color-dark-gray; }
+  .color-medium-gray    { color: $color-medium-gray; }
+
+
+
   @media only screen and (max-width: $grid-breakpoint-mobile) {
 
-    body{ font-size: 10px!important }
+    body{ font-size: 10px!important; height: 100% }
+    .entire-content-scrollable{ padding-top: 80px }
     h1, .h1{ font-size: 2.5em }
 
     .btn-radius.brown.load-more:hover

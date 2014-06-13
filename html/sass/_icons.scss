@@ -15,6 +15,12 @@
     &:after{ background-position: 0 -40px }
   }
 
+  &.star.active{
+    border-color: $color-brown; background: $color-brown;
+    &:before{ background-position: -160px -240px }
+    &:after{ display: none }
+  }
+
   &.dark.star{
     &:before{ background-position: -160px -80px }
     &:after{ display: none }
@@ -45,18 +51,29 @@
     &:after{ background-position: -120px -40px }
   }
 
+  &.plus{
+    &:before{ background-position: -80px -0px }
+    &:after{ background-position: -80px -40px }
+  }
+
+  &.minus{
+    &:before{ background-position: 0px -360px }
+    &:after{ background-position: 0px -400px }
+  }
+
 }
 
 .btn-radius.with-icon{
 
-  &.place{
-    &:before{ background-position: -212px -0px }
-    &:after{ background-position: -212px -40px }
+  &.city, &.map{
+    &:before{ background-position: -212px -2px }
+    &:after{ background-position: -212px -42px }
   }
 
   &.friend{
     &:before{ background-position: -12px -200px }
     &:after{ background-position: -12px -240px }
+    &.active:after{ opacity: 1 }
   }
 
   &.chillout{
@@ -72,6 +89,16 @@
   &.party{
     &:before{ background-position: -132px -200px }
     &:after{ background-position: -132px -240px }
+  }
+
+  &.grid{ padding-right: 1.2em!important;
+    &:before{ background-position: -0px -320px; width: 40px!important; left: 0.4em!important; }
+    &:after{ background-position: -0px -280px; width: 40px!important; left: 0.4em!important; }
+  }
+
+  &.list{ padding-right: 1.2em!important;
+    &:before{ background-position: -40px -320px; width: 40px!important; left: 0.4em!important; }
+    &:after{ background-position: -40px -280px; width: 40px!important; left: 0.4em!important; }
   }
 }
 
@@ -92,8 +119,8 @@
   &.facebook{
     border-color: #2960a3;
     &:hover{ background: #2960a3 }
-    &:before{ background-position:-85px -125px }
-    &:after{ background-position: -85px -165px }
+    &:before{ background-position:-86px -125px }
+    &:after{ background-position: -86px -165px }
   }
 
   &.instagram{

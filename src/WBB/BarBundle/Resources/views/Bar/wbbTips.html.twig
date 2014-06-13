@@ -1,0 +1,88 @@
+{% set idx = offset %}
+{% if offset==0 and showwbb==1 %}
+    <script type="text/javascript">
+        eval("$('.load-more').data('limit','9');");
+    </script>
+{% endif %}
+{% if offset==0 and bar.getTips(true)|length==0 and tips and tips.data|length==0 %}
+    <script type="text/javascript">
+        eval("$('#tipsForm').removeClass('three');$('#tipsForm').addClass('six');$('.load-more').css('display','none');");
+    </script>
+{% else %}
+    {% if showwbb==1 %}
+        {% if offset!=0 or (offset==0 and wbbTips|length>3) %}
+            {% set s=0 %}
+            {% for t in wbbTips %}
+                {% if s < limit-1 and (offset!=0 or s>=3) %}
+                    {% set idx = offset+loop.index %}
+                    <div class="three columns box wbbtips{{ offset }}" data-index="{{ idx }}">
+                        <article class="tip">
+                            <table class="content expert">
+                                <tr class="excerpt">
+                                    <td colspan="2">
+                                        <div class="scroll">
+                                            “{{ t.description }}”
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr class="s-margin-bottom"/>
+                                    </td>
+                                </tr>
+                                <tr class="author">
+                                    <td>
+                                        <img src="{{ asset('/bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                                    </td>
+                                    <td>
+                                        <b>{{ t.user.getUserRole }}</b>
+                                        {{ t.user.fullname }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </article>
+
+                        <script type="text/javascript">
+                            eval("$('.load-more').data('offset', {{ idx }});");
+                        </script>
+                        {% if wbbTips|length<limit-1 and loop.last %}
+                            {% set r = 9-(wbbTips|length) %}
+                            <script type="text/javascript">
+                                eval("$('.load-more').data('limit','{{ r }}'); $('.load-more').data('offset','0'); $('.load-more').data('showwbb','0'); /*new meta.LoadMore({$button:$('.load-more')});*/ setTimeout(function(){$('.load-more').trigger('click'); $('.load-more').data('limit','9');}, 10);");
+                            </script>
+                        {% endif %}
+                    </div>
+
+                {% endif %}
+                {% set s=s+1 %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+    {% if tips and tips.data and showwbb==0 %}
+        {% set s=0 %}
+        {% for t in tips.data %}
+            {% if t.id not in excluded and s < limit-1 %}
+                {% set idx = offset+loop.index %}
+                <div class="three columns box fstip" data-index="{{ idx }}">
+                    <article class="tip">
+                        <table class="content">
+
+                            <tr class="excerpt">
+                                <td colspan="2">
+                                    <div class="scroll">
+                                        <img src="/bundles/wbbcore/images/icons/pin.foursquare-blue.png" alt="icon.foursquare" width="30" height="30"/><br/>
+                                        “{{ t.text}}”
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </article>
+                    <script type="text/javascript">
+                        eval("$('.load-more').data('showwbb', 0);$('.load-more').data('offset', {{ idx }});{% if tips.data|length<limit %}$('.load-more').css('display','none');{% endif %}");
+                    </script>
+                </div>
+                {% set s=s+1 %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endif %}

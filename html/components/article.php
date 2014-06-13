@@ -10,7 +10,9 @@
     <?php endif ?>
 
     <div class="title vcenter">
-        <h2><a href="">The Bar Project From<br/>Ballantine’s</a></h2>
+        <?php if(!$has_quote): ?>
+            <h2><a href="">The Bar Project From<br/>Ballantine’s</a></h2>
+        <?php endif ?>
 
         <?php if($has_text):?>
             <p class="m-margin">
@@ -23,10 +25,16 @@
             </p>
         <?php endif ?>
 
+        <?php if($has_quote):?>
+            <h1>
+                “ The heart of any drink should be
+                the spirit and not the syrup or garnish ”
+            </h1>
+            <p class="m-margin">Myles Davies</p>
+        <?php endif ?>
+
         <?php if(!$has_image): ?>
             <a class="plus-btn" href=""></a>
         <?php endif ?>
-
     </div>
-
 </article>

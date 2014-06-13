@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * BestOf
  *
- * @ORM\Table(name="wbb_best_of")
- * @ORM\Entity
+ * @ORM\Table(name="wbb_bestof")
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestOfRepository")
  */
 class BestOf
 {
@@ -71,21 +71,21 @@ class BestOf
     /**
      * @var string
      *
-     * @ORM\Column(name="seoDescription", type="string", length=255, nullable=true)
+     * @ORM\Column(name="seo_description", type="string", length=255, nullable=true)
      */
     private $seoDescription;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="byTag", type="boolean", nullable=true)
+     * @ORM\Column(name="by_tag", type="boolean", nullable=true)
      */
     private $byTag;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTop", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $onTop;
 
@@ -108,7 +108,7 @@ class BestOf
 
     /**
      * @ORM\ManyToOne(targetEntity="News", inversedBy="bestOfs", cascade={"remove"})
-     * @ORM\JoinColumn(name="best_of_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="bestof_id", referencedColumnName="id")
      */
     private $news;    
     

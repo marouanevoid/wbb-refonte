@@ -1,54 +1,71 @@
-{% if is_mobile() %}
+<!-- AD -->
+{% if not is_mobile() or is_tablet() %}
 
-{% else %}
-<footer>
+    <section class="footer-ad">
 
-    <div class="container">
+        <div class="container align-center">
 
-        <div class="twelve columns">
+            <div class="twelve columns">
 
-            <div class="left vcenter">
+                <hr/>
 
-                <nav class="h4">
-                    <a href="">About</a>
-                    <a href="">Legal</a>
-                    <a href="">Cookies</a>
-                    <a href="">Submit a bar</a>
-                    <a href="">Claim this bar</a>
-                    <a href="">Responsible Drinking</a>
-                </nav>
+                <img class="m-margin scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
 
-                <div class="copy h4">
-                    &copy; 2014 World's Best Bars
-                </div>
             </div>
 
-            <div class="right">
+        </div>
 
-                <div class="social-icons vcenter">
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/facebook.yellow.png') }}" alt="social-icon facebook" width="12" height="24"/>
-                    </a>
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/twitter.yellow.png') }}" alt="social-icon twitter" width="28" height="23"/>
-                    </a>
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/instagram.yellow.png') }}" alt="social-icon instagram" width="24" height="23"/>
-                    </a>
-                    <a href="">
-                        <img src="{{ asset('/bundles/wbbcore/images/icons/pinterest.yellow.png') }}" alt="social-icon pinterest" width="23" height="23"/>
-                    </a>
+    </section>
+
+
+{% endif %}
+{% if is_mobile() and not is_tablet() %}
+
+{% else %}
+    <footer>
+        <div class="container">
+            <div class="twelve columns">
+                <div class="left vcenter">
+                    <nav class="h4">
+                        <a href="">About</a>
+                        <a href="">Legal</a>
+                        <a href="">Cookies</a>
+                        <a href="">Add a bar</a>
+                        <a href="">Claim your venue</a>
+                        <a href="">Responsible Drinking</a>
+                    </nav>
+                    <div class="copy h4">
+                        &copy; 2014 World's Best Bars
+                    </div>
                 </div>
+                <div class="right">
+                    <div class="social-icons vcenter">
+                        <a href="" class="facebook">
+                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="13" height="24"/></span>
+                        </a>
+                        <a href="" class="twitter">
+                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="28" height="24"/></span>
+                        </a>
+                        <a href="" class="instagram">
+                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="25" height="24"/></span>
+                        </a>
+                        <a href="" class="pinterest">
+                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="24" height="24"/></span>
+                        </a>
+                    </div>
+                    <div class="keep-in-touch vcenter">
+                        <h3 class="s-margin-bottom">Keep in touch</h3>
 
-                <div class="keep-in-touch vcenter">
-                    {% if not is_mobile() %}<h3 class="s-margin-bottom">Keep in touch</h3>{% else %}<h4 class="s-margin-bottom">Keep in touch<h4>{% endif %}
-                    <div class="fb-like" data-href="https://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-                    <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a>
+                        <div class="socials">
+                            <div class="fb-like" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                            <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 {% endif %}
+
 </div>
 </div>

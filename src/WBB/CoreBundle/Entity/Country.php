@@ -30,6 +30,13 @@ class Country
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="acronym", type="string", length=6)
+     */
+    private $acronym;
+
+    /**
      * @ORM\OneToMany(targetEntity="City", mappedBy="country", cascade={"all"})
      */
     private $cities;
@@ -239,5 +246,28 @@ class Country
     public function getAd()
     {
         return $this->ad;
+    }
+
+    /**
+     * Set acronym
+     *
+     * @param string $acronym
+     * @return Country
+     */
+    public function setAcronym($acronym)
+    {
+        $this->acronym = $acronym;
+
+        return $this;
+    }
+
+    /**
+     * Get acronym
+     *
+     * @return string 
+     */
+    public function getAcronym()
+    {
+        return $this->acronym;
     }
 }

@@ -27,7 +27,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - 'StnwDatePickerBundle:Form:fields.html.twig'    
+            - 'StnwDatePickerBundle:Form:fields.html.twig'
+    globals:
+        feedsLimit: %feeds_limit%
 
 # Assetic Configuration
 assetic:
@@ -98,9 +100,9 @@ sonata_admin:
             - { position: left, type: sonata.admin.block.admin_list }
 
         groups:
-            wbb_user: ~
-            wbb_bar: ~
             wbb_location: ~
+            wbb_bar: ~
+            wbb_user: ~
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
         layout: SonataAdminBundle::layout.html.twig
@@ -128,6 +130,9 @@ sonata_media:
     db_driver: doctrine_orm
     contexts:
         default:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
             providers:
                 - sonata.media.provider.youtube
                 - sonata.media.provider.image
@@ -198,3 +203,16 @@ mobile_detect:
     switch_device_view:
         save_referer_path: true
     extension_class: WBB\CoreBundle\Twig\Extension\MobileDetectExtension
+
+#CreatedAt et UpdatedAt Extention
+stof_doctrine_extensions:
+   orm:
+       default:
+           timestampable: true
+           sluggable:  true
+
+avalanche_imagine:
+    filters:
+        scare_small:
+            type:    thumbnail
+            options: { size: [120, 90], mode: outbound, quality: 100, format: png }

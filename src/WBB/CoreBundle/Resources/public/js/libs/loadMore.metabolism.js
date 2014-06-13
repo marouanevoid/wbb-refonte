@@ -34,7 +34,7 @@ meta.LoadMore = function(config) {
     that.config = {
 
         $button : false,
-        page    : '?page=',
+        page    : '&page=',
         class   : 'line',
         speed   : 500,
         easing  : 'easeInOutCubic'
@@ -53,7 +53,11 @@ meta.LoadMore = function(config) {
 
             var $button     = $(this);
             var $target     = that.context.$container.find('.load-target');
-            var url         = $button.attr('href')+that.config.page+that.context.page;
+            var limit       = $button.data('limit');
+            var offset      = $button.data('offset');
+            var showwbb     = $button.data('showwbb');
+            var url         = $button.attr('href');
+            url += '/'+offset+'/'+limit+'/'+showwbb;
 
             $button.data('text', $button.text());
             $button.addClass('loading').text(TRAD.loading);
@@ -77,16 +81,7 @@ meta.LoadMore = function(config) {
 
         var target_height = $target.show().height();
 
-        $elements.css({opacity:0, top:'4em'});
-        $target.css({height:0, overflow:'hidden'});
-
-        $target.velocity({height:target_height}, that.config.speed, that.config.easing, function()
-        {
-            $target.removeAttr('style');
-            if(callback) callback();
-        });
-
-        $elements.each(function(index){
+        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, that.config.speed, that.config.easing);
         });
@@ -104,6 +99,12 @@ meta.LoadMore = function(config) {
 
             $target.removeClass('load-target');
             $target.after('<div class="'+that.config.class+' load-target"/>');
+
+            $target.find('img[data-src]').each(function()
+            {
+                $(this).attr('src', $(this).data('src'));
+                $(this).removeAttr('data-src');
+            });
 
             that._animate($target, $target.find('> *').not('br'), callback );
 

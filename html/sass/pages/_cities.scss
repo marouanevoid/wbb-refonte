@@ -1,0 +1,76 @@
+body.cities {
+  overflow-y: scroll;
+  .cities-content{
+    position: relative; min-height: 500px;
+    #map{
+      width: 100%; height: 100%;
+      .label{
+        background: #fff; font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px; padding: 1.5em; color: #818a8c; box-shadow: 0 2px 5px rgba(0,0,0,0.24); white-space: nowrap;
+        b{ display: block; font-size: 14px; font-weight: normal; color: #333; margin-bottom: 0.4em }
+      }
+      .cluster{ background: url("../images/map.pin.png") no-repeat center; width: 20px; height: 30px; background-size: 100% auto }
+    }
+    .zoom{
+      position: absolute; right: 5%; top: 50%; margin-top: -23px; background: $color-brown; border-radius: 25px; padding: 2px; padding-bottom: 0;
+      a{ background-color: $color-cream }
+    }
+    .selector{
+      position: absolute; left: 5%; top: 10%; bottom: auto; overflow: hidden; width: 23em; background: #fff; border: 10px solid $color-cream; padding: 25px; @include transition( height 0.3s );
+      h3{ color: $color-brown }
+      form{
+        input[type=reset]{ display: none }
+      }
+      .ui-dropdown-container{ font-size: 1.4em; width: 100%!important }
+      .scrolls{
+        display: none;
+        .scroll ul{ font-size: 1.4em; line-height: 180% }
+        .scroll-cities{
+          overflow: auto; margin-left: 1em;
+          li{ cursor: pointer; @include transition( color 0.2s ease-in-out )}
+          li:hover{ color: $color-brown }
+        }
+        .scroll-bars{
+          margin-top: 1em; display: none;
+          a{ display: inline-block; vertical-align: top }
+          ul{ list-style: decimal inside; color:$color-brown }
+          b{ font-weight: normal; color: #333 }
+          span{ color: #666; font-size: 90% }
+          li{ border-top: 1px solid #999; padding: 0.7em 0.5em; @include transition(0.2s ease-in-out); cursor: pointer }
+          li:hover, li.active{ border-top-color: $color-cream; background: $color-cream }
+          li:hover+li, li.active+li{ border-top-color: $color-cream }
+          li:first-child{ border-top:0 }
+        }
+        .scroll-cities{
+          li.active{ color: $color-brown }
+        }
+      }
+
+    }
+  }
+
+  @media only screen and (max-width: $grid-breakpoint-mobile) {
+
+    .entire-content-scrollable{ padding-top: 0 }
+    header.mobile{ position: static }
+
+    .cities-content{
+      min-height:inherit;
+      .zoom{ right: 20px; bottom: 20px; top: auto; margin-top: 0 }
+      .selector{
+        border: 0; padding: 0; top: 0; left: 0; width: 100%; box-sizing: border-box; bottom: auto;
+        .heading{ padding: 1em }
+        form.s-margin{ margin-top: 5px!important }
+        h3{ display: none }
+        .scrolls{  display: none; padding: 10px; background: $color-cream }
+        .scroll ul{ line-height: 250% }
+        .scroll-cities, .scroll-bars{ padding: 0; margin: 0 }
+        .heading{ text-align: center }
+        .ui-radio.btn-radius.with-icon{ width: auto; color: $color-brown; padding-right: 1.2em!important; font-size: 1.4em; padding-left: 2.5em!important; }
+        .ui-radio.btn-radius.with-icon.active, .ui-radio.btn-radius.with-icon:hover{ color: $color-cream }
+        .ui-dropdown-container{ margin-bottom: 15px }
+      }
+      #map{ top: 118px }
+    }
+  }
+}

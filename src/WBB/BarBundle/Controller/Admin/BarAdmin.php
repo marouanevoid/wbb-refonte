@@ -31,6 +31,15 @@ class BarAdmin extends Admin
             ->add('onTop', null, array('editable' => true))
             ->add('status', 'status')
             ->add('user')
+            ->addIdentifier('_action', 'actions', array(
+                'field'   => 'name',
+                'label'    => 'Actions',
+                'actions' => array(
+                    'show'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
+                    'edit'   => array(),
+                    'delete' => array(),
+                )
+            ))
         ;
     }
 
@@ -40,15 +49,20 @@ class BarAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $filterMapper)
     {
         $filterMapper
-            ->add('id')
             ->add('name')
+            ->add('city')
+            ->add('suburb')
             ->add('onTop')
             ->add('status', 'doctrine_orm_string', array(), 'choice',
-                    array('choices' => array(
-                            Bar::BAR_STATUS_PENDING_VALUE => 'Pending',
-                            Bar::BAR_STATUS_ENABLED_VALUE => 'Enabled',
-                            Bar::BAR_STATUS_DISABLED_VALUE => 'Disabled')
-                ))
+                array('choices' => array(
+                    Bar::BAR_STATUS_PENDING_VALUE   => 'Pending',
+                    Bar::BAR_STATUS_ENABLED_VALUE   => 'Enabled',
+                    Bar::BAR_STATUS_DISABLED_VALUE  => 'Disabled'
+                )
+            ))
+            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
+            ->add('updatedAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
+
         ;
     }
 
@@ -95,79 +109,93 @@ class BarAdmin extends Admin
         
         $formMapper
             ->with('General')
-                ->add('user')
-                ->add('name')
-                ->add('city', 'sonata_type_model', array('required' => false))
-                ->add('suburb')
+                ->add('user', null, array('help' => 'Optional'))
+                ->add('name', null, array('label'=>'Name of the bar', 'help' => 'Mandatory'))
+                ->add('city', null, array('help' => 'Mandatory', 'required' => true))
+                ->add('suburb', null, array('help' => 'Mandatory', 'required' => true))
                 ->add('onTop')
                 ->add('status', 'choice', array(
                     'required' => false,
+                    'help' => 'Keep the "Pending" status until the bar page is completely finished.',
                     'choices'  => array(
                         Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
                         Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
                         Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
-                    )
+                    ),
+                    'empty_value' => false,
+                    'preferred_choices' => array(Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT)
                 ))
-            ->end();
+            ->end()
+            ->with('Bar Details');
+                if($this->getSecurityContext()->isGranted('ROLE_BAR_ID')){
+                    $formMapper
+                        ->add('latitude', 'hidden')
+                        ->add('longitude', 'hidden')
+                        ->add('address', null, array('help' => 'Mandatory'))
+                        ->add('phone', null, array('help' => 'Mandatory'))
+                        ->add('email')
+                        ->add('website', null, array('help' => 'Example : http://www.url.com'))
+                        ->add('foursquare', null, array('help' => 'Example : 4bfd2db02b83b71365a7a998'))
+                        ->add('twitter', null, array('help' => 'Example : buddhabargroup'))
+                        ->add('facebook', null, array('help' => 'Example : buddhabarofficial'))
+                        ->add('instagram', null, array('help' => 'Example : buddhabarparis'));
+                }
 
-        if($this->getSecurityContext()->isGranted('ROLE_BAR_ID')){
+        $formMapper
+            ->add('isCreditCard')
+            ->add('isCoatCheck')
+            ->add('parking', 'choice', array(
+                'required' => false,
+                'choices'  => array(
+                    'Street level'              => 'Street level',
+                    'Underground'               => 'Underground',
+                    'Unattended parking lot'    => 'Unattended parking lot',
+                    'Valet'                     => 'Valet'
+                )
+            ))
+            ->add('price', 'choice', array(
+                'required' => false,
+                'choices'  => array(
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4
+                )
+            ))
+            ->add('menu', null, array('help' => 'Example : http://www.url.com'))
+            ->add('isReservation')
+            ->add('reservation', null, array('help' => 'Example : http://www.url.com'));
+
+        if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper
-                ->with('Bar ID')
-                    ->add('latitude', 'hidden')
-                    ->add('longitude', 'hidden')
-                    ->add('address')
-                    ->add('phone')
-                    ->add('email')
-                    ->add('website')
-                    ->add('foursquare')
-                    ->add('twitter')
-                    ->add('facebook')
-                    ->add('instagram')
-                ->end();
+                ->add('description', 'textarea', array('required' => false,'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
+            ;
         }
 
         $formMapper
-            ->with('Details')
-                ->add('isCreditCard')
-                ->add('isCoatCheck')
-                ->add('parking', 'choice', array(
-                    'required' => false,
-                    'choices'  => array(
-                        2 => 'Premier Etage',
-                        1 => 'RDC',
-                        0 => 'RDJ'
+                ->add('seoDescription', 'textarea', array(
+                        'required' => false,
+                        'label' => 'SEO Description *',
+                        'help' => 'Mandatory (160 characters max)',
+                        'attr' => array(
+                            'cols'=>220,
+                            'rows'=>10
+                        )
                     )
-                ))
-                ->add('price', 'choice', array(
-                    'required' => false,
-                    'choices'  => array(
-                        1 => 1,
-                        2 => 2,
-                        3 => 3,
-                        4 => 4
-                    )
-                ))
-                ->add('menu')
-                ->add('isReservation')
-                ->add('reservation');
-
-        if($this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
-            $formMapper->add('description');
-        }
-
-        $formMapper
-                ->add('seoDescription', 'textarea', array('required' => false))
+                )
             ->end()
             ->with('Medias')
-                ->add('medias', 'sonata_type_collection', array('required' => false),
+                ->add('medias', 'sonata_type_collection', array('required' => false, 'help' => 'Add a WBB media is mandatory'),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('New Tags')
-                ->add('tags', 'sonata_type_collection', array('required' => false),
+            ->with('Tags')
+                ->add('tags', 'sonata_type_collection', array(
+                    'required' => false,
+                    'help' => 'Associate a tag minimum to the bar is mandatory'),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',

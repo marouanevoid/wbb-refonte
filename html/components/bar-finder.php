@@ -7,7 +7,7 @@
 
             <a class="finder-close"></a>
 
-            <form>
+            <form action="search.php">
                 <table>
                     <tr>
                         <td rowspan="2">
@@ -22,8 +22,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <select class="ui-dropdown dark" name="city">
-                                <option disabled="disabled">Choose a city</option>
+                            <select class="ui-dropdown dark" name="city" data-class="with-icon city">
+                                <option disabled="disabled">Choose a City</option>
                                 <option value="cty2">City 2</option>
                                 <option value="cty3">City 3</option>
                                 <option value="cty4">City 4</option>
@@ -33,26 +33,26 @@
                         </td>
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
                         <td>
-                            <select class="ui-dropdown dark" name="go_out">
-                                <option disabled="disabled">Friend...</option>
-                                <option>City 2</option>
-                                <option>City 3</option>
-                                <option>City 4</option>
-                                <option>City 5</option>
-                                <option>City 6</option>
+                            <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
+                                <option disabled="disabled">Friends...</option>
+                                <option>Friends</option>
+                                <option>Familly</option>
+                                <option>Wife</option>
+                                <option>Kids</option>
+                                <option>Mother</option>
                             </select>
                         </td>
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
                         <td>
-                            <input type="radio" name="mood" value="chillout" class="ui-radio checked dark" data-color="brown"/>
+                            <input type="radio" name="mood" value="chillout" class="ui-radio dark" data-color="brown" checked="checked"/>
                         <td>
                             <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
                         </td>
                         <td>
-                            <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
+                            <input type="radio" name="mood" value="party" class="ui-radio dark"/>
                         </td>
                         <td>
-                            <input type="submit" class="btn-radius border brown go" value="Go"/>
+                            <input type="submit" class="btn-radius border brown go" value="GO"/>
                         </td>
                     </tr>
                 </table>

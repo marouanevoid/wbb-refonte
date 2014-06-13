@@ -61,12 +61,27 @@ meta.App = function() {
             {
                 $body.addClass('menu-open');
 
-                if( Modernizr.csstransforms3d )
-                    $to_scroll.css({transform: 'translate3d(245px,0,0)'});
-                else
-                    $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
-
+                $('html,body').animate({scrollTop:0}, that.config.speed, that.config.easing, function()
+                {
+                    if( Modernizr.csstransforms3d )
+                        $to_scroll.css({transform: 'translate3d(245px,0,0)'});
+                    else
+                        $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
+                });
             }
+        });
+
+        $('.detect-scroll').swipe(
+        {
+            swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
+            swipeRight:function(){ $('header.mobile .nav-icon a').click() },
+            threshold:1
+        });
+
+        $('.mobile-menu').swipe(
+        {
+            swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
+            threshold:10
         });
     };
 
@@ -87,10 +102,10 @@ meta.App = function() {
             {
                 $is_animating = true;
 
-                $bar_finder.find('table').velocity({opacity: '1'}, speed, easing);
-                $bar_finder.find('.finder-arrow').velocity({top: '-15px', opacity: '1'}, speed, easing);
-                $bar_finder.find('.finder-close').velocity({opacity: '1'}, speed, easing);
-                $container.velocity('slideDown', { duration: speed, easing:easing, complete:function(){ $is_animating = false } });
+                $bar_finder.find('table').animate({opacity: '1'}, that.config.speed, that.config.easing);
+                $bar_finder.find('.finder-arrow').animate({top: '-15px', opacity: '1'}, that.config.speed, that.config.easing);
+                $bar_finder.find('.finder-close').animate({opacity: '1'}, that.config.speed, that.config.easing);
+                $container.slideDown(that.config.speed, that.config.easing, function(){ $is_animating = false });
             }
         });
 
@@ -100,10 +115,28 @@ meta.App = function() {
 
             $is_animating = true;
 
-            $bar_finder.find('table').velocity({opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-arrow').velocity({top: '0', opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-close').velocity({opacity: '0'}, speed/2, easing);
-            $container.velocity('slideUp', { duration: speed, easing:easing, complete:function(){ $is_animating = false } });
+            $bar_finder.find('table').animate({opacity: '0'}, speed, easing);
+            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, speed, easing);
+            $bar_finder.find('.finder-close').animate({opacity: '0'}, speed/2, easing);
+            $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
+        });
+    };
+
+
+    that._customScroll = function()
+    {
+        $('.custom-scroll').not('.jspScrollable').each(function()
+        {
+            $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+        });
+    };
+
+
+    that._loadImages = function()
+    {
+        $('.force-load [data-src]').each(function()
+        {
+            $(this).attr('src', $(this).data('src'));
         });
     };
 
@@ -120,11 +153,28 @@ meta.App = function() {
         $('a.see-more').click(function(e)
         {
             e.preventDefault();
-            $(this).next('.more').slideToggle(that.config.speed, that.config.easing);
+
+            if( $(this).hasClass('fade') )
+                $(this).velocity('fadeOut', { duration: speed, easing:easing});
+            else
+                $(this).velocity('slideUp', { duration: speed, easing:easing});
+
+            $(this).next('.more').velocity('slideDown', { duration: speed, easing:easing});
         });
 
         that._barFinderEvents();
         that._mobileMenuEvents();
+        that._loadImages();
+        that._customScroll();
+
+        $( document ).ajaxComplete(function() {
+
+            setTimeout(function()
+            {
+                that._customScroll();
+
+            }, 600);
+        });
     };
 
 
@@ -141,6 +191,7 @@ meta.App = function() {
     {
         that._setupElements();
         that._setupEvents();
+        that._customScroll();
     };
 
     that.__construct();

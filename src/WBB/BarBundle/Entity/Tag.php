@@ -32,56 +32,56 @@ class Tag
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isStyle", type="boolean", nullable=true)
+     * @ORM\Column(name="is_style", type="boolean", nullable=true)
      */
     private $isStyle;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isOccasion", type="boolean", nullable=true)
+     * @ORM\Column(name="is_occasion", type="boolean", nullable=true)
      */
     private $isOccasion;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isAtmosphere", type="boolean", nullable=true)
+     * @ORM\Column(name="is_atmosphere", type="boolean", nullable=true)
      */
     private $isAtmosphere;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isAlcohol", type="boolean", nullable=true)
+     * @ORM\Column(name="is_alcohol", type="boolean", nullable=true)
      */
     private $isAlcohol;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isCocktail", type="boolean", nullable=true)
+     * @ORM\Column(name="is_cocktail", type="boolean", nullable=true)
      */
     private $isCocktail;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isMood", type="boolean", nullable=true)
+     * @ORM\Column(name="is_mood", type="boolean", nullable=true)
      */
     private $isMood;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="energyLevel", type="smallint", nullable=true)
+     * @ORM\Column(name="energy_level", type="smallint", nullable=true)
      */
     private $energyLevel;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTop", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $onTop;
 
@@ -336,7 +336,7 @@ class Tag
 
     public static function getEnergyLevels()
     {
-        $result = array(0,1,2,3,4,5);
+        $result = array(1 => 'Chillout', 2 => "Casual", 3 => "Party");
 
         return $result;
     }
