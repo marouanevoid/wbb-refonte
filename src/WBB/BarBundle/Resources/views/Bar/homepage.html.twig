@@ -4,8 +4,9 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        document.location.href="/admin/";
+        //document.location.href="/admin/";
         $(document).ready(function(){
+            initializeSliders();
             $(".star").click(function(){
                 var btn = $(this);
                 $.ajax({
@@ -15,8 +16,18 @@
                     success: function(r) {
                         if(btn.hasClass('active')){
                             btn.removeClass('active');
+                            if(btn.hasClass('changed')){
+                                btn.removeClass('brown');
+                                btn.addClass('dark');
+                                btn.removeClass('changed');
+                            }
                         }else{
                             btn.addClass('active');
+                            if(btn.hasClass('dark')){
+                                btn.addClass('changed');
+                                btn.addClass('brown');
+                                btn.removeClass('dark');
+                            }
                         }
                     }
                 });
@@ -40,24 +51,34 @@
                                 You are in
                                 <select class="ui-dropdown" name="city" data-class="with-icon city">
                                     <option disabled="disabled">Choose a City</option>
-                                    <option value="cty2">City 2</option>
-                                    <option value="cty3">City 3</option>
-                                    <option value="cty4">City 4</option>
-                                    <option value="cty5">City 5</option>
-                                    <option value="cty6">City 6</option>
+                                    {% for c in topCities %}
+                                        <option value="{{ c.id }}"
+                                            {% if city is defined and c.id==city.id %}
+                                                selected="selected"
+                                            {% endif %}
+                                        >{{ c.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </td>
 
                         <td class="title">
-                            <h1>Discover the World’s Best Bars</h1>
+                            {% if city is defined %}
+                                <h1>Popular Bars in {{ city.name }}</h1>
+                            {% else %}
+                                <h1>Discover the World’s Best Bars</h1>
+                            {% endif %}
                         </td>
 
                         <td></td>
                     </tr>
                 </table>
                 {% else %}
-                <h1>Discover the World’s Best Bars</h1>
+                    {% if city is defined %}
+                        <h1>Popular Bars in {{ city.name }}</h1>
+                    {% else %}
+                        <h1>Discover the World’s Best Bars</h1>
+                    {% endif %}
                 {% endif %}
             </section>
     </div>
@@ -100,7 +121,7 @@
 
     </div>
 
-
+    {% if city is defined %}
     <!-- CITIES -->
     <div class="container">
 
@@ -112,9 +133,9 @@
 
             <div class="twelve columns">
                 {% if is_mobile() and not is_tablet() %}
-                    <div class="ui-slider type-cities has_sizer arrows infinite dots" data-size="8x3" data-display="3">
+                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="8x3" data-display="3">
                 {% else %}
-                    <div class="ui-slider type-cities has_sizer arrows infinite dots" data-size="1x6" data-display="6">
+                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="1x6" data-display="6">
                 {% endif %}
                 {% for c in topCities %}
                     <div class="ui-slide">
@@ -125,7 +146,9 @@
                             </div>
                             <a href="" class="overlay-link"></a>
                             <img class="overlay" src="{{ asset('/bundles/wbbcore/images/city.background-circle.png') }}"/>
-                            <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) }}" alt="{{ c.name }}"/>
+                            {% if c.webPath %}
+                            <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) | apply_filter('city_small') }}" alt="{{ c.name }}"/>
+                            {% endif %}
                         </article>
                     </div>
                 {% endfor %}
@@ -134,7 +157,7 @@
         </section>
 
     </div>
-
+    {% endif %}
 
     <!-- BEST OF -->
     <div class="container">
@@ -143,12 +166,16 @@
 
             <section class="bestof">
                 <div class="align-center l-margin">
-                    <h1>Latest Best Of</h1>
+                    {% if city is defined %}
+                        <h1>Best of in {{ city.name }}</h1>
+                    {% else %}
+                        <h1>Latest Best Of</h1>
+                    {% endif %}
                 </div>
                 {% if is_mobile() and not is_tablet() %}
-                    <div class="ui-slider type-bestof has_sizer arrows infinite dots" data-size="4x3" data-display="1">
+                    <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1">
                 {% else %}
-                        <div class="ui-slider type-bestof has_sizer arrows infinite dots" data-size="3x3" data-display="3">
+                        <div class="ui-slider type-bestof has_sizer arrows dots" data-size="3x3" data-display="3">
                 {% endif %}
 
                 {% for b in topBestofs %}
@@ -163,9 +190,10 @@
                                     <h3>{{ b.name }}</h3>
                                 </div>
                             </div>
-
-                            <img src="" class="scale-with-grid" data-src="{{ asset(b.webPath) }}" alt="{{ b.name }}" width="570" height="428"/>
-                            <a href="" class="overlay-link"></a>
+                            {% if b.webPath %}
+                            <img src="" class="scale-with-grid" data-src="{{ asset(b.webPath) | apply_filter('bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
+                            {% endif %}
+                            <a href="#0" class="overlay-link"></a>
 
                         </article>
                     </div>
@@ -221,6 +249,7 @@
                 <article class="large">
                     <div class="img">
                         <a href="" class="cover">
+                        {# dump(n.medias) #}
                         {% for m in n.medias|slice(0,1) %}
                             <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
                         {% endfor %}

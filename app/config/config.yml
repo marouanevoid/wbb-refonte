@@ -143,6 +143,8 @@ sonata_media:
                 large:          { width: 1024, quality: 70}
                 slider_small :  { width: 320 , height: 240, quality: 70 }
                 slider_large :  { width: 640 , height: 480, quality: 70 }
+                news :          { width: 600 , height: 400, quality: 70 }
+                news_large :    { width: 900 , height: 600, quality: 70 }
     cdn:
         server:
             path: /uploads/media
@@ -216,3 +218,16 @@ avalanche_imagine:
         scare_small:
             type:    thumbnail
             options: { size: [120, 90], mode: outbound, quality: 100, format: png }
+        city_small:
+            type:    thumbnail
+            options: { size: [340, 350], mode: outbound, quality: 100, format: png }
+        news_small:
+            type:    thumbnail
+            options: { size: [600, 400], mode: outbound, quality: 100, format: png }
+        news_large:
+            type:    thumbnail
+            options: { size: [900, 600], mode: outbound, quality: 100, format: png }
+        bestof_small:
+            type:    thumbnail
+            options: { size: [387, 290], mode: outbound, quality: 100, format: png }
+
