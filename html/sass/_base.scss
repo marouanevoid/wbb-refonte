@@ -52,7 +52,7 @@
     .cover > * { position: relative; }
 
     a.overlay-link{ position: absolute; left: 0; width: 100%; top: 0; height: 100%; z-index: 21; img{ width: 100%; height: 100%; display: block} }
-    html.mobile a.overlay-link{ display: none }
+    html.mobile .ui-slide a.overlay-link{ display: none }
 
     .enable3d{ backface-visibility: hidden; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; @include transform( translate3d(0,0,0) )}
     .transform3d{ @include transition(transform 0.4s ease-in-out); backface-visibility: hidden; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; }
@@ -197,7 +197,8 @@
   .btn-radius {
     display: inline-block; padding: 0.8em 1.2em; border-radius: 2em; line-height: 1em; white-space: nowrap;
     @include transition(background ease-in-out 0.2s, color ease-in-out 0.2s, border ease-in-out 0.2s);
-    &.border { border: 1px solid; }
+    &.border { border: 1px solid }
+    &.large { padding: 1.2em 2em }
     &.with-icon{
       position: relative; padding-left: 2.7em; padding-right: 2em;
       &:after, &:before{
@@ -247,7 +248,7 @@
   @media only screen and (max-width: $grid-breakpoint-mobile) {
 
     body{ font-size: 10px!important; height: 100% }
-    .entire-content-scrollable{ padding-top: 80px }
+    .entire-content-scrollable{ padding-top: 80px; overflow: hidden }
     h1, .h1{ font-size: 2.5em }
 
     .btn-radius.brown.load-more:hover

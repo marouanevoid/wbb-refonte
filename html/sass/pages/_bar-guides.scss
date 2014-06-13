@@ -27,7 +27,7 @@
         .btn-radius:last-of-type{ margin-right: 0.2em }
       }
       .bars-w-pic{ width: 100% }
-      .bar-w-pic:nth-child(2n){border-right: 1px solid transparent;}
+      .bar-w-pic{ border-right: 1px solid transparent }
     }
 
     section.bars, section.bar-filter {
@@ -51,7 +51,7 @@
           &:before{ background-size: 256px 512px; background-position: -160px -80px }
         }
       }
-      .bar-w-pic:nth-child(2n+1){border-right: 1px solid transparent;}
+      .bar-w-pic{border-right: 1px solid transparent;}
     }
   }
 

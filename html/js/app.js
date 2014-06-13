@@ -39,12 +39,16 @@ meta.App = function() {
         {
             e.preventDefault();
 
-            var $to_scroll  = $('.entire-content-scrollable');
+            var $to_scroll  = $('.entire-content-scrollable, aside.mobile-menu');
+            var $menu       = $('aside.mobile-menu');
+            var $content    = $('.entire-content-scrollable');
+            var $header     = $('header.mobile');
             var $body       = $('body');
-            var transformation;
 
             if( $body.hasClass("menu-open") )
             {
+                $content.height('auto');
+
                 if( Modernizr.csstransforms3d )
                     $to_scroll.css({transform: 'translate3d(0,0,0)'});
                 else
@@ -55,18 +59,24 @@ meta.App = function() {
                     $body.removeClass('menu-open');
                     $to_scroll.removeAttr('style');
 
-                }, that.config.speed);
+                }, that.config.speed+200);
             }
             else
             {
-                $body.addClass('menu-open');
-
                 $('html,body').animate({scrollTop:0}, that.config.speed, that.config.easing, function()
                 {
-                    if( Modernizr.csstransforms3d )
-                        $to_scroll.css({transform: 'translate3d(245px,0,0)'});
-                    else
-                        $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
+                    $body.addClass('menu-open');
+
+                    setTimeout(function()
+                    {
+                        $content.height($menu.height()-$header.height()-1);
+
+                        if( Modernizr.csstransforms3d )
+                            $to_scroll.css({transform: 'translate3d(245px,0,0)'});
+                        else
+                            $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
+
+                    }, 50);
                 });
             }
         });
@@ -75,13 +85,13 @@ meta.App = function() {
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
             swipeRight:function(){ $('header.mobile .nav-icon a').click() },
-            threshold:1
+            threshold:4
         });
 
         $('.mobile-menu').swipe(
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
-            threshold:10
+            threshold:50
         });
     };
 

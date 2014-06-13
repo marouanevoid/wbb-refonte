@@ -64,24 +64,39 @@
     }
 
     header.mobile {
-      position: fixed; left: 0; top: 0; width: 100%; z-index: 999;
+      position: fixed; left: 0; top: 0; width: 100%; z-index: 999; border-bottom: 1px solid transparent; @include transition( border 0.4s ease-in-out );
+      table{ table-layout: fixed }
       .logo { padding: 0.5em 0 1.5em 0; width: 100%; text-align: center; }
-      .nav-icon { text-align: left; a{ padding: 1em; margin-left: -1em; display: block } }
-      .search-pin-icon { text-align: right;
-        a:nth-child(1) { margin-right: 1.3em; }
+      .nav-icon { text-align: center; width:55px; a{ padding: 1em; display: inline-block } }
+      .search-pin-icon {
+        text-align: right; width:55px;
+        a { padding: 0.6em; display: inline-block }
       }
     }
 
+    .menu-open header.mobile{ border-bottom: 1px solid #5c5549 }
+    .menu-open aside.mobile-menu{ display: block }
+
     .detect-scroll{ position: fixed; top: 0; left: 0; height: 100%; width: 40px; z-index: 998 }
 
-    aside.mobile-menu { position: absolute; width: 245px; height: 100%; left: -245px; top: 0; background-color: $color-dark-gray; background-image: url("../images/mobile.menu.inner-shadow.png"); background-position: top right; background-size: 7px 100%; background-repeat: repeat-y;
+    aside.mobile-menu {
+      position: absolute; width: 245px; left: -245px; top: 0; background-color: $color-dark-gray; display: none;
+      background-image: url("../images/mobile.menu.inner-shadow.png"); background-position: top right;
+      background-size: 7px 100%; background-repeat: repeat-y;
+      //because of compass bug, set manually
+      -webkit-transition: -webkit-transform 0.5s ease-in-out;
+      -moz-transition: -moz-transform 0.5s ease-in-out;
+      -o-transition: -o-transform 0.5s ease-in-out;
+      transition: transform 0.5s ease-in-out;
 
-      table { width: 100%;
+      table {
+
+        width: 100%;
 
         tr td { width: 80%; border-bottom: 1px solid #5c5549; padding: 3em 10%; }
 
         tr.search td {
-          padding: 2em 8%;
+          padding: 2em 8%; border-bottom: 0;
           input[type=text]{ padding: 0 10%; width: 80%; height: 39px }
           input[type=submit]{ background: url("../images/icons/search.png") 40% 50% no-repeat; background-size: 40% auto; width: 45px; height: 39px }
         }
