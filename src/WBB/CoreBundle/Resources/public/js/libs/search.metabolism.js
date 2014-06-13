@@ -42,6 +42,7 @@ meta.Search = function(config){
 
     that.context = {};
     that.search_timeout = false;
+    that.show_results = false;
 
 
     /* Contructor. */
@@ -71,6 +72,20 @@ meta.Search = function(config){
         that.context.$form          = that.context.$header.find('.nav form');
         that.context.$input         = that.context.$form.find('input');
         that.context.$result        = that.context.$header.find('.search-result-proposal ul');
+
+        var is_trident = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
+        if( is_trident || $('html').hasClass('ie') )
+        {
+            var placeholder = that.context.$input.attr('placeholder');
+            var $placeholder = $('<span class="placeholder">'+placeholder+'</span>');
+
+            that.context.$input.removeAttr('placeholder');
+            that.context.$input.after($placeholder);
+
+            $placeholder.on('click', function(){ that.context.$input.focus() });
+            that.context.$input.on('keydown', function(){ $placeholder.hide() });
+            that.context.$input.on('keyup', function(){ if(that.context.$input.val() == "") $placeholder.show() });
+        }
     };
 
 
@@ -95,6 +110,8 @@ meta.Search = function(config){
                 });
 
                 that.context.$result.html( html );
+
+                that.show_results = true;
             }
         });
     };
@@ -126,6 +143,8 @@ meta.Search = function(config){
             $(this).removeAttr('style');
             that.context.$input.val('');
             that.context.$result.empty();
+            that.context.$form.find('.placeholder').show();
+            that.show_results = false
         }});
 
         that.context.$searchHeader.velocity({top:'-50%', opacity:0}, { duration: that.config.speed, easing:that.config.easing, complete:function() {
@@ -152,7 +171,31 @@ meta.Search = function(config){
         that.context.$input.on('keydown', function(){
             clearInterval(that.search_timeout);
             that.search_timeout = setTimeout(function(){ that._search() }, that.config.throttle);
-        })
+        });
+
+        that.context.$result.on('click', 'a', function()
+        {
+            that.context.$input.val( $(this).text() );
+
+            that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
+            {
+                $(this).removeAttr('style');
+                that.context.$result.empty();
+                that.context.$form.submit();
+            }});
+        });
+
+        $(document).click(function(e)
+        {
+            if(that.show_results)
+            {
+                that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
+                {
+                    $(this).removeAttr('style');
+                    that.context.$result.empty();
+                }});
+            }
+        });
     };
 
 

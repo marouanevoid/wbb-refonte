@@ -7,24 +7,64 @@
                 <target>Detail Bar Page</target>
             </trans-unit>
 
+            <trans-unit id="breadcrumb.link_tag_list">
+                <source>breadcrumb.link_tag_list</source>
+                <target>Tag list</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_best_of_list">
+                <source>breadcrumb.link_best_of_list</source>
+                <target>Best of list</target>
+            </trans-unit>
+
+            <trans-unit id="bars">
+                <source>bars</source>
+                <target>Bars</target>
+            </trans-unit>
+
+            <trans-unit id="tags">
+                <source>tags</source>
+                <target>Tags</target>
+            </trans-unit>
+
+            <trans-unit id="bestofs">
+                <source>bestofs</source>
+                <target>Best of</target>
+            </trans-unit>
+
+            <trans-unit id="tips">
+                <source>tips</source>
+                <target>Tips</target>
+            </trans-unit>
+
+            <trans-unit id="ad">
+                <source>ad</source>
+                <target>Ads</target>
+            </trans-unit>
+
+            <trans-unit id="news">
+                <source>news</source>
+                <target>News</target>
+            </trans-unit>
+
             <trans-unit id="form.label_user">
                 <source>form.label_user</source>
-                <target>Link to owner / Add owner</target>
+                <target>Select the bar owner of your choice</target>
             </trans-unit>
 
             <trans-unit id="form.label_suburb">
                 <source>form.label_suburb</source>
-                <target>Suburb</target>
+                <target>Area</target>
             </trans-unit>
 
             <trans-unit id="form.label_foursquare">
                 <source>form.label_foursquare</source>
-                <target>Foursquare</target>
+                <target>Foursquare ID</target>
             </trans-unit>
 
             <trans-unit id="form.label_tags">
                 <source>form.label_tags</source>
-                <target>Tags</target>
+                <target>Tags *</target>
             </trans-unit>
 
             <trans-unit id="form.label_openings">
@@ -54,12 +94,12 @@
 
             <trans-unit id="form.label_address">
                 <source>form.label_address</source>
-                <target>Address</target>
+                <target>Address *</target>
             </trans-unit>
 
             <trans-unit id="form.label_phone">
                 <source>form.label_phone</source>
-                <target>Phone</target>
+                <target>Phone number*</target>
             </trans-unit>
 
             <trans-unit id="form.label_email">
@@ -74,17 +114,17 @@
 
             <trans-unit id="form.label_twitter">
                 <source>form.label_twitter</source>
-                <target>Twitter</target>
+                <target>Twitter pseudo</target>
             </trans-unit>
 
             <trans-unit id="form.label_facebook">
                 <source>form.label_facebook</source>
-                <target>Facebook</target>
+                <target>Facebook pseudo</target>
             </trans-unit>
 
             <trans-unit id="form.label_instagram">
                 <source>form.label_instagram</source>
-                <target>Instagram</target>
+                <target>Instagram pseudo</target>
             </trans-unit>
 
             <trans-unit id="form.label_is_credit_card">
@@ -114,7 +154,7 @@
 
             <trans-unit id="form.label_menu">
                 <source>form.label_menu</source>
-                <target>Menu</target>
+                <target>Menu link</target>
             </trans-unit>
 
             <trans-unit id="form.label_reservation">
@@ -124,7 +164,7 @@
 
             <trans-unit id="form.label_description">
                 <source>form.label_description</source>
-                <target>Description</target>
+                <target>Bar Description *</target>
             </trans-unit>
 
             <trans-unit id="form.label_seo_description">
@@ -134,7 +174,7 @@
 
             <trans-unit id="form.label_medias">
                 <source>form.label_medias</source>
-                <target>Medias</target>
+                <target>Medias *</target>
             </trans-unit>
 
             <trans-unit id="form.label_media">
@@ -463,6 +503,10 @@
                 <source>list.label_is_on_top</source>
                 <target>Is on top</target>
             </trans-unit>
+            <trans-unit id="list.label_on_top">
+                <source>list.label_on_top</source>
+                <target>On top</target>
+            </trans-unit>
             <trans-unit id="filter.label_is_on_top">
                 <source>filter.label_is_on_top</source>
                 <target>Is on top</target>
@@ -539,6 +583,134 @@
             <trans-unit id="filter.label_medias">
                 <source>filter.label_medias</source>
                 <target>Medias</target>
+            </trans-unit>
+            <trans-unit id="list.label_city">
+                <source>list.label_city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="list.label_suburb">
+                <source>list.label_suburb</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="list.label_website">
+                <source>list.label_website</source>
+                <target>Website</target>
+            </trans-unit>
+            <trans-unit id="filter.label_city">
+                <source>filter.label_city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="filter.label_suburb">
+                <source>filter.label_suburb</source>
+                <target>Suburb</target>
+            </trans-unit>
+            <trans-unit id="filter.label_on_top">
+                <source>filter.label_on_top</source>
+                <target>On Top</target>
+            </trans-unit>
+            <trans-unit id="form.label_opening_day">
+                <source>form.label_opening_day</source>
+                <target>Opening Day</target>
+            </trans-unit>
+            <trans-unit id="form.label_from_hour">
+                <source>form.label_from_hour</source>
+                <target>From</target>
+            </trans-unit>
+            <trans-unit id="form.label_to_hour">
+                <source>form.label_to_hour</source>
+                <target>To</target>
+            </trans-unit>
+            <trans-unit id="filter.label_energy_level">
+                <source>filter.label_energy_level</source>
+                <target>Energy level</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_style">
+                <source>filter.label_is_style</source>
+                <target>Style</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_occasion">
+                <source>filter.label_is_occasion</source>
+                <target>Occasion</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_atmosphere">
+                <source>filter.label_is_atmosphere</source>
+                <target>Atmosphere</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_alcohol">
+                <source>filter.label_is_alcohol</source>
+                <target>Alcohol</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_cocktail">
+                <source>filter.label_is_cocktail</source>
+                <target>Cocktail</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_mood">
+                <source>filter.label_is_mood</source>
+                <target>Mood</target>
+            </trans-unit>
+            <trans-unit id="form.label_energy_level">
+                <source>form.label_energy_level</source>
+                <target>Energy level</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_style">
+                <source>form.label_is_style</source>
+                <target>Style</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_occasion">
+                <source>form.label_is_occasion</source>
+                <target>Occasion</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_atmosphere">
+                <source>form.label_is_atmosphere</source>
+                <target>Atmosphere</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_alcohol">
+                <source>form.label_is_alcohol</source>
+                <target>Alcohol</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_cocktail">
+                <source>form.label_is_cocktail</source>
+                <target>Cocktail</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_mood">
+                <source>form.label_is_mood</source>
+                <target>Mood</target>
+            </trans-unit>
+            <trans-unit id="list.label_energy_level">
+                <source>list.label_energy_level</source>
+                <target>Energy level</target>
+            </trans-unit>
+            <trans-unit id="list.label_by_tag">
+                <source>list.label_by_tag</source>
+                <target>By Tag</target>
+            </trans-unit>
+            <trans-unit id="filter.label_by_tag">
+                <source>filter.label_by_tag</source>
+                <target>By Tag</target>
+            </trans-unit>
+            <trans-unit id="filter.label_country">
+                <source>filter.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="form.label_country">
+                <source>form.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="form.label_sponsor_image_file">
+                <source>form.label_sponsor_image_file</source>
+                <target>Sponsor Image</target>
+            </trans-unit>
+            <trans-unit id="form.label_file">
+                <source>form.label_file</source>
+                <target>Image</target>
+            </trans-unit>
+            <trans-unit id="form.label_by_tag">
+                <source>form.label_by_tag</source>
+                <target>By Tag</target>
+            </trans-unit>
+            <trans-unit id="form.label_ordered">
+                <source>form.label_ordered</source>
+                <target>Ordered</target>
             </trans-unit>
 
         </body>

@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use WBB\BarBundle\Entity\Bar;
 
 class CitySuburbAdmin extends Admin
 {
@@ -18,10 +19,16 @@ class CitySuburbAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+
         $formMapper
             ->with('General')
-                ->add('name')
-            ->end();
+                ->add('name', null, array('label'=> 'Name of the area *', 'help'=>'Mandatory'));
+
+        if(!$this->hasParentFieldDescription()) {
+            $formMapper->add('city', null, array('required' => true));
+        }
+
+        $formMapper->end();
     }
 
     /**

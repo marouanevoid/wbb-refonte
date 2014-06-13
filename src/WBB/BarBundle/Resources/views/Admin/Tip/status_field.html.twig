@@ -1,0 +1,13 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% if object.status == 0 %}
+            <strong>Pending</strong>
+        {% elseif object.status == 1 %}
+            <strong>Enabled</strong>
+        {% elseif object.status == 2 %}
+            <strong>Disabled</strong>
+        {% endif %}
+    </div>
+{% endblock %}

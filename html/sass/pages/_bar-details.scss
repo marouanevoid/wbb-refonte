@@ -1,6 +1,7 @@
 .bar-details {
 
   .gallery{
+    .loader{position: absolute; left: 1px; top: 0; width: 100%; height: 100%; background: url('../images/loading.gif') no-repeat center #000; z-index: 99; display: none }
     .main{
       width: 50%; float: left; position: relative; overflow: hidden;
       .image{
@@ -20,7 +21,7 @@
   .content
   {
     .trends {
-      font-size: 1.6em; margin-bottom: 2em;
+      font-size: 1.6em; margin-bottom: 2em; line-height: 2.6em;
       li{ display: inline-block; margin-left: 0.7em }
       li:after{ content: '.'; position: relative; margin-left: 1em; top: -0.25em }
       li:first-child{ color:#333; margin-left: 0 }
@@ -32,6 +33,7 @@
       .more{ display: block }
     }
 
+
     aside{
 
       .informations{
@@ -40,7 +42,7 @@
           background: #fff; padding: 1em;
           .gmap { position: relative;
             .get-directions {
-              position: absolute; text-align: center; z-index: 10; width: 100%; height: 100%; left: 0; top: 0;
+              position: absolute; text-align: center; z-index: 10; width: 100%; height: 100%; left:0; top: 0;
               background-image: url("../images/icons/pin.gmap.png"); background-repeat: no-repeat;
               background-size: 34px 96px; background-position: center center;
               .btn-small-radius { margin-top: 24%; background: #fff }
@@ -98,7 +100,7 @@
       .main{ width: 100%; border-bottom: 1px solid #fff }
       .ui-slider{
         width: 100%;
-        .ui-slide .image{ width: 33.33% }
+        .ui-slide .image{ width: 33.33%; height: auto }
         .ui-slide .image:first-of-type{ border-left: 0 }
         .ui-slide .image:last-of-type{ display: none }
         .arrows{ display: none }

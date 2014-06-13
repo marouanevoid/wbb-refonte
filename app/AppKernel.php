@@ -15,6 +15,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
@@ -40,8 +41,8 @@ class AppKernel extends Kernel
             //Foursquare
             new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),
 
-            //Guzzle
-//            new Misd\GuzzleBundle\MisdGuzzleBundle(),
+            //Avalanche Imagine Bundle
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
 
             //Mobile Detecte
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
@@ -54,6 +55,9 @@ class AppKernel extends Kernel
             
             // sonata datepiker
             new Stnw\DatePickerBundle\StnwDatePickerBundle(),
+
+            //Serializer Bundle
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
 
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),

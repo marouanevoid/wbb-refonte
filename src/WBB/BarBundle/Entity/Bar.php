@@ -9,12 +9,15 @@ use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Bar
  *
  * @ORM\Table(name="wbb_bar")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BarRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Bar
 {
@@ -25,12 +28,16 @@ class Bar
     const BAR_STATUS_DISABLED_VALUE = 0;
     const BAR_STATUS_DISABLED_TEXT = "Disabled";
 
+    const MOBILE_DESCRIPTION_CHARS_LIMIT = 500;
+    const DESKTOP_DESCRIPTION_CHARS_LIMIT = 1000;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
      */
     private $id;
 
@@ -38,8 +45,16 @@ class Bar
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @JMS\Expose
      */
     private $name;
+
+    /**
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @ORM\Column(unique=true)
+     * @JMS\Expose
+     */
+    private $slug;
 
     /**
      * @var string
@@ -114,14 +129,14 @@ class Bar
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isCreditCard", type="boolean", nullable=true)
+     * @ORM\Column(name="is_credit_card", type="boolean", nullable=true)
      */
     private $isCreditCard;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isCoatCheck", type="boolean", nullable=true)
+     * @ORM\Column(name="is_coat_check", type="boolean", nullable=true)
      */
     private $isCoatCheck;
 
@@ -149,7 +164,7 @@ class Bar
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isReservation", type="boolean", nullable=true)
+     * @ORM\Column(name="is_reservation", type="boolean", nullable=true)
      */
     private $isReservation;
 
@@ -177,7 +192,7 @@ class Bar
     /**
      * @var boolean
      *
-     * @ORM\Column(name="onTop", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $onTop;
 
@@ -250,6 +265,7 @@ class Bar
 
     /**
      * @ORM\OneToMany(targetEntity="Tip", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $tips;
     
@@ -432,7 +448,13 @@ class Bar
      */
     public function setWebsite($website)
     {
-        $this->website = $website;
+        if ((strpos($website,'http://') !== false) or (strpos($website,'https://') !== false)) {
+            $this->website = $website;
+        }
+        else
+        {
+            $this->website = 'http://'.$website;
+        }
 
         return $this;
     }
@@ -616,7 +638,13 @@ class Bar
      */
     public function setMenu($menu)
     {
-        $this->menu = $menu;
+        if ((strpos($menu,'http://') !== false) or (strpos($menu,'https://') !== false)) {
+            $this->menu = $menu;
+        }
+        else
+        {
+            $this->menu = 'http://'.$menu;
+        }
 
         return $this;
     }
@@ -662,7 +690,13 @@ class Bar
      */
     public function setReservation($reservation)
     {
-        $this->reservation = $reservation;
+        if ((strpos($reservation,'http://') !== false) or (strpos($reservation,'https://') !== false)) {
+            $this->reservation = $reservation;
+        }
+        else
+        {
+            $this->reservation = 'http://'.$reservation;
+        }
 
         return $this;
     }
@@ -685,7 +719,7 @@ class Bar
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = strip_tags($description, '<a><b><br><strong><u><i>');
 
         return $this;
     }
@@ -830,6 +864,9 @@ class Bar
         $this->isCreditCard     = true;
         $this->onTop            = true;
         $this->isReservation    = true;
+
+        $this->latitude = 0;
+        $this->longitude = 0;
     }
 
     /**
@@ -1099,10 +1136,20 @@ class Bar
     /**
      * Get tips
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param bool $enabled
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTips()
+    public function getTips($enabled = false)
     {
+        if($enabled){
+            $tips = array();
+            foreach($this->tips as $tip){
+                if($tip->getStatus() == 1)
+                    $tips[] = $tip;
+            }
+            return $tips;
+        }
+
         return $this->tips;
     }
 
@@ -1205,7 +1252,8 @@ class Bar
         $tags = array();
         foreach($this->getTags() as $tag)
         {
-            $tags[] = $tag->getTag()->getId();
+            if($tag->getTag())
+                $tags[] = $tag->getTag()->getId();
         }
 
         if(sizeof($tags)>0)
@@ -1245,5 +1293,70 @@ class Bar
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Bar
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function splitDescription($getMore = false, $mobile = false)
+    {
+        $limit = ($mobile) ? self::MOBILE_DESCRIPTION_CHARS_LIMIT : self::DESKTOP_DESCRIPTION_CHARS_LIMIT;
+
+        $fullArray = explode("<br>", $this->description);
+        $init = $fullArray[0];
+        $delta = abs(strlen($init) - $limit);
+        $more = "";
+        $curNb = 0;
+        $curDelta = 0;
+        $i = 1;
+        for ($i = 1 ; $i < count($fullArray) ; $i++) {
+            $cur = $fullArray[$i];
+            $curNb = strlen($cur);
+            $curSize = strlen($init) + $curNb;
+            $curDelta = abs($curSize - $limit);
+            if ($curDelta < $delta+3) {
+                $init .= "<br>".$cur;
+                $delta = $curDelta;
+            } else {
+                $moreArray = array_slice($fullArray, $i);
+                $more = implode( "<br>" , $moreArray);
+                break;
+            }
+        }
+
+        if($getMore)
+            return $more;
+        else
+            return $init;
+    }
+
+    public function getDescriptionIntro($mobile = false)
+    {
+        return $this->splitDescription(false, $mobile);
+    }
+
+    public function getDescriptionMore($mobile = false)
+    {
+        return $this->splitDescription(true, $mobile);
     }
 }

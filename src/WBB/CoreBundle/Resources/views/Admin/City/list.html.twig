@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% include 'SonataAdminBundle:Core:create_button.html.twig' %}
+        <a class="btn sonata-action-element" href="{{ path('admin_wbb_core_country_list') }}" target="_blank">
+            <i class="icon-list"></i>
+            Countries List
+        </a>
+    </div>
+{% endblock %}

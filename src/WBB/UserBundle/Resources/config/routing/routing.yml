@@ -1,3 +1,7 @@
 wbb_fos_user:
     resource: "@WBBUserBundle/Resources/config/routing/fosuser.yml"
     prefix:   /
+
+wbb_user_favoris_add:
+    pattern:  /favoris/add
+    defaults: { _controller: WBBBarBundle:Favoris:add }

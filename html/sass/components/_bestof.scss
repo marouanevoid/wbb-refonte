@@ -8,10 +8,16 @@ article.bestof {
       h3 { color: $color-subtle-yellow; text-transform: none; }
     }
   }
-  img.scale-with-grid{ display: block; @include opacity(0.8); @include transition( opacity ease-in-out 0.2s); @include reduceFlickering() }
+  img.scale-with-grid{ display: block; opacity : 0.8; @include transition( opacity ease-in-out 0.2s); @include reduceFlickering() }
 
   &:hover
   {
-    img.scale-with-grid{ @include opacity(1) }
+    img.scale-with-grid{ opacity : 1 }
   }
+}
+
+html.mobile article.bestof
+{
+  img.scale-with-grid{ opacity : 1 }
+  &:hover img.scale-with-grid{ opacity : 1 }
 }

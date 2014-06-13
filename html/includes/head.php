@@ -31,7 +31,11 @@
     <script type="text/javascript" src="js/plugins/jquery.transform3d.js"></script>
     <script type="text/javascript" src="js/plugins/modernizr.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.jscrollpane.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
@@ -40,6 +44,8 @@
     <script type="text/javascript" src="js/libs/dropdown.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/radio.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/search.metabolism.js"></script>
+    <script type="text/javascript" src="js/libs/map.metabolism.js"></script>
+    <script type="text/javascript" src="js/libs/form.metabolism.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/anim.js"></script>
@@ -47,14 +53,32 @@
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-        var BASEURL = "/";
-        //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
+        //var BASEURL = "/pr0d/wbb/";
+        var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = { loading: 'Loading...'};
     </script>
 
 </head>
 
 <body class="<?=$page?>">
+
+    <div id="fb-root"></div>
+
+    <script type="text/javascript">
+
+        //facebook
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        //twitter
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+    </script>
 
     <div class="entire-content">
         <div class="entire-content-scrollable">

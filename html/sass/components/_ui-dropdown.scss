@@ -9,7 +9,11 @@
     .ui-dropdown.drop-dark {
       background: $color-light-gray; color: $color-subtle-yellow; border-color:$color-light-gray;
       span:before { opacity: 1 }
+      &:after { opacity: 1 }
     }
+
+    .drop-light{ background: #fff!important }
+
   }
 
   .ui-dropdown-placeholder{ display: none }
@@ -19,12 +23,16 @@
   .ui-dropdown {
     width: 100%; box-sizing: border-box; padding-top:0; padding-bottom: 0; cursor: pointer; border-radius: 20px; background: #fff;
     span{
-      display: block; height:34px; line-height:34px; position:relative; text-align: left; padding-right: 30px; white-space: nowrap;
-      &:after,&:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -160px 0; position: absolute; top: 50%; right: -10px; width: 40px; height: 40px; margin-top: -20px }
+      display: block; height:38px; line-height:38px; position:relative; text-align: left; padding-right: 30px; white-space: nowrap;
+      &:after,&:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -160px 0; position: absolute; top: 50%; right: -15px; width: 40px; height: 40px; margin-top: -20px }
       &:before{ background-position: -160px -40px; opacity: 0 }
     }
-    .choice { width: 100%; display: none;  z-index: 100; box-sizing: border-box; text-align: left; font-size: 90%;
-      ul { padding: 0.6em 0; max-height: 100px; overflow-y: scroll; margin-bottom: 1.2em; overflow-x: hidden;
+    .slide{ display: none; overflow-x: hidden!important }
+    .choice {
+      overflow-x: hidden; overflow-y: scroll; width: 100%; z-index: 100; box-sizing: border-box; text-align: left; font-size: 90%; margin-bottom: 1.2em; height: 100px;
+      .jspContainer{ height: 100px!important }
+      .jspTrack{ height: 98px!important }
+      ul { padding: 0.6em 0;
         li {
           padding-bottom: 1em; @include transition( color 0.2s ease-in-out);
           &:last-child { padding-bottom: 0; }
@@ -32,17 +40,22 @@
       }
     }
     &.drop-light {
-      color: $color-brown; @include lightScrollbar();
+      color: $color-brown;
       .choice li:hover{ color:$color-brown-dark }
+      &:hover { background: #fff }
+    }
+    &.drop-cream {
+      background-color: #000000;
     }
     &.drop-dark {
-      background: $color-gray; color: $color-brown; border-color:$color-brown; @include darkScrollbar();
+      background: $color-gray; color: $color-brown; border-color:$color-brown;
       &:hover, &.active { background: $color-light-gray; color: $color-subtle-yellow; border-color:$color-light-gray; }
       &:hover span:before, &.active span:before { opacity: 1 }
       .choice li:hover{ color:#fff }
       span{
         &:before{ background-position: -160px -40px; z-index: 1; @include transition( opacity 0.2s ease-in-out) }
       }
+      .jspTrack{ background: $color-gray; border-color: $color-gray }
     }
   }
 }

@@ -24,7 +24,11 @@
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.transform3d.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/modernizr.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/placeholders.min.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.jscrollpane.js"></script>
 
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/slider.metabolism.js"></script>
@@ -33,6 +37,8 @@
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/dropdown.metabolism.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/radio.metabolism.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/search.metabolism.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/libs/map.metabolism.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/libs/form.metabolism.js"></script>
 
     <script type="text/javascript" src="/bundles/wbbcore/js/app.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/anim.js"></script>
@@ -43,7 +49,7 @@
     <script type="text/javascript">
         var MARKET  = "US";
         var LANG    = "en";
-        var BASEURL = "/";
+        var BASEURL = "/bundles/wbbcore/";
         var TRAD    = { loading: 'Loading...'};
     </script>
     {% block javascripts %}
@@ -55,6 +61,23 @@
 {% block bodyTag %}
 <body>
 {% endblock %}
+<div id="fb-root"></div>
+
+<script type="text/javascript">
+
+    //facebook
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    //twitter
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+</script>
 
 {% block header %}
     {% include '::header.html.twig' %}
@@ -66,24 +89,6 @@
 {% block footer %}
     {% include '::footer.html.twig' %}
 {% endblock %}
-
-<div id="fb-root"></div>
-
-<script type="text/javascript">
-
-    //facebook
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=204779309680162&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    //twitter
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-
-</script>
 
 </body>
 </html>

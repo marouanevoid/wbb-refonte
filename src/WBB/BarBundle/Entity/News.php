@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * News
  *
  * @ORM\Table(name="wbb_news")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\NewsRepository")
  */
 
 class News {
@@ -76,7 +76,7 @@ class News {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_on_top", type="boolean", nullable=true)
+     * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $isOnTop;
 

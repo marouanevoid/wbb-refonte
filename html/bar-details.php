@@ -1,6 +1,8 @@
 <?php $page = 'bar-details' ?>
 <?php include('includes/head.php') ?>
 
+<div itemscope itemtype="http://schema.org/BarOrPub">
+
     <!-- SUBHEADER -->
     <div class="container">
         <section class="sub-header">
@@ -8,12 +10,12 @@
                 <tr>
                     <?php if( !$is_mobile ): ?>
                         <td>
-                            <?php include('components/city-selector.php') ?>
+                            <?php include('components/city-btn.php') ?>
                         </td>
                     <?php endif ?>
 
                     <td class="title">
-                        <h1>Macao Trading Co.</h1>
+                        <h1 itemprop="name">Macao Trading Co.</h1>
                         <h3>Lower Manhattan, New York</h3>
                     </td>
 
@@ -36,9 +38,11 @@
                 <?php include('components/slider/video.php') ?>
             </div>
 
-            <div class="ui-slider type-bar-detail has_sizer arrows infinite" data-size="4x3" data-animation="latency">
+            <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
 
-                <?php for($i=1; $i<3; $i++): ?>
+                <div class="loader"></div>
+
+                <?php for($i=1; $i<5; $i++): ?>
 
                     <div class="ui-slide">
                         <?php for($j=2; $j<6; $j++): ?>
@@ -125,11 +129,16 @@
                             </div>
 
                             <p>
-                                354 West Hubbard Street<br/>
-                                New York, NY<br/>
-                                (555) 555-5555<br/>
-                                <a href="">info@macaonyc.com</a><br/>
-                                <a href="" class="btn-small-round www brown"></a>
+                                <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                    <span itemprop="streetAddress">3354 West Hubbard Street</span><br/>
+                                    <span itemprop="addressLocality">New York</span>, <span itemprop="addressRegion">NY</span>
+                                </span>
+                                <br/>
+                                <span itemprop="telephone">
+                                    (555) 555-5555<br/>
+                               </span>
+                                <a href="" itemprop="email">info@macaonyc.com</a><br/>
+                                <a href="" class="btn-small-round www brown" itemprop="url"></a>
                                 <a href="" class="btn-small-round twitter"></a>
                                 <a href="" class="btn-small-round facebook"></a>
                                 <a href="" class="btn-small-round instagram"></a>
@@ -140,20 +149,20 @@
 
                             <div class="p">
                                 Hours: Today 5:00 pm - 2:00 am
-                                <a href="" class="see-more">(See all)</a>
+                                <a href="" class="see-more fade">(See all)</a>
                                 <div class="more">
-                                    Today 5:00 pm - 2:00 am<br/>
-                                    Today 5:00 pm - 2:00 am<br/>
-                                    Today 5:00 pm - 2:00 am<br/>
-                                    Today 5:00 pm - 2:00 am<br/>
+                                    <time itemprop="openingHours" datetime="Mo 17:00-2:00">Monday 5:00 pm - 2:00 am</time><br/>
+                                    <time itemprop="openingHours" datetime="Tu 17:00-2:00">Tuesday 5:00 pm - 2:00 am</time><br/>
+                                    <time itemprop="openingHours" datetime="We 17:00-2:00">Wednesday 5:00 pm - 2:00 am</time><br/>
+                                    <time itemprop="openingHours" datetime="Mh 17:00-2:00">Thursday 5:00 pm - 2:00 am</time><br/>
                                 </div>
                                 <br/>
-                                Accepts Credit Cards: Yes<br/>
+                                Accepts <span itemprop="paymentAccepted">Credit Cards</span>: Yes<br/>
                                 Coat Check: Yes<br/>
                                 Parking: Street<br/>
-                                Price: $$$$
-                                <a href="">(View menu)</a><br/>
-                                Reservation: Yes<br/>
+                                Price: <span itemprop="priceRange">$$$$</span>
+                                <a href="" itemprop="menu">(View menu)</a><br/>
+                                Reservation: <span itemprop="acceptsReservations">Yes</span><br/>
                                 <a href="" class="btn-small-radius border brown">Make a Reservation</a>
                             </div>
                         </div>
@@ -185,12 +194,13 @@
         </div>
     <?php endif ?>
 
-    <!-- ALSO LIKE -->
-    <?php include('components/also-like.php') ?>
+</div>
+<!-- ALSO LIKE -->
+<?php include('components/also-like.php') ?>
 
-    <!-- AD -->
-    <?php if( !$is_mobile ): ?>
-        <?php include('components/footer-ad.php') ?>
-    <?php endif ?>
+<!-- AD -->
+<?php if( !$is_mobile ): ?>
+    <?php include('components/footer-ad.php') ?>
+<?php endif ?>
 
 <?php include('includes/foot.php') ?>

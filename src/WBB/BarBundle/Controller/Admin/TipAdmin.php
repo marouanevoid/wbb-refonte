@@ -18,7 +18,9 @@ class TipAdmin extends Admin {
             ->addIdentifier('id')
             ->add('user', null, array('editable' => true))
             ->add('description', null, array('editable' => true))
-            ->add('status', null, array('editable' => true))
+            ->add('status', null, array(
+                'template' => 'WBBBarBundle:Admin:Tip\status_field.html.twig'
+            ))
         ;
     }
 
@@ -59,18 +61,29 @@ class TipAdmin extends Admin {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
-                ->add('bar', 'sonata_type_model')
+                ->add('bar', 'sonata_type_model', array('label'=> 'Link to Bar'))
                 ->add('status', 'choice', array(
                     'required' => false,
                     'choices'  => array(
-                        0 => 'pending',
-                        1 => 'enabled',
-                        2 => 'disabled'
+                        0 => 'Pending',
+                        1 => 'Enabled',
+                        2 => 'Disabled'
                     )
                 ))
                 ->add('description')
             ->end()
         ;
     }
+
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+        '_page' => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt'
+    );
 
 }

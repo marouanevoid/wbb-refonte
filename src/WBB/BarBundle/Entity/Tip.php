@@ -5,12 +5,15 @@ namespace WBB\BarBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Tip
  *
  * @ORM\Table(name="wbb_tip")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\TipRepository")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 
 class Tip {
@@ -21,11 +24,14 @@ class Tip {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="tips")
+     * @JMS\MaxDepth(1)
+     * @JMS\Expose
      */
     private $user;
 
@@ -38,6 +44,7 @@ class Tip {
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * @JMS\Expose
      */
     private $description;
 
@@ -45,6 +52,7 @@ class Tip {
      * @var integer
      *
      * @ORM\Column(name="status", type="smallint", nullable=true)
+     * @JMS\Expose
      */
     private $status;
 
@@ -53,6 +61,7 @@ class Tip {
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * @JMS\Expose
      */
     private $createdAt;
 

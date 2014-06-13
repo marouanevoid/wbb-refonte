@@ -50,14 +50,18 @@ meta.Dropdown = function(config){
         template  : '<div class="ui-dropdown-container">'+
                         '<div class="btn-radius border ui-dropdown %color%">'+
                             '<span>%name%</span>'+
-                            '<div class="choice">'+
-                                '<ul>%options%</ul>'+
+                            '<div class="slide">'+
+                                '<div class="choice custom-scroll">'+
+                                    '<ul>%options%</ul>'+
+                                '</div>'+
                             '</div>'+
                         '</div>'+
                         '<div class="ui-dropdown-placeholder"></div>'+
                     '</div>'
     };
 
+    that.active = false;
+    that.currentScroll = 0;
 
     /* Private. */
 
@@ -72,29 +76,48 @@ meta.Dropdown = function(config){
         {
             that.config.$dropdown_value.click(function() {
 
-                if( $dropdown.hasClass("dropdown-open") ){
+                if( !$dropdown.hasClass("dropdown-open") ){
 
-                    $dropdown.find('.choice').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
-                        $dropdown.removeClass('dropdown-open')
-                    }});
-                }
-                else{
+                    that.currentScroll = $(window).scrollTop();
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
-                    $dropdown.css({width:$dropdown.width()});
-                    $dropdown.addClass('dropdown-open').find('.choice').velocity('slideDown', {speed:that.config.speed, easing:that.config.easing});
+
+                    $dropdown.addClass('dropdown-open').find('.slide').velocity('slideDown', {speed:that.config.speed, easing:that.config.easing, complete: function()
+                    {
+                        that.active = true;
+                    }});
                 }
             });
 
             $dropdown.find('.choice li').click(function(){
 
                 that.config.$dropdown_value.text( $(this).text() );
-                that.config.$dropdown_value.click();
 
                 var $options = that.config.$dropdown.find('option');
 
                 $options.removeAttr('selected');
-                $options.eq( $(this).index() ).attr('selected', 'selected');
+                $options.eq( $(this).index()+1 ).attr('selected', 'selected');
+
+                $(document).click();
             });
+
+            $(document).click(function(e)
+            {
+                if( !$(e.target).closest('.ui-dropdown').length && that.active )
+                {
+                    that.active = false;
+                    $dropdown.find('.slide').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
+                        $dropdown.removeClass('dropdown-open');
+                    }});
+                }
+            });
+
+            if( $('html').hasClass('ie9') )
+            {
+                $(window).scroll(function()
+                {
+                    that._lockscroll();
+                });
+            }
         }
         else
         {
@@ -107,6 +130,11 @@ meta.Dropdown = function(config){
     };
 
 
+    that._lockscroll = function(){
+
+        if( that.active) $('html,body').scrollTop(that.currentScroll);
+    };
+
     /**
      *
      */
@@ -118,12 +146,12 @@ meta.Dropdown = function(config){
         $options.each(function()
         {
             if( !$(this).attr('disabled') )
-                html += "<li>"+$(this).text()+"</li>"
+                html += "<li class='"+$(this).val()+"'>"+$(this).text()+"</li>"
         });
 
         html = that.config.template.replace('%options%', html);
         html = html.replace('%name%', $options.first().text());
-        html = html.replace('%color%', 'drop-'+that.config.color);
+        html = html.replace('%color%', 'drop-'+that.config.color+' '+that.config.$dropdown.data('class'));
 
         that.config.$dropdown_replacement = $(html);
         that.config.$dropdown.after(that.config.$dropdown_replacement);
@@ -133,6 +161,11 @@ meta.Dropdown = function(config){
 
         that.config.$dropdown_replacement.append(that.config.$dropdown);
 
+        if( !$('html').hasClass('mobile') )
+        {
+            var drop_width = that.config.$dropdown_replacement.width()+60;
+            that.config.$dropdown_replacement.css({width:Math.max(200, drop_width)});
+        }
     };
 
 

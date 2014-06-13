@@ -9,13 +9,13 @@
 
                     <td class="logo">
                         <a href="index.php">
-                            <img src="images/logo-placeholder.png" alt="logo" width="157" height="85"/>
+                            <img src="images/logo-placeholder.png" alt="logo" width="158" height="85"/>
                         </a>
                     </td>
 
                     <td class="nav">
                         <?php include('components/header/nav.php') ?>
-                        <form>
+                        <form action="search.php">
                             <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
                         </form>
                     </td>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="search-result-proposal"><ul></ul><div>
+    <div class="search-result-proposal"><ul></ul></div>
 
 </header>
 

@@ -5,5 +5,5 @@
     </div>
     <a href="" class="overlay-link"></a>
     <img class="overlay" src="images/city.background-circle.png"/>
-    <img class="scale-with-grid" src="tmp/city.jpg" alt="city.paris"/>
+    <img src="" class="scale-with-grid" data-src="tmp/city.jpg" alt="city.paris"/>
 </article>

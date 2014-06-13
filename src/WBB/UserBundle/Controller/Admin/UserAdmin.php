@@ -68,6 +68,8 @@ class UserAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('username')
+                ->add('firstname')
+                ->add('lastname')
                 ->add('email')
                 ->add('plainPassword', 'text', array('required' => false))
             ->end()
