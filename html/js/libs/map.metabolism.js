@@ -185,7 +185,7 @@ meta.Map = function(config){
                                 options:{
                                     content:  '<div class="label">'+context.data+'</div>',
                                     offset:{
-                                        y:-70,
+                                        y:-95,
                                         x:30
                                     }
                                 }

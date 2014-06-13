@@ -3,7 +3,7 @@
   h2 { color: $color-brown; text-transform: uppercase; font-weight: bold; }
   h3 { text-transform: none; }
   .nine.columns {
-    .tags { font-size: 1.5em; color: $color-medium-gray; position: absolute; bottom: 1.5em; left: 25%;  margin-left: 2.6%;
+    .tags { font-size: 1.5em; color: $color-medium-gray; position: absolute; bottom: 1.5em; left: 25%;  margin-left: 1.16667%;
       &:before{ vertical-align: middle; content: ''; display: inline-block; width: 16px; height: 16px; margin-right: 10px; background: url("../images/icons/tag-gray.png") center no-repeat; background-size: 100% auto; }
     }
   }

@@ -80,11 +80,11 @@
 
     </script>
 
+    <?php if( $is_mobile ): ?>
+        <?php include('includes/mobile/header.php') ?>
+    <?php else: ?>
+        <?php include('includes/header.php') ?>
+    <?php endif ?>
+
     <div class="entire-content">
         <div class="entire-content-scrollable">
-
-            <?php if( $is_mobile ): ?>
-                <?php include('includes/mobile/header.php') ?>
-            <?php else: ?>
-                <?php include('includes/header.php') ?>
-            <?php endif ?>

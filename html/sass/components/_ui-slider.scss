@@ -60,7 +60,7 @@
   &.type-cities, &.type-bestof
   {
     clear: both;
-    .ui-slide { box-sizing: border-box; border-left: 0.3em solid transparent; border-right: 0.3em solid transparent; z-index: 40; margin-left: -0.3em }
+    .ui-slide { box-sizing: border-box; border-right: 0.6em solid transparent; z-index: 40 }
     article {
       &:first-of-type { margin-left: 0; }
       &:last-of-type { margin-right: 0; }
@@ -80,14 +80,13 @@
 
   &.type-cities{
     width: 90%; margin: 0 auto;
-    .ui-slide { width: 16.8%; margin-left: -0.3em }
+    .ui-slide { width: 16.75% }
   }
 
   &.type-bestof{
     .ui-slide { width: 33.5% }
   }
 }
-
 
 @media only screen and (max-width: $grid-breakpoint-mobile) {
 
@@ -119,13 +118,10 @@
 
 
 html.webkit .ui-slide{ overflow: visible }
-
-html.ie9 .ui-slider{
-  &.type-cities{
-    .ui-slide { width: 17% }
-  }
-
-  &.type-bestof{
-    .ui-slide { width: 33.7% }
+html.no-csstransforms3d .ui-slider
+{
+  &.type-cities, &.type-bestof
+  {
+    .ui-slides{ width: 100.5% }
   }
 }
