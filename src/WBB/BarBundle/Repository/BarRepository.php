@@ -42,6 +42,27 @@ class BarRepository extends EntityRepository
 
     }
 
+    public function findPopularBars($city = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->setMaxResults(5)
+        ;
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        //TODO : Add Favoris count
+
+        return $qb->getQuery()->getResult();
+
+    }
+
     public function findLatestBars($city = null, $limit = 5)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
