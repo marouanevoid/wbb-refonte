@@ -362,10 +362,10 @@ class News {
     /**
      * Remove city
      *
-     * @param City $citie
+     * @param City $city
      */
-    public function removeCity($citie){
-        $this->cities->removeElement($citie);
+    public function removeCity($city){
+        $this->cities->removeElement($city);
     }
 
     /**

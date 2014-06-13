@@ -105,18 +105,7 @@ class NewsAdmin extends Admin {
                 )
             ->end()
             ->with('Related')    
-                ->add('bars', 'sonata_type_collection',
-                    array(
-                        'required'     => false,
-                        'by_reference' => false,
-                        'type_options' => array('delete' => true)
-                    ),
-                    array(
-                        'edit'      => 'inline',
-                        'inline'    => 'table',
-                        'sortable'  => 'position'
-                    )
-                )                      
+                ->add('bars', 'sonata_type_model', array('required' => false,'multiple' => true))  
                 ->add('cities', 'sonata_type_model', array('required' => false,'multiple' => true))          
                 ->add('bestOfs', 'sonata_type_model', array('required' => false,'multiple' => true))
             ->end()
