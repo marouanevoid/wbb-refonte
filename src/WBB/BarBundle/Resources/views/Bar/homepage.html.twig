@@ -218,6 +218,7 @@
             {% endif %}
                 Latest News
             </div>
+            {% if topNews|length>2 %}
             {% for n in topNews|slice(0,1) %}
                 <article class="small">
                     <div class="img">
@@ -265,8 +266,58 @@
 
                 </article>
             {% endfor %}
+            {% elseif topNews|length==2 %}
+                {% for n in topNews|slice(0,1) %}
+                    <article class="small">
+                        <div class="img">
+                            <a href="" class="cover">
+                                {% for m in n.medias|slice(0,1) %}
+                                    <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                                {% endfor %}
+                            </a>
+                            <a class="plus-btn" href=""></a>
+                        </div>
+                        <div class="title vcenter">
+                            <h2><a href="">{{ n.title }}</a></h2>
+                        </div>
+                    </article>
+                {% endfor %}
+                {% for n in topNews|slice(1,1) %}
+                    <article class="small">
+                        <div class="title vcenter">
+                            <h2><a href="">{{ n.title }}</a></h2>
+                            <p class="m-margin">
+                                {{ n.shareText }}
+                            </p>
+                            <a class="plus-btn" href=""></a>
+                        </div>
 
-            <a class="btn-radius border brown h4 s-margin-top" href="" style="clear: left">See all articles</a>
+                    </article>
+                {% endfor %}
+            {% else %}
+                {% for n in topNews|slice(0,1) %}
+                    <article class="large">
+                        <div class="img">
+                            <a href="" class="cover">
+                                {# dump(n.medias) #}
+                                {% for m in n.medias|slice(0,1) %}
+                                    <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                                {% endfor %}
+                            </a>
+                            <a class="plus-btn" href=""></a>
+                        </div>
+                        <div class="title vcenter">
+                            <h2><a href="">{{ n.title }}</a></h2>
+                            <p class="m-margin">
+                                {{ n.shareText }}
+                            </p>
+                        </div>
+
+                    </article>
+                {% endfor %}
+            {% endif %}
+
+            <a class="btn-radius border brown h4 s-margin-top" href="" style="clear: left; float:left;">See all articles</a>
 
         </section>
 
