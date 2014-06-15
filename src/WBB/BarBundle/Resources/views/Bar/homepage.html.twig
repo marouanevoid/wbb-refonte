@@ -56,7 +56,7 @@
                                             {% if city is defined and c.id==city.id %}
                                                 selected="selected"
                                             {% endif %}
-                                        >{{ c.name }}</option>
+                                        ><a href="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</a></option>
                                     {% endfor %}
                                 </select>
                             </div>

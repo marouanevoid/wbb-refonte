@@ -62,7 +62,7 @@ meta.Cities = function() {
         $.each(bars, function(index, bar)
         {
             if( display_list ) html += '<li id="'+bar.id+'" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
-            markers.push({address:bar.address, data:'<b>'+bar.name+'</b>'+bar.address, options:{icon:'images/markers/'+(index+1)+'.png'}, id:bar.id});
+            markers.push({address:bar.address, data:'<b>'+bar.name+'</b>'+bar.address, options:{icon:'/bundles/wbbcore/images/markers/'+(index+1)+'.png'}, id:bar.id});
         });
 
         if( display_list )
@@ -89,7 +89,7 @@ meta.Cities = function() {
         $.each(cities, function(index, city)
         {
             if( display_list ) html += '<li id="'+city.id+'">'+city.name+'</li>';
-            markers.push({address:city.name, options:{icon:'images/map.pin.png'}, id:city.id});
+            markers.push({address:city.name, options:{icon:'/bundles/wbbcore/images/map.pin.png'}, id:city.id});
         });
 
         if( display_list )
@@ -171,7 +171,7 @@ meta.Cities = function() {
      */
     that._requestBars = function( city_id, neighborhood_id, callback )
     {
-        $.get('tmp/data/poi.php', {city_id:city_id, neighborhood_id:neighborhood_id}, function( data )
+        $.get('/app_dev.php/poi', {city_id:city_id, neighborhood_id:neighborhood_id}, function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.neighborhoods, data.bars);
@@ -184,7 +184,7 @@ meta.Cities = function() {
      */
     that._requestCities = function( callback )
     {
-        $.get('tmp/data/cities.php', function( data )
+        $.get('/app_dev.php/list/cities', function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.cities);

@@ -1,6 +1,6 @@
 <!-- AD -->
 {% if not is_mobile() or is_tablet() %}
-
+    {% if hideFooterAd is defined and hideFooterAd == 1 %}
     <section class="footer-ad">
 
         <div class="container align-center">
@@ -17,7 +17,7 @@
 
     </section>
 
-
+    {% endif %}
 {% endif %}
 {% if is_mobile() and not is_tablet() %}
 
