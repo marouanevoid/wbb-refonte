@@ -514,7 +514,7 @@
             <!-- sponsor -->
             <trans-unit id="form.label_sponsor">
                 <source>form.label_sponsor</source>
-                <target>Sponsor</target>
+                <target>Sponsor name</target>
             </trans-unit>
             <trans-unit id="list.label_sponsor">
                 <source>list.label_sponsor</source>

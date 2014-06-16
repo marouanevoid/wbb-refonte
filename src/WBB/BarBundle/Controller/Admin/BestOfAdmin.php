@@ -69,31 +69,37 @@ class BestOfAdmin extends Admin
         $imageOptions = array('required' => false);
         if (($object = $this->getSubject()) && $object->getImage()) {
             $path = $object->getWebPath();
-            $imageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
+            $imageOptions['help'] = 'Mandatory<br /><img width="250px" src="/' . $path . '" />';
+            $imageOptions['label'] = 'Best of visual *';
         }
 
         $sponsorImageOptions = array('required' => false);
         if (($object = $this->getSubject()) && $object->getSponsorImage()) {
             $path = $object->getWebPath(true);
             $sponsorImageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
+            $sponsorImageOptions['label'] = 'Sponsor visual';
         }
 
         $formMapper
             ->with('General')
-                ->add('name')
+                ->add('name', null, array('label' => 'Name of the best of *', 'help'=>'Mandatory'))
                 ->add('country', null, array('required' => false))
                 ->add('city', null, array('required' => false))
-                ->add('description')
+                ->add('description', 'textarea', array('label'=>'Best of description *', 'help' => 'Mandatory'))
                 ->add('file', 'file', $imageOptions)
                 ->add('sponsor')
                 ->add('sponsorImageFile', 'file', $sponsorImageOptions)
-                ->add('seoDescription')
+                ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory'))
                 ->add('byTag')
                 ->add('onTop')
-                ->add('ordered')
+                ->add('ordered', null, array('label' => 'Order from bar tab'))
             ->end()
             ->with('Tags')
-                ->add('tags', 'sonata_type_collection', array('required' => false),
+                ->add('tags', 'sonata_type_collection',
+                    array(
+                        'required' => false,
+                        'label' => 'Add a tag to this best of'
+                    ),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
@@ -101,15 +107,25 @@ class BestOfAdmin extends Admin
                     ))
             ->end()
             ->with('Bars')
-                ->add('bars', 'sonata_type_collection', array('required' => false),
+                ->add('bars', 'sonata_type_collection',
+                    array(
+                        'required' => false,
+                        'label'    => 'Add a bar to this best of'
+                    ),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('Related Best of')
-                ->add('bestofs', null, array('required' => false))
+            ->with('You may also like')
+                ->add('bestofs', null,
+                    array(
+                        'required' => false,
+                        'label' => 'If you want to add a related Best of, select it or them',
+                        'help' => '3 maximum'
+                    )
+                )
             ->end()
         ;
     }
@@ -141,12 +157,16 @@ class BestOfAdmin extends Admin
         $object->preUpload();
         $object->preUpload(true);
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBestof($object);
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                $tag->setBestof($object);
+            }
         }
 
-        foreach ($object->getBars() as $bar) {
-            $bar->setBestof($object);
+        if($object->getBars()){
+            foreach ($object->getBars() as $bar) {
+                $bar->setBestof($object);
+            }
         }
     }
 
@@ -155,12 +175,16 @@ class BestOfAdmin extends Admin
         $object->preUpload();
         $object->preUpload(true);
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBestof($object);
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                $tag->setBestof($object);
+            }
         }
 
-        foreach ($object->getBars() as $bar) {
-            $bar->setBestof($object);
+        if($object->getBars()){
+            foreach ($object->getBars() as $bar) {
+                $bar->setBestof($object);
+            }
         }
     }
 
