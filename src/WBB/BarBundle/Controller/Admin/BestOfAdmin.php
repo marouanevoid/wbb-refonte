@@ -89,7 +89,7 @@ class BestOfAdmin extends Admin
                 ->add('file', 'file', $imageOptions)
                 ->add('sponsor')
                 ->add('sponsorImageFile', 'file', $sponsorImageOptions)
-                ->add('seoDescription', 'textarea', array('label' => 'SEO description', 'help' => 'Mandatory'))
+                ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory', 'required'=> false))
                 ->add('byTag')
                 ->add('onTop')
                 ->add('ordered', null, array('label' => 'Order from bar tab'))
