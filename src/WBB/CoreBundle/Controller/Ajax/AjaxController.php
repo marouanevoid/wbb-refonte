@@ -113,6 +113,8 @@ class AjaxController extends Controller
     {
         $cities = $this->container->get('city.repository')->findCitiesWithBars();
 
+        var_dump($cities);die;
+
         $response = array();
 
         foreach($cities as $city)

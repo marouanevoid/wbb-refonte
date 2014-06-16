@@ -28,7 +28,7 @@ class CityRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
             ->select($this->getAlias().", COUNT(b) AS HIDDEN nbBars")
-            ->innerJoin($this->getAlias().".bars", "b")
+            ->leftJoin($this->getAlias().".bars", "b")
             ->having('nbBars > 0')
         ;
 
