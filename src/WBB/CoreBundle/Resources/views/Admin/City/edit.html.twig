@@ -13,9 +13,63 @@
         {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
     </div>
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+    <script src="{{ asset('bundles/wbbbar/js/admin/locationpicker.jquery.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('ul.nav-tabs li a').click(function() {
+                $('.mapcontainer').locationpicker({
+                    location: { latitude: $('#{{ admin.uniqId }}_latitude').val(), longitude: $('#{{ admin.uniqId }}_longitude').val() },
+                    radius: 0,
+                    zoom: 15,
+                    scrollwheel: true,
+                    inputBinding: {
+                        latitudeInput: $('#lat, #{{ admin.uniqId }}_latitude'),
+                        longitudeInput: $('#lon, #{{ admin.uniqId }}_longitude'),
+                        locationNameInput: $('#mpAddress')
+                    },
+                    enableAutocomplete: true
+                });
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}{% endblock %}
 {% use 'WBBCoreBundle:Admin:City/base_edit_form.html.twig' with form as parentForm %}
 {% block form %}
     {{ block('parentForm') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .mapcontainer img {
+            max-width: none;
+        }
+        .mapcontainer {
+            float: left;
+            margin-right: 20px;
+        }
+        .mapinfos {
+            float: left;
+        }
+        .mapinfos div {
+            clear: left;
+            margin-bottom: 15px;
+        }
+        .mapinfos label {
+            width: 100px;
+            float: left;
+            line-height: 30px;
+            margin-bottom: 0;
+        }
+        .mapinfos input {
+            float: left;
+        }
+    </style>
 {% endblock %}
