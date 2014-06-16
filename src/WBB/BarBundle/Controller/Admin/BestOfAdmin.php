@@ -82,14 +82,14 @@ class BestOfAdmin extends Admin
 
         $formMapper
             ->with('General')
-                ->add('name', null, array('label' => 'Name of the best of *', 'help'=>'Mandatory'))
+                ->add('name', null, array('label' => 'Name of the best of', 'help'=>'Mandatory'))
                 ->add('country', null, array('required' => false))
                 ->add('city', null, array('required' => false))
-                ->add('description', 'textarea', array('label'=>'Best of description *', 'help' => 'Mandatory'))
+                ->add('description', 'textarea', array('label'=>'Best of description', 'help' => 'Mandatory'))
                 ->add('file', 'file', $imageOptions)
                 ->add('sponsor')
                 ->add('sponsorImageFile', 'file', $sponsorImageOptions)
-                ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory'))
+                ->add('seoDescription', 'textarea', array('label' => 'SEO description', 'help' => 'Mandatory'))
                 ->add('byTag')
                 ->add('onTop')
                 ->add('ordered', null, array('label' => 'Order from bar tab'))
