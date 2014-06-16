@@ -49,14 +49,14 @@
                         <td>
                             <div class="city-selector h3">
                                 You are in
-                                <select class="ui-dropdown" name="city" data-class="with-icon city">
+                                <select class="ui-dropdown" name="city" data-class="with-icon city" onchange="location = this.options[this.selectedIndex].value;">>
                                     <option disabled="disabled">Choose a City</option>
                                     {% for c in topCities %}
-                                        <option value="{{ c.id }}"
+                                        <option value="{{ path('city_homepage',{slug:c.slug}) }}"
                                             {% if city is defined and c.id==city.id %}
                                                 selected="selected"
                                             {% endif %}
-                                        ><a href="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</a></option>
+                                        >{{ c.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -239,7 +239,7 @@
                     <div class="title vcenter">
                         <h2><a href="">{{ n.title }}</a></h2>
                         <p class="m-margin">
-                            {{ n.shareText }}
+                            {{ n.richDescription|truncate(200, true, '...')|striptags }}
                         </p>
                         <a class="plus-btn" href=""></a>
                     </div>
@@ -260,7 +260,7 @@
                     <div class="title vcenter">
                         <h2><a href="">{{ n.title }}</a></h2>
                         <p class="m-margin">
-                            {{ n.shareText }}
+                            {{ n.richDescription|truncate(200, true, '...')|striptags }}
                         </p>
                     </div>
 
@@ -287,7 +287,7 @@
                         <div class="title vcenter">
                             <h2><a href="">{{ n.title }}</a></h2>
                             <p class="m-margin">
-                                {{ n.shareText }}
+                                {{ n.richDescription|truncate(200, true, '...')|striptags }}
                             </p>
                             <a class="plus-btn" href=""></a>
                         </div>
@@ -309,7 +309,7 @@
                         <div class="title vcenter">
                             <h2><a href="">{{ n.title }}</a></h2>
                             <p class="m-margin">
-                                {{ n.shareText }}
+                                {{ n.richDescription|truncate(200, true, '...')|striptags }}
                             </p>
                         </div>
 
