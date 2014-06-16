@@ -18,14 +18,15 @@ class NewsRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->leftJoin($this->getAlias().'.cities', 'c')
             ->where($qb->expr()->eq($this->getAlias().'.isOnTop', $qb->expr()->literal(true)))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->setMaxResults($limit)
         ;
 
         if($city){
-            $qb->andWhere($qb->expr()->eq('c.id', $city->getId()));
+            $qb
+                ->leftJoin($this->getAlias().'.cities', 'c')
+                ->andWhere($qb->expr()->eq('c.id', $city->getId()));
         }
 
         return $qb->getQuery()->getResult();
