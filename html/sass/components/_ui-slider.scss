@@ -95,13 +95,13 @@
       .dots{ display: block }
 
       &.type-bestof, &.type-bar {
-        .ui-slide{ width: 100%; border: 0; margin-left: 0 }
+        .ui-slide{ width: 100%!important; border: 0; margin-left: 0 }
         .arrows{ display: none }
       }
 
       &.type-cities {
         width: 100%;
-        .ui-slide{ width: 33.33% }
+        .ui-slide{ width: 33.33%!important }
         .arrows{ display: none }
         .dots{ margin-top: -0.5em }
       }
@@ -123,5 +123,16 @@ html.no-csstransforms3d .ui-slider
   &.type-cities, &.type-bestof
   {
     .ui-slides{ width: 100.5% }
+  }
+}
+
+html.safari.csstransforms3d .ui-slider
+{
+  &.type-cities{
+    .ui-slide { width: 16.8% }
+  }
+
+  &.type-bestof{
+    .ui-slide { width: 33.6% }
   }
 }

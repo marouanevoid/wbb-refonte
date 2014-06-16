@@ -81,16 +81,23 @@ meta.LoadMore = function(config) {
 
             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, that.config.speed, that.config.easing);
         });
+
+        setTimeout(function()
+        {
+            if(callback) callback();
+            $elements.removeClass('enable3d');
+
+        }, 100*$elements.length+that.config.speed );
     };
 
 
     that._load = function( url, $target, callback)
     {
         that.context.is_loading = true;
-
-        callback()
         $target.load(url, function()
         {
+            if( callback ) callback();
+
             $target.hide();
 
             $target.removeClass('load-target');
@@ -102,7 +109,7 @@ meta.LoadMore = function(config) {
                 $(this).removeAttr('data-src');
             });
 
-            that._animate($target, $target.find('> *').not('br'), callback );
+            that._animate($target, $target.find('> *').not('br') );
 
             that.context.page +=1;
             that.context.is_loading = false;

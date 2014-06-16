@@ -49,7 +49,7 @@ meta.Dropdown = function(config){
         color     : false,
         template  : '<div class="ui-dropdown-container">'+
                         '<div class="btn-radius border ui-dropdown %color%">'+
-                            '<span>%name%</span>'+
+                            '<span class="selected">%name%</span>'+
                             '<div class="slide">'+
                                 '<div class="choice custom-scroll">'+
                                     '<ul>%options%</ul>'+
@@ -102,7 +102,7 @@ meta.Dropdown = function(config){
 
             $(document).click(function(e)
             {
-                if( !$(e.target).closest('.ui-dropdown').length && that.active )
+                if( (!$(e.target).closest('.ui-dropdown').length || $(e.target).hasClass('selected')) && that.active )
                 {
                     that.active = false;
                     $dropdown.find('.slide').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){

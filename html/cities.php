@@ -47,9 +47,9 @@
 
     $(window).resize(function()
     {
-        if( !$('html').hasClass('mobile') )
+        if( !$('html').hasClass('mobile') || $(window).width() > 640 )
         {
-            $cities_content.height( $(window).height()-$('header').height()-105 );
+            $cities_content.height( $(window).height()-$('header').height()-$('footer').height() );
 
             var cities_height = $selector.height()-$head.height()-20;
 
@@ -58,30 +58,15 @@
         }
         else
         {
-            $cities_content.height($(window).height()-$('header').height());
+            $cities_content.height($(window).height() - $('header').height());
 
-            var map_height = $(window).height()-$('header').height()-$head.outerHeight();
+            var map_height = $(window).height() - $('header').height() - $head.outerHeight();
             $map.css({height:map_height, top:$head.outerHeight()});
             $cities.height( map_height-35 );
-            $bars.height( map_height-55 );
+            $bars.height( map_height-35 );
         }
     });
 
-    $('input[name=display-mode]').change(function()
-    {
-        if( $(this).val() == "map")
-        {
-            $('.cities-content .scrolls').hide();
-            $('.cities-content .zoom').show();
-        }
-        else
-        {
-            $('.cities-content .scrolls').show();
-            $('.cities-content .zoom').hide();
-        }
-
-        $(window).resize();
-    });
 
     $(document).ready(function(){ $(window).resize() });
 

@@ -67,15 +67,23 @@
       position: fixed; left: 0; top: 0; width: 100%; z-index: 999; border-bottom: 1px solid transparent; @include transition( border 0.4s ease-in-out );
       table{ table-layout: fixed }
       .logo { padding: 0.5em 0 1.5em 0; width: 100%; text-align: center; }
-      .nav-icon { text-align: center; width:55px; a{ padding: 1em; display: inline-block } }
+      .nav-icon {
+        text-align: center; width:55px;
+        a{ padding: 1em; display: inline-block; @include transition(opacity 0.5s ease-in-out) }
+      }
       .search-pin-icon {
         text-align: right; width:55px;
         a { padding: 0.6em; display: inline-block }
       }
     }
 
-    .menu-open header.mobile{ border-bottom: 1px solid #5c5549 }
-    .menu-open aside.mobile-menu{ display: block }
+    .menu-open
+    {
+      header.mobile{
+        border-bottom: 1px solid #5c5549;
+      }
+      aside.mobile-menu{ display: block }
+    }
 
     .detect-scroll{ position: fixed; top: 0; left: 0; height: 100%; width: 40px; z-index: 998 }
 
