@@ -32,6 +32,9 @@
                     }
                 });
             });
+            {% if city is defined %}
+                $('.city-selector .city>span').html('{{ city.name }}');
+            {% endif %}
         });
     </script>
 {% endblock %}
