@@ -12,6 +12,10 @@ city_homepage:
     pattern: /top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
 
+bar_guides:
+    pattern: /
+    defaults: { _controller: WBBBarBundle:Bar:barGuide }
+
 cities:
     pattern: /cities
     defaults: { _controller: WBBBarBundle:Bar:cities }

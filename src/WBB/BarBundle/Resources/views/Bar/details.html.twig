@@ -475,9 +475,10 @@
                         <div class="content form">
                             <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
                                 <h3>Leave a tip</h3>
-                                <textarea class="s-margin-top" name="tip" placeholder="Type your tip ..." maxlength="250"></textarea>
+                                {{ form_widget(tipForm.description) }}
                                 <div class="m-margin-top h4 count">250 left</div>
                                 <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
+                                {{ form_rest(tipForm) }}
                             </form>
                             <br class="clear"/>
                         </div>

@@ -47,7 +47,7 @@ class BarController extends Controller
         $response['topNews']        = $this->container->get('news.repository')->findLatestNews(null, 3);
         $response['latestBars']     = $this->container->get('bar.repository')->findLatestBars(null, 5);
 
-        return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
+        return $this->render('barGuides.html.twig', $response);
     }
 
     public function citiesAction()

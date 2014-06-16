@@ -171,7 +171,7 @@ meta.Cities = function() {
      */
     that._requestBars = function( city_id, neighborhood_id, callback )
     {
-        $.get('/app_dev.php/poi', {city_id:city_id, neighborhood_id:neighborhood_id}, function( data )
+        $.get(lsPoi, {city_id:city_id, neighborhood_id:neighborhood_id}, function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.neighborhoods, data.bars);
@@ -184,7 +184,7 @@ meta.Cities = function() {
      */
     that._requestCities = function( callback )
     {
-        $.get('/app_dev.php/list/cities', function( data )
+        $.get(lsCities, function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.cities);
