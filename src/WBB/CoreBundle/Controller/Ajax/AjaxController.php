@@ -73,7 +73,7 @@ class AjaxController extends Controller
             foreach($bars as $bar)
             {
                 $result['bars'][] = array(
-                    'id'        => $bar->getSlug(),
+                    'id'        => $bar->getId(),
                     'address'   => $bar->getAddress(),
                     'name'      => $bar->getName(),
                     'url'       => $this->container->get('router')->generate('wbb_bar_details', array(
@@ -118,7 +118,7 @@ class AjaxController extends Controller
         foreach($cities as $city)
         {
             $response[] = array(
-                'id'        => $city->getSlug(),
+                'id'        => $city->getId(),
                 'name'      => $city->getName() .', '. $city->getCountry(),
                 'latitude'  => $city->getLatitude(),
                 'longitude' => $city->getLongitude()

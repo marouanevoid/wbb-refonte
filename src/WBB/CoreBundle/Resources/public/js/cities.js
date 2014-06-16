@@ -171,7 +171,9 @@ meta.Cities = function() {
      */
     that._requestBars = function( city_id, neighborhood_id, callback )
     {
-        $.get(lsPoi, {city_id:city_id, neighborhood_id:neighborhood_id}, function( data )
+
+
+        $.post(Routing.generate('wbb_cities_poi', { cityID:city_id, suburbID:neighborhood_id}), function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.neighborhoods, data.bars);
@@ -184,7 +186,7 @@ meta.Cities = function() {
      */
     that._requestCities = function( callback )
     {
-        $.get(lsCities, function( data )
+        $.post(lsCities, function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.cities);
