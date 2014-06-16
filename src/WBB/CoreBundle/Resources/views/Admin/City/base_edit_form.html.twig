@@ -30,6 +30,14 @@
                                 </a>
                             </li>
                         {% endfor %}
+                        {% if admin.id(object) %}
+                            <li class="">
+                                <a href="#{{ admin.uniqid }}_map_tab" data-toggle="tab">
+                                    <i class="icon-exclamation-sign has-errors hide"></i>
+                                    Map
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
             {% endblock %}
 
@@ -52,6 +60,23 @@
                             </fieldset>
                         </div>
                     {% endfor %}
+                    {% if admin.id(object) %}
+                        <div class="tab-pane " id="{{ admin.uniqid }}_map_tab">
+                            <fieldset>
+                                <div class="sonata-ba-collapsed-fields">
+                                    <div class="mapcontainer" style="width: 600px; height: 400px;"></div>
+                                    <div class="mapinfos">
+                                        <div><label>Location:</label> <input type="text" id="mpAddress" style="width: 200px"/></div>
+                                        <span class="help-block sonata-ba-field-help">Mandatory. Type the bar adress and select Google Map recommandation</span>
+                                        <div style="clear: left; height: 5px;"></div>
+                                        <div><label>Lat.:</label> <input type="text" id="lat"/></div>
+                                        <div style="clear: left; height: 5px;"></div>
+                                        <div><label>Long.:</label> <input type="text" id="lon"/></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    {% endif %}
                 </div>
             {% endblock %}
 
