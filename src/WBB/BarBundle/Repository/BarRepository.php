@@ -18,6 +18,18 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
+    public function findAllEnabled()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', 2))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findBestBars($city = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());

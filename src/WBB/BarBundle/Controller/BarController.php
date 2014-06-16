@@ -50,51 +50,6 @@ class BarController extends Controller
         return $this->render('barGuides.html.twig', $response);
     }
 
-    public function citiesAction()
-    {
-        return $this->render('WBBBarBundle:Bar:cities.html.twig');
-    }
-
-    public function citiesListAction()
-    {
-        $cities = array
-        (
-            array('id'=>'nice-france', 'name'=>"Nice, France"),
-            array('id'=>'madrid-espana', 'name'=>"Madrid, Espana"),
-            array('id'=>'roma-italy', 'name'=>"Roma, Italy"),
-            array('id'=>'new_york-new_york', 'name'=>"New York, New York"),
-        );
-
-        return new JsonResponse(array(
-            'code'   => 200,
-            'cities' => $cities
-        ));
-    }
-
-    public function poiListAction(){
-        $bars = array
-        (
-            array('id'=>'bar1', 'address'=>"189 Spring St, Soho, New York", 'name'=>"Achiles Heel", 'url'=>"/app_dev.php/bar/Agadir/Founty/Le-Jardin-De-Leau", 'image_url'=>"/app_dev.php/bundles/wbbcore/images/tmp/bar.jpg", 'tags'=>"rooftop, romance, ambiente"),
-            array('id'=>'bar2', 'address'=>"163 Spring St, Soho, New York", 'name'=>"Alameda", 'url'=>"/app_dev.php/bar/Agadir/Founty/Le-Dome", 'image_url'=>"/app_dev.php/bundles/wbbcore/images/tmp/bar.jpg", 'tags'=>"rooftop, romance, ambiente"),
-            array('id'=>'bar3', 'address'=>"220 Houston St, Soho, New York", 'name'=>"Atrium", 'url'=>"/app_dev.php/bar/Agadir/Founty/Le-Jardin-De-Leau", 'image_url'=>"/app_dev.php/bundles/wbbcore/images/tmp/bar.jpg", 'tags'=>"rooftop, romance, ambiente"),
-            array('id'=>'bar4', 'address'=>"382 Prince  St, Soho, New York", 'name'=>"Bar Below Rye", 'url'=>"/app_dev.php/bar/Agadir/Founty/Le-Dome", 'image_url'=>"/app_dev.php/bundles/wbbcore/images/tmp/bar.jpg", 'tags'=>"rooftop, romance, ambiente"),
-        );
-
-        $neighborhood = array
-        (
-            array('id'=>1, 'name'=>"Neighborhood 1"),
-            array('id'=>2, 'name'=>"Neighborhood 2"),
-            array('id'=>3, 'name'=>"Neighborhood 3"),
-            array('id'=>4, 'name'=>"Neighborhood 4"),
-        );
-
-        return new JsonResponse(array(
-            'code'          => 200,
-            'bars'          => $bars,
-            'neighborhoods' => $neighborhood
-        ));
-    }
-
     /**
      * detailsAction
      *

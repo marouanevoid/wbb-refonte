@@ -64,3 +64,9 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBCoreBundle:City']
+
+    suburb.repository:
+        class: WBB\CoreBundle\Repository\SuburbRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBCoreBundle:CitySuburb']

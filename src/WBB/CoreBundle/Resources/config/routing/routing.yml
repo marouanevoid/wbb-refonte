@@ -7,3 +7,21 @@ get_suburbs_from_city:
     defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getSuburbsFromCity, bar: 0, suburbId: 0}
     options:
         expose: true
+
+get_medias_from_bar:
+    pattern: /ajax/get-medias-from-bar/{barID}/{mediaID}
+    defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getBarMedias, barID: 0, mediaID: 0}
+    options:
+        expose: true
+
+cities:
+    pattern: /cities
+    defaults: { _controller: WBBCoreBundle:City:cities }
+
+wbb_list_cities:
+    pattern: /list/cities
+    defaults: { _controller: WBBCoreBundle:City:citiesList }
+
+wbb_list_poi:
+    pattern: /poi
+    defaults: { _controller: WBBCoreBundle:City:poiList }

@@ -16,18 +16,6 @@ bar_guides:
     pattern: /
     defaults: { _controller: WBBBarBundle:Bar:barGuide }
 
-cities:
-    pattern: /cities
-    defaults: { _controller: WBBBarBundle:Bar:cities }
-
-wbb_list_cities:
-    pattern: /list/cities
-    defaults: { _controller: WBBBarBundle:Bar:citiesList }
-
-wbb_list_poi:
-    pattern: /poi
-    defaults: { _controller: WBBBarBundle:Bar:poiList }
-
 wbb_bar_tips:
     pattern: /bar/{barID}/tips/{offset}/{limit}/{showwbb}
     requirements:
