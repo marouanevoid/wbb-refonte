@@ -24,7 +24,7 @@ class BarRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.status', 2))
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
         ;
 
         return $qb->getQuery()->getResult();
@@ -151,5 +151,22 @@ class BarRepository extends EntityRepository
         else{
             return null;
         }
+    }
+
+    public function findNearestBars($latitude = 0, $longitude = 0, $start = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().",GEO(c.latitude = :latitude, c.longitude = :longitude) AS HIDDEN Distance")
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->setParameter('latitude', $latitude)
+            ->setParameter('longitude', $longitude)
+            ->orderBy('Distance', 'ASC')
+            ->setFirstResult($start)
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 } 

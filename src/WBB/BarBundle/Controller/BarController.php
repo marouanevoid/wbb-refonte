@@ -44,8 +44,8 @@ class BarController extends Controller
     {
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5);
-        $response['topNews']        = $this->container->get('news.repository')->findLatestNews(null, 3);
-        $response['latestBars']     = $this->container->get('bar.repository')->findLatestBars(null, 5);
+        $response['nearestBars']    = $this->container->get('bestof.repository')->findNearestBars();
+
 
         return $this->render('barGuides.html.twig', $response);
     }

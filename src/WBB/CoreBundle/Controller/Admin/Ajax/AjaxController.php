@@ -9,8 +9,6 @@ class AjaxController extends Controller
 {
     public function getSuburbsFromCityAction($bar, $cityId, $suburbId)
     {
-
-
         $html = "";
         $barObject = null;
         if($bar > 0){
@@ -34,6 +32,28 @@ class AjaxController extends Controller
                 else
                     $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
             }
+        }
+
+        return new JsonResponse($html);
+    }
+
+    public function getBarMedias($barID, $mediaID)
+    {
+        $html = "";
+        $bar = null;
+        if($barID > 0){
+            $bar = $this->getDoctrine()->getRepository('WBBBarBundle:Bar')->find($barID);
+        }else{
+            return new JsonResponse(array());
+        }
+
+        $medias = $bar->getMedias();
+
+        foreach($medias as $media){
+            if($mediaID == $media->getId())
+                $html .= '<option value="'.$media->getId().'" selected>'.$media->getAlt().'</option>';
+            else
+                $html .= '<option value="'.$media->getId().'" >'.$media->getAlt().'</option>';
         }
 
         return new JsonResponse($html);

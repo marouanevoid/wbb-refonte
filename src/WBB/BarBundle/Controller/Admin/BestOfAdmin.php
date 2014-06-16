@@ -81,8 +81,8 @@ class BestOfAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name')
-                ->add('city', 'sonata_type_model', array('required' => false))
-                ->add('country', 'sonata_type_model', array('required' => false))
+                ->add('country', null, array('required' => false))
+                ->add('city', null, array('required' => false))
                 ->add('description')
                 ->add('file', 'file', $imageOptions)
                 ->add('sponsor')

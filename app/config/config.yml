@@ -62,6 +62,9 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                dql:
+                    numeric_functions:
+                        geo: WBB\CoreBundle\AST\Functions\Geo
                 mappings:
                     SonataMediaBundle: ~
 

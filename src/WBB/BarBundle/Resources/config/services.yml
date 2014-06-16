@@ -76,6 +76,7 @@ services:
         arguments: [null, %wbb_bar.bestof.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
+            - [setTemplates, [{ edit:"WBBBarBundle:Admin:BestOf/edit.html.twig" }]]
 
     wbb.bar.admin.bestof.tag:
         class: %wbb_bar.bestof_tag.admin.class%

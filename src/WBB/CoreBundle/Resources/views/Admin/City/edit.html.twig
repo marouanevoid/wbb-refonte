@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}{% endblock %}
-{% use 'SonataAdminBundle:CRUD:base_edit_form.html.twig' with form as parentForm %}
+{% use 'WBBCoreBundle:Admin:City/base_edit_form.html.twig' with form as parentForm %}
 {% block form %}
     {{ block('parentForm') }}
 {% endblock %}
