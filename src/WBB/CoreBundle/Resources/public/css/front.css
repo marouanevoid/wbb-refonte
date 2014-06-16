@@ -4853,7 +4853,7 @@ section.bar-filter .bars-w-pic .three.columns {
         top: 0.5em;
     }
     /* line 39, ../sass/pages/_bar-guides.scss */
-    section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {
+    body.bar-guides section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {
         background-size: 128px 256px;
         background-position: -80px -40px;
     }
@@ -4879,7 +4879,7 @@ section.bar-filter .bars-w-pic .three.columns {
         top: 1em;
     }
     /* line 51, ../sass/pages/_bar-guides.scss */
-    section.bars .bar-w-pic:first-child .btn-round:before {
+    body.bar-guides section.bars .bar-w-pic:first-child .btn-round:before {
         background-size: 256px 512px;
         background-position: -160px -80px;
     }
