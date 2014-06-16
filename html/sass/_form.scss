@@ -72,7 +72,7 @@ select {
 textarea{ overflow: auto }
 input[type="text"],
 input[type="password"],
-input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; line-height: 40px; color:$color-brown; @include placeholder{ color: $color-brown } }
+input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; line-height: 1em; color:$color-brown; @include placeholder{ color: $color-brown } }
 input[type="submit"], input[type="reset"]{
   @include transition( background-color 0.2s ease-in-out, color 0.2s ease-in-out );
   &:hover{ background-color: $color-brown; color: #fff }

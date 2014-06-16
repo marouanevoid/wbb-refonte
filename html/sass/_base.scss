@@ -51,7 +51,7 @@
     .cover { overflow: hidden; height: 100%; width: 100%; left: 0; top: 0; position: absolute; z-index: -1; }
     .cover > * { position: relative; }
 
-    a.overlay-link{ position: absolute; left: 0; width: 100%; top: 0; height: 100%; z-index: 21; img{ width: 100%; height: 100%; display: block} }
+    a.overlay-link{ position: absolute; left: 0; width: 100%; top: 0; height: 100%; z-index: 21; img{ width: 100%; height: 100%; position: absolute; left: 0; top: 0} }
     html.mobile .ui-slide a.overlay-link{ display: none }
 
     .enable3d{ backface-visibility: hidden; -webkit-backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-perspective: 1000; perspective: 1000; @include transform( translate3d(0,0,0) )}
@@ -250,9 +250,12 @@
     body{ font-size: 10px!important; height: 100% }
     .entire-content-scrollable{ padding-top: 80px; overflow: hidden }
     h1, .h1{ font-size: 2.5em }
-
-    .btn-radius.brown.load-more:hover
-    {
-        background: transparent!important; color: $color-brown!important;
-    }
   }
+
+html.mobile
+{
+  .btn-radius.brown.load-more:hover
+  {
+    background: transparent!important; color: $color-brown!important;
+  }
+}

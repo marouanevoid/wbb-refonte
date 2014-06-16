@@ -71,7 +71,7 @@ meta.Cities = function() {
             $scrollBars.find('ul').html(html);
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
-            setTimeout(function(){ $(window).resize() }, 40);
+            setTimeout(function(){ $(window).resize() }, 50);
         }
 
         that.context.map.addMarkers(markers, fit);
@@ -162,7 +162,7 @@ meta.Cities = function() {
     {
         that.context.$container.find('.scroll-cities').velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
-        setTimeout(function(){ $(window).resize() }, 40);
+        setTimeout(function(){ $(window).resize() }, 50);
     };
 
 
@@ -256,26 +256,40 @@ meta.Cities = function() {
             that._removeNeighborhoodSelector();
             that._hideBars();
 
-            $(window).resize();
+            setTimeout(function(){ $(window).resize() }, 50);
         });
 
 
         $zoom.find('a').click(function()
         {
             if( $(this).hasClass('plus') )
-            {
                 that.context.map.zoomIn();
-            }
             else
-            {
                 that.context.map.zoomOut();
-            }
         });
 
 
-        if( !$('html').hasClass('mobile') )
+        that.context.$container.find('input[name=display-mode]').change(function()
         {
-            $selector.click(function()
+            if( $(this).val() == "map")
+            {
+                $('.cities-content .scrolls').hide();
+                $('.cities-content .zoom').show();
+            }
+            else
+            {
+                $('.cities-content .scrolls').show();
+                $('.cities-content .zoom').hide();
+            }
+
+            $(window).resize();
+        });
+
+
+
+        $selector.find('input[name=city]').click(function()
+        {
+            if( !$('html').hasClass('mobile') || $(window).width() > 640 )
             {
                 if( !that.context.filter_is_open )
                 {
@@ -293,8 +307,21 @@ meta.Cities = function() {
 
                     }, 300);
                 }
-            });
-        }
+            }
+            else
+            {
+                var $modes = that.context.$container.find('input[name=display-mode]');
+                var $mode_list = $modes.filter('[value=list]');
+                var $mode_map = $modes.filter('[value=map]');
+
+                $mode_map.prop('checked', false);
+                $mode_map.parent().removeClass('active');
+
+
+                $mode_list.parent().addClass('active');
+                $mode_list.prop('checked', true).trigger("change");
+            }
+        });
 
 
         $(window).resize(function()

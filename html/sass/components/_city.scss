@@ -3,9 +3,9 @@ article.city {
   .btn-round { z-index: 20; position: absolute; right: 10px; top: 10px; border: none; background-image: url("../images/color.333333.80.png");
     img { background-image: url("../images/also-like.icon.star.png"); background-size: 20px 20px; }
   }
-  .txt { position: absolute; z-index: 20; bottom: 1.5em; left: 2em; right: 2em; text-shadow: 0 2px 3px rgba(0,0,0,.3);
-    h3 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: normal; margin-bottom: 0.3em; }
-    h4 { color: $color-cream; }
+  .txt { position: absolute; z-index: 20; bottom: 1.5em; left: 1em; right: 1em; text-shadow: 0 2px 3px rgba(0,0,0,.3);
+    h3 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: normal; margin-bottom: 0.3em; font-size: 1.4em }
+    h4 { color: $color-cream; font-size: 1.2em }
   }
   img.scale-with-grid{ display: block;@include border-radius (2px); opacity : 0.7; @include transition(opacity 0.2s ease-in-out); margin: auto }
 
