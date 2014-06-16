@@ -39,7 +39,7 @@
         <section class="bars">
             <div class="ui-slider type-bar has_sizer arrows dots" data-size="<?php if(!$is_mobile): ?>12x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
 
-                <?php for($i=1; $i<7; $i++): ?>
+                <?php for($i=1; $i<4; $i++): ?>
 
                     <div class="ui-slide">
                         <?php include('components/bar-w-pic.php') ?>

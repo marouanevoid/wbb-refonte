@@ -62,7 +62,7 @@ meta.Cities = function() {
         $.each(bars, function(index, bar)
         {
             if( display_list ) html += '<li id="'+bar.id+'" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
-            markers.push({address:bar.address, data:'<b>'+bar.name+'</b>'+bar.address, options:{icon:'/bundles/wbbcore/images/markers/'+(index+1)+'.png'}, id:bar.id});
+            markers.push({address:bar.address, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:'/bundles/wbbcore/images/markers/'+(index+1)+'.png'}, id:bar.id});
         });
 
         if( display_list )
@@ -250,6 +250,7 @@ meta.Cities = function() {
             that.context.$container.find('form input[name=city]').prop('disabled', false);
             that.context.$container.find('form input[type=submit]').show();
             that.context.$container.find('form input[type=reset]').hide();
+            that.context.$container.find('form input[name=city]').focus().blur();
 
             that._showCitySelector();
             that._removeNeighborhoodSelector();

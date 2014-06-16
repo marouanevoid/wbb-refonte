@@ -1,201 +1,199 @@
-<div class="entire-content">
-    <div class="entire-content-scrollable">
-    {% if is_mobile() and not is_tablet() %}
-        <div class="detect-scroll"></div>
-        <aside class="mobile-menu">
+{% if is_mobile() and not is_tablet() %}
+    <div class="detect-scroll"></div>
+    <aside class="mobile-menu">
 
-            <table>
+        <table>
 
-                <tr class="search">
-                    <td>
-                        <form class="dark">
-                            <input type="text" placeholder="Search..."/>
-                            <input type="submit" value=" "/>
-                        </form>
-                    </td>
-                </tr>
+            <tr class="search">
+                <td>
+                    <form class="dark">
+                        <input type="text" placeholder="Search..."/>
+                        <input type="submit" value=" "/>
+                    </form>
+                </td>
+            </tr>
 
-                <tr class="header-nav">
-                    <td>
-                        <nav class="h3">
-                            <a href="{{ path('cities') }}">Cities</a>
-                            <a href="#0">Bar Guides</a>
-                            <a href="">News</a>
-                        </nav>
-                    </td>
-                </tr>
+            <tr class="header-nav">
+                <td>
+                    <nav class="h3">
+                        <a href="{{ path('cities') }}">Cities</a>
+                        <a href="#0">Bar Guides</a>
+                        <a href="">News</a>
+                    </nav>
+                </td>
+            </tr>
 
-                <tr class="links">
-                    <td>
-                        <a class="finder h3">
-                            <img src="{{ asset('/bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
-                            Bar Finder
-                        </a>
-                    </td>
-                </tr>
+            <tr class="links">
+                <td>
+                    <a class="finder h3">
+                        <img src="{{ asset('/bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
+                        Bar Finder
+                    </a>
+                </td>
+            </tr>
 
-                <tr class="signin">
-                    <td>
+            <tr class="signin">
+                <td>
                         <span class="register h4">
                             <a href="">Sign in</a>
                             or
                             <a class="btn-radius" href="">Register</a>
                         </span>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
-                <tr class="footer-nav">
-                    <td>
-                        <nav class="h4">
-                            <a href="">About</a>
-                            <a href="">Legal</a>
-                            <a href="">Cookies</a>
-                            <a href="">Add a bar</a>
-                            <a href="">Claim your venue</a>
-                            <a href="">Responsible Drinking</a>
-                        </nav>
-                    </td>
-                </tr>
+            <tr class="footer-nav">
+                <td>
+                    <nav class="h4">
+                        <a href="">About</a>
+                        <a href="">Legal</a>
+                        <a href="">Cookies</a>
+                        <a href="">Add a bar</a>
+                        <a href="">Claim your venue</a>
+                        <a href="">Responsible Drinking</a>
+                    </nav>
+                </td>
+            </tr>
 
-                <tr class="socials">
-                    <td>
-                        <a href="" class="facebook">
-                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="13" height="24"/></span>
-                        </a>
-                        <a href="" class="twitter">
-                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="28" height="24"/></span>
-                        </a>
-                        <a href="" class="instagram">
-                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="25" height="24"/></span>
-                        </a>
-                        <a href="" class="pinterest">
-                            <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="24" height="24"/></span>
-                        </a>
-                    </td>
-                </tr>
+            <tr class="socials">
+                <td>
+                    <a href="" class="facebook">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="13" height="24"/></span>
+                    </a>
+                    <a href="" class="twitter">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="28" height="24"/></span>
+                    </a>
+                    <a href="" class="instagram">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="25" height="24"/></span>
+                    </a>
+                    <a href="" class="pinterest">
+                        <span><img src="{{ asset('/bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="24" height="24"/></span>
+                    </a>
+                </td>
+            </tr>
 
-                <tr class="touch">
-                    <td>
-                        <h4 class="s-margin-bottom">Keep in touch</h4>
+            <tr class="touch">
+                <td>
+                    <h4 class="s-margin-bottom">Keep in touch</h4>
 
-                        <div class="socials">
-                            <div class="fb-like" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-                            <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a>
-                        </div>
-                    </td>
-                </tr>
+                    <div class="socials">
+                        <div class="fb-like" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                        <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a>
+                    </div>
+                </td>
+            </tr>
 
-                <tr class="copyright">
-                    <td>
-                        <div class="copy h4">
-                            &copy; 2014 World's Best Bars
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </aside>
+            <tr class="copyright">
+                <td>
+                    <div class="copy h4">
+                        &copy; 2014 World's Best Bars
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </aside>
 
-        <header class="mobile">
+    <header class="mobile">
 
-            <div class="container">
+        <div class="container">
 
-                <div class="twelve columns">
+            <div class="twelve columns">
 
-                    <table>
-                        <tr>
-                            <td class="nav-icon">
-                                <a>
-                                    <img src="{{ asset('/bundles/wbbcore/images/icons/nav.mobile.png') }}" alt="nav.mobile" width="19" height="17"/>
+                <table>
+                    <tr>
+                        <td class="nav-icon">
+                            <a>
+                                <img src="{{ asset('/bundles/wbbcore/images/icons/nav.mobile.png') }}" alt="nav.mobile" width="19" height="17"/>
+                            </a>
+                        </td>
+
+                        <td class="logo">
+                            <a href="/">
+                                <img src="{{ asset('/bundles/wbbcore/images/logo.png') }}" alt="logo" width="104" height="56"/>
+                            </a>
+                        </td>
+
+                        <td class="search-pin-icon">
+                            <a href="">
+                                <img src="{{ asset('/bundles/wbbcore/images/icons/pin.border.png') }}" alt="pin.border" width="12" height="16"/>
+                            </a>
+                            <a href="">
+                                <img src="{{ asset('/bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </header>
+{% else %}
+    <header class="desktop">
+
+        <div class="container">
+
+            <div class="twelve columns">
+
+                <table>
+                    <tr>
+
+                        <td class="logo">
+                            <a href="/">
+                                <img src="{{ asset('/bundles/wbbcore/images/logo-placeholder.png') }}" alt="logo" width="157" height="85"/>
+                            </a>
+                        </td>
+
+                        <td class="nav">
+                            <nav class="h3">
+                                <a href="{{ path('cities') }}">Cities</a>
+                                <a href="#0">Bar Guides</a>
+                                <a href="#0">News</a>
+                            </nav>
+                            <form>
+                                <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
+                            </form>
+                        </td>
+
+                        <td class="bar-finder">
+
+                            <div class="normal-mode">
+                                <a class="finder h3">
+                                    <img src="{{ asset('/bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
+                                    Bar Finder
                                 </a>
-                            </td>
 
-                            <td class="logo">
-                                <a href="/">
-                                    <img src="{{ asset('/bundles/wbbcore/images/logo.png') }}" alt="logo" width="104" height="56"/>
-                                </a>
-                            </td>
+                                <img class="separator" src="{{ asset('/bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
 
-                            <td class="search-pin-icon">
-                                <a href="">
-                                    <img src="{{ asset('/bundles/wbbcore/images/icons/pin.border.png') }}" alt="pin.border" width="12" height="16"/>
-                                </a>
-                                <a href="">
+                                <a class="search">
                                     <img src="{{ asset('/bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
                                 </a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </header>
-    {% else %}
-        <header class="desktop">
+                            </div>
+                            <div class="search-mode">
+                                <a class="btn-round brown close"></a>
 
-            <div class="container">
+                                <img class="separator" src="{{ asset('/bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
 
-                <div class="twelve columns">
-
-                    <table>
-                        <tr>
-
-                            <td class="logo">
-                                <a href="/">
-                                    <img src="{{ asset('/bundles/wbbcore/images/logo-placeholder.png') }}" alt="logo" width="157" height="85"/>
+                                <a href="" class="advanced-search h4">
+                                    Advanced Search
                                 </a>
-                            </td>
+                            </div>
 
-                            <td class="nav">
-                                <nav class="h3">
-                                    <a href="{{ path('cities') }}">Cities</a>
-                                    <a href="#0">Bar Guides</a>
-                                    <a href="#0">News</a>
-                                </nav>
-                                <form>
-                                    <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
-                                </form>
-                            </td>
+                        </td>
 
-                            <td class="bar-finder">
-
-                                <div class="normal-mode">
-                                    <a class="finder h3">
-                                        <img src="{{ asset('/bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
-                                        Bar Finder
-                                    </a>
-
-                                    <img class="separator" src="{{ asset('/bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
-
-                                    <a class="search">
-                                        <img src="{{ asset('/bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
-                                    </a>
-                                </div>
-                                <div class="search-mode">
-                                    <a class="btn-round brown close"></a>
-
-                                    <img class="separator" src="{{ asset('/bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
-
-                                    <a href="" class="advanced-search h4">
-                                        Advanced Search
-                                    </a>
-                                </div>
-
-                            </td>
-
-                            <td>
+                        <td>
                                 <span class="register h4">
                                     <a href="">Sign in</a>
                                     or
                                     <a class="btn-radius" href="">Register</a>
                                 </span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
+        </div>
 
-            <div class="search-result-proposal"><ul></ul></div>
+        <div class="search-result-proposal"><ul></ul></div>
 
-        </header>
+    </header>
 
 
 
@@ -263,4 +261,6 @@
 
         </div>
     </section>
-    {% endif %}
+{% endif %}
+<div class="entire-content">
+    <div class="entire-content-scrollable">
