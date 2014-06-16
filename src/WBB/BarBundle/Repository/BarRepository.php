@@ -18,6 +18,18 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
+    public function findAllEnabled()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', 2))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findBestBars($city = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
@@ -25,10 +37,11 @@ class BarRepository extends EntityRepository
         $qb
             ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips")
             ->leftjoin($this->getAlias().'.tips', 'tp')
-            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+//            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->groupBy($this->getAlias())
-            ->orderBy('nbTips', 'DESC')
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy('nbTips', 'DESC')
             ->setMaxResults(6)
         ;
 

@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * CitySuburb
  *
  * @ORM\Table(name="wbb_city_suburb")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\SuburbRepository")
  */
 class CitySuburb
 {
