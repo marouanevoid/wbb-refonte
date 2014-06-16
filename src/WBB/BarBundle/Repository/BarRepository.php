@@ -43,10 +43,9 @@ class BarRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips")
-            ->leftjoin($this->getAlias().'.tips', 'tp')
+            ->leftjoin($this->getAlias().'.tips', 'tp', 'WITH', 'tp.status ='. $qb->expr()->literal(1))
 //            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
-//            ->andWhere($qb->expr()->eq('tp.status', $qb->expr()->literal(1)))
             ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
             ->addOrderBy('nbTips', 'DESC')
@@ -95,6 +94,10 @@ class BarRepository extends EntityRepository
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->setMaxResults($limit)
         ;
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
 
         return $qb->getQuery()->getResult();
     }
