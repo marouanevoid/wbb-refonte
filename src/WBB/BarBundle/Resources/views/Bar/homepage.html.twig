@@ -23,7 +23,7 @@
                             }
                         }else{
                             btn.addClass('active');
-                            if(btn.hasClass('dark')){
+                            if(btn.hasClass('dark') && !btn.hasClass('nc')){
                                 btn.addClass('changed');
                                 btn.addClass('brown');
                                 btn.removeClass('dark');
@@ -341,7 +341,7 @@
             {% for b in latestBars %}
                 <article class="bar-wo-pic">
 
-                    <a href="#0" class="btn-round dark star"></a>
+                    <a href="#0" class="btn-round dark star {% if is_mobile() and not is_tablet() %}nc{% endif %}"></a>
 
                     <div class="txt">
                         <h2>{{ b.name }}</h2>
