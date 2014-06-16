@@ -41,6 +41,8 @@ class CityAdmin extends Admin
                         'inline' => 'table'
                     )
                 )
+                ->add('latitude', 'hidden')
+                ->add('longitude', 'hidden')
             ->end()
             ->with('Media')
                 ->add('file', 'file', $imageOptions)
