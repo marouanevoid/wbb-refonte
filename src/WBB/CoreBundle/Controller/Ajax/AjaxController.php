@@ -111,7 +111,7 @@ class AjaxController extends Controller
 
     public function citiesListAction()
     {
-        $cities = $this->container->get('city.repository')->findAll();
+        $cities = $this->container->get('city.repository')->findCitiesWithBars();
 
         $response = array();
 
