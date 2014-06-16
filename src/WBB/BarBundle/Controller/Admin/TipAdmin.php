@@ -17,6 +17,7 @@ class TipAdmin extends Admin {
         $listMapper
             ->addIdentifier('id')
             ->add('user', null, array('editable' => true))
+            ->add('bar', null, array('editable' => true))
             ->add('description', null, array('editable' => true))
             ->add('status', null, array(
                 'template' => 'WBBBarBundle:Admin:Tip\status_field.html.twig'
