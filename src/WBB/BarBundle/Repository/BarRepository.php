@@ -96,6 +96,10 @@ class BarRepository extends EntityRepository
             ->setMaxResults($limit)
         ;
 
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
         return $qb->getQuery()->getResult();
     }
 
