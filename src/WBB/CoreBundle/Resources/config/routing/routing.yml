@@ -4,24 +4,30 @@ wbb_sonata:
 
 get_suburbs_from_city:
     pattern: /ajax/get-suburbs-from-city/{bar}/{cityId}/{suburbId}
-    defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getSuburbsFromCity, bar: 0, suburbId: 0}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getSuburbsFromCity, bar: 0, suburbId: 0}
     options:
         expose: true
 
 get_medias_from_bar:
     pattern: /ajax/get-medias-from-bar/{barID}/{mediaID}
-    defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getBarMedias, barID: 0, mediaID: 0}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getBarMedias, barID: 0, mediaID: 0}
     options:
         expose: true
 
-cities:
+wbb_cities_poi:
+    pattern: /poi/{cityID}/{suburbID}
+    defaults: { _controller: WBBCoreBundle:Ajax\Ajax:poiList, cityID: 0, suburbID: 0}
+    options:
+            expose: true
+
+wbb_cities_list:
+    pattern: /list/cities
+    defaults: { _controller: WBBCoreBundle:Ajax\Ajax:citiesList }
+
+wbb_cities:
     pattern: /cities
     defaults: { _controller: WBBCoreBundle:City:cities }
 
-wbb_list_cities:
-    pattern: /list/cities
-    defaults: { _controller: WBBCoreBundle:City:citiesList }
 
-wbb_list_poi:
-    pattern: /poi
-    defaults: { _controller: WBBCoreBundle:City:poiList }
+
+
