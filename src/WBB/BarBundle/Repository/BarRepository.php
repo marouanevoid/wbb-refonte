@@ -46,7 +46,7 @@ class BarRepository extends EntityRepository
             ->join($this->getAlias().'.tips', 'tp')
 //            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
-            ->andWhere($qb->expr()->eq('tp.status', $qb->expr()->literal(1)))
+            ->andWhere($qb->expr()->notIn('tp.status', array(0, 2)))
             ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
             ->addOrderBy('nbTips', 'DESC')
