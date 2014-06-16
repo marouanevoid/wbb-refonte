@@ -6,7 +6,6 @@
     <script type="text/javascript">
         //document.location.href="/admin/";
         $(document).ready(function(){
-            initializeSliders();
             $(".star").click(function(){
                 var btn = $(this);
                 $.ajax({
@@ -33,8 +32,9 @@
                 });
             });
             {% if city is defined %}
-                $('.city-selector .city>span').html('{{ city.name }}');
+            $('.city-selector .city>span').html('{{ city.name }}');
             {% endif %}
+            initializeSliders();
         });
     </script>
 {% endblock %}
