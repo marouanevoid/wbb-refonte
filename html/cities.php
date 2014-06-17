@@ -36,39 +36,4 @@
 
 </section>
 
-<script type="text/javascript">
-
-    var $cities_content = $('.cities-content');
-    var $cities = $('.cities-content .scroll-cities');
-    var $bars = $('.cities-content .scroll-bars');
-    var $head = $('.cities-content .heading');
-    var $selector = $('.cities-content .selector');
-    var $map = $('.cities-content #map');
-
-    $(window).resize(function()
-    {
-        if( !$('html').hasClass('mobile') || $(window).width() > 640 )
-        {
-            $cities_content.height( $(window).height()-$('header').height()-$('footer').height() );
-
-            var cities_height = $selector.height()-$head.height()-20;
-
-            $cities.height( cities_height );
-            $bars.height( cities_height-40 );
-        }
-        else
-        {
-            $cities_content.height($(window).height() - $('header').height());
-
-            var map_height = $(window).height() - $('header').height() - $head.outerHeight();
-            $map.css({height:map_height, top:$head.outerHeight()});
-            $cities.height( map_height-35 );
-            $bars.height( map_height-35 );
-        }
-    });
-
-
-    $(document).ready(function(){ $(window).resize() });
-
-</script>
 <?php include('includes/foot.php') ?>

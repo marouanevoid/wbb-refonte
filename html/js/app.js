@@ -130,9 +130,9 @@ meta.App = function() {
 
             $is_animating = true;
 
-            $bar_finder.find('table').animate({opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-close').animate({opacity: '0'}, speed/2, easing);
+            $bar_finder.find('table').animate({opacity: '0'}, that.config.speed, that.config.easing);
+            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, that.config.speed, that.config.easing);
+            $bar_finder.find('.finder-close').animate({opacity: '0'}, that.config.speed/2, that.config.easing);
             $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
         });
     };

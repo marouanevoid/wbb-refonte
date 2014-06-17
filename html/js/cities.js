@@ -71,7 +71,7 @@ meta.Cities = function() {
             $scrollBars.find('ul').html(html);
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
-            setTimeout(function(){ $(window).resize() }, 50);
+            setTimeout(function(){ that._resize() }, 50);
         }
 
         that.context.map.addMarkers(markers, fit);
@@ -162,7 +162,7 @@ meta.Cities = function() {
     {
         that.context.$container.find('.scroll-cities').velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
-        setTimeout(function(){ $(window).resize() }, 50);
+        setTimeout(function(){ that._resize() }, 50);
     };
 
 
@@ -200,16 +200,23 @@ meta.Cities = function() {
         var $scroll     = that.context.$container.find('.scroll');
         var $zoom       = that.context.$container.find('.zoom');
         var $head       = that.context.$container.find('.heading');
+        var $header     = $('header');
         var $selector   = that.context.$container.find('.selector');
 
-        that.context.$container.find('.scroll-cities').on('click', 'li', function()
+        var $cities_content     = that.context.$container;
+        var $cities             = that.context.$container.find('.scroll-cities');
+        var $bars               = that.context.$container.find('.scroll-bars');
+        var $map                = that.context.$container.find('#map');
+
+
+        $cities.on('click', 'li', function()
         {
             that.context.$container.find('form input[name=city]').val( $(this).text() );
             that.context.$container.find('form').submit();
         });
 
 
-        that.context.$container.find('.scroll-bars').on('click', 'li', function()
+        $bars.on('click', 'li', function()
         {
             document.location.href = $(this).data('link');
         });
@@ -218,14 +225,14 @@ meta.Cities = function() {
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
         {
             var marker = that.context.map.getMarker( $(this).attr('id') );
-            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(google.maps.Animation.BOUNCE)
+            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(google.maps.Animation.BOUNCE);
         });
 
 
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseleave', 'li', function()
         {
             var marker = that.context.map.getMarker( $(this).attr('id') );
-            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(null)
+            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(null);
         });
 
 
@@ -235,7 +242,7 @@ meta.Cities = function() {
 
             $(this).find('input[name=city]').prop('disabled', true);
 
-            var city_id = $(this).find('input[name=city]').val();
+            var city_id         = $(this).find('input[name=city]').val();
             var neighborhood_id = $(this).find('select[name=neighborhood]').val();
 
             $(this).find('input[type=submit]').hide();
@@ -256,7 +263,7 @@ meta.Cities = function() {
             that._removeNeighborhoodSelector();
             that._hideBars();
 
-            setTimeout(function(){ $(window).resize() }, 50);
+            setTimeout(function(){ that._resize() }, 50);
         });
 
 
@@ -282,7 +289,7 @@ meta.Cities = function() {
                 $('.cities-content .zoom').hide();
             }
 
-            $(window).resize();
+            that._resize();
         });
 
 
@@ -326,13 +333,7 @@ meta.Cities = function() {
 
         $(window).resize(function()
         {
-            $scroll.height( $selector.height()-$head.height()-25 );
-
-            if( that.context.filter_is_open )
-            {
-                that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
-                $selector.height(that.context.$container.height()*0.8-70);
-            }
+            that._resize();
         });
 
     };
@@ -353,6 +354,51 @@ meta.Cities = function() {
     /**
      *
      */
+    that._resize = function()
+    {
+        var $cities_content     = that.context.$container;
+        var $cities             = that.context.$container.find('.scroll-cities');
+        var $bars               = that.context.$container.find('.scroll-bars');
+        var $map                = that.context.$container.find('#map');
+
+        var $scroll     = that.context.$container.find('.scroll');
+        var $head       = that.context.$container.find('.heading');
+        var $header     = $('header');
+        var $selector   = that.context.$container.find('.selector');
+
+        if( !$('html').hasClass('mobile') || $(window).width() > 640 )
+        {
+            $cities_content.height( $(window).height()-$header.height()-$('footer').height() );
+
+            var cities_height = $selector.height()-$head.height()-20;
+
+            $cities.height( cities_height );
+            $bars.height( cities_height-40 );
+
+            $scroll.height( $selector.height()-$head.height()-25 );
+
+            if( that.context.filter_is_open )
+            {
+                that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+                $selector.height(that.context.$container.height()*0.8-70);
+            }
+        }
+        else
+        {
+            $cities_content.height($(window).height() - $header.height());
+
+            var map_height = $(window).height() - $header.height() - $head.outerHeight();
+
+            $map.css({height:map_height, top:$head.outerHeight()});
+            $cities.height( map_height-20 );
+            $bars.height( map_height-20 );
+        }
+    };
+
+
+    /**
+     *
+     */
     that.__construct = function()
     {
         var $map = $('#map');
@@ -363,6 +409,8 @@ meta.Cities = function() {
 
         that._setupEvents();
         that._showAllCities(false);
+
+        that._resize();
     };
 
     that.__construct();

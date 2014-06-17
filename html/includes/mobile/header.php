@@ -86,20 +86,21 @@
             </table>
         </div>
     </div>
-</header>
 
-<div class="search-bar-mobile">
+    <div class="search-bar-mobile nav">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="twelve columns s-margin">
-            <form action="">
-                <input type="text"/>
-            </form>
-            <a class="btn-radius border h4 close">Cancel</a>
+            <div class="twelve columns s-margin">
+                <form action="search.php">
+                    <input type="text" name="q"/>
+                </form>
+                <a class="btn-radius border h4 close">Cancel</a>
+            </div>
         </div>
+
+        <div class="search-result-proposal"><ul></ul></div>
+
     </div>
 
-    <div class="search-result-proposal"><ul></ul></div>
-
-</div>
+</header>

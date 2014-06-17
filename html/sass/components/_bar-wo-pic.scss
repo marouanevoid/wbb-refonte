@@ -26,13 +26,3 @@ article.bar-wo-pic {
 
   .gradient, .tags, img.scale-with-grid { display: none }
 }
-
-
-html.mobile article.bar-wo-pic{
-  &:hover
-  {
-    background: $color-cream;
-    h2{ color: $color-dark-gray; }
-    h3{ color: $color-brown; }
-  }
-}
