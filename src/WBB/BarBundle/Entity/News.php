@@ -81,17 +81,17 @@ class News {
     private $isOnTop;
 
     /**
-     * @ORM\OneToMany(targetEntity="Bar", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news", cascade={"remove", "persist"})
      */
     private $bars; 
     
     /**
-     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"remove", "persist"})
      */
     private $cities;    
 
     /**
-     * @ORM\OneToMany(targetEntity="BestOf", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="news", cascade={"remove", "persist"})
      */
     private $bestOfs;     
     
@@ -138,7 +138,9 @@ class News {
      * Constructor
      */
     public function __construct(){
-
+        $this->bars    = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->cities  = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bestOfs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

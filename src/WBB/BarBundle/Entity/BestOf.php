@@ -107,9 +107,9 @@ class BestOf
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="bestOfs", cascade={"remove"})
-     * @ORM\JoinColumn(name="bestof_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToMany(targetEntity="News", inversedBy="bestOfs")
+     * @ORM\JoinTable(name="bestofs_news")
+     **/
     private $news;    
     
     /**
@@ -614,6 +614,8 @@ class BestOf
         $this->setOnTop(true);
         $this->setByTag(true);
         $this->setOrdered(true);
+        
+        $this->news = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

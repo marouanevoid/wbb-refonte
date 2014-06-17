@@ -270,9 +270,9 @@ class Bar
     private $tips;
     
     /**
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="bars", cascade={"remove"})
-     * @ORM\JoinColumn(name="bar_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToMany(targetEntity="News", inversedBy="bars")
+     * @ORM\JoinTable(name="bars_news")
+     **/
     private $news;      
 
     /**
@@ -867,6 +867,8 @@ class Bar
 
         $this->latitude = 0;
         $this->longitude = 0;
+        
+        $this->news = new ArrayCollection();
     }
 
     /**
