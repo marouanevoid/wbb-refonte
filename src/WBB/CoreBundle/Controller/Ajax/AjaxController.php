@@ -61,13 +61,13 @@ class AjaxController extends Controller
 
     public function poiListAction($cityID = 0, $suburbID = 0)
     {
-        if($cityID > 0 and $suburbID > 0)
+        if($cityID > 0)
         {
             $city = $this->container->get('city.repository')->findOneById($cityID);
             $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
 
             $bars = $this->container->get('bar.repository')->findAllEnabled($city, $suburb);
-            $suburbs = $this->container->get('suburb.repository')->findAll();
+            $suburbs = $this->container->get('suburb.repository')->findByCity($city);
             $result = array('bars' => array(), 'suburbs' => array());
 
             foreach($bars as $bar)
