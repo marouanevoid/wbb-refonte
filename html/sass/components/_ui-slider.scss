@@ -14,7 +14,7 @@
       &.right::before{ background-image: url("../images/misc/arrow.right.png") }
 
       &:hover{ background: $color-brown }
-      &:hover::after{ opacity : 1 }
+      &:hover::after{ opacity : 0.99 }
 
       &:hover.disabled{ background: #fff }
       &:hover.disabled::after{ opacity : 0 }
@@ -48,7 +48,7 @@
       position: static;
       a{
         top: 50%; margin-top: -2em; position: absolute; z-index: 99; opacity : 0.8; background: $color-cream; @include transition(opacity 0.3s);
-        &:hover{ opacity : 1 }
+        &:hover{ opacity : 0.99 }
         &:hover::after{ opacity : 0 }
         &.disabled{ opacity : 0 }
       }
@@ -70,7 +70,7 @@
       a{
         top: 50%; margin-top: -2em; position: absolute; z-index: 20; border: 1px solid $color-brown; background: transparent; @include transition(background 0.3s, opacity 0.3s); width: 3.5em;
         &:hover{ background: $color-brown }
-        &:hover::after{ opacity : 1 }
+        &:hover::after{ opacity : 0.99 }
         &.disabled{ opacity : 0 }
       }
       .left{ left: -3.5em; border-radius: 50% 0 0 50%; border-right: 0; margin-left: 0 }

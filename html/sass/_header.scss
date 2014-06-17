@@ -75,6 +75,8 @@
         text-align: right; width:55px;
         a { padding: 0.6em; display: inline-block }
       }
+      .search-result-proposal{ overflow: auto }
+      .search-result-proposal ul li a{ padding: 1.4em; color: $color-subtle-yellow; display: block }
     }
 
     .menu-open
