@@ -109,9 +109,9 @@ class City {
     private $bestofs;  
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"remove"})
-     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities")
+     * @ORM\JoinTable(name="cities_news")
+     **/
     private $news;    
     
     /**
@@ -254,6 +254,7 @@ class City {
      */
     public function __construct() {
         $this->suburbs = new ArrayCollection();
+        $this->news    = new ArrayCollection();
 
         $this->setOnTopCity(true);
     }
