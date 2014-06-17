@@ -59,7 +59,7 @@ class AjaxController extends Controller
         return new JsonResponse($html);
     }
 
-    public function poiListAction($cityID, $suburbID)
+    public function poiListAction($cityID = 0, $suburbID = 0)
     {
         if($cityID > 0 and $suburbID > 0)
         {
@@ -129,5 +129,29 @@ class AjaxController extends Controller
             'code'   => 200,
             'cities' => $response
         ));
+    }
+
+    private function arrayTagsToString($tags)
+    {
+        $result = "";
+
+        foreach($tags as $tag)
+        {
+            $result .= $tag->getTag()->getName().', ';
+        }
+
+        return substr($result, 0, -2);
+    }
+
+    private function barFirstImage($bar)
+    {
+        $medias = $bar->getMedias();
+        foreach($medias as $media)
+        {
+            if($media->getMedia()->getProviderName() === "sonata.media.provider.image")
+                return $this->container->get("sonata.media.provider.image")->generatePublicUrl($media->getMedia(), 'slider_large');
+        }
+
+        return null;
     }
 }
