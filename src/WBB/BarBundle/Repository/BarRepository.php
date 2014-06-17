@@ -18,7 +18,7 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_WORLDWIDE = 3;
 
 
-    public function findAllEnabled($city = null, $suburb = null)
+    public function findAllEnabled($city = 0, $suburb = 0)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -26,11 +26,11 @@ class BarRepository extends EntityRepository
             ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)));
 
-        if($city){
+        if($city > 0){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($suburb){
+        if($suburb > 0){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.suburb', $suburb->getId()));
         }
 
