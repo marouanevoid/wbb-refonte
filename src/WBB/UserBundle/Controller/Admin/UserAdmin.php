@@ -67,11 +67,33 @@ class UserAdmin extends Admin
     {
         $formMapper
             ->with('General')
+                ->add('title', 'choice', array(
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => true,
+                    'choices'  => array(
+                        'Mrs'      =>  'Madam',
+                        'Miss'        =>  'Miss',
+                        'Mr'        =>  'Mister'
+                    )
+                ))
                 ->add('username')
+                ->add('email')
                 ->add('firstname')
                 ->add('lastname')
-                ->add('email')
+                ->add('website')
+                ->add('latitude', 'hidden')
+                ->add('longitude', 'hidden')
+                ->add('description', 'textarea', array('attr' => array('class' => 'wysihtml5')))
                 ->add('plainPassword', 'text', array('required' => false))
+            ->end()
+            ->with('Preferences')
+                ->add('prefWhen')
+                ->add('prefHome')
+                ->add('prefCity1')
+                ->add('prefCity2')
+                ->add('prefCity3')
+                ->add('prefStartCity')
             ->end()
         ;
 
