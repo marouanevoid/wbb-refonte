@@ -94,6 +94,7 @@ class UserAdmin extends Admin
                 ->add('prefCity2', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefCity3', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefStartCity', null, array('read_only' => true, 'disabled'  => true))
+                ->add('stayInformed')
             ->end()
         ;
 

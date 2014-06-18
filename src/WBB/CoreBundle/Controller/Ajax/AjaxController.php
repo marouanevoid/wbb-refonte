@@ -38,6 +38,37 @@ class AjaxController extends Controller
         return new JsonResponse($html);
     }
 
+    //Returns the list of cities in a country (add selected to the city passed in parameters)
+    public function getCitiesFromCountryAction($bestof, $countryId, $cityId)
+    {
+        $html = "";
+        $Object = null;
+        if($bestof > 0){
+            $Object = $this->getDoctrine()->getRepository('WBBBarBundle:BestOf')->find($bestof);
+        }
+
+        $country = $this->getDoctrine()->getRepository('WBBCoreBundle:Country')->find($countryId);
+
+        $cities = $country->getCities();
+
+        foreach($cities as $city){
+            if($cityId > 0)
+            {
+                if($cityId == $city->getId())
+                    $html .= '<option value="'.$city->getId().'" selected>'.$city->getName().'</option>';
+                else
+                    $html .= '<option value="'.$city->getId().'" >'.$city->getName().'</option>';
+            }else{
+                if($Object and $Object->getCity() and $Object->getCity()->getId() == $city->getId())
+                    $html .= '<option value="'.$city->getId().'" selected>'.$city->getName().'</option>';
+                else
+                    $html .= '<option value="'.$city->getId().'" >'.$city->getName().'</option>';
+            }
+        }
+
+        return new JsonResponse($html);
+    }
+
     //Returns a list of bar medias (add selected to a media if passed on parameters)
     public function getBarMedias($barID, $mediaID)
     {

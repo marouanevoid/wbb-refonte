@@ -107,6 +107,13 @@ class User extends BaseUser
     private $prefCity3;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="stay_informed", type="boolean", nullable=true)
+     */
+    private $stayInformed;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="users")
      * @ORM\JoinColumn(name="pref_city_id_start", referencedColumnName="id")
      */
@@ -147,6 +154,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->setEnabled(true);
+        $this->setStayInformed(true);
     }
 
     /**
@@ -622,5 +630,28 @@ class User extends BaseUser
     public function getPrefStartCity()
     {
         return $this->prefStartCity;
+    }
+
+    /**
+     * Set stayInformed
+     *
+     * @param boolean $stayInformed
+     * @return User
+     */
+    public function setStayInformed($stayInformed)
+    {
+        $this->stayInformed = $stayInformed;
+
+        return $this;
+    }
+
+    /**
+     * Get stayInformed
+     *
+     * @return boolean 
+     */
+    public function getStayInformed()
+    {
+        return $this->stayInformed;
     }
 }
