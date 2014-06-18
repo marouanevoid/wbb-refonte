@@ -4863,6 +4863,7 @@ body.cities .cities-content .selector .scrolls .scroll-cities li.active {
     width: 100%;
     box-sizing: border-box;
     bottom: auto;
+    z-index: 1;
   }
   /* line 69, ../sass/pages/_cities.scss */
   body.cities .cities-content .selector .heading {

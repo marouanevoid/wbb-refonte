@@ -31,58 +31,90 @@ meta.App = function() {
         easing  : 'easeInOutCubic'
     };
 
+    that.menu_open = false;
+
 
 
     that._mobileMenuEvents = function()
     {
+        if( $(window).width() > 640 ) return;
+
+        var $to_scroll  = $('.entire-content-scrollable, aside.mobile-menu');
+        var $menu       = $('aside.mobile-menu');
+        var $content    = $('.entire-content-scrollable');
+        var $header     = $('header.mobile');
+        var $menu_btn   = $header.find('.nav-icon a');
+        var $body       = $('body');
+
+        if( Modernizr.csstransforms3d )
+        {
+            $menu.on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function () {
+
+                if( that.menu_open )
+                {
+                    $body.removeClass('menu-open');
+                    $to_scroll.removeAttr('style');
+                    that.menu_open = false;
+                }
+                else
+                {
+                    var speed = Math.min(500, $(window).scrollTop()*2);
+                    $('html,body').animate({scrollTop:0}, speed, that.config.easing, function()
+                    {
+                        $menu.height('auto');
+                        $content.height($menu.height()-$header.height()-1);
+                    });
+                    that.menu_open = true;
+                }
+            });
+        }
+
         $('header.mobile .nav-icon a').on('click touchstart', function(e)
         {
             e.preventDefault();
 
-            var $to_scroll  = $('.entire-content-scrollable, aside.mobile-menu');
-            var $menu       = $('aside.mobile-menu');
-            var $content    = $('.entire-content-scrollable');
-            var $header     = $('header.mobile');
-            var $menu_btn   = $header.find('.nav-icon a');
-            var $body       = $('body');
-
-            if( $body.hasClass("menu-open") )
+            if( that.menu_open )
             {
                 $content.height('auto');
                 $menu_btn.css('opacity', 1);
 
                 if( Modernizr.csstransforms3d )
-                    $to_scroll.css({transform: 'translate3d(0,0,0)'});
-                else
-                    $to_scroll.animate({left:0}, that.config.speed, that.config.easing);
-
-                setTimeout(function()
                 {
-                    $body.removeClass('menu-open');
-                    $to_scroll.removeAttr('style');
-
-                }, that.config.speed+200);
+                    $to_scroll.css({transform: 'translate3d(0,0,0)'});
+                }
+                else
+                {
+                    $to_scroll.animate({left:0}, that.config.speed, that.config.easing, function()
+                    {
+                        $body.removeClass('menu-open');
+                        $to_scroll.removeAttr('style');
+                        that.menu_open = false;
+                    });
+                }
             }
             else
             {
-                var speed = Math.min(500, $(window).scrollTop()*2);
+                $body.addClass('menu-open');
+                $menu_btn.css('opacity', 0.5);
 
-                $('html,body').animate({scrollTop:0}, speed, that.config.easing, function()
+                $menu.height($content.height()+$header.height()+1);
+
+                if( Modernizr.csstransforms3d )
+                    $to_scroll.css({transform: 'translate3d(245px,0,0)'});
+                else
                 {
-                    $body.addClass('menu-open');
-                    $menu_btn.css('opacity', 0.5);
+                    var speed = Math.min(500, $(window).scrollTop()*2);
 
-                    setTimeout(function()
+                    $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing, function()
                     {
-                        $content.height($menu.height()-$header.height()-1);
-
-                        if( Modernizr.csstransforms3d )
-                            $to_scroll.css({transform: 'translate3d(245px,0,0)'});
-                        else
-                            $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
-
-                    }, 50);
-                });
+                        $('html,body').animate({scrollTop:0}, speed, that.config.easing, function()
+                        {
+                            $menu.height('auto');
+                            $content.height($menu.height()-$header.height()-1);
+                        });
+                        that.menu_open = true;
+                    });
+                }
             }
         });
 
@@ -96,7 +128,7 @@ meta.App = function() {
         $('.mobile-menu').swipe(
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
-            threshold:50
+            threshold:30
         });
     };
 
@@ -178,7 +210,9 @@ meta.App = function() {
         });
 
         that._barFinderEvents();
+
         that._mobileMenuEvents();
+
         that._loadImages();
         that._customScroll();
 

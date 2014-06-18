@@ -72,9 +72,9 @@ class UserAdmin extends Admin
                     'multiple' => false,
                     'required' => true,
                     'choices'  => array(
-                        'Mrs'      =>  'Madam',
-                        'Miss'        =>  'Miss',
-                        'Mr'        =>  'Mister'
+                        'Mrs'   =>  'Madam',
+                        'Miss'  =>  'Miss',
+                        'Mr'    =>  'Mister'
                     )
                 ))
                 ->add('username')
@@ -88,16 +88,17 @@ class UserAdmin extends Admin
                 ->add('plainPassword', 'text', array('required' => false))
             ->end()
             ->with('Preferences')
-                ->add('prefWhen')
-                ->add('prefHome')
-                ->add('prefCity1')
-                ->add('prefCity2')
-                ->add('prefCity3')
-                ->add('prefStartCity')
+                ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefHome', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefStartCity', null, array('read_only' => true, 'disabled'  => true))
+                ->add('stayInformed')
             ->end()
         ;
 
-        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if(!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->with('Management')
                     ->add('roles', 'choice', array(
