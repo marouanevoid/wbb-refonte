@@ -62,7 +62,7 @@ class BarRepository extends EntityRepository
 
     }
 
-    public function findPopularBars($city = null)
+    public function findPopularBars($city = null, $limit = 5, $offset = 0)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -70,7 +70,8 @@ class BarRepository extends EntityRepository
             ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
-            ->setMaxResults(5)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
         ;
 
         if($city){
@@ -83,17 +84,21 @@ class BarRepository extends EntityRepository
 
     }
 
-    public function findLatestBars($city = null, $limit = 5)
+    public function findLatestBars($city = null, $limit = 5, $offset = 0, $onTop = true)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->setMaxResults($limit)
+            ->setFirstResult($offset)
         ;
+
+        if($onTop){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        }
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
@@ -177,6 +182,25 @@ class BarRepository extends EntityRepository
             ->setFirstResult($start)
             ->setMaxResults($limit)
         ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBarsOrderedByName($city = null, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->orderBy($this->getAlias().'.name', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
 
         return $qb->getQuery()->getResult();
     }

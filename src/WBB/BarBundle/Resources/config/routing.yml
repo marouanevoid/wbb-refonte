@@ -34,34 +34,34 @@ wbb_bar_feeds_find:
     pattern:  /feed/find/{type}/{id}
     defaults: { _controller: WBBBarBundle:FSAdmin:find, id: 0 }
     options:
-            expose: true
+        expose: true
 
 wbb_bar_feeds_list:
     pattern:  /feed/list/{type}/{bar}
     defaults: { _controller: WBBBarBundle:FSAdmin:list }
     options:
-            expose: true
+        expose: true
 
 wbb_bar_feed_add:
     pattern:  /feed/save/{type}/{hash}/{bar}
     defaults: { _controller: WBBBarBundle:FSAdmin:add }
     options:
-            expose: true
+        expose: true
             
 wbb_bar_feed_remove:
     pattern:  /feed/remove/{type}/{hash}/{bar}
     defaults: { _controller: WBBBarBundle:FSAdmin:remove }
     options:
-            expose: true
+        expose: true
 
 wbb_bar_tips_add:
     pattern:  /tips/add/
     defaults: { _controller: WBBBarBundle:Tips:add }
     options:
-            expose: true
+        expose: true
 
 wbb_bar_tips_fetch:
     pattern:  /tips/fetch/{barID}/{offset}/{limit}
     defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
     options:
-            expose: true
+        expose: true

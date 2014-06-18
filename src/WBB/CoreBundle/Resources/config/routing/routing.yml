@@ -18,15 +18,23 @@ wbb_cities_poi:
     pattern: /poi/{cityID}/{suburbID}
     defaults: { _controller: WBBCoreBundle:Ajax\Ajax:poiList, cityID: 0, suburbID: 0}
     options:
-            expose: true
+        expose: true
 
 wbb_cities_list:
     pattern: /list/cities
     defaults: { _controller: WBBCoreBundle:Ajax\Ajax:citiesList }
+    options:
+        expose: true
 
 wbb_cities:
     pattern: /cities
     defaults: { _controller: WBBCoreBundle:City:cities }
+
+wbb_bar_guide_filters:
+    pattern: /barguide/filter/{bar}/{city}/{filter}/{offset}/{limit}
+    defaults: { _controller: WBBCoreBundle:Ajax\Ajax:barGuideFilter, bar: 1, city: 0, filter: popularity, offset: 0, limit: 8}
+    options:
+        expose: true
 
 
 

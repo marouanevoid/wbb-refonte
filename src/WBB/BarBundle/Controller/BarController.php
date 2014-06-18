@@ -44,8 +44,18 @@ class BarController extends Controller
     {
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5);
-        $response['nearestBars']    = $this->container->get('bestof.repository')->findNearestBars();
+        $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars();
 
+        return $this->render('barGuides.html.twig', $response);
+    }
+
+    public function barGuideCityAction($slug)
+    {
+        $city = $this->container->get('city.repository')->findOneBySlug($slug);
+
+        $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
+        $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5);
+        $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars($city);
 
         return $this->render('barGuides.html.twig', $response);
     }

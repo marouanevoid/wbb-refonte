@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AjaxController extends Controller
 {
+    //Returns the list of suburbs in a city (add selected to the suburbs passed in parameters)
     public function getSuburbsFromCityAction($bar, $cityId, $suburbId)
     {
         $html = "";
@@ -37,6 +38,7 @@ class AjaxController extends Controller
         return new JsonResponse($html);
     }
 
+    //Returns a list of bar medias (add selected to a media if passed on parameters)
     public function getBarMedias($barID, $mediaID)
     {
         $html = "";
@@ -59,6 +61,7 @@ class AjaxController extends Controller
         return new JsonResponse($html);
     }
 
+    //Returns a list on Point of interest in a city (and a suburb)
     public function poiListAction($cityID = 0, $suburbID = 0)
     {
         if($cityID > 0)
@@ -109,6 +112,7 @@ class AjaxController extends Controller
         }
     }
 
+    //Returns a list of cities with one or more bars
     public function citiesListAction()
     {
         $cities = $this->container->get('city.repository')->findCitiesWithBars();
@@ -131,6 +135,38 @@ class AjaxController extends Controller
         ));
     }
 
+    // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")
+    public function barGuideFilterAction($bars = 1, $city = 0, $filter = "popularity" , $offset = 0, $limit = 8)
+    {
+        $response = null;
+
+        if($bars){
+            if($filter === "popularity"){
+                $response = $this->container->get('bar.repository')->findPopularBars($city, $limit, $offset);
+            }elseif($filter === "alphabetical"){
+                $response = $this->container->get('bar.repository')->findBarsOrderedByName($city, $offset ,$limit);
+            }elseif($filter === "date"){
+                $response = $this->container->get('bar.repository')->findLatestBars($city, $limit, $offset, false);
+            }elseif($filter === "distance"){
+                $response = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, $limit);
+            }
+        }else{
+            if($filter === "popularity"){
+                //TODO: Repository methode for popularity
+            }elseif($filter === "alphabetical"){
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
+            }elseif($filter === "date"){
+                $response = $this->container->get('bestof.repository')->findLatestBars($city, $limit, $offset, false);
+            }
+        }
+
+        return new JsonResponse(array(
+            'code' => '200',
+            'response' => $response
+        ));
+    }
+
+    // Methodes to parse objects
     private function arrayTagsToString($tags)
     {
         $result = "";
