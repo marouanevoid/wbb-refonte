@@ -37,6 +37,8 @@ meta.App = function() {
 
     that._mobileMenuEvents = function()
     {
+        if( $(window).width() > 640 ) return;
+
         var $to_scroll  = $('.entire-content-scrollable, aside.mobile-menu');
         var $menu       = $('aside.mobile-menu');
         var $content    = $('.entire-content-scrollable');
@@ -46,7 +48,7 @@ meta.App = function() {
 
         if( Modernizr.csstransforms3d )
         {
-            $to_scroll.eq(0).on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function () {
+            $menu.on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function () {
 
                 if( that.menu_open )
                 {
@@ -95,7 +97,7 @@ meta.App = function() {
                 $body.addClass('menu-open');
                 $menu_btn.css('opacity', 0.5);
 
-                $menu.height($content.height()+$header.height()+1)
+                $menu.height($content.height()+$header.height()+1);
 
                 if( Modernizr.csstransforms3d )
                     $to_scroll.css({transform: 'translate3d(245px,0,0)'});
@@ -208,7 +210,9 @@ meta.App = function() {
         });
 
         that._barFinderEvents();
+
         that._mobileMenuEvents();
+
         that._loadImages();
         that._customScroll();
 
