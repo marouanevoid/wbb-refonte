@@ -25,3 +25,10 @@ function nodeToString ( node ) {
     tmpNode = node = null; // prevent memory leaks in IE
     return str;
 }
+
+$(document).ready(function(){
+    if($.cookie('city')){
+        //$('.logo a').attr('href', $.cookie('city'));
+        // alert($.cookie('city'));
+    }
+});

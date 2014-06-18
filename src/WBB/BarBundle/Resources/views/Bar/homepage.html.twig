@@ -5,12 +5,17 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function(){
+            {% if city is defined %}
+                $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
+            {% else %}
+                $.cookie('city', '/', { path: '/' });
+            {% endif %}
             $(".star").click(function(){
                 var btn = $(this);
                 $.ajax({
                     type: "POST",
                     url:  '/',
-                    success: function(r) {
+                    success: function() {
                         if(btn.hasClass('active')){
                             btn.removeClass('active');
                             if(btn.hasClass('changed')){
@@ -18,12 +23,18 @@
                                 btn.addClass('dark');
                                 btn.removeClass('changed');
                             }
+                            if(btn.hasClass('nc')){
+                                btn.addClass('force-disabled')
+                            }
                         }else{
                             btn.addClass('active');
-                            if(btn.hasClass('dark') && !btn.hasClass('nc')){
+                            if(btn.hasClass('dark')){
                                 btn.addClass('changed');
                                 btn.addClass('brown');
                                 btn.removeClass('dark');
+                            }
+                            if(btn.hasClass('force-disabled')){
+                                btn.removeClass('force-disabled')
                             }
                         }
                     }
@@ -32,10 +43,6 @@
             {% if city is defined %}
             $('.city-selector .city>span').html('{{ city.name }}');
             {% endif %}
-            $('#city_selector').change(function(){
-                alert("");
-                document.location = $(this).options[$(this).selectedIndex].value;
-            });
             initializeSliders();
         });
     </script>
@@ -57,7 +64,7 @@
                                 <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
                                     <option disabled="disabled">Choose a City</option>
                                     {% for c in topCities %}
-                                        <option value="{{ path('city_homepage',{slug:c.slug}) }}"
+                                        <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}"
                                             {% if city is defined and c.id==city.id %}
                                                 selected="selected"
                                             {% endif %}

@@ -96,6 +96,9 @@ meta.Dropdown = function(config){
 
                 $options.removeAttr('selected');
                 $options.eq( $(this).index()+1 ).attr('selected', 'selected');
+                if($options.eq( $(this).index()+1).data('type')=='redirect') {
+                   document.location=$options.eq( $(this).index()+1).val();
+                }
 
                 $(document).click();
             });
