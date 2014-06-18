@@ -65,7 +65,7 @@ body.cities {
       min-height:inherit;
       .zoom{ left: 20px; right: auto; bottom: 20px; top: auto; margin-top: 0 }
       .selector{
-        border: 0; padding: 0; top: 0; left: 0; width: 100%; box-sizing: border-box; bottom: auto;
+        border: 0; padding: 0; top: 0; left: 0; width: 100%; box-sizing: border-box; bottom: auto; z-index: 1;
         .heading{ padding: 1em }
         form.s-margin{ margin-top: 5px!important }
         h3{ display: none }
