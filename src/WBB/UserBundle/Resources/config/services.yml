@@ -17,6 +17,7 @@ services:
         calls:
             - [setUserManager, ["@fos_user.user_manager"]]
             - [setTranslationDomain, ["WBBUserBundle"]]
+            - [setTemplates, [{ edit: "WBBUserBundle:Admin:User/edit.html.twig"}]]
 
     #User repository
     user.repository:

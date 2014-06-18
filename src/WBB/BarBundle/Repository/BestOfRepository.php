@@ -34,4 +34,45 @@ class BestOfRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->orderBy($this->getAlias().'.name', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findLatestBestofs($city = null, $limit = 8, $offset = 0, $onTop = true)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq(1, 1))
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+        ;
+
+        if($onTop){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 } 
