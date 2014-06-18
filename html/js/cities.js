@@ -197,20 +197,16 @@ meta.Cities = function() {
      */
     that._setupEvents = function()
     {
-        var $scroll     = that.context.$container.find('.scroll');
         var $zoom       = that.context.$container.find('.zoom');
-        var $head       = that.context.$container.find('.heading');
-        var $header     = $('header');
         var $selector   = that.context.$container.find('.selector');
-
-        var $cities_content     = that.context.$container;
-        var $cities             = that.context.$container.find('.scroll-cities');
-        var $bars               = that.context.$container.find('.scroll-bars');
-        var $map                = that.context.$container.find('#map');
+        var $cities     = that.context.$container.find('.scroll-cities');
+        var $bars       = that.context.$container.find('.scroll-bars');
 
 
         $cities.on('click', 'li', function()
         {
+            if( !$('html').hasClass('mobile') || $(window).width() > 640 ) that._openFilter();
+
             that.context.$container.find('form input[name=city]').val( $(this).text() );
             that.context.$container.find('form').submit();
         });
@@ -294,26 +290,11 @@ meta.Cities = function() {
 
 
 
-        $selector.find('input[name=city]').click(function()
+        $selector.find('input[name=city], input[type=submit]').click(function()
         {
             if( !$('html').hasClass('mobile') || $(window).width() > 640 )
             {
-                if( !that.context.filter_is_open )
-                {
-                    that.context.filter_is_open = true;
-
-                    $selector.height($selector.height());
-                    that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
-                    that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
-
-                    $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
-
-                    setTimeout(function()
-                    {
-                        that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
-
-                    }, 300);
-                }
+                that._openFilter();
             }
             else
             {
@@ -336,6 +317,34 @@ meta.Cities = function() {
             that._resize();
         });
 
+    };
+
+
+    /**
+     *
+     */
+    that._openFilter = function()
+    {
+
+        var $head       = that.context.$container.find('.heading');
+        var $selector   = that.context.$container.find('.selector');
+
+        if( !that.context.filter_is_open )
+        {
+            that.context.filter_is_open = true;
+
+            $selector.height($selector.height());
+            that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
+            that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+
+            $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
+
+            setTimeout(function()
+            {
+                that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
+
+            }, 300);
+        }
     };
 
 
