@@ -95,6 +95,9 @@ class AjaxController extends Controller
     //Returns a list on Point of interest in a city (and a suburb)
     public function poiListAction($cityID = 0, $suburbID = 0)
     {
+        if($suburbID=='undefined')
+            $suburbID=0;
+
         if($cityID > 0)
         {
             $city = $this->container->get('city.repository')->findOneById($cityID);
