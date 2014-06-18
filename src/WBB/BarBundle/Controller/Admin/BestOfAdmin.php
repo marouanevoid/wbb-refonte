@@ -66,18 +66,16 @@ class BestOfAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $imageOptions = array('required' => false);
+        $imageOptions = array('required' => false, 'label' => 'Best of visual *');
         if (($object = $this->getSubject()) && $object->getImage()) {
             $path = $object->getWebPath();
             $imageOptions['help'] = 'Mandatory<br /><img width="250px" src="/' . $path . '" />';
-            $imageOptions['label'] = 'Best of visual *';
         }
 
-        $sponsorImageOptions = array('required' => false);
+        $sponsorImageOptions = array('required' => false, 'label' => 'Sponsor visual');
         if (($object = $this->getSubject()) && $object->getSponsorImage()) {
             $path = $object->getWebPath(true);
             $sponsorImageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
-            $sponsorImageOptions['label'] = 'Sponsor visual';
         }
 
         $formMapper

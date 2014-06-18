@@ -94,6 +94,11 @@ class City {
     private $suburbs;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"all"})
+     */
+    private $users;
+
+    /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="city", cascade={"all"})
      */
     private $bars;
@@ -104,9 +109,9 @@ class City {
     private $bestofs;  
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"remove"})
-     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities")
+     * @ORM\JoinTable(name="cities_news")
+     **/
     private $news;    
     
     /**
@@ -249,6 +254,7 @@ class City {
      */
     public function __construct() {
         $this->suburbs = new ArrayCollection();
+        $this->news    = new ArrayCollection();
 
         $this->setOnTopCity(true);
     }
@@ -594,5 +600,38 @@ class City {
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     * @return City
+     */
+    public function addUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     */
+    public function removeUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
