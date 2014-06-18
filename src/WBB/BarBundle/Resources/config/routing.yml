@@ -13,7 +13,7 @@ city_homepage:
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
 
 bar_guides:
-    pattern: /
+    pattern: /bar-guides
     defaults: { _controller: WBBBarBundle:Bar:barGuide }
 
 wbb_bar_tips:

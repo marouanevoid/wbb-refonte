@@ -31,9 +31,7 @@
                         </li>
                     {% endfor %}
 
-
-                    {% if admin.id(object) %}
-                        {% if is_granted('ROLE_BAR_ID') %}
+                    {% if is_granted('ROLE_BAR_ID') %}
                         <li class="">
                             <a href="#{{ admin.uniqid }}_map_tab" data-toggle="tab">
                                 <i class="icon-exclamation-sign has-errors hide"></i>
@@ -41,6 +39,7 @@
                             </a>
                         </li>
                     {% endif %}
+                    {% if admin.id(object) %}
                         {% if is_granted('ROLE_WBB_BAR_FS_TIPS') %}
                             <li class="">
                                 <a href="#{{ admin.uniqid }}_fs_tips_tab" data-toggle="tab">
@@ -88,24 +87,24 @@
                                 </fieldset>
                             </div>
                         {% endfor %}
-                        {% if admin.id(object) %}
-                            {% if is_granted('ROLE_BAR_ID') %}
-                                <div class="tab-pane " id="{{ admin.uniqid }}_map_tab">
-                                    <fieldset>
-                                        <div class="sonata-ba-collapsed-fields">
-                                            <div class="mapcontainer" style="width: 600px; height: 400px;"></div>
-                                            <div class="mapinfos">
-                                                <div><label>Location:</label> <input type="text" id="mpAddress" style="width: 200px"/></div>
-                                                <span class="help-block sonata-ba-field-help">Mandatory. Type the bar adress and select Google Map recommandation</span>
-                                                <div style="clear: left; height: 5px;"></div>
-                                                <div><label>Lat.:</label> <input type="text" id="lat"/></div>
-                                                <div style="clear: left; height: 5px;"></div>
-                                                <div><label>Long.:</label> <input type="text" id="lon"/></div>
-                                            </div>
+                        {% if is_granted('ROLE_BAR_ID') %}
+                            <div class="tab-pane " id="{{ admin.uniqid }}_map_tab">
+                                <fieldset>
+                                    <div class="sonata-ba-collapsed-fields">
+                                        <div class="mapcontainer" style="width: 600px; height: 400px;"></div>
+                                        <div class="mapinfos">
+                                            <div><label>Location:</label> <input type="text" id="mpAddress" style="width: 200px"/></div>
+                                            <span class="help-block sonata-ba-field-help">Mandatory. Type the bar adress and select Google Map recommandation</span>
+                                            <div style="clear: left; height: 5px;"></div>
+                                            <div><label>Lat.:</label> <input type="text" id="lat"/></div>
+                                            <div style="clear: left; height: 5px;"></div>
+                                            <div><label>Long.:</label> <input type="text" id="lon"/></div>
                                         </div>
-                                    </fieldset>
-                                </div>
-                            {% endif %}
+                                    </div>
+                                </fieldset>
+                            </div>
+                        {% endif %}
+                        {% if admin.id(object) %}
                             {% if is_granted('ROLE_WBB_BAR_FS_TIPS') %}
                                 <div class="tab-pane " id="{{ admin.uniqid }}_fs_tips_tab">
                                     <fieldset>

@@ -1,0 +1,19 @@
+<article class="bar-w-pic">
+    <a href="#0" class="btn-round dark star"></a>
+    <div class="txt">
+        <h2>{{ b.name }}</h2>
+        <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
+        <div class="hover">
+            <div class="tags">
+                {% for tr in b.tags %}
+                    {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+    <div class="gradient"></div>
+    {% for m in b.medias|slice(0,1) %}
+        <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+    {% endfor %}
+</article>

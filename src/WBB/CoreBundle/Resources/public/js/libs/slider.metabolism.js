@@ -85,7 +85,10 @@ meta.Slider = function(config){
         that.context.$slides    = that.context.$slider.find(that.config.slide);
         that.context.$dots      = that.context.$slider.find(that.config.dots);
 
-        var min_slide_length = that.config.autoload ? 0 : 1;
+        var min_slide_length    = that.config.autoload ? 0 : 1;
+
+        if( that.config.display_count )
+            min_slide_length = that.config.display_count;
 
         that.config.has_arrows  = that.config.has_arrows && that.context.$slides.length > min_slide_length;
         that.config.has_dots    = that.config.has_dots && that.context.$slides.length > min_slide_length;
@@ -569,7 +572,7 @@ function initializeSliders()
                 autoload        : $slider.hasClass('autoload'),
                 animate_arrow   : $slider.hasClass('animate-arrow'),
                 autoplay        : $slider.hasClass('autoplay'),
-                display_count   : $slider.data('display'),
+                display_count   : parseInt($slider.data('display')),
                 animation       : animation
             }));
 

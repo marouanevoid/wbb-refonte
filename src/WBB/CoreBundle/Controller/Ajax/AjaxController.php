@@ -75,7 +75,7 @@ class AjaxController extends Controller
             {
                 $bars = $this->container->get('bar.repository')->findAllEnabled($city);
             }
-            $suburbs = $this->container->get('suburb.repository')->findAll();
+            $suburbs = $this->container->get('suburb.repository')->findByCity($city);
             $result = array('bars' => array(), 'suburbs' => array());
 
             foreach($bars as $bar)
