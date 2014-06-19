@@ -1043,7 +1043,7 @@ form.dark input[type="text"] + input[type="submit"] {
 }
 
 /* line 114, ../sass/_form.scss */
-input[type="reset"][value=" "] {
+input[type="reset"][value=" "], input[type="reset"][value=""] {
   border-radius: 50%;
   position: absolute;
   top: 4px;
@@ -1061,7 +1061,7 @@ input[type="reset"][value=" "] {
   transition: background-color 0.2s ease-in-out;
 }
 /* line 118, ../sass/_form.scss */
-input[type="reset"][value=" "]:hover {
+input[type="reset"][value=" "]:hover, input[type="reset"][value=""]:hover {
   background-position: -124px -44px;
   background-color: #b3955f;
 }
@@ -4081,12 +4081,24 @@ html.mobile article.city:hover img.scale-with-grid {
 /* line 6, ../sass/components/_search-bar-mobile.scss */
 .search-bar-mobile .container input[type="text"] {
   width: 70%;
-  padding-left: 10%;
+  padding-left: 12%;
   background: url("../images/sprite.png") no-repeat white;
   background-size: 256px 512px;
   background-position: -80px -360px;
 }
 /* line 7, ../sass/components/_search-bar-mobile.scss */
+.search-bar-mobile .container input[type="reset"] {
+  position: absolute;
+  right: 31%;
+  top: 3px;
+  display: none;
+}
+/* line 8, ../sass/components/_search-bar-mobile.scss */
+.search-bar-mobile .container input[type="reset"]:hover {
+  background-position: -124px -4px;
+  background-color: transparent;
+}
+/* line 9, ../sass/components/_search-bar-mobile.scss */
 .search-bar-mobile .container .btn-radius {
   color: #b3955f;
   width: 25%;
@@ -4095,13 +4107,13 @@ html.mobile article.city:hover img.scale-with-grid {
   text-align: center;
 }
 
-/* line 13, ../sass/components/_search-bar-mobile.scss */
+/* line 15, ../sass/components/_search-bar-mobile.scss */
 body.search .search-bar-mobile {
   position: static;
   display: block;
   border-bottom: 1px solid #b3955f;
 }
-/* line 15, ../sass/components/_search-bar-mobile.scss */
+/* line 17, ../sass/components/_search-bar-mobile.scss */
 body.search .search-bar-mobile .container {
   display: block;
   -webkit-transform: translate3d(0, 0, 0);
@@ -4110,7 +4122,7 @@ body.search .search-bar-mobile .container {
   -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-/* line 16, ../sass/components/_search-bar-mobile.scss */
+/* line 18, ../sass/components/_search-bar-mobile.scss */
 body.search .search-bar-mobile + .container {
   margin-top: 1.5em !important;
 }
@@ -5474,7 +5486,7 @@ footer .right .keep-in-touch .fb-like, footer .right .keep-in-touch iframe {
   }
 
   /* line 5, ../sass/_retina.scss */
-  input[type="reset"][value=" "], .search-bar-mobile .container input[type="text"] {
+  input[type="reset"][value=" "], input[type="reset"][value=""], .search-bar-mobile .container input[type="text"] {
     background-image: url("../images/sprite@2x.png");
   }
 

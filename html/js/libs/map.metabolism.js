@@ -176,6 +176,8 @@ meta.Map = function(config){
                 events:{
                     mouseover: function(marker, event, context){
 
+                        if( $('html').hasClass('mobile') ) return;
+
                         if( typeof(context.id) != 'undefined')
                             $('#'+context.id ).addClass('active');
 

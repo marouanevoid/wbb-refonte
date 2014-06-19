@@ -111,7 +111,7 @@ input[type="text"]+input[type="submit"].search+input[type="reset"] { margin-righ
 form.dark input[type="text"]+input[type="submit"]{
   background: url('../images/sprite.png') no-repeat $color-gray; height: 40px; border-left:1px solid $color-dark-gray; box-shadow: none;
 }
-input[type="reset"][value=" "]{
+input[type="reset"][value=" "], input[type="reset"][value=""]{
   border-radius: 50%; position: absolute; top: 4px; right: 4px; margin: 0; height: 34px; width: 34px; padding: 0;
   background: url('../images/sprite.png') no-repeat #fff; background-size: 256px 512px;  background-position: -124px -4px;
   @include transition( background-color 0.2s ease-in-out);

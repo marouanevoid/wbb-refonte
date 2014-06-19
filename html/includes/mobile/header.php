@@ -94,6 +94,7 @@
             <div class="twelve columns s-margin">
                 <form action="search.php">
                     <input type="text" name="q"/>
+                    <input type="reset" value=" "/>
                 </form>
                 <a class="btn-radius border h4 close">Cancel</a>
             </div>
