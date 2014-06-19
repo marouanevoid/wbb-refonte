@@ -1,0 +1,65 @@
+.bar-details .content p .see-more {
+    display: block;
+    text-align: center;
+    margin-top: 1em;
+}
+.bar-details .content p .more {
+    display: none;
+}
+.bar-details .content .trends li {
+    line-height: 26px;
+}
+.bar-details .content aside .informations .contain .gmap .get-directions {
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+    left: 106px;
+    top: 80px;
+    width: auto !important;
+    height: auto !important;
+    background-image: none !important;
+    background-repeat: inherit !important;
+    background-size: 0;
+    background-position: inherit !important;
+}
+.ui-slider.type-bar-detail .image {
+    width: 50%;
+    height: 50%;
+}
+@media only screen and (max-width: 768px) {
+    .bar-details .gallery .ui-slider .ui-slide .image {
+        width: 33.33%;
+        height: auto;
+    }
+}
+.bar-details .content aside .informations .contain .gmap .get-directions .btn-small-radius {
+    background: white;
+    margin-top: inherit !important;
+}
+
+.fb-like {
+    height: 20px;
+    overflow: hidden;
+}
+.fb_edge_comment_widget {
+    display: none !important;
+}
+.facebook_container {
+    position:absolute;
+}
+
+.bar-details .gallery .loader {
+    display:block;
+}
+.btn-round.star.active:before {
+    background-position: -160px -240px !important;
+}
+body.bar-guides section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {
+    background-size: 128px 256px !important;
+    background-position: -80px -40px !important;
+}
+body.bar-guides section.bars .bar-w-pic:first-child .btn-round:before {
+    background-size: 256px 512px !important;
+    background-position: -160px -80px !important;
+}
+

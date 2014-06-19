@@ -34,9 +34,8 @@
                 var btn = $(this);
                 $.ajax({
                     type: "POST",
-                    url:  Routing.generate('wbb_bar_tips_add'),
-                    dataType: 'json',
-                    success: function(r) {
+                    url:  '/',
+                    success: function() {
                         if(btn.hasClass('active')){
                             btn.removeClass('active');
                             if(btn.hasClass('changed')){
@@ -44,12 +43,18 @@
                                 btn.addClass('dark');
                                 btn.removeClass('changed');
                             }
+                            if(btn.hasClass('nc')){
+                                btn.addClass('force-disabled')
+                            }
                         }else{
                             btn.addClass('active');
                             if(btn.hasClass('dark')){
                                 btn.addClass('changed');
                                 btn.addClass('brown');
                                 btn.removeClass('dark');
+                            }
+                            if(btn.hasClass('force-disabled')){
+                                btn.removeClass('force-disabled')
                             }
                         }
                     }
@@ -535,36 +540,9 @@
             {% for b in barLike %}
                 <div class="three columns">
                     {% if is_mobile() and not is_tablet() %}
-                        <article class="bar-wo-pic">
-
-                            <a href="" class="btn-round dark star"></a>
-
-                            <div class="txt">
-                                <h2>{{ b.name }}</h2>
-                                <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
-                            </div>
-
-                            <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
-
-                        </article>
+                        {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
                     {% else %}
-                    <article class="bar-w-pic">
-                        <a href="#0" class="btn-round dark star"></a>
-                        <div class="txt">
-                            <h2>{{ b.name }}</h2>
-                            <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
-                            <div class="tags">
-                                {% for tr in b.tags %}
-                                    {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                                {% endfor%}
-                            </div>
-                        </div>
-                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
-                        <div class="gradient"></div>
-                        {% for m in b.medias|slice(0,1) %}
-                            <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
-                        {% endfor %}
-                    </article>
+                        {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
                     {% endif %}
                 </div>
             {% endfor %}
