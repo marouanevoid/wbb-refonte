@@ -65,3 +65,9 @@ wbb_bar_tips_fetch:
     defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
     options:
         expose: true
+
+wbb_bar_guide_filters:
+    pattern: /barguide/filter/{bar}/{city}/{filter}/{offset}/{limit}
+    defaults: { _controller: WBBBarBundle:Bar:barGuideFilter, bar: 1, city: 0, filter: popularity, offset: 0, limit: 8}
+    options:
+        expose: true
