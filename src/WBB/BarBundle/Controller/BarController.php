@@ -46,7 +46,7 @@ class BarController extends Controller
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5);
         $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars();
 
-        return $this->render('barGuides.html.twig', $response);
+        return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }
 
     public function barGuideCityAction($slug)
@@ -57,7 +57,7 @@ class BarController extends Controller
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5);
         $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars($city);
 
-        return $this->render('barGuides.html.twig', $response);
+        return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }
 
     /**
@@ -178,5 +178,41 @@ class BarController extends Controller
             'bars'      =>  $youMayAlsoLike,
             'oneCity'   =>  $oneCity
         );
+    }
+
+    // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")
+    public function barGuideFilterAction($bars = 1, $city = 0, $filter = "popularity" , $offset = 0, $limit = 8)
+    {
+        $response = null;
+        $type = null;
+
+        if($bars){
+            if($filter === "popularity"){
+                $response = $this->container->get('bar.repository')->findPopularBars($city, $limit, $offset);
+            }elseif($filter === "alphabetical"){
+                $response = $this->container->get('bar.repository')->findBarsOrderedByName($city, $offset ,$limit);
+            }elseif($filter === "date"){
+                $response = $this->container->get('bar.repository')->findLatestBars($city, $limit, $offset, false);
+            }elseif($filter === "distance"){
+                $response = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, $limit);
+            }
+
+            return $this->render('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
+                'bars'  => $response
+            ));
+
+        }else{
+            if($filter === "popularity"){
+                //TODO: Repository methode for popularity
+            }elseif($filter === "alphabetical"){
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
+            }elseif($filter === "date"){
+                $response = $this->container->get('bestof.repository')->findLatestBars($city, $limit, $offset, false);
+            }
+
+            return $this->render('WBBBarBundle:BarGuide:filters\bestofs.html.twig', array(
+                'bestofs'  => $response
+            ));
+        }
     }
 }
