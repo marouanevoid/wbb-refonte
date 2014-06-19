@@ -32,7 +32,7 @@ services:
         arguments: [null, %wbb_core.city.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
-            - [setTemplates, [{ edit: "WBBCoreBundle:Admin:City/edit.html.twig", list: "WBBCoreBundle:Admin:City/list.html.twig"}]]
+            - [setTemplates, [{ edit: "WBBCoreBundle:Admin:City/edit.html.twig", list: "WBBCoreBundle:Admin:City/List/list.html.twig"}]]
 
     wbb.core.admin.city.suburb:
         class: %wbb_core.citysuburb.admin.class%

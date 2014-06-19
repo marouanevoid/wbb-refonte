@@ -634,4 +634,20 @@ class City {
     {
         return $this->users;
     }
+
+    public function getNbBars()
+    {
+        return count($this->getBars());
+    }
+
+    public function getNbNews()
+    {
+        return count($this->getNews());
+    }
+
+    public function getNbAreas()
+    {
+        return count($this->getSuburbs());
+    }
+
 }
