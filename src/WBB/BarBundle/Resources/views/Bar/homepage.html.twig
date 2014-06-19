@@ -139,7 +139,7 @@
                                 <h3> {{ c.name }} </h3>
                                 <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
                             </div>
-                            <a href="" class="overlay-link"></a>
+                            <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
                             <img class="overlay" src="{{ asset('/bundles/wbbcore/images/city.background-circle.png') }}"/>
                             {% if c.webPath %}
                             <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) | apply_filter('city_small') }}" alt="{{ c.name }}"/>
