@@ -1,11 +1,9 @@
 {% extends "::base.html.twig" %}
+{% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
 {% block title %}World Best Bars{% endblock %}
 
-{% block javascripts %}
-
-{% endblock %}
 {% block bodyTag %}
-<body class="bar-guides">
+<body class="index">
 {% endblock %}
 {% block body %}
 <div class="full-cream">
@@ -21,13 +19,15 @@
                     <td>
                         <div class="city-selector h3">
                             You are in
-                            <select class="ui-dropdown" name="city" data-class="with-icon city">
+                            <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
                                 <option disabled="disabled">Choose a City</option>
-                                <option value="cty2">City 2</option>
-                                <option value="cty3">City 3</option>
-                                <option value="cty4">City 4</option>
-                                <option value="cty5">City 5</option>
-                                <option value="cty6">City 6</option>
+                                {% for c in topCities %}
+                                    <option data-type="redirect" value="{{ path('city_bar_guides',{slug:c.slug}) }}"
+                                            {% if city is defined and c.id==city.id %}
+                                                selected="selected"
+                                            {% endif %}
+                                            >{{ c.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </td>
@@ -53,46 +53,19 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="force-load">
-                {# FOR : TOPBARS #}
-                <article class="bar-w-pic">
-
-                    <a href="" class="btn-round dark star"></a>
-
-                    <div class="txt">
-                        <h2>Berry Park</h2>
-                        <h3>Lower Manhattan, New York</h3>
-                        <div class="tags">rooftop, romance, ambiente</div>
-                    </div>
-                    <a href="bar-details.php" class="overlay-link"></a>
-
-                    <div class="gradient"></div>
-                    <img src="" class="scale-with-grid" data-src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
-                </article>
-                {# ENDFOR #}
+                {% for b in popularBars %}
+                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                {% endfor %}
             </div>
 
             {% else %}
 
             <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
-
-                {# FOR : TOPBARS #}
-                <div class="ui-slide">
-                    <article class="bar-w-pic">
-
-                        <a href="" class="btn-round dark star"></a>
-
-                        <div class="txt">
-                            <h2>Berry Park</h2>
-                            <h3>Lower Manhattan, New York</h3>
-                            <div class="tags">rooftop, romance, ambiente</div>
-                        </div>
-                        <a href="bar-details.php" class="overlay-link"></a>
-
-                        <div class="gradient"></div>
-                        <img src="" class="scale-with-grid" data-src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
-                    </article>
-                </div>
-                {# ENDFOR #}
+                {% for b in popularBars %}
+                    <div class="ui-slide">
+                       {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
+                    </div>
+                {% endfor %}
             </div>
 
             {% endif %}
@@ -109,28 +82,16 @@
                 <div class="align-center l-margin">
                     <h1>Best Of</h1>
                 </div>
-
-                <div class="ui-slider type-bestof has_sizer arrows dots" data-size="{% if not is_mobile() or is_tablet() %}3x3{% else %}4x3{% endif %}" data-display="{% if is_mobile() and not is_tablet() %}1{% else %}3{% endif %}">
-
-                    {# FOR BESTOF #}
-                    <div class="ui-slide">
-                        <article class="bestof">
-
-                            <a href="" class="btn-round dark star"></a>
-
-                            <div class="txt vcenter">
-                                <div class="circle vcenter">
-                                    <h2>Berry Park</h2>
-                                    <h3>Dance Clubs</h3>
-                                </div>
-                            </div>
-
-                            <img src="" class="scale-with-grid" data-src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
-                            <a href="" class="overlay-link"></a>
-
-                        </article>
-                    </div>
-                    {# EFDFOR #}
+                {% if is_mobile() and not is_tablet() %}
+                    <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1">
+                {% else %}
+                    <div class="ui-slider type-bestof has_sizer arrows dots" data-size="3x3" data-display="3">
+                {% endif %}
+                    {% for b in topBestofs %}
+                        <div class="ui-slide">
+                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}
+                        </div>
+                    {% endfor %}
                 </div>
             </section>
         </div>
@@ -170,26 +131,13 @@
 
         <div class="container">
 
-            <div class="bars-w-pic force-load  {% if is_mobile() and not is_tablet() %}m-margin-top{% endif %} load-container">
+            <div class="bars-w-pic force-load  <?php if($is_mobile): ?>m-margin-top<?php endif ?> load-container">
 
-                {# FOR BARS #}
+                <?php for($i=1; $i<13; $i++) : ?>
                 {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
-                    <article class="bar-w-pic">
-
-                        <a href="" class="btn-round dark star"></a>
-
-                        <div class="txt">
-                            <h2>Berry Park</h2>
-                            <h3>Lower Manhattan, New York</h3>
-                            <div class="tags">rooftop, romance, ambiente</div>
-                        </div>
-                        <a href="bar-details.php" class="overlay-link"></a>
-
-                        <div class="gradient"></div>
-                        <img src="" class="scale-with-grid" data-src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
-                    </article>
+                    <?php include('components/bar-w-pic.php') ?>
                 {% if not is_mobile() or is_tablet() %}</div>{% endif %}
-                {# ENDFOR #}
+                <?php endfor ?>
 
                 <div class="load-target"></div>
 
@@ -201,33 +149,9 @@
 
             <div class="bars-w-pic-list load-container" style="display: none">
 
-                {# FOR BARS #}
-                <article class="bar-w-pic-list">
-
-                    <div class="three columns s-margin-top">
-
-                        <div class="bar-w-pic list">
-
-                            <a href="" class="btn-round dark star"></a>
-
-                            <a href="bar-details.php" class="overlay-link"></a>
-
-                            <img class="scale-with-grid" src="tmp/bar.jpg" alt="bar.berry-park" width="570" height="428"/>
-                        </div>
-                    </div>
-
-                    <div class="nine columns s-margin-top">
-                        <h2 class="s-margin-top">Berry Park</h2>
-                        <h3 class="xs-margin-top">Lower Manhattan, New York</h3>
-                        <p class="s-margin-top">
-                            From the team behind the acclaimed Employees Only and David Waltuck, chef and owner of Chanterelle,
-                            comes a new super-hip Tribeca spot. Taking its inspiration from the brothels and opium dens of old 1930s ...
-                        </p>
-                        <div class="tags">rooftop, romance, ambiente</div>
-                    </div>
-                    <div class="separator"><hr/></div>
-                </article>
-                {# ENDFOR #}
+                <?php for($i=1; $i<6; $i++) : ?>
+                <?php include('components/bar-w-pic-list.php') ?>
+                <?php endfor ?>
 
                 <div class="load-target"></div>
 
@@ -276,7 +200,5 @@
         </script>
 
     </section>
-
-
 </div>
 {% endblock %}
