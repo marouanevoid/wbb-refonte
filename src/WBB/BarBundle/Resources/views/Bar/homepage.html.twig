@@ -4,15 +4,18 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        //document.location.href="/admin/";
         $(document).ready(function(){
+            {% if city is defined %}
+                $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
+            {% else %}
+                $.cookie('city', '/', { path: '/' });
+            {% endif %}
             $(".star").click(function(){
                 var btn = $(this);
                 $.ajax({
                     type: "POST",
-                    url:  Routing.generate('wbb_bar_tips_add'),
-                    dataType: 'json',
-                    success: function(r) {
+                    url:  '/',
+                    success: function() {
                         if(btn.hasClass('active')){
                             btn.removeClass('active');
                             if(btn.hasClass('changed')){
@@ -20,12 +23,18 @@
                                 btn.addClass('dark');
                                 btn.removeClass('changed');
                             }
+                            if(btn.hasClass('nc')){
+                                btn.addClass('force-disabled')
+                            }
                         }else{
                             btn.addClass('active');
-                            if(btn.hasClass('dark') && !btn.hasClass('nc')){
+                            if(btn.hasClass('dark')){
                                 btn.addClass('changed');
                                 btn.addClass('brown');
                                 btn.removeClass('dark');
+                            }
+                            if(btn.hasClass('force-disabled')){
+                                btn.removeClass('force-disabled')
                             }
                         }
                     }
@@ -52,10 +61,10 @@
                         <td>
                             <div class="city-selector h3">
                                 You are in
-                                <select class="ui-dropdown" name="city" data-class="with-icon city" onchange="location = this.options[this.selectedIndex].value;">>
+                                <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
                                     <option disabled="disabled">Choose a City</option>
                                     {% for c in topCities %}
-                                        <option value="{{ path('city_homepage',{slug:c.slug}) }}"
+                                        <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}"
                                             {% if city is defined and c.id==city.id %}
                                                 selected="selected"
                                             {% endif %}
@@ -98,24 +107,7 @@
 
             {% for b in topBars %}
                 <div class="ui-slide">
-                    <article class="bar-w-pic">
-
-                        <a href="#0" class="btn-round dark star"></a>
-
-                        <div class="txt">
-                            <h2>{{ b.name }}</h2>
-                            <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
-                            <div class="tags">{% for t in b.tags %}
-                                    {{ t.tag }}{% if not loop.last %}, {% endif %}
-                                {% endfor%}</div>
-                        </div>
-                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb:b.suburb,slug:b.slug}) }}" class="overlay-link"></a>
-
-                        <div class="gradient"></div>
-                        {% for m in b.medias|slice(0,1) %}
-                            <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
-                        {% endfor %}
-                    </article>
+                    {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'mobile':0 } %}
                 </div>
             {% endfor %}
 
@@ -147,7 +139,7 @@
                                 <h3> {{ c.name }} </h3>
                                 <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
                             </div>
-                            <a href="" class="overlay-link"></a>
+                            <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
                             <img class="overlay" src="{{ asset('/bundles/wbbcore/images/city.background-circle.png') }}"/>
                             {% if c.webPath %}
                             <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) | apply_filter('city_small') }}" alt="{{ c.name }}"/>
@@ -325,7 +317,7 @@
                 {% endfor %}
             {% endif %}
 
-            <a class="btn-radius border brown h4 s-margin-top" href="" style="clear: left; float:left;">See all articles</a>
+            <a class="btn-radius border brown h4 s-margin-top" href="" style="clear: left; float:left;">See all news</a>
 
         </section>
 
@@ -339,18 +331,7 @@
                 Newly Added Bars
             </div>
             {% for b in latestBars %}
-                <article class="bar-wo-pic">
-
-                    <a href="#0" class="btn-round dark star {% if is_mobile() and not is_tablet() %}nc{% endif %}"></a>
-
-                    <div class="txt">
-                        <h2>{{ b.name }}</h2>
-                        <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
-                    </div>
-
-                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb:b.suburb,slug:b.slug}) }}" class="overlay-link"></a>
-
-                </article>
+                {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
             {% endfor %}
 
             <a class="btn-radius border brown h4 s-margin-top" href="">See all bars</a>

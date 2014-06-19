@@ -1,0 +1,12 @@
+<article class="bar-wo-pic">
+
+    <a href="#0" class="btn-round dark star nc"></a>
+
+    <div class="txt">
+        <h2>{{ b.name }}</h2>
+        <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
+    </div>
+
+    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+
+</article>

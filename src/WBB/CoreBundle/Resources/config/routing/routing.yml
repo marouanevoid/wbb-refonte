@@ -8,6 +8,12 @@ get_suburbs_from_city:
     options:
         expose: true
 
+get_cities_from_country:
+    pattern: /ajax/get-cities-from-country/{bestof}/{countryId}/{cityId}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getCitiesFromCountry, bestof: 0, cityId: 0}
+    options:
+        expose: true
+
 get_medias_from_bar:
     pattern: /ajax/get-medias-from-bar/{barID}/{mediaID}
     defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getBarMedias, barID: 0, mediaID: 0}
@@ -29,13 +35,3 @@ wbb_cities_list:
 wbb_cities:
     pattern: /cities
     defaults: { _controller: WBBCoreBundle:City:cities }
-
-wbb_bar_guide_filters:
-    pattern: /barguide/filter/{bar}/{city}/{filter}/{offset}/{limit}
-    defaults: { _controller: WBBCoreBundle:Ajax\Ajax:barGuideFilter, bar: 1, city: 0, filter: popularity, offset: 0, limit: 8}
-    options:
-        expose: true
-
-
-
-

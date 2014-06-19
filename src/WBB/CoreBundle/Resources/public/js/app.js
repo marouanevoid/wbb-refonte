@@ -43,11 +43,13 @@ meta.App = function() {
             var $menu       = $('aside.mobile-menu');
             var $content    = $('.entire-content-scrollable');
             var $header     = $('header.mobile');
+            var $menu_btn   = $header.find('.nav-icon a');
             var $body       = $('body');
 
             if( $body.hasClass("menu-open") )
             {
                 $content.height('auto');
+                $menu_btn.css('opacity', 1);
 
                 if( Modernizr.csstransforms3d )
                     $to_scroll.css({transform: 'translate3d(0,0,0)'});
@@ -63,9 +65,12 @@ meta.App = function() {
             }
             else
             {
-                $('html,body').animate({scrollTop:0}, that.config.speed, that.config.easing, function()
+                var speed = Math.min(500, $(window).scrollTop()*2);
+
+                $('html,body').animate({scrollTop:0}, speed, that.config.easing, function()
                 {
                     $body.addClass('menu-open');
+                    $menu_btn.css('opacity', 0.5);
 
                     setTimeout(function()
                     {
@@ -82,17 +87,17 @@ meta.App = function() {
         });
 
         $('.detect-scroll').swipe(
-            {
-                swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
-                swipeRight:function(){ $('header.mobile .nav-icon a').click() },
-                threshold:4
-            });
+        {
+            swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
+            swipeRight:function(){ $('header.mobile .nav-icon a').click() },
+            threshold:4
+        });
 
         $('.mobile-menu').swipe(
-            {
-                swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
-                threshold:50
-            });
+        {
+            swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
+            threshold:50
+        });
     };
 
 
@@ -125,9 +130,9 @@ meta.App = function() {
 
             $is_animating = true;
 
-            $bar_finder.find('table').animate({opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-close').animate({opacity: '0'}, speed/2, easing);
+            $bar_finder.find('table').animate({opacity: '0'}, that.config.speed, that.config.easing);
+            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, that.config.speed, that.config.easing);
+            $bar_finder.find('.finder-close').animate({opacity: '0'}, that.config.speed/2, that.config.easing);
             $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
         });
     };

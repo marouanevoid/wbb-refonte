@@ -30,6 +30,30 @@ file that was distributed with this source code.
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            var country = $("#{{ admin.uniqId }}_country");
+            country.change(updateCities());
+            country.change();
+
+            function updateCities(){
+                return function () {
+                    var countryId = $("#{{ admin.uniqId }}_country option:selected").val();
+                    var city = $("#{{ admin.uniqId }}_city");
+
+                    city.empty();
+                    city.trigger("list:updated");
+
+                    var url = Routing.generate('get_cities_from_country', {'bestof': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'countryId': countryId });
+                    $.post(url, { countryId: countryId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        city.empty().append(options);
+                        city.trigger("list:updated");
+                    },"text");
+
+                    city.val("option:first").attr("selected", true);
+                };
+            }
+
+
             $('#field_widget_{{ admin.uniqid }}_bars tr:gt(0) td:eq(1) select').live('change', function(){
                 var id = $(this).attr('id');
                 var newId = '#'+id.substr(0,(id.length-3))+'media';

@@ -91,6 +91,8 @@ meta.Map = function(config){
                 options: {
                     center:[25,0],
                     zoom: 3,
+                    maxZoom: 21,
+                    minZoom: 3,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     mapTypeControl: false,
                     navigationControl: false,

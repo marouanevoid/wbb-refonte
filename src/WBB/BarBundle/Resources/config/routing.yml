@@ -12,9 +12,13 @@ city_homepage:
     pattern: /top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
 
-bar_guides:
-    pattern: /
+wbb_bar_guides:
+    pattern: /bar-guides
     defaults: { _controller: WBBBarBundle:Bar:barGuide }
+
+wbb_bar_guides_city:
+    pattern: /bar-guides/top-{slug}
+    defaults: { _controller: WBBBarBundle:Bar:barGuideCity }
 
 wbb_bar_tips:
     pattern: /bar/{barID}/tips/{offset}/{limit}/{showwbb}
@@ -63,5 +67,11 @@ wbb_bar_tips_add:
 wbb_bar_tips_fetch:
     pattern:  /tips/fetch/{barID}/{offset}/{limit}
     defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
+    options:
+        expose: true
+
+wbb_bar_guide_filters:
+    pattern: /barguide/filter/{bar}/{city}/{filter}/{offset}/{limit}
+    defaults: { _controller: WBBBarBundle:Bar:barGuideFilter, bar: 1, city: 0, filter: popularity, offset: 0, limit: 8}
     options:
         expose: true

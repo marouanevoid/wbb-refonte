@@ -49,7 +49,7 @@ meta.Dropdown = function(config){
         color     : false,
         template  : '<div class="ui-dropdown-container">'+
                         '<div class="btn-radius border ui-dropdown %color%">'+
-                            '<span>%name%</span>'+
+                            '<span class="selected">%name%</span>'+
                             '<div class="slide">'+
                                 '<div class="choice custom-scroll">'+
                                     '<ul>%options%</ul>'+
@@ -96,13 +96,16 @@ meta.Dropdown = function(config){
 
                 $options.removeAttr('selected');
                 $options.eq( $(this).index()+1 ).attr('selected', 'selected');
+                if($options.eq( $(this).index()+1).data('type')=='redirect') {
+                   document.location=$options.eq( $(this).index()+1).val();
+                }
 
                 $(document).click();
             });
 
             $(document).click(function(e)
             {
-                if( !$(e.target).closest('.ui-dropdown').length && that.active )
+                if( (!$(e.target).closest('.ui-dropdown').length || $(e.target).hasClass('selected')) && that.active )
                 {
                     that.active = false;
                     $dropdown.find('.slide').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
