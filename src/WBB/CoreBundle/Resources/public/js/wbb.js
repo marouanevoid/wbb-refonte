@@ -28,7 +28,7 @@ function nodeToString ( node ) {
 
 $(document).ready(function(){
     if($.cookie('city')){
-        //$('.logo a').attr('href', $.cookie('city'));
-        // alert($.cookie('city'));
+        console.log($('.logo a').attr('href'));
+        $('.logo a').attr('href', $.cookie('city'));
     }
 });
