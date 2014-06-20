@@ -36,6 +36,7 @@ meta.Cities = function() {
         filter_is_open: false
     };
 
+    that.first_resize = true;
 
     /**
      *
@@ -253,7 +254,9 @@ meta.Cities = function() {
             that.context.$container.find('form input[name=city]').prop('disabled', false);
             that.context.$container.find('form input[type=submit]').show();
             that.context.$container.find('form input[type=reset]').hide();
-            that.context.$container.find('form input[name=city]').focus().blur();
+
+            if( $('html').hasClass('ie9') )
+                that.context.$container.find('form input[name=city]').focus().blur();
 
             that._showCitySelector();
             that._removeNeighborhoodSelector();
@@ -377,12 +380,17 @@ meta.Cities = function() {
 
         if( !$('html').hasClass('mobile') || $(window).width() > 640 )
         {
-            $cities_content.height( $(window).height()-$header.height()-$('footer').height() );
+            if( !$('html').hasClass('mobile') || that.first_resize )
+            {
+                that.first_resize = false;
 
-            var cities_height = $selector.height()-$head.height()-20;
+                $cities_content.height( $(window).height()-$header.height()-$('footer').height() );
 
-            $cities.height( cities_height );
-            $bars.height( cities_height-40 );
+                var cities_height = $selector.height()-$head.height()-20;
+
+                $cities.height( cities_height );
+                $bars.height( cities_height-40 );
+            }
 
             $scroll.height( $selector.height()-$head.height()-25 );
 
