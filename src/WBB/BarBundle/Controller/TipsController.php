@@ -61,13 +61,15 @@ class TipsController extends Controller
         $bar    = $this->container->get('bar.repository')->findOneById($barID);
         $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit);
 
-
-        return $this->render('WBBBarBundle:Bar:wbbTips.html.twig', array(
+        $response['nbResults']= count($tips);
+        $response['htmldata'] = $this->renderView('WBBBarBundle:Bar:wbbTips.html.twig', array(
                 'bar'       => $bar,
                 'tips'      => $tips,
                 'offset'    => $offset,
-                'limit'      => $limit
+                'limit'     => $limit
             )
         );
+
+        return new JsonResponse($response);
     }
 }

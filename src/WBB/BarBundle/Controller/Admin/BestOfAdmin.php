@@ -24,11 +24,27 @@ class BestOfAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
+            ->add('country')
+            ->add('city')
             ->add('sponsor', null, array('editable' => true))
+            ->add('nbBars', 'string', array(
+                'label' => 'Bars',
+                'template' => 'WBBCoreBundle:Admin:list\list_nb_bars.html.twig'
+            ))
             ->add('byTag', null, array('editable' => true))
+            ->add('ordered', null, array('editable' => true))
+            ->add('createdAt')
+            ->add('updatedAt')
             ->add('onTop', null, array('editable' => true))
-            ->add('city', null, array('editable' => true))
-            ->add('country', null, array('editable' => true))
+            ->addIdentifier('_action', 'actions', array(
+                'field'   => 'name',
+                'label'    => 'Actions',
+                'actions' => array(
+//                    'show'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
+                    'edit'   => array(),
+                    'delete' => array(),
+                )
+            ))
         ;
     }
 
@@ -38,13 +54,48 @@ class BestOfAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $filterMapper)
     {
         $filterMapper
-            ->add('id')
             ->add('name')
-            ->add('sponsor')
-            ->add('byTag')
-            ->add('onTop')
-            ->add('city')
             ->add('country')
+            ->add('city')
+            ->add('sponsor')
+            ->add('seoDescription')
+            ->add('byTag')
+            ->add('ordered')
+            ->add('onTop')
+            ->add('tags')
+            ->add('bars')
+            ->add('createdAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Created After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
+                            $queryBuilder->setParameter('createdAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
+            ->add('updatedAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Updated After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
+                            $queryBuilder->setParameter('updatedAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
         ;
     }
 

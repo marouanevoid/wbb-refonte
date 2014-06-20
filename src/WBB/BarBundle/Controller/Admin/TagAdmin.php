@@ -47,7 +47,14 @@ class TagAdmin extends Admin
             ->add('energyLevel', null, array(
                 'template' => 'WBBBarBundle:Admin:Tag\status_field.html.twig'
             ))
-            ->add('onTop', null, array('editable' => true));
+            ->add('isStyle', null, array('editable' => true))
+            ->add('isOccasion', null, array('editable' => true))
+            ->add('isAtmosphere', null, array('editable' => true))
+            ->add('isAlcohol', null, array('editable' => true))
+            ->add('isCocktail', null, array('editable' => true))
+            ->add('isMood', null, array('editable' => true))
+            ->add('onTop', null, array('editable' => true))
+        ;
     }
 
     /**

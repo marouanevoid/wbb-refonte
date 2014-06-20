@@ -73,18 +73,18 @@ class CityAdmin extends Admin
         $listMapper
             ->addIdentifier('name', null, array('editable' => true))
             ->add('country')
-            ->add('seoDescription')
+            ->add('seoDescription', null, array('label' => 'SEO Description'))
             ->add('nbAreas', 'string', array(
-                'label' => 'Related Areas',
-                'template' => 'WBBCoreBundle:Admin:City\list_nb_areas.html.twig'
+                'label' => 'Districts',
+                'template' => 'WBBCoreBundle:Admin:list\list_nb_areas.html.twig'
             ))
             ->add('nbBars', 'string', array(
-                'label' => 'Related Bars',
-                'template' => 'WBBCoreBundle:Admin:City\list_nb_bars.html.twig'
+                'label' => 'Bars',
+                'template' => 'WBBCoreBundle:Admin:list\list_nb_bars.html.twig'
             ))
             ->add('nbNews', 'string', array(
-                'label' => 'Related News',
-                'template' => 'WBBCoreBundle:Admin:City\list_nb_news.html.twig'
+                'label' => 'News',
+                'template' => 'WBBCoreBundle:Admin:list\list_nb_news.html.twig'
             ))
             ->add('createdAt')
             ->add('updatedAt')
