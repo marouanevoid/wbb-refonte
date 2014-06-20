@@ -53,12 +53,12 @@ meta.LoadMore = function(config) {
 
             var $button     = $(this);
             var $target     = that.context.$container.find('.load-target');
-            var limit       = $button.data('limit');
-            var offset      = $button.data('offset');
-            var showwbb     = $button.data('showwbb');
-            var url         = $button.attr('href');
-            url += '/'+offset+'/'+limit+'/'+showwbb;
-
+            var url;
+            if($button.data('type')=="tips"){
+                url = Routing.generate('wbb_bar_tips', { barID:$button.data('bar'), offset:$button.data('offset'), limit:$button.data('limit'), showwbb:$button.data('showwbb') });
+            }else if($button.data('type')=="bars"){
+                url = Routing.generate('wbb_bar_guide_filters', { barsOnly: $button.data('bar'), city: $button.data('city'), filter: $button.data('filter'), offset: $button.data('offset'), limit: $button.data('limit'), display:$button.data('display') });
+            }
             $button.data('text', $button.text());
             $button.addClass('loading').text(TRAD.loading);
 
@@ -112,6 +112,7 @@ meta.LoadMore = function(config) {
                 $(this).attr('src', $(this).data('src'));
                 $(this).removeAttr('data-src');
             });
+            $('line:first-child').addClass('first');
 
             that._animate($target, $target.find('> *').not('br') );
 

@@ -186,11 +186,11 @@
         </script>
 
     </section>
-
+</div>
     <!-- AD -->
     <?php if( !$is_mobile ): ?>
         <?php include('components/footer-ad.php') ?>
     <?php endif ?>
-</div>
+
 
 <?php include('includes/foot.php') ?>

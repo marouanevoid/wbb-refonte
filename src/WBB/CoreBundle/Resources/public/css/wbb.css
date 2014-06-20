@@ -54,12 +54,14 @@
 .btn-round.star.active:before {
     background-position: -160px -240px !important;
 }
-body.bar-guides section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {
-    background-size: 128px 256px !important;
-    background-position: -80px -40px !important;
+.type-bestof .best-of-container{
+    width: 33.3%;
+    box-sizing: border-box;
+    border-right: 0.6em solid rgba(0, 0, 0, 0);
+    z-index: 40;
+    float: left;
+    height: 100%;
+    margin-bottom: 7px;
 }
-body.bar-guides section.bars .bar-w-pic:first-child .btn-round:before {
-    background-size: 256px 512px !important;
-    background-position: -160px -80px !important;
-}
+
 
