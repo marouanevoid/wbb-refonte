@@ -116,7 +116,7 @@ meta.LoadMore = function(config) {
                       $(this).removeAttr('data-src');
                       if (that.context.itemsNumber <= 0)
                         $target.find(".line:last-child").show();
-                        that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
+                        //that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
 
                         that.context.is_loading = false;
                         that.config.$button.removeClass('loading').text( TRAD.common.morebars);
