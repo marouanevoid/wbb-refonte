@@ -1,5 +1,4 @@
 {% for b in bestofs %}
-    {% if not loop.last or bestofs|length < limit %}
 <div class="best-of-container transform3d">
 <article class="bestof">
 
@@ -23,13 +22,4 @@
 
 </article>
 </div>
-        {% endif %}
 {% endfor %}
-<script type="text/javascript">
-    eval("setTimeout(function(){$('.smbestofs').data('offset', {{ offset + 9 }});});");
-</script>
-{% if bestofs|length<limit %}
-    <script type="text/javascript">
-        eval("$('.smbestofs').hide();");
-    </script>
-{% endif %}

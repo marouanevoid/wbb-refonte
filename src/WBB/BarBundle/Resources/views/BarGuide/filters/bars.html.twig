@@ -1,15 +1,7 @@
+<div class="line">
 {% for bar in bars %}
-    {% if not loop.last or bars|length < limit %}
-        {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
-            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
-        {% if not is_mobile() or is_tablet() %}</div>{% endif %}
-    {% endif %}
+    {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
+        {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
+    {% if not is_mobile() or is_tablet() %}</div>{% endif %}
 {% endfor %}
-<script type="text/javascript">
-    eval("$('.smbars').data('offset', {{ offset + 8 }});");
-</script>
-{% if bars|length<limit %}
-    <script type="text/javascript">
-        eval("$('.smbars').hide();");
-    </script>
-{% endif %}
+</div>

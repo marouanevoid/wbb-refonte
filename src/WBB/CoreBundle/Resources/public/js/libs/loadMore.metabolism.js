@@ -1,21 +1,3 @@
-/**
- * Load More
- *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
- *
- * License: GPL
- * Version: 1.0
- *
- * Requires:
- *   - jQuery
- *
- **/
-
-/**
- * indigen namespace.
- */
 var meta = meta || {};
 
 /**
@@ -26,15 +8,11 @@ meta.LoadMore = function(config) {
     var that = this;
 
     that.context = {
-
-        page : 1,
         is_loading : false
     };
 
     that.config = {
-
         $button : false,
-        page    : '&page=',
         class   : 'line',
         speed   : 500,
         easing  : 'easeInOutCubic'
@@ -44,38 +22,24 @@ meta.LoadMore = function(config) {
     /* Public attributes. */
     that._setupEvents = function(){
 
-        that.config.$button.on('click', function(e)
+        /*that.config.$button.on('click', function(e)
         {
             e.preventDefault();
+            that._updateContent();
+        });*/
+    };
 
-            if(that.context.is_loading) return;
+    that._updateContent = function() {
 
+        if(that.context.is_loading) return;
 
-            var $button     = $(this);
-            var $target     = that.context.$container.find('.load-target');
-            var url;
-            if($button.data('type')=="tips"){
-                url = Routing.generate('wbb_bar_tips', { barID:$button.data('bar'), offset:$button.data('offset'), limit:$button.data('limit'), showwbb:$button.data('showwbb') });
-            }else if($button.data('type')=="bars"){
-                url = Routing.generate('wbb_bar_guide_filters', { barsOnly: $button.data('bar'), city: $button.data('city'), filter: $button.data('filter'), offset: $button.data('offset'), limit: $button.data('limit'), display:$button.data('display') });
-            }
-            $button.data('text', $button.text());
-            $button.addClass('loading').text(TRAD.loading);
+        var $target     = that.context.$container.find('.load-target');
 
-          /*  that._load(url, $target, function()
-            {
-                $button.removeClass('loading').text( $button.data('text'));
-            });*/
-
-            that._loadAjax(url, $target, function()
-            {
-                $button.removeClass('loading').text( $button.data('text'));
-            });
-
-            /*that._loadAjax("/test.json", $target, function()
-            {
-                $button.removeClass('loading').text( $button.data('text'));
-            });*/
+        /* Récupérer la traduction pour loading */
+        that.config.$button.addClass('loading').text(TRAD.common.loading);
+        that._loadAjax(that.config.url, $target, function()
+        {
+            that.config.$button.removeClass('loading').text( TRAD.common.morebars);
         });
     };
 
@@ -126,66 +90,37 @@ meta.LoadMore = function(config) {
 
             that._animate($target, $target.find('> *').not('br') );
 
-            that.context.page +=1;
             that.context.is_loading = false;
         })
     };
 
     that._loadAjax = function( url, $target, callback)
     {
+
         that.context.is_loading = true;
         $.ajax({
             type: "GET",
             url: url,
             dataType: "json",
             success: function(msg) {
-                var obj = $.parseJSON(eval(msg));
-                $target.html(obj.htmldata);
+                $target.append(msg.htmldata);
                 if( callback ) callback();
-
-                $target.hide();
-
-                $target.removeClass('load-target');
-                $target.after('<div class="'+that.config.class+' load-target"/>');
 
                 $target.find('img[data-src]').each(function()
                 {
                     $(this).attr('src', $(this).data('src'));
                     $(this).removeAttr('data-src');
                 });
-                $('line:first-child').addClass('first');
+                //$('line:first-child').addClass('first');
 
-                that._animate($target, $target.find('> *').not('br') );
+                that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
 
-                that.context.page +=1;
                 that.context.is_loading = false;
             },
             error: function(e) {
                 console.log('Error : ' + e);
             }
         });
-
-        $target.load(url, function()
-        {
-            if( callback ) callback();
-
-            $target.hide();
-
-            $target.removeClass('load-target');
-            $target.after('<div class="'+that.config.class+' load-target"/>');
-
-            $target.find('img[data-src]').each(function()
-            {
-                $(this).attr('src', $(this).data('src'));
-                $(this).removeAttr('data-src');
-            });
-            $('line:first-child').addClass('first');
-
-            that._animate($target, $target.find('> *').not('br') );
-
-            that.context.page +=1;
-            that.context.is_loading = false;
-        })
     };
 
 
@@ -202,13 +137,4 @@ meta.LoadMore = function(config) {
 
     that.__construct( config );
 };
-
-$(document).ready(function()
-{
-   $('.load-more').each(function()
-   {
-        new meta.LoadMore({$button:$(this)});
-   });
-
-});
 

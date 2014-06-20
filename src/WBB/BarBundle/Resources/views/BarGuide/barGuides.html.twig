@@ -3,12 +3,23 @@
 {% block title %}World Best Bars{% endblock %}
 {% block javascripts %}
     <script type="text/javascript">
+        var _offset = 0;
+        var _city = 0;
+        {% if city is defined %}
+            _city = {{ city.id }};
+        {% endif %}
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/modules/bar-guides.wbb.js') }}"></script>
+    <script type="text/javascript">
         $(document).ready(function(){
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
             $.cookie('city', {{ path('homepage') }}, { path: '/' });
             {% endif %}
+
+            /* Evenement sur le bouton favoris des items */
+
             $(".star").click(function(){
                 var btn = $(this);
                 $.ajax({
@@ -42,36 +53,10 @@
             {% if city is defined %}
             $('.city-selector .city>span').html('{{ city.name }}');
             {% endif %}
-            $('#criteria').change(function(){
-                if($('input[name=filter]:checked').val()=='bar_list'){
-                    if($('input[name=view-type]:checked').val()=='grid'){
-                        $(".smbars").show();
-                        $(".bars-grid").html('<div class="line load-target"></div><div class="twelve columns align-center m-margin load-more-container"> <a class="h4 btn-radius large border load-more brown smbars" href="#0" data-bar="1" data-city="0" data-filter="'+$(this).val()+'" data-offset="0" data-limit="9" data-type="bars" data-display="grid" >See more bars</a></div>');
-                        new meta.LoadMore({$button:$(".smbars")});
-                        $(".smbars").trigger('click');
-                    }else{
-                        $(".smbars2").show();
-                        $(".bars-list").html('<div class="line load-target"></div><div class="twelve columns align-center m-margin load-more-container"> <a class="h4 btn-radius large border load-more brown smbars2" href="#0" data-bar="1" data-city="0" data-filter="'+$(this).val()+'" data-offset="0" data-limit="9" data-type="bars" data-display="list" >See more bars</a></div>');
-                        new meta.LoadMore({$button:$(".smbars2")});
-                        $(".smbars2").trigger('click');
-                    }
 
-                }else{
-                    if($('input[name=view-type]:checked').val()=='grid'){
-                        $(".smbestofs").show();
-                        $(".bestofs-grid").html('<div class="line load-target"></div><div class="twelve columns align-center m-margin load-more-container"> <a class="h4 btn-radius large border load-more brown smbestofs" href="#0" data-bar="0" data-city="0" data-filter="'+$(this).val()+'" data-offset="0" data-limit="10" data-type="bars" data-display="grid" >See more best ofs</a></div>');
-                        new meta.LoadMore({$button:$(".smbestofs")});
-                        $(".smbestofs").trigger('click');
-                    }else{
-                        $(".smbestofs2").show();
-                        $(".bestofs-list").html('<div class="line load-target"></div><div class="twelve columns align-center m-margin load-more-container"> <a class="h4 btn-radius large border load-more brown smbestofs2" href="#0" data-bar="0" data-city="0" data-filter="'+$(this).val()+'" data-offset="0" data-limit="10" data-type="bars" data-display="list" >See more best ofs</a></div>');
-                        new meta.LoadMore({$button:$(".smbestofs2")});
-                        $(".smbestofs2").trigger('click');
-                    }
-                }
-
-            });
             initializeSliders();
+
+
         });
     </script>
 {% endblock %}
@@ -208,49 +193,15 @@
         </div>
 
         <div class="container">
-            <div class="bar-list">
-                <div class="bars-w-pic force-load {% if is_mobile() and not is_tablet() %}m-margin-top{% endif %} load-container bars-grid">
-                    <div class='line first'>{{ render(controller('WBBBarBundle:Bar:barGuideFilter', { 'barsOnly' : 1, 'city' : 0 , 'filter' : 'popularity' , 'offset' : 0, 'limit' : 9, 'display' : 'grid' })) }}</div>
-                    <div class="line load-target"></div>
-
-                    <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown smbars" href="#0" data-bar="1" data-city="0" data-filter="popularity" data-offset="8" data-limit="9" data-type="bars" data-display="grid" >See more bars</a>
-                    </div>
+            <div class="load-container">
+                <div class="load-target">
 
                 </div>
-
-                <div class="bars-w-pic-list load-container bars-list" style="display: none">
-
-                    <div class='line first'>{{ render(controller('WBBBarBundle:Bar:barGuideFilter', { 'barsOnly' : 1, 'city' : 0 , 'filter' : 'popularity' , 'offset' : 0, 'limit' : 9, 'display' : 'list' })) }}</div>
-                    <div class="line load-target"></div>
-
-                    <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown smbars2" href="#0" data-bar="1" data-city="0" data-filter="popularity" data-offset="8" data-limit="9" data-type="bars" data-display="list" >See more bars</a>
-                    </div>
-
+                <div class="twelve columns align-center m-margin load-more-container">
+                    <a class="h4 btn-radius large border load-more brown smbestofs2" href="#0">See more best of</a>
                 </div>
             </div>
-            <div class="best-of" style="display: none;" >
-                <div class="twelve columns type-bestof force-load {% if is_mobile() and not is_tablet() %}m-margin-top{% endif %} load-container bestofs-grid">
-                    <div class='line first'>{{ render(controller('WBBBarBundle:Bar:barGuideFilter', { 'barsOnly' : 0, 'city' : 0 , 'filter' : 'popularity' , 'offset' : 0, 'limit' : 10 })) }}</div>
-                    <div class="line load-target"></div>
 
-                    <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown smbestofs" href="#0" data-bar="0" data-city="0" data-filter="popularity" data-offset="8" data-limit="10" data-type="bars" data-display="grid" >See more best of</a>
-                    </div>
-
-                </div>
-
-                <div class="load-container bestofs-list" style="display: none !important">
-
-                    <div class='line first'>{{ render(controller('WBBBarBundle:Bar:barGuideFilter', { 'barsOnly' : 0, 'city' : 0 , 'filter' : 'popularity' , 'offset' : 0, 'limit' : 10 , 'display' : 'list', 'display': 'grid' })) }}</div>
-                    <div class="line load-target"></div>
-
-                    <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown smbestofs2" href="#0" data-bar="0" data-city="0" data-filter="popularity" data-offset="8" data-limit="10" data-type="bars" data-display="list" >See more best of</a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <script type="text/javascript">
