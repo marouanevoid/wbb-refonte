@@ -32,7 +32,7 @@ class BestOf
 
     /**
      * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
-     * @ORM\Column(unique=false)
+     * @ORM\Column(unique=true)
      */
     private $slug;
 
@@ -843,5 +843,10 @@ class BestOf
     public function removeNews(\WBB\BarBundle\Entity\News $news)
     {
         $this->news->removeElement($news);
+    }
+
+    public function getNbBars()
+    {
+        return count($this->getBars());
     }
 }
