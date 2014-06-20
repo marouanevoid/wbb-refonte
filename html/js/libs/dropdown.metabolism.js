@@ -95,7 +95,13 @@ meta.Dropdown = function(config){
                 var $options = that.config.$dropdown.find('option');
 
                 $options.removeAttr('selected');
-                $options.eq( $(this).index()+1 ).attr('selected', 'selected');
+
+                var index = $(this).index();
+                if( $options.filter(':disabled').length ) index++;
+
+                $options.eq( index ).attr('selected', 'selected');
+
+                that.config.$dropdown.trigger('change');
 
                 $(document).click();
             });
