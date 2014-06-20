@@ -112,6 +112,7 @@ meta.LoadMore = function(config) {
                 {
                     $(this).load(function () {
                       that.context.itemsNumber--;
+                      console.log(" itemsNumber : " + that.context.itemsNumber);
                       $(this).removeAttr('data-src');
                       if (that.context.itemsNumber <= 0)
                         $target.find(".line:last-child").show();
