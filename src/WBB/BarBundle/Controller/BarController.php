@@ -8,11 +8,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BarController extends Controller
 {
     public function homeAction()
     {
+        $session = new Session();
+        $slug = $session->get('citySlug');
+        if (!empty($slug))
+           return $this->cityHomeAction($session->get('citySlug'));
+        $session->set('citySlug', "");
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
         $response['topCities']  = $topCities;
@@ -26,9 +32,18 @@ class BarController extends Controller
 
     public function cityHomeAction($slug)
     {
+        $session = new Session();
+        if ($slug == "world-wide")
+        {
+            $session->set('citySlug', "");
+            return $this->homeAction();
+        }
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
+
+
+        $session->set('citySlug', $slug);
 
         $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars($city);
