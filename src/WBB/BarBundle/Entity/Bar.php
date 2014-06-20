@@ -1361,4 +1361,27 @@ class Bar
     {
         return $this->splitDescription(true, $mobile);
     }
+
+    /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return Bar
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
 }

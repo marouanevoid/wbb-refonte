@@ -31,6 +31,12 @@ class BestOf
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @ORM\Column(unique=false)
+     */
+    private $slug;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -791,5 +797,51 @@ class BestOf
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return BestOf
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return BestOf
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
     }
 }
