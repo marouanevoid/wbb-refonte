@@ -272,7 +272,7 @@ meta.Cities = function() {
             that.context.$container.find('form input[name=city]').prop('disabled', false);
             that.context.$container.find('form input[type=submit]').show();
             that.context.$container.find('form input[type=reset]').hide();
-            that.context.$container.find('form input[name=city]').focus().blur();
+            that.context.$container.find('form [name=city][name=city]').focus().blur();
 
             that._showCitySelector();
             that._removeNeighborhoodSelector();

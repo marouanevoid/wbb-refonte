@@ -471,7 +471,7 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-offset="0" data-limit="9" data-showwbb="1">Load More</a>
+                <a class="btn-radius border load-more brown" href="#0" data-bar="{{ bar.id }}" data-offset="0" data-limit="9" data-showwbb="1" data-type="tips">Load More</a>
             </div>
 
                 <div class="three columns box">
@@ -492,7 +492,7 @@
             {% else %}
 
             <div class="twelve columns align-center m-margin">
-                <a class="btn-radius border load-more brown" href="{{ path('wbb_bar_tips',{barID:bar.id}) }}" data-offset="0"  data-limit="9" data-showwbb="1">Load More</a>
+                <a class="btn-radius border load-more brown" href="#0" data-bar="{{ bar.id }}" data-offset="0"  data-limit="9" data-showwbb="1" data-type="tips">Load More</a>
             </div>
 
             {% endif %}

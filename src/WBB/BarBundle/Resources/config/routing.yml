@@ -28,6 +28,8 @@ wbb_bar_tips:
           limit: \d+
           showwbb : \d+
     defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0 , limit: 8 , showwbb: 1 }
+    options:
+        expose: true
 
 wbb_bar_details:
     pattern: /bar/{city}/{suburb}/{slug}
@@ -51,7 +53,7 @@ wbb_bar_feed_add:
     defaults: { _controller: WBBBarBundle:FSAdmin:add }
     options:
         expose: true
-            
+
 wbb_bar_feed_remove:
     pattern:  /feed/remove/{type}/{hash}/{bar}
     defaults: { _controller: WBBBarBundle:FSAdmin:remove }
@@ -71,7 +73,7 @@ wbb_bar_tips_fetch:
         expose: true
 
 wbb_bar_guide_filters:
-    pattern: /barguide/filter/{bar}/{city}/{filter}/{offset}/{limit}
-    defaults: { _controller: WBBBarBundle:Bar:barGuideFilter, bar: 1, city: 0, filter: popularity, offset: 0, limit: 8}
+    pattern: /barguide/filter/{barsOnly}/{city}/{filter}/{offset}/{limit}/{display}
+    defaults: { _controller: WBBBarBundle:Bar:barGuideFilter, barsOnly: 1, city: 0, filter: popularity, offset: 0, limit: 8, display: grid }
     options:
         expose: true

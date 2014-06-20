@@ -1,0 +1,41 @@
+{% for b in bars %}
+    {% if not loop.last or bars|length < limit %}
+        <article class="bar-w-pic-list">
+
+            <div class="three columns s-margin-top">
+
+                <div class="bar-w-pic list">
+
+                    <a href="#0" class="btn-round dark star"></a>
+
+                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+
+                    {% for m in b.medias|slice(0,1) %}
+                        <img class="scale-with-grid" src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="nine columns s-margin-top">
+                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.name }}</a></h2>
+                <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
+                <p class="s-margin-top">
+                    {{ b.description|truncate(200, true, '...')|striptags }}
+                </p>
+                <div class="tags">{% for tr in b.tags %}
+                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                    {% endfor%}</div>
+            </div>
+            <div class="separator"><hr/></div>
+        </article>
+    {% endif %}
+{% endfor %}
+<script type="text/javascript">
+    eval("setTimeout(function(){$('.smbars2').data('offset', {{ offset + 8 }});});");
+</script>
+{% if bars|length<limit %}
+    <script type="text/javascript">
+        eval("$('.smbars2').hide();");
+    </script>
+{% endif %}
+

@@ -174,7 +174,7 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias().",GEO(c.latitude = :latitude, c.longitude = :longitude) AS HIDDEN Distance")
+            ->select($this->getAlias().",GEO(".$this->getAlias().".latitude = :latitude, ".$this->getAlias().".longitude = :longitude) AS HIDDEN Distance")
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->setParameter('latitude', $latitude)
             ->setParameter('longitude', $longitude)
@@ -204,4 +204,4 @@ class BarRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-} 
+}

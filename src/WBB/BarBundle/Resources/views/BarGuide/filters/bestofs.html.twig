@@ -1,3 +1,35 @@
-{% for bestof in bestofs %}
-    {{ bestof.name }}
+{% for b in bestofs %}
+    {% if not loop.last or bestofs|length < limit %}
+<div class="best-of-container transform3d">
+<article class="bestof">
+
+    <a href="#0" class="btn-round dark star"></a>
+
+    <div class="txt vcenter">
+        <div class="circle vcenter">
+            {% if city is defined %}
+                <h2>{{ b.name }}</h2>
+                <h3>In {{ b.city.name }}</h3>
+            {% else %}
+                <h2>{% if b.city %}{{ b.city.name }}'s Best{% else %}World's Best{% endif %}</h2>
+                <h3>{{ b.name }}</h3>
+            {% endif %}
+        </div>
+    </div>
+    {% if b.webPath %}
+        <img src="" class="scale-with-grid" data-src="{{ asset(b.webPath) | apply_filter('bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
+    {% endif %}
+    <a href="#0" class="overlay-link"></a>
+
+</article>
+</div>
+        {% endif %}
 {% endfor %}
+<script type="text/javascript">
+    eval("setTimeout(function(){$('.smbestofs').data('offset', {{ offset + 9 }});});");
+</script>
+{% if bestofs|length<limit %}
+    <script type="text/javascript">
+        eval("$('.smbestofs').hide();");
+    </script>
+{% endif %}

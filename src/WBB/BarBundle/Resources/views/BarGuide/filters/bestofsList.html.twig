@@ -1,0 +1,40 @@
+{% for b in bestofs %}
+    {% if not loop.last or bestofs|length < limit %}
+        <article class="bar-w-pic-list">
+
+            <div class="three columns s-margin-top">
+
+                <div class="bar-w-pic list">
+
+                    <a href="" class="btn-round dark star"></a>
+
+                    <a href="#0" class="overlay-link"></a>
+
+                    <img src="" class="scale-with-grid" data-src="{{ asset(b.webPath) | apply_filter('bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
+
+                </div>
+            </div>
+
+            <div class="nine columns s-margin-top">
+                <h2 class="s-margin-top"><a href="#0">{{ b.name }}</a></h2>
+                <h3 class="xs-margin-top"><a href="#0">{{ b.city.name }}</a></h3>
+                <p class="s-margin-top">
+                    {{ b.description|truncate(200, true, '...')|striptags }}
+                </p>
+                <div class="tags">{% for tr in b.tags %}
+                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                    {% endfor%}</div>
+            </div>
+            <div class="separator"><hr/></div>
+        </article>
+    {% endif %}
+{% endfor %}
+<script type="text/javascript">
+    eval("setTimeout(function(){$('.smbestofs2').data('offset', {{ offset + 8 }});});");
+</script>
+{% if bestofs|length<limit %}
+    <script type="text/javascript">
+        eval("$('.smbestofs2').hide();");
+    </script>
+{% endif %}
+
