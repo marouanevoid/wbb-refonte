@@ -37,7 +37,7 @@ class BarRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBestBars($city = null)
+    public function findBestBars($city = null, $limit = 6)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -49,7 +49,7 @@ class BarRepository extends EntityRepository
             ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
             ->addOrderBy('nbTips', 'DESC')
-            ->setMaxResults(6)
+            ->setMaxResults($limit)
         ;
 
         if($city){
@@ -68,8 +68,9 @@ class BarRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+//            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
         ;
