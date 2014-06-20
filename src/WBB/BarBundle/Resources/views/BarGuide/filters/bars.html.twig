@@ -6,7 +6,7 @@
     {% endif %}
 {% endfor %}
 <script type="text/javascript">
-    eval("setTimeout(function(){$('.smbars').data('offset', {{ offset + 8 }});});");
+    eval("$('.smbars').data('offset', {{ offset + 8 }});");
 </script>
 {% if bars|length<limit %}
     <script type="text/javascript">

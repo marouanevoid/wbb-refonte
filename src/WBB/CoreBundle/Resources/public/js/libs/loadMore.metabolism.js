@@ -62,10 +62,20 @@ meta.LoadMore = function(config) {
             $button.data('text', $button.text());
             $button.addClass('loading').text(TRAD.loading);
 
-            that._load(url, $target, function()
+          /*  that._load(url, $target, function()
+            {
+                $button.removeClass('loading').text( $button.data('text'));
+            });*/
+
+            that._loadAjax(url, $target, function()
             {
                 $button.removeClass('loading').text( $button.data('text'));
             });
+
+            /*that._loadAjax("/test.json", $target, function()
+            {
+                $button.removeClass('loading').text( $button.data('text'));
+            });*/
         });
     };
 
@@ -98,6 +108,63 @@ meta.LoadMore = function(config) {
     that._load = function( url, $target, callback)
     {
         that.context.is_loading = true;
+        $target.load(url, function()
+        {
+            if( callback ) callback();
+
+            $target.hide();
+
+            $target.removeClass('load-target');
+            $target.after('<div class="'+that.config.class+' load-target"/>');
+
+            $target.find('img[data-src]').each(function()
+            {
+                $(this).attr('src', $(this).data('src'));
+                $(this).removeAttr('data-src');
+            });
+            $('line:first-child').addClass('first');
+
+            that._animate($target, $target.find('> *').not('br') );
+
+            that.context.page +=1;
+            that.context.is_loading = false;
+        })
+    };
+
+    that._loadAjax = function( url, $target, callback)
+    {
+        that.context.is_loading = true;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(msg) {
+                var obj = $.parseJSON(eval(msg));
+                $target.html(obj.htmldata);
+                if( callback ) callback();
+
+                $target.hide();
+
+                $target.removeClass('load-target');
+                $target.after('<div class="'+that.config.class+' load-target"/>');
+
+                $target.find('img[data-src]').each(function()
+                {
+                    $(this).attr('src', $(this).data('src'));
+                    $(this).removeAttr('data-src');
+                });
+                $('line:first-child').addClass('first');
+
+                that._animate($target, $target.find('> *').not('br') );
+
+                that.context.page +=1;
+                that.context.is_loading = false;
+            },
+            error: function(e) {
+                console.log('Error : ' + e);
+            }
+        });
+
         $target.load(url, function()
         {
             if( callback ) callback();

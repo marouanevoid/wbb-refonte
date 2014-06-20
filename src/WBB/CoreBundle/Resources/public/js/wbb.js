@@ -32,6 +32,7 @@ $(document).ready(function(){
     });
     if($.cookie('city')){
         console.log($('.logo a').attr('href'));
+
         $('.logo a').attr('href', $.cookie('city'));
     }
 });

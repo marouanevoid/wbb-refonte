@@ -8,7 +8,7 @@
             {% if city is defined %}
                 $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
-                $.cookie('city', {{ path('homepage') }}, { path: '/' });
+                $.cookie('city', '{{ path('homepage') }}', { path: '/' });
             {% endif %}
             $(".star").click(function(){
                 var btn = $(this);

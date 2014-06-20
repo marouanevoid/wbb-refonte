@@ -258,6 +258,7 @@
             {
                 if( $('input[name=filter]:checked').val() == "bar_list")
                 {
+                    $('li.distance').css('display','block');
                     $('.best-of').fadeOut(200, 'easeInOutCubic', function()
                     {
                         $('.bar-list').show();
@@ -266,6 +267,7 @@
                 }
                 else
                 {
+                    $('li.distance').css('display','none');
                     $('.bar-list').fadeOut(200, 'easeInOutCubic', function()
                     {
                         $('.best-of').show();
