@@ -8,7 +8,8 @@ meta.LoadMore = function(config) {
     var that = this;
 
     that.context = {
-        is_loading : false
+        is_loading : false,
+        itemsNumber : 0
     };
 
     that.config = {
@@ -39,7 +40,7 @@ meta.LoadMore = function(config) {
         that.config.$button.addClass('loading').text(TRAD.common.loading);
         that._loadAjax(that.config.url, $target, function()
         {
-            that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+
         });
     };
 
@@ -105,17 +106,23 @@ meta.LoadMore = function(config) {
             success: function(msg) {
                 $target.append(msg.htmldata);
                 if( callback ) callback();
-
+                $target.find(".line:last-child").hide();
+                that.context.itemsNumber = $target.find('img[data-src]').length;
                 $target.find('img[data-src]').each(function()
                 {
+                    $(this).load(function () {
+                      that.context.itemsNumber--;
+                      $(this).removeAttr('data-src');
+                      alert(that.context.itemsNumber);
+                      if (that.context.itemsNumber <= 0)
+                        $target.find(".line:last-child").show();
+                        that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
+
+                        that.context.is_loading = false;
+                        that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+                    });
                     $(this).attr('src', $(this).data('src'));
-                    $(this).removeAttr('data-src');
                 });
-                //$('line:first-child').addClass('first');
-
-                that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
-
-                that.context.is_loading = false;
             },
             error: function(e) {
                 console.log('Error : ' + e);

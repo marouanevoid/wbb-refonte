@@ -13,7 +13,7 @@ $(document).ready(function()
        _display = $('input[name=view-type]:checked').val();
 
        var _url = Routing.generate('homepage')+"barguide/filter/"+_type+"/"+_city+"/"+_sortby+"/"+_offset+"/"+_limit+"/"+_display;
- 
+
        if (_type==1)
            _offset += 8;
        else
