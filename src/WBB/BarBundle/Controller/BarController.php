@@ -113,7 +113,7 @@ class BarController extends Controller
             }
 
             if($display=="grid"){
-                $nbResults = sizeof($response);
+                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
@@ -121,7 +121,7 @@ class BarController extends Controller
                     )
                 );
             }else{
-                $nbResults = sizeof($response);
+                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
@@ -140,14 +140,14 @@ class BarController extends Controller
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
             }
             if($display=="grid"){
-                $nbResults = sizeof($response);
+                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
                 ));
             }else{
-                $nbResults = sizeof($response);
+                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofsList.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
@@ -158,9 +158,9 @@ class BarController extends Controller
 
         return new JsonResponse(
             array(
-                'html'       => $html,
+                'htmldata'   => $html,
                 'nbResults'  => $nbResults,
-                'difference' => ($offset - $nbResults)
+                'difference' => ($limit - $nbResults)
             )
         );
     }
