@@ -113,7 +113,6 @@ meta.LoadMore = function(config) {
                     $(this).load(function () {
                       that.context.itemsNumber--;
                       $(this).removeAttr('data-src');
-                      alert(that.context.itemsNumber);
                       if (that.context.itemsNumber <= 0)
                         $target.find(".line:last-child").show();
                         that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
