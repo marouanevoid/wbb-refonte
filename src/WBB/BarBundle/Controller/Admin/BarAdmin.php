@@ -60,8 +60,38 @@ class BarAdmin extends Admin
                     Bar::BAR_STATUS_DISABLED_VALUE  => 'Disabled'
                 )
             ))
-            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
-            ->add('updatedAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
+            ->add('createdAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Created After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
+                            $queryBuilder->setParameter('createdAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
+            ->add('updatedAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Updated After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
+                            $queryBuilder->setParameter('updatedAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
 
         ;
     }

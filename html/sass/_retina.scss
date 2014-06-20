@@ -2,7 +2,7 @@
 {
   header.desktop .logo img{ background-image: url("../images/logo@2x.png") }
 
-  input[type="reset"][value=" "], .search-bar-mobile .container input[type="text"]{ background-image: url('../images/sprite@2x.png') }
+  input[type="reset"][value=" "], input[type="reset"][value=""], .search-bar-mobile .container input[type="text"]{ background-image: url('../images/sprite@2x.png') }
 
   .btn-small-round, .btn-round, .btn-radius.with-icon, .finder-close {
     &:after, &:before{

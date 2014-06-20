@@ -74,7 +74,30 @@ class CityAdmin extends Admin
             ->addIdentifier('name', null, array('editable' => true))
             ->add('country')
             ->add('seoDescription')
+            ->add('nbAreas', 'string', array(
+                'label' => 'Related Areas',
+                'template' => 'WBBCoreBundle:Admin:City\list_nb_areas.html.twig'
+            ))
+            ->add('nbBars', 'string', array(
+                'label' => 'Related Bars',
+                'template' => 'WBBCoreBundle:Admin:City\list_nb_bars.html.twig'
+            ))
+            ->add('nbNews', 'string', array(
+                'label' => 'Related News',
+                'template' => 'WBBCoreBundle:Admin:City\list_nb_news.html.twig'
+            ))
+            ->add('createdAt')
+            ->add('updatedAt')
             ->add('onTopCity', null, array('editable' => true))
+            ->addIdentifier('_action', 'actions', array(
+                'field'   => 'name',
+                'label'    => 'Actions',
+                'actions' => array(
+//                    'show'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
+                    'edit'   => array(),
+                    'delete' => array(),
+                )
+            ))
         ;
     }
 
@@ -87,7 +110,41 @@ class CityAdmin extends Admin
             ->add('name')
             ->add('country')
             ->add('seoDescription')
+            ->add('suburbs')
+            ->add('tags')
             ->add('onTopCity')
+            ->add('createdAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Created After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
+                            $queryBuilder->setParameter('createdAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
+            ->add('updatedAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Updated After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
+                            $queryBuilder->setParameter('updatedAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
         ;
     }
 
@@ -102,6 +159,7 @@ class CityAdmin extends Admin
                 ->add('country')
                 ->add('seoDescription')
                 ->add('suburbs')
+                ->add('tags')
                 ->add('onTopCity')
             ->end()
         ;

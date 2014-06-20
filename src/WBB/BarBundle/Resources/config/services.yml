@@ -43,7 +43,7 @@ services:
         arguments: [null, %wbb_bar.bar.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
-            - [setTemplates, [{ edit:"WBBBarBundle:Admin:Bar/edit.html.twig" }]]
+            - [setTemplates, [{ edit:"WBBBarBundle:Admin:Bar\edit.html.twig" }]]
 
     wbb.bar.admin.bar.media:
         class: %wbb_bar.bar_media.admin.class%
@@ -76,7 +76,7 @@ services:
         arguments: [null, %wbb_bar.bestof.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
-            - [setTemplates, [{ edit:"WBBBarBundle:Admin:BestOf/edit.html.twig" }]]
+            - [setTemplates, [{ edit:"WBBBarBundle:Admin:BestOf\edit.html.twig" }]]
 
     wbb.bar.admin.bestof.tag:
         class: %wbb_bar.bestof_tag.admin.class%
