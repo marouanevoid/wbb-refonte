@@ -60,8 +60,10 @@ class TipsController extends Controller
     {
         $bar    = $this->container->get('bar.repository')->findOneById($barID);
         $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit);
+        $all    = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
 
         $response['nbResults']= count($tips);
+        $response['difference']= count($all) - count($tips);
         $response['htmldata'] = $this->renderView('WBBBarBundle:Bar:wbbTips.html.twig', array(
                 'bar'       => $bar,
                 'tips'      => $tips,
