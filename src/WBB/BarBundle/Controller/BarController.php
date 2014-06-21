@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BarController extends Controller
 {
-    public function homeAction(Request $request)
+    public function homeAction()
     {
-        $session = $request->getSession();
+        $session = $this->getRequest()->getSession();
         $slug = $session->get('citySlug');
         if (!empty($slug))
            return $this->cityHomeAction($session->get('citySlug'));
@@ -31,9 +31,9 @@ class BarController extends Controller
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
 
-    public function cityHomeAction($slug, Request $request)
+    public function cityHomeAction($slug)
     {
-        $session = $request->getSession();
+        $session = $this->getRequest()->getSession();
         if ($slug == "world-wide")
         {
             $session->set('citySlug', "");
