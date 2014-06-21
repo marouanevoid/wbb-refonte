@@ -29,6 +29,7 @@ $(document).ready(function()
        loadData();
    });
    $("#criteria, input[name=filter], input[name=view-type]").change(function(){
+       $(".load-more").show();
        _offset = 0;
        $(".load-target").html('');
        loadData();
