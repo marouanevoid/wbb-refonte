@@ -97,23 +97,28 @@ class BarController extends Controller
     // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")
     public function barGuideFilterAction($barsOnly = 1, $city = 0, $filter = "popularity" , $offset = 0, $limit = 8, $display = 'grid')
     {
-        $response   = null;
-        $nbResults  = null;
-        $html       = null;
+        $response           = null;
+        $all                = null;
+        $nbResults          = null;
+        $nbResultsRemaining = null;
+        $html               = null;
 
         if($barsOnly){
             if($filter === "popularity"){
                 $response = $this->container->get('bar.repository')->findPopularBars($city, $limit, $offset);
+                $all = $this->container->get('bar.repository')->findPopularBars($city, 0, $offset);
             }elseif($filter === "alphabetical"){
                 $response = $this->container->get('bar.repository')->findBarsOrderedByName($city, $offset ,$limit);
+                $all = $this->container->get('bar.repository')->findBarsOrderedByName($city, $offset , 0);
             }elseif($filter === "date"){
                 $response = $this->container->get('bar.repository')->findLatestBars($city, $limit, $offset, false);
+                $all = $this->container->get('bar.repository')->findLatestBars($city, 0, $offset, false);
             }elseif($filter === "distance"){
                 $response = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, $limit);
+                $all = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, 0);
             }
 
             if($display=="grid"){
-                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
@@ -121,7 +126,6 @@ class BarController extends Controller
                     )
                 );
             }else{
-                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
@@ -132,22 +136,22 @@ class BarController extends Controller
         }else{
             if($filter === "popularity"){
                 //TODO: Repository methode for popularity
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset, $limit);
+                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset, 0);
             }elseif($filter === "alphabetical"){
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
+                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset, 0);
             }elseif($filter === "date"){
-                //$response = $this->container->get('bestof.repository')->findLatestBars($city, $limit, $offset, false);
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
+                $response = $this->container->get('bestof.repository')->findLatestBestofs($city, $offset, $limit, false);
+                $all = $this->container->get('bestof.repository')->findLatestBestofs($city, $offset, 0, false);
             }
             if($display=="grid"){
-                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
                 ));
             }else{
-                $nbResults = count($response);
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofsList.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
@@ -156,11 +160,14 @@ class BarController extends Controller
             }
         }
 
+        $nbResults = count($response);
+        $nbResultsRemaining = count($all) - $nbResults;
+
         return new JsonResponse(
             array(
                 'htmldata'   => $html,
                 'nbResults'  => $nbResults,
-                'difference' => ($limit - $nbResults)
+                'difference' => $nbResultsRemaining
             )
         );
     }

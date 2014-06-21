@@ -43,8 +43,11 @@ class BestOfRepository extends EntityRepository
             ->select($this->getAlias())
             ->orderBy($this->getAlias().'.name', 'ASC')
             ->setFirstResult($offset)
-            ->setMaxResults($limit)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
@@ -61,9 +64,12 @@ class BestOfRepository extends EntityRepository
             ->select($this->getAlias())
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->where($qb->expr()->eq(1, 1))
-            ->setMaxResults($limit)
             ->setFirstResult($offset)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         if($onTop){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
