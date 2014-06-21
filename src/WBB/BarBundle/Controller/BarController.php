@@ -31,7 +31,7 @@ class BarController extends Controller
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
 
-    public function cityHomeAction($slug, Requestion $request)
+    public function cityHomeAction($slug, Request $request)
     {
         $session = $request->getSession();
         if ($slug == "world-wide")
