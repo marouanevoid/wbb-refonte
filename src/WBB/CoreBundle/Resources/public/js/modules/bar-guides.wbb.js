@@ -2,10 +2,13 @@ $(document).ready(function()
 {
    var loadData = function(){
        var _type, _sortby, _limit, _display;
-       if($("input[name=filter]:checked").val()=='best_of'){
+       if($("input[name=filter]:checked").val()=='best_of')
+       {
            _type = 0;
            _limit   = 9;
-       }else{
+       }
+       else
+       {
            _type = 1;
            _limit   = 8;
        }

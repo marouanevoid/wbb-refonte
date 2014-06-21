@@ -51,7 +51,7 @@
                 });
             });
             {% if city is defined %}
-            $('.city-selector .city>span').html('{{ city.name }}');
+                $('.city-selector .city>span').html('{{ city.name }}');
             {% endif %}
 
             initializeSliders();
@@ -61,7 +61,7 @@
     </script>
 {% endblock %}
 {% block bodyTag %}
-<body class="index">
+<body class="bar-guides">
 {% endblock %}
 {% block body %}
 <style type="text/css">
@@ -219,6 +219,11 @@
                 else
                 {
                     $('li.distance').css('display','none');
+                    if($('#criteria').val()=='distance')
+                    {
+                        $('#criteria').val('popularity');
+                        $('li.popularity').css('display','block');
+                    }
                     $('.bar-list').fadeOut(200, 'easeInOutCubic', function()
                     {
                         $('.best-of').show();
