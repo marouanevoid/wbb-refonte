@@ -4,13 +4,15 @@ wbb_bar_test:
 
 #Actions
 
-homepage:
-    pattern: /
-    defaults: { _controller: WBBBarBundle:Bar:home }
-
 city_homepage:
     pattern: /top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
+
+homepage:
+    pattern: /
+    defaults: { _controller: WBBBarBundle:Bar:home}
+    options:
+            expose: true
 
 wbb_bar_guides:
     pattern: /bar-guides
