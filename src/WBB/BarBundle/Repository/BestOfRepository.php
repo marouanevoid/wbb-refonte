@@ -12,6 +12,26 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class BestOfRepository extends EntityRepository
 {
+    public function findYouMayAlsoLike($bestOf, $city = null)
+    {
+        $qb = $this->createQueryBuilder('bo');
+
+        if ($bestOf->getByTag()) {
+            // Here tags
+        }
+
+        if ($city) {
+            // City here
+        }
+
+        $qb->orderBy('bo.onTop', 'desc')
+                ->addOrderBy('bo.createdAt', 'desc');
+
+        $qb->setMaxResults(3);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findTopBestOfs($city = null, $favoris = null, $limit = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());

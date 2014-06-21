@@ -94,6 +94,29 @@ class BarController extends Controller
         ));
     }
 
+    public function bestOfAction($slug, $city = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($slug);
+
+        if (!$bestOf) {
+            // TODO Does not work !
+            $this->createNotFoundException('Not found !');
+        }
+
+        $bestofsCount = $bestOf->getBestofs()->count();
+        if ($bestofsCount < 3 && $bestOf->getByTag()) {
+            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $city);
+            for ($index = 0; $index < 3 - $bestofsCount - 1; $index++) {
+                $bestOf->addBestof($bestOfs[$index]);
+            }
+        }
+
+        return $this->render('WBBBarBundle:BestOf:details_global.html.twig', array(
+                    'bestOf' => $bestOf
+        ));
+    }
+
     // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")
     public function barGuideFilterAction($barsOnly = 1, $city = 0, $filter = "popularity" , $offset = 0, $limit = 8, $display = 'grid')
     {
