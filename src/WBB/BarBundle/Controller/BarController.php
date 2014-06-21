@@ -9,12 +9,13 @@ use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class BarController extends Controller
 {
-    public function homeAction()
+    public function homeAction(Request $request)
     {
-        $session = new Session();
+        $session = $request->getSession();
         $slug = $session->get('citySlug');
         if (!empty($slug))
            return $this->cityHomeAction($session->get('citySlug'));
@@ -30,9 +31,9 @@ class BarController extends Controller
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
 
-    public function cityHomeAction($slug)
+    public function cityHomeAction($slug, Requestion $request)
     {
-        $session = new Session();
+        $session = $request->getSession();
         if ($slug == "world-wide")
         {
             $session->set('citySlug', "");
