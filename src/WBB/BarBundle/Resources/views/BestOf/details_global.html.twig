@@ -1,0 +1,5 @@
+{{ bestOf.description | raw }}
+
+{% for bo in bestOf.bestofs %}
+    <div class="bar-details">{{ bo.description | raw }}</div>
+{% endfor %}
