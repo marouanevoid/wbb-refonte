@@ -78,3 +78,7 @@ wbb_bar_guide_filters:
     defaults: { _controller: WBBBarBundle:Bar:barGuideFilter, barsOnly: 1, city: 0, filter: popularity, offset: 0, limit: 8, display: grid }
     options:
         expose: true
+
+wbb_bar_best_of_global:
+    pattern: /best-of/{slug}
+    defaults: { _controller: WBBBarBundle:Bar:bestOf }
