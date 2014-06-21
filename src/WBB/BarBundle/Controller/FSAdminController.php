@@ -125,7 +125,8 @@ class FSAdminController extends Controller
             $count = $offset;
             $recursive = 0;
             do{
-                $tmp = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $count)['data'];
+                $tab = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $count);
+                $tmp = $tab['data'];
                 $nbFsTips = count($tmp);
                 if ($nbFsTips <= $index && !$nbFsTips)
                     break;
