@@ -1,27 +1,10 @@
-/**
- * Map
- *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
- *
- * License: GPL
- * Version: 1.0
- *
- * Requires:
- *   - jQuery
- *
- **/
 
-/**
- * metabolism namespace.
- */
-var meta = meta || {};
+var wbb = wbb || {};
 
 /**
  *
  */
-meta.Map = function(config){
+wbb.Map = function(config){
 
     var that = this;
 
@@ -32,34 +15,34 @@ meta.Map = function(config){
         $map        : false,
         easing      : 'easeInOutCubic',
         map         :[
-                        {
-                            "featureType": "water",
-                            "stylers": [
-                                { "color": "#bdbec0" }
-                            ]
-                        },{
-                            "featureType": "landscape.natural",
-                            "stylers": [
-                                { "color": "#faf3e1" }
-                            ]
-                        },{
-                            "featureType": "administrative",
-                            "elementType": "labels.text.fill",
-                            "stylers": [
-                                { "color": "#b5985e" }
-                            ]
-                        },{
-                            "featureType": "transit",
-                            "stylers": [
-                                { "visibility": "off" }
-                            ]
-                        },{
-                            "featureType": "road",
-                            "stylers": [
-                                { "visibility": "on" }
-                            ]
-                        }
-                    ]
+            {
+                "featureType": "water",
+                "stylers": [
+                    { "color": "#bdbec0" }
+                ]
+            },{
+                "featureType": "landscape.natural",
+                "stylers": [
+                    { "color": "#faf3e1" }
+                ]
+            },{
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    { "color": "#b5985e" }
+                ]
+            },{
+                "featureType": "transit",
+                "stylers": [
+                    { "visibility": "off" }
+                ]
+            },{
+                "featureType": "road",
+                "stylers": [
+                    { "visibility": "on" }
+                ]
+            }
+        ]
 
     };
 
@@ -156,10 +139,22 @@ meta.Map = function(config){
     };
 
 
+
+    that.setCenter = function( position ) {
+
+        var map = that.config.$map.gmap3('get');
+
+        //if( !map.getBounds().contains(position) )
+        that.config.$map.gmap3('get').panTo( position );
+    };
+
+
     /**
      *
      */
     that.addMarkers = function( markers, fit ){
+
+        var map = that.config.$map.gmap3('get');
 
         that.config.$map.gmap3({
             clear: {
@@ -176,16 +171,22 @@ meta.Map = function(config){
                 events:{
                     mouseover: function(marker, event, context){
 
+                        if( $('html').hasClass('mobile') ) return;
+
                         if( typeof(context.id) != 'undefined')
-                            $('#'+context.id ).addClass('active');
+                            $('html').find("li[data-id=" + context.id + "]").addClass('active');
 
                         if( typeof(context.data) == 'undefined') return;
 
+                        var align = "right";
+                        if( map.getBounds().getNorthEast().lng() - marker.getPosition().lng() < 80 ) align = "left";
+                        console.log(" MAP OVER ");
+                        console.log(map.getBounds().getNorthEast().lng() - marker.getPosition().lng());
                         that.config.$map.gmap3({
                             overlay:{
                                 latLng: marker.getPosition(),
                                 options:{
-                                    content:  '<div class="label">'+context.data+'</div>',
+                                    content:  '<div class="label '+align+'">'+context.data+'</div>',
                                     offset:{
                                         y:-95,
                                         x:30
@@ -197,7 +198,7 @@ meta.Map = function(config){
                     mouseout: function(marker, event, context){
 
                         if( typeof(context.id) != 'undefined')
-                            $('#'+context.id ).removeClass('active');
+                            $('html').find("li[data-id=" + context.id + "]").removeClass('active');
 
                         that.config.$map.gmap3({
                             clear: {
@@ -209,7 +210,7 @@ meta.Map = function(config){
                     click: function(marker, event, context){
 
                         if( typeof(context.id) != 'undefined')
-                            $('#'+context.id ).click();
+                            $('html').find("li[data-id=" + context.id + "]").click();
                     }
                 },
                 cluster:{

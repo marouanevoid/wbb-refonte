@@ -70,6 +70,10 @@ meta.Cities = function() {
         {
             var $scrollBars = that.context.$container.find('.scroll-bars');
             $scrollBars.find('ul').html(html);
+
+            var api = $scrollBars.data('jsp');
+            api.scrollToY(0, false);
+
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
             setTimeout(function(){ that._resize() }, 50);
@@ -82,7 +86,7 @@ meta.Cities = function() {
     /**
      *
      */
-    that._showCities = function( cities, display_list, fit )
+    that._showCities = function( query, cities, display_list, fit )
     {
         var html = "";
         var markers = [];

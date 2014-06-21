@@ -36,6 +36,7 @@ meta.Cities = function() {
         filter_is_open: false
     };
 
+    that.first_resize = true;
 
     /**
      *
@@ -71,11 +72,14 @@ meta.Cities = function() {
                 }
             }
         });
-
         if( display_list )
         {
             var $scrollBars = that.context.$container.find('.scroll-bars');
             $scrollBars.find('ul').html(html);
+
+            var api = $scrollBars.data('jsp');
+            api.scrollToY(0, false);
+
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
             setTimeout(function(){ that._resize() }, 50);
@@ -139,6 +143,8 @@ meta.Cities = function() {
      */
     that._showNeighborhoodSelector = function(neighborhoods)
     {
+        if( that.context.$container.find('select[name=neighborhood]').length ) return;
+
         var html = '<select name="neighborhood" class="ui-dropdown">';
         $.each(neighborhoods, function(index, neighborhood)
         {
@@ -146,7 +152,7 @@ meta.Cities = function() {
         });
         html += '</select>';
 
-        that.context.$container.find('form').after(html);
+        that.context.$container.find('form').append(html);
 
         initializeDropdowns();
 
@@ -185,7 +191,7 @@ meta.Cities = function() {
      */
     that._requestBars = function( city_id, neighborhood_id, callback )
     {
-        $.post(Routing.generate('wbb_cities_poi', { cityID:city_id, suburbID:neighborhood_id}), function( data )
+        $.post(Routing.generate('wbb_cities_poi', { cityID:city_id, suburbID:neighborhood_id}), {city_id:city_id, neighborhood_id:neighborhood_id}, function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.neighborhoods, data.bars);
@@ -196,9 +202,9 @@ meta.Cities = function() {
     /**
      *
      */
-    that._requestCities = function( callback )
+    that._requestCities = function( query, callback )
     {
-        $.post(lsCities, function( data )
+        $.post(Routing.generate('wbb_cities_list') , function( data )
         {
             if(data.code == 200 && callback)
                 callback(data.cities);
@@ -211,20 +217,16 @@ meta.Cities = function() {
      */
     that._setupEvents = function()
     {
-        var $scroll     = that.context.$container.find('.scroll');
         var $zoom       = that.context.$container.find('.zoom');
-        var $head       = that.context.$container.find('.heading');
-        var $header     = $('header');
         var $selector   = that.context.$container.find('.selector');
-
-        var $cities_content     = that.context.$container;
-        var $cities             = that.context.$container.find('.scroll-cities');
-        var $bars               = that.context.$container.find('.scroll-bars');
-        var $map                = that.context.$container.find('#map');
+        var $cities     = that.context.$container.find('.scroll-cities');
+        var $bars       = that.context.$container.find('.scroll-bars');
 
 
         $cities.on('click', 'li', function()
         {
+            if( !$('html').hasClass('mobile') || $(window).width() > 640 ) that._openFilter();
+
             that.context.$container.find('form input[name=city]').val( $(this).text() );
             that.context.$container.find('form input[name=city_id]').val( $(this).attr('id') );
             that.context.$container.find('form').submit();
@@ -241,6 +243,10 @@ meta.Cities = function() {
         {
             var marker = that.context.map.getMarker( $(this).attr('id') );
             if( typeof marker  != 'undefined' && marker ) marker.setAnimation(google.maps.Animation.BOUNCE);
+
+            if( $(this).closest('.scroll').hasClass('scroll-bars')  )
+                that.context.map.setCenter( marker.getPosition() );
+
         });
 
 
@@ -257,7 +263,7 @@ meta.Cities = function() {
 
             $(this).find('input[name=city]').prop('disabled', true);
 
-            var city_id = $(this).find('input[name=city_id]').val();
+            var city_id         = $(this).find('input[name=city_id]').val();
             var neighborhood_id = $(this).find('select[name=neighborhood]').val();
 
             $(this).find('input[type=submit]').hide();
@@ -272,7 +278,9 @@ meta.Cities = function() {
             that.context.$container.find('form input[name=city]').prop('disabled', false);
             that.context.$container.find('form input[type=submit]').show();
             that.context.$container.find('form input[type=reset]').hide();
-            that.context.$container.find('form [name=city][name=city]').focus().blur();
+
+            if( $('html').hasClass('ie9') )
+                that.context.$container.find('form input[name=city]').focus().blur();
 
             that._showCitySelector();
             that._removeNeighborhoodSelector();
@@ -309,26 +317,11 @@ meta.Cities = function() {
 
 
 
-        $selector.find('input[name=city]').click(function()
+        $selector.find('input[name=city], input[type=submit]').click(function()
         {
             if( !$('html').hasClass('mobile') || $(window).width() > 640 )
             {
-                if( !that.context.filter_is_open )
-                {
-                    that.context.filter_is_open = true;
-
-                    $selector.height($selector.height());
-                    that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
-                    that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
-
-                    $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
-
-                    setTimeout(function()
-                    {
-                        that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
-
-                    }, 300);
-                }
+                that._openFilter();
             }
             else
             {
@@ -346,11 +339,56 @@ meta.Cities = function() {
         });
 
 
+        that.context.$container.find('form input[name=city]').on('keyup', function()
+        {
+            that._requestCities($(this).val(), function(query, cities)
+            {
+                that._showCities(query, cities, true, false);
+            });
+        });
+
+
+        $(document).on('change', '.selector select[name=neighborhood]', function()
+        {
+            var city_id         = that.context.$container.find('input[name=city]').val();
+            var neighborhood_id = $(this).val();
+
+            that._searchBars( city_id, neighborhood_id );
+
+        });
         $(window).resize(function()
         {
             that._resize();
         });
 
+    };
+
+
+    /**
+     *
+     */
+    that._openFilter = function()
+    {
+
+        var $head       = that.context.$container.find('.heading');
+        var $selector   = that.context.$container.find('.selector');
+
+        if( !that.context.filter_is_open )
+        {
+            that.context.filter_is_open = true;
+
+            $selector.height($selector.height());
+            that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
+            that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+
+            $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
+
+            setTimeout(function()
+            {
+                that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
+
+            }, 300);
+        }
     };
 
 
@@ -383,12 +421,17 @@ meta.Cities = function() {
 
         if( !$('html').hasClass('mobile') || $(window).width() > 640 )
         {
-            $cities_content.height( $(window).height()-$header.height()-$('footer').height() );
+            if( !$('html').hasClass('mobile') || that.first_resize )
+            {
+                that.first_resize = false;
 
-            var cities_height = $selector.height()-$head.height()-20;
+                $cities_content.height( $(window).height()-$header.height()-$('footer').height() );
 
-            $cities.height( cities_height );
-            $bars.height( cities_height-40 );
+                var cities_height = $selector.height()-$head.height()-20;
+
+                $cities.height( cities_height );
+                $bars.height( cities_height-40 );
+            }
 
             $scroll.height( $selector.height()-$head.height()-25 );
 

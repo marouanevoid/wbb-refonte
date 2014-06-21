@@ -20,15 +20,21 @@ get_medias_from_bar:
     options:
         expose: true
 
-wbb_cities_poi:
-    pattern: /poi/{cityID}/{suburbID}
-    defaults: { _controller: WBBCoreBundle:Ajax\Ajax:poiList, cityID: 0, suburbID: 0}
+wbb_cities_bars:
+    pattern: /getbars-bycity/{cityID}/{suburbID}
+    defaults: { _controller: WBBCoreBundle:City:barsList, cityID: 0, suburbID: 0}
     options:
         expose: true
 
 wbb_cities_list:
-    pattern: /list/cities
-    defaults: { _controller: WBBCoreBundle:Ajax\Ajax:citiesList }
+    pattern: /cities/list/{keywords}
+    defaults: { _controller: WBBCoreBundle:City:citiesList, keywords: "" }
+    options:
+        expose: true
+
+wbb_cities_list_all:
+    pattern: /cities/list/
+    defaults: { _controller: WBBCoreBundle:City:citiesList, keywords: "" }
     options:
         expose: true
 
