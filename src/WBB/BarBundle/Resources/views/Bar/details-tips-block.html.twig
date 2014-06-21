@@ -1,0 +1,63 @@
+<section class="insider-tips m-margin-top">
+
+    <div class="container load-container">
+
+        <div class="twelve columns align-center l-margin-top m-margin-bottom h1">
+            Insider Tips
+        </div>
+
+        <div class="load-target">
+            <div class="line" style="height: 0px;width: 0px;"></div>
+            <div class="line wbbtips">
+
+                {% if not is_mobile() or is_tablet() %}
+                    <div class="three columns box"  id="tipsForm">
+                        <article class="tip">
+                            <div class="content form">
+                                <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
+                                    <h3>Leave a tip</h3>
+                                    {{ form_widget(tipForm.description) }}
+                                    <div class="m-margin-top h4 count">250 left</div>
+                                    <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
+                                    {{ form_rest(tipForm) }}
+                                </form>
+                                <br class="clear"/>
+                            </div>
+                        </article>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+        {% if is_mobile() and not is_tablet() %}
+
+            <div class="twelve columns align-center m-margin">
+                <a class="btn-radius border load-more brown" href="#0" data-bar="{{ bar.id }}" data-offset="0" data-limit="9" data-showwbb="1" data-type="tips">Load More</a>
+            </div>
+
+            <div class="three columns box">
+                <article class="tip">
+                    <div class="content form">
+                        <form action="{{ path('wbb_bar_tips_add') }}" id="tips">
+                            <h3>Leave a tip</h3>
+                            {{ form_widget(tipForm.description) }}
+                            <div class="m-margin-top h4 count">250 left</div>
+                            <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
+                            {{ form_rest(tipForm) }}
+                        </form>
+                        <br class="clear"/>
+                    </div>
+                </article>
+            </div>
+
+        {% else %}
+
+            <div class="twelve columns align-center m-margin">
+                <a class="btn-radius border load-more brown" href="#0">Load More</a>
+            </div>
+
+        {% endif %}
+    </div>
+
+</section>

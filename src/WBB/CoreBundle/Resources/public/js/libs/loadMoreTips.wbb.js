@@ -1,9 +1,8 @@
-var meta = meta || {};
 
 /**
  *
  */
-meta.LoadMore = function(config) {
+meta.LoadMoreTips = function(config) {
 
     var that = this;
 
@@ -14,7 +13,6 @@ meta.LoadMore = function(config) {
 
     that.config = {
         $button : false,
-        $target : null,
         class   : 'line',
         speed   : 500,
         easing  : 'easeInOutCubic'
@@ -35,11 +33,11 @@ meta.LoadMore = function(config) {
 
         if(that.context.is_loading) return;
 
-        that.config.$target     = that.context.$container.find('.load-target');
+        var $target     = that.context.$container.find('.load-target');
 
         /* Récupérer la traduction pour loading */
         that.config.$button.addClass('loading').text(TRAD.common.loading);
-        that._loadAjax(that.config.url, function()
+        that._loadAjax(that.config.url, $target, function()
         {
 
         });
@@ -70,48 +68,28 @@ meta.LoadMore = function(config) {
         }, 100*$elements.length+that.config.speed );
     };
 
-    that._loadAjax = function( url, callback)
+    that._loadAjax = function( url, $target, callback)
     {
 
         that.context.is_loading = true;
-        console.log("Load More : " + url);
         $.ajax({
             type: "GET",
             url: url,
             dataType: "json",
             success: function(msg) {
-                that.config.$target.append(msg.htmldata);
+                $target.append(msg.htmldata);
                 if(parseInt(msg.difference)==0)
-                    that.config.$button.hide();
+                   that.config.$button.hide();
                 if( callback ) callback();
-                that.config.$target.find(".line:last-child").hide();
-                that.context.itemsNumber = that.config.$target.find('img[data-src]').length;
-                that.config.$target.find('img[data-src]').each(function()
-                {
-                    $(this).load(that._imageLoaded);
-                    $(this).error(that._imageLoaded);
-                    $(this).attr('src', $(this).data('src'));
-                });
+                that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
+                that.context.is_loading = false;
+                that.config.$button.removeClass('loading').text( TRAD.common.morebars);
             },
             error: function(e) {
-                console.log('Load More - Error : ' + e);
+                console.log('Error : ' + e);
             }
         });
     };
-
-    that._imageLoaded = function ()
-    {
-        that.context.itemsNumber--;
-        console.log(" itemsNumber : " + that.context.itemsNumber + " , " + $(this));
-        $(this).removeAttr('data-src');
-        if (that.context.itemsNumber <= 0)
-            that.config.$target.find(".line:last-child").show();
-        that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
-
-        that.context.is_loading = false;
-        that.config.$button.removeClass('loading').text( TRAD.common.morebars);
-
-    }
 
 
     /**
