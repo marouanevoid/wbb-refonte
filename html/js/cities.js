@@ -37,6 +37,8 @@ meta.Cities = function() {
     };
 
     that.first_resize = true;
+    that.current_zoom_level = 3;
+    that.max_zoom_level_for_bars = 11;
 
     /**
      *
@@ -115,15 +117,15 @@ meta.Cities = function() {
     /**
      *
      */
-    that._hideBars = function()
+    that._hideBars = function(fit)
     {
         var $scrollBars = that.context.$container.find('.scroll-bars');
         $scrollBars.find('ul').empty();
         $scrollBars.hide();
 
-        that._showAllCities(true);
+        that._showAllCities(fit);
 
-        that.context.map.reset();
+        if(fit) that.context.map.reset();
 
     };
 
@@ -269,18 +271,19 @@ meta.Cities = function() {
 
         that.context.$container.find('form input[type=reset]').click(function(e)
         {
-            that.context.$container.find('form input[name=city]').prop('disabled', false);
-            that.context.$container.find('form input[type=submit]').show();
-            that.context.$container.find('form input[type=reset]').hide();
+            that._backToCities(true);
+        });
 
-            if( $('html').hasClass('ie9') )
-                that.context.$container.find('form input[name=city]').focus().blur();
 
-            that._showCitySelector();
-            that._removeNeighborhoodSelector();
-            that._hideBars();
+        that.context.map.addZoomListener(function( zoomLevel ){
 
-            setTimeout(function(){ that._resize() }, 50);
+            if( that.current_zoom_level > zoomLevel && zoomLevel == that.max_zoom_level_for_bars )
+            {
+                that._backToCities(false);
+            }
+
+            that.current_zoom_level = zoomLevel;
+
         });
 
 
@@ -356,6 +359,27 @@ meta.Cities = function() {
         {
             that._resize();
         });
+
+    };
+
+
+    /**
+     *
+     */
+    that._backToCities = function( fit )
+    {
+        that.context.$container.find('form input[name=city]').prop('disabled', false);
+        that.context.$container.find('form input[type=submit]').show();
+        that.context.$container.find('form input[type=reset]').hide();
+
+        if( $('html').hasClass('ie9') )
+            that.context.$container.find('form input[name=city]').focus().blur();
+
+        that._showCitySelector();
+        that._removeNeighborhoodSelector();
+        that._hideBars(fit);
+
+        setTimeout(function(){ that._resize() }, 50);
 
     };
 

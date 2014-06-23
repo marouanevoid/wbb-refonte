@@ -166,6 +166,18 @@ meta.Map = function(config){
     };
 
 
+    that.addZoomListener = function ( callback ){
+
+        var map = that.config.$map.gmap3('get');
+
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+            var zoomLevel = map.getZoom();
+            callback(zoomLevel);
+        });
+
+    };
+
+
     /**
      *
      */
