@@ -137,7 +137,7 @@
                                 <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
                             </div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            <img class="overlay" src="{{ asset('/bundles/wbbcore/images/city.background-circle.png') }}"/>
+                            <img class="overlay" src="{{ asset('bundles/wbbcore/images/city.background-circle.png') }}"/>
                             {% if c.webPath %}
                             <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) | apply_filter('city_small') }}" alt="{{ c.name }}"/>
                             {% endif %}
@@ -316,7 +316,7 @@
             {% if not is_mobile() or is_tablet() %}
                 <div class="block">
                     <div class="side-ad xl-margin-top">
-                        <img src="{{ asset('/bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
                         <div class="txt">Advertising</div>
                     </div>
                 </div>
