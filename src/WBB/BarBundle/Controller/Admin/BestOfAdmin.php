@@ -134,7 +134,7 @@ class BestOfAdmin extends Admin
                 ->add('name', null, array('label' => 'Name of the best of', 'help'=>'Mandatory'))
                 ->add('country', null, array('required' => false))
                 ->add('city', null, array('required' => false))
-                ->add('description', 'textarea', array('label'=>'Best of description', 'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
+                ->add('description', 'textarea', array('required' => false, 'label'=>'Best of description', 'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
                 ->add('file', 'file', $imageOptions)
                 ->add('sponsor')
                 ->add('sponsorImageFile', 'file', $sponsorImageOptions)
