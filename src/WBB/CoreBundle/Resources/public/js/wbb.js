@@ -27,6 +27,9 @@ function nodeToString ( node ) {
 }
 
 $(document).ready(function(){
+    $('img').error(function(){
+        $(this).attr('src', '/bundles/wbbcore/images/default.jpg');
+    });
     $('#city_selector').change(function(){
         document.location = $(this).val();
     });
