@@ -70,6 +70,10 @@ meta.Cities = function() {
         {
             var $scrollBars = that.context.$container.find('.scroll-bars');
             $scrollBars.find('ul').html(html);
+
+            var api = $scrollBars.data('jsp');
+            api.scrollToY(0, false);
+
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
             setTimeout(function(){ that._resize() }, 50);
@@ -82,14 +86,14 @@ meta.Cities = function() {
     /**
      *
      */
-    that._showCities = function( cities, display_list, fit )
+    that._showCities = function( query, cities, display_list, fit )
     {
         var html = "";
         var markers = [];
 
         $.each(cities, function(index, city)
         {
-            if( display_list ) html += '<li id="'+city.id+'">'+city.name+'</li>';
+            if( display_list ) html += '<li id="'+city.id+'">'+city.name.replace(query, '<b>'+query+'</b>')+'</li>';
             markers.push({address:city.name, options:{icon:'images/map.pin.png'}, id:city.id});
         });
 
@@ -97,6 +101,9 @@ meta.Cities = function() {
         {
             var $scrollCities = that.context.$container.find('.scroll-cities');
             $scrollCities.find('ul').html(html);
+
+            var api = $scrollCities.data('jsp');
+            api.scrollToY(0, false);
         }
 
         that.context.map.addMarkers(markers, false);
@@ -126,6 +133,8 @@ meta.Cities = function() {
      */
     that._showNeighborhoodSelector = function(neighborhoods)
     {
+        if( that.context.$container.find('select[name=neighborhood]').length ) return;
+
         var html = '<select name="neighborhood" class="ui-dropdown">';
         $.each(neighborhoods, function(index, neighborhood)
         {
@@ -133,7 +142,7 @@ meta.Cities = function() {
         });
         html += '</select>';
 
-        that.context.$container.find('form').after(html);
+        that.context.$container.find('form').append(html);
 
         initializeDropdowns();
 
@@ -183,12 +192,12 @@ meta.Cities = function() {
     /**
      *
      */
-    that._requestCities = function( callback )
+    that._requestCities = function( query, callback )
     {
-        $.get('tmp/data/cities.php', function( data )
+        $.get('tmp/data/cities.php', {q:query}, function( data )
         {
             if(data.code == 200 && callback)
-                callback(data.cities);
+                callback(query, data.cities);
         });
     };
 
@@ -222,7 +231,16 @@ meta.Cities = function() {
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
         {
             var marker = that.context.map.getMarker( $(this).attr('id') );
-            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(google.maps.Animation.BOUNCE);
+
+            if( typeof marker  != 'undefined' && marker )
+            {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function(){ marker.setAnimation(null) }, 700);
+            }
+
+            if( $(this).closest('.scroll').hasClass('scroll-bars')  )
+                that.context.map.setCenter( marker.getPosition() );
+
         });
 
 
@@ -315,6 +333,25 @@ meta.Cities = function() {
         });
 
 
+        that.context.$container.find('form input[name=city]').on('keyup', function()
+        {
+            that._requestCities($(this).val(), function(query, cities)
+            {
+                that._showCities(query, cities, true, false);
+            });
+        });
+
+
+        $(document).on('change', '.selector select[name=neighborhood]', function()
+        {
+            var city_id         = that.context.$container.find('input[name=city]').val();
+            var neighborhood_id = $(this).val();
+
+            that._searchBars( city_id, neighborhood_id );
+
+        });
+
+
         $(window).resize(function()
         {
             that._resize();
@@ -356,9 +393,9 @@ meta.Cities = function() {
      */
     that._showAllCities = function( fit )
     {
-        that._requestCities(function(cities)
+        that._requestCities('', function(query, cities)
         {
-            that._showCities(cities, true, fit);
+            that._showCities(query, cities, true, fit);
         });
     };
 
