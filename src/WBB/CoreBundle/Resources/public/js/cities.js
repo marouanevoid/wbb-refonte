@@ -64,11 +64,11 @@ meta.Cities = function() {
         {
             if(typeof bar.latitude != 'undefined' && typeof bar.longitude != 'undefined' && bar.latitude != 'null' && bar.longitude != 'null'){
                 if( display_list ) html += '<li id="'+bar.id+'" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
-                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:'/bundles/wbbcore/images/markers/'+(index+1)+'.png'}, id:bar.id});
+                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:BASEURL+'images/markers/'+(index+1)+'.png'}, id:bar.id});
             }else{
                 if(bar.address){
                     if( display_list ) html += '<li id="'+bar.id+'" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
-                    markers.push({address:bar.address, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:'/bundles/wbbcore/images/markers/'+(index+1)+'.png'}, id:bar.id});
+                    markers.push({address:bar.address, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:BASEURL+'images/markers/'+(index+1)+'.png'}, id:bar.id});
                 }
             }
         });
@@ -101,11 +101,11 @@ meta.Cities = function() {
         {
             if(typeof city.latitude != 'undefined' && typeof city.longitude != 'undefined' && city.latitude != 'null' && city.longitude != 'null'){
                 if( display_list ) html += '<li id="'+city.id+'">'+city.name+'</li>';
-                markers.push({address:city.latitude+','+city.longitude, options:{icon:'/bundles/wbbcore/images/map.pin.png'}, id:city.id});
+                markers.push({address:city.latitude+','+city.longitude, options:{icon:BASEURL+'images/map.pin.png'}, id:city.id});
             }else{
                 if(city.name){
                     if( display_list ) html += '<li id="'+city.id+'">'+city.name+'</li>';
-                    markers.push({address:city.name, options:{icon:'/bundles/wbbcore/images/map.pin.png'}, id:city.id});
+                    markers.push({address:city.name, options:{icon:BASEURL+'images/map.pin.png'}, id:city.id});
                 }
             }
         });

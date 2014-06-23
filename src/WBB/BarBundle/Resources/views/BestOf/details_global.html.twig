@@ -7,7 +7,7 @@
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
-            $.cookie('city', {{ path('homepage') }}, { path: '/' });
+            $.cookie('city', '{{ path('homepage') }}', { path: '/' });
             {% endif %}
 
             /* Evenement sur le bouton favoris des items */
@@ -99,8 +99,6 @@
             {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b.bar, 'bestof' : 1 } %}
         </div>
     {% endfor %}
-
-    <?php endfor ?>
 </div>
 
 <!-- ALSO LIKE -->
