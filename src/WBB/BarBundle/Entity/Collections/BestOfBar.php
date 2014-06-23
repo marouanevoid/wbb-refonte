@@ -97,7 +97,10 @@ class BestOfBar
 
     public function __toString()
     {
-        return $this->tag->getName();
+        if($this->bar)
+            return $this->bar->getName();
+        else
+            return "";
     }
 
     /**

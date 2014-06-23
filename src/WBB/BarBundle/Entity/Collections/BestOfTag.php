@@ -92,7 +92,10 @@ class BestOfTag
 
     public function __toString()
     {
-        return $this->tag->getName();
+        if ($this->tag)
+            return $this->tag->getName();
+        else
+            return "";
     }
 
     /**

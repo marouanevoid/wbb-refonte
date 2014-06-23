@@ -1,9 +1,9 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field%}
-    {% if admin.datagrid.results|length > 1 %}
+    {% if admin.datagrid.results|length >= 1 %}
         <div>
-            <strong>{{ object.getNbNews}}</strong>
+            <strong>{{ object.getNbBars}}</strong>
         </div>
     {% endif %}
 {% endblock %}

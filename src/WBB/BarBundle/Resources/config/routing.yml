@@ -4,13 +4,15 @@ wbb_bar_test:
 
 #Actions
 
-homepage:
-    pattern: /
-    defaults: { _controller: WBBBarBundle:Bar:home }
-
 city_homepage:
     pattern: /top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
+
+homepage:
+    pattern: /
+    defaults: { _controller: WBBBarBundle:Bar:home}
+    options:
+            expose: true
 
 wbb_bar_guides:
     pattern: /bar-guides
@@ -21,13 +23,12 @@ wbb_bar_guides_city:
     defaults: { _controller: WBBBarBundle:Bar:barGuideCity }
 
 wbb_bar_tips:
-    pattern: /bar/{barID}/tips/{offset}/{limit}/{showwbb}
+    pattern: /bar/{barID}/tips/{offset}/{limit}
     requirements:
           id: \d+
           offset: \d+
           limit: \d+
-          showwbb : \d+
-    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0 , limit: 8 , showwbb: 1 }
+    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0 , limit: 8}
     options:
         expose: true
 
@@ -66,14 +67,18 @@ wbb_bar_tips_add:
     options:
         expose: true
 
-wbb_bar_tips_fetch:
-    pattern:  /tips/fetch/{barID}/{offset}/{limit}
-    defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
-    options:
-        expose: true
+#wbb_bar_tips_fetch:
+#    pattern:  /tips/fetch/{barID}/{offset}/{limit}
+#    defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
+#    options:
+#        expose: true
 
 wbb_bar_guide_filters:
     pattern: /barguide/filter/{barsOnly}/{city}/{filter}/{offset}/{limit}/{display}
     defaults: { _controller: WBBBarBundle:Bar:barGuideFilter, barsOnly: 1, city: 0, filter: popularity, offset: 0, limit: 8, display: grid }
     options:
         expose: true
+
+wbb_bar_best_of_global:
+    pattern: /best-of/{slug}
+    defaults: { _controller: WBBBarBundle:Bar:bestOf }

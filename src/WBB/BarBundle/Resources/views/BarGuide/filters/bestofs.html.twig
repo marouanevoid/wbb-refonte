@@ -1,5 +1,5 @@
+<div class="line">
 {% for b in bestofs %}
-    {% if not loop.last or bestofs|length < limit %}
 <div class="best-of-container transform3d">
 <article class="bestof">
 
@@ -17,19 +17,11 @@
         </div>
     </div>
     {% if b.webPath %}
-        <img src="" class="scale-with-grid" data-src="{{ asset(b.webPath) | apply_filter('bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
+        <img class="scale-with-grid" data-src="{{ asset(b.webPath) | apply_filter('bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
     {% endif %}
     <a href="#0" class="overlay-link"></a>
 
 </article>
 </div>
-        {% endif %}
 {% endfor %}
-<script type="text/javascript">
-    eval("setTimeout(function(){$('.smbestofs').data('offset', {{ offset + 9 }});});");
-</script>
-{% if bestofs|length<limit %}
-    <script type="text/javascript">
-        eval("$('.smbestofs').hide();");
-    </script>
-{% endif %}
+    </div>

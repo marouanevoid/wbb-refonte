@@ -12,6 +12,26 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class BestOfRepository extends EntityRepository
 {
+    public function findYouMayAlsoLike($bestOf, $city = null)
+    {
+        $qb = $this->createQueryBuilder('bo');
+
+        if ($bestOf->getByTag()) {
+            // Here tags
+        }
+
+        if ($city) {
+            // City here
+        }
+
+        $qb->orderBy('bo.onTop', 'desc')
+                ->addOrderBy('bo.createdAt', 'desc');
+
+        $qb->setMaxResults(3);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findTopBestOfs($city = null, $favoris = null, $limit = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
@@ -43,8 +63,11 @@ class BestOfRepository extends EntityRepository
             ->select($this->getAlias())
             ->orderBy($this->getAlias().'.name', 'ASC')
             ->setFirstResult($offset)
-            ->setMaxResults($limit)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
@@ -61,9 +84,12 @@ class BestOfRepository extends EntityRepository
             ->select($this->getAlias())
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->where($qb->expr()->eq(1, 1))
-            ->setMaxResults($limit)
             ->setFirstResult($offset)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         if($onTop){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));

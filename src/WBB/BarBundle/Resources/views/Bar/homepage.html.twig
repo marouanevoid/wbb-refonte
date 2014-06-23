@@ -5,11 +5,7 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function(){
-            {% if city is defined %}
-                $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
-            {% else %}
-                $.cookie('city', {{ path('homepage') }}, { path: '/' });
-            {% endif %}
+
             $(".star").click(function(){
                 var btn = $(this);
                 $.ajax({
@@ -70,6 +66,7 @@
                                             {% endif %}
                                         >{{ c.name }}</option>
                                     {% endfor %}
+                                    <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
                                 </select>
                             </div>
                         </td>
@@ -326,7 +323,6 @@
             {% endif %}
 
         </aside>
-
     </div>
 {% endblock %}
 

@@ -1,21 +1,3 @@
-/**
- * Load More
- *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
- *
- * License: GPL
- * Version: 1.0
- *
- * Requires:
- *   - jQuery
- *
- **/
-
-/**
- * indigen namespace.
- */
 var meta = meta || {};
 
 /**
@@ -26,15 +8,13 @@ meta.LoadMore = function(config) {
     var that = this;
 
     that.context = {
-
-        page : 1,
-        is_loading : false
+        is_loading : false,
+        itemsNumber : 0
     };
 
     that.config = {
-
         $button : false,
-        page    : '&page=',
+        $target : null,
         class   : 'line',
         speed   : 500,
         easing  : 'easeInOutCubic'
@@ -44,28 +24,24 @@ meta.LoadMore = function(config) {
     /* Public attributes. */
     that._setupEvents = function(){
 
-        that.config.$button.on('click', function(e)
+        /*that.config.$button.on('click', function(e)
         {
             e.preventDefault();
+            that._updateContent();
+        });*/
+    };
 
-            if(that.context.is_loading) return;
+    that._updateContent = function() {
 
+        if(that.context.is_loading) return;
 
-            var $button     = $(this);
-            var $target     = that.context.$container.find('.load-target');
-            var url;
-            if($button.data('type')=="tips"){
-                url = Routing.generate('wbb_bar_tips', { barID:$button.data('bar'), offset:$button.data('offset'), limit:$button.data('limit'), showwbb:$button.data('showwbb') });
-            }else if($button.data('type')=="bars"){
-                url = Routing.generate('wbb_bar_guide_filters', { barsOnly: $button.data('bar'), city: $button.data('city'), filter: $button.data('filter'), offset: $button.data('offset'), limit: $button.data('limit'), display:$button.data('display') });
-            }
-            $button.data('text', $button.text());
-            $button.addClass('loading').text(TRAD.loading);
+        that.config.$target     = that.context.$container.find('.load-target');
 
-            that._load(url, $target, function()
-            {
-                $button.removeClass('loading').text( $button.data('text'));
-            });
+        /* Récupérer la traduction pour loading */
+        that.config.$button.addClass('loading').text(TRAD.common.loading);
+        that._loadAjax(that.config.url, function()
+        {
+
         });
     };
 
@@ -94,32 +70,58 @@ meta.LoadMore = function(config) {
         }, 100*$elements.length+that.config.speed );
     };
 
-
-    that._load = function( url, $target, callback)
+    that._loadAjax = function( url, callback)
     {
+
         that.context.is_loading = true;
-        $target.load(url, function()
-        {
-            if( callback ) callback();
-
-            $target.hide();
-
-            $target.removeClass('load-target');
-            $target.after('<div class="'+that.config.class+' load-target"/>');
-
-            $target.find('img[data-src]').each(function()
-            {
-                $(this).attr('src', $(this).data('src'));
-                $(this).removeAttr('data-src');
-            });
-            $('line:first-child').addClass('first');
-
-            that._animate($target, $target.find('> *').not('br') );
-
-            that.context.page +=1;
-            that.context.is_loading = false;
-        })
+        console.log("Load More : " + url);
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(msg) {
+                that.config.$target.append(msg.htmldata);
+                if(parseInt(msg.difference)==0)
+                    that.config.$button.hide();
+                if( callback ) callback();
+                that.config.$target.find(".line:last-child").hide();
+                that.context.itemsNumber = that.config.$target.find('img[data-src]').length;
+                that.config.$target.find('img[data-src]').each(function()
+                {
+                    $(this).load(that._imageLoaded);
+                    $(this).error(that._imageNotLoaded);
+                    $(this).attr('src', $(this).data('src'));
+                });
+            },
+            error: function(e) {
+                console.log('Load More - Error : ' + e);
+            }
+        });
     };
+
+    that._imageLoaded = function ()
+    {
+        that.context.itemsNumber--;
+        console.log(" itemsNumber : " + that.context.itemsNumber + " , " + $(this));
+        $(this).removeAttr('data-src');
+        if (that.context.itemsNumber <= 0)
+            that.config.$target.find(".line:last-child").show();
+        that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
+
+        that.context.is_loading = false;
+        that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+    }
+    that._imageNotLoaded = function ()
+    {
+        $(this).removeAttr('data-src');
+        if (that.context.itemsNumber <= 0)
+            that.config.$target.find(".line:last-child").show();
+        that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
+
+        that.context.is_loading = false;
+        that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+        $(this).attr('src', '/bundles/wbbcore/images/default.jpg');
+    }
 
 
     /**
@@ -135,13 +137,4 @@ meta.LoadMore = function(config) {
 
     that.__construct( config );
 };
-
-$(document).ready(function()
-{
-   $('.load-more').each(function()
-   {
-        new meta.LoadMore({$button:$(this)});
-   });
-
-});
 

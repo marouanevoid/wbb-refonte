@@ -75,6 +75,10 @@ class BarRepository extends EntityRepository
             ->setMaxResults($limit)
         ;
 
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
@@ -93,9 +97,12 @@ class BarRepository extends EntityRepository
             ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
-            ->setMaxResults($limit)
             ->setFirstResult($offset)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         if($onTop){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
@@ -170,7 +177,7 @@ class BarRepository extends EntityRepository
         }
     }
 
-    public function findNearestBars($latitude = 0, $longitude = 0, $start = 0, $limit = 8)
+    public function findNearestBars($latitude = 0, $longitude = 0, $offset = 0, $limit = 8)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -180,9 +187,12 @@ class BarRepository extends EntityRepository
             ->setParameter('latitude', $latitude)
             ->setParameter('longitude', $longitude)
             ->orderBy('Distance', 'ASC')
-            ->setFirstResult($start)
-            ->setMaxResults($limit)
+            ->setFirstResult($offset)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         return $qb->getQuery()->getResult();
     }
@@ -196,8 +206,11 @@ class BarRepository extends EntityRepository
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->orderBy($this->getAlias().'.name', 'ASC')
             ->setFirstResult($offset)
-            ->setMaxResults($limit)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
