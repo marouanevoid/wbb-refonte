@@ -72,7 +72,6 @@ class BarRepository extends EntityRepository
             ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->orderBy($this->getAlias().'.onTop', 'DESC')
             ->setFirstResult($offset)
-            ->setMaxResults($limit)
         ;
 
         if($limit > 0){

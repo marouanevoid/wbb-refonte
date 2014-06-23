@@ -7,7 +7,7 @@
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
-            $.cookie('city', {{ path('homepage') }}, { path: '/' });
+            $.cookie('city', '{{ path('homepage') }}', { path: '/' });
             {% endif %}
 
             /* Evenement sur le bouton favoris des items */
@@ -88,7 +88,7 @@
             <div class="four columns">
                 <div class="block">
                     <div class="side-ad">
-                        <img src="{{ asset('/bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
                         <div class="txt">Advertising</div>
                     </div>
                 </div>
@@ -99,8 +99,6 @@
             {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b.bar, 'bestof' : 1 } %}
         </div>
     {% endfor %}
-
-    <?php endfor ?>
 </div>
 
 <!-- ALSO LIKE -->

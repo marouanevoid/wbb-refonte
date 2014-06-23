@@ -15,7 +15,7 @@
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
-            $.cookie('city', {{ path('homepage') }}, { path: '/' });
+            $.cookie('city', '{{ path('homepage') }}', { path: '/' });
             {% endif %}
 
             /* Evenement sur le bouton favoris des items */
@@ -194,8 +194,8 @@
 
         <div class="container">
             <div class="load-container">
-                <div class="load-target">
-
+                <div class="load-target bars-w-pic">
+                    <div class="line" style="height: 0px;width: 0px;"></div>
                 </div>
                 <div class="twelve columns align-center m-margin load-more-container">
                     <a class="h4 btn-radius large border load-more brown smbestofs2" href="#0">See more best of</a>

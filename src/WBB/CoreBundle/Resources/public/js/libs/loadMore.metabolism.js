@@ -120,7 +120,7 @@ meta.LoadMore = function(config) {
 
         that.context.is_loading = false;
         that.config.$button.removeClass('loading').text( TRAD.common.morebars);
-        $(this).attr('src', '/bundles/wbbcore/images/default.jpg');
+        $(this).attr('src', BASEURL+'images/default.jpg');
     }
 
 

@@ -17,21 +17,22 @@ body.cities {
             background: url("../images/icons/tag-gray.png") center no-repeat; background-size: 100% auto
           }
         }
+        &.left{ left: -490px; background-image: url("../images/misc/bar-overlay-flip.png"); padding-right: 35px; padding-left: 20px }
       }
       .cluster{ background: url("../images/map.pin.png") no-repeat center; width: 20px; height: 30px; background-size: 100% auto }
     }
     .zoom{
-      position: absolute; right: 5%; top: 50%; margin-top: -23px; background: $color-brown; border-radius: 25px; padding: 2px; padding-bottom: 0;
+      position: absolute; right: 3%; top: 50%; margin-top: -23px; background: $color-brown; border-radius: 25px; padding: 2px; padding-bottom: 0;
       a{ background-color: $color-cream }
     }
     .selector{
-      position: absolute; left: 5%; top: 10%; bottom: auto; overflow: hidden; width: 23em; background: #fff; border: 10px solid $color-cream;
+      position: absolute; left: 3%; top: 10%; bottom: auto; overflow: hidden; width: 23em; background: #fff; border: 10px solid $color-cream;
       padding: 25px; @include transition( height 0.3s );
       h3{ color: $color-brown }
       form{
         input[type=reset]{ display: none }
       }
-      .ui-dropdown-container{ font-size: 1.4em; width: 100%!important }
+      .ui-dropdown-container{ font-size: 1.4em; width: 100%!important; margin-top: 0.5em }
       .scrolls{
         display: none;
         .scroll ul{ font-size: 1.4em; line-height: 180% }
