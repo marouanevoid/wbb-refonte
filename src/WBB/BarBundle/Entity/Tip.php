@@ -217,4 +217,12 @@ class Tip {
         return $this->updatedAt;
     }
 
+    public function getStatusChoices(){
+        return array(
+            0 => 'Pending',
+            1 => 'Enabled',
+            2 => 'Disabled'
+        );
+    }
+
 }
