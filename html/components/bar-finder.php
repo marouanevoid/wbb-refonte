@@ -43,12 +43,12 @@
                         </td>
                         <td><img src="images/misc/chevron.png" alt="chevron" width="8" height="13"/></td>
                         <td>
-                            <input type="radio" name="mood" value="chillout" class="ui-radio dark" data-color="brown" checked="checked"/>
+                            <input type="radio" name="mood" value="chillout" class="ui-radio dark with-icon" data-color="brown" checked="checked"/>
                         <td>
-                            <input type="radio" name="mood" value="casual" class="ui-radio dark"/>
+                            <input type="radio" name="mood" value="casual" class="ui-radio dark with-icon"/>
                         </td>
                         <td>
-                            <input type="radio" name="mood" value="party" class="ui-radio dark"/>
+                            <input type="radio" name="mood" value="party" class="ui-radio dark with-icon"/>
                         </td>
                         <td>
                             <input type="submit" class="btn-radius border brown go" value="GO"/>

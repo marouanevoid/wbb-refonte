@@ -2183,7 +2183,6 @@ section.bar-finder .twelve {
 }
 /* line 5, ../sass/components/_bar-finder.scss */
 section.bar-finder .finder-arrow {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   position: absolute;
   right: 30.5em;
@@ -2191,7 +2190,6 @@ section.bar-finder .finder-arrow {
 }
 /* line 6, ../sass/components/_bar-finder.scss */
 section.bar-finder .finder-close {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   position: absolute;
   right: 0;
@@ -2230,6 +2228,7 @@ section.bar-finder .btn-radius.with-icon:before, section.bar-finder .btn-radius.
 /* line 15, ../sass/components/_bar-finder.scss */
 section.bar-finder .ui-radio.btn-radius.with-icon {
   padding-left: 2.2em;
+  width: 56px;
 }
 /* line 18, ../sass/components/_bar-finder.scss */
 section.bar-finder .ui-dropdown.btn-radius.with-icon {
@@ -2274,7 +2273,6 @@ section.bar-finder table {
   height: 7.5em;
   margin: 3em 0;
   text-align: center;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
 /* line 29, ../sass/components/_bar-finder.scss */
@@ -2418,31 +2416,37 @@ section.bar-finder table tr:nth-child(2) td:nth-child(8) {
   margin-left: 1em;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   /* line 36, ../sass/components/_subheader.scss */
+  .sub-header .city-selector .ui-dropdown-container .btn-radius {
+    width: 145px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* line 41, ../sass/components/_subheader.scss */
   .sub-header {
     padding: 20px 0;
     white-space: normal;
     text-align: center;
     width: 90%;
   }
-  /* line 38, ../sass/components/_subheader.scss */
+  /* line 43, ../sass/components/_subheader.scss */
   .sub-header table tr {
     display: block;
     width: 100%;
   }
-  /* line 39, ../sass/components/_subheader.scss */
+  /* line 44, ../sass/components/_subheader.scss */
   .sub-header table tr td {
     display: block;
     width: 100% !important;
   }
 
-  /* line 44, ../sass/components/_subheader.scss */
+  /* line 49, ../sass/components/_subheader.scss */
   .sub-header .star-share {
     margin-top: 2.5em;
     text-align: center;
   }
-  /* line 44, ../sass/components/_subheader.scss */
+  /* line 49, ../sass/components/_subheader.scss */
   .sub-header .star-share .btn-round {
     margin-left: 0.5em;
     margin-right: 0.5em;
@@ -2450,7 +2454,7 @@ section.bar-finder table tr:nth-child(2) td:nth-child(8) {
 }
 /* Load SVG for Chrome */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  /* line 52, ../sass/components/_subheader.scss */
+  /* line 57, ../sass/components/_subheader.scss */
   .sub-header .city-selector .ui-dropdown-container .btn-radius span {
     line-height: 38px;
   }
