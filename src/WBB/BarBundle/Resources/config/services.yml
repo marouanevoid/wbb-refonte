@@ -110,6 +110,7 @@ services:
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
             - [setTemplates, [{ edit:"WBBBarBundle:Admin:Tip/edit.html.twig" }]]
+            - [setTemplates, [{ list:"WBBBarBundle:Admin:Tip/list.html.twig" }]]
 
     wbb.bar.admin.news:
         class: %wbb_bar.news.admin.class%

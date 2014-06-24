@@ -79,6 +79,10 @@ wbb_bar_guide_filters:
     options:
         expose: true
 
-wbb_bar_best_of_global:
-    pattern: /best-of/{slug}
+wbb_bar_bestof_global:
+    pattern: /best-of/{bestOfSlug}
+    defaults: { _controller: WBBBarBundle:Bar:bestOf }
+
+wbb_bar_bestof_local:
+    pattern: /best-of/{citySlug}/{bestOfSlug}
     defaults: { _controller: WBBBarBundle:Bar:bestOf }

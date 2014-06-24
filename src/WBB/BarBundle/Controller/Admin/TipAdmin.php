@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use WBB\UserBundle\Entity\User;
 
 class TipAdmin extends Admin {
 
@@ -78,6 +79,19 @@ class TipAdmin extends Admin {
                 ->add('description')
             ->end()
         ;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $qb = parent::createQuery($context);
+        $alias = $qb->getRootAliases();
+
+        if ($this->getContainer()->get('request')->query->get('wbbexpert')) {
+            $alias = $qb->getRootAliases();
+            // here the user that have the role ROLE_EXPERT
+        }
+
+        return $qb;
     }
 
     /**

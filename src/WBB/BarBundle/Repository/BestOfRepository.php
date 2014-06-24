@@ -3,6 +3,8 @@
 namespace WBB\BarBundle\Repository;
 
 use WBB\CoreBundle\Repository\EntityRepository;
+use WBB\BarBundle\Entity\BestOf;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * BestOfRepository
@@ -12,21 +14,23 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class BestOfRepository extends EntityRepository
 {
-    public function findYouMayAlsoLike($bestOf, $city = null)
+    public function findYouMayAlsoLike(BestOf $bestOf)
     {
-        $qb = $this->createQueryBuilder('bo');
+        $qb = $this->createQueryBuilder('bo')
+            ->where('bo.id <> ' . $bestOf->getId())
+            ->orderBy('bo.onTop', 'desc');
+
+        if ($bestOf->getCity()) {
+            $qb->leftJoin('bo.city', 'city', Expr\Join::WITH, 'city.id = :id')
+                ->setParameter('id', $bestOf->getCity()->getId())
+                ->addOrderBy('city.id', 'desc');
+        }
 
         if ($bestOf->getByTag()) {
-            // Here tags
+            // TODO common tags
         }
 
-        if ($city) {
-            // City here
-        }
-
-        $qb->orderBy('bo.onTop', 'desc')
-                ->addOrderBy('bo.createdAt', 'desc');
-
+        $qb->addOrderBy('bo.createdAt', 'desc');
         $qb->setMaxResults(3);
 
         return $qb->getQuery()->getResult();
