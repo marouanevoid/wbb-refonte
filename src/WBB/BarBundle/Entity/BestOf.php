@@ -849,4 +849,20 @@ class BestOf
     {
         return count($this->getBars());
     }
+
+    public function getTagsIds()
+    {
+        $tags = array();
+        foreach ($this->getTags() as $tag) {
+            if ($tag->getTag()) {
+                $tags[] = $tag->getTag()->getId();
+            }
+        }
+
+        if (sizeof($tags) > 0) {
+            return $tags;
+        } else {
+            return array(0);
+        }
+    }
 }

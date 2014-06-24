@@ -1,0 +1,11 @@
+{% extends "SonataAdminBundle:CRUD:base_list.html.twig" %}
+
+{% block list_header %}
+    {{ parent() }}
+    <div>
+        <a href="{{ url('admin_wbb_bar_tip_list') ~ '?filter[status][value]=0' }}" class="btn">Pending tips</a>
+        <a href="{{ url('admin_wbb_bar_tip_list') ~ '?filter[_sort_order]=DESC&filter[_sort_by]=id' }}" class="btn">Latest tips</a>
+        <a href="{{ url('admin_wbb_bar_tip_list') ~ '?wbbexpert=1' }}" class="btn">Expert's tips</a>
+    </div>
+    <br/>
+{% endblock %}

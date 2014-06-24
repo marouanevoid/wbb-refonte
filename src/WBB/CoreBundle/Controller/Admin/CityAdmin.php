@@ -170,8 +170,14 @@ class CityAdmin extends Admin
     {
         $object->preUpload();
 
-        foreach ($object->getSuburbs() as $suburb) {
-            $suburb->setCity($object);
+        if($object->getSuburbs()){
+            foreach ($object->getSuburbs() as $suburb) {
+                if($suburb->getName()){
+                    $suburb->setCity($object);
+                }else{
+                    $object->removeSuburb($suburb);
+                }
+            }
         }
     }
 
@@ -179,8 +185,14 @@ class CityAdmin extends Admin
     {
         $object->preUpload();
 
-        foreach ($object->getSuburbs() as $suburb) {
-            $suburb->setCity($object);
+        if($object->getSuburbs()){
+            foreach ($object->getSuburbs() as $suburb) {
+                if($suburb->getName()){
+                    $suburb->setCity($object);
+                }else{
+                    $object->removeSuburb($suburb);
+                }
+            }
         }
     }
 

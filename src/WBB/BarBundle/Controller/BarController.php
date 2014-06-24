@@ -94,13 +94,10 @@ class BarController extends Controller
     /**
      * detailsAction
      *
-     * @param $city
-     * @param $suburb
      * @param $slug
-     *
      * @return Response
      */
-    public function detailsAction($city, $suburb, $slug)
+    public function detailsAction($slug)
     {
         $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
         $user = $this->container->get('user.repository')->findOneById(1);
@@ -123,10 +120,10 @@ class BarController extends Controller
         ));
     }
 
-    public function bestOfAction($slug, $city = null)
+    public function bestOfAction($bestOfSlug)
     {
         $em = $this->getDoctrine()->getManager();
-        $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($slug);
+        $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
 
         if (!$bestOf) {
             // TODO Does not work !
@@ -134,10 +131,12 @@ class BarController extends Controller
         }
 
         $bestofsCount = $bestOf->getBestofs()->count();
-        if ($bestofsCount < 3 && $bestOf->getByTag()) {
-            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $city);
-            for ($index = 0; $index < 3 - $bestofsCount - 1; $index++) {
-                $bestOf->addBestof($bestOfs[$index]);
+        if ($bestofsCount < 3) {
+            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf);
+            for ($index = 0; $index < 3 - $bestofsCount; $index++) {
+                if (isset($bestOfs[$index])) {
+                    $bestOf->addBestof($bestOfs[$index]);
+                }
             }
         }
 
