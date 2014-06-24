@@ -148,7 +148,16 @@ wbb.Map = function(config){
         that.config.$map.gmap3('get').panTo( position );
     };
 
+    that.addZoomListener = function ( callback ){
 
+        var map = that.config.$map.gmap3('get');
+
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+            var zoomLevel = map.getZoom();
+            callback(zoomLevel);
+        });
+
+    };
     /**
      *
      */
@@ -174,14 +183,18 @@ wbb.Map = function(config){
                         if( $('html').hasClass('mobile') ) return;
 
                         if( typeof(context.id) != 'undefined')
-                            $('html').find("li[data-id=" + context.id + "]").addClass('active');
+                            $('#'+context.id ).addClass('active');
 
-                        if( typeof(context.data) == 'undefined') return;
+
+                        if( typeof(context.data) == 'undefined')
+                        {
+                            marker.setIcon(BASEURL+'images/map.pin.grey.png');
+                            return;
+                        }
 
                         var align = "right";
-                        if( map.getBounds().getNorthEast().lng() - marker.getPosition().lng() < 80 ) align = "left";
-                        console.log(" MAP OVER ");
-                        console.log(map.getBounds().getNorthEast().lng() - marker.getPosition().lng());
+                        if( map.getBounds().getNorthEast().lng() - marker.getPosition().lng() < 0.0122 ) align = "left";
+
                         that.config.$map.gmap3({
                             overlay:{
                                 latLng: marker.getPosition(),
@@ -197,8 +210,13 @@ wbb.Map = function(config){
                     },
                     mouseout: function(marker, event, context){
 
+                        if( typeof(context.data) == 'undefined')
+                        {
+                            marker.setIcon(BASEURL+'images/map.pin.png');
+                        }
+
                         if( typeof(context.id) != 'undefined')
-                            $('html').find("li[data-id=" + context.id + "]").removeClass('active');
+                            $('#'+context.id ).removeClass('active');
 
                         that.config.$map.gmap3({
                             clear: {
@@ -210,7 +228,7 @@ wbb.Map = function(config){
                     click: function(marker, event, context){
 
                         if( typeof(context.id) != 'undefined')
-                            $('html').find("li[data-id=" + context.id + "]").click();
+                            $('#'+context.id ).click();
                     }
                 },
                 cluster:{

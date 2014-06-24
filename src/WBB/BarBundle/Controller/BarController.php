@@ -57,6 +57,12 @@ class BarController extends Controller
 
     public function barGuideAction()
     {
+        $session = $this->container->get('session');
+        $slug = $session->get('citySlug');
+        if (!empty($slug))
+            return $this->barGuideCityAction($session->get('citySlug'));
+        $session->set('citySlug', "");
+
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5);
@@ -67,12 +73,20 @@ class BarController extends Controller
 
     public function barGuideCityAction($slug)
     {
+        $session = $this->container->get('session');
+        if ($slug == "world-wide")
+        {
+            $session->set('citySlug', "");
+            return $this->barGuideAction();
+        }
+        $session->set('citySlug', $slug);
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
 
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5);
         // $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars($city);
+        $response['city']       = $city;
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }

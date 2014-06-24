@@ -91,19 +91,20 @@
                                             {% endif %}
                                             >{{ c.name }}</option>
                                 {% endfor %}
+                                <option value="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">World Wide</option>
                             </select>
                         </div>
                     </td>
 
                     <td class="title">
-                        <h1>Popular Bars</h1>
+                        <h1>Popular Bars {% if city is defined %}in {{ city.name }}{% endif %}</h1>
                     </td>
 
                     <td></td>
                 </tr>
             </table>
             {% else %}
-            <h1>Popular Bars</h1>
+            <h1>Popular Bars {% if city is defined %}in {{ city.name }}{% endif %}</h1>
             {% endif %}
         </section>
     </div>
@@ -143,7 +144,7 @@
 
             <section class="bestof">
                 <div class="align-center l-margin">
-                    <h1>Best Of</h1>
+                    <h1>Best Of {% if city is defined %}in {{ city.name }}{% endif %}</h1>
                 </div>
                 {% if is_mobile() and not is_tablet() %}
                     <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1">
