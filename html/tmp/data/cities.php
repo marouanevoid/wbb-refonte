@@ -7,7 +7,10 @@ header('Content-type: application/json');
     array('id'=>'nice-france', 'name'=>"Nice, France"),
     array('id'=>'madrid-espana', 'name'=>"Madrid, Espana"),
     array('id'=>'roma-italy', 'name'=>"Roma, Italy"),
-    array('id'=>'new_york-new_york', 'name'=>"New York, New York")
+    array('id'=>'new_york-new_york', 'name'=>"New York, New York"),
+    array('id'=>'paris-france', 'name'=>"Paris, France"),
+    array('id'=>'chicago-illinois', 'name'=>"Chicago, Illinois"),
+    array('id'=>'los_angeles-californie', 'name'=>"Los Angeles, Californie"),
  );
 
 

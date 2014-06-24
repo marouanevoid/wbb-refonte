@@ -129,7 +129,7 @@ meta.Dropdown = function(config){
         {
             $dropdown.find('select').on('change', function()
             {
-                $dropdown.css({width : $dropdown.width()});
+                //$dropdown.css({width : $dropdown.width()});
                 that.config.$dropdown_value.text( $(this).find('option:selected').text() );
             });
         }
