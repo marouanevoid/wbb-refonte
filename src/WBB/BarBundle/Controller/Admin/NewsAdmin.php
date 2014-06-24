@@ -123,9 +123,13 @@ class NewsAdmin extends Admin {
     public function prePersist($object)
     {
         if($object->getMedias()){
-           foreach ($object->getMedias() as $media) {
-                $media->setNews($object);
-            } 
+            foreach ($object->getMedias() as $media) {
+                if($media->getMedia()){
+                    $media->setNews($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
         }
         
         if($object->getCities()){
@@ -139,9 +143,13 @@ class NewsAdmin extends Admin {
     public function preUpdate($object)
     {
         if($object->getMedias()){
-           foreach ($object->getMedias() as $media) {
-                $media->setNews($object);
-            } 
+            foreach ($object->getMedias() as $media) {
+                if($media->getMedia()){
+                    $media->setNews($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
         }
         
         if($object->getCities()){

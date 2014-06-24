@@ -208,7 +208,11 @@ class BestOfAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                $tag->setBestof($object);
+                if($tag->getName()){
+                    $tag->setBestof($object);
+                }else{
+                    $object->removeTag($tag);
+                }
             }
         }
 
@@ -226,7 +230,11 @@ class BestOfAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                $tag->setBestof($object);
+                if($tag->getName()){
+                    $tag->setBestof($object);
+                }else{
+                    $object->removeTag($tag);
+                }
             }
         }
 
