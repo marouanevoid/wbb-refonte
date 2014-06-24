@@ -55,14 +55,15 @@ class CityAdmin extends Admin
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('Tags')
-                ->add('tags', 'sonata_type_collection', array('required' => false),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                        'sortable'  => 'position'
-                    ))
-            ->end();
+//            ->with('Tags')
+//                ->add('tags', 'sonata_type_collection', array('required' => false),
+//                    array(
+//                        'edit' => 'inline',
+//                        'inline' => 'table',
+//                        'sortable'  => 'position'
+//                    ))
+//            ->end()
+        ;
     }
 
     /**
@@ -169,8 +170,14 @@ class CityAdmin extends Admin
     {
         $object->preUpload();
 
-        foreach ($object->getSuburbs() as $suburb) {
-            $suburb->setCity($object);
+        if($object->getSuburbs()){
+            foreach ($object->getSuburbs() as $suburb) {
+                if($suburb->getName()){
+                    $suburb->setCity($object);
+                }else{
+                    $object->removeSuburb($suburb);
+                }
+            }
         }
     }
 
@@ -178,8 +185,14 @@ class CityAdmin extends Admin
     {
         $object->preUpload();
 
-        foreach ($object->getSuburbs() as $suburb) {
-            $suburb->setCity($object);
+        if($object->getSuburbs()){
+            foreach ($object->getSuburbs() as $suburb) {
+                if($suburb->getName()){
+                    $suburb->setCity($object);
+                }else{
+                    $object->removeSuburb($suburb);
+                }
+            }
         }
     }
 

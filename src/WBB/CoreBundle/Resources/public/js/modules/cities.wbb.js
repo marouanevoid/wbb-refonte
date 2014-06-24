@@ -51,7 +51,7 @@ wbb.Cities = function () {
         {
             if(typeof bar.latitude != 'undefined' && typeof bar.longitude != 'undefined' && bar.latitude != 'null' && bar.longitude != 'null'){
                 if( display_list ) html += '<li value="'+(index+1)+'" data-id="'+ bar.id + '" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
-                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:'/bundles/wbbcore/images/markers/'+(index+1)+'.png'}, id:bar.id});
+                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:BASEURL+'images/markers/'+(index+1)+'.png'}, id:bar.id});
             }
         });
         if( display_list )
@@ -368,7 +368,7 @@ wbb.Cities = function () {
         {
             if(typeof city.latitude != 'undefined' && typeof city.longitude != 'undefined' && city.latitude != 'null' && city.longitude != 'null'){
                 if( display_list ) html += '<li data-id="'+city.id+'">'+city.name+'</li>';
-                markers.push({address:city.latitude+','+city.longitude, options:{icon:'/bundles/wbbcore/images/map.pin.png'}, id:city.id});
+                markers.push({address:city.latitude+','+city.longitude, options:{icon:BASEURL+'images/map.pin.png'}, id:city.id});
             }
         });
 

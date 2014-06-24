@@ -52,7 +52,7 @@
         <script type="text/javascript">
             var MARKET = "US";
             var LANG = "en";
-            var BASEURL = "/bundles/wbbcore/";
+            var BASEURL = "{{ asset('bundles/wbbcore/') }}";
         </script>
         {% block javascripts %}
         {% endblock %}
@@ -108,7 +108,7 @@
 
                             <hr/>
 
-                            <img class="m-margin scale-with-grid" src="{{ asset('/bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
+                            <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
 
                         </div>
 

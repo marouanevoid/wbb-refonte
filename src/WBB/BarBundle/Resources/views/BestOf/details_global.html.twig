@@ -7,7 +7,7 @@
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
-            $.cookie('city', {{ path('homepage') }}, { path: '/' });
+            $.cookie('city', '{{ path('homepage') }}', { path: '/' });
             {% endif %}
 
             /* Evenement sur le bouton favoris des items */
@@ -88,7 +88,7 @@
             <div class="four columns">
                 <div class="block">
                     <div class="side-ad">
-                        <img src="{{ asset('/bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
                         <div class="txt">Advertising</div>
                     </div>
                 </div>
@@ -99,8 +99,6 @@
             {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b.bar, 'bestof' : 1 } %}
         </div>
     {% endfor %}
-
-    <?php endfor ?>
 </div>
 
 <!-- ALSO LIKE -->
@@ -118,7 +116,7 @@
 
             <div class="ui-slider type-bestof has_sizer arrows dots" data-size="{% if not is_mobile() or is_tablet() %}3x3{% else %}4x3{% endif %}" data-display="{% if not is_mobile() or is_tablet() %}3{% else %}1{% endif %}">
 
-                {% for b in bestOf.bestofs %}
+                {% for b in bestOf.bestofs|slice(0,3) %}
 
                 <div class="ui-slide">
                     {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}

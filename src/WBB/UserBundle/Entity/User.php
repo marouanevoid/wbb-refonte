@@ -44,6 +44,13 @@ class User extends BaseUser
     private $lastname;
 
     /**
+     * @var date
+     *
+     * @ORM\Column(name="birthdate", type="date", nullable=true)
+     */
+    private $birthdate;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="website", type="string", length=255, nullable=true)
@@ -118,6 +125,11 @@ class User extends BaseUser
      * @ORM\JoinColumn(name="pref_city_id_start", referencedColumnName="id")
      */
     private $prefStartCity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="users")
+     */
+    private $country;
 
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="user")
@@ -653,5 +665,51 @@ class User extends BaseUser
     public function getStayInformed()
     {
         return $this->stayInformed;
+    }
+
+    /**
+     * Set birthdate
+     *
+     * @param \DateTime $birthdate
+     * @return User
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthdate
+     *
+     * @return \DateTime 
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \WBB\CoreBundle\Entity\Country $country
+     * @return User
+     */
+    public function setCountry(\WBB\CoreBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \WBB\CoreBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

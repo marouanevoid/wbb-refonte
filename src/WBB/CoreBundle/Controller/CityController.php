@@ -41,7 +41,7 @@ class CityController extends Controller
     }
 
     //Returns a list on Point of interest in a city (and a suburb)
-    public function barsListAction($cityID = 0, $suburbID = 0)
+    public function barsListAction($cityID = 0, $suburbID = 0, Request $request)
     {
         if($suburbID=='undefined')
             $suburbID=0;
@@ -66,7 +66,7 @@ class CityController extends Controller
                             'suburb'    => $bar->getSuburb()->getSlug(),
                             'city'      => $bar->getCity()->getSlug()
                         )),
-                    'image_url' => $this->barFirstImage($bar),
+                    'image_url' => $this->barFirstImage($bar, $request),
                     'tags'      => $this->arrayTagsToString($bar->getTags()),
                     'latitude'  => $bar->getLatitude(),
                     'longitude' => $bar->getLongitude()
@@ -107,13 +107,15 @@ class CityController extends Controller
         return substr($result, 0, -2);
     }
 
-    private function barFirstImage($bar)
+    private function barFirstImage($bar, Request $request)
     {
+        $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+
         $medias = $bar->getMedias();
         foreach($medias as $media)
         {
             if($media->getMedia()->getProviderName() === "sonata.media.provider.image")
-                return $this->container->get("sonata.media.provider.image")->generatePublicUrl($media->getMedia(), 'slider_large');
+                return $baseUrl.$this->container->get("sonata.media.provider.image")->generatePublicUrl($media->getMedia(), 'default_slider_large');
         }
 
         return null;

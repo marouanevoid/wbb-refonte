@@ -48,16 +48,16 @@ meta.Dropdown = function(config){
         $dropdown : false,
         color     : false,
         template  : '<div class="ui-dropdown-container">'+
-            '<div class="btn-radius border ui-dropdown %color%">'+
-            '<span class="selected">%name%</span>'+
-            '<div class="slide">'+
-            '<div class="choice custom-scroll">'+
-            '<ul>%options%</ul>'+
-            '</div>'+
-            '</div>'+
-            '</div>'+
-            '<div class="ui-dropdown-placeholder"></div>'+
-            '</div>'
+                        '<div class="btn-radius border ui-dropdown %color%">'+
+                            '<span class="selected">%name%</span>'+
+                            '<div class="slide">'+
+                                '<div class="choice custom-scroll">'+
+                                    '<ul>%options%</ul>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="ui-dropdown-placeholder"></div>'+
+                    '</div>'
     };
 
     that.active = false;
@@ -190,10 +190,10 @@ function initializeDropdowns()
         var $dropdown = $(this);
 
         dropdowns.push( new meta.Dropdown(
-            {
-                $dropdown  : $dropdown,
-                color      : $dropdown.hasClass('dark')?'dark':'light'
-            }));
+        {
+            $dropdown  : $dropdown,
+            color      : $dropdown.hasClass('dark')?'dark':'light'
+        }));
 
         $dropdown.addClass('ui-initialized');
     })

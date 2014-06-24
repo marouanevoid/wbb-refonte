@@ -80,6 +80,10 @@ meta.LoadMoreTips = function(config) {
                 $target.append(msg.htmldata);
                 if(parseInt(msg.difference)==0)
                    that.config.$button.hide();
+                if(parseInt(msg.difference)==0 && $(".line .three").length<=1)
+                {
+                    $('.line .three').addClass('six').removeClass('three');
+                }
                 if( callback ) callback();
                 that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
                 that.context.is_loading = false;

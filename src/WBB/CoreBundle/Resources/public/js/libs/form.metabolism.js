@@ -82,9 +82,26 @@ meta.Form = function(config){
         {
             if(data.code == 200)
             {
-                if( that.config.onComplete ) that.config.onComplete( that.form, data );
-                $('.line.first').prepend(data.tip);
-                $('.line.first .three:last-child').remove();
+                if( that.config.onComplete )
+                    that.config.onComplete( that.form, data );
+                if($('.insider-tips .three').length==0)
+                {
+                    $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
+                }else
+                {
+                    $('.line.wbbtips .three:first-child').after(data.tip);
+                }
+                if($('.insider-tips .three').length>=4 || ($('.insider-tips .three').length>=4 && ($('.insider-tips .three').length-4)%8!=0))
+                {
+                    if($('.line:last-child .three').length==0)
+                    {
+                        $('.line:last-child').remove();
+                    }
+                    $('.line:last-child .three:last-child').remove();
+                }
+                console.log($(".line .three"))
+
+//                if($)
             }
             else
             {

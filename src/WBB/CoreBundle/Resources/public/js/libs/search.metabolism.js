@@ -217,13 +217,20 @@ meta.Search = function(config){
             that._hideForm();
         });
 
-        that.context.$input.on('keydown', function(){
+        that.context.$input.on('keyup', function(){
             clearInterval(that.search_timeout);
             that.search_timeout = setTimeout(function(){ that._search() }, that.config.throttle);
+
+            if( that.context.$input.val() == "" ) that.context.$input.next('input[type=reset]').hide();
+            else that.context.$input.next('input[type=reset]').show();
         });
 
-        that.context.$result.on('click', 'a', function()
-        {
+        that.context.$input.next('input[type=reset]').click(function(){
+            $('.entire-content').show();
+            that.context.$input.next('input[type=reset]').hide();
+        });
+
+        that.context.$result.on('click', 'a', function(){
             that.context.$input.val( $(this).text() );
 
             that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
@@ -234,8 +241,7 @@ meta.Search = function(config){
             }});
         });
 
-        $(document).click(function(e)
-        {
+        $(document).click(function(e){
             if(that.show_results)
             {
                 that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()

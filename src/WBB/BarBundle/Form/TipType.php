@@ -19,7 +19,7 @@ class TipType extends AbstractType
 
         $builder
             ->add('description', 'textarea', array(
-                'required' => true,
+                'required' => false,
                 'attr' => array(
                     'class'         => 's-margin-top',
                     'placeholder'   => 'Type a tip ...',

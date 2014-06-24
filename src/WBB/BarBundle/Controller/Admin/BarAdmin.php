@@ -257,31 +257,67 @@ class BarAdmin extends Admin
 
     public function prePersist($object)
     {
-        foreach ($object->getMedias() as $media) {
-            $media->setBar($object);
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media->getMedia()){
+                    $media->setBar($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
         }
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBar($object);
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                if($tag->getName()){
+                    $tag->setBar($object);
+                }else{
+                    $object->removeTag($tag);
+                }
+            }
         }
 
-        foreach ($object->getOpenings() as $opening) {
-            $opening->setBar($object);
+        if($object->getOpenings()){
+            foreach ($object->getOpenings() as $opening) {
+                if($opening->getGetOpeningDay()){
+                    $opening->setBar($object);
+                }else{
+                    $object->removeOpening($opening);
+                }
+            }
         }
     }
 
     public function preUpdate($object)
     {
-        foreach ($object->getMedias() as $media) {
-            $media->setBar($object);
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media->getMedia()){
+                    $media->setBar($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
         }
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBar($object);
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                if($tag->getName()){
+                    $tag->setBar($object);
+                }else{
+                    $object->removeTag($tag);
+                }
+            }
         }
 
-        foreach ($object->getOpenings() as $opening) {
-            $opening->setBar($object);
+        if($object->getOpenings()){
+            foreach ($object->getOpenings() as $opening) {
+                if($opening->getGetOpeningDay()){
+                    $opening->setBar($object);
+                }else{
+                    $object->removeOpening($opening);
+                }
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ $(document).ready(function()
            _type = 0;
            _limit   = 9;
        }
-       else
+       else if($("input[name=filter]:checked").val()=='bar_list')
        {
            _type = 1;
            _limit   = 8;
@@ -28,12 +28,41 @@ $(document).ready(function()
    {
        loadData();
    });
-   $("#criteria, input[name=filter], input[name=view-type]").change(function(){
+   $("#criteria, input[name=view-type]").change(function(){
        $(".load-more").show();
        _offset = 0;
+       if($('input[name=filter]:checked').val()=='bar_list')
+       {
+           _limit = 8;
+       }else{
+           _limit = 9;
+       }
        $(".load-target").html('');
        loadData();
    });
    loadData();
+
+    $('input[name=filter]').change(function()
+    {
+        $(".load-more").show();
+        _offset = 0;
+        if( $('input[name=filter]:checked').val() == "bar_list")
+        {
+            $('li.distance').css('display','block');
+            _limit = 8;
+        }
+        else
+        {
+            $('li.distance').css('display','none');
+            if($('#criteria').val()=='distance')
+            {
+                $('#criteria').val('popularity');
+                $('li.popularity').css('display','block');
+            }
+            _limit = 9;
+        }
+        $(".load-target").html('');
+        loadData();
+    });
 });
 
