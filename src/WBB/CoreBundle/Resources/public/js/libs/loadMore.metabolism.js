@@ -74,7 +74,6 @@ meta.LoadMore = function(config) {
     {
 
         that.context.is_loading = true;
-        console.log("Load More : " + url);
         $.ajax({
             type: "GET",
             url: url,
@@ -83,6 +82,7 @@ meta.LoadMore = function(config) {
                 that.config.$target.append(msg.htmldata);
                 if(parseInt(msg.difference)==0)
                     that.config.$button.hide();
+
                 if( callback ) callback();
                 that.config.$target.find(".line:last-child").hide();
                 that.context.itemsNumber = that.config.$target.find('img[data-src]').length;

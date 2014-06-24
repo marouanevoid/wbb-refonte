@@ -193,78 +193,14 @@
         </div>
 
         <div class="container">
-            <div class="load-container">
-                <div class="load-target bars-w-pic">
-                    <div class="line" style="height: 0px;width: 0px;"></div>
-                </div>
+            <div class="bars-w-pic force-load   load-container">
+                <div class="load-target"></div>
                 <div class="twelve columns align-center m-margin load-more-container">
-                    <a class="h4 btn-radius large border load-more brown smbestofs2" href="#0">See more best of</a>
+                    <a class="h4 btn-radius large border load-more brown" href="#0">See more best of</a>
                 </div>
             </div>
 
         </div>
-
-        <script type="text/javascript">
-            $('input[name=filter]').change(function()
-            {
-                if( $('input[name=filter]:checked').val() == "bar_list")
-                {
-                    $('li.distance').css('display','block');
-                    $('.best-of').fadeOut(200, 'easeInOutCubic', function()
-                    {
-                        $('.bar-list').show();
-
-                    });
-                }
-                else
-                {
-                    $('li.distance').css('display','none');
-                    if($('#criteria').val()=='distance')
-                    {
-                        $('#criteria').val('popularity');
-                        $('li.popularity').css('display','block');
-                    }
-                    $('.bar-list').fadeOut(200, 'easeInOutCubic', function()
-                    {
-                        $('.best-of').show();
-
-                    });
-                }
-            });
-
-            $('input[name=view-type]').change(function()
-            {
-                if( $('input[name=view-type]:checked').val() == "grid")
-                {
-                    $('.bars-w-pic-list').fadeOut(200, 'easeInOutCubic', function()
-                    {
-                        $('.bars-w-pic').show();
-
-                        var $elements = $('.bars-w-pic article');
-
-                        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
-
-                            $(this).delay(60*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
-                        });
-                    });
-                }
-                else
-                {
-                    $('.bars-w-pic').fadeOut(200, 'easeInOutCubic', function()
-                    {
-                        $('.bars-w-pic-list').show();
-
-                        var $elements = $('.bars-w-pic-list article');
-
-                        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
-
-                            $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
-                        });
-                    });
-                }
-            });
-
-        </script>
 
     </section>
 </div>
