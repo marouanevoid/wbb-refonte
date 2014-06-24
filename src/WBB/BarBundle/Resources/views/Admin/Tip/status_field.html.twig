@@ -1,13 +1,38 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    <div>
-        {% if object.status == 0 %}
-            <strong>Pending</strong>
-        {% elseif object.status == 1 %}
-            <strong>Enabled</strong>
-        {% elseif object.status == 2 %}
-            <strong>Disabled</strong>
-        {% endif %}
+    <div class="btn-group status-field-{{ object.id }}">
+        <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" id="label_status_{{ object.id }}">
+            {{ object.statusChoices[object.status] }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            {% set baseRouteName = admin.baseRouteName %}
+            {% for keyChoice, choice in object.statusChoices %}
+                <li{% if object.status == keyChoice %} class="active"{% endif %}>
+                    <a class="change-status-{{ object.id }}" data-label="{{ choice }}" href="{{ url('sonata_admin_set_object_field_value', {'code': admin.code, '_sonata_admin': admin.code(object), 'objectId': object.id, 'field': 'status', 'value': keyChoice, context: 'list'}) }}">
+                        {{ choice|trans({}, admin.translationdomain) }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
+
+    <script type="text/javascript">
+        $(function() {
+            $('.status-field-{{ object.id }}').parent().unbind();
+
+            $(".change-status-{{ object.id }}").on('click', function(event) {
+                var labelValue = $(this).data('label');
+                event.preventDefault();
+                $.post($(this).attr('href'), function(response) {
+                    if('KO' === response.status) {
+                        console.log(response.content)
+                    }
+                    $('#label_status_{{ object.id }}').html(labelValue+'<span class="caret"></span>');
+                });
+            });
+        });
+    </script>
 {% endblock %}
+

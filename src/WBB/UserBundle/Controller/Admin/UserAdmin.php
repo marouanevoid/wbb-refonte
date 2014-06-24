@@ -68,6 +68,7 @@ class UserAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('title', 'choice', array(
+                    'help' => 'Mandatory',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => true,
@@ -77,15 +78,17 @@ class UserAdmin extends Admin
                         'Mr'    =>  'Mister'
                     )
                 ))
-                ->add('username')
-                ->add('email')
-                ->add('firstname')
-                ->add('lastname')
+                ->add('username', null, array('help' => 'Mandatory'))
+                ->add('email', null, array('help' => 'Mandatory'))
+                ->add('firstname', null, array('help' => 'Mandatory'))
+                ->add('lastname', null, array('help' => 'Mandatory'))
+                ->add('birthdate', null, array('help' => 'Mandatory'))
                 ->add('website')
+                ->add('country', null, array('help' => 'Mandatory'))
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
-                ->add('description', 'textarea', array('attr' => array('class' => 'wysihtml5')))
-                ->add('plainPassword', 'text', array('required' => false))
+                ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
+                ->add('plainPassword', 'text', array('required' => false, 'help' => 'Mandatory'))
             ->end()
             ->with('Preferences')
                 ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))
@@ -102,6 +105,7 @@ class UserAdmin extends Admin
             $formMapper
                 ->with('Management')
                     ->add('roles', 'choice', array(
+                        'help' => 'Mandatory',
                         'expanded' => true,
                         'multiple' => true,
                         'required' => false,

@@ -2,6 +2,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use WBB\BarBundle\Entity\Tip;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -20,7 +21,8 @@ class TipAdmin extends Admin {
             ->add('bar', null, array('editable' => true))
             ->add('description', null, array('editable' => true))
             ->add('status', null, array(
-                'template' => 'WBBBarBundle:Admin:Tip\status_field.html.twig'
+                'template' => 'WBBBarBundle:Admin:Tip\status_field.html.twig',
+                'editable' => true
             ))
         ;
     }
@@ -62,14 +64,16 @@ class TipAdmin extends Admin {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
-                ->add('bar', 'sonata_type_model', array('label'=> 'Link to Bar'))
+                ->add('bar', 'sonata_type_model', array('label'=> 'Link to Bar', 'btn_add' => false))
                 ->add('status', 'choice', array(
                     'required' => false,
                     'choices'  => array(
                         0 => 'Pending',
                         1 => 'Enabled',
                         2 => 'Disabled'
-                    )
+                    ),
+                    'empty_value' => false,
+                    'preferred_choices' => array(0 => 'Pending')
                 ))
                 ->add('description')
             ->end()

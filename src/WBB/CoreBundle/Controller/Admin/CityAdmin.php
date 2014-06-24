@@ -55,14 +55,15 @@ class CityAdmin extends Admin
                         'sortable'  => 'position'
                     ))
             ->end()
-            ->with('Tags')
-                ->add('tags', 'sonata_type_collection', array('required' => false),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                        'sortable'  => 'position'
-                    ))
-            ->end();
+//            ->with('Tags')
+//                ->add('tags', 'sonata_type_collection', array('required' => false),
+//                    array(
+//                        'edit' => 'inline',
+//                        'inline' => 'table',
+//                        'sortable'  => 'position'
+//                    ))
+//            ->end()
+        ;
     }
 
     /**
