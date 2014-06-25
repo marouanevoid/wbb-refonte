@@ -36,15 +36,21 @@ class BestOfRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findTopBestOfs($city = null, $favoris = null, $limit = null)
+    public function findTopBestOfs($city = null, $favoris = null, $limit = null, $onlyOnTop = true)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq(1, 1))
         ;
+
+        if($onlyOnTop){
+            $qb->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        }else{
+            $qb->addOrderBy($this->getAlias().'.onTop', 'DESC');
+        }
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
