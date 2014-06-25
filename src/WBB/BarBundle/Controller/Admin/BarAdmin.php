@@ -269,7 +269,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag and $tag->getName()){
+                if($tag->getTag() and $tag->getTag()->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
@@ -302,7 +302,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag and $tag->getName()){
+                if($tag->getTag() and $tag->getTag()->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
