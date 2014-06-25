@@ -590,7 +590,7 @@
             </trans-unit>
             <trans-unit id="list.label_suburb">
                 <source>list.label_suburb</source>
-                <target>City</target>
+                <target>Area</target>
             </trans-unit>
             <trans-unit id="list.label_website">
                 <source>list.label_website</source>
