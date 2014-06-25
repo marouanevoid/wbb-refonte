@@ -124,7 +124,7 @@ class NewsAdmin extends Admin {
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media->getMedia()){
+                if($media and $media->getMedia()){
                     $media->setNews($object);
                 }else{
                     $object->removeMedia($media);
@@ -144,7 +144,7 @@ class NewsAdmin extends Admin {
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media->getMedia()){
+                if($media and $media->getMedia()){
                     $media->setNews($object);
                 }else{
                     $object->removeMedia($media);

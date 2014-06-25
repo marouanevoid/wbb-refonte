@@ -10,5 +10,15 @@ namespace WBB\CoreBundle\Repository;
  */
 class SuburbRepository extends EntityRepository
 {
+    public function findByCityWithBars($city)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias())
+            ->innerJoin($this->getAlias().'.bars', 'b')
+            ->where($qb->expr()->eq($this->getAlias().'.city', $city->getId()))
+        ;
 
+        return $qb->getQuery()->getResult();
+    }
 } 

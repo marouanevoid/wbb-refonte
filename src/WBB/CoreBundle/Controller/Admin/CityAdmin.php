@@ -172,7 +172,7 @@ class CityAdmin extends Admin
 
         if($object->getSuburbs()){
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb->getName()){
+                if($suburb and $suburb->getName()){
                     $suburb->setCity($object);
                 }else{
                     $object->removeSuburb($suburb);
@@ -187,7 +187,7 @@ class CityAdmin extends Admin
 
         if($object->getSuburbs()){
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb->getName()){
+                if($suburb and $suburb->getName()){
                     $suburb->setCity($object);
                 }else{
                     $object->removeSuburb($suburb);

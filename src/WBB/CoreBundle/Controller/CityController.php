@@ -52,7 +52,7 @@ class CityController extends Controller
             $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
 
             $bars = $this->container->get('bar.repository')->findAllEnabled($city, $suburb);
-            $suburbs = $this->container->get('suburb.repository')->findByCity($city);
+            $suburbs = $this->container->get('suburb.repository')->findByCityWithBars($city);
             $result = array('bars' => array(), 'suburbs' => array());
 
             foreach($bars as $bar)

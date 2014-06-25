@@ -259,7 +259,7 @@ class BarAdmin extends Admin
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media->getMedia()){
+                if($media and $media->getMedia()){
                     $media->setBar($object);
                 }else{
                     $object->removeMedia($media);
@@ -269,7 +269,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getName()){
+                if($tag and $tag->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
@@ -279,7 +279,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening->getGetOpeningDay()){
+                if($opening and $opening->getGetOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);
@@ -292,7 +292,7 @@ class BarAdmin extends Admin
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media->getMedia()){
+                if($media and $media->getMedia()){
                     $media->setBar($object);
                 }else{
                     $object->removeMedia($media);
@@ -302,7 +302,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getName()){
+                if($tag and $tag->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
@@ -312,7 +312,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening->getGetOpeningDay()){
+                if($opening and $opening->getGetOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);
