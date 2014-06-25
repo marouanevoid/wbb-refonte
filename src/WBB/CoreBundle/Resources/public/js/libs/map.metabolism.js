@@ -148,6 +148,7 @@ wbb.Map = function(config){
         that.config.$map.gmap3('get').panTo( position );
     };
 
+
     that.addZoomListener = function ( callback ){
 
         var map = that.config.$map.gmap3('get');
@@ -183,18 +184,17 @@ wbb.Map = function(config){
                         if( $('html').hasClass('mobile') ) return;
 
                         if( typeof(context.id) != 'undefined')
-                            $('#'+context.id ).addClass('active');
+                            $('html').find("li[data-id=" + context.id + "]").addClass('active');
 
-
-                        if( typeof(context.data) == 'undefined')
-                        {
+                        if( typeof(context.data) == 'undefined'){
                             marker.setIcon(BASEURL+'images/map.pin.grey.png');
                             return;
                         }
 
                         var align = "right";
                         if( map.getBounds().getNorthEast().lng() - marker.getPosition().lng() < 0.0122 ) align = "left";
-
+                        console.log(" MAP OVER ");
+                        console.log(map.getBounds().getNorthEast().lng() - marker.getPosition().lng());
                         that.config.$map.gmap3({
                             overlay:{
                                 latLng: marker.getPosition(),
@@ -216,7 +216,7 @@ wbb.Map = function(config){
                         }
 
                         if( typeof(context.id) != 'undefined')
-                            $('#'+context.id ).removeClass('active');
+                            $('html').find("li[data-id=" + context.id + "]").removeClass('active');
 
                         that.config.$map.gmap3({
                             clear: {
@@ -228,7 +228,7 @@ wbb.Map = function(config){
                     click: function(marker, event, context){
 
                         if( typeof(context.id) != 'undefined')
-                            $('#'+context.id ).click();
+                            $('html').find("li[data-id=" + context.id + "]").click();
                     }
                 },
                 cluster:{

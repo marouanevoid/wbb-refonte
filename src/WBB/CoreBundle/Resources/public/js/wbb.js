@@ -27,10 +27,47 @@ function nodeToString ( node ) {
 }
 
 $(document).ready(function(){
-    $('img').error(function(){
-        $(this).attr('src', BASEURL+'images/default.jpg');
-    });
+    /*$(function () {
+        $("img").bind('error abort', function () {
+            if(!$(this).parent().hasClass('city'))
+                $(this).attr("src", BASEURL+'images/default.jpg');
+        });
+    });*/
     $('#city_selector').change(function(){
         document.location = $(this).val();
+    });
+    $(".star").click(function(){
+        var btn = $(this);
+        $.ajax({
+            type: "POST",
+            url:  '/',
+            success: function() {
+                if(btn.hasClass('active')){
+                    btn.hide();
+                    btn.removeClass('active');
+                    if(btn.hasClass('changed')){
+                        btn.removeClass('brown');
+                        btn.addClass('dark');
+                        btn.removeClass('changed');
+                    }
+                    if(btn.hasClass('nc')){
+                        btn.addClass('force-disabled')
+                    }
+                    btn.show();
+                }else{
+                    btn.hide();
+                    btn.addClass('active');
+                    if(btn.hasClass('dark')){
+                        btn.addClass('changed');
+                        btn.addClass('brown');
+                        btn.removeClass('dark');
+                    }
+                    if(btn.hasClass('force-disabled')){
+                        btn.removeClass('force-disabled')
+                    }
+                    btn.show();
+                }
+            }
+        });
     });
 });

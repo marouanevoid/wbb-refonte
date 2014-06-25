@@ -67,6 +67,28 @@
     .bar-filter .best-of-container{
         width: 100%;
     }
+    article.bar-wo-pic:hover {
+        background: #faf3e1 !important;
+    }
+    article.bar-wo-pic:hover h2 {
+        color: #333 !important;
+    }
+    article.bar-wo-pic:hover h3 {
+        color: #B3955F !important;
+    }
+    article.bar-wo-pic .btn-round.star{
+        background : #faf3e1 !important;
+    }
+    article.bar-wo-pic .btn-round.star.active, article.bar-wo-pic .btn-round.star:hover {
+         border-color: transparent !important;
+         background: transparent !important;
+    }
+}
+article.bar-wo-pic .btn-round.brown:hover {
+    background: transparent !important;
+}
+article.bar-wo-pic .txt h2 {
+    padding-right: 20px;
 }
 
 .best-of-details .sub-header table{

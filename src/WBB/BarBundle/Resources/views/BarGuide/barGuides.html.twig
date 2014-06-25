@@ -18,38 +18,6 @@
             $.cookie('city', '{{ path('homepage') }}', { path: '/' });
             {% endif %}
 
-            /* Evenement sur le bouton favoris des items */
-
-            $(".star").click(function(){
-                var btn = $(this);
-                $.ajax({
-                    type: "POST",
-                    url:  '/',
-                    success: function() {
-                        if(btn.hasClass('active')){
-                            btn.removeClass('active');
-                            if(btn.hasClass('changed')){
-                                btn.removeClass('brown');
-                                btn.addClass('dark');
-                                btn.removeClass('changed');
-                            }
-                            if(btn.hasClass('nc')){
-                                btn.addClass('force-disabled')
-                            }
-                        }else{
-                            btn.addClass('active');
-                            if(btn.hasClass('dark')){
-                                btn.addClass('changed');
-                                btn.addClass('brown');
-                                btn.removeClass('dark');
-                            }
-                            if(btn.hasClass('force-disabled')){
-                                btn.removeClass('force-disabled')
-                            }
-                        }
-                    }
-                });
-            });
             {% if city is defined %}
                 $('.city-selector .city>span').html('{{ city.name }}');
             {% endif %}

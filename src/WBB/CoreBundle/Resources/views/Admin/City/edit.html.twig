@@ -22,6 +22,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('ul.nav-tabs li a').click(function() {
+                setTimeout(function(){
                 $('.mapcontainer').locationpicker({
                     location: { latitude: $('#{{ admin.uniqId }}_latitude').val(), longitude: $('#{{ admin.uniqId }}_longitude').val() },
                     radius: 0,
@@ -33,7 +34,8 @@
                         locationNameInput: $('#mpAddress')
                     },
                     enableAutocomplete: true
-                });
+                })
+                },100);
             });
         });
     </script>

@@ -5,37 +5,6 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function(){
-
-            $(".star").click(function(){
-                var btn = $(this);
-                $.ajax({
-                    type: "POST",
-                    url:  '/',
-                    success: function() {
-                        if(btn.hasClass('active')){
-                            btn.removeClass('active');
-                            if(btn.hasClass('changed')){
-                                btn.removeClass('brown');
-                                btn.addClass('dark');
-                                btn.removeClass('changed');
-                            }
-                            if(btn.hasClass('nc')){
-                                btn.addClass('force-disabled')
-                            }
-                        }else{
-                            btn.addClass('active');
-                            if(btn.hasClass('dark')){
-                                btn.addClass('changed');
-                                btn.addClass('brown');
-                                btn.removeClass('dark');
-                            }
-                            if(btn.hasClass('force-disabled')){
-                                btn.removeClass('force-disabled')
-                            }
-                        }
-                    }
-                });
-            });
             {% if city is defined %}
             $('.city-selector .city>span').html('{{ city.name }}');
             {% endif %}
@@ -310,8 +279,11 @@
             {% for b in latestBars %}
                 {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
             {% endfor %}
-
-            <a class="btn-radius border brown h4 s-margin-top" href="">See all bars</a>
+            {% if city is defined %}
+                <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:city.slug}) }}">See all bars</a>
+            {% else %}
+                <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
+            {% endif %}
 
             {% if not is_mobile() or is_tablet() %}
                 <div class="block">

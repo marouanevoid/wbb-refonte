@@ -16,9 +16,9 @@
             <tr class="header-nav">
                 <td>
                     <nav class="h3">
-                        <a href="{{ path('wbb_cities') }}">Cities</a>
-                        <a href="{{ path('wbb_bar_guides') }}">Bar Guides</a>
-                        <a href="">News</a>
+                        <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
+                        <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
+                        <a href="#0">News</a>
                     </nav>
                 </td>
             </tr>
@@ -48,8 +48,8 @@
                         <a href="">About</a>
                         <a href="">Legal</a>
                         <a href="">Cookies</a>
-                        <a href="">Add a bar</a>
-                        <a href="">Claim your venue</a>
+                        <a href="mailto:editor@worldsbestbars.com">Submit a bar</a>
+                        {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim your bar</a>{% endif %}
                         <a href="">Responsible Drinking</a>
                     </nav>
                 </td>
@@ -114,7 +114,7 @@
                         </td>
 
                         <td class="search-pin-icon">
-                            <a href="">
+                            <a href="{{ path('wbb_cities') }}">
                                 <img src="{{ asset('bundles/wbbcore/images/icons/pin.border.png') }}" alt="pin.border" width="12" height="16"/>
                             </a>
                             <a href="">
@@ -124,6 +124,22 @@
                     </tr>
                 </table>
             </div>
+        </div>
+        <div class="search-bar-mobile nav">
+
+            <div class="container">
+
+                <div class="twelve columns s-margin">
+                    <form action="search.php">
+                        <input type="text" name="q"/>
+                        <input type="reset" value=" "/>
+                    </form>
+                    <a class="btn-radius border h4 close">Cancel</a>
+                </div>
+            </div>
+
+            <div class="search-result-proposal"><ul></ul></div>
+
         </div>
     </header>
 {% else %}
@@ -143,9 +159,10 @@
                         </td>
 
                         <td class="nav">
+                            {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
                             <nav class="h3">
-                                <a href="{{ path('wbb_cities') }}">Cities</a>
-                                <a href="{{ path('wbb_bar_guides') }}">Bar Guides</a>
+                                <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
+                                <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
                                 <a href="#0">News</a>
                             </nav>
                             <form>
