@@ -14,24 +14,39 @@ use Doctrine\ORM\Query\Expr;
  */
 class BestOfRepository extends EntityRepository
 {
-    public function findYouMayAlsoLike(BestOf $bestOf)
+    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3)
     {
-        $qb = $this->createQueryBuilder('bo')
-            ->where('bo.id <> ' . $bestOf->getId())
-            ->orderBy('bo.onTop', 'desc');
-
-        if ($bestOf->getCity()) {
-            $qb->leftJoin('bo.city', 'city', Expr\Join::WITH, 'city.id = :id')
-                ->setParameter('id', $bestOf->getCity()->getId())
-                ->addOrderBy('city.id', 'desc');
+        $ids = array($bestof->getId());
+        foreach($bestof->getBestofs() as $excludedBestof)
+        {
+            if($excludedBestof)
+                $ids[] = $excludedBestof->getId();
         }
 
-        if ($bestOf->getByTag()) {
+        $qb = $this->createQueryBuilder($this->getAlias());
+        $qb
+            ->select()
+//            ->where($qb->expr()->neq($this->getAlias().'.id', $bestof->getId()))
+            ->where($qb->expr()->notIn($this->getAlias().'.id', $ids))
+            ->orderBy($this->getAlias().'.onTop', 'desc');
+
+        if ($city) {
+            $qb
+                ->leftJoin($this->getAlias().'.city', 'c')
+                ->andWhere($qb->expr()->eq($this->getAlias().'.city', $bestof->getCity()->getId()));
+        }
+
+        if($bestof->getByTag()){
             // TODO common tags
+            $qb
+                ->innerjoin($this->getAlias().'.tags', 'bt')
+                ->innerjoin('bt.tag', 't')
+                ->andWhere($qb->expr()->in('t.id',':tags'))
+                ->setParameter('tags', $bestof->getTagsIds());
         }
 
-        $qb->addOrderBy('bo.createdAt', 'desc');
-        $qb->setMaxResults(3);
+        $qb->addOrderBy($this->getAlias().'.createdAt', 'desc');
+        $qb->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
     }

@@ -14,6 +14,10 @@
         </div>
     </div>
     <img src="" class="scale-with-grid" data-src="{% path b.image, 'bestof_small' %}" alt="{{ b.name }}" width="570" height="428"/>
-    <a href="{{ path('wbb_bar_bestof_global',{bestOfSlug:b.slug}) }}" class="overlay-link"></a>
+    {% if withCity is defined and withCity %}
+        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
+    {% else %}
+        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
+    {% endif %}
 
 </article>

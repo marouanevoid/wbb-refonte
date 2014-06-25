@@ -14,6 +14,9 @@ parameters:
     wbb_bar.news.admin.class: WBB\BarBundle\Controller\Admin\NewsAdmin
     wbb_bar.news_media.admin.class: WBB\BarBundle\Controller\Admin\Collections\NewsMediaAdmin
 
+    #CRUD Controllers
+    wbb_bar.tip.crud.class: WBBBarBundle:CRUD\TipCRUD
+
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
     wbb_bar.bar_media.entity.class: WBB\BarBundle\Entity\Collections\BarMedia
@@ -106,7 +109,7 @@ services:
         class: %wbb_bar.tip.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: tips, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.tip.entity.class%, SonataAdminBundle:CRUD]
+        arguments: [null, %wbb_bar.tip.entity.class%, %wbb_bar.tip.crud.class%]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
             - [setTemplates, [{ edit:"WBBBarBundle:Admin:Tip/edit.html.twig" }]]
