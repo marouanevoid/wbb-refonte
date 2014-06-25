@@ -279,7 +279,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening and $opening->getGetOpeningDay()){
+                if($opening and $opening->getOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);
@@ -312,7 +312,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening and $opening->getGetOpeningDay()){
+                if($opening and $opening->getOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);
