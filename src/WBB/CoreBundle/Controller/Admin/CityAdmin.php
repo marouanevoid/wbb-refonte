@@ -18,13 +18,13 @@ class CityAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $imageOptions = array('required' => false);
-        if (($object = $this->getSubject()) && $object->getImage()) {
-            $path = $object->getWebPath();
-            $imageOptions['help'] = 'Associate a visual is mandatory for top cities<br /><img width="250px" src="/' . $path . '" />';
-        }else{
-            $imageOptions['help'] = 'Associate a visual is mandatory for top cities';
-        }
+//        $imageOptions = array('required' => false);
+//        if (($object = $this->getSubject()) && $object->getImage()) {
+//            $path = $object->getWebPath();
+//            $imageOptions['help'] = 'Associate a visual is mandatory for top cities<br /><img width="250px" src="/' . $path . '" />';
+//        }else{
+//            $imageOptions['help'] = 'Associate a visual is mandatory for top cities';
+//        }
         
         $formMapper
             ->with('General')
@@ -45,7 +45,18 @@ class CityAdmin extends Admin
                 ->add('longitude', 'hidden')
             ->end()
             ->with('Media')
-                ->add('file', 'file', $imageOptions)
+//                ->add('file', 'file', $imageOptions)
+                ->add('image', 'sonata_type_model_list',
+                    array(
+                        'required'  => false,
+                        'btn_list'  => false,
+                        'help'      => 'Associate a visual is mandatory for top cities',
+                        'label'     => 'Main visual *'
+                    ), array(
+                        'link_parameters' => array(
+                            'context' => 'default'
+                        )
+                    ))
             ->end()
             ->with('Related Best Of')
                 ->add('bestofs', 'sonata_type_collection', array('required' => false),
@@ -168,7 +179,7 @@ class CityAdmin extends Admin
 
     public function prePersist($object)
     {
-        $object->preUpload();
+//        $object->preUpload();
 
         if($object->getSuburbs()){
             foreach ($object->getSuburbs() as $suburb) {
@@ -183,7 +194,7 @@ class CityAdmin extends Admin
 
     public function preUpdate($object)
     {
-        $object->preUpload();
+//        $object->preUpload();
 
         if($object->getSuburbs()){
             foreach ($object->getSuburbs() as $suburb) {
@@ -196,27 +207,27 @@ class CityAdmin extends Admin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function postUpdate($object)
-    {
-        $object->upload();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function postPersist($object)
-    {
-        $object->upload();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function postRemove($object)
-    {
-        $object->removeUpload();
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function postUpdate($object)
+//    {
+//        $object->upload();
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function postPersist($object)
+//    {
+//        $object->upload();
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function postRemove($object)
+//    {
+//        $object->removeUpload();
+//    }
 }

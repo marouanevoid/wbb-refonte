@@ -119,17 +119,17 @@ class BestOfAdmin extends Admin
     {
         $object = $this->getSubject();
 
-        $imageOptions = array('required' => false, 'label' => 'Best of visual *');
-        if ($object && $object->getImage()) {
-            $path = $object->getWebPath();
-            $imageOptions['help'] = 'Mandatory<br /><img width="250px" src="/' . $path . '" />';
-        }
-
-        $sponsorImageOptions = array('required' => false, 'label' => 'Sponsor visual');
-        if ($object && $object->getSponsorImage()) {
-            $path = $object->getWebPath(true);
-            $sponsorImageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
-        }
+//        $imageOptions = array('required' => false, 'label' => 'Best of visual *');
+//        if ($object && $object->getImage()) {
+//            $path = $object->getWebPath();
+//            $imageOptions['help'] = 'Mandatory<br /><img width="250px" src="/' . $path . '" />';
+//        }
+//
+//        $sponsorImageOptions = array('required' => false, 'label' => 'Sponsor visual');
+//        if ($object && $object->getSponsorImage()) {
+//            $path = $object->getWebPath(true);
+//            $sponsorImageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
+//        }
 
         $formMapper
             ->with('General')
@@ -137,9 +137,30 @@ class BestOfAdmin extends Admin
                 ->add('country', null, array('required' => false))
                 ->add('city', null, array('required' => false))
                 ->add('description', 'textarea', array('required' => false, 'label'=>'Best of description', 'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
-                ->add('file', 'file', $imageOptions)
+//                ->add('file', 'file', $imageOptions)
+                ->add('image', 'sonata_type_model_list',
+                    array(
+                        'required'  => false,
+                        'btn_list'  => false,
+                        'help'      => 'Mandatory',
+                        'label'     => 'Best of visual *'
+                    ), array(
+                        'link_parameters' => array(
+                            'context' => 'default'
+                        )
+                    ))
                 ->add('sponsor')
-                ->add('sponsorImageFile', 'file', $sponsorImageOptions)
+//                ->add('sponsorImageFile', 'file', $sponsorImageOptions)
+                ->add('sponsorImage', 'sonata_type_model_list',
+                    array(
+                        'required'  => false,
+                        'btn_list'  => false,
+                        'label'     => 'Sponsor visual'
+                    ), array(
+                        'link_parameters' => array(
+                            'context' => 'default'
+                        )
+                    ))
                 ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory', 'required'=> false))
                 ->add('byTag')
                 ->add('onTop')
@@ -204,19 +225,19 @@ class BestOfAdmin extends Admin
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validate(ErrorElement $errorElement, $object)
-    {
-        $errorElement->with('file')->assertImage()->end();
-        $errorElement->with('sponsorImageFile')->assertImage()->end();
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function validate(ErrorElement $errorElement, $object)
+//    {
+//        $errorElement->with('file')->assertImage()->end();
+//        $errorElement->with('sponsorImageFile')->assertImage()->end();
+//    }
 
     public function prePersist($object)
     {
-        $object->preUpload();
-        $object->preUpload(true);
+//        $object->preUpload();
+//        $object->preUpload(true);
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
@@ -237,8 +258,8 @@ class BestOfAdmin extends Admin
 
     public function preUpdate($object)
     {
-        $object->preUpload();
-        $object->preUpload(true);
+//        $object->preUpload();
+//        $object->preUpload(true);
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
@@ -257,30 +278,30 @@ class BestOfAdmin extends Admin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function postPersist($object)
-    {
-        $object->upload();
-        $object->upload(true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function postUpdate($object)
-    {
-        $object->upload();
-        $object->upload(true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function postRemove($object)
-    {
-        $object->removeUpload();
-        $object->removeUpload(true);
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function postPersist($object)
+//    {
+//        $object->upload();
+//        $object->upload(true);
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function postUpdate($object)
+//    {
+//        $object->upload();
+//        $object->upload(true);
+//    }
+//
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function postRemove($object)
+//    {
+//        $object->removeUpload();
+//        $object->removeUpload(true);
+//    }
 }

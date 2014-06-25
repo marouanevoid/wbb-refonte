@@ -65,16 +65,21 @@ class City {
     private $seoDescription;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $image;
 
-    /**
-     * @var FileUpload
-     */
-    private $file;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+//     */
+//    private $image;
+//
+//    /**
+//     * @var FileUpload
+//     */
+//    private $file;
 
     /**
      * @var boolean
@@ -388,108 +393,108 @@ class City {
         return $this->updatedAt;
     }
 
-    /**
-     * Set image
-     *
-     * @param  string   $image
-     * @return BestOf
-     */
-    public function setImage($image) {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage() {
-        return $this->image;
-    }
-
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-        if (isset($this->image)) {
-            $this->temp = $this->image;
-            $this->image = null;
-        } else {
-            $this->image = 'initial';
-        }
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile() {
-        return $this->file;
-    }
-
-    public function getAbsolutePath() {
-
-        return null === $this->image ? null : $this->getUploadRootDir() . '/' . $this->image;
-    }
-
-    public function getWebPath() {
-
-        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
-    }
-
-    protected function getUploadRootDir() {
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
-    }
-
-    protected function getUploadDir() {
-        return 'uploads/cities';
-    }
-
-    private $temp;
-
-    /**
-     * preUpload
-     */
-    public function preUpload() {
-        if (null !== $this->getFile()) {
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->image = $filename . '.' . $this->getFile()->guessExtension();
-        }
-    }
-
-    /**
-     * upload
-     */
-    public function upload() {
-
-        if (null === $this->getFile()) {
-            return;
-        }
-
-        $this->getFile()->move($this->getUploadRootDir(), $this->image);
-
-        if (isset($this->temp) && file_exists($this->getUploadRootDir() . '/' . $this->temp)) {
-            unlink($this->getUploadRootDir() . '/' . $this->temp);
-            $this->temp = null;
-        }
-        $this->file = null;
-    }
-
-    /**
-     * removeUpload
-     */
-    public function removeUpload() {
-        if ($file = $this->getAbsolutePath()) {
-            unlink($file);
-        }
-    }
+//    /**
+//     * Set image
+//     *
+//     * @param  string   $image
+//     * @return BestOf
+//     */
+//    public function setImage($image) {
+//        $this->image = $image;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get image
+//     *
+//     * @return string
+//     */
+//    public function getImage() {
+//        return $this->image;
+//    }
+//
+//    /**
+//     * Sets file.
+//     *
+//     * @param UploadedFile $file
+//     */
+//    public function setFile(UploadedFile $file = null)
+//    {
+//        $this->file = $file;
+//        if (isset($this->image)) {
+//            $this->temp = $this->image;
+//            $this->image = null;
+//        } else {
+//            $this->image = 'initial';
+//        }
+//    }
+//
+//    /**
+//     * Get file.
+//     *
+//     * @return UploadedFile
+//     */
+//    public function getFile() {
+//        return $this->file;
+//    }
+//
+//    public function getAbsolutePath() {
+//
+//        return null === $this->image ? null : $this->getUploadRootDir() . '/' . $this->image;
+//    }
+//
+//    public function getWebPath() {
+//
+//        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
+//    }
+//
+//    protected function getUploadRootDir() {
+//        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+//    }
+//
+//    protected function getUploadDir() {
+//        return 'uploads/cities';
+//    }
+//
+//    private $temp;
+//
+//    /**
+//     * preUpload
+//     */
+//    public function preUpload() {
+//        if (null !== $this->getFile()) {
+//            $filename = sha1(uniqid(mt_rand(), true));
+//            $this->image = $filename . '.' . $this->getFile()->guessExtension();
+//        }
+//    }
+//
+//    /**
+//     * upload
+//     */
+//    public function upload() {
+//
+//        if (null === $this->getFile()) {
+//            return;
+//        }
+//
+//        $this->getFile()->move($this->getUploadRootDir(), $this->image);
+//
+//        if (isset($this->temp) && file_exists($this->getUploadRootDir() . '/' . $this->temp)) {
+//            unlink($this->getUploadRootDir() . '/' . $this->temp);
+//            $this->temp = null;
+//        }
+//        $this->file = null;
+//    }
+//
+//    /**
+//     * removeUpload
+//     */
+//    public function removeUpload() {
+//        if ($file = $this->getAbsolutePath()) {
+//            unlink($file);
+//        }
+//    }
 
     /**
      * Set news
@@ -672,5 +677,28 @@ class City {
     public function removeNews(\WBB\BarBundle\Entity\News $news)
     {
         $this->news->removeElement($news);
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return City
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
