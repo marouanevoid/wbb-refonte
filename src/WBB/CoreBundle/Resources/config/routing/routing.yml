@@ -16,7 +16,7 @@ get_cities_from_country:
 
 get_medias_from_bar:
     pattern: /ajax/get-medias-from-bar/{barID}/{mediaID}
-    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getBarMedias, barID: 0, mediaID: 0}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getMediasFromBar, barID: 0, mediaID: 0}
     options:
         expose: true
 

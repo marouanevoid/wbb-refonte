@@ -70,7 +70,7 @@ class AjaxController extends Controller
     }
 
     //Returns a list of bar medias (add selected to a media if passed on parameters)
-    public function getBarMedias($barID, $mediaID)
+    public function getMediasFromBarAction($barID, $mediaID)
     {
         $html = "";
         $bar = null;
@@ -81,12 +81,14 @@ class AjaxController extends Controller
         }
 
         $medias = $bar->getMedias();
-
+        $i = 1;
         foreach($medias as $media){
             if($mediaID == $media->getId())
-                $html .= '<option value="'.$media->getId().'" selected>'.$media->getAlt().'</option>';
+                $html .= '<option value="'.$media->getId().'" selected>'.$i.': '.$media->getAlt().'</option>';
             else
-                $html .= '<option value="'.$media->getId().'" >'.$media->getAlt().'</option>';
+                $html .= '<option value="'.$media->getId().'" >'.$i.': '.$media->getAlt().'</option>';
+
+            $i++;
         }
 
         return new JsonResponse($html);
