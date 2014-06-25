@@ -209,6 +209,13 @@ meta.App = function() {
             $(this).next('.more').velocity('slideDown', { duration: speed, easing:easing});
         });
 
+        $('a.scrolltop').click(function(e)
+        {
+            e.preventDefault();
+
+            $('html, body').animate({scrollTop:0}, that.config.speed, that.config.easing);
+        });
+
         that._barFinderEvents();
 
         that._mobileMenuEvents();
