@@ -43,7 +43,9 @@ class TagAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name', null, array('editable' => true));
+            ->addIdentifier('name', null, array('editable' => true))
+            ->add('onTop', null, array('editable' => true))
+        ;
         if(!$this->hasParentFieldDescription()) {
             $listMapper
                 ->add('energyLevel', null, array(
@@ -54,11 +56,18 @@ class TagAdmin extends Admin
                 ->add('isAtmosphere', null, array('editable' => true))
                 ->add('isAlcohol', null, array('editable' => true))
                 ->add('isCocktail', null, array('editable' => true))
-                ->add('isMood', null, array('editable' => true));
+                ->add('isMood', null, array('editable' => true))
+                ->add('createdAt')
+                ->addIdentifier('_action', 'actions', array(
+                    'field'   => 'name',
+                    'label'    => 'Actions',
+                    'actions' => array(
+                        'edit'   => array(),
+                        'delete' => array(),
+                    )
+                ))
+            ;
         }
-        $listMapper
-            ->add('onTop', null, array('editable' => true))
-        ;
     }
 
     /**
