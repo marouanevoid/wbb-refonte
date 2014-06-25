@@ -26,9 +26,11 @@ $(document).ready(function()
    }
    $(".load-more").on('click', function()
    {
+       $('.disableClick').show();
        loadData();
    });
    $("#criteria, input[name=view-type]").change(function(){
+       $('.disableClick').show();
        $(".load-more").show();
        _offset = 0;
        if($('input[name=filter]:checked').val()=='bar_list')
@@ -44,6 +46,7 @@ $(document).ready(function()
 
     $('input[name=filter]').change(function()
     {
+        $('.disableClick').show();
         $(".load-more").show();
         _offset = 0;
         if( $('input[name=filter]:checked').val() == "bar_list")

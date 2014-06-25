@@ -89,9 +89,10 @@ meta.LoadMore = function(config) {
                 that.config.$target.find('img[data-src]').each(function()
                 {
                     $(this).load(that._imageLoaded);
-                    $(this).error(that._imageNotLoaded);
+                    $(this).error(that._imageLoaded);
                     $(this).attr('src', $(this).data('src'));
                 });
+                $('.disableClick').hide();
             },
             error: function(e) {
                 console.log('Load More - Error : ' + e);
@@ -109,20 +110,14 @@ meta.LoadMore = function(config) {
         that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
 
         that.context.is_loading = false;
-        that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+        if($("input[name=filter]:checked").val()=='bar_list')
+        {
+            that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+        }else
+        {
+            that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
+        }
     }
-    that._imageNotLoaded = function ()
-    {
-        $(this).removeAttr('data-src');
-        if (that.context.itemsNumber <= 0)
-            that.config.$target.find(".line:last-child").show();
-        that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
-
-        that.context.is_loading = false;
-        that.config.$button.removeClass('loading').text( TRAD.common.morebars);
-        $(this).attr('src', BASEURL+'images/default.jpg');
-    }
-
 
     /**
      *

@@ -94,3 +94,16 @@ article.bar-wo-pic .txt h2 {
 .best-of-details .sub-header table{
     white-space: normal;
 }
+.bar-filter .filters {
+    position: relative;
+}
+.bar-filter .disableClick {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}

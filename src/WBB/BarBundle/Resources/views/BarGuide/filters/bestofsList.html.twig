@@ -17,7 +17,7 @@
 
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top"><a href="#0">{{ b.name }}</a></h2>
-                <h3 class="xs-margin-top"><a href="#0">{{ b.city.name }}</a></h3>
+                <h3 class="xs-margin-top"><a href="#0">{% if b.city %}{{ b.city.name }}{% endif %}</a></h3>
                 <p class="s-margin-top">
                     {{ b.description|truncate(200, true, '...')|striptags }}
                 </p>
