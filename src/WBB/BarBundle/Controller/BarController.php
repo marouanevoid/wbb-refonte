@@ -193,8 +193,8 @@ class BarController extends Controller
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset, 0);
             }elseif($filter === "date"){
-                $response = $this->container->get('bestof.repository')->findLatestBestofs($city, $offset, $limit, false);
-                $all = $this->container->get('bestof.repository')->findLatestBestofs($city, $offset, 0, false);
+                $response = $this->container->get('bestof.repository')->findLatestBestofs($city, $limit, $offset, false);
+                $all = $this->container->get('bestof.repository')->findLatestBestofs($city, 0, $offset, false);
             }
             if($display=="grid"){
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
