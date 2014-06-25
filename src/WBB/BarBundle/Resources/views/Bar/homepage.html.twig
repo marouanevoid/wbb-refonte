@@ -107,7 +107,7 @@
                             </div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
                             <img class="overlay" src="{{ asset('bundles/wbbcore/images/city.background-circle.png') }}"/>
-                            <img src="" class="scale-with-grid" data-src="{% path b.image, 'city_small' %}" alt="{{ c.name }}"/>
+                            <img src="" class="scale-with-grid" data-src="{% path c.image, 'city_small' %}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}
