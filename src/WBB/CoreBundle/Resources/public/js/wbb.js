@@ -37,6 +37,7 @@ $(document).ready(function(){
         document.location = $(this).val();
     });
     $(".star").click(function(){
+        concole.log('click on star !');
         var btn = $(this);
         $.ajax({
             type: "POST",
