@@ -34,5 +34,5 @@
 
 @mixin reduceFlickering()
 {
-  backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-backface-visibility: hidden
+  -webkit-backface-visibility: hidden; border:1px solid transparent; -moz-transform:rotate(0); box-sizing: border-box;
 }

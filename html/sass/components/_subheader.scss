@@ -16,7 +16,7 @@
           font-size: 95%; height: 34px; line-height: 34px;
           &:before, &:after{ right: -10px }
         }
-        &:before{ left: 0.8em!important; top: 17px!important }
+        &:before{ left: 0.8em!important; top: 18px!important }
         &:after{ display: none }
       }
      }
@@ -29,6 +29,11 @@
 
   .star-share {color: $color-brown; text-align: right;.btn-round { margin-left: 1em; }
   }
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .sub-header .city-selector .ui-dropdown-container .btn-radius{ width: 145px }
 }
 
 @media only screen and (max-width: $grid-breakpoint-mobile) {
@@ -44,4 +49,10 @@
     .star-share { margin-top: 2.5em; text-align: center; .btn-round { margin-left: 0.5em; margin-right: 0.5em; }
     }
   }
+}
+
+/* Load SVG for Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+  .sub-header .city-selector .ui-dropdown-container .btn-radius span{ line-height: 38px }
 }

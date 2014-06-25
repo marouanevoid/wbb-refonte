@@ -15,6 +15,12 @@
     &:after{ background-position: 0 -40px }
   }
 
+  &.scrolltop{
+    border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-bottom: 0; background: $color-brown; position: absolute; bottom: 100%; right: 1em;
+    &:before{ background-position: -120px -360px }
+    &:after{ display: none }
+  }
+
   &.star.active{
     border-color: $color-brown; background: $color-brown;
     &:before{ background-position: -160px -240px }

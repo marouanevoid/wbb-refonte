@@ -1,6 +1,10 @@
 <?php $page = 'search' ?>
 <?php include('includes/head.php') ?>
 
+<?php if($is_mobile): ?>
+    <?php include('includes/mobile/search-bar.php') ?>
+<?php endif ?>
+
     <div class="container l-padding">
 
         <aside class="three columns filters">
