@@ -12,6 +12,8 @@
 
 body.search
 {
+  header .search-bar-mobile{ display: none }
+
   .search-bar-mobile {
     position: static; display: block; border-bottom: 1px solid $color-brown;
     .container{ display: block; @include transform(translate3d(0,0,0)); }

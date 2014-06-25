@@ -71,6 +71,11 @@
 @media only screen and (max-width: $grid-breakpoint-mobile) {
 
   .search {
+
+    header.mobile .search{ display: none }
+    .container.l-padding{ padding-top: 0!important }
+    .container .nine.columns.bar-filter{ width: 100%!important }
+
     aside.filters {
       width: 100%!important; margin: 0!important; text-align: center; display: none;
       form{

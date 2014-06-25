@@ -2,7 +2,7 @@
 --------------------------------------------------- */
 
     footer {
-      width: 100%; background-color: $color-dark-gray;
+      width: 100%; background-color: $color-dark-gray; position: relative;
       .left, .right{ height: $footer-height }
       .left { float: left;
 
@@ -15,9 +15,16 @@
         .copy { margin-top: 1.5em; color: $color-subtle-yellow; }
 
       }
-
-      .right { float: right; color: $color-subtle-yellow;
-
+      .left.right{
+        float: none; height: auto; padding: 0 2em; width: auto; margin-top: 2em;
+        .social-icons, .keep-in-touch{
+          float: none; text-align: center; border-left: 0; border-bottom: 1px solid #5c5549; padding:2em 0; max-width:  none;
+          h4{ color: $color-subtle-yellow; text-transform: uppercase; font-size: 1.6em; font-weight: bold; margin-bottom: 10px!important }
+        }
+        .copyright{ text-align: center; padding-bottom: 2em }
+      }
+      .right {
+        float: right; color: $color-subtle-yellow;
         .social-icons,
         .keep-in-touch { border-left: 1px solid #5c5549; height: 100%; padding:0 3em; }
 
