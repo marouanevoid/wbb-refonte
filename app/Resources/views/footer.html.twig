@@ -1,5 +1,39 @@
 {% if is_mobile() and not is_tablet() %}
+    <footer>
+        <a class="btn-round scrolltop"></a>
+        <div class="container right left">
 
+            <div class="social-icons">
+                <a href="" class="facebook">
+                    <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="13" height="24"/></span>
+                </a>
+                <a href="" class="twitter">
+                    <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="28" height="24"/></span>
+                </a>
+                <a href="" class="instagram">
+                    <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="25" height="24"/></span>
+                </a>
+                <a href="" class="pinterest">
+                    <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="24" height="24"/></span>
+                </a>
+            </div>
+            <div class="keep-in-touch">
+                <h3 class="s-margin-bottom">Keep in touch</h3>
+
+                <div class="socials">
+                    <div class="fb-like" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                    <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="copy h4">
+                    &copy; 2014 World's Best Bars
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
 {% else %}
     <footer>
         <div class="container">

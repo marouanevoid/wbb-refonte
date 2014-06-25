@@ -46,6 +46,7 @@ meta.Search = function(config){
     that.context = {};
     that.search_timeout = false;
     that.show_results = false;
+    that.show_form = false;
 
 
     /* Contructor. */
@@ -137,6 +138,10 @@ meta.Search = function(config){
      */
     that._showForm = function()
     {
+        if(that.show_form) return;
+
+        that.show_form = true;
+
         if( $(window).width() > 640 )
         {
             that.context.$normalHeader.velocity({top:'50%', opacity:0}, { duration: that.config.speed, easing:that.config.easing, complete:function() {
@@ -171,6 +176,8 @@ meta.Search = function(config){
      */
     that._hideForm = function()
     {
+        that.show_form = false;
+
         that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
         {
             $(this).removeAttr('style');

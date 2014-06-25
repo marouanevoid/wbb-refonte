@@ -107,9 +107,7 @@
                             </div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
                             <img class="overlay" src="{{ asset('bundles/wbbcore/images/city.background-circle.png') }}"/>
-                            {% if c.webPath %}
-                            <img src="" class="scale-with-grid" data-src="{{ asset(c.webPath) | apply_filter('city_small') }}" alt="{{ c.name }}"/>
-                            {% endif %}
+                            <img src="" class="scale-with-grid" data-src="{% path c.image, 'city_small' %}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}
