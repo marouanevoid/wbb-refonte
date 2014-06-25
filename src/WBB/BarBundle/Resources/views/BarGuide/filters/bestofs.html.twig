@@ -16,9 +16,9 @@
             {% endif %}
         </div>
     </div>
-    {% if b.webPath %}
-        <img class="scale-with-grid" data-src="{{ asset(b.webPath) | apply_filter('bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
-    {% endif %}
+
+        <img class="scale-with-grid" data-src="{% path b.image, 'bestof_small' %}" alt="{{ b.name }}" width="570" height="428"/>
+
     <a href="#0" class="overlay-link"></a>
 
 </article>
