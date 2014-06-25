@@ -117,14 +117,16 @@ class BestOfAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $object = $this->getSubject();
+
         $imageOptions = array('required' => false, 'label' => 'Best of visual *');
-        if (($object = $this->getSubject()) && $object->getImage()) {
+        if ($object && $object->getImage()) {
             $path = $object->getWebPath();
             $imageOptions['help'] = 'Mandatory<br /><img width="250px" src="/' . $path . '" />';
         }
 
         $sponsorImageOptions = array('required' => false, 'label' => 'Sponsor visual');
-        if (($object = $this->getSubject()) && $object->getSponsorImage()) {
+        if ($object && $object->getSponsorImage()) {
             $path = $object->getWebPath(true);
             $sponsorImageOptions['help'] = '<img width="250px" src="/' . $path . '" />';
         }
@@ -142,31 +144,41 @@ class BestOfAdmin extends Admin
                 ->add('byTag')
                 ->add('onTop')
                 ->add('ordered', null, array('label' => 'Order from bar tab'))
-            ->end()
-            ->with('Tags')
-                ->add('tags', 'sonata_type_collection',
-                    array(
-                        'required' => false,
-                        'label' => 'Add a tag to this best of'
-                    ),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                        'sortable'  => 'position'
-                    ))
-            ->end()
-            ->with('Bars')
-                ->add('bars', 'sonata_type_collection',
-                    array(
-                        'required' => false,
-                        'label'    => 'Add a bar to this best of'
-                    ),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                        'sortable'  => 'position'
-                    ))
-            ->end()
+            ->end();
+
+        if($object->getByTag()){
+            $formMapper
+                ->with('Tags')
+                    ->add('tags', 'sonata_type_collection',
+                        array(
+                            'required' => false,
+                            'label' => 'Add a tag to this best of'
+                        ),
+                        array(
+                            'edit' => 'inline',
+                            'inline' => 'table',
+                            'sortable'  => 'position'
+                        ))
+                ->end();
+        }
+
+        if(!$object->getByTag()){
+            $formMapper
+                ->with('Bars')
+                    ->add('bars', 'sonata_type_collection',
+                        array(
+                            'required' => false,
+                            'label'    => 'Add a bar to this best of'
+                        ),
+                        array(
+                            'edit' => 'inline',
+                            'inline' => 'table',
+                            'sortable'  => 'position'
+                        ))
+                ->end();
+        }
+
+        $formMapper
             ->with('You may also like')
                 ->add('bestofs', null,
                     array(
