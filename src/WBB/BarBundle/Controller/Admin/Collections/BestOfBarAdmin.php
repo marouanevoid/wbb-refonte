@@ -23,6 +23,7 @@ class BestOfBarAdmin extends Admin
             ->with('General')
                 ->add('bar')
                 ->add('media')
+                ->add('description', 'textarea')
                 ->add('position', 'hidden')
             ->end();
     }
