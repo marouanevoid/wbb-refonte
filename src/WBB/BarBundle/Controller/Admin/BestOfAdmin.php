@@ -146,7 +146,7 @@ class BestOfAdmin extends Admin
                         'label'     => 'Best of visual *'
                     ), array(
                         'link_parameters' => array(
-                            'context' => 'default'
+                            'context' => 'simple_image'
                         )
                     ))
                 ->add('sponsor')
@@ -158,7 +158,7 @@ class BestOfAdmin extends Admin
                         'label'     => 'Sponsor visual'
                     ), array(
                         'link_parameters' => array(
-                            'context' => 'default'
+                            'context' => 'simple_image'
                         )
                     ))
                 ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory', 'required'=> false))
