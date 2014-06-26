@@ -4634,26 +4634,39 @@ body.search .search-bar-mobile + .container {
 .best-of-details .sub-header .title h3 {
   text-transform: none;
   margin-top: 0;
+  line-height: 150%;
 }
-/* line 6, ../sass/pages/_best-of-details.scss */
+/* line 7, ../sass/pages/_best-of-details.scss */
 .best-of-details .sub-header .title h3:first-of-type {
   text-transform: uppercase;
   font-weight: bold;
 }
-/* line 8, ../sass/pages/_best-of-details.scss */
+/* line 9, ../sass/pages/_best-of-details.scss */
 .best-of-details .sub-header .title h1 {
   margin-top: 5px;
   margin-bottom: 25px;
 }
-/* line 13, ../sass/pages/_best-of-details.scss */
+/* line 10, ../sass/pages/_best-of-details.scss */
+.best-of-details .sub-header .title h1 + h3 {
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: normal;
+}
+/* line 15, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.bars .four.columns {
   margin-top: 3em;
 }
-/* line 14, ../sass/pages/_best-of-details.scss */
+/* line 16, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.bars .four.columns:nth-child(1), .best-of-details .container.bars .four.columns:nth-child(2), .best-of-details .container.bars .four.columns:nth-child(3) {
   margin-top: 0;
 }
-/* line 20, ../sass/pages/_best-of-details.scss */
+/* line 22, ../sass/pages/_best-of-details.scss */
+.best-of-details .bestof .align-center {
+  margin-left: 1.1667%;
+  margin-right: 1.1667%;
+}
+/* line 24, ../sass/pages/_best-of-details.scss */
 .best-of-details .side-ad {
   margin-top: 0;
   width: 100%;
@@ -4661,33 +4674,49 @@ body.search .search-bar-mobile + .container {
   outline: 0;
   padding: 0;
 }
-/* line 21, ../sass/pages/_best-of-details.scss */
+/* line 25, ../sass/pages/_best-of-details.scss */
 .best-of-details .side-ad .txt {
   position: static;
   margin-right: 3.8em;
-  margin-top: 2.2em;
+  margin-top: 1.2em;
+  margin-bottom: 1em;
 }
-/* line 22, ../sass/pages/_best-of-details.scss */
+/* line 26, ../sass/pages/_best-of-details.scss */
 .best-of-details .side-ad img {
   width: 80%;
   height: auto;
   display: block;
   margin: auto;
   margin-bottom: 4px;
+  margin-top: 1px;
 }
-/* line 26, ../sass/pages/_best-of-details.scss */
+/* line 29, ../sass/pages/_best-of-details.scss */
+.best-of-details .footer-ad .container {
+  width: 100%;
+  max-width: 1280px;
+}
+/* line 32, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.also-like h1 {
   color: #b3955f;
 }
+/* line 35, ../sass/pages/_best-of-details.scss */
+.best-of-details footer .container {
+  max-width: 1280px;
+}
 @media only screen and (max-width: 768px) {
-  /* line 32, ../sass/pages/_best-of-details.scss */
+  /* line 40, ../sass/pages/_best-of-details.scss */
   .best-of-details .container.bars .four.columns {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+    margin-top: 1em;
   }
-  /* line 33, ../sass/pages/_best-of-details.scss */
-  .best-of-details .container.bars .four.columns:nth-child(2), .best-of-details .container.bars .four.columns:nth-child(3) {
+  /* line 42, ../sass/pages/_best-of-details.scss */
+  .best-of-details .container.bars .four.columns:nth-child(2) {
+    margin-top: 1em;
+  }
+  /* line 43, ../sass/pages/_best-of-details.scss */
+  .best-of-details .container.bars .four.columns:nth-child(3) {
     margin-top: 3em;
   }
 }
