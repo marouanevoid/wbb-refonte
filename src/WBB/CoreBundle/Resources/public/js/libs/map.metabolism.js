@@ -123,6 +123,7 @@ wbb.Map = function(config){
 
         var map = that.config.$map.gmap3('get');
         if(map.getZoom() >  3) map.setZoom( map.getZoom()-1 );
+        map.panTo(0);
     };
 
 

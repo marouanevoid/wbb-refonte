@@ -15,7 +15,12 @@ $(document).ready(function()
        }
        _sortby  = $("#criteria").val();
        _display = $('input[name=view-type]:checked').val();
-
+       console.log("Type : " + $("input[name=filter]:checked").val() );
+//       console.log("City : " + _city );
+       console.log("Sort by : " + _sortby );
+//       console.log("Offset : " + _offset );
+//       console.log("Limit : " + _limit );
+       console.log("Display : " + _display );
        var _url = Routing.generate('homepage')+"barguide/filter/"+_type+"/"+_city+"/"+_sortby+"/"+_offset+"/"+_limit+"/"+_display;
 
        if (_type==1)
@@ -60,6 +65,7 @@ $(document).ready(function()
             $('li.distance').css('display','none');
             if($('#criteria').val()=='distance')
             {
+                $('.jspPane li.popularity').trigger("click");
                 $('#criteria').val('popularity');
                 $('li.popularity').css('display','block');
             }

@@ -61,11 +61,12 @@
     z-index: 40;
     float: left;
     height: 100%;
-    margin-bottom: 7px;
+    border-bottom: 0.6em solid rgba(0, 0, 0, 0);
 }
 @media only screen and (max-width: 768px) {
     .bar-filter .best-of-container{
         width: 100%;
+        border-right: 0 !important;
     }
     article.bar-wo-pic:hover {
         background: #faf3e1 !important;
@@ -105,7 +106,7 @@ article.bar-wo-pic .txt h2 {
 .bar-filter .disableClick {
     height: 100%;
     width: 100%;
-    background: transparent;
+    background: url(../images/blank.png) repeat;
     float: left;
     position: absolute;
     top: 0;

@@ -105,18 +105,19 @@ meta.LoadMore = function(config) {
         that.context.itemsNumber--;
         console.log(" itemsNumber : " + that.context.itemsNumber + " , " + $(this));
         $(this).removeAttr('data-src');
-        if (that.context.itemsNumber <= 0)
+        if (that.context.itemsNumber <= 0){
             that.config.$target.find(".line:last-child").show();
+            if($("input[name=filter]:checked").val()=='bar_list')
+            {
+                that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+            }else
+            {
+                that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
+            }
+        }
         that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
 
         that.context.is_loading = false;
-        if($("input[name=filter]:checked").val()=='bar_list')
-        {
-            that.config.$button.removeClass('loading').text( TRAD.common.morebars);
-        }else
-        {
-            that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
-        }
     }
 
     /**
