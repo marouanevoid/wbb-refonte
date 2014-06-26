@@ -244,6 +244,7 @@ wbb.Cities = function () {
                 that.context.map.zoomIn();
             else
                 that.context.map.zoomOut();
+            setTimeout(function(){ that._resize() }, 50);
         });
 
 

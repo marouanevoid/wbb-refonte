@@ -27,17 +27,10 @@ function nodeToString ( node ) {
 }
 
 $(document).ready(function(){
-    /*$(function () {
-        $("img").bind('error abort', function () {
-            if(!$(this).parent().hasClass('city'))
-                $(this).attr("src", BASEURL+'images/default.jpg');
-        });
-    });*/
     $('#city_selector').change(function(){
         document.location = $(this).val();
     });
-    $(".star").click(function(){
-        concole.log('click on star !');
+    $(document).on("click", ".star", function(){
         var btn = $(this);
         $.ajax({
             type: "POST",
