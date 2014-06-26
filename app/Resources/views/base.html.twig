@@ -54,6 +54,27 @@
             var LANG = "en";
             var BASEURL = "{{ asset('bundles/wbbcore/') }}";
         </script>
+
+        {% if is_tablet() %}
+            <style type="text/css">
+                article.bar-wo-pic:hover {
+                    background: #faf3e1 !important;
+                }
+                article.bar-wo-pic:hover h2 {
+                    color: #333 !important;
+                }
+                article.bar-wo-pic:hover h3 {
+                    color: #B3955F !important;
+                }
+                article.bar-wo-pic .btn-round.star{
+                    background : #faf3e1 !important;
+                }
+                article.bar-wo-pic .btn-round.star.active, article.bar-wo-pic .btn-round.star:hover {
+                    border-color: transparent !important;
+                    background: transparent !important;
+                }
+            </style>
+        {% endif %}
         {% block javascripts %}
         {% endblock %}
 
