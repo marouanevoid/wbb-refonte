@@ -151,7 +151,9 @@ class BarController extends Controller
         {
             $bars = $this->container->get('bar.repository')->findBarsByTags($bestOf->getTagsIds());
         }else{
-            $bars = $bestOf->getBars();
+            foreach($bestOf->getBars() as $bar){
+                $bars[] = $bar->getBar();
+            }
         }
 
         return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
@@ -193,7 +195,9 @@ class BarController extends Controller
         {
             $bars = $this->container->get('bar.repository')->findBarsByTags($bestOf->getTagsIds());
         }else{
-            $bars = $bestOf->getBars();
+            foreach($bestOf->getBars() as $bar){
+                $bars[] = $bar->getBar();
+            }
         }
 
         return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
