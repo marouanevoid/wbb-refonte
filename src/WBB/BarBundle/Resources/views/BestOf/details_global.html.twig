@@ -71,7 +71,7 @@
                 <h1>You may also like</h1>
             </div>
             <div class="ui-slider type-bestof has_sizer arrows dots" data-size="{% if not is_mobile() or is_tablet() %}3x3{% else %}4x3{% endif %}" data-display="{% if not is_mobile() or is_tablet() %}3{% else %}1{% endif %}">
-                {% for b in ymal |slice(0,3) %}
+                {% for b in bestofs |slice(0,3) %}
                     <div class="ui-slide">
                         {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}
                     </div>

@@ -44,10 +44,14 @@ class BestOfRepository extends EntityRepository
                 ->andWhere($qb->expr()->in('t.id', ':tags'))
                 ->setParameter('tags', $bestof->getTagsIds())
                 ->groupBy($this->getAlias().'.id')
-                ->orderBy('nbTags','DESC')
+                ->addOrderBy('nbTags','DESC')
             ;
+        }else{
+            $qb->addOrderBy($this->getAlias().'.createdAt','DESC');
         }
+
         $qb->setMaxResults($limit);
+
 
         return $qb->getQuery()->getResult();
     }
