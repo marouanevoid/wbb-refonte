@@ -32,7 +32,7 @@ class BestOfRepository extends EntityRepository
         if ($city) {
             $qb
                 ->leftJoin($this->getAlias().'.city', 'c')
-                ->andWhere($qb->expr()->eq($this->getAlias().'.city', $bestof->getCity()->getId()));
+                ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
         }
 
         if($bestof->getByTag()){
