@@ -5,7 +5,7 @@
             <span class="number h2">{{ loop.index }}</span>
         {% endif %}
         <h2>{{ b.name }}</h2>
-        <h3>{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</h3>
+        <h3>{% if b.suburb %}{{ b.suburb.name|default('Unspecified') }}, {% endif %}{% if b.city %}{{ b.city.name|default('Unspecified') }}{% endif %}</h3>
         <div class="hover">
             <div class="tags">
                 {% for tr in b.tags %}
@@ -19,7 +19,9 @@
             {% endif %}
         </div>
     </div>
+    {% if b.suburb %}
     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+    {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
     {% for m in b.medias|slice(0,1) %}

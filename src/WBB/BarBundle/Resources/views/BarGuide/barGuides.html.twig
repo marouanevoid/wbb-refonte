@@ -85,8 +85,8 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="force-load">
-                {% for b in popularBars %}
-                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                {% for b in popularBars|slice(0,5) %}
+                    {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
                 {% endfor %}
             </div>
 
@@ -172,5 +172,10 @@
         </div>
 
     </section>
+
+
+{% endblock %}
+{% block footerAd %}
+    {{ parent() }}
 </div>
 {% endblock %}
