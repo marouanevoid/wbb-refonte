@@ -147,20 +147,26 @@ class BarController extends Controller
             }
         }
 
-        if($bestOf->getByTag())
-        {
-            $bars = $this->container->get('bar.repository')->findBarsByExactTags($bestOf->getTagsIds());
+        if($bestOf->getByTag()){
+            $barsTmp = $this->container->get('bar.repository')->findBarsByExactTags($bestOf->getTagsIds());
+            foreach($barsTmp as $bar){
+                $bars[] = $bar;
+            }
         }else{
             foreach($bestOf->getBars() as $bar){
                 $bars[] = $bar->getBar();
             }
         }
 
+        if(!$bestOf->getOrdered()){
+            shuffle($bars);
+        }
+
         return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
             array(
-                'bestOf'=> $bestOf,
+                'bestOf'   => $bestOf,
                 'bestofs'  => $bestOfs,
-                'bars'  => $bars
+                'bars'     => $bars
         ));
     }
 

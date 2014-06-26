@@ -55,7 +55,7 @@
             </div>
         {% endif %}
         <div class="four columns">
-            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 } %}
+            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
         </div>
     {% endfor %}
 </div>

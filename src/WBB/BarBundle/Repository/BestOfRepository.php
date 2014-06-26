@@ -62,14 +62,13 @@ class BestOfRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->where($qb->expr()->eq(1, 1))
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
         ;
 
         if($onlyOnTop){
-            $qb->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
-        }else{
-            $qb->addOrderBy($this->getAlias().'.onTop', 'DESC');
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
         }
 
         if($city){

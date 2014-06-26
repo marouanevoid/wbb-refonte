@@ -1,7 +1,7 @@
 <article class="bar-w-pic {% if bestof is defined %}best-of{% endif %}">
     <a href="#0" class="btn-round dark star"></a>
     <div class="txt">
-        {% if bestof is defined %}
+        {% if (bestof is defined) and ordered %}
             <span class="number h2">{{ loop.index }}</span>
         {% endif %}
         <h2>{{ b.name }}</h2>
