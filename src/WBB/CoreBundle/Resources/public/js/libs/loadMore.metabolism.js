@@ -80,8 +80,6 @@ meta.LoadMore = function(config) {
             dataType: "json",
             success: function(msg) {
                 that.config.$target.append(msg.htmldata);
-                if(parseInt(msg.difference)==0)
-                    that.config.$button.hide();
 
                 if( callback ) callback();
                 that.config.$target.find(".line:last-child").hide();
@@ -92,6 +90,8 @@ meta.LoadMore = function(config) {
                     $(this).error(that._imageLoaded);
                     $(this).attr('src', $(this).data('src'));
                 });
+                if(parseInt(msg.difference)==0)
+                    that.config.$button.hide();
                 $('.disableClick').hide();
             },
             error: function(e) {
