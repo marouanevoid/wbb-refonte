@@ -159,7 +159,7 @@ class BarController extends Controller
         return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
             array(
                 'bestOf'=> $bestOf,
-                'ymal'  => $bestOfs,
+                'bestofs'  => $bestOfs,
                 'bars'  => $bars
         ));
     }
