@@ -26,13 +26,9 @@
     img{ width: 80%; height: auto; display: block; margin: auto; margin-bottom: 4px; margin-top: 1px }
   }
 
-  .footer-ad .container{ width: 100%; max-width: 1280px }
-
   .container.also-like {
     h1 { color: $color-brown; }
   }
-
-  footer .container{ max-width: 1280px }
 
   @media only screen and (max-width: $grid-breakpoint-mobile) {
 

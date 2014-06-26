@@ -30,7 +30,7 @@
 </div>
 
 <!-- BARS -->
-<div class="container bars full force-load">
+<div class="container bars force-load">
 
     <?php for($i=1; $i<9; $i++): ?>
         <?php if($i==3): ?>
@@ -46,7 +46,7 @@
 </div>
 
 <!-- ALSO LIKE -->
-<div class="container full also-like l-margin">
+<div class="container also-like l-margin">
 
     <section class="bestof force-load">
         <div class="align-center l-margin-bottom">

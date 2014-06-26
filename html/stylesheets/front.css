@@ -4690,32 +4690,23 @@ body.search .search-bar-mobile + .container {
   margin-bottom: 4px;
   margin-top: 1px;
 }
-/* line 29, ../sass/pages/_best-of-details.scss */
-.best-of-details .footer-ad .container {
-  width: 100%;
-  max-width: 1280px;
-}
-/* line 32, ../sass/pages/_best-of-details.scss */
+/* line 30, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.also-like h1 {
   color: #b3955f;
 }
-/* line 35, ../sass/pages/_best-of-details.scss */
-.best-of-details footer .container {
-  max-width: 1280px;
-}
 @media only screen and (max-width: 768px) {
-  /* line 40, ../sass/pages/_best-of-details.scss */
+  /* line 36, ../sass/pages/_best-of-details.scss */
   .best-of-details .container.bars .four.columns {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     margin-top: 1em;
   }
-  /* line 42, ../sass/pages/_best-of-details.scss */
+  /* line 38, ../sass/pages/_best-of-details.scss */
   .best-of-details .container.bars .four.columns:nth-child(2) {
     margin-top: 1em;
   }
-  /* line 43, ../sass/pages/_best-of-details.scss */
+  /* line 39, ../sass/pages/_best-of-details.scss */
   .best-of-details .container.bars .four.columns:nth-child(3) {
     margin-top: 3em;
   }
