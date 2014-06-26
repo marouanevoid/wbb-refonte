@@ -138,6 +138,7 @@ class BarController extends Controller
         }
 
         $bestofsCount = count($bestOfs);
+
         if ($bestofsCount < 3) {
             $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, null, (3 - $bestofsCount));
             foreach($bestOfsTmp as $bo)
@@ -165,25 +166,42 @@ class BarController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
+        $bestOfs = array();
+        $bars = null;
 
         if (!$bestOf) {
             // TODO Does not work !
             $this->createNotFoundException('Not found !');
         }
 
-        $bestofsCount = $bestOf->getBestofs()->count();
+        foreach($bestOf->getBestofs() as $bo)
+        {
+            $bestOfs[] = $bo;
+        }
+
+        $bestofsCount = count($bestOfs);
+
         if ($bestofsCount < 3) {
-            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, true);
-            for ($index = 0; $index < 3 - $bestofsCount; $index++) {
-                if (isset($bestOfs[$index])) {
-                    $bestOf->addBestof($bestOfs[$index]);
-                }
+            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, true, (3 - $bestofsCount));
+            foreach($bestOfsTmp as $bo)
+            {
+                $bestOfs[] = $bo;
             }
         }
 
-        return $this->render('WBBBarBundle:BestOf:details_global.html.twig', array(
-            'bestOf' => $bestOf
-        ));
+        if($bestOf->getByTag())
+        {
+            $bars = $this->container->get('bar.repository')->findBarsByTags($bestOf->getTagsIds());
+        }else{
+            $bars = $bestOf->getBars();
+        }
+
+        return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
+            array(
+                'bestOf'=> $bestOf,
+                'ymal'  => $bestOfs,
+                'bars'  => $bars
+            ));
     }
 
     // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")

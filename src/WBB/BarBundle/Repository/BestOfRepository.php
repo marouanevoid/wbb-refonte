@@ -26,7 +26,6 @@ class BestOfRepository extends EntityRepository
         $qb = $this->createQueryBuilder($this->getAlias());
         $qb
             ->select()
-//            ->where($qb->expr()->neq($this->getAlias().'.id', $bestof->getId()))
             ->where($qb->expr()->notIn($this->getAlias().'.id', $ids))
             ->orderBy($this->getAlias().'.onTop', 'desc');
 
@@ -39,13 +38,15 @@ class BestOfRepository extends EntityRepository
         if($bestof->getByTag()){
             // TODO common tags
             $qb
+                ->addSelect('count(t.id) as HIDDEN nbTags')
                 ->leftjoin($this->getAlias().'.tags', 'bt')
                 ->leftjoin('bt.tag', 't')
                 ->andWhere($qb->expr()->in('t.id', ':tags'))
-                ->setParameter('tags', $bestof->getTagsIds());
+                ->setParameter('tags', $bestof->getTagsIds())
+                ->groupBy($this->getAlias().'.id')
+                ->orderBy('nbTags','DESC')
+            ;
         }
-
-//        $qb->addOrderBy($this->getAlias().'.createdAt', 'desc');
         $qb->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();

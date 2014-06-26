@@ -5,13 +5,11 @@
     <script type="text/javascript">
         $(document).ready(function(){
             {% if city is defined %}
-            $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
+                $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
-            $.cookie('city', '{{ path('homepage') }}', { path: '/' });
+                $.cookie('city', '{{ path('homepage') }}', { path: '/' });
             {% endif %}
-
             initializeSliders();
-
         });
     </script>
 {% endblock %}
@@ -21,15 +19,12 @@
 {% block body %}
 
 <div>
-
     <!-- SUBHEADER -->
     <div class="container">
         <section class="sub-header">
             <table>
                 <tr>
-
                     <td></td>
-
                     <td class="title">
                         <h3>New York Best's</h3>
                         <h1 itemprop="name">{{ bestOf.name }}</h1>
@@ -37,7 +32,6 @@
                             {{ bestOf.description | raw }}
                         </h3>
                     </td>
-
                     <td class="star-share">
                         <a class="btn-round brown star" href=""></a><a class="btn-round brown share" href=""></a>
                     </td>
@@ -49,7 +43,6 @@
 
 <!-- BARS -->
 <div class="container bars full force-load">
-
     {% for b in bars %}
         {% if loop.index==3 %}
             <div class="four columns">
@@ -61,18 +54,15 @@
                 </div>
             </div>
         {% endif %}
-
         <div class="four columns">
-            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b.bar, 'bestof' : 1 } %}
+            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 } %}
         </div>
     {% endfor %}
 </div>
 
 <!-- ALSO LIKE -->
 <div class="container also-like l-margin">
-
     <div class="twelve columns">
-
         <section class="bestof">
             <div class="align-center l-margin-bottom">
                 {% if not is_mobile() or is_tablet() %}
@@ -80,14 +70,11 @@
                 {% endif %}
                 <h1>You may also like</h1>
             </div>
-
             <div class="ui-slider type-bestof has_sizer arrows dots" data-size="{% if not is_mobile() or is_tablet() %}3x3{% else %}4x3{% endif %}" data-display="{% if not is_mobile() or is_tablet() %}3{% else %}1{% endif %}">
-
                 {% for b in ymal |slice(0,3) %}
-
-                <div class="ui-slide">
-                    {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}
-                </div>
+                    <div class="ui-slide">
+                        {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}
+                    </div>
                 {% endfor %}
             </div>
         </section>
