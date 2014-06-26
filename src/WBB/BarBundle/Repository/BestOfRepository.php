@@ -39,8 +39,8 @@ class BestOfRepository extends EntityRepository
         if($bestof->getByTag()){
             // TODO common tags
             $qb
-                ->innerjoin($this->getAlias().'.tags', 'bt')
-                ->innerjoin('bt.tag', 't')
+                ->leftjoin($this->getAlias().'.tags', 'bt')
+                ->leftjoin('bt.tag', 't')
                 ->andWhere($qb->expr()->in('t.id', ':tags'))
                 ->setParameter('tags', $bestof->getTagsIds());
         }
