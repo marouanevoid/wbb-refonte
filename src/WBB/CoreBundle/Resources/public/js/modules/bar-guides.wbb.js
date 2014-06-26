@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+    $("form[name=filter]")[0].reset();
    var loadData = function(){
        var _type, _sortby, _limit, _display;
        if($("input[name=filter]:checked").val()=='best_of')
