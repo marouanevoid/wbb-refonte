@@ -27,6 +27,8 @@ function nodeToString ( node ) {
 }
 
 $(document).ready(function(){
+    var allInputs = $(":input");
+    $(allInputs).attr('autocomplete', 'off');
     $('#city_selector').change(function(){
         document.location = $(this).val();
     });
