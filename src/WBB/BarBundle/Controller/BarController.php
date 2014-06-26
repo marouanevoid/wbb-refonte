@@ -124,25 +124,40 @@ class BarController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
+        $bestOfs = array();
+        $bars = null;
 
         if (!$bestOf) {
             // TODO Does not work !
             $this->createNotFoundException('Not found !');
         }
 
-        $bestofsCount = $bestOf->getBestofs()->count();
+        foreach($bestOf->getBestofs() as $bo)
+        {
+            $bestOfs[] = $bo;
+        }
+
+        $bestofsCount = count($bestOfs);
         if ($bestofsCount < 3) {
-            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, null, (3 - $bestofsCount));
-            for ($index = 0; $index < (3 - $bestofsCount); $index++) {
-                if (isset($bestOfs[$index])) {
-                    $bestOf->addBestof($bestOfs[$index]);
-                }
+            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, null, (3 - $bestofsCount));
+            foreach($bestOfsTmp as $bo)
+            {
+                $bestOfs[] = $bo;
             }
         }
 
+        if($bestOf->getByTag())
+        {
+            $bars = $this->container->get('bar.repository')->findBarsByTags($bestOf->getTagsIds());
+        }else{
+            $bars = $bestOf->getBars();
+        }
 
-        return $this->render('WBBBarBundle:BestOf:details_global.html.twig', array(
-                    'bestOf' => $bestOf
+        return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
+            array(
+                'bestOf'=> $bestOf,
+                'ymal'  => $bestOfs,
+                'bars'  => $bars
         ));
     }
 
