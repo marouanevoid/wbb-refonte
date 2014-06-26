@@ -94,6 +94,32 @@ class TipAdmin extends Admin {
         return $qb;
     }
 
+    public function getBatchActions()
+    {
+        // retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+
+        // check user permissions
+        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+            $actions['enabled']=[
+                'label'            => 'Enabled',
+                'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
+            ];
+
+            $actions['pending']=[
+                'label'            => 'Pending',
+                'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
+            ];
+
+            $actions['disabled']=[
+                'label'            => 'Disabled',
+                'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
+            ];
+        }
+
+        return $actions;
+    }
+
     /**
      * Default Datagrid values
      *

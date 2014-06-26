@@ -84,7 +84,7 @@ class BarController extends Controller
 
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
-        $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5);
+        $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5, false);
         // $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars($city);
         $response['city']       = $city;
 
@@ -132,7 +132,33 @@ class BarController extends Controller
 
         $bestofsCount = $bestOf->getBestofs()->count();
         if ($bestofsCount < 3) {
-            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf);
+            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, null, (3 - $bestofsCount));
+            for ($index = 0; $index < (3 - $bestofsCount); $index++) {
+                if (isset($bestOfs[$index])) {
+                    $bestOf->addBestof($bestOfs[$index]);
+                }
+            }
+        }
+
+
+        return $this->render('WBBBarBundle:BestOf:details_global.html.twig', array(
+                    'bestOf' => $bestOf
+        ));
+    }
+
+    public function bestOfCityAction($bestOfSlug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
+
+        if (!$bestOf) {
+            // TODO Does not work !
+            $this->createNotFoundException('Not found !');
+        }
+
+        $bestofsCount = $bestOf->getBestofs()->count();
+        if ($bestofsCount < 3) {
+            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, true);
             for ($index = 0; $index < 3 - $bestofsCount; $index++) {
                 if (isset($bestOfs[$index])) {
                     $bestOf->addBestof($bestOfs[$index]);
@@ -141,7 +167,7 @@ class BarController extends Controller
         }
 
         return $this->render('WBBBarBundle:BestOf:details_global.html.twig', array(
-                    'bestOf' => $bestOf
+            'bestOf' => $bestOf
         ));
     }
 

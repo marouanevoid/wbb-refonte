@@ -85,4 +85,4 @@ wbb_bar_bestof_global:
 
 wbb_bar_bestof_local:
     pattern: /best-of/{citySlug}/{bestOfSlug}
-    defaults: { _controller: WBBBarBundle:Bar:bestOf }
+    defaults: { _controller: WBBBarBundle:Bar:bestOfCity }

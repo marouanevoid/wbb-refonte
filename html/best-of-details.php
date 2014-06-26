@@ -13,9 +13,9 @@
 
                     <td class="title">
                         <h3>New York Best's</h3>
-                        <h1 itemprop="name">Rooftop Bars</h1>
+                        <h1>Rooftop Bars</h1>
                         <h3>
-                            We recently took our research on the roof,<br/>
+                            We recently took our research on the roof,
                             going all over the world to find the best rooftop bars.
                         </h3>
                     </td>
@@ -30,7 +30,7 @@
 </div>
 
 <!-- BARS -->
-<div class="container bars full force-load">
+<div class="container bars force-load">
 
     <?php for($i=1; $i<9; $i++): ?>
         <?php if($i==3): ?>
@@ -48,27 +48,27 @@
 <!-- ALSO LIKE -->
 <div class="container also-like l-margin">
 
-    <div class="twelve columns">
+    <section class="bestof force-load">
+        <div class="align-center l-margin-bottom">
+            <?php if( !$is_mobile ): ?>
+                <hr class="l-margin-bottom"/>
+            <?php endif ?>
+            <h1>You may also like</h1>
+        </div>
 
-        <section class="bestof">
-            <div class="align-center l-margin-bottom">
-                <?php if( !$is_mobile ): ?>
-                    <hr class="l-margin-bottom"/>
-                <?php endif ?>
-                <h1>You may also like</h1>
+        <?php if($is_mobile): ?>
+            <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1">
+        <?php endif ?>
+                <?php for($i=1; $i<4; $i++): ?>
+                <div class="four columns <?php if($is_mobile): ?>ui-slide<?php endif ?>">
+                    <?php include('components/bestof.php') ?>
+                </div>
+            <?php endfor ?>
+        <?php if($is_mobile): ?>
             </div>
+        <?php endif ?>
+    </section>
 
-            <div class="ui-slider type-bestof has_sizer arrows dots" data-size="<?php if(!$is_mobile): ?>3x3<?php else: ?>4x3<?php endif ?>" data-display="<?=$is_mobile?1:3?>">
-
-                <?php for($i=1; $i<7; $i++): ?>
-
-                    <div class="ui-slide">
-                        <?php include('components/bestof.php') ?>
-                    </div>
-                <?php endfor ?>
-            </div>
-        </section>
-    </div>
 </div>
 
 <!-- AD -->

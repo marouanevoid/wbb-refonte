@@ -139,7 +139,11 @@
 
                 {% for b in topBestofs %}
                     <div class="ui-slide">
-                        {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}
+                        {% if city is defined %}
+                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'withCity': true } %}
+                        {% else %}
+                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'withCity': false } %}
+                        {% endif %}
                     </div>
                 {% endfor %}
                 </div>
