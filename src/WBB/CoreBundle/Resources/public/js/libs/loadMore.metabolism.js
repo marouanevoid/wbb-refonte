@@ -114,6 +114,7 @@ meta.LoadMore = function(config) {
             {
                 that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
             }
+            $('.load-container').css('height');
         }
         that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
 

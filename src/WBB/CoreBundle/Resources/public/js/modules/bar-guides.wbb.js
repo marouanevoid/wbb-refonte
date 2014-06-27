@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
-    $("form[name=filter]")[0].reset();
-   var loadData = function(){
+   $("form[name=filter]")[0].reset();
+   var loadData = function(fit){
        var _type, _sortby, _limit, _display;
        if($("input[name=filter]:checked").val()=='best_of')
        {
@@ -28,12 +28,12 @@ $(document).ready(function()
        else
            _offset += 9;
        var Guides = new meta.LoadMore({$button:$(".load-more"), url:_url});
-       Guides._updateContent();
+       Guides._updateContent(fit);
    }
    $(".load-more").on('click', function()
    {
        $('.disableClick').show();
-       loadData();
+       loadData(false);
    });
    $("#criteria, input[name=view-type]").change(function(){
        $('.disableClick').show();
@@ -45,10 +45,10 @@ $(document).ready(function()
        }else{
            _limit = 9;
        }
-       $(".load-target").html('');
-       loadData();
+       //$(".load-target").html('');
+       loadData(true);
    });
-   loadData();
+   loadData(true);
 
     $('input[name=filter]').change(function()
     {
@@ -71,8 +71,8 @@ $(document).ready(function()
             }
             _limit = 9;
         }
-        $(".load-target").html('');
-        loadData();
+        //$(".load-target").html('');
+        loadData(true);
     });
 });
 
