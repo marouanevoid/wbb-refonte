@@ -1,17 +1,17 @@
-**
-* Slider
-*
-* Copyright (c) 2014 - Metabolism
-    * Author:
-*   - Jérome Barbato <jerome@metabolism.fr>
-*
-    * License: GPL
-* Version: 1.0
-*
-* Requires:
-    *   - jQuery
-        *
-        **/
+/**
+ * Slider
+ *
+ * Copyright (c) 2014 - Metabolism
+ * Author:
+ *   - JÃ©rome Barbato <jerome@metabolism.fr>
+ *
+ * License: GPL
+ * Version: 1.0
+ *
+ * Requires:
+ *   - jQuery
+ *
+ **/
 
 /**
  * metabolism namespace.
