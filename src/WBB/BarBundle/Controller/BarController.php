@@ -159,7 +159,7 @@ class BarController extends Controller
             }
         }
 
-        if(!$bestOf->getOrdered()){
+        if(!$bestOf->getOrdered() and $bars){
             shuffle($bars);
         }
 
