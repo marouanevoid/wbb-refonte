@@ -1,11 +1,6 @@
 $(document).ready(function()
 {
    $("form[name=filter]")[0].reset();
-   var height = $('.load-container').height();
-   $('.load-container').on('resize', function(){
-       height = $(this).height();
-   });
-   console.log('DIV HEIGHT : ' + height);
    var loadData = function(){
        var _type, _sortby, _limit, _display;
        if($("input[name=filter]:checked").val()=='best_of')
