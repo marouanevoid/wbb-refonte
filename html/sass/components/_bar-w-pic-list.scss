@@ -4,7 +4,7 @@
   h3 { text-transform: none; a{color: $color-dark-gray} }
   .nine.columns {
     .tags { font-size: 1.5em; color: $color-medium-gray; position: absolute; bottom: 1.5em; left: 25%;  margin-left: 1.16667%;
-      &:before{ vertical-align: middle; content: ''; display: block; float: left; width: 16px; height: 16px; margin-right: 10px; background: url("../images/icons/tag-gray.png") center no-repeat; background-size: 100% auto; }
+      &:before{ margin-bottom: 10px; vertical-align: middle; content: ''; display: block; float: left; width: 16px; height: 16px; margin-right: 10px; background: url("../images/icons/tag-gray.png") center no-repeat; background-size: 100% auto; }
     }
   }
   .separator { position: absolute; bottom: 0; left:23.9%; right:1.16667%; hr{ padding: 0; margin: 0 } }

@@ -883,10 +883,10 @@ select {
   -webkit-border-radius: 4px;
   border-radius: 4px;
   font: 1.4em "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 150%;
   color: #818a8c;
   margin: 0;
   background: #fff;
+  line-height: 1em;
   -webkit-transition: border 0.2s ease-in-out;
   -moz-transition: border 0.2s ease-in-out;
   -o-transition: border 0.2s ease-in-out;
@@ -1761,6 +1761,7 @@ header.desktop .nav form {
 }
 /* line 30, ../sass/_header.scss */
 header.desktop .nav form input[type="text"] {
+  line-height: 150%;
   background-color: transparent;
   border: none;
   font-size: 3em;
@@ -2750,14 +2751,14 @@ section.bar-finder table tr:nth-child(2) td:nth-child(8) {
   left: -3.5em;
   border-radius: 50% 0 0 50%;
   border-right: 0;
-  margin-left: 0;
+  margin-left: 1px;
 }
 /* line 77, ../sass/components/_ui-slider.scss */
 .ui-slider.type-cities .arrows .right, .ui-slider.type-bestof .arrows .right {
   right: -3.5em;
   border-radius: 0 50% 50% 0;
   border-left: 0;
-  margin-right: 0;
+  margin-right: 1px;
 }
 /* line 81, ../sass/components/_ui-slider.scss */
 .ui-slider.type-cities {
@@ -2823,8 +2824,8 @@ html.webkit .ui-slide {
 }
 
 /* line 125, ../sass/components/_ui-slider.scss */
-html.no-csstransforms3d .ui-slider.type-cities .ui-slides, html.no-csstransforms3d .ui-slider.type-bestof .ui-slides {
-  width: 100.5%;
+html.firefox .ui-slider.type-cities .ui-slides, html.firefox .ui-slider.type-bestof .ui-slides, html.no-csstransforms3d .ui-slider.type-cities .ui-slides, html.no-csstransforms3d .ui-slider.type-bestof .ui-slides {
+  width: 100.6%;
 }
 
 /* line 132, ../sass/components/_ui-slider.scss */
@@ -2896,13 +2897,15 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   text-align: left;
   padding-right: 30px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* line 27, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown span:after, .ui-dropdown-container .ui-dropdown span:before {
   content: '';
   background: url("../images/sprite.png") no-repeat;
   background-size: 256px 512px;
-  background-position: -160px 0;
+  background-position: -162px 0;
   position: absolute;
   top: 50%;
   right: -15px;
@@ -2912,7 +2915,7 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
 }
 /* line 28, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown span:before {
-  background-position: -160px -40px;
+  background-position: -162px -40px;
   opacity: 0;
 }
 /* line 30, ../sass/components/_ui-dropdown.scss */
@@ -3566,6 +3569,7 @@ html.mobile .bar-w-pic:hover .txt h3 {
 }
 /* line 7, ../sass/components/_bar-w-pic-list.scss */
 .bar-w-pic-list .nine.columns .tags:before {
+  margin-bottom: 10px;
   vertical-align: middle;
   content: '';
   display: block;
@@ -4653,20 +4657,24 @@ body.search .search-bar-mobile + .container {
   margin-right: auto;
   white-space: normal;
 }
-/* line 15, ../sass/pages/_best-of-details.scss */
+/* line 12, ../sass/pages/_best-of-details.scss */
+.best-of-details .sub-header .star-share {
+  vertical-align: top;
+}
+/* line 16, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.bars .four.columns {
   margin-top: 3em;
 }
-/* line 16, ../sass/pages/_best-of-details.scss */
+/* line 17, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.bars .four.columns:nth-child(1), .best-of-details .container.bars .four.columns:nth-child(2), .best-of-details .container.bars .four.columns:nth-child(3) {
   margin-top: 0;
 }
-/* line 22, ../sass/pages/_best-of-details.scss */
+/* line 23, ../sass/pages/_best-of-details.scss */
 .best-of-details .bestof .align-center {
   margin-left: 1.1667%;
   margin-right: 1.1667%;
 }
-/* line 24, ../sass/pages/_best-of-details.scss */
+/* line 25, ../sass/pages/_best-of-details.scss */
 .best-of-details .side-ad {
   margin-top: 0;
   width: 100%;
@@ -4674,14 +4682,14 @@ body.search .search-bar-mobile + .container {
   outline: 0;
   padding: 0;
 }
-/* line 25, ../sass/pages/_best-of-details.scss */
+/* line 26, ../sass/pages/_best-of-details.scss */
 .best-of-details .side-ad .txt {
   position: static;
   margin-right: 3.8em;
   margin-top: 1.2em;
   margin-bottom: 1em;
 }
-/* line 26, ../sass/pages/_best-of-details.scss */
+/* line 27, ../sass/pages/_best-of-details.scss */
 .best-of-details .side-ad img {
   width: 80%;
   height: auto;
@@ -4690,23 +4698,23 @@ body.search .search-bar-mobile + .container {
   margin-bottom: 4px;
   margin-top: 1px;
 }
-/* line 30, ../sass/pages/_best-of-details.scss */
+/* line 31, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.also-like h1 {
   color: #b3955f;
 }
 @media only screen and (max-width: 768px) {
-  /* line 36, ../sass/pages/_best-of-details.scss */
+  /* line 37, ../sass/pages/_best-of-details.scss */
   .best-of-details .container.bars .four.columns {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     margin-top: 1em;
   }
-  /* line 38, ../sass/pages/_best-of-details.scss */
+  /* line 39, ../sass/pages/_best-of-details.scss */
   .best-of-details .container.bars .four.columns:nth-child(2) {
     margin-top: 1em;
   }
-  /* line 39, ../sass/pages/_best-of-details.scss */
+  /* line 40, ../sass/pages/_best-of-details.scss */
   .best-of-details .container.bars .four.columns:nth-child(3) {
     margin-top: 3em;
   }
@@ -5088,20 +5096,24 @@ section.bar-filter .bars-w-pic .three.columns {
     width: 120px;
     font-size: 90%;
   }
-  /* line 27, ../sass/pages/_bar-guides.scss */
+  /* line 28, ../sass/pages/_bar-guides.scss */
+  section.bar-filter .sort-by .ui-dropdown span {
+    padding-right: 15px;
+  }
+  /* line 30, ../sass/pages/_bar-guides.scss */
   section.bar-filter .sort-by .btn-radius:last-of-type {
     margin-right: 0.2em;
   }
-  /* line 29, ../sass/pages/_bar-guides.scss */
+  /* line 32, ../sass/pages/_bar-guides.scss */
   section.bar-filter .bars-w-pic {
     width: 100%;
   }
-  /* line 30, ../sass/pages/_bar-guides.scss */
+  /* line 33, ../sass/pages/_bar-guides.scss */
   section.bar-filter .bar-w-pic {
     border-right: 1px solid transparent;
   }
 
-  /* line 34, ../sass/pages/_bar-guides.scss */
+  /* line 37, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic, section.bar-filter .bar-w-pic {
     width: 50%;
     float: left;
@@ -5109,59 +5121,59 @@ section.bar-filter .bars-w-pic .three.columns {
     border-left: 1px solid transparent;
     border-bottom: 1px solid transparent;
   }
-  /* line 36, ../sass/pages/_bar-guides.scss */
+  /* line 39, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
     font-size: 80%;
   }
-  /* line 37, ../sass/pages/_bar-guides.scss */
+  /* line 40, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic .btn-round, section.bar-filter .bar-w-pic .btn-round {
     width: 20px;
     height: 20px;
     right: 0.5em;
     top: 0.5em;
   }
-  /* line 39, ../sass/pages/_bar-guides.scss */
+  /* line 42, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {
     background-size: 128px 256px;
     background-position: -80px -40px;
   }
-  /* line 42, ../sass/pages/_bar-guides.scss */
+  /* line 45, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic.list, section.bar-filter .bar-w-pic.list {
     width: 100%;
   }
 
-  /* line 46, ../sass/pages/_bar-guides.scss */
+  /* line 49, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic:first-child {
     width: 100%;
     float: none;
   }
-  /* line 48, ../sass/pages/_bar-guides.scss */
+  /* line 51, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic:first-child .txt {
     font-size: 100%;
   }
-  /* line 49, ../sass/pages/_bar-guides.scss */
+  /* line 52, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic:first-child .btn-round {
     width: 40px;
     height: 40px;
     right: 1em;
     top: 1em;
   }
-  /* line 51, ../sass/pages/_bar-guides.scss */
+  /* line 54, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic:first-child .btn-round:before {
     background-size: 256px 512px;
     background-position: -160px -80px;
   }
-  /* line 54, ../sass/pages/_bar-guides.scss */
+  /* line 57, ../sass/pages/_bar-guides.scss */
   section.bars .bar-w-pic {
     border-right: 1px solid transparent;
   }
 
-  /* line 57, ../sass/pages/_bar-guides.scss */
+  /* line 60, ../sass/pages/_bar-guides.scss */
   .full-cream {
     padding-bottom: 2em;
   }
 
-  /* line 58, ../sass/pages/_bar-guides.scss */
+  /* line 61, ../sass/pages/_bar-guides.scss */
   footer .left.right {
     margin-top: 0 !important;
   }

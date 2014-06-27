@@ -63,10 +63,10 @@ select {
   -webkit-border-radius: 4px;
   border-radius: 4px;
   font: 1.4em "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 150%;
   color: $color-medium-gray;
   margin: 0;
   background: #fff;
+  line-height: 1em;
   @include transition(border 0.2s ease-in-out)
 }
 textarea{ overflow: auto }

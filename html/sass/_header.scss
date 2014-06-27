@@ -28,7 +28,7 @@
         form{
           position: relative; top: -50%; display: none;
           input[type="text"] {
-            background-color: transparent; border: none; font-size: 3em; height: 100%; padding: 0 5%; width: 90%; font-weight: bold; color: $color-subtle-yellow; @include placeholder{ color: $color-subtle-yellow; font-weight: normal };
+            line-height: 150%; background-color: transparent; border: none; font-size: 3em; height: 100%; padding: 0 5%; width: 90%; font-weight: bold; color: $color-subtle-yellow; @include placeholder{ color: $color-subtle-yellow; font-weight: normal };
             &:focus { outline: none; @include box-shadow(none); }
           }
           .placeholder{  font-size: 3em; color: $color-subtle-yellow; position: absolute; left: 35px; top: 0; pointer-events:none }
