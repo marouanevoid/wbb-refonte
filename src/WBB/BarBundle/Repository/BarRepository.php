@@ -17,7 +17,6 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_COUNTRY = 2;
     const BAR_LOCATION_WORLDWIDE = 3;
 
-
     public function findAllEnabled($city = null, $suburb = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
@@ -219,7 +218,7 @@ class BarRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBarsByExactTags($tags)
+    public function findBarsByExactTags($bestof)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
@@ -229,10 +228,14 @@ class BarRepository extends EntityRepository
             ->innerjoin($this->getAlias().'.tags', 'bt')
             ->innerjoin('bt.tag', 't')
             ->andWhere($qb->expr()->in('t.id',':tags'))
-            ->setParameter('tags', $tags)
+            ->setParameter('tags', $bestof->getTagsIds())
             ->groupBy($this->getAlias().'.id')
-            ->having($qb->expr()->gte('nbTags', count($tags)))
+            ->having($qb->expr()->gte('nbTags', count($bestof->getTagsIds())))
         ;
+
+        if($bestof->getCity()){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $bestof->getCity()->getId()));
+        }
 
         return $qb->getQuery()->getResult();
     }

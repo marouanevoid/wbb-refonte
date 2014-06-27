@@ -120,12 +120,13 @@ class BarController extends Controller
         ));
     }
 
-    public function bestOfAction($bestOfSlug)
+    public function bestOfAction($bestOfSlug, $citySlug = false)
     {
         $em = $this->getDoctrine()->getManager();
         $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
         $bestOfs = array();
         $bars = null;
+        $byCity = ($citySlug)? true : null;
 
         if (!$bestOf) {
             // TODO Does not work !
@@ -140,7 +141,7 @@ class BarController extends Controller
         $bestofsCount = count($bestOfs);
 
         if ($bestofsCount < 3) {
-            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, null, (3 - $bestofsCount));
+            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount));
             foreach($bestOfsTmp as $bo)
             {
                 $bestOfs[] = $bo;
@@ -148,13 +149,13 @@ class BarController extends Controller
         }
 
         if($bestOf->getByTag()){
-            $barsTmp = $this->container->get('bar.repository')->findBarsByExactTags($bestOf->getTagsIds());
+            $barsTmp = $this->container->get('bar.repository')->findBarsByExactTags($bestOf);
             foreach($barsTmp as $bar){
                 $bars[] = $bar;
             }
         }else{
             foreach($bestOf->getBars() as $bar){
-                $bars[] = $bar->getBar();
+                $bars[] = $bar;
             }
         }
 
@@ -168,50 +169,6 @@ class BarController extends Controller
                 'bestofs'  => $bestOfs,
                 'bars'     => $bars
         ));
-    }
-
-    public function bestOfCityAction($bestOfSlug)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
-        $bestOfs = array();
-        $bars = null;
-
-        if (!$bestOf) {
-            // TODO Does not work !
-            $this->createNotFoundException('Not found !');
-        }
-
-        foreach($bestOf->getBestofs() as $bo)
-        {
-            $bestOfs[] = $bo;
-        }
-
-        $bestofsCount = count($bestOfs);
-
-        if ($bestofsCount < 3) {
-            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, true, (3 - $bestofsCount));
-            foreach($bestOfsTmp as $bo)
-            {
-                $bestOfs[] = $bo;
-            }
-        }
-
-        if($bestOf->getByTag())
-        {
-            $bars = $this->container->get('bar.repository')->findBarsByExactTags($bestOf->getTagsIds());
-        }else{
-            foreach($bestOf->getBars() as $bar){
-                $bars[] = $bar->getBar();
-            }
-        }
-
-        return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
-            array(
-                'bestOf'=> $bestOf,
-                'bestofs'  => $bestOfs,
-                'bars'  => $bars
-            ));
     }
 
     // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")

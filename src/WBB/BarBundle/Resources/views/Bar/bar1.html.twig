@@ -13,18 +13,18 @@
                 {% endfor%}
             </div>
             {% if bestof is defined %}
-            <div class="description">
-                {{ b.description|truncate(150, true)|striptags }}
-            </div>
+                <div class="description">
+                    {{ b.description|truncate(150, true)|striptags }}
+                </div>
             {% endif %}
         </div>
     </div>
     {% if b.suburb %}
-    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
     {% for m in b.medias|slice(0,1) %}
-       <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
     {% endfor %}
 </article>
