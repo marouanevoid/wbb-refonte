@@ -14,7 +14,7 @@ use Doctrine\ORM\Query\Expr;
  */
 class BestOfRepository extends EntityRepository
 {
-    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3)
+    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3, $forceTags = true)
     {
         $ids = array($bestof->getId());
         foreach($bestof->getBestofs() as $excludedBestof)
@@ -35,7 +35,7 @@ class BestOfRepository extends EntityRepository
                 ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
         }
 
-        if($bestof->getByTag()){
+        if($bestof->getByTag() and $forceTags){
             // TODO common tags
             $qb
                 ->addSelect('count(t.id) as HIDDEN nbTags')
@@ -51,7 +51,6 @@ class BestOfRepository extends EntityRepository
         }
 
         $qb->setMaxResults($limit);
-
 
         return $qb->getQuery()->getResult();
     }
