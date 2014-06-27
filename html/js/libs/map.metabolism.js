@@ -250,7 +250,7 @@ meta.Map = function(config){
                         if( typeof(context.id) != 'undefined')
                             $('#'+context.id ).click();
                     }
-                },
+                }/*,
                 cluster:{
                     radius: 15,
                     3: {
@@ -266,7 +266,7 @@ meta.Map = function(config){
                             gmap.setZoom(gmap.getZoom()+2);
                         }
                     }
-                }
+                }*/
             }
         });
 

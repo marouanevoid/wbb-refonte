@@ -96,7 +96,7 @@ meta.Slider = function(config){
 
         that.context.offset     = parseInt(10000/that.config.display_count)/100;
 
-        that.config.use_3D      = Modernizr.csstransforms3d;
+        that.config.use_3D      = Modernizr.csstransforms3d && !$('html').hasClass('firefox');
     };
 
 

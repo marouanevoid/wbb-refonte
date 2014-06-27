@@ -19,12 +19,17 @@ wbb.Cities = function () {
         is_clicked : false
     };
 
+    that.first_resize = true;
+    that.current_zoom_level = 3;
+    that.max_zoom_level_for_bars = 11;
+
     /* Search the bars after submitting */
     that._searchBars = function( city_id, neighborhood_id )
     {
         that._hideCitySelector();
         that._showBarsSelector();
         that.context.$container.find(".scroll-bars").find('ul').html("<span>Loading...</span>");
+        console.log("[Cities] _searchBars - neighborhood_id :" + neighborhood_id);
         that._requestBars(city_id, neighborhood_id, function(neighborhoods, bars)
         {
             if(neighborhoods.length) that._showNeighborhoodSelector(neighborhoods);
@@ -34,6 +39,8 @@ wbb.Cities = function () {
 
     that._requestBars = function( city_id, neighborhood_id, callback )
     {
+        console.log(" Request Bars : " + Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}));
+        console.log("[Cities] _requestBars - neighborhood_id :" + neighborhood_id);
         $.post(Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}), function( data )
         {
             if(data.code == 200 && callback)
@@ -55,7 +62,7 @@ wbb.Cities = function () {
             }
                 if(typeof bar.latitude != 'undefined' && typeof bar.longitude != 'undefined' && bar.latitude != null && bar.longitude != null){
                 if( display_list ) html += '<li value="'+(index+1)+'" data-id="'+ bar.id + '" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+address+'</span></li>';
-                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+address, options:{icon:BASEURL+'images/markers/'+(index+1)+'.png'}, id:bar.id});
+                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+address, options:{icon:BASEURL+'images/markers/'+(index+1)+'.png', optimized: false}, id:bar.id});
             }
         });
         if( display_list )
@@ -66,8 +73,8 @@ wbb.Cities = function () {
             else
                 $scrollBars.find('ul').html("No results");
 
-            //var api = $scrollBars.data('jsp');
-            //api.scrollToY(0, false);
+            var api = $scrollBars.data('jsp');
+            api.scrollToY(0, false);
 
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
@@ -88,6 +95,10 @@ wbb.Cities = function () {
     that._hideBarsSelector = function()
     {
         that.context.$container.find('.scroll-bars').hide();
+
+        that._showAllCities(fit);
+
+        if(fit) that.context.map.reset();
     };
 
     /* Hide City Selector to show Bars */
@@ -154,7 +165,11 @@ wbb.Cities = function () {
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
         {
             var marker = that.context.map.getMarker( $(this).attr('data-id') );
-            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(google.maps.Animation.BOUNCE);
+            if( typeof marker  != 'undefined' && marker )
+            {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function(){ marker.setAnimation(null) }, 700);
+            }
 
             if( $(this).closest('.scroll').hasClass('scroll-bars')  )
                 that.context.map.setCenter( marker.getPosition() );
@@ -209,32 +224,20 @@ wbb.Cities = function () {
 
         that.context.$container.find('form input[type=reset]').click(function(e)
         {
-            that.context.$container.find('form input[name=city]').prop('disabled', false);
-            that.context.$container.find('form input[type=submit]').show();
-            that.context.$container.find('form input[type=reset]').hide();
-
-            if( $('html').hasClass('ie9') )
-                that.context.$container.find('form input[name=city]').focus().blur();
-
-            that._showCitySelector();
-            that._removeNeighborhoodSelector();
-            that._hideBars();
-            $cities.find('ul').html("<span>Loading...</span>");
-            if( !$('html').hasClass('mobile') || $(window).width() > 640 )
-                that._showAllCities(true);
-            setTimeout(function(){ that._resize() }, 50);
-            that.context.$container.find('form input[type=submit]').attr("disabled", "disabled");
+            that._backToCities(true);
         });
 
 
         that.context.map.addZoomListener(function( zoomLevel ){
+            console.log("zooming..." + zoomLevel);
 
-            if( that.current_zoom_level > zoomLevel && zoomLevel == that.max_zoom_level_for_bars )
+            if( that.current_zoom_level > zoomLevel && zoomLevel == 6 )
             {
                 that._backToCities(false);
             }
 
             that.current_zoom_level = zoomLevel;
+            that._resize();
 
         });
 
@@ -244,7 +247,7 @@ wbb.Cities = function () {
                 that.context.map.zoomIn();
             else
                 that.context.map.zoomOut();
-            setTimeout(function(){ that._resize() }, 50);
+            //setTimeout(function(){ that._resize() }, 250);
         });
 
 
@@ -319,7 +322,7 @@ wbb.Cities = function () {
                 that.context.$container.find('form input[type=submit]').removeAttr("disabled");
             if($('form input[name=city]').val().length>2)
             {
-                $cities.find('ul').html("<span>Loading...</span>");
+                that.context.$container.find('.scroll-cities').find('ul').html("<span>Loading...</span>");
                 that.context.is_clicked = false;
                 that._requestCities($(this).val(), function(query, cities)
                 {
@@ -336,7 +339,7 @@ wbb.Cities = function () {
         $(document).on('change', '.selector select[name=neighborhood]', function()
         {
             var city_id         = that.context.city_id;
-            var neighborhood_id = $(this).val();
+            var neighborhood_id = $(".selector select[name=neighborhood] option[selected=selected]").val();
             that.context.$container.find(".scroll-bars").find('ul').html("<span>Loading...</span>");
             that._searchBars( city_id, neighborhood_id );
 
@@ -350,6 +353,25 @@ wbb.Cities = function () {
 
     };
 
+    that._backToCities = function( fit )
+    {
+        that.context.$container.find('form input[name=city]').prop('disabled', false);
+        that.context.$container.find('form input[type=submit]').show();
+        that.context.$container.find('form input[type=reset]').hide();
+
+        if( $('html').hasClass('ie9') )
+            that.context.$container.find('form input[name=city]').focus().blur();
+
+        that._showCitySelector();
+        that._removeNeighborhoodSelector();
+        that._hideBars(fit);
+        that.context.$container.find('.scroll-cities').find('ul').html("<span>Loading...</span>");
+        if( !$('html').hasClass('mobile') || $(window).width() > 640 )
+            that._showAllCities(true);
+        setTimeout(function(){ that._resize() }, 50);
+        that.context.$container.find('form input[type=submit]').attr("disabled", "disabled");
+    }
+
     that._showCitySelector = function()
     {
         that.context.$container.find('.scroll-cities').velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
@@ -362,15 +384,15 @@ wbb.Cities = function () {
         that.context.$container.find('.ui-dropdown-container').remove();
     };
 
-    that._hideBars = function()
+    that._hideBars = function(fit)
     {
         var $scrollBars = that.context.$container.find('.scroll-bars');
         $scrollBars.find('ul').empty();
         $scrollBars.hide();
 
-        that._showAllCities(true);
+        that._showAllCities(fit);
 
-        that.context.map.reset();
+        if(fit) that.context.map.reset();
 
     };
 
@@ -379,7 +401,8 @@ wbb.Cities = function () {
         that._requestCities("", function(query, cities)
         {
             that._showCities(query, cities, true, false);
-            that._openFilter();
+            if( !$('html').hasClass('mobile') || $(window).width() > 640 )
+                that._openFilter();
         });
     };
 
@@ -401,7 +424,7 @@ wbb.Cities = function () {
         {
             if(typeof city.latitude != 'undefined' && typeof city.longitude != 'undefined' && city.latitude != null && city.longitude != null){
                 if( display_list ) html += '<li data-id="'+city.id+'">'+city.name+'</li>';
-                markers.push({address:city.latitude+','+city.longitude, options:{icon:BASEURL+'images/map.pin.png'}, id:city.id});
+                markers.push({address:city.latitude+','+city.longitude, options:{icon:BASEURL+'images/map.pin.png', optimized: false}, id:city.id});
             }
         });
 
@@ -409,9 +432,15 @@ wbb.Cities = function () {
         {
             var $scrollCities = that.context.$container.find('.scroll-cities');
             if(cities.length>0)
+            {
                 $scrollCities.find('ul').html(html);
-            else
+                var api = $scrollCities.data('jsp');
+                api.scrollToY(0, false);
+            }else
+            {
                 $scrollCities.find('ul').html("No results");
+            }
+
         }
 
         that.context.map.addMarkers(markers, false);
@@ -426,7 +455,7 @@ wbb.Cities = function () {
         if( that.context.$container.find('select[name=neighborhood]').length ) return;
 
         var html = '<select name="neighborhood" class="ui-dropdown">';
-        html += '<option value="">All</option>';
+        html += '<option value="-1">All</option>';
         $.each(neighborhoods, function(index, neighborhood)
         {
             html += '<option value="'+neighborhood.id+'">'+neighborhood.name+'</option>';
@@ -461,8 +490,8 @@ wbb.Cities = function () {
 
                 var cities_height = $selector.height()-$head.height()-20;
 
-                $cities.height( cities_height );
-                $bars.height( cities_height-40 );
+                //$cities.height( cities_height );
+                //$bars.height( cities_height-40 );
             }
 
             $scroll.height( $selector.height()-$head.height()-25 );
@@ -499,8 +528,7 @@ wbb.Cities = function () {
         that.context.$container = $(that.config.container);
 
         that._setupEvents();
-        if( !$('html').hasClass('mobile') || $(window).width() > 640 )
-            that._showAllCities(false);
+        that._showAllCities(false);
 
         that._resize();
     };
