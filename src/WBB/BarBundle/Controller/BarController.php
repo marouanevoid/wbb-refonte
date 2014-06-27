@@ -119,6 +119,10 @@ class BarController extends Controller
             'tipForm'   => $form->createView()
         ));
     }
+    public function barFinderResultsAction()
+    {
+        return $this->render('WBBBarBundle:Bar:barFinderResults.html.twig');
+    }
 
     public function bestOfAction($bestOfSlug, $citySlug = false)
     {
