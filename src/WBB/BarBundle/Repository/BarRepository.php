@@ -218,4 +218,22 @@ class BarRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBarsByExactTags($tags)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias())
+            ->addSelect('count(t.id) as HIDDEN nbTags')
+            ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->innerjoin($this->getAlias().'.tags', 'bt')
+            ->innerjoin('bt.tag', 't')
+            ->andWhere($qb->expr()->in('t.id',':tags'))
+            ->setParameter('tags', $tags)
+            ->groupBy($this->getAlias().'.id')
+            ->having($qb->expr()->gte('nbTags', count($tags)))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

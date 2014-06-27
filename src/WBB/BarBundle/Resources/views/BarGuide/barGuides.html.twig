@@ -85,8 +85,8 @@
             {% if is_mobile() and not is_tablet() %}
 
             <div class="force-load">
-                {% for b in popularBars %}
-                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                {% for b in popularBars|slice(0,5) %}
+                    {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
                 {% endfor %}
             </div>
 
@@ -134,7 +134,7 @@
     <section class="bar-filter">
 
         <div class="container s-margin-bottom">
-
+            <form name="filter" autocomplete="off">
             <div class="twelve columns">
                 <hr class="l-margin-top m-margin-bottom"/>
             </div>
@@ -159,6 +159,7 @@
                 <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
                 <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
             </div>
+            </form>
         </div>
 
         <div class="container">
@@ -172,5 +173,10 @@
         </div>
 
     </section>
+
+
+{% endblock %}
+{% block footerAd %}
+    {{ parent() }}
 </div>
 {% endblock %}

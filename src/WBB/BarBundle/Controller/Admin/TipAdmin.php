@@ -101,20 +101,20 @@ class TipAdmin extends Admin {
 
         // check user permissions
         if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
-            $actions['enabled']=[
+            $actions['enabled'] = array(
                 'label'            => 'Enabled',
                 'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
-            ];
+            );
 
-            $actions['pending']=[
+            $actions['pending']=array(
                 'label'            => 'Pending',
                 'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
-            ];
+            );
 
-            $actions['disabled']=[
+            $actions['disabled']=array(
                 'label'            => 'Disabled',
                 'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
-            ];
+            );
         }
 
         return $actions;

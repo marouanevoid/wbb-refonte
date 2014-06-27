@@ -105,8 +105,8 @@
                                 <h3> {{ c.name }} </h3>
                                 <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
                             </div>
+                            <div class="overlay"></div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            <img class="overlay" src="{{ asset('bundles/wbbcore/images/city.background-circle.png') }}"/>
                             <img src="" class="scale-with-grid" data-src="{% path c.image, 'city_small' %}" alt="{{ c.name }}"/>
                         </article>
                     </div>

@@ -124,25 +124,49 @@ class BarController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
+        $bestOfs = array();
+        $bars = null;
 
         if (!$bestOf) {
             // TODO Does not work !
             $this->createNotFoundException('Not found !');
         }
 
-        $bestofsCount = $bestOf->getBestofs()->count();
+        foreach($bestOf->getBestofs() as $bo)
+        {
+            $bestOfs[] = $bo;
+        }
+
+        $bestofsCount = count($bestOfs);
+
         if ($bestofsCount < 3) {
-            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, null, (3 - $bestofsCount));
-            for ($index = 0; $index < (3 - $bestofsCount); $index++) {
-                if (isset($bestOfs[$index])) {
-                    $bestOf->addBestof($bestOfs[$index]);
-                }
+            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, null, (3 - $bestofsCount));
+            foreach($bestOfsTmp as $bo)
+            {
+                $bestOfs[] = $bo;
             }
         }
 
+        if($bestOf->getByTag()){
+            $barsTmp = $this->container->get('bar.repository')->findBarsByExactTags($bestOf->getTagsIds());
+            foreach($barsTmp as $bar){
+                $bars[] = $bar;
+            }
+        }else{
+            foreach($bestOf->getBars() as $bar){
+                $bars[] = $bar->getBar();
+            }
+        }
 
-        return $this->render('WBBBarBundle:BestOf:details_global.html.twig', array(
-                    'bestOf' => $bestOf
+        if(!$bestOf->getOrdered()){
+            shuffle($bars);
+        }
+
+        return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
+            array(
+                'bestOf'   => $bestOf,
+                'bestofs'  => $bestOfs,
+                'bars'     => $bars
         ));
     }
 
@@ -150,25 +174,44 @@ class BarController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
+        $bestOfs = array();
+        $bars = null;
 
         if (!$bestOf) {
             // TODO Does not work !
             $this->createNotFoundException('Not found !');
         }
 
-        $bestofsCount = $bestOf->getBestofs()->count();
+        foreach($bestOf->getBestofs() as $bo)
+        {
+            $bestOfs[] = $bo;
+        }
+
+        $bestofsCount = count($bestOfs);
+
         if ($bestofsCount < 3) {
-            $bestOfs = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, true);
-            for ($index = 0; $index < 3 - $bestofsCount; $index++) {
-                if (isset($bestOfs[$index])) {
-                    $bestOf->addBestof($bestOfs[$index]);
-                }
+            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, true, (3 - $bestofsCount));
+            foreach($bestOfsTmp as $bo)
+            {
+                $bestOfs[] = $bo;
             }
         }
 
-        return $this->render('WBBBarBundle:BestOf:details_global.html.twig', array(
-            'bestOf' => $bestOf
-        ));
+        if($bestOf->getByTag())
+        {
+            $bars = $this->container->get('bar.repository')->findBarsByExactTags($bestOf->getTagsIds());
+        }else{
+            foreach($bestOf->getBars() as $bar){
+                $bars[] = $bar->getBar();
+            }
+        }
+
+        return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
+            array(
+                'bestOf'=> $bestOf,
+                'bestofs'  => $bestOfs,
+                'bars'  => $bars
+            ));
     }
 
     // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")
@@ -180,16 +223,18 @@ class BarController extends Controller
         $nbResultsRemaining = null;
         $html               = null;
 
+        $cityObject = $this->container->get('city.repository')->findOneById($city);
+
         if($barsOnly){
             if($filter === "popularity"){
-                $response = $this->container->get('bar.repository')->findPopularBars($city, $limit, $offset);
-                $all = $this->container->get('bar.repository')->findPopularBars($city, 0, $offset);
+                $response = $this->container->get('bar.repository')->findPopularBars($cityObject, $limit, $offset);
+                $all = $this->container->get('bar.repository')->findPopularBars($cityObject, 0, $offset);
             }elseif($filter === "alphabetical"){
-                $response = $this->container->get('bar.repository')->findBarsOrderedByName($city, $offset ,$limit);
-                $all = $this->container->get('bar.repository')->findBarsOrderedByName($city, $offset , 0);
+                $response = $this->container->get('bar.repository')->findBarsOrderedByName($cityObject, $offset ,$limit);
+                $all = $this->container->get('bar.repository')->findBarsOrderedByName($cityObject, $offset , 0);
             }elseif($filter === "date"){
-                $response = $this->container->get('bar.repository')->findLatestBars($city, $limit, $offset, false);
-                $all = $this->container->get('bar.repository')->findLatestBars($city, 0, $offset, false);
+                $response = $this->container->get('bar.repository')->findLatestBars($cityObject, $limit, $offset, false);
+                $all = $this->container->get('bar.repository')->findLatestBars($cityObject, 0, $offset, false);
             }elseif($filter === "distance"){
                 $response = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, $limit);
                 $all = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, 0);
@@ -213,14 +258,14 @@ class BarController extends Controller
         }else{
             if($filter === "popularity"){
                 //TODO: Repository methode for popularity
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset, $limit);
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset, 0);
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, $limit);
+                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);
             }elseif($filter === "alphabetical"){
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset ,$limit);
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($city, $offset, 0);
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset ,$limit);
+                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);
             }elseif($filter === "date"){
-                $response = $this->container->get('bestof.repository')->findLatestBestofs($city, $limit, $offset, false);
-                $all = $this->container->get('bestof.repository')->findLatestBestofs($city, 0, $offset, false);
+                $response = $this->container->get('bestof.repository')->findLatestBestofs($cityObject, $limit, $offset, false);
+                $all = $this->container->get('bestof.repository')->findLatestBestofs($cityObject, 0, $offset, false);
             }
             if($display=="grid"){
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(

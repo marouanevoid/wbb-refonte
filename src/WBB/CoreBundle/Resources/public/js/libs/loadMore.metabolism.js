@@ -80,8 +80,6 @@ meta.LoadMore = function(config) {
             dataType: "json",
             success: function(msg) {
                 that.config.$target.append(msg.htmldata);
-                if(parseInt(msg.difference)==0)
-                    that.config.$button.hide();
 
                 if( callback ) callback();
                 that.config.$target.find(".line:last-child").hide();
@@ -92,6 +90,8 @@ meta.LoadMore = function(config) {
                     $(this).error(that._imageLoaded);
                     $(this).attr('src', $(this).data('src'));
                 });
+                if(parseInt(msg.difference)==0)
+                    that.config.$button.hide();
                 $('.disableClick').hide();
             },
             error: function(e) {
@@ -105,18 +105,20 @@ meta.LoadMore = function(config) {
         that.context.itemsNumber--;
         console.log(" itemsNumber : " + that.context.itemsNumber + " , " + $(this));
         $(this).removeAttr('data-src');
-        if (that.context.itemsNumber <= 0)
+        if (that.context.itemsNumber <= 0){
             that.config.$target.find(".line:last-child").show();
+            if($("input[name=filter]:checked").val()=='bar_list')
+            {
+                that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+            }else
+            {
+                that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
+            }
+            $('.load-container').css('height');
+        }
         that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
 
         that.context.is_loading = false;
-        if($("input[name=filter]:checked").val()=='bar_list')
-        {
-            that.config.$button.removeClass('loading').text( TRAD.common.morebars);
-        }else
-        {
-            that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
-        }
     }
 
     /**

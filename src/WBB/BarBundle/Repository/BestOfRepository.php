@@ -26,27 +26,32 @@ class BestOfRepository extends EntityRepository
         $qb = $this->createQueryBuilder($this->getAlias());
         $qb
             ->select()
-//            ->where($qb->expr()->neq($this->getAlias().'.id', $bestof->getId()))
             ->where($qb->expr()->notIn($this->getAlias().'.id', $ids))
             ->orderBy($this->getAlias().'.onTop', 'desc');
 
         if ($city) {
             $qb
                 ->leftJoin($this->getAlias().'.city', 'c')
-                ->andWhere($qb->expr()->eq($this->getAlias().'.city', $bestof->getCity()->getId()));
+                ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
         }
 
         if($bestof->getByTag()){
             // TODO common tags
             $qb
-                ->innerjoin($this->getAlias().'.tags', 'bt')
-                ->innerjoin('bt.tag', 't')
-                ->andWhere($qb->expr()->in('t.id',':tags'))
-                ->setParameter('tags', $bestof->getTagsIds());
+                ->addSelect('count(t.id) as HIDDEN nbTags')
+                ->leftjoin($this->getAlias().'.tags', 'bt')
+                ->leftjoin('bt.tag', 't')
+                ->andWhere($qb->expr()->in('t.id', ':tags'))
+                ->setParameter('tags', $bestof->getTagsIds())
+                ->groupBy($this->getAlias().'.id')
+                ->addOrderBy('nbTags','DESC')
+            ;
+        }else{
+            $qb->addOrderBy($this->getAlias().'.createdAt','DESC');
         }
 
-        $qb->addOrderBy($this->getAlias().'.createdAt', 'desc');
         $qb->setMaxResults($limit);
+
 
         return $qb->getQuery()->getResult();
     }
@@ -57,14 +62,13 @@ class BestOfRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->where($qb->expr()->eq(1, 1))
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
         ;
 
         if($onlyOnTop){
-            $qb->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
-        }else{
-            $qb->addOrderBy($this->getAlias().'.onTop', 'DESC');
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
         }
 
         if($city){
