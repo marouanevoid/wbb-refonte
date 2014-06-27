@@ -99,7 +99,9 @@ meta.Dropdown = function(config){
                 var index = $(this).index();
                 if( $options.filter(':disabled').length ) index++;
 
-                $options.eq( index ).attr('selected', 'selected');
+                $options.eq( index ).prop('selected', true);
+                //$options.eq( index ).attr('selected', 'selected');
+
                 that.config.$dropdown.trigger('change');
 
                 $(document).click();

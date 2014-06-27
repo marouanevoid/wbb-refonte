@@ -52,7 +52,7 @@ meta.Slider = function(config){
         swipe       : false,
         speed       : 400,
         easing      : 'easeInOutCubic',
-        default_img : BASEURL+'images/default.jpg',
+        default_img : 'images/default.jpg',
         animate_arrow   : false,
         autoplay_delay  : 5000,
         autoplay        : false,
@@ -96,7 +96,7 @@ meta.Slider = function(config){
 
         that.context.offset     = parseInt(10000/that.config.display_count)/100;
 
-        that.config.use_3D      = Modernizr.csstransforms3d;
+        that.config.use_3D      = Modernizr.csstransforms3d && !$('html').hasClass('firefox');
     };
 
 

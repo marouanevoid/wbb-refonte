@@ -339,7 +339,8 @@ wbb.Cities = function () {
         $(document).on('change', '.selector select[name=neighborhood]', function()
         {
             var city_id         = that.context.city_id;
-            var neighborhood_id = $(".selector select[name=neighborhood] option[selected=selected]").val();
+            var neighborhood_id = $(".selector select[name=neighborhood]").val();
+
             that.context.$container.find(".scroll-bars").find('ul').html("<span>Loading...</span>");
             that._searchBars( city_id, neighborhood_id );
 
