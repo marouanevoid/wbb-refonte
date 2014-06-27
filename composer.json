@@ -41,7 +41,6 @@
         "suncat/mobile-detect-bundle": "0.9.*",
         "avalanche123/imagine-bundle": "2.*",
         "jms/serializer-bundle": "0.13.*@dev",
-        "ddeboer/data-import": "dev-master",
         "ddeboer/data-import-bundle": "0.1"
 
     },
