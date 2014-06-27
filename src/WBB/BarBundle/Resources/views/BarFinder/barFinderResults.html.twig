@@ -50,6 +50,7 @@
 <div>
     <!-- SUBHEADER -->
     <div class="container">
+        {% if bars|length >0 %}
         <section class="sub-header">
             <table>
                 <tr>
@@ -57,7 +58,7 @@
                     <td class="title">
                         <h1 itemprop="name">Bar finder results</h1>
                         <h3>
-                            We found 443 bars that match your request!
+                            We found {{ bars|length }} bars that match your request!
                         </h3>
                     </td>
                     <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
@@ -74,8 +75,8 @@
                 </tr>
             </table>
         </section>
-
-        <section class="sub-header" style="">
+        {% else %}
+        <section class="sub-header">
             <table>
                 <tr>
                     <td></td>
@@ -92,9 +93,10 @@
                 </tr>
             </table>
         </section>
+        {% endif %}
     </div>
 </div>
-
+{% if bars|length >0 %}
 <section class="bar-filter">
     <div class="container">
         <div class="bars-w-pic force-load   load-container">
@@ -149,4 +151,5 @@
     </div>
 
 </section>
+{% endif %}
 {% endblock %}
