@@ -83,13 +83,13 @@ class BestOfRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8)
+    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8, $order = 'ASC')
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->orderBy($this->getAlias().'.name', 'ASC')
+            ->orderBy($this->getAlias().'.name', $order)
             ->setFirstResult($offset)
         ;
 

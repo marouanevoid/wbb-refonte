@@ -119,8 +119,9 @@ class BarController extends Controller
             'tipForm'   => $form->createView()
         ));
     }
-    public function barFinderResultsAction()
+    public function barFinderResultsAction($cityID)
     {
+
         return $this->render('WBBBarBundle:Bar:barFinderResults.html.twig');
     }
 
@@ -227,8 +228,8 @@ class BarController extends Controller
         }else{
             if($filter === "popularity"){
                 //TODO: Repository methode for popularity
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, $limit);
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, $limit, 'DESC');
+                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0, 'DESC');
             }elseif($filter === "alphabetical"){
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset ,$limit);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);
