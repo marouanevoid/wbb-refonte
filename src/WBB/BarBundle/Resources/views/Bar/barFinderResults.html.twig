@@ -1,0 +1,143 @@
+{% extends "::base.html.twig" %}
+{% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
+{% block title %}World Best Bars{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            {% if city is defined %}
+            $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
+            {% else %}
+            $.cookie('city', '{{ path('homepage') }}', { path: '/' });
+            {% endif %}
+            $('input[name=view-type]').change(function()
+            {
+                if( $('input[name=view-type]:checked').val() == "grid")
+                {
+                    $('.gridview').show();
+                    $('.listview').hide();
+                }
+                else
+                {
+                    $('.listview').show();
+                    $('.gridview').hide();
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block bodyTag %}
+<body class="bar-guides">
+{% endblock %}
+{% block body %}
+<style type="text/css">
+    section.bar-filter {
+        border-top : none !important;
+    }
+    section.bar-filter .bars-w-pic {
+        width: auto;
+    }
+    {% if is_mobile() and not is_tablet() %}
+        .filters {
+            margin: 15px 0 -15px 0;
+        }
+    {% else %}
+        .filters {
+            margin: 0;
+            padding: 0;
+        }
+    {% endif %}
+</style>
+<div>
+    <!-- SUBHEADER -->
+    <div class="container">
+        <section class="sub-header">
+            <table>
+                <tr>
+                    <td></td>
+                    <td class="title">
+                        <h1 itemprop="name">Bar finder results</h1>
+                        <h3>
+                            We found 443 bars that match your request!
+                        </h3>
+                    </td>
+                    <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
+                        <div class="container s-margin-bottom {% if not is_mobile() or is_tablet() %}align-right{% endif %}" {% if not is_mobile() or is_tablet() %}style="margin:0;"{% endif %}>
+                            <form name="filter" autocomplete="off">
+                                <div class="sort-by h3 filters">
+                                    <div class="disableClick"></div>
+                                    <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
+                                    <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </div>
+</div>
+
+<section class="bar-filter">
+    <div class="container">
+        <div class="bars-w-pic force-load   load-container">
+            <div class="load-target">
+                <div class="line gridview">
+                    {% for i in 0..15 %}
+                        {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
+                            <article class="bar-w-pic">
+                                <a href="#0" class="btn-round dark star"></a>
+                                <div class="txt">
+                                    <h2>White house</h2>
+                                    <h3>Parson's Green, London</h3>
+                                    <div class="hover">
+                                        <div class="tags">
+                                            rooftop, romance, ambiente
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#0" class="overlay-link"></a>
+                                <div class="color gradient"></div>
+                                <div class="color gray"></div>
+                                    <img class="scale-with-grid" data-src="http://wbb-dev.lapreprod.com/uploads/media/default/0001/01/thumb_49_default_slider_large.jpeg"  alt="bar" width="570" height="428"/>
+                            </article>
+                        {% if not is_mobile() or is_tablet() %}</div>{% endif %}
+                    {% endfor %}
+                </div>
+                <div class="line listview" style="display: none;">
+                    {% for i in 0..15 %}
+                        <article class="bar-w-pic-list">
+
+                            <div class="three columns s-margin-top">
+
+                                <div class="bar-w-pic list">
+
+                                    <a href="#0" class="btn-round dark star"></a>
+
+                                    <a href="#0" class="overlay-link"></a>
+
+                                        <img class="scale-with-grid" data-src="http://wbb-dev.lapreprod.com/uploads/media/default/0001/01/thumb_49_default_slider_large.jpeg"  alt="" width="570" height="428"/>
+                                </div>
+                            </div>
+
+                            <div class="nine columns s-margin-top">
+                                <h2 class="s-margin-top"><a href="#0">White house</a></h2>
+                                    <h3 class="xs-margin-top"><a href="#0">Parson's Green, London</a></h3>
+                                <p class="s-margin-top">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris erat libero, sagittis eu lacus ut, ullamcorper interdum enim. Etiam sagittis egestas vehicula. Duis cursus tellus et ullamcorper aliquet...
+                                </p>
+                                <div class="tags">Friendly, Classy, Luxury</div>
+                            </div>
+                            <div class="separator"><hr/></div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="twelve columns align-center m-margin load-more-container">
+                <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}
