@@ -55,7 +55,12 @@
             </div>
         {% endif %}
         <div class="four columns">
-            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
+            {% if bestOf.byTag %}
+                {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
+            {% else %}
+                {% include "WBBBarBundle:BestOf:bar.html.twig" with { 'b': b, 'bestof' : bestOf} %}
+            {% endif %}
+
         </div>
     {% endfor %}
 </div>

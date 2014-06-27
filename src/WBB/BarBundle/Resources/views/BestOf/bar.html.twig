@@ -1,0 +1,39 @@
+<article class="bar-w-pic best-of">
+    <a href="#0" class="btn-round dark star"></a>
+    <div class="txt">
+        {% if bestof.ordered %}
+            <span class="number h2">{{ loop.index }}</span>
+        {% endif %}
+        <h2>{{ b.bar.name }}</h2>
+        <h3>
+            {% if b.bar.suburb %}{{ b.bar.suburb.name|default('Unspecified') }}, {% endif %}
+            {% if b.bar.city %} {{ b.bar.city.name|default('Unspecified') }} {% endif %}
+        </h3>
+        <div class="hover">
+            <div class="tags">
+                {% for tr in b.bar.tags %}
+                    {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                {% endfor%}
+            </div>
+            <div class="description">
+                {% if b.description is empty %}
+                    {{ b.bar.description|truncate(150, true)|striptags }}
+                {% else %}
+                    {{ b.description|truncate(150, true)|striptags }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if b.bar.suburb and b.bar.city %}
+        <a href="{{ path('wbb_bar_details',{ city: b.bar.city, suburb: b.bar.suburb, slug: b.bar.slug }) }}" class="overlay-link"></a>
+    {% endif %}
+    <div class="color gradient"></div>
+    <div class="color gray"></div>
+    {% if b.media %}
+        <img class="scale-with-grid" data-src="{% path b.media, 'slider_large' %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
+    {% else %}
+        {% for m in b.bar.medias|slice(0,1) %}
+            <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
+        {% endfor %}
+    {% endif %}
+</article>
