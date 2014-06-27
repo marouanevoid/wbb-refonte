@@ -231,7 +231,7 @@ wbb.Map = function(config){
                         if( typeof(context.id) != 'undefined')
                             $('html').find("li[data-id=" + context.id + "]").click();
                     }
-                },
+                }/*,
                 cluster:{
                     radius: 15,
                     3: {
@@ -247,7 +247,7 @@ wbb.Map = function(config){
                             gmap.setZoom(gmap.getZoom()+2);
                         }
                     }
-                }
+                }*/
             }
         });
 
