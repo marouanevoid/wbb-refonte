@@ -1,17 +1,17 @@
-/**
- * Slider
- *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
- *
- * License: GPL
- * Version: 1.0
- *
- * Requires:
- *   - jQuery
- *
- **/
+**
+* Slider
+*
+* Copyright (c) 2014 - Metabolism
+    * Author:
+*   - Jérome Barbato <jerome@metabolism.fr>
+*
+    * License: GPL
+* Version: 1.0
+*
+* Requires:
+    *   - jQuery
+        *
+        **/
 
 /**
  * metabolism namespace.
@@ -108,9 +108,9 @@ meta.Slider = function(config){
         if( that.config.has_arrows ){
 
             that.context.$slider.append
-            (
-                '<div class="arrows"><a class="left"/><a class="right"/></div>'
-            );
+                (
+                    '<div class="arrows"><a class="left"/><a class="right"/></div>'
+                );
 
             that.context.$arrows = that.context.$slider.find('.arrows a');
 
@@ -121,9 +121,9 @@ meta.Slider = function(config){
         if( that.config.has_dots ){
 
             that.context.$slider.append
-            (
-                '<div class="dots"></div>'
-            );
+                (
+                    '<div class="dots"></div>'
+                );
 
             that.context.$dots = that.context.$slider.find('.dots');
 
@@ -212,17 +212,17 @@ meta.Slider = function(config){
 
         if( that.config.swipe ){
             that.context.$slider.swipe(
-            {
-                swipeLeft:function(){ that._slide('right') },
-                swipeRight:function(){ that._slide('left') },
-                tap:function(event, target){
-                    var $article  = $(target).closest('article');
-                    var href = $article.find('a.overlay-link').attr('href');
+                {
+                    swipeLeft:function(){ that._slide('right') },
+                    swipeRight:function(){ that._slide('left') },
+                    tap:function(event, target){
+                        var $article  = $(target).closest('article');
+                        var href = $article.find('a.overlay-link').attr('href');
 
-                    if( typeof(href) != "undefined") document.location.href = href;
-                },
-                threshold:20
-            });
+                        if( typeof(href) != "undefined") document.location.href = href;
+                    },
+                    threshold:20
+                });
         }
 
         if( that.config.autoplay ){
@@ -496,10 +496,10 @@ meta.Slider = function(config){
 
         if(
             that.is_running || that.context.$slider.hasClass('loading') ||
-            next_slide_index == first_slide_index ||
-            next_slide_index == last_slide_index
+                next_slide_index == first_slide_index ||
+                next_slide_index == last_slide_index
 
-        ) return;
+            ) return;
 
         that.is_running = true;
 
