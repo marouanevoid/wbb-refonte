@@ -1,0 +1,54 @@
+<section class="bar-finder">
+    <div class="container">
+        <img class="finder-arrow" src="{{ asset('bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
+        <div class="twelve columns">
+            <a class="finder-close"></a>
+            <form action="{{ path('wbb_bar_finder_results') }}" method="post">
+                <table>
+                    <tr>
+                        <td rowspan="2">
+                            <h2>Find Your<br/>Best Bar</h2>
+                        </td>
+                        <td><h3>City</h3></td>
+                        <td></td>
+                        <td><h3>To go out with</h3></td>
+                        <td></td>
+                        <td colspan="3"><h3>Mood</h3></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="ui-dropdown dark" name="city" data-class="with-icon city">
+                                <option value="">Choose a City</option>
+                                {% for city in cities %}
+                                    <option value="{{ city.slug }}">{{ city.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
+                        <td>
+                            <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
+                                <option value=""></option>
+                                {% for tag in firstTags %}
+                                    <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
+                        <td>
+                            <input type="radio" name="mood" value="chillout" class="ui-radio dark with-icon" data-color="brown" checked="checked"/>
+                        <td>
+                            <input type="radio" name="mood" value="casual" class="ui-radio dark with-icon"/>
+                        </td>
+                        <td>
+                            <input type="radio" name="mood" value="party" class="ui-radio dark with-icon"/>
+                        </td>
+                        <td>
+                            <input type="submit" class="btn-radius border brown go" value="GO"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,9 +1,7 @@
 {% if is_mobile() and not is_tablet() %}
     <div class="detect-scroll"></div>
     <aside class="mobile-menu">
-
         <table>
-
             <tr class="search">
                 <td>
                     <form class="dark">
@@ -12,7 +10,6 @@
                     </form>
                 </td>
             </tr>
-
             <tr class="header-nav">
                 <td>
                     <nav class="h3">
@@ -22,7 +19,6 @@
                     </nav>
                 </td>
             </tr>
-
             <tr class="links">
                 <td>
                     <a class="finder h3">
@@ -31,7 +27,6 @@
                     </a>
                 </td>
             </tr>
-
             <tr class="signin">
                 <td>
                     <span class="register h4">
@@ -41,7 +36,6 @@
                     </span>
                 </td>
             </tr>
-
             <tr class="footer-nav">
                 <td>
                     <nav class="h4">
@@ -54,7 +48,6 @@
                     </nav>
                 </td>
             </tr>
-
             <tr class="socials">
                 <td>
                     <a href="" class="facebook">
@@ -71,18 +64,15 @@
                     </a>
                 </td>
             </tr>
-
             <tr class="touch">
                 <td>
                     <h4 class="s-margin-bottom">Keep in touch</h4>
-
                     <div class="socials">
                         <div class="fb-like" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
                         <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a>
                     </div>
                 </td>
             </tr>
-
             <tr class="copyright">
                 <td>
                     <div class="copy h4">
@@ -92,13 +82,9 @@
             </tr>
         </table>
     </aside>
-
     <header class="mobile">
-
         <div class="container">
-
             <div class="twelve columns">
-
                 <table>
                     <tr>
                         <td class="nav-icon">
@@ -106,13 +92,11 @@
                                 <img src="{{ asset('bundles/wbbcore/images/icons/nav.mobile.png') }}" alt="nav.mobile" width="19" height="17"/>
                             </a>
                         </td>
-
                         <td class="logo">
                             <a href="{{ path('homepage',{city:1}) }}">
                                 <img src="{{ asset('bundles/wbbcore/images/logo.png') }}" alt="logo" width="104" height="56"/>
                             </a>
                         </td>
-
                         <td class="search-pin-icon">
                             <a href="{{ path('wbb_cities') }}">
                                 <img src="{{ asset('bundles/wbbcore/images/icons/pin.border.png') }}" alt="pin.border" width="12" height="16"/>
@@ -126,9 +110,7 @@
             </div>
         </div>
         <div class="search-bar-mobile nav">
-
             <div class="container">
-
                 <div class="twelve columns s-margin">
                     <form action="search.php">
                         <input type="text" name="q" placeholder="Search"/>
@@ -137,27 +119,20 @@
                     <a class="btn-radius border h4 close">Cancel</a>
                 </div>
             </div>
-
             <div class="search-result-proposal"><ul></ul></div>
-
         </div>
     </header>
 {% else %}
     <header class="desktop">
-
         <div class="container">
-
             <div class="twelve columns">
-
                 <table>
                     <tr>
-
                         <td class="logo">
                             <a href="{{ url('homepage') }}">
                                 <img src="{{ asset('bundles/wbbcore/images/logo-placeholder.png') }}" alt="logo" width="157" height="85"/>
                             </a>
                         </td>
-
                         <td class="nav">
                             {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
                             <nav class="h3">
@@ -169,33 +144,25 @@
                                 <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
                             </form>
                         </td>
-
                         <td class="bar-finder">
-
                             <div class="normal-mode">
                                 <a class="finder h3">
                                     <img src="{{ asset('bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
                                     Bar Finder
                                 </a>
-
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
-
                                 <a class="search" href="#0">
                                     <img src="{{ asset('bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
                                 </a>
                             </div>
                             <div class="search-mode">
                                 <a class="btn-round brown close"></a>
-
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
-
                                 <a href="" class="advanced-search h4">
                                     Advanced Search
                                 </a>
                             </div>
-
                         </td>
-
                         <td>
                             <span class="register h4">
                                 <a href="">Sign in</a>
@@ -207,77 +174,11 @@
                 </table>
             </div>
         </div>
-
         <div class="search-result-proposal"><ul></ul></div>
-
     </header>
 
+    {{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}
 
-
-    <section class="bar-finder">
-        <div class="container">
-
-            <img class="finder-arrow" src="{{ asset('bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
-
-            <div class="twelve columns">
-
-                <a class="finder-close"></a>
-
-                <form>
-                    <table>
-                        <tr>
-                            <td rowspan="2">
-                                <h2>Find Your<br/>Best Bar</h2>
-                            </td>
-                            <td><h3>City</h3></td>
-                            <td></td>
-                            <td><h3>To go out with</h3></td>
-                            <td></td>
-                            <td colspan="3"><h3>Mood</h3></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <select class="ui-dropdown dark" name="city" data-class="with-icon city">
-                                    <option disabled="disabled">Choose a City</option>
-                                    <option value="cty2">City 2</option>
-                                    <option value="cty3">City 3</option>
-                                    <option value="cty4">City 4</option>
-                                    <option value="cty5">City 5</option>
-                                    <option value="cty6">City 6</option>
-                                </select>
-                            </td>
-                            <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
-                            <td>
-                                <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
-                                    <option disabled="disabled">Friends...</option>
-                                    <option>Friends</option>
-                                    <option>Familly</option>
-                                    <option>Wife</option>
-                                    <option>Kids</option>
-                                    <option>Mother</option>
-                                </select>
-                            </td>
-                            <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
-                            <td>
-                                <input type="radio" name="mood" value="chillout" class="ui-radio dark with-icon" data-color="brown" checked="checked"/>
-                            <td>
-                                <input type="radio" name="mood" value="casual" class="ui-radio dark with-icon"/>
-                            </td>
-                            <td>
-                                <input type="radio" name="mood" value="party" class="ui-radio dark with-icon"/>
-                            </td>
-                            <td>
-                                <input type="submit" class="btn-radius border brown go" value="GO"/>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-
-            </div>
-
-        </div>
-    </section>
 {% endif %}
 <div class="entire-content">
     <div class="entire-content-scrollable">

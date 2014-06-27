@@ -239,4 +239,37 @@ class BarRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBarFromFinder($city = null, $tag = null, $mood = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->orderBy($this->getAlias().'.name', 'ASC')
+        ;
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        if($tag){
+            $qb
+                ->leftjoin($this->getAlias().'.tags', 'bt')
+                ->leftjoin('bt.tag', 't')
+                ->andWhere($qb->expr()->eq('t.id', $tag))
+            ;
+        }
+
+        if($mood){
+            $qb
+                ->leftjoin($this->getAlias().'.tags', 'bt2')
+                ->leftjoin('bt2.tag', 't2')
+                ->andWhere($qb->expr()->eq('t2.energyLevel', $mood))
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

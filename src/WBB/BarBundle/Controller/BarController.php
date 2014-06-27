@@ -3,8 +3,10 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
@@ -119,10 +121,44 @@ class BarController extends Controller
             'tipForm'   => $form->createView()
         ));
     }
-    public function barFinderResultsAction($cityID)
-    {
 
-        return $this->render('WBBBarBundle:Bar:barFinderResults.html.twig');
+    public function barFinderFormAction()
+    {
+        $toGoOutWith    = $this->container->get('tag.repository')->findOccasionTags();
+        $cities         = $this->container->get('city.repository')->findBarFinderCities();
+
+        return $this->render('WBBBarBundle:BarFinder:barFinderForm.html.twig', array(
+            'cities'    => $cities,
+            'firstTags' => $toGoOutWith
+        ));
+    }
+
+    public function barFinderResultsAction(Request $request)
+    {
+        $mood= null;
+        $city = null;
+        $tag = null;
+
+        if($request->request->get('mood') != "")
+        {
+            $mood = array_search(ucfirst($request->request->get('mood')), Tag::getEnergyLevels());
+        }
+
+        if($request->request->get('city') != "")
+        {
+            $city = $this->container->get('city.repository')->findOneBySlug($request->request->get('city'));
+        }
+
+        if($request->request->get('go_out') != "")
+        {
+            $tag = $request->request->get('go_out');
+        }
+
+        $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
+
+        return $this->render('WBBBarBundle:BarFinder:barFinderResults.html.twig', array(
+            'bars' => $bars
+        ));
     }
 
     public function bestOfAction($bestOfSlug, $citySlug = false)
