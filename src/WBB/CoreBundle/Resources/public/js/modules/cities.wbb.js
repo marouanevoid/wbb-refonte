@@ -328,7 +328,7 @@ wbb.Cities = function () {
                 {
                     that._showCities(query, cities, true, false, function(){
                         var $scrollCities = that.context.$container.find('.scroll-cities');
-                        $scrollCities.html($scrollCities.html().replace($('form input[name=city]').val(), '<strong>'+$('form input[name=city]').val()+'</strong>'));
+                        $scrollCities.html($scrollCities.html().replace($('form input[name=city]').val(), '<b>'+$('form input[name=city]').val()+'</b>'));
                     });
                 });
             }
