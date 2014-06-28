@@ -90,3 +90,11 @@ wbb_bar_bestof_local:
 wbb_bar_finder_results:
     pattern: /bar-finder-results
     defaults: { _controller: WBBBarBundle:Bar:barFinderResults }
+
+wbb_news_landing_page:
+    pattern: /news
+    defaults: { _controller: WBBBarBundle:News:landingPage }
+
+wbb_news_landing_page_city:
+    pattern: /news/{citySlug}
+    defaults: { _controller: WBBBarBundle:News:landingPage }

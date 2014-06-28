@@ -109,6 +109,11 @@ class City {
     private $bars;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="city", cascade={"all"})
+     */
+    private $semsoftBars;
+
+    /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\CityBestOf", mappedBy="city", cascade={"all"})
      */
     private $bestofs;  
@@ -393,131 +398,6 @@ class City {
         return $this->updatedAt;
     }
 
-//    /**
-//     * Set image
-//     *
-//     * @param  string   $image
-//     * @return BestOf
-//     */
-//    public function setImage($image) {
-//        $this->image = $image;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get image
-//     *
-//     * @return string
-//     */
-//    public function getImage() {
-//        return $this->image;
-//    }
-//
-//    /**
-//     * Sets file.
-//     *
-//     * @param UploadedFile $file
-//     */
-//    public function setFile(UploadedFile $file = null)
-//    {
-//        $this->file = $file;
-//        if (isset($this->image)) {
-//            $this->temp = $this->image;
-//            $this->image = null;
-//        } else {
-//            $this->image = 'initial';
-//        }
-//    }
-//
-//    /**
-//     * Get file.
-//     *
-//     * @return UploadedFile
-//     */
-//    public function getFile() {
-//        return $this->file;
-//    }
-//
-//    public function getAbsolutePath() {
-//
-//        return null === $this->image ? null : $this->getUploadRootDir() . '/' . $this->image;
-//    }
-//
-//    public function getWebPath() {
-//
-//        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
-//    }
-//
-//    protected function getUploadRootDir() {
-//        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
-//    }
-//
-//    protected function getUploadDir() {
-//        return 'uploads/cities';
-//    }
-//
-//    private $temp;
-//
-//    /**
-//     * preUpload
-//     */
-//    public function preUpload() {
-//        if (null !== $this->getFile()) {
-//            $filename = sha1(uniqid(mt_rand(), true));
-//            $this->image = $filename . '.' . $this->getFile()->guessExtension();
-//        }
-//    }
-//
-//    /**
-//     * upload
-//     */
-//    public function upload() {
-//
-//        if (null === $this->getFile()) {
-//            return;
-//        }
-//
-//        $this->getFile()->move($this->getUploadRootDir(), $this->image);
-//
-//        if (isset($this->temp) && file_exists($this->getUploadRootDir() . '/' . $this->temp)) {
-//            unlink($this->getUploadRootDir() . '/' . $this->temp);
-//            $this->temp = null;
-//        }
-//        $this->file = null;
-//    }
-//
-//    /**
-//     * removeUpload
-//     */
-//    public function removeUpload() {
-//        if ($file = $this->getAbsolutePath()) {
-//            unlink($file);
-//        }
-//    }
-
-    /**
-     * Set news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     * @return City
-     */
-    public function setNews(\WBB\BarBundle\Entity\News $news = null)
-    {
-        $this->news = $news;
-
-        return $this;
-    }
-
-    /**
-     * Get news
-     *
-     */
-    public function getNews()
-    {
-        return $this->news;
-    }
-
     /**
      * Add tags
      *
@@ -700,5 +580,48 @@ class City {
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @return City
+     */
+    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars[] = $semsoftBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     */
+    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars->removeElement($semsoftBars);
+    }
+
+    /**
+     * Get semsoftBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSemsoftBars()
+    {
+        return $this->semsoftBars;
+    }
+
+    /**
+     * Get news
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNews()
+    {
+        return $this->news;
     }
 }

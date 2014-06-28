@@ -46,6 +46,11 @@ class CitySuburb
     private $bars;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="suburb", cascade={"all"})
+     */
+    private $semsoftBars;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -230,5 +235,38 @@ class CitySuburb
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @return CitySuburb
+     */
+    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars[] = $semsoftBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     */
+    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars->removeElement($semsoftBars);
+    }
+
+    /**
+     * Get semsoftBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSemsoftBars()
+    {
+        return $this->semsoftBars;
     }
 }

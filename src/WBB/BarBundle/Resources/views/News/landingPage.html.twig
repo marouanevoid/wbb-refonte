@@ -1,0 +1,21 @@
+{% if city %}{{ city.name }}<br />{% endif %}
+
+<h1>Latest News</h1>
+{% for n in latest %}
+    {{ n.title }}<br/>
+{% endfor %}
+
+<h1>Articles</h1>
+{% for n in articles %}
+    {{ n.title }}<br/>
+{% endfor %}
+
+<h1>Interviews</h1>
+{% for n in interviews %}
+    {{ n.title }}<br/>
+{% endfor %}
+
+<h1>Other News</h1>
+{% for n in newsList %}
+    {{ n.title }}<br/>
+{% endfor %}

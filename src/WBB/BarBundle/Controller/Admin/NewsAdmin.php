@@ -134,7 +134,7 @@ class NewsAdmin extends Admin {
         
         if($object->getCities()){
             foreach ($object->getCities() as $city) {
-                $city->setNews($object);
+                $city->addNews($object);
             }
         }
         
@@ -154,7 +154,7 @@ class NewsAdmin extends Admin {
         
         if($object->getCities()){
             foreach ($object->getCities() as $city) {
-                $city->setNews($object);
+                $city->addNews($object);
             }
         }
     }
