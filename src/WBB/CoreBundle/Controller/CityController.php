@@ -45,7 +45,6 @@ class CityController extends Controller
     {
         if($suburbID=='undefined')
             $suburbID=0;
-
         if($cityID > 0)
         {
             $city = $this->container->get('city.repository')->findOneById($cityID);
@@ -57,9 +56,22 @@ class CityController extends Controller
 
             foreach($bars as $bar)
             {
+                $address = $city->getName();
+
+                $suburbBar = $bar->getSuburb();
+                if (!empty($suburbBar))
+                  $address = $suburbBar->getName().", ".$city->getName();
+
+                $addressBar = $bar->getAddress();
+                if (!empty($addressBar) && empty($suburbBar))
+                    $address = $addressBar.", ".$city->getName();
+
+                if (!empty($addressBar))
+                    $address = $addressBar.", ".$suburbBar->getName().", ".$city->getName();
+
                 $result['bars'][] = array(
                     'id'        => $bar->getId(),
-                    'address'   => $bar->getAddress(),
+                    'address'   => $address,
                     'name'      => $bar->getName(),
                     'url'       => $this->container->get('router')->generate('wbb_bar_details', array(
                             'slug'      => $bar->getSlug(),

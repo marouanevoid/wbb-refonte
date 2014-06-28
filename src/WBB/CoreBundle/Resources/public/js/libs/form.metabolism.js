@@ -76,38 +76,44 @@ meta.Form = function(config){
     that._sendData = function()
     {
         var data = that.form.serializeArray();
+        /*console.log(data[0].value.replace(/^\s+|\s+$/g,''));*/
         var url = that.form.attr('action');
-
-        $.post( url, data, function(data)
+        if(data[0].value.replace(/^\s+|\s+$/g,'')=="")
         {
-            if(data.code == 200)
+            $("form#tips textarea").val('');
+            that.form.find(".count").text("250 left");
+            $("form#tips textarea").focus();
+        }else
+        {
+            $.post( url, data, function(data)
             {
-                if( that.config.onComplete )
-                    that.config.onComplete( that.form, data );
-                if($('.insider-tips .three').length==0)
+                if(data.code == 200)
                 {
-                    $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
-                }else
-                {
-                    $('.line.wbbtips .three:first-child').after(data.tip);
-                }
-                if($('.insider-tips .three').length>=4 || ($('.insider-tips .three').length>=4 && ($('.insider-tips .three').length-4)%8!=0))
-                {
-                    if($('.line:last-child .three').length==0)
+                    if( that.config.onComplete )
+                        that.config.onComplete( that.form, data );
+                    if($('.insider-tips .three').length==0)
                     {
-                        $('.line:last-child').remove();
+                        $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
+                    }else
+                    {
+                        $('.line.wbbtips .three:first-child').after(data.tip);
                     }
-                    $('.line:last-child .three:last-child').remove();
-                }
-                console.log($(".line .three"))
+                    if($('.insider-tips .three').length>=4 || ($('.insider-tips .three').length>=4 && ($('.insider-tips .three').length-4)%8!=0))
+                    {
+                        if($('.line:last-child .three').length==0)
+                        {
+                            $('.line:last-child').remove();
+                        }
+                        $('.line:last-child .three:last-child').remove();
+                    }
 
-//                if($)
-            }
-            else
-            {
-                if( that.config.onError ) that.config.onError( that.form, data.message );
-            }
-        });
+                }
+                else
+                {
+                    if( that.config.onError ) that.config.onError( that.form, data.message );
+                }
+            });
+        }
     };
 
     that.__construct(config);

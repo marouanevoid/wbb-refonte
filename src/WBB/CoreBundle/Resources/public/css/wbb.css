@@ -90,6 +90,9 @@
         width: 50% !important;
     }
 }
+article.tip .form form .count.success {
+    color: #B3955F;
+}
 article.bar-wo-pic .btn-round.brown:hover {
     background: transparent !important;
 }

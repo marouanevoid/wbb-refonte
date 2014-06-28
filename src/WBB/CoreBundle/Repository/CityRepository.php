@@ -41,7 +41,9 @@ class CityRepository extends EntityRepository
         $qb
             ->select($this->getAlias())
             ->innerJoin($this->getAlias().".bars", "b")
+            ->leftJoin($this->getAlias().".country", "c")
             ->where($qb->expr()->like($this->getAlias().'.name', "'%".$keyword."%'"))
+            ->orWhere($qb->expr()->like('c.name', "'%".$keyword."%'"))
         ;
 
         return $qb->getQuery()->getResult();

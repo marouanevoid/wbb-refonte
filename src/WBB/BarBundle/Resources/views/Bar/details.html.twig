@@ -465,7 +465,8 @@
                         setTimeout(function()
                         {
                             //restore state
-                            $count.removeClass('success').text(count);
+                            $('form#tips textarea').val("");
+                            $count.removeClass('success').text("250 left");
 
                         }, 2000);
                     },

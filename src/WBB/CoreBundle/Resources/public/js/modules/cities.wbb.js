@@ -16,7 +16,8 @@ wbb.Cities = function () {
         //filter_is_open: false
         city_id : 0,
         neighborhood_id : 0,
-        is_clicked : false
+        is_clicked : false,
+        ajaxRequest : null
     };
 
     that.first_resize = true;
@@ -57,9 +58,11 @@ wbb.Cities = function () {
 
         $.each(bars, function(index, bar)
         {
+            address = "";
             if(typeof bar.address != 'undefined' && bar.address != null && bar.address != 'null'){
                 address = bar.address;
             }
+
                 if(typeof bar.latitude != 'undefined' && typeof bar.longitude != 'undefined' && bar.latitude != null && bar.longitude != null){
                 if( display_list ) html += '<li value="'+(index+1)+'" data-id="'+ bar.id + '" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+address+'</span></li>';
                 markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+address, options:{icon:BASEURL+'images/markers/'+(index+1)+'.png', optimized: false}, id:bar.id});
@@ -233,6 +236,7 @@ wbb.Cities = function () {
 
             if( that.current_zoom_level > zoomLevel && zoomLevel == 6 )
             {
+                $("form[name=filter]")[0].reset();
                 that._backToCities(false);
             }
 
@@ -320,7 +324,7 @@ wbb.Cities = function () {
                 that.context.$container.find('form input[type=submit]').attr("disabled", "disabled");
             else
                 that.context.$container.find('form input[type=submit]').removeAttr("disabled");
-            if($('form input[name=city]').val().length>2)
+            if($('form input[name=city]').val().length>2  || !$('form input[name=city]').val().length )
             {
                 that.context.$container.find('.scroll-cities').find('ul').html("<span>Loading...</span>");
                 that.context.is_clicked = false;
@@ -329,8 +333,11 @@ wbb.Cities = function () {
                     that._showCities(query, cities, true, false, function(){
                         var $scrollCities = that.context.$container.find('.scroll-cities');
 
-                        var re = new RegExp('(' + $('input[name=city]').val() + ')', 'gi');
-                        $scrollCities.html($scrollCities.html().replace(re, '<b>$1</b>'));
+                        if($('form input[name=city]').val().length > 0)
+                        {
+                            var re = new RegExp('(' + $('input[name=city]').val() + ')', 'gi');
+                            $scrollCities.html($scrollCities.html().replace(re, '<b>$1</b>'));
+                        }
                     });
                 });
             }
@@ -411,10 +418,19 @@ wbb.Cities = function () {
 
     that._requestCities = function( query, callback )
     {
-        $.get(Routing.generate('wbb_cities_list', {keywords: query}) , function( data )
-        {
-            if(data.code == 200 && callback)
-                callback(query, data.cities);
+        console.log("[Cities] _requestCities, URL : " + Routing.generate('wbb_cities_list', {keywords: query}));
+        that.context.ajaxRequest = $.ajax({
+                                            url: Routing.generate('wbb_cities_list', {keywords: query}) ,
+                                            success: function( data )
+                                            {
+                                                if(data.code == 200 && callback)
+                                                    callback(query, data.cities);
+                                            }, beforeSend: function()
+                                            {
+                                                console.log("beforeSend");
+                                                if (that.context.ajaxRequest != null)
+                                                    that.context.ajaxRequest.abort();
+                                            }
         });
     };
 

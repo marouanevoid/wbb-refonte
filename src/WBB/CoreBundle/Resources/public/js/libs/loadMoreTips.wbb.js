@@ -36,7 +36,7 @@ meta.LoadMoreTips = function(config) {
         var $target     = that.context.$container.find('.load-target');
 
         /* Récupérer la traduction pour loading */
-        that.config.$button.addClass('loading').text(TRAD.common.loading);
+        that.config.$button.addClass('loading').text(TRAD.common.loadmore);
         that._loadAjax(that.config.url, $target, function()
         {
 
