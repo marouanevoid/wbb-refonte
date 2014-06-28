@@ -86,7 +86,7 @@ class News {
     private $bars; 
     
     /**
-     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"all"})
      */
     private $cities;    
 
@@ -138,9 +138,9 @@ class News {
      * Constructor
      */
     public function __construct(){
-        $this->bars    = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->cities  = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->bestOfs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bars    = new ArrayCollection();
+        $this->cities  = new ArrayCollection();
+        $this->bestOfs = new ArrayCollection();
     }
 
     /**

@@ -12,16 +12,29 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class NewsRepository extends EntityRepository
 {
-    public function findLatestNews($city=null, $limit = 3)
+    public function findLatestNews($city = null, $limit = 3, $onlyOnTop = true, $asArray = false)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.isOnTop', $qb->expr()->literal(true)))
-            ->orderBy($this->getAlias().'.createdAt', 'DESC')
-            ->setMaxResults($limit)
+            ->where($qb->expr()->eq(1, 1))
         ;
+
+        if($limit > 0)
+        {
+            $qb->setMaxResults($limit);
+        }
+
+        if($onlyOnTop){
+            $qb
+                ->where($qb->expr()->eq($this->getAlias().'.isOnTop', $qb->expr()->literal(true)))
+                ->orderBy($this->getAlias().'.createdAt', 'DESC');
+        }else{
+            $qb
+                ->orderBy($this->getAlias().'.isOnTop', 'DESC')
+                ->addOrderBy($this->getAlias().'.createdAt', 'DESC');
+        }
 
         if($city){
             $qb
@@ -29,6 +42,9 @@ class NewsRepository extends EntityRepository
                 ->andWhere($qb->expr()->eq('c.id', $city->getId()));
         }
 
-        return $qb->getQuery()->getResult();
+        if($asArray)
+            return $qb->getQuery()->getArrayResult();
+        else
+            return $qb->getQuery()->getResult();
     }
 } 

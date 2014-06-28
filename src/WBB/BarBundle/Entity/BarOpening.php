@@ -50,6 +50,11 @@ class BarOpening
     private $bar;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", inversedBy="openings")
+     */
+    private $semsoftBar;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -241,5 +246,28 @@ class BarOpening
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set semsoftBar
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar
+     * @return BarOpening
+     */
+    public function setSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar = null)
+    {
+        $this->semsoftBar = $semsoftBar;
+
+        return $this;
+    }
+
+    /**
+     * Get semsoftBar
+     *
+     * @return \WBB\BarBundle\Entity\Semsoft\SemsoftBar 
+     */
+    public function getSemsoftBar()
+    {
+        return $this->semsoftBar;
     }
 }
