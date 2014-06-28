@@ -12,9 +12,6 @@
     {% endif %}
 
     <div class="title vcenter">
-        {% if has_quote is defined %}
-            <h2><a href="">{{ n.title }}</a></h2>
-        {% endif %}
 
         {% if has_text is defined %}
             <p class="m-margin">
@@ -22,15 +19,8 @@
             </p>
         {% endif %}
 
-        {% if has_quote is defined %}
-            <h1>
-                “ {{ n.quoteText }} ”
-            </h1>
-            <p class="m-margin">{{ n.quoteAuthor }}</p>
-        {% endif %}
-
         {% if has_image is defined %}
-            <a class="plus-btn" href=""></a>
+            <h2><a href="">{{ n.title }}</a></h2>
         {% endif %}
     </div>
 </article>
