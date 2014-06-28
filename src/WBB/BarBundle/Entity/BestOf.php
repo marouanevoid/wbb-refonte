@@ -627,7 +627,7 @@ class BestOf
 
     public function __construct(){
         $this->setOnTop(true);
-        $this->setByTag(true);
+        $this->setByTag(false);
         $this->setOrdered(true);
         
         $this->news = new \Doctrine\Common\Collections\ArrayCollection();
