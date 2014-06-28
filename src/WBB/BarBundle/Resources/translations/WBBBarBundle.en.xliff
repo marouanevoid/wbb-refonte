@@ -548,7 +548,7 @@
             </trans-unit>
             <trans-unit id="filter.label_bars">
                 <source>filter.label_bars</source>
-                <target>Link to bar</target>
+                <target>Bars</target>
             </trans-unit>
             <!-- cities -->
             <trans-unit id="form.label_cities">
