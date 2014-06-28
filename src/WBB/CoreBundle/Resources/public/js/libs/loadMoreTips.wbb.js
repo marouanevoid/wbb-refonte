@@ -87,7 +87,7 @@ meta.LoadMoreTips = function(config) {
                 if( callback ) callback();
                 that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
                 that.context.is_loading = false;
-                that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+                that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
             },
             error: function(e) {
                 console.log('Error : ' + e);
