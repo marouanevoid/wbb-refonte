@@ -1,17 +1,6 @@
 {% extends "::base.html.twig" %}
 {% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
 {% block title %}World Best Bars{% endblock %}
-{% block javascripts %}
-    <script type="text/javascript">
-        $(document).ready(function(){
-            {% if city is defined %}
-                $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
-            {% else %}
-                $.cookie('city', '{{ path('homepage') }}', { path: '/' });
-            {% endif %}
-        });
-    </script>
-{% endblock %}
 {% block bodyTag %}
 <body class="best-of-details">
 {% endblock %}
@@ -43,7 +32,7 @@
 <!-- BARS -->
 <div class="container bars force-load">
     {% for b in bars %}
-        {% if loop.index==3 and (not is_mobile() or is_tablet()) %}
+        {#{% if loop.index==3 and (not is_mobile() or is_tablet()) %}
             <div class="four columns">
                 <div class="block">
                     <div class="side-ad">
@@ -52,7 +41,7 @@
                     </div>
                 </div>
             </div>
-        {% endif %}
+        {% endif %}#}
         <div class="four columns">
             {% if bestOf.byTag %}
                 {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}

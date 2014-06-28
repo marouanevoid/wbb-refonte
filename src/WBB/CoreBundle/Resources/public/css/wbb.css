@@ -89,6 +89,9 @@
         margin-right: 0 !important;
         width: 50% !important;
     }
+    .best-of-details .container.bars .four.columns:nth-child(3) {
+        margin-top : 1em ;
+    }
 }
 article.tip .form form .count.success {
     color: #B3955F;

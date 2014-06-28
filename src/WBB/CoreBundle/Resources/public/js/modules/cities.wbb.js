@@ -42,10 +42,20 @@ wbb.Cities = function () {
     {
         console.log(" Request Bars : " + Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}));
         console.log("[Cities] _requestBars - neighborhood_id :" + neighborhood_id);
-        $.post(Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}), function( data )
-        {
-            if(data.code == 200 && callback)
-                callback(data.neighborhoods, data.bars);
+
+        that.context.ajaxRequest = $.ajax({
+                                            url: Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}),
+                                            success: function( data )
+                                            {
+                                                if(data.code == 200 && callback)
+                                                    callback(data.neighborhoods, data.bars);
+                                            },
+                                            beforeSend: function()
+                                            {
+                                                console.log("beforeSend");
+                                                if (that.context.ajaxRequest != null)
+                                                    that.context.ajaxRequest.abort();
+                                            }
         });
     };
 
@@ -71,6 +81,7 @@ wbb.Cities = function () {
         if( display_list )
         {
             var $scrollBars = that.context.$container.find('.scroll-bars');
+            $scrollBars.css({ opacity: 0 });
             if(bars.length>0)
                 $scrollBars.find('ul').html(html);
             else
@@ -79,8 +90,8 @@ wbb.Cities = function () {
             var api = $scrollBars.data('jsp');
             api.scrollToY(0, false);
 
-            $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
+            $scrollBars.velocity('fadeIn', { duration: that.config.speed});
             setTimeout(function(){ that._resize() }, 50);
         }
         that._hideCitySelector();
@@ -331,13 +342,13 @@ wbb.Cities = function () {
                 that._requestCities($(this).val(), function(query, cities)
                 {
                     that._showCities(query, cities, true, false, function(){
-                        var $scrollCities = that.context.$container.find('.scroll-cities');
+                        var $scrollCitiesItems = that.context.$container.find('.scroll-cities li');
 
-                        if($('form input[name=city]').val().length > 0)
+                        /*if($('form input[name=city]').val().length > 0)
                         {
-                            var re = new RegExp('(' + $('input[name=city]').val() + ')', 'gi');
-                            $scrollCities.html($scrollCities.html().replace(re, '<b>$1</b>'));
-                        }
+                            //var re = new RegExp('(' + $('input[name=city]').val() + ')', 'gi');
+                           // $scrollCitiesItems.html($scrollCitiesItems.html().replace(re, '<b>$1</b>'));
+                        }*/
                     });
                 });
             }
@@ -442,7 +453,13 @@ wbb.Cities = function () {
         $.each(cities, function(index, city)
         {
             if(typeof city.latitude != 'undefined' && typeof city.longitude != 'undefined' && city.latitude != null && city.longitude != null){
-                if( display_list ) html += '<li data-id="'+city.id+'">'+city.name+'</li>';
+                var cityName = city.name;
+                if (query != "")
+                {
+                    var re = new RegExp('(' + query + ')', 'gi');
+                    cityName = cityName.replace(re, '<b>$1</b>');
+                }
+                if( display_list ) html += '<li data-id="'+city.id+'">'+cityName+'</li>';
                 markers.push({address:city.latitude+','+city.longitude, options:{icon:BASEURL+'images/map.pin.png', optimized: false}, id:city.id});
             }
         });
