@@ -46,11 +46,11 @@ class BestOfRepository extends EntityRepository
                 ->groupBy($this->getAlias().'.id')
                 ->addOrderBy('nbTags','DESC')
             ;
-        }else{
-            $qb->addOrderBy($this->getAlias().'.createdAt','DESC');
         }
 
-        $qb->setMaxResults($limit);
+        $qb
+            ->addOrderBy($this->getAlias().'.createdAt','DESC')
+            ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
     }
