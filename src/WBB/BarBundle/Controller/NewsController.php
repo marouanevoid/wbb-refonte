@@ -41,13 +41,15 @@ class NewsController extends Controller
                 $newsList[] = $news;
             }
         }
-
+        $topCities = $this->container->get('city.repository')->findTopCities();
+        shuffle($topCities);
         return $this->render('WBBBarBundle:News:landingPage.html.twig', array(
             'city'      => $city,
             'latest'    => $latestNews,
             'articles'  => $articles,
             'interviews'=> $interviews,
-            'newsList'  => $newsList
+            'newsList'  => $newsList,
+            'topCities' => $topCities
         ));
     }
 }
