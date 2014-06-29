@@ -20,6 +20,16 @@
     }
   }
 
+  .articles article{
+    .img {
+      .cover{
+        .video{
+          background-image: url("../images/misc/play@2x.png")
+        }
+      }
+    }
+  }
+
   .bar-w-pic-list {
 
     .nine.columns .tags:before{ background-image: url("../images/icons/tag-gray@2x.png") }

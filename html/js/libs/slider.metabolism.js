@@ -96,14 +96,14 @@ meta.Slider = function(config){
 
         that.context.offset     = parseInt(10000/that.config.display_count)/100;
 
-        that.config.use_3D      = Modernizr.csstransforms3d && !$('html').hasClass('firefox');
+        that.config.use_3D      = Modernizr.csstransforms3d && ( $('html').hasClass('webkit') || $('html').hasClass('mobile') );
     };
 
 
 
     that._addComponents = function() {
 
-        that.context.$slider.wrapInner('<div class="ui-slides"/>');
+        that.context.$slider.wrapInner('<div class="ui-slides"><div class="ui-wrapper"/></div>');
 
         if( that.config.has_arrows ){
 
@@ -153,7 +153,7 @@ meta.Slider = function(config){
                     if( that.config.use_3D )
                         $(this).css({transform:'translate3d('+index*100+'%,0,0)'});
                     else
-                        $(this).css({left:index*that.context.offset+'%'});
+                        $(this).css({left:(Math.round(index*that.context.offset*100)/100)+'%'});
 
                 })
             }
@@ -198,7 +198,7 @@ meta.Slider = function(config){
             });
         }
 
-        if( that.config.has_dots ){
+        if( that.config.has_dots && $(window).width() > 640 ){
 
             that.context.$dots.click(function(e)
             {

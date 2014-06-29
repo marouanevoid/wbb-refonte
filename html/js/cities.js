@@ -22,7 +22,7 @@ var meta = meta || {};
 /**
  *
  */
-meta.Cities = function() {
+meta.CitiesPage = function() {
 
     var that = this;
 
@@ -39,6 +39,7 @@ meta.Cities = function() {
     that.first_resize = true;
     that.current_zoom_level = 3;
     that.max_zoom_level_for_bars = 11;
+    that.timer = false;
 
     /**
      *
@@ -232,22 +233,33 @@ meta.Cities = function() {
 
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
         {
-            var marker = that.context.map.getMarker( $(this).attr('id') );
+            var $this = $(this);
 
-            if( typeof marker  != 'undefined' && marker )
+            clearTimeout(that.timer);
+
+            that.timer = setTimeout(function()
             {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-                setTimeout(function(){ marker.setAnimation(null) }, 700);
-            }
+                var marker = that.context.map.getMarker( $this.attr('id') );
 
-            if( $(this).closest('.scroll').hasClass('scroll-bars')  )
-                that.context.map.setCenter( marker.getPosition() );
+                if( typeof marker  != 'undefined' && marker )
+                {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(function(){ marker.setAnimation(null) }, 700);
+                }
+
+                if( $this.closest('.scroll').hasClass('scroll-bars')  )
+                    that.context.map.setCenter( marker.getPosition() );
+
+            }, 200);
+
 
         });
 
 
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseleave', 'li', function()
         {
+            clearTimeout(that.timer);
+
             var marker = that.context.map.getMarker( $(this).attr('id') );
             if( typeof marker  != 'undefined' && marker ) marker.setAnimation(null);
         });
@@ -318,7 +330,7 @@ meta.Cities = function() {
         {
             if( !$('html').hasClass('mobile') || $(window).width() > 640 )
             {
-                that._openFilter();
+                setTimeout(function(){ that._openFilter() }, $('html').hasClass('mobile')?200:0 );
             }
             else
             {
@@ -497,6 +509,6 @@ meta.Cities = function() {
 
 $(document).ready(function()
 {
-    new meta.Cities();
+    new meta.CitiesPage();
 });
 

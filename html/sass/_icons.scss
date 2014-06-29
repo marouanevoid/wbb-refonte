@@ -33,7 +33,7 @@
   }
 
   &.dark.star.active{
-    opacity: 1;
+    opacity: 1; background: #333; border-color: #333;
     &:before{ background-position: -200px -160px }
   }
 

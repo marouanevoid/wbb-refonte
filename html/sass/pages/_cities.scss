@@ -26,8 +26,7 @@ body.cities {
       a{ background-color: $color-cream }
     }
     .selector{
-      position: absolute; left: 3%; top: 10%; bottom: auto; overflow: hidden; width: 23em; background: #fff; border: 10px solid $color-cream;
-      padding: 25px; @include transition( height 0.3s );
+      position: absolute; left: 3%; top: 10%; bottom: auto; overflow: hidden; width: 23em; background: #fff; border: 10px solid $color-cream; padding: 25px;
       h3{ color: $color-brown }
       form{
         input[type=reset]{ display: none }

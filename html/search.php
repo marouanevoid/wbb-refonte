@@ -1,5 +1,6 @@
 <?php $page = 'search' ?>
 <?php include('includes/head.php') ?>
+<script type="text/javascript" src="js/search.js"></script>
 
 <?php if($is_mobile): ?>
     <?php include('includes/mobile/search-bar.php') ?>
@@ -9,7 +10,7 @@
 
         <aside class="three columns filters">
 
-            <form>
+            <form id="filter">
 
                 <div class="reset m-margin-bottom">
                     <h3>Filters</h3>
@@ -17,7 +18,6 @@
                 </div>
 
                 <ul>
-                    <?php for($i=1; $i<5; $i++): ?>
                     <li>
                         <div class="drop-btn">
                             <h3>Location</h3>
@@ -37,45 +37,32 @@
                                 <option value="cty6">City 6</option>
                             </select>
 
-                            <label class="h3">Neigborhood</label>
+                            <div class="neigborhood">
+                                <label class="h3">Neigborhood</label>
+                                <ul></ul>
+                            </div>
 
-                            <ul>
-                               <li class="h4">
-                                    <label><input type="radio" name="neigborhoods"/><b></b>All Neigborhoods</label>
-                                    <div class="custom-scroll">
-                                        <ul>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                        </ul>
-                                   </div>
-                                </li>
-
-                                <li class="h4">
-                                    <label><input type="radio" name="neigborhoods"/><b></b>Some specific Neigborhoods</label>
-                                    <div class="custom-scroll">
-                                        <ul>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                            <li><label><input type="checkbox" name="neigborhood[]"/><b></b>Brooklyon</label></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </li>
-                    <?php endfor; ?>
+                    <li>
+                        <div class="drop-btn">
+                            <h3>Bar style</h3>
+                            <a class="btn-round plus brown"></a>
+                        </div>
+
+                        <div class="drop-list">
+
+                            <ul>
+                                <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Hotel Bar</label></li>
+                                <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Amazing Views</label></li>
+                                <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Speakeasy</label></li>
+                            </ul>
+
+                        </div>
+                    </li>
                 </ul>
 
-                <div class="submit m-margin-top">
+                <div class="submit s-margin-top">
                     <input type="submit" value="Apply Filters"/>
                 </div>
 
@@ -90,7 +77,7 @@
                 <h1>Search results</h1>
 
                 <div class="five columns m-margin">
-                    <form action="">
+                    <form id="search">
                         <input type="text" name="city" placeholder="Type your city name..."/>
                         <input type="submit" class="search" value=" "/>
                         <input type="reset" value=" "/>
@@ -181,21 +168,6 @@
                     });
                 });
             }
-        });
-
-        $('.search .drop-btn a').click(function(){
-            if( $(this).hasClass('plus') ) {
-                $(this).addClass('minus').removeClass('plus').parent().next('.drop-list').slideDown();
-            }
-            else {
-                $(this).addClass('plus').removeClass('minus').parent().next('.drop-list').slideUp();
-            }
-        });
-
-        $('input[type=radio]').change(function()
-        {
-            var $others = $(this).closest('form').find('input[name='+$(this).attr('name')+']');
-            $others.parent().next().find('input[type=checkbox]').prop('checked', false);
         });
 
         $('.filter-btn').click(function()

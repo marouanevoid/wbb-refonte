@@ -105,7 +105,7 @@
 </div>
 
 <!-- NEWS -->
-<div class="container l-margin-top m-padding-bottom">
+<div class="container l-margin-top <?=$is_mobile?'l':'m'?>-padding-bottom">
 
     <!-- LATEST ARTICLES -->
     <section class="articles eight columns">

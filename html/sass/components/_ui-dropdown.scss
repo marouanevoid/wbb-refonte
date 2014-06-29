@@ -53,7 +53,7 @@
       &:hover span:before, &.active span:before { opacity: 1 }
       .choice li:hover{ color:#fff }
       span{
-        &:before{ background-position: -160px -40px; z-index: 1; @include transition( opacity 0.2s ease-in-out) }
+        &:before{ background-position: -162px -40px; z-index: 1; @include transition( opacity 0.2s ease-in-out) }
       }
       .jspTrack{ background: $color-gray; border-color: $color-gray }
     }

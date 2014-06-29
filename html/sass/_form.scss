@@ -72,11 +72,13 @@ select {
 textarea{ overflow: auto }
 input[type="text"],
 input[type="password"],
-input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; color:$color-brown; @include placeholder{ color: $color-brown } }
+input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; color:$color-brown; @include placeholder{ color: $color-brown }; -webkit-appearance:none }
 input[type="submit"], input[type="reset"]{
   @include transition( background-color 0.2s ease-in-out, color 0.2s ease-in-out );
   &:hover{ background-color: $color-brown; color: #fff }
 }
+
+input[type="text"]:disabled{ -webkit-text-fill-color:$color-brown; opacity: 1 }
 
 label{
   position: relative;
@@ -106,7 +108,7 @@ input[type="text"]+input[type="submit"]{ border-radius: 0 25px 25px 0; position:
 }
 
 
-input[type="text"]+input[type="submit"].search+input[type="reset"] { margin-right: 2.7em; }
+input[type="text"]+input[type="submit"].search+input[type="reset"] { margin-right: 2.7em; display: none }
 
 form.dark input[type="text"]+input[type="submit"]{
   background: url('../images/sprite.png') no-repeat $color-gray; height: 40px; border-left:1px solid $color-dark-gray; box-shadow: none;

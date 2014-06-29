@@ -130,6 +130,17 @@ meta.App = function() {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
             threshold:30
         });
+
+        /* bind events */
+        $(document).on('focus', 'input[type=text], textarea', function()
+        {
+            $('body').addClass('fixfixed');
+        })
+        .on('blur', 'input[type=text], textarea', function()
+        {
+            $('body').removeClass('fixfixed');
+            if( $(window).width() < 640 ) $('html,body').animate({scrollTop: $(window).scrollTop()-$('header.mobile').height()}, 300);
+        });
     };
 
 

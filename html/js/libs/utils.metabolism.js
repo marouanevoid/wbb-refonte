@@ -51,7 +51,7 @@ meta.Utils = function() {
         $covers.each(function()
         {
             var $cover              = $(this);
-            var $element            = $cover.find(' > *');
+            var $element            = $cover.find(' > img');
             var ratio               = $element.data('ratio');
             var margin              = parseInt($cover.data('margin'));
             if( isNaN(margin)) margin = 0;
@@ -81,7 +81,7 @@ meta.Utils = function() {
 
         $covers.each(function()
         {
-            var $element   = $(this).find(' > *');
+            var $element   = $(this).find(' > img');
             $element.data('ratio', parseInt($element.attr('width'))/parseInt($element.attr('height')));
         });
 
@@ -187,6 +187,7 @@ meta.Utils = function() {
             that._detectSmartphone();
             that._sizer();
             that._cover();
+            that._resizeCover();
             that._matchElements();
             that._svgPlaceholder();
         });
