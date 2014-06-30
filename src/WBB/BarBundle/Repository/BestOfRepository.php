@@ -26,6 +26,7 @@ class BestOfRepository extends EntityRepository
         $qb = $this->createQueryBuilder($this->getAlias());
         $qb
             ->select()
+            ->distinct()
             ->where($qb->expr()->notIn($this->getAlias().'.id', $ids))
             ->orderBy($this->getAlias().'.onTop', 'desc');
 
