@@ -1,6 +1,13 @@
 {% extends "::base.html.twig" %}
 {% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
 {% block title %}World Best Bars{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initializeSliders();
+        });
+    </script>
+{% endblock %}
 {% block bodyTag %}
 <body class="best-of-details">
 {% endblock %}

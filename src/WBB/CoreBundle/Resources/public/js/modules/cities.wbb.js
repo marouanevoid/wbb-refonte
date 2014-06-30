@@ -180,12 +180,12 @@ wbb.CitiesPage = function () {
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
         {
             var $this = $(this);
+            var marker = that.context.map.getMarker( $(this).attr('data-id') );
 
             clearTimeout(that.timer);
 
             that.timer = setTimeout(function()
             {
-                var marker = that.context.map.getMarker( $this.attr('id') );
 
                 if( typeof marker  != 'undefined' && marker )
                 {
