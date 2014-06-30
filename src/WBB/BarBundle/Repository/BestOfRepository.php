@@ -14,10 +14,15 @@ use Doctrine\ORM\Query\Expr;
  */
 class BestOfRepository extends EntityRepository
 {
-    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3, $forceTags = true)
+    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3, $forceTags = true, $excluded = array())
     {
         $ids = array($bestof->getId());
         foreach($bestof->getBestofs() as $excludedBestof)
+        {
+            if($excludedBestof)
+                $ids[] = $excludedBestof->getId();
+        }
+        foreach($excluded as $excludedBestof)
         {
             if($excludedBestof)
                 $ids[] = $excludedBestof->getId();
