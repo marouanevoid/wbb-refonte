@@ -88,7 +88,7 @@ class UserAdmin extends Admin
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
-                ->add('plainPassword', 'text', array('required' => false, 'help' => 'Mandatory'))
+                ->add('plainPassword', 'text', array('required' => false, 'help' => 'Mandatory', 'label' => 'Password *'))
             ->end()
             ->with('Preferences')
                 ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))

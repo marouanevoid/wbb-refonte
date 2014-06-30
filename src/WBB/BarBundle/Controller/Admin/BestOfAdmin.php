@@ -123,7 +123,8 @@ class BestOfAdmin extends Admin
                 ->add('name', null, array('label' => 'Name of the best of', 'help'=>'Mandatory'))
                 ->add('country', null, array('required' => ($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT'))?true:false))
                 ->add('city', null, array('required' => ($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT'))?true:false))
-                ->add('description', 'textarea', array('required' => false, 'label'=>'Best of description', 'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
+                ->add('description', 'textarea', array('required' => false, 'label'=>'Best of description *', 'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
+                ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory', 'required'=> false))
                 ->add('image', 'sonata_type_model_list',
                     array(
                         'required'  => false,
@@ -146,8 +147,7 @@ class BestOfAdmin extends Admin
 //                            'context' => 'simple_image'
 //                        )
 //                    ))
-                ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory', 'required'=> false))
-                ->add('byTag')
+                ->add('byTag', null, array('help'=> 'Create a best of with tag'))
                 ->add('onTop')
                 ->add('ordered', null, array('label' => 'Order from bar tab'))
             ->end();
@@ -157,30 +157,30 @@ class BestOfAdmin extends Admin
                 ->with('Tags')
                     ->add('tags', 'sonata_type_collection',
                         array(
-                            'required' => false,
-                            'label' => 'Add a tag to this best of'
+                            'required'  => false,
+                            'label'     => 'Add a tag to this best of *',
+                            'help'      => 'Mandatory'
                         ),
                         array(
-                            'edit' => 'inline',
-                            'inline' => 'table',
+                            'edit'      => 'inline',
+                            'inline'    => 'table',
                             'sortable'  => 'position'
                         ))
                 ->end();
-        }
-
-        if(!$object->getByTag()){
+        }else{
             $formMapper
                 ->with('Bars')
-                    ->add('bars', 'sonata_type_collection',
-                        array(
-                            'required' => false,
-                            'label'    => 'Add a bar to this best of'
-                        ),
-                        array(
-                            'edit' => 'inline',
-                            'inline' => 'table',
-                            'sortable'  => 'position'
-                        ))
+                ->add('bars', 'sonata_type_collection',
+                    array(
+                        'required'  => false,
+                        'label'     => 'Add a bar to this best of*',
+                        'help'      => 'Mandatory'
+                    ),
+                    array(
+                        'edit'      => 'inline',
+                        'inline'    => 'table',
+                        'sortable'  => 'position'
+                    ))
                 ->end();
         }
 
