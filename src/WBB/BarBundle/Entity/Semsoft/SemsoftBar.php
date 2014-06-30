@@ -3,6 +3,7 @@
 namespace WBB\BarBundle\Entity\Semsoft;
 
 use Doctrine\ORM\Mapping as ORM;
+use WBB\BarBundle\Entity\Semsoft\BarOpening;
 
 /**
  * SemsoftBars
@@ -1134,10 +1135,10 @@ class SemsoftBar
     /**
      * Add openings
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\BarOpening $openings
+     * @param \WBB\BarBundle\Entity\BarOpening $openings
      * @return SemsoftBars
      */
-    public function addOpening(\WBB\BarBundle\Entity\Semsoft\BarOpening $openings)
+    public function addOpening(\WBB\BarBundle\Entity\BarOpening $openings)
     {
         $this->openings[] = $openings;
 
@@ -1147,9 +1148,9 @@ class SemsoftBar
     /**
      * Remove openings
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\BarOpening $openings
+     * @param \WBB\BarBundle\Entity\BarOpening $openings
      */
-    public function removeOpening(\WBB\BarBundle\Entity\Semsoft\BarOpening $openings)
+    public function removeOpening(\WBB\BarBundle\Entity\BarOpening $openings)
     {
         $this->openings->removeElement($openings);
     }
