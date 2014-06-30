@@ -200,13 +200,14 @@
             <tr>
                 {% if not is_mobile() or is_tablet() %}
                 <td>
+                {% if bar.city %}
                     {% if bar.city.onTopCity %}
                         <div class="city-selector h3">
-                            You are in 
+                            You are in
                             <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:bar.city.slug}) }}">{{ bar.city.name|default('Unspecified') }}</a>
-                            
                         </div>
                     {% endif %}
+                {% endif %}
                 </td>
                 {% endif %}
                 <td class="title">
