@@ -227,8 +227,15 @@ wbb.Map = function(config){
                             marker.setIcon(BASEURL+'images/map.pin.png');
                         }
 
-                        if( typeof(context.id) != 'undefined')
-                            $('html').find(".scroll-bars li[data-id=" + context.id + "]").removeClass('active');
+                        if( typeof(context.id) != 'undefined'){
+                            if($('.scroll-bars').is(":visible") ){
+                                $('html').find(".scroll-bars li[data-id=" + context.id + "]").removeClass('active');
+                            }else
+                            {
+                                $('html').find(".scroll-cities li[data-id=" + context.id + "]").removeClass('active');
+                            }
+                            
+                        }
 
                         that.config.$map.gmap3({
                             clear: {
@@ -239,8 +246,14 @@ wbb.Map = function(config){
                     },
                     click: function(marker, event, context){
 
-                        if( typeof(context.id) != 'undefined')
-                            $('html').find(".scroll-bars li[data-id=" + context.id + "]").click();
+                        if( typeof(context.id) != 'undefined'){
+                            if($('.scroll-bars').is(":visible") ){
+                                $('html').find(".scroll-bars li[data-id=" + context.id + "]").click();
+                            }else
+                            {
+                                $('html').find(".scroll-cities li[data-id=" + context.id + "]").click();
+                            }
+                        }
                     }
                 }/*,
                 cluster:{

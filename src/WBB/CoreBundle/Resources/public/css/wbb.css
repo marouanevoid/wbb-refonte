@@ -92,6 +92,13 @@
     .best-of-details .container.bars .four.columns:nth-child(3) {
         margin-top : 1em ;
     }
+    /*.bar-w-pic .btn-round.star.active:before {
+        background-position: -100px -80px;
+    }
+    section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {
+        background-size: 128px 256px;
+        background-position: -80px -40px;
+    }*/
 }
 article.tip .form form .count.success {
     color: #B3955F;

@@ -8,6 +8,10 @@
         var _bar = {{ bar.id }};
         var _offset = 0;
         var _limit = 3;
+        var is_mobile = 0;
+        {% if is_mobile() and not is_tablet() %}
+            is_mobile = 1;
+        {% endif %}
     </script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMoreTips.wbb.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/modules/bar-details.wbb.js') }}"></script>
@@ -198,12 +202,9 @@
                 <td>
                     {% if bar.city.onTopCity %}
                         <div class="city-selector h3">
-                            You are in
-                            {% if bar.city %}
+                            You are in 
                             <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:bar.city.slug}) }}">{{ bar.city.name|default('Unspecified') }}</a>
-                            {% else %}
-                                <a class="btn-radius with-icon border brown city" href="{{ path('homepage') }}">World Wide</a>
-                            {% endif %}
+                            
                         </div>
                     {% endif %}
                 </td>

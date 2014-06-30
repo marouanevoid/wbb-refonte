@@ -80,7 +80,8 @@ meta.LoadMoreTips = function(config) {
                 $target.append(msg.htmldata);
                 if(parseInt(msg.difference)==0){
                     that.config.$button.hide();
-                    that.config.$button.parent().hide();
+                    if(is_mobile == 1)
+                        that.config.$button.parent().hide();
                 }
 
                 if(parseInt(msg.difference)==0 && $(".line .three").length<=1)
