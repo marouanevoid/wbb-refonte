@@ -26,9 +26,11 @@ class BestOfRepository extends EntityRepository
         $qb = $this->createQueryBuilder($this->getAlias());
         $qb
             ->select()
-            ->distinct()
+            ->distinct($this->getAlias().'.id')
             ->where($qb->expr()->notIn($this->getAlias().'.id', $ids))
-            ->orderBy($this->getAlias().'.onTop', 'desc');
+            ->orderBy($this->getAlias().'.onTop', 'desc')
+            ->groupBy($this->getAlias().'.id')
+        ;
 
         if ($city) {
             $qb
@@ -44,7 +46,6 @@ class BestOfRepository extends EntityRepository
                 ->leftjoin('bt.tag', 't')
                 ->andWhere($qb->expr()->in('t.id', ':tags'))
                 ->setParameter('tags', $bestof->getTagsIds())
-                ->groupBy($this->getAlias().'.id')
                 ->addOrderBy('nbTags','DESC')
             ;
         }
