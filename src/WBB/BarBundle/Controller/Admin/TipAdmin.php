@@ -37,7 +37,7 @@ class TipAdmin extends Admin {
             ->add('description')
             ->add('user')
             ->add('bar')
-            ->add('status')
+            ->add('status', 'doctrine_orm_string', array(), 'choice', array('choices' => array(0 => 'Pending',1 => 'Enabled',2 => 'Disabled')))
         ;
     }
 

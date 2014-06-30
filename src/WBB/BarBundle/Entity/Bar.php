@@ -271,7 +271,10 @@ class Bar
     
     /**
      * @ORM\ManyToMany(targetEntity="News", inversedBy="bars")
-     * @ORM\JoinTable(name="bars_news")
+     * @ORM\JoinTable(name="wbb_news_bars",
+     *      joinColumns={@ORM\JoinColumn(name="bar_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      )
      **/
     private $news;      
 
@@ -1156,29 +1159,6 @@ class Bar
     }
 
     /**
-     * Set news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     * @return Bar
-     */
-    public function setNews(\WBB\BarBundle\Entity\News $news = null)
-    {
-        $this->news = $news;
-
-        return $this;
-    }
-
-    /**
-     * Get news
-     *
-     * @return \WBB\BarBundle\Entity\News 
-     */
-    public function getNews()
-    {
-        return $this->news;
-    }
-
-    /**
      * Add tags
      *
      * @param \WBB\BarBundle\Entity\Collections\BarTag $tags
@@ -1384,4 +1364,13 @@ class Bar
     {
         $this->news->removeElement($news);
     }
+
+    /**
+    * Get $news
+    *
+    * @return \Doctrine\Common\Collections\Collection
+    **/
+    public function getNews(){
+         return $this->news;
+     }
 }

@@ -28,6 +28,16 @@
                 <target>User Name</target>
             </trans-unit>
 
+            <trans-unit id="form.label_locked">
+                <source>form.label_locked</source>
+                <target>Blacklisted</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_enabled">
+                <source>form.label_enabled</source>
+                <target>Enable</target>
+            </trans-unit>
+
             <trans-unit id="form.label_firstname">
                 <source>form.label_firstname</source>
                 <target>Firstname *</target>

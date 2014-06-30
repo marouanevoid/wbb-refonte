@@ -218,7 +218,7 @@ class BarRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBarsByExactTags($bestof)
+    public function findBarsByExactTags($bestof, $offset = 0, $limit = 9)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb

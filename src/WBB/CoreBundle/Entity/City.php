@@ -120,7 +120,10 @@ class City {
     
     /**
      * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities")
-     * @ORM\JoinTable(name="cities_news")
+     * @ORM\JoinTable(name="wbb_news_cities",
+     *      joinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      )
      **/
     private $news;    
     

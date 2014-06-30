@@ -81,12 +81,12 @@ class News {
     private $isOnTop;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news", cascade={"persist", "remove"})
      */
     private $bars; 
     
     /**
-     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"persist", "remove"})
      */
     private $cities;    
 
@@ -96,13 +96,13 @@ class News {
     private $bestOfs;     
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news", cascade={"persist"})
      * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\NewsMedia", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\NewsMedia", mappedBy="news", cascade={"remove", "persist"}, orphanRemoval=true)
      */
     private $medias;
 
@@ -328,6 +328,7 @@ class News {
      * @return News
      */
     public function addBar($bar){
+        $bar->addNews($this);
         $this->bars[] = $bar;
         return $this;
     }
@@ -339,6 +340,7 @@ class News {
      */
     public function removeBar($bar){
         $this->bars->removeElement($bar);
+        $bar->removeNews($this);
     }
 
     /**
@@ -357,6 +359,7 @@ class News {
      * @return News
      */
     public function addCity($city){
+        $city->addNews($this);
         $this->cities[] = $city;
         return $this;
     }
@@ -368,6 +371,7 @@ class News {
      */
     public function removeCity($city){
         $this->cities->removeElement($city);
+        $city->removeNews($this);
     }
 
     /**
@@ -381,12 +385,13 @@ class News {
 
 
     /**
-     * Add city
+     * Add BestOf
      *
      * @param BestOf $bestOf
      * @return News
      */
     public function addBestOf($bestOf){
+        $bestOf->addNews($this);
         $this->bestOfs[] = $bestOf;
         return $this;
     }
@@ -398,6 +403,7 @@ class News {
      */
     public function removeBestOf($bestOf){
         $this->cities->removeElement($bestOf);
+        $bestOf->removeNews($this);
     }
 
     /**
