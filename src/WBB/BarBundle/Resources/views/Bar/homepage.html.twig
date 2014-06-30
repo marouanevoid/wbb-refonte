@@ -154,7 +154,7 @@
 </div>
 
     <!-- NEWS -->
-    <div class="container l-margin-top m-padding-bottom">
+    <div class="container l-margin-top {% if is_mobile() and not is_tablet() %}l{% else %}m{% endif %}-padding-bottom">
 
         <!-- LATEST ARTICLES -->
         <section class="articles eight columns">
@@ -265,7 +265,7 @@
                 {% endfor %}
             {% endif %}
 
-            <a class="btn-radius border brown h4 s-margin-top" href="" style="clear: left; float:left;">See all news</a>
+            <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_news_landing_page') }}" style="clear: left; float:left;">See all news</a>
 
         </section>
 

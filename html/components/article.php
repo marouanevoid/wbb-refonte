@@ -4,6 +4,9 @@
         <div class="img">
             <a href="" class="cover">
                 <img src="tmp/article1.jpg" width="600" height="400" alt="article1"/>
+                <?php if($has_video): ?>
+                    <span class="video"></span>
+                <?php endif ?>
             </a>
             <a class="plus-btn" href=""></a>
         </div>

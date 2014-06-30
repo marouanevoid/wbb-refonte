@@ -2,6 +2,7 @@
   position: relative; width: 100%;
   .ui-slides{ position: relative; overflow: hidden; width: 100%; height: 100%; }
   .ui-slide{ width: 100%; position: absolute; left: 0; top: 0; height: 100%; overflow: hidden }
+  .ui-wrapper{ position: relative; height: 100%; width: 100% }
   .arrows{
     position: absolute; bottom: 0; right:0; z-index: 30;
     a {
@@ -118,11 +119,19 @@
 
 
 html.webkit .ui-slide{ overflow: visible }
-html.firefox .ui-slider, html.no-csstransforms3d .ui-slider
+html .ui-slider
 {
   &.type-cities, &.type-bestof
   {
-    .ui-slides{ width: 100.6% }
+    .ui-wrapper{ width: 100.6% }
+  }
+}
+
+html.webkit.csstransforms3d .ui-slider
+{
+  &.type-cities, &.type-bestof
+  {
+    .ui-wrapper{ width: 100% }
   }
 }
 

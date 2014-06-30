@@ -4,6 +4,7 @@
 var TRAD = {
     common: {
                 loading: 'Loading...',
+                loadmore: 'Load more',
                 morebars: 'See more Bars',
                 morebestof : 'See more Best of'
             }

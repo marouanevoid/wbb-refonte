@@ -36,7 +36,7 @@ meta.LoadMoreTips = function(config) {
         var $target     = that.context.$container.find('.load-target');
 
         /* Récupérer la traduction pour loading */
-        that.config.$button.addClass('loading').text(TRAD.common.loading);
+        that.config.$button.addClass('loading').text(TRAD.common.loadmore);
         that._loadAjax(that.config.url, $target, function()
         {
 
@@ -78,8 +78,11 @@ meta.LoadMoreTips = function(config) {
             dataType: "json",
             success: function(msg) {
                 $target.append(msg.htmldata);
-                if(parseInt(msg.difference)==0)
-                   that.config.$button.hide();
+                if(parseInt(msg.difference)==0){
+                    that.config.$button.hide();
+                    that.config.$button.parent().hide();
+                }
+
                 if(parseInt(msg.difference)==0 && $(".line .three").length<=1)
                 {
                     $('.line .three').addClass('six').removeClass('three');
@@ -87,7 +90,7 @@ meta.LoadMoreTips = function(config) {
                 if( callback ) callback();
                 that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
                 that.context.is_loading = false;
-                that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+                that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
             },
             error: function(e) {
                 console.log('Error : ' + e);

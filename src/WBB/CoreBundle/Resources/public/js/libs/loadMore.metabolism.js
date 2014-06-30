@@ -9,7 +9,8 @@ meta.LoadMore = function(config) {
 
     that.context = {
         is_loading : false,
-        itemsNumber : 0
+        itemsNumber : 0,
+        requestBars : null
     };
 
     that.config = {
@@ -74,7 +75,7 @@ meta.LoadMore = function(config) {
     {
 
         that.context.is_loading = true;
-        $.ajax({
+        that.context.requestBars = $.ajax({
             type: "GET",
             url: url,
             dataType: "json",
@@ -93,6 +94,11 @@ meta.LoadMore = function(config) {
                 if(parseInt(msg.difference)==0)
                     that.config.$button.hide();
                 $('.disableClick').hide();
+            },
+            beforeSend: function()
+            {
+                if (that.context.requestBars != null)
+                    that.context.requestBars.abort();
             },
             error: function(e) {
                 console.log('Load More - Error : ' + e);

@@ -5,7 +5,7 @@
     }
   }
   h1 { text-transform: none; }
-  p, h2, h1 { padding: 0 6%; }
+  p, h2, h1 { padding: 0 6% }
   .img {
     position: relative; width: 100%; height: 70%;
     .cover{
@@ -13,6 +13,10 @@
       opacity : 0.8; @include transition( opacity 0.2s ease-in-out ); @include reduceFlickering();
       img{ width: 100%; height: auto; display: block }
       &:hover{ opacity : 1 }
+      .video{
+        background: url("../images/misc/play.png") no-repeat center; width: 12em; height: 12em; background-size: 100% 100%;
+        margin-left: -6em; margin-top: -6em; position: absolute; left: 50%; top:50%
+      }
     }
     .plus-btn { position: absolute; margin-left: -2em; bottom: -2em; left: 50%; z-index: 2 }
   }
@@ -47,7 +51,9 @@
   }
   &.four.columns {
     .side-ad { margin-top: 0!important; }
-    article { width: 100%; margin-top: 8%;
+    article {
+      width: 100%; margin-top: 8%;
+      .cover .video{ background-size: 50% 50% }
       &:first-of-type { margin-top: 8%; }
       &.large { height: 40em; }
       &.small { height: 17.5em;
@@ -55,19 +61,31 @@
       }
     }
   }
-  &.older-news article.small { width: 31.5%;
+  &.older-news article.small {
+    width: 31.5%; margin-bottom: 2.5%;
     &+article.small { border-left: 1px solid $color-brown; }
     &:nth-of-type(3n+2) { margin-left: 2.5%; margin-right: 2.5%; }
+    .cover .video{ background-size: 50% 50% }
   }
-}
 
-@media only screen and (max-width: $grid-breakpoint-mobile) {
 
-  .articles article p{ height: 9em; overflow: hidden; text-overflow: ellipsis }
-  .articles article .img+.title p{ display: none }
+  @media only screen and (max-width: $grid-breakpoint-mobile) {
 
-  .articles article.small,
-  .articles article.large { width: 100%; height: 35em }
+     article p{ max-height: 9em; overflow: hidden; }
+     article .img+.title p{ display: none }
+     article .img .cover .video{ background-size: 50% 50% }
 
-  .articles article.small+article.small { border-left: 1px solid $color-brown; border-top: 0; }
+     article.small, &.padding article.small,
+     article.large { width: 100%; min-height: 35em; height: 35em }
+
+    &.padding article.small+article.small { margin-left: 0 }
+    article+article { margin-top: 4% }
+    article.small+article.small { border-left: 1px solid $color-brown }
+
+    &.older-news > div{ margin-top: 4% }
+    &.older-news article.small {
+      width: 100%; margin-bottom: 4%; margin-top: 0;
+      &:nth-of-type(3n+2) { margin-left: 0; margin-right: 0 }
+    }
+  }
 }

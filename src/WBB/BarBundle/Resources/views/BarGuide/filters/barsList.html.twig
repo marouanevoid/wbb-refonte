@@ -22,7 +22,7 @@
                 <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
                 {% endif %}
                 <p class="s-margin-top">
-                    {{ b.description|truncate(200, true, '...')|striptags }}
+                    {{ b.seoDescription|truncate(200, true, '...')|striptags }}
                 </p>
                 <div class="tags">{% for tr in b.tags %}
                         {{ tr.tag }}{% if not loop.last %}, {% endif %}

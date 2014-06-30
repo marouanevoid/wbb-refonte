@@ -164,9 +164,7 @@ meta.Search = function(config){
                 $searchBar.find('.container').css({transform:'translate3d(0,0%,0)'});
             }, 10);
 
-            setTimeout(function(){
-                that.context.$input.focus();
-            }, 510);
+            $('html,body').animate({scrollTop:0},500);
         }
     };
 
