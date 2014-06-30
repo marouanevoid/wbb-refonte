@@ -84,9 +84,9 @@ class AjaxController extends Controller
         $i = 1;
         foreach($medias as $media){
             if($mediaID == $media->getId())
-                $html .= '<option value="'.$media->getMedia()->getId().'" selected>'.$i.': '.$media->getAlt().'</option>';
+                $html .= '<option value="'.$media->getId().'" selected>'.$i.': '.$media->getAlt().'</option>';
             else
-                $html .= '<option value="'.$media->getMedia()->getId().'" >'.$i.': '.$media->getAlt().'</option>';
+                $html .= '<option value="'.$media->getId().'" >'.$i.': '.$media->getAlt().'</option>';
 
             $i++;
         }
