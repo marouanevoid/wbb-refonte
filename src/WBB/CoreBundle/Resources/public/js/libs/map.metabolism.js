@@ -228,7 +228,7 @@ wbb.Map = function(config){
                         }
 
                         if( typeof(context.id) != 'undefined')
-                            $('html').find("li[data-id=" + context.id + "]").removeClass('active');
+                            $('html').find(".scroll-bars li[data-id=" + context.id + "]").removeClass('active');
 
                         that.config.$map.gmap3({
                             clear: {
@@ -240,7 +240,7 @@ wbb.Map = function(config){
                     click: function(marker, event, context){
 
                         if( typeof(context.id) != 'undefined')
-                            $('html').find("li[data-id=" + context.id + "]").click();
+                            $('html').find(".scroll-bars li[data-id=" + context.id + "]").click();
                     }
                 }/*,
                 cluster:{
