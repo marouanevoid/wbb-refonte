@@ -14,10 +14,15 @@ use Doctrine\ORM\Query\Expr;
  */
 class BestOfRepository extends EntityRepository
 {
-    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3, $forceTags = true)
+    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3, $forceTags = true, $excluded = array())
     {
         $ids = array($bestof->getId());
         foreach($bestof->getBestofs() as $excludedBestof)
+        {
+            if($excludedBestof)
+                $ids[] = $excludedBestof->getId();
+        }
+        foreach($excluded as $excludedBestof)
         {
             if($excludedBestof)
                 $ids[] = $excludedBestof->getId();
@@ -26,8 +31,11 @@ class BestOfRepository extends EntityRepository
         $qb = $this->createQueryBuilder($this->getAlias());
         $qb
             ->select()
+            ->distinct($this->getAlias().'.id')
             ->where($qb->expr()->notIn($this->getAlias().'.id', $ids))
-            ->orderBy($this->getAlias().'.onTop', 'desc');
+            ->orderBy($this->getAlias().'.onTop', 'desc')
+            ->groupBy($this->getAlias().'.id')
+        ;
 
         if ($city) {
             $qb
@@ -43,7 +51,6 @@ class BestOfRepository extends EntityRepository
                 ->leftjoin('bt.tag', 't')
                 ->andWhere($qb->expr()->in('t.id', ':tags'))
                 ->setParameter('tags', $bestof->getTagsIds())
-                ->groupBy($this->getAlias().'.id')
                 ->addOrderBy('nbTags','DESC')
             ;
         }

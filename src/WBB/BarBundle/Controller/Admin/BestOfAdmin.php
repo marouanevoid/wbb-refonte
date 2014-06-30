@@ -16,7 +16,6 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class BestOfAdmin extends Admin
 {
-
     /**
      * {@inheritdoc}
      */
@@ -122,8 +121,8 @@ class BestOfAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name', null, array('label' => 'Name of the best of', 'help'=>'Mandatory'))
-                ->add('country', null, array('required' => false))
-                ->add('city', null, array('required' => false))
+                ->add('country', null, array('required' => ($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT'))?true:false))
+                ->add('city', null, array('required' => ($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT'))?true:false))
                 ->add('description', 'textarea', array('required' => false, 'label'=>'Best of description', 'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
                 ->add('image', 'sonata_type_model_list',
                     array(
@@ -196,6 +195,17 @@ class BestOfAdmin extends Admin
                 )
             ->end()
         ;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $qb = parent::createQuery($context);
+        $alias = $qb->getRootAlias();
+        if($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT')){
+            $qb->andWhere($qb->expr()->isNotNull("$alias.city"));
+        }
+
+        return $qb;
     }
 
     /**

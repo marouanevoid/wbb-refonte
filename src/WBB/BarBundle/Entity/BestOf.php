@@ -2,9 +2,11 @@
 
 namespace WBB\BarBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WBB\BarBundle\Entity\Collections\BestOfTag;
 
 /**
  * BestOf
@@ -123,7 +125,10 @@ class BestOf
 
     /**
      * @ORM\ManyToMany(targetEntity="News", inversedBy="bestOfs")
-     * @ORM\JoinTable(name="bestofs_news")
+     * @ORM\JoinTable(name="wbb_news_bestofs",
+     *      joinColumns={@ORM\JoinColumn(name="bestof_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      )
      **/
     private $news;    
     
@@ -630,16 +635,16 @@ class BestOf
         $this->setByTag(false);
         $this->setOrdered(true);
         
-        $this->news = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
     /**
      * Add tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $tags
+     * @param BestOfTag $tags
      * @return BestOf
      */
-    public function addTag(\WBB\BarBundle\Entity\Collections\BestOfTag $tags)
+    public function addTag(BestOfTag $tags)
     {
         $this->tags[] = $tags;
 
@@ -649,9 +654,9 @@ class BestOf
     /**
      * Remove tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $tags
+     * @param BestOfTag $tags
      */
-    public function removeTag(\WBB\BarBundle\Entity\Collections\BestOfTag $tags)
+    public function removeTag(BestOfTag $tags)
     {
         $this->tags->removeElement($tags);
     }

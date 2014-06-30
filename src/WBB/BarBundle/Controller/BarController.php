@@ -189,7 +189,7 @@ class BarController extends Controller
                 $bestOfs[] = $bo;
             }
             if($bestofsCount < 3){
-                $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount), false);
+                $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount), false, $bestOfsTmp);
                 foreach($bestOfsTmp as $bo)
                 {
                     $bestOfs[] = $bo;

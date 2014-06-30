@@ -85,7 +85,7 @@ security:
             - ROLE_WBB_BAR_FS_IMGS
             - ROLE_WBB_BAR_INSTAGRAM
             - ROLE_WBB_BESTOF_ALL
-            - ROLE_WBB_BAR_TAG_ALL
+            - ROLE_WBB_TAG_ALL
             - ROLE_WBB_TIP_ALL
             - ROLE_WBB_NEWS_ALL
             - ROLE_WBB_AD_ALL
@@ -106,6 +106,7 @@ security:
             - ROLE_BAR_ID
             - ROLE_WBB_BAR_FEED_ALL
             - ROLE_ALLOWED_TO_SWITCH
+            - ROLE_WBB_TAG_ALL
 
         # Roles attributs
         ROLE_WBB_BAR_ALL:
@@ -144,7 +145,7 @@ security:
             - ROLE_WBB_BAR_ADMIN_BAR_TAG_CREATE
             - ROLE_WBB_BAR_ADMIN_BAR_TAG_EDIT
             - ROLE_WBB_BAR_ADMIN_BAR_TAG_DELETE
-            - ROLE_WBB_TAG_ALL
+            - ROLE_WBB_BAR_ADMIN_TAG_LIST
 
         ROLE_WBB_BAR_OPENING_ALL:
             - ROLE_WBB_BAR_ADMIN_BAR_OPENING_LIST

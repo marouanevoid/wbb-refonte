@@ -104,10 +104,10 @@ class NewsAdmin extends Admin {
                     )
                 )
             ->end()
-            ->with('Related')    
-                ->add('bars', 'sonata_type_model', array('required' => false,'multiple' => true))  
-                ->add('cities', 'sonata_type_model', array('required' => false,'multiple' => true))          
-                ->add('bestOfs', 'sonata_type_model', array('required' => false,'multiple' => true))
+            ->with('Related')
+                ->add('bars', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('cities', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('bestOfs', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
             ->end()
         ;
     }
