@@ -202,12 +202,9 @@
                 <td>
                     {% if bar.city.onTopCity %}
                         <div class="city-selector h3">
-                            You are in
-                            {% if bar.city %}
+                            You are in 
                             <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:bar.city.slug}) }}">{{ bar.city.name|default('Unspecified') }}</a>
-                            {% else %}
-                                <a class="btn-radius with-icon border brown city" href="{{ path('homepage') }}">World Wide</a>
-                            {% endif %}
+                            
                         </div>
                     {% endif %}
                 </td>
