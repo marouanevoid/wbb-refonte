@@ -2,7 +2,7 @@
 /* The Namespace of the project */
 var wbb = wbb || {};
 
-wbb.Cities = function () {
+wbb.CitiesPage = function () {
 
     var that = this;
 
@@ -23,6 +23,7 @@ wbb.Cities = function () {
     that.first_resize = true;
     that.current_zoom_level = 3;
     that.max_zoom_level_for_bars = 11;
+    that.timer = false;
 
     /* Search the bars after submitting */
     that._searchBars = function( city_id, neighborhood_id )
@@ -178,21 +179,32 @@ wbb.Cities = function () {
         /* Event to center and animate the markup */
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
         {
-            var marker = that.context.map.getMarker( $(this).attr('data-id') );
-            if( typeof marker  != 'undefined' && marker )
-            {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-                setTimeout(function(){ marker.setAnimation(null) }, 700);
-            }
+            var $this = $(this);
 
-            if( $(this).closest('.scroll').hasClass('scroll-bars')  )
-                that.context.map.setCenter( marker.getPosition() );
+            clearTimeout(that.timer);
+
+            that.timer = setTimeout(function()
+            {
+                var marker = that.context.map.getMarker( $this.attr('id') );
+
+                if( typeof marker  != 'undefined' && marker )
+                {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(function(){ marker.setAnimation(null) }, 700);
+                }
+
+                if( $this.closest('.scroll').hasClass('scroll-bars')  )
+                    that.context.map.setCenter( marker.getPosition() );
+
+            }, 200);
+
 
         });
 
         /* on the Leave Event, stop to animate the markup */
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseleave', 'li', function()
         {
+            clearTimeout(that.timer);
             var marker = that.context.map.getMarker( $(this).attr('data-id') );
             if( typeof marker  != 'undefined' && marker ) marker.setAnimation(null);
         });
@@ -288,7 +300,7 @@ wbb.Cities = function () {
         {
             if( !$('html').hasClass('mobile') || $(window).width() > 640 )
             {
-                that._openFilter();
+                setTimeout(function(){ that._openFilter() }, $('html').hasClass('mobile')?200:0 );
             }
             else
             {
@@ -575,6 +587,6 @@ wbb.Cities = function () {
 
 $(document).ready(function()
 {
-    new wbb.Cities();
+    new wbb.CitiesPage();
 });
 

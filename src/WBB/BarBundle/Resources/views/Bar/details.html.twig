@@ -103,12 +103,14 @@
                                             reste  = 4-$('.ui-slide .image').length%4;
                                             lastImages = $('.ui-slide .image').slice(0,reste);
                                             i=1;
+                                            if($('.ui-slide .image').length>1){
                                             $.each(lastImages, function(key, element){
                                                 if(i<=reste){
                                                     $('.ui-slide:last-child').append('<div class="image">'+element.innerHTML+'</div>');
                                                 }
                                                 i++;
                                             });
+                                            }
                                             initializeSliders();
                                         },
                                         error: function(e) {

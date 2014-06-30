@@ -78,8 +78,11 @@ meta.LoadMoreTips = function(config) {
             dataType: "json",
             success: function(msg) {
                 $target.append(msg.htmldata);
-                if(parseInt(msg.difference)==0)
-                   that.config.$button.hide();
+                if(parseInt(msg.difference)==0){
+                    that.config.$button.hide();
+                    that.config.$button.parent().hide();
+                }
+
                 if(parseInt(msg.difference)==0 && $(".line .three").length<=1)
                 {
                     $('.line .three').addClass('six').removeClass('three');
