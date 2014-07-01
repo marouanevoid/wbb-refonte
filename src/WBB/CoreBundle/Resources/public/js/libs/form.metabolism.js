@@ -78,6 +78,8 @@ meta.Form = function(config){
         var data = that.form.serializeArray();
         /*console.log(data[0].value.replace(/^\s+|\s+$/g,''));*/
         var url = that.form.attr('action');
+        var nbItems = 0;
+
         if(data[0].value.replace(/^\s+|\s+$/g,'')=="")
         {
             $("form#tips textarea").val('');
@@ -91,19 +93,16 @@ meta.Form = function(config){
                 {
                     if( that.config.onComplete )
                         that.config.onComplete( that.form, data );
-                    if($('.insider-tips .three').length==0)
+                    nbItems = $('.insider-tips .three').length;
+                    if(nbItems==0)
                     {
                         $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
                     }else
                     {
                         $('.line.wbbtips .three:first-child').after(data.tip);
                     }
-                    if($('.insider-tips .three').length>=4 || ($('.insider-tips .three').length>=4 && ($('.insider-tips .three').length-4)%8!=0))
+                    if(nbItems>=4)
                     {
-                        if($('.line:last-child .three').length==0)
-                        {
-                            $('.line:last-child').remove();
-                        }
                         $('.line:last-child .three:last-child').remove();
                     }
 

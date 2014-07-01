@@ -5,8 +5,25 @@
     <script type="text/javascript">
         $(document).ready(function(){
             initializeSliders();
+            $(".bars .four:lt(3)").show(); 
+            if($('.bars .four').length>3)
+                $(".load-more-container").show();
+            var display;   
+            $(".load-more").click(function(){
+                display = $('.bars .four:visible').length+3;
+                $(".bars .four:lt("+display+")").fadeIn(500); 
+                if($('.bars .four:hidden').length<=0){
+                    $('.load-more-container').hide();
+                }
+            });   
         });
     </script>
+    <style type="text/css">
+        .load-more-container {
+            display:none;
+            margin-bottom: 0 !important;
+        }
+    </style>
 {% endblock %}
 {% block bodyTag %}
 <body class="best-of-details">
@@ -21,7 +38,7 @@
                 <tr>
                     <td></td>
                     <td class="title">
-                        <h3>{% if bestOf.city %}{{ bestOf.city.name }} Best's{% else %}World Wide Best's{% endif %}</h3>
+                        <h3>{% if bestOf.city %}{{ bestOf.city.name }} Best's{% else %}World's Best{% endif %}</h3>
                         <h1>{{ bestOf.name }}</h1>
                         <h3>
                             {{ bestOf.description | raw }}
@@ -49,7 +66,7 @@
                 </div>
             </div>
         {% endif %}#}
-        <div class="four columns">
+        <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}
                 {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
             {% else %}
@@ -57,6 +74,11 @@
             {% endif %}
         </div>
     {% endfor %}
+</div>
+<div class="container load-more-container">
+    <div class="twelve columns align-center m-margin load-more-container">
+        <a class="h4 btn-radius large border load-more brown" href="#0">Load more</a>
+    </div>
 </div>
 
 <!-- ALSO LIKE -->
@@ -81,4 +103,21 @@
             {% endif %}
         </section>
 </div>
+{% endblock %}
+{% block footerAd %}
+    <section class="footer-ad">
+
+    <div class="container full align-center">
+
+        <div class="twelve columns">
+
+            <hr/>
+
+            <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
+
+        </div>
+
+    </div>
+
+    </section>
 {% endblock %}
