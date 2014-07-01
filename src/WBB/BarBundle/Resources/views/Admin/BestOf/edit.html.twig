@@ -94,6 +94,29 @@ file that was distributed with this source code.
                     media.trigger("list:updated");
                 },"text");
             });
+
+            jQuery(document).on('sonata.add_element',function(){
+                $('select').each(function(){
+                    var bar = $(this).attr('id');
+                    var type = bar.substr(bar.length - 4);
+                    if (type != "_bar"){
+                        return;
+                    }
+                    var media = $('#'+bar.substr(0,(bar.length-3))+'media');
+                    barId = $(this).val();
+                    mediaId = media.val() || 0;
+
+                    media.empty();
+                    media.trigger("list:updated");
+
+                    var url = Routing.generate('get_medias_from_bar', {'barID': barId, 'mediaID': mediaId });
+                    $.post(url, { 'barID': barId, 'mediaID': mediaId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        media.empty().append(options);
+                        media.trigger("list:updated");
+                    },"text");
+                });
+            });
         });
     </script>
 {% endblock %}
