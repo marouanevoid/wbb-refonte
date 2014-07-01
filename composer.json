@@ -41,7 +41,8 @@
         "suncat/mobile-detect-bundle": "0.9.*",
         "avalanche123/imagine-bundle": "2.*",
         "jms/serializer-bundle": "0.13.*@dev",
-        "ddeboer/data-import-bundle": "0.1"
+        "ddeboer/data-import-bundle": "0.1",
+        "cybernox/amazon-webservices-bundle": "1.5.6"
 
     },
     "scripts": {
