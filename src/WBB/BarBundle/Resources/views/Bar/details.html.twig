@@ -302,11 +302,11 @@
                                 <li>
                                     {% if b.bestof.city %}
                                         <a href=""{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
-                                            {{ b.bestof.name }} in {{ b.bestof.city }}
+                                            Best {{ b.bestof.name }} in {{ b.bestof.city }}
                                         </a>
                                     {% else %}
                                         <a href=""{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
-                                            {{ b.bestof.name }}
+                                            Best {{ b.bestof.name }} in world
                                         </a>
                                     {% endif %}
                                 </li>
