@@ -113,7 +113,8 @@ class CityController extends Controller
 
         foreach($tags as $tag)
         {
-            $result .= $tag->getTag()->getName().', ';
+            if($tag->getTag())
+                $result .= $tag->getTag()->getName().', ';
         }
 
         return substr($result, 0, -2);

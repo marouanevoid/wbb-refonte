@@ -4,8 +4,61 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5537cdf93dac446bb0d6da2c35bd224",
+    "hash": "c40547bd3f188c05e856203ddec3f023",
     "packages": [
+        {
+            "name": "amazonwebservices/aws-sdk-for-php",
+            "version": "1.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amazonwebservices/aws-sdk-for-php.git",
+                "reference": "65d6bc82d6e0cd095709c342a23c749dc2f3a012"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amazonwebservices/aws-sdk-for-php/zipball/65d6bc82d6e0cd095709c342a23c749dc2f3a012",
+                "reference": "65d6bc82d6e0cd095709c342a23c749dc2f3a012",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "You should consider upgrading to version 2 of the AWS SDK for PHP"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "authentication/",
+                    "extensions/",
+                    "lib/",
+                    "services/",
+                    "utilities/",
+                    "sdk.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Amazon Web Services",
+                    "homepage": "http://aws.amazon.com"
+                }
+            ],
+            "description": "AWS SDK for PHP",
+            "homepage": "http://aws.amazon.com/sdkforphp/",
+            "keywords": [
+                "amazon",
+                "aws",
+                "dynamodb",
+                "ec2",
+                "s3",
+                "sdk"
+            ],
+            "time": "2013-03-15 19:43:06"
+        },
         {
             "name": "avalanche123/imagine-bundle",
             "version": "v2.1.2",
@@ -55,6 +108,51 @@
                 "imagine"
             ],
             "time": "2012-12-13 18:34:10"
+        },
+        {
+            "name": "cybernox/amazon-webservices-bundle",
+            "version": "1.5.6",
+            "target-dir": "Cybernox/AmazonWebServicesBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Cybernox/AmazonWebServicesBundle.git",
+                "reference": "fd721e092188707c9fa3902619331b0b77f15e1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Cybernox/AmazonWebServicesBundle/zipball/fd721e092188707c9fa3902619331b0b77f15e1e",
+                "reference": "fd721e092188707c9fa3902619331b0b77f15e1e",
+                "shasum": ""
+            },
+            "require": {
+                "amazonwebservices/aws-sdk-for-php": "*",
+                "symfony/framework-bundle": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cybernox\\AmazonWebServicesBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Badolato",
+                    "email": "mbadolato@cybernox.com",
+                    "homepage": "http://www.markbadolato.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Symfony2 Bundle for interfacing with Amazon Web Services (AWS)",
+            "keywords": [
+                "amazon",
+                "aws",
+                "web services"
+            ],
+            "time": "2013-06-12 09:46:21"
         },
         {
             "name": "ddeboer/data-import",

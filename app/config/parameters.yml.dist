@@ -30,3 +30,8 @@ parameters:
         db_id_col:   session_id
         db_data_col: session_value
         db_time_col: session_time
+
+    #AWS
+    aws_bucket: staging.worldsbestbars.com
+    aws_key: AKIAJM6ZSVZZ3WLRHZIA
+    aws_secret: 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
