@@ -20,7 +20,7 @@
         <script src="{{ asset('bundles/wbbcore/js/plugins/html5.js') }}"></script>
         <![endif]–->
         <script type="text/javascript">
-            var ismobile, istablet;
+            var ismobile, istablet, firstLoading;
             ismobile=0;
             istablet=0;
             {% if is_mobile() and not is_tablet() %}ismobile=1;{% endif %}
