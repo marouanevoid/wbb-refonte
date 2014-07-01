@@ -38,8 +38,8 @@ wbb_bar_details:
 
 #Services
 wbb_bar_feeds_find:
-    pattern:  /feed/find/{type}/{id}
-    defaults: { _controller: WBBBarBundle:FSAdmin:find, id: 0 }
+    pattern:  /feed/find/{type}/{id}/{offset}
+    defaults: { _controller: WBBBarBundle:FSAdmin:find, id: 0, offset: 0 }
     options:
         expose: true
 
