@@ -1,0 +1,29 @@
+<div class="line">
+{% for b in bestofs %}
+<div class="best-of-container transform3d">
+<article class="bestof">
+
+    <a href="#0" class="btn-round dark star"></a>
+
+    <div class="txt vcenter">
+        <div class="circle vcenter">
+            {% if city is defined %}
+                <h2>{{ b.name }}</h2>
+                <h3>In {{ b.city.name }}</h3>
+            {% else %}
+                <h2>{% if b.city %}{{ b.city.name }}'s Best{% else %}World's Best{% endif %}</h2>
+                <h3>{{ b.name }}</h3>
+            {% endif %}
+        </div>
+    </div>
+
+        <img class="scale-with-grid" data-src="{% path b.image, 'bestof_small' %}" alt="{{ b.name }}" width="570" height="428"/>
+    {% if b.city %}
+        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
+    {% else %}
+        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
+    {% endif %}
+</article>
+</div>
+{% endfor %}
+    </div>

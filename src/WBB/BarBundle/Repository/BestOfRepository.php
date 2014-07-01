@@ -3,6 +3,8 @@
 namespace WBB\BarBundle\Repository;
 
 use WBB\CoreBundle\Repository\EntityRepository;
+use WBB\BarBundle\Entity\BestOf;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * BestOfRepository
@@ -12,15 +14,121 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class BestOfRepository extends EntityRepository
 {
-    public function findTopBestOfs($city = null)
+    public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3, $forceTags = true, $excluded = array())
+    {
+        $ids = array($bestof->getId());
+        foreach($bestof->getBestofs() as $excludedBestof)
+        {
+            if($excludedBestof)
+                $ids[] = $excludedBestof->getId();
+        }
+        foreach($excluded as $excludedBestof)
+        {
+            if($excludedBestof)
+                $ids[] = $excludedBestof->getId();
+        }
+
+        $qb = $this->createQueryBuilder($this->getAlias());
+        $qb
+            ->select()
+            ->distinct($this->getAlias().'.id')
+            ->where($qb->expr()->notIn($this->getAlias().'.id', $ids))
+            ->orderBy($this->getAlias().'.onTop', 'desc')
+            ->groupBy($this->getAlias().'.id')
+        ;
+
+        if ($city) {
+            $qb
+                ->leftJoin($this->getAlias().'.city', 'c')
+                ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
+        }
+
+        if($bestof->getByTag() and $forceTags){
+            // TODO common tags
+            $qb
+                ->addSelect('count(t.id) as HIDDEN nbTags')
+                ->leftjoin($this->getAlias().'.tags', 'bt')
+                ->leftjoin('bt.tag', 't')
+                ->andWhere($qb->expr()->in('t.id', ':tags'))
+                ->setParameter('tags', $bestof->getTagsIds())
+                ->addOrderBy('nbTags','DESC')
+            ;
+        }
+
+        $qb
+            ->addOrderBy($this->getAlias().'.createdAt','DESC')
+            ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findTopBestOfs($city = null, $favoris = null, $limit = null, $onlyOnTop = true)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq(1, 1))
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
         ;
+
+        if($onlyOnTop){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        if($limit){
+            $qb->setMaxResults($limit);
+        }
+
+        // TODO: Favoris WBB
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8, $order = 'ASC')
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->orderBy($this->getAlias().'.name', $order)
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findLatestBestofs($city = null, $limit = 8, $offset = 0, $onTop = true)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq(1, 1))
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($onTop){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        }
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));

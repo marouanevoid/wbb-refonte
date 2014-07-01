@@ -21,8 +21,11 @@ class TipRepository extends EntityRepository
             ->where($qb->expr()->eq($this->getAlias().'.status', 1))
             ->andWhere($qb->expr()->eq($this->getAlias().'.bar', $bar->getId()))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
-            ->setMaxResults($limit)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
 
         if($offset > 0){
             $qb

@@ -44,16 +44,16 @@ class City {
     private $slug;
 
     /**
-     * @var string
+     * @var decimal
      *
-     * @ORM\Column(name="latitude", type="string", length=255, nullable=true)
+     * @ORM\Column(name="latitude", type="decimal", scale=8, nullable=true)
      */
     private $latitude;
 
     /**
-     * @var string
+     * @var decimal
      *
-     * @ORM\Column(name="longitude", type="string", length=255, nullable=true)
+     * @ORM\Column(name="longitude", type="decimal", scale=8, nullable=true)
      */
     private $longitude;
 
@@ -65,16 +65,21 @@ class City {
     private $seoDescription;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $image;
 
-    /**
-     * @var FileUpload
-     */
-    private $file;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+//     */
+//    private $image;
+//
+//    /**
+//     * @var FileUpload
+//     */
+//    private $file;
 
     /**
      * @var boolean
@@ -94,9 +99,19 @@ class City {
     private $suburbs;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"all"})
+     */
+    private $users;
+
+    /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="city", cascade={"all"})
      */
     private $bars;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="city", cascade={"all"})
+     */
+    private $semsoftBars;
 
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\CityBestOf", mappedBy="city", cascade={"all"})
@@ -104,9 +119,12 @@ class City {
     private $bestofs;  
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"remove"})
-     * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities")
+     * @ORM\JoinTable(name="wbb_news_cities",
+     *      joinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      )
+     **/
     private $news;    
     
     /**
@@ -249,6 +267,7 @@ class City {
      */
     public function __construct() {
         $this->suburbs = new ArrayCollection();
+        $this->news    = new ArrayCollection();
 
         $this->setOnTopCity(true);
     }
@@ -383,131 +402,6 @@ class City {
     }
 
     /**
-     * Set image
-     *
-     * @param  string   $image
-     * @return BestOf
-     */
-    public function setImage($image) {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage() {
-        return $this->image;
-    }
-
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-        if (isset($this->image)) {
-            $this->temp = $this->image;
-            $this->image = null;
-        } else {
-            $this->image = 'initial';
-        }
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile() {
-        return $this->file;
-    }
-
-    public function getAbsolutePath() {
-
-        return null === $this->image ? null : $this->getUploadRootDir() . '/' . $this->image;
-    }
-
-    public function getWebPath() {
-
-        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
-    }
-
-    protected function getUploadRootDir() {
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
-    }
-
-    protected function getUploadDir() {
-        return 'uploads/cities';
-    }
-
-    private $temp;
-
-    /**
-     * preUpload
-     */
-    public function preUpload() {
-        if (null !== $this->getFile()) {
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->image = $filename . '.' . $this->getFile()->guessExtension();
-        }
-    }
-
-    /**
-     * upload
-     */
-    public function upload() {
-
-        if (null === $this->getFile()) {
-            return;
-        }
-
-        $this->getFile()->move($this->getUploadRootDir(), $this->image);
-
-        if (isset($this->temp) && file_exists($this->getUploadRootDir() . '/' . $this->temp)) {
-            unlink($this->getUploadRootDir() . '/' . $this->temp);
-            $this->temp = null;
-        }
-        $this->file = null;
-    }
-
-    /**
-     * removeUpload
-     */
-    public function removeUpload() {
-        if ($file = $this->getAbsolutePath()) {
-            unlink($file);
-        }
-    }
-
-    /**
-     * Set news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     * @return City
-     */
-    public function setNews(\WBB\BarBundle\Entity\News $news = null)
-    {
-        $this->news = $news;
-
-        return $this;
-    }
-
-    /**
-     * Get news
-     *
-     */
-    public function getNews()
-    {
-        return $this->news;
-    }
-
-    /**
      * Add tags
      *
      * @param CityTag $tags
@@ -594,5 +488,143 @@ class City {
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     * @return City
+     */
+    public function addUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     */
+    public function removeUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    public function getNbBars()
+    {
+        return count($this->getBars());
+    }
+
+    public function getNbNews()
+    {
+        return count($this->getNews());
+    }
+
+    public function getNbAreas()
+    {
+        return count($this->getSuburbs());
+    }
+
+
+    /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return City
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return City
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @return City
+     */
+    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars[] = $semsoftBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     */
+    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars->removeElement($semsoftBars);
+    }
+
+    /**
+     * Get semsoftBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSemsoftBars()
+    {
+        return $this->semsoftBars;
+    }
+
+    /**
+     * Get news
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNews()
+    {
+        return $this->news;
     }
 }

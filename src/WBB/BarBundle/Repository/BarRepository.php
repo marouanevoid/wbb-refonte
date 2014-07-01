@@ -17,19 +17,38 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_COUNTRY = 2;
     const BAR_LOCATION_WORLDWIDE = 3;
 
+    public function findAllEnabled($city = null, $suburb = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
 
-    public function findBestBars($city = null)
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)));
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        if($suburb){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.suburb', $suburb->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBestBars($city = null, $limit = 6)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips")
-            ->leftjoin($this->getAlias().'.tips', 'tp')
-            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->leftjoin($this->getAlias().'.tips', 'tp', 'WITH', 'tp.status ='. $qb->expr()->literal(1))
+//            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->groupBy($this->getAlias())
-            ->orderBy('nbTips', 'DESC')
-            ->setMaxResults(6)
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy('nbTips', 'DESC')
+            ->setMaxResults($limit)
         ;
 
         if($city){
@@ -42,17 +61,55 @@ class BarRepository extends EntityRepository
 
     }
 
-    public function findLatestBars($city = null, $limit = 5)
+    public function findPopularBars($city = null, $limit = 5, $offset = 0)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
-            ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
-            ->orderBy($this->getAlias().'.createdAt', 'DESC')
-            ->setMaxResults($limit)
+//            ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setFirstResult($offset)
         ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        //TODO : Add Favoris count
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    public function findLatestBars($city = null, $limit = 5, $offset = 0, $onTop = true)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($onTop){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
 
         return $qb->getQuery()->getResult();
     }
@@ -118,4 +175,101 @@ class BarRepository extends EntityRepository
             return null;
         }
     }
-} 
+
+    public function findNearestBars($latitude = 0, $longitude = 0, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().",GEO(".$this->getAlias().".latitude = :latitude, ".$this->getAlias().".longitude = :longitude) AS HIDDEN Distance")
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->setParameter('latitude', $latitude)
+            ->setParameter('longitude', $longitude)
+            ->orderBy('Distance', 'ASC')
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBarsOrderedByName($city = null, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->orderBy($this->getAlias().'.name', 'ASC')
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBarsByExactTags($bestof, $offset = 0, $limit = 9)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias())
+            ->addSelect('count(t.id) as HIDDEN nbTags')
+            ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->innerjoin($this->getAlias().'.tags', 'bt')
+            ->innerjoin('bt.tag', 't')
+            ->andWhere($qb->expr()->in('t.id',':tags'))
+            ->setParameter('tags', $bestof->getTagsIds())
+            ->groupBy($this->getAlias().'.id')
+            ->having($qb->expr()->gte('nbTags', count($bestof->getTagsIds())))
+        ;
+
+        if($bestof->getCity()){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $bestof->getCity()->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBarFromFinder($city = null, $tag = null, $mood = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->orderBy($this->getAlias().'.name', 'ASC')
+        ;
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        if($tag){
+            $qb
+                ->leftjoin($this->getAlias().'.tags', 'bt')
+                ->leftjoin('bt.tag', 't')
+                ->andWhere($qb->expr()->eq('t.id', $tag))
+            ;
+        }
+
+        if($mood){
+            $qb
+                ->leftjoin($this->getAlias().'.tags', 'bt2')
+                ->leftjoin('bt2.tag', 't2')
+                ->andWhere($qb->expr()->eq('t2.energyLevel', $mood))
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+}

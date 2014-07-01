@@ -25,7 +25,7 @@
 
         "sonata-project/core-bundle": "2.2.*",
         "sonata-project/admin-bundle": "2.2.*",
-        "sonata-project/block-bundle": "2.2.*",
+        "sonata-project/block-bundle": "2.2.11",
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
         "sonata-project/jquery-bundle": "1.8.*",
         "sonata-project/media-bundle": "2.2.*",
@@ -40,7 +40,8 @@
         "stnw/date-picker-bundle" : "dev-master",
         "suncat/mobile-detect-bundle": "0.9.*",
         "avalanche123/imagine-bundle": "2.*",
-        "jms/serializer-bundle": "0.13.*@dev"
+        "jms/serializer-bundle": "0.13.*@dev",
+        "ddeboer/data-import-bundle": "0.1"
 
     },
     "scripts": {

@@ -8,6 +8,7 @@ article.bar-wo-pic {
       &:before{ background-position: -200px -80px }
       &:after{ background-position: -200px -120px; display: block }
       &.active:before{ background-position: -200px -120px }
+      &.force-disabled:after{ opacity: 0 }
     }
   }
 

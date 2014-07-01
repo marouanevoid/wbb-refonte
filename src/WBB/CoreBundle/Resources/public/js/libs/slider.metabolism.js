@@ -52,7 +52,7 @@ meta.Slider = function(config){
         swipe       : false,
         speed       : 400,
         easing      : 'easeInOutCubic',
-        default_img : '/bundles/wbbcore/images/default.jpg',
+        default_img : 'images/default.jpg',
         animate_arrow   : false,
         autoplay_delay  : 5000,
         autoplay        : false,
@@ -85,7 +85,10 @@ meta.Slider = function(config){
         that.context.$slides    = that.context.$slider.find(that.config.slide);
         that.context.$dots      = that.context.$slider.find(that.config.dots);
 
-        var min_slide_length = that.config.autoload ? 0 : 1;
+        var min_slide_length    = that.config.autoload ? 0 : 1;
+
+        if( that.config.display_count )
+            min_slide_length = that.config.display_count;
 
         that.config.has_arrows  = that.config.has_arrows && that.context.$slides.length > min_slide_length;
         that.config.has_dots    = that.config.has_dots && that.context.$slides.length > min_slide_length;
@@ -93,14 +96,14 @@ meta.Slider = function(config){
 
         that.context.offset     = parseInt(10000/that.config.display_count)/100;
 
-        that.config.use_3D      = Modernizr.csstransforms3d;
+        that.config.use_3D      = Modernizr.csstransforms3d && ( $('html').hasClass('webkit') || $('html').hasClass('mobile') );
     };
 
 
 
     that._addComponents = function() {
 
-        that.context.$slider.wrapInner('<div class="ui-slides"/>');
+        that.context.$slider.wrapInner('<div class="ui-slides"><div class="ui-wrapper"/></div>');
 
         if( that.config.has_arrows ){
 
@@ -150,7 +153,7 @@ meta.Slider = function(config){
                     if( that.config.use_3D )
                         $(this).css({transform:'translate3d('+index*100+'%,0,0)'});
                     else
-                        $(this).css({left:index*that.context.offset+'%'});
+                        $(this).css({left:(Math.round(index*that.context.offset*100)/100)+'%'});
 
                 })
             }
@@ -195,7 +198,7 @@ meta.Slider = function(config){
             });
         }
 
-        if( that.config.has_dots ){
+        if( that.config.has_dots && $(window).width() > 640 ){
 
             that.context.$dots.click(function(e)
             {
@@ -569,7 +572,7 @@ function initializeSliders()
                 autoload        : $slider.hasClass('autoload'),
                 animate_arrow   : $slider.hasClass('animate-arrow'),
                 autoplay        : $slider.hasClass('autoplay'),
-                display_count   : $slider.data('display'),
+                display_count   : parseInt($slider.data('display')),
                 animation       : animation
             }));
 

@@ -1,0 +1,32 @@
+<div class="line">
+{% for b in bestofs %}
+        <article class="bar-w-pic-list">
+
+            <div class="three columns s-margin-top">
+
+                <div class="bar-w-pic list">
+
+                    <a href="#0" class="btn-round dark star"></a>
+
+                    {% if b.city %}
+                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
+                    {% else %}
+                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
+                    {% endif %}
+
+                    <img class="scale-with-grid" data-src="{% path b.image, 'bestof_small' %}" alt="{{ b.name }}" width="570" height="428"/>
+
+                </div>
+            </div>
+
+            <div class="nine columns s-margin-top">
+                <h2 class="s-margin-top"><a href="#0">{{ b.name }}</a></h2>
+                <h3 class="xs-margin-top"><a href="#0">{% if b.city %}{{ b.city.name }}{% endif %}</a></h3>
+                <p class="s-margin-top">
+                    {{ b.seoDescription|truncate(200, true, '...')|striptags }}
+                </p>
+            </div>
+            <div class="separator"><hr/></div>
+        </article>
+{% endfor %}
+</div>

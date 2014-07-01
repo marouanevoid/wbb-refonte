@@ -20,6 +20,7 @@
     $color-dark-gray:     #333333;
     $color-medium-gray:   #818a8c;
     $color-light-gray:    #6f7072;
+    $color-ultralight-gray: #c8c9cb;
     $color-error:         #cc4a45;
     $color-success:       #4acc4f;
 
@@ -34,5 +35,5 @@
 
 @mixin reduceFlickering()
 {
-  backface-visibility: hidden; -moz-backface-visibility: hidden; -webkit-backface-visibility: hidden
+  -webkit-backface-visibility: hidden; border:1px solid transparent; -moz-transform:rotate(0); box-sizing: border-box;
 }

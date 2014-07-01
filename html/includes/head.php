@@ -48,13 +48,12 @@
     <script type="text/javascript" src="js/libs/form.metabolism.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/anim.js"></script>
 
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-        //var BASEURL = "/pr0d/wbb/";
-        var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
+        var BASEURL = "/";
+        //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = { loading: 'Loading...'};
     </script>
 
@@ -80,11 +79,11 @@
 
     </script>
 
+    <?php if( $is_mobile ): ?>
+        <?php include('includes/mobile/header.php') ?>
+    <?php else: ?>
+        <?php include('includes/header.php') ?>
+    <?php endif ?>
+
     <div class="entire-content">
         <div class="entire-content-scrollable">
-
-            <?php if( $is_mobile ): ?>
-                <?php include('includes/mobile/header.php') ?>
-            <?php else: ?>
-                <?php include('includes/header.php') ?>
-            <?php endif ?>

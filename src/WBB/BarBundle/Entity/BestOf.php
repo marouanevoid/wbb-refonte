@@ -2,9 +2,11 @@
 
 namespace WBB\BarBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WBB\BarBundle\Entity\Collections\BestOfTag;
 
 /**
  * BestOf
@@ -31,6 +33,12 @@ class BestOf
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @ORM\Column(unique=true)
+     */
+    private $slug;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -38,16 +46,20 @@ class BestOf
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $image;
-
-    /**
-     * @var FileUpload
-     */
-    private $file;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+//     */
+//    private $image;
+//
+//    /**
+//     * @var FileUpload
+//     */
+//    private $file;
 
     /**
      * @var string
@@ -57,16 +69,21 @@ class BestOf
     private $sponsor;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="sponsor_image", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $sponsorImage;
 
-    /**
-     * @var FileUpload
-     */
-    private $sponsorImageFile;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="sponsor_image", type="string", length=255, nullable=true)
+//     */
+//    private $sponsorImage;
+//
+//    /**
+//     * @var FileUpload
+//     */
+//    private $sponsorImageFile;
 
     /**
      * @var string
@@ -107,9 +124,12 @@ class BestOf
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="bestOfs", cascade={"remove"})
-     * @ORM\JoinColumn(name="bestof_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToMany(targetEntity="News", inversedBy="bestOfs")
+     * @ORM\JoinTable(name="wbb_news_bestofs",
+     *      joinColumns={@ORM\JoinColumn(name="bestof_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      )
+     **/
     private $news;    
     
     /**
@@ -304,214 +324,214 @@ class BestOf
     }
 
 
-    /**
-     * Set image
-     *
-     * @param  string   $image
-     * @return BestOf
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-        if (isset($this->image)) {
-            $this->temp = $this->image;
-            $this->image = null;
-        } else {
-            $this->image = 'initial';
-        }
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     */
-    public function setSponsorImageFile(UploadedFile $file = null)
-    {
-        $this->sponsorImageFile = $file;
-        if (isset($this->sponsorImage)) {
-            $this->temp = $this->sponsorImage;
-            $this->sponsorImage = null;
-        } else {
-            $this->sponsorImage = 'initial';
-        }
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getSponsorImageFile()
-    {
-        return $this->sponsorImageFile;
-    }
-
-    public function getAbsolutePath($sponsor = null)
-    {
-        if($sponsor){
-            return null === $this->sponsorImage
-                ? null
-                : $this->getUploadRootDir(true).'/'.$this->sponsorImage;
-        }else{
-            return null === $this->image
-                ? null
-                : $this->getUploadRootDir().'/'.$this->image;
-        }
-    }
-
-    public function getWebPath($sponsor = null)
-    {
-        if($sponsor){
-            return null === $this->sponsorImage
-                ? null
-                : $this->getUploadDir(true).'/'.$this->sponsorImage;
-        }else{
-            return null === $this->image
-                ? null
-                : $this->getUploadDir().'/'.$this->image;
-        }
-    }
-
-    protected function getUploadRootDir($sponsor = null)
-    {
-        if($sponsor)
-            return __DIR__.'/../../../../web/'.$this->getUploadDir(true);
-        else
-            return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir($sponsor = null)
-    {
-        if($sponsor){
-            return "uploads/sponsor";
-        }else{
-            return 'uploads/bestof';
-        }
-    }
-
-    private $temp;
-
-    /**
-     * preUpload
-     */
-    public function preUpload($sponsor = null)
-    {
-        if($sponsor){
-            if (null !== $this->getSponsorImageFile()) {
-                $filename = sha1(uniqid(mt_rand(), true));
-                $this->sponsorImage = $filename.'.'.$this->getSponsorImageFile()->guessExtension();
-            }
-        }else{
-            if (null !== $this->getFile()) {
-                $filename = sha1(uniqid(mt_rand(), true));
-                $this->image = $filename.'.'.$this->getFile()->guessExtension();
-            }
-        }
-    }
-
-    /**
-     * upload
-     */
-    public function upload($sponsor = null)
-    {
-        if($sponsor){
-            if (null === $this->getSponsorImageFile()) {
-                return;
-            }
-
-            $this->getSponsorImageFile()->move($this->getUploadRootDir(true), $this->sponsorImage);
-
-            if (isset($this->temp) && file_exists($this->getUploadRootDir(true).'/'.$this->temp)) {
-                unlink($this->getUploadRootDir(true).'/'.$this->temp);
-                $this->temp = null;
-            }
-            $this->sponsorImageFile = null;
-        }else{
-            if (null === $this->getFile()) {
-                return;
-            }
-
-            $this->getFile()->move($this->getUploadRootDir(), $this->image);
-
-            if (isset($this->temp) && file_exists($this->getUploadRootDir().'/'.$this->temp)) {
-                unlink($this->getUploadRootDir().'/'.$this->temp);
-                $this->temp = null;
-            }
-            $this->file = null;
-        }
-    }
-
-    /**
-     * removeUpload
-     */
-    public function removeUpload($sponsor = null)
-    {
-        if($sponsor){
-            if ($file = $this->getAbsolutePath(true)) {
-                unlink($file);
-            }
-        }else{
-            if ($file = $this->getAbsolutePath()) {
-                unlink($file);
-            }
-        }
-    }
-
-    /**
-     * Set sponsorImage
-     *
-     * @param string $sponsorImage
-     * @return BestOf
-     */
-    public function setSponsorImage($sponsorImage)
-    {
-        $this->sponsorImage = $sponsorImage;
-
-        return $this;
-    }
-
-    /**
-     * Get sponsorImage
-     *
-     * @return string 
-     */
-    public function getSponsorImage()
-    {
-        return $this->sponsorImage;
-    }
+//    /**
+//     * Set image
+//     *
+//     * @param  string   $image
+//     * @return BestOf
+//     */
+//    public function setImage($image)
+//    {
+//        $this->image = $image;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get image
+//     *
+//     * @return string
+//     */
+//    public function getImage()
+//    {
+//        return $this->image;
+//    }
+//
+//    /**
+//     * Sets file.
+//     *
+//     * @param UploadedFile $file
+//     */
+//    public function setFile(UploadedFile $file = null)
+//    {
+//        $this->file = $file;
+//        if (isset($this->image)) {
+//            $this->temp = $this->image;
+//            $this->image = null;
+//        } else {
+//            $this->image = 'initial';
+//        }
+//    }
+//
+//    /**
+//     * Get file.
+//     *
+//     * @return UploadedFile
+//     */
+//    public function getFile()
+//    {
+//        return $this->file;
+//    }
+//
+//    /**
+//     * Sets file.
+//     *
+//     * @param UploadedFile $file
+//     */
+//    public function setSponsorImageFile(UploadedFile $file = null)
+//    {
+//        $this->sponsorImageFile = $file;
+//        if (isset($this->sponsorImage)) {
+//            $this->temp = $this->sponsorImage;
+//            $this->sponsorImage = null;
+//        } else {
+//            $this->sponsorImage = 'initial';
+//        }
+//    }
+//
+//    /**
+//     * Get file.
+//     *
+//     * @return UploadedFile
+//     */
+//    public function getSponsorImageFile()
+//    {
+//        return $this->sponsorImageFile;
+//    }
+//
+//    public function getAbsolutePath($sponsor = null)
+//    {
+//        if($sponsor){
+//            return null === $this->sponsorImage
+//                ? null
+//                : $this->getUploadRootDir(true).'/'.$this->sponsorImage;
+//        }else{
+//            return null === $this->image
+//                ? null
+//                : $this->getUploadRootDir().'/'.$this->image;
+//        }
+//    }
+//
+//    public function getWebPath($sponsor = null)
+//    {
+//        if($sponsor){
+//            return null === $this->sponsorImage
+//                ? null
+//                : $this->getUploadDir(true).'/'.$this->sponsorImage;
+//        }else{
+//            return null === $this->image
+//                ? null
+//                : $this->getUploadDir().'/'.$this->image;
+//        }
+//    }
+//
+//    protected function getUploadRootDir($sponsor = null)
+//    {
+//        if($sponsor)
+//            return __DIR__.'/../../../../web/'.$this->getUploadDir(true);
+//        else
+//            return __DIR__.'/../../../../web/'.$this->getUploadDir();
+//    }
+//
+//    protected function getUploadDir($sponsor = null)
+//    {
+//        if($sponsor){
+//            return "uploads/sponsor";
+//        }else{
+//            return 'uploads/bestof';
+//        }
+//    }
+//
+//    private $temp;
+//
+//    /**
+//     * preUpload
+//     */
+//    public function preUpload($sponsor = null)
+//    {
+//        if($sponsor){
+//            if (null !== $this->getSponsorImageFile()) {
+//                $filename = sha1(uniqid(mt_rand(), true));
+//                $this->sponsorImage = $filename.'.'.$this->getSponsorImageFile()->guessExtension();
+//            }
+//        }else{
+//            if (null !== $this->getFile()) {
+//                $filename = sha1(uniqid(mt_rand(), true));
+//                $this->image = $filename.'.'.$this->getFile()->guessExtension();
+//            }
+//        }
+//    }
+//
+//    /**
+//     * upload
+//     */
+//    public function upload($sponsor = null)
+//    {
+//        if($sponsor){
+//            if (null === $this->getSponsorImageFile()) {
+//                return;
+//            }
+//
+//            $this->getSponsorImageFile()->move($this->getUploadRootDir(true), $this->sponsorImage);
+//
+//            if (isset($this->temp) && file_exists($this->getUploadRootDir(true).'/'.$this->temp)) {
+//                unlink($this->getUploadRootDir(true).'/'.$this->temp);
+//                $this->temp = null;
+//            }
+//            $this->sponsorImageFile = null;
+//        }else{
+//            if (null === $this->getFile()) {
+//                return;
+//            }
+//
+//            $this->getFile()->move($this->getUploadRootDir(), $this->image);
+//
+//            if (isset($this->temp) && file_exists($this->getUploadRootDir().'/'.$this->temp)) {
+//                unlink($this->getUploadRootDir().'/'.$this->temp);
+//                $this->temp = null;
+//            }
+//            $this->file = null;
+//        }
+//    }
+//
+//    /**
+//     * removeUpload
+//     */
+//    public function removeUpload($sponsor = null)
+//    {
+//        if($sponsor){
+//            if ($file = $this->getAbsolutePath(true)) {
+//                unlink($file);
+//            }
+//        }else{
+//            if ($file = $this->getAbsolutePath()) {
+//                unlink($file);
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Set sponsorImage
+//     *
+//     * @param string $sponsorImage
+//     * @return BestOf
+//     */
+//    public function setSponsorImage($sponsorImage)
+//    {
+//        $this->sponsorImage = $sponsorImage;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get sponsorImage
+//     *
+//     * @return string
+//     */
+//    public function getSponsorImage()
+//    {
+//        return $this->sponsorImage;
+//    }
 
     /**
      * Set createdAt
@@ -612,17 +632,19 @@ class BestOf
 
     public function __construct(){
         $this->setOnTop(true);
-        $this->setByTag(true);
+        $this->setByTag(false);
         $this->setOrdered(true);
+        
+        $this->news = new ArrayCollection();
     }
 
     /**
      * Add tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $tags
+     * @param BestOfTag $tags
      * @return BestOf
      */
-    public function addTag(\WBB\BarBundle\Entity\Collections\BestOfTag $tags)
+    public function addTag(BestOfTag $tags)
     {
         $this->tags[] = $tags;
 
@@ -632,9 +654,9 @@ class BestOf
     /**
      * Remove tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $tags
+     * @param BestOfTag $tags
      */
-    public function removeTag(\WBB\BarBundle\Entity\Collections\BestOfTag $tags)
+    public function removeTag(BestOfTag $tags)
     {
         $this->tags->removeElement($tags);
     }
@@ -789,5 +811,118 @@ class BestOf
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return BestOf
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return BestOf
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
+
+    public function getNbBars()
+    {
+        return count($this->getBars());
+    }
+
+    public function getTagsIds()
+    {
+        $tags = array();
+        foreach ($this->getTags() as $tag) {
+            if ($tag->getTag()) {
+                $tags[] = $tag->getTag()->getId();
+            }
+        }
+
+        if (sizeof($tags) > 0) {
+            return $tags;
+        } else {
+            return array(0);
+        }
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return BestOf
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set sponsorImage
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $sponsorImage
+     * @return BestOf
+     */
+    public function setSponsorImage(\Application\Sonata\MediaBundle\Entity\Media $sponsorImage = null)
+    {
+        $this->sponsorImage = $sponsorImage;
+
+        return $this;
+    }
+
+    /**
+     * Get sponsorImage
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getSponsorImage()
+    {
+        return $this->sponsorImage;
     }
 }

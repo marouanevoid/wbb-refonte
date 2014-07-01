@@ -86,20 +86,7 @@
             </table>
         </div>
     </div>
+
+    <?php include('includes/mobile/search-bar.php') ?>
+
 </header>
-
-<div class="search-bar-mobile">
-
-    <div class="container">
-
-        <div class="twelve columns s-margin">
-            <form action="">
-                <input type="text"/>
-            </form>
-            <a class="btn-radius border h4 close">Cancel</a>
-        </div>
-    </div>
-
-    <div class="search-result-proposal"><ul></ul></div>
-
-</div>

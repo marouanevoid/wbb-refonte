@@ -34,8 +34,15 @@ meta.Map = function(config){
         map         :[
                         {
                             "featureType": "water",
+                            "elementType": "geometry",
                             "stylers": [
                                 { "color": "#bdbec0" }
+                            ]
+                        },{
+                            "featureType": "water",
+                            "elementType": "labels",
+                            "stylers": [
+                                { "visibility": "off" }
                             ]
                         },{
                             "featureType": "landscape.natural",
@@ -59,7 +66,8 @@ meta.Map = function(config){
                                 { "visibility": "on" }
                             ]
                         }
-                    ]
+                    ],
+        offset      : {21:0.00039, 20:0.00077, 19:0.0015, 18: 0.0031, 17:0.0062, 16:0.0123, 15:0.025, 14:0.05, 13:0.098, 12:0.19  }
 
     };
 
@@ -76,6 +84,9 @@ meta.Map = function(config){
     {
         that.config = $.extend(that.config, config);
         that._setupContext();
+
+        $('<img/>')[0].src = 'images/map.pin.grey.png';
+
     };
 
 
@@ -91,6 +102,8 @@ meta.Map = function(config){
                 options: {
                     center:[25,0],
                     zoom: 3,
+                    maxZoom: 21,
+                    minZoom: 3,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     mapTypeControl: false,
                     navigationControl: false,
@@ -154,10 +167,34 @@ meta.Map = function(config){
     };
 
 
+
+    that.setCenter = function( position ) {
+
+        var map = that.config.$map.gmap3('get');
+
+        //if( !map.getBounds().contains(position) )
+            that.config.$map.gmap3('get').panTo( position );
+    };
+
+
+    that.addZoomListener = function ( callback ){
+
+        var map = that.config.$map.gmap3('get');
+
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+            var zoomLevel = map.getZoom();
+            callback(zoomLevel);
+        });
+
+    };
+
+
     /**
      *
      */
     that.addMarkers = function( markers, fit ){
+
+        var map = that.config.$map.gmap3('get');
 
         that.config.$map.gmap3({
             clear: {
@@ -174,18 +211,28 @@ meta.Map = function(config){
                 events:{
                     mouseover: function(marker, event, context){
 
+                        if( $('html').hasClass('mobile') ) return;
+
                         if( typeof(context.id) != 'undefined')
                             $('#'+context.id ).addClass('active');
 
-                        if( typeof(context.data) == 'undefined') return;
+
+                        if( typeof(context.data) == 'undefined')
+                        {
+                            marker.setIcon('images/map.pin.grey.png');
+                            return;
+                        }
+
+                        var align = "right";
+                        if( map.getBounds().getNorthEast().lng() - marker.getPosition().lng() < that.config.offset[map.getZoom()] ) align = "left";
 
                         that.config.$map.gmap3({
                             overlay:{
                                 latLng: marker.getPosition(),
                                 options:{
-                                    content:  '<div class="label">'+context.data+'</div>',
+                                    content:  '<div class="label '+align+'">'+context.data+'</div>',
                                     offset:{
-                                        y:-70,
+                                        y:-95,
                                         x:30
                                     }
                                 }
@@ -193,6 +240,11 @@ meta.Map = function(config){
                         });
                     },
                     mouseout: function(marker, event, context){
+
+                        if( typeof(context.data) == 'undefined')
+                        {
+                            marker.setIcon('images/map.pin.png');
+                        }
 
                         if( typeof(context.id) != 'undefined')
                             $('#'+context.id ).removeClass('active');
@@ -209,7 +261,7 @@ meta.Map = function(config){
                         if( typeof(context.id) != 'undefined')
                             $('#'+context.id ).click();
                     }
-                },
+                }/*,
                 cluster:{
                     radius: 15,
                     3: {
@@ -225,7 +277,7 @@ meta.Map = function(config){
                             gmap.setZoom(gmap.getZoom()+2);
                         }
                     }
-                }
+                }*/
             }
         });
 

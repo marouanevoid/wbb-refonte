@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * CitySuburb
  *
  * @ORM\Table(name="wbb_city_suburb")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\SuburbRepository")
  */
 class CitySuburb
 {
@@ -30,6 +30,12 @@ class CitySuburb
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @ORM\Column(unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="City", inversedBy="suburbs")
      */
     private $city;
@@ -38,6 +44,11 @@ class CitySuburb
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="suburb", cascade={"all"})
      */
     private $bars;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="suburb", cascade={"all"})
+     */
+    private $semsoftBars;
 
     /**
      * @var \DateTime
@@ -201,5 +212,61 @@ class CitySuburb
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return CitySuburb
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @return CitySuburb
+     */
+    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars[] = $semsoftBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     */
+    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars->removeElement($semsoftBars);
+    }
+
+    /**
+     * Get semsoftBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSemsoftBars()
+    {
+        return $this->semsoftBars;
     }
 }

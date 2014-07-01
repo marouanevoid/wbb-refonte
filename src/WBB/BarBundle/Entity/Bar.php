@@ -59,14 +59,14 @@ class Bar
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="string", length=20, nullable=true)
+     * @ORM\Column(name="latitude", type="decimal", scale=8, nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="string", length=20, nullable=true)
+     * @ORM\Column(name="longitude", type="decimal", scale=8, nullable=true)
      */
     private $longitude;
 
@@ -270,9 +270,12 @@ class Bar
     private $tips;
     
     /**
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="bars", cascade={"remove"})
-     * @ORM\JoinColumn(name="bar_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToMany(targetEntity="News", inversedBy="bars")
+     * @ORM\JoinTable(name="wbb_news_bars",
+     *      joinColumns={@ORM\JoinColumn(name="bar_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      )
+     **/
     private $news;      
 
     /**
@@ -867,6 +870,8 @@ class Bar
 
         $this->latitude = 0;
         $this->longitude = 0;
+        
+        $this->news = new ArrayCollection();
     }
 
     /**
@@ -1154,29 +1159,6 @@ class Bar
     }
 
     /**
-     * Set news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     * @return Bar
-     */
-    public function setNews(\WBB\BarBundle\Entity\News $news = null)
-    {
-        $this->news = $news;
-
-        return $this;
-    }
-
-    /**
-     * Get news
-     *
-     * @return \WBB\BarBundle\Entity\News 
-     */
-    public function getNews()
-    {
-        return $this->news;
-    }
-
-    /**
      * Add tags
      *
      * @param \WBB\BarBundle\Entity\Collections\BarTag $tags
@@ -1359,4 +1341,36 @@ class Bar
     {
         return $this->splitDescription(true, $mobile);
     }
+
+    /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return Bar
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
+
+    /**
+    * Get $news
+    *
+    * @return \Doctrine\Common\Collections\Collection
+    **/
+    public function getNews(){
+         return $this->news;
+     }
 }

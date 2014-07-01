@@ -24,7 +24,7 @@ class NewsMediaAdmin extends Admin
                         'context' => 'default'
                     )
                 ))
-                ->add('alt')
+                ->add('alt', 'textarea', array('attr'=>array('cols'=>220, 'rows'=>6)))
             ->end();
     }
 }

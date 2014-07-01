@@ -24,6 +24,13 @@ class BestOfBar
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="smallint", nullable=true)
@@ -97,7 +104,10 @@ class BestOfBar
 
     public function __toString()
     {
-        return $this->tag->getName();
+        if($this->bar)
+            return $this->bar->getName();
+        else
+            return "";
     }
 
     /**
@@ -213,5 +223,28 @@ class BestOfBar
     public function getMedia()
     {
         return $this->media;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return BestOfBar
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

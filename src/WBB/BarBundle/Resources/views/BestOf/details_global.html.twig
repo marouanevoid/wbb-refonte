@@ -1,0 +1,123 @@
+{% extends "::base.html.twig" %}
+{% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
+{% block title %}World Best Bars{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initializeSliders();
+            $(".bars .four:lt(3)").show(); 
+            if($('.bars .four').length>3)
+                $(".load-more-container").show();
+            var display;   
+            $(".load-more").click(function(){
+                display = $('.bars .four:visible').length+3;
+                $(".bars .four:lt("+display+")").fadeIn(500); 
+                if($('.bars .four:hidden').length<=0){
+                    $('.load-more-container').hide();
+                }
+            });   
+        });
+    </script>
+    <style type="text/css">
+        .load-more-container {
+            display:none;
+            margin-bottom: 0 !important;
+        }
+    </style>
+{% endblock %}
+{% block bodyTag %}
+<body class="best-of-details">
+{% endblock %}
+{% block body %}
+
+<div>
+    <!-- SUBHEADER -->
+    <div class="container">
+        <section class="sub-header">
+            <table>
+                <tr>
+                    <td></td>
+                    <td class="title">
+                        <h3>{% if bestOf.city %}{{ bestOf.city.name }} Best's{% else %}World's Best{% endif %}</h3>
+                        <h1>{{ bestOf.name }}</h1>
+                        <h3>
+                            {{ bestOf.description | raw }}
+                        </h3>
+                    </td>
+                    <td class="star-share">
+                        <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href=""></a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </div>
+</div>
+
+<!-- BARS -->
+<div class="container bars force-load">
+    {% for b in bars %}
+        {#{% if loop.index==3 and (not is_mobile() or is_tablet()) %}
+            <div class="four columns">
+                <div class="block">
+                    <div class="side-ad">
+                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                        <div class="txt">Advertising</div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}#}
+        <div class="four columns" style="display:none;">
+            {% if bestOf.byTag %}
+                {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
+            {% else %}
+                {% include "WBBBarBundle:BestOf:bar.html.twig" with { 'b': b, 'bestof' : bestOf} %}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+<div class="container load-more-container">
+    <div class="twelve columns align-center m-margin load-more-container">
+        <a class="h4 btn-radius large border load-more brown" href="#0">Load more</a>
+    </div>
+</div>
+
+<!-- ALSO LIKE -->
+<div class="container full also-like l-margin">
+        <section class="bestof force-load">
+            <div class="align-center l-margin-bottom">
+                {% if not is_mobile() or is_tablet() %}
+                <hr class="l-margin-bottom"/>
+                {% endif %}
+                <h1>You may also like</h1>
+            </div>
+            {% if is_mobile() and not is_tablet() %}
+            <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1">
+            {% endif %}
+                {% for b in bestofs |slice(0,3) %}
+                    <div class="four columns {% if is_mobile() and not is_tablet() %}ui-slide{% endif %}">
+                        {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}
+                    </div>
+                {% endfor %}
+            {% if is_mobile() and not is_tablet() %}
+            </div>
+            {% endif %}
+        </section>
+</div>
+{% endblock %}
+{% block footerAd %}
+    <section class="footer-ad">
+
+    <div class="container full align-center">
+
+        <div class="twelve columns">
+
+            <hr/>
+
+            <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
+
+        </div>
+
+    </div>
+
+    </section>
+{% endblock %}

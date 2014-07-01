@@ -31,43 +31,90 @@ meta.App = function() {
         easing  : 'easeInOutCubic'
     };
 
+    that.menu_open = false;
+
 
 
     that._mobileMenuEvents = function()
     {
+        if( $(window).width() > 640 ) return;
+
+        var $to_scroll  = $('.entire-content-scrollable, aside.mobile-menu');
+        var $menu       = $('aside.mobile-menu');
+        var $content    = $('.entire-content-scrollable');
+        var $header     = $('header.mobile');
+        var $menu_btn   = $header.find('.nav-icon a');
+        var $body       = $('body');
+
+        if( Modernizr.csstransforms3d )
+        {
+            $menu.on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function () {
+
+                if( that.menu_open )
+                {
+                    $body.removeClass('menu-open');
+                    $to_scroll.removeAttr('style');
+                    that.menu_open = false;
+                }
+                else
+                {
+                    var speed = Math.min(500, $(window).scrollTop()*2);
+                    $('html,body').animate({scrollTop:0}, speed, that.config.easing, function()
+                    {
+                        $menu.height('auto');
+                        $content.height($menu.height()-$header.height()-1);
+                    });
+                    that.menu_open = true;
+                }
+            });
+        }
+
         $('header.mobile .nav-icon a').on('click touchstart', function(e)
         {
             e.preventDefault();
 
-            var $to_scroll  = $('.entire-content-scrollable');
-            var $body       = $('body');
-            var transformation;
-
-            if( $body.hasClass("menu-open") )
+            if( that.menu_open )
             {
+                $content.height('auto');
+                $menu_btn.css('opacity', 1);
+
                 if( Modernizr.csstransforms3d )
-                    $to_scroll.css({transform: 'translate3d(0,0,0)'});
-                else
-                    $to_scroll.animate({left:0}, that.config.speed, that.config.easing);
-
-                setTimeout(function()
                 {
-                    $body.removeClass('menu-open');
-                    $to_scroll.removeAttr('style');
-
-                }, that.config.speed);
+                    $to_scroll.css({transform: 'translate3d(0,0,0)'});
+                }
+                else
+                {
+                    $to_scroll.animate({left:0}, that.config.speed, that.config.easing, function()
+                    {
+                        $body.removeClass('menu-open');
+                        $to_scroll.removeAttr('style');
+                        that.menu_open = false;
+                    });
+                }
             }
             else
             {
                 $body.addClass('menu-open');
+                $menu_btn.css('opacity', 0.5);
 
-                $('html,body').animate({scrollTop:0}, that.config.speed, that.config.easing, function()
+                $menu.height($content.height()+$header.height()+1);
+
+                if( Modernizr.csstransforms3d )
+                    $to_scroll.css({transform: 'translate3d(245px,0,0)'});
+                else
                 {
-                    if( Modernizr.csstransforms3d )
-                        $to_scroll.css({transform: 'translate3d(245px,0,0)'});
-                    else
-                        $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing);
-                });
+                    var speed = Math.min(500, $(window).scrollTop()*2);
+
+                    $to_scroll.animate({left:'245px'}, that.config.speed, that.config.easing, function()
+                    {
+                        $('html,body').animate({scrollTop:0}, speed, that.config.easing, function()
+                        {
+                            $menu.height('auto');
+                            $content.height($menu.height()-$header.height()-1);
+                        });
+                        that.menu_open = true;
+                    });
+                }
             }
         });
 
@@ -75,13 +122,24 @@ meta.App = function() {
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
             swipeRight:function(){ $('header.mobile .nav-icon a').click() },
-            threshold:1
+            threshold:4
         });
 
         $('.mobile-menu').swipe(
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
-            threshold:10
+            threshold:30
+        });
+
+        /* bind events */
+        $(document).on('focus', 'input[type=text], textarea', function()
+        {
+            $('body').addClass('fixfixed');
+        })
+        .on('blur', 'input[type=text], textarea', function()
+        {
+            $('body').removeClass('fixfixed');
+            if( $(window).width() < 640 ) $('html,body').animate({scrollTop: $(window).scrollTop()-$('header.mobile').height()}, 300);
         });
     };
 
@@ -115,9 +173,9 @@ meta.App = function() {
 
             $is_animating = true;
 
-            $bar_finder.find('table').animate({opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, speed, easing);
-            $bar_finder.find('.finder-close').animate({opacity: '0'}, speed/2, easing);
+            $bar_finder.find('table').animate({opacity: '0'}, that.config.speed, that.config.easing);
+            $bar_finder.find('.finder-arrow').animate({top: '0', opacity: '0'}, that.config.speed, that.config.easing);
+            $bar_finder.find('.finder-close').animate({opacity: '0'}, that.config.speed/2, that.config.easing);
             $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
         });
     };
@@ -162,8 +220,17 @@ meta.App = function() {
             $(this).next('.more').velocity('slideDown', { duration: speed, easing:easing});
         });
 
+        $('a.scrolltop').click(function(e)
+        {
+            e.preventDefault();
+
+            $('html, body').animate({scrollTop:0}, that.config.speed, that.config.easing);
+        });
+
         that._barFinderEvents();
+
         that._mobileMenuEvents();
+
         that._loadImages();
         that._customScroll();
 

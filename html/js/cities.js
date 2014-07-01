@@ -22,7 +22,7 @@ var meta = meta || {};
 /**
  *
  */
-meta.Cities = function() {
+meta.CitiesPage = function() {
 
     var that = this;
 
@@ -36,6 +36,10 @@ meta.Cities = function() {
         filter_is_open: false
     };
 
+    that.first_resize = true;
+    that.current_zoom_level = 3;
+    that.max_zoom_level_for_bars = 11;
+    that.timer = false;
 
     /**
      *
@@ -62,16 +66,20 @@ meta.Cities = function() {
         $.each(bars, function(index, bar)
         {
             if( display_list ) html += '<li id="'+bar.id+'" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
-            markers.push({address:bar.address, data:'<b>'+bar.name+'</b>'+bar.address, options:{icon:'images/markers/'+(index+1)+'.png'}, id:bar.id});
+            markers.push({address:bar.address, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:'images/markers/'+(index+1)+'.png'}, id:bar.id});
         });
 
         if( display_list )
         {
             var $scrollBars = that.context.$container.find('.scroll-bars');
             $scrollBars.find('ul').html(html);
+
+            var api = $scrollBars.data('jsp');
+            api.scrollToY(0, false);
+
             $scrollBars.velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
-            setTimeout(function(){ $(window).resize() }, 40);
+            setTimeout(function(){ that._resize() }, 50);
         }
 
         that.context.map.addMarkers(markers, fit);
@@ -81,14 +89,14 @@ meta.Cities = function() {
     /**
      *
      */
-    that._showCities = function( cities, display_list, fit )
+    that._showCities = function( query, cities, display_list, fit )
     {
         var html = "";
         var markers = [];
 
         $.each(cities, function(index, city)
         {
-            if( display_list ) html += '<li id="'+city.id+'">'+city.name+'</li>';
+            if( display_list ) html += '<li id="'+city.id+'">'+city.name.replace(query, '<b>'+query+'</b>')+'</li>';
             markers.push({address:city.name, options:{icon:'images/map.pin.png'}, id:city.id});
         });
 
@@ -96,6 +104,9 @@ meta.Cities = function() {
         {
             var $scrollCities = that.context.$container.find('.scroll-cities');
             $scrollCities.find('ul').html(html);
+
+            var api = $scrollCities.data('jsp');
+            api.scrollToY(0, false);
         }
 
         that.context.map.addMarkers(markers, false);
@@ -107,15 +118,15 @@ meta.Cities = function() {
     /**
      *
      */
-    that._hideBars = function()
+    that._hideBars = function(fit)
     {
         var $scrollBars = that.context.$container.find('.scroll-bars');
         $scrollBars.find('ul').empty();
         $scrollBars.hide();
 
-        that._showAllCities(true);
+        that._showAllCities(fit);
 
-        that.context.map.reset();
+        if(fit) that.context.map.reset();
 
     };
 
@@ -125,6 +136,8 @@ meta.Cities = function() {
      */
     that._showNeighborhoodSelector = function(neighborhoods)
     {
+        if( that.context.$container.find('select[name=neighborhood]').length ) return;
+
         var html = '<select name="neighborhood" class="ui-dropdown">';
         $.each(neighborhoods, function(index, neighborhood)
         {
@@ -132,7 +145,7 @@ meta.Cities = function() {
         });
         html += '</select>';
 
-        that.context.$container.find('form').after(html);
+        that.context.$container.find('form').append(html);
 
         initializeDropdowns();
 
@@ -162,7 +175,7 @@ meta.Cities = function() {
     {
         that.context.$container.find('.scroll-cities').velocity('fadeIn', { duration: that.config.speed, easing:that.config.easing});
 
-        setTimeout(function(){ $(window).resize() }, 40);
+        setTimeout(function(){ that._resize() }, 50);
     };
 
 
@@ -182,12 +195,12 @@ meta.Cities = function() {
     /**
      *
      */
-    that._requestCities = function( callback )
+    that._requestCities = function( query, callback )
     {
-        $.get('tmp/data/cities.php', function( data )
+        $.get('tmp/data/cities.php', {q:query}, function( data )
         {
             if(data.code == 200 && callback)
-                callback(data.cities);
+                callback(query, data.cities);
         });
     };
 
@@ -197,19 +210,22 @@ meta.Cities = function() {
      */
     that._setupEvents = function()
     {
-        var $scroll     = that.context.$container.find('.scroll');
         var $zoom       = that.context.$container.find('.zoom');
-        var $head       = that.context.$container.find('.heading');
         var $selector   = that.context.$container.find('.selector');
+        var $cities     = that.context.$container.find('.scroll-cities');
+        var $bars       = that.context.$container.find('.scroll-bars');
 
-        that.context.$container.find('.scroll-cities').on('click', 'li', function()
+
+        $cities.on('click', 'li', function()
         {
+            if( !$('html').hasClass('mobile') || $(window).width() > 640 ) that._openFilter();
+
             that.context.$container.find('form input[name=city]').val( $(this).text() );
             that.context.$container.find('form').submit();
         });
 
 
-        that.context.$container.find('.scroll-bars').on('click', 'li', function()
+        $bars.on('click', 'li', function()
         {
             document.location.href = $(this).data('link');
         });
@@ -217,15 +233,35 @@ meta.Cities = function() {
 
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseenter', 'li', function()
         {
-            var marker = that.context.map.getMarker( $(this).attr('id') );
-            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(google.maps.Animation.BOUNCE)
+            var $this = $(this);
+
+            clearTimeout(that.timer);
+
+            that.timer = setTimeout(function()
+            {
+                var marker = that.context.map.getMarker( $this.attr('id') );
+
+                if( typeof marker  != 'undefined' && marker )
+                {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(function(){ marker.setAnimation(null) }, 700);
+                }
+
+                if( $this.closest('.scroll').hasClass('scroll-bars')  )
+                    that.context.map.setCenter( marker.getPosition() );
+
+            }, 200);
+
+
         });
 
 
         that.context.$container.find('.scroll-bars, .scroll-cities').on('mouseleave', 'li', function()
         {
+            clearTimeout(that.timer);
+
             var marker = that.context.map.getMarker( $(this).attr('id') );
-            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(null)
+            if( typeof marker  != 'undefined' && marker ) marker.setAnimation(null);
         });
 
 
@@ -235,7 +271,7 @@ meta.Cities = function() {
 
             $(this).find('input[name=city]').prop('disabled', true);
 
-            var city_id = $(this).find('input[name=city]').val();
+            var city_id         = $(this).find('input[name=city]').val();
             var neighborhood_id = $(this).find('select[name=neighborhood]').val();
 
             $(this).find('input[type=submit]').hide();
@@ -247,64 +283,93 @@ meta.Cities = function() {
 
         that.context.$container.find('form input[type=reset]').click(function(e)
         {
-            that.context.$container.find('form input[name=city]').prop('disabled', false);
-            that.context.$container.find('form input[type=submit]').show();
-            that.context.$container.find('form input[type=reset]').hide();
+            that._backToCities(true);
+        });
 
-            that._showCitySelector();
-            that._removeNeighborhoodSelector();
-            that._hideBars();
 
-            $(window).resize();
+        that.context.map.addZoomListener(function( zoomLevel ){
+
+            if( that.current_zoom_level > zoomLevel && zoomLevel == that.max_zoom_level_for_bars )
+            {
+                that._backToCities(false);
+            }
+
+            that.current_zoom_level = zoomLevel;
+
         });
 
 
         $zoom.find('a').click(function()
         {
             if( $(this).hasClass('plus') )
-            {
                 that.context.map.zoomIn();
+            else
+                that.context.map.zoomOut();
+        });
+
+
+        that.context.$container.find('input[name=display-mode]').change(function()
+        {
+            if( $(this).val() == "map")
+            {
+                $('.cities-content .scrolls').hide();
+                $('.cities-content .zoom').show();
             }
             else
             {
-                that.context.map.zoomOut();
+                $('.cities-content .scrolls').show();
+                $('.cities-content .zoom').hide();
+            }
+
+            that._resize();
+        });
+
+
+
+        $selector.find('input[name=city], input[type=submit]').click(function()
+        {
+            if( !$('html').hasClass('mobile') || $(window).width() > 640 )
+            {
+                setTimeout(function(){ that._openFilter() }, $('html').hasClass('mobile')?200:0 );
+            }
+            else
+            {
+                var $modes = that.context.$container.find('input[name=display-mode]');
+                var $mode_list = $modes.filter('[value=list]');
+                var $mode_map = $modes.filter('[value=map]');
+
+                $mode_map.prop('checked', false);
+                $mode_map.parent().removeClass('active');
+
+
+                $mode_list.parent().addClass('active');
+                $mode_list.prop('checked', true).trigger("change");
             }
         });
 
 
-        if( !$('html').hasClass('mobile') )
+        that.context.$container.find('form input[name=city]').on('keyup', function()
         {
-            $selector.click(function()
+            that._requestCities($(this).val(), function(query, cities)
             {
-                if( !that.context.filter_is_open )
-                {
-                    that.context.filter_is_open = true;
-
-                    $selector.height($selector.height());
-                    that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
-                    that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
-
-                    $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
-
-                    setTimeout(function()
-                    {
-                        that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
-
-                    }, 300);
-                }
+                that._showCities(query, cities, true, false);
             });
-        }
+        });
+
+
+        $(document).on('change', '.selector select[name=neighborhood]', function()
+        {
+            var city_id         = that.context.$container.find('input[name=city]').val();
+            var neighborhood_id = $(this).val();
+
+            that._searchBars( city_id, neighborhood_id );
+
+        });
 
 
         $(window).resize(function()
         {
-            $scroll.height( $selector.height()-$head.height()-25 );
-
-            if( that.context.filter_is_open )
-            {
-                that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
-                $selector.height(that.context.$container.height()*0.8-70);
-            }
+            that._resize();
         });
 
     };
@@ -313,12 +378,111 @@ meta.Cities = function() {
     /**
      *
      */
+    that._backToCities = function( fit )
+    {
+        that.context.$container.find('form input[name=city]').prop('disabled', false);
+        that.context.$container.find('form input[type=submit]').show();
+        that.context.$container.find('form input[type=reset]').hide();
+
+        if( $('html').hasClass('ie9') )
+            that.context.$container.find('form input[name=city]').focus().blur();
+
+        that._showCitySelector();
+        that._removeNeighborhoodSelector();
+        that._hideBars(fit);
+
+        setTimeout(function(){ that._resize() }, 50);
+
+    };
+
+
+    /**
+     *
+     */
+    that._openFilter = function()
+    {
+
+        var $head       = that.context.$container.find('.heading');
+        var $selector   = that.context.$container.find('.selector');
+
+        if( !that.context.filter_is_open )
+        {
+            that.context.filter_is_open = true;
+
+            $selector.height($selector.height());
+            that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
+            that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+
+            $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
+
+            setTimeout(function()
+            {
+                that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
+
+            }, 300);
+        }
+    };
+
+
+    /**
+     *
+     */
     that._showAllCities = function( fit )
     {
-        that._requestCities(function(cities)
+        that._requestCities('', function(query, cities)
         {
-            that._showCities(cities, true, fit);
+            that._showCities(query, cities, true, fit);
         });
+    };
+
+
+    /**
+     *
+     */
+    that._resize = function()
+    {
+        var $cities_content     = that.context.$container;
+        var $cities             = that.context.$container.find('.scroll-cities');
+        var $bars               = that.context.$container.find('.scroll-bars');
+        var $map                = that.context.$container.find('#map');
+
+        var $scroll     = that.context.$container.find('.scroll');
+        var $head       = that.context.$container.find('.heading');
+        var $header     = $('header');
+        var $selector   = that.context.$container.find('.selector');
+
+        if( !$('html').hasClass('mobile') || $(window).width() > 640 )
+        {
+            if( !$('html').hasClass('mobile') || that.first_resize )
+            {
+                that.first_resize = false;
+
+                $cities_content.height( $(window).height()-$header.height()-$('footer').height() );
+
+                var cities_height = $selector.height()-$head.height()-20;
+
+                $cities.height( cities_height );
+                $bars.height( cities_height-40 );
+            }
+
+            $scroll.height( $selector.height()-$head.height()-25 );
+
+            if( that.context.filter_is_open )
+            {
+                that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+                $selector.height(that.context.$container.height()*0.8-70);
+            }
+        }
+        else
+        {
+            $cities_content.height($(window).height() - $header.height());
+
+            var map_height = $(window).height() - $header.height() - $head.outerHeight();
+
+            $map.css({height:map_height, top:$head.outerHeight()});
+            $cities.height( map_height-20 );
+            $bars.height( map_height-20 );
+        }
     };
 
 
@@ -335,6 +499,8 @@ meta.Cities = function() {
 
         that._setupEvents();
         that._showAllCities(false);
+
+        that._resize();
     };
 
     that.__construct();
@@ -343,6 +509,6 @@ meta.Cities = function() {
 
 $(document).ready(function()
 {
-    new meta.Cities();
+    new meta.CitiesPage();
 });
 

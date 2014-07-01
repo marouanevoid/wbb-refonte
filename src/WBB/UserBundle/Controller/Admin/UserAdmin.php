@@ -67,18 +67,45 @@ class UserAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('username')
-                ->add('firstname')
-                ->add('lastname')
-                ->add('email')
-                ->add('plainPassword', 'text', array('required' => false))
+                ->add('title', 'choice', array(
+                    'help' => 'Mandatory',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => true,
+                    'choices'  => array(
+                        'Mrs'   =>  'Madam',
+                        'Miss'  =>  'Miss',
+                        'Mr'    =>  'Mister'
+                    )
+                ))
+                ->add('username', null, array('help' => 'Mandatory'))
+                ->add('email', null, array('help' => 'Mandatory'))
+                ->add('firstname', null, array('help' => 'Mandatory'))
+                ->add('lastname', null, array('help' => 'Mandatory'))
+                ->add('birthdate', null, array('help' => 'Mandatory'))
+                ->add('website')
+                ->add('country', null, array('help' => 'Mandatory'))
+                ->add('latitude', 'hidden')
+                ->add('longitude', 'hidden')
+                ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
+                ->add('plainPassword', 'text', array('required' => false, 'help' => 'Mandatory', 'label' => 'Password *'))
+            ->end()
+            ->with('Preferences')
+                ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefHome', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefStartCity', null, array('read_only' => true, 'disabled'  => true))
+                ->add('stayInformed')
             ->end()
         ;
 
-        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if(!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->with('Management')
                     ->add('roles', 'choice', array(
+                        'help' => 'Mandatory',
                         'expanded' => true,
                         'multiple' => true,
                         'required' => false,

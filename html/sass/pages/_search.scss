@@ -9,11 +9,11 @@
       .reset {
         position: relative;
         h3 { text-transform: none; color: $color-medium-gray; }
-        input[type="reset"] { position: absolute; right: 0; bottom: -0.5em; }
+        input[type="reset"] { position: absolute; right: 0; bottom: -0.5em; display: none }
       }
       .submit{ text-align: right }
-      .reset+ul{ border-top: 1px solid $color-medium-gray; }
-
+      .reset+ul{ border-top: 1px solid $color-ultralight-gray; }
+      .neigborhood{ display: none }
       .btn-round{
         width: 30px; height: 30px;
         &.minus{
@@ -26,8 +26,8 @@
         }
       }
 
-      ul{ margin-left: 1em }
-      > ul{ margin-left: 0; >li{ border-bottom: 1px solid $color-medium-gray; padding: $margin-padding-m 0 }  }
+      .drop-list ul ul{ margin-left: 1em }
+      > ul{ margin-left: 0; >li{ border-bottom: 1px solid $color-ultralight-gray; padding: $margin-padding-m 0 }  }
       li{
         .drop-btn { position: relative;
           h3 { position: relative; top: 0.2em; }
@@ -36,7 +36,7 @@
 
         .drop-list {
           display: none;
-          .ui-dropdown-container{ font-size: 1.4em; margin-top: $margin-padding-xs; margin-bottom: $margin-padding-m; width: 100%!important }
+          .ui-dropdown-container{ font-size: 1.4em; margin-top: $margin-padding-xs; margin-bottom: $margin-padding-xs; width: 100%!important }
           label { color: $color-medium-gray; margin-top: 1em; font-weight: normal; display: inline-block }
           li {
             .custom-scroll { height: 200px; overflow: auto }
@@ -59,6 +59,7 @@
       .three.columns { width: 32.5%; margin-left: 0.4%; margin-right: 0.4%; margin-top: 0.8%!important }
       .nine.columns { width: 64.5%; margin-right: 0; margin-left: 2.2% }
       .separator, .tags{ left: 32.9% }
+      .tags{ margin-left: 2.6% }
     }
     .bars-w-pic
     {
@@ -70,6 +71,11 @@
 @media only screen and (max-width: $grid-breakpoint-mobile) {
 
   .search {
+
+    header.mobile .search{ display: none }
+    .container.l-padding{ padding-top: 0!important }
+    .container .nine.columns.bar-filter{ width: 100%!important }
+
     aside.filters {
       width: 100%!important; margin: 0!important; text-align: center; display: none;
       form{

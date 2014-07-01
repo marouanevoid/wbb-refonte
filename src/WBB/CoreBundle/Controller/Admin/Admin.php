@@ -20,6 +20,10 @@ class Admin extends BaseAdmin
      */
     protected $maxPageLinks = 15;
 
+    protected $formOptions = array(
+        'cascade_validation' => true
+    );
+
     /**
      * {@inheritdoc}
      */

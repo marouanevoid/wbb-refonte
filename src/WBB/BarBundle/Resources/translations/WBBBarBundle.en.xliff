@@ -514,7 +514,7 @@
             <!-- sponsor -->
             <trans-unit id="form.label_sponsor">
                 <source>form.label_sponsor</source>
-                <target>Sponsor</target>
+                <target>Sponsor name</target>
             </trans-unit>
             <trans-unit id="list.label_sponsor">
                 <source>list.label_sponsor</source>
@@ -548,7 +548,7 @@
             </trans-unit>
             <trans-unit id="filter.label_bars">
                 <source>filter.label_bars</source>
-                <target>Link to bar</target>
+                <target>Bars</target>
             </trans-unit>
             <!-- cities -->
             <trans-unit id="form.label_cities">
@@ -590,7 +590,7 @@
             </trans-unit>
             <trans-unit id="list.label_suburb">
                 <source>list.label_suburb</source>
-                <target>City</target>
+                <target>Area</target>
             </trans-unit>
             <trans-unit id="list.label_website">
                 <source>list.label_website</source>
@@ -646,6 +646,30 @@
             </trans-unit>
             <trans-unit id="filter.label_is_mood">
                 <source>filter.label_is_mood</source>
+                <target>Mood</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_style">
+                <source>list.label_is_style</source>
+                <target>Style</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_occasion">
+                <source>list.label_is_occasion</source>
+                <target>Occasion</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_atmosphere">
+                <source>list.label_is_atmosphere</source>
+                <target>Atmosphere</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_alcohol">
+                <source>list.label_is_alcohol</source>
+                <target>Alcohol</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_cocktail">
+                <source>list.label_is_cocktail</source>
+                <target>Cocktail</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_mood">
+                <source>list.label_is_mood</source>
                 <target>Mood</target>
             </trans-unit>
             <trans-unit id="form.label_energy_level">
@@ -712,7 +736,22 @@
                 <source>form.label_ordered</source>
                 <target>Ordered</target>
             </trans-unit>
-
+            <trans-unit id="list.label_country">
+                <source>list.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="list.label_ordered">
+                <source>list.label_ordered</source>
+                <target>Ordered</target>
+            </trans-unit>
+            <trans-unit id="filter.label_ordered">
+                <source>filter.label_ordered</source>
+                <target>Ordered</target>
+            </trans-unit>
+            <trans-unit id="filter.label_tags">
+                <source>filter.label_tags</source>
+                <target>Tags</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

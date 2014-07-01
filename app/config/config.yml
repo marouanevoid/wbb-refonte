@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -17,7 +18,8 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        handler_id: session.handler.pdo
     fragments:       ~
     http_method_override: true
 
@@ -62,6 +64,9 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                dql:
+                    numeric_functions:
+                        geo: WBB\CoreBundle\AST\Functions\Geo
                 mappings:
                     SonataMediaBundle: ~
 
@@ -98,6 +103,7 @@ sonata_admin:
                         Vous aurez la possibilité de gérer les utilisateurs,
                         les informations relatives aux bars, tips, et villes. </p><br /><br />
             - { position: left, type: sonata.admin.block.admin_list }
+#            - { position: right, type: wbb.block.service.semsoft.import }
 
         groups:
             wbb_location: ~
@@ -122,6 +128,7 @@ sonata_block:
         sonata.admin.block.search_result:
             contexts:   [admin]
         sonata.block.service.text:
+#        wbb.block.service.semsoft.import: ~
         sonata.block.service.rss:
 
 #Sonata Media Bundle
@@ -143,6 +150,27 @@ sonata_media:
                 large:          { width: 1024, quality: 70}
                 slider_small :  { width: 320 , height: 240, quality: 70 }
                 slider_large :  { width: 640 , height: 480, quality: 70 }
+                news :          { width: 600 , height: 400, quality: 70 }
+                news_large :    { width: 900 , height: 600, quality: 70 }
+
+        simple_image:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small:          { width: 100 , quality: 70}
+                big:            { width: 500 , quality: 70}
+                large:          { width: 1024, quality: 70}
+                slider_small :  { width: 320 , height: 240, quality: 70 }
+                slider_large :  { width: 640 , height: 480, quality: 70 }
+                news :          { width: 600 , height: 400, quality: 70 }
+                news_large :    { width: 900 , height: 600, quality: 70 }
+                city_small :    { width: 340 , height: 350, quality: 70 }
+                bestof_small :  { width: 387 , height: 290, quality: 70 }
+
     cdn:
         server:
             path: /uploads/media
@@ -216,3 +244,16 @@ avalanche_imagine:
         scare_small:
             type:    thumbnail
             options: { size: [120, 90], mode: outbound, quality: 100, format: png }
+        city_small:
+            type:    thumbnail
+            options: { size: [340, 350], mode: outbound, quality: 100, format: png }
+        news_small:
+            type:    thumbnail
+            options: { size: [600, 400], mode: outbound, quality: 100, format: png }
+        news_large:
+            type:    thumbnail
+            options: { size: [900, 600], mode: outbound, quality: 100, format: png }
+        bestof_small:
+            type:    thumbnail
+            options: { size: [387, 290], mode: outbound, quality: 100, format: png }
+

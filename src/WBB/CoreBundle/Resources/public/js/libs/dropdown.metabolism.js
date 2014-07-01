@@ -49,7 +49,7 @@ meta.Dropdown = function(config){
         color     : false,
         template  : '<div class="ui-dropdown-container">'+
                         '<div class="btn-radius border ui-dropdown %color%">'+
-                            '<span>%name%</span>'+
+                            '<span class="selected">%name%</span>'+
                             '<div class="slide">'+
                                 '<div class="choice custom-scroll">'+
                                     '<ul>%options%</ul>'+
@@ -95,14 +95,21 @@ meta.Dropdown = function(config){
                 var $options = that.config.$dropdown.find('option');
 
                 $options.removeAttr('selected');
-                $options.eq( $(this).index()+1 ).attr('selected', 'selected');
+
+                var index = $(this).index();
+                if( $options.filter(':disabled').length ) index++;
+
+                $options.eq( index ).prop('selected', true);
+                //$options.eq( index ).attr('selected', 'selected');
+
+                that.config.$dropdown.trigger('change');
 
                 $(document).click();
             });
 
             $(document).click(function(e)
             {
-                if( !$(e.target).closest('.ui-dropdown').length && that.active )
+                if( (!$(e.target).closest('.ui-dropdown').length || $(e.target).hasClass('selected')) && that.active )
                 {
                     that.active = false;
                     $dropdown.find('.slide').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
@@ -123,7 +130,7 @@ meta.Dropdown = function(config){
         {
             $dropdown.find('select').on('change', function()
             {
-                $dropdown.css({width : $dropdown.width()});
+                //$dropdown.css({width : $dropdown.width()});
                 that.config.$dropdown_value.text( $(this).find('option:selected').text() );
             });
         }

@@ -36,6 +36,11 @@ class BarTag
     private $bar;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", inversedBy="tags")
+     */
+    private $semsoftBar;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bars")
      */
     private $tag;
@@ -185,5 +190,28 @@ class BarTag
     public function getTag()
     {
         return $this->tag;
+    }
+
+    /**
+     * Set semsoftBar
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar
+     * @return BarTag
+     */
+    public function setSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar = null)
+    {
+        $this->semsoftBar = $semsoftBar;
+
+        return $this;
+    }
+
+    /**
+     * Get semsoftBar
+     *
+     * @return \WBB\BarBundle\Entity\Semsoft\SemsoftBar 
+     */
+    public function getSemsoftBar()
+    {
+        return $this->semsoftBar;
     }
 }

@@ -104,21 +104,10 @@ class NewsAdmin extends Admin {
                     )
                 )
             ->end()
-            ->with('Related')    
-                ->add('bars', 'sonata_type_collection',
-                    array(
-                        'required'     => false,
-                        'by_reference' => false,
-                        'type_options' => array('delete' => true)
-                    ),
-                    array(
-                        'edit'      => 'inline',
-                        'inline'    => 'table',
-                        'sortable'  => 'position'
-                    )
-                )                      
-                ->add('cities', 'sonata_type_model', array('required' => false,'multiple' => true))          
-                ->add('bestOfs', 'sonata_type_model', array('required' => false,'multiple' => true))
+            ->with('Related')
+                ->add('bars', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('cities', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('bestOfs', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
             ->end()
         ;
     }
@@ -129,6 +118,45 @@ class NewsAdmin extends Admin {
         $newInstance->setIsOnTop(true);
 
         return $newInstance;
-    }    
+    }
+
+    public function prePersist($object)
+    {
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media and $media->getMedia()){
+                    $media->setNews($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
+        }
+        
+        if($object->getCities()){
+            foreach ($object->getCities() as $city) {
+                $city->addNews($object);
+            }
+        }
+        
+    }
+
+    public function preUpdate($object)
+    {
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media and $media->getMedia()){
+                    $media->setNews($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
+        }
+        
+        if($object->getCities()){
+            foreach ($object->getCities() as $city) {
+                $city->addNews($object);
+            }
+        }
+    }
 
 }

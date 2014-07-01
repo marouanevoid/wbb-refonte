@@ -25,6 +25,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="string", length=4, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="first_name", type="string", length=45, nullable=true)
      */
     private $firstname;
@@ -35,6 +42,13 @@ class User extends BaseUser
      * @ORM\Column(name="last_name", type="string", length=45, nullable=true)
      */
     private $lastname;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="birthdate", type="date", nullable=true)
+     */
+    private $birthdate;
 
     /**
      * @var string
@@ -53,16 +67,69 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="string", length=20, nullable=true)
+     * @ORM\Column(name="latitude", type="decimal", scale=8, nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="string", length=20, nullable=true)
+     * @ORM\Column(name="longitude", type="decimal", scale=8, nullable=true)
      */
     private $longitude;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_when", type="time", nullable=true)
+     */
+    private $prefWhen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_home", type="string", length=255, nullable=true)
+     */
+    private $prefHome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_city1", type="string", length=255, nullable=true)
+     */
+    private $prefCity1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_city2", type="string", length=255, nullable=true)
+     */
+    private $prefCity2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_city3", type="string", length=255, nullable=true)
+     */
+    private $prefCity3;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="stay_informed", type="boolean", nullable=true)
+     */
+    private $stayInformed;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="users")
+     * @ORM\JoinColumn(name="pref_city_id_start", referencedColumnName="id")
+     */
+    private $prefStartCity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="users")
+     */
+    private $country;
 
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Bar", mappedBy="user")
@@ -99,6 +166,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->setEnabled(true);
+        $this->setStayInformed(true);
     }
 
     /**
@@ -413,5 +481,235 @@ class User extends BaseUser
     public function getFullName()
     {
         return $this->getFirstname().' '.$this->getLastname();
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return User
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set prefWhen
+     *
+     * @param \DateTime $prefWhen
+     * @return User
+     */
+    public function setPrefWhen($prefWhen)
+    {
+        $this->prefWhen = $prefWhen;
+
+        return $this;
+    }
+
+    /**
+     * Get prefWhen
+     *
+     * @return \DateTime 
+     */
+    public function getPrefWhen()
+    {
+        return $this->prefWhen;
+    }
+
+    /**
+     * Set prefHome
+     *
+     * @param string $prefHome
+     * @return User
+     */
+    public function setPrefHome($prefHome)
+    {
+        $this->prefHome = $prefHome;
+
+        return $this;
+    }
+
+    /**
+     * Get prefHome
+     *
+     * @return string 
+     */
+    public function getPrefHome()
+    {
+        return $this->prefHome;
+    }
+
+    /**
+     * Set prefCity1
+     *
+     * @param string $prefCity1
+     * @return User
+     */
+    public function setPrefCity1($prefCity1)
+    {
+        $this->prefCity1 = $prefCity1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity1
+     *
+     * @return string 
+     */
+    public function getPrefCity1()
+    {
+        return $this->prefCity1;
+    }
+
+    /**
+     * Set prefCity2
+     *
+     * @param string $prefCity2
+     * @return User
+     */
+    public function setPrefCity2($prefCity2)
+    {
+        $this->prefCity2 = $prefCity2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity2
+     *
+     * @return string 
+     */
+    public function getPrefCity2()
+    {
+        return $this->prefCity2;
+    }
+
+    /**
+     * Set prefCity3
+     *
+     * @param string $prefCity3
+     * @return User
+     */
+    public function setPrefCity3($prefCity3)
+    {
+        $this->prefCity3 = $prefCity3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity3
+     *
+     * @return string 
+     */
+    public function getPrefCity3()
+    {
+        return $this->prefCity3;
+    }
+
+    /**
+     * Set prefStartCity
+     *
+     * @param \WBB\CoreBundle\Entity\City $prefStartCity
+     * @return User
+     */
+    public function setPrefStartCity(\WBB\CoreBundle\Entity\City $prefStartCity = null)
+    {
+        $this->prefStartCity = $prefStartCity;
+
+        return $this;
+    }
+
+    /**
+     * Get prefStartCity
+     *
+     * @return \WBB\CoreBundle\Entity\City 
+     */
+    public function getPrefStartCity()
+    {
+        return $this->prefStartCity;
+    }
+
+    /**
+     * Set stayInformed
+     *
+     * @param boolean $stayInformed
+     * @return User
+     */
+    public function setStayInformed($stayInformed)
+    {
+        $this->stayInformed = $stayInformed;
+
+        return $this;
+    }
+
+    /**
+     * Get stayInformed
+     *
+     * @return boolean 
+     */
+    public function getStayInformed()
+    {
+        return $this->stayInformed;
+    }
+
+    /**
+     * Set birthdate
+     *
+     * @param \DateTime $birthdate
+     * @return User
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthdate
+     *
+     * @return \DateTime 
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \WBB\CoreBundle\Entity\Country $country
+     * @return User
+     */
+    public function setCountry(\WBB\CoreBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \WBB\CoreBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

@@ -47,7 +47,7 @@
 
                 <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
 
-                    <?php for($i=1; $i<7; $i++): ?>
+                    <?php for($i=1; $i<4; $i++): ?>
 
                         <div class="ui-slide">
                             <?php include('components/bar-w-pic.php') ?>
@@ -128,7 +128,7 @@
                 <div class="load-target"></div>
 
                 <div class="twelve columns align-center m-margin load-more-container">
-                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?<?=$is_mobile?'&mobile':''?>">See more bars</a>
+                    <a class="h4 btn-radius large border load-more brown" href="tmp/data/bar.php?<?=$is_mobile?'&mobile':''?>">See more bars</a>
                 </div>
 
             </div>
@@ -142,7 +142,7 @@
                 <div class="load-target"></div>
 
                 <div class="twelve columns align-center m-margin load-more-container">
-                    <a class="h4 btn-radius border load-more brown" href="tmp/data/bar.php?list=1<?=$is_mobile?'&mobile':''?>">See more bars</a>
+                    <a class="h4 btn-radius large border load-more brown" href="tmp/data/bar.php?list=1<?=$is_mobile?'&mobile':''?>">See more bars</a>
                 </div>
 
             </div>

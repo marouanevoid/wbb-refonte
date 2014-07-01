@@ -32,7 +32,7 @@ services:
         arguments: [null, %wbb_core.city.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
-            - [setTemplates, [{ edit:"WBBCoreBundle:Admin:City/edit.html.twig", list: "WBBCoreBundle:Admin:City/list.html.twig"}]]
+            - [setTemplates, [{ edit: "WBBCoreBundle:Admin:City/edit.html.twig", list: "WBBCoreBundle:Admin:City/list.html.twig"}]]
 
     wbb.core.admin.city.suburb:
         class: %wbb_core.citysuburb.admin.class%
@@ -64,3 +64,9 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBCoreBundle:City']
+
+    suburb.repository:
+        class: WBB\CoreBundle\Repository\SuburbRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBCoreBundle:CitySuburb']

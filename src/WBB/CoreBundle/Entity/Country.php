@@ -42,6 +42,11 @@ class Country
     private $cities;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="country", cascade={"all"})
+     */
+    private $users;
+
+    /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BestOf", mappedBy="country", cascade={"all"})
      */
     private $bestofs;
@@ -269,5 +274,38 @@ class Country
     public function getAcronym()
     {
         return $this->acronym;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     * @return Country
+     */
+    public function addUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     */
+    public function removeUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

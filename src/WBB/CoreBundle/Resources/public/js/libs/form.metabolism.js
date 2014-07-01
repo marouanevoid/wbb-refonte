@@ -76,21 +76,43 @@ meta.Form = function(config){
     that._sendData = function()
     {
         var data = that.form.serializeArray();
+        /*console.log(data[0].value.replace(/^\s+|\s+$/g,''));*/
         var url = that.form.attr('action');
+        var nbItems = 0;
 
-        $.post( url, data, function(data)
+        if(data[0].value.replace(/^\s+|\s+$/g,'')=="")
         {
-            if(data.code == 200)
+            $("form#tips textarea").val('');
+            that.form.find(".count").text("250 left");
+            $("form#tips textarea").focus();
+        }else
+        {
+            $.post( url, data, function(data)
             {
-                if( that.config.onComplete ) that.config.onComplete( that.form, data );
-                $('.line.first').prepend(data.tip);
-                $('.line.first .three:last-child').remove();
-            }
-            else
-            {
-                if( that.config.onError ) that.config.onError( that.form, data.message );
-            }
-        });
+                if(data.code == 200)
+                {
+                    if( that.config.onComplete )
+                        that.config.onComplete( that.form, data );
+                    nbItems = $('.insider-tips .three').length;
+                    if(nbItems==0)
+                    {
+                        $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
+                    }else
+                    {
+                        $('.line.wbbtips .three:first-child').after(data.tip);
+                    }
+                    if(nbItems>=4)
+                    {
+                        $('.line:last-child .three:last-child').remove();
+                    }
+
+                }
+                else
+                {
+                    if( that.config.onError ) that.config.onError( that.form, data.message );
+                }
+            });
+        }
     };
 
     that.__construct(config);

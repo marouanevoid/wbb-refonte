@@ -1,0 +1,155 @@
+{% extends "::base.html.twig" %}
+{% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
+{% block title %}World Best Bars{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            {% if city is defined %}
+            $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
+            {% else %}
+            $.cookie('city', '{{ path('homepage') }}', { path: '/' });
+            {% endif %}
+            $('input[name=view-type]').change(function()
+            {
+                if( $('input[name=view-type]:checked').val() == "grid")
+                {
+                    $('.gridview').show();
+                    $('.listview').hide();
+                }
+                else
+                {
+                    $('.listview').show();
+                    $('.gridview').hide();
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block bodyTag %}
+<body class="bar-guides">
+{% endblock %}
+{% block body %}
+<style type="text/css">
+    section.bar-filter {
+        border-top : none !important;
+    }
+    section.bar-filter .bars-w-pic {
+        width: auto;
+    }
+    {% if is_mobile() and not is_tablet() %}
+        .filters {
+            margin: 15px 0 -15px 0;
+        }
+    {% else %}
+        .filters {
+            margin: 0;
+            padding: 0;
+        }
+    {% endif %}
+</style>
+<div>
+    <!-- SUBHEADER -->
+    <div class="container">
+        {% if bars|length >0 %}
+        <section class="sub-header">
+            <table>
+                <tr>
+                    <td></td>
+                    <td class="title">
+                        <h1 itemprop="name">Bar finder results</h1>
+                        <h3>
+                            We found {{ bars|length }} bars that match your request!
+                        </h3>
+                    </td>
+                    <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
+                        <div class="container s-margin-bottom {% if not is_mobile() or is_tablet() %}align-right{% endif %}" {% if not is_mobile() or is_tablet() %}style="margin:0;"{% endif %}>
+                            <form name="filter" autocomplete="off">
+                                <div class="sort-by h3 filters">
+                                    <div class="disableClick"></div>
+                                    <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
+                                    <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        {% else %}
+        <section class="sub-header">
+            <table>
+                <tr>
+                    <td></td>
+                    <td class="title">
+                        <h1 itemprop="name">Bar finder results</h1>
+                        <img src="{{ asset('bundles/wbbcore/') }}images/glass.png" width="113" style="margin: 50px 0" />
+                        <h3>
+                            Sorry we didn’t find any bars that matched your request.<br>
+                            Please change your criteria or contact us on Twitter<br>
+                            <u>@worldsbestbars</u>
+                        </h3>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </section>
+        {% endif %}
+    </div>
+</div>
+{% if bars|length >0 %}
+<section class="bar-filter">
+    <div class="container">
+        <div class="bars-w-pic force-load   load-container">
+            <div class="load-target">
+                <div class="line gridview">
+                    {% for bar in bars %}
+                        {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
+                            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
+                        {% if not is_mobile() or is_tablet() %}</div>{% endif %}
+                    {% endfor %}
+                </div>
+                <div class="line listview" style="display: none;">
+                    {% for b in bars %}
+                        <article class="bar-w-pic-list">
+
+                            <div class="three columns s-margin-top">
+
+                                <div class="bar-w-pic list">
+
+                                    <a href="#0" class="btn-round dark star"></a>
+
+                                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+
+                                    {% for m in b.medias|slice(0,1) %}
+                                        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="nine columns s-margin-top">
+                                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.name }}</a></h2>
+                                {% if b.city and b.suburb %}
+                                    <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
+                                {% endif %}
+                                <p class="s-margin-top">
+                                    {{ b.description|truncate(200, true, '...')|striptags }}
+                                </p>
+                                <div class="tags">{% for tr in b.tags %}
+                                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                                    {% endfor%}</div>
+                            </div>
+                            <div class="separator"><hr/></div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="twelve columns align-center m-margin load-more-container">
+                <br /><br /><br />
+            </div>
+        </div>
+
+    </div>
+
+</section>
+{% endif %}
+{% endblock %}

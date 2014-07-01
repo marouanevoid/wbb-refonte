@@ -179,6 +179,7 @@ file that was distributed with this source code.
             }
 
             $('ul.nav-tabs li a').click(function() {
+                setTimeout(function(){
                 $('.mapcontainer').locationpicker({
                     location: { latitude: $('#{{ admin.uniqId }}_latitude').val(), longitude: $('#{{ admin.uniqId }}_longitude').val() },
                     radius: 0,
@@ -190,7 +191,8 @@ file that was distributed with this source code.
                         locationNameInput: $('#mpAddress')
                     },
                     enableAutocomplete: true
-                });
+                })
+                },300);
             });
         });
     </script>

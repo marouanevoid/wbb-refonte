@@ -52,7 +52,7 @@
 </div>
 
 <!-- EDITOR'S PICK -->
-<div class="container l-margin-top m-padding-bottom">
+<div class="container l-margin-top <?=$is_mobile?'s':'l'?>-padding-bottom">
 
     <div class="twelve columns h1 m-margin-bottom color-brown <?php if( $is_mobile ): ?>align-center<?php endif ?>">
         Editor's Pick
@@ -61,32 +61,33 @@
     <!-- 8 COLS -->
     <section class="articles padding eight columns">
 
-        <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; include('components/article.php') ?>
+        <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=true; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=true; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; include('components/article.php') ?>
+        <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; $has_video = true; include('components/article.php') ?>
     </section>
 
     <!-- 4 COLS -->
-    <aside class="articles padding four columns">
+    <?php if( !$is_mobile ): ?>
+        <aside class="articles padding four columns">
 
-        <?php if( !$is_mobile ): ?>
             <?php include('components/side-ad.php') ?>
-        <?php endif ?>
 
-        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=false; include('components/article.php') ?>
+            <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=false; $has_image=true; $has_text=false; $has_quote=false; include('components/article.php') ?>
+            <?php $is_small=false; $has_image=true; $has_text=false; $has_quote=false; $has_video = true; include('components/article.php') ?>
 
-        <?php $is_small=false; $has_image=true; $has_text=false; $has_quote=false; include('components/article.php') ?>
+            <?php $is_small=false; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=false; $has_image=true; $has_text=false; $has_quote=false; include('components/article.php') ?>
+            <?php $is_small=false; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=false; include('components/article.php') ?>
-    </aside>
+            <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
+        </aside>
+    <?php endif ?>
+
 </div>
 
 
@@ -95,22 +96,26 @@
     <?php include('components/footer-ad.php') ?>
 <?php endif ?>
 
-    <!-- OLDER NEWS -->
-    <div class="container l-margin-top m-padding-bottom">
+    <div class="load-container">
+        <!-- OLDER NEWS -->
+        <div class="container <?php if( !$is_mobile ): ?>m-margin-top<?php endif ?>">
 
-        <!-- 12 COLS -->
-        <div class="articles older-news twelve columns">
+            <!-- 12 COLS -->
+            <div class="articles older-news twelve columns">
 
-            <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; include('components/article.php') ?>
+                <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; $has_video = true; include('components/article.php') ?>
 
-            <?php $is_small=true; $has_image=false; $has_text=true; $has_quote=false; include('components/article.php') ?>
+                <?php $is_small=true; $has_image=false; $has_text=true; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-            <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; include('components/article.php') ?>
+                <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
+
+                <div class="load-target"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="twelve columns align-center m-margin-bottom">
-        <a class="h4 btn-radius border load-more brown" href="tmp/data/tips.php">Older News</a>
+        <div class="twelve columns align-center l-margin-bottom">
+            <a class="h4 btn-radius border load-more brown large" href="tmp/data/news.php?">Older News</a>
+        </div>
     </div>
 
 

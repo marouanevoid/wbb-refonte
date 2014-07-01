@@ -1,6 +1,6 @@
 /* Ads
 --------------------------------------------------- */
-    .side-ad { position: relative; width: 100%; height: auto; outline: 1px solid $color-brown; padding: 10% 0;
+    .side-ad { margin-top: $margin-padding-xl; position: relative; width: 100%; height: auto; outline: 1px solid $color-brown; padding: 10% 0;
       .txt { position: absolute; right: 10%; left: 10%; bottom: 5%; text-align: right; text-transform: uppercase; }
       img{ width: 80%; height: auto; display: block; margin: auto; margin-bottom: 4px }
     }

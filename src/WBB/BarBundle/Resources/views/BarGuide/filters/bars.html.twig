@@ -1,0 +1,7 @@
+<div class="line">
+{% for bar in bars %}
+    {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
+        {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
+    {% if not is_mobile() or is_tablet() %}</div>{% endif %}
+{% endfor %}
+</div>

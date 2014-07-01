@@ -2,11 +2,13 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use WBB\BarBundle\Entity\Tip;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use WBB\UserBundle\Entity\User;
 
 class TipAdmin extends Admin {
 
@@ -17,9 +19,11 @@ class TipAdmin extends Admin {
         $listMapper
             ->addIdentifier('id')
             ->add('user', null, array('editable' => true))
+            ->add('bar', null, array('editable' => true))
             ->add('description', null, array('editable' => true))
             ->add('status', null, array(
-                'template' => 'WBBBarBundle:Admin:Tip\status_field.html.twig'
+                'template' => 'WBBBarBundle:Admin:Tip\status_field.html.twig',
+                'editable' => true
             ))
         ;
     }
@@ -33,7 +37,7 @@ class TipAdmin extends Admin {
             ->add('description')
             ->add('user')
             ->add('bar')
-            ->add('status')
+            ->add('status', 'doctrine_orm_string', array(), 'choice', array('choices' => array(0 => 'Pending',1 => 'Enabled',2 => 'Disabled')))
         ;
     }
 
@@ -61,18 +65,59 @@ class TipAdmin extends Admin {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
-                ->add('bar', 'sonata_type_model', array('label'=> 'Link to Bar'))
+                ->add('bar', 'sonata_type_model', array('label'=> 'Link to Bar', 'btn_add' => false))
                 ->add('status', 'choice', array(
                     'required' => false,
                     'choices'  => array(
                         0 => 'Pending',
                         1 => 'Enabled',
                         2 => 'Disabled'
-                    )
+                    ),
+                    'empty_value' => false,
+                    'preferred_choices' => array(0 => 'Pending')
                 ))
                 ->add('description')
             ->end()
         ;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $qb = parent::createQuery($context);
+        $alias = $qb->getRootAliases();
+
+        if ($this->getContainer()->get('request')->query->get('wbbexpert')) {
+            $alias = $qb->getRootAliases();
+            // here the user that have the role ROLE_EXPERT
+        }
+
+        return $qb;
+    }
+
+    public function getBatchActions()
+    {
+        // retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+
+        // check user permissions
+        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+            $actions['enabled'] = array(
+                'label'            => 'Enabled',
+                'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
+            );
+
+            $actions['pending']=array(
+                'label'            => 'Pending',
+                'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
+            );
+
+            $actions['disabled']=array(
+                'label'            => 'Disabled',
+                'ask_confirmation' => false // If true, a confirmation will be asked before performing the action
+            );
+        }
+
+        return $actions;
     }
 
     /**

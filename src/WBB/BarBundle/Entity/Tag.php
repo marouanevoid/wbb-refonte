@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Tag
  *
  * @ORM\Table(name="wbb_tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\TagRepository")
  */
 class Tag
 {
