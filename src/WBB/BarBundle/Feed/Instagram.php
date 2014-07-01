@@ -58,7 +58,7 @@ class Instagram implements FeedInterface
         $instID = $this->getInstagramID($id);
         $url = "/v1/users/$instID/media/recent/?count=$this->limit&client_id=$this->clientId";
 
-        if($next != 0) $url .= '$max_id='.$next;
+        if($next != 0) $url .= '&max_id='.$next;
 
         $response = $this->client->get($url)->send();
 
