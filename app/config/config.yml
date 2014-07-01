@@ -145,13 +145,13 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                small:          { width: 100 , quality: 70}
-                big:            { width: 500 , quality: 70}
-                large:          { width: 1024, quality: 70}
-                slider_small :  { width: 320 , height: 240, quality: 70 }
-                slider_large :  { width: 640 , height: 480, quality: 70 }
-                news :          { width: 600 , height: 400, quality: 70 }
-                news_large :    { width: 900 , height: 600, quality: 70 }
+                small:          { width: 100 , quality: 100}
+                big:            { width: 500 , quality: 100}
+                large:          { width: 1024, quality: 100}
+                slider_small :  { width: 320 , height: 240, quality: 100 }
+                slider_large :  { width: 640 , height: 480, quality: 100 }
+                news :          { width: 600 , height: 400, quality: 100 }
+                news_large :    { width: 900 , height: 600, quality: 100 }
 
         simple_image:
             download:
@@ -161,15 +161,15 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                small:          { width: 100 , quality: 70}
-                big:            { width: 500 , quality: 70}
-                large:          { width: 1024, quality: 70}
-                slider_small :  { width: 320 , height: 240, quality: 70 }
-                slider_large :  { width: 640 , height: 480, quality: 70 }
-                news :          { width: 600 , height: 400, quality: 70 }
-                news_large :    { width: 900 , height: 600, quality: 70 }
-                city_small :    { width: 340 , height: 350, quality: 70 }
-                bestof_small :  { width: 387 , height: 290, quality: 70 }
+                small:          { width: 100 , quality: 100}
+                big:            { width: 500 , quality: 100}
+                large:          { width: 1024, quality: 100}
+                slider_small :  { width: 320 , height: 240, quality: 100 }
+                slider_large :  { width: 640 , height: 480, quality: 100 }
+                news :          { width: 600 , height: 400, quality: 100 }
+                news_large :    { width: 900 , height: 600, quality: 100 }
+                city_small :    { width: 340 , height: 350, quality: 100 }
+                bestof_small :  { width: 387 , height: 290, quality: 100 }
 
     cdn:
         server:

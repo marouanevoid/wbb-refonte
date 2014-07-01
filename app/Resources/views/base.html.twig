@@ -19,6 +19,13 @@
         <!-–[if lt IE 9]>
         <script src="{{ asset('bundles/wbbcore/js/plugins/html5.js') }}"></script>
         <![endif]–->
+        <script type="text/javascript">
+            var ismobile, istablet;
+            ismobile=0;
+            istablet=0;
+            {% if is_mobile() and not is_tablet() %}ismobile=1;{% endif %}
+            {% if is_tablet() %}istablet=1;{% endif %}
+        </script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
