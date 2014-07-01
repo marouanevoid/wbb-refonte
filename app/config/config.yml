@@ -271,3 +271,6 @@ avalanche_imagine:
             type:    thumbnail
             options: { size: [387, 290], mode: outbound, quality: 100, format: png }
 
+cybernox_amazon_web_services:
+    key:                        %aws_key%
+    secret:                     %aws_secret%
