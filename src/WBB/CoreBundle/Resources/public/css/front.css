@@ -4904,6 +4904,10 @@ body.cities .cities-content .selector {
     background: #fff;
     border: 10px solid #faf3e1;
     padding: 25px;
+
+    /* */
+        display: none;
+    /**/
 }
 /* line 30, ../sass/pages/_cities.scss */
 body.cities .cities-content .selector h3 {
