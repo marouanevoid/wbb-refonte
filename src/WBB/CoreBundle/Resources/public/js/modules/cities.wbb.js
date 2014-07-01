@@ -142,7 +142,7 @@ wbb.CitiesPage = function () {
             {
                 that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
 
-                $selector.show();
+                //$selector.show();
             }, 300);
             that._resize();
         }
