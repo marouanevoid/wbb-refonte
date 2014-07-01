@@ -59,6 +59,11 @@ class AppKernel extends Kernel
             //Serializer Bundle
             new JMS\SerializerBundle\JMSSerializerBundle($this),
 
+            //CSV Import Bundle
+            new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
+
+            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),
