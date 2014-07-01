@@ -47,6 +47,16 @@
                 <target>Name</target>
             </trans-unit>
 
+            <trans-unit id="form.label_bestof">
+                <source>form.label_bestof</source>
+                <target>Best of</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_position">
+                <source>form.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+
             <trans-unit id="list.label_country">
                 <source>list.label_country</source>
                 <target>Country</target>
