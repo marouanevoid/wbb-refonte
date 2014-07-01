@@ -127,8 +127,7 @@ class CityController extends Controller
         $medias = $bar->getMedias();
         foreach($medias as $media)
         {
-            if($media->getMedia()->getProviderName() === "sonata.media.provider.image")
-                return $baseUrl.$this->container->get("sonata.media.provider.image")->generatePublicUrl($media->getMedia(), 'default_slider_large');
+            return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'default_slider_large');
         }
 
         return null;
