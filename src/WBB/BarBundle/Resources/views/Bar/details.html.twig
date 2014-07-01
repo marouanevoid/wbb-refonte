@@ -301,11 +301,11 @@
                             {% for b in bar.bestofs %}
                                 <li>
                                     {% if b.bestof.city %}
-                                        <a href=""{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
                                             Best {{ b.bestof.name }} in {{ b.bestof.city }}
                                         </a>
                                     {% else %}
-                                        <a href=""{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
                                             Best {{ b.bestof.name }} in world
                                         </a>
                                     {% endif %}
@@ -414,21 +414,19 @@
                 <div class="m-margin-top h2">This bar appears also in</div>
                 <div class="m-margin-top h3">
                     <ul>
-                        <li>
-                            <a href="">
-                                Interview with Nick Miller
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                Best Cocktails Bars in New York
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                The Bar Project from Ballantine’s
-                            </a>
-                        </li>
+                        {% for b in bar.bestofs %}
+                            <li>
+                                {% if b.bestof.city %}
+                                    <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                    Best {{ b.bestof.name }} in {{ b.bestof.city }}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                    Best {{ b.bestof.name }} in world
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <hr class="l-margin-top"/>
