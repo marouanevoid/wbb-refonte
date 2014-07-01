@@ -1,17 +1,24 @@
 $(document).ready(function()
 {
+    var barsLimit = 8;
+    var bestofLimit = 9;
+    if(istablet==1)
+    {
+        barsLimit = 4;
+        bestofLimit = 3;
+    }
    $("form[name=filter]")[0].reset();
    var loadData = function(){
        var _type, _sortby, _limit, _display;
        if($("input[name=filter]:checked").val()=='best_of')
        {
            _type = 0;
-           _limit   = 9;
+           _limit   = bestofLimit;
        }
        else if($("input[name=filter]:checked").val()=='bar_list')
        {
            _type = 1;
-           _limit   = 8;
+           _limit   = barsLimit;
        }
        _sortby  = $("#criteria").val();
        _display = $('input[name=view-type]:checked').val();
@@ -24,9 +31,9 @@ $(document).ready(function()
        var _url = Routing.generate('homepage')+"barguide/filter/"+_type+"/"+_city+"/"+_sortby+"/"+_offset+"/"+_limit+"/"+_display;
 
        if (_type==1)
-           _offset += 8;
+           _offset += barsLimit;
        else
-           _offset += 9;
+           _offset += bestofLimit;
        var Guides = new meta.LoadMore({$button:$(".load-more"), url:_url});
        Guides._updateContent();
    }
@@ -41,9 +48,9 @@ $(document).ready(function()
        _offset = 0;
        if($('input[name=filter]:checked').val()=='bar_list')
        {
-           _limit = 8;
+           _limit = barsLimit;
        }else{
-           _limit = 9;
+           _limit = bestofLimit;
        }
        $(".load-target").html('');
        loadData();
@@ -58,7 +65,7 @@ $(document).ready(function()
         if( $('input[name=filter]:checked').val() == "bar_list")
         {
             $('li.distance').css('display','block');
-            _limit = 8;
+            _limit = barsLimit;
         }
         else
         {
@@ -69,7 +76,7 @@ $(document).ready(function()
                 $('#criteria').val('popularity');
                 $('li.popularity').css('display','block');
             }
-            _limit = 9;
+            _limit = bestofLimit;
         }
         $(".load-target").html('');
         loadData();

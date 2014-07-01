@@ -47,7 +47,7 @@ file that was distributed with this source code.
     <script src="{{ asset('bundles/wbbbar/js/admin/locationpicker.jquery.js') }}"></script>
     <script type="text/javascript">
         var barId = "{{ admin.id(object) }}";
-        var venue, insta;
+        var venue, insta, fsTipsOffset, fsImagesOffset, instagramImagesOffset;
         $(document).ready(function(){
             venue = "{{ object.foursquare }}";
             insta = "{{ object.instagram }}";
@@ -275,6 +275,18 @@ file that was distributed with this source code.
         }
         .mapinfos input {
             float: left;
+        }
+        .tips_action, .imgs_action, .instimgs_action {
+            width: 100%;
+            clear: both;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .btload {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            margin : 30px 0;
         }
     </style>
 {% endblock %}

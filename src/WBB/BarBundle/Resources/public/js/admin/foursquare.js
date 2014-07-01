@@ -26,6 +26,15 @@ $(function() {
     foursquareImages.init();
     instagramImages = new instagramImages();
     instagramImages.init();
+    $('#loadFsTips').click(function(){
+        foursquareTips.load();
+    });
+    $('#loadFsImages').click(function(){
+        foursquareImages.load();
+    });
+    $('#loadInstagramImages').click(function(){
+        instagramImages.load();
+    });
 });
 function foursquareTips() {
     var foursquareTips = this;
@@ -81,23 +90,33 @@ function foursquareTips() {
         });
     }
 
-    foursquareTips.load = function(type, container) {
+    foursquareTips.load = function() {
+        var offset = $('.fstip').length;
+        var container = $('.content_tips');
+        var type = "fstips";
         var loader = $(container).parent('.tips').find('.tips_action .loader');
         loader.show();
-
+        $('.btload').hide();
+        var url;
+        if(typeof offset != 'undefined' && offset!= null && offset!=""){
+            url = Routing.generate('wbb_bar_feeds_find', { type: "fstips", id: venue, offset: offset});
+        }else{
+            url = Routing.generate('wbb_bar_feeds_find', { type: "fstips", id: venue, offset: 0})
+        }
         $.ajax({
             type: "POST",
             url:  Routing.generate('wbb_bar_feeds_list',
                 { type: "fstips", bar: barId}),
             dataType: 'json',
             success: function(r) {
+
                 $.ajax({
                     type: "POST",
-                    url:  Routing.generate('wbb_bar_feeds_find',
-                        { type: "fstips", id: venue}),
+                    url:  url,
                     dataType: 'json',
                     success: function(response) {
                         loader.hide();
+                        $('.btload').show();
                         var template = null;
                         $.each(response.data, function(key, feed){
                             var tipsHtml = $("#tips").html();
@@ -180,10 +199,19 @@ function foursquareImages() {
         });
     }
 
-    foursquareImages.load = function(type, container) {
+    foursquareImages.load = function() {
+        var offset = $('.fsimg').length;
+        var type = "fsimgs";
+        var container = $('.content_imgs');
         var loader = $(container).parent('.imgs').find('.imgs_action .loader');
         loader.show();
-
+        $('.btload').hide();
+        var url;
+        if(typeof offset != 'undefined' && offset!= null && offset!=""){
+            url = Routing.generate('wbb_bar_feeds_find', { type: "fsimgs", id: venue, offset: offset});
+        }else{
+            url = Routing.generate('wbb_bar_feeds_find', { type: "fsimgs", id: venue, offset: 0})
+        }
         $.ajax({
             type: "POST",
             url:  Routing.generate('wbb_bar_feeds_list',
@@ -192,11 +220,11 @@ function foursquareImages() {
             success: function(r) {
                 $.ajax({
                     type: "POST",
-                    url:  Routing.generate('wbb_bar_feeds_find',
-                        { type: "fsimgs", id: venue}),
+                    url:  url,
                     dataType: 'json',
                     success: function(response) {
                         loader.hide();
+                        $('.btload').show();
                         var template = null;
                         $.each(response.data, function(key, feed){
                             //console.log(feed);
@@ -274,7 +302,7 @@ function instagramImages() {
                 ),
                 dataType: "json",
                 success: function(msg) {
-                    loader.hide();
+                    $('.btload').show();
                 },
                 error: function(e) {
                     console.log('Error : ' + e);
@@ -283,9 +311,23 @@ function instagramImages() {
         });
     }
 
-    instagramImages.load = function(type, container) {
+    instagramImages.load = function() {
+        if($('.instimg').length>0){
+            var offset = $('.instimg:last-child').attr('id');
+        }else{
+            var offset = 0;
+        }
+        var type = "instagram";
+        var container = $('.content_instimgs');
         var loader = $(container).parent('.instimgs').find('.instimgs_action .loader');
         loader.show();
+        $('.btload').hide();
+        var url;
+        if(typeof offset != 'undefined' && offset!= null && offset!=""){
+            url = Routing.generate('wbb_bar_feeds_find', { type: "instagram", id: insta, offset: offset});
+        }else{
+            url = Routing.generate('wbb_bar_feeds_find', { type: "instagram", id: insta, offset: 0})
+        }
 
         $.ajax({
             type: "POST",
@@ -295,11 +337,11 @@ function instagramImages() {
             success: function(r) {
                 $.ajax({
                     type: "POST",
-                    url:  Routing.generate('wbb_bar_feeds_find',
-                        { type: "instagram", id: insta}),
+                    url:  url,
                     dataType: 'json',
                     success: function(response) {
                         loader.hide();
+                        $('.btload').show();
                         var template = null;
                         $.each(response.data.data, function(key, feed){
                             var imgsHtml = $("#instimgs").html();
@@ -316,7 +358,7 @@ function instagramImages() {
                     },
                     error: function(e) {
                         console.log(e);
-                        loader.hide();
+                        $('.btload').show();
                     }
                 });
             },

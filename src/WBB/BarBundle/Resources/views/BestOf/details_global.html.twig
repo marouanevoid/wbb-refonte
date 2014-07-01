@@ -5,8 +5,8 @@
     <script type="text/javascript">
         $(document).ready(function(){
             initializeSliders();
-            $(".bars .four:lt(3)").show(); 
-            if($('.bars .four').length>3)
+            $(".bars .four:lt(12)").show();
+            if($('.bars .four').length>12)
                 $(".load-more-container").show();
             var display;   
             $(".load-more").click(function(){
@@ -82,7 +82,7 @@
 </div>
 
 <!-- ALSO LIKE -->
-<div class="container full also-like l-margin">
+<div class="container also-like l-margin">
         <section class="bestof force-load">
             <div class="align-center l-margin-bottom">
                 {% if not is_mobile() or is_tablet() %}
@@ -103,21 +103,4 @@
             {% endif %}
         </section>
 </div>
-{% endblock %}
-{% block footerAd %}
-    <section class="footer-ad">
-
-    <div class="container full align-center">
-
-        <div class="twelve columns">
-
-            <hr/>
-
-            <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
-
-        </div>
-
-    </div>
-
-    </section>
 {% endblock %}
