@@ -189,8 +189,8 @@ class AjaxController extends Controller
         $medias = $bar->getMedias();
         foreach($medias as $media)
         {
-            if($media->getMedia()->getProviderName() === "sonata.media.provider.image")
-                return $this->container->get("sonata.media.provider.image")->generatePublicUrl($media->getMedia(), 'slider_large');
+//            if($media->getMedia()->getProviderName() === "sonata.media.provider.image")
+                return $this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'slider_large');
         }
 
         return null;
