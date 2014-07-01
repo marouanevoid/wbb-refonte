@@ -305,7 +305,7 @@
                                             Best {{ b.bestof.name }} in {{ b.bestof.city }}
                                         </a>
                                     {% else %}
-                                        <a href=""{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
                                             Best {{ b.bestof.name }} in world
                                         </a>
                                     {% endif %}
@@ -417,7 +417,7 @@
                         {% for b in bar.bestofs %}
                             <li>
                                 {% if b.bestof.city %}
-                                    <a href=""{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                    <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
                                     Best {{ b.bestof.name }} in {{ b.bestof.city }}
                                     </a>
                                 {% else %}
