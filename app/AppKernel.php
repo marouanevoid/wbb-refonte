@@ -41,9 +41,6 @@ class AppKernel extends Kernel
             //Foursquare
             new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),
 
-            //Avalanche Imagine Bundle
-            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
-
             //Mobile Detecte
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
 
@@ -62,7 +59,7 @@ class AppKernel extends Kernel
             //CSV Import Bundle
             new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
 
-            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
+//            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
