@@ -181,11 +181,11 @@ sonata_media:
 #            directory:  %kernel.root_dir%/../web/uploads/media
 #            create:     true
         s3:
-            bucket: cdn-wbb
+            bucket: wbb-bucket
             accessKey: AKIAJ6WSWPZUXSICYDPQ #AKIAJM6ZSVZZ3WLRHZIA
             secretKey: 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 #Sw9IbIoSTjfQIamFAFWqljY/tNhQmDBnChYzSC9T
             create:         false
-            region:         s3-website-us-east-1.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
+#            region:         s3-website-us-east-1.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
             storage:        standard # can be one of: standard or reduced
             acl:            public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
 #            encryption:     aes256 # can be aes256 or not set
@@ -197,6 +197,7 @@ sonata_media:
         image:
             filesystem: sonata.media.filesystem.s3
             resizer: sonata.media.resizer.custom
+            cdn: sonata.media.cdn.server
 
 #Fake Data Generator
 hautelook_alice:
