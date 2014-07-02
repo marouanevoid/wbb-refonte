@@ -141,10 +141,29 @@ article.tip .content .author b {
     margin-top: 2px;
 }
 
+
+
+/*******
+Added By Khalid
+****/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
 
     .heading input[type="text"] + input[type="submit"]{
         right: -1.4px !important;
     }
 
+}
+
+.heading input[type="text"] + input[type="submit"]:hover{
+        background-color: white;
+        background-position: -200px -200px;
+    }
+
+.heading input[type="text"] + input[type="submit"].active {
+    background-color: #b3955f;
+    background-position: -200px -240px;
+}
+
+section.bar-filter .container {
+    min-height: 423px;
 }
