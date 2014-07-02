@@ -1,11 +1,22 @@
 <div class="city-selector h3">
     You are in
-    <select class="ui-dropdown" name="city" data-class="with-icon city">
-        <option disabled="disabled">Choose a City</option>
-        <option value="cty2">City 2</option>
-        <option value="cty3">City 3</option>
-        <option value="cty4">City 4</option>
-        <option value="cty5">City 5</option>
-        <option value="cty6">City 6</option>
-    </select>
+    <div class="ui-selector">
+        <a class="btn-radius brown border with-icon city select" data-tips="Click here to select your location" id="city-selector">Choose a city</a>
+        <div class="selector">
+            <span></span>
+            <a class="close btn-round brown"></a>
+            <ul>
+                <li><a href="bar-guides.php">Berlin</a></li>
+                <li><a href="bar-guides.php">New York City</a></li>
+                <li><a href="bar-guides.php">London</a></li>
+                <li><a href="bar-guides.php">Madrid</a></li>
+                <li><a href="bar-guides.php">Paris</a></li>
+                <li><a href="bar-guides.php">Rome</a></li>
+                <li><a href="bar-guides.php">Sydney</a></li>
+                <li><a href="bar-guides.php">Washington</a></li>
+                <li><a href="bar-guides.php">World Wide</a></li>
+            </ul>
+            <a class="btn-radius border brown" href="cities.php">See a list of cities</a>
+        </div>
+    </div>
 </div>
