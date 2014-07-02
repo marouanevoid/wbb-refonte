@@ -141,8 +141,6 @@ wbb.CitiesPage = function () {
             setTimeout(function()
             {
                 that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
-
-                setTimeout(function(){$selector.show();},400);
             }, 300);
             that._resize();
         }
@@ -436,7 +434,8 @@ wbb.CitiesPage = function () {
         {
             that._showCities(query, cities, true, false);
             if( !$('html').hasClass('mobile') || $(window).width() > 640 )
-                that._openFilter();
+                if(!$('html').hasClass('ipad'))
+                    that._openFilter();
         });
     };
 
@@ -485,6 +484,10 @@ wbb.CitiesPage = function () {
                 $scrollCities.find('ul').html(html);
                 var api = $scrollCities.data('jsp');
                 api.scrollToY(0, false);
+
+                ///// TEMP ///
+                    // Show List
+                /////////////
             }else
             {
                 $scrollCities.find('ul').html("No results");
@@ -589,5 +592,8 @@ wbb.CitiesPage = function () {
 $(document).ready(function()
 {
     new wbb.CitiesPage();
+    if( !$('html').hasClass('mobile') || $(window).width() > 640 )
+        $('html').find('.cities-content .selector').hide()
+    setTimeout(function(){$('html').find('.cities-content .selector').show()},700);
 });
 
