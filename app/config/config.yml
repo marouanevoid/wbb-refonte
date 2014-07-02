@@ -184,7 +184,7 @@ sonata_media:
             bucket: cdn-wbb
             accessKey: AKIAJ6WSWPZUXSICYDPQ #AKIAJM6ZSVZZ3WLRHZIA
             secretKey: 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 #Sw9IbIoSTjfQIamFAFWqljY/tNhQmDBnChYzSC9T
-            create:         true
+            create:         false
             region:         s3-website-us-west-2.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
             storage:        standard # can be one of: standard or reduced
             acl:            public # can be one of: public, private, open, auth_read, owner_read, owner_full_control

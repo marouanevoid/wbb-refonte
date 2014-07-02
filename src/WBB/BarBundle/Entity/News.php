@@ -5,6 +5,7 @@ namespace WBB\BarBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * News
@@ -30,6 +31,13 @@ class News {
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"}, style="camel", separator="-")
+     * @ORM\Column(unique=true)
+     * @JMS\Expose
+     */
+    private $slug;
 
     /**
      * @var string
@@ -544,4 +552,27 @@ class News {
         return $this->updatedAt;
     }
 
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return News
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }

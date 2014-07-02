@@ -52,4 +52,9 @@ class NewsController extends Controller
             'topCities' => $topCities
         ));
     }
+
+    public function detailsAction($newsSlug)
+    {
+        $news = $this->container->get('news.repository')->findOneBySlug();
+    }
 }
