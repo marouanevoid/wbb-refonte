@@ -140,3 +140,11 @@ article.tip .content .author b {
     color: #333;
     margin-top: 2px;
 }
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
+
+    .heading input[type="text"] + input[type="submit"]{
+        right: -1.4px !important;
+    }
+
+}
