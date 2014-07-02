@@ -29,7 +29,7 @@
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
-    {% if b.media.media %}
+    {% if b.media and b.media.media %}
         <img class="scale-with-grid" data-src="{% path b.media.media, 'slider_large' %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
     {% else %}
         {% for m in b.bar.medias|slice(0,1) %}
