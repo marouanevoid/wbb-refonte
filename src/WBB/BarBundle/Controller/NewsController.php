@@ -55,6 +55,11 @@ class NewsController extends Controller
 
     public function detailsAction($newsSlug)
     {
-        $news = $this->container->get('news.repository')->findOneBySlug();
+        $news = $this->container->get('news.repository')->findOneBySlug($newsSlug);
+
+        return $this->render('WBBBarBundle:News:details.html.twig', array(
+                'news' => $news
+            )
+        );
     }
 }
