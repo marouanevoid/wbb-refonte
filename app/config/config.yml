@@ -173,18 +173,18 @@ sonata_media:
 
     cdn:
         server:
-            path: /uploads/media
-#            path: http://staging.worldsbestbars.com.s3-website-eu-west-1.amazonaws.com
+#            path: /uploads/media
+            path: http://staging.worldsbestbars.com.s3-website-eu-west-1.amazonaws.com
 
     filesystem:
-        local:
-            directory:  %kernel.root_dir%/../web/uploads/media
-            create:     true
-#        s3:
-#            bucket: staging.worldsbestbars.com
-#            accessKey: AKIAJM6ZSVZZ3WLRHZIA
-#            secretKey: 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
-#            create:         true
+#        local:
+#            directory:  %kernel.root_dir%/../web/uploads/media
+#            create:     true
+        s3:
+            bucket: staging.worldsbestbars.com
+            accessKey: AKIAJM6ZSVZZ3WLRHZIA
+            secretKey: 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
+            create:         true
 #            region:         s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
 #            storage:        standard # can be one of: standard or reduced
 #            acl:            public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
@@ -195,7 +195,7 @@ sonata_media:
 
     providers:
         image:
-#            filesystem: sonata.media.filesystem.s3
+            filesystem: sonata.media.filesystem.s3
             resizer: sonata.media.resizer.custom
 
 #Fake Data Generator
