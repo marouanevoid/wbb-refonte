@@ -59,7 +59,7 @@ class AppKernel extends Kernel
             //CSV Import Bundle
             new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
 
-//            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
+            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
