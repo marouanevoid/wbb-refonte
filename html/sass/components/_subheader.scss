@@ -7,7 +7,7 @@
 
   .city-selector {
     color: $color-brown; text-transform: none; letter-spacing: -0.01em;
-    .btn-radius { margin-left: 1em }
+    .ui-selector { margin-left: 0.5em }
     .ui-dropdown-container{
       display: inline-block;vertical-align: middle;
       .btn-radius {

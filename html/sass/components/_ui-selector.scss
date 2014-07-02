@@ -1,0 +1,26 @@
+.ui-selector
+{
+  display: inline-block; position: relative;
+  .btn-radius.active{ background: $color-brown!important; color: $color-cream; border-color: $color-brown }
+  .selector{
+    position: absolute; left: 0; top: 100%; z-index: 99; background: $color-cream; border: 1px solid $color-brown-light; font-size: 90%; display: none;
+    border-radius: 1.2em; padding: 1em 2em; text-align: center; margin-top: 1em;
+    span{ background: url("../images/misc/ui-selector.png") no-repeat center; background-size: 100% auto; width: 12px; height: 7px; display:inline-block; position: absolute; top: -6px; left: 50%; margin-left: -6px }
+    ul{
+      line-height: 190%; margin-top: 0.5em;
+      a{ color: $color-light-gray }
+      a:hover{ color: $color-brown }
+    }
+    .close{
+      position: absolute; right: 3px; top: 3px; width: 30px; height: 30px; border-color: $color-brown-light;
+      &:before, &:after{ background-size: 192px 384px }
+      &:before{ background-position: -90px 0 }
+      &:after{ background-position: -90px -30px }
+      &:hover{ border-color: $color-brown }
+    }
+    .btn-radius{
+      font-size: 100%; margin-top: 1em; margin-left: 0; padding: 0.6em 2em; border-color:$color-brown-light;
+      &:hover{ border-color: $color-brown }
+    }
+  }
+}

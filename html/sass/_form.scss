@@ -69,7 +69,7 @@ select {
   line-height: 1em;
   @include transition(border 0.2s ease-in-out)
 }
-textarea{ overflow: auto }
+textarea{ overflow: auto; -webkit-appearance:none  }
 input[type="text"],
 input[type="password"],
 input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; color:$color-brown; @include placeholder{ color: $color-brown }; -webkit-appearance:none }
@@ -96,8 +96,7 @@ label{
 input[type="text"].error,
 input[type="password"].error,
 input[type="email"].error,
-textarea.error{ border-color: $color-error }
-textarea.error:focus{ box-shadow: inset 0 0 2px $color-error }
+textarea.error{ outline: 1px solid $color-brown }
 
 input[type="text"]::-ms-clear { display: none  }
 input[type="text"]+input[type="submit"]{ border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; width: 40px; padding: 0; height: 42px;
