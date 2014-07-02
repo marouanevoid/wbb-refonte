@@ -121,7 +121,7 @@
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
             {% endfor %}
             {% for n in interviews|slice(0,1) %}
-                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
+                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , 'has_quote' : 1 } %}
             {% endfor %}
             {% for n in articles|slice(2,1) %}
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1, 'has_video' : 1 } %}
@@ -149,7 +149,7 @@
                 {% endfor %}
 
                 {% for n in interviews|slice(2,1) %}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n, 'has_quote' : 1 } %}
+                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
                 {% endfor %}
 
                 {% for n in articles|slice(4,1) %}
