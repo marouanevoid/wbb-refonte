@@ -247,7 +247,7 @@ wbb.Map = function(config){
                     click: function(marker, event, context){
 
                         if( typeof(context.id) != 'undefined'){
-                            if($('.scroll-bars').is(":visible") ){
+                            if($('input[name=city]').prop("disabled") == true){
                                 $('html').find(".scroll-bars li[data-id=" + context.id + "]").click();
                             }else
                             {

@@ -5,7 +5,7 @@ var wbb = wbb || {};
 wbb.CitiesPage = function () {
 
     var that = this;
-
+    
     that.config = {
         speed   : 500,
         easing  : 'easeInOutCubic',
