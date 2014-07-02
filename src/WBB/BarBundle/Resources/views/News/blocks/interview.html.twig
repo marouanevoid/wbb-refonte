@@ -1,11 +1,13 @@
 <article class="small">
     <div class="title vcenter">
-            <h2><a href="">{{ n.title }}</a></h2>
-
+        <h2><a href="">{{ n.title }}</a></h2>
+        {% if has_quote is defined %}
             <h1>
                 “ {{ n.quoteText }} ”
             </h1>
             <p class="m-margin">{{ n.quoteAuthor }}</p>
+        {% endif %}
+            <a class="plus-btn" href=""></a>
 
     </div>
 </article>
