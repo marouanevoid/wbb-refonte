@@ -269,5 +269,13 @@ $(document).ready(function()
 {
     new meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
     new meta.App();
+
+    // TEMP
+    // setInterval(function(){
+    //             $('.scroll').not('.jspScrollable').each(function()
+    //     {
+    //         $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+    //     });
+    // })
 });
 
