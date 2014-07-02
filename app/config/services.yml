@@ -11,3 +11,9 @@ services:
     session.handler.pdo:
         class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
         arguments: ["@pdo", "%pdo.db_options%"]
+
+    wbb.block.service.semsoft.import:
+        class: WBB\CoreBundle\Block\ImportService
+        arguments: [ "wbb.block.service.semsoft.import", @templating, @service_container ]
+        tags:
+         - { name: sonata.block }
