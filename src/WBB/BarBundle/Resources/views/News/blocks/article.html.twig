@@ -3,24 +3,32 @@
     {% if has_image is defined %}
         <div class="img">
             <a href="" class="cover">
-                {% for m in n.medias|slice(0,1) %}
-                    <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
-                {% endfor %}
+                {% if n.medias|length>0 %}
+                    {% for m in n.medias|slice(0,1) %}
+                        <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                    {% endfor %}
+                {% else %}
+                    <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ n.title }}"/>
+                {% endif %}
+
+                {% if has_video is defined %}
+                    <span class="video"></span>
+                {% endif %}
             </a>
             <a class="plus-btn" href=""></a>
         </div>
     {% endif %}
 
     <div class="title vcenter">
-
+        <h2><a href="">{{ n.title }}</a></h2>
         {% if has_text is defined %}
             <p class="m-margin">
                 {{ n.seoDescription }}
             </p>
         {% endif %}
 
-        {% if has_image is defined %}
-            <h2><a href="">{{ n.title }}</a></h2>
+        {% if has_image is not defined %}
+            <a class="plus-btn" href=""></a>
         {% endif %}
     </div>
 </article>
