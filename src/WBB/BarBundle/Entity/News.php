@@ -575,4 +575,16 @@ class News {
     {
         return $this->slug;
     }
+
+    public function getFirstVideo()
+    {
+        $medias = $this->getMedias();
+        foreach($medias as $media)
+        {
+            if($media->getMedia()->getProviderName() === "sonata.media.provider.youtube")
+                return $media;
+        }
+
+        return null;
+    }
 }
