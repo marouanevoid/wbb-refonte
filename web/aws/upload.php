@@ -13,11 +13,12 @@
 	// The file size, file type, and MD5 hash are automatically calculated by the SDK
 	try {
 	    $s3->putObject(array(
-	        'Bucket' => 'staging.worldsbestbars.com',
+	        'Bucket' => 'cdn.wbb',
 	        'Key'    => 'imgtest.jpg',
 	        'Body'   => fopen('imgtest.jpg', 'r'),
 	        'ACL'    => 'public-read',
 	    ));
 	} catch (S3Exception $e) {
 	    echo "There was an error uploading the file.\n";
+	    echo $e;
 	}
