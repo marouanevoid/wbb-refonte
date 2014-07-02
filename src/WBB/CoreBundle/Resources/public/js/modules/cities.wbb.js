@@ -169,7 +169,18 @@ wbb.CitiesPage = function () {
             that.context.$container.find('form').submit();
         });
 
+        // Effet Hover ///
+        var cciblehover = $('.heading input[type="text"] + input[type="submit"]'),
+            cciblehovertext = $('.heading input[type="text"]');
 
+        cciblehover.on('mouseover' , function(){
+            if(cciblehovertext.val() != ''){
+                $(this).addClass('active');
+            }
+        }).on('mouseout', function(){
+            $(this).removeClass('active');
+        });
+        ///// End effet Hover
         $bars.on('click', 'li', function()
         {
             document.location.href = $(this).data('link');
