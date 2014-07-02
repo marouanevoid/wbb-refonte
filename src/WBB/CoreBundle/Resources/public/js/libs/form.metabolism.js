@@ -93,18 +93,36 @@ meta.Form = function(config){
                 {
                     if( that.config.onComplete )
                         that.config.onComplete( that.form, data );
+                    if($('.line:last-child .three').length==0)
+                        $('.line:last-child').remove();
                     nbItems = $('.insider-tips .three').length;
-                    if(nbItems==0)
+                    
+                    if(ismobile==1)
                     {
-                        $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
+                        $('.line.wbbtips').prepend(data.tip);
+                        if(nbItems>=4)
+                        {
+                            $('.line:last-child .three:last-child').remove();
+                            $(".load-more").show();
+                            $(".load-more").parent().show();
+                        }
                     }else
                     {
-                        $('.line.wbbtips .three:first-child').after(data.tip);
+                        if(nbItems==0)
+                        {
+                            $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
+                        }else
+                        {
+                            $('.line.wbbtips .three:first-child').after(data.tip);
+                        }
+                        if(nbItems>=4)
+                        {
+                            $('.line:last-child .three:last-child').remove();
+                            $(".load-more").show();
+                            $(".load-more").parent().show();
+                        }
                     }
-                    if(nbItems>=4)
-                    {
-                        $('.line:last-child .three:last-child').remove();
-                    }
+
 
                 }
                 else

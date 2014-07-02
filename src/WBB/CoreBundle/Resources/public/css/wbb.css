@@ -130,3 +130,13 @@ article.bar-wo-pic .txt h2 {
 .load-container .tip {
     word-wrap:break-word !important;
 }
+article.tip .content .author td img {
+    margin-right: 1em;
+    display: block;
+    float: left;
+}
+article.tip .content .author b {
+    display: block;
+    color: #333;
+    margin-top: 2px;
+}
