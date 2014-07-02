@@ -11,6 +11,7 @@
 /vendor/
 /bin/
 /.idea/
+*.DS_Store
 *.php~
 /nbproject/private/
 /nbproject/
