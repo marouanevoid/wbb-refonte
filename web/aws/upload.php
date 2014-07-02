@@ -13,7 +13,7 @@
 	// The file size, file type, and MD5 hash are automatically calculated by the SDK
 	try {
 	    $s3->putObject(array(
-	        'Bucket' => 'cdn-wbb',
+	        'Bucket' => 'staging.worldsbestbars.com',
 	        'Key'    => 'imgtest.jpg',
 	        'Body'   => fopen('imgtest.jpg', 'r'),
 	        'ACL'    => 'public-read',
