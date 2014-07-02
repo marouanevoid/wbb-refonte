@@ -167,3 +167,31 @@ Added By Khalid
 section.bar-filter .container {
     min-height: 423px;
 }
+
+.nicescroll-rails{
+    background : none repeat scroll 0 0 #fff;
+    border : 1px solid #b3955f;
+    
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius : 10px !important;
+    width: 14px !important;
+    opacity: 1 !important; 
+    padding-bottom: 3px;
+    margin-left: 10px;
+}
+.nicescroll-rails div{
+    background : none repeat scroll 0 0 #b3955f;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius : 10px !important;
+    cursor : pointer;
+    width : 8px !important;
+    position: relative !important;
+    margin: 2px auto auto;
+    left : -2px;
+
+}
+article.tip .content .excerpt td .scroll{
+    width: 209px;
+}
