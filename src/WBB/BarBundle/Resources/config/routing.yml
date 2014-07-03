@@ -96,9 +96,13 @@ wbb_news_landing_page:
     defaults: { _controller: WBBBarBundle:News:landingPage }
 
 wbb_news_landing_page_city:
+    pattern: /news/{citySlug}
+    defaults: { _controller: WBBBarBundle:News:landingPage }
+
+wbb_news_details:
     pattern: /news/city/{citySlug}
     defaults: { _controller: WBBBarBundle:News:landingPage }
 
 wbb_news_details_page:
-    pattern: /news/{newsSlug}
+    pattern: /news/details/{newsSlug}
     defaults: { _controller: WBBBarBundle:News:details }
