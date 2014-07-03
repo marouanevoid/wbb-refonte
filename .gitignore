@@ -11,7 +11,11 @@
 /vendor/
 /bin/
 /.idea/
+*.DS_Store
 *.php~
 /nbproject/private/
 /nbproject/
+<<<<<<< HEAD
+=======
 .DS_Store
+>>>>>>> c28b4e914ab1e822f78bd3985e3024e4944fc582
