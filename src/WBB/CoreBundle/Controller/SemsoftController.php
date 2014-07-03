@@ -25,7 +25,7 @@ class SemsoftController extends Controller
 
         var_dump($param);die;
 
-        // if upload was not ok, just redirect to "shortyStatWrongPArameters"
+        // if upload was not ok, just redirect
         if (!CSVTypes::existsType($curType) || $uploadedFile == null) return $this->redirect($this->generateUrl('shortyStatWrongParameters'));
 
         // generate dummy dir
