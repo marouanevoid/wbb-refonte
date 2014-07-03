@@ -164,7 +164,7 @@ Added By Khalid
     background-position: -200px -240px;
 }
 
-section.bar-filter .container {
+section.bar-filter .container:nth-child(2) {
     min-height: 423px;
 }
 
