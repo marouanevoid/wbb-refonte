@@ -80,13 +80,22 @@
       function initNearPositions(data){
           // TODO : where the user is accept geolocalisation 
           // And the nearest Lat lon is stocked
+          var directionRoote = Routing.generate('wbb_bar_guides_city' , {slug : data.slug});
+
+          var getBaseURL = function(){
+            var bs = window.location.href,
+                split = bs.split('/'),
+                bbase = split[2];
+            return bbase;
+          }
+          window.location.href =  directionRoote;
       }
 
     // if the current navigator support geolocalisation
     // if the geolocalisation is aleady stocked 
 
     //if(navigator.geolocation && ( ! $.cookie('currentLat') || $.cookie('currentLat') == '' ))
-      //navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
+    //navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
   })
 
 
