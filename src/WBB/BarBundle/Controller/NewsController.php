@@ -62,5 +62,10 @@ class NewsController extends Controller
             'latestBars' => $this->container->get('bar.repository')->findLatestBars(null, 5),
             'alsoLike'   => $alsoLike
         ));
+
+        return $this->render('WBBBarBundle:News:details.html.twig', array(
+                'news' => $news
+            )
+        );
     }
 }

@@ -100,5 +100,9 @@ wbb_news_landing_page_city:
     defaults: { _controller: WBBBarBundle:News:landingPage }
 
 wbb_news_details:
+    pattern: /news/city/{citySlug}
+    defaults: { _controller: WBBBarBundle:News:landingPage }
+
+wbb_news_details_page:
     pattern: /news/details/{newsSlug}
     defaults: { _controller: WBBBarBundle:News:details }

@@ -2,7 +2,7 @@
 
     {% if has_image is defined %}
         <div class="img">
-            <a href="{{ path('wbb_news_details',{newsSlug:n.slug}) }}" class="cover">
+            <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="cover">
                 {% if n.medias|length>0 %}
                     {% for m in n.medias|slice(0,1) %}
                         <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
@@ -15,12 +15,12 @@
                     <span class="video"></span>
                 {% endif %}
             </a>
-            <a class="plus-btn" href="{{ path('wbb_news_details',{newsSlug:n.slug}) }}"></a>
+            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
         </div>
     {% endif %}
 
     <div class="title vcenter">
-        <h2><a href="{{ path('wbb_news_details',{newsSlug:n.slug}) }}">{{ n.title }}</a></h2>
+        <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title }}</a></h2>
         {% if has_text is defined %}
             <p class="m-margin">
                 {{ n.seoDescription }}
@@ -28,7 +28,7 @@
         {% endif %}
 
         {% if has_image is not defined %}
-            <a class="plus-btn" href="{{ path('wbb_news_details',{newsSlug:n.slug}) }}"></a>
+            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
         {% endif %}
     </div>
 </article>
