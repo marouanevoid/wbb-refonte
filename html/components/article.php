@@ -4,7 +4,7 @@
         <div class="img">
             <a href="" class="cover">
                 <img src="tmp/article1.jpg" width="600" height="400" alt="article1"/>
-                <?php if($has_video): ?>
+                <?php if( isset($has_video) and $has_video ): ?>
                     <span class="video"></span>
                 <?php endif ?>
             </a>

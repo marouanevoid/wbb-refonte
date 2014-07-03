@@ -52,7 +52,7 @@
 </div>
 
 <!-- EDITOR'S PICK -->
-<div class="container l-margin-top <?=$is_mobile?'s':'l'?>-padding-bottom">
+<div class="container l-margin-top <?=$is_mobile?'s':'m'?>-padding-bottom">
 
     <div class="twelve columns h1 m-margin-bottom color-brown <?php if( $is_mobile ): ?>align-center<?php endif ?>">
         Editor's Pick
@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <div class="twelve columns align-center l-margin-bottom">
+        <div class="twelve columns align-center l-margin-bottom <?=$is_mobile?'s-margin-top':''?>">
             <a class="h4 btn-radius border load-more brown large" href="tmp/data/news.php?">Older News</a>
         </div>
     </div>
