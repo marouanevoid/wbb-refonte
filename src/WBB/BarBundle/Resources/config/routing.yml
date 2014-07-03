@@ -21,6 +21,8 @@ wbb_bar_guides:
 wbb_bar_guides_city:
     pattern: /bar-guides/top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:barGuideCity }
+    options:
+        expose: true
 
 wbb_bar_tips:
     pattern: /bar/{barID}/tips/{offset}/{limit}

@@ -36,7 +36,13 @@ $(document).ready(function()
 //       console.log("Offset : " + _offset );
 //       console.log("Limit : " + _limit );
        console.log("Display : " + _display );
+
+       ////// TODO ADD THE LAT AND LON TO THE RESQUEST ////////
+       var cibling_long = $.cookie('currentLong'),
+           cibling_lat = $.cookie('currentLat');
+      ///////////////////////////////////////////////////////
        var _url = Routing.generate('homepage')+"barguide/filter/"+_type+"/"+_city+"/"+_sortby+"/"+_offset+"/"+_limit+"/"+_display;
+
 
        if (_type==1)
            _offset += barsLimit;
