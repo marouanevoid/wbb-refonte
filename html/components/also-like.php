@@ -1,6 +1,6 @@
 <section class="also-like force-load">
 
-    <div class="container m-padding-bottom">
+    <div class="container <?=$is_mobile?'xl':'m'?>-padding-bottom">
 
         <div class="h1 twelve columns align-center l-margin-top m-margin-bottom">
             You May Also Like

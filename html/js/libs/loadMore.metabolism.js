@@ -109,6 +109,8 @@ meta.LoadMore = function(config) {
                 $(this).removeAttr('data-src');
             });
 
+            $(window).resize();
+
             that._animate($target, $target.find('> *').not('br') );
 
             that.context.page +=1;
