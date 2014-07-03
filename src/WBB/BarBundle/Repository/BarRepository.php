@@ -133,7 +133,7 @@ class BarRepository extends EntityRepository
             $qb
                 ->select($this->getAlias())
                 ->innerjoin($this->getAlias().'.city', 'c')
-                ->where($qb->expr()->notIn($this->getAlias().'.id',':exceptBars'))
+                ->where($qb->expr()->notIn($this->getAlias().'.id', ':exceptBars'))
                 ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
                 ->setParameter('exceptBars', $ids)
             ;
@@ -147,7 +147,7 @@ class BarRepository extends EntityRepository
                 $qb
                     ->innerjoin($this->getAlias().'.tags', 'bt')
                     ->innerjoin('bt.tag', 't')
-                    ->andWhere($qb->expr()->in('t.id',':tags'))
+                    ->andWhere($qb->expr()->in('t.id', ':tags'))
                     ->setParameter('tags', $bar->getTagsIds());
             }
 
@@ -227,7 +227,7 @@ class BarRepository extends EntityRepository
             ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->innerjoin($this->getAlias().'.tags', 'bt')
             ->innerjoin('bt.tag', 't')
-            ->andWhere($qb->expr()->in('t.id',':tags'))
+            ->andWhere($qb->expr()->in('t.id', ':tags'))
             ->setParameter('tags', $bestof->getTagsIds())
             ->groupBy($this->getAlias().'.id')
             ->having($qb->expr()->gte('nbTags', count($bestof->getTagsIds())))

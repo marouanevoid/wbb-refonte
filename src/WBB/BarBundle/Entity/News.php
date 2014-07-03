@@ -587,4 +587,31 @@ class News {
 
         return null;
     }
+
+    public function hasOnlyOneTopCity()
+    {
+        $count = 0;
+        $city = null;
+
+        foreach($this->getCities() as $obj)
+        {
+            if($obj->getOnTopCity()){
+                $count++;
+                $city = $obj;
+            }
+        }
+
+        return ($count == 1) ? $city : null;
+    }
+
+    public function getCitiesAsArray()
+    {
+        $ids = array();
+
+        foreach($this->getCities() as $city){
+            $ids[] = $city->getId();
+        }
+
+        return $ids;
+    }
 }
