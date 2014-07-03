@@ -81,6 +81,7 @@ class BarController extends Controller
             $session->set('citySlug', "");
             return $this->barGuideAction();
         }
+
         $session->set('citySlug', $slug);
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
 

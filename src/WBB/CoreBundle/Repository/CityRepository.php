@@ -48,4 +48,17 @@ class CityRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findByNameAndCountry($name = "", $country = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias())
+            ->leftJoin($this->getAlias().".country", "c")
+            ->where($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)))
+            ->andWhere($qb->expr()->eq('c.id', $country->getId()))
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 } 

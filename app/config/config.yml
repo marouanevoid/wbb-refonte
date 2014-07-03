@@ -103,7 +103,7 @@ sonata_admin:
                         Vous aurez la possibilité de gérer les utilisateurs,
                         les informations relatives aux bars, tips, et villes. </p><br /><br />
             - { position: left, type: sonata.admin.block.admin_list }
-#            - { position: right, type: wbb.block.service.semsoft.import }
+            - { position: right, type: wbb.block.service.semsoft.import }
 
         groups:
             wbb_location: ~
@@ -128,7 +128,7 @@ sonata_block:
         sonata.admin.block.search_result:
             contexts:   [admin]
         sonata.block.service.text:
-#        wbb.block.service.semsoft.import: ~
+        wbb.block.service.semsoft.import: ~
         sonata.block.service.rss:
 
 #Sonata Media Bundle

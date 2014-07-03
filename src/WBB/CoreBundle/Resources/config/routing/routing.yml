@@ -47,3 +47,7 @@ wbb_cities_list_all:
 wbb_cities:
     pattern: /cities
     defaults: { _controller: WBBCoreBundle:City:cities }
+
+wbb_semsoft_import:
+    pattern: /semsoft/import
+    defaults: { _controller: WBBCoreBundle:Semsoft:import }

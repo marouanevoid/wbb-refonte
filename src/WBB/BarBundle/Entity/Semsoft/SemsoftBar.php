@@ -32,226 +32,259 @@ class SemsoftBar
     /**
      * @var string
      *
-     * @ORM\Column(name="county", type="string", length=255)
+     * @ORM\Column(name="county", type="string", length=255, nullable=true)
      */
     private $county;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="postal_code", type="string", length=255)
+     * @ORM\Column(name="postal_code", type="string", length=255, nullable=true)
      */
     private $postalCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="address", type="text", nullable=true)
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="decimal")
+     * @ORM\Column(name="latitude", type="decimal", nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal")
+     * @ORM\Column(name="longitude", type="decimal", nullable=true)
      */
     private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="website", type="string", length=255)
+     * @ORM\Column(name="website", type="string", length=255, nullable=true)
      */
     private $website;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="price", type="smallint")
+     * @ORM\Column(name="price", type="smallint", nullable=true)
      */
     private $price;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_credit_card", type="boolean")
+     * @ORM\Column(name="is_credit_card", type="boolean", nullable=true)
      */
     private $isCreditCard;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_description", type="text")
+     * @ORM\Column(name="seo_description", type="text", nullable=true)
      */
     private $seoDescription;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_out_door_seating", type="boolean")
+     * @ORM\Column(name="is_out_door_seating", type="boolean", nullable=true)
      */
     private $isOutDoorSeating;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_happy_hour", type="boolean")
+     * @ORM\Column(name="is_happy_hour", type="boolean", nullable=true)
      */
     private $isHappyHour;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_wifi", type="boolean")
+     * @ORM\Column(name="is_wifi", type="boolean", nullable=true)
      */
     private $isWiFi;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="menu", type="string", length=255)
+     * @ORM\Column(name="menu", type="string", length=255, nullable=true)
      */
     private $menu;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="reservation", type="boolean")
+     * @ORM\Column(name="reservation", type="boolean", nullable=true)
      */
     private $reservation;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="parking_type", type="string", length=255)
+     * @ORM\Column(name="parking_type", type="string", length=255, nullable=true)
      */
     private $parkingType;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_id", type="string", length=255)
+     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
      */
     private $facebookID;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_user_page", type="string", length=255)
+     * @ORM\Column(name="facebook_user_page", type="string", length=255, nullable=true)
      */
     private $facebookUserPage;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="facebook_likes", type="integer", nullable=true)
+     */
+    private $facebookLikes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="facebook_check_ins", type="integer", nullable=true)
+     */
+    private $facebookCheckIns;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="twitter_name", type="string", length=255)
+     * @ORM\Column(name="twitter_name", type="string", length=255, nullable=true)
      */
     private $twitterName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="twitter_user_page", type="string", length=255)
+     * @ORM\Column(name="twitter_user_page", type="string", length=255, nullable=true)
      */
     private $twitterUserPage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="instagram_id", type="string", length=255)
+     * @ORM\Column(name="instagram_id", type="string", length=255, nullable=true)
      */
     private $instagramID;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="instagram_user_page", type="string", length=255)
+     * @ORM\Column(name="instagram_user_page", type="string", length=255, nullable=true)
      */
     private $instagramUserPage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="google_plus_user_page", type="string", length=255)
+     * @ORM\Column(name="google_plus_user_page", type="string", length=255, nullable=true)
      */
     private $googlePlusUserPage;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_id", type="string", length=255, nullable=true)
+     */
+    private $foursquareID;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_user_page", type="string", length=255, nullable=true)
+     */
+    private $foursquareUserPage;
+
+    /**
      * @var integer
      *
-     * @ORM\Column(name="foursquare_check_ins", type="integer")
+     * @ORM\Column(name="foursquare_check_ins", type="integer", nullable=true)
      */
     private $foursquareCheckIns;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="facebook_check_ins", type="integer")
-     */
-    private $facebookCheckIns;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="foursquare_likes", type="integer")
+     * @ORM\Column(name="foursquare_likes", type="integer", nullable=true)
      */
     private $foursquareLikes;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="facebook_likes", type="integer")
+     * @ORM\Column(name="foursquare_tips", type="integer", nullable=true)
      */
-    private $facebookLikes;
+    private $foursquareTips;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_permanently_closed", type="boolean")
+     * @ORM\Column(name="is_permanently_closed", type="boolean", nullable=true)
      */
     private $isPermanentlyClosed;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="business_found", type="boolean")
+     * @ORM\Column(name="business_found", type="boolean", nullable=true)
      */
     private $businessFound;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="updated_columns", type="array")
+     * @ORM\Column(name="updated_columns", type="array", nullable=true)
      */
     private $updatedColumns;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="overwritten_columns", type="array")
+     * @ORM\Column(name="overwritten_columns", type="array", nullable=true)
      */
     private $overwrittenColumns;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="semsoftBars")
+     */
+    private $country;
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="semsoftBars")
@@ -259,7 +292,7 @@ class SemsoftBar
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars", cascade={"all"})
      */
     private $suburb;
 
@@ -1163,5 +1196,120 @@ class SemsoftBar
     public function getOpenings()
     {
         return $this->openings;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return SemsoftBar
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set foursquareID
+     *
+     * @param string $foursquareID
+     * @return SemsoftBar
+     */
+    public function setFoursquareID($foursquareID)
+    {
+        $this->foursquareID = $foursquareID;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareID
+     *
+     * @return string 
+     */
+    public function getFoursquareID()
+    {
+        return $this->foursquareID;
+    }
+
+    /**
+     * Set foursquareUserPage
+     *
+     * @param string $foursquareUserPage
+     * @return SemsoftBar
+     */
+    public function setFoursquareUserPage($foursquareUserPage)
+    {
+        $this->foursquareUserPage = $foursquareUserPage;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareUserPage
+     *
+     * @return string 
+     */
+    public function getFoursquareUserPage()
+    {
+        return $this->foursquareUserPage;
+    }
+
+    /**
+     * Set foursquareTips
+     *
+     * @param integer $foursquareTips
+     * @return SemsoftBar
+     */
+    public function setFoursquareTips($foursquareTips)
+    {
+        $this->foursquareTips = $foursquareTips;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareTips
+     *
+     * @return integer 
+     */
+    public function getFoursquareTips()
+    {
+        return $this->foursquareTips;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \WBB\CoreBundle\Entity\Country $country
+     * @return SemsoftBar
+     */
+    public function setCountry(\WBB\CoreBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \WBB\CoreBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }
