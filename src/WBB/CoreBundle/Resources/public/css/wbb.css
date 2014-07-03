@@ -167,3 +167,10 @@ Added By Khalid
 section.bar-filter .container {
     min-height: 423px;
 }
+.sponsor-name {
+    font-size: 1.6em;
+}
+.news-details .articles.older-news article.small:nth-of-type(3n+2) {
+    margin-left: 2.7%;
+    margin-right: 2.7%;
+}
