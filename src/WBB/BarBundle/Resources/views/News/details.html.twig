@@ -6,6 +6,21 @@
             initializeSliders();
         });
     </script>
+    <style type="text/css">
+        div.description {
+            float : left;
+            padding : 70px 35px;
+            text-align: center;
+            display: block;
+            width:300px;
+        }
+        div.description p {
+            margin-bottom: 0 !important;
+        }
+        div.description h1 {
+            text-transform: inherit !important;
+        }
+    </style>
     {% if is_mobile() and not is_tablet() %}
     <style type="text/css">
         .ui-slider .arrows {
@@ -13,6 +28,13 @@
         }
         .ui-slider .ui-wrapper {
             height: 350px;
+        }
+        div.description {
+            float: left;
+            padding: 50px 0;
+            text-align: center;
+            display: block;
+            width: 100%;
         }
     </style>
     {% endif %}
@@ -68,9 +90,32 @@
                             </div>
                         {% endif %}
                     {% endif %}
-                    <p>
-                        {{ news.richDescription|raw }}
-                    </p>
+                    {% if news.quoteText %}
+                        {% set paragraphs = news.richDescription|split('<br><br>') %}
+                        <p>
+                            {% for p in paragraphs %}
+                                {% if paragraphs|length==1 %}
+                                    {% if loop.index == 1 %}
+                                        </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
+                                    {% endif %}
+                                {% elseif paragraphs|length<=3 %}
+                                    {% if loop.index == 2 %}
+                                        </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
+                                    {% endif %}
+                                {% elseif paragraphs|length>3 %}
+                                    {% if loop.index == 3 %}
+                                        </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
+                                    {% endif %}
+                                {% endif %}
+                                {{ p|raw }}
+                                {% if not loop.last %}<br><br>{% endif %}
+                            {% endfor %}
+                        </p>
+                    {% else %}
+                        <p>
+                            {{ news.richDescription|raw }}
+                        </p>
+                    {% endif %}
                     {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
                     <div class="share-btns l-margin-top full">
                         <hr/>
