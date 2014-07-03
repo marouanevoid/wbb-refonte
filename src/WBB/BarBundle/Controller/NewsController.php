@@ -34,7 +34,7 @@ class NewsController extends Controller
             if($news->getIsAnInterview() and $nbInteviews < 4 ){
                 $interviews[] = $news;
                 $nbInteviews++;
-            }elseif($nbArticles < 5){
+            }elseif($nbArticles < 8){
                 $articles[] = $news;
                 $nbArticles++;
             }else{
