@@ -29,14 +29,12 @@
                 <tr>
                     {% if not is_mobile() or is_tablet() %}
                         <td>
-                           {# {% if news.city %}
-                                {% if news.city.onTopCity %}#}
-                                    <div class="city-selector h3">
-                                        You are in
-                                        <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:'world-wide'}) }}">World Wide</a>
-                                    </div>
-                                {#{% endif %}
-                           {% endif %}#}
+                           {% if city %}
+                               <div class="city-selector h3">
+                                   You are in
+                                   <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:city.slug}) }}">{{ city.name|default('Unspecified') }}</a>
+                               </div>
+                           {% endif %}
                         </td>
                     {% endif %}
                     <td class="title">
@@ -77,7 +75,7 @@
                     <div class="share-btns l-margin-top full">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
-                        <div class="social-share s-margin-top">
+                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
                             <a href="#0" class="fb-share">Post</a>
                             <a href="#0" class="twitter-share">Tweet</a>
                             <a href="#0" class="email-share">Email</a>
@@ -95,17 +93,27 @@
                     {% endif %}
                     <!-- NEWLY ADDED BARS -->
                     <aside {% if is_mobile() and not is_tablet() %}class="l-margin-top"{% endif %}>
-                        <hr/>
+                        {% if is_mobile() and not is_tablet() %}<hr/>{% endif %}
                         {% if news.sponsorImage %}
                         <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top {% else %}l-margin-top{% endif %}">
                         {% else %}
-                        <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top {% else %}l-margin-top{% endif %}">
+                        <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top{% endif %}">
                         {% endif %}
+                            {% if news.bars|length>0 %}
+                                Related bars
+                            {% else %}
                                 Newly Added Bars
+                            {% endif %}
                         </div>
-                            {% for b in latestBars %}
-                                {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
-                            {% endfor %}
+                            {% if news.bars|length>0 %}
+                                {% for b in news.bars %}
+                                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                                {% endfor %}
+                            {% else %}
+                                {% for b in latestBars %}
+                                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                                {% endfor %}
+                            {% endif %}
                             {#{% if news.city %}#}
                                 {#<a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:news.city.slug}) }}">See all bars</a>#}
                             {#{% else %}#}
