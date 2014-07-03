@@ -42,7 +42,7 @@
                         <img src="{% path m.media, 'slider_large' %}" class="l-margin-bottom" width="100%" alt="{{ news.title }}"/>
                     {% endfor %}
                     <p>
-                        {{ news.richDescription }}
+                        {{ news.richDescription|raw }}
                     </p>
                     {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
                     <div class="share-btns l-margin-top full">
@@ -56,7 +56,7 @@
                 <!-- ASIDE -->
                 <aside class="columns four">
                     <div class="block">
-                            <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="100%" />
+                            <img src="{% path news.sponsorImage, 'slider_large' %}" alt="{{ news.sponsor }}" width="100%" />
                     </div>
 
                     <!-- NEWLY ADDED BARS -->
