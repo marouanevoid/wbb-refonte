@@ -141,6 +141,22 @@ article.tip .content .author b {
     margin-top: 2px;
 }
 
+.fb-share, .twitter-share, .email-share {
+    height: 40px;
+    width: 105px;
+    display: inline-block;
+    text-indent: -10000px;
+}
+.fb-share {
+    background: url(../images/fb.png) no-repeat;
+}
+.twitter-share{
+    background: url(../images/twitter.png) no-repeat;
+    margin: 0 10px;
+}
+.email-share{
+    background: url(../images/email.png) no-repeat;
+}
 
 
 /*******
