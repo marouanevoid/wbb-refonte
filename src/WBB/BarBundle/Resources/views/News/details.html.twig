@@ -1,5 +1,22 @@
 {% extends "::base.html.twig" %}
 {% block title %}{{ news.title }} | World Best Bars{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initializeSliders();
+        });
+    </script>
+    {% if is_mobile() and not is_tablet() %}
+    <style type="text/css">
+        .ui-slider .arrows {
+            display: none !important;
+        }
+        .ui-slider .ui-wrapper {
+            height: 350px;
+        }
+    </style>
+    {% endif %}
+{% endblock %}
 {% block bodyTag %}
 <body class="news-details">
 {% endblock %}
@@ -19,7 +36,7 @@
                                         <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:'world-wide'}) }}">World Wide</a>
                                     </div>
                                 {#{% endif %}
-                            {% endif %}#}
+                           {% endif %}#}
                         </td>
                     {% endif %}
                     <td class="title">
@@ -37,31 +54,53 @@
         <section class="content">
             <!-- MAIN CONTENT -->
             <article class="main">
+                {% if not is_mobile() or is_tablet() %}
                 <div class="eight columns">
+                {% endif %}
                     {% for m in news.medias|slice(0,1) %}
-                        <img src="{% path m.media, 'slider_large' %}" class="l-margin-bottom" width="100%" alt="{{ news.title }}"/>
+                        <img src="{% path m.media, 'slider_large' %}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
                     {% endfor %}
+                {% if is_mobile() and not is_tablet() %}
+                    <div class="eight columns">
+                {% endif %}
+                    {% if is_mobile() and not is_tablet() %}
+                        {% if news.sponsorImage %}
+                            <div class="block">
+                                <img src="{% path news.sponsorImage, 'slider_large' %}" class="s-margin-bottom" alt="{{ news.sponsor }}" width="100%" />
+                            </div>
+                        {% endif %}
+                    {% endif %}
                     <p>
                         {{ news.richDescription|raw }}
                     </p>
                     {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
                     <div class="share-btns l-margin-top full">
                         <hr/>
-                        <h2>SHARE THIS NEWS</h2>
-                        <a href="#0" class="fb-sahre">Post</a>
-                        <a href="#0" class="twitter-sahre">Tweet</a>
-                        <a href="#0" class="email-sahre">Email</a>
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
+                        <div class="social-share s-margin-top">
+                            <a href="#0" class="fb-share">Post</a>
+                            <a href="#0" class="twitter-share">Tweet</a>
+                            <a href="#0" class="email-share">Email</a>
+                        </div>
                     </div>
                 </div>
                 <!-- ASIDE -->
                 <aside class="columns four">
-                    <div class="block">
-                            <img src="{% path news.sponsorImage, 'slider_large' %}" alt="{{ news.sponsor }}" width="100%" />
-                    </div>
-
+                    {% if not is_mobile() or is_tablet() %}
+                        {% if news.sponsorImage %}
+                        <div class="block">
+                                <img src="{% path news.sponsorImage, 'slider_large' %}" alt="{{ news.sponsor }}" width="100%" />
+                        </div>
+                        {% endif %}
+                    {% endif %}
                     <!-- NEWLY ADDED BARS -->
-                    <aside>
-                        <div class="h1 m-margin-bottom color-brown align-center l-margin-top">
+                    <aside {% if is_mobile() and not is_tablet() %}class="l-margin-top"{% endif %}>
+                        <hr/>
+                        {% if news.sponsorImage %}
+                        <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top {% else %}l-margin-top{% endif %}">
+                        {% else %}
+                        <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top {% else %}l-margin-top{% endif %}">
+                        {% endif %}
                                 Newly Added Bars
                         </div>
                             {% for b in latestBars %}
@@ -91,23 +130,33 @@
         <div class="container m-padding-bottom">
             <div class="twelve columns l-margin-top">
             <hr/>
-            <div class="h1 align-center l-margin-top m-margin-bottom">
+            <div class="h1 m-margin-bottom color-brown  align-center {% if is_mobile() and not is_tablet() %}m-margin-top {% else %}l-margin-top{% endif %}">
                You May Also Like
             </div>
 
                 <div class="container full {% if not is_mobile() or is_tablet() %}m-margin-top{% endif %}">
 
                     <!-- 12 COLS -->
+                    {% if is_mobile() and not is_tablet() %}
+                    <div class="ui-slider articles older-news has_sizer arrows dots l-margin-bottom" data-size="4x3" data-display="1">
+                    {% else %}
                     <div class="articles older-news">
+                    {% endif %}
+                    {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
                     {% for n in alsoLike|slice(0,1) %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                     {% endfor %}
+                    {% if is_mobile() and not is_tablet() %}</div>{% endif %}
+                    {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
                     {% for n in alsoLike|slice(1,1) %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
                     {% endfor %}
+                    {% if is_mobile() and not is_tablet() %}</div>{% endif %}
+                    {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
                     {% for n in alsoLike|slice(2,1) %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                     {% endfor %}
+                    {% if is_mobile() and not is_tablet() %}</div>{% endif %}
                     </div>
                 </div>
             </div>

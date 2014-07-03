@@ -77,7 +77,7 @@ meta.LoadMore = function(config) {
 
         var target_height = $target.show().height();
 
-        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, that.config.speed, that.config.easing);
         });
@@ -85,7 +85,6 @@ meta.LoadMore = function(config) {
         setTimeout(function()
         {
             if(callback) callback();
-            $elements.removeClass('enable3d');
 
         }, 100*$elements.length+that.config.speed );
     };
@@ -108,6 +107,8 @@ meta.LoadMore = function(config) {
                 $(this).attr('src', $(this).data('src'));
                 $(this).removeAttr('data-src');
             });
+
+            $(window).resize();
 
             that._animate($target, $target.find('> *').not('br') );
 
