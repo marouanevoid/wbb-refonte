@@ -47,4 +47,34 @@ class NewsRepository extends EntityRepository
         else
             return $qb->getQuery()->getResult();
     }
+
+    public function findRelatedNews($cities = null, $limit = 3)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq(1, 1))
+            ->orderBy($this->getAlias().'.isOnTop', 'DESC')
+        ;
+
+        if($limit > 0)
+        {
+            $qb->setMaxResults($limit);
+        }
+
+        if($cities){
+            $qb
+                ->addSelect('count(c.id) as HIDDEN nbCities')
+                ->innerjoin($this->getAlias().'.cities', 'c')
+                ->andWhere($qb->expr()->in('c.id', $cities))
+                ->groupBy($this->getAlias().'.id')
+                ->addOrderBy('nbCities', 'DESC')
+            ;
+        }
+
+        $qb->addOrderBy($this->getAlias().'.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
 } 
