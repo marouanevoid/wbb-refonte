@@ -90,6 +90,9 @@ meta.LoadMore = function(config) {
                     $(this).error(that._imageLoaded);
                     $(this).attr('src', $(this).data('src'));
                 });
+
+                $(window).resize();
+                
                 if(parseInt(msg.difference)==0)
                     that.config.$button.hide();
                 $('.disableClick').hide();
