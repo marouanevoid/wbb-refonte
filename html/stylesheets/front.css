@@ -782,7 +782,7 @@ img.scale-with-grid {
     font-size: 2.5em;
   }
 }
-@media screen and (min-device-width: 641px) and (orientation: portrait) {
+@media screen and (min-device-width: 768px) and (orientation: portrait) {
   /* line 257, ../sass/_base.scss */
   body {
     background: url("../images/turn@2x.jpg") no-repeat center;
@@ -1017,7 +1017,7 @@ input[type="text"].error,
 input[type="password"].error,
 input[type="email"].error,
 textarea.error {
-  outline: 1px solid #b3955f;
+  box-shadow: 0 0 0 1px #b3955f !important;
 }
 
 /* line 101, ../sass/_form.scss */
@@ -1640,79 +1640,88 @@ or wrap each row of columns in a <div class="row"> */
 }
 
 /* line 114, ../sass/_icons.scss */
+html.ipad .btn-radius.with-icon.city:before, html.ipad .btn-radius.with-icon.map:before {
+  background-position: -212px 0px;
+}
+/* line 115, ../sass/_icons.scss */
+html.ipad .btn-radius.with-icon.city:after, html.ipad .btn-radius.with-icon.map:after {
+  background-position: -212px -40px;
+}
+
+/* line 122, ../sass/_icons.scss */
 .btn-small-round.www:before {
   background-position: -5px -125px;
 }
-/* line 115, ../sass/_icons.scss */
+/* line 123, ../sass/_icons.scss */
 .btn-small-round.www:after {
   background-position: -5px -165px;
 }
-/* line 118, ../sass/_icons.scss */
+/* line 126, ../sass/_icons.scss */
 .btn-small-round.twitter {
   border-color: #00c3f3;
 }
-/* line 120, ../sass/_icons.scss */
+/* line 128, ../sass/_icons.scss */
 .btn-small-round.twitter:hover {
   background: #00c3f3;
 }
-/* line 121, ../sass/_icons.scss */
+/* line 129, ../sass/_icons.scss */
 .btn-small-round.twitter:before {
   background-position: -45px -125px;
 }
-/* line 122, ../sass/_icons.scss */
+/* line 130, ../sass/_icons.scss */
 .btn-small-round.twitter:after {
   background-position: -45px -165px;
 }
-/* line 125, ../sass/_icons.scss */
+/* line 133, ../sass/_icons.scss */
 .btn-small-round.facebook {
   border-color: #2960a3;
 }
-/* line 127, ../sass/_icons.scss */
+/* line 135, ../sass/_icons.scss */
 .btn-small-round.facebook:hover {
   background: #2960a3;
 }
-/* line 128, ../sass/_icons.scss */
+/* line 136, ../sass/_icons.scss */
 .btn-small-round.facebook:before {
   background-position: -86px -125px;
 }
-/* line 129, ../sass/_icons.scss */
+/* line 137, ../sass/_icons.scss */
 .btn-small-round.facebook:after {
   background-position: -86px -165px;
 }
-/* line 132, ../sass/_icons.scss */
+/* line 140, ../sass/_icons.scss */
 .btn-small-round.instagram {
   border-color: #818a8c;
 }
-/* line 134, ../sass/_icons.scss */
+/* line 142, ../sass/_icons.scss */
 .btn-small-round.instagram:hover {
   background: #818a8c;
 }
-/* line 135, ../sass/_icons.scss */
+/* line 143, ../sass/_icons.scss */
 .btn-small-round.instagram:before {
   background-position: -165px -165px;
 }
-/* line 136, ../sass/_icons.scss */
+/* line 144, ../sass/_icons.scss */
 .btn-small-round.instagram:after {
   background-position: -165px -205px;
 }
-/* line 139, ../sass/_icons.scss */
+/* line 147, ../sass/_icons.scss */
 .btn-small-round.foursquare {
   border-color: #209fca;
 }
-/* line 141, ../sass/_icons.scss */
+/* line 149, ../sass/_icons.scss */
 .btn-small-round.foursquare:hover {
   background: #209fca;
 }
-/* line 142, ../sass/_icons.scss */
+/* line 150, ../sass/_icons.scss */
 .btn-small-round.foursquare:before {
   background-position: -125px -125px;
 }
-/* line 143, ../sass/_icons.scss */
+/* line 151, ../sass/_icons.scss */
 .btn-small-round.foursquare:after {
   background-position: -125px -165px;
 }
 
-/* line 148, ../sass/_icons.scss */
+/* line 156, ../sass/_icons.scss */
 .finder-close:before {
   background-position: -160px -120px;
 }
@@ -2017,6 +2026,7 @@ header.mobile .search-result-proposal ul li a {
   height: 100%;
   width: 40px;
   z-index: 998;
+  display: none;
 }
 
 /* line 94, ../sass/_header.scss */
@@ -4141,133 +4151,144 @@ html.mobile article.city:hover img.scale-with-grid {
 }
 
 /* line 38, ../sass/components/_article-box.scss */
+html.webkit .articles.eight.columns article .img .cover {
+  right: -1px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* line 40, ../sass/components/_article-box.scss */
+  html.webkit .articles.eight.columns article .img .cover {
+    right: -2px;
+  }
+}
+/* line 44, ../sass/components/_article-box.scss */
 .articles article.small {
   width: 50%;
   height: 40em;
 }
-/* line 39, ../sass/components/_article-box.scss */
+/* line 45, ../sass/components/_article-box.scss */
 .articles article.small + article.small {
   border-left: 0;
 }
-/* line 40, ../sass/components/_article-box.scss */
+/* line 46, ../sass/components/_article-box.scss */
 .articles article.small + article.small + article.large {
   border-top: 0;
 }
-/* line 43, ../sass/components/_article-box.scss */
+/* line 49, ../sass/components/_article-box.scss */
 .articles article.large {
   width: 100%;
   height: 80em;
 }
-/* line 45, ../sass/components/_article-box.scss */
+/* line 51, ../sass/components/_article-box.scss */
 .articles.padding article.large {
   margin-top: 4%;
 }
-/* line 46, ../sass/components/_article-box.scss */
+/* line 52, ../sass/components/_article-box.scss */
 .articles.padding article.large:first-of-type {
   margin-top: 0;
 }
-/* line 48, ../sass/components/_article-box.scss */
+/* line 54, ../sass/components/_article-box.scss */
 .articles.padding article.small {
   width: 48%;
   height: 40em;
   margin-top: 4%;
 }
-/* line 49, ../sass/components/_article-box.scss */
+/* line 55, ../sass/components/_article-box.scss */
 .articles.padding article.small + article.small {
   margin-left: 4%;
   border-left: 1px solid #b3955f;
 }
-/* line 53, ../sass/components/_article-box.scss */
+/* line 59, ../sass/components/_article-box.scss */
 .articles.four.columns .side-ad {
   margin-top: 0 !important;
 }
-/* line 54, ../sass/components/_article-box.scss */
+/* line 60, ../sass/components/_article-box.scss */
 .articles.four.columns article {
   width: 100%;
   margin-top: 8%;
 }
-/* line 56, ../sass/components/_article-box.scss */
+/* line 62, ../sass/components/_article-box.scss */
 .articles.four.columns article .cover .video {
   background-size: 50% 50%;
 }
-/* line 57, ../sass/components/_article-box.scss */
+/* line 63, ../sass/components/_article-box.scss */
 .articles.four.columns article:first-of-type {
   margin-top: 8%;
 }
-/* line 58, ../sass/components/_article-box.scss */
+/* line 64, ../sass/components/_article-box.scss */
 .articles.four.columns article.large {
   height: 40em;
 }
-/* line 59, ../sass/components/_article-box.scss */
+/* line 65, ../sass/components/_article-box.scss */
 .articles.four.columns article.small {
   height: 17.5em;
 }
-/* line 60, ../sass/components/_article-box.scss */
+/* line 66, ../sass/components/_article-box.scss */
 .articles.four.columns article.small .plus-btn {
   margin-top: 25px;
 }
-/* line 64, ../sass/components/_article-box.scss */
+/* line 70, ../sass/components/_article-box.scss */
 .articles.older-news article.small {
   width: 31.5%;
   margin-bottom: 2.5%;
 }
-/* line 66, ../sass/components/_article-box.scss */
+/* line 72, ../sass/components/_article-box.scss */
 .articles.older-news article.small + article.small {
   border-left: 1px solid #b3955f;
 }
-/* line 67, ../sass/components/_article-box.scss */
+/* line 73, ../sass/components/_article-box.scss */
 .articles.older-news article.small:nth-of-type(3n+2) {
   margin-left: 2.5%;
   margin-right: 2.5%;
 }
-/* line 68, ../sass/components/_article-box.scss */
+/* line 74, ../sass/components/_article-box.scss */
 .articles.older-news article.small .cover .video {
   background-size: 50% 50%;
 }
 @media only screen and (max-width: 768px) {
-  /* line 74, ../sass/components/_article-box.scss */
+  /* line 80, ../sass/components/_article-box.scss */
   .articles article p {
     max-height: 9em;
     overflow: hidden;
   }
-  /* line 75, ../sass/components/_article-box.scss */
+  /* line 81, ../sass/components/_article-box.scss */
   .articles article .img + .title p {
     display: none;
   }
-  /* line 76, ../sass/components/_article-box.scss */
+  /* line 82, ../sass/components/_article-box.scss */
   .articles article .img .cover .video {
     background-size: 50% 50%;
   }
-  /* line 78, ../sass/components/_article-box.scss */
+  /* line 84, ../sass/components/_article-box.scss */
   .articles article.small, .articles.padding article.small,
   .articles article.large {
     width: 100%;
     min-height: 35em;
     height: 35em;
   }
-  /* line 81, ../sass/components/_article-box.scss */
+  /* line 87, ../sass/components/_article-box.scss */
   .articles.padding article.small + article.small {
     margin-left: 0;
   }
-  /* line 82, ../sass/components/_article-box.scss */
+  /* line 88, ../sass/components/_article-box.scss */
   .articles article + article {
     margin-top: 4%;
   }
-  /* line 83, ../sass/components/_article-box.scss */
+  /* line 89, ../sass/components/_article-box.scss */
   .articles article.small + article.small {
     border-left: 1px solid #b3955f;
   }
-  /* line 85, ../sass/components/_article-box.scss */
+  /* line 91, ../sass/components/_article-box.scss */
   .articles.older-news > div {
     margin-top: 4%;
   }
-  /* line 86, ../sass/components/_article-box.scss */
+  /* line 92, ../sass/components/_article-box.scss */
   .articles.older-news article.small {
     width: 100%;
     margin-bottom: 4%;
     margin-top: 0;
   }
-  /* line 88, ../sass/components/_article-box.scss */
+  /* line 94, ../sass/components/_article-box.scss */
   .articles.older-news article.small:nth-of-type(3n+2) {
     margin-left: 0;
     margin-right: 0;

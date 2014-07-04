@@ -34,6 +34,12 @@
   }
 }
 
+//todo: remove when webkit fix this bug
+html.webkit .articles.eight.columns article .img .cover{ right: -1px }
+@media only screen and (max-width: $grid-breakpoint-mobile) {
+  html.webkit .articles.eight.columns article .img .cover{ right: -2px }
+}
+
 .articles {
   article.small { width: 50%; height: 40em;
     &+article.small { border-left: 0;

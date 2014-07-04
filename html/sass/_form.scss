@@ -96,7 +96,7 @@ label{
 input[type="text"].error,
 input[type="password"].error,
 input[type="email"].error,
-textarea.error{ outline: 1px solid $color-brown }
+textarea.error{ box-shadow: 0 0 0 1px #B3955F!important; }
 
 input[type="text"]::-ms-clear { display: none  }
 input[type="text"]+input[type="submit"]{ border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; width: 40px; padding: 0; height: 42px;
