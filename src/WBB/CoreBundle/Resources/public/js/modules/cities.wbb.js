@@ -132,16 +132,18 @@ wbb.CitiesPage = function () {
         {
             that.context.filter_is_open = true;
 
-            $selector.height($selector.height());
+            //$selector.height($selector.height());
             that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
             that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
 
             $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
 
+
+            // if the iPad Reduise the timer
             setTimeout(function()
             {
                 that.context.$container.find('.scrolls').velocity({opacity:1}, that.config.speed, that.config.easing);
-            }, 300);
+            },$('html').hasClass('ipad') ? 100 : 300);
             that._resize();
         }
     };
