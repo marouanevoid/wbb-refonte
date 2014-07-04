@@ -21,6 +21,8 @@ wbb_bar_guides:
 wbb_bar_guides_city:
     pattern: /bar-guides/top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:barGuideCity }
+    options:
+        expose: true
 
 wbb_bar_tips:
     pattern: /bar/{barID}/tips/{offset}/{limit}
@@ -106,3 +108,7 @@ wbb_news_details:
 wbb_news_details_page:
     pattern: /news/details/{newsSlug}
     defaults: { _controller: WBBBarBundle:News:details }
+
+wbb_semsoft_import:
+    pattern: /semsoft/import
+    defaults: { _controller: WBBBarBundle:Semsoft:import }

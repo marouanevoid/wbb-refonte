@@ -59,6 +59,12 @@ services:
             - [setTranslationDomain, ["WBBCoreBundle"]]
 
     #Repositories
+    country.repository:
+        class: WBB\CoreBundle\Repository\CountryRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBCoreBundle:Country']
+
     city.repository:
         class: WBB\CoreBundle\Repository\CityRepository
         factory_service: doctrine.orm.default_entity_manager

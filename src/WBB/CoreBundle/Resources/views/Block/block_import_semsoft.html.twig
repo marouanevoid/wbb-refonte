@@ -11,10 +11,12 @@
         <tr>
             <td>Import File:</td>
             <td>
-                <form action="{{ path('wbb_semsoft_import') }}" method="post" enctype="multipart/form-data" >
-                    <input type="file" name="csvFile" id="csvFile" /> <br />
-                    <input type="submit" value="Upload" />
-                </form>
+                {{ render( controller('WBBCoreBundle:Semsoft:importForm')) }}
+
+                {#<form action="{{ path('wbb_semsoft_import') }}" method="post" enctype="multipart/form-data" >#}
+                    {#<input type="file" name="csvFile" id="csvFile" /> <br />#}
+                    {#<input type="submit" value="Upload" />#}
+                {#</form>#}
             </td>
         </tr>
         </tbody>

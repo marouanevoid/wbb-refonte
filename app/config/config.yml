@@ -103,7 +103,7 @@ sonata_admin:
                         Vous aurez la possibilité de gérer les utilisateurs,
                         les informations relatives aux bars, tips, et villes. </p><br /><br />
             - { position: left, type: sonata.admin.block.admin_list }
-#            - { position: right, type: wbb.block.service.semsoft.import }
+            - { position: right, type: wbb.block.service.semsoft.import }
 
         groups:
             wbb_location: ~
@@ -128,7 +128,7 @@ sonata_block:
         sonata.admin.block.search_result:
             contexts:   [admin]
         sonata.block.service.text:
-#        wbb.block.service.semsoft.import: ~
+        wbb.block.service.semsoft.import: ~
         sonata.block.service.rss:
 
 #Sonata Media Bundle
@@ -143,7 +143,6 @@ sonata_media:
             providers:
                 - sonata.media.provider.youtube
                 - sonata.media.provider.image
-
             formats:
                 small:          { width: 100 , quality: 100}
                 big:            { width: 500 , quality: 100}
@@ -159,7 +158,6 @@ sonata_media:
                 mode: http
             providers:
                 - sonata.media.provider.image
-
             formats:
                 small:          { width: 100 , quality: 100}
                 big:            { width: 500 , quality: 100}
@@ -170,6 +168,25 @@ sonata_media:
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 city_small :    { width: 340 , height: 350, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
+
+        sponsor:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+            formats:
+                news :          { width: 600 , height: 400, quality: 100 }
+                news_large :    { width: 900 , height: 600, quality: 100 }
+
+        sponsor_small:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small:          { width: 100 , quality: 100}
 
     cdn:
         server:

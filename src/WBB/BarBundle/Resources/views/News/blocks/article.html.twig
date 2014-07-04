@@ -6,24 +6,29 @@
                 {% if n.medias|length>0 %}
                     {% for m in n.medias|slice(0,1) %}
                         <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                        {% if m.media.providerName == 'sonata.media.provider.youtube' %}
+                            <span class="video"></span>
+                        {% endif %}
                     {% endfor %}
                 {% else %}
                     <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ n.title }}"/>
                 {% endif %}
 
-                {% if has_video is defined %}
-                    <span class="video"></span>
-                {% endif %}
+
             </a>
             <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
         </div>
     {% endif %}
 
     <div class="title vcenter">
-        <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title }}</a></h2>
+        <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
         {% if has_text is defined %}
             <p class="m-margin">
-                {{ n.seoDescription }}
+                {% if n.seoDescription %}
+                    {{ n.seoDescription|truncate(60, true, '...') }}
+                {% else %}
+
+                {% endif %}
             </p>
         {% endif %}
 

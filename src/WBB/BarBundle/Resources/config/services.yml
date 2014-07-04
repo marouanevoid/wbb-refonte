@@ -50,13 +50,13 @@ services:
             - [setTranslationDomain, ["WBBBarBundle"]]
             - [setTemplates, [{ edit:"WBBBarBundle:Admin:Bar/edit.html.twig" }]]
 
-#    wbb.semsoftbar.admin.bar:
-#        class: %wbb_bar.semsoftbar.admin.class%
-#        tags:
-#          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-#        arguments: [null, %wbb_bar.semsoftbar.entity.class%, SonataAdminBundle:CRUD]
-#        calls:
-#            - [setTranslationDomain, ["WBBBarBundle"]]
+    wbb.semsoftbar.admin.bar:
+        class: %wbb_bar.semsoftbar.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: semsoft_bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.semsoftbar.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setTranslationDomain, ["WBBBarBundle"]]
 
     wbb.bar.admin.bar.media:
         class: %wbb_bar.bar_media.admin.class%

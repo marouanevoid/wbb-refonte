@@ -21,4 +21,17 @@ class SuburbRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findByNameAndCity($name = "", $city = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias())
+            ->leftJoin($this->getAlias().".city", "c")
+            ->where($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)))
+            ->andWhere($qb->expr()->eq('c.id', $city->getId()))
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 } 

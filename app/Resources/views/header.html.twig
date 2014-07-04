@@ -15,7 +15,7 @@
                     <nav class="h3">
                         <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
                         <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
-                        <a href="#0" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
+                        <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
                     </nav>
                 </td>
             </tr>
@@ -138,7 +138,7 @@
                             <nav class="h3">
                                 <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
                                 <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
-                                <a href="#0" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
+                                <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
                             </nav>
                             <form>
                                 <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>

@@ -119,10 +119,10 @@ class City {
     private $bestofs;  
     
     /**
-     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities")
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"all"})
      * @ORM\JoinTable(name="wbb_news_cities",
      *      joinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="news_id", referencedColumnName="id")}
      *      )
      **/
     private $news;    
@@ -530,36 +530,12 @@ class City {
 
     public function getNbNews()
     {
-        return count($this->getNews());
+        return count($this->news);
     }
 
     public function getNbAreas()
     {
         return count($this->getSuburbs());
-    }
-
-
-    /**
-     * Add news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     * @return City
-     */
-    public function addNews(\WBB\BarBundle\Entity\News $news)
-    {
-        $this->news[] = $news;
-
-        return $this;
-    }
-
-    /**
-     * Remove news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     */
-    public function removeNews(\WBB\BarBundle\Entity\News $news)
-    {
-        $this->news->removeElement($news);
     }
 
     /**
@@ -616,6 +592,29 @@ class City {
     public function getSemsoftBars()
     {
         return $this->semsoftBars;
+    }
+
+    /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return City
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
     }
 
     /**

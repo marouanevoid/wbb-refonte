@@ -40,6 +40,21 @@ class CityController extends Controller
         ));
     }
 
+    public function nearestCityAction($latitude, $longitude)
+    {
+        $cities = $this->container->get('city.repository')->findAll();
+        foreach($cities as $city)
+        {
+            return new JsonResponse(array(
+                'id'    => $city->getId(),
+                'name'  => $city->getName(),
+                'slug'  => $city->getSlug(),
+                'latitude' => $city->getLatitude(),
+                'longitude' => $city->getLongitude()
+            ));
+        }
+    }
+
     //Returns a list on Point of interest in a city (and a suburb)
     public function barsListAction($cityID = 0, $suburbID = 0, Request $request)
     {
