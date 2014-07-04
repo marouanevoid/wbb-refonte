@@ -276,7 +276,12 @@ class Bar
      *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
      *      )
      **/
-    private $news;      
+    private $news;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     */
+    private $semsoftBars;
 
     /**
      * @var \DateTime
@@ -1373,4 +1378,37 @@ class Bar
     public function getNews(){
          return $this->news;
      }
+
+    /**
+     * Add semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @return Bar
+     */
+    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars[] = $semsoftBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     */
+    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars->removeElement($semsoftBars);
+    }
+
+    /**
+     * Get semsoftBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSemsoftBars()
+    {
+        return $this->semsoftBars;
+    }
 }

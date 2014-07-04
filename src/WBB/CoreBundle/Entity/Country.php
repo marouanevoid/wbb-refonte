@@ -73,7 +73,7 @@ class Country
     private $ad;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="city", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="country", cascade={"all"})
      */
     private $semsoftBars;
 

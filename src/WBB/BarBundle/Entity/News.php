@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use WBB\CoreBundle\Entity\City;
 
 /**
  * News
@@ -96,7 +97,7 @@ class News {
     /**
      * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"persist", "remove"})
      */
-    private $cities;    
+    private $cities;
 
     /**
      * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="news", cascade={"remove", "persist"})
@@ -124,8 +125,13 @@ class News {
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
-    private $sponsorImage;    
-    
+    private $sponsorImage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     */
+    private $sponsorImageSmall;
+
     /**
      * @var \DateTime
      *
@@ -361,38 +367,6 @@ class News {
     }
 
     /**
-     * Add city
-     *
-     * @param City $city
-     * @return News
-     */
-    public function addCity($city){
-        $city->addNews($this);
-        $this->cities[] = $city;
-        return $this;
-    }
-
-    /**
-     * Remove city
-     *
-     * @param City $city
-     */
-    public function removeCity($city){
-        $this->cities->removeElement($city);
-        $city->removeNews($this);
-    }
-
-    /**
-     * Get cities
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCities(){
-        return $this->cities;
-    }
-
-
-    /**
      * Add BestOf
      *
      * @param BestOf $bestOf
@@ -613,5 +587,63 @@ class News {
         }
 
         return $ids;
+    }
+
+    /**
+     * Set sponsorImageSmall
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall
+     * @return News
+     */
+    public function setSponsorImageSmall(\Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall = null)
+    {
+        $this->sponsorImageSmall = $sponsorImageSmall;
+
+        return $this;
+    }
+
+    /**
+     * Get sponsorImageSmall
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getSponsorImageSmall()
+    {
+        return $this->sponsorImageSmall;
+    }
+
+    /**
+     * Add cities
+     *
+     * @param City $city
+     * @return News
+     */
+    public function addCity(City $city)
+    {
+        $this->cities[] = $city;
+        $city->addNews($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove cities
+     *
+     * @param City $city
+     */
+    public function removeCity(City $city)
+    {
+        $this->cities->removeElement($city);
+        $city->getNews()->removeElement($this);
+    }
+
+    /**
+     * Get cities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCities()
+    {
+        return $this->cities;
     }
 }

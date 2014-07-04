@@ -86,7 +86,14 @@ class NewsAdmin extends Admin {
                     'required' => false
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'default'
+                        'context' => 'sponsor'
+                    )
+                ))
+                ->add('sponsorImageSmall', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'sponsor_small'
                     )
                 ))
             ->end()
@@ -105,9 +112,9 @@ class NewsAdmin extends Admin {
                 )
             ->end()
             ->with('Related')
-                ->add('bars', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
-                ->add('cities', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
-                ->add('bestOfs', 'sonata_type_model', array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('bars', null, array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('cities', null, array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('bestOfs', null, array('required' => false, 'multiple' => true, 'by_reference' => false))
             ->end()
         ;
     }
@@ -131,13 +138,6 @@ class NewsAdmin extends Admin {
                 }
             }
         }
-        
-        if($object->getCities()){
-            foreach ($object->getCities() as $city) {
-                $city->addNews($object);
-            }
-        }
-        
     }
 
     public function preUpdate($object)
@@ -149,12 +149,6 @@ class NewsAdmin extends Admin {
                 }else{
                     $object->removeMedia($media);
                 }
-            }
-        }
-        
-        if($object->getCities()){
-            foreach ($object->getCities() as $city) {
-                $city->addNews($object);
             }
         }
     }

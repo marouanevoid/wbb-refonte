@@ -108,3 +108,7 @@ wbb_news_details:
 wbb_news_details_page:
     pattern: /news/details/{newsSlug}
     defaults: { _controller: WBBBarBundle:News:details }
+
+wbb_semsoft_import:
+    pattern: /semsoft/import
+    defaults: { _controller: WBBBarBundle:Semsoft:import }
