@@ -529,6 +529,10 @@
                 <source>form.label_sponsor_image</source>
                 <target>Sponsor image</target>
             </trans-unit>
+            <trans-unit id="form.label_sponsor_image_small">
+                <source>form.label_sponsor_image_small</source>
+                <target>Small Sponsor image</target>
+            </trans-unit>
             <trans-unit id="list.label_sponsor_image">
                 <source>list.label_sponsor_image</source>
                 <target>Sponsor image</target>
