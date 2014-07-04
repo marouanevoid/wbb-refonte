@@ -158,6 +158,16 @@ article.tip .content .author b {
     background: url(../images/email.png) no-repeat;
 }
 
+article .table {table-layout: fixed;}
+article .table .td {
+    word-wrap:break-word !important;
+}
+.sub-header {
+    white-space: normal;
+}
+.news-details .sponsor-img {
+    outline: 1px solid #B3955F;
+}
 
 /*******
 Added By Khalid

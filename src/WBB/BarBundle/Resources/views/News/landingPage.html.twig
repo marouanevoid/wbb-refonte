@@ -106,10 +106,10 @@
     </div>
 
     <!-- EDITOR'S PICK -->
-    <div class="container l-margin-top {% if is_mobile() and not is_tablet() %}s{% else %}l{% endif %}-padding-bottom">
+    <div class="container l-margin-top {% if is_mobile() and not is_tablet() %}s{% else %}m{% endif %}-padding-bottom">
 
         <div class="twelve columns h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center{% endif %}">
-            Editor's Pick
+            Editor's Picks
         </div>
 
         <!-- 8 COLS -->
@@ -124,7 +124,7 @@
                 {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , 'has_quote' : 1 } %}
             {% endfor %}
             {% for n in articles|slice(2,1) %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1, 'has_video' : 1 } %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
             {% endfor %}
 
         </section>
@@ -145,7 +145,7 @@
                 {% endfor %}
 
                 {% for n in articles|slice(3,1) %}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_video' : 1 } %}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
                 {% endfor %}
 
                 {% for n in interviews|slice(2,1) %}
@@ -182,7 +182,7 @@
                 {% for n in newsList %}
                     {% if newsIndex <= 0 %}
                         {% if loop.index0==0 %}
-                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1, 'has_video' : 1 } %}
+                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                         {% else %}
                             {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                         {% endif %}
@@ -190,14 +190,14 @@
                         {% set newsIndex=newsIndex+1 %}
                     {% else %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
-                        {% set newsIndex = -1 %}
+                        {% set newsIndex = 0 %}
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
 
-        <div class="twelve columns align-center l-margin-bottom load-more-container">
-            <a class="h4 btn-radius border load-more brown large" href="#0">Older News</a>
+        <div class="twelve columns align-center l-margin-bottom load-more-container {% if not is_mobile() or is_tablet() %}s-margin-top{% endif %}">
+            <a class="h4 btn-radius border load-more brown large" href="#0">older news</a>
         </div>
     </div>
 {% endblock %}

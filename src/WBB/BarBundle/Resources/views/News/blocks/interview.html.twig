@@ -1,13 +1,15 @@
 {% if is_simple_quote is not defined %}<article class="small">{% endif %}
     <div class="title vcenter{% if is_simple_quote is defined %} description{% endif %}">
         {% if is_simple_quote is not defined %}
-            <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title }}</a></h2>
+            {% if has_quote is not defined %}
+            <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+            {% endif %}
         {% endif %}
         {% if has_quote is defined %}
             <h1>
-                “{{ n.quoteText }}”
+                “{{ n.quoteText|truncate(60, true, '...') }}”
             </h1>
-            <p class="m-margin">{{ n.quoteAuthor }}</p>
+            <p class="m-margin">{{ n.quoteAuthor|truncate(20, true, '...') }}</p>
         {% endif %}
         {% if is_simple_quote is not defined %}
             <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
