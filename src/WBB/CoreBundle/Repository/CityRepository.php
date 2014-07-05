@@ -61,4 +61,27 @@ class CityRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    public function findNearestCity($latitude = 0, $longitude = 0, $maxDistance = 0, $offset = 0, $limit = 0)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().",GEO(".$this->getAlias().".latitude = :latitude, ".$this->getAlias().".longitude = :longitude) AS HIDDEN Distance")
+            ->setParameter('latitude', $latitude)
+            ->setParameter('longitude', $longitude)
+            ->orderBy('Distance', 'ASC')
+            ->setFirstResult($offset)
+        ;
+
+        if($maxDistance > 0){
+            $qb->having($qb->expr()->lte('Distance', $maxDistance));
+        }
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 } 
