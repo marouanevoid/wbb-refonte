@@ -39,8 +39,11 @@ class SemsoftController extends Controller
             'oneCity'   => true,
             'tipForm'   => $form->createView()
         ));
+    }
 
-
+    public function mergeAction()
+    {
+        // TODO: After tags edited 
     }
 
     public function importFormAction()
