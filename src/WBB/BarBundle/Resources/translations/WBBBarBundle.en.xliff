@@ -7,6 +7,11 @@
                 <target>Detail Bar Page</target>
             </trans-unit>
 
+            <trans-unit id="breadcrumb.link_semsoft_bars_list">
+                <source>breadcrumb.link_semsoft_bars_list</source>
+                <target>Semsoft imported bars</target>
+            </trans-unit>
+
             <trans-unit id="breadcrumb.link_tag_list">
                 <source>breadcrumb.link_tag_list</source>
                 <target>Tag list</target>
@@ -20,6 +25,11 @@
             <trans-unit id="bars">
                 <source>bars</source>
                 <target>Bars</target>
+            </trans-unit>
+
+            <trans-unit id="semsoft_bars">
+                <source>semsoft_bars</source>
+                <target>Semsoft Imported Bars</target>
             </trans-unit>
 
             <trans-unit id="tags">

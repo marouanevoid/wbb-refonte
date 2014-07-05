@@ -112,3 +112,7 @@ wbb_news_details_page:
 wbb_semsoft_import:
     pattern: /admin/semsoft/csv/import
     defaults: { _controller: WBBBarBundle:Semsoft:import }
+
+wbb_semsoft_preview:
+    pattern: /admin/semsoft/bar/{ssBarId}/preview
+    defaults: { _controller: WBBBarBundle:Semsoft:preview }

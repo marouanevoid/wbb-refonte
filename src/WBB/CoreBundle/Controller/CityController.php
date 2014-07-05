@@ -42,9 +42,13 @@ class CityController extends Controller
 
     public function nearestCityAction($latitude, $longitude)
     {
-        $cities = $this->container->get('city.repository')->findAll();
-        foreach($cities as $city)
-        {
+        $session = $this->container->get('session');
+        $session->set('userLatitude', $latitude);
+        $session->set('userLongitude', $longitude);
+
+        $city = $this->get('city.repository')->findNearestCity($latitude, $longitude, 150, 0, 1);
+
+        if($city){
             return new JsonResponse(array(
                 'id'    => $city->getId(),
                 'name'  => $city->getName(),
@@ -53,6 +57,12 @@ class CityController extends Controller
                 'longitude' => $city->getLongitude()
             ));
         }
+        else{
+            return new JsonResponse(array(
+                'message' => 'No near city found!'
+            ));
+        }
+
     }
 
     //Returns a list on Point of interest in a city (and a suburb)

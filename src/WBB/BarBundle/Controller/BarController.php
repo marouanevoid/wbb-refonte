@@ -21,8 +21,10 @@ class BarController extends Controller
         if (!empty($slug))
            return $this->cityHomeAction($session->get('citySlug'));
         $session->set('citySlug', "");
+
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
+
         $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars();
         $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
@@ -65,10 +67,20 @@ class BarController extends Controller
             return $this->barGuideCityAction($session->get('citySlug'));
         $session->set('citySlug', "");
 
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
+
+        if(!empty($latitude) and !empty($longitude)){
+            $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude);
+            $response['distance'] = true;
+        }else{
+            $response['distance'] = false;
+        }
+
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5, false);
-        // $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars();
+//
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }
@@ -85,11 +97,17 @@ class BarController extends Controller
         $session->set('citySlug', $slug);
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
 
+        if(!empty($latitude) and !empty($longitude)){
+            $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
+            $response['distance'] = true;
+        }else{
+            $response['distance'] = false;
+        }
+
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5, false);
-        // $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars($city);
-        $response['city']       = $city;
+        $response['city']           = $city;
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }

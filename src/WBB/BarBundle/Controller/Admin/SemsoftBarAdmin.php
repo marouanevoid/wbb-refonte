@@ -22,7 +22,7 @@ class SemsoftBarAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->add('name')
             ->add('city')
             ->add('suburb')
             ->add('website')
@@ -30,8 +30,7 @@ class SemsoftBarAdmin extends Admin
                 'field'   => 'name',
                 'label'    => 'Actions',
                 'actions' => array(
-                    'show'   => array(),
-                    'edit'   => array(),
+                    'show'   => array('template' => 'WBBBarBundle:Admin/Semsoft:linkShowBar.html.twig'),
                     'delete' => array(),
                 )
             ))

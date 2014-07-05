@@ -1347,6 +1347,35 @@ class SemsoftBar
         return $this->bar;
     }
 
+    public function hydrateByBar(Bar $bar)
+    {
+        $this
+            ->setName($bar->getName())
+            ->setCity($bar->getCity())
+            ->setAddress($bar->getAddress())
+            ->setEmail($bar->getEmail())
+            ->setBar($bar)
+            ->setCountry(($bar->getCity())?$bar->getCity()->getCountry():null)
+            ->setDescription($bar->getDescription())
+            ->setSeoDescription($bar->getSeoDescription())
+            ->setFacebookID($bar->getFacebook())
+            ->setInstagramID($bar->getInstagram())
+            ->setWebsite($bar->getWebsite())
+            ->setTwitterName($bar->getTwitter())
+            ->setSuburb($bar->getSuburb())
+            ->setReservation($bar->getIsReservation())
+            ->setPrice($bar->getPrice())
+            ->setPhone($bar->getPhone())
+            ->setLatitude($bar->getLatitude())
+            ->setLongitude($bar->getLongitude())
+            ->setParkingType($bar->getParking())
+            ->setMenu($bar->getMenu())
+            ->setIsCreditCard($bar->getIsCreditCard())
+            ->setFoursquareID($bar->getFoursquare());
+
+        return $this;
+    }
+
     public function getUpdatedBar()
     {
         $bar = null;
@@ -1368,5 +1397,57 @@ class SemsoftBar
         if($this->getCity())
             $bar->setCity($this->getCity());
 
+        if($this->getEmail())
+            $bar->setEmail($this->getEmail());
+
+        if($this->getDescription())
+            $bar->setDescription($this->getDescription());
+
+        if($this->getSeoDescription())
+            $bar->setSeoDescription($this->getSeoDescription());
+
+        if($this->getFacebookID())
+            $bar->setFacebook($this->getFacebookID());
+
+        if($this->getInstagramID())
+            $bar->setInstagram($this->getInstagramID());
+
+        if($this->getWebsite())
+            $bar->setWebsite($this->getWebsite());
+
+        if($this->getTwitterName())
+            $bar->setTwitter($this->getTwitterName());
+
+        if($this->getSuburb())
+            $bar->setSuburb($this->getSuburb());
+
+        if($this->getReservation())
+            $bar->setIsReservation($this->getReservation());
+
+        if($this->getPrice())
+            $bar->setPrice($this->getPrice());
+
+        if($this->getPhone())
+            $bar->setPhone($this->getPhone());
+
+        if($this->getLatitude())
+            $bar->setLatitude($this->getLatitude());
+
+        if($this->getLongitude())
+            $bar->setLongitude($this->getLongitude());
+
+        if($this->getParkingType())
+            $bar->setParking($this->getParkingType());
+
+        if($this->getMenu())
+            $bar->setMenu($this->getMenu());
+
+        if($this->getIsCreditCard())
+            $bar->setIsCreditCard($this->getIsCreditCard());
+
+        if($this->getFoursquareID())
+            $bar->setFoursquare($this->getFoursquareID());
+
+        return $bar;
     }
 }

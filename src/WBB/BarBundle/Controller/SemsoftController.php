@@ -12,6 +12,8 @@ use WBB\BarBundle\Entity\BarOpening;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\BarBundle\Form\SemsoftType;
+use WBB\BarBundle\Form\TipType;
+use WBB\BarBundle\Entity\Tip;
 
 class SemsoftController extends Controller
 {
@@ -19,8 +21,29 @@ class SemsoftController extends Controller
     public function previewAction($ssBarId)
     {
         $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
+        $bar = $ssBar->getUpdatedBar();
 
+        $user = $this->container->get('user.repository')->findOneById(1);
 
+        $tip = new Tip();
+        $tip
+            ->setUser($user)
+            ->setBar($bar)
+            ->setStatus(1);
+
+        $form = $this->createForm(new TipType(), $tip, array('em' => $this->container->get('doctrine.orm.entity_manager')));
+
+        return $this->render('WBBBarBundle:Bar:details.html.twig', array(
+            'bar'       => $bar,
+            'barLike'   => array(),
+            'oneCity'   => true,
+            'tipForm'   => $form->createView()
+        ));
+    }
+
+    public function mergeAction()
+    {
+        // TODO: After tags edited
     }
 
     public function importFormAction()
@@ -49,6 +72,11 @@ class SemsoftController extends Controller
             foreach ($reader as $data)
             {
                 $ssBar = new SemsoftBar();
+
+                if($data['ID']){
+                    $bar = $this->get('bar.repository')->findOneById($data['ID']);
+                    $ssBar->hydrateByBar($bar);
+                }
 
                 $country    = $this->getCountry($data['Country']);
                 if($country){

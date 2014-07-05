@@ -176,7 +176,7 @@ class BarRepository extends EntityRepository
         }
     }
 
-    public function findNearestBars($latitude = 0, $longitude = 0, $offset = 0, $limit = 8)
+    public function findNearestBars($city = null, $latitude = 0, $longitude = 0, $offset = 0, $limit = 8)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -191,6 +191,10 @@ class BarRepository extends EntityRepository
 
         if($limit > 0){
             $qb->setMaxResults($limit);
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
         return $qb->getQuery()->getResult();
