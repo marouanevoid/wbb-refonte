@@ -70,6 +70,7 @@ class CityRepository extends EntityRepository
             ->select($this->getAlias().",GEO(".$this->getAlias().".latitude = :latitude, ".$this->getAlias().".longitude = :longitude) AS HIDDEN Distance")
             ->setParameter('latitude', $latitude)
             ->setParameter('longitude', $longitude)
+            ->where($qb->expr()->eq($this->getAlias().'.onTopCity', true))
             ->orderBy('Distance', 'ASC')
             ->setFirstResult($offset)
         ;
