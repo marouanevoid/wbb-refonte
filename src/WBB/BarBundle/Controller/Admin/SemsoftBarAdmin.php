@@ -30,7 +30,7 @@ class SemsoftBarAdmin extends Admin
                 'field'   => 'name',
                 'label'    => 'Actions',
                 'actions' => array(
-                    'show'   => array(),
+                    'show'   => array('template' => 'WBBBarBundle:Admin/Semsoft:linkShowBar.html.twig'),
                     'edit'   => array(),
                     'delete' => array(),
                 )
