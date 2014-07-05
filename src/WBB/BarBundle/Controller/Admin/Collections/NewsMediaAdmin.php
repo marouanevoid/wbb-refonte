@@ -25,6 +25,7 @@ class NewsMediaAdmin extends Admin
                     )
                 ))
                 ->add('alt', 'textarea', array('attr'=>array('cols'=>220, 'rows'=>6)))
+                ->add('position', 'hidden')
             ->end();
     }
 }

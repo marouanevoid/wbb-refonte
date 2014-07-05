@@ -11,7 +11,7 @@ use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BarOpening;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
 use WBB\CoreBundle\Entity\CitySuburb;
-use WBB\CoreBundle\Form\SemsoftType;
+use WBB\BarBundle\Form\SemsoftType;
 
 class SemsoftController extends Controller
 {
@@ -27,7 +27,7 @@ class SemsoftController extends Controller
     {
         $form = $this->createImportForm();
 
-        return $this->render('WBBCoreBundle:Block:form.html.twig', array(
+        return $this->render('WBBBarBundle:Block:form.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -118,20 +118,24 @@ class SemsoftController extends Controller
             return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
         }
 
-        return $this->render('WBBCoreBundle:Block:empty_block.html.twig');
+        return $this->render('WBBBarBundle:Block:empty_block.html.twig');
     }
 
     private function setFieldValue($fieldName, $data, $value = null)
     {
-        if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
-            if($value != null)
-                return $value;
-            else
-                return $data[$fieldName];
-        }
-        else{
-            return null;
-        }
+        if($value != null)
+            return $value;
+        else
+            return $data[$fieldName];
+//        if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
+//            if($value != null)
+//                return $value;
+//            else
+//                return $data[$fieldName];
+//        }
+//        else{
+//            return null;
+//        }
     }
 
     private function createImportForm()

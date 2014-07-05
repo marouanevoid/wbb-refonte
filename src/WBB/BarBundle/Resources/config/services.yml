@@ -39,6 +39,12 @@ parameters:
     wbb_feed.instagram.class: WBB\BarBundle\Feed\Instagram
 
 services:
+    #Blocks
+    wbb.block.service.semsoft.import:
+        class: WBB\BarBundle\Block\ImportService
+        arguments: [ "wbb.block.service.semsoft.import", @templating, @service_container ]
+        tags:
+         - { name: sonata.block }
 
     #Admin Class
     wbb.bar.admin.bar:

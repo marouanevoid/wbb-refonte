@@ -1,6 +1,6 @@
 <?php
 
-namespace WBB\CoreBundle\Block;
+namespace WBB\BarBundle\Block;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -45,9 +45,9 @@ class ImportService extends BaseBlockService
         // merge settings
         $settings = array_merge($this->getDefaultSettings(), $blockContext->getSettings());
 
-        $curBlock='WBBCoreBundle:Block:block_import_semsoft.html.twig';
+        $curBlock='WBBBarBundle:Block:block_import_semsoft.html.twig';
         if (!$this->container->get('security.context')->isGranted("ROLE_SUPER_ADMIN")) {
-            $curBlock='WBBCoreBundle:Block:empty_block.html.twig';
+            $curBlock='WBBBarBundle:Block:empty_block.html.twig';
         }
 
         return $this->renderResponse($curBlock, array(

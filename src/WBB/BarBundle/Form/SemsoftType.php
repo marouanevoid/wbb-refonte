@@ -1,6 +1,6 @@
 <?php
 
-namespace WBB\CoreBundle\Form;
+namespace WBB\BarBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +35,6 @@ class SemsoftType extends AbstractType
      */
     public function getName()
     {
-        return 'wbb_corebundle_semsoft_csv';
+        return 'wbb_barbundle_semsoft_csv';
     }
 }
