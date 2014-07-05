@@ -261,9 +261,15 @@ class BarController extends Controller
                 $response = $this->container->get('bar.repository')->findLatestBars($cityObject, $limit, $offset, false);
                 $all = $this->container->get('bar.repository')->findLatestBars($cityObject, 0, $offset, false);
             }elseif($filter === "distance"){
-                $response = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, $limit);
+
+            $session = $this->container->get('session');
+            $latitude = $session->get('userLatitude' );
+            $longitude = $session->get('userLongitude');
+                $response = $this->container->get('bar.repository')->findNearestBars(0, $latitude, $longitude, $offset, $limit);
                 $all = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, 0);
             }
+
+            
 
             if($display=="grid"){
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(

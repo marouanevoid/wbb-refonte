@@ -107,24 +107,50 @@
                             </div>
                         {% endif %}
                     {% endif %}
-                    {% if news.quoteText %}
-                        {% set paragraphs = news.richDescription|split('<br><br>') %}
+                   
+                        {%    set txt = news.richDescription|trim("<br>") %}
+
+                         {%   set paragraphs = txt|split('<br><br>') %}
                         <p>
+                         {% if paragraphs|length>=3 %}
                             {% for p in paragraphs %}
-                                {% if paragraphs|length>=3 %}
                                     {% if loop.index == 3 %}
-                                        </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
+
+                                         {% if news.quoteText %}
+
+                                            </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
+                                        
+                                        {% else %}
+                                            </p><p>
+                                                {%
+                                                    set init = random(news.bestofs|length - 1)
+                                                %}
+                                                    {% for b in news.bestofs |slice(init,1) %}
+                                                        <div class="five columns {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                                                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
+                                                        </div>
+                                                    {% endfor %}
+                                            </p><p>
+
+                                        {% endif %}
+
                                     {% endif %}
-                                {% endif %}
                                 {{ p|raw }}
                                 {% if not loop.last %}<br><br>{% endif %}
                             {% endfor %}
-                        </p>
-                    {% else %}
-                        <p>
+                        {% else %}
                             {{ news.richDescription|raw }}
+                        {% endif %}
+
                         </p>
-                    {% endif %}
+                   
+
+
+
+
+
+                       
+                   
                     <div style='clear:both;'></div>
                     {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
                     <div class="share-btns l-margin-top full">

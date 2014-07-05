@@ -80,7 +80,7 @@
       function initNearPositions(data){
           // TODO : where the user is accept geolocalisation 
           // And the nearest Lat lon is stocked
-          var directionRoote = Routing.generate('wbb_bar_guides_city' , {slug : data.slug});
+          var directionRoote = Routing.generate('city_homepage' , {slug : data.slug});
 
           var getBaseURL = function(){
             var bs = window.location.href,
