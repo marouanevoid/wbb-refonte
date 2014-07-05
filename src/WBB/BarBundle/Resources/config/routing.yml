@@ -1,9 +1,4 @@
-wbb_bar_test:
-    pattern:  /feed/test
-    defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
-
 #Actions
-
 city_homepage:
     pattern: /top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:cityHome }

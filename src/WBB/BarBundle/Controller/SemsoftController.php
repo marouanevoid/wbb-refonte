@@ -80,12 +80,14 @@ class SemsoftController extends Controller
 
                 $country    = $this->getCountry($data['Country']);
                 if($country){
-                    $city       = $this->getCity($data['City'], $country);
-                    $suburb     = $this->getSuburb($data['District'], $city);
-
+                    $city   = $this->getCity($data['City'], $country);
+                    if($city)
+                    {
+                        $suburb = $this->getSuburb($data['District'], $city);
+                        $ssBar->setCity($this->setFieldValue('City', $data, $city));
+                        $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb));
+                    }
                     $ssBar->setCountry($this->setFieldValue('Country', $data, $country));
-                    $ssBar->setCity($this->setFieldValue('City', $data, $city));
-                    $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb));
                 }
 
                 $ssBar->setName($this->setFieldValue('Name', $data));
