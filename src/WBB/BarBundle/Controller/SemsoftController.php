@@ -73,9 +73,10 @@ class SemsoftController extends Controller
             {
                 $ssBar = new SemsoftBar();
 
-                if($data['ID']){
+                if($data['ID'] and is_numeric($data['ID'])){
                     $bar = $this->get('bar.repository')->findOneById($data['ID']);
-                    $ssBar->hydrateByBar($bar);
+                    if($bar)
+                        $ssBar->hydrateByBar($bar);
                 }
 
                 $country    = $this->getCountry($data['Country']);
@@ -153,19 +154,15 @@ class SemsoftController extends Controller
 
     private function setFieldValue($fieldName, $data, $value = null)
     {
-        if($value != null)
-            return $value;
-        else
-            return $data[$fieldName];
-//        if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
-//            if($value != null)
-//                return $value;
-//            else
-//                return $data[$fieldName];
-//        }
-//        else{
-//            return null;
-//        }
+        if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
+            if($value != null)
+                return $value;
+            else
+                return $data[$fieldName];
+        }
+        else{
+            return null;
+        }
     }
 
     private function createImportForm()
