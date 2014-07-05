@@ -298,23 +298,23 @@ class SemsoftBar
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars")
      */
     private $suburb;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="semsoftBars", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="semsoftBars")
      */
     private $bar;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"all"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"all"})
      * @ORM\OrderBy({"openingDay" = "ASC"})
      */
     private $openings;
@@ -350,7 +350,12 @@ class SemsoftBar
      */
     public function getName()
     {
-        return $this->name;
+        if($this->name)
+            return $this->name;
+        elseif($this->bar)
+            return $this->bar->getName();
+        else
+            return '';
     }
 
     /**
@@ -465,7 +470,12 @@ class SemsoftBar
      */
     public function getWebsite()
     {
-        return $this->website;
+        if($this->website)
+            return $this->website;
+        elseif($this->bar)
+            return $this->bar->getWebsite();
+        else
+            return null;
     }
 
     /**
@@ -1117,7 +1127,12 @@ class SemsoftBar
      */
     public function getCity()
     {
-        return $this->city;
+        if($this->city)
+            return $this->city;
+        elseif($this->bar)
+            return $this->bar->getCity();
+        else
+            return null;
     }
 
     /**
@@ -1140,7 +1155,12 @@ class SemsoftBar
      */
     public function getSuburb()
     {
-        return $this->suburb;
+        if($this->suburb)
+            return $this->suburb;
+        elseif($this->bar)
+            return $this->bar->getSuburb();
+        else
+            return null;
     }
 
     /**

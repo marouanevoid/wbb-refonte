@@ -72,76 +72,83 @@ class SemsoftController extends Controller
             foreach ($reader as $data)
             {
                 $ssBar = new SemsoftBar();
+                $bar = null;
+                $newBar = true;
 
                 if($data['ID'] and is_numeric($data['ID'])){
                     $bar = $this->get('bar.repository')->findOneById($data['ID']);
-                    if($bar)
+
+                    if($bar){
                         $ssBar->hydrateByBar($bar);
-                }
-
-                $country    = $this->getCountry($data['Country']);
-                if($country){
-                    $city   = $this->getCity($data['City'], $country);
-                    if($city)
-                    {
-                        $suburb = $this->getSuburb($data['District'], $city);
-                        $ssBar->setCity($this->setFieldValue('City', $data, $city));
-                        $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb));
+                        $newBar = false;
                     }
-                    $ssBar->setCountry($this->setFieldValue('Country', $data, $country));
                 }
 
-                $ssBar->setName($this->setFieldValue('Name', $data));
-                $ssBar->setCounty($this->setFieldValue('County', $data));
-                $ssBar->setPostalCode($this->setFieldValue('PostalCode', $data));
-                $ssBar->setAddress($this->setFieldValue('Name', $data, ($data['Street1'].' '.$data['Street2'])));
-                $ssBar->setSeoDescription($this->setFieldValue('Intro', $data));
-                $ssBar->setDescription($this->setFieldValue('Description', $data));
-                $ssBar->setLatitude($this->setFieldValue('GeocoordinateString', $data, $this->splitGeoData($data['GeocoordinateString'])));
-                $ssBar->setLongitude($this->setFieldValue('GeocoordinateString', $data, $this->splitGeoData($data['GeocoordinateString'], false)));
-                $ssBar->setWebsite($this->setFieldValue('Website', $data));
-                $ssBar->setEmail($this->setFieldValue('Email', $data));
-                $ssBar->setPhone($this->setFieldValue('Phone', $data));
-                //Tags (Category, Mood)
-                $ssBar->setIsOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, ($data['OutdoorSeating'] == "true")?true:false));
-                $ssBar->setIsHappyHour($this->setFieldValue('HappyHour', $data, ($data['HappyHour'] == "true")?true:false));
-                $ssBar->setIsWiFi($this->setFieldValue('Wifi', $data, ($data['Wifi'] == "true")?true:false));
-                $ssBar->setPrice($this->setFieldValue('PriceRange', $data, $this->getPriceValue($data['PriceRange'])));
-                $ssBar->setIsCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted'])));
-                //RestaurantServices
-                $ssBar->setMenu($this->setFieldValue('MenuUrl', $data));
-                $ssBar->setReservation($this->setFieldValue('Booking', $data));
-                $ssBar->setParkingType($this->setFieldValue('ParkingType', $data));
-                //Public Transport
-                $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data));
-                $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data));
-                $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data));
-                $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data));
-                $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data));
-                $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data));
-                $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data));
-                $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data));
-                $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data));
-                $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data));
-                $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data));
-                $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data));
-                $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data));
-                $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data));
-                $ssBar->setIsPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data));
-                $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data));
-                $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
-                $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));
+                if($bar or !empty($data['Name'])){
+                    $country    = $this->getCountry($data['Country']);
+                    if($country){
+                        $city   = $this->getCity($data['City'], $country);
+                        if($city)
+                        {
+                            $suburb = $this->getSuburb($data['District'], $city);
+                            $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
+                            $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
+                        }
+                        $ssBar->setCountry($this->setFieldValue('Country', $data, $country, $newBar));
+                    }
 
-                //Open hours
-                $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
-                $ssBar = $this->getOpenHoursArray($data['TuesdayOpenHours'], 2, $ssBar);
-                $ssBar = $this->getOpenHoursArray($data['WednesdayOpenHours'], 3, $ssBar);
-                $ssBar = $this->getOpenHoursArray($data['ThursdayOpenHours'], 4, $ssBar);
-                $ssBar = $this->getOpenHoursArray($data['FridayOpenHours'], 5, $ssBar);
-                $ssBar = $this->getOpenHoursArray($data['SaturdayOpenHours'], 6, $ssBar);
-                $ssBar = $this->getOpenHoursArray($data['SundayOpenHours'], 7, $ssBar);
+                    $ssBar->setName($this->setFieldValue('Name', $data, null, $newBar));
+                    $ssBar->setCounty($this->setFieldValue('County', $data, null, $newBar));
+                    $ssBar->setPostalCode($this->setFieldValue('PostalCode', $data, null, $newBar));
+                    $ssBar->setAddress($this->setFieldValue('Name', $data, ($data['Street1'].' '.$data['Street2']), $newBar));
+                    $ssBar->setSeoDescription($this->setFieldValue('Intro', $data, null, $newBar));
+                    $ssBar->setDescription($this->setFieldValue('Description', $data, null, $newBar));
+                    $ssBar->setLatitude($this->setFieldValue('GeocoordinateString', $data, $this->splitGeoData($data['GeocoordinateString']), $newBar));
+                    $ssBar->setLongitude($this->setFieldValue('GeocoordinateString', $data, $this->splitGeoData($data['GeocoordinateString'], false), $newBar));
+                    $ssBar->setWebsite($this->setFieldValue('Website', $data, null, $newBar));
+                    $ssBar->setEmail($this->setFieldValue('Email', $data, null, $newBar));
+                    $ssBar->setPhone($this->setFieldValue('Phone', $data, null, $newBar));
+                    //Tags (Category, Mood)
+                    $ssBar->setIsOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
+                    $ssBar->setIsHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
+                    $ssBar->setIsWiFi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
+                    $ssBar->setPrice($this->setFieldValue('PriceRange', $data, $this->getPriceValue($data['PriceRange']), $newBar));
+                    $ssBar->setIsCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
+                    //RestaurantServices
+                    $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
+                    $ssBar->setReservation($this->setFieldValue('Booking', $data, null, $newBar));
+                    $ssBar->setParkingType($this->setFieldValue('ParkingType', $data, null, $newBar));
+                    //Public Transport
+                    $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, $newBar));
+                    $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, $newBar));
+                    $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, $newBar));
+                    $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, $newBar));
+                    $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, $newBar));
+                    $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, $newBar));
+                    $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, $newBar));
+                    $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, $newBar));
+                    $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, $newBar));
+                    $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, $newBar));
+                    $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, $newBar));
+                    $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
+                    $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
+                    $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
+                    $ssBar->setIsPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
+                    $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, null, $newBar));
+                    $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
+                    $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));
 
-                $em->persist($ssBar);
+                    //Open hours
+                    $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
+                    $ssBar = $this->getOpenHoursArray($data['TuesdayOpenHours'], 2, $ssBar);
+                    $ssBar = $this->getOpenHoursArray($data['WednesdayOpenHours'], 3, $ssBar);
+                    $ssBar = $this->getOpenHoursArray($data['ThursdayOpenHours'], 4, $ssBar);
+                    $ssBar = $this->getOpenHoursArray($data['FridayOpenHours'], 5, $ssBar);
+                    $ssBar = $this->getOpenHoursArray($data['SaturdayOpenHours'], 6, $ssBar);
+                    $ssBar = $this->getOpenHoursArray($data['SundayOpenHours'], 7, $ssBar);
+
+                    $em->persist($ssBar);
+                }
             }
 
             $em->flush();
@@ -152,16 +159,24 @@ class SemsoftController extends Controller
         return $this->render('WBBBarBundle:Block:empty_block.html.twig');
     }
 
-    private function setFieldValue($fieldName, $data, $value = null)
+    private function setFieldValue($fieldName, $data, $value = null, $forceUpdate = false)
     {
-        if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
+        if($forceUpdate)
+        {
             if($value != null)
                 return $value;
             else
                 return $data[$fieldName];
-        }
-        else{
-            return null;
+        }else{
+            if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
+                if($value != null)
+                    return $value;
+                else
+                    return $data[$fieldName];
+            }
+            else{
+                return null;
+            }
         }
     }
 
