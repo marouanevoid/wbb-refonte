@@ -75,10 +75,12 @@ class SemsoftController extends Controller
 
                 if($data['ID'] and is_numeric($data['ID'])){
                     $bar = $this->get('bar.repository')->findOneById($data['ID']);
-                    
+
                     if($bar){
                         $ssBar->hydrateByBar($bar);
-                    }elseif($data['Name'] and !empty($data['Name'])){
+                    }
+
+                    if($bar or $this->setFieldValue('Name', $data)){
 
                         $country    = $this->getCountry($data['Country']);
                         if($country){
