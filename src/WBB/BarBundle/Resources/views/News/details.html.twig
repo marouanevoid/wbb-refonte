@@ -20,6 +20,18 @@
         div.description h1 {
             text-transform: inherit !important;
         }
+        a.twitter-share , a.fb-share, a.email-share{
+            -webkit-transition: opacity 1s ease-fade-in;
+            -moz-transition: opacity 1s ease-fade-in;
+            -ms-transition: opacity 1s ease-fade-in;
+            -o-transition: opacity 1s ease-fade-in;
+            transition: opacity 1s ease-fade-in; 
+        }        
+        a.twitter-share:hover ,a.fb-share:hover, a.email-share:hover{
+            zoom: 1;
+            filter: alpha(opacity=50);
+            opacity: 0.5; 
+        }
     </style>
     {% if is_mobile() and not is_tablet() %}
     <style type="text/css">
@@ -36,6 +48,7 @@
             display: block;
             width: 100%;
         }
+
     </style>
     {% endif %}
 {% endblock %}
@@ -54,7 +67,7 @@
                            {% if city %}
                                <div class="city-selector h3">
                                    You are in
-                                   <a class="btn-radius with-icon border brown city" href="{{ path('wbb_news_landing_page_city',{citySlug:city.slug}) }}">{{ city.name|default('Unspecified') }}</a>
+                                   <a class="btn-radius with-icon border brown city" href="{{ path('wbb_bar_guides_city',{slug:city.slug}) }}">{{ city.name|default('Unspecified') }}</a>
                                </div>
                            {% endif %}
                         </td>
@@ -112,6 +125,7 @@
                             {{ news.richDescription|raw }}
                         </p>
                     {% endif %}
+                    <div style='clear:both;'></div>
                     {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
                     <div class="share-btns l-margin-top full">
                         <hr/>

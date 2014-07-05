@@ -178,6 +178,17 @@ meta.App = function() {
             $bar_finder.find('.finder-close').animate({opacity: '0'}, that.config.speed/2, that.config.easing);
             $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
         });
+
+        if(window.homepage){
+            // demeande de dispatch lick on finder
+             $('header .finder').click();
+             var closed = false;
+             $(window).on('scroll' , function(){
+                if(!closed)
+                    $('header .finder').click();
+                closed = true
+             });
+        }
     };
 
 
