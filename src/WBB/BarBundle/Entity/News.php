@@ -156,6 +156,7 @@ class News {
         $this->bars    = new ArrayCollection();
         $this->cities  = new ArrayCollection();
         $this->bestOfs = new ArrayCollection();
+        $this->medias  = new ArrayCollection();
     }
 
     /**
@@ -355,7 +356,6 @@ class News {
      */
     public function removeBar($bar){
         $this->bars->removeElement($bar);
-        $bar->removeNews($this);
     }
 
     /**
@@ -386,7 +386,6 @@ class News {
      */
     public function removeBestOf($bestOf){
         $this->cities->removeElement($bestOf);
-        $bestOf->removeNews($this);
     }
 
     /**
@@ -432,10 +431,10 @@ class News {
     /**
      * Remove medias
      *
-     * @param NewsMedia $medias
+     * @param NewsMedia $media
      */
-    public function removeMedia($medias){
-        $this->medias->removeElement($medias);
+    public function removeMedia($media){
+        $this->medias->removeElement($media);
     }
 
     /**
@@ -635,7 +634,6 @@ class News {
     public function removeCity(City $city)
     {
         $this->cities->removeElement($city);
-        $city->getNews()->removeElement($this);
     }
 
     /**
