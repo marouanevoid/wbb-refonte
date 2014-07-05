@@ -43,7 +43,7 @@ class SemsoftController extends Controller
 
     public function mergeAction()
     {
-        // TODO: After tags edited 
+        // TODO: After tags edited
     }
 
     public function importFormAction()
