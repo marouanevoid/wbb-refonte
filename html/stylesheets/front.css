@@ -9,7 +9,7 @@
 --------------------------------------------------- */
 /* Reset & Basics (Inspired by E. Meyers)
 --------------------------------------------------- */
-/* line 6, ../sass/_base.scss */
+/* line 3, ../sass/_base.scss */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address,
 big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
 dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside,
@@ -42,7 +42,7 @@ blockquote, q {
   quotes: none;
 }
 
-/* line 22, ../sass/_base.scss */
+/* line 21, ../sass/_base.scss */
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: none;
@@ -782,7 +782,7 @@ img.scale-with-grid {
     font-size: 2.5em;
   }
 }
-@media screen and (min-device-width: 641px) and (orientation: portrait) {
+@media screen and (min-device-width: 768px) and (orientation: portrait) {
   /* line 257, ../sass/_base.scss */
   body {
     background: url("../images/turn@2x.jpg") no-repeat center;
@@ -794,7 +794,7 @@ img.scale-with-grid {
     display: none !important;
   }
 }
-/* line 265, ../sass/_base.scss */
+/* line 264, ../sass/_base.scss */
 html.mobile .btn-radius.brown.load-more:hover {
   background: transparent !important;
   color: #b3955f !important;
@@ -802,7 +802,7 @@ html.mobile .btn-radius.brown.load-more:hover {
 
 /* Form Button
 --------------------------------------------------- */
-/* line 8, ../sass/_form.scss */
+/* line 4, ../sass/_form.scss */
 .button,
 button,
 input[type="submit"],
@@ -824,14 +824,14 @@ input[type="button"] {
 }
 
 /* Fix for odd Mozilla border & padding issues */
-/* line 25, ../sass/_form.scss */
+/* line 24, ../sass/_form.scss */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-/* line 38, ../sass/_form.scss */
+/* line 33, ../sass/_form.scss */
 form.dark .button,
 form.dark button,
 form.dark input[type="text"],
@@ -890,7 +890,7 @@ form {
   position: relative;
 }
 
-/* line 56, ../sass/_form.scss */
+/* line 52, ../sass/_form.scss */
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -921,7 +921,7 @@ textarea {
   -webkit-appearance: none;
 }
 
-/* line 75, ../sass/_form.scss */
+/* line 73, ../sass/_form.scss */
 input[type="text"],
 input[type="password"],
 input[type="email"] {
@@ -1012,12 +1012,12 @@ label input[type="radio"]:checked + b {
   background-image: url("../images/misc/form.radio.checked.png");
 }
 
-/* line 99, ../sass/_form.scss */
+/* line 96, ../sass/_form.scss */
 input[type="text"].error,
 input[type="password"].error,
 input[type="email"].error,
 textarea.error {
-  outline: 1px solid #b3955f;
+  box-shadow: 0 0 0 1px #b3955f !important;
 }
 
 /* line 101, ../sass/_form.scss */
@@ -1108,7 +1108,7 @@ textarea {
   min-height: 60px;
 }
 
-/* line 128, ../sass/_form.scss */
+/* line 127, ../sass/_form.scss */
 label,
 legend {
   display: block;
@@ -1126,7 +1126,7 @@ input[type="checkbox"] {
   display: inline;
 }
 
-/* line 137, ../sass/_form.scss */
+/* line 136, ../sass/_form.scss */
 label span,
 legend span {
   font-weight: normal;
@@ -1152,7 +1152,7 @@ input[type="submit"], input[type="button"] {
   padding: 0;
 }
 
-/* line 35, ../sass/_grid.scss */
+/* line 34, ../sass/_grid.scss */
 .container .column,
 .container .columns {
   float: left;
@@ -1179,7 +1179,7 @@ input[type="submit"], input[type="button"] {
 }
 
 /* Base Grid */
-/* line 45, ../sass/_grid.scss */
+/* line 44, ../sass/_grid.scss */
 .container .one.column,
 .container .one.columns {
   width: 6%;
@@ -1305,7 +1305,7 @@ input[type="submit"], input[type="button"] {
     width: 100%;
   }
 
-  /* line 93, ../sass/_grid.scss */
+  /* line 81, ../sass/_grid.scss */
   .container .one.column,
   .container .one.columns,
   .container .two.columns,
@@ -1325,7 +1325,7 @@ input[type="submit"], input[type="button"] {
   }
 
   /* Offsets */
-  /* line 106, ../sass/_grid.scss */
+  /* line 96, ../sass/_grid.scss */
   .container .offset-by-one,
   .container .offset-by-two,
   .container .offset-by-three,
@@ -1364,7 +1364,7 @@ input[type="submit"], input[type="button"] {
 
 /* Use clearfix class on parent to clear nested columns,
 or wrap each row of columns in a <div class="row"> */
-/* line 125, ../sass/_grid.scss */
+/* line 122, ../sass/_grid.scss */
 .clearfix:before,
 .clearfix:after,
 .row:before,
@@ -1377,13 +1377,13 @@ or wrap each row of columns in a <div class="row"> */
   height: 0;
 }
 
-/* line 133, ../sass/_grid.scss */
+/* line 132, ../sass/_grid.scss */
 .row:after,
 .clearfix:after {
   clear: both;
 }
 
-/* line 136, ../sass/_grid.scss */
+/* line 135, ../sass/_grid.scss */
 .row,
 .clearfix {
   zoom: 1;
@@ -1640,79 +1640,88 @@ or wrap each row of columns in a <div class="row"> */
 }
 
 /* line 114, ../sass/_icons.scss */
+html.ipad .btn-radius.with-icon.city:before, html.ipad .btn-radius.with-icon.map:before {
+  background-position: -212px 0px;
+}
+/* line 115, ../sass/_icons.scss */
+html.ipad .btn-radius.with-icon.city:after, html.ipad .btn-radius.with-icon.map:after {
+  background-position: -212px -40px;
+}
+
+/* line 122, ../sass/_icons.scss */
 .btn-small-round.www:before {
   background-position: -5px -125px;
 }
-/* line 115, ../sass/_icons.scss */
+/* line 123, ../sass/_icons.scss */
 .btn-small-round.www:after {
   background-position: -5px -165px;
 }
-/* line 118, ../sass/_icons.scss */
+/* line 126, ../sass/_icons.scss */
 .btn-small-round.twitter {
   border-color: #00c3f3;
 }
-/* line 120, ../sass/_icons.scss */
+/* line 128, ../sass/_icons.scss */
 .btn-small-round.twitter:hover {
   background: #00c3f3;
 }
-/* line 121, ../sass/_icons.scss */
+/* line 129, ../sass/_icons.scss */
 .btn-small-round.twitter:before {
   background-position: -45px -125px;
 }
-/* line 122, ../sass/_icons.scss */
+/* line 130, ../sass/_icons.scss */
 .btn-small-round.twitter:after {
   background-position: -45px -165px;
 }
-/* line 125, ../sass/_icons.scss */
+/* line 133, ../sass/_icons.scss */
 .btn-small-round.facebook {
   border-color: #2960a3;
 }
-/* line 127, ../sass/_icons.scss */
+/* line 135, ../sass/_icons.scss */
 .btn-small-round.facebook:hover {
   background: #2960a3;
 }
-/* line 128, ../sass/_icons.scss */
+/* line 136, ../sass/_icons.scss */
 .btn-small-round.facebook:before {
   background-position: -86px -125px;
 }
-/* line 129, ../sass/_icons.scss */
+/* line 137, ../sass/_icons.scss */
 .btn-small-round.facebook:after {
   background-position: -86px -165px;
 }
-/* line 132, ../sass/_icons.scss */
+/* line 140, ../sass/_icons.scss */
 .btn-small-round.instagram {
   border-color: #818a8c;
 }
-/* line 134, ../sass/_icons.scss */
+/* line 142, ../sass/_icons.scss */
 .btn-small-round.instagram:hover {
   background: #818a8c;
 }
-/* line 135, ../sass/_icons.scss */
+/* line 143, ../sass/_icons.scss */
 .btn-small-round.instagram:before {
   background-position: -165px -165px;
 }
-/* line 136, ../sass/_icons.scss */
+/* line 144, ../sass/_icons.scss */
 .btn-small-round.instagram:after {
   background-position: -165px -205px;
 }
-/* line 139, ../sass/_icons.scss */
+/* line 147, ../sass/_icons.scss */
 .btn-small-round.foursquare {
   border-color: #209fca;
 }
-/* line 141, ../sass/_icons.scss */
+/* line 149, ../sass/_icons.scss */
 .btn-small-round.foursquare:hover {
   background: #209fca;
 }
-/* line 142, ../sass/_icons.scss */
+/* line 150, ../sass/_icons.scss */
 .btn-small-round.foursquare:before {
   background-position: -125px -125px;
 }
-/* line 143, ../sass/_icons.scss */
+/* line 151, ../sass/_icons.scss */
 .btn-small-round.foursquare:after {
   background-position: -125px -165px;
 }
 
-/* line 148, ../sass/_icons.scss */
+/* line 156, ../sass/_icons.scss */
 .finder-close:before {
   background-position: -160px -120px;
 }
@@ -2017,6 +2026,7 @@ header.mobile .search-result-proposal ul li a {
   height: 100%;
   width: 40px;
   z-index: 998;
+  display: none;
 }
 
 /* line 94, ../sass/_header.scss */
@@ -2350,7 +2360,7 @@ section.bar-finder table .ui-dropdown, section.bar-finder table .ui-radio, secti
 section.bar-finder table tr:nth-child(2) td {
   text-align: center;
 }
-/* line 37, ../sass/components/_bar-finder.scss */
+/* line 36, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(2) td,
 section.bar-finder table tr:nth-child(1) td:nth-child(1) {
   vertical-align: middle;
@@ -2364,7 +2374,7 @@ section.bar-finder table tr:nth-child(1) td:nth-child(1) {
   width: 20.8em;
   text-align: left;
 }
-/* line 43, ../sass/components/_bar-finder.scss */
+/* line 42, ../sass/components/_bar-finder.scss */
 section.bar-finder table tr:nth-child(2) td:nth-child(2),
 section.bar-finder table tr:nth-child(2) td:nth-child(4) {
   padding: 2em;
@@ -2737,7 +2747,7 @@ section.bar-finder table tr:nth-child(2) td:nth-child(8) {
   right: 0;
   border-radius: 50% 0 0 50%;
 }
-/* line 62, ../sass/components/_ui-slider.scss */
+/* line 61, ../sass/components/_ui-slider.scss */
 .ui-slider.type-cities, .ui-slider.type-bestof {
   clear: both;
 }
@@ -2881,7 +2891,7 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   width: 33.6%;
 }
 
-/* line 2, ../sass/components/_ui-dropdown.scss */
+/* line 1, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container {
   position: relative;
 }
@@ -3066,7 +3076,7 @@ html.mobile .ui-dropdown-container select {
   display: block;
 }
 
-/* line 2, ../sass/components/_ui-radio.scss */
+/* line 1, ../sass/components/_ui-radio.scss */
 .ui-radio {
   padding-top: 0;
   padding-bottom: 0;
@@ -3138,7 +3148,7 @@ html.mobile .ui-dropdown-container select {
     text-align: center;
   }
 
-  /* line 37, ../sass/components/_ui-radio.scss */
+  /* line 36, ../sass/components/_ui-radio.scss */
   .ui-radio.btn-radius.with-icon {
     padding: 0 !important;
     width: 38px;
@@ -3156,7 +3166,7 @@ html.mobile .ui-dropdown-container select {
     left: 12px !important;
   }
 }
-/* line 2, ../sass/components/_ui-selector.scss */
+/* line 1, ../sass/components/_ui-selector.scss */
 .ui-selector {
   display: inline-block;
   position: relative;
@@ -3406,7 +3416,7 @@ article.tip .form form input[type=submit] {
   float: right;
 }
 
-/* line 40, ../sass/components/_tip.scss */
+/* line 39, ../sass/components/_tip.scss */
 .insider-tips .six.columns.box {
   left: 25%;
 }
@@ -3506,7 +3516,7 @@ article.bar-wo-pic .txt h2, article.bar-wo-pic .txt h3 {
   -o-transition: color ease-in-out 0.2s;
   transition: color ease-in-out 0.2s;
 }
-/* line 22, ../sass/components/_bar-wo-pic.scss */
+/* line 21, ../sass/components/_bar-wo-pic.scss */
 article.bar-wo-pic:hover {
   background: #b3955f;
 }
@@ -4141,133 +4151,144 @@ html.mobile article.city:hover img.scale-with-grid {
 }
 
 /* line 38, ../sass/components/_article-box.scss */
+html.webkit .articles.eight.columns article .img .cover {
+  right: -1px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* line 40, ../sass/components/_article-box.scss */
+  html.webkit .articles.eight.columns article .img .cover {
+    right: -2px;
+  }
+}
+/* line 44, ../sass/components/_article-box.scss */
 .articles article.small {
   width: 50%;
   height: 40em;
 }
-/* line 39, ../sass/components/_article-box.scss */
+/* line 45, ../sass/components/_article-box.scss */
 .articles article.small + article.small {
   border-left: 0;
 }
-/* line 40, ../sass/components/_article-box.scss */
+/* line 46, ../sass/components/_article-box.scss */
 .articles article.small + article.small + article.large {
   border-top: 0;
 }
-/* line 43, ../sass/components/_article-box.scss */
+/* line 49, ../sass/components/_article-box.scss */
 .articles article.large {
   width: 100%;
   height: 80em;
 }
-/* line 45, ../sass/components/_article-box.scss */
+/* line 51, ../sass/components/_article-box.scss */
 .articles.padding article.large {
   margin-top: 4%;
 }
-/* line 46, ../sass/components/_article-box.scss */
+/* line 52, ../sass/components/_article-box.scss */
 .articles.padding article.large:first-of-type {
   margin-top: 0;
 }
-/* line 48, ../sass/components/_article-box.scss */
+/* line 54, ../sass/components/_article-box.scss */
 .articles.padding article.small {
   width: 48%;
   height: 40em;
   margin-top: 4%;
 }
-/* line 49, ../sass/components/_article-box.scss */
+/* line 55, ../sass/components/_article-box.scss */
 .articles.padding article.small + article.small {
   margin-left: 4%;
   border-left: 1px solid #b3955f;
 }
-/* line 53, ../sass/components/_article-box.scss */
+/* line 59, ../sass/components/_article-box.scss */
 .articles.four.columns .side-ad {
   margin-top: 0 !important;
 }
-/* line 54, ../sass/components/_article-box.scss */
+/* line 60, ../sass/components/_article-box.scss */
 .articles.four.columns article {
   width: 100%;
   margin-top: 8%;
 }
-/* line 56, ../sass/components/_article-box.scss */
+/* line 62, ../sass/components/_article-box.scss */
 .articles.four.columns article .cover .video {
   background-size: 50% 50%;
 }
-/* line 57, ../sass/components/_article-box.scss */
+/* line 63, ../sass/components/_article-box.scss */
 .articles.four.columns article:first-of-type {
   margin-top: 8%;
 }
-/* line 58, ../sass/components/_article-box.scss */
+/* line 64, ../sass/components/_article-box.scss */
 .articles.four.columns article.large {
   height: 40em;
 }
-/* line 59, ../sass/components/_article-box.scss */
+/* line 65, ../sass/components/_article-box.scss */
 .articles.four.columns article.small {
   height: 17.5em;
 }
-/* line 60, ../sass/components/_article-box.scss */
+/* line 66, ../sass/components/_article-box.scss */
 .articles.four.columns article.small .plus-btn {
   margin-top: 25px;
 }
-/* line 64, ../sass/components/_article-box.scss */
+/* line 70, ../sass/components/_article-box.scss */
 .articles.older-news article.small {
   width: 31.5%;
   margin-bottom: 2.5%;
 }
-/* line 66, ../sass/components/_article-box.scss */
+/* line 72, ../sass/components/_article-box.scss */
 .articles.older-news article.small + article.small {
   border-left: 1px solid #b3955f;
 }
-/* line 67, ../sass/components/_article-box.scss */
+/* line 73, ../sass/components/_article-box.scss */
 .articles.older-news article.small:nth-of-type(3n+2) {
   margin-left: 2.5%;
   margin-right: 2.5%;
 }
-/* line 68, ../sass/components/_article-box.scss */
+/* line 74, ../sass/components/_article-box.scss */
 .articles.older-news article.small .cover .video {
   background-size: 50% 50%;
 }
 @media only screen and (max-width: 768px) {
-  /* line 74, ../sass/components/_article-box.scss */
+  /* line 80, ../sass/components/_article-box.scss */
   .articles article p {
     max-height: 9em;
     overflow: hidden;
   }
-  /* line 75, ../sass/components/_article-box.scss */
+  /* line 81, ../sass/components/_article-box.scss */
   .articles article .img + .title p {
     display: none;
   }
-  /* line 76, ../sass/components/_article-box.scss */
+  /* line 82, ../sass/components/_article-box.scss */
   .articles article .img .cover .video {
     background-size: 50% 50%;
   }
-  /* line 79, ../sass/components/_article-box.scss */
+  /* line 84, ../sass/components/_article-box.scss */
   .articles article.small, .articles.padding article.small,
   .articles article.large {
     width: 100%;
     min-height: 35em;
     height: 35em;
   }
-  /* line 81, ../sass/components/_article-box.scss */
+  /* line 87, ../sass/components/_article-box.scss */
   .articles.padding article.small + article.small {
     margin-left: 0;
   }
-  /* line 82, ../sass/components/_article-box.scss */
+  /* line 88, ../sass/components/_article-box.scss */
   .articles article + article {
     margin-top: 4%;
   }
-  /* line 83, ../sass/components/_article-box.scss */
+  /* line 89, ../sass/components/_article-box.scss */
   .articles article.small + article.small {
     border-left: 1px solid #b3955f;
   }
-  /* line 85, ../sass/components/_article-box.scss */
+  /* line 91, ../sass/components/_article-box.scss */
   .articles.older-news > div {
     margin-top: 4%;
   }
-  /* line 86, ../sass/components/_article-box.scss */
+  /* line 92, ../sass/components/_article-box.scss */
   .articles.older-news article.small {
     width: 100%;
     margin-bottom: 4%;
     margin-top: 0;
   }
-  /* line 88, ../sass/components/_article-box.scss */
+  /* line 94, ../sass/components/_article-box.scss */
   .articles.older-news article.small:nth-of-type(3n+2) {
     margin-left: 0;
     margin-right: 0;
@@ -4440,23 +4461,23 @@ body.search .search-bar-mobile + .container {
  * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
  * may not operate correctly without them.
  */
-/* line 9, ../sass/components/_jquery.jscrollpane.scss */
+/* line 8, ../sass/components/_jquery.jscrollpane.scss */
 .jspContainer {
   overflow: hidden;
   position: relative;
 }
 
-/* line 15, ../sass/components/_jquery.jscrollpane.scss */
+/* line 14, ../sass/components/_jquery.jscrollpane.scss */
 .jspPane {
   position: absolute;
 }
 
-/* line 20, ../sass/components/_jquery.jscrollpane.scss */
+/* line 19, ../sass/components/_jquery.jscrollpane.scss */
 .jspPane:focus {
   outline: none !important;
 }
 
-/* line 25, ../sass/components/_jquery.jscrollpane.scss */
+/* line 24, ../sass/components/_jquery.jscrollpane.scss */
 .jspVerticalBar {
   position: absolute;
   top: 0;
@@ -4465,7 +4486,7 @@ body.search .search-bar-mobile + .container {
   height: 100%;
 }
 
-/* line 34, ../sass/components/_jquery.jscrollpane.scss */
+/* line 33, ../sass/components/_jquery.jscrollpane.scss */
 .jspHorizontalBar {
   position: absolute;
   bottom: 0;
@@ -4475,17 +4496,17 @@ body.search .search-bar-mobile + .container {
   display: none;
 }
 
-/* line 44, ../sass/components/_jquery.jscrollpane.scss */
+/* line 43, ../sass/components/_jquery.jscrollpane.scss */
 .jspCap {
   display: none;
 }
 
-/* line 49, ../sass/components/_jquery.jscrollpane.scss */
+/* line 48, ../sass/components/_jquery.jscrollpane.scss */
 .jspHorizontalBar .jspCap {
   float: left;
 }
 
-/* line 54, ../sass/components/_jquery.jscrollpane.scss */
+/* line 53, ../sass/components/_jquery.jscrollpane.scss */
 .jspTrack {
   background: #fff;
   border-radius: 10px;
@@ -4493,7 +4514,7 @@ body.search .search-bar-mobile + .container {
   position: relative;
 }
 
-/* line 60, ../sass/components/_jquery.jscrollpane.scss */
+/* line 59, ../sass/components/_jquery.jscrollpane.scss */
 .jspDrag {
   background: #b3955f;
   border-radius: 10px;
@@ -4506,14 +4527,14 @@ body.search .search-bar-mobile + .container {
   margin-top: 2px;
 }
 
-/* line 74, ../sass/components/_jquery.jscrollpane.scss */
+/* line 72, ../sass/components/_jquery.jscrollpane.scss */
 .jspHorizontalBar .jspTrack,
 .jspHorizontalBar .jspDrag {
   float: left;
   height: 100%;
 }
 
-/* line 80, ../sass/components/_jquery.jscrollpane.scss */
+/* line 79, ../sass/components/_jquery.jscrollpane.scss */
 .jspArrow {
   background: #50506d;
   text-indent: -20000px;
@@ -4523,30 +4544,30 @@ body.search .search-bar-mobile + .container {
   margin: 0;
 }
 
-/* line 90, ../sass/components/_jquery.jscrollpane.scss */
+/* line 89, ../sass/components/_jquery.jscrollpane.scss */
 .jspArrow.jspDisabled {
   cursor: default;
   background: #80808d;
 }
 
-/* line 96, ../sass/components/_jquery.jscrollpane.scss */
+/* line 95, ../sass/components/_jquery.jscrollpane.scss */
 .jspVerticalBar .jspArrow {
   height: 16px;
 }
 
-/* line 101, ../sass/components/_jquery.jscrollpane.scss */
+/* line 100, ../sass/components/_jquery.jscrollpane.scss */
 .jspHorizontalBar .jspArrow {
   width: 16px;
   float: left;
   height: 100%;
 }
 
-/* line 108, ../sass/components/_jquery.jscrollpane.scss */
+/* line 107, ../sass/components/_jquery.jscrollpane.scss */
 .jspVerticalBar .jspArrow:focus {
   outline: none;
 }
 
-/* line 113, ../sass/components/_jquery.jscrollpane.scss */
+/* line 112, ../sass/components/_jquery.jscrollpane.scss */
 .jspCorner {
   background: #eeeef4;
   float: left;
@@ -4554,7 +4575,7 @@ body.search .search-bar-mobile + .container {
 }
 
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
-/* line 121, ../sass/components/_jquery.jscrollpane.scss */
+/* line 120, ../sass/components/_jquery.jscrollpane.scss */
 * html .jspCorner {
   margin: 0 -3px 0 0;
 }
@@ -4895,7 +4916,7 @@ html.webkit .also-appears li:before {
 .best-of-details .container.bars .four.columns {
   margin-top: 3em;
 }
-/* line 19, ../sass/pages/_best-of-details.scss */
+/* line 17, ../sass/pages/_best-of-details.scss */
 .best-of-details .container.bars .four.columns:nth-child(1), .best-of-details .container.bars .four.columns:nth-child(2), .best-of-details .container.bars .four.columns:nth-child(3) {
   margin-top: 0;
 }
@@ -5286,7 +5307,7 @@ section.bar-filter .sort-by > * {
   display: inline-block;
   margin-left: 0.5em;
 }
-/* line 11, ../sass/pages/_bar-guides.scss */
+/* line 10, ../sass/pages/_bar-guides.scss */
 section.bar-filter .bars-w-pic {
   width: 97.6667%;
   margin: auto;
@@ -5300,12 +5321,12 @@ section.bar-filter .bars-w-pic .three.columns {
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 20, ../sass/pages/_bar-guides.scss */
+  /* line 19, ../sass/pages/_bar-guides.scss */
   section.bar-filter {
     width: 100% !important;
     margin: 0 !important;
   }
-  /* line 23, ../sass/pages/_bar-guides.scss */
+  /* line 22, ../sass/pages/_bar-guides.scss */
   section.bar-filter .sort-by {
     width: 100% !important;
     margin-left: 0 !important;
@@ -5593,7 +5614,7 @@ section.bar-filter .bars-w-pic .three.columns {
   .search aside.filters form li .drop-list .ui-dropdown-container {
     margin-top: 25px;
   }
-  /* line 85, ../sass/pages/_search.scss */
+  /* line 84, ../sass/pages/_search.scss */
   .search aside.filters form .reset {
     margin-top: 15px;
   }
@@ -5735,7 +5756,7 @@ footer .right {
   float: right;
   color: #ffe4af;
 }
-/* line 29, ../sass/_footer.scss */
+/* line 28, ../sass/_footer.scss */
 footer .right .social-icons,
 footer .right .keep-in-touch {
   border-left: 1px solid #5c5549;

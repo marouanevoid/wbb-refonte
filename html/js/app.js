@@ -118,12 +118,12 @@ meta.App = function() {
             }
         });
 
-        $('.detect-scroll').swipe(
+        /*$('.detect-scroll').swipe(
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
             swipeRight:function(){ $('header.mobile .nav-icon a').click() },
             threshold:4
-        });
+        });*/
 
         $('.mobile-menu').swipe(
         {

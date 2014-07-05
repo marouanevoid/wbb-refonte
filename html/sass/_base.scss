@@ -252,7 +252,7 @@
   }
 
 
-  @media screen and (min-device-width: 641px) and (orientation: portrait) {
+  @media screen and (min-device-width: 768px) and (orientation: portrait) {
 
     body{ background: url("../images/turn@2x.jpg") no-repeat center; background-size: cover }
     body *{ display:none!important }

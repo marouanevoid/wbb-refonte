@@ -89,7 +89,7 @@
       aside.mobile-menu{ display: block }
     }
 
-    .detect-scroll{ position: fixed; top: 0; left: 0; height: 100%; width: 40px; z-index: 998 }
+    .detect-scroll{ position: fixed; top: 0; left: 0; height: 100%; width: 40px; z-index: 998; display: none }
 
     aside.mobile-menu {
       position: absolute; width: 245px; left: -245px; top: 0; background-color: $color-dark-gray; display: none;
