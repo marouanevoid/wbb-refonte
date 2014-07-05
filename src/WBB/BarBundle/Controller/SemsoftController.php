@@ -153,19 +153,15 @@ class SemsoftController extends Controller
 
     private function setFieldValue($fieldName, $data, $value = null)
     {
-        if($value != null)
-            return $value;
-        else
-            return $data[$fieldName];
-//        if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
-//            if($value != null)
-//                return $value;
-//            else
-//                return $data[$fieldName];
-//        }
-//        else{
-//            return null;
-//        }
+        if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
+            if($value != null)
+                return $value;
+            else
+                return $data[$fieldName];
+        }
+        else{
+            return null;
+        }
     }
 
     private function createImportForm()
