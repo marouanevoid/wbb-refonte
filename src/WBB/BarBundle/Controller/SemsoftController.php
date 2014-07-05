@@ -23,7 +23,7 @@ class SemsoftController extends Controller
         $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
         $bar = $ssBar->getUpdatedBar();
 
-        var_dump($bar);die;
+        var_dump($ssBarId);die;
 
         $user = $this->container->get('user.repository')->findOneById(1);
 
