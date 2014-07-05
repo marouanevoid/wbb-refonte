@@ -1447,5 +1447,7 @@ class SemsoftBar
 
         if($this->getFoursquareID())
             $bar->setFoursquare($this->getFoursquareID());
+
+        return $bar;
     }
 }
