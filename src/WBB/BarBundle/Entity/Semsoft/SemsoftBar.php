@@ -350,7 +350,12 @@ class SemsoftBar
      */
     public function getName()
     {
-        return $this->name;
+        if($this->name)
+            return $this->name;
+        elseif($this->bar)
+            return $this->bar->getName();
+        else
+            return '';
     }
 
     /**
@@ -465,7 +470,12 @@ class SemsoftBar
      */
     public function getWebsite()
     {
-        return $this->website;
+        if($this->website)
+            return $this->website;
+        elseif($this->bar)
+            return $this->bar->getWebsite();
+        else
+            return null;
     }
 
     /**
@@ -1117,7 +1127,12 @@ class SemsoftBar
      */
     public function getCity()
     {
-        return $this->city;
+        if($this->city)
+            return $this->city;
+        elseif($this->bar)
+            return $this->bar->getCity();
+        else
+            return null;
     }
 
     /**
@@ -1140,7 +1155,12 @@ class SemsoftBar
      */
     public function getSuburb()
     {
-        return $this->suburb;
+        if($this->suburb)
+            return $this->suburb;
+        elseif($this->bar)
+            return $this->bar->getSuburb();
+        else
+            return null;
     }
 
     /**
