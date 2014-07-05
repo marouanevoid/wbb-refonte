@@ -298,23 +298,23 @@ class SemsoftBar
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars", cascade={"persist", "detach"})
      */
     private $suburb;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="semsoftBars", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="semsoftBars", cascade={"persist", "detach"})
      */
     private $bar;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"persist", "detach"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"persist", "detach"})
      * @ORM\OrderBy({"openingDay" = "ASC"})
      */
     private $openings;
