@@ -88,14 +88,15 @@
                 bbase = split[2];
             return bbase;
           }
-          window.location.href =  directionRoote;
+          if(data.slug)
+            window.location.href =  directionRoote;
       }
 
     // if the current navigator support geolocalisation
     // if the geolocalisation is aleady stocked 
 
     //if(navigator.geolocation && ( ! $.cookie('currentLat') || $.cookie('currentLat') == '' ))
-    //navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
+    navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
   })
 
 
