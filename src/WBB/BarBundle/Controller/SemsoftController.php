@@ -72,7 +72,8 @@ class SemsoftController extends Controller
             foreach ($reader as $data)
             {
                 $ssBar = new SemsoftBar();
-
+                $bar = null;
+                
                 if($data['ID'] and is_numeric($data['ID'])){
                     $bar = $this->get('bar.repository')->findOneById($data['ID']);
                 }
