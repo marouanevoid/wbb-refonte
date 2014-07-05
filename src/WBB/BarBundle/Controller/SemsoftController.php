@@ -80,7 +80,7 @@ class SemsoftController extends Controller
                         $ssBar->hydrateByBar($bar);
                     }
 
-                    if($bar or $this->setFieldValue('Name', $data)){
+                    if($bar or $data['Name']){
 
                         $country    = $this->getCountry($data['Country']);
                         if($country){
