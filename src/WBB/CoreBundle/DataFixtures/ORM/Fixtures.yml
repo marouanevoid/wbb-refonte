@@ -1,6 +1,37 @@
+# Media
+Application\Sonata\MediaBundle\Entity\Media:
+    mediasimpleimage:
+        name: chat-people-pic1.png
+        description: "une description"
+        enabled: 0
+        providerName: "sonata.media.provider.image"
+        providerStatus: 1
+        providerReference: "e3cb27d3d7b65351d1e98a73bc235151ac2b6116.png"
+        providerMetadata: {"filename":"chat-people-pic1.png"}
+        width: 90
+        height: 90
+        context: "simple_image"
+        contentType: "image/png"
+        size: 27018
+        
+    mediadefault:
+        name: chat-people-pic1.png
+        description: "une description"
+        enabled: 0
+        providerName: "sonata.media.provider.image"
+        providerStatus: 1
+        providerReference: "e3cb27d3d7b65351d1e98a73bc235151ac2b6116.png"
+        providerMetadata: {"filename":"chat-people-pic1.png"}
+        width: 90
+        height: 90
+        context: "default"
+        contentType: "image/png"
+        size: 27018
+
+
 #Bundle User
 WBB\UserBundle\Entity\User:
-    user:
+    superadmin:
         username: admin
         email: b.hakkari@void.fr
         plainPassword: pass4admin
@@ -11,3 +42,279 @@ WBB\UserBundle\Entity\User:
         lastname:  'HAKKARI'
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
+
+#Advertisements
+WBB\BarBundle\Entity\Ad:
+    ad1:
+        name: "An ad"
+        position: 0
+        image: @mediasimpleimage
+        tag: "pub"
+        link: "http://google.com"
+        beginAt: <dateTime('now')>
+        endAt: <dateTime('now')>
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+
+#Countries
+WBB\CoreBundle\Entity\Country:
+    maroc:
+        name: Morocco
+        acronym: MA
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+            
+    france:
+        name: France
+        acronym: FR
+        ad: @ad1
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+
+#Cities
+WBB\CoreBundle\Entity\City:
+    marrakech:
+        name: Marrakech
+        latitude: 31.63
+        longitude: -8.008888999999954
+        seoDescription:
+        image:
+        onTopCity: true
+        country: @maroc
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+    
+    agadir:
+        name: Agadir
+        latitude: 31.63
+        longitude: -8.008888999999954
+        seoDescription:
+        image:
+        onTopCity: true
+        country: @maroc
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+        
+    paris:
+        name: Paris
+        latitude: 31.63
+        longitude: -8.008888999999954
+        seoDescription:
+        image:
+        onTopCity: true
+        country: @france
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+    
+    nice:
+        name: Nice
+        latitude: 31.63
+        longitude: -8.008888999999954
+        seoDescription:
+        image:
+        onTopCity:
+        country: @france
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+
+#Suburbs
+WBB\CoreBundle\Entity\CitySuburb:
+    gueliz:
+        name: Gueliz
+        city: @marrakech
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+        
+    daoudiate:
+        name: Daoudiate
+        city: @marrakech
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+        
+    founty:
+        name: Founty
+        city: @agadir
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+        
+    centre:
+        name: Centre
+        city: @paris
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+        
+    sud:
+        name: Sud
+        city: @nice
+        createdAt: <dateTime('now')>
+        updatedAt: <dateTime('now')>
+        
+#Bars
+WBB\BarBundle\Entity\Bar:
+    chezzouhair:
+        name: "Chez Zouhair"
+        latitude: 31.63
+        longitude: -8.008888999999954
+        address: "an address"
+        phone: "002126340000"
+        email: "contact@chezzouhair.com"
+        website: "http://google.com"
+        foursquare: ""
+        twitter: ""
+        facebook: ""
+        instagram: ""
+        isCreditCard: true
+        isCoatCheck: true
+        parking: "some value"
+        price: 1
+        menu: "http://google.com"
+        isReservation: true
+        reservation: "http://google.com"
+        description: "a description"
+        seoDescription: "a seo description"
+        onTop: true
+        status: 2
+        user: @superadmin
+        city: @marrakech
+        suburb: @gueliz
+            
+    boudha:
+        name: Budha Bar
+        latitude: 31.63
+        longitude: -8.008888999999954
+        address: "an address"
+        phone: "002126340000"
+        email: "contact@budha.com"
+        website: "http://google.com"
+        foursquare: ""
+        twitter: ""
+        facebook: ""
+        instagram: ""
+        isCreditCard: true
+        isCoatCheck: true
+        parking: "some value"
+        price: 1
+        menu: "http://google.com"
+        isReservation: true
+        reservation: "http://google.com"
+        description: "a description"
+        seoDescription: "a seo description"
+        onTop: true
+        status: 2
+        user: @superadmin
+        city: @paris
+        suburb: @centre
+
+#BarMedias
+WBB\BarBundle\Entity\Collections\BarMedia:
+    chezzouhairmedia1:
+        alt: Un Alt
+        position: 0
+        bar: @chezzouhair
+        media: @mediadefault
+    
+    boudhamedia1:
+        alt: Un autre Alt
+        position: 0
+        bar: @boudha
+        media: @mediadefault
+
+#Tags
+WBB\BarBundle\Entity\Tag:
+    tag1:
+        name: Tag1
+        isStyle: true
+        isOccasion: false
+        isAtmosphere: false
+        isAlcohol: true
+        isCocktail: false
+        isMood: true
+        energyLevel: 1
+        onTop: true
+    
+    tag2:
+        name: Tag2
+        isStyle: true
+        isOccasion: false
+        isAtmosphere: false
+        isAlcohol: true
+        isCocktail: false
+        isMood: true
+        energyLevel: 2
+        onTop: false
+        
+#Bar Tags
+WBB\BarBundle\Entity\Collections\BarTag:
+    bartag1:
+        position: 0
+        bar: @chezzouhair
+        tag: @tag1
+        
+    bartag2:
+        position: 0
+        bar: @chezzouhair
+        tag: @tag2
+        
+    bartag3:
+        position: 0
+        bar: @boudha
+        tag: @tag2
+        
+        
+#Bar Openings
+WBB\BarBundle\Entity\BarOpening:
+    mondaychezzouhair:
+        openingDay: 1
+        fromHour: 1
+        toHour: 4
+        bar: @chezzouhair
+            
+    sundaychezzouhair:
+        openingDay: 7
+        fromHour: 1
+        toHour: 4
+        bar: @chezzouhair
+
+#Best ofs
+WBB\BarBundle\Entity\BestOf:
+    bestof1:
+        name: "First bestof"
+        description: "first best of description"
+        image: @mediasimpleimage
+        sponsor: "first best of sponsor"
+        sponsorImage: @mediasimpleimage
+        seoDescription: "first best of"
+        byTag: true
+        onTop: true
+        ordered: false
+    
+    bestof2:
+        name: "Second best of"
+        description: "a description"
+        image: @mediasimpleimage
+        sponsor: "a sponsor"
+        sponsorImage: @mediasimpleimage
+        seoDescription:
+        byTag: true
+        onTop: true
+        ordered: true
+        city: @marrakech
+        country: @maroc
+
+#Best of tags
+WBB\BarBundle\Entity\Collections\BestOfTag:
+    bestof1tag1:
+        position: 0
+        bestof: @bestof1
+        tag: @tag1
+        
+    bestof1tag2:
+        position: 1
+        bestof: @bestof1
+        tag: @tag2
+        
+    bestof2tag1:
+        position: 0
+        bestof: @bestof2
+        tag: @tag1
+
