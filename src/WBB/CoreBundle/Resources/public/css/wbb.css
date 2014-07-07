@@ -233,3 +233,7 @@ article.tip .content .excerpt td .scroll{
 .sub-header table tr td:nth-child(1), .sub-header table td:nth-child(3){
     width : 28%;
 }
+
+.bar-w-pic-list .separator{
+    left: 24.5%;
+}
