@@ -216,6 +216,7 @@ class BestOf
      */
     public function setDescription($description)
     {
+        $description = preg_replace('#(( ){0,}<br( {0,})(/{0,1})>){1,}$#i', '', $description);
         $this->description = $description;
 
         return $this;

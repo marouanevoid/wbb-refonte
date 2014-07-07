@@ -58,7 +58,7 @@ class NewsController extends Controller
         $news = $this->container->get('news.repository')->findOneBySlug($newsSlug);
         $byCity = $news->hasOnlyOneTopCity();
 
-        $alsoLike = $this->container->get('news.repository')->findRelatedNews($news->getCitiesAsArray());
+        $alsoLike = $this->container->get('news.repository')->findRelatedNews($news->getCitiesAsArray(), 3, array($news->getId()));
 
         return $this->render('WBBBarBundle:News:details.html.twig', array(
             'news'          => $news,
