@@ -1,4 +1,4 @@
-{% if is_simple_quote is not defined %}<article class="small">{% endif %}
+{% if is_simple_quote is not defined %}<article class="small {% if first is defined %}firstblock{% endif %}">{% endif %}
     <div class="title vcenter{% if is_simple_quote is defined %} description{% endif %}">
         {% if is_simple_quote is not defined %}
             {% if has_quote is not defined %}

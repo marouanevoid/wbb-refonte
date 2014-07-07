@@ -54,7 +54,8 @@
                                         <option disabled="disabled">Choose a City</option>
                                         {% for c in topCities %}
                                             <option data-type="redirect"
-                                                    value="{{ path('city_homepage',{slug:c.slug}) }}"
+                                                    {# value="{{ path('city_homepage',{slug:c.slug}) }}" #}
+                                                    value="{{ path('wbb_news_landing_page_city',{citySlug:c.slug}) }}"
                                                     {#{% if city is defined and c.id==city.id %}#}
                                                     {#selected="selected"#}
                                                     {#{% endif %}#}
@@ -128,7 +129,7 @@
         <!-- 4 COLS -->
         {% if not is_mobile() or is_tablet() %}
             <aside class="articles padding four columns">
-                <div class="block">
+                <div class="block ads-pannel">
                     <div class="side-ad m-margin-top">
                         <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300"
                              height="250"/>
@@ -137,6 +138,10 @@
                     </div>
                 </div>
                 {% for n in interviews|slice(1,1) %}
+                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
+                {% endfor %}
+
+                {% for n in interviews|slice(2,1) %}
                     {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
                 {% endfor %}
 
@@ -144,7 +149,7 @@
                     {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
                 {% endfor %}
 
-                {% for n in interviews|slice(2,1) %}
+                {% for n in interviews|slice(3,1) %}
                     {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
                 {% endfor %}
 
@@ -152,9 +157,6 @@
                     {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
                 {% endfor %}
 
-                {% for n in interviews|slice(3,1) %}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
-                {% endfor %}
 
             </aside>
         {% endif %}
@@ -168,7 +170,17 @@
         {% endblock %}
     {% endif %}
 
-
+    {# 
+        Hide the first Block if the adds height is great then 600 px
+    #}
+    <script type="text/javascript">
+        $(function(){
+            var adsPannelHeight = $('.ads-pannel').height();
+            if(adsPannelHeight > 600){
+                $('.firstblock').hide();
+            }
+        });
+    </script>
     <div class="load-container">
         <!-- OLDER NEWS -->
         <div class="container {% if not is_mobile() or is_tablet() %}m-margin-top{% endif %}">
