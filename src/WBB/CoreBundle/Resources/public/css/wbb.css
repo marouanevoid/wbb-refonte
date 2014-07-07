@@ -229,3 +229,7 @@ section.bar-filter .container:nth-child(2) {
 article.tip .content .excerpt td .scroll{
     width: 209px;
 }
+
+.sub-header table tr td:nth-child(1), .sub-header table td:nth-child(3){
+    width : 28%;
+}
