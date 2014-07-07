@@ -25,3 +25,10 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBUserBundle:User']
+
+    #User Registration Form
+    wbb_user.registration.form.type:
+        class: WBB\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: wbb_user_registration }

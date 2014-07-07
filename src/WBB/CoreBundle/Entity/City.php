@@ -69,18 +69,6 @@ class City {
      */
     private $image;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-//     */
-//    private $image;
-//
-//    /**
-//     * @var FileUpload
-//     */
-//    private $file;
-
     /**
      * @var boolean
      *
@@ -99,7 +87,7 @@ class City {
     private $suburbs;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"persist"})
      */
     private $users;
 
@@ -625,5 +613,104 @@ class City {
     public function getNews()
     {
         return $this->news;
+    }
+
+    /**
+     * Add userHomes
+     *
+     * @param \WBB\UserBundle\Entity\User $userHomes
+     * @return City
+     */
+    public function addUserHome(\WBB\UserBundle\Entity\User $userHomes)
+    {
+        $this->userHomes[] = $userHomes;
+
+        return $this;
+    }
+
+    /**
+     * Remove userHomes
+     *
+     * @param \WBB\UserBundle\Entity\User $userHomes
+     */
+    public function removeUserHome(\WBB\UserBundle\Entity\User $userHomes)
+    {
+        $this->userHomes->removeElement($userHomes);
+    }
+
+    /**
+     * Get userHomes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserHomes()
+    {
+        return $this->userHomes;
+    }
+
+    /**
+     * Add userCities1
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities1
+     * @return City
+     */
+    public function addUserCities1(\WBB\UserBundle\Entity\User $userCities1)
+    {
+        $this->userCities1[] = $userCities1;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCities1
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities1
+     */
+    public function removeUserCities1(\WBB\UserBundle\Entity\User $userCities1)
+    {
+        $this->userCities1->removeElement($userCities1);
+    }
+
+    /**
+     * Get userCities1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserCities1()
+    {
+        return $this->userCities1;
+    }
+
+    /**
+     * Add userCities2
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities2
+     * @return City
+     */
+    public function addUserCities2(\WBB\UserBundle\Entity\User $userCities2)
+    {
+        $this->userCities2[] = $userCities2;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCities2
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities2
+     */
+    public function removeUserCities2(\WBB\UserBundle\Entity\User $userCities2)
+    {
+        $this->userCities2->removeElement($userCities2);
+    }
+
+    /**
+     * Get userCities2
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserCities2()
+    {
+        return $this->userCities2;
     }
 }

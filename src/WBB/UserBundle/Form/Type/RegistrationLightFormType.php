@@ -10,7 +10,7 @@ use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 /**
  * Registration Form Type
  */
-class RegistrationFormType extends BaseType
+class RegistrationLightFormType extends BaseType
 {
     /**
      * {@inheritdoc}
@@ -19,18 +19,6 @@ class RegistrationFormType extends BaseType
     {
         $builder
             ->add('username')
-            ->add('title', 'choice', array(
-                'expanded' => false,
-                'multiple' => false,
-                'required' => false,
-                'empty_value' => 'Please choose your gender',
-                'choices'  => array(
-                    'F'   =>  'F',
-                    'M'   =>  'M'
-                )
-            ))
-            ->add('firstname')
-            ->add('lastname')
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
@@ -40,19 +28,6 @@ class RegistrationFormType extends BaseType
             ))
             ->add('birthdate')
             ->add('country')
-
-            ->add('prefCity1')
-            ->add('prefCity2')
-            ->add('prefCity3')
-            ->add('prefBar1')
-            ->add('prefBar2')
-            ->add('prefBar3')
-            ->add('prefDrinkBrand1')
-            ->add('prefDrinkBrand2')
-            ->add('prefDrinkBrand3')
-            ->add('prefCocktails1')
-            ->add('prefCocktails2')
-            ->add('prefCocktails3')
         ;
     }
 
@@ -76,7 +51,7 @@ class RegistrationFormType extends BaseType
      */
     public function getName()
     {
-        return 'wbb_user_registration';
+        return 'wbb_user_registration_light';
     }
 
 }

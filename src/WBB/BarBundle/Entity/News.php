@@ -90,28 +90,28 @@ class News {
     private $isOnTop;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news")
      */
     private $bars; 
     
     /**
-     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news")
      */
     private $cities;
 
     /**
-     * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="news")
      */
     private $bestOfs;     
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news")
      * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\NewsMedia", mappedBy="news", cascade={"remove", "persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\NewsMedia", mappedBy="news", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $medias;
@@ -356,6 +356,7 @@ class News {
      */
     public function removeBar($bar){
         $this->bars->removeElement($bar);
+        $bar->getNews()->removeElement($this);
     }
 
     /**
@@ -386,6 +387,7 @@ class News {
      */
     public function removeBestOf($bestOf){
         $this->cities->removeElement($bestOf);
+        $bestOf->getNews()->removeElement($this);
     }
 
     /**
@@ -634,6 +636,7 @@ class News {
     public function removeCity(City $city)
     {
         $this->cities->removeElement($city);
+        $city->getNews()->removeElement($this);
     }
 
     /**

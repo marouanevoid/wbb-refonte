@@ -2,12 +2,14 @@
 city_homepage:
     pattern: /top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
+    options:
+        expose: true
 
 homepage:
     pattern: /
     defaults: { _controller: WBBBarBundle:Bar:home}
     options:
-            expose: true
+        expose: true
 
 wbb_bar_guides:
     pattern: /bar-guides
