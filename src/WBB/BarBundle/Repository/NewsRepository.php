@@ -48,13 +48,13 @@ class NewsRepository extends EntityRepository
             return $qb->getQuery()->getResult();
     }
 
-    public function findRelatedNews($cities = null, $limit = 3)
+    public function findRelatedNews($cities = null, $limit = 3, $exceptIds = array(0))
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq(1, 1))
+            ->where($qb->expr()->notIn($this->getAlias().'.id', $exceptIds))
             ->orderBy($this->getAlias().'.isOnTop', 'DESC')
         ;
 
