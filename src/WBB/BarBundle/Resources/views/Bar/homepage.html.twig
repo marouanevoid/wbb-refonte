@@ -3,7 +3,6 @@
 {% block title %}World Best Bars{% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             {% if city is defined %}
@@ -11,9 +10,11 @@
             {% endif %}
             initializeSliders();
         });
-
-        window.homepage = true;
+        {% if city is not defined %}
+            window.homepage = true;
+        {% endif %}
     </script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
 {% endblock %}
 {% block bodyTag %}
 <body class="index">
