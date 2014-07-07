@@ -1,0 +1,60 @@
+/* Footer
+--------------------------------------------------- */
+
+    footer {
+      width: 100%; background-color: $color-dark-gray; position: relative;
+      .left, .right{ height: $footer-height }
+      .left { float: left;
+
+        nav {
+          a { color: $color-subtle-yellow; margin-right: 1em; position: relative }
+          a+a:before{ font-size: 0.6em; padding: 0 0.8em; color: $color-subtle-yellow; content: '•'; position: absolute; left: -2em; }
+          a:hover{ color: $color-brown }
+        }
+
+        .copy { margin-top: 1.5em; color: $color-subtle-yellow; }
+
+      }
+      .left.right{
+        float: none; height: auto; padding: 0 2em; width: auto; margin-top: 2em;
+        .social-icons, .keep-in-touch{
+          float: none; text-align: center; border-left: 0; border-bottom: 1px solid #5c5549; padding:2em 0; max-width:  none;
+          h4{ color: $color-subtle-yellow; text-transform: uppercase; font-size: 1.6em; font-weight: bold; margin-bottom: 10px!important }
+        }
+        .copyright{ text-align: center; padding-bottom: 2em }
+      }
+      .right {
+        float: right; color: $color-subtle-yellow;
+        .social-icons,
+        .keep-in-touch { border-left: 1px solid #5c5549; height: 100%; padding:0 3em; }
+
+        .social-icons {
+          float: left; height: 100%;
+          a {
+            padding:0 1em; display: inline-block;
+            img{ background-image: url("../images/sprite.png"); background-size: 256px 512px; background-repeat: no-repeat; display: block }
+            span{ position: relative; display: inline-block }
+            span:after{
+              @include transition( opacity 0.2s ease-in-out); opacity : 0; content: ''; position: absolute;
+              left: 0; top: 0; width: 100%; height: 100%; background-image: url("../images/sprite.png"); background-size: 256px 512px; background-repeat: no-repeat }
+          }
+          a:hover span:after { opacity : 1 }
+          .facebook img{ background-position: -94px -287px }
+          .facebook span:after{ background-position: -94px -327px }
+          .twitter img{ background-position: -166px -287px }
+          .twitter span:after{ background-position: -166px -327px }
+          .instagram img{ background-position: -127px -287px }
+          .instagram span:after{ background-position: -127px -327px }
+          .pinterest img{ background-position: -208px -287px }
+          .pinterest span:after{ background-position: -208px -327px }
+        }
+
+        .keep-in-touch {
+          float: left; text-align: right; border-left: 1px solid #5c5549; padding-right: 0; max-width: 300px;
+          h3 { color: $color-subtle-yellow; font-weight: bold; text-align: center }
+          .socials{ height: 20px; overflow: hidden }
+          .fb-like{ display: inline-block!important; width: auto!important }
+          .fb-like, iframe{ vertical-align: middle; margin: 0 2px }
+        }
+      }
+    }
