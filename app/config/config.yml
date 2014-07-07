@@ -180,6 +180,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
+                small:          { width: 100 , quality: 100}
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
 
