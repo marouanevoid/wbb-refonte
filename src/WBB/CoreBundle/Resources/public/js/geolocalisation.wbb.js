@@ -88,7 +88,7 @@
                 bbase = split[2];
             return bbase;
           }
-          // if(data.slug)
+          // if(data.slug && window.homepage)
           //   window.location.href =  directionRoote;
       }
 
