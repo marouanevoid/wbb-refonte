@@ -7,20 +7,33 @@
 /* Globale Tags */
 	body {}
 	input[type="submit"] {border: none;}
-	::-webkit-input-placeholder { /* WebKit browsers */
+	input[type="email"]::-webkit-input-placeholder,
+	input[type="text"]::-webkit-input-placeholder,
+	input[type="password"]::-webkit-input-placeholder { /* WebKit browsers */
 	    color:    #818a8c;
 	}
-	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	input[type="text"]:-moz-placeholder,
+	input[type="password"]:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
 	    color:    #818a8c;
 	    opacity:  1;
 	}
-	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	input[type="email"]::-moz-placeholder,
+	input[type="text"]::-moz-placeholder,
+	input[type="password"]::-moz-placeholder { /* Mozilla Firefox 19+ */
 	    color:    #818a8c;
 	    opacity:  1;
 	}
-	:-ms-input-placeholder { /* Internet Explorer 10+ */
+	input[type="email"]:-ms-input-placeholder,
+	input[type="text"]:-ms-input-placeholder,
+	input[type="password	"]:-ms-input-placeholder { /* Internet Explorer 10+ */
 	    color:    #818a8c;
 	}
+/* Globale Libs */
+	form .icheckbox_flat {display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
+	form .icheckbox_flat {background-position: 0 0;}
+    form .icheckbox_flat.checked {background-position: 0 -21px;}
+    form .icheckbox_flat.disabled {background-position: 0 0; cursor: default;}
+    form .icheckbox_flat.checked.disabled {background-position: 0 0;}
 /* Globale Classes */
 	.clear {clear: both;}
 	.block {display: block;}
@@ -31,6 +44,7 @@
 	.bold {font-weight: bold;}
 	.unbold {font-weight: lighter;}
 	.wrap {margin-left: auto; margin-right: auto;}
+	.container {width: 1172px!important;}
 
 	/* TEMPS */
 		.mask {width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-color: #000; opacity: 0.8;} /* TEMPS !!! */
@@ -38,7 +52,6 @@
 		.group-form {overflow: hidden;}
 		.separator-top {border-top: 1px solid #818a8c;}
 		.separator-bottom {border-bottom: 1px solid #818a8c;}
-
 	/* Radius */
 		.radius-30 {-webkit-border-radius: 30px;
 					-moz-border-radius: 30px;
@@ -48,6 +61,10 @@
 					-moz-border-radius: 60px;
 					-o-border-radius: 60px;
 					border-radius: 60px;}
+		.radius-max {-webkit-border-radius: 10em;
+					-moz-border-radius: 10em;
+					-o-border-radius: 10em;
+					border-radius: 10em;}
 	/* Margins */
 		.no-margin {margin: 0!important;}
 		/* Margin top */
@@ -66,6 +83,24 @@
 			.margin-bottom-20 {margin-bottom: 20px!important; display: block;}
 			.margin-bottom-30 {margin-bottom: 30px!important; display: block;}
 			.margin-bottom-40 {margin-bottom: 40px!important; display: block;}
+	/* Paddings */
+		.no-padding {padding: 0!important;}
+		/* padding top */
+			.padding-top-10 {padding-top: 10px!important; display: block;}
+			.padding-top-15 {padding-top: 15px!important; display: block;}
+			.padding-top-20 {padding-top: 20px!important; display: block;}
+			.padding-top-30 {padding-top: 30px!important; display: block;}
+			.padding-top-40 {padding-top: 40px!important; display: block;}
+			.padding-top-50 {padding-top: 50px!important; display: block;}
+			.padding-top-80 {padding-top: 80px!important; display: block;}
+			.padding-top-100 {padding-top: 100px!important; display: block;}
+
+		/* padding bottom */
+			.padding-bottom-10 {padding-bottom: 10px!important; display: block;}
+			.padding-bottom-15 {padding-bottom: 15px!important; display: block;}
+			.padding-bottom-20 {padding-bottom: 20px!important; display: block;}
+			.padding-bottom-30 {padding-bottom: 30px!important; display: block;}
+			.padding-bottom-40 {padding-bottom: 40px!important; display: block;}
 	/* Typographs */
 		.text-align-center {text-align: center;}
 		.text-align-left {text-align: left;}
@@ -73,25 +108,39 @@
 		.text-transform-uppercase {text-transform: uppercase;}
 		.text-transform-lowercase {text-transform: lowercase;}
 		.text-transform-capitalize {text-transform: capitalize;}
+	/* Columns */
+		.col {margin-left: 5px; margin-right: 5px;}
+		.col-4 {width: 35%;}
+
+/* Globale ID's */
+	#date-birthday .select-wrap {width: 95px; margin-right: 7px;}
+	#date-birthday .ui-dropdown-container {width: 95px!important;}
+	#countries .ui-dropdown-container {width: 100%!important;}
+	#UI form label {font-size: 17px;}
+	#UI form .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
 /* Globale Mobile Classes */
 	.mobile .content {padding: 0 30px 60px;}
-	.mobile .radius {border-radius: 100%;}
+	.mobile .radius {border-radius: 100%;}	
 /* Globale Mobile */
 	.mobile a,
 	.mobile p {font-size: 28px!important;}
 	.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
 	.mobile form label {display: none; visibility: hidden;}
 	.mobile .btn {height: 120px; font-size: 42px;}
+
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
 	#UI {background-color: #faf3e1; position: relative; top: 145px;}
 	#UI a {color: #818a8c; font-size: 17px; text-decoration: underline;}
+	#UI a.ui-radio {color: #b3955f; text-decoration: none;}
+	#UI a.ui-radio.active,
+	#UI a.ui-radio:hover {background: #b3955f !important; color: #faf3e1;}
 	#UI a:hover {text-decoration: none;}
 	#UI.wrap {width: 720px; padding: 25px 25px 60px;}
-	#UI .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase;}
+	#UI .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif; /*text-transform: uppercase;*/}
 	#UI .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif; letter-spacing: -1px;}
 	#UI .block {width: 300px;}
 	#UI .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
-	#UI .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-align: center; font-size: 17px; background-color: #faf3e1;}
+	#UI .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
 	#UI .form-submit {background-color: #b3955f; font-size: 22px;}
 	#UI .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
 	#UI .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 25px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
@@ -104,7 +153,6 @@
 	#UI.mobile .separator {margin: 0 auto;}
 	#UI.mobile .btn {height: 120px; font-size: 42px;}
 	#UI.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
-
 /* Register1 (Popup) - PSDN : PSDs/login/desktop/register1.psd & register2.psd; */
 	#register {padding: 0 25px;}
 	#register .title {width: 55%;}
@@ -115,12 +163,8 @@
 	#register .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
 	#register .btn-create-with-fb {margin: 0 0 0 16px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
 	#register .connect-fb {line-height: 45px; font-size: 15px;}
-	#register .ui-dropdown-container .ui-dropdown {background-color: #faf3e1; font-size: 17px; padding: 0 10px 0; border-radius: 2em;}
 	#register #date-birthday label {color: #818a8c; font-size: 17px;}
-	#register #date-birthday .select-wrap {width: 95px; margin-right: 7px;}
 	#register #date-birthday .select-wrap.last {margin-right: 0;}
-	#register #date-birthday .ui-dropdown-container {width: 95px!important;}
-	#register #countries .ui-dropdown-container {width: 100%!important;}
 	#register #message {background-color: #818a8c; width: 100%; padding: 20px 0;}
 	#register #message img {margin: 0 20px 07;}
 	#register #message p {color: #faf3e1; font-size: 15px; padding: 0 10px 0 0; line-height: 16px;}
@@ -214,6 +258,28 @@
 	#register.page.mobile #create-account label {margin: 40px 0 20px; float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 28px; font-weight: lighter;}
 	#register.page.mobile #create-account .form-submit {font-size: 32px; margin: 30px 0 0;}
 	#register.page.mobile .ui-dropdown-container .ui-dropdown span {height: 80px; line-height: 80px;}
-/* register3 (Mobile) */
+/* Register3 (Mobile) */
 	#register.mobile #UI #success p {margin: 0 auto 30px; width: 60%;}
 	#register.mobile #UI #success .subtitle {padding: 0;}
+/* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
+	#editprofile #UI {top: 0; width: 530px;}
+	#editprofile .title h5 {color: #333; font-size: 30px; font-family: "Myriad Pro", sans-serif;}
+	#editprofile .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
+	#editprofile .group.right {width: 410px;}
+	#editprofile .subgroup.wrap {width: 210px;}
+	#editprofile .avatar-profil {position: absolute;}
+	#editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
+	#editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.jpg") no-repeat 0 0;}
+	#editprofile .file-image:hover {cursor: pointer;}
+	#editprofile .file-image input {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
+	#editprofile #edit-account {position: relative;}
+	#editprofile #edit-account label {display: block; text-align: right; float: left; width: 200px; line-height: 35px; padding: 0 15px 0 0; font-weight: lighter;}
+	#editprofile #edit-account .form-text {float: left; width: 300px;}
+	#editprofile #edit-account .form-text-without-label {margin: 0 0 0 215px;}
+	#editprofile #edit-account .group-form.checkbox label {width: 400px; font-size: 13px;}
+	#editprofile #edit-account .group-actions {width: 300px; margin-right: 15px;}
+
+/* UserProfile */
+	.filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
+	.block-top {width: 520px;}
+
