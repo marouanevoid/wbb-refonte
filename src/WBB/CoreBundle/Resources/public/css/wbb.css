@@ -237,3 +237,7 @@ article.tip .content .excerpt td .scroll{
 .bar-w-pic-list .separator{
     left: 24.5%;
 }
+
+.articles.padding article.small + article.small{
+    margin-left : 0;
+}
