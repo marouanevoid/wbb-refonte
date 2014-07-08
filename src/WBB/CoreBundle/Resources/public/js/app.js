@@ -271,8 +271,40 @@ meta.App = function() {
         that._setupEvents();
         that._customScroll();
     };
+    /**
+    *** Add listner on bar
+    *    finder
+    ***/
+
+    that.bareFinderHandler = function(){
+            // add listner on city changes
+            var $finder = $('.bar-finder'),
+                $city = $finder.find('.city li'),
+                $gowith = $finder.find('.friend li'),
+                $chilot = $('.chillout'),
+                $casual = $('.casual'),
+                $party = $('.party');
+
+            $city.on('click',function(){
+                // stock the current city on session cookie
+                $.cookie('finder_city' , $(this).prop('class'), 0);
+            });            
+
+            $gowith.on('click',function(){
+                // stock the current city on session cookie
+                $.cookie('finder_gowith' , $(this).prop('class'), 0);
+            });
+
+            $chilot.on('click',function(){ $.cookie('finder_mood' , 'chilot' , 0)});
+            $casual.on('click',function(){ $.cookie('finder_mood' , 'casual' , 0)});
+            $party.on('click',function(){ $.cookie('finder_mood' , 'party' , 0)});
+
+
+
+    }
 
     that.__construct();
+    that.bareFinderHandler();
 };
 
 

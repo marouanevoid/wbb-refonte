@@ -20,6 +20,7 @@
                         <td>
                             <select class="ui-dropdown dark" name="city" data-class="with-icon city">
                                 <option value="">Choose a City</option>
+{#                                 {% if city is defined %} <option value="">{{ city.name }}</option> {% endif %} #}
                                 {% for city in cities %}
                                     <option value="{{ city.slug }}">{{ city.name }}</option>
                                 {% endfor %}
@@ -28,7 +29,7 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
-                                <option value=""></option>
+                               {#  <option value=""></option> #}
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}">{{ tag.name }}</option>
                                 {% endfor %}
