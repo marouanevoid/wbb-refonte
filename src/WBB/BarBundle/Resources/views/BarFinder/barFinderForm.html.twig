@@ -29,7 +29,7 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
-                               {#  <option value=""></option> #}
+                                <option value="">Choose with who</option>
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}">{{ tag.name }}</option>
                                 {% endfor %}
