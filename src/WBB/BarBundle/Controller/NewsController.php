@@ -43,6 +43,9 @@ class NewsController extends Controller
         }
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
+
+        var_dump(count($newsList));die;
+
         return $this->render('WBBBarBundle:News:landingPage.html.twig', array(
             'city'      => $city,
             'latest'    => $latestNews,
