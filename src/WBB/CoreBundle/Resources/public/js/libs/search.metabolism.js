@@ -108,7 +108,7 @@ meta.Search = function(config){
             $('.entire-content').hide();
         }
 
-        $.post('tmp/data/search.php',{q:q}, function( data )
+        $.post('/tmp-search.php',{q:q}, function( data )
         {
             if(data.code == 200)
             {
