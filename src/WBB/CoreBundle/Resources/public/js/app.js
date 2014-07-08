@@ -179,7 +179,7 @@ meta.App = function() {
             $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
         });
 
-        if(window.homepage){
+        if(window.homepage && window.shownav){
             // demeande de dispatch lick on finder
              $('header .finder').click();
              var closed = false;

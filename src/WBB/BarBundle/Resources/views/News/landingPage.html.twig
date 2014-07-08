@@ -9,6 +9,8 @@
             $(".older-news article:lt(3)").show();
             if($('.older-news article').length>3)
                 $(".load-more-container").show();
+            else
+                $(".load-more-container").hide();
             var display;
             $(".load-more").click(function(){
                 display = $('.older-news article:visible').length+3;
@@ -27,6 +29,7 @@
         .older-news article {
             display: none;
         }
+
     </style>
 {% endblock %}
 {% block bodyTag %}
