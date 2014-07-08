@@ -143,8 +143,8 @@
                     </div>
                 </div>
                 {% for n in interviews|slice(1,1) %}
-                    {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %} #}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %}
+                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
+                    {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
                 {% endfor %}
 
                 {% for n in interviews|slice(2,1) %}
