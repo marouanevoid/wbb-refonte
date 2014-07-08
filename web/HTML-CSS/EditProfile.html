@@ -1,12 +1,11 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+	<title>Edit Profile</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="stylesheets/front.css">
-	<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
 
 	<!-- JS -->
 	<script type="text/javascript" src="js/plugins/jquery.min.js"></script>
@@ -20,6 +19,7 @@
     <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.mousewheel.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.jscrollpane.js"></script>
+    <script type="text/javascript" src="js/plugins/icheck.min.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
@@ -68,39 +68,58 @@
         <div class="search-result-proposal"><ul></ul></div>
     </header>
 
-    <div class="full-cream">
-    	<div id="register" class="page mobile wrap margin-bottom-20">
+    <div class="full-cream" style="background-color:#fff;">
+		  <div id="editprofile" class="page wrap margin-bottom-20">
             <div id="UI" class="wrap">
-                <div class="title text-transform-uppercase bold">Register</div>
                 <div class="margin-top-20">
-                    <div id="create-account">
-                        <div class="subtitle text-transform-uppercase bold">Create an account now</div>
-                            <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" class="btn btn-create-with-fb radius-30">Facebook</a></div>
-                        <form>
-                            <div class="text-align-left margin-bottom-20">
-                                <div class="group-form margin-top-20">
-                                    <!-- <label>Name</label> --><!-- We this label for this form for version mobile -->
-                                    <input type="text" class="form-text" placeholder="Name">
-                                </div>
-                                <div class="group-form margin-top-10">
-                                    <!-- <label>Email</label> --><!-- We this label for this form for version mobile -->
-                                    <input type="text" class="form-text" placeholder="Email">
-                                </div>
-                                <div class="group-form margin-top-10">
-                                    <!-- <label>Password</label> --><!-- We this label for this form for version mobile -->
-                                    <input type="password" class="form-text" placeholder="Password">
-                                </div>
-                                <div class="group-form margin-top-10">
-                                    <!-- <label>Confirm Password</label --><!-- We this label for this form for version mobile -->
-                                    <input type="password" class="form-text" placeholder="Confirm Password">
-                                </div>
+                    <div id="edit-account">
+                            <div class="avatar-profil left">
+                                <img src="images/UI/_images/robert_smithson.jpg" height="145" width="145" class="radius-max">
                             </div>
 
-                            <div id="date-birthday" class="text-align-center">
-                                <label class="show">Date of Birth</label>
+                            <div class="group right">
+                                <div class="title text-transform-capitalize unbold">
+                                    <h5>Robert simthson</h5>
+                                </div>
+                                <div class="subgroup margin-top-10 wrap">
+                                    <div class="text-transform-capitalize text-align-center">
+                                        <div class="city"><img src="images/UI/icon_map.jpg"> New York, USA</div>
+                                    </div>
+                                    <form>
+                                        <div class="form-group">
+                                            <div class="file-image wrap">
+                                                <input type="file" class="form-file">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> <!-- .subgroup.right -->
+                            </div> <!-- .group.right -->
+
+                            <div class="clear"></div>
+                        <form>
+
+                            <div class="group-form margin-top-20">
+                                <label>Name</label>
+                                <input type="text" class="form-text text-align-center" placeholder="Robert Simthson">
+                            </div>
+                            <div class="group-form margin-top-10">
+                                <label>Email</label>
+                                <input type="text" class="form-text text-align-center" placeholder="robertsimtshon@gmail.com">
+                            </div>
+                            <div class="group-form margin-top-10">
+                                <label>Password</label>
+                                <input type="password" class="form-text text-align-center" placeholder="**********">
+                            </div>
+                            <div class="group-form margin-top-10">
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-text text-align-center" placeholder="**********">
+                            </div>
+
+                            <div id="date-birthday" class="text-align-center margin-top-10  ">
+                                <label>Date of Birth</label>
                                 <div class="select-wrap left">
                                     <select id="months" class="ui-dropdown">
-                                        <option>MM</option>
+                                        <option>12</option>
                                         <option>30</option>
                                         <!-- [Your loops here] -->
                                     </select>
@@ -123,7 +142,7 @@
                             <div class="clear"></div>
 
                             <div id="countries" class="margin-top-10">
-                                <!-- <label>Country</label> --> <!-- We this label for this form for version mobile -->
+                                <label>Country</label>
                                 <div class="left" style="width: 300px">
                                     <select class="ui-dropdown">
                                         <option>United States of America</option>
@@ -135,37 +154,53 @@
                             <div class="clear"></div>
 
                             <div class="group-form margin-top-10">
-                                <label class="show">Cities you like to go</label>
+                                <label>Cities you like to go</label>
                                 <input type="text" class="form-text" placeholder="New York City">
                                 <input type="text" class="form-text margin-top-10 form-text-without-label" placeholder="Rio de Janeiro">
                                 <input type="text" class="form-text margin-top-10 form-text-without-label" placeholder="London">
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="show">Drink brands</label>
+                                <label>Favorite bars</label>
+                                <input type="text" class="form-text" placeholder="Macao Trading Co.">
+                                <input type="text" class="form-text margin-top-10 form-text-without-label" placeholder="Goodnite Gracie Jazz and Martini Bar">
+                                <input type="text" class="form-text margin-top-10 form-text-without-label" placeholder="Centaur Bar">
+                            </div>
+
+                            <div class="group-form margin-top-10">
+                                <label>Drink brands</label>
                                 <input type="text" class="form-text" placeholder="Jameson">
                                 <input type="text" class="form-text margin-top-10 form-text-without-label" placeholder="Chivas">
                                 <input type="text" class="form-text margin-top-10 form-text-without-label" placeholder="Midleton">
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="show">Categories or cocktails</label>
+                                <label>Categories or cocktails</label>
                                 <input type="text" class="form-text">
                                 <input type="text" class="form-text margin-top-10 form-text-without-label">
                                 <input type="text" class="form-text margin-top-10 form-text-without-label">
                             </div>
 
-                            <div class="group-action">
-                                <input type="submit" class="form-submit btn" value="Create Your Account">
+                            <div class="group-form checkbox margin-top-10">
+                                <label class="wrap"><input type="checkbox" class="form-checkbox left">
+                                Unsubscribe the newsletter</label>
                             </div>
+
+                            <div class="group-actions margin-top-20 right">
+                                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
+                            </div>
+
                         </form>
                         <div class="clear"></div>
                     </div>
-                </div>
+                </div> <!-- .margin-top-20 -->
                 <div class="clear"></div>
             </div> <!-- #UI -->
-        </div> <!-- #register -->
-    </div> <!-- .full-cream -->
+        </div> <!-- #editprofile -->
+        <div id="banner-bottom" class="margin-bottom-20 text-align-center">
+            <a href="#"><img src="images/UI/banner.jpg" align="center"></a>
+        </div> <!--  -->
+    </div>
 
     <footer>
         <div class="container">
@@ -201,13 +236,21 @@
                         <h3 class="s-margin-bottom">Keep in touch</h3>
 
                         <div class="socials">
-                            <div class="fb-like fb_iframe_widget" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;href=http%3A%2F%2Fwww.facebook.com%2Fworldsbestbars&amp;layout=button&amp;locale=fr_FR&amp;sdk=joey&amp;share=false&amp;show_faces=false"><span style="vertical-align: top; width: 0px; height: 0px;"><iframe name="f58793cc" width="1000px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/v2.0/plugins/like.php?action=like&amp;app_id=&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FDhmkJ2TR0QN.js%3Fversion%3D41%23cb%3Df12a753d98%26domain%3Dwbb-dev.lapreprod.com%26origin%3Dhttp%253A%252F%252Fwbb-dev.lapreprod.com%252Ff461a0958%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fwww.facebook.com%2Fworldsbestbars&amp;layout=button&amp;locale=fr_FR&amp;sdk=joey&amp;share=false&amp;show_faces=false" style="border: none; visibility: visible; width: 0px; height: 0px;"></iframe></span></div>
-                            <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1404409145.html#_=1404486817128&amp;id=twitter-widget-0&amp;lang=fr&amp;screen_name=WorldsBestBars&amp;show_count=false&amp;show_screen_name=false&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 59px; height: 20px;"></iframe>
+                            <!--  <div class="fb-like fb_iframe_widget" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;href=http%3A%2F%2Fwww.facebook.com%2Fworldsbestbars&amp;layout=button&amp;locale=fr_FR&amp;sdk=joey&amp;share=false&amp;show_faces=false"><span style="vertical-align: top; width: 0px; height: 0px;"><iframe name="f58793cc" width="1000px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/v2.0/plugins/like.php?action=like&amp;app_id=&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FDhmkJ2TR0QN.js%3Fversion%3D41%23cb%3Df12a753d98%26domain%3Dwbb-dev.lapreprod.com%26origin%3Dhttp%253A%252F%252Fwbb-dev.lapreprod.com%252Ff461a0958%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fwww.facebook.com%2Fworldsbestbars&amp;layout=button&amp;locale=fr_FR&amp;sdk=joey&amp;share=false&amp;show_faces=false" style="border: none; visibility: visible; width: 0px; height: 0px;"></iframe></span></div> -->                        <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1404409145.html#_=1404486817128&amp;id=twitter-widget-0&amp;lang=fr&amp;screen_name=WorldsBestBars&amp;show_count=false&amp;show_screen_name=false&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 59px; height: 20px;"></iframe>
                         </div>
                     </div></div></div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script type="text/javascript">
+
+            $('.form-checkbox').iCheck({
+                checkboxClass: 'icheckbox_flat',
+                increaseArea: '20%' // optional
+            });
+
+    </script>
 </body>
 </html>

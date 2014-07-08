@@ -9,6 +9,8 @@
             $(".older-news article:lt(3)").show();
             if($('.older-news article').length>3)
                 $(".load-more-container").show();
+            else
+                $(".load-more-container").hide();
             var display;
             $(".load-more").click(function(){
                 display = $('.older-news article:visible').length+3;
@@ -27,6 +29,7 @@
         .older-news article {
             display: none;
         }
+
     </style>
 {% endblock %}
 {% block bodyTag %}
@@ -47,8 +50,8 @@
                         <tr>
                             <td>
 
-                                <div class="city-selector h3">
-                                    You are in
+                                <div class="city-selector h3"> 
+                                    You are in 
                                     <select class="ui-dropdown" name="city" data-class="with-icon city"
                                             id="city_selector">
                                         <option disabled="disabled">Choose a City</option>
@@ -56,9 +59,11 @@
                                             <option data-type="redirect"
                                                     {# value="{{ path('city_homepage',{slug:c.slug}) }}" #}
                                                     value="{{ path('wbb_news_landing_page_city',{citySlug:c.slug}) }}"
-                                                    {#{% if city is defined and c.id==city.id %}#}
-                                                    {#selected="selected"#}
-                                                    {#{% endif %}#}
+         {#                                                {% if city is defined %}
+                                                        {% if city.name == city %}
+                                                        selected="selected"
+                                                        {% endif %}
+                                                        {% endif %} #}
                                                     >{{ c.name }}</option>
                                         {% endfor %}
                                         <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide
@@ -139,10 +144,12 @@
                 </div>
                 {% for n in interviews|slice(1,1) %}
                     {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
+                    {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
                 {% endfor %}
 
                 {% for n in interviews|slice(2,1) %}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
+                    {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
                 {% endfor %}
 
                 {% for n in articles|slice(3,1) %}
@@ -150,11 +157,13 @@
                 {% endfor %}
 
                 {% for n in interviews|slice(3,1) %}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
+                    {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
                 {% endfor %}
 
                 {% for n in articles|slice(4,1) %}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
+                    {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %} #}
+                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
                 {% endfor %}
 
 
@@ -186,6 +195,9 @@
         <div class="container {% if not is_mobile() or is_tablet() %}m-margin-top{% endif %}">
             <!-- 12 COLS -->
             <div class="articles older-news twelve columns">
+                {% for n in articles|slice(4,3) %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                {% endfor %}
                 {% set newsIndex = 0 %}
                 {% for n in newsList %}
                     {% if newsIndex <= 0 %}

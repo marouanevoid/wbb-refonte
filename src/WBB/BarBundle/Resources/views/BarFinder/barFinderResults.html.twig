@@ -22,6 +22,40 @@
                     $('.gridview').hide();
                 }
             });
+
+
+            // auto focus on perviews result search
+
+            if($.cookie){
+                var $finder = $('.bar-finder'),
+                $city = $finder.find('.city li'),
+                $gowith = $finder.find('.friend li'),
+                $chilot = $('.chillout'),
+                $casual = $('.casual'),
+                $party = $('.party');
+
+                if($.cookie('finder_city')){
+                    // Focus on city
+                    $finder.find('.'+$.cookie('finder_city')).click();
+                }   
+
+                if($.cookie('finder_gowith')){
+                    // Focus on go width
+                    $finder.find('.'+$.cookie('finder_gowith')).click();
+                }
+
+                if($.cookie('finder_mood')){
+                    //focus on Mood
+                    // Remove Class the the all Mood
+                    $chilot.removeClass('active');
+                    $casual.removeClass('active');
+                    $party.removeClass('active');
+                    $finder.find('.' + $.cookie('finder_mood')).addClass('active')
+                }
+
+                // OPEN THE FINDER
+                $('header .finder').click();
+            }
         });
     </script>
 {% endblock %}
@@ -46,6 +80,11 @@
             padding: 0;
         }
     {% endif %}
+
+    .sub-header .title h1{
+        position: relative;
+        top:6px;
+    }
 </style>
 <div>
     <!-- SUBHEADER -->
@@ -58,7 +97,7 @@
                     <td class="title">
                         <h1 itemprop="name">Bar finder results</h1>
                         <h3>
-                            We found {{ bars|length }} bars that match your request!
+                            We found {{ bars|length }} {% if bars|length > 1 %}bars{% else %}bar{% endif %} that match your request!
                         </h3>
                     </td>
                     <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
@@ -85,8 +124,8 @@
                         <img src="{{ asset('bundles/wbbcore/') }}images/glass.png" width="113" style="margin: 50px 0" />
                         <h3>
                             Sorry we didn’t find any bars that matched your request.<br>
-                            Please change your criteria or contact us on Twitter<br>
-                            <u>@worldsbestbars</u>
+                            Please change your criteria or <a href='https://twitter.com/WorldsBestBars' target='_blank'>contact us</a> on Twitter<br>
+                            <a href='https://twitter.com/WorldsBestBars' target='_blank'>@worldsbestbars</a>
                         </h3>
                     </td>
                     <td></td>

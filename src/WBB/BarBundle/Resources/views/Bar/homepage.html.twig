@@ -11,9 +11,18 @@
             {% endif %}
             initializeSliders();
         });
-        {% if city is not defined %}
-            window.homepage = true;
-        {% endif %}
+
+    {% if city is not defined %}
+        window.homepage = true;
+        if($.cookie('shown-nav')){
+            window.shownav = false;
+        }else{
+            window.shownav = true;
+            $.cookie('shown-nav', true , 0)
+        }
+        $(window).unload( function () { $.cookie('shown-nav', null, {path:'/'})} );
+
+    {% endif %}
     </script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
 {% endblock %}
