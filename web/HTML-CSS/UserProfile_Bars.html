@@ -68,11 +68,10 @@
         <div class="search-result-proposal"><ul></ul></div>
     </header>
 
-    <div class="full-cream">
 		  <div id="editprofile" class="page wrap margin-bottom-20">
                 <div class="margin-top-20">
-                    <div id="view-account">
-                        <div id="UI" class="wrap container">
+                    <div id="view-account" class="mobile"> <!-- [ This Class is CONDITION OF MOBILE VERSION] -->
+                        <div id="UI" class="wrap container mobile">
 
                                 <div class="block-top wrap">
                                     <div class="avatar-profil left">
@@ -81,25 +80,22 @@
 
                                     <div class="group right">
                                         <div class="title text-transform-capitalize unbold">
-                                            <h5>Robert simthson</h5>
+                                            <h5>ROBERT SIMTHSON</h5>
                                         </div>
                                         <div class="subgroup margin-top-10 wrap">
                                             <div class="text-transform-capitalize text-align-center">
                                                 <div class="city"><img src="images/UI/icon_map.jpg"> New York, USA</div>
                                             </div>
-                                            <form>
-                                                <div class="form-group">
-                                                    <div class="file-image wrap">
-                                                        <input type="file" class="form-file">
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <div class="btn-editprofile">
+                                                <a href="#" class="btn radius-30">Edit Profile</a>
+                                            </div>
                                         </div> <!-- .subgroup.right -->
                                     </div> <!-- .group.right -->
+                                    <div class="clear"></div>
                                 </div> <!-- .block-top -->
                                 <div class="clear"></div>
 
-                            <div class="filter-profil separator-bottom padding-bottom-20">
+                            <div class="filter-profil padding-bottom-20 wrap">
                                 <div class="margin-top-80">
                                     <div class="disableClick"></div>
                                     <input type="radio" name="filter" value="(94) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
@@ -107,15 +103,38 @@
                                     <input type="radio" name="filter" value="(359) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
                                 </div>
                                 <div class="clear"></div>
-                            </div>
+                            </div> <!-- .filter-profil -->
 
+                            <hr>
                             <div class="clear"></div>
 
-                            <div class="filter-view margin-top-20">
-                                <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
-                                <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
-                            </div>
+                            <!-- Filters -->
+                            <div class="container">
+                                <div class="margin-top-20">
+                                    <div class="sort-by six columns">
 
+                                        <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+
+                                        <div class="four columns">
+                                            <select class="ui-dropdown light" name="criteria" id="criteria">
+                                                <option value="popularity" data-type="criteria">Date added</option>
+                                                <option value="date" data-type="criteria">Date</option>
+                                                <option value="distance" data-type="criteria">Distance</option>
+                                                <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                            </select>
+                                        </div>
+                                    </div> <!-- .sort-by -->
+
+                                    <div class="filter-view">
+                                        <div class="right">
+                                            <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                            <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                        </div>
+                                    </div> <!-- .filter-view -->
+                                </div> <!-- .margin-top-20 -->
+                            </div> <!-- .container -->
+
+                            <!-- List of Bars -->
                             <div class="margin-top-40">
                                 <ul class="list-bars">
                                     <li class="col-4 col">
@@ -198,16 +217,67 @@
                                             <img class="scale-with-grid" alt="Test bar" width="570" height="428" src="images/barfinder/_images/img_2.jpg">
                                         </article>
                                     </li>
+                                    <li class="col-4 col">
+                                        <article class="bar-w-pic">
+                                            <a href="#0" class="btn-round dark star"></a>
+                                            <div class="txt">
+                                                <h2>Test bar</h2>
+                                                <h3>Centre-ville, Toulouse</h3>
+                                                <div class="hover">
+                                                    <div class="tags">Luxury, Classy</div>
+                                                </div>
+                                            </div>
+                                            <a href="/app_dev.php/bar/Toulouse/Centre-ville/Test-Bar" class="overlay-link"></a>
+                                            <div class="color gradient"></div>
+                                            <div class="color gray"></div>
+                                            <img class="scale-with-grid" alt="Test bar" width="570" height="428" src="images/barfinder/_images/img_2.jpg">
+                                        </article>
+                                    </li>
+                                    <li class="col-4 col">
+                                        <article class="bar-w-pic">
+                                            <a href="#0" class="btn-round dark star"></a>
+                                            <div class="txt">
+                                                <h2>Test bar</h2>
+                                                <h3>Centre-ville, Toulouse</h3>
+                                                <div class="hover">
+                                                    <div class="tags">Luxury, Classy</div>
+                                                </div>
+                                            </div>
+                                            <a href="/app_dev.php/bar/Toulouse/Centre-ville/Test-Bar" class="overlay-link"></a>
+                                            <div class="color gradient"></div>
+                                            <div class="color gray"></div>
+                                            <img class="scale-with-grid" alt="Test bar" width="570" height="428" src="images/barfinder/_images/img_2.jpg">
+                                        </article>
+                                    </li>
+                                    <li class="col-4 col">
+                                        <article class="bar-w-pic">
+                                            <a href="#0" class="btn-round dark star"></a>
+                                            <div class="txt">
+                                                <h2>Test bar</h2>
+                                                <h3>Centre-ville, Toulouse</h3>
+                                                <div class="hover">
+                                                    <div class="tags">Luxury, Classy</div>
+                                                </div>
+                                            </div>
+                                            <a href="/app_dev.php/bar/Toulouse/Centre-ville/Test-Bar" class="overlay-link"></a>
+                                            <div class="color gradient"></div>
+                                            <div class="color gray"></div>
+                                            <img class="scale-with-grid" alt="Test bar" width="570" height="428" src="images/barfinder/_images/img_2.jpg">
+                                        </article>
+                                    </li>
                                 </ul>
                             </div>
+                            
+                            <!-- Button See more Bars -->
                             <div class="container">
-                                <div class="bars-w-pic force-load   load-container">
+                                <div class="bars-w-pic force-load load-container">
                                     <div class="load-target"></div>
                                     <div class="twelve columns align-center m-margin load-more-container">
                                         <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
                                     </div>
                                 </div>
                             </div>
+
                         <div class="clear"></div>
                     </div>
                 </div> <!-- .margin-top-20 -->
@@ -216,17 +286,7 @@
         </div> <!-- #editprofile -->
         <div id="banner-bottom" class="margin-bottom-20 text-align-center">
             <a href="#"><img src="images/UI/banner.jpg" align="center"></a>
-        </div> <!--  -->
-    </div>
-
-        <!-- BAR FILTER -->
-
-<section class="bar-filter">
-
-
-
-
-</section>
+        </div> <!-- #banner-bottom -->
 
     <footer>
         <div class="container">
