@@ -44,7 +44,9 @@
 	.bold {font-weight: bold;}
 	.unbold {font-weight: lighter;}
 	.wrap {margin-left: auto; margin-right: auto;}
+	.no-text {text-indent: -7777px; font-size: 0!important; color: transparent;}
 	.container {width: 1172px!important;}
+	.full-white {background-color: #fff;}
 
 	/* TEMPS */
 		.mask {width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-color: #000; opacity: 0.8;} /* TEMPS !!! */
@@ -83,6 +85,18 @@
 			.margin-bottom-20 {margin-bottom: 20px!important; display: block;}
 			.margin-bottom-30 {margin-bottom: 30px!important; display: block;}
 			.margin-bottom-40 {margin-bottom: 40px!important; display: block;}
+		/* Margin left */
+			.margin-left-10 {margin-left: 10px!important; display: block;}
+			.margin-left-15 {margin-left: 15px!important; display: block;}
+			.margin-left-20 {margin-left: 20px!important; display: block;}
+			.margin-left-30 {margin-left: 30px!important; display: block;}
+			.margin-left-40 {margin-left: 40px!important; display: block;}
+		/* Margin right */
+			.margin-right-10 {margin-right: 10px!important; display: block;}
+			.margin-right-15 {margin-right: 15px!important; display: block;}
+			.margin-right-20 {margin-right: 20px!important; display: block;}
+			.margin-right-30 {margin-right: 30px!important; display: block;}
+			.margin-right-40 {margin-right: 40px!important; display: block;}
 	/* Paddings */
 		.no-padding {padding: 0!important;}
 		/* padding top */
@@ -109,24 +123,28 @@
 		.text-transform-lowercase {text-transform: lowercase;}
 		.text-transform-capitalize {text-transform: capitalize;}
 	/* Columns */
-		.col {margin-left: 5px; margin-right: 5px;}
-		.col-4 {width: 35%;}
+		.col {margin-left: 5px; margin-right: 5px; float: left;}
+		.col-3 {width: 380px;}
+		.col-4 {width: 283px;}
 
 /* Globale ID's */
 	#date-birthday .select-wrap {width: 95px; margin-right: 7px;}
 	#date-birthday .ui-dropdown-container {width: 95px!important;}
 	#countries .ui-dropdown-container {width: 100%!important;}
 	#UI form label {font-size: 17px;}
-	#UI form .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+	#UI .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+	#UI .load-more	 {text-decoration: none;}
+	#UI .load-more:hover {color: #faf3e1;}
 /* Globale Mobile Classes */
-	.mobile .content {padding: 0 30px 60px;}
+	.mobile .content {padding: 0 20px 60px;}
 	.mobile .radius {border-radius: 100%;}	
 /* Globale Mobile */
 	.mobile a,
-	.mobile p {font-size: 28px;}
+	.mobile p {font-size: 20px;}
 	.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
 	.mobile form label {display: none; visibility: hidden;}
 	.mobile .btn {height: 120px; font-size: 42px;}
+	.mobile .col {float: none;}
 
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
 	#UI {background-color: #faf3e1; position: relative; top: 145px;}
@@ -136,7 +154,7 @@
 	#UI a.ui-radio:hover {background: #b3955f !important; color: #faf3e1;}
 	#UI a:hover {text-decoration: none;}
 	#UI.wrap {width: 720px; padding: 25px 25px 60px;}
-	#UI .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif; /*text-transform: uppercase;*/}
+	#UI .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
 	#UI .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif; letter-spacing: -1px;}
 	#UI .block {width: 300px;}
 	#UI .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
@@ -148,10 +166,10 @@
 
 	/* Version mobile */
 	#UI.mobile {width: auto; padding: 80px 20px; top: 80px;}
-	#UI.mobile .form-text {height: 80px; border-radius: 2em;}
+	#UI.mobile .form-text {height: 60px; border-radius: 2em;}
 	#UI.mobile .block {width: 100%;}
 	#UI.mobile .separator {margin: 0 auto;}
-	#UI.mobile .btn {height: 120px; font-size: 42px;}
+	#UI.mobile .btn {height: 60px; font-size: 28px;}
 	#UI.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
 /* Register1 (Popup) - PSDN : PSDs/login/desktop/register1.psd & register2.psd; */
 	#register {padding: 0 25px;}
@@ -167,7 +185,8 @@
 	#register #date-birthday .select-wrap.last {margin-right: 0;}
 	#register #message {background-color: #818a8c; width: 100%; padding: 20px 0;}
 	#register #message img {margin: 0 20px 07;}
-	#register #message p {color: #faf3e1; font-size: 15px; padding: 0 10px 0 0; line-height: 16px;}
+	#register #message div {padding: 0 10px 0 0; line-height: 16px;}
+	#register #message ul li {color: #faf3e1; font-size: 15px;}
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
 	#success p {color: #818a8c; font-size: 22px;}
 	#success {position: static; top: 0; min-height: 500px;}
@@ -184,8 +203,8 @@
 	#register.page #create-account .form-text-without-label {margin: 0 0 0 38%;}
 	#register.page #UI.select-wrap {padding-bottom: 30px;}
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
-	#bar-finder.mobile {margin-top: 77px; background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center; min-height: 800px;}
-	#bar-finder.mobile .title {color: #b3955f; font-size: 40px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 10px;}
+	#bar-finder.mobile {margin-top: 77px; background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
+	#bar-finder.mobile .title {color: #b3955f; font-size: 28px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 10px;}
 	#bar-finder.mobile form label {font-size: 26px; color: #b3955f; margin: 20px 0 40px;}
 	#bar-finder.mobile .ui-dropdown-container {width: 100%!important;}
 	#bar-finder.mobile .ui-dropdown-container .selected {text-align: center; font-size: 18px;}
@@ -195,33 +214,33 @@
 	#bar-finder.mobile .ui-radio.btn-radius.with-icon:after, 
 	#bar-finder.mobile .ui-radio.btn-radius.with-icon:before {left:10px !important}
 	#bar-finder.mobile .group-form.radio {width: 100%;}
-	#bar-finder.mobile .form-radio {width: 30%; margin-right: 15px;}
-	#bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; font-size: 17px;}
+	#bar-finder.mobile .form-radio {width: 71px; margin-right: 10px;}
+	#bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; font-size: 12px; text-indent: 18px;}
 	#bar-finder.mobile .form-submit {width: 100%; color: #faf3e1; font-size: 32px; background-color: #b3955f;}
 /* Barfinder Results (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_results.psd; */
 	#bar-finder-result.mobile {text-align: center; font-family: "Avenir", Helvetica, Arial, sans-serif;}
-	#bar-finder-result.mobile .title {color: #333; font-size: 40px;}
-	#bar-finder-result.mobile .btn:hover {}
-	#bar-finder-result.mobile .btn-grid {background-image: url("../images/barfinder/icon_grid.png"); background-color: #b3955f; margin-right: 5px;}
-	#bar-finder-result.mobile .btn-list {background-image: url("../images/barfinder/icon_list.png"); background-color: #fff; border: 1px solid #b3955f;}
+	#bar-finder-result.mobile .title {color: #333; font-size: 20px; line-height: 50px;}
+	#bar-finder-result.mobile .btn:hover {color: #fff; background-color: #b3955f;}
+	#bar-finder-result.mobile .btn-grid {background-color: #b3955f; margin-right: 5px;}
+	#bar-finder-result.mobile .btn-list {background-color: #fff; border: 1px solid #b3955f;}
 	#bar-finder-result.mobile .btn-list,
-	#bar-finder-result.mobile .btn-grid {height: 80px; width: 80px; display: inline-block; text-indent: -7777px; font-size: 0; background-position: center center; background-repeat: no-repeat;}
-	#bar-finder-result.mobile .btn-more {border: 1px solid #b3955f; height: 80px; display: block; font-size: 22px; font-family: "Myriad Pro", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 80px;	}
-	#bar-finder-result.mobile .btn-redefine-search {border: 1px solid #b3955f; height: 80px; display: block; font-size: 22px; font-family: "Myriad Pro", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 80px;}
-	#bar-finder-result.mobile .count-results {color: #818a8c; font-size: 28px;}
-	#bar-finder-result.mobile ul {}
+	#bar-finder-result.mobile .btn-grid {height: 38px; width: 38px; display: inline-block; text-indent: -7777px; font-size: 0; background-repeat: no-repeat;}
+	#bar-finder-result.mobile .btn-more {border: 1px solid #b3955f; height: 42px; display: block; font-size: 22px; font-family: "Myriad Pro", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 42px;}
+	#bar-finder-result.mobile .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; font-family: "Myriad Pro", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 38px;}
+	#bar-finder-result.mobile .count-results {color: #818a8c; font-size: 16px;}
+	#bar-finder-result.mobile .btn-radius.with-icon.grid:before {background-position: -0px -280px;}
 	#bar-finder-result.mobile ul li {width: 49%; float: left; position: relative;}
 	#bar-finder-result.mobile ul li img {display: block; width: 100%;}
-	#bar-finder-result.mobile ul li .block-text {position: absolute; left: 20px; top: 110px; text-align: left;}
-	#bar-finder-result.mobile ul li .name {color: #ffe4af; font-size: 24px; margin: 0 0 5px;}
-	#bar-finder-result.mobile ul li .city {color: #faf3e1; font-size: 18px;}
+	#bar-finder-result.mobile ul li .block-text {position: absolute; left: 10px; top: 55px; text-align: left;}
+	#bar-finder-result.mobile ul li .name {color: #ffe4af; font-size: 18px; margin: 0 0 5px;}
+	#bar-finder-result.mobile ul li .city {color: #faf3e1; font-size: 12px;}
 	#bar-finder-result.mobile ul li .background-gradient {background: url("../images/barfinder/line_gradient.png") repeat-x left bottom; bottom: 0; height: 100%; left: 0; position: absolute; width: 100%;}
 	#bar-finder-result.mobile ul li .star {opacity: 0.6; background: url("../images/barfinder/star.png") no-repeat center center; background-color: #333; height: 40px; width: 40px; position: absolute; top: 10px; right: 10px;}
 	#bar-finder-result.mobile ul li .star:hover {opacity: 0.8;} /* Rollover */
 	#bar-finder-result.mobile ul.list li {border-right: 2px solid transparent; border-bottom: 2px solid transparent;}
 	#bar-finder-result.mobile .more {width: 50%; margin: 0 auto;}
 /* Barfinder no result (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_noresults.psd; */
-	#no-results p {color: #818a8c; font-size: 30px;}
+	#no-results p {color: #818a8c; font-size: 20px;}
 	#no-results .icon {width: 205px; height: 205px; background-color: #333;}
 	#no-results .icon img {display: inline-block;}
 /* Register1 (Mobile) */
@@ -267,7 +286,7 @@
 	#editprofile .title h5 {color: #333; font-size: 30px; font-family: "Myriad Pro", sans-serif;}
 	#editprofile .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
 	#editprofile .group.right {width: 410px;}
-	#editprofile .subgroup.wrap {width: 210px;}
+	#editprofile .subgroup.wrap {width: 211	px;}
 	#editprofile .avatar-profil {position: absolute;}
 	#editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
 	#editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.jpg") no-repeat 0 0;}
@@ -279,10 +298,47 @@
 	#editprofile #edit-account .form-text-without-label {margin: 0 0 0 215px;}
 	#editprofile #edit-account .group-form.checkbox label {width: 400px; font-size: 13px;}
 	#editprofile #edit-account .group-actions {width: 300px; margin-right: 15px;}
-
 /* UserProfile */
-	.filter-profil {width: 660px;}
-	.filter-profil a.ui-radio {width: 660px; text-align: center; width: 160px;}
-	.filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
-	.block-top {width: 520px;}
+	#view-account .filter-profil {width: 660px;}
+	#view-account .filter-profil a.ui-radio {width: 660px; text-align: center; width: 160px;}
+	#view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
+	#view-account .block-top {width: 520px;}
+	#view-account .list-bars li {margin-bottom: 10px;}
+	#view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
+	#view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
+	#view-account .filter-view a.ui-radio {margin-left: 0.5em;}
+	#view-account .btn-editprofile {margin: 10px 0 0 50px;}
+	#UI .btn-editprofile .btn {border: 1px solid #b3955f; color: #b3955f; height: 27px; padding: 5px 10px; text-transform: capitalize;}
+	#UI.tips {width: 100% !important; }
+	#UI.tips .list-tips {background-color: #faf3e1;}
+	#UI.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
+	#UI.tips .list-tips ul {}
+	#UI.tips .list-tips li {position: relative; margin-bottom: 20px;}
+	#UI.tips .list-tips li p {font-size: 14px; text-align: center; line-height: 21px;}
+	#UI.tips .list-tips li img {margin: 0 10px 0 0;}
+	#UI.tips .list-tips li .block-tip {padding: 20px; background-color: #fff; margin: 0 0 0 10px;}
+	#UI.tips .list-tips li .profil {border-color: #ebeced;}
+	#UI.tips .list-tips li .expert {color: #333;}
+	#UI.tips .list-tips li .name {}
+	#UI.tips .list-tips li .close {background: url("../images/UI/icon_close_tip.png") no-repeat 0 0; display: block; height: 30px; width: 30px; position: absolute; top: -10px; right: -10px;}
+/* EditProfile (Mobile) */
+	#editprofile #UI.mobile {width: 100%; padding-right: 0; padding-left: 0;}
+	#editprofile #UI.mobile .avatar-profil {width: 100%; position: relative;}
+	#editprofile #UI.mobile .avatar-profil img {margin: 0 auto;}
+	#editprofile #UI.mobile .group.right {float: none; width: 100%;}
+	#editprofile #UI.mobile .title h5 {line-height: 55px;}
+	#editprofile #UI.mobile #edit-account label {visibility: visible; width: 100%; text-align: center;}
+	#editprofile #UI.mobile #edit-account .group-form,
+	#editprofile #UI.mobile #edit-account .group-select {padding: 0 10px;}
+	#editprofile #UI.mobile #edit-account .form-text {width: 100%; margin: 0;}
+	#editprofile #UI.mobile #edit-account .group-actions {float: none; width: auto; margin: 0;}
+	#editprofile #UI.mobile #edit-account .form-submit {margin: 0 20px; width: 90%;}
+	#editprofile #UI.mobile #date-birthday .select-wrap {margin-right: 9px; width: 85px;}
+	#editprofile #UI.mobile #date-birthday .ui-dropdown-container {width: 85px!important;}
+	#editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
+	#editprofile #view-account.mobile #UI,
 
+	#editprofile #view-account.mobile .group.right {float: left; margin: 0 0 0 70px;}
+	#editprofile #view-account.mobile .filter-profil {width: 100%;}
+	#editprofile #view-account.mobile .filter-profil a.ui-radio {width: 130px;}
+	#view-account .mobile .block-top {width: auto;}
