@@ -80,8 +80,17 @@
                 top: 16px;
                 text-align: center;
         }
-        .social-share ul{padding: 0 ; margin: 0;}
+        .social-share ul{padding: 0 ; margin: 0; width: 340px;
+            position:relative;
+            left: -5%;
+            bottom: 10px;}
         .social-share ul li{display: inline;float: left;}
+
+        .social-share {
+            width: 260px;
+            margin-left:auto;
+            margin-right:auto;
+            }
     </style>
     {% endif %}
 {% endblock %}
@@ -186,6 +195,19 @@
                    
                     <div style='clear:both;'></div>
                     {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
+                {% if not is_mobile()  %}
+                    <div class="share-btns l-margin-top full">
+                        <hr/>
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
+                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
+                            <a href="#0" class="fb-share">Post</a>
+                            <a href="#0" class="twitter-share">Tweet</a>
+                            <a href="#0" class="email-share">Email</a>
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+                {% if is_mobile()  %}
                     <div class="share-btns l-margin-top full">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
@@ -197,7 +219,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                {% endif %}
                 <!-- ASIDE -->
                 <aside class="columns four">
                     {% if not is_mobile() or is_tablet() %}
