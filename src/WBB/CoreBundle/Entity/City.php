@@ -12,6 +12,7 @@ use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\CoreBundle\Entity\CityBestOf;
 use WBB\CoreBundle\Entity\Collections\CityTag;
 use WBB\CoreBundle\Entity\Country;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 
 /**
  * City
@@ -19,7 +20,8 @@ use WBB\CoreBundle\Entity\Country;
  * @ORM\Table(name="wbb_city")
  * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\CityRepository")
  */
-class City {
+class City implements IndexableEntity
+{
 
     /**
      * @var integer
@@ -712,5 +714,25 @@ class City {
     public function getUserCities2()
     {
         return $this->userCities2;
+    }
+    
+    public function getCloudSearchFields()
+    {
+        $countryName = ($this->country) ? $this->country->getName() : '';
+        $lat = ($this->latitude) ? $this->latitude : 0;
+        $lon = ($this->longitude) ? $this->longitude : 0;
+        $suburbs = array();
+
+        foreach ($this->getSuburbs() as $suburb) {
+            $suburbs[] = $suburb->getName();
+        }
+
+        return array(
+            'name' => $this->name,
+            'wbb_id' => $this->id,
+            'country' => $countryName,
+            'location' => $lat . ',' . $lon,
+            'districts' => $suburbs
+        );
     }
 }

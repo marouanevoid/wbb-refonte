@@ -10,6 +10,7 @@ use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
 use JMS\Serializer\Annotation as JMS;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 
 /**
  * Bar
@@ -19,7 +20,7 @@ use JMS\Serializer\Annotation as JMS;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class Bar
+class Bar implements IndexableEntity
 {
     const BAR_STATUS_ENABLED_VALUE = 2;
     const BAR_STATUS_ENABLED_TEXT = "Enabled";
@@ -1411,4 +1412,55 @@ class Bar
     {
         return $this->semsoftBars;
     }
+
+    public function getCloudSearchFields()
+    {
+        $cityName = ($this->city) ? $this->city->getName() : '';
+        $countryName = ($this->city->getCountry()) ? $this->city->getCountry()->getName() : '';
+        $lat = ($this->latitude) ? $this->latitude : 0;
+        $lon = ($this->longitude) ? $this->longitude : 0;
+
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+        $types = array(
+            'tags_style' => 'getIsStyle',
+            'tags_mood' => 'getIsMood',
+            'tags_occasion' => 'getIsOccasion',
+            'tags_cocktails' => 'getIsCocktail',
+        );
+
+        foreach ($this->tags as $barTags) {
+            foreach ($barTags as $tag) {
+                foreach ($types as $type => $getter) {
+                    if ($tag->$getter()) {
+                        $tags[$type][] = $tag->getName();
+                    }
+                }
+            }
+        }
+
+        return array(
+            'name' => $this->name,
+            'city' => $cityName,
+            'country' => $countryName,
+            'district' => ($this->suburb) ? $this->suburb->getName() : '',
+            'location' => $lat . ',' . $lon,
+            'address' => ($this->address) ? $this->address : '',
+            'website' => ($this->website) ? $this->website : '',
+            'description' => ($this->description) ? $this->description : '',
+            'seo_description' => ($this->seoDescription) ? $this->seoDescription : '',
+            'tags_style' => $tags['tags_style'],
+            'tags_mood' => $tags['tags_mood'],
+            'tags_occasion' => $tags['tags_occasion'],
+            'tags_cocktails' => $tags['tags_cocktails'],
+            //'tags_food' => '',
+            //'tags_special' => '',
+            'wbb_id' => $this->id
+        );
+    }
+
 }
