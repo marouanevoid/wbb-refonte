@@ -1,11 +1,15 @@
 {% extends "::base.html.twig" %}
 {% block title %}{{ news.title }} | World Best Bars{% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function(){
             initializeSliders();
         });
     </script>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
     <style type="text/css">
         div.description {
             float : left;
@@ -53,13 +57,31 @@
         article.main {}
         article.main p , .sponsor-name{text-align: center;}
 
-        .social-share a{ display: block; margin: 0 auto; margin-top: 2px;}
+        /*.social-share a{ display: block; margin: 0 auto; margin-top: 2px;}*/
+
+        a.fb-share{
+            width:90px;
+            height:41px;
+            background: url({{ asset('bundles/wbbcore/images/icon_fb-mobile.jpg') }});
+        }
+        .twitter-share{
+            width:90px;
+            height:41px;
+            background: url({{ asset('bundles/wbbcore/images/icon_tw-mobile.jpg') }});
+        }
+        .email-share{
+            width:90px;
+            height:41px;
+            background: url({{ asset('bundles/wbbcore/images/icon_email-mobile.jpg') }});
+        }
         .showallbars-btn{
                 display: block;
                 position: relative;
                 top: 16px;
                 text-align: center;
         }
+        .social-share ul{padding: 0 ; margin: 0;}
+        .social-share ul li{display: inline;float: left;}
     </style>
     {% endif %}
 {% endblock %}
@@ -168,9 +190,11 @@
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
-                            <a href="#0" class="fb-share">Post</a>
-                            <a href="#0" class="twitter-share">Tweet</a>
-                            <a href="#0" class="email-share">Email</a>
+                            <ul>
+                            <li><a href="#0" class="fb-share">Post</a></li>
+                            <li><a href="#0" class="twitter-share">Tweet</a></li>
+                            <li><a href="#0" class="email-share">Email</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
