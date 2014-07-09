@@ -73,6 +73,8 @@ class BarController extends Controller
         if(!empty($latitude) and !empty($longitude)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude);
             $response['distance'] = true;
+            $response['latitude'] = $latitude;
+            $response['longitude'] = $longitude;
         }else{
             $response['distance'] = false;
         }
@@ -96,9 +98,14 @@ class BarController extends Controller
         $session->set('citySlug', $slug);
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
 
+        $latitude = $session->get('userLatitude' );
+        $longitude = $session->get('userLongitude');
+
         if(!empty($latitude) and !empty($longitude)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
             $response['distance'] = true;
+            $response['latitude'] = $latitude;
+            $response['longitude'] = $longitude;
         }else{
             $response['distance'] = false;
         }
@@ -247,6 +254,10 @@ class BarController extends Controller
         $nbResultsRemaining = null;
         $html               = null;
 
+        $latitude   = null;
+        $longitude  = null;
+        $distance   = false;
+
         $cityObject = $this->container->get('city.repository')->findOneById($city);
 
         if($barsOnly){
@@ -263,7 +274,7 @@ class BarController extends Controller
                 $session = $this->container->get('session');
                 $latitude = $session->get('userLatitude' );
                 $longitude = $session->get('userLongitude');
-
+                $distance = true;
                 $response = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, $limit);
                 $all = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, 0);
             }
@@ -272,14 +283,20 @@ class BarController extends Controller
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
-                        'limit'  => $limit
+                        'limit'  => $limit,
+                        'distance' => $distance,
+                        'latitude' => $latitude,
+                        'longitude'=> $longitude
                     )
                 );
             }else{
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
-                    'limit'  => $limit
+                    'limit'  => $limit,
+                    'distance' => $distance,
+                    'latitude' => $latitude,
+                    'longitude'=> $longitude
                 ));
             }
 

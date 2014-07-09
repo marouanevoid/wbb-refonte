@@ -17,7 +17,11 @@
             </div>
 
             <div class="nine columns s-margin-top">
-                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.name }}</a></h2>
+                <h2 class="s-margin-top">
+                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">
+                        {{ b.name }}{% if distance is defined %} - {{ b.calculateDistance(latitude, longitude) }} KM{% endif %}
+                    </a>
+                </h2>
                 {% if b.city and b.suburb %}
                 <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
                 {% endif %}
