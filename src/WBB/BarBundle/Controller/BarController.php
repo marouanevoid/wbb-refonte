@@ -67,18 +67,6 @@ class BarController extends Controller
             return $this->barGuideCityAction($session->get('citySlug'));
         $session->set('citySlug', "");
 
-        $latitude  = $session->get('userLatitude');
-        $longitude = $session->get('userLongitude');
-
-        if(!empty($latitude) and !empty($longitude)){
-            $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude);
-            $response['distance'] = true;
-            $response['latitude'] = $latitude;
-            $response['longitude'] = $longitude;
-        }else{
-            $response['distance'] = false;
-        }
-
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5, false);
@@ -97,18 +85,6 @@ class BarController extends Controller
 
         $session->set('citySlug', $slug);
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
-
-        $latitude = $session->get('userLatitude' );
-        $longitude = $session->get('userLongitude');
-
-        if(!empty($latitude) and !empty($longitude)){
-            $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
-            $response['distance'] = true;
-            $response['latitude'] = $latitude;
-            $response['longitude'] = $longitude;
-        }else{
-            $response['distance'] = false;
-        }
 
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
