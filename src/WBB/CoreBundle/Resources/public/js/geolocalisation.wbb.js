@@ -96,7 +96,8 @@
     // if the geolocalisation is aleady stocked 
 
     //if(navigator.geolocation && ( ! $.cookie('currentLat') || $.cookie('currentLat') == '' ))
-    navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
+    if(window.homepage)
+      navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
   })
 
 
