@@ -200,16 +200,16 @@ sonata_media:
     cdn:
         server:
 #            path: /uploads/media
-            path: http://wbb-bucket.s3-website-us-east-1.amazonaws.com #http://staging.worldsbestbars.s3-website-us-east-1.amazonaws.com #http://wbb-bucket.s3-website-us-east-1.amazonaws.com #http://staging.worldsbestbars.com.s3-website-eu-west-1.amazonaws.com
+            path: http://staging.worldsbestbars.s3-website-us-east-1.amazonaws.com #http://wbb-bucket.s3-website-us-east-1.amazonaws.com #http://staging.worldsbestbars.com.s3-website-eu-west-1.amazonaws.com
 
     filesystem:
 #        local:
 #            directory:  %kernel.root_dir%/../web/uploads/media
 #            create:     true
         s3:
-            bucket: wbb-bucket #staging.worldsbestbars #wbb-bucket
-            accessKey: AKIAJ6WSWPZUXSICYDPQ #AKIAJ6WSWPZUXSICYDPQ #AKIAJM6ZSVZZ3WLRHZIA
-            secretKey: 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 #79xB1PY4cI34URlW04OAXWzBGrq6o57KL+H8HpVd #Sw9IbIoSTjfQIamFAFWqljY/tNhQmDBnChYzSC9T
+            bucket: staging.worldsbestbars #wbb-bucket
+            accessKey: AKIAJM6ZSVZZ3WLRHZIA #AKIAJ6WSWPZUXSICYDPQ #AKIAJM6ZSVZZ3WLRHZIA
+            secretKey: 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 #79xB1PY4cI34URlW04OAXWzBGrq6o57KL+H8HpVd #Sw9IbIoSTjfQIamFAFWqljY/tNhQmDBnChYzSC9T
             create:         false
 #            region:         s3-website-us-east-1.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
             storage:        standard # can be one of: standard or reduced
