@@ -6,6 +6,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             initializeSliders();
+            $(".older-news article").hide();
             $(".older-news article:lt(3)").show();
             if($('.older-news article').length>3)
                 $(".load-more-container").show();

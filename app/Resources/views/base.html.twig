@@ -67,6 +67,25 @@
             {% endjavascripts %}
         {% endblock %}
 
+        {% block javascripts %}
+            {#<script type="text/javascript">#}
+                {#$(function() {#}
+                    {#$(this).find('#register_form').submit(function (e) {#}
+                        {#e.preventDefault();#}
+                        {#$.ajax({#}
+                            {#url: Routing.generate('wbb_user_registration_register_light', $( this ).serialize()),#}
+                            {#success: function( data )#}
+                            {#{#}
+                                {#console.log(" Success Data ");#}
+                                {#console.log(data);#}
+                            {#}#}
+                        {#});#}
+
+                     {#});#}
+                {#});#}
+            {#</script>#}
+        {% endblock %}
+
         <script type="text/javascript">
             var MARKET = "US";
             var LANG = "en";
