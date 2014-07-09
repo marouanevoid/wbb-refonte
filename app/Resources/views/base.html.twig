@@ -21,6 +21,9 @@
             istablet=0;
             {% if is_mobile() and not is_tablet() %}ismobile=1;{% endif %}
             {% if is_tablet() %}istablet=1;{% endif %}
+            {% if city is defined and city != ''  %}
+                window.isCity = true;
+            {% endif %}
         </script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -30,7 +33,6 @@
 
             {% stylesheets filter="cssrewrite"
                 "bundles/wbbcore/css/front.css"
-                "bundles/wbbcore/css/main.css"
                 "bundles/wbbcore/css/wbb.css"
             %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -46,6 +48,7 @@
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'
+                '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
                 '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
