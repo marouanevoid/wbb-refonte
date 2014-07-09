@@ -138,7 +138,8 @@
 --------------------------------------------------- */
 	img.scale-with-grid {
 		max-width: 100%;
-		height: auto; }
+		height: auto;
+    }
 
 
 /* Margins & Paddings
@@ -232,6 +233,7 @@
     &:after{ z-index: 2; opacity: 0 }
   }
 
+  .btn-radius.load-more.large{ min-width: 5.4em }
 
 
   /* Colors
