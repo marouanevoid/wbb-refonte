@@ -1472,16 +1472,16 @@ class Bar implements IndexableEntity
         $miles = $dist * 60 * 1.1515;
         $unit = strtoupper($unit);
 
-        if($unit == "km")
+        if($unit == "m")
         {
-            return ($miles * 1.609344);
+            return round($miles, 2);
         }
         elseif($unit == "nm") {
-            return ($miles * 0.8684);
+            return round(($miles * 0.8684), 2);
         }
         else
         {
-            return $miles;
+            return round(($miles * 1.609344), 2);
         }
     }
 
