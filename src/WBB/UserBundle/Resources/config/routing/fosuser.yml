@@ -5,9 +5,35 @@ fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
 
-fos_user_register:
-    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /register
+fos_user_registration_register:
+    pattern: /register
+    defaults: { _controller:FOSUserBundle:Registration:register }
+    options:
+        expose: true
+
+wbb_user_registration_register_light:
+    pattern: /register/light
+    defaults: { _controller:WBBUserBundle:Registration:registerLight }
+    options:
+        expose: true
+
+fos_user_registration_check_email:
+    pattern: /inscription/check-email
+    defaults: { _controller:FOSUserBundle:Registration:checkEmail }
+    requirements:
+        _method: GET
+
+fos_user_registration_confirm:
+    pattern: /inscription/confirm/{token}
+    defaults: { _controller:FOSUserBundle:Registration:confirm }
+    requirements:
+        _method: GET
+
+fos_user_registration_confirmed:
+    pattern: /inscription/confirmed
+    defaults: { _controller:FOSUserBundle:Registration:confirmed }
+    requirements:
+        _method: GET
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"

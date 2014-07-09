@@ -30,6 +30,7 @@
 
             {% stylesheets filter="cssrewrite"
                 "bundles/wbbcore/css/front.css"
+                "bundles/wbbcore/css/main.css"
                 "bundles/wbbcore/css/wbb.css"
             %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -92,7 +93,6 @@
                 }
             </style>
         {% endif %}
-        {% block javascripts %} {# TODO : Add JS here #} {% endblock %}
     </head>
 
     {% block bodyTag %}
@@ -144,8 +144,41 @@
             {% endblock %}
 
         {% endif %}
+
+        {#<div>#}
+            {#<h2>Register</h2>#}
+            {#{% render url('wbb_user_registration_register_light') %}#}
+            {#<br />#}
+            {#<br />#}
+            {#<br />#}
+            {#<br />#}
+            {#<br />#}
+            {#<br />#}
+            {#<br />#}
+            {#<br />#}
+        {#</div>#}
+
         {% block footer %}
             {% include '::footer.html.twig' %}
         {% endblock %}
+
+        {#{% block javascripts %}#}
+            {#<script type="text/javascript">#}
+                {#$(function() {#}
+                    {#$(this).find('#register_form').submit(function (e) {#}
+                        {#e.preventDefault();#}
+                        {#$.ajax({#}
+                            {#url: Routing.generate('wbb_user_registration_register_light', $( this ).serialize()),#}
+                            {#success: function( data )#}
+                            {#{#}
+                                {#console.log(" Success Data ");#}
+                                {#console.log(data);#}
+                            {#}#}
+                        {#});#}
+
+                     {#});#}
+                {#});#}
+            {#</script>#}
+        {#{% endblock %}#}
     </body>
 </html>

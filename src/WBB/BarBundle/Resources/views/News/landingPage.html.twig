@@ -74,7 +74,10 @@
                             </td>
 
                             <td class="title">
-                                <h1>The Latest News</h1>
+                                <h1>The Latest News {% if city is defined %}
+                                in {{ city }}
+                                {% endif %}
+                                </h1>
                             </td>
 
                             <td></td>
@@ -142,10 +145,12 @@
                         <div class="txt">Advertising</div>
                     </div>
                 </div>
-                {% for n in interviews|slice(1,1) %}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
-                    {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
-                {% endfor %}
+                {%  if not bigAd %}
+                    {% for n in interviews|slice(1,1) %}
+                        {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
+                        {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
+                    {% endfor %}
+                {%  endif %}
 
                 {% for n in interviews|slice(2,1) %}
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
@@ -195,9 +200,23 @@
         <div class="container {% if not is_mobile() or is_tablet() %}m-margin-top{% endif %}">
             <!-- 12 COLS -->
             <div class="articles older-news twelve columns">
+
                 {% for n in articles|slice(4,3) %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                    {% if loop.index == 2 %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1} %}
+                    {%  else %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                    {%  endif %}
                 {% endfor %}
+
+                {%  if bigAd %}
+                    {% for n in interviews|slice(1,1) %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                        {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
+                    {% endfor %}
+                    {% set counter += 1 %}
+                {%  endif %}
+
                 {% set newsIndex = 0 %}
                 {% for n in newsList %}
                     {% if newsIndex <= 0 %}

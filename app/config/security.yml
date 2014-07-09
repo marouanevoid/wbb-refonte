@@ -48,6 +48,8 @@ security:
             - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin(.*), role: [ROLE_ADMIN] }
 
+            #Ensecure the rest
+            - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:
 

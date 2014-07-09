@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use WBB\BarBundle\Entity\Ad;
 use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
@@ -44,13 +45,17 @@ class NewsController extends Controller
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
 
+        $ad = new Ad();
+
         return $this->render('WBBBarBundle:News:landingPage.html.twig', array(
             'city'      => $city,
             'latest'    => $latestNews,
             'articles'  => $articles,
             'interviews'=> $interviews,
             'newsList'  => $newsList,
-            'topCities' => $topCities
+            'topCities' => $topCities,
+            'ad'        => $ad,
+            'bigAd'     => false
         ));
     }
 
