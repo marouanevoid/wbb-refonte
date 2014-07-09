@@ -43,10 +43,12 @@ class CityController extends Controller
     public function nearestCityAction($latitude, $longitude)
     {
         $session = $this->container->get('session');
-        $session->set('userLatitude', $latitude);
-        $session->set('userLongitude', $longitude);
 
         $city = $this->get('city.repository')->findNearestCity($latitude, $longitude, 150, 0, 1);
+
+        $session->set('userLatitude', $latitude);
+        $session->set('userLongitude', $longitude);
+        $session->set('citySlug', $city->getSlug());
 
         if($city){
             return new JsonResponse(array(
