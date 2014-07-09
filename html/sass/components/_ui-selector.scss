@@ -1,15 +1,15 @@
 .ui-selector
 {
-  display: inline-block; position: relative;
+  display: inline-block; position: relative; -webkit-tap-highlight-color: rgba(0,0,0,0);
   .btn-radius.active{ background: $color-brown!important; color: $color-cream; border-color: $color-brown }
   .selector{
-    position: absolute; left: 0; top: 100%; z-index: 99; background: $color-cream; border: 1px solid $color-brown-light; font-size: 90%; display: none;
+    position: absolute; left: 0; top: 100%; z-index: 99; background: $color-cream; border: 1px solid $color-brown-light; font-size: 90%; display: none; @include transform( translate3d(0,0,0));
     border-radius: 1.2em; padding: 1em 2em; text-align: center; margin-top: 1em;
     span{ background: url("../images/misc/ui-selector.png") no-repeat center; background-size: 100% auto; width: 12px; height: 7px; display:inline-block; position: absolute; top: -6px; left: 50%; margin-left: -6px }
     ul{
       line-height: 190%; margin-top: 0.5em;
-      a{ color: $color-light-gray }
-      a:hover{ color: $color-brown }
+      li{ color: $color-light-gray; cursor: pointer; @include transition( color 0.3s ease-in-out) }
+      li:hover{ color: $color-brown }
     }
     .close{
       position: absolute; right: 3px; top: 3px; width: 30px; height: 30px; border-color: $color-brown-light;

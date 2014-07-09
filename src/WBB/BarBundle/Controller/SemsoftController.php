@@ -17,7 +17,6 @@ use WBB\BarBundle\Entity\Tip;
 
 class SemsoftController extends Controller
 {
-
     public function previewAction($ssBarId)
     {
         $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
@@ -244,6 +243,7 @@ class SemsoftController extends Controller
 
     private function getSuburb($suburbName, $city)
     {
+        $em = $this->getDoctrine()->getManager();
         $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
 
         if(!$suburb)
@@ -252,6 +252,8 @@ class SemsoftController extends Controller
             $suburb
                 ->setName($suburbName)
                 ->setCity($city);
+            $em->persist($suburb);
+            $em->flush();
         }
 
         return $suburb;

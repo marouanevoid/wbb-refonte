@@ -28,8 +28,7 @@ class TipRepository extends EntityRepository
         }
 
         if($offset > 0){
-            $qb
-                ->setFirstResult($offset);
+            $qb->setFirstResult($offset);
         }
 
         return $qb->getQuery()->getResult();
