@@ -88,8 +88,8 @@
                 bbase = split[2];
             return bbase;
           }
-          // if(data.slug && window.homepage)
-          //   window.location.href =  directionRoote;
+          if(data.slug && window.homepage)
+            window.location.href =  directionRoote;
       }
 
     // if the current navigator support geolocalisation
