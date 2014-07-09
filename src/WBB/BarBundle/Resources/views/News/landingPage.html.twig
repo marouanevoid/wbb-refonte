@@ -21,7 +21,12 @@
                 }
             });
             $(".footer-ad:eq(1)").css('display', 'none');
-        });
+            
+                {% if city is defined and city != '' %}
+                    $('.sub-header .selected').text('{{city}}')
+                {% endif %}
+                
+            });
     </script>
     <style type="text/css">
         .footer-ad:last-child {
@@ -57,15 +62,18 @@
                                             id="city_selector">
                                         <option disabled="disabled">Choose a City</option>
                                         {% for c in topCities %}
+                                            {% if c.name != city %}
                                             <option data-type="redirect"
                                                     {# value="{{ path('city_homepage',{slug:c.slug}) }}" #}
                                                     value="{{ path('wbb_news_landing_page_city',{citySlug:c.slug}) }}"
-         {#                                                {% if city is defined %}
-                                                        {% if city.name == city %}
+                                                        {% if city is defined %}
+                                                        {% if c.name == city %}
                                                         selected="selected"
                                                         {% endif %}
-                                                        {% endif %} #}
-                                                    >{{ c.name }}</option>
+                                                        {% endif %}
+                                                    >{{ c.name }}
+                                            </option>
+                                            {% endif %}
                                         {% endfor %}
                                         <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide
                                         </option>
@@ -75,7 +83,7 @@
                             </td>
 
                             <td class="title">
-                                <h1>The Latest News {% if city is defined %}
+                                <h1>The Latest News {% if city is defined and city != '' %}
                                 in {{ city }}
                                 {% endif %}
                                 </h1>

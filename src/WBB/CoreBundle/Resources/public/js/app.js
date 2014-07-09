@@ -317,8 +317,9 @@ meta.App = function() {
             selected = parent.find('.selected').text();
 
             li.show();
+
             li.each(function(){
-                if($(this).text() == selected || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+                if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
                     $(this).hide();
             });
 
