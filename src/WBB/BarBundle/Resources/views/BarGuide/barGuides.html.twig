@@ -149,9 +149,11 @@
                 <span class="sort">Sort by :</span>
 
                 <select class="ui-dropdown light" name="criteria" id="criteria">
+                    {% if distance is defined and distance %}
+                    <option value="distance" data-type="criteria">Distance</option>
+                    {% endif %}
                     <option value="popularity" data-type="criteria">Popularity</option>
                     <option value="date" data-type="criteria">Date</option>
-                    <option value="distance" data-type="criteria">Distance</option>
                     <option value="alphabetical" data-type="criteria">Alphabetical order</option>
                 </select>
 

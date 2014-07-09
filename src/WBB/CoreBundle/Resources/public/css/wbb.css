@@ -241,3 +241,6 @@ article.tip .content .excerpt td .scroll{
 .articles.padding article.small + article.small{
     margin-left : 0;
 }
+.articles.padding article.small + article.small{
+    margin-left : 4% ;
+}
