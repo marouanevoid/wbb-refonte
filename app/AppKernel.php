@@ -65,6 +65,7 @@ class AppKernel extends Kernel
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),
             new WBB\BarBundle\WBBBarBundle(),
+            new WBB\CloudSearchBundle\WBBCloudSearchBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

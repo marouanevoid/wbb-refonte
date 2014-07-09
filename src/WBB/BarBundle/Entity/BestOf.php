@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\Collections\BestOfTag;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 
 /**
  * BestOf
@@ -14,7 +15,7 @@ use WBB\BarBundle\Entity\Collections\BestOfTag;
  * @ORM\Table(name="wbb_bestof")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestOfRepository")
  */
-class BestOf
+class BestOf implements IndexableEntity
 {
     /**
      * @var integer
@@ -926,4 +927,50 @@ class BestOf
     {
         return $this->sponsorImage;
     }
+
+    public function getCloudSearchFields()
+    {
+        $bars = array();
+        foreach ($this->bars as $bar) {
+            $bars[] = $bar->getName();
+        }
+
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+        $types = array(
+            'tags_style' => 'getIsStyle',
+            'tags_mood' => 'getIsMood',
+            'tags_occasion' => 'getIsOccasion',
+            'tags_cocktails' => 'getIsCocktail',
+        );
+
+        foreach ($this->tags as $bestOfTags) {
+            foreach ($bestOfTags as $tag) {
+                foreach ($types as $type => $getter) {
+                    if ($tag->$getter()) {
+                        $tags[$type][] = $tag->getName();
+                    }
+                }
+            }
+        }
+
+        return array(
+            'name' => ($this->name) ? $this->name : '',
+            'country' => ($this->getCountry()) ? $this->getCountry()->getName() : '',
+            'city' => ($this->getCity()) ? $this->getCity()->getName() : '',
+            'description' => ($this->description) ? $this->description : '',
+            'tags_style' => $tags['tags_style'],
+            'tags_mood' => $tags['tags_mood'],
+            'tags_occasion' => $tags['tags_occasion'],
+            'tags_cocktails' => $tags['tags_cocktails'],
+            'tags_special' => '',
+            'bars' => $bars,
+            'wbb_id' => $this->id
+        );
+    }
+
 }
