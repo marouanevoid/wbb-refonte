@@ -75,7 +75,11 @@
 
       }
 
-
+      function userNotAccept(error){
+         if( error.code == error.PERMISSION_DENIED ){
+              $.cookie('near_permission' , 'NO' , 0);
+          }
+      }
       // init theLocation near
       function initNearPositions(data){
           // TODO : where the user is accept geolocalisation 
@@ -88,16 +92,18 @@
                 bbase = split[2];
             return bbase;
           }
-          if(data.slug && window.homepage)
-            window.location.href =  directionRoote;
+            window.location.reload();
       }
 
     // if the current navigator support geolocalisation
     // if the geolocalisation is aleady stocked 
 
-    //if(navigator.geolocation && ( ! $.cookie('currentLat') || $.cookie('currentLat') == '' ))
-    if(window.homepage)
-      navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
+    /*
+    * TODO : Add the nigative response on PERMISSION_DENIED 
+    * Geo localisation 
+    **/
+    if( ( !$.cookie('near_permission') ) /*&&  ( ! window.isCity ) */ && ( ! $.cookie('currentLat') )  )
+       navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong , userNotAccept);
   })
 
 
