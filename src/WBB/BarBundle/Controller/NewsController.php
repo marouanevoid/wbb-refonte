@@ -61,16 +61,21 @@ class NewsController extends Controller
 
     public function detailsAction($newsSlug)
     {
+        $session = $this->container->get('session');
+        $slug = $session->get('citySlug');
+        $city = null;
+        if (!empty($slug))
+            $city = $this->get('city.repository')->findOneBySlug($slug);
+
         $news = $this->container->get('news.repository')->findOneBySlug($newsSlug);
-        $byCity = $news->hasOnlyOneTopCity();
 
         $alsoLike = $this->container->get('news.repository')->findRelatedNews($news->getCitiesAsArray(), 3, array($news->getId()));
 
         return $this->render('WBBBarBundle:News:details.html.twig', array(
             'news'          => $news,
-            'latestBars'    => $this->container->get('bar.repository')->findLatestBars($byCity, 5),
+            'latestBars'    => $this->container->get('bar.repository')->findLatestBars($city, 5),
             'alsoLike'      => $alsoLike,
-            'city'          => $byCity,
+            'city'          => $news->hasOnlyOneTopCity(),
         ));
     }
 }
