@@ -46,6 +46,16 @@ class BarController extends Controller
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
 
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
+
+        if(!empty($latitude) and !empty($longitude)){
+            $response['distance'] = true;
+            $response['latitude'] = $latitude;
+            $response['longitude'] = $longitude;
+        }else{
+            $response['distance'] = false;
+        }
 
         $session->set('citySlug', $slug);
 
@@ -237,11 +247,23 @@ class BarController extends Controller
             shuffle($bars);
         }
 
+        $session = $this->container->get('session');
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
+        $distance = false;
+
+        if(!empty($latitude) and !empty($longitude)){
+            $distance = true;
+        }
+
         return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
             array(
-                'bestOf'   => $bestOf,
-                'bestofs'  => $bestOfs,
-                'bars'     => $bars
+                'bestOf'    => $bestOf,
+                'bestofs'   => $bestOfs,
+                'bars'      => $bars,
+                'distance'  => $distance,
+                'latitude'  => $latitude,
+                'longitude' => $longitude
         ));
     }
 
