@@ -80,7 +80,6 @@ class BarController extends Controller
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5, false);
-//
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }

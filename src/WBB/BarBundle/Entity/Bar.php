@@ -1463,4 +1463,26 @@ class Bar implements IndexableEntity
         );
     }
 
+    public function calculateDistance($latitude, $longitude, $unit = 'km')
+    {
+        $theta = $this->getLongitude() - $longitude;
+        $dist = sin(deg2rad($this->getLatitude())) * sin(deg2rad($latitude)) + cos(deg2rad($this->getLatitude())) * cos(deg2rad($latitude)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if($unit == "km")
+        {
+            return ($miles * 1.609344);
+        }
+        elseif($unit == "nm") {
+            return ($miles * 0.8684);
+        }
+        else
+        {
+            return $miles;
+        }
+    }
+
 }
