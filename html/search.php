@@ -52,12 +52,12 @@
 
                         <div class="drop-list">
 
-                            <ul>
+                            <ul class="checkbox-container">
                                 <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Hotel Bar</label></li>
                                 <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Amazing Views</label></li>
                                 <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Speakeasy</label></li>
                             </ul>
-
+                            <br class="clear"/>
                         </div>
                     </li>
                 </ul>
@@ -172,16 +172,14 @@
 
         $('.filter-btn').click(function()
         {
-            $('aside.filters').fadeIn(500, 'easeInOutCubic', function()
-            {
-                $('.bar-filter-form, .bar-filter').hide();
-            });
+            $('.bar-filter-form, .bar-filter').hide();
+            $('aside.filters').fadeIn();
         });
 
         $('aside.filters input[type=reset]').click(function()
         {
-            $('.bar-filter-form, .bar-filter').show();
-            if( $(window).width() < 640 ) $('aside.filters').fadeOut();
+            $('.bar-filter-form, .bar-filter').fadeIn();
+            if( $(window).width() < 640 ) $('aside.filters').hide();
         });
 
     </script>
