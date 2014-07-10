@@ -1,0 +1,7 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% for result in results.hits.hit %}
+        {{ result.id }}
+    {% endfor %}
+{% endblock %}
