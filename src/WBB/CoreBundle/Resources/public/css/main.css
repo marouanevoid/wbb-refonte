@@ -46,7 +46,6 @@
 	.wrap {margin-left: auto; margin-right: auto;}
 	.no-text {text-indent: -7777px; font-size: 0!important; color: transparent;}
 	.font-avenir {font-family: "Avenir", sans-serif;}
-	.container {width: 1172px!important;}
 	.full-white {background-color: #fff;}
 
 	/* TEMPS */
@@ -145,14 +144,14 @@
 	.mobile a,
 	.mobile p {font-size: 16px;}
 	.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
-	.mobile form label {display: none; visibility: hidden;}
-	.mobile .btn {height: 120px; font-size: 42px;}
+	/*.mobile form label {display: none; visibility: hidden;}*/
+	.mobile .btn {/*height: 120px; font-size: 42px;*/}
 	/*.mobile .col {float: none;}*/
-	.mobile .col-4 {width: 237px;}
 	.mobile #UI .title {font-size: 17px;}
 	.mobile #UI .separator {width: 100%; background-position: center center;}
-	.mobile .ui-dropdown-container .ui-dropdown {height: 38px;}
-	.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
+	#UI.mobile .ui-dropdown-container .ui-dropdown {height: 38px;}
+	#UI.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
+	#UI.mobile .col-4 {width: 237px;}
 
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
 	#UI {background-color: #faf3e1; position: relative; top: 145px;}
@@ -169,7 +168,7 @@
 	#UI .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
 	#UI .form-submit {background-color: #b3955f; font-size: 22px;}
 	#UI .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
-	#UI .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 25px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
+	#UI .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
 	#UI .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
 	/* Version mobile */
@@ -213,7 +212,7 @@
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
 	#bar-finder.mobile {margin-top: 77px; background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
 	#bar-finder.mobile .title {color: #b3955f; font-size: 28px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
-	#bar-finder.mobile form label {font-size: 16px; color: #b3955f; margin: 10px 0 10px; display: block; visibility: visible;}
+	#bar-finder.mobile form label {font-size: 16px; color: #b3955f; margin: 30px 0 15px; display: block; visibility: visible;}
 	#bar-finder.mobile .ui-dropdown-container {width: 100%!important;}
 	#bar-finder.mobile .ui-dropdown-container .selected {text-align: center; font-size: 18px;}
 	#bar-finder.mobile .ui-dropdown-container .btn-radius.with-icon:after {top: 20px !important;}
@@ -224,27 +223,50 @@
 	#bar-finder.mobile .group-form.radio ul {width: 310px!important;}
 	#bar-finder.mobile .form-radio {width: 95px; margin-right: 7px;}
 	#bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; text-indent: 18px;}
-	#bar-finder.mobile .form-submit {width: 100%; color: #faf3e1; font-size: 20px; background-color: #b3955f; line-height: 42px;}
+	#bar-finder.mobile .form-submit {width: 90%; color: #faf3e1; font-size: 20px; background-color: #b3955f; line-height: 42px; font-weight: bold;}
 /* Barfinder Results (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_results.psd; */
 	#bar-finder-result.mobile {text-align: center; font-family: "Avenir", Helvetica, Arial, sans-serif;}
-	#bar-finder-result.mobile .title {color: #333; font-size: 24px; line-height: 50px;}
+	#bar-finder-result.mobile .title {color: #333; font-size: 24px; line-height: 34px;}
 	#bar-finder-result.mobile .btn:hover {color: #fff; background-color: #b3955f;}
-	#bar-finder-result.mobile .btn-grid {background-color: #b3955f; margin-right: 5px;}
+	#bar-finder-result.mobile .btn-grid {background-color: #b3955f; margin-right: 2px;}
 	#bar-finder-result.mobile .btn-list {background-color: #fff; border: 1px solid #b3955f;}
 	#bar-finder-result.mobile .btn-list,
 	#bar-finder-result.mobile .btn-grid {height: 38px; width: 38px; display: inline-block; text-indent: -7777px; font-size: 0; background-repeat: no-repeat;}
 	#bar-finder-result.mobile .btn-more {border: 1px solid #b3955f; height: 42px; display: block; font-size: 16px; font-family: "Avenir", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 42px;}
-	#bar-finder-result.mobile .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; font-family: "Myriad Pro", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 38px;}
+	#bar-finder-result.mobile .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
 	#bar-finder-result.mobile .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
 	#bar-finder-result.mobile .btn-radius.with-icon.grid:before {background-position: -0px -280px;}
 	#bar-finder-result.mobile ul li {width: 49%; float: left; position: relative;}
+	/*
 	#bar-finder-result.mobile ul li img {display: block; width: 100%;}
 	#bar-finder-result.mobile ul li .block-text {position: absolute; left: 10px; top: 55px; text-align: left; font-family: "Avenir", sans-serif;}
 	#bar-finder-result.mobile ul li .name {color: #ffe4af; font-size: 14px; font-weight: bold; margin: 0 0 5px; text-transform: uppercase;}
 	#bar-finder-result.mobile ul li .city {color: #faf3e1; font-size: 12px;}
 	#bar-finder-result.mobile ul li .background-gradient {background: url("../images/barfinder/line_gradient.png") repeat-x left bottom; bottom: 0; height: 100%; left: 0; position: absolute; width: 100%;}
 	#bar-finder-result.mobile ul li .star {opacity: 0.6; background: url("../images/barfinder/star_mobile.png") no-repeat center center; background-color: #333; height: 20px; width: 20px; position: absolute; top: 7px; right: 7px;}
-	#bar-finder-result.mobile ul li .star:hover {opacity: 0.8;} /* Rollover */
+	#bar-finder-result.mobile ul li .star:hover {opacity: 0.8;}
+	*/
+	
+	/*
+		TEMPS STYLE
+	*/
+	@media only screen and (max-width: 768px) {
+		/* line 42, ../sass/pages/_bar-guides.scss */
+		.mobile section.bars .bar-w-pic .btn-round:before, .mobile section.bar-filter .bar-w-pic .btn-round:before {
+		  background-size: 128px 256px;
+		  background-position: -80px -40px;
+		}
+		/* line 40, ../sass/pages/_bar-guides.scss */
+		.mobile section.bars .bar-w-pic .btn-round, .mobile section.bar-filter .bar-w-pic .btn-round {
+			width: 20px;
+			height: 20px;
+			right: 0.5em;
+			top: 0.5em;
+		}
+		section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
+			font-size: 80%!important;
+		}
+	}
 	#bar-finder-result.mobile ul.list li {border-right: 2px solid transparent; border-bottom: 2px solid transparent;}
 	#bar-finder-result.mobile .more {width: 50%; margin: 0 auto;}
 	#bar-finder-result.mobile .content {overflow: hidden; padding-bottom: 0;}
@@ -355,9 +377,11 @@
 	#view-account #UI.mobile .block-top {width: auto;}
 	#view-account #UI.mobile .sort-by label {display: none;}
 	#view-account #UI.mobile .sort-by .four.columns {}
-	#view-account #UI.mobile .sort-by.six.columns {width: 47.6667%; margin-left: 0;}
+	#view-account #UI.mobile .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
 	#view-account #UI.mobile .container {width: 100%!important;}
 	#view-account #UI.mobile .filter-view a.ui-radio {color: transparent;}
 	#view-account #UI.mobile .filter-view .right {margin: 0 20px 0 0;}
+	#view-account #UI.mobile .filter-view a:nth-child(2) {margin-left: 2px;}
 	#view-account #UI.mobile .filter-profil {width: 285px;}
-	#view-account #UI.mobile .list-bars .col-4 {width: 46%;}
+	#view-account #UI.mobile .list-bars .col {margin: 0;}
+	#view-account #UI.mobile .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
