@@ -75,14 +75,15 @@
             background: url({{ asset('bundles/wbbcore/images/icon_email-mobile.jpg') }});
         }
         .showallbars-btn{
-                display: block;
+                /*display: block;*/
                 position: relative;
                 top: 16px;
                 text-align: center;
         }
-        .social-share ul{padding: 0 ; margin: 0; width: 360px;
+        .social-share ul{padding: 0 ; margin: 0; width: 320px;
             position:relative;
-            left: -7%;
+            left: -6%;
+            top: 6px;
             bottom: 10px;}
         .social-share ul li{display: inline;float: left;}
 
@@ -90,6 +91,13 @@
             width: 260px;
             margin-left:auto;
             margin-right:auto;
+            }
+            body article p {
+                font-size: 18px !important;
+            }
+
+            article .hr-parent hr {
+                width : 90%;
             }
     </style>
     {% endif %}
@@ -194,9 +202,9 @@
                        
                    
                     <div style='clear:both;'></div>
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
                 {% if not is_mobile()  %}
-                    <div class="share-btns l-margin-top full">
+                    <div class="share-btns l-margin-top">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
@@ -208,7 +216,7 @@
                 {% endif %}
                 </div>
                 {% if is_mobile()  %}
-                    <div class="share-btns l-margin-top full">
+                    <div class="share-btns l-margin-top full full hr-parent">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
