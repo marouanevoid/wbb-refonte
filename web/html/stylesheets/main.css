@@ -271,7 +271,8 @@
 			font-size: 80%!important;
 		}
 	}
-	#bar-finder-result.mobile ul.list li {border-right: 2px solid transparent; border-bottom: 2px solid transparent;}
+	#bar-finder-result.mobile ul.list {position: relative;}
+	#bar-finder-result.mobile ul.list li {width: 50%; border-right: none; /*border-bottom: 2px solid transparent;*/}
 	#bar-finder-result.mobile .more {width: 50%; margin: 0 auto;}
 	#bar-finder-result.mobile .content {overflow: hidden; padding-bottom: 0;}
 /* Barfinder no result (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_noresults.psd; */
