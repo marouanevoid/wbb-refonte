@@ -49,7 +49,7 @@
 	.full-white {background-color: #fff;}
 
 	/* TEMPS */
-		.mask {width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-color: #000; opacity: 0.8;} /* TEMPS !!! */
+		.mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #000; opacity: 0.8;} /* TEMPS !!! */
 		.mask.brown {background-color: #4b4d4e; opacity: 1;}
 		.group-form {overflow: hidden;}
 		.separator-top {border-top: 1px solid #818a8c;}
@@ -138,8 +138,10 @@
 	#UI .load-more:hover {color: #faf3e1;}
 	#UI.mobile.container {width: 100%!important;}
 /* Globale Mobile Classes */
-	.mobile .content {padding: 0 10px 60px;}
-	.mobile .radius {border-radius: 100%;}	
+	#UI.mobile .content,
+	#bar-finder-result.mobile .content,
+	#bar-finder.mobile .content {padding: 0 10px 60px;}
+	#UI.mobile .radius {border-radius: 100%;}	
 /* Globale Mobile */
 	.mobile a,
 	.mobile p {font-size: 16px;}
