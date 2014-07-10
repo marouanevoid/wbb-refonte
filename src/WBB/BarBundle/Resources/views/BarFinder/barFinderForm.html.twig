@@ -1,3 +1,19 @@
+<style type="text/css">
+    .go{
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    $(function(){
+        var showGo = function(){$('.go').show();};
+        $('.trigger-handler').parent('a').on('click' , showGo);
+       $('.trigger-select-go').on('change' , showGo);
+
+       $('.go').hide();
+       // Delete the fake item on the list
+       $('.fake-go-item').remove();
+    });
+</script>
 <section class="bar-finder">
     <div class="container">
         <img class="finder-arrow" src="{{ asset('bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
@@ -18,7 +34,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <select class="ui-dropdown dark" name="city" data-class="with-icon city">
+                            <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
                                 <option value="">Choose a City</option>
 {#                                 {% if city is defined %} <option value="">{{ city.name }}</option> {% endif %} #}
                                 {% for city in cities %}
@@ -28,7 +44,7 @@
                         </td>
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
-                            <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
+                            <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
                                 <option value="">Choose with who</option>
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}">{{ tag.name }}</option>
@@ -36,10 +52,13 @@
                             </select>
                         </td>
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
+                        <div style='display:none' class='fake-go-item'>
+                            <input type="radio" name="mood" value="" class="ui-radio dark with-icon" data-color="brown" checked=""/>
+                        </div>
                         <td>
-                            <input type="radio" name="mood" value="chillout" class="ui-radio dark with-icon" data-color="brown" checked="checked"/>
+                            <input type="radio" name="mood" value="chillout" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
                         <td>
-                            <input type="radio" name="mood" value="casual" class="ui-radio dark with-icon"/>
+                            <input type="radio" name="mood" value="casual" class="trigger-handler ui-radio dark with-icon"/>
                         </td>
                         <td>
                             <input type="radio" name="mood" value="party" class="ui-radio dark with-icon"/>

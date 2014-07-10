@@ -306,7 +306,6 @@ meta.App = function() {
     that.__construct();
     that.bareFinderHandler();
 
-    // TEMP //
     // Script Injection for Select UI
     ////////
     //$('.ui-dropdown-container').each(function(){})
@@ -327,7 +326,7 @@ meta.App = function() {
 
     // Trigger change on select
     $('select').change();
-    //////// END TEMP
+
 };
 
 

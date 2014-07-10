@@ -36,6 +36,11 @@
     section.bar-filter .bars-w-pic {
         width: auto;
     }
+    {% if not distance %}
+        .bar-filter .ui-dropdown.drop-light {
+            max-height: 110px !important;
+        }
+    {% endif %}
 </style>
 <div class="full-cream">
 
@@ -148,7 +153,7 @@
                 <div class="disableClick"></div>
                 <span class="sort">Sort by :</span>
 
-                <select class="ui-dropdown light" name="criteria" id="criteria">
+                <select class="ui-dropdown light filter-distance" name="criteria" id="criteria" style="{% if not distance %}height:110px !important;{% endif %}">
                     {% if distance is defined and distance %}
                     <option value="distance" data-type="criteria">Distance</option>
                     {% endif %}
