@@ -32,6 +32,8 @@ class CloudSearchIndexer implements IndexerInterface
                 'fields' => $entity->getCloudSearchFields()
         ));
 
+        $body[0]['fields']['entity_type'] = $this->getEntityType($entity);
+
         if ($this->getEntityType($entity) == 'BestOf') {
             $image = $entity->getImage();
             if ($image) {
@@ -40,7 +42,7 @@ class CloudSearchIndexer implements IndexerInterface
         } elseif ($this->getEntityType($entity) == 'Bar') {
             $medias = $entity->getMedias();
             if (isset($medias[0])) {
-                $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($medias[0], 'simple_image_big');
+                $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($medias[0]->getMedia(), 'simple_image_big');
             }
         }
 
