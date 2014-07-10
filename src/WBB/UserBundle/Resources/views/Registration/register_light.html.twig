@@ -1,79 +1,54 @@
-{% extends '::Popin/layout.html.twig' %}
-
-{% block title %}
-    Register
-{% endblock %}
-
-
-{% block content %}
-    {#<div class="mask"></div>#}
-    <div id="register">
-        <div id="UI" class="wrap">
-            <div class="margin-top-20">
-                <div id="account" class="left">
-                    <div class="subtitle text-transform-uppercase bold">I already have an account</div>
-                    <form>
-                        <div class="text-align-center">
-                            <input type="email" class="form-text margin-top-30" placeholder="Email">
-                            <input type="password" class="form-text form-password margin-top-10" placeholder="Password">
-                            <input type="submit" class="form-submit btn margin-top-30 bold" value="CONFIRM">
+{#<div class="mask"></div>#}
+<div id="register">
+    <div id="UI" class="wrap">
+        <div class="margin-top-20">
+            <div id="account" class="left">
+                <div class="subtitle text-transform-uppercase bold">I already have an account</div>
+                {% render url('fos_user_security_login') %}
+            </div> <!-- #account.block.wrap -->
+            <div id="create-account" class="left">
+                <div class="subtitle text-transform-uppercase bold">Create an account now</div>
+                <div class="connect-fb margin-top-20">Pre fill your profile with <a href="#linkto" class="btn btn-create-with-fb radius-30">Facebook</a></div>
+                <form action="" {{ path('wbb_user_registration_register_light') }} method="POST" id="register_form">
+                    <div class="text-align-left margin-bottom-20">
+                        {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Name' } }) }}
+                        {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
+                        {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
+                        {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
+                    </div>
+                    <div id="date-birthday" class="text-align-center">
+                        <label class="margin-bottom-15">Date of Birth</label>
+                        <div class="select-wrap left">
+                            {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                         </div>
-                        <div class="clear"></div>
-                        <a href="#linkto" class="text-align-center margin-top-20">Forgot your password?</a>
-                        <div class="separator margin-top-40"></div>
-                        <a href="#linktoAPIFacebook" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30">Sign up with Facebook</a>
-                    </form>
-                </div> <!-- #account.block.wrap -->
-                <div id="create-account" class="left">
-                    <div class="subtitle text-transform-uppercase bold">Create an account now</div>
-                    <div class="connect-fb margin-top-20">Pre fill your profile with <a href="#linkto" class="btn btn-create-with-fb radius-30">Facebook</a></div>
-                    <form action="" {{ form_enctype(form) }} method="POST" id="register_form">
-                        <div class="text-align-left margin-bottom-20">
-                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Username' } }) }}
-                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
-                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
-                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
+                        <div class="select-wrap left">
+                            {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
                         </div>
-                        <div id="date-birthday" class="text-align-center">
-                            <label class="margin-bottom-15">Date of Birth</label>
-                            <div class="select-wrap left">
-                                {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
-                            </div>
-                            <div class="select-wrap left">
-                                {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
-                            </div>
-                            <div class="select-wrap left last">
-                                {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
-                            </div>
-                        </div> <!-- #date-birthday -->
-                        <div class="clear"></div>
-                        <div id="countries" class="margin-top-10">
-                            {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
-                        </div><!-- #countries -->
+                        <div class="select-wrap left last">
+                            {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                        </div>
+                    </div> <!-- #date-birthday -->
+                    <div class="clear"></div>
+                    <div id="countries" class="margin-top-10">
+                        {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                    </div><!-- #countries -->
 
-                        {{ form_rest(form) }}
-                        <div class="group-actions margin-top-20 right">
-                            <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Register">
-                        </div>
-                    </form>
-                    {#{% if form.points.vars.errors|length %}#}
-                        {#<div id="message" class="margin-top-20 right">#}
-                            {#<div>#}
-                                {#<img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">#}
-                                {#{{ form_errors(form) }}#}
-                                {#{{ form_errors(form.plainPassword.first) }}#}
-                                {#{{ form_errors(form.plainPassword.second) }}#}
-                                {#{{ form_errors(form.username) }}#}
-                                {#{{ form_errors(form.email) }}#}
-                                {#{{ form_errors(form.birthdate) }}#}
-                                {#{{ form_errors(form.country) }}#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#{% endif %}#}
+                    {{ form_rest(form) }}
+                    <div class="group-actions margin-top-20 right">
+                        <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Register">
+                    </div>
+                </form>
+                {#{% if form.points.vars.errors|length %}#}
+                <div id="message" class="margin-top-20 right">
+                    <div>
+                        <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+
+                    </div>
                 </div>
-                <a href="#close" class="btn btn-close">Close</a>
+                {#{% endif %}#}
             </div>
-            <div class="clear"></div>
-        </div> <!-- #UI -->
-    </div> <!-- #register -->
-{% endblock %}
+            <a href="#close" class="btn btn-close">Close</a>
+        </div>
+        <div class="clear"></div>
+    </div> <!-- #UI -->
+</div> <!-- #register -->

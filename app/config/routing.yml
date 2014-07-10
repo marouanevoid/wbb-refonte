@@ -10,6 +10,10 @@ wbb_user:
     resource: "@WBBUserBundle/Resources/config/routing/routing.yml"
     prefix:   /
 
+wbb_cloudsearch:
+    resource: "@WBBCloudSearchBundle/Resources/config/routing.yml"
+    prefix:   /
+
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
     prefix: /media/gallery
