@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use WBB\BarBundle\Entity\Ad;
+use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
@@ -77,5 +78,21 @@ class NewsController extends Controller
             'alsoLike'      => $alsoLike,
             'city'          => $news->hasOnlyOneTopCity(),
         ));
+    }
+
+    public function shareAction(News $news)
+    {
+        $form = $this->container->get('wbb.forum.sharenews.form');
+        $formHandler = $this->container->get('bmwi.forum.sharequestion.form.handler');
+
+        $process = $formHandler->process($question);
+        if ($process) {
+            return $this->render('BMWiForumBundle:Question:confirmedShare.html.twig');
+        }
+
+        return array(
+            'form'     => $form->createView(),
+            'question' => $question
+        );
     }
 }

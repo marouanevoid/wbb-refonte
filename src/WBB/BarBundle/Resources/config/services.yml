@@ -209,3 +209,9 @@ services:
     sonata.media.resizer.custom:
         class: WBB\BarBundle\Resizer\CustomResizer
         arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
+
+    # ForumMailer
+#    wbb_bar.mailer:
+#        class:  WBB\BarBundle\Mailer\BarMailer
+#        parent: bmwi_core.mailer.twig_swift
+#        public: false

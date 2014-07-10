@@ -1,5 +1,8 @@
 parameters:
 
+    #Mailer Class
+    wbb_core.twig_swift.class: WBB\CoreBundle\Mailer\TwigSwiftMailer
+
     #Admin Classes
     wbb_core.country.admin.class: WBB\CoreBundle\Controller\Admin\CountryAdmin
     wbb_core.city.admin.class: WBB\CoreBundle\Controller\Admin\CityAdmin
@@ -76,3 +79,11 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBCoreBundle:CitySuburb']
+
+#    # TwigSwiftMailer
+#    wbb_core.mailer.twig_swift:
+#        class:  %wbb_core.twig_swift.class%
+#        parent: fos_user.mailer.twig_swift
+#        public: false
+#        calls:
+#            - [setContainer, [@service_container]]
