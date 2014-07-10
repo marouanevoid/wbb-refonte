@@ -152,6 +152,10 @@
 	#UI.mobile .ui-dropdown-container .ui-dropdown {height: 38px;}
 	#UI.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
 	#UI.mobile .col-4 {width: 237px;}
+	/*
+	#UI.mobile .bar-w-pic .txt h2,
+	#UI.mobile .bar-w-pic .txt h3 {text-align: left;}
+	*/
 
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
 	#UI {background-color: #faf3e1; position: relative; top: 145px;}
@@ -221,7 +225,7 @@
 	#bar-finder.mobile .ui-radio.btn-radius.with-icon:after, 
 	#bar-finder.mobile .ui-radio.btn-radius.with-icon:before {left:10px !important}
 	#bar-finder.mobile .group-form.radio ul {width: 310px!important;}
-	#bar-finder.mobile .form-radio {width: 95px; margin-right: 7px;}
+	#bar-finder.mobile .form-radio {width: 93px; margin-right: 7px;} /* Page : Mobile_BarFinder.html */
 	#bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; text-indent: 18px;}
 	#bar-finder.mobile .form-submit {width: 90%; color: #faf3e1; font-size: 20px; background-color: #b3955f; line-height: 42px; font-weight: bold;}
 /* Barfinder Results (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_results.psd; */
