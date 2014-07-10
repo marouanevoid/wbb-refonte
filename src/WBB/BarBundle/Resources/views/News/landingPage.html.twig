@@ -211,7 +211,6 @@
             <div class="articles older-news twelve columns">
 
                 {% for n in articles|slice(4,3) %}
-                {{10/10}}
                     {% if loop.index == 2 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1} %}
                     {%  else %}
@@ -233,7 +232,6 @@
 
                 
                 {% for n in newsList %}
-                    {{cursorIndex % 2}}
                     {% if cursorIndex % 2 == 0 %}
                             {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                         {% set newsIndex=1 %}
