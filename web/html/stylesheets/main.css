@@ -247,10 +247,10 @@
 	#bar-finder-result.mobile ul li .star {opacity: 0.6; background: url("../images/barfinder/star_mobile.png") no-repeat center center; background-color: #333; height: 20px; width: 20px; position: absolute; top: 7px; right: 7px;}
 	#bar-finder-result.mobile ul li .star:hover {opacity: 0.8;}
 	*/
+	
 	/*
 		TEMPS STYLE
 	*/
-
 	@media only screen and (max-width: 768px) {
 		/* line 42, ../sass/pages/_bar-guides.scss */
 		.mobile section.bars .bar-w-pic .btn-round:before, .mobile section.bar-filter .bar-w-pic .btn-round:before {
@@ -263,6 +263,9 @@
 			height: 20px;
 			right: 0.5em;
 			top: 0.5em;
+		}
+		section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
+			font-size: 80%!important;
 		}
 	}
 	#bar-finder-result.mobile ul.list li {border-right: 2px solid transparent; border-bottom: 2px solid transparent;}
@@ -375,9 +378,11 @@
 	#view-account #UI.mobile .block-top {width: auto;}
 	#view-account #UI.mobile .sort-by label {display: none;}
 	#view-account #UI.mobile .sort-by .four.columns {}
-	#view-account #UI.mobile .sort-by.six.columns {width: 47.6667%; margin-left: 0;}
+	#view-account #UI.mobile .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
 	#view-account #UI.mobile .container {width: 100%!important;}
 	#view-account #UI.mobile .filter-view a.ui-radio {color: transparent;}
 	#view-account #UI.mobile .filter-view .right {margin: 0 20px 0 0;}
+	#view-account #UI.mobile .filter-view a:nth-child(2) {margin-left: 2px;}
 	#view-account #UI.mobile .filter-profil {width: 285px;}
-	#view-account #UI.mobile .list-bars .col-4 {width: 46%;}
+	#view-account #UI.mobile .list-bars .col {margin: 0;}
+	#view-account #UI.mobile .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
