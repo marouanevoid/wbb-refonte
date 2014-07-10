@@ -1,39 +1,13 @@
 <html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<title>Login</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
-	<title>BarFinder - mobile version</title>
-
-	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="stylesheets/front.css">
 	<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
-
-	<!-- JS -->
-	<script type="text/javascript" src="js/plugins/jquery.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.easing.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.velocity.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.transform3d.js"></script>
-    <script type="text/javascript" src="js/plugins/modernizr.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.browser.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.touchSwipe.min.js"></script>
-    <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.mousewheel.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.jscrollpane.js"></script>
-
-    <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/ratio.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/loadMore.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/dropdown.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/radio.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/search.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/map.metabolism.js"></script>
-    <script type="text/javascript" src="js/libs/form.metabolism.js"></script>
-
-    <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
+	
 	<aside class="mobile-menu">
         <table>
             <tbody><tr class="search">
@@ -157,49 +131,21 @@
         </div>
     </header>
 
-   	<div id="bar-finder" class="mobile margin-top-60">
-    	<div class="content">
-    		<div class="title text-transform-uppercase margin-bottom-40">find your best bar</div>
-	    	<form>
-	    		<div class="group-select margin-bottom-40">
-		    		<label class="text-transform-uppercase">city</label>
-		    		<select class="ui-dropdown dark" name="city" data-class="with-icon city">
-		    			<option class="cty1">Choose a City</option>
-		    			<option class="cty2">Frankfurt</option>
-		    			<option class="cty3">Tokyo</option>
-		    			<option class="cty4">Rio de janeiro</option>
-		    		</select>
-	    		</div>
-	    		<div class="clear"></div>
-	    		<div class="group-select margin-bottom-40">
-	    			<label class="text-transform-uppercase">To go out with</label>
-	    			<select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
-                        <option selected="selected">Friends</option>
-                        <option>Familly</option>
-                        <option>Wife</option>
-                        <option>Kids</option>
-                        <option>Mother</option>
-                    </select>
-	    		</div>
-	    		<div class="clear"></div>
-	    		<div class="group-form radio margin-bottom-40 wrap" style="width:245px">
-	    			<label class="text-transform-uppercase">Mood</label>
-	    			<div class="form-radio left">
-	    				<input type="radio" name="mood" value="chillout" class="ui-radio dark with-icon text-transform-capitalize" data-color="brown"  checked="checked">
-	    			</div>
-	    			<div class="form-radio left">
-	    				<input type="radio" name="mood" value="casual" class="ui-radio dark with-icon text-transform-capitalize">
-	    			</div>
-	    			<div class="form-radio left">
-	    				<input type="radio" name="mood" value="party" class="ui-radio dark with-icon text-transform-capitalize">
-	    			</div>
-	    		</div>
-	    		<div class="group-form margin-bottom-40">
-	    			<input type="submit" value="Go" class="form-submit radius-30 text-transform-uppercase">
-	    		</div>
-	    	</form>
-    	</div>
-   	</div> <!-- #bar-finder -->
-
+    <div class="full-cream">
+        <div id="register" class="mobile"> <!-- Version Mobile -->
+            <div id="UI" class="wrap close">
+                <div id="close" style="min-height: 460px">
+                    <div class="title margin-bottom-30 padding-bottom-30 bold separator-bottom">
+                        <a href="#login" class="btn wrap">I already have an account</a> 
+                    </div>
+                    <div class="title margin-bottom-30 bold">
+                        <a href="#create-account" class="btn wrap">Create an account now</a>
+                    </div>  
+                </div> <!-- #close -->
+                <a href="#close" class="btn btn-close">Close</a>
+                <div class="clear"></div>
+            </div> <!-- #UI -->
+        </div> <!-- #register -->
+    </div>
 </body>
 </html>

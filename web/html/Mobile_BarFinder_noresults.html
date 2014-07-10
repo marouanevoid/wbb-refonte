@@ -1,7 +1,8 @@
 <html>
 <head>
-    <title>Bar Finder Results - mobile version</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
+	<title>Barsr Finder Results - mobile version</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="stylesheets/front.css">
@@ -32,7 +33,7 @@
 
     <script type="text/javascript" src="js/app.js"></script>
 </head>
-<body>
+<body class="no-result">
 	<aside class="mobile-menu">
         <table>
             <tbody><tr class="search">
@@ -160,138 +161,19 @@
         <div class="wrapper margin-bottom-40">
         	<div class="content margin-top-100">
         		
-                <div class="title text-transform-uppercase">Bar Finder Results</div>
-    	    	<div class="count-results margin-top-10">We found 34 bars that match your request!</div>
+                <div class="title text-transform-uppercase bold">Bar Finder Results</div>
                 <div class="clear"></div>
+                
+                <div id="no-results" class="margin-top-50">
+                    <div class="icon glass radius text-align-center wrap">
+                        <img src="images/barfinder/icon_glass.png" class="margin-top-20">
+                    </div>
+                    <div class="clear"></div>
 
-                <div id="filter" class="margin-top-30">
-                    <ul>
-                        <li>
-                            <a href="#search" class="btn btn-redefine-search radius-60">Redefine Search</a>
-                        </li>
-                        <li class="text-align-right">
-                            <a href="#grid" class="btn btn-grid radius-60 ui-radio btn-radius border brown grid radio-light with-icon">Grid</a>
-                            <a href="#list" class="btn btn-list radius-60 ui-radio btn-radius border brown list radio-light with-icon">List</a>
-                        </li>
-                    </ul>
-                </div><!-- #filer -->
-            </div>
-            <div class="clear"></div>
-            
-            <ul class="list margin-top-40">
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_1.jpg">
-                    <div class="block-text">
-                        <div class="name">Golden Cadillac</div>
-                        <div class="city">Lower East Manhattan, New York</div>
+                    <div class="margin-top-40">
+                        <p>Sorry we didn’t find any bars that matched your request. Please change your criteria or <a href="#contact">contact us</a> on Twitter <a href="#">@worldsbestbars</a></p>
                     </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_2.jpg">
-                    <div class="block-text">
-                        <div class="name">Brandy Library</div>
-                        <div class="city">Brooklyn, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_2.jpg">
-                    <div class="block-text">
-                        <div class="name">Cocktail Room</div>
-                        <div class="city">Compton, California</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_1.jpg">
-                    <div class="block-text">
-                        <div class="name">Brandy Library</div>
-                        <div class="city">Brooklyn, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_1.jpg">
-                    <div class="block-text">
-                        <div class="name">Golden Cadillac</div>
-                        <div class="city">Lower East Manhattan, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_2.jpg">
-                    <div class="block-text">
-                        <div class="name">Brandy Library</div>
-                        <div class="city">Brooklyn, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_2.jpg">
-                    <div class="block-text">
-                        <div class="name">Cocktail Room</div>
-                        <div class="city">Compton, California</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_1.jpg">
-                    <div class="block-text">
-                        <div class="name">Brandy Library</div>
-                        <div class="city">Brooklyn, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_1.jpg">
-                    <div class="block-text">
-                        <div class="name">Golden Cadillac</div>
-                        <div class="city">Lower East Manhattan, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_2.jpg">
-                    <div class="block-text">
-                        <div class="name">Brandy Library</div>
-                        <div class="city">Brooklyn, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_2.jpg">
-                    <div class="block-text">
-                        <div class="name">Cocktail Room</div>
-                        <div class="city">Compton, California</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-                <li>
-                    <div class="background-gradient"></div>
-                    <img src="images/barfinder/_images/img_1.jpg">
-                    <div class="block-text">
-                        <div class="name">Brandy Library</div>
-                        <div class="city">Brooklyn, New York</div>
-                    </div>
-                    <div class="star radius-60"></div>
-                </li>
-            </ul>
-            <div class="clear"></div>
-            
-            <div class="more margin-top-40">
-                <a href="#more" class="btn btn-more radius-60">See more bars</a>
+                </div> <!-- #no-results -->
             </div>
         	<div class="clear"></div>
         </div> <!-- .wrapper -->
