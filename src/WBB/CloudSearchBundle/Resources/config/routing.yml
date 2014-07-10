@@ -1,0 +1,3 @@
+wbb_cloudsearch_search:
+    pattern: /search-results
+    defaults: { _controller: WBBCloudSearchBundle:Search:search }
