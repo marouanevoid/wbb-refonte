@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-	<title>Barsr Finder Results - mobile version</title>
+	<title>BarFinder - mobile version</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="stylesheets/front.css">
@@ -33,7 +33,7 @@
 
     <script type="text/javascript" src="js/app.js"></script>
 </head>
-<body class="no-result">
+<body>
 	<aside class="mobile-menu">
         <table>
             <tbody><tr class="search">
@@ -157,27 +157,59 @@
         </div>
     </header>
 
-   	<div id="bar-finder-result" class="mobile">
-        <div class="wrapper margin-bottom-40">
-        	<div class="content margin-top-100">
-        		
-                <div class="title text-transform-uppercase">Bar Finder Results</div>
-                <div class="clear"></div>
-                
-                <div id="no-results" class="margin-top-20">
-                    <div class="icon glass radius text-align-center wrap">
-                        <img src="images/barfinder/icon_glass.png" class="margin-top-40">
+   	<div id="bar-finder" class="mobile margin-top-60">
+    	<div class="content">
+    		<div class="title text-transform-uppercase margin-bottom-20 bold">find your best bar</div>
+	    	<form>
+	    		<div class="group-select margin-bottom-40">
+		    		<label class="text-transform-uppercase">city</label>
+		    		<select class="ui-dropdown dark" name="city" data-class="with-icon city">
+		    			<option class="cty1">Choose a City</option>
+		    			<option class="cty2">Frankfurt</option>
+		    			<option class="cty3">Tokyo</option>
+		    			<option class="cty4">Rio de janeiro</option>
+		    		</select>
+	    		</div>
+	    		<div class="clear"></div>
+	    		<div class="group-select margin-bottom-10">
+	    			<label class="text-transform-uppercase">To go out with</label>
+	    			<select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
+                        <option selected="selected">Friends</option>
+                        <option>Familly</option>
+                        <option>Wife</option>
+                        <option>Kids</option>
+                        <option>Mother</option>
+                    </select>
+	    		</div>
+	    		<div class="clear"></div>
+	    		<div class="group-form radio margin-bottom-50 wrap"> <!-- Mobile [Warning /!\] -->
+                    <label class="text-transform-uppercase">Mood</label>
+                    <div class="wrap" style="width:310px">
+                        <ul>
+                            <li class="left">
+                                <div class="form-radio">
+                                    <input type="radio" name="mood" value="chillout" class="ui-radio dark with-icon text-transform-capitalize" data-color="brown"  checked="checked">
+                                </div>
+                            </li>
+                            <li class="left">
+                                <div class="form-radio">
+                                    <input type="radio" name="mood" value="casual" class="ui-radio dark with-icon text-transform-capitalize">
+                                </div>
+                            </li>
+                            <li class="left">
+                                <div class="form-radio">
+                                    <input type="radio" name="mood" value="party" class="ui-radio dark with-icon text-transform-capitalize">
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="clear"></div>
-
-                    <div class="margin-top-20">
-                        <p>Sorry we didn’t find any bars that matched your request. Please change your criteria or <a href="#contact">contact us</a> on Twitter <a href="#">@worldsbestbars</a></p>
-                    </div>
-                </div> <!-- #no-results -->
-            </div>
-        	<div class="clear"></div>
-        </div> <!-- .wrapper -->
-   	</div> <!-- #var-finder -->
+                </div>
+                <div class="group-form margin-bottom-40">
+                    <input type="submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold">
+                </div>
+            </form>
+        </div>
+    </div> <!-- #bar-finder -->
 
 </body>
 </html>
