@@ -211,6 +211,7 @@
             <div class="articles older-news twelve columns">
 
                 {% for n in articles|slice(4,3) %}
+                {{10/10}}
                     {% if loop.index == 2 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1} %}
                     {%  else %}
@@ -218,27 +219,29 @@
                     {%  endif %}
                 {% endfor %}
 
+                {% set newsIndex = 0 %}
                 {%  if bigAd %}
                     {% for n in interviews|slice(1,1) %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
                         {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
                     {% endfor %}
-                {%  endif %}
+                    {% set newsIndex = 1 %}
+                    {% set cursorIndex = 0 %}
+                {%  else %}
+                    {% set cursorIndex = 1 %}
+                {% endif %}
 
-                {% set newsIndex = 0 %}
+                
                 {% for n in newsList %}
-                    {% if newsIndex <= 0 %}
-                        {% if loop.index0==0 %}
+                    {{cursorIndex % 2}}
+                    {% if cursorIndex % 2 == 0 %}
                             {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
-                        {% else %}
-                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
-                        {% endif %}
-
-                        {% set newsIndex=newsIndex+1 %}
+                        {% set newsIndex=1 %}
                     {% else %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
                         {% set newsIndex = 0 %}
                     {% endif %}
+                    {% set cursorIndex = cursorIndex + 1 %}
                 {% endfor %}
             </div>
         </div>
