@@ -171,7 +171,7 @@
         {% endif %}
 
         {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <div id="register-light">
+        <div id="register-light" style="display:none">
             {% render url('wbb_user_registration_register_light') %}
             <br />
             <br />
