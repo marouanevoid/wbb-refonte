@@ -3,10 +3,8 @@
 
 /* Light reset */
 	* {padding: 0; margin: 0;}
-
 /* Globale Tags */
 	body {}
-	/*input[type="submit"] {border: none;}*/
 	input[type="email"]::-webkit-input-placeholder,
 	input[type="text"]::-webkit-input-placeholder,
 	input[type="password"]::-webkit-input-placeholder { /* WebKit browsers */
@@ -242,7 +240,8 @@
 	#bar-finder-result.mobile .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
 	#bar-finder-result.mobile .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
 	#bar-finder-result.mobile .btn-radius.with-icon.grid:before {background-position: -0px -280px;}
-	#bar-finder-result.mobile ul li {width: 49%; float: left; position: relative;}
+	#bar-finder-result.mobile ul li {width: 50%; float: left; position: relative;}
+	#bar-finder-result.mobile #filter ul {width: 101%;}
 	/*
 	#bar-finder-result.mobile ul li img {display: block; width: 100%;}
 	#bar-finder-result.mobile ul li .block-text {position: absolute; left: 10px; top: 55px; text-align: left; font-family: "Avenir", sans-serif;}
