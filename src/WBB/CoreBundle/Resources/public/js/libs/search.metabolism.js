@@ -108,28 +108,51 @@ meta.Search = function(config){
             $('.entire-content').hide();
         }
 
-        $.post('/tmp-search.php',{q:q}, function( data )
-        {
-            if(data.code == 200)
-            {
-                var values  = data.values;
-                var html    = "";
 
-                $.each(values, function(index, value)
-                {
-                    var result = value.name.replace(data.q, '<b>'+data.q+'</b>');
+        $.ajax({
+            type: 'GET',
+            url: 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search',
+            async: false,
+            contentType: "application/json",
+            dataType: 'json',
+        data : {
+            q : q
+        },
+        success  :function(){
+            console.log('done');
+        }
 
-                    if( $(window).width() < 640 )
-                        html += that.config.template_mobile.replace('%s', result);
-                    else
-                        html += that.config.template.replace('%s', result);
-                });
+        })
 
-                that.context.$result.html( html );
+        // $.post('/proxy.php',{target_url : 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search?q='+q} , function( data )
+        // {
+        //     console.log('done');
+        //     //vtools.log('Search' ,'search.metabolism' , 'done');
+        //     // if(data.code == 200)
+        //     // {
+        //     //     var values  = data.values;
+        //     //     var html    = "";
 
-                that.show_results = true;
-            }
-        });
+        //     //     $.each(values, function(index, value)
+        //     //     {
+        //     //         var result = value.name.replace(data.q, '<b>'+data.q+'</b>');
+
+        //     //         if( $(window).width() < 640 )
+        //     //             html += that.config.template_mobile.replace('%s', result);
+        //     //         else
+        //     //             html += that.config.template.replace('%s', result);
+        //     //     });
+
+        //     //     that.context.$result.html( html );
+
+        //     //     that.show_results = true;
+        //     // }
+
+
+        // }).done(function(){
+        //     alert('done');
+        // });
+
     };
 
 
