@@ -28,9 +28,16 @@
                 <p class="s-margin-top">
                     {{ b.seoDescription|truncate(200, true, '...')|striptags }}
                 </p>
-                <div class="tags">{% for tr in b.tags %}
-                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                    {% endfor%}</div>
+                <div class="tags">
+                    {% if b.energyLevel %}
+                        {{ b.energyLevel }}
+                    {% endif %}
+                    {% for tr in b.tags |slice(0, ((b.energyLevel)? 4 : 5)) %}
+                        {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
+                            {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                        {% endif %}
+                    {% endfor%}
+                </div>
             </div>
             <div class="separator"><hr/></div>
         </article>

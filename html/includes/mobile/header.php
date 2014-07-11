@@ -26,7 +26,7 @@
 
         <tr class="signin">
             <td>
-                <?php include('components/header/signin-register.php') ?>
+                <?php include('components/header/logged.php') ?>
             </td>
         </tr>
 
@@ -90,3 +90,5 @@
     <?php include('includes/mobile/search-bar.php') ?>
 
 </header>
+
+<?php include('components/bar-finder-mobile.php') ?>

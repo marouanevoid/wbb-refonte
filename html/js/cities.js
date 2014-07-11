@@ -54,6 +54,11 @@ meta.CitiesPage = function() {
         });
     };
 
+    that._isRetina = function() {
+        if (window.devicePixelRatio === undefined) return false; // No pixel ratio available. Assume 1:1.
+        return window.devicePixelRatio > 1.5;
+    };
+
 
     /**
      *
@@ -63,10 +68,14 @@ meta.CitiesPage = function() {
         var html = "";
         var markers = [];
 
+        var is_retina = that._isRetina();
         $.each(bars, function(index, bar)
         {
             if( display_list ) html += '<li id="'+bar.id+'" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+bar.address+'</span></li>';
-            markers.push({address:bar.address, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:'images/markers/'+(index+1)+'.png'}, id:bar.id});
+
+            var icon = new google.maps.MarkerImage('images/markers/'+(index+1)+(is_retina?'@2x':'')+'.png', null, null, null, new google.maps.Size(39,58));
+
+            markers.push({address:bar.address, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:icon}, id:bar.id});
         });
 
         if( display_list )

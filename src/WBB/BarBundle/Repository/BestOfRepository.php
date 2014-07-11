@@ -44,15 +44,27 @@ class BestOfRepository extends EntityRepository
         }
 
         if($bestof->getByTag() and $forceTags){
-            // TODO common tags
             $qb
                 ->addSelect('count(t.id) as HIDDEN nbTags')
+                ->addSelect('count(tgw.id) as HIDDEN nbWiths')
+                ->leftjoin($this->getAlias().'.energyLevel', 'el')
+                ->leftjoin($this->getAlias().'.toGoWith', 'tgw')
                 ->leftjoin($this->getAlias().'.tags', 'bt')
                 ->leftjoin('bt.tag', 't')
-                ->andWhere($qb->expr()->in('t.id', ':tags'))
+                ->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->in('t.id', ':tags'),
+                        $qb->expr()->orX(
+                            $qb->expr()->in('tgw.id', ':goWith'),
+                            $qb->expr()->eq('el.id', ($bestof->getEnergyLevel()) ? $bestof->getEnergyLevel()->getId() : 0)
+                        )
+
+                    )
+                )
                 ->setParameter('tags', $bestof->getTagsIds())
-                ->addOrderBy('nbTags','DESC')
-            ;
+                ->setParameter('goWith', $bestof->getGoWithIds())
+                ->addOrderBy('nbTags', 'DESC')
+                ->addOrderBy('nbWiths', 'DESC');
         }
 
         $qb

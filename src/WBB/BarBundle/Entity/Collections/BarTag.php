@@ -24,6 +24,13 @@ class BarTag
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="smallint", nullable=true)
@@ -213,5 +220,28 @@ class BarTag
     public function getSemsoftBar()
     {
         return $this->semsoftBar;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return BarTag
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

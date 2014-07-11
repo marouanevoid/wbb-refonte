@@ -115,7 +115,7 @@ class City implements IndexableEntity
      *      inverseJoinColumns={@ORM\JoinColumn(name="news_id", referencedColumnName="id")}
      *      )
      **/
-    private $news;    
+    private $news;
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTag", mappedBy="city", cascade={"all"})

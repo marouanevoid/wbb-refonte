@@ -7,7 +7,7 @@
 namespace WBB\BarBundle\Controller\Admin;
 
 use Sonata\AdminBundle\Validator\ErrorElement;
-use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -155,6 +155,26 @@ class BestOfAdmin extends Admin
         if($object->getByTag()){
             $formMapper
                 ->with('Tags')
+                    ->add('energyLevel', 'entity', array(
+                            'class'    => 'WBBBarBundle:Tag',
+                            'required' => false,
+                            'empty_value' => 'Please choose a mood',
+                            'property' => 'name',
+                            'query_builder' => function ($er) {
+                                    return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
+                                }
+                        )
+                    )
+                    ->add('toGoWith', null,
+                        array(
+                            'required' => false,
+                            'multiple' => true,
+                            'by_reference' => false,
+                            'query_builder' => function ($er) {
+                                    return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
+                                }
+                        )
+                    )
                     ->add('tags', 'sonata_type_collection',
                         array(
                             'required'  => false,
