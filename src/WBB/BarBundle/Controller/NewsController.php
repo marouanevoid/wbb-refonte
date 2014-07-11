@@ -18,7 +18,16 @@ class NewsController extends Controller
 {
     public function landingPageAction($citySlug = false)
     {
-        $city = ($citySlug)? $this->container->get('city.repository')->findOneBySlug($citySlug) : null;
+        $session = $this->container->get('session');
+        if ($citySlug == "world-wide")
+            $session->set('citySlug', "");
+        $slug = $session->get('citySlug');
+        $city = null;
+        if (!empty($slug)){
+            $city = $this->get('city.repository')->findOneBySlug($slug);
+        }elseif($citySlug){
+            $city = ($citySlug)? $this->container->get('city.repository')->findOneBySlug($citySlug) : null;
+        }
 
         $allNews = $this->container->get('news.repository')->findLatestNews($city, 0, false);
 
@@ -36,7 +45,7 @@ class NewsController extends Controller
             if($news->getIsAnInterview() and $nbInteviews < 4 ){
                 $interviews[] = $news;
                 $nbInteviews++;
-            }elseif($nbArticles < 8){
+            }elseif(!$news->getIsAnInterview() and $nbArticles < 8){
                 $articles[] = $news;
                 $nbArticles++;
             }else{

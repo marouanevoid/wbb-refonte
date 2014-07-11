@@ -531,6 +531,28 @@ wbb.CitiesPage = function () {
 
         initializeDropdowns();
 
+        // Initialize Selector  on drop down list
+        // Script Injection for Select UI
+        ////////
+        //$('.ui-dropdown-container').each(function(){})
+        $('select').on('change',function(){
+           var  $target = $(this),
+                parent  = $target.parent('.ui-dropdown-container'),
+                li = parent.find('li')
+                selected = parent.find('.selected').text();
+
+                li.show();
+
+                li.each(function(){
+                    if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+                        $(this).hide();
+                });
+        });
+
+        // Trigger change on select
+        $('select').change();
+
+
     };
 
     that._resize = function()

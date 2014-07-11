@@ -49,8 +49,8 @@
         // stock this on coockies
 
         if( $.cookie ){
-          $.cookie('currentLong' , currentLong);
-          $.cookie('currentLat' , currentLat);
+          $.cookie('currentLong' , currentLong , 0);
+          $.cookie('currentLat' , currentLat , 0);
 
           // send the request Ajax to get the nearest point
           $.ajax({
@@ -59,13 +59,13 @@
                       { 
                         if(data){
                           if(data.id)
-                            $.cookie('near_id', data.id)
+                            $.cookie('near_id', data.id , 0)
                           if(data.slug)
-                            $.cookie('near_islug', data.slug)
+                            $.cookie('near_islug', data.slug , 0)
                           if(data.latitude)
-                            $.cookie('near_latitude', data.latitude)
+                            $.cookie('near_latitude', data.latitude , 0)
                           if(data.longitude)
-                            $.cookie('near_longitude' , data.longitude);
+                            $.cookie('near_longitude' , data.longitude , 0);
                         }
                         // init near Location
                         initNearPositions(data);

@@ -39,7 +39,7 @@
                         <td>
                             <div class="city-selector h3">
                                 You are in
-                                <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
+{#                                 <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
                                     <option disabled="disabled">Choose a City</option>
                                     {% for c in topCities %}
                                         <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}"
@@ -47,6 +47,20 @@
                                                 selected="selected"
                                             {% endif %}
                                         >{{ c.name }}</option>
+                                    {% endfor %}
+                                    <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
+                                </select>
+ #}
+                                <select class="ui-dropdown" name="city" data-class="with-icon city"id="city_selector">
+                                    <option disabled="disabled">Choose a City</option>
+                                    {% for c in topCities %}
+                                        {% if city is defined %}
+                                        {% if c.name != city %}
+                                            <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</option>
+                                        {% endif %}
+                                        {% else %}
+                                             <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</option>
+                                        {% endif %}
                                     {% endfor %}
                                     <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
                                 </select>
@@ -206,7 +220,8 @@
             </div>
             {% if topNews|length>2 %}
             {% for n in topNews|slice(0,1) %}
-                <article class="small">
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1, 'is_small' : 1, } %}
+                {# <article class="small">
                     <div class="img">
                         <a href="" class="cover">
                             {% for m in n.medias|slice(0,1) %}
@@ -219,8 +234,13 @@
                         <h2><a href="">{{ n.title }}</a></h2>
                     </div>
                 </article>
+                #}
             {% endfor %}
             {% for n in topNews|slice(1,1) %}
+                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_text' : 1 , 'is_small' : 1 , 'has_text' : 1} %}
+                {#
+
+
                 <article class="small">
                     <div class="title vcenter">
                         <h2><a href="">{{ n.title }}</a></h2>
@@ -231,12 +251,14 @@
                     </div>
 
                 </article>
+             #}
             {% endfor %}
             {% for n in topNews|slice(2,1) %}
-                <article class="large">
+                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
+                {#
+                    <article class="large">
                     <div class="img">
                         <a href="" class="cover">
-                        {# dump(n.medias) #}
                         {% for m in n.medias|slice(0,1) %}
                             <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
                         {% endfor %}
@@ -251,6 +273,9 @@
                     </div>
 
                 </article>
+
+                 #}
+                
             {% endfor %}
             {% elseif topNews|length==2 %}
                 {% for n in topNews|slice(0,1) %}
@@ -303,7 +328,9 @@
                 {% endfor %}
             {% endif %}
 
-            <a class="btn-radius border brown h4 s-margin-top" href="#0" style="clear: left; float:left;">See all news</a>
+
+            <a class="btn-radius border brown h4 s-margin-top" href="{{ city is defined ? path('wbb_news_landing_page_city',{citySlug:city.slug}) : path('wbb_news_landing_page') }}" style="clear: left; float:left;">See all news</a>
+
 
         </section>
 

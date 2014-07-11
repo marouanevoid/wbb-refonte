@@ -80,7 +80,7 @@ class BarController extends Controller
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
 
-        if(!empty($latitude) and !empty($longitude)){
+        if(!empty($latitude) and !empty($longitude) and !empty($slug)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude);
             $response['distance'] = true;
             $response['latitude'] = $latitude;
@@ -111,7 +111,7 @@ class BarController extends Controller
         $latitude = $session->get('userLatitude' );
         $longitude = $session->get('userLongitude');
 
-        if(!empty($latitude) and !empty($longitude)){
+        if(!empty($latitude) and !empty($longitude) and !empty($slug)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
             $response['distance'] = true;
             $response['latitude'] = $latitude;

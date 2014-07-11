@@ -75,7 +75,7 @@
                                             </option>
                                             {% endif %}
                                         {% endfor %}
-                                        <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide
+                                        <option value="{{ path('wbb_news_landing_page_city',{citySlug:"world-wide"}) }}">World Wide
                                         </option>
                                     </select>
                                 </div>
@@ -83,7 +83,7 @@
                             </td>
 
                             <td class="title">
-                                <h1>The Latest News {% if city is defined and city != '' %}
+                                <h1>{% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %}
                                 in {{ city }}
                                 {% endif %}
                                 </h1>
@@ -106,9 +106,9 @@
             <section class="bars">
                 {% if not is_mobile() or is_tablet() %}
                 <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
-                    {% else %}
+                {% else %}
                     <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1">
-                        {% endif %}
+                {% endif %}
                         {% for n in latest %}
                             <div class="ui-slide">
                                 {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n } %}
@@ -211,7 +211,6 @@
             <div class="articles older-news twelve columns">
 
                 {% for n in articles|slice(4,3) %}
-                {{10/10}}
                     {% if loop.index == 2 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1} %}
                     {%  else %}
@@ -233,7 +232,6 @@
 
                 
                 {% for n in newsList %}
-                    {{cursorIndex % 2}}
                     {% if cursorIndex % 2 == 0 %}
                             {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                         {% set newsIndex=1 %}
