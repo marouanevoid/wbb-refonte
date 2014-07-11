@@ -55,14 +55,19 @@
                         <div style='display:none' class='fake-go-item'>
                             <input type="radio" name="mood" value="" class="ui-radio dark with-icon" data-color="brown" checked=""/>
                         </div>
-                        <td>
-                            <input type="radio" name="mood" value="chillout" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
-                        <td>
-                            <input type="radio" name="mood" value="casual" class="trigger-handler ui-radio dark with-icon"/>
-                        </td>
-                        <td>
-                            <input type="radio" name="mood" value="party" class="ui-radio dark with-icon"/>
-                        </td>
+
+                        {% for mood in moods %}
+                            <td>
+                                <input type="radio" name="mood" value="{{ mood.id }}" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
+                            </td>
+                        {% endfor %}
+                        {#<td>#}
+                            {#<input type="radio" name="mood" value="2" class="trigger-handler ui-radio dark with-icon"/>#}
+                        {#</td>#}
+                        {#<td>#}
+                            {#<input type="radio" name="mood" value="1" class="trigger-handler ui-radio dark with-icon"/>#}
+                        {#</td>#}
+
                         <td>
                             <input type="submit" class="btn-radius border brown go" value="GO"/>
                         </td>

@@ -194,6 +194,73 @@ file that was distributed with this source code.
                 })
                 },300);
             });
+
+            //Bar tags relations
+            $('select').each(function(){
+                var type = $(this).attr('id');
+                var extension = type.substr(type.length - 5);
+                if (extension != "_type"){
+                    return;
+                }
+                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                typeId = $(this).val();
+                tagId = tag.val() || 0;
+
+                tag.empty();
+                tag.trigger("list:updated");
+
+                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                    tag.empty().append(options);
+                    tag.trigger("list:updated");
+                },"text");
+            });
+
+            $('select').live('change', function(){
+                var type = $(this).attr('id');
+                var extension = type.substr(type.length - 5);
+                if (extension != "_type"){
+                    return;
+                }
+                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                typeId = $(this).val();
+                tagId = tag.val() || 0;
+
+                tag.empty();
+                tag.trigger("list:updated");
+
+                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                    tag.empty().append(options);
+                    tag.trigger("list:updated");
+                    tag.select2("val", "");
+                },"text");
+            });
+
+            jQuery(document).on('sonata.add_element',function(){
+                $('select').each(function(){
+                    var type = $(this).attr('id');
+                    var extension = type.substr(type.length - 5);
+                    if (extension != "_type"){
+                        return;
+                    }
+                    var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                    typeId = $(this).val();
+                    tagId = tag.val() || 0;
+
+                    tag.empty();
+                    tag.trigger("list:updated");
+
+                    var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                    $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        tag.empty().append(options);
+                        tag.trigger("list:updated");
+                    },"text");
+                });
+            });
         });
     </script>
 {% endblock %}

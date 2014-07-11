@@ -247,6 +247,20 @@ class Bar implements IndexableEntity
     private $medias;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="barsLevel")
+     */
+    private $energyLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="barOccasions", cascade={"all"})
+     * @ORM\JoinTable(name="wbb_bar_occasion",
+     *      joinColumns={@ORM\JoinColumn(name="bar_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $toGoWith;
+
+    /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -1250,6 +1264,22 @@ class Bar implements IndexableEntity
             return array(0);
     }
 
+    public function getGoWithIds()
+    {
+        $tags = array();
+        foreach ($this->getToGoWith() as $tag) {
+            if ($tag) {
+                $tags[] = $tag->getId();
+            }
+        }
+
+        if (sizeof($tags) > 0) {
+            return $tags;
+        } else {
+            return array(0);
+        }
+    }
+
     /**
      * Add bestofs
      *
@@ -1485,4 +1515,67 @@ class Bar implements IndexableEntity
         }
     }
 
+    public static function getEnergyLevels()
+    {
+        $result = array(1 => 'Chillout', 2 => "Casual", 3 => "Party");
+
+        return $result;
+    }
+
+
+    /**
+     * Set energyLevel
+     *
+     * @param integer $energyLevel
+     * @return Bar
+     */
+    public function setEnergyLevel($energyLevel)
+    {
+        $this->energyLevel = $energyLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get energyLevel
+     *
+     * @return integer 
+     */
+    public function getEnergyLevel()
+    {
+        return $this->energyLevel;
+    }
+
+    /**
+     * Add toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     * @return Bar
+     */
+    public function addToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith[] = $toGoWith;
+
+        return $this;
+    }
+
+    /**
+     * Remove toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     */
+    public function removeToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith->removeElement($toGoWith);
+    }
+
+    /**
+     * Get toGoWith
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getToGoWith()
+    {
+        return $this->toGoWith;
+    }
 }

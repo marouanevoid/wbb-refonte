@@ -113,3 +113,9 @@ wbb_semsoft_import:
 wbb_semsoft_preview:
     pattern: /admin/semsoft/bar/{ssBarId}/preview
     defaults: { _controller: WBBBarBundle:Semsoft:preview }
+
+get_tags_by_type:
+    pattern: /ajax/get-tags-by-type/{typeID}/{tagID}
+    defaults: { _controller: WBBBarBundle:Tag:getByType }
+    options:
+        expose: true

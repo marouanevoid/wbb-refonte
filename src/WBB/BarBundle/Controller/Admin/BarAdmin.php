@@ -7,6 +7,7 @@
 namespace WBB\BarBundle\Controller\Admin;
 
 use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -223,6 +224,26 @@ class BarAdmin extends Admin
                     ))
             ->end()
             ->with('Tags')
+                ->add('energyLevel', 'entity', array(
+                        'class'    => 'WBBBarBundle:Tag',
+                        'required' => false,
+                        'property' => 'name',
+                        'empty_value' => 'Please choose a mood',
+                        'query_builder' => function ($er) {
+                                return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
+                            }
+                    )
+                )
+                ->add('toGoWith', null,
+                    array(
+                        'required' => false,
+                        'multiple' => true,
+                        'by_reference' => false,
+                        'query_builder' => function ($er) {
+                                return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
+                            }
+                    )
+                )
                 ->add('tags', 'sonata_type_collection', array(
                     'required' => false,
                     'help' => 'Associate a tag minimum to the bar is mandatory'),
@@ -230,7 +251,8 @@ class BarAdmin extends Admin
                         'edit' => 'inline',
                         'inline' => 'table',
                         'sortable'  => 'position'
-                    ))
+                    )
+                )
             ->end()
             ->with('Openings')
                 ->add('openings', 'sonata_type_collection', array('required' => false),

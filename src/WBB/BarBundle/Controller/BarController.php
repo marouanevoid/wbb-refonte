@@ -159,12 +159,14 @@ class BarController extends Controller
 
     public function barFinderFormAction()
     {
-        $toGoOutWith    = $this->container->get('tag.repository')->findOccasionTags();
+        $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
+        $moods    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL);
         $cities         = $this->container->get('city.repository')->findBarFinderCities();
 
         return $this->render('WBBBarBundle:BarFinder:barFinderForm.html.twig', array(
             'cities'    => $cities,
-            'firstTags' => $toGoOutWith
+            'firstTags' => $toGoOutWith,
+            'moods'     => $moods
         ));
     }
 
@@ -176,7 +178,7 @@ class BarController extends Controller
 
         if($request->request->get('mood') != "")
         {
-            $mood = array_search(ucfirst($request->request->get('mood')), Tag::getEnergyLevels());
+            $mood = $request->request->get('mood');
         }
 
         if($request->request->get('city') != "")
