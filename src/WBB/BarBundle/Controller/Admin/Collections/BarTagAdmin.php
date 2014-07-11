@@ -25,7 +25,7 @@ class BarTagAdmin extends Admin
                 ->add('type', 'choice', array(
                     'choices' => array(
                         Tag::WBB_TAG_TYPE_SPECIAL_FEATURES  => 'Special Features',
-                        Tag::WBB_TAG_TYPE_THEME             => 'Theme',
+                        Tag::WBB_TAG_TYPE_THEME             => 'Style',
                         Tag::WBB_TAG_TYPE_BEST_COCKTAILS    => 'Best Cocktails'
                     ))
                 )
