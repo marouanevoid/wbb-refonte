@@ -962,7 +962,9 @@ class BestOf implements IndexableEntity
     {
         $bars = array();
         foreach ($this->bars as $bar) {
-            $bars[] = $bar->getBar()->getName();
+            if ($bar->getBar()) {
+                $bars[] = $bar->getBar()->getName();
+            }
         }
 
         $tags = array(

@@ -19,6 +19,8 @@ class NewsController extends Controller
     public function landingPageAction($citySlug = false)
     {
         $session = $this->container->get('session');
+        if ($citySlug == "world-wide")
+            $session->set('citySlug', "");
         $slug = $session->get('citySlug');
         $city = null;
         if (!empty($slug)){

@@ -27,7 +27,13 @@
                 {% if n.seoDescription %}
                     {{ n.seoDescription|truncate(60, true, '...') }}
                 {% else %}
-
+                {% if show_quote is defined %}
+                {% if n.quoteText %}
+                    <h1>
+                        “{{ n.quoteText|truncate(60, true, '...') }}”
+                    </h1>
+                {% endif %}
+                {% endif %}
                 {% endif %}
             </p>
         {% endif %}
