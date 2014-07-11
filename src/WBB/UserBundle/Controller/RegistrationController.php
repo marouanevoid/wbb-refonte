@@ -112,12 +112,17 @@ class RegistrationController extends ContainerAware
                 }
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
+               
                 return $response;
-            }else{
-                //TODO: loop for errors
+            } else {
+                $formErrors = $form->getErrors();
+                $errors = array();
 
-                return new JsonResponse();
+                foreach ($formErrors as $error) {
+                    $errors[] = $error->getMessage();
+                }
+
+                return new JsonResponse(array('code' => '400', 'errors' => $errors));
             }
 
         }
