@@ -30,6 +30,6 @@
     <div class="color gradient"></div>
     <div class="color gray"></div>
     {% for m in b.medias|slice(0,1) %}
-        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+        <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
     {% endfor %}
 </article>

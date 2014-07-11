@@ -36,9 +36,9 @@
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
                                 <option value="">Choose a City</option>
-{#                                 {% if city is defined %} <option value="">{{ city.name }}</option> {% endif %} #}
-                                {% for city in cities %}
-                                    <option value="{{ city.slug }}">{{ city.name }}</option>
+                                {% if city %} <option value="">{{ city.name }}</option> {% endif %}
+                                {% for c in cities %}
+                                    <option value="{{ c.slug }}">{{ c.name }}</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -58,7 +58,7 @@
 
                         {% for mood in moods %}
                             <td>
-                                <input type="radio" name="mood" value="{{ mood.id }}" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
+                                <input type="radio" name="mood" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
                             </td>
                         {% endfor %}
                         {#<td>#}

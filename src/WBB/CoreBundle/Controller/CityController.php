@@ -48,6 +48,7 @@ class CityController extends Controller
 
         $session->set('userLatitude', $latitude);
         $session->set('userLongitude', $longitude);
+//        $session->set('fromGeo', true);
         $session->set('citySlug', $city->getSlug());
 
         if($city){

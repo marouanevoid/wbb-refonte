@@ -80,6 +80,19 @@ services:
         factory_method: getRepository
         arguments: ['WBBCoreBundle:CitySuburb']
 
+    #Twig Show Media Extension
+    wbb.twig.show_media_extension:
+        class: WBB\CoreBundle\Twig\Extension\ShowMediaExtension
+        arguments: ['@service_container']
+        tags:
+          - { name: twig.extension }
+
+    wbb.twig.show_media_filter_extension:
+        class: WBB\CoreBundle\Twig\Extension\ShowMediaFilterExtension
+        arguments: ['@service_container']
+        tags:
+          - { name: twig.extension }
+
 #    # TwigSwiftMailer
 #    wbb_core.mailer.twig_swift:
 #        class:  %wbb_core.twig_swift.class%

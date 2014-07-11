@@ -159,11 +159,18 @@ class BarController extends Controller
 
     public function barFinderFormAction()
     {
+        $session = $this->container->get('session');
+        $slug = $session->get('citySlug');
+        $city = null;
+        if (!empty($slug))
+            $city = $this->get('city.repository')->findOneBySlug($slug);
+
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
         $moods    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL);
         $cities         = $this->container->get('city.repository')->findBarFinderCities();
 
         return $this->render('WBBBarBundle:BarFinder:barFinderForm.html.twig', array(
+            'city'      => $city,
             'cities'    => $cities,
             'firstTags' => $toGoOutWith,
             'moods'     => $moods
