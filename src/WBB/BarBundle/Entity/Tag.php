@@ -305,10 +305,10 @@ class Tag
     public static function getTypeNames(){
         return array(
             Tag::WBB_TAG_TYPE_SPECIAL_FEATURES  => 'Special Features',
-            Tag::WBB_TAG_TYPE_THEME             => 'Theme',
+            Tag::WBB_TAG_TYPE_THEME             => 'Style',
             Tag::WBB_TAG_TYPE_BEST_COCKTAILS    => 'Best Cocktails',
             Tag::WBB_TAG_TYPE_WITH_WHO          => 'With Who',
-            Tag::WBB_TAG_TYPE_ENERGY_LEVEL      => 'Energy Level',
+            Tag::WBB_TAG_TYPE_ENERGY_LEVEL      => 'Mood',
             Tag::WBB_TAG_TYPE_DRINK_BRANDS      => 'Drink Brands'
         );
     }

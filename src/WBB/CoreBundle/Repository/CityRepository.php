@@ -23,7 +23,7 @@ class CityRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBarFinderCities()
+    public function findBarFinderCities($geoCity = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
@@ -31,6 +31,10 @@ class CityRepository extends EntityRepository
             ->orderBy($this->getAlias().'.onTopCity', 'DESC')
             ->addOrderBy($this->getAlias().'.name', 'ASC')
         ;
+
+        if($geoCity){
+            $qb->where($qb->expr()->neq($this->getAlias().'.id', $geoCity->getId()));
+        }
 
         return $qb->getQuery()->getResult();
     }
