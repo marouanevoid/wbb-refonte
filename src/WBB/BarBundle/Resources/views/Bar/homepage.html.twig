@@ -39,18 +39,6 @@
                         <td>
                             <div class="city-selector h3">
                                 You are in
-{#                                 <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
-                                    <option disabled="disabled">Choose a City</option>
-                                    {% for c in topCities %}
-                                        <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}"
-                                            {% if city is defined and c.id==city.id %}
-                                                selected="selected"
-                                            {% endif %}
-                                        >{{ c.name }}</option>
-                                    {% endfor %}
-                                    <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
-                                </select>
- #}
                                 <select class="ui-dropdown" name="city" data-class="with-icon city"id="city_selector">
                                     <option disabled="disabled">Choose a City</option>
                                     {% for c in topCities %}
@@ -159,7 +147,7 @@
                             </div>
                             <div class="overlay"></div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            <img src="" class="scale-with-grid" data-src="{% path c.image, 'city_small' %}" alt="{{ c.name }}"/>
+                            <img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_small' %}{% endfilter %}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}

@@ -92,14 +92,72 @@ meta.Search = function(config){
         }
     };
 
+    /*
+    * On Search Result
+    */
+    that.searchResult = function(data ,q ){
+        var html    = "";
 
+        if(data.hits){
+            if(data.hits.hit && data.hits.hit.length > 0){
+
+                var values  = data.hits.hit;
+                $.each(values, function(index, value)
+                {
+                    var searchType = value.id,
+                        result ="",
+                        wrapB = function(str,istr){
+                            return str.replace(new RegExp(istr , 'ig'), '<b>'+istr+'</b>');
+                        };
+
+                    if(searchType.indexOf('City') >-1){
+                        // TODO : Type of Search is City
+                        if(value.fields.name){
+                            result = wrapB(value.fields.name , q);
+                        }
+                    }
+                    if(searchType.indexOf('Bar') >-1){
+                        // TODO : Type of Search is Bar
+                        if(value.fields.name){
+                            result = wrapB(value.fields.name , q);
+                        }
+                    }
+                    if(searchType.indexOf('News')>-1){
+                        // TODO : Type of search is News
+                        if(value.fields.title){
+                            result = wrapB(value.fields.title , q);
+                        }
+                    }
+                    
+                   
+                    console.log('the result is ' + result);
+
+                    if( $(window).width() < 640 )
+                        html += that.config.template_mobile.replace('%s', result);
+                    else
+                        html += that.config.template.replace('%s', result);
+                });
+
+                that.context.$result.html( html );
+
+                that.show_results = true;
+            }else{
+                // TODO : On no results
+                that.context.$result.html('');
+            }
+        }else{
+                // TODO : On no results
+                that.context.$result.html('');
+        }
+    }
     /**
      *
      */
     that._search = function()
     {
-        var q = that.context.$input.val();
 
+
+        var q = that.context.$input.val();
         if( $(window).width() < 640 )
         {
             var result_height = $(window).height()-$('header.mobile .search-bar-mobile > .container').height();
@@ -109,49 +167,30 @@ meta.Search = function(config){
         }
 
 
-        $.ajax({
-            type: 'GET',
-            url: 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search',
-            async: false,
-            contentType: "application/json",
-            dataType: 'json',
-        data : {
-            q : q
-        },
-        success  :function(){
-            console.log('done');
-        }
-
-        })
-
-        // $.post('/proxy.php',{target_url : 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search?q='+q} , function( data )
-        // {
+        // $.ajax({
+        //     type: 'GET',
+        //     url: 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search',
+        //     async: false,
+        //     contentType: "application/json",
+        //     dataType: 'json',
+        // data : {
+        //     q : q
+        // },
+        // success  :function(){
         //     console.log('done');
-        //     //vtools.log('Search' ,'search.metabolism' , 'done');
-        //     // if(data.code == 200)
-        //     // {
-        //     //     var values  = data.values;
-        //     //     var html    = "";
+        // }
 
-        //     //     $.each(values, function(index, value)
-        //     //     {
-        //     //         var result = value.name.replace(data.q, '<b>'+data.q+'</b>');
-
-        //     //         if( $(window).width() < 640 )
-        //     //             html += that.config.template_mobile.replace('%s', result);
-        //     //         else
-        //     //             html += that.config.template.replace('%s', result);
-        //     //     });
-
-        //     //     that.context.$result.html( html );
-
-        //     //     that.show_results = true;
-        //     // }
-
-
-        // }).done(function(){
-        //     alert('done');
         // });
+        $.ajax({
+          url: "/proxy.php?url_get=" + 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search?q=' + q, 
+          type: "GET",
+          dataType:'jsonp',
+          async : false,
+          contentType : "application/json",
+          success: function(data){
+            that.searchResult(data , q);
+          }
+        });
 
     };
 

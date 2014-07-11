@@ -26,7 +26,7 @@ class ShowMediaFilterExtension extends \Twig_Extension
         $pathToCheck = realpath($this->container->get('kernel')->getRootDir() . '/../web/') . '/' . $path;
 
         // If the path does not exist, return the fallback image
-        if (!file_exists($pathToCheck))
+        if (!file_exists($pathToCheck) || $path != "/")
         {
             return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default.jpg');
         }

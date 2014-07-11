@@ -5,7 +5,7 @@
             <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="cover">
                 {% if n.medias|length>0 %}
                     {% for m in n.medias|slice(0,1) %}
-                        <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                        <img src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}" width="600" height="400" alt="{{ n.title }}"/>
                         {% if m.media.providerName == 'sonata.media.provider.youtube' %}
                             <span class="video"></span>
                         {% endif %}
@@ -21,7 +21,9 @@
     {% endif %}
 
     <div class="title vcenter">
-        <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+        {% if not show_quote is defined %}
+         <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+         {% endif %}
         {% if has_text is defined %}
             <p class="m-margin">
                 {% if n.seoDescription %}
