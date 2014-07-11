@@ -36,6 +36,12 @@ class RegistrationController extends ContainerAware
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
+        if ($request->getMethod() == 'POST') {
+            $facebook = $this->container->get('fos_facebook.api');
+            $facebookId = $facebook->getUser();
+            $user->setFBData(array('id' => $facebookId));
+        }
+
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 
@@ -82,6 +88,12 @@ class RegistrationController extends ContainerAware
 
         $user = $userManager->createUser();
         $user->setEnabled(true);
+
+        if ($request->getMethod() == 'POST') {
+            $facebook = $this->container->get('fos_facebook.api');
+            $facebookId = $facebook->getUser();
+            $user->setFBData(array('id' => $facebookId));
+        }
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);

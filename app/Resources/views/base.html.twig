@@ -122,19 +122,37 @@
         <body>
         {% endblock %}
         <div id="fb-root"></div>
-
+        {{ facebook_initialize({'xfbml': true}) }}
+        <script>
+            function fillInForm(formId) {
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        FB.api('/me', function(response) {
+                            console.log(response);
+                            if (formId === '#register_form_full') {
+                                $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
+                                $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
+                                $(formId + ' #fos_user_registration_form_email').val(response.email);
+                                $(formId + ' #fos_user_registration_form_email').val(response.email);
+                            } else if (formId === '#register_form') {
+                                $(formId + ' #fos_user_registration_form_email').val(response.email);
+                                $(formId + ' #fos_user_registration_form_username').val(response.first_name);
+                            }
+                        });
+                    } else {
+                        FB.login(function(response) {
+                            if (response.authResponse) {
+                                console.log('Welcome!  Fetching your information.... ');
+                                fillInForm(formId);
+                            } else {
+                                console.log('User cancelled login or did not fully authorize.');
+                            }
+                        });
+                    }
+                });
+            }
+        </script>
         <script type="text/javascript">
-
-            //facebook
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id))
-                    return;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
 
             //twitter
             !function(d, s, id) {

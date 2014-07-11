@@ -279,3 +279,10 @@ stof_doctrine_extensions:
        default:
            timestampable: true
            sluggable:  true
+
+fos_facebook:
+    alias:  facebook
+    app_id: %facebook_app_id%
+    secret: %facebook_app_secret%
+    cookie: true
+    permissions: [email, user_birthday, user_location]
