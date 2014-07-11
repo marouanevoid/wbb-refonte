@@ -257,3 +257,12 @@ article.tip .content .excerpt td .scroll{
     color: #999999;
     opacity: 0.29;
 }
+.entire-content{
+    display: none;
+}
+
+#common-loader{
+    left:50%;
+    position:absolute;
+    top:50px;
+}

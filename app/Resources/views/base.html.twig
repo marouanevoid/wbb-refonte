@@ -121,7 +121,9 @@
 
     {% block bodyTag %}
         <body>
+
         {% endblock %}
+        
         <div id="fb-root"></div>
 
         <script type="text/javascript">
@@ -151,7 +153,7 @@
         {% block header %}
             {% include '::header.html.twig' %}
         {% endblock %}
-
+        <div id="common-loader"><img src="{{ asset('bundles/wbbcore/images/common/loader.gif') }}" /></div>
         {% block body %}
         {% endblock %}
         <!-- AD -->

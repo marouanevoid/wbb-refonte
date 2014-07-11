@@ -352,6 +352,8 @@ $(document).ready(function()
     new meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
     new meta.App();
 
+    $('.entire-content').show();
+    $('#common-loader').hide();
     // TEMP
     // setInterval(function(){
     //             $('.scroll').not('.jspScrollable').each(function()
