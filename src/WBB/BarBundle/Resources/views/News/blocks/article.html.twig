@@ -13,10 +13,15 @@
                 {% else %}
                     <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ n.title }}"/>
                 {% endif %}
-
+                
+                {% if n.sponsorImageSmall is defined %}
+                    <span class="sponsor">
+                            <img src="{% path n.sponsorImageSmall , 'small' %}" alt="sponsor"/>
+                    </span>
+                {% endif %}
 
             </a>
-            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
+            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
         </div>
     {% endif %}
 
