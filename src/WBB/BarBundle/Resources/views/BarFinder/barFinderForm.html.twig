@@ -1,15 +1,15 @@
-<style type="text/css">
-    .go{
-        display: none;
-    }
-</style>
 <script type="text/javascript">
     $(function(){
-        var showGo = function(){$('.go').show();};
-        $('.trigger-handler').parent('a').on('click' , showGo);
+        var showGo = function(){
+            $('.go').removeClass('disabled');
+            $('.go').removeAttr('disabled');
+        };
+       
+       $('.trigger-handler').parent('a').on('click' , showGo);
        $('.trigger-select-go').on('change' , showGo);
 
-       $('.go').hide();
+       $('.go').addClass('disabled');
+       $('.go').attr('disabled' , 'disabled');
        // Delete the fake item on the list
        $('.fake-go-item').remove();
     });
