@@ -89,6 +89,14 @@ meta.Selector = function(config){
 
         });
 
+        $(document).click(function(e)
+        {
+            if( !$(e.target).closest('.ui-selector').length && that.active )
+            {
+                that.config.$selector.find('.close').click();
+            }
+        });
+
         that.config.$selector.find('li').click(function(){
 
             var $select = that.config.$selector.find('.select');

@@ -244,3 +244,11 @@ article.tip .content .excerpt td .scroll{
 .articles.padding article.small + article.small{
     margin-left : 4% ;
 }
+.go{
+    line-height: 41px !important;
+}
+.go.disabled {
+    background-color: #ccc;
+    color: #999999;
+    opacity: 0.29;
+}
