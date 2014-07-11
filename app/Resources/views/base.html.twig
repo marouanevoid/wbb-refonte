@@ -24,6 +24,7 @@
             {% if city is defined and city != ''  %}
                 window.isCity = true;
             {% endif %}
+            var DEBUGMODE = "{{app.environment }}";
         </script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
