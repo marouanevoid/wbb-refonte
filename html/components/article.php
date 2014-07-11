@@ -7,8 +7,13 @@
                 <?php if( isset($has_video) and $has_video ): ?>
                     <span class="video"></span>
                 <?php endif ?>
+                <?php if( isset($has_sponsor) and $has_sponsor ): ?>
+                    <span class="sponsor">
+                        <img src="tmp/burton.png" alt="sponsor"/>
+                    </span>
+                <?php endif ?>
             </a>
-            <a class="plus-btn" href=""></a>
+            <a class="plus-btn" href=""><span></span></a>
         </div>
     <?php endif ?>
 
