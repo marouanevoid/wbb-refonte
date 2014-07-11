@@ -147,7 +147,7 @@
                 <div class="line gridview">
                     {% for bar in bars %}
                         {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
-                            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
+                            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar, 'distance': distance, 'latitude': latitude, 'longitude': longitude } %}
                         {% if not is_mobile() or is_tablet() %}</div>{% endif %}
                     {% endfor %}
                 </div>
@@ -164,13 +164,17 @@
                                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
 
                                     {% for m in b.medias|slice(0,1) %}
-                                        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                                        <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
                                     {% endfor %}
                                 </div>
                             </div>
 
                             <div class="nine columns s-margin-top">
-                                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.name }}</a></h2>
+                                <h2 class="s-margin-top">
+                                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">
+                                        {{ b.name }}{% if distance is defined %} - {{ b.calculateDistance(latitude, longitude) }} KM{% endif %}
+                                    </a>
+                                </h2>
                                 {% if b.city and b.suburb %}
                                     <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
                                 {% endif %}

@@ -42,6 +42,12 @@ class BarController extends Controller
             $session->set('citySlug', "");
             return $this->homeAction();
         }
+
+        if($slug != $session->get('citySlug')){
+            $session->set('userLatitude', '');
+            $session->set('userLongitude', '');
+        }
+
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
@@ -103,6 +109,11 @@ class BarController extends Controller
         {
             $session->set('citySlug', "");
             return $this->barGuideAction();
+        }
+
+        if($slug != $session->get('citySlug')){
+            $session->set('userLatitude', '');
+            $session->set('userLongitude', '');
         }
 
         $session->set('citySlug', $slug);
@@ -200,8 +211,20 @@ class BarController extends Controller
 
         $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
 
+        $session = $this->container->get('session');
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
+        $distance = false;
+
+        if(!empty($latitude) and !empty($longitude)){
+            $distance = true;
+        }
+
         return $this->render('WBBBarBundle:BarFinder:barFinderResults.html.twig', array(
-            'bars' => $bars
+            'bars'      => $bars,
+            'distance'  => $distance,
+            'latitude'  => $latitude,
+            'longitude' => $longitude
         ));
     }
 
@@ -259,9 +282,8 @@ class BarController extends Controller
         $session = $this->container->get('session');
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
-        $distance = false;
 
-        if(!empty($latitude) and !empty($longitude)){
+        if(!empty($latitude) and !empty($longitude) and ($citySlug != $session->get('citySlug'))){
             $distance = true;
         }
 
