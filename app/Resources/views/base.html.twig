@@ -124,6 +124,18 @@
         <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
+            $(document).ready(function(){
+                $('#facebook-signup').on('click',function(){
+                    $.ajax({
+                        url: '{{ path('_security_check') }}',
+                        success:function(response) {
+                            if(reponse.code==='400') {
+                                
+                            }
+                        }
+                    })
+                });
+            });
             function fillInForm(formId) {
                 FB.getLoginStatus(function(response) {
                     if (response.status === 'connected') {
@@ -136,7 +148,6 @@
                                 $(formId + ' #fos_user_registration_form_email').val(response.email);
                             } else if (formId === '#register_form') {
                                 $(formId + ' #fos_user_registration_form_email').val(response.email);
-                                $(formId + ' #fos_user_registration_form_username').val(response.first_name);
                             }
                         });
                     } else {

@@ -31,5 +31,9 @@ _security_check:
 _security_logout:
     pattern:  /logoutfb
 
+_security_login:
+    pattern: /loginfb
+    defaults: { _controller: WBBUserBundle:Security:facebookLogin }
+
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml"

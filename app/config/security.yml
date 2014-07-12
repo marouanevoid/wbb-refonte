@@ -42,8 +42,9 @@ security:
             anonymous:    true
             switch_user: true
             fos_facebook:
-                login_path: _security_login
+                login_path: /loginfb
                 check_path: _security_check
+                provider: fos_facebook_provider
 
     access_control:
             - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
