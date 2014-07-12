@@ -13,8 +13,8 @@
                 {% else %}
                     <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ n.title }}"/>
                 {% endif %}
-                
-                {% if n.sponsorImageSmall is defined %}
+
+                {% if n.sponsorImageSmall is defined and n.sponsorImageSmall != '' %}
                     <span class="sponsor">
                             <img src="{% path n.sponsorImageSmall , 'small' %}" alt="sponsor"/>
                     </span>
@@ -26,9 +26,9 @@
     {% endif %}
 
     <div class="title vcenter">
-        {% if not show_quote is defined %}
+        {% if n.seoDescription is defined and n.seoDescription != '' %}
          <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
-         {% endif %}
+        {% endif %}
         {% if has_text is defined %}
             <p class="m-margin">
                 {% if n.seoDescription %}
