@@ -44,6 +44,7 @@ class BarController extends Controller
         }
 
         if($slug != $session->get('citySlug')){
+            $session->set('citySlug', $slug);
             $session->set('userLatitude', '');
             $session->set('userLongitude', '');
         }
@@ -63,7 +64,7 @@ class BarController extends Controller
             $response['distance'] = false;
         }
 
-        $session->set('citySlug', $slug);
+
 
         $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars($city);
@@ -112,11 +113,11 @@ class BarController extends Controller
         }
 
         if($slug != $session->get('citySlug')){
+            $session->set('citySlug', $slug);
             $session->set('userLatitude', '');
             $session->set('userLongitude', '');
         }
 
-        $session->set('citySlug', $slug);
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
 
         $latitude = $session->get('userLatitude' );
