@@ -22,7 +22,7 @@ class NewsController extends Controller
         if ($citySlug == "world-wide")
             $session->set('citySlug', "");
 
-        if($citySlug != $session->get('citySlug')){
+        if($citySlug != $session->get('citySlug') and $citySlug){
             $session->set('citySlug', $citySlug);
             $session->set('userLatitude', '');
             $session->set('userLongitude', '');
