@@ -252,11 +252,15 @@ class BarRepository extends EntityRepository
             ->innerjoin($this->getAlias().'.tags', 'bt')
             ->innerjoin('bt.tag', 't')
             ->andWhere($qb->expr()->in('t.id', ':tags'))
-            ->setParameter('tags', $bestof->getTagsIds())
+            ->setParameter('tags', $bestof->getTagsIds());
 
-            ->innerjoin($this->getAlias().'.energyLevel', 'el')
-            ->andWhere($qb->expr()->eq('el.id', $bestof->getEnergyLevel()->getId()))
+        if($bestof->getEnergyLevel()){
+            $qb
+                ->innerjoin($this->getAlias().'.energyLevel', 'el')
+                ->andWhere($qb->expr()->eq('el.id', $bestof->getEnergyLevel()->getId()));
+        }
 
+        $qb
             ->innerjoin($this->getAlias().'.toGoWith', 'tgw')
             ->andWhere($qb->expr()->in('tgw.id', ':goWith'))
             ->setParameter('goWith', $bestof->getGoWithIds())
