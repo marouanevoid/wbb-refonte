@@ -65,7 +65,7 @@
 #}
 <script type="text/javascript">
     $(function(){
-        {% if city is defined %}
+        {% if city is defined and city %}
             $('.city-selector .city>span').html('{{ city.name }}');
         {% endif %}
     });
