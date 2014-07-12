@@ -61,31 +61,7 @@
                     <table>
                         <tr>
                             <td>
-
-                                <div class="city-selector h3"> 
-                                    You are in 
-                                    <select class="ui-dropdown" name="city" data-class="with-icon city"
-                                            id="city_selector">
-                                        <option disabled="disabled">Choose a City</option>
-                                        {% for c in topCities %}
-                                            {% if c.name != city %}
-                                            <option data-type="redirect"
-                                                    {# value="{{ path('city_homepage',{slug:c.slug}) }}" #}
-                                                    value="{{ path('wbb_news_landing_page_city',{citySlug:c.slug}) }}"
-                                                        {% if city is defined %}
-                                                        {% if c.name == city %}
-                                                        selected="selected"
-                                                        {% endif %}
-                                                        {% endif %}
-                                                    >{{ c.name }}
-                                            </option>
-                                            {% endif %}
-                                        {% endfor %}
-                                        <option value="{{ path('wbb_news_landing_page_city',{citySlug:"world-wide"}) }}">World Wide
-                                        </option>
-                                    </select>
-                                </div>
-
+                                {% include "WBBBarBundle:UI:citys_selector.html.twig" %}
                             </td>
 
                             <td class="title">
