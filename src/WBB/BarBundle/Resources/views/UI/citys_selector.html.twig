@@ -1,7 +1,7 @@
 
 <div class="city-selector h3">
     You are in
-    <select class="ui-dropdown" name="city" data-class="with-icon city"id="city_selector">
+{#     <select class="ui-dropdown" name="city" data-class="with-icon city"id="city_selector">
         <option disabled="disabled">Choose a City</option>
         {% for c in topCities %}
             {% if city is defined %}
@@ -13,11 +13,11 @@
             {% endif %}
         {% endfor %}
         <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
-    </select>
+    </select> #}
 
-{#                                 <div class="ui-selector">
+        <div class="ui-selector">
         <a class="btn-radius brown border with-icon city select" data-tips="Click here to select your location" id="city-selector">
-            {% if city is defined %} {{city.name}} {% else %} Choose a city {% endif %}
+            {% if city is defined and city %} {{city}} {% else %} Choose a city {% endif %}
         </a>
         <div class="selector">
             <span></span>
@@ -25,18 +25,36 @@
             <ul>
                 {% for c in topCities %}
                     {% if city is defined %}
-                        {% if city.id != c.id %}
+                        {% if city != c.name %}
+                        {% if from == 'home' %}
                         <li><a data-type="redirect" href="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</a></li>
+                        {% elseif from == 'news' %}
+                        <li><a data-type="redirect" href="{{ path('wbb_news_landing_page_city',{citySlug:c.slug}) }}">{{ c.name }}</a></li>
+                        {% elseif from == 'barguide' %}
+                        <li><a data-type="redirect" href="{{ path('wbb_bar_guides_city',{slug:c.slug}) }}">{{ c.name }}</a></li>
+                        {% endif %}
                         {% endif %}
                     {% else %}
-                    <li><a data-type="redirect" href="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</a></li>
+                        {% if from == 'home' %}
+                        <li><a data-type="redirect" href="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</a></li>
+                        {% elseif from == 'news' %}
+                        <li><a data-type="redirect" href="{{ path('wbb_news_landing_page_city',{citySlug:c.slug}) }}">{{ c.name }}</a></li>
+                        {% elseif from == 'barguide' %}
+                        <li><a data-type="redirect" href="{{ path('wbb_bar_guides_city',{slug:c.slug}) }}">{{ c.name }}</a></li>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
-                 <li><a data-type="redirect" href="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</a></li>
+                        {% if from == 'home' %}
+                        <li><a data-type="redirect" href="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</a></li>
+                        {% elseif from == 'news' %}
+                        <li><a data-type="redirect" href="{{ path('wbb_news_landing_page_city',{citySlug:"world-wide"}) }}">World Wide</a></li>
+                        {% elseif from == 'barguide' %}
+                        <li><a data-type="redirect" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">World Wide</a></li>
+                        {% endif %}
             </ul>
             <a class="btn-radius border brown" href="cities.php">See a list of cities</a>
         </div>
-    </div> #}
+    </div>
 
 
 </div>
