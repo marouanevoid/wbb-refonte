@@ -17,10 +17,10 @@
         <![endif]–->
         <script type="text/javascript">
             var ismobile, istablet;
-            ismobile=0;
-            istablet=0;
-            {% if is_mobile() and not is_tablet() %}ismobile=1;{% endif %}
-            {% if is_tablet() %}istablet=1;{% endif %}
+            ismobile = 0;
+            istablet = 0;
+            {% if is_mobile() and not is_tablet() %}ismobile = 1;{% endif %}
+            {% if is_tablet() %}istablet = 1;{% endif %}
             {% if city is defined and city != ''  %}
                 window.isCity = true;
             {% endif %}
@@ -72,28 +72,12 @@
         {% endblock %}
 
         {% block javascripts %}
-            {#<script type="text/javascript">#}
-                {#$(function() {#}
-                    {#$(this).find('#register_form').submit(function (e) {#}
-                        {#e.preventDefault();#}
-                        {#$.ajax({#}
-                            {#url: Routing.generate('wbb_user_registration_register_light', $( this ).serialize()),#}
-                            {#success: function( data )#}
-                            {#{#}
-                                {#console.log(" Success Data ");#}
-                                {#console.log(data);#}
-                            {#}#}
-                        {#});#}
-
-                     {#});#}
-                {#});#}
-            {#</script>#}
         {% endblock %}
 
         <script type="text/javascript">
-            var MARKET = "US";
-            var LANG = "en";
-            var BASEURL = "{{ asset('bundles/wbbcore/') }}";
+                var MARKET = "US";
+                var LANG = "en";
+                var BASEURL = "{{ asset('bundles/wbbcore/') }}";
         </script>
 
         {% if is_tablet() %}
@@ -124,17 +108,38 @@
         <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
-            $(document).ready(function(){
-                $('#facebook-signup').on('click',function(){
+            $(document).ready(function() {
+                $('#facebook-signup').on('click', function() {
+                    FB.getLoginStatus(function(response) {
+                        if (response.status === 'connected') {
+                            FB.api('/me', function(response) {
+                                console.log(response);
+                                setTimeout(securityCheck, 500);
+                            });
+                        } else {
+                            FB.login(function(response) {
+                                if (response.authResponse) {
+                                    console.log('Welcome!  Fetching your information.... ');
+                                    setTimeout(securityCheck, 500);
+                                } else {
+                                    console.log('User cancelled login or did not fully authorize.');
+                                }
+                            });
+                        }
+                    });
+                });
+                function securityCheck() {
                     $.ajax({
                         url: '{{ path('_security_check') }}',
-                        success:function(response) {
-                            if(reponse.code==='400') {
-                                
+                        success: function(response) {
+                            if (response.code === '400') {
+                                alert('Create an account please !');
+                            } else {
+                                window.location.reload();
                             }
                         }
                     })
-                });
+                }
             });
             function fillInForm(formId) {
                 FB.getLoginStatus(function(response) {
@@ -186,112 +191,93 @@
         {% if not is_mobile() or is_tablet() %}
             {% block footerAd %}
                 <section class="footer-ad">
-                <div class="container align-center">
-                    <div class="twelve columns">
-                        <hr/>
-                        <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
+                    <div class="container align-center">
+                        <div class="twelve columns">
+                            <hr/>
+                            <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
             {% endblock %}
 
         {% endif %}
 
         {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <div id="register-light">
-            {% render url('wbb_user_registration_register_light') %}
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
+            <div id="register-light">
+                {% render url('wbb_user_registration_register_light') %}
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
             <script>
-            $(document).ready(function() {
-                $('#message').hide();
-                $('#register_form').on('submit', function(e) {
-                    e.preventDefault();
-                    var form = $(this);
-                    var formUrl='{{ path('wbb_user_registration_register_light') }}';
-                    
-                    $.ajax({
-                        type: "POST",
-                        url: formUrl,
-                        data: form.serialize(),
-                        success: function(data) {
-                            if(data.code==='400') {
-                                var errors = data.errors;
-                                var errorsList = $('#message').show().find('img').html('<ul></ul>');
-                                for(var i=0 ; i < errors.length ; i++) {
-                                    errorsList.find('ul').append('<li>'+errors[i]+'</li>');
+                $(document).ready(function() {
+                    $('#message').hide();
+                    $('#register_form').on('submit', function(e) {
+                        e.preventDefault();
+                        var form = $(this);
+                        var formUrl = '{{ path('wbb_user_registration_register_light') }}';
+
+                        $.ajax({
+                            type: "POST",
+                            url: formUrl,
+                            data: form.serialize(),
+                            success: function(data) {
+                                if (data.code === '400') {
+                                    var errors = data.errors;
+                                    var errorsList = $('#message').show().find('img').html('<ul></ul>');
+                                    for (var i = 0; i < errors.length; i++) {
+                                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                                    }
                                 }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                // Si erreur communication ?
                             }
-                        },
-                        error:function (xhr, ajaxOptions, thrownError) {
-                            // Si erreur communication ?
-                        }
+                        });
+                    });
+                    $('#login_form').on('submit', function(e) {
+                        e.preventDefault();
+                        var form = $(this);
+                        var formUrl = '{{ path('fos_user_security_check') }}';
+
+                        $.ajax({
+                            type: "POST",
+                            url: formUrl,
+                            data: form.serialize(),
+                            success: function(data) {
+                                console.log(data);
+                                if (data.code === '400') {
+                                    $('#login_error').html(data.error);
+                                } else {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                // Si erreur communication ?
+                            }
+                        });
                     });
                 });
-                $('#login_form').on('submit',function(e) {
-                    e.preventDefault();
-                    var form = $(this);
-                    var formUrl='{{ path('fos_user_security_check') }}';
-                    
-                    $.ajax({
-                        type: "POST",
-                        url: formUrl,
-                        data: form.serialize(),
-                        success: function(data) {
-                            console.log(data);
-                            if(data.code === '400') {
-                                $('#login_error').html(data.error);
-                            } else {
-                                window.location.reload();
-                            }
-                        },
-                        error:function (xhr, ajaxOptions, thrownError) {
-                            // Si erreur communication ?
-                        }
-                    });
-                });
-            });
-        </script>
+            </script>
         {% endif %}
 
         {% block footer %}
             {% include '::footer.html.twig' %}
         {% endblock %}
-
-        {#{% block javascripts %}#}
-            {#<script type="text/javascript">#}
-                {#$(function() {#}
-                    {#$(this).find('#register_form').submit(function (e) {#}
-                        {#e.preventDefault();#}
-                        {#$.ajax({#}
-                            {#url: Routing.generate('wbb_user_registration_register_light', $( this ).serialize()),#}
-                            {#success: function( data )#}
-                            {#{#}
-                                {#console.log(" Success Data ");#}
-                                {#console.log(data);#}
-                            {#}#}
-                        {#});#}
-
-                     {#});#}
-                {#});#}
-            {#</script>#}
-        {#{% endblock %}#}
     </body>
 </html>
