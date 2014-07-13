@@ -401,7 +401,7 @@
   .share-btns .social-share ul {left: -5%;}
 
 /* Override */
-.container .bar-w-pic .txt h2 {
+.container .bar-w-pic .txt h2 { /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
 	margin-bottom: 0;
 }
 
