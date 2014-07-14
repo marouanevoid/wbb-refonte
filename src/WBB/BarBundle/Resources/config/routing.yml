@@ -86,6 +86,10 @@ wbb_bar_bestof_local:
     pattern: /best-of/{citySlug}/{bestOfSlug}
     defaults: { _controller: WBBBarBundle:Bar:bestOf }
 
+wbb_bar_finder:
+    pattern: /bar-finder
+    defaults: { _controller: WBBBarBundle:Bar:barFinder }
+
 wbb_bar_finder_results:
     pattern: /bar-finder-results
     defaults: { _controller: WBBBarBundle:Bar:barFinderResults }
