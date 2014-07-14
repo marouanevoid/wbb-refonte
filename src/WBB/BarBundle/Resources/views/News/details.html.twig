@@ -104,7 +104,7 @@
     {% endif %}
 {% endblock %}
 {% block bodyTag %}
-<body class="news-details {% if is_mobile() %} mobile {% endif %}">
+<body class="news-details {% if is_mobile() %}mobile{% endif %} ">
 {% endblock %}
 {% block body %}
     <div>
@@ -139,7 +139,7 @@
             <!-- MAIN CONTENT -->
             <article class="main">
                 {% if not is_mobile() or is_tablet() %}
-                <div class="eight columns">
+                    <div class="eight columns">
                 {% endif %}
                     {% for m in news.medias|slice(0,1) %}
                         {% if m.media.providerName == 'sonata.media.provider.youtube' %}
@@ -153,7 +153,7 @@
                 {% endif %}
                     {% if is_mobile() and not is_tablet() %}
                         {% if news.sponsorImage %}
-                            <div class="block">
+                            <div class="block padding-top-10">
                                 <img src="{% path news.sponsorImage, 'slider_large' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
                             </div>
                         {% endif %}
@@ -223,11 +223,11 @@
                     </div>
                 {% endif %}
                 <!-- ASIDE -->
-                <aside class="columns four">
+                <aside  class="columns four">
                     {% if not is_mobile() or is_tablet() %}
                         {% if news.sponsorImage %}
                         <div class="block">
-                                <img src="{% path news.sponsorImage, 'slider_large' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
+                                <img src="{% path news.sponsorImage, 'sponsor_sponsor_detail' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
                         </div>
                         {% endif %}
                     {% endif %}
@@ -257,7 +257,7 @@
                             {#{% if news.city %}#}
                                 {#<a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:news.city.slug}) }}">See all bars</a>#}
                             {#{% else %}#}
-                                <a class="btn-radius border brown h4 showallbars-btn" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
+                                <a class="btn-radius border brown h4 showallbars-btn s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
                             {#{% endif %}#}
 
                     </aside>
