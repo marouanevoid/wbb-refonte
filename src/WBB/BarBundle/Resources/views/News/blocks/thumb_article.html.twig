@@ -6,9 +6,15 @@
     <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="overlay-link"></a>
 
     <div class="gradient"></div>
+    {% if n.medias|length > 1 and secand_media is defined and secand_media %}
+    {% for m in n.medias|slice(1,1) %}
+        <img src="" class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}" alt="{{ n.title|truncate(60, true, '...') }}" width="852" height="639"/>
+    {% endfor %}
+    {% else %}
     {% for m in n.medias|slice(0,1) %}
         <img src="" class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}" alt="{{ n.title|truncate(60, true, '...') }}" width="852" height="639"/>
     {% endfor %}
+    {% endif %}
 
     {% if n.medias|length <= 0 %}
         <img src="" class="scale-with-grid" data-src="{{ asset('bundles/wbbcore/images/default.jpg') }}" alt="{{ n.title|truncate(60, true, '...') }}" width="852" height="639"/>

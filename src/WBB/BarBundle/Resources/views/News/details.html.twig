@@ -177,7 +177,7 @@
                                                     set init = random(news.bestofs|length - 1)
                                                 %}
                                                     {% for b in news.bestofs |slice(init,1) %}
-                                                        <div class="five columns {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                                                        <div class="five margin-best-of-list columns {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
                                                             {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
                                                         </div>
                                                     {% endfor %}
@@ -200,7 +200,7 @@
                 {% if not is_mobile()  %}
                     <div class="share-btns l-margin-top">
                         <hr/>
-                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEW</h2>
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
                             <a href="#0" class="fb-share">Post</a>
                             <a href="#0" class="twitter-share">Tweet</a>
@@ -212,7 +212,7 @@
                 {% if is_mobile()  %}
                     <div class="share-btns l-margin-top full full hr-parent">
                         <hr/>
-                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEWS</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
                             <ul>
                             <li><a href="#0" class="fb-share">Post</a></li>
@@ -232,7 +232,7 @@
                         {% endif %}
                     {% endif %}
                     <!-- NEWLY ADDED BARS -->
-                    <aside {% if is_mobile() and not is_tablet() %}class="l-margin-top"{% endif %}>
+                    <aside {% if is_mobile() and not is_tablet() %}class="l-margin-top" {% else %}class="first-h-item"{% endif %}>
                         {% if is_mobile() and not is_tablet() %}<hr/>{% endif %}
                         {% if news.sponsorImage %}
                         <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top {% else %}l-margin-top{% endif %}">
@@ -254,11 +254,12 @@
                                     {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
                                 {% endfor %}
                             {% endif %}
-                            {#{% if news.city %}#}
-                                {#<a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:news.city.slug}) }}">See all bars</a>#}
-                            {#{% else %}#}
-                                <a class="btn-radius border brown h4 showallbars-btn" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
-                            {#{% endif %}#}
+
+                            {% if city is defined and city and city.slug is defined and city.slug %}
+                                <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:city.slug}) }}">See all bars</a>
+                            {% else %}
+                                <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
+                            {% endif %}
 
                     </aside>
                     {% if not is_mobile() or is_tablet() %}

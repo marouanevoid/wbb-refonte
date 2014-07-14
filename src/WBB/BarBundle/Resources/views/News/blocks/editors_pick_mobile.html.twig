@@ -68,7 +68,7 @@
                 {% endfor %}
 
 
-                {% for n in articles|slice(4,3) %}
+                {% for n in articles|slice(5,3) %}
                     {% if loop.index == 2 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1} %}
                     {%  else %}
