@@ -81,13 +81,10 @@
         }
     {% endif %}
 
-    .sub-header .title h1{
+    /*.sub-header .title h1{position: relative; top:6px; }*//* Duplicate STYLE */
+    .sub-header .title h1 {
         position: relative;
-        top:6px;
-    }
-    .sub-header .title h1{
-        position: relative;
-        top : 3px;
+        top : 10px;
     }
 </style>
 <div>
@@ -122,7 +119,7 @@
             </table>
         </section>
         {% else %}
-        <section class="sub-header">
+        <section class="sub-header no-results">
             <table>
                 <tr>
                     <td></td>

@@ -184,6 +184,7 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }
+                sponsor_detail :  { width: 368 , height: 170, quality: 100 }
 
         sponsor_small:
             download:
@@ -196,6 +197,7 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }
+                sponsor_detail :  { width: 368 , height: 170, quality: 100 }
 
     cdn:
         server:
