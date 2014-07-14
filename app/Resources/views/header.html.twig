@@ -21,21 +21,21 @@
             </tr>
             <tr class="links">
                 <td>
-                    <a class="finder h3">
+                    <a href="{{ path('wbb_bar_finder') }}" class="finder h3">
                         <img src="{{ asset('bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
                         Bar Finder
                     </a>
                 </td>
             </tr>
-            <tr class="signin">
-                <td>
-                    <span class="register h4">
-                        <a href="">Sign in</a>
-                        or
-                        <a class="btn-radius" href="">Register</a>
-                    </span>
-                </td>
-            </tr>
+                <tr class="signin">
+                    <td>
+                        <span class="register h4">
+                            <a href="">Sign in</a>
+                            or
+                            <a class="btn-radius" href="">Register</a>
+                        </span>
+                    </td>
+                </tr>
             <tr class="footer-nav">
                 <td>
                     <nav class="h4">
@@ -164,11 +164,19 @@
                             </div>
                         </td>
                         <td>
-                            <span class="register h4">
-                                <a href="">Sign in</a>
-                                or
-                                <a class="btn-radius" href="">Register</a>
-                            </span>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            {% else %}
+                                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                <span class="register h4">
+                                    <a href="">Sign in</a>
+                                    or
+                                    <a class="btn-radius" href="">Register</a>
+                                </span>
+                            {% endif %}
                         </td>
                     </tr>
                 </table>
@@ -176,8 +184,9 @@
         </div>
         <div class="search-result-proposal"><ul></ul></div>
     </header>
-
-    {{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}
+    {% if not is_mobile() or is_tablet() %}
+        {{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}
+    {% endif %}
 
 {% endif %}
 <div class="entire-content">

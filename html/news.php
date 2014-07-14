@@ -63,9 +63,9 @@
 
         <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; $has_sponsor=true; include('components/article.php') ?>
 
-        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=true; $has_video = false; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=true; $has_video = false; $has_sponsor=false; include('components/article.php') ?>
 
         <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; $has_video = true; include('components/article.php') ?>
     </section>

@@ -38,7 +38,10 @@ wbb.CitiesPage = function () {
             that._showBars(bars, true, true);
         });
     };
-
+    that._isRetina = function() {
+       if (window.devicePixelRatio === undefined) return false; // No pixel ratio available. Assume 1:1.
+       return window.devicePixelRatio > 1.5;
+   };
     that._requestBars = function( city_id, neighborhood_id, callback )
     {
         console.log(" Request Bars : " + Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}));
@@ -67,6 +70,7 @@ wbb.CitiesPage = function () {
         var markers = [];
         var address = "";
 
+        var is_retina = that._isRetina();
         $.each(bars, function(index, bar)
         {
             address = "";
@@ -76,7 +80,9 @@ wbb.CitiesPage = function () {
 
                 if(typeof bar.latitude != 'undefined' && typeof bar.longitude != 'undefined' && bar.latitude != null && bar.longitude != null){
                 if( display_list ) html += '<li value="'+(index+1)+'" data-id="'+ bar.id + '" data-link="'+bar.url+'"><b>'+bar.name+'</b><br/><span>'+address+'</span></li>';
-                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+address, options:{icon:BASEURL+'images/markers/'+(index+1)+'.png', optimized: false}, id:bar.id});
+                var icon = new google.maps.MarkerImage(BASEURL+'images/markers/'+(index+1)+(is_retina?'@2x':'')+'.png', null, null, null, new google.maps.Size(39,58));
+                markers.push({address:bar.latitude+','+bar.longitude, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+address, options:{icon:icon, optimized: false}, id:bar.id});
+               //markers.push({address:bar.address, data:'<img src="'+bar.image_url+'"/><b>'+bar.name+'</b>'+bar.address+'<span>'+bar.tags+'</span>', options:{icon:icon}, id:bar.id});
             }
         });
         if( display_list )
@@ -530,6 +536,28 @@ wbb.CitiesPage = function () {
         that.context.$container.find('form').append(html);
 
         initializeDropdowns();
+
+        // Initialize Selector  on drop down list
+        // Script Injection for Select UI
+        ////////
+        //$('.ui-dropdown-container').each(function(){})
+        $('select').on('change',function(){
+           var  $target = $(this),
+                parent  = $target.parent('.ui-dropdown-container'),
+                li = parent.find('li')
+                selected = parent.find('.selected').text();
+
+                li.show();
+
+                li.each(function(){
+                    if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+                        $(this).hide();
+                });
+        });
+
+        // Trigger change on select
+        $('select').change();
+
 
     };
 

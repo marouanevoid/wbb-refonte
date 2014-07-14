@@ -269,8 +269,13 @@
 
                 <ul class="trends">
                     <li>At a Glance :</li>
-                    {% for tr in bar.tags %}
-                        <li>{{ tr.tag }}</li>
+                    {% if bar.energyLevel %}
+                        <li>{{ bar.energyLevel }}</li>
+                    {% endif %}
+                    {% for tr in bar.tags |slice(0, ((bar.energyLevel)? 4 : 5)) %}
+                        {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
+                            <li>{{ tr.tag }}</li>
+                        {% endif %}
                     {% endfor%}
                 </ul>
 

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\Collections\BestOfTag;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 
 /**
  * BestOf
@@ -14,7 +15,7 @@ use WBB\BarBundle\Entity\Collections\BestOfTag;
  * @ORM\Table(name="wbb_bestof")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestOfRepository")
  */
-class BestOf
+class BestOf implements IndexableEntity
 {
     /**
      * @var integer
@@ -130,7 +131,21 @@ class BestOf
      *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
      *      )
      **/
-    private $news;    
+    private $news;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="bestofsLevel")
+     */
+    private $energyLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="bestofOccasions", cascade={"all"})
+     * @ORM\JoinTable(name="wbb_bestof_occasion",
+     *      joinColumns={@ORM\JoinColumn(name="bestof_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $toGoWith;
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
@@ -881,6 +896,22 @@ class BestOf
         }
     }
 
+    public function getGoWithIds()
+    {
+        $tags = array();
+        foreach ($this->getToGoWith() as $tag) {
+            if ($tag) {
+                $tags[] = $tag->getId();
+            }
+        }
+
+        if (sizeof($tags) > 0) {
+            return $tags;
+        } else {
+            return array(0);
+        }
+    }
+
     /**
      * Set image
      *
@@ -925,5 +956,109 @@ class BestOf
     public function getSponsorImage()
     {
         return $this->sponsorImage;
+    }
+
+    public function getCloudSearchFields()
+    {
+        $bars = array();
+        foreach ($this->bars as $bar) {
+            if ($bar->getBar()) {
+                $bars[] = $bar->getBar()->getName();
+            }
+        }
+
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+        $types = array(
+            'tags_style' => 'getIsStyle',
+            'tags_mood' => 'getIsMood',
+            'tags_occasion' => 'getIsOccasion',
+            'tags_cocktails' => 'getIsCocktail',
+        );
+
+        foreach ($this->tags as $bestOfTags) {
+            foreach ($bestOfTags as $tag) {
+                foreach ($types as $type => $getter) {
+                    if ($tag->$getter()) {
+                        $tags[$type][] = $tag->getName();
+                    }
+                }
+            }
+        }
+
+        return array(
+            'name' => ($this->name) ? $this->name : '',
+            'country' => ($this->getCountry()) ? $this->getCountry()->getName() : '',
+            'city' => ($this->getCity()) ? $this->getCity()->getName() : '',
+            'description' => ($this->description) ? $this->description : '',
+            'tags_style' => $tags['tags_style'],
+            'tags_mood' => $tags['tags_mood'],
+            'tags_occasion' => $tags['tags_occasion'],
+            'tags_cocktails' => $tags['tags_cocktails'],
+            'tags_special' => '',
+            'bars' => $bars,
+            'wbb_id' => $this->id
+        );
+    }
+
+
+    /**
+     * Set energyLevel
+     *
+     * @param \WBB\BarBundle\Entity\Tag $energyLevel
+     * @return BestOf
+     */
+    public function setEnergyLevel(\WBB\BarBundle\Entity\Tag $energyLevel = null)
+    {
+        $this->energyLevel = $energyLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get energyLevel
+     *
+     * @return \WBB\BarBundle\Entity\Tag 
+     */
+    public function getEnergyLevel()
+    {
+        return $this->energyLevel;
+    }
+
+    /**
+     * Add toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     * @return BestOf
+     */
+    public function addToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith[] = $toGoWith;
+
+        return $this;
+    }
+
+    /**
+     * Remove toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     */
+    public function removeToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith->removeElement($toGoWith);
+    }
+
+    /**
+     * Get toGoWith
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getToGoWith()
+    {
+        return $this->toGoWith;
     }
 }

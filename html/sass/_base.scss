@@ -133,6 +133,9 @@
 	a, a:visited { text-decoration: none; outline: 0; }
 	a:hover, a:focus { color: $color-brown-dark }
 
+  html.safari.win, html.mobile{
+    a, a:before, a:after, a *, a *:before, a *:after{ @include transition(none!important) }
+  }
 
 /* Images
 --------------------------------------------------- */
@@ -244,6 +247,8 @@
   .color-cream          { color: $color-cream; }
   .color-dark-gray      { color: $color-dark-gray; }
   .color-medium-gray    { color: $color-medium-gray; }
+
+
 
   @media only screen and (max-width: $grid-breakpoint-mobile) {
 

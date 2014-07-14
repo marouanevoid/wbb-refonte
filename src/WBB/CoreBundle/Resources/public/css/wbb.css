@@ -174,9 +174,9 @@ Added By Khalid
 ****/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
 
-    .heading input[type="text"] + input[type="submit"]{
+/*    .heading input[type="text"] + input[type="submit"]{
         right: -1.4px !important;
-    }
+    }*/
 
 }
 
@@ -238,6 +238,31 @@ article.tip .content .excerpt td .scroll{
     left: 24.5%;
 }
 
-.articles.padding article.small + article.small{
+.mobile .articles.padding article.small + article.small{
     margin-left : 0;
+}
+.articles.padding article.small + article.small{
+    margin-left : 4% ;
+}
+.go{
+    line-height: 41px !important;
+}
+.go.disabled {
+    background-color: #ccc !important;
+    color: #999999;
+    opacity: 0.29;
+}
+.go.disabled:hover {
+    background-color: #ccc !important;
+    color: #999999;
+    opacity: 0.29;
+}
+.entire-content{
+    display: none;
+}
+
+#common-loader{
+    left:50%;
+    position:absolute;
+    top:50px;
 }

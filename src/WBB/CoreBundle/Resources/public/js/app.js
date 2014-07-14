@@ -118,6 +118,23 @@ meta.App = function() {
             }
         });
 
+        $('aside.mobile-menu a').on('click', function(e){
+            $('html,body').animate({scrollTop:0},300);
+            $('section.bar-finder').fadeIn(that.config.speed, that.config.easing, function()
+            {
+                $('header.mobile .nav-icon a').click();
+                $('.mobile-menu').hide().removeAttr('style');
+                $('.entire-content').hide();
+            });
+        });
+
+        $('section.bar-finder .finder-close').click(function(){
+            $('.entire-content').show();
+            $('section.bar-finder').fadeOut(that.config.speed, that.config.easing, function()
+            {
+                $('section.bar-finder .finder-close').css('opacity',1);
+            });
+        });
         /*$('.detect-scroll').swipe(
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
@@ -306,7 +323,6 @@ meta.App = function() {
     that.__construct();
     that.bareFinderHandler();
 
-    // TEMP //
     // Script Injection for Select UI
     ////////
     //$('.ui-dropdown-container').each(function(){})
@@ -317,8 +333,9 @@ meta.App = function() {
             selected = parent.find('.selected').text();
 
             li.show();
+
             li.each(function(){
-                if($(this).text() == selected || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+                if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
                     $(this).hide();
             });
 
@@ -326,7 +343,7 @@ meta.App = function() {
 
     // Trigger change on select
     $('select').change();
-    //////// END TEMP
+
 };
 
 
@@ -335,6 +352,8 @@ $(document).ready(function()
     new meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
     new meta.App();
 
+    $('.entire-content').show();
+    $('#common-loader').hide();
     // TEMP
     // setInterval(function(){
     //             $('.scroll').not('.jspScrollable').each(function()

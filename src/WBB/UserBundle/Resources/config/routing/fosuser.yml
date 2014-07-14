@@ -3,10 +3,10 @@ fos_user_security:
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
+    prefix: /your-profile
 
 fos_user_registration_register:
-    pattern: /register
+    pattern: /profile
     defaults: { _controller:FOSUserBundle:Registration:register }
     options:
         expose: true

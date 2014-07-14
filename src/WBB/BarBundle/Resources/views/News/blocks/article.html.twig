@@ -5,7 +5,7 @@
             <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="cover">
                 {% if n.medias|length>0 %}
                     {% for m in n.medias|slice(0,1) %}
-                        <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
+                        <img src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}" width="600" height="400" alt="{{ n.title }}"/>
                         {% if m.media.providerName == 'sonata.media.provider.youtube' %}
                             <span class="video"></span>
                         {% endif %}
@@ -14,20 +14,33 @@
                     <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ n.title }}"/>
                 {% endif %}
 
+                {% if n.sponsorImageSmall is defined and n.sponsorImageSmall != '' %}
+                    <span class="sponsor">
+                            <img src="{% path n.sponsorImageSmall , 'small' %}" alt="sponsor"/>
+                    </span>
+                {% endif %}
 
             </a>
-            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
+            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
         </div>
     {% endif %}
 
     <div class="title vcenter">
-        <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+        {% if n.seoDescription is defined and n.seoDescription != '' %}
+         <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+        {% endif %}
         {% if has_text is defined %}
             <p class="m-margin">
                 {% if n.seoDescription %}
                     {{ n.seoDescription|truncate(60, true, '...') }}
                 {% else %}
-
+                {% if show_quote is defined %}
+                {% if n.quoteText %}
+                    <h1>
+                        “{{ n.quoteText|truncate(60, true, '...') }}”
+                    </h1>
+                {% endif %}
+                {% endif %}
                 {% endif %}
             </p>
         {% endif %}

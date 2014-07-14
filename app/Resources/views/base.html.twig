@@ -21,6 +21,10 @@
             istablet=0;
             {% if is_mobile() and not is_tablet() %}ismobile=1;{% endif %}
             {% if is_tablet() %}istablet=1;{% endif %}
+            {% if city is defined and city != ''  %}
+                window.isCity = true;
+            {% endif %}
+            var DEBUGMODE = "{{app.environment }}";
         </script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -30,9 +34,9 @@
 
             {% stylesheets filter="cssrewrite"
                 "bundles/wbbcore/css/front.css"
-                "bundles/wbbcore/css/main.css"
                 "bundles/wbbcore/css/wbb.css"
             %}
+                {# "bundles/wbbcore/css/main.css" #}
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
@@ -46,6 +50,7 @@
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'
+                '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
                 '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
@@ -116,7 +121,9 @@
 
     {% block bodyTag %}
         <body>
+
         {% endblock %}
+        
         <div id="fb-root"></div>
 
         <script type="text/javascript">
@@ -146,36 +153,98 @@
         {% block header %}
             {% include '::header.html.twig' %}
         {% endblock %}
-
+        <div id="common-loader"><img src="{{ asset('bundles/wbbcore/images/common/loader.gif') }}" /></div>
         {% block body %}
         {% endblock %}
         <!-- AD -->
         {% if not is_mobile() or is_tablet() %}
             {% block footerAd %}
-                <section class="footer-ad">
+                {#<section class="footer-ad">
                 <div class="container align-center">
                     <div class="twelve columns">
                         <hr/>
                         <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
                     </div>
                 </div>
-            </section>
+            </section>#}
+                 {% include '::ads/adsFooter.html.twig' %}
             {% endblock %}
 
         {% endif %}
 
-        {#<div>#}
-            {#<h2>Register</h2>#}
-            {#{% render url('wbb_user_registration_register_light') %}#}
-            {#<br />#}
-            {#<br />#}
-            {#<br />#}
-            {#<br />#}
-            {#<br />#}
-            {#<br />#}
-            {#<br />#}
-            {#<br />#}
-        {#</div>#}
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div id="register-light" style="display:none">
+            {% render url('wbb_user_registration_register_light') %}
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+            <script>
+            $(document).ready(function() {
+                $('#message').hide();
+                $('#register_form').on('submit', function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var formUrl='{{ path('wbb_user_registration_register_light') }}';
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: formUrl,
+                        data: form.serialize(),
+                        success: function(data) {
+                            if(data.code==='400') {
+                                var errors = data.errors;
+                                var errorsList = $('#message').show().find('img').html('<ul></ul>');
+                                for(var i=0 ; i < errors.length ; i++) {
+                                    errorsList.find('ul').append('<li>'+errors[i]+'</li>');
+                                }
+                            }
+                        },
+                        error:function (xhr, ajaxOptions, thrownError) {
+                            // Si erreur communication ?
+                        }
+                    });
+                });
+                $('#login_form').on('submit',function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var formUrl='{{ path('fos_user_security_check') }}';
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: formUrl,
+                        data: form.serialize(),
+                        success: function(data) {
+                            console.log(data);
+                            if(data.code === '400') {
+                                $('#login_error').html(data.error);
+                            } else {
+                                window.location.reload();
+                            }
+                        },
+                        error:function (xhr, ajaxOptions, thrownError) {
+                            // Si erreur communication ?
+                        }
+                    });
+                });
+            });
+        </script>
+        {% endif %}
 
         {% block footer %}
             {% include '::footer.html.twig' %}

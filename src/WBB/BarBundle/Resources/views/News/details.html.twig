@@ -75,18 +75,36 @@
             background: url({{ asset('bundles/wbbcore/images/icon_email-mobile.jpg') }});
         }
         .showallbars-btn{
-                display: block;
+                /*display: block;*/
                 position: relative;
                 top: 16px;
                 text-align: center;
         }
-        .social-share ul{padding: 0 ; margin: 0;}
+        .social-share ul{padding: 0 ; margin: 0; width: 320px;
+            position:relative;
+            left: -6%;
+            top: 6px;
+            bottom: 10px;}
         .social-share ul li{display: inline;float: left;}
+
+        .social-share {
+            width: 260px;
+            margin-left:auto;
+            margin-right:auto;
+            }
+            body article p {
+                font-size: 18px !important;
+            }
+
+            article .hr-parent hr {
+                width : 90%;
+                margin: 0 auto;
+            }
     </style>
     {% endif %}
 {% endblock %}
 {% block bodyTag %}
-<body class="news-details">
+<body class="news-details {% if is_mobile() %} mobile {% endif %}">
 {% endblock %}
 {% block body %}
     <div>
@@ -176,17 +194,23 @@
                         {% endif %}
 
                         </p>
-                   
-
-
-
-
-
-                       
-                   
+                      
                     <div style='clear:both;'></div>
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
-                    <div class="share-btns l-margin-top full">
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> <br /> {{ news.sponsor }}</div>{% endif %}
+                {% if not is_mobile()  %}
+                    <div class="share-btns l-margin-top">
+                        <hr/>
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEW</h2>
+                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
+                            <a href="#0" class="fb-share">Post</a>
+                            <a href="#0" class="twitter-share">Tweet</a>
+                            <a href="#0" class="email-share">Email</a>
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+                {% if is_mobile()  %}
+                    <div class="share-btns l-margin-top full full hr-parent">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
@@ -197,7 +221,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                {% endif %}
                 <!-- ASIDE -->
                 <aside class="columns four">
                     {% if not is_mobile() or is_tablet() %}
@@ -233,7 +257,7 @@
                             {#{% if news.city %}#}
                                 {#<a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:news.city.slug}) }}">See all bars</a>#}
                             {#{% else %}#}
-                                <a class="btn-radius border brown h4 s-margin-top showallbars-btn" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
+                                <a class="btn-radius border brown h4 showallbars-btn" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
                             {#{% endif %}#}
 
                     </aside>

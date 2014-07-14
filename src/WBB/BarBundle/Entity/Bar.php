@@ -10,6 +10,7 @@ use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
 use JMS\Serializer\Annotation as JMS;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 
 /**
  * Bar
@@ -19,7 +20,7 @@ use JMS\Serializer\Annotation as JMS;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class Bar
+class Bar implements IndexableEntity
 {
     const BAR_STATUS_ENABLED_VALUE = 2;
     const BAR_STATUS_ENABLED_TEXT = "Enabled";
@@ -244,6 +245,20 @@ class Bar
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $medias;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="barsLevel")
+     */
+    private $energyLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="barOccasions", cascade={"all"})
+     * @ORM\JoinTable(name="wbb_bar_occasion",
+     *      joinColumns={@ORM\JoinColumn(name="bar_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $toGoWith;
 
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
@@ -1249,6 +1264,22 @@ class Bar
             return array(0);
     }
 
+    public function getGoWithIds()
+    {
+        $tags = array();
+        foreach ($this->getToGoWith() as $tag) {
+            if ($tag) {
+                $tags[] = $tag->getId();
+            }
+        }
+
+        if (sizeof($tags) > 0) {
+            return $tags;
+        } else {
+            return array(0);
+        }
+    }
+
     /**
      * Add bestofs
      *
@@ -1410,5 +1441,141 @@ class Bar
     public function getSemsoftBars()
     {
         return $this->semsoftBars;
+    }
+
+    public function getCloudSearchFields()
+    {
+        $cityName = ($this->city) ? $this->city->getName() : '';
+        $countryName = ($this->city->getCountry()) ? $this->city->getCountry()->getName() : '';
+        $lat = ($this->latitude) ? $this->latitude : 0;
+        $lon = ($this->longitude) ? $this->longitude : 0;
+
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+        $types = array(
+            'tags_style' => 'getIsStyle',
+            'tags_mood' => 'getIsMood',
+            'tags_occasion' => 'getIsOccasion',
+            'tags_cocktails' => 'getIsCocktail',
+        );
+
+        foreach ($this->tags as $barTags) {
+            foreach ($barTags as $tag) {
+                foreach ($types as $type => $getter) {
+                    if ($tag->$getter()) {
+                        $tags[$type][] = $tag->getName();
+                    }
+                }
+            }
+        }
+
+        return array(
+            'name' => $this->name,
+            'city' => $cityName,
+            'country' => $countryName,
+            'district' => ($this->suburb) ? $this->suburb->getName() : '',
+            'location' => $lat . ',' . $lon,
+            'address' => ($this->address) ? $this->address : '',
+            'website' => ($this->website) ? $this->website : '',
+            'description' => ($this->description) ? $this->description : '',
+            'seo_description' => ($this->seoDescription) ? $this->seoDescription : '',
+            'tags_style' => $tags['tags_style'],
+            'tags_mood' => $tags['tags_mood'],
+            'tags_occasion' => $tags['tags_occasion'],
+            'tags_cocktails' => $tags['tags_cocktails'],
+            //'tags_food' => '',
+            //'tags_special' => '',
+            'wbb_id' => $this->id
+        );
+    }
+
+    public function calculateDistance($latitude, $longitude, $unit = 'km')
+    {
+        $theta = $this->getLongitude() - $longitude;
+        $dist = sin(deg2rad($this->getLatitude())) * sin(deg2rad($latitude)) + cos(deg2rad($this->getLatitude())) * cos(deg2rad($latitude)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if($unit == "m")
+        {
+            return round($miles, 2);
+        }
+        elseif($unit == "nm") {
+            return round(($miles * 0.8684), 2);
+        }
+        else
+        {
+            return round(($miles * 1.609344), 2);
+        }
+    }
+
+    public static function getEnergyLevels()
+    {
+        $result = array(1 => 'Chillout', 2 => "Casual", 3 => "Party");
+
+        return $result;
+    }
+
+
+    /**
+     * Set energyLevel
+     *
+     * @param integer $energyLevel
+     * @return Bar
+     */
+    public function setEnergyLevel($energyLevel)
+    {
+        $this->energyLevel = $energyLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get energyLevel
+     *
+     * @return integer 
+     */
+    public function getEnergyLevel()
+    {
+        return $this->energyLevel;
+    }
+
+    /**
+     * Add toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     * @return Bar
+     */
+    public function addToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith[] = $toGoWith;
+
+        return $this;
+    }
+
+    /**
+     * Remove toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     */
+    public function removeToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith->removeElement($toGoWith);
+    }
+
+    /**
+     * Get toGoWith
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getToGoWith()
+    {
+        return $this->toGoWith;
     }
 }

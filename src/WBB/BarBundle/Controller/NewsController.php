@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use WBB\BarBundle\Entity\Ad;
+use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
@@ -17,7 +18,24 @@ class NewsController extends Controller
 {
     public function landingPageAction($citySlug = false)
     {
-        $city = ($citySlug)? $this->container->get('city.repository')->findOneBySlug($citySlug) : null;
+        $session = $this->container->get('session');
+        if ($citySlug == "world-wide")
+            $session->set('citySlug', "");
+
+        if($citySlug != $session->get('citySlug') and $citySlug){
+            $session->set('citySlug', $citySlug);
+            $session->set('userLatitude', '');
+            $session->set('userLongitude', '');
+        }
+
+        $slug = $session->get('citySlug');
+
+        $city = null;
+        if (!empty($slug)){
+            $city = $this->get('city.repository')->findOneBySlug($slug);
+        }elseif($citySlug){
+            $city = ($citySlug)? $this->container->get('city.repository')->findOneBySlug($citySlug) : null;
+        }
 
         $allNews = $this->container->get('news.repository')->findLatestNews($city, 0, false);
 
@@ -35,7 +53,7 @@ class NewsController extends Controller
             if($news->getIsAnInterview() and $nbInteviews < 4 ){
                 $interviews[] = $news;
                 $nbInteviews++;
-            }elseif($nbArticles < 8){
+            }elseif(!$news->getIsAnInterview() and $nbArticles < 8){
                 $articles[] = $news;
                 $nbArticles++;
             }else{
@@ -61,16 +79,37 @@ class NewsController extends Controller
 
     public function detailsAction($newsSlug)
     {
+        $session = $this->container->get('session');
+        $slug = $session->get('citySlug');
+        $city = null;
+        if (!empty($slug))
+            $city = $this->get('city.repository')->findOneBySlug($slug);
+
         $news = $this->container->get('news.repository')->findOneBySlug($newsSlug);
-        $byCity = $news->hasOnlyOneTopCity();
 
         $alsoLike = $this->container->get('news.repository')->findRelatedNews($news->getCitiesAsArray(), 3, array($news->getId()));
 
         return $this->render('WBBBarBundle:News:details.html.twig', array(
             'news'          => $news,
-            'latestBars'    => $this->container->get('bar.repository')->findLatestBars($byCity, 5),
+            'latestBars'    => $this->container->get('bar.repository')->findLatestBars($city, 5),
             'alsoLike'      => $alsoLike,
-            'city'          => $byCity,
+            'city'          => $news->hasOnlyOneTopCity(),
         ));
+    }
+
+    public function shareAction(News $news)
+    {
+        $form = $this->container->get('wbb.forum.sharenews.form');
+        $formHandler = $this->container->get('bmwi.forum.sharequestion.form.handler');
+
+        $process = $formHandler->process($question);
+        if ($process) {
+            return $this->render('BMWiForumBundle:Question:confirmedShare.html.twig');
+        }
+
+        return array(
+            'form'     => $form->createView(),
+            'question' => $question
+        );
     }
 }

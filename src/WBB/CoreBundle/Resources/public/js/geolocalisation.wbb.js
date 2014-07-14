@@ -49,8 +49,8 @@
         // stock this on coockies
 
         if( $.cookie ){
-          $.cookie('currentLong' , currentLong);
-          $.cookie('currentLat' , currentLat);
+          $.cookie('currentLong' , currentLong , 0);
+          $.cookie('currentLat' , currentLat , 0);
 
           // send the request Ajax to get the nearest point
           $.ajax({
@@ -59,13 +59,13 @@
                       { 
                         if(data){
                           if(data.id)
-                            $.cookie('near_id', data.id)
+                            $.cookie('near_id', data.id , 0)
                           if(data.slug)
-                            $.cookie('near_islug', data.slug)
+                            $.cookie('near_islug', data.slug , 0)
                           if(data.latitude)
-                            $.cookie('near_latitude', data.latitude)
+                            $.cookie('near_latitude', data.latitude , 0)
                           if(data.longitude)
-                            $.cookie('near_longitude' , data.longitude);
+                            $.cookie('near_longitude' , data.longitude , 0);
                         }
                         // init near Location
                         initNearPositions(data);
@@ -75,7 +75,11 @@
 
       }
 
-
+      function userNotAccept(error){
+         if( error.code == error.PERMISSION_DENIED ){
+              $.cookie('near_permission' , 'NO' , 0);
+          }
+      }
       // init theLocation near
       function initNearPositions(data){
           // TODO : where the user is accept geolocalisation 
@@ -88,15 +92,18 @@
                 bbase = split[2];
             return bbase;
           }
-          // if(data.slug && window.homepage)
-          //   window.location.href =  directionRoote;
+            window.location.reload();
       }
 
     // if the current navigator support geolocalisation
     // if the geolocalisation is aleady stocked 
 
-    //if(navigator.geolocation && ( ! $.cookie('currentLat') || $.cookie('currentLat') == '' ))
-    navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong);
+    /*
+    * TODO : Add the nigative response on PERMISSION_DENIED 
+    * Geo localisation 
+    **/
+    if( ( !$.cookie('near_permission') ) /*&&  ( ! window.isCity ) */ && ( ! $.cookie('currentLat') )  )
+       navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong , userNotAccept);
   })
 
 

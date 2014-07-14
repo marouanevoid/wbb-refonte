@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use WBB\CoreBundle\Entity\City;
-
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 /**
  * News
  *
@@ -15,7 +15,8 @@ use WBB\CoreBundle\Entity\City;
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\NewsRepository")
  */
 
-class News {
+class News implements IndexableEntity
+{
 
     /**
      * @var integer
@@ -647,5 +648,38 @@ class News {
     public function getCities()
     {
         return $this->cities;
+    }
+    
+    public function getCloudSearchFields()
+    {
+        $cities = array();
+        $bars = array();
+        foreach ($this->cities as $city) {
+            $cities[] = $city->getName();
+        }
+        foreach ($this->bars as $bar) {
+            $bars[] = $bar->getName();
+        }
+        
+        $bestOfs = array();
+        foreach ($this->bestOfs as $bestOf) {
+            $bestOfs[] = $bestOf->getName();
+        }
+
+        return array(
+            'name' => ($this->title) ? $this->title : '',
+            'text' => ($this->richDescription) ? $this->richDescription : '',
+            'cities' => $cities,
+            'quote' => ($this->quoteText) ? $this->quoteText : '',
+            'quote_author' => ($this->quoteAuthor) ? $this->quoteAuthor : '',
+            'seo_description' => ($this->seoDescription) ? $this->seoDescription : '',
+            'bestofs' => $bestOfs,
+            'bars' => $bars,
+            //'tags_mood' => '',
+            //'tags_occasion' => '',
+            //'tags_cocktails' => '',
+            //'tags_special' => '',
+            'wbb_id' => $this->id
+        );
     }
 }

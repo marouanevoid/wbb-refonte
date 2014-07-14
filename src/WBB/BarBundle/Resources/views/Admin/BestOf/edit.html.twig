@@ -21,6 +21,21 @@ file that was distributed with this source code.
 
 {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}{% endblock %}
 
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% if object.slug %}
+            <a class="btn sonata-action-element" href="{{ path('wbb_bar_bestof_global',{bestOfSlug:object.slug}) }}" target="_blank">
+                <i class="icon-zoom-in"></i>
+                {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
+            </a>
+        {% endif %}
+        {% include 'SonataAdminBundle:Button:history_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:acl_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
+    </div>
+{% endblock %}
+
 {% use 'WBBBarBundle:Admin:BestOf/base_edit_form.html.twig' with form as parentForm %}
 
 
@@ -92,6 +107,7 @@ file that was distributed with this source code.
                     var options = JSON && JSON.parse(data) || $.parseJSON(data);
                     media.empty().append(options);
                     media.trigger("list:updated");
+                    media.select2("val", "");
                 },"text");
             });
 
@@ -114,6 +130,73 @@ file that was distributed with this source code.
                         var options = JSON && JSON.parse(data) || $.parseJSON(data);
                         media.empty().append(options);
                         media.trigger("list:updated");
+                    },"text");
+                });
+            });
+
+            //Bar tags relations
+            $('select').each(function(){
+                var type = $(this).attr('id');
+                var extension = type.substr(type.length - 5);
+                if (extension != "_type"){
+                    return;
+                }
+                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                typeId = $(this).val();
+                tagId = tag.val() || 0;
+
+                tag.empty();
+                tag.trigger("list:updated");
+
+                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                    tag.empty().append(options);
+                    tag.trigger("list:updated");
+                },"text");
+            });
+
+            $('select').live('change', function(){
+                var type = $(this).attr('id');
+                var extension = type.substr(type.length - 5);
+                if (extension != "_type"){
+                    return;
+                }
+                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                typeId = $(this).val();
+                tagId = tag.val() || 0;
+
+                tag.empty();
+                tag.trigger("list:updated");
+
+                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                    tag.empty().append(options);
+                    tag.trigger("list:updated");
+                    tag.select2("val", "");
+                },"text");
+            });
+
+            jQuery(document).on('sonata.add_element',function(){
+                $('select').each(function(){
+                    var type = $(this).attr('id');
+                    var extension = type.substr(type.length - 5);
+                    if (extension != "_type"){
+                        return;
+                    }
+                    var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                    typeId = $(this).val();
+                    tagId = tag.val() || 0;
+
+                    tag.empty();
+                    tag.trigger("list:updated");
+
+                    var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                    $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        tag.empty().append(options);
+                        tag.trigger("list:updated");
                     },"text");
                 });
             });

@@ -42,7 +42,7 @@ meta.Selector = function(config){
 
     that.config =
     {
-        speed     : 500,
+        speed     : 300,
         easing    : 'easeInOutCubic',
         $selector : false
     };
@@ -87,6 +87,14 @@ meta.Selector = function(config){
                 that.active = false;
             });
 
+        });
+
+        $(document).on('click touchstart', function(e)
+        {
+            if( !$(e.target).closest('.ui-selector').length && that.active )
+            {
+                that.config.$selector.find('.close').click();
+            }
         });
 
         that.config.$selector.find('li').click(function(){
