@@ -404,6 +404,9 @@
 .container .bar-w-pic .txt h2 { /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
 	margin-bottom: 0;
 }
+.mobile .sub-header .star-share {
+	margin-top: 1.5em;
+}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {

@@ -104,7 +104,7 @@
     {% endif %}
 {% endblock %}
 {% block bodyTag %}
-<body class="news-details">
+<body class="news-details {% if is_mobile() %} mobile {% endif %}">
 {% endblock %}
 {% block body %}
     <div>
