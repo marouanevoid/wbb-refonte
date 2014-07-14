@@ -1445,6 +1445,7 @@ class Bar implements IndexableEntity
 
         return array(
             'name' => $this->name,
+            'slug' => $this->slug,
             'city' => $cityName,
             'country' => $countryName,
             'district' => ($this->suburb) ? $this->suburb->getName() : '',

@@ -668,6 +668,7 @@ class News implements IndexableEntity
 
         return array(
             'name' => ($this->title) ? $this->title : '',
+            'slug' => $this->slug,
             'text' => ($this->richDescription) ? $this->richDescription : '',
             'cities' => $cities,
             'quote' => ($this->quoteText) ? $this->quoteText : '',

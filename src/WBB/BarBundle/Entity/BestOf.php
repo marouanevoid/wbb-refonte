@@ -962,6 +962,7 @@ class BestOf implements IndexableEntity
 
         return array(
             'name' => ($this->name) ? $this->name : '',
+            'slug' => $this->slug,
             'country' => ($this->getCountry()) ? $this->getCountry()->getName() : '',
             'city' => ($this->getCity()) ? $this->getCity()->getName() : '',
             'description' => ($this->description) ? $this->description : '',
