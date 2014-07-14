@@ -184,6 +184,7 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }
+                sponsor_detail :  { width: 368 , height: 170, quality: 100 }
 
         sponsor_small:
             download:
@@ -196,6 +197,7 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }
+                sponsor_detail :  { width: 368 , height: 170, quality: 100 }
 
     cdn:
         server:
@@ -210,14 +212,14 @@ sonata_media:
 #            bucket: wbb-bucket
 #            accessKey: AKIAJ6WSWPZUXSICYDPQ #AKIAJM6ZSVZZ3WLRHZIA
 #            secretKey: 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 #Sw9IbIoSTjfQIamFAFWqljY/tNhQmDBnChYzSC9T
-#            create:         false
-##            region:         s3-website-us-east-1.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
-#            storage:        standard # can be one of: standard or reduced
-#            acl:            public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
-##            encryption:     aes256 # can be aes256 or not set
-##            cache_control:  max-age=86400 # or any other
-##            meta:
-##                key1:       value1 #any amount of metas(sent as x-amz-meta-key1 = value1)
+#            create: true
+#            region:         s3-website-us-east-1.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
+#            storage: standard # can be one of: standard or reduced
+#            acl: public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
+#            encryption:     aes256 # can be aes256 or not set
+#            cache_control:  max-age=86400 # or any other
+#            meta:
+#                key1:       value1 #any amount of metas(s ent as x-amz-meta-key1 = value1)
 
     providers:
         image:

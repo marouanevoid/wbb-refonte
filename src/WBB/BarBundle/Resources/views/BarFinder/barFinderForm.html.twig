@@ -1,15 +1,15 @@
-<style type="text/css">
-    .go{
-        display: none;
-    }
-</style>
 <script type="text/javascript">
     $(function(){
-        var showGo = function(){$('.go').show();};
-        $('.trigger-handler').parent('a').on('click' , showGo);
+        var showGo = function(){
+            $('.go').removeClass('disabled');
+            $('.go').removeAttr('disabled');
+        };
+       
+       $('.trigger-handler').parent('a').on('click' , showGo);
        $('.trigger-select-go').on('change' , showGo);
 
-       $('.go').hide();
+       $('.go').addClass('disabled');
+       $('.go').attr('disabled' , 'disabled');
        // Delete the fake item on the list
        $('.fake-go-item').remove();
     });
@@ -36,9 +36,9 @@
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
                                 <option value="">Choose a City</option>
-{#                                 {% if city is defined %} <option value="">{{ city.name }}</option> {% endif %} #}
-                                {% for city in cities %}
-                                    <option value="{{ city.slug }}">{{ city.name }}</option>
+                                {% if city %} <option value="">{{ city.name }}</option> {% endif %}
+                                {% for c in cities %}
+                                    <option value="{{ c.slug }}">{{ c.name }}</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -55,14 +55,19 @@
                         <div style='display:none' class='fake-go-item'>
                             <input type="radio" name="mood" value="" class="ui-radio dark with-icon" data-color="brown" checked=""/>
                         </div>
-                        <td>
-                            <input type="radio" name="mood" value="chillout" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
-                        <td>
-                            <input type="radio" name="mood" value="casual" class="trigger-handler ui-radio dark with-icon"/>
-                        </td>
-                        <td>
-                            <input type="radio" name="mood" value="party" class="ui-radio dark with-icon"/>
-                        </td>
+
+                        {% for mood in moods %}
+                            <td>
+                                <input type="radio" name="mood" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
+                            </td>
+                        {% endfor %}
+                        {#<td>#}
+                            {#<input type="radio" name="mood" value="2" class="trigger-handler ui-radio dark with-icon"/>#}
+                        {#</td>#}
+                        {#<td>#}
+                            {#<input type="radio" name="mood" value="1" class="trigger-handler ui-radio dark with-icon"/>#}
+                        {#</td>#}
+
                         <td>
                             <input type="submit" class="btn-radius border brown go" value="GO"/>
                         </td>

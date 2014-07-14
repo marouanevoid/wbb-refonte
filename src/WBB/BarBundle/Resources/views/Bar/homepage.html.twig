@@ -6,9 +6,6 @@
     {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function(){
-            {% if city is defined %}
-            $('.city-selector .city>span').html('{{ city.name }}');
-            {% endif %}
             initializeSliders();
         });
 
@@ -37,59 +34,7 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="city-selector h3">
-                                You are in
-{#                                 <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
-                                    <option disabled="disabled">Choose a City</option>
-                                    {% for c in topCities %}
-                                        <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}"
-                                            {% if city is defined and c.id==city.id %}
-                                                selected="selected"
-                                            {% endif %}
-                                        >{{ c.name }}</option>
-                                    {% endfor %}
-                                    <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
-                                </select>
- #}
-                                <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
-                                    <option disabled="disabled">Choose a City</option>
-                                    {% for c in topCities %}
-                                        {% if city is defined %}
-                                        {% if c.name != city %}
-                                            <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</option>
-                                        {% endif %}
-                                        {% else %}
-                                             <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</option>
-                                        {% endif %}
-                                    {% endfor %}
-                                    <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
-                                </select>
-
-{#                                 <div class="ui-selector">
-                                    <a class="btn-radius brown border with-icon city select" data-tips="Click here to select your location" id="city-selector">
-                                        {% if city is defined %} {{city.name}} {% else %} Choose a city {% endif %}
-                                    </a>
-                                    <div class="selector">
-                                        <span></span>
-                                        <a class="close btn-round brown"></a>
-                                        <ul>
-                                            {% for c in topCities %}
-                                                {% if city is defined %}
-                                                    {% if city.id != c.id %}
-                                                    <li><a data-type="redirect" href="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</a></li>
-                                                    {% endif %}
-                                                {% else %}
-                                                <li><a data-type="redirect" href="{{ path('city_homepage',{slug:c.slug}) }}">{{ c.name }}</a></li>
-                                                {% endif %}
-                                            {% endfor %}
-                                             <li><a data-type="redirect" href="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</a></li>
-                                        </ul>
-                                        <a class="btn-radius border brown" href="cities.php">See a list of cities</a>
-                                    </div>
-                                </div> #}
-
-
-                            </div>
+                             {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
                         </td>
 
                         <td class="title">
@@ -159,7 +104,7 @@
                             </div>
                             <div class="overlay"></div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            <img src="" class="scale-with-grid" data-src="{% path c.image, 'city_small' %}" alt="{{ c.name }}"/>
+                            <img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_small' %}{% endfilter %}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}
@@ -364,5 +309,3 @@
         </aside>
     </div>
 {% endblock %}
-
-

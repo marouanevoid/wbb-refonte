@@ -42,7 +42,7 @@ meta.Selector = function(config){
 
     that.config =
     {
-        speed     : 500,
+        speed     : 300,
         easing    : 'easeInOutCubic',
         $selector : false
     };
@@ -58,7 +58,11 @@ meta.Selector = function(config){
 
         that.config.$selector.find('.select').click(function(){
 
-            if(that.active) return;
+            if(that.active)
+            {
+                that.config.$selector.find('.close').click();
+                return;
+            }
 
             that.active = true;
             $(this).addClass('active');
@@ -84,6 +88,25 @@ meta.Selector = function(config){
             });
 
         });
+
+        $(document).on('click touchstart', function(e)
+        {
+            if( !$(e.target).closest('.ui-selector').length && that.active )
+            {
+                that.config.$selector.find('.close').click();
+            }
+        });
+
+        that.config.$selector.find('li').click(function(){
+
+            var $select = that.config.$selector.find('.select');
+            $select.text( $(this).text() );
+
+            $(document).trigger('citySelected', [$(this).text(), $(this).attr('id')]);
+
+            that.config.$selector.find('.close').click();
+        });
+
 
     };
 

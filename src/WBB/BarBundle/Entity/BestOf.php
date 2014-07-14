@@ -131,7 +131,21 @@ class BestOf implements IndexableEntity
      *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
      *      )
      **/
-    private $news;    
+    private $news;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="bestofsLevel")
+     */
+    private $energyLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="bestofOccasions", cascade={"all"})
+     * @ORM\JoinTable(name="wbb_bestof_occasion",
+     *      joinColumns={@ORM\JoinColumn(name="bestof_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $toGoWith;
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
@@ -882,6 +896,22 @@ class BestOf implements IndexableEntity
         }
     }
 
+    public function getGoWithIds()
+    {
+        $tags = array();
+        foreach ($this->getToGoWith() as $tag) {
+            if ($tag) {
+                $tags[] = $tag->getId();
+            }
+        }
+
+        if (sizeof($tags) > 0) {
+            return $tags;
+        } else {
+            return array(0);
+        }
+    }
+
     /**
      * Set image
      *
@@ -931,9 +961,11 @@ class BestOf implements IndexableEntity
     public function getCloudSearchFields()
     {
         $bars = array();
-        foreach ($this->bars as $bar) {
-            if ($this->bar->getBar()) {
-                $bars[] = $bar->bar->getName();
+        if($this->bars){
+            foreach ($this->bars as $bar) {
+                if ($bar->getBar()) {
+                    $bars[] = $bar->getBar()->getName();
+                }
             }
         }
 
@@ -950,11 +982,13 @@ class BestOf implements IndexableEntity
             'tags_cocktails' => 'getIsCocktail',
         );
 
-        foreach ($this->tags as $bestOfTags) {
-            foreach ($bestOfTags as $tag) {
-                foreach ($types as $type => $getter) {
-                    if ($tag->$getter()) {
-                        $tags[$type][] = $tag->getName();
+        if($this->tags){
+            foreach ($this->tags as $bestOfTags) {
+                foreach ($bestOfTags as $tag) {
+                    foreach ($types as $type => $getter) {
+                        if ($tag->$getter()) {
+                            $tags[$type][] = $tag->getName();
+                        }
                     }
                 }
             }
@@ -976,4 +1010,60 @@ class BestOf implements IndexableEntity
         );
     }
 
+
+    /**
+     * Set energyLevel
+     *
+     * @param \WBB\BarBundle\Entity\Tag $energyLevel
+     * @return BestOf
+     */
+    public function setEnergyLevel(\WBB\BarBundle\Entity\Tag $energyLevel = null)
+    {
+        $this->energyLevel = $energyLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get energyLevel
+     *
+     * @return \WBB\BarBundle\Entity\Tag 
+     */
+    public function getEnergyLevel()
+    {
+        return $this->energyLevel;
+    }
+
+    /**
+     * Add toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     * @return BestOf
+     */
+    public function addToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith[] = $toGoWith;
+
+        return $this;
+    }
+
+    /**
+     * Remove toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     */
+    public function removeToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith->removeElement($toGoWith);
+    }
+
+    /**
+     * Get toGoWith
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getToGoWith()
+    {
+        return $this->toGoWith;
+    }
 }

@@ -8,8 +8,13 @@
         <h3>{% if b.suburb %}{{ b.suburb.name|default('Unspecified') }}, {% endif %}{% if b.city %}{{ b.city.name|default('Unspecified') }}{% endif %}</h3>
         <div class="hover">
             <div class="tags">
-                {% for tr in b.tags %}
-                    {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                {% if b.energyLevel %}
+                    {{ b.energyLevel }}
+                {% endif %}
+                {% for tr in b.tags |slice(0, ((b.energyLevel)? 4 : 5)) %}
+                    {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
+                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                    {% endif %}
                 {% endfor%}
             </div>
             {% if bestof is defined %}
@@ -25,6 +30,6 @@
     <div class="color gradient"></div>
     <div class="color gray"></div>
     {% for m in b.medias|slice(0,1) %}
-        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+        <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
     {% endfor %}
 </article>

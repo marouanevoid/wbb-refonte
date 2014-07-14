@@ -24,6 +24,7 @@
             {% if city is defined and city != ''  %}
                 window.isCity = true;
             {% endif %}
+            var DEBUGMODE = "{{app.environment }}";
         </script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -36,6 +37,7 @@
                 "bundles/wbbcore/css/wbb.css"
                 "bundles/wbbcore/css/main.css"
             %}
+                {#  #}
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
@@ -104,7 +106,9 @@
 
     {% block bodyTag %}
         <body>
+
         {% endblock %}
+<<<<<<< HEAD
         {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <div id="register-light">
                 {% render url('wbb_user_registration_register_light') %}
@@ -274,20 +278,21 @@
         {% block header %}
             {% include '::header.html.twig' %}
         {% endblock %}
-
+        <div id="common-loader"><img src="{{ asset('bundles/wbbcore/images/common/loader.gif') }}" /></div>
         {% block body %}
         {% endblock %}
         <!-- AD -->
         {% if not is_mobile() or is_tablet() %}
             {% block footerAd %}
-                <section class="footer-ad">
-                    <div class="container align-center">
-                        <div class="twelve columns">
-                            <hr/>
-                            <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
-                        </div>
+                {#<section class="footer-ad">
+                <div class="container align-center">
+                    <div class="twelve columns">
+                        <hr/>
+                        <img class="m-margin scale-with-grid" src="{{ asset('bundles/wbbcore/images/tmp/ad.pre-footer.jpg') }}" alt="ad.chivas" width="728" height="90"/>
                     </div>
-                </section>
+                </div>
+            </section>#}
+                 {% include '::ads/adsFooter.html.twig' %}
             {% endblock %}
 
         {% endif %}

@@ -81,6 +81,7 @@ meta.Dropdown = function(config){
                     that.currentScroll = $(window).scrollTop();
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
 
+                    $dropdown.find('.custom-scroll').show();
                     $dropdown.addClass('dropdown-open').find('.slide').velocity('slideDown', {speed:that.config.speed, easing:that.config.easing, complete: function()
                     {
                         that.active = true;
@@ -112,6 +113,7 @@ meta.Dropdown = function(config){
                 if( (!$(e.target).closest('.ui-dropdown').length || $(e.target).hasClass('selected')) && that.active )
                 {
                     that.active = false;
+                    $dropdown.find('.custom-scroll').hide();
                     $dropdown.find('.slide').velocity('slideUp', {speed:that.config.speed, easing:that.config.easing, complete:function(){
                         $dropdown.removeClass('dropdown-open');
                     }});

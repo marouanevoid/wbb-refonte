@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Ddeboer\DataImport\Reader\CsvReader;
 use Ddeboer\DataImportWorkflow;
 use Ddeboer\DataImport\Writer\DoctrineWriter;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BarOpening;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
@@ -14,6 +15,7 @@ use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\BarBundle\Form\SemsoftType;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Entity\Tip;
+use Ddeboer\DataImport\Writer\CsvWriter;
 
 class SemsoftController extends Controller
 {
@@ -99,7 +101,7 @@ class SemsoftController extends Controller
                     $ssBar->setName($this->setFieldValue('Name', $data, null, $newBar));
                     $ssBar->setCounty($this->setFieldValue('County', $data, null, $newBar));
                     $ssBar->setPostalCode($this->setFieldValue('PostalCode', $data, null, $newBar));
-                    $ssBar->setAddress($this->setFieldValue('Name', $data, ($data['Street1'].' '.$data['Street2']), $newBar));
+                    $ssBar->setAddress($this->setFieldValue('Street1', $data, ($data['Street1'].' '.$data['Street2']), $newBar));
                     $ssBar->setSeoDescription($this->setFieldValue('Intro', $data, null, $newBar));
                     $ssBar->setDescription($this->setFieldValue('Description', $data, null, $newBar));
                     $ssBar->setLatitude($this->setFieldValue('GeocoordinateString', $data, $this->splitGeoData($data['GeocoordinateString']), $newBar));
@@ -156,6 +158,44 @@ class SemsoftController extends Controller
         }
 
         return $this->render('WBBBarBundle:Block:empty_block.html.twig');
+    }
+
+    public function exportAction()
+    {
+        $container = $this->container;
+        $response = new StreamedResponse(function() use($container) {
+
+            $em = $container->get('doctrine')->getManager();
+            $results = $em->getRepository('WBBBarBundle:Bar')->getExportQuery()->iterate();
+            var_dump(33);die;
+            $handle = fopen('php://output', 'r+');
+
+            fputcsv($handle, array(
+                'ID', 'Name', 'Country', 'County', 'City', 'PostalCode', 'District', 'Street1', 'Street2',
+                'Intro', 'Description', 'GeocoordinateString', 'Website', 'Email', 'Phone', 'MondayOpenHours',
+                'TuesdayOpenHours', 'WednesdayOpenHours', 'ThursdayOpenHours', 'FridayOpenHours', 'SaturdayOpenHours',
+                'SundayOpenHours', 'Category', 'Mood', 'OutdoorSeating', 'HappyHour', 'Wifi', 'PriceRange', 'PaymentAccepted',
+                'RestaurantServices', 'MenuUrl', 'Booking', 'ParkingType', 'PublicTransport', 'FacebookId', 'FacebookUserPage',
+                'TwitterName', 'TwitterUserPage', 'InstagramId', 'InstagramUserPage', 'GooglePlusUserPage', 'FoursquareId',
+                'FoursquareUserPage', 'FacebookLikes', 'FacebookCheckins', 'FoursquareLikes', 'FoursquareCheckIns',
+                'FoursquareTips', 'IsPermanentlyClosed', 'BusinessFound', 'Updated Columns', 'Overwritten Columns'
+            ), ',');
+
+            while (false !== ($row = $results->next())) {
+
+
+                fputcsv($handle, $row[0]->toCSVArray(), ',');
+                $em->detach($row[0]);
+                die(33);
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'application/force-download');
+        $response->headers->set('Content-Disposition','attachment; filename="export.csv"');
+
+        return $response;
     }
 
     private function setFieldValue($fieldName, $data, $value = null, $forceUpdate = false)

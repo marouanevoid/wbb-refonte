@@ -21,7 +21,15 @@ class NewsController extends Controller
         $session = $this->container->get('session');
         if ($citySlug == "world-wide")
             $session->set('citySlug', "");
+
+        if($citySlug != $session->get('citySlug') and $citySlug){
+            $session->set('citySlug', $citySlug);
+            $session->set('userLatitude', '');
+            $session->set('userLongitude', '');
+        }
+
         $slug = $session->get('citySlug');
+
         $city = null;
         if (!empty($slug)){
             $city = $this->get('city.repository')->findOneBySlug($slug);

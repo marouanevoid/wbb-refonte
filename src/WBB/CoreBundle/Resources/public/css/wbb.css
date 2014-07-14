@@ -244,3 +244,41 @@ article.tip .content .excerpt td .scroll{
 .articles.padding article.small + article.small{
     margin-left : 4% ;
 }
+.go{
+    line-height: 41px !important;
+}
+.go.disabled {
+    background-color: #ccc !important;
+    color: #999999;
+    opacity: 0.29;
+}
+.go.disabled:hover {
+    background-color: #ccc !important;
+    color: #999999;
+    opacity: 0.29;
+}
+.entire-content{
+    display: none;
+}
+
+#common-loader{
+    left:50%;
+    position:absolute;
+    top:50px;
+}
+.quote-cls{
+    color :#333333;
+}
+.first-h-item{
+    position:  relative;
+    top: -6px;
+}
+.margin-best-of-list{
+    padding: 36px 70px;
+}
+.ui-selector .ui-tips{width: 155%;}
+.ui-selector .ui-tips .tips{ left: -46px !important;}
+
+aside > article.interview-frist-child{ margin-top:0 !important; }
+.ads-pannel + article.interview-frist-child , article + article.interview-frist-child {margin-top: 8% !important; }
+

@@ -223,24 +223,12 @@ WBB\BarBundle\Entity\Collections\BarMedia:
 WBB\BarBundle\Entity\Tag:
     tag1:
         name: Tag1
-        isStyle: true
-        isOccasion: false
-        isAtmosphere: false
-        isAlcohol: true
-        isCocktail: false
-        isMood: true
-        energyLevel: 1
+        type: 1
         onTop: true
     
     tag2:
         name: Tag2
-        isStyle: true
-        isOccasion: false
-        isAtmosphere: false
-        isAlcohol: true
-        isCocktail: false
-        isMood: true
-        energyLevel: 2
+        type: 2
         onTop: false
         
 #Bar Tags
