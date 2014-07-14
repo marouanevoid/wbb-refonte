@@ -226,6 +226,7 @@ class BarAdmin extends Admin
             ->with('Tags')
                 ->add('energyLevel', 'entity', array(
                         'class'    => 'WBBBarBundle:Tag',
+                        'help'     => 'Mandatory',
                         'required' => false,
                         'property' => 'name',
                         'empty_value' => 'Please choose a mood',

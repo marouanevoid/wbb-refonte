@@ -651,7 +651,7 @@
             </trans-unit>
             <trans-unit id="filter.label_energy_level">
                 <source>filter.label_energy_level</source>
-                <target>Energy Level</target>
+                <target>Mood</target>
             </trans-unit>
             <trans-unit id="form.label_to_go_with">
                 <source>form.label_to_go_with</source>
@@ -663,15 +663,15 @@
             </trans-unit>
             <trans-unit id="list.label_to_go_with">
                 <source>list.label_to_go_with</source>
-                <target>To go out with</target>
+                <target>With Who</target>
             </trans-unit>
             <trans-unit id="form.label_energy_level">
                 <source>form.label_energy_level</source>
-                <target>Energy Level</target>
+                <target>Mood *</target>
             </trans-unit>
             <trans-unit id="list.label_energy_level">
                 <source>list.label_energy_level</source>
-                <target>Energy Level</target>
+                <target>Mood</target>
             </trans-unit>
             <trans-unit id="list.label_by_tag">
                 <source>list.label_by_tag</source>
