@@ -282,7 +282,7 @@ class BarAdmin extends Admin
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setBar($object);
                 }else{
                     $object->removeMedia($media);
@@ -292,7 +292,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() and $tag->getTag()->getName()){
+                if($tag->getTag() && $tag->getTag()->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
@@ -302,7 +302,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening and $opening->getOpeningDay()){
+                if($opening && $opening->getOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);
@@ -315,7 +315,7 @@ class BarAdmin extends Admin
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setBar($object);
                 }else{
                     $object->removeMedia($media);
@@ -325,7 +325,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() and $tag->getTag()->getName()){
+                if($tag->getTag() && $tag->getTag()->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
@@ -335,7 +335,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening and $opening->getOpeningDay()){
+                if($opening && $opening->getOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);

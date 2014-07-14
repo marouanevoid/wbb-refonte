@@ -76,7 +76,7 @@ class SemsoftController extends Controller
                 $bar = null;
                 $newBar = true;
 
-                if($data['ID'] and is_numeric($data['ID'])){
+                if($data['ID'] && is_numeric($data['ID'])){
                     $bar = $this->get('bar.repository')->findOneById($data['ID']);
 
                     if($bar){
@@ -85,7 +85,7 @@ class SemsoftController extends Controller
                     }
                 }
 
-                if($bar or !empty($data['Name'])){
+                if($bar || !empty($data['Name'])){
                     $country    = $this->getCountry($data['Country']);
                     if($country){
                         $city   = $this->getCity($data['City'], $country);
@@ -167,7 +167,6 @@ class SemsoftController extends Controller
 
             $em = $container->get('doctrine')->getManager();
             $results = $em->getRepository('WBBBarBundle:Bar')->getExportQuery()->iterate();
-            var_dump(33);die;
             $handle = fopen('php://output', 'r+');
 
             fputcsv($handle, array(
@@ -186,7 +185,6 @@ class SemsoftController extends Controller
 
                 fputcsv($handle, $row[0]->toCSVArray(), ',');
                 $em->detach($row[0]);
-                die(33);
             }
 
             fclose($handle);
@@ -207,7 +205,7 @@ class SemsoftController extends Controller
             else
                 return $data[$fieldName];
         }else{
-            if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) or in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
+            if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) || in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
                 if($value != null)
                     return $value;
                 else
@@ -248,7 +246,7 @@ class SemsoftController extends Controller
 
     private function getPriceValue($price)
     {
-        if(strlen($price) and str_replace('$','',$price)=="")
+        if(strlen($price) && str_replace('$','',$price)=="")
             return strlen($price);
         else
             return null;

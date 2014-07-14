@@ -43,7 +43,7 @@ class BestOfRepository extends EntityRepository
                 ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
         }
 
-        if($bestof->getByTag() and $forceTags){
+        if($bestof->getByTag() && $forceTags){
             $qb
                 ->addSelect('(count(t.id) + count(tgw.id)) as HIDDEN nbTags')
                 ->leftjoin($this->getAlias().'.energyLevel', 'el')

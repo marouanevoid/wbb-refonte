@@ -21,7 +21,7 @@ class BarTagRepository extends EntityRepository
             {
                 foreach($exceptBars as $exBar)
                 {
-                    if($exBar and $exBar->getBar())
+                    if($exBar && $exBar->getBar())
                         $ids[] = $exBar->getBar()->getId();
                 }
             }
@@ -48,14 +48,14 @@ class BarTagRepository extends EntityRepository
                     ->setParameter('tags', $bar->getTagsIds());
             }
 
-            if($location == BarRepository::BAR_LOCATION_CITY and !is_null($bar->getCity()))
+            if($location == BarRepository::BAR_LOCATION_CITY && !is_null($bar->getCity()))
             {
                 $qb
                     ->andWhere($qb->expr()->eq('b.city', ':city'))
                     ->setParameter('city', $bar->getCity());
             }
 
-            if($location == BarRepository::BAR_LOCATION_COUNTRY and !is_null($bar->getCity()) and !is_null($bar->getCity()->getCountry()))
+            if($location == BarRepository::BAR_LOCATION_COUNTRY && !is_null($bar->getCity()) && !is_null($bar->getCity()->getCountry()))
             {
                 $qb
                     ->andWhere($qb->expr()->eq('c.country', ':country'))
@@ -67,7 +67,7 @@ class BarTagRepository extends EntityRepository
                 ->setMaxResults($limit);
 
 
-//            if($location==BarRepository::BAR_LOCATION_CITY and $tags == false)
+//            if($location==BarRepository::BAR_LOCATION_CITY && $tags == false)
 //            {
 //                var_dump($limit);die;
 //            }

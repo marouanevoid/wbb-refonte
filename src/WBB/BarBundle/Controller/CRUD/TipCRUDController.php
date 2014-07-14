@@ -13,7 +13,7 @@ use Sonata\AdminBundle\Exception\ModelManagerException;
 
 class TipCRUDController extends Controller
 {
-    public function batchActionEnabled(ProxyQueryInterface $selectedTipsQuery)
+    protected function batchActionEnabled(ProxyQueryInterface $selectedTipsQuery)
     {
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
         {
@@ -45,7 +45,7 @@ class TipCRUDController extends Controller
         );
     }
 
-    public function batchActionDisabled(ProxyQueryInterface $selectedTipsQuery)
+    protected function batchActionDisabled(ProxyQueryInterface $selectedTipsQuery)
     {
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
         {
@@ -77,7 +77,7 @@ class TipCRUDController extends Controller
         );
     }
 
-    public function batchActionPending(ProxyQueryInterface $selectedTipsQuery)
+    protected function batchActionPending(ProxyQueryInterface $selectedTipsQuery)
     {
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
         {

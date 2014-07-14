@@ -56,7 +56,7 @@ class BarController extends Controller
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
 
-        if(!empty($latitude) and !empty($longitude)){
+        if(!empty($latitude) && !empty($longitude)){
             $response['distance'] = true;
             $response['latitude'] = $latitude;
             $response['longitude'] = $longitude;
@@ -87,7 +87,7 @@ class BarController extends Controller
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
 
-        if(!empty($latitude) and !empty($longitude) and !empty($slug)){
+        if(!empty($latitude) && !empty($longitude) && !empty($slug)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude);
             $response['distance'] = true;
             $response['latitude'] = $latitude;
@@ -123,7 +123,7 @@ class BarController extends Controller
         $latitude = $session->get('userLatitude' );
         $longitude = $session->get('userLongitude');
 
-        if(!empty($latitude) and !empty($longitude) and !empty($slug)){
+        if(!empty($latitude) && !empty($longitude) && !empty($slug)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
             $response['distance'] = true;
             $response['latitude'] = $latitude;
@@ -237,7 +237,7 @@ class BarController extends Controller
         $longitude = $session->get('userLongitude');
         $distance = false;
 
-        if(!empty($latitude) and !empty($longitude)){
+        if(!empty($latitude) && !empty($longitude)){
             $distance = true;
         }
 
@@ -296,7 +296,7 @@ class BarController extends Controller
             }
         }
 
-        if(!$bestOf->getOrdered() and $bars){
+        if(!$bestOf->getOrdered() && $bars){
             shuffle($bars);
         }
 
@@ -305,7 +305,7 @@ class BarController extends Controller
         $longitude = $session->get('userLongitude');
         $distance = false;
 
-        if(!empty($latitude) and !empty($longitude) and ($citySlug != $session->get('citySlug'))){
+        if(!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))){
             $distance = true;
         }
 

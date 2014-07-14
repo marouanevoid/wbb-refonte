@@ -22,7 +22,7 @@ class NewsController extends Controller
         if ($citySlug == "world-wide")
             $session->set('citySlug', "");
 
-        if($citySlug != $session->get('citySlug') and $citySlug){
+        if($citySlug != $session->get('citySlug') && $citySlug){
             $session->set('citySlug', $citySlug);
             $session->set('userLatitude', '');
             $session->set('userLongitude', '');
@@ -50,10 +50,10 @@ class NewsController extends Controller
 
         foreach($allNews as $news)
         {
-            if($news->getIsAnInterview() and $nbInteviews < 4 ){
+            if($news->getIsAnInterview() && $nbInteviews < 4 ){
                 $interviews[] = $news;
                 $nbInteviews++;
-            }elseif(!$news->getIsAnInterview() and $nbArticles < 8){
+            }elseif(!$news->getIsAnInterview() && $nbArticles < 8){
                 $articles[] = $news;
                 $nbArticles++;
             }else{
