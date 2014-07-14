@@ -961,9 +961,11 @@ class BestOf implements IndexableEntity
     public function getCloudSearchFields()
     {
         $bars = array();
-        foreach ($this->bars as $bar) {
-            if ($bar->getBar()) {
-                $bars[] = $bar->getBar()->getName();
+        if($this->bars){
+            foreach ($this->bars as $bar) {
+                if ($bar->getBar()) {
+                    $bars[] = $bar->getBar()->getName();
+                }
             }
         }
 
