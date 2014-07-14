@@ -106,7 +106,10 @@ meta.CitiesPage = function() {
         $.each(cities, function(index, city)
         {
             if( display_list ) html += '<li id="'+city.id+'">'+city.name.replace(query, '<b>'+query+'</b>')+'</li>';
-            markers.push({address:city.name, options:{icon:'images/map.pin.png'}, id:city.id});
+
+            var icon = new google.maps.MarkerImage('images/map.pin'+(that._isRetina()?'@2x':'')+'.png', null, null, null, new google.maps.Size(20,30));
+
+            markers.push({address:city.name, options:{icon:icon}, id:city.id});
         });
 
         if( display_list )

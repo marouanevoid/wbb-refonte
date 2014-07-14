@@ -1,7 +1,7 @@
 .articles article{
   border: 1px solid $color-brown; float: left; text-align: center; @include box-sizing(border-box);
   h2 { text-transform: uppercase; font-weight: bold;
-    a{ color: $color-dark-gray; &:hover{ color: $color-brown }
+    a{ color: $color-dark-gray; display:inline-block; &:hover{ color: $color-brown }
     }
   }
   h1 { text-transform: none; }
