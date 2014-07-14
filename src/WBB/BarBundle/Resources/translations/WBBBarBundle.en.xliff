@@ -22,6 +22,21 @@
                 <target>Best of list</target>
             </trans-unit>
 
+            <trans-unit id="list.label_type">
+                <source>list.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_type">
+                <source>filter.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_type">
+                <source>form.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+
             <trans-unit id="bars">
                 <source>bars</source>
                 <target>Bars</target>
