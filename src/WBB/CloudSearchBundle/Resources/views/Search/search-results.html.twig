@@ -2,6 +2,36 @@
 
 {% block body %}
     {% for result in results.hits.hit %}
-        {{ result.id }}
+        <div class="nine columns s-margin-top">
+            <h2 class="s-margin-top"><a href="">{{ result.fields.name }}</a></h2>
+            <h3 class="xs-margin-top"><a href="">{{ result.fields.district }}, {{ result.fields.city }}</a></h3>
+            <p class="s-margin-top">
+                From the team behind the acclaimed Employees Only and David Waltuck, chef and owner of Chanterelle,
+                comes a new super-hip Tribeca spot. Taking its inspiration from the brothels and opium dens of old 1930s ...
+            </p>
+            <div class="tags">rooftop, romance, ambiente</div>
+        </div>
+        <div class="separator">
+            <hr/>
+        </div>
     {% endfor %}
+    <div id="more-results">
+    </div>
+    <div class="twelve columns align-center m-margin load-more-container">
+        <a id="load-more-results" class="h4 btn-radius large border load-more brown">See more bars</a>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var moreResults = '{{ results.more_results|raw }}';
+            $('#load-more-results').on('click', function() {
+                $.ajax({
+                    url: moreResults,
+                    success: function(response) {
+                        console.log(response);
+                        moreResults = response.more_results;
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

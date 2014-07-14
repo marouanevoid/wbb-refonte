@@ -24,6 +24,9 @@ class CloudSearchSearcher
         $query = $request->getQuery();
 
         $query->set('q', $parameters['q']);
+        $query->set('size', $parameters['size']);
+        $query->set('start', $parameters['start']);
+        $query->set('fq', "entity_type:'{$parameters['entity']}'");
 
         $response = $request->send()->json();
         return $response;
