@@ -42,7 +42,7 @@
         <?php endif ?>
 
         <?php if(!$has_image): ?>
-            <a class="plus-btn" href=""></a>
+            <a class="plus-btn" href=""><span></span></a>
         <?php endif ?>
     </div>
 </article>

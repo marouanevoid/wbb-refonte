@@ -56,10 +56,13 @@ meta.LoadMore = function(config) {
             var url         = $button.attr('href')+that.config.page+that.context.page;
 
             $button.data('text', $button.text());
+            $button.width($button.width());
+
             $button.addClass('loading').text(TRAD.loading);
 
             that._load(url, $target, function()
             {
+                $button.removeAttr('style');
                 $button.removeClass('loading').text( $button.data('text'));
             });
         });

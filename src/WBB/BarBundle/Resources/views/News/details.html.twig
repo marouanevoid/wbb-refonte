@@ -104,7 +104,7 @@
     {% endif %}
 {% endblock %}
 {% block bodyTag %}
-<body class="news-details">
+<body class="news-details {% if is_mobile() %} mobile {% endif %}">
 {% endblock %}
 {% block body %}
     <div>
@@ -194,20 +194,13 @@
                         {% endif %}
 
                         </p>
-                   
-
-
-
-
-
-                       
-                   
+                      
                     <div style='clear:both;'></div>
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {{ news.sponsor }}</div>{% endif %}
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> <br /> {{ news.sponsor }}</div>{% endif %}
                 {% if not is_mobile()  %}
                     <div class="share-btns l-margin-top">
                         <hr/>
-                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEW</h2>
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEW</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
                             <a href="#0" class="fb-share">Post</a>
                             <a href="#0" class="twitter-share">Tweet</a>
@@ -264,7 +257,7 @@
                             {#{% if news.city %}#}
                                 {#<a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:news.city.slug}) }}">See all bars</a>#}
                             {#{% else %}#}
-                                <a class="btn-radius border brown h4 s-margin-top showallbars-btn" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
+                                <a class="btn-radius border brown h4 showallbars-btn" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
                             {#{% endif %}#}
 
                     </aside>

@@ -63,14 +63,28 @@
       }
 
       .logged{
-        text-align: right; padding-left: 4.5em; text-transform: none;
+        text-align: right; padding-left: 4.5em; text-transform: none; position: relative; display: inline-block;
         img{ border-radius: 50%; border:2px solid $color-cream; vertical-align: middle; margin-right: 0.5em }
-        a{ color: $color-brown; position: relative; padding-right: 30px; display: inline-block }
-        a:hover{ color:  $color-subtle-yellow }
-        a:after, a:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -162px 0; position: absolute; top: 50%; right: -15px; width: 40px; height: 40px; margin-top: -20px }
-        a:before{ background-position: -162px -40px; opacity: 0; @include transition(opacity 0.2s ease-in-out ); z-index: 1 }
-        a:hover:before{ opacity: 1 }
-        span{ display: inline-block; vertical-align: middle; max-width: 160px; overflow: hidden; text-overflow: ellipsis }
+        > a{
+          color: $color-brown; position: relative; display: inline-block; padding-right: 30px;
+          &:after, &:before{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -162px 0; position: absolute; top: 50%; right: -15px; width: 40px; height: 40px; margin-top: -20px }
+          &:before{ background-position: -162px -40px; opacity: 0; @include transition(opacity 0.2s ease-in-out ); z-index: 1 }
+          &:hover:before{ opacity: 1 }
+          span{ display: inline-block; vertical-align: middle; max-width: 160px; overflow: hidden; text-overflow: ellipsis; font-size: 90% }
+        }
+        &:hover
+        {
+          > a{ color:  $color-subtle-yellow }
+        }
+        .actions
+        {
+          display:none; position: absolute; left: -72px; top: 100%; z-index: 100; background: url("../images/background.actions.png") no-repeat 50% 10px;
+          background-size: 100% 133px; font-size: 1em; padding: 20px; width: 145px; height: 106px; padding-top: 25px; padding-bottom: 15px; 
+          margin-left: 4.5em; @include transform( translate3d(0,0,0)); line-height: 20px; -webkit-backface-visibility:hidden;
+          a{ display: block; border-bottom: 1px solid #4b4d4e; text-align: left; padding: 8px 0; color: $color-subtle-yellow; font-size: 14px }
+          a:last-child{ border-bottom: 0 }
+          a:hover{ color: $color-brown }
+        }
       }
     }
 
@@ -146,10 +160,20 @@
           .logged{
             text-transform: none;
             img{ border-radius: 50%; border:2px solid $color-cream; vertical-align: middle; margin-right: 0.5em }
-            a{ color: $color-subtle-yellow ; position: relative; padding-right: 30px; display: inline-block }
-            a:after{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -162px -40px; position: absolute; top: 50%; right: -15px; width: 40px; height: 40px; margin-top: -20px }
+            a{ color: $color-subtle-yellow ; position: relative; display: inline-block }
+            > a{ padding: 1em 10%; color: $color-brown }
+            a:after{ display: none }
+            .actions
+            {
+              background: #6e7072; padding: 1em 10%; display: block; max-width: none;
+              a{ padding: 1em 0; display: block }
+            }
             span{ display: inline-block; vertical-align: middle; max-width: 110px; overflow: hidden; text-overflow: ellipsis }
           }
+        }
+
+        tr.signin.logged{
+          td{ padding: 0; border-bottom: 0 }
         }
 
 
