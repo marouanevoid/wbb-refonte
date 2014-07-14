@@ -135,6 +135,7 @@
 	#UI .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
 	#UI .load-more	 {text-decoration: none;}
 	#UI .load-more:hover {color: #faf3e1;}
+	#UI.mobile.container {width: 100%!important;}
 /* Globale Mobile Classes */
 	.mobile .content {padding: 0 20px 60px;}
 	.mobile .radius {border-radius: 100%;}	
@@ -145,6 +146,10 @@
 	.mobile form label {display: none; visibility: hidden;}
 	.mobile .btn {height: 120px; font-size: 42px;}
 	.mobile .col {float: none;}
+	.mobile #UI .title {font-size: 17px;}
+	.mobile #UI .separator {width: 100%; background-position: center center;}
+	.mobile .ui-dropdown-container .ui-dropdown {height: 38px;}
+	.mobile .ui-dropdown-container .ui-dropdown span {height: 3	8px; line-height: 3	8px;}
 
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
 	#UI {background-color: #faf3e1; position: relative; top: 145px;}
@@ -245,21 +250,23 @@
 	#no-results .icon img {display: inline-block;}
 /* Register1 (Mobile) */
  	#register.mobile {padding: 25px 25px 60px; background-color: #faf3e1;}
- 	#register.mobile .btn {height: 120px; font-size: 42px;}
+ 	#register.mobile .btn {/*height: 120px; */font-size: 17px;}
  	#register.mobile #UI {width: auto; top: 80px; position: relative;}
- 	#register.mobile #UI a {font-size: 28px;}
+ 	#register.mobile #UI a {font-size: 16px;}
  	#register.mobile #UI .title {/*text-transform: none;*/ width: 90%;}
- 	#register.mobile #UI .subtitle {font-size: 38px; padding: 0 20%;}
- 	#register.mobile #UI .btn-close {background-image: url("../images/UI/close_vm.png"); height: 80px; width: 80px; top: -28px; right: -15px;}
- 	#register.mobile form .form-text {height: 80px; font-size: 28px; border-radius: 2em;}
- 	#register.mobile form .btn-facebook {background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px;}
+ 	#register.mobile #UI .subtitle {font-size: 15px; padding: 0 20%;}
+ 	#register.mobile #UI .btn-close {background-image: url("../images/UI/close_vm.png"); height: 40px; width: 40px; top: -28px; right: -15px;}
+ 	#register.mobile form .form-text {height: 38px; font-size: 15px; border-radius: 2em;}
+ 	#register.mobile form .btn-facebook {background-image: url("../images/UI/icon_fb.jpg"); background-position: 25px center; line-height: 64px;}
+ 	#register.mobile #UI form .btn-facebook {font-size: 9px; border-radius: 4em;}
  	#register.mobile form .btn {border-radius: 2em;}
  	#register.mobile #account {text-transform: none; width: 100%; padding: 0; border: none;}
  	#register.mobile #create-account {width: 100%; padding: 40px 0;}
- 	#register.mobile #create-account a {font-size: 42px; line-height: 120px; border-radius: 2em;}
+ 	#register.mobile #create-account a {font-size: 17px; line-height: 64px; border-radius: 2em;}
 /* Register2 Close (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register2_Close.psd; */
-	#register.mobile #UI.close #close {margin: 15% 0 0;}
-	#register.mobile #UI.close #close .btn {color: #333; padding: 20px; display: block; width: 55%;}
+	#register.mobile #UI.close {padding: 0;}	
+	#register.mobile #UI.close #close {/*margin: 15% 0 0;*/ position: relative; 	top: 50px;}
+	#register.mobile #UI.close #close .btn {color: #333; /*padding: 20px;*/ display: block; /*width: 55%;*/}
 	#register.mobile #UI.close #close .title {width: 100%;}
 /* Register4 (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register4.psd; */
 	#register.page.mobile {padding: 0; width: auto;}
@@ -272,14 +279,14 @@
 	#register.page.mobile #countries .left,
 	#register.page.mobile #countries .ui-dropdown-container {width: 100% !important;}
 	#register.page.mobile #countries label {display: none!important;}
-	#register.page.mobile #date-birthday .select-wrap {width: 32%;}
+	#register.page.mobile #date-birthday {margin: 0 auto; width: 108%;}
+	#register.page.mobile #date-birthday .select-wrap {width: 30%;}
 	#register.page.mobile #date-birthday .ui-dropdown-container {width: 100% !important;}
-	#register.page.mobile #create-account label {margin: 40px 0 20px; float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 28px; font-weight: lighter;}
-	#register.page.mobile #create-account .form-submit {font-size: 32px; margin: 30px 0 0;}
-	#register.page.mobile .ui-dropdown-container .ui-dropdown span {height: 80px; line-height: 80px;}
+	#register.page.mobile #create-account label {margin: 20px 0 20px; float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 20px; font-weight: lighter;}
+	#register.page.mobile #create-account .form-submit {font-size: 20px; margin: 30px 0 0;}
 /* Register3 (Mobile) */
-	#register.mobile #UI #success p {margin: 0 auto 30px; width: 60%;}
-	#register.mobile #UI #success .subtitle {padding: 0;}
+	#register.mobile #UI #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
+	#register.mobile #UI #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
 	#editprofile #UI {top: 0; width: 530px; background-color: #fff;}
 	#editprofile #UI .form-text {background-color: #fff;}
@@ -307,8 +314,8 @@
 	#view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
 	#view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
 	#view-account .filter-view a.ui-radio {margin-left: 0.5em;}
-	#view-account .btn-editprofile {margin: 10px 0 0 50px;}
-	#UI .btn-editprofile .btn {border: 1px solid #b3955f; color: #b3955f; height: 27px; padding: 5px 10px; text-transform: capitalize;}
+/*	#view-account .btn-editprofile {margin: 10px 0 0 50px;}*/	
+	#UI .btn-editprofile .btn {border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
 	#UI.tips {width: 100% !important; }
 	#UI.tips .list-tips {background-color: #faf3e1;}
 	#UI.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
