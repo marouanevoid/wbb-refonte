@@ -982,11 +982,13 @@ class BestOf implements IndexableEntity
             'tags_cocktails' => 'getIsCocktail',
         );
 
-        foreach ($this->tags as $bestOfTags) {
-            foreach ($bestOfTags as $tag) {
-                foreach ($types as $type => $getter) {
-                    if ($tag->$getter()) {
-                        $tags[$type][] = $tag->getName();
+        if($this->tags){
+            foreach ($this->tags as $bestOfTags) {
+                foreach ($bestOfTags as $tag) {
+                    foreach ($types as $type => $getter) {
+                        if ($tag->$getter()) {
+                            $tags[$type][] = $tag->getName();
+                        }
                     }
                 }
             }
