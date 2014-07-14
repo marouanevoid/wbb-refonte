@@ -961,9 +961,11 @@ class BestOf implements IndexableEntity
     public function getCloudSearchFields()
     {
         $bars = array();
-        foreach ($this->bars as $bar) {
-            if ($bar->getBar()) {
-                $bars[] = $bar->getBar()->getName();
+        if($this->bars){
+            foreach ($this->bars as $bar) {
+                if ($bar->getBar()) {
+                    $bars[] = $bar->getBar()->getName();
+                }
             }
         }
 
@@ -980,11 +982,13 @@ class BestOf implements IndexableEntity
             'tags_cocktails' => 'getIsCocktail',
         );
 
-        foreach ($this->tags as $bestOfTags) {
-            foreach ($bestOfTags as $tag) {
-                foreach ($types as $type => $getter) {
-                    if ($tag->$getter()) {
-                        $tags[$type][] = $tag->getName();
+        if($this->tags){
+            foreach ($this->tags as $bestOfTags) {
+                foreach ($bestOfTags as $tag) {
+                    foreach ($types as $type => $getter) {
+                        if ($tag->$getter()) {
+                            $tags[$type][] = $tag->getName();
+                        }
                     }
                 }
             }

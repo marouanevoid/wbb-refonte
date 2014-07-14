@@ -141,9 +141,9 @@
   #bar-finder.mobile .content {padding: 0 10px 60px;}
   #UI.mobile .radius {border-radius: 100%;} 
 /* Globale Mobile */
-  .mobile a,
-  .mobile p {font-size: 16px;}
-  .mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
+  #UI.mobile a,
+  #UI.mobile p {font-size: 16px;}
+  #UI.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
   /*.mobile form label {display: none; visibility: hidden;}*/
   .mobile .btn {/*height: 120px; font-size: 42px;*/}
   /*.mobile .col {float: none;}*/
@@ -218,7 +218,7 @@
   #register.page #create-account .form-text-without-label {margin: 0 0 0 38%;}
   #register.page #UI.select-wrap {padding-bottom: 30px;}
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
-  #bar-finder.mobile {margin-top: 77px; background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
+  #bar-finder.mobile {/* margin-top: 77px; */ background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 28px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
   #bar-finder.mobile form label {font-size: 16px; color: #b3955f; margin: 30px 0 15px; display: block; visibility: visible;}
   #bar-finder.mobile .ui-dropdown-container {width: 100%!important;}
@@ -404,9 +404,8 @@
 .container .bar-w-pic .txt h2 { /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
 	margin-bottom: 0;
 }
-.mobile .sub-header .star-share {
-	margin-top: 1.5em;
-}
+.mobile .sub-header .star-share {margin-top: 1.5em;}
+.no-results h3 a:last-child {margin-top: 10px; display: block;}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
