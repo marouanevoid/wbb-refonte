@@ -160,10 +160,20 @@
           .logged{
             text-transform: none;
             img{ border-radius: 50%; border:2px solid $color-cream; vertical-align: middle; margin-right: 0.5em }
-            a{ color: $color-subtle-yellow ; position: relative; padding-right: 30px; display: inline-block }
-            a:after{ content: ''; background: url('../images/sprite.png') no-repeat; background-size: 256px 512px; background-position: -162px -40px; position: absolute; top: 50%; right: -15px; width: 40px; height: 40px; margin-top: -20px }
+            a{ color: $color-subtle-yellow ; position: relative; display: inline-block }
+            > a{ padding: 1em 10%; color: $color-brown }
+            a:after{ display: none }
+            .actions
+            {
+              background: #6e7072; padding: 1em 10%; display: block; max-width: none;
+              a{ padding: 1em 0; display: block }
+            }
             span{ display: inline-block; vertical-align: middle; max-width: 110px; overflow: hidden; text-overflow: ellipsis }
           }
+        }
+
+        tr.signin.logged{
+          td{ padding: 0; border-bottom: 0 }
         }
 
 

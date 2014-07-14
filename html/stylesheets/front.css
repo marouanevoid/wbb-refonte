@@ -2248,23 +2248,30 @@ aside.mobile-menu table tr.signin td .logged img {
 aside.mobile-menu table tr.signin td .logged a {
   color: #ffe4af;
   position: relative;
-  padding-right: 30px;
   display: inline-block;
 }
 /* line 164, ../sass/_header.scss */
-aside.mobile-menu table tr.signin td .logged a:after {
-  content: '';
-  background: url("../images/sprite.png") no-repeat;
-  background-size: 256px 512px;
-  background-position: -162px -40px;
-  position: absolute;
-  top: 50%;
-  right: -15px;
-  width: 40px;
-  height: 40px;
-  margin-top: -20px;
+aside.mobile-menu table tr.signin td .logged > a {
+  padding: 1em 10%;
+  color: #b3955f;
 }
 /* line 165, ../sass/_header.scss */
+aside.mobile-menu table tr.signin td .logged a:after {
+  display: none;
+}
+/* line 166, ../sass/_header.scss */
+aside.mobile-menu table tr.signin td .logged .actions {
+  background: #6e7072;
+  padding: 1em 10%;
+  display: block;
+  max-width: none;
+}
+/* line 169, ../sass/_header.scss */
+aside.mobile-menu table tr.signin td .logged .actions a {
+  padding: 1em 0;
+  display: block;
+}
+/* line 171, ../sass/_header.scss */
 aside.mobile-menu table tr.signin td .logged span {
   display: inline-block;
   vertical-align: middle;
@@ -2272,43 +2279,48 @@ aside.mobile-menu table tr.signin td .logged span {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* line 171, ../sass/_header.scss */
+/* line 176, ../sass/_header.scss */
+aside.mobile-menu table tr.signin.logged td {
+  padding: 0;
+  border-bottom: 0;
+}
+/* line 181, ../sass/_header.scss */
 aside.mobile-menu table tr.footer-nav td a {
   display: block;
   margin-bottom: 1.5em;
   color: #ffe4af;
 }
-/* line 172, ../sass/_header.scss */
+/* line 182, ../sass/_header.scss */
 aside.mobile-menu table tr.footer-nav td a:last-child {
   margin-bottom: 0;
 }
-/* line 176, ../sass/_header.scss */
+/* line 186, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td {
   padding: 4em 10%;
 }
-/* line 178, ../sass/_header.scss */
+/* line 188, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td a {
   margin-right: 0.5em;
   padding: 0 1em;
   display: inline-block;
 }
-/* line 180, ../sass/_header.scss */
+/* line 190, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td a:last-child {
   margin-right: 0;
 }
-/* line 181, ../sass/_header.scss */
+/* line 191, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td a img {
   background-image: url("../images/sprite@2x.png");
   background-size: 256px 512px;
   background-repeat: no-repeat;
   display: block;
 }
-/* line 182, ../sass/_header.scss */
+/* line 192, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td a span {
   position: relative;
   display: inline-block;
 }
-/* line 183, ../sass/_header.scss */
+/* line 193, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td a span:after {
   -webkit-transition: opacity 0.2s ease-in-out;
   -moz-transition: opacity 0.2s ease-in-out;
@@ -2325,68 +2337,68 @@ aside.mobile-menu table tr.socials td a span:after {
   background-size: 256px 512px;
   background-repeat: no-repeat;
 }
-/* line 187, ../sass/_header.scss */
+/* line 197, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td a:hover span:after {
   opacity: 1;
 }
-/* line 188, ../sass/_header.scss */
+/* line 198, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .facebook img {
   background-position: -94px -287px;
 }
-/* line 189, ../sass/_header.scss */
+/* line 199, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .facebook span:after {
   background-position: -94px -327px;
 }
-/* line 190, ../sass/_header.scss */
+/* line 200, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .twitter img {
   background-position: -166px -287px;
 }
-/* line 191, ../sass/_header.scss */
+/* line 201, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .twitter span:after {
   background-position: -166px -327px;
 }
-/* line 192, ../sass/_header.scss */
+/* line 202, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .instagram img {
   background-position: -127px -287px;
 }
-/* line 193, ../sass/_header.scss */
+/* line 203, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .instagram span:after {
   background-position: -127px -327px;
 }
-/* line 194, ../sass/_header.scss */
+/* line 204, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .pinterest img {
   background-position: -208px -287px;
 }
-/* line 195, ../sass/_header.scss */
+/* line 205, ../sass/_header.scss */
 aside.mobile-menu table tr.socials td .pinterest span:after {
   background-position: -208px -327px;
 }
-/* line 198, ../sass/_header.scss */
+/* line 208, ../sass/_header.scss */
 aside.mobile-menu table tr.touch td {
   text-align: center;
 }
-/* line 200, ../sass/_header.scss */
+/* line 210, ../sass/_header.scss */
 aside.mobile-menu table tr.touch td h4 {
   color: #ffe4af;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.6em;
 }
-/* line 201, ../sass/_header.scss */
+/* line 211, ../sass/_header.scss */
 aside.mobile-menu table tr.touch td .fb-like {
   display: inline-block !important;
   width: auto !important;
 }
-/* line 202, ../sass/_header.scss */
+/* line 212, ../sass/_header.scss */
 aside.mobile-menu table tr.touch td .fb-like, aside.mobile-menu table tr.touch td iframe {
   vertical-align: middle;
   margin-right: 2px;
 }
-/* line 205, ../sass/_header.scss */
+/* line 215, ../sass/_header.scss */
 aside.mobile-menu table tr.copyright td {
   border-bottom: 0;
 }
-/* line 206, ../sass/_header.scss */
+/* line 216, ../sass/_header.scss */
 aside.mobile-menu table tr.copyright td .copy {
   color: #ffe4af;
 }
