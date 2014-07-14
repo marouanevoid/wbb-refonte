@@ -114,6 +114,10 @@ wbb_semsoft_import:
     pattern: /admin/semsoft/csv/import
     defaults: { _controller: WBBBarBundle:Semsoft:import }
 
+wbb_semsoft_export:
+    pattern: /admin/semsoft/csv/export
+    defaults: { _controller: WBBBarBundle:Semsoft:export }
+
 wbb_semsoft_preview:
     pattern: /admin/semsoft/bar/{ssBarId}/preview
     defaults: { _controller: WBBBarBundle:Semsoft:preview }

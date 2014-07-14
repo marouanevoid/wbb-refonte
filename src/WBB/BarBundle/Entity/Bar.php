@@ -5,6 +5,7 @@ namespace WBB\BarBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use WBB\BarBundle\Entity\Tip;
 use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
@@ -74,9 +75,23 @@ class Bar implements IndexableEntity
     /**
      * @var string
      *
+     * @ORM\Column(name="county", type="string", length=255, nullable=true)
+     */
+    private $county;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address_2", type="string", length=255, nullable=true)
+     */
+    private $address2;
 
     /**
      * @var string
@@ -116,9 +131,58 @@ class Bar implements IndexableEntity
     /**
      * @var string
      *
+     * @ORM\Column(name="google_plus", type="string", length=255, nullable=true)
+     */
+    private $googlePlus;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instagram_id", type="string", length=255, nullable=true)
+     */
+    private $instagramId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
      */
     private $facebook;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook_checkins", type="integer", nullable=true)
+     */
+    private $facebookCheckIns;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook_likes", type="integer", nullable=true)
+     */
+    private $facebookLikes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_checkins", type="integer", nullable=true)
+     */
+    private $foursquareCheckIns;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_likes", type="integer", nullable=true)
+     */
+    private $foursquareLikes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_tips", type="integer", nullable=true)
+     */
+    private $foursquareTips;
 
     /**
      * @var string
@@ -189,6 +253,13 @@ class Bar implements IndexableEntity
      * @ORM\Column(name="seo_description", type="string", length=255, nullable = true)
      */
     private $seoDescription;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="out_door_seating", type="boolean", nullable=true)
+     */
+    private $outDoorSeating;
 
     /**
      * @var boolean
@@ -1577,5 +1648,335 @@ class Bar implements IndexableEntity
     public function getToGoWith()
     {
         return $this->toGoWith;
+    }
+
+    public function getPriceSymbols()
+    {
+        $response = '';
+
+        for($i=1; $i <= $this->getPrice(); $i++)
+        {
+            $response+= '$';
+        }
+
+        return $response;
+    }
+
+    public function toCSVArray()
+    {
+        array(
+            'ID'                    => $this->getId(),
+            'Name'                  => $this->getName(),
+            'Country'               => ($this->getCity())?$this->getCity()->getCountry():'',
+            'County'                => $this->getCounty(),
+            'City'                  => $this->getCity(),
+            'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',
+            'District'              => $this->getSuburb(),
+            'Street1'               => $this->getAddress(),
+            'Street2'               => $this->getAddress2(),
+            'Intro'                 => $this->getSeoDescription(),
+            'Description'           => $this->getDescription(),
+            'GeocoordinateString'   => $this->getLatitude().','.$this->getLongitude(),
+            'Website'               => $this->getWebsite(),
+            'Email'                 => $this->getEmail(),
+            'Phone'                 => $this->getPhone(),
+            'MondayOpenHours'       => $this->getOpeningsByDay(1),
+            'TuesdayOpenHours'      => $this->getOpeningsByDay(2),
+            'WednesdayOpenHours'    => $this->getOpeningsByDay(3),
+            'ThursdayOpenHours'     => $this->getOpeningsByDay(4),
+            'FridayOpenHours'       => $this->getOpeningsByDay(5),
+            'SaturdayOpenHours'     => $this->getOpeningsByDay(6),
+            'SundayOpenHours'       => $this->getOpeningsByDay(7),
+            'Category'              => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
+            'Mood'                  => $this->getEnergyLevel(),
+            'OutdoorSeating'        => $this->isOutDoorSeating(),
+            'HappyHour'             => $this->isHappyHour(),
+            'Wifi'                  => $this->isWifi(),
+            'PriceRange'            => $this->getPriceSymbols(),
+            'PaymentAccepted'       => ($this->getIsCreditCard())? 'Card' : '',
+            'RestaurantServices'    => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
+            'MenuUrl'               => $this->getMenu(),
+            'Booking'               => $this->getReservation(),
+            'ParkingType'           => $this->getParking(),
+            'Public Transport'      => '',
+            'FacebookId'            => $this->getFacebook(),
+            'FacebookUserPage'      => 'http://facebook.com/'.$this->getFacebook(),
+            'TwitterName'           => $this->getTwitter(),
+            'TwitterUserPage'       => '',
+            'InstagramId'           => $this->getInstagramId(),
+            'InstagramUserPage'     => $this->getInstagram(),
+            'GooglePlusUserPage'    => $this->getGooglePlus(),
+            'FoursquareId'          => $this->getFoursquare(),
+            'FoursquareUserPage'    => ''.$this->getFoursquare(),
+            'FacebookLikes'         => '',
+            'FacebookCheckins'      => '',
+            'FoursquareLikes'       => '',
+            'FoursquareCheckIns'    => '',
+            'FoursquareTips'        => '',
+            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? true : '',
+            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? true : '',
+            'Updated Columns'       => '',
+            'Overwritten Columns'   => ''
+        );
+    }
+
+    /**
+     * Set county
+     *
+     * @param string $county
+     * @return Bar
+     */
+    public function setCounty($county)
+    {
+        $this->county = $county;
+
+        return $this;
+    }
+
+    /**
+     * Get county
+     *
+     * @return string 
+     */
+    public function getCounty()
+    {
+        return $this->county;
+    }
+
+    /**
+     * Set address2
+     *
+     * @param string $address2
+     * @return Bar
+     */
+    public function setAddress2($address2)
+    {
+        $this->address2 = $address2;
+
+        return $this;
+    }
+
+    /**
+     * Get address2
+     *
+     * @return string 
+     */
+    public function getAddress2()
+    {
+        return $this->address2;
+    }
+
+    /**
+     * Set googlePlus
+     *
+     * @param string $googlePlus
+     * @return Bar
+     */
+    public function setGooglePlus($googlePlus)
+    {
+        $this->googlePlus = $googlePlus;
+
+        return $this;
+    }
+
+    /**
+     * Get googlePlus
+     *
+     * @return string 
+     */
+    public function getGooglePlus()
+    {
+        return $this->googlePlus;
+    }
+
+    /**
+     * Set instagramId
+     *
+     * @param string $instagramId
+     * @return Bar
+     */
+    public function setInstagramId($instagramId)
+    {
+        $this->instagramId = $instagramId;
+
+        return $this;
+    }
+
+    /**
+     * Get instagramId
+     *
+     * @return string 
+     */
+    public function getInstagramId()
+    {
+        return $this->instagramId;
+    }
+
+    /**
+     * Set facebookCheckIns
+     *
+     * @param integer $facebookCheckIns
+     * @return Bar
+     */
+    public function setFacebookCheckIns($facebookCheckIns)
+    {
+        $this->facebookCheckIns = $facebookCheckIns;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookCheckIns
+     *
+     * @return integer 
+     */
+    public function getFacebookCheckIns()
+    {
+        return $this->facebookCheckIns;
+    }
+
+    /**
+     * Set facebookLikes
+     *
+     * @param integer $facebookLikes
+     * @return Bar
+     */
+    public function setFacebookLikes($facebookLikes)
+    {
+        $this->facebookLikes = $facebookLikes;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookLikes
+     *
+     * @return integer 
+     */
+    public function getFacebookLikes()
+    {
+        return $this->facebookLikes;
+    }
+
+    /**
+     * Set foursquareCheckIns
+     *
+     * @param integer $foursquareCheckIns
+     * @return Bar
+     */
+    public function setFoursquareCheckIns($foursquareCheckIns)
+    {
+        $this->foursquareCheckIns = $foursquareCheckIns;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareCheckIns
+     *
+     * @return integer 
+     */
+    public function getFoursquareCheckIns()
+    {
+        return $this->foursquareCheckIns;
+    }
+
+    /**
+     * Set foursquareLikes
+     *
+     * @param integer $foursquareLikes
+     * @return Bar
+     */
+    public function setFoursquareLikes($foursquareLikes)
+    {
+        $this->foursquareLikes = $foursquareLikes;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareLikes
+     *
+     * @return integer 
+     */
+    public function getFoursquareLikes()
+    {
+        return $this->foursquareLikes;
+    }
+
+    /**
+     * Set foursquareTips
+     *
+     * @param integer $foursquareTips
+     * @return Bar
+     */
+    public function setFoursquareTips($foursquareTips)
+    {
+        $this->foursquareTips = $foursquareTips;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareTips
+     *
+     * @return integer 
+     */
+    public function getFoursquareTips()
+    {
+        return $this->foursquareTips;
+    }
+
+    /**
+     * Set outDoorSeating
+     *
+     * @param boolean $outDoorSeating
+     * @return Bar
+     */
+    public function setOutDoorSeating($outDoorSeating)
+    {
+        $this->outDoorSeating = $outDoorSeating;
+
+        return $this;
+    }
+
+    /**
+     * Get outDoorSeating
+     *
+     * @return boolean 
+     */
+    public function isOutDoorSeating()
+    {
+        return $this->outDoorSeating;
+    }
+
+    private function getOpeningsByDay($day)
+    {
+        $openings = $this->getOpenings();
+        $response = '';
+
+        foreach($openings as $op)
+        {
+            if($day == $op->getOpeningDay())
+            {
+                $response.= $op->getFromHour().'-'.$op->getToHour().',';
+            }
+        }
+
+        return substr($response, 0, -1);
+    }
+
+    private function getTagsByType($type){
+        $tags = $this->getTags();
+        $response = '';
+
+        foreach($tags as $tag)
+        {
+            if($tag->getType() == $type and $tag->getTag())
+            {
+                $response.= $tag->getTag()->getName().',';
+            }
+        }
+        return substr($response, 0, -1);
     }
 }
