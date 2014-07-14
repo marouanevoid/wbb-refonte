@@ -196,7 +196,7 @@
                         </p>
                       
                     <div style='clear:both;'></div>
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> <br /> {{ news.sponsor }}</div>{% endif %}
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() %}<br />{% endif %} {{ news.sponsor }}</div>{% endif %}
                 {% if not is_mobile()  %}
                     <div class="share-btns l-margin-top">
                         <hr/>
