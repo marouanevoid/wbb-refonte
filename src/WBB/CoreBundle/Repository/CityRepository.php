@@ -85,4 +85,12 @@ class CityRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
-} 
+    
+    public function findCitiesLike($name)
+    {
+        return $this->createQueryBuilder('c')
+                        ->where('c.name LIKE :name')
+                        ->setParameter('name', "$name%")
+                        ->getQuery()->getResult();
+    }
+}

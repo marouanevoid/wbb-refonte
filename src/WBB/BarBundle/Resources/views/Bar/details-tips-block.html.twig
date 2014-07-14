@@ -6,6 +6,17 @@
             Insider Tips
         </div>
 
+        {% if app.user == null %}
+            <script>
+                $(document).ready(function() {
+                    $('#tips').on('submit', function(e) {
+                        e.preventDefault();
+                        alert('Prevented !');
+                    });
+                });
+            </script>
+        {% endif %}
+
         <div class="load-target">
             <div class="line" style="height: 0px;width: 0px;"></div>
             <div class="line wbbtips">
@@ -18,7 +29,7 @@
                                     <h3>Leave a tip</h3>
                                     {{ form_widget(tipForm.description) }}
                                     <div class="m-margin-top h4 count">250 left</div>
-                                    <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit"/>
+                                    <input class="s-margin-top btn-small-radius brown" type="submit" value="Submit" id="tips_submit"/>
                                     {{ form_rest(tipForm) }}
                                 </form>
                                 <br class="clear"/>

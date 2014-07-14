@@ -59,6 +59,7 @@ class RegistrationController extends ContainerAware
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+                $user->setEnabled(true);
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
@@ -67,6 +68,9 @@ class RegistrationController extends ContainerAware
                 }
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                $session = $this->container->get('session');
+                $session->save();
 
                 return $response;
             }
@@ -112,19 +116,20 @@ class RegistrationController extends ContainerAware
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+                $user->setEnabled(true);
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
                     $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
-//                    $response = new RedirectResponse($url);
+                    $response = new RedirectResponse($url);
 
-                    return new JsonResponse(array(
-                        'code' => '200',
-                        'message' => 'Registration successful !'
-                    ));
+                    return $response;
                 }
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                $session = $this->container->get('session');
+                $session->save();
 
                 return $response;
             } else {

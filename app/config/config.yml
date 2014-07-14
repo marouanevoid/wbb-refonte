@@ -84,7 +84,7 @@ fos_user:
     firewall_name: main
     user_class: WBB\UserBundle\Entity\User
     registration:
-#        confirmation: { enabled: true }
+        confirmation: { enabled: true }
         form:
             type: wbb_user_registration
 

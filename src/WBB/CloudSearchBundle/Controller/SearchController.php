@@ -15,39 +15,47 @@ class SearchController extends Controller
             //return $this->redirect($this->generateUrl(('homepage')));
         }
 
-        $results = $this->getSearchResults($request);
+        $entity = $request->query->get('entity', null);
+        $results = $this->getSearchResults($request, $entity);
 
         return new JsonResponse($results);
     }
 
     public function searchResultsAction(Request $request)
     {
-        $results = $this->getSearchResults($request);
+        $barResults = $this->getSearchResults($request, 'Bar');
+        $newsResults = $this->getSearchResults($request, 'News');
+
+        $cities = $this->getDoctrine()->getManager()->getRepository('WBBCoreBundle:City')->findAll();
 
         return $this->render('WBBCloudSearchBundle:Search:search-results.html.twig', array(
-                    'results' => $results
+                    'bar_results' => $barResults,
+                    'news_results' => $newsResults,
+                    'cities' => $cities
         ));
     }
 
-    private function getSearchResults(Request $request)
+    private function getSearchResults(Request $request, $entity = 'Bar')
     {
         $q = $request->query->get('q', null);
-        $size = $request->query->get('size', 10);
+        $size = $request->query->get('size', 12);
         $start = $request->query->get('start', 0);
-        $entity = $request->query->get('entity', null);
+        $city = $request->query->get('city', null);
 
         $results = $this->get('cloudsearch.searcher')->search(array(
             'q' => $q,
             'start' => $start,
             'size' => $size,
-            'entity' => $entity
+            'entity' => $entity,
+            'city' => $city
         ));
 
         $results['more_results'] = $this->generateUrl('wbb_cloudsearch_search', array(
             'q' => $q,
             'start' => $start + $size,
             'size' => $size,
-            'entity' => $entity
+            'entity' => $entity,
+            'city' => $city
         ));
 
         return $results;

@@ -105,6 +105,92 @@
     {% block bodyTag %}
         <body>
         {% endblock %}
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div id="register-light">
+                {% render url('wbb_user_registration_register_light') %}
+            </div>
+            <script>
+                jQuery(document).ready(function($) {
+                    // Click anywhere on the page to get rid of lightbox window
+                    $('.mask').hide();
+                    $('.lighbox').click(function(e) {
+                        e.preventDefault();
+                        //Get clicked link data-show ID of tag to show
+                        var id_content = $(this).attr("data-show");
+                        var current_id = $("#" + id_content);
+                        var mask = $(".mask");
+
+                        if (current_id.length > 0) {
+                            //show lightbox window
+                            current_id.show('slow');
+                            // Add class to trigger ID
+                            current_id.addClass('void-popup');
+                            //show the mask
+                            mask.show('fast');
+                        } else {
+                            $('.mask').hide();
+                            current_id.removeClass("void-popup");
+                        }
+                    })
+                    $(".btn-close").click(function(e) {
+                        var current_popup = $(this).closest(".void-popup");
+                        current_popup.removeClass("void-popup");
+                        current_popup.hide("fast");
+                        $(".mask").hide("slow");
+                    })
+                });
+                $(document).ready(function() {
+                    $('#message').hide();
+                    $('#register_form').on('submit', function(e) {
+                        e.preventDefault();
+                        var form = $(this);
+                        var formUrl = '{{ path('wbb_user_registration_register_light') }}';
+
+                        $.ajax({
+                            type: "POST",
+                            url: formUrl,
+                            data: form.serialize(),
+                            success: function(data) {
+                                if (data.code === '400') {
+                                    var errors = data.errors;
+                                    var errorsList = $('#message').show().find('img').html('<ul></ul>');
+                                    for (var i = 0; i < errors.length; i++) {
+                                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                                    }
+                                } else {
+
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                // Si erreur communication ?
+                            }
+                        });
+                    });
+                    $('#login_form').on('submit', function(e) {
+                        e.preventDefault();
+                        var form = $(this);
+                        var formUrl = '{{ path('fos_user_security_check') }}';
+
+                        $.ajax({
+                            type: "POST",
+                            url: formUrl,
+                            data: form.serialize(),
+                            success: function(data) {
+                                console.log(data);
+                                if (data.code === '400') {
+                                    $('#login_error').html(data.error);
+                                } else {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                // Si erreur communication ?
+                            }
+                        });
+                    });
+                });
+            </script>
+        {% endif %}
         <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
@@ -150,7 +236,11 @@
                                 $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
                                 $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
                                 $(formId + ' #fos_user_registration_form_email').val(response.email);
-                                $(formId + ' #fos_user_registration_form_email').val(response.email);
+                                if (response.gender === 'male') {
+                                    $('#fos_user_registration_form_title').find('option[value="M"]').attr('selected', 'selected');
+                                } else {
+                                    $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected');
+                                }
                             } else if (formId === '#register_form') {
                                 $(formId + ' #fos_user_registration_form_email').val(response.email);
                             }
@@ -200,80 +290,6 @@
                 </section>
             {% endblock %}
 
-        {% endif %}
-
-        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <div id="register-light">
-                {% render url('wbb_user_registration_register_light') %}
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-            </div>
-            <script>
-                $(document).ready(function() {
-                    $('#message').hide();
-                    $('#register_form').on('submit', function(e) {
-                        e.preventDefault();
-                        var form = $(this);
-                        var formUrl = '{{ path('wbb_user_registration_register_light') }}';
-
-                        $.ajax({
-                            type: "POST",
-                            url: formUrl,
-                            data: form.serialize(),
-                            success: function(data) {
-                                if (data.code === '400') {
-                                    var errors = data.errors;
-                                    var errorsList = $('#message').show().find('img').html('<ul></ul>');
-                                    for (var i = 0; i < errors.length; i++) {
-                                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
-                                    }
-                                }
-                            },
-                            error: function(xhr, ajaxOptions, thrownError) {
-                                // Si erreur communication ?
-                            }
-                        });
-                    });
-                    $('#login_form').on('submit', function(e) {
-                        e.preventDefault();
-                        var form = $(this);
-                        var formUrl = '{{ path('fos_user_security_check') }}';
-
-                        $.ajax({
-                            type: "POST",
-                            url: formUrl,
-                            data: form.serialize(),
-                            success: function(data) {
-                                console.log(data);
-                                if (data.code === '400') {
-                                    $('#login_error').html(data.error);
-                                } else {
-                                    window.location.reload();
-                                }
-                            },
-                            error: function(xhr, ajaxOptions, thrownError) {
-                                // Si erreur communication ?
-                            }
-                        });
-                    });
-                });
-            </script>
         {% endif %}
 
         {% block footer %}
