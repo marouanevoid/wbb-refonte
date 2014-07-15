@@ -15,8 +15,7 @@ class NewsAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->addIdentifier('id')
-            ->add('title', null, array('editable' => true))
+            ->addIdentifier('title')
             ->add('shareText', null, array('editable' => true))
             ->add('quoteAuthor', null, array('editable' => true))
             ->add('quoteText', null, array('editable' => true))
