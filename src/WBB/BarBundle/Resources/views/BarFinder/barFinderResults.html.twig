@@ -4,6 +4,9 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function(){
+            setTimeout(function(){
+                $('.go').removeClass('disabled').removeAttr('disabled');
+            },100);
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
@@ -82,10 +85,7 @@
     {% endif %}
 
     /*.sub-header .title h1{position: relative; top:6px; }*//* Duplicate STYLE */
-    .sub-header .title h1 {
-        position: relative;
-        top : 10px;
-    }
+    /*.sub-header .title h1 {position: relative; top : 10px;}*//* #8044 */
 </style>
 <div>
     <!-- SUBHEADER -->

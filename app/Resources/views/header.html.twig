@@ -27,20 +27,21 @@
                     </a>
                 </td>
             </tr>
-                <tr class="signin">
-                    <td>
-                        <span class="register h4">
-                            <a href="">Sign in</a>
-                            or
-                            <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
-                        </span>
-                    </td>
-                </tr>
+            <tr class="signin">
+                <td>
+                    <span class="register h4">
+                        <a href="">Sign in</a>
+                        or
+                        <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                    </span>
+                </td>
+            </tr>
             <tr class="footer-nav">
                 <td>
                     <nav class="h4">
                         <a href="">About</a>
-                        <a href="">Legal</a>
+                        <a href="">Terms & conditions</a>
+                        <a href="">Privacy Policy</a>
                         <a href="">Cookies</a>
                         <a href="mailto:editor@worldsbestbars.com">Submit a bar</a>
                         {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a>{% endif %}
@@ -172,7 +173,6 @@
                                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                                 </a>
                             {% else %}
-                                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                                 <span class="register h4">
                                     <a data-show="register" class="lighbox" href="#">Sign in</a>
                                     or
