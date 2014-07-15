@@ -18,6 +18,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SecurityController extends Controller
 {
+    
+    public function facebookLoginAction(Request $request)
+    {
+        return $this->loginAction($request);
+    }
+
     public function loginAction(Request $request)
     {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */

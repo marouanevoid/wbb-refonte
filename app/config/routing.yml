@@ -24,3 +24,16 @@ media:
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+_security_check:
+    pattern:  /loginfb_check
+
+_security_logout:
+    pattern:  /logoutfb
+
+_security_login:
+    pattern: /loginfb
+    defaults: { _controller: WBBUserBundle:Security:facebookLogin }
+
+fos_facebook_channel:
+    resource: "@FOSFacebookBundle/Resources/config/routing.xml"
