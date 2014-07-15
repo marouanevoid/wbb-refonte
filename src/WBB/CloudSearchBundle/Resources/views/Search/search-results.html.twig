@@ -1,7 +1,11 @@
 {% extends "::base.html.twig" %}
-
 {% block bodyTag %}
     <body class="search">
+    <script type="text/javascript">
+        $(function(){
+
+        });
+    </script>
     {% endblock %}
 
     {% block body %}
@@ -103,21 +107,6 @@
                 </div>
             </section>
         </div>
-
-        <script>
-            $(document).ready(function() {
-                var moreResults = '{{ bar_results.more_results|raw }}';
-                $('#load-more-results').on('click', function() {
-                    $.ajax({
-                        url: moreResults,
-                        success: function(response) {
-                            console.log(response);
-                            moreResults = response.more_results;
-                        }
-                    });
-                });
-            });
-        </script>
 
         <script type="text/javascript">
             $('input[name=view-type]').change(function()
