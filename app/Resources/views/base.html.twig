@@ -82,6 +82,25 @@
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
         </script>
 
+        <script>
+            $(document).ready(function(){
+                $('.favorite-bar-btn').on('click',function(e){
+                    e.preventDefault();
+                    var url = $(this).attr('href');
+                    $.ajax({
+                        url: url,
+                        success:function(response) {
+                            if (response.code === 200) {
+                                alert('Success !');
+                            } else {
+                                alert('Sign up fool !');
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+
         {% if is_tablet() %}
             <style type="text/css">
                 article.bar-wo-pic:hover {

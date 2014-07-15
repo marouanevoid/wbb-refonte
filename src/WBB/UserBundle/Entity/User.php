@@ -6,6 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -232,6 +233,18 @@ class User extends BaseUser
      */
     protected $facebookId;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="users")
+     * @ORM\JoinTable(name="wbb_user_favorite_bars")
+     */
+    private $favoriteBars;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\BestOf", inversedBy="users")
+     * @ORM\JoinTable(name="wbb_user_favorite_bestof")
+     */
+    private $favoriteBestOfs;
+
     public function serialize()
     {
         return serialize(array($this->facebookId, parent::serialize()));
@@ -248,6 +261,7 @@ class User extends BaseUser
         parent::__construct();
         $this->setEnabled(true);
         $this->setStayInformed(true);
+        $this->favoriteBars = new ArrayCollection();
     }
 
     /**
@@ -1029,4 +1043,70 @@ class User extends BaseUser
         }
     }
 
+
+    /**
+     * Add favoriteBars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @return User
+     */
+    public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    {
+        $this->favoriteBars[] = $favoriteBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove favoriteBars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     */
+    public function removeFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    {
+        $this->favoriteBars->removeElement($favoriteBars);
+    }
+
+    /**
+     * Get favoriteBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteBars()
+    {
+        return $this->favoriteBars;
+    }
+
+    /**
+     * Add favoriteBestOfs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @return User
+     */
+    public function addFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    {
+        $this->favoriteBestOfs[] = $favoriteBestOfs;
+
+        return $this;
+    }
+
+    /**
+     * Remove favoriteBestOfs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     */
+    public function removeFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    {
+        $this->favoriteBestOfs->removeElement($favoriteBestOfs);
+    }
+
+    /**
+     * Get favoriteBestOfs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteBestOfs()
+    {
+        return $this->favoriteBestOfs;
+    }
 }

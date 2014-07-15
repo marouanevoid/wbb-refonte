@@ -6,7 +6,7 @@
             Insider Tips
         </div>
 
-        {% if app.user == null %}
+        {% if app.user is null %}
             <script>
                 $(document).ready(function() {
                     $('#tips').on('submit', function(e) {

@@ -385,6 +385,10 @@ class Bar implements IndexableEntity
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="favoriteBars")
+     */
+    private $users;
 
     /**
      * Get id
@@ -963,6 +967,7 @@ class Bar implements IndexableEntity
         $this->longitude = 0;
         
         $this->news = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -1985,5 +1990,48 @@ class Bar implements IndexableEntity
             }
         }
         return substr($response, 0, -1);
+    }
+
+    /**
+     * Get outDoorSeating
+     *
+     * @return boolean 
+     */
+    public function getOutDoorSeating()
+    {
+        return $this->outDoorSeating;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     * @return Bar
+     */
+    public function addUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     */
+    public function removeUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
