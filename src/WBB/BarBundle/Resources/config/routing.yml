@@ -129,9 +129,17 @@ get_tags_by_type:
         expose: true
         
 wbb_favorite_bar_add:
-    pattern: /ajax/favorite/bar/{barId}
+    pattern: /ajax/favorite/add/bar/{barId}
     defaults: { _controller: WBBBarBundle:Favorite:addBar }
 
 wbb_favorite_bestof_add:
-    pattern: /ajax/favorite/bestof/{bestOfId}
+    pattern: /ajax/favorite/add/bestof/{bestOfId}
     defaults: { _controller: WBBBarBundle:Favorite:addBestOf }
+
+wbb_favorite_bar_delete:
+    pattern: /ajax/favorite/delete/bar/{barId}
+    defaults: { _controller: WBBBarBundle:Favorite:deleteBar }
+
+wbb_favorite_bestof_delete:
+    pattern: /ajax/favorite/delete/bestof/{bestOfId}
+    defaults: { _controller: WBBBarBundle:Favorite:deleteBestOf }

@@ -4,12 +4,11 @@ namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 class FavoriteController extends Controller
 {
 
-    public function addBarAction(Request $request, $barId)
+    public function addBarAction($barId)
     {
         $user = $this->getUser();
         if (!$user) {
@@ -43,7 +42,41 @@ class FavoriteController extends Controller
         ));
     }
 
-    public function addBestOfAction(Request $request, $bestOfId)
+    public function deleteBar($barId)
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(array(
+                'code' => 403,
+                'message' => 'User not authenticated !'
+            ));
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $bar = $em->getRepository('WBBBarBundle:Bar')
+                ->findOneBy(array('id' => $barId));
+
+        if (!$bar) {
+            return new JsonResponse(array(
+                'code' => 404,
+                'message' => 'Bar not found !'
+            ));
+        }
+        
+        $bar->removeUser($user);
+        $user->removeFavoriteBar($bar);
+        
+        $em->persist($bar);
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse(array(
+            'code' => 200,
+            'message' => 'Bar deleted from the favirites of the current user !'
+        ));
+    }
+
+    public function addBestOfAction($bestOfId)
     {
         $user = $this->getUser();
         if (!$user) {
@@ -74,6 +107,40 @@ class FavoriteController extends Controller
         return new JsonResponse(array(
             'code' => 200,
             'message' => 'BestOf added to the current user !'
+        ));
+    }
+    
+    public function deleteBestOf($bestOfId)
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(array(
+                'code' => 403,
+                'message' => 'User not authenticated !'
+            ));
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $bestOf = $em->getRepository('WBBBarBundle:BestOf')
+                ->findOneBy(array('id' => $bestOfId));
+
+        if (!$bestOf) {
+            return new JsonResponse(array(
+                'code' => 404,
+                'message' => 'BestOf not found !'
+            ));
+        }
+
+        $bestOf->removeUser($user);
+        $user->removeFavoriteBestOf($bestOf);
+        
+        $em->persist($bestOf);
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse(array(
+            'code' => 200,
+            'message' => 'BestOf deleted from the favirites of the current user !'
         ));
     }
 
