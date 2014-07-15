@@ -10,7 +10,9 @@ use Ddeboer\DataImport\Writer\DoctrineWriter;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BarOpening;
+use WBB\BarBundle\Entity\Collections\BarTag;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\BarBundle\Form\SemsoftType;
 use WBB\BarBundle\Form\TipType;
@@ -109,13 +111,11 @@ class SemsoftController extends Controller
                     $ssBar->setWebsite($this->setFieldValue('Website', $data, null, $newBar));
                     $ssBar->setEmail($this->setFieldValue('Email', $data, null, $newBar));
                     $ssBar->setPhone($this->setFieldValue('Phone', $data, null, $newBar));
-                    //Tags (Category, Mood)
                     $ssBar->setIsOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
                     $ssBar->setIsHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
                     $ssBar->setIsWiFi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
                     $ssBar->setPrice($this->setFieldValue('PriceRange', $data, $this->getPriceValue($data['PriceRange']), $newBar));
                     $ssBar->setIsCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
-                    //RestaurantServices
                     $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
                     $ssBar->setReservation($this->setFieldValue('Booking', $data, null, $newBar));
                     $ssBar->setParkingType($this->setFieldValue('ParkingType', $data, null, $newBar));
@@ -138,6 +138,11 @@ class SemsoftController extends Controller
                     $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, null, $newBar));
                     $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
                     $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));
+
+                    //Tags
+                    $this->getTagsFromString($data['Category'], Tag::WBB_TAG_TYPE_THEME, $ssBar);
+                    $this->getTagsFromString($data['Mood'], Tag::WBB_TAG_TYPE_ENERGY_LEVEL, $ssBar);
+                    $this->getTagsFromString($data['RestaurantServices'], Tag::WBB_TAG_TYPE_SPECIAL_FEATURES, $ssBar);
 
                     //Open hours
                     $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
@@ -326,5 +331,37 @@ class SemsoftController extends Controller
         $string = str_replace(']', '', $string);
 
         return explode(',', $string);
+    }
+
+    private function getTagsFromString($tags, $type, SemsoftBar $ssBar)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tagNames = explode(',', $tags);
+        if($tagNames){
+            foreach($tagNames as $tagName){
+                $tag = $this->get('tag.repository')->findOneByName($tagName);
+                if(!$tag){
+                    $tag = new Tag();
+                    $tag
+                        ->setName($tagName)
+                        ->setType($type);
+                }
+                $em->persist($tag);
+
+                if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
+                    $ssBar->setEnergyLevel($tag);
+                }elseif($type == Tag::WBB_TAG_TYPE_THEME or $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
+                    $barTag = new BarTag();
+                    $barTag
+                        ->setType($type)
+                        ->setSemsoftBar($ssBar)
+                        ->setTag($tag);
+                    $ssBar->addTag($barTag);
+                    $tag->addBar($barTag);
+                    $em->persist($barTag);
+                }
+            }
+            $em->flush();
+        }
     }
 }

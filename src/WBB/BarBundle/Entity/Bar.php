@@ -2037,4 +2037,34 @@ class Bar implements IndexableEntity
             'Overwritten Columns'   => ''
         );
     }
+
+    /**
+     * Get outDoorSeating
+     *
+     * @return boolean 
+     */
+    public function getOutDoorSeating()
+    {
+        return $this->outDoorSeating;
+    }
+
+    /**
+     * Get happyHour
+     *
+     * @return boolean 
+     */
+    public function getHappyHour()
+    {
+        return $this->happyHour;
+    }
+
+    /**
+     * Get wifi
+     *
+     * @return boolean 
+     */
+    public function getWifi()
+    {
+        return $this->wifi;
+    }
 }
