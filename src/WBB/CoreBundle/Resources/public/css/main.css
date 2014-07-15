@@ -252,11 +252,11 @@
   #bar-finder-result.mobile ul li .star:hover {opacity: 0.8;}
   */
 
-  #filter .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
-  #filter .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}  
-  #filter .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
-  #filter ul li {width: 50%; float: left; position: relative;}
-  #filter ul {width: 101%;}
+  .filter-search .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
+  .filter-search .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}  
+  .filter-search .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
+  .filter-search ul li {width: 50%; float: left; position: relative;}
+  .filter-search ul {width: 101%;}
   
   /*
     TEMPS STYLE
@@ -417,7 +417,7 @@
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .no-results h3 a:last-child {margin-top: 10px; display: block;}
-  section.bar-finder .ui-radio.with-icon:before, section.bar-finder .ui-radio.with-icon:after {background-position: -52px -200px !important;}
+  /*section.bar-finder .ui-radio.with-icon:before, section.bar-finder .ui-radio.with-icon:after {background-position: -52px -200px !important;}*/
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
 
