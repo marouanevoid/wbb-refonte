@@ -196,8 +196,9 @@
                         </p>
                       
                     <div style='clear:both;'></div>
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> <br /> {{ news.sponsor }}</div>{% endif %}
-                {% if not is_mobile()  %}
+
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() %}<br />{% endif %} {{ news.sponsor }}</div>{% endif %}
+                {% if not is_mobile() or is_tablet() %}
                     <div class="share-btns l-margin-top">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
@@ -209,7 +210,7 @@
                     </div>
                 {% endif %}
                 </div>
-                {% if is_mobile()  %}
+                {% if is_mobile() and not is_tablet()  %}
                     <div class="share-btns l-margin-top full full hr-parent">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEWS</h2>
