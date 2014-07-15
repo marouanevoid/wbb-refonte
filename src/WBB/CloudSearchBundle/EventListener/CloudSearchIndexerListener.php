@@ -5,6 +5,7 @@ namespace WBB\CloudSearchBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use WBB\CloudSearchBundle\Indexer\IndexerInterface;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use WBB\BarBundle\Entity\Bar;
 
 class CloudSearchIndexerListener
 {
@@ -38,7 +39,13 @@ class CloudSearchIndexerListener
     {
         $entity = $args->getEntity();
         if ($entity instanceof IndexableEntity) {
-            $this->indexer->index($entity);
+            if ($entity instanceof Bar) {
+                if ($entity->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) {
+                    $this->indexer->index($entity);
+                }
+            } else {
+                $this->indexer->index($entity);
+            }
         }
     }
 

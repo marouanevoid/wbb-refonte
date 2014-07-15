@@ -736,6 +736,7 @@ class City implements IndexableEntity
 
         return array(
             'name' => $this->name,
+            'slug' => $this->slug,
             'wbb_id' => $this->id,
             'country' => $countryName,
             'location' => $lat . ',' . $lon,

@@ -666,8 +666,23 @@ class News implements IndexableEntity
             $bestOfs[] = $bestOf->getName();
         }
 
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+        foreach ($this->bars as $bar) {
+            $barTags = $bar->getTagsArrays();
+            $tags['tags_style'] = array_unique(array_merge($tags['tags_style'], $barTags['tags_style']));
+            $tags['tags_mood'] = array_unique(array_merge($tags['tags_mood'], $barTags['tags_mood']));
+            $tags['tags_occasion'] = array_unique(array_merge($tags['tags_occasion'], $barTags['tags_occasion']));
+            $tags['tags_cocktails'] = array_unique(array_merge($tags['tags_cocktails'], $barTags['tags_cocktails']));
+        }
+
         return array(
             'name' => ($this->title) ? $this->title : '',
+            'slug' => $this->slug,
             'text' => ($this->richDescription) ? $this->richDescription : '',
             'cities' => $cities,
             'quote' => ($this->quoteText) ? $this->quoteText : '',
@@ -675,9 +690,9 @@ class News implements IndexableEntity
             'seo_description' => ($this->seoDescription) ? $this->seoDescription : '',
             'bestofs' => $bestOfs,
             'bars' => $bars,
-            //'tags_mood' => '',
-            //'tags_occasion' => '',
-            //'tags_cocktails' => '',
+            'tags_mood' => $tags['tags_mood'],
+            'tags_occasion' => $tags['tags_occasion'],
+            'tags_cocktails' => $tags['tags_cocktails'],
             //'tags_special' => '',
             'wbb_id' => $this->id
         );

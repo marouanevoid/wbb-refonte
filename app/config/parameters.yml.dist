@@ -41,3 +41,6 @@ parameters:
     aws_cloudsearch_region:         eu-west-1
     aws_cloudsearch_key:            AKIAJ6WSWPZUXSICYDPQ
     aws_cloudsearch_secret:         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
+
+    facebook_app_id:        test
+    facebook_app_secret:    test

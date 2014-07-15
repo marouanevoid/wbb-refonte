@@ -23,9 +23,38 @@ class CloudSearchSearcher
         $request = $this->cloudSearchClient->get('search');
         $query = $request->getQuery();
 
-        $query->set('q', $parameters['q']);
+        $q = "(and '{$parameters['q']}*' ";
+        if ($parameters['entity']) {
+            $q = $q . "entity_type:'{$parameters['entity']}'";
+        }
+        if ($parameters['city']) {
+            $q = $q . " city:'{$parameters['city']}'";
+        }
+        $tagsTypes = array(
+            'style',
+            'mood',
+            'cocktails',
+            'occasion'
+        );
+
+        foreach ($tagsTypes as $tagType) {
+            if ($parameters[$tagType]) {
+                $tags = explode(',', $parameters[$tagType]);
+                foreach ($tags as $tag) {
+                    $q = $q . " tags_$tagType:'$tag'";
+                }
+            }
+        }
+
+        $q = $q . ")";
+
+        $query->set('q', $q);
+        $query->set('q.parser', 'structured');
+        $query->set('size', $parameters['size']);
+        $query->set('start', $parameters['start']);
 
         $response = $request->send()->json();
+
         return $response;
     }
 
