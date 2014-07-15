@@ -652,6 +652,8 @@ class BestOf implements IndexableEntity
         $this->setOrdered(true);
         
         $this->news = new ArrayCollection();
+        $this->bars = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
