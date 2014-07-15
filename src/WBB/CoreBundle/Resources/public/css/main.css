@@ -201,9 +201,9 @@
   #success p {color: #818a8c; font-size: 22px;}
   #success {position: static; top: 0; min-height: 500px;}
   #success .subtitle {font-size: 32px;}
-  #alert p {color: #818a8c; font-size: 20px; line-height: 28px;}
-  #alert {position: static; top: 0; min-height: 500px;}
-  #alert .subtitle {font-size: 32px;}
+  .alert p {color: #818a8c; font-size: 20px; line-height: 28px;}
+  .alert {position: static; top: 0; min-height: 500px;}
+  .alert .subtitle {font-size: 32px;}
 /* Register4 (Page) - PSDN : PSDs/login/desktop/register4.psd; */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
   #register.page #UI {position: static; width: 560px;}
@@ -417,7 +417,7 @@
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .no-results h3 a:last-child {margin-top: 10px; display: block;}
-  /*section.bar-finder .ui-radio.with-icon:before, section.bar-finder .ui-radio.with-icon:after {background-position: -52px -200px !important;}*/
+  .btn-radius.with-icon.chillout:before {background-position: -52px -200px;}
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
 
