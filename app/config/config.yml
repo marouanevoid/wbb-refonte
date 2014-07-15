@@ -84,7 +84,7 @@ fos_user:
     firewall_name: main
     user_class: WBB\UserBundle\Entity\User
     registration:
-#        confirmation: { enabled: true }
+        confirmation: { enabled: true }
         form:
             type: wbb_user_registration
 
@@ -281,3 +281,10 @@ stof_doctrine_extensions:
        default:
            timestampable: true
            sluggable:  true
+
+fos_facebook:
+    alias:  facebook
+    app_id: %facebook_app_id%
+    secret: %facebook_app_secret%
+    cookie: true
+    permissions: [email, user_birthday, user_location]

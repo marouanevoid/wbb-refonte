@@ -1535,31 +1535,11 @@ class Bar implements IndexableEntity
         $lat = ($this->latitude) ? $this->latitude : 0;
         $lon = ($this->longitude) ? $this->longitude : 0;
 
-        $tags = array(
-            'tags_style' => array(),
-            'tags_mood' => array(),
-            'tags_occasion' => array(),
-            'tags_cocktails' => array(),
-        );
-        $types = array(
-            'tags_style' => 'getIsStyle',
-            'tags_mood' => 'getIsMood',
-            'tags_occasion' => 'getIsOccasion',
-            'tags_cocktails' => 'getIsCocktail',
-        );
-
-        foreach ($this->tags as $barTags) {
-            foreach ($barTags as $tag) {
-                foreach ($types as $type => $getter) {
-                    if ($tag->$getter()) {
-                        $tags[$type][] = $tag->getName();
-                    }
-                }
-            }
-        }
+        $tags = $this->getTagsArrays();
 
         return array(
             'name' => $this->name,
+            'slug' => $this->slug,
             'city' => $cityName,
             'country' => $countryName,
             'district' => ($this->suburb) ? $this->suburb->getName() : '',
@@ -1576,6 +1556,33 @@ class Bar implements IndexableEntity
             //'tags_special' => '',
             'wbb_id' => $this->id
         );
+    }
+
+    public function getTagsArrays()
+    {
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+
+        foreach ($this->tags as $barTag) {
+            $tag = $barTag->getTag();
+            if ($tag) {
+                if ($tag->getType() == Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
+                    $tags['tags_mood'][] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
+                    $tags['tags_cocktails'][] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_THEME) {
+                    $tags['tags_style'][] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_WITH_WHO) {
+                    $tags['tags_occasion'][] = $tag->getName();
+                }
+            }
+        }
+
+        return $tags;
     }
 
     public function calculateDistance($latitude, $longitude, $unit = 'km')
