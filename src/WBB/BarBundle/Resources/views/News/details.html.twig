@@ -197,12 +197,12 @@
                       
                     <div style='clear:both;'></div>
 
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() %}<br />{% endif %} {{ news.sponsor }}</div>{% endif %}
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() %}<br /><br /> {% endif %} {{ news.sponsor }}</div>{% endif %}
                 {% if not is_mobile() or is_tablet() %}
                     <div class="share-btns l-margin-top">
                         <hr/>
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
-                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} margin-top-20">
+                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} margin-topop-20">
                             <a href="#0" class="fb-share">Post</a>
                             <a href="#0" class="twitter-share">Tweet</a>
                             <a href="#0" class="email-share">Email</a>
