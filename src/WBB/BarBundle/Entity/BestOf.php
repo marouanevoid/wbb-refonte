@@ -975,21 +975,18 @@ class BestOf implements IndexableEntity
             'tags_occasion' => array(),
             'tags_cocktails' => array(),
         );
-        $types = array(
-            'tags_style' => 'getIsStyle',
-            'tags_mood' => 'getIsMood',
-            'tags_occasion' => 'getIsOccasion',
-            'tags_cocktails' => 'getIsCocktail',
-        );
 
-        if($this->tags){
-            foreach ($this->tags as $bestOfTags) {
-                foreach ($bestOfTags as $tag) {
-                    foreach ($types as $type => $getter) {
-                        if ($tag->$getter()) {
-                            $tags[$type][] = $tag->getName();
-                        }
-                    }
+        foreach ($this->tags as $bestOfTag) {
+            $tag = $bestOfTag->getTag();
+            if ($tag) {
+                if ($tag->getType() === Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
+                    $tags['tags_mood'][] = $tag->getName();
+                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
+                    $tags['tags_cocktails'][] = $tag->getName();
+                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_THEME) {
+                    $tags['tags_style'][] = $tag->getName();
+                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_WITH_WHO) {
+                    $tags['tags_occasion'] = $tag->getName();
                 }
             }
         }
@@ -1004,7 +1001,7 @@ class BestOf implements IndexableEntity
             'tags_mood' => $tags['tags_mood'],
             'tags_occasion' => $tags['tags_occasion'],
             'tags_cocktails' => $tags['tags_cocktails'],
-            'tags_special' => '',
+            //'tags_special' => '',
             'bars' => $bars,
             'wbb_id' => $this->id
         );
