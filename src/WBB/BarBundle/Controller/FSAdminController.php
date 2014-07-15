@@ -94,7 +94,7 @@ class FSAdminController extends Controller
 
         $difference = count($all) - count($tips);
         $FsTips = array();
-        if(($nbResults < $limit) and !is_null($bar->getFoursquare()) and $bar->getFoursquare() != ""){
+        if(($nbResults < $limit) && !is_null($bar->getFoursquare()) && $bar->getFoursquare() != ""){
             $excluded = $bar->getFsExcludedTips();
             $index = 0;
             $count = $offset;
@@ -118,7 +118,7 @@ class FSAdminController extends Controller
                 }
                 $count += $nbFsTips;
                 $recursive++;
-            }while(($index < ($limit - $nbResults)) and $recursive < 5);
+            }while(($index < ($limit - $nbResults)) && $recursive < 5);
             $nbResults += $index;
         }
 

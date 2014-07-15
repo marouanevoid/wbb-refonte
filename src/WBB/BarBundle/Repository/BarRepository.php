@@ -124,7 +124,7 @@ class BarRepository extends EntityRepository
             {
                 foreach($exceptBars as $exBar)
                 {
-                    if($exBar and $exBar)
+                    if($exBar)
                         $ids[] = $exBar->getId();
                 }
             }
@@ -169,14 +169,14 @@ class BarRepository extends EntityRepository
                 ;
             }
 
-            if($location == BarRepository::BAR_LOCATION_CITY and !is_null($bar->getCity()))
+            if($location == BarRepository::BAR_LOCATION_CITY && !is_null($bar->getCity()))
             {
                 $qb
                     ->andWhere($qb->expr()->eq($this->getAlias().'.city', ':city'))
                     ->setParameter('city', $bar->getCity());
             }
 
-            if($location == BarRepository::BAR_LOCATION_COUNTRY and !is_null($bar->getCity()) and !is_null($bar->getCity()->getCountry()))
+            if($location == BarRepository::BAR_LOCATION_COUNTRY && !is_null($bar->getCity()) && !is_null($bar->getCity()->getCountry()))
             {
                 $qb
                     ->andWhere($qb->expr()->eq('c.country', ':country'))

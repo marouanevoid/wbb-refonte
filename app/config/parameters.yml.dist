@@ -15,7 +15,7 @@ parameters:
     mailer_password:   AojZacS7wAU/4lZ3WmlCgGIgnb6dCG4GWwssbBUUMPzj # to be created in the SES console
 
     locale: en
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: ThisTokenIsNowSecretIChangedIt
 
     foursquare_client_id: IO0TI5QMTBY5U2P2JHWIYF2D3NHM30V2F5VT3W3011BPMQ4W
     foursquare_client_secret: B5ADSJPXA5VP20DYFII1FIU0LCJFT0AFIEGWGURACLG3HNZ2

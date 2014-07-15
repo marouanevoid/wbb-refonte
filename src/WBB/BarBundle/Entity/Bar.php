@@ -542,7 +542,7 @@ class Bar implements IndexableEntity
      */
     public function setWebsite($website)
     {
-        if ((strpos($website,'http://') !== false) or (strpos($website,'https://') !== false)) {
+        if ((strpos($website,'http://') !== false) || (strpos($website,'https://') !== false)) {
             $this->website = $website;
         }
         else
@@ -732,7 +732,7 @@ class Bar implements IndexableEntity
      */
     public function setMenu($menu)
     {
-        if ((strpos($menu,'http://') !== false) or (strpos($menu,'https://') !== false)) {
+        if ((strpos($menu,'http://') !== false) || (strpos($menu,'https://') !== false)) {
             $this->menu = $menu;
         }
         else
@@ -784,7 +784,7 @@ class Bar implements IndexableEntity
      */
     public function setReservation($reservation)
     {
-        if ((strpos($reservation,'http://') !== false) or (strpos($reservation,'https://') !== false)) {
+        if ((strpos($reservation,'http://') !== false) || (strpos($reservation,'https://') !== false)) {
             $this->reservation = $reservation;
         }
         else
@@ -1649,77 +1649,7 @@ class Bar implements IndexableEntity
     {
         return $this->toGoWith;
     }
-
-    public function getPriceSymbols()
-    {
-        $response = '';
-
-        for($i=1; $i <= $this->getPrice(); $i++)
-        {
-            $response+= '$';
-        }
-
-        return $response;
-    }
-
-    public function toCSVArray()
-    {
-        array(
-            'ID'                    => $this->getId(),
-            'Name'                  => $this->getName(),
-            'Country'               => ($this->getCity())?$this->getCity()->getCountry():'',
-            'County'                => $this->getCounty(),
-            'City'                  => $this->getCity(),
-            'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',
-            'District'              => $this->getSuburb(),
-            'Street1'               => $this->getAddress(),
-            'Street2'               => $this->getAddress2(),
-            'Intro'                 => $this->getSeoDescription(),
-            'Description'           => $this->getDescription(),
-            'GeocoordinateString'   => $this->getLatitude().','.$this->getLongitude(),
-            'Website'               => $this->getWebsite(),
-            'Email'                 => $this->getEmail(),
-            'Phone'                 => $this->getPhone(),
-            'MondayOpenHours'       => $this->getOpeningsByDay(1),
-            'TuesdayOpenHours'      => $this->getOpeningsByDay(2),
-            'WednesdayOpenHours'    => $this->getOpeningsByDay(3),
-            'ThursdayOpenHours'     => $this->getOpeningsByDay(4),
-            'FridayOpenHours'       => $this->getOpeningsByDay(5),
-            'SaturdayOpenHours'     => $this->getOpeningsByDay(6),
-            'SundayOpenHours'       => $this->getOpeningsByDay(7),
-            'Category'              => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
-            'Mood'                  => $this->getEnergyLevel(),
-            'OutdoorSeating'        => $this->isOutDoorSeating(),
-            'HappyHour'             => $this->isHappyHour(),
-            'Wifi'                  => $this->isWifi(),
-            'PriceRange'            => $this->getPriceSymbols(),
-            'PaymentAccepted'       => ($this->getIsCreditCard())? 'Card' : '',
-            'RestaurantServices'    => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
-            'MenuUrl'               => $this->getMenu(),
-            'Booking'               => $this->getReservation(),
-            'ParkingType'           => $this->getParking(),
-            'Public Transport'      => '',
-            'FacebookId'            => $this->getFacebook(),
-            'FacebookUserPage'      => 'http://facebook.com/'.$this->getFacebook(),
-            'TwitterName'           => $this->getTwitter(),
-            'TwitterUserPage'       => '',
-            'InstagramId'           => $this->getInstagramId(),
-            'InstagramUserPage'     => $this->getInstagram(),
-            'GooglePlusUserPage'    => $this->getGooglePlus(),
-            'FoursquareId'          => $this->getFoursquare(),
-            'FoursquareUserPage'    => ''.$this->getFoursquare(),
-            'FacebookLikes'         => '',
-            'FacebookCheckins'      => '',
-            'FoursquareLikes'       => '',
-            'FoursquareCheckIns'    => '',
-            'FoursquareTips'        => '',
-            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? true : '',
-            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? true : '',
-            'Updated Columns'       => '',
-            'Overwritten Columns'   => ''
-        );
-    }
-
+    
     /**
      * Set county
      *
@@ -1950,6 +1880,76 @@ class Bar implements IndexableEntity
         return $this->outDoorSeating;
     }
 
+    public function getPriceSymbols()
+    {
+        $response = '';
+
+        for($i=1; $i <= $this->getPrice(); $i++)
+        {
+            $response+= '$';
+        }
+
+        return $response;
+    }
+
+    public function toCSVArray()
+    {
+        array(
+            'ID'                    => $this->getId(),
+//            'Name'                  => $this->getName(),
+//            'Country'               => ($this->getCity())?$this->getCity()->getCountry():'',
+//            'County'                => $this->getCounty(),
+//            'City'                  => $this->getCity(),
+//            'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',
+//            'District'              => $this->getSuburb(),
+//            'Street1'               => $this->getAddress(),
+//            'Street2'               => $this->getAddress2(),
+//            'Intro'                 => $this->getSeoDescription(),
+//            'Description'           => $this->getDescription(),
+//            'GeocoordinateString'   => $this->getLatitude().','.$this->getLongitude(),
+//            'Website'               => $this->getWebsite(),
+//            'Email'                 => $this->getEmail(),
+//            'Phone'                 => $this->getPhone(),
+//            'MondayOpenHours'       => $this->getOpeningsByDay(1),
+//            'TuesdayOpenHours'      => $this->getOpeningsByDay(2),
+//            'WednesdayOpenHours'    => $this->getOpeningsByDay(3),
+//            'ThursdayOpenHours'     => $this->getOpeningsByDay(4),
+//            'FridayOpenHours'       => $this->getOpeningsByDay(5),
+//            'SaturdayOpenHours'     => $this->getOpeningsByDay(6),
+//            'SundayOpenHours'       => $this->getOpeningsByDay(7),
+//            'Category'              => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
+//            'Mood'                  => $this->getEnergyLevel(),
+//            'OutdoorSeating'        => $this->isOutDoorSeating(),
+//            'HappyHour'             => $this->isHappyHour(),
+//            'Wifi'                  => $this->isWifi(),
+//            'PriceRange'            => $this->getPriceSymbols(),
+//            'PaymentAccepted'       => ($this->getIsCreditCard())? 'Card' : '',
+//            'RestaurantServices'    => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
+//            'MenuUrl'               => $this->getMenu(),
+//            'Booking'               => $this->getReservation(),
+//            'ParkingType'           => $this->getParking(),
+//            'Public Transport'      => '',
+//            'FacebookId'            => $this->getFacebook(),
+//            'FacebookUserPage'      => 'http://facebook.com/'.$this->getFacebook(),
+//            'TwitterName'           => $this->getTwitter(),
+//            'TwitterUserPage'       => '',
+//            'InstagramId'           => $this->getInstagramId(),
+//            'InstagramUserPage'     => $this->getInstagram(),
+//            'GooglePlusUserPage'    => $this->getGooglePlus(),
+//            'FoursquareId'          => $this->getFoursquare(),
+//            'FoursquareUserPage'    => ''.$this->getFoursquare(),
+//            'FacebookLikes'         => '',
+//            'FacebookCheckins'      => '',
+//            'FoursquareLikes'       => '',
+//            'FoursquareCheckIns'    => '',
+//            'FoursquareTips'        => '',
+//            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? true : '',
+//            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? true : '',
+//            'Updated Columns'       => '',
+//            'Overwritten Columns'   => ''
+        );
+    }
+
     private function getOpeningsByDay($day)
     {
         $openings = $this->getOpenings();
@@ -1972,7 +1972,7 @@ class Bar implements IndexableEntity
 
         foreach($tags as $tag)
         {
-            if($tag->getType() == $type and $tag->getTag())
+            if($tag->getType() == $type && $tag->getTag())
             {
                 $response.= $tag->getTag()->getName().',';
             }

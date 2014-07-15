@@ -28,7 +28,7 @@ class AjaxController extends Controller
                 else
                     $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
             }else{
-                if($barObject and $barObject->getSuburb() and $barObject->getSuburb()->getId() == $suburb->getId())
+                if($barObject && $barObject->getSuburb() && $barObject->getSuburb()->getId() == $suburb->getId())
                     $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
                 else
                     $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
@@ -59,7 +59,7 @@ class AjaxController extends Controller
                 else
                     $html .= '<option value="'.$city->getId().'" >'.$city->getName().'</option>';
             }else{
-                if($Object and $Object->getCity() and $Object->getCity()->getId() == $city->getId())
+                if($Object && $Object->getCity() && $Object->getCity()->getId() == $city->getId())
                     $html .= '<option value="'.$city->getId().'" selected>'.$city->getName().'</option>';
                 else
                     $html .= '<option value="'.$city->getId().'" >'.$city->getName().'</option>';

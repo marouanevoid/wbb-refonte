@@ -40,7 +40,7 @@
         .older-news article {
             display: none;
         }
-
+        
     </style>
 {% endblock %}
 {% block bodyTag %}
@@ -93,7 +93,7 @@
                 {% endif %}
                         {% for n in latest %}
                             <div class="ui-slide">
-                                {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n } %}
+                                {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n , 'secand_media' : true } %}
                             </div>
                         {% endfor %}
                     </div>

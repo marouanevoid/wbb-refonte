@@ -33,6 +33,7 @@
                         <div class="txt">Advertising</div>
                     </div>
                 </div>
+  {#               {% set bigAd = true %} #}
                 {%  if not bigAd %}
                     {% for n in interviews|slice(1,1) %}
                         {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
@@ -41,7 +42,7 @@
                 {%  endif %}
 
                 {% for n in interviews|slice(2,1) %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 , firstchild : true } %}
                     {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
                 {% endfor %}
 
@@ -76,7 +77,7 @@
             <!-- 12 COLS -->
             <div class="articles older-news twelve columns">
 
-                {% for n in articles|slice(4,3) %}
+                {% for n in articles|slice(5,3) %}
                     {% if loop.index == 2 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1} %}
                     {%  else %}

@@ -73,15 +73,15 @@ class NewsAdmin extends Admin {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
-                ->add('title')
-                ->add('shareText')
+                ->add('title', null, array('help'=> 'Mandatory', 'label'=> 'Title *'))
+                ->add('shareText', null, array('help'=> 'Mandatory', 'label'=> 'Share text *'))
                 ->add('quoteAuthor')
                 ->add('quoteText')
-                ->add('seoDescription')
-                ->add('richDescription', 'textarea', array('attr'=>array('class'=>'wysihtml5')))
+                ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
+                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'attr'=>array('class'=>'wysihtml5')))
                 ->add('isAnInterview')
                 ->add('isOnTop')
-                ->add('sponsor')
+                ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
                     'required' => false
                 ), array(
@@ -90,7 +90,8 @@ class NewsAdmin extends Admin {
                     )
                 ))
                 ->add('sponsorImageSmall', 'sonata_type_model_list', array(
-                    'required' => false
+                    'required'  => false,
+                    'help'      => 'Prefered size (width: 368 , height: 170)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor_small'
@@ -131,7 +132,7 @@ class NewsAdmin extends Admin {
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setNews($object);
                 }else{
                     $object->removeMedia($media);
@@ -144,7 +145,7 @@ class NewsAdmin extends Admin {
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setNews($object);
                 }else{
                     $object->removeMedia($media);
