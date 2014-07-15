@@ -246,6 +246,7 @@
   */
 
   #filter .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
+  #filter .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}
   #filter .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
   #filter ul li {width: 50%; float: left; position: relative;}
   #filter ul {width: 101%;}

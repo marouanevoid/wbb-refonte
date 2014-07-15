@@ -107,31 +107,22 @@
                                 <div class="sort-by h3 filters">
                                     <div class="disableClick"></div>
                                     {% if is_mobile() and not is_tablet() %}
-                                        <div id="filter" class="margin-top-10"><ul>
-                                            <li>
-                                                <a href="{{ path('wbb_bar_finder') }}" class="btn btn-redefine-search radius-60">Redefine Search</a>
-                                            </li>
-                                    <li class="text-align-right">
+                                        <div id="filter" class="margin-top-10">
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ path('wbb_bar_finder') }}" class="btn btn-redefine-search radius-60 text-transform-capitalize">Redefine Search</a>
+                                                </li>
+                                                <li class="text-align-right">
                                     {% endif %}
                                         <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
                                         <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
                                     {% if is_mobile() and not is_tablet() %}
-                                    </li>
-                                    </div><!-- #filter -->
+                                                </li>
+                                                <div class="clear"></div>
+                                            </div><!-- #filter -->
                                     {% endif %}
                                 </div>
                             </form>
-                                <div id="filter" class="margin-top-10">
-                                    <ul>
-                                        <li>
-                                            <a href="#search" class="btn btn-redefine-search radius-60">Redefine Search</a>
-                                        </li>
-                                        <li class="text-align-right">
-                                            <a href="#grid" class="btn btn-grid radius-60 ui-radio btn-radius border brown grid radio-light with-icon">Grid</a>
-                                            <a href="#list" class="btn btn-list radius-60 ui-radio btn-radius border brown list radio-light with-icon">List</a>
-                                        </li>
-                                    </ul>
-                                </div><!-- #filer -->
                         </div>
                     </td>
                 </tr>
