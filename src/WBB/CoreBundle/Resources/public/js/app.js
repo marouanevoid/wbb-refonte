@@ -255,6 +255,41 @@ meta.App = function() {
             $('html, body').animate({scrollTop:0}, that.config.speed, that.config.easing);
         });
 
+
+        if( $('html').hasClass('mobile') )
+        {
+            var options_are_visible = false;
+
+            $('header.desktop .logged').click(function(){
+
+                if( !options_are_visible )
+                    $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing);
+                else
+                    $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
+                    {
+                        $(this).hide();
+                    });
+
+                options_are_visible = !options_are_visible;
+            });
+        }
+        else
+        {
+            $('header.desktop .logged').hover(function(){
+
+                $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing)
+
+            }, function()
+            {
+                $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
+                {
+                    $(this).hide();
+                })
+            });
+        }
+
+
+
         that._barFinderEvents();
 
         that._mobileMenuEvents();

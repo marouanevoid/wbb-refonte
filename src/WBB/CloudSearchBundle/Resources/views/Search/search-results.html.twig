@@ -10,6 +10,7 @@
 
     {% block body %}
         <div class="container l-padding">
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/search.js') }}"></script>
             <aside class="three columns filters">
                 <form id="filter">
                     <div class="reset m-margin-bottom">
@@ -24,7 +25,7 @@
                             </div>
 
                             <div class="drop-list">
-                                {% if is_mobile() and not is_tablet() %}<label class="h3">City</label>{% endif %}
+                                {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
 
                                 <select class="ui-dropdown" name="city" data-class="city">
                                     <option disabled="disabled">Choose a City</option>
