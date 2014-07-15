@@ -431,15 +431,15 @@
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   .social-share .fb-share {
-    background-image: url("../bundles/wbbcore/images/fb@2x.png");
+    background-image: url("../images/fb@2x.png");
     background-size: 105px 40px;
   }
   .social-share .twitter-share {
-    background-image: url("../bundles/wbbcore/images/twitter@2x.png");
+    background-image: url("../images/twitter@2x.png");
     background-size: 105px 40px;
   }
   .social-share .email-share {
-    background-image: url("../bundles/wbbcore/images/email@2x.png");
+    background-image: url("../images/email@2x.png");
     background-size: 105px 40px;
   }
 }
