@@ -243,15 +243,6 @@
   #bar-finder-result.mobile .btn-list,
   #bar-finder-result.mobile .btn-grid {height: 38px; width: 38px; display: inline-block; text-indent: -7777px; font-size: 0; background-repeat: no-repeat;}
   #bar-finder-result.mobile .btn-more {border: 1px solid #b3955f; height: 42px; display: block; font-size: 16px; font-family: "Avenir", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 42px;}
-  */
-
-  #filter .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
-  #filter .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}
-  #filter .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
-  #filter ul li {width: 50%; float: left; position: relative;}
-  #filter ul {width: 101%;}
-
-  /*
   #bar-finder-result.mobile ul li img {display: block; width: 100%;}
   #bar-finder-result.mobile ul li .block-text {position: absolute; left: 10px; top: 55px; text-align: left; font-family: "Avenir", sans-serif;}
   #bar-finder-result.mobile ul li .name {color: #ffe4af; font-size: 14px; font-weight: bold; margin: 0 0 5px; text-transform: uppercase;}
@@ -260,6 +251,12 @@
   #bar-finder-result.mobile ul li .star {opacity: 0.6; background: url("../images/barfinder/star_mobile.png") no-repeat center center; background-color: #333; height: 20px; width: 20px; position: absolute; top: 7px; right: 7px;}
   #bar-finder-result.mobile ul li .star:hover {opacity: 0.8;}
   */
+
+  #filter .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
+  #filter .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}  
+  #filter .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
+  #filter ul li {width: 50%; float: left; position: relative;}
+  #filter ul {width: 101%;}
   
   /*
     TEMPS STYLE
@@ -420,7 +417,7 @@
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .no-results h3 a:last-child {margin-top: 10px; display: block;}
-  section.bar-finder .btn-radius.with-icon:before, section.bar-finder .btn-radius.with-icon:after {background-position: -52px -200px !important;}
+  section.bar-finder .ui-radio.with-icon:before, section.bar-finder .ui-radio.with-icon:after {background-position: -52px -200px !important;}
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
 
