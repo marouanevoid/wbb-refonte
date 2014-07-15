@@ -195,7 +195,7 @@
   #register #date-birthday label {color: #818a8c; font-size: 17px;}
   #register #date-birthday .select-wrap.last {margin-right: 0;}
   #register #message {background-color: #818a8c; width: 100%; padding: 20px 0;}
-  #register #message img {margin: 0 20px 07;}
+  #register #message img {margin: 0 20px 0 7px;}
   #register #message div {padding: 0 10px 0 0; line-height: 16px;}
   #register #message ul li {color: #faf3e1; font-size: 15px;}
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
@@ -205,7 +205,6 @@
   #alert p {color: #818a8c; font-size: 20px; line-height: 28px;}
   #alert {position: static; top: 0; min-height: 500px;}
   #alert .subtitle {font-size: 32px;}
-
 /* Register4 (Page) - PSDN : PSDs/login/desktop/register4.psd; */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
   #register.page #UI {position: static; width: 560px;}
@@ -217,6 +216,10 @@
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 38%;}
   #register.page #UI.select-wrap {padding-bottom: 30px;}
+  #register.page .group-action {width: 128%;}
+  #register.page .group-action .form-submit {width: 50%; margin: auto; display: block;}
+
+
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {/* margin-top: 77px; */ background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 28px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
@@ -405,6 +408,8 @@
 .mobile .sub-header .star-share {margin-top: 1.5em;}
 .no-results h3 a:last-child {margin-top: 10px; display: block;}
 section.bar-finder .btn-radius.with-icon:before, section.bar-finder .btn-radius.with-icon:after {background-position: -52px -200px !important;}
+.btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
+.btn-radius.with-icon.friend:after {background-position: -12px -240px;}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
