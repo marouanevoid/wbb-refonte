@@ -115,10 +115,10 @@
                 <tr>
                     {% if not is_mobile() or is_tablet() %}
                         <td>
-                           {% if city %}
+                           {% if oneTopCity %}
                                <div class="city-selector h3">
                                    You are in
-                                   <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:city.slug}) }}">{{ city.name|default('Unspecified') }}</a>
+                                   <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:oneTopCity.slug}) }}">{{ oneTopCity.name|default('Unspecified') }}</a>
                                </div>
                            {% endif %}
                         </td>
