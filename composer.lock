@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c25ed84e2f7bf4c91f77ff5bb567e7f9",
+    "hash": "60710c6a196397b63188399d612b7964",
     "packages": [
         {
             "name": "amazonwebservices/aws-sdk-for-php",
@@ -1828,6 +1828,102 @@
                 "orm"
             ],
             "time": "2014-03-12 05:18:55"
+        },
+        {
+            "name": "hpatoio/bitly-api",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hpatoio/bitly-api.git",
+                "reference": "49f3233cc30b5e3ce42b2fe560d307cdd8fec3a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hpatoio/bitly-api/zipball/49f3233cc30b5e3ce42b2fe560d307cdd8fec3a4",
+                "reference": "49f3233cc30b5e3ce42b2fe560d307cdd8fec3a4",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "~3.0"
+            },
+            "require-dev": {
+                "behat/behat": "~2.0",
+                "behat/mink": "~1.5",
+                "phpunit/phpunit": "~3.7"
+            },
+            "suggest": {
+                "hpatoio/bitly-bundle": "for integration with Symfony2 web framework"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hpatoio\\Bitly\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC-BY-SA-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Simone Fumagalli",
+                    "email": "simone@iliveinperego.com",
+                    "homepage": "http://www.iliveinperego.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Library based on Guzzle to consume Bit.ly API",
+            "homepage": "http://www.iliveinperego.com/",
+            "keywords": [
+                "Behat",
+                "Guzzle",
+                "api",
+                "bitly"
+            ],
+            "time": "2014-06-03 22:03:46"
+        },
+        {
+            "name": "hpatoio/bitly-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hpatoio/BitlyBundle.git",
+                "reference": "51194439b8f5a6ff37ea5ad28b16a4e74299e5de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hpatoio/BitlyBundle/zipball/51194439b8f5a6ff37ea5ad28b16a4e74299e5de",
+                "reference": "51194439b8f5a6ff37ea5ad28b16a4e74299e5de",
+                "shasum": ""
+            },
+            "require": {
+                "hpatoio/bitly-api": "~2.0",
+                "symfony/framework-bundle": "~2.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Hpatoio\\BitlyBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC-BY-SA-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Simone Fumagalli",
+                    "homepage": "http://www.iliveinperego.com/",
+                    "role": "Web Artisan"
+                }
+            ],
+            "description": "Integrate hpatoio/bitly-api in your Symfony2 project",
+            "keywords": [
+                "Guzzle",
+                "api",
+                "bitly"
+            ],
+            "time": "2014-07-02 05:55:25"
         },
         {
             "name": "imagine/imagine",
@@ -4846,7 +4942,8 @@
         "friendsofsymfony/user-bundle": 20,
         "hautelook/alice-bundle": 20,
         "stnw/date-picker-bundle": 20,
-        "jms/serializer-bundle": 20
+        "jms/serializer-bundle": 20,
+        "hpatoio/bitly-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"

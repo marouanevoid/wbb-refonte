@@ -113,7 +113,8 @@
             <div class="container">
                 <div class="twelve columns s-margin">
                     <form action="search.php">
-                        <input type="text" name="q" placeholder="Search"/>
+                        <input type="text" name="q" placeholder="Search" class="form-text" />
+                        <input type="submit" class="form-submit no-text">
                         <input type="reset" value=" "/>
                     </form>
                     <a class="btn-radius border h4 close">Cancel</a>
@@ -157,6 +158,7 @@
                             </div>
                             <div class="search-mode">
                                 <a class="btn-round brown close"></a>
+                                <a class="btn-round brown open radius-60 text-align-center">GO</a>
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
                                 <a href="" class="advanced-search h4">
                                     Advanced Search

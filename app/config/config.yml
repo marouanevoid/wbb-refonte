@@ -288,3 +288,6 @@ fos_facebook:
     secret: %facebook_app_secret%
     cookie: true
     permissions: [email, user_birthday, user_location]
+
+hpatoio_bitly:
+    access_token: %bitly_access_token%
