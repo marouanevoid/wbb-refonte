@@ -78,7 +78,7 @@ class NewsAdmin extends Admin {
                 ->add('quoteAuthor')
                 ->add('quoteText')
                 ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
-                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'attr'=>array('class'=>'wysihtml5')))
+                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
                 ->add('isAnInterview')
                 ->add('isOnTop')
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
