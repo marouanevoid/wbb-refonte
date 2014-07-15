@@ -417,7 +417,7 @@
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .no-results h3 a:last-child {margin-top: 10px; display: block;}
-  .btn-radius.with-icon.chillout:before {background-position: -52px -200px;}
+  .btn-radius.with-icon.chillout:before {background-position: -52px -200px;}  
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
 
@@ -426,5 +426,20 @@
   #bar-finder.mobile .form-radio {
     width: 93px;
     margin-right: 8px;
+  }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+  .social-share .fb-share {
+    background: url("../../bundles/wbbcore/images/fb@2x.png") no-repeat;
+    background-size: 105px 40px;
+  }
+  .social-share .twitter-share {
+    background: url("../../bundles/wbbcore/images/twitter@2x.png") no-repeat;
+    background-size: 105px 40px;
+  }
+  .social-share .email-share {
+    background: url("../../bundles/wbbcore/images/email@2x.png") no-repeat;
+    background-size: 105px 40px;
   }
 }
