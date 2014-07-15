@@ -82,7 +82,8 @@ class NewsAdmin extends Admin {
                 ->add('isOnTop')
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
-                    'required' => false
+                    'required' => false,
+                    'help'      => 'Prefered size (width: 368px , height: 170px)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor'
@@ -90,7 +91,6 @@ class NewsAdmin extends Admin {
                 ))
                 ->add('sponsorImageSmall', 'sonata_type_model_list', array(
                     'required'  => false,
-                    'help'      => 'Prefered size (width: 368 , height: 170)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor_small'

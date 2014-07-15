@@ -93,6 +93,12 @@ services:
         tags:
           - { name: twig.extension }
 
+    wbb.twig.bitly_filter_extension:
+        class: WBB\CoreBundle\Twig\Extension\BitlyFilterExtension
+        arguments: ['@hpatoio_bitly.client']
+        tags:
+          - { name: twig.extension }
+
 #    # TwigSwiftMailer
 #    wbb_core.mailer.twig_swift:
 #        class:  %wbb_core.twig_swift.class%

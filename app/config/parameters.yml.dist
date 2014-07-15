@@ -44,3 +44,5 @@ parameters:
 
     facebook_app_id:        test
     facebook_app_secret:    test
+
+    bitly_access_token: 2dc4e633c58b8a735d59724a667ccaacc0c9b11e

@@ -61,6 +61,9 @@ class AppKernel extends Kernel
 
 //            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 
+            //Bitly Bundle
+            new Hpatoio\BitlyBundle\HpatoioBitlyBundle(),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),

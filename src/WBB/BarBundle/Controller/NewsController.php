@@ -93,7 +93,8 @@ class NewsController extends Controller
             'news'          => $news,
             'latestBars'    => $this->container->get('bar.repository')->findLatestBars($city, 5),
             'alsoLike'      => $alsoLike,
-            'city'          => $news->hasOnlyOneTopCity(),
+            'city'          => $city,
+            'oneTopCity'    => $news->hasOnlyOneTopCity(),
         ));
     }
 
