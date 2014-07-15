@@ -238,7 +238,7 @@ article.tip .content .excerpt td .scroll{
     left: 24.5%;
 }
 
-.mobile .articles.padding article.small + article.small{
+.mobile-device .articles.padding article.small + article.small{
     margin-left : 0;
 }
 .articles.padding article.small + article.small{

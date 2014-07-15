@@ -181,8 +181,6 @@ class SemsoftController extends Controller
             ), ',');
 
             while (false !== ($row = $results->next())) {
-
-
                 fputcsv($handle, $row[0]->toCSVArray(), ',');
                 $em->detach($row[0]);
             }

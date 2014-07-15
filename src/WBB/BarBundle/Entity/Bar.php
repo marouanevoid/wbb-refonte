@@ -264,6 +264,20 @@ class Bar implements IndexableEntity
     /**
      * @var boolean
      *
+     * @ORM\Column(name="happyHour", type="boolean", nullable=true)
+     */
+    private $happyHour;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="wifi", type="boolean", nullable=true)
+     */
+    private $wifi;
+
+    /**
+     * @var boolean
+     *
      * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
     private $onTop;
@@ -354,7 +368,7 @@ class Bar implements IndexableEntity
      * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $tips;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="News", inversedBy="bars")
      * @ORM\JoinTable(name="wbb_news_bars",
@@ -389,7 +403,7 @@ class Bar implements IndexableEntity
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -412,7 +426,7 @@ class Bar implements IndexableEntity
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -435,7 +449,7 @@ class Bar implements IndexableEntity
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
@@ -458,7 +472,7 @@ class Bar implements IndexableEntity
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -481,7 +495,7 @@ class Bar implements IndexableEntity
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -504,7 +518,7 @@ class Bar implements IndexableEntity
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -527,7 +541,7 @@ class Bar implements IndexableEntity
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -556,7 +570,7 @@ class Bar implements IndexableEntity
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -579,7 +593,7 @@ class Bar implements IndexableEntity
     /**
      * Get twitter
      *
-     * @return string 
+     * @return string
      */
     public function getTwitter()
     {
@@ -602,7 +616,7 @@ class Bar implements IndexableEntity
     /**
      * Get facebook
      *
-     * @return string 
+     * @return string
      */
     public function getFacebook()
     {
@@ -625,7 +639,7 @@ class Bar implements IndexableEntity
     /**
      * Get instagram
      *
-     * @return string 
+     * @return string
      */
     public function getInstagram()
     {
@@ -648,7 +662,7 @@ class Bar implements IndexableEntity
     /**
      * Get isCreditCard
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsCreditCard()
     {
@@ -671,7 +685,7 @@ class Bar implements IndexableEntity
     /**
      * Get isCoatCheck
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsCoatCheck()
     {
@@ -694,7 +708,7 @@ class Bar implements IndexableEntity
     /**
      * Get parking
      *
-     * @return string 
+     * @return string
      */
     public function getParking()
     {
@@ -717,7 +731,7 @@ class Bar implements IndexableEntity
     /**
      * Get price
      *
-     * @return integer 
+     * @return integer
      */
     public function getPrice()
     {
@@ -746,7 +760,7 @@ class Bar implements IndexableEntity
     /**
      * Get menu
      *
-     * @return string 
+     * @return string
      */
     public function getMenu()
     {
@@ -769,7 +783,7 @@ class Bar implements IndexableEntity
     /**
      * Get isReservation
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsReservation()
     {
@@ -798,7 +812,7 @@ class Bar implements IndexableEntity
     /**
      * Get reservation
      *
-     * @return string 
+     * @return string
      */
     public function getReservation()
     {
@@ -821,7 +835,7 @@ class Bar implements IndexableEntity
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -844,7 +858,7 @@ class Bar implements IndexableEntity
     /**
      * Get onTop
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTop()
     {
@@ -867,7 +881,7 @@ class Bar implements IndexableEntity
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -890,7 +904,7 @@ class Bar implements IndexableEntity
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -913,7 +927,7 @@ class Bar implements IndexableEntity
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -961,7 +975,7 @@ class Bar implements IndexableEntity
 
         $this->latitude = 0;
         $this->longitude = 0;
-        
+
         $this->news = new ArrayCollection();
     }
 
@@ -993,7 +1007,7 @@ class Bar implements IndexableEntity
     /**
      * Get medias
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMedias()
     {
@@ -1016,7 +1030,7 @@ class Bar implements IndexableEntity
     /**
      * Get foursquare
      *
-     * @return string 
+     * @return string
      */
     public function getFoursquare()
     {
@@ -1067,7 +1081,7 @@ class Bar implements IndexableEntity
     /**
      * Get seoDescription
      *
-     * @return string 
+     * @return string
      */
     public function getSeoDescription()
     {
@@ -1113,7 +1127,7 @@ class Bar implements IndexableEntity
     /**
      * Get fsExcludedTips
      *
-     * @return array 
+     * @return array
      */
     public function getFsExcludedTips()
     {
@@ -1127,7 +1141,7 @@ class Bar implements IndexableEntity
 
         return $this;
     }
-    
+
     public function removeFsExcludedTips($hash)
     {
         if(($key = array_search($hash, $this->fsExcludedTips)) !== false) {
@@ -1165,7 +1179,7 @@ class Bar implements IndexableEntity
 
         return $this;
     }
-    
+
     public function removeFsSelectedImgs($hash)
     {
         if(($key = array_search($hash, $this->fsSelectedImgs)) !== false) {
@@ -1199,7 +1213,7 @@ class Bar implements IndexableEntity
     /**
      * Get openings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpenings()
     {
@@ -1275,7 +1289,7 @@ class Bar implements IndexableEntity
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -1298,7 +1312,7 @@ class Bar implements IndexableEntity
     /**
      * Get instagramExcludedImgs
      *
-     * @return array 
+     * @return array
      */
     public function getInstagramExcludedImgs()
     {
@@ -1377,7 +1391,7 @@ class Bar implements IndexableEntity
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -1400,7 +1414,7 @@ class Bar implements IndexableEntity
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -1507,7 +1521,7 @@ class Bar implements IndexableEntity
     /**
      * Get semsoftBars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSemsoftBars()
     {
@@ -1610,7 +1624,7 @@ class Bar implements IndexableEntity
     /**
      * Get energyLevel
      *
-     * @return integer 
+     * @return integer
      */
     public function getEnergyLevel()
     {
@@ -1643,13 +1657,13 @@ class Bar implements IndexableEntity
     /**
      * Get toGoWith
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getToGoWith()
     {
         return $this->toGoWith;
     }
-    
+
     /**
      * Set county
      *
@@ -1666,7 +1680,7 @@ class Bar implements IndexableEntity
     /**
      * Get county
      *
-     * @return string 
+     * @return string
      */
     public function getCounty()
     {
@@ -1689,7 +1703,7 @@ class Bar implements IndexableEntity
     /**
      * Get address2
      *
-     * @return string 
+     * @return string
      */
     public function getAddress2()
     {
@@ -1712,7 +1726,7 @@ class Bar implements IndexableEntity
     /**
      * Get googlePlus
      *
-     * @return string 
+     * @return string
      */
     public function getGooglePlus()
     {
@@ -1735,7 +1749,7 @@ class Bar implements IndexableEntity
     /**
      * Get instagramId
      *
-     * @return string 
+     * @return string
      */
     public function getInstagramId()
     {
@@ -1758,7 +1772,7 @@ class Bar implements IndexableEntity
     /**
      * Get facebookCheckIns
      *
-     * @return integer 
+     * @return integer
      */
     public function getFacebookCheckIns()
     {
@@ -1781,7 +1795,7 @@ class Bar implements IndexableEntity
     /**
      * Get facebookLikes
      *
-     * @return integer 
+     * @return integer
      */
     public function getFacebookLikes()
     {
@@ -1804,7 +1818,7 @@ class Bar implements IndexableEntity
     /**
      * Get foursquareCheckIns
      *
-     * @return integer 
+     * @return integer
      */
     public function getFoursquareCheckIns()
     {
@@ -1827,7 +1841,7 @@ class Bar implements IndexableEntity
     /**
      * Get foursquareLikes
      *
-     * @return integer 
+     * @return integer
      */
     public function getFoursquareLikes()
     {
@@ -1850,7 +1864,7 @@ class Bar implements IndexableEntity
     /**
      * Get foursquareTips
      *
-     * @return integer 
+     * @return integer
      */
     public function getFoursquareTips()
     {
@@ -1873,7 +1887,7 @@ class Bar implements IndexableEntity
     /**
      * Get outDoorSeating
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isOutDoorSeating()
     {
@@ -1886,68 +1900,10 @@ class Bar implements IndexableEntity
 
         for($i=1; $i <= $this->getPrice(); $i++)
         {
-            $response+= '$';
+            $response.= "$";
         }
 
         return $response;
-    }
-
-    public function toCSVArray()
-    {
-        array(
-            'ID'                    => $this->getId(),
-//            'Name'                  => $this->getName(),
-//            'Country'               => ($this->getCity())?$this->getCity()->getCountry():'',
-//            'County'                => $this->getCounty(),
-//            'City'                  => $this->getCity(),
-//            'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',
-//            'District'              => $this->getSuburb(),
-//            'Street1'               => $this->getAddress(),
-//            'Street2'               => $this->getAddress2(),
-//            'Intro'                 => $this->getSeoDescription(),
-//            'Description'           => $this->getDescription(),
-//            'GeocoordinateString'   => $this->getLatitude().','.$this->getLongitude(),
-//            'Website'               => $this->getWebsite(),
-//            'Email'                 => $this->getEmail(),
-//            'Phone'                 => $this->getPhone(),
-//            'MondayOpenHours'       => $this->getOpeningsByDay(1),
-//            'TuesdayOpenHours'      => $this->getOpeningsByDay(2),
-//            'WednesdayOpenHours'    => $this->getOpeningsByDay(3),
-//            'ThursdayOpenHours'     => $this->getOpeningsByDay(4),
-//            'FridayOpenHours'       => $this->getOpeningsByDay(5),
-//            'SaturdayOpenHours'     => $this->getOpeningsByDay(6),
-//            'SundayOpenHours'       => $this->getOpeningsByDay(7),
-//            'Category'              => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
-//            'Mood'                  => $this->getEnergyLevel(),
-//            'OutdoorSeating'        => $this->isOutDoorSeating(),
-//            'HappyHour'             => $this->isHappyHour(),
-//            'Wifi'                  => $this->isWifi(),
-//            'PriceRange'            => $this->getPriceSymbols(),
-//            'PaymentAccepted'       => ($this->getIsCreditCard())? 'Card' : '',
-//            'RestaurantServices'    => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
-//            'MenuUrl'               => $this->getMenu(),
-//            'Booking'               => $this->getReservation(),
-//            'ParkingType'           => $this->getParking(),
-//            'Public Transport'      => '',
-//            'FacebookId'            => $this->getFacebook(),
-//            'FacebookUserPage'      => 'http://facebook.com/'.$this->getFacebook(),
-//            'TwitterName'           => $this->getTwitter(),
-//            'TwitterUserPage'       => '',
-//            'InstagramId'           => $this->getInstagramId(),
-//            'InstagramUserPage'     => $this->getInstagram(),
-//            'GooglePlusUserPage'    => $this->getGooglePlus(),
-//            'FoursquareId'          => $this->getFoursquare(),
-//            'FoursquareUserPage'    => ''.$this->getFoursquare(),
-//            'FacebookLikes'         => '',
-//            'FacebookCheckins'      => '',
-//            'FoursquareLikes'       => '',
-//            'FoursquareCheckIns'    => '',
-//            'FoursquareTips'        => '',
-//            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? true : '',
-//            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? true : '',
-//            'Updated Columns'       => '',
-//            'Overwritten Columns'   => ''
-        );
     }
 
     private function getOpeningsByDay($day)
@@ -1978,5 +1934,100 @@ class Bar implements IndexableEntity
             }
         }
         return substr($response, 0, -1);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isHappyHour()
+    {
+        return $this->happyHour;
+    }
+
+    /**
+     * @param boolean $happyHour
+     */
+    public function setHappyHour($happyHour)
+    {
+        $this->happyHour = $happyHour;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isWifi()
+    {
+        return $this->wifi;
+    }
+
+    /**
+     * @param boolean $wifi
+     */
+    public function setWifi($wifi)
+    {
+        $this->wifi = $wifi;
+    }
+
+    private function prepareString($string){
+
+        return str_replace(array("\r", "\n"), "", $string);
+    }
+
+    public function toCSVArray()
+    {
+        return array(
+            'ID'                    => $this->getId(),
+            'Name'                  => $this->getName(),
+            'Country'               => ($this->getCity() && $this->getCity()->getCountry())?$this->getCity()->getCountry()->getName():'',
+            'County'                => $this->getCounty(),
+            'City'                  => ($this->getCity())?$this->getCity()->getName():'',
+            'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',
+            'District'              => ($this->getSuburb())?$this->getSuburb()->getName():'',
+            'Street1'               => $this->getAddress(),
+            'Street2'               => $this->getAddress2(),
+            'Intro'                 => $this->prepareString($this->getSeoDescription()),
+            'Description'           => $this->prepareString($this->getDescription()),
+            'GeocoordinateString'   => $this->getLatitude().','.$this->getLongitude(),
+            'Website'               => $this->getWebsite(),
+            'Email'                 => $this->getEmail(),
+            'Phone'                 => $this->getPhone(),
+            'MondayOpenHours'       => $this->getOpeningsByDay(1),
+            'TuesdayOpenHours'      => $this->getOpeningsByDay(2),
+            'WednesdayOpenHours'    => $this->getOpeningsByDay(3),
+            'ThursdayOpenHours'     => $this->getOpeningsByDay(4),
+            'FridayOpenHours'       => $this->getOpeningsByDay(5),
+            'SaturdayOpenHours'     => $this->getOpeningsByDay(6),
+            'SundayOpenHours'       => $this->getOpeningsByDay(7),
+            'Category'              => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
+            'Mood'                  => ($this->getEnergyLevel())?$this->getEnergyLevel()->getName():'',
+            'OutdoorSeating'        => $this->isOutDoorSeating(),
+            'HappyHour'             => $this->isHappyHour(),
+            'Wifi'                  => $this->isWifi(),
+            'PriceRange'            => $this->getPriceSymbols(),
+            'PaymentAccepted'       => ($this->getIsCreditCard())? 'Card' : '',
+            'RestaurantServices'    => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
+            'MenuUrl'               => $this->getMenu(),
+            'Booking'               => $this->getReservation(),
+            'ParkingType'           => $this->getParking(),
+            'Public Transport'      => '',
+            'FacebookId'            => $this->getFacebook(),
+            'FacebookUserPage'      => 'http://facebook.com/'.$this->getFacebook(),
+            'TwitterName'           => $this->getTwitter(),
+            'TwitterUserPage'       => '',
+            'InstagramId'           => $this->getInstagramId(),
+            'InstagramUserPage'     => $this->getInstagram(),
+            'GooglePlusUserPage'    => $this->getGooglePlus(),
+            'FoursquareId'          => $this->getFoursquare(),
+            'FoursquareUserPage'    => ''.$this->getFoursquare(),
+            'FacebookLikes'         => '',
+            'FacebookCheckins'      => '',
+            'FoursquareLikes'       => '',
+            'FoursquareCheckIns'    => '',
+            'FoursquareTips'        => '',
+            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? "true" : '',
+            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? "true" : '',
+            'Updated Columns'       => '',
+            'Overwritten Columns'   => ''
+        );
     }
 }
