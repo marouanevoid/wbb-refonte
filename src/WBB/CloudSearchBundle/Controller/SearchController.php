@@ -12,7 +12,7 @@ class SearchController extends Controller
     public function searchAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            //return $this->redirect($this->generateUrl(('homepage')));
+            return $this->redirect($this->generateUrl(('homepage')));
         }
 
         $entity = $request->query->get('entity', null);
@@ -41,21 +41,21 @@ class SearchController extends Controller
         $size = $request->query->get('size', 12);
         $start = $request->query->get('start', 0);
         $city = $request->query->get('city', null);
+        $style = $request->query->get('style', null);
+        $mood = $request->query->get('mood', null);
+        $occasion = $request->query->get('occasion', null);
+        $cocktails = $request->query->get('cocktails', null);
 
         $results = $this->get('cloudsearch.searcher')->search(array(
             'q' => $q,
             'start' => $start,
             'size' => $size,
             'entity' => $entity,
-            'city' => $city
-        ));
-
-        $results['more_results'] = $this->generateUrl('wbb_cloudsearch_search', array(
-            'q' => $q,
-            'start' => $start + $size,
-            'size' => $size,
-            'entity' => $entity,
-            'city' => $city
+            'city' => $city,
+            'style' => $style,
+            'mood' => $mood,
+            'occasion' => $occasion,
+            'cocktails' => $cocktails
         ));
 
         return $results;

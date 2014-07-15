@@ -1556,14 +1556,14 @@ class Bar implements IndexableEntity
         foreach ($this->tags as $barTag) {
             $tag = $barTag->getTag();
             if ($tag) {
-                if ($tag->getType() === Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
+                if ($tag->getType() == Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
                     $tags['tags_mood'][] = $tag->getName();
-                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
                     $tags['tags_cocktails'][] = $tag->getName();
-                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_THEME) {
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_THEME) {
                     $tags['tags_style'][] = $tag->getName();
-                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_WITH_WHO) {
-                    $tags['tags_occasion'] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_WITH_WHO) {
+                    $tags['tags_occasion'][] = $tag->getName();
                 }
             }
         }

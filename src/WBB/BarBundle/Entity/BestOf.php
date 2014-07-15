@@ -979,13 +979,13 @@ class BestOf implements IndexableEntity
         foreach ($this->tags as $bestOfTag) {
             $tag = $bestOfTag->getTag();
             if ($tag) {
-                if ($tag->getType() === Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
+                if ($tag->getType() == Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
                     $tags['tags_mood'][] = $tag->getName();
-                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
                     $tags['tags_cocktails'][] = $tag->getName();
-                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_THEME) {
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_THEME) {
                     $tags['tags_style'][] = $tag->getName();
-                } elseif ($tag->getType() === Tag::WBB_TAG_TYPE_WITH_WHO) {
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_WITH_WHO) {
                     $tags['tags_occasion'] = $tag->getName();
                 }
             }

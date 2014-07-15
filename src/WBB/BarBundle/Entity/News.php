@@ -674,7 +674,7 @@ class News implements IndexableEntity
         );
         foreach ($this->bars as $bar) {
             $barTags = $bar->getTagsArrays();
-            $tags['tags_style'] = array_unique(array_merge($tags['tags_style'], $barTags['tage_style']));
+            $tags['tags_style'] = array_unique(array_merge($tags['tags_style'], $barTags['tags_style']));
             $tags['tags_mood'] = array_unique(array_merge($tags['tags_mood'], $barTags['tags_mood']));
             $tags['tags_occasion'] = array_unique(array_merge($tags['tags_occasion'], $barTags['tags_occasion']));
             $tags['tags_cocktails'] = array_unique(array_merge($tags['tags_cocktails'], $barTags['tags_cocktails']));
