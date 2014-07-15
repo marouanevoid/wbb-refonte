@@ -40,7 +40,7 @@
         .older-news article {
             display: none;
         }
-        
+
     </style>
 {% endblock %}
 {% block bodyTag %}
@@ -53,7 +53,7 @@
 
 
         <!-- SUBHEADER -->
-        <div class="container  {% if is_mobile() %} mobile {% endif %}">
+        <div class="container  {% if is_mobile() and not is_tablet() %} mobile {% endif %}">
 
             <section class="sub-header">
 
