@@ -258,27 +258,7 @@
   .filter-search .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
   .filter-search ul li {width: 50%; float: left; position: relative;}
   .filter-search ul {width: 101%;}
-  
-  /*
-    TEMPS STYLE
-  */
-  @media only screen and (max-width: 768px) {
-    /* line 42, ../sass/pages/_bar-guides.scss */
-    .mobile section.bars .bar-w-pic .btn-round:before, .mobile section.bar-filter .bar-w-pic .btn-round:before {
-      background-size: 128px 256px;
-      background-position: -80px -40px;
-    }
-    /* line 40, ../sass/pages/_bar-guides.scss */
-    .mobile section.bars .bar-w-pic .btn-round, .mobile section.bar-filter .bar-w-pic .btn-round {
-      width: 20px;
-      height: 20px;
-      right: 0.5em;
-      top: 0.5em;
-    }
-    section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
-      font-size: 80%!important;
-    }
-  }
+
   #bar-finder-result.mobile ul.list {position: relative;}
   #bar-finder-result.mobile ul.list li {width: 50%; border-right: none; /*border-bottom: 2px solid transparent;*/}
   #bar-finder-result.mobile .more {width: 50%; margin: 0 auto;}
@@ -308,7 +288,6 @@
   #register.mobile #UI.close #close .title {width: 100%;}
 /* Register4 (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register4.psd; */
   #register.page.mobile {padding: 0; width: auto;}
-  /*#register.page.mobile #UI {top: 0;}*/
   #register.page.mobile #UI .title,
   #register.page.mobile #UI .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
@@ -352,7 +331,7 @@
   #view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
   #view-account .filter-view a.ui-radio {margin-left: 0.5em;}
-/*  #view-account .btn-editprofile {margin: 10px 0 0 50px;}*/ 
+
   #UI .btn-editprofile .btn {border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
   #UI.tips {width: 100% !important; }
   #UI.tips .list-tips {background-color: #faf3e1;}
@@ -385,7 +364,6 @@
 
   #view-account #UI.mobile .group.right {/*float: left; margin: 0 0 0 70px;*/}
   #view-account #UI.mobile .btn-editprofile .btn {font-size: 16px;}
-  /*#view-account #UI.mobile .filter-profil {padding: 0 20%;}*/
   #view-account #UI.mobile .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
   #view-account #UI.mobile .block-top {width: auto;}
   #view-account #UI.mobile .sort-by label {display: none;}
@@ -444,3 +422,36 @@
     background-size: 105px 40px;
   }
 }
+
+/*
+  TEMPS STYLE
+*/
+  @media only screen and (max-width: 768px) {
+    /* line 42, ../sass/pages/_bar-guides.scss */
+    .mobile section.bars .bar-w-pic .btn-round:before, .mobile section.bar-filter .bar-w-pic .btn-round:before {
+      background-size: 128px 256px;
+      background-position: -80px -40px;
+    }
+    /* line 40, ../sass/pages/_bar-guides.scss */
+    .mobile section.bars .bar-w-pic .btn-round, .mobile section.bar-filter .bar-w-pic .btn-round {
+      width: 20px;
+      height: 20px;
+      right: 0.5em;
+      top: 0.5em;
+    }
+    section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
+      font-size: 80%!important;
+    }
+    .social-share .fb-share {
+      background-image: url("../images/fb@2x.png");
+      background-size: 105px 40px;
+    }
+    .social-share .twitter-share {
+      background-image: url("../images/twitter@2x.png");
+      background-size: 105px 40px;
+    }
+    .social-share .email-share {
+      background-image: url("../images/email@2x.png");
+      background-size: 105px 40px;
+    }
+  }
