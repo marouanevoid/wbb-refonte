@@ -69,7 +69,7 @@
 
 
                 {% for n in articles|slice(5,3) %}
-                    {% if loop.index == 2 %}
+                    {% if loop.index0 % 2 == 0 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1} %}
                     {%  else %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
