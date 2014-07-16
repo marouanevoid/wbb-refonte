@@ -114,9 +114,9 @@
         {% include "WBBBarBundle:News/blocks:editors_pick_desktop.html.twig"  with { 'articles' : articles , 'interviews' : interviews, 'newsList' : newsList } %}
     {% endif %}
     
-        <div class="twelve columns align-center l-margin-bottom load-more-container {% if is_mobile() %}s-margin-top{% endif %}">
+        <div class="twelve columns align-center l-margin-bottom load-more-container">
             <a class="h4 btn-radius border load-more brown large" href="#0">Older news</a>
         </div>
-   
+
 {% endblock %}
 
