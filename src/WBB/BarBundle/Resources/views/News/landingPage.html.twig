@@ -40,7 +40,11 @@
         .older-news article {
             display: none;
         }
-
+        {% if is_mobile() and not is_tablet() %}
+            .articles.padding article.small + article.small {
+                margin-left: 0!important;
+            }
+        {% endif %}
     </style>
 {% endblock %}
 {% block bodyTag %}
@@ -113,9 +117,6 @@
         <div class="twelve columns align-center l-margin-bottom load-more-container {% if is_mobile() %}s-margin-top{% endif %}">
             <a class="h4 btn-radius border load-more brown large" href="#0">Older news</a>
         </div>
-   
-
-
    
 {% endblock %}
 
