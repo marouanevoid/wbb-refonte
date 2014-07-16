@@ -3,15 +3,8 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use WBB\BarBundle\Entity\Ad;
 use WBB\BarBundle\Entity\News;
-use WBB\BarBundle\Entity\Tag;
-use WBB\BarBundle\Entity\Tip;
-use WBB\BarBundle\Form\TipType;
-use WBB\BarBundle\Repository\BarRepository;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class NewsController extends Controller

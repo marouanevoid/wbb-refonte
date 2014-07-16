@@ -6,7 +6,6 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
-use Sonata\AdminBundle\Validator\ErrorElement;
 use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;

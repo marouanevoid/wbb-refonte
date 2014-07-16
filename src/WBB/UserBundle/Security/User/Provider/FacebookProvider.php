@@ -7,7 +7,6 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use \BaseFacebook;
-use \FacebookApiException;
 
 class FacebookProvider implements UserProviderInterface
 {

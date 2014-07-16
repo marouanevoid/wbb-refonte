@@ -4,7 +4,6 @@ namespace WBB\BarBundle\Repository;
 
 use WBB\CoreBundle\Repository\EntityRepository;
 use WBB\BarBundle\Entity\BestOf;
-use Doctrine\ORM\Query\Expr;
 
 /**
  * BestOfRepository

@@ -10,7 +10,6 @@ use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class BarController extends Controller
 {
