@@ -100,6 +100,10 @@ meta.Dropdown = function(config){
                 if( $options.filter(':disabled').length ) index++;
 
                 $options.eq( index ).prop('selected', true);
+
+                $dropdown.find('.choice li').show();
+                $(this).hide();
+
                 //$options.eq( index ).attr('selected', 'selected');
 
                 that.config.$dropdown.trigger('change');
@@ -153,7 +157,7 @@ meta.Dropdown = function(config){
         $options.each(function()
         {
             if( !$(this).attr('disabled') )
-                html += "<li class='"+$(this).val()+"'>"+$(this).text()+"</li>"
+                html += "<li class='"+$(this).val()+"' "+($(this).index()==0?'style="display:none"':'')+">"+$(this).text()+"</li>"
         });
 
         html = that.config.template.replace('%options%', html);
