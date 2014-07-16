@@ -101,6 +101,9 @@
         div .margin-best-of-list{
             padding: 0;
         }
+        html.mobile article.bestof img.scale-with-grid {
+            height: 210px;
+        }
     </style>
     {% endif %}
 {% endblock %}
@@ -178,7 +181,7 @@
                                                     set init = random(news.bestofs|length - 1)
                                                 %}
                                                     {% for b in news.bestofs |slice(init,1) %}
-                                                        <div class="five margin-best-of-list columns {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                                                        <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
                                                             {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
                                                         </div>
                                                     {% endfor %}
