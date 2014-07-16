@@ -201,6 +201,7 @@
 
 				if (!(isScrollableH || isScrollableV)) {
 					elem.removeClass('jspScrollable');
+					elem.addClass('jspNotScrollable');
 					pane.css({
                         top: 0,
                         left: 0,
@@ -210,8 +211,10 @@
 					removeFocusHandler();
 					removeKeyboardNav();
 					removeClickOnTrack();
+
 				} else {
 					elem.addClass('jspScrollable');
+                    elem.removeClass('jspNotScrollable');
 
 					isMaintainingPositon = settings.maintainPosition && (verticalDragPosition || horizontalDragPosition);
 					if (isMaintainingPositon) {

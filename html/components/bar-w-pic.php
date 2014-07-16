@@ -1,7 +1,7 @@
 <?php $is_bestof = isset($bestof) && $bestof; ?>
 <article class="bar-w-pic <?=$is_bestof?'best-of':''?>">
 
-    <a href="" class="btn-round dark star active"></a>
+    <a href="" class="btn-round dark star"></a>
 
     <div class="txt">
         <?php if($is_bestof) : ?>

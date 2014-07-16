@@ -12,23 +12,24 @@
             </td>
         </tr>
 
+        <!--<tr class="signin">
+            <td>
+                <?php include('components/header/signin-register.php') ?>
+            </td>
+        </tr>-->
+
+        <tr class="signin logged">
+            <td>
+                <?php include('components/header/logged.php') ?>
+            </td>
+        </tr>
+
         <tr class="header-nav">
             <td>
                 <?php include('components/header/nav.php') ?>
             </td>
         </tr>
 
-        <tr class="links">
-            <td>
-                <?php include('components/header/bar-finder-link.php') ?>
-            </td>
-        </tr>
-
-        <tr class="signin">
-            <td>
-                <?php include('components/header/signin-register.php') ?>
-            </td>
-        </tr>
 
         <tr class="footer-nav">
             <td>
@@ -90,3 +91,5 @@
     <?php include('includes/mobile/search-bar.php') ?>
 
 </header>
+
+<?php include('components/bar-finder-mobile.php') ?>

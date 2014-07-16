@@ -3,12 +3,27 @@
   header.desktop .logo img{ background-image: url("../images/logo@2x.png") }
 
   input[type="reset"][value=" "], input[type="reset"][value=""], .search-bar-mobile .container input[type="text"]{ background-image: url('../images/sprite@2x.png') }
+  input[type="text"]+input[type="submit"]{ background-image: url('../images/sprite@2x.png') }
 
   .btn-small-round, .btn-round, .btn-radius.with-icon, .finder-close {
     &:after, &:before{
       background-image: url("../images/sprite@2x.png");
     }
   }
+
+  .ui-selector
+  {
+    .selector{
+      span{ background-image: url("../images/misc/ui-selector@2x.png") }
+    }
+  }
+
+  .ui-tips{
+    .tips{
+      b{ background-image: url("../images/misc/ui-tips@2x.png") }
+    }
+  }
+
 
 
   article.bar-w-pic {

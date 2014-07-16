@@ -36,12 +36,15 @@
     <script type="text/javascript" src="js/plugins/placeholders.min.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.mousewheel.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.jscrollpane.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
 
     <script type="text/javascript" src="js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/slider.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/ratio.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/loadMore.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/dropdown.metabolism.js"></script>
+    <script type="text/javascript" src="js/libs/selector.metabolism.js"></script>
+    <script type="text/javascript" src="js/libs/tips.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/radio.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/search.metabolism.js"></script>
     <script type="text/javascript" src="js/libs/map.metabolism.js"></script>
@@ -52,7 +55,7 @@
     <script type="text/javascript">
         var MARKET  = "FR";
         var LANG    = "fr";
-        var BASEURL = "/";
+        var BASEURL = "/pr0d/wbb/";
         //var BASEURL = "/Pr0d/World%20Best%20Bar/Web/";
         var TRAD    = { loading: 'Loading...'};
     </script>

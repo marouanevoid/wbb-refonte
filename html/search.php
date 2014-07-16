@@ -6,7 +6,7 @@
     <?php include('includes/mobile/search-bar.php') ?>
 <?php endif ?>
 
-    <div class="container l-padding">
+    <div class="container l-padding<?=$is_mobile?'':'-top'?>">
 
         <aside class="three columns filters">
 
@@ -52,20 +52,22 @@
 
                         <div class="drop-list">
 
-                            <ul>
+                            <ul class="checkbox-container">
                                 <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Hotel Bar</label></li>
                                 <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Amazing Views</label></li>
                                 <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Speakeasy</label></li>
                             </ul>
-
+                            <br class="clear"/>
                         </div>
                     </li>
                 </ul>
 
-                <div class="submit s-margin-top">
-                    <input type="submit" value="Apply Filters"/>
-                </div>
-
+                <?php if($is_mobile): ?>
+                    <div class="submit s-margin-top">
+                        <input type="submit" class="apply-filters" value="Apply Filters"/>
+                        <input type="reset" value="Cancel" class="large"/>
+                    </div>
+                <?php endif ?>
             </form>
 
         </aside>
@@ -76,9 +78,9 @@
 
                 <h1>Search results</h1>
 
-                <div class="five columns m-margin">
+                <div class="six columns m-margin search-box">
                     <form id="search">
-                        <input type="text" name="city" placeholder="Type your city name..."/>
+                        <input type="text" name="city" placeholder="Start typing..."/>
                         <input type="submit" class="search" value=" "/>
                         <input type="reset" value=" "/>
                     </form>
@@ -135,56 +137,6 @@
 
         </section>
     </div>
-
-    <script type="text/javascript">
-
-        $('input[name=view-type]').change(function()
-        {
-            if( $(this).val() == "grid")
-            {
-                $('.bars-w-pic-list').fadeOut(200, 'easeInOutCubic', function()
-                {
-                    $('.bars-w-pic').show();
-
-                    var $elements = $('.bars-w-pic article');
-
-                    $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
-
-                        $(this).delay(60*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
-                    });
-                });
-            }
-            else
-            {
-                $('.bars-w-pic').fadeOut(200, 'easeInOutCubic', function()
-                {
-                    $('.bars-w-pic-list').show();
-
-                    var $elements = $('.bars-w-pic-list article');
-
-                    $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
-
-                        $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
-                    });
-                });
-            }
-        });
-
-        $('.filter-btn').click(function()
-        {
-            $('aside.filters').fadeIn(500, 'easeInOutCubic', function()
-            {
-                $('.bar-filter-form, .bar-filter').hide();
-            });
-        });
-
-        $('aside.filters input[type=reset]').click(function()
-        {
-            $('.bar-filter-form, .bar-filter').show();
-            if( $(window).width() < 640 ) $('aside.filters').fadeOut();
-        });
-
-    </script>
 
     <!-- AD -->
     <?php if( !$is_mobile ): ?>

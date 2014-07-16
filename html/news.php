@@ -52,7 +52,7 @@
 </div>
 
 <!-- EDITOR'S PICK -->
-<div class="container l-margin-top <?=$is_mobile?'s':'l'?>-padding-bottom">
+<div class="container l-margin-top <?=$is_mobile?'s':'m'?>-padding-bottom">
 
     <div class="twelve columns h1 m-margin-bottom color-brown <?php if( $is_mobile ): ?>align-center<?php endif ?>">
         Editor's Pick
@@ -63,9 +63,9 @@
 
         <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; $has_video = false; include('components/article.php') ?>
 
-        <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=true; $has_text=false; $has_quote=false; $has_video = false; $has_sponsor=true; include('components/article.php') ?>
 
-        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=true; $has_video = false; include('components/article.php') ?>
+        <?php $is_small=true; $has_image=false; $has_text=false; $has_quote=true; $has_video = false; $has_sponsor=false; include('components/article.php') ?>
 
         <?php $is_small=false; $has_image=true; $has_text=true; $has_quote=false; $has_video = true; include('components/article.php') ?>
     </section>
@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <div class="twelve columns align-center l-margin-bottom">
+        <div class="twelve columns align-center l-margin-bottom <?=$is_mobile?'s-margin-top':''?>">
             <a class="h4 btn-radius border load-more brown large" href="tmp/data/news.php?">Older News</a>
         </div>
     </div>
