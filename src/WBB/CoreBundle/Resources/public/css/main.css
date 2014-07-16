@@ -395,7 +395,6 @@
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
-  .no-results h3 a:last-child {margin-top: 10px; display: block;}
   .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;} 
   .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -52px -240px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
