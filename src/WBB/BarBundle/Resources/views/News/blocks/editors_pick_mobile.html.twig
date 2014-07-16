@@ -52,7 +52,7 @@
             <!-- 12 COLS -->
             <div class="articles older-news twelve columns">
                 {% for n in interviews|slice(2,1) %}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 ,'is_small' : 1 } %}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1 ,'has_image' : 1 } %}
                 {% endfor %}
 
                 {% for n in articles|slice(3,1) %}
@@ -60,27 +60,27 @@
                 {% endfor %}
 
                 {% for n in interviews|slice(3,1) %}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1,'is_small' : 1 } %}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1,'has_image' : 1 } %}
                 {% endfor %}
 
                 {% for n in articles|slice(4,1) %}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
+                     {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
                 {% endfor %}
 
 
                 {% for n in articles|slice(5,3) %}
                     {% if loop.index == 2 %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1} %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1} %}
                     {%  else %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
                     {%  endif %}
                 {% endfor %}
 
                 {% for n in newsList %}
                     {% if loop.index0 % 2 == 0 %}
-                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
                     {% else %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 } %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 , show_quote : 1 } %}
                     {% endif %}
                 {% endfor %}
             </div>
