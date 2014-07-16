@@ -89,6 +89,7 @@ class SemsoftBarAdmin extends Admin
                 'field'   => 'name',
                 'label'    => 'Actions',
                 'actions' => array(
+                    'merge'   => array('template' => 'WBBBarBundle:Admin/Semsoft:linkMergeBar.html.twig'),
                     'show'   => array('template' => 'WBBBarBundle:Admin/Semsoft:linkShowBar.html.twig'),
                     'delete' => array(),
                 )
