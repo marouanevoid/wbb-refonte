@@ -209,7 +209,13 @@ services:
     sonata.media.resizer.custom:
         class: WBB\BarBundle\Resizer\CustomResizer
         arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
-
+    
+    acme.twig.acme_extension:
+        class: WBB\BarBundle\Twig\Extension\FavoriteExtension
+        arguments:
+            - "@router"
+        tags:
+            - { name: twig.extension }
     # ForumMailer
 #    wbb_bar.mailer:
 #        class:  WBB\BarBundle\Mailer\BarMailer

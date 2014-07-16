@@ -45,7 +45,8 @@
                         </h3>
                     </td>
                     <td class="star-share">
-                        <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href=""></a>
+                        <a href="{{ favorite_url(app.user, bestOf) }}" class="btn-round star {% if is_favorite(app.user, bestOf) %}active brown changed{% else %}dark{% endif %}"></a>
+                        <a class="btn-round brown share" href=""></a>
                     </td>
                 </tr>
             </table>

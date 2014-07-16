@@ -82,27 +82,6 @@
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
         </script>
 
-        <script>
-            $(document).ready(function(){
-                $('.favorite-btn').on('click',function(e){
-                    e.preventDefault();
-                    var btn = $(this);
-                    var url = $(this).attr('href');
-                    $.ajax({
-                        url: url,
-                        success:function(response) {
-                            if (response.code === 200) {
-                                btn.attr('href', response.href);
-                                console.log(response.message);
-                            } else {
-                                console.log('sign in fool !');
-                            }
-                        }
-                    });
-                });
-            });
-        </script>
-
         {% if is_tablet() %}
             <style type="text/css">
                 article.bar-wo-pic:hover {
@@ -216,6 +195,7 @@
                 });
             </script>
         {% endif %}
+        <div data-show="register" class="lighbox" id="show-popin"></div>
         <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
