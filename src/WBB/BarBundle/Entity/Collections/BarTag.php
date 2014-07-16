@@ -2,7 +2,6 @@
 
 namespace WBB\BarBundle\Entity\Collections;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 

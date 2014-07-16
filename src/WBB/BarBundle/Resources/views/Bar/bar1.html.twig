@@ -9,7 +9,7 @@
         <div class="hover">
             <div class="tags">
                 {% if b.energyLevel %}
-                    {{ b.energyLevel }}
+                    {{ b.energyLevel }},
                 {% endif %}
                 {% for tr in b.tags |slice(0, ((b.energyLevel)? 4 : 5)) %}
                     {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
@@ -29,7 +29,11 @@
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
+    {% if b.medias|length>0 %}
     {% for m in b.medias|slice(0,1) %}
         <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
     {% endfor %}
+    {% else %}
+        <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
+    {% endif %}
 </article>

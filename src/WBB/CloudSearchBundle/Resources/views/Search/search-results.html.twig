@@ -1,11 +1,16 @@
 {% extends "::base.html.twig" %}
-
 {% block bodyTag %}
     <body class="search">
+    <script type="text/javascript">
+        $(function(){
+
+        });
+    </script>
     {% endblock %}
 
     {% block body %}
         <div class="container l-padding">
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/search.js') }}"></script>
             <aside class="three columns filters">
                 <form id="filter">
                     <div class="reset m-margin-bottom">
@@ -20,7 +25,7 @@
                             </div>
 
                             <div class="drop-list">
-                                {% if is_mobile() and not is_tablet() %}<label class="h3">City</label>{% endif %}
+                                {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
 
                                 <select class="ui-dropdown" name="city" data-class="city">
                                     <option disabled="disabled">Choose a City</option>
@@ -103,21 +108,6 @@
                 </div>
             </section>
         </div>
-
-        <script>
-            $(document).ready(function() {
-                var moreResults = '{{ bar_results.more_results|raw }}';
-                $('#load-more-results').on('click', function() {
-                    $.ajax({
-                        url: moreResults,
-                        success: function(response) {
-                            console.log(response);
-                            moreResults = response.more_results;
-                        }
-                    });
-                });
-            });
-        </script>
 
         <script type="text/javascript">
             $('input[name=view-type]').change(function()

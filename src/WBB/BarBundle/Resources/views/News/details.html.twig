@@ -36,6 +36,9 @@
             filter: alpha(opacity=50);
             opacity: 0.5; 
         }
+        .margin-best-of-list{
+            padding: 0 21px;
+        }
     </style>
     {% if is_mobile() and not is_tablet() %}
     <style type="text/css">
@@ -53,11 +56,7 @@
             width: 100%;
         }
 
-
-        article.main {}
         article.main p , .sponsor-name{text-align: center;}
-
-        /*.social-share a{ display: block; margin: 0 auto; margin-top: 2px;}*/
 
         a.fb-share{
             width:90px;
@@ -75,7 +74,6 @@
             background: url({{ asset('bundles/wbbcore/images/icon_email-mobile.jpg') }});
         }
         .showallbars-btn{
-                /*display: block;*/
                 position: relative;
                 top: 16px;
                 text-align: center;
@@ -91,7 +89,7 @@
             width: 260px;
             margin-left:auto;
             margin-right:auto;
-            }
+        }
             body article p {
                 font-size: 18px !important;
             }
@@ -100,6 +98,12 @@
                 width : 90%;
                 margin: 0 auto;
             }
+        div .margin-best-of-list{
+            padding: 0;
+        }
+        html.mobile article.bestof img.scale-with-grid {
+            height: 210px;
+        }
     </style>
     {% endif %}
 {% endblock %}
@@ -115,10 +119,10 @@
                 <tr>
                     {% if not is_mobile() or is_tablet() %}
                         <td>
-                           {% if city %}
+                           {% if oneTopCity %}
                                <div class="city-selector h3">
                                    You are in
-                                   <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:city.slug}) }}">{{ city.name|default('Unspecified') }}</a>
+                                   <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:oneTopCity.slug}) }}">{{ oneTopCity.name|default('Unspecified') }}</a>
                                </div>
                            {% endif %}
                         </td>
@@ -177,7 +181,7 @@
                                                     set init = random(news.bestofs|length - 1)
                                                 %}
                                                     {% for b in news.bestofs |slice(init,1) %}
-                                                        <div class="five margin-best-of-list columns {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                                                        <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
                                                             {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
                                                         </div>
                                                     {% endfor %}
@@ -196,12 +200,13 @@
                         </p>
                       
                     <div style='clear:both;'></div>
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> <br /> {{ news.sponsor }}</div>{% endif %}
-                {% if not is_mobile()  %}
+
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() and not is_tablet() %}<div class="margin-top-10">{% endif %} {{ news.sponsor }}{% if is_mobile() and not is_tablet() %}</div>{% endif %}</div>{% endif %}
+                {% if not is_mobile() or is_tablet() %}
                     <div class="share-btns l-margin-top">
-                        <hr/>
+                        <hr />
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
-                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
+                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} margin-top-20">
                             <a href="#0" class="fb-share">Post</a>
                             <a href="#0" class="twitter-share">Tweet</a>
                             <a href="#0" class="email-share">Email</a>
@@ -209,10 +214,10 @@
                     </div>
                 {% endif %}
                 </div>
-                {% if is_mobile()  %}
+                {% if is_mobile() and not is_tablet()  %}
                     <div class="share-btns l-margin-top full full hr-parent">
-                        <hr/>
-                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %}">SHARE THIS NEWS</h2>
+                        <hr />
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
                             <ul>
                             <li><a href="#0" class="fb-share">Post</a></li>
@@ -298,7 +303,7 @@
                     {% if is_mobile() and not is_tablet() %}</div>{% endif %}
                     {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
                     {% for n in alsoLike|slice(1,1) %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 } %}
                     {% endfor %}
                     {% if is_mobile() and not is_tablet() %}</div>{% endif %}
                     {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
@@ -309,6 +314,15 @@
                     </div>
                 </div>
             </div>
+
+            <script type="text/javascript">
+            $(function(){
+                setTimeout(function(){
+                    UTILS._cover();
+                    UTILS._resizeCover();
+                },1000);
+            });
+            </script>
         </div>
     </section>
 {% endblock %}

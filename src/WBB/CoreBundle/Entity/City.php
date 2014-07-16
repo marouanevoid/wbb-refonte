@@ -5,7 +5,6 @@ namespace WBB\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Entity\CitySuburb;
@@ -65,6 +64,13 @@ class City implements IndexableEntity
      * @ORM\Column(name="seo_description", type="text", nullable=true)
      */
     private $seoDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postal_code", type="string", length=10)
+     */
+    private $postalCode;
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
@@ -735,5 +741,28 @@ class City implements IndexableEntity
             'location' => $lat . ',' . $lon,
             'districts' => $suburbs
         );
+    }
+
+    /**
+     * Set postalCode
+     *
+     * @param string $postalCode
+     * @return City
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode
+     *
+     * @return string 
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
     }
 }

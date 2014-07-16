@@ -4,7 +4,7 @@
  * Copyright (c) 2014 - Metabolism
  * Author:
  *   - Jérome Barbato <jerome@metabolism.fr>
- *
+ *   - Khalid Ahmada k.ahmada@void.fr
  * License: GPL
  * Version: 1.0
  *
@@ -39,7 +39,7 @@ meta.Search = function(config){
                             '</div>'+
                         '</li>',
         template_mobile    : '<li>'+
-                                '<a>%s</a>'+
+                                '<a herf="%h">%s</a>'+
                              '</li>'
     };
 

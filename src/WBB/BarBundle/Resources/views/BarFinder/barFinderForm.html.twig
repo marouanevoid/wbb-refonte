@@ -56,9 +56,11 @@
                             <input type="radio" name="mood" value="" class="ui-radio dark with-icon" data-color="brown" checked=""/>
                         </div>
 
+                        {% set curostIndex = 0 %}
                         {% for mood in moods %}
+                        {% set curostIndex  = curostIndex + 1 %}
                             <td>
-                                <input type="radio" name="mood" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="trigger-handler ui-radio dark with-icon" data-color="brown"/>
+                                <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"/>
                             </td>
                         {% endfor %}
                         {#<td>#}

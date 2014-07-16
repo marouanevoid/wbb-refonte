@@ -2,7 +2,6 @@
 
 namespace WBB\BarBundle\Repository;
 
-use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Repository\EntityRepository;
 
 /**

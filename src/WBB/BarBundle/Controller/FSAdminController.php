@@ -3,12 +3,7 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Guzzle\Http\Client;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use WBB\BarBundle\Entity\Bar;
 
 /**
@@ -94,7 +89,7 @@ class FSAdminController extends Controller
 
         $difference = count($all) - count($tips);
         $FsTips = array();
-        if(($nbResults < $limit) and !is_null($bar->getFoursquare()) and $bar->getFoursquare() != ""){
+        if(($nbResults < $limit) && !is_null($bar->getFoursquare()) && $bar->getFoursquare() != ""){
             $excluded = $bar->getFsExcludedTips();
             $index = 0;
             $count = $offset;
@@ -118,7 +113,7 @@ class FSAdminController extends Controller
                 }
                 $count += $nbFsTips;
                 $recursive++;
-            }while(($index < ($limit - $nbResults)) and $recursive < 5);
+            }while(($index < ($limit - $nbResults)) && $recursive < 5);
             $nbResults += $index;
         }
 

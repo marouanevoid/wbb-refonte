@@ -15,8 +15,7 @@ class NewsAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->addIdentifier('id')
-            ->add('title', null, array('editable' => true))
+            ->addIdentifier('title')
             ->add('shareText', null, array('editable' => true))
             ->add('quoteAuthor', null, array('editable' => true))
             ->add('quoteText', null, array('editable' => true))
@@ -78,12 +77,13 @@ class NewsAdmin extends Admin {
                 ->add('quoteAuthor')
                 ->add('quoteText')
                 ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
-                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'attr'=>array('class'=>'wysihtml5')))
+                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
                 ->add('isAnInterview')
                 ->add('isOnTop')
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
-                    'required' => false
+                    'required' => false,
+                    'help'      => 'Preferred size (width: 368px , height: 170px)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor'
@@ -91,7 +91,7 @@ class NewsAdmin extends Admin {
                 ))
                 ->add('sponsorImageSmall', 'sonata_type_model_list', array(
                     'required'  => false,
-                    'help'      => 'Prefered size (width: 368 , height: 170)'
+                    'help'      => 'Preferred size (width: 95px , height: 105px)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor_small'
@@ -132,7 +132,7 @@ class NewsAdmin extends Admin {
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setNews($object);
                 }else{
                     $object->removeMedia($media);
@@ -145,7 +145,7 @@ class NewsAdmin extends Admin {
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setNews($object);
                 }else{
                     $object->removeMedia($media);

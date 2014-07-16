@@ -6,7 +6,6 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
-use Sonata\AdminBundle\Validator\ErrorElement;
 use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -245,7 +244,7 @@ class BestOfAdmin extends Admin
     {
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() and $tag->getTag()->getName()){
+                if($tag->getTag() && $tag->getTag()->getName()){
                     $tag->setBestof($object);
                 }else{
                     $object->removeTag($tag);
@@ -264,7 +263,7 @@ class BestOfAdmin extends Admin
     {
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() and $tag->getTag()->getName()){
+                if($tag->getTag() && $tag->getTag()->getName()){
                     $tag->setBestof($object);
                 }else{
                     $object->removeTag($tag);

@@ -255,6 +255,41 @@ meta.App = function() {
             $('html, body').animate({scrollTop:0}, that.config.speed, that.config.easing);
         });
 
+
+        if( $('html').hasClass('mobile') )
+        {
+            var options_are_visible = false;
+
+            $('header.desktop .logged').click(function(){
+
+                if( !options_are_visible )
+                    $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing);
+                else
+                    $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
+                    {
+                        $(this).hide();
+                    });
+
+                options_are_visible = !options_are_visible;
+            });
+        }
+        else
+        {
+            $('header.desktop .logged').hover(function(){
+
+                $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing)
+
+            }, function()
+            {
+                $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
+                {
+                    $(this).hide();
+                })
+            });
+        }
+
+
+
         that._barFinderEvents();
 
         that._mobileMenuEvents();
@@ -294,13 +329,10 @@ meta.App = function() {
     ***/
 
     that.bareFinderHandler = function(){
-            // add listner on city changes
             var $finder = $('.bar-finder'),
                 $city = $finder.find('.city li'),
                 $gowith = $finder.find('.friend li'),
-                $chilot = $('.chillout'),
-                $casual = $('.casual'),
-                $party = $('.party');
+                $moodItem = $('.mood-item');
 
             $city.on('click',function(){
                 // stock the current city on session cookie
@@ -312,9 +344,10 @@ meta.App = function() {
                 $.cookie('finder_gowith' , $(this).prop('class'), 0);
             });
 
-            $chilot.on('click',function(){ $.cookie('finder_mood' , 'chilot' , 0)});
-            $casual.on('click',function(){ $.cookie('finder_mood' , 'casual' , 0)});
-            $party.on('click',function(){ $.cookie('finder_mood' , 'party' , 0)});
+            $moodItem.parent('a').on('click',function(){ 
+                var indexMood = $(this).find('input').attr('data-index');
+                $.cookie('finder_mood' , indexMood, 0);
+            });
 
 
 
@@ -353,6 +386,7 @@ $(document).ready(function()
     new meta.App();
 
     $('.entire-content').show();
+    $('.entire-content').addClass('show');
     $('#common-loader').hide();
     // TEMP
     // setInterval(function(){
