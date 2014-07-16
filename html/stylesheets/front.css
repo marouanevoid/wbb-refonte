@@ -3235,15 +3235,15 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   text-align: left;
   font-size: 90%;
   margin-bottom: 1.2em;
-  height: 100px;
+  height: 110px;
 }
 /* line 33, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice .jspContainer {
-  height: 100px !important;
+  height: 110px !important;
 }
 /* line 34, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice .jspTrack {
-  height: 98px !important;
+  height: 108px !important;
 }
 /* line 35, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice ul {
