@@ -396,7 +396,8 @@
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .no-results h3 a:last-child {margin-top: 10px; display: block;}
-  .btn-radius.with-icon.chillout:before {background-position: -52px -200px;}  
+  .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;} 
+  .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -52px -240px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
 
@@ -427,12 +428,10 @@
   TEMPS STYLE
 */
   @media only screen and (max-width: 768px) {
-    /* line 42, ../sass/pages/_bar-guides.scss */
     .mobile section.bars .bar-w-pic .btn-round:before, .mobile section.bar-filter .bar-w-pic .btn-round:before {
       background-size: 128px 256px;
       background-position: -80px -40px;
     }
-    /* line 40, ../sass/pages/_bar-guides.scss */
     .mobile section.bars .bar-w-pic .btn-round, .mobile section.bar-filter .bar-w-pic .btn-round {
       width: 20px;
       height: 20px;
@@ -442,16 +441,16 @@
     section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
       font-size: 80%!important;
     }
+    .social-share > a {
+      background-size: 90px 40px;
+    }
     .social-share .fb-share {
       background-image: url("../images/fb@2x.png");
-      background-size: 105px 40px;
     }
     .social-share .twitter-share {
       background-image: url("../images/twitter@2x.png");
-      background-size: 105px 40px;
     }
     .social-share .email-share {
       background-image: url("../images/email@2x.png");
-      background-size: 105px 40px;
     }
   }
