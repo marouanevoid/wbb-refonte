@@ -238,11 +238,11 @@ article.tip .content .excerpt td .scroll{
     left: 24.5%;
 }
 
-.mobile-device .articles.padding article.small + article.small{
-    margin-left : 0;
-}
 .articles.padding article.small + article.small{
     margin-left : 4% ;
+}
+.mobile-device .articles.padding article.small + article.small{
+    margin-left : 0 !important;
 }
 .go{
     line-height: 41px !important;
