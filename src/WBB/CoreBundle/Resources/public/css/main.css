@@ -222,7 +222,7 @@
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {/* margin-top: 77px; */ background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 28px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
-  #bar-finder.mobile form label {font-size: 16px; color: #b3955f; margin: 30px 0 15px; display: block; visibility: visible;}
+  #bar-finder.mobile form label {font-size: 16px; color: #b3955f; margin: 40px 0 15px; display: block; visibility: visible;}
   #bar-finder.mobile .ui-dropdown-container {width: 100%!important;}
   #bar-finder.mobile .ui-dropdown-container .selected {text-align: center; font-size: 18px;}
   #bar-finder.mobile .ui-dropdown-container .btn-radius.with-icon:after {top: 20px !important;}
@@ -400,7 +400,8 @@
   .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -52px -240px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
-
+  .sub-header .title h3 {font-size: 1.8em;}
+  
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
   #bar-finder.mobile .form-radio {
