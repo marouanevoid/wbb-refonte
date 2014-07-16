@@ -308,6 +308,11 @@ class SemsoftBar
     private $bar;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="semsoftBarsLevel")
+     */
+    private $energyLevel;
+
+    /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"all"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -1399,12 +1404,9 @@ class SemsoftBar
     public function getUpdatedBar()
     {
         $bar = null;
-        if($this->getBar())
-        {
+        if($this->getBar()){
             $bar = $this->getBar();
-        }
-        else
-        {
+        }else{
             $bar = new Bar();
         }
 
@@ -1468,6 +1470,98 @@ class SemsoftBar
         if($this->getFoursquareID())
             $bar->setFoursquare($this->getFoursquareID());
 
+        if($this->getCounty())
+            $bar->setCounty($this->getCounty());
+
+        if($this->getIsOutDoorSeating())
+            $bar->setOutDoorSeating($this->getIsOutDoorSeating());
+
+        if($this->getIsHappyHour())
+            $bar->setHappyHour($this->getIsHappyHour());
+
+        if($this->getIsWiFi())
+            $bar->setWifi($this->getIsWiFi());
+//
+//        if($this->getFacebookUserPage())
+//            $bar->setFacebookUserPage($this->getFacebookUserPage());
+
+        if($this->getFacebookLikes())
+            $bar->setFacebookLikes($this->getFacebookLikes());
+
+        if($this->getFacebookCheckIns())
+            $bar->setFacebookCheckIns($this->getFacebookCheckIns());
+
+//        if($this->getTwitterUserPage())
+//            $bar->setTwitterUserPage($this->getTwitterUserPage());
+
+        if($this->getInstagramUserPage())
+            $bar->setInstagram($this->getInstagramUserPage());
+
+        if($this->getGooglePlusUserPage())
+            $bar->setGooglePlus($this->getGooglePlusUserPage());
+
+//        if($this->getFoursquareUserPage())
+//            $bar->setFoursquareUserPage($this->getFoursquareUserPage());
+
+        if($this->getFoursquareCheckIns())
+            $bar->setFoursquareCheckIns($this->getFoursquareCheckIns());
+
+        if($this->getFoursquareLikes())
+            $bar->setFoursquareLikes($this->getFoursquareLikes());
+
+        if($this->getFoursquareTips())
+            $bar->setFoursquareTips($this->getFoursquareTips());
+
+        if($this->getBusinessFound())
+            $bar->setStatus(Bar::BAR_STATUS_ENABLED_VALUE);
+
+        if($this->getIsPermanentlyClosed())
+            $bar->setStatus(Bar::BAR_STATUS_DISABLED_VALUE);
+
+        if($this->getEnergyLevel())
+            $bar->setEnergyLevel($this->getEnergyLevel());
+
+        if($this->getTags()){
+            $tags = $this->getTags();
+            foreach($tags as $tag)
+            {
+                $tag->setBar($bar);
+                $bar->addTag($tag);
+            }
+        }
+
+        if($this->getOpenings()){
+            $ops = $this->getOpenings();
+            foreach($ops as $op)
+            {
+                $op->setBar($bar);
+                $bar->addOpening($op);
+            }
+        }
+
         return $bar;
+    }
+
+    /**
+     * Set energyLevel
+     *
+     * @param \WBB\BarBundle\Entity\Tag $energyLevel
+     * @return SemsoftBar
+     */
+    public function setEnergyLevel(\WBB\BarBundle\Entity\Tag $energyLevel = null)
+    {
+        $this->energyLevel = $energyLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get energyLevel
+     *
+     * @return \WBB\BarBundle\Entity\Tag 
+     */
+    public function getEnergyLevel()
+    {
+        return $this->energyLevel;
     }
 }

@@ -3,6 +3,7 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Ddeboer\DataImport\Reader\CsvReader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -11,6 +12,7 @@ use WBB\BarBundle\Entity\BarOpening;
 use WBB\BarBundle\Entity\Collections\BarTag;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
 use WBB\BarBundle\Entity\Tag;
+use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\BarBundle\Form\SemsoftType;
 use WBB\BarBundle\Form\TipType;
@@ -41,9 +43,18 @@ class SemsoftController extends Controller
         ));
     }
 
-    public function mergeAction()
+    public function mergeAction($ssBarId)
     {
-        // TODO: After tags edited
+        $em = $this->getDoctrine()->getManager();
+
+        $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
+        $bar = $ssBar->getUpdatedBar();
+
+        $em->persist($bar);
+        $em->remove($ssBar);
+        $em->flush();
+
+        return new RedirectResponse($this->generateUrl("admin_wbb_bar_semsoft_semsoftbar_list"));
     }
 
     public function importFormAction()
@@ -83,20 +94,25 @@ class SemsoftController extends Controller
                         $newBar = false;
                     }
                 }
+                $country = $this->getCountry($data['Country']);
+                if($country && ($bar || !empty($data['Name']))){
 
-                if($bar || !empty($data['Name'])){
-                    $country    = $this->getCountry($data['Country']);
-                    if($country){
-                        $city   = $this->getCity($data['City'], $country);
-                        if($city)
-                        {
-                            $suburb = $this->getSuburb($data['District'], $city);
-                            $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
-                            $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
-                        }
-                        $ssBar->setCountry($this->setFieldValue('Country', $data, $country, $newBar));
+                    $city   = $this->getCity($data['City'], $country);
+                    if(!$city){
+                        $city = new City();
+                        $city
+                            ->setName($data['City'])
+                            ->setCountry($country)
+                            ->setPostalCode($data['PostalCode'])
+                        ;
+                        $em->persist($city);
+                        $em->flush();
                     }
-
+                    $suburb = $this->getSuburb($data['District'], $city);
+                    if(!$suburb)
+                    $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
+                    $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
+                    $ssBar->setCountry($this->setFieldValue('Country', $data, $country, $newBar));
                     $ssBar->setName($this->setFieldValue('Name', $data, null, $newBar));
                     $ssBar->setCounty($this->setFieldValue('County', $data, null, $newBar));
                     $ssBar->setPostalCode($this->setFieldValue('PostalCode', $data, null, $newBar));
@@ -281,8 +297,14 @@ class SemsoftController extends Controller
 
     private function getSuburb($suburbName, $city)
     {
-        $em = $this->getDoctrine()->getManager();
-        $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
+        $suburb = null;
+
+        if(!empty($suburbName)){
+            $em = $this->getDoctrine()->getManager();
+            $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
+        }else{
+            $suburbName = 'Unspecified';
+        }
 
         if(!$suburb)
         {
@@ -293,6 +315,7 @@ class SemsoftController extends Controller
             $em->persist($suburb);
             $em->flush();
         }
+
 
         return $suburb;
     }
@@ -344,6 +367,7 @@ class SemsoftController extends Controller
                         ->setType($type);
                 }
                 $em->persist($tag);
+                $em->flush();
 
                 if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
                     $ssBar->setEnergyLevel($tag);
@@ -356,9 +380,10 @@ class SemsoftController extends Controller
                     $ssBar->addTag($barTag);
                     $tag->addBar($barTag);
                     $em->persist($barTag);
+                    $em->persist($ssBar);
+                    $em->flush();
                 }
             }
-            $em->flush();
         }
     }
 }
