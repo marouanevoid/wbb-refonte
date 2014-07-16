@@ -446,14 +446,14 @@
     }
     .social-share .fb-share {
       background-image: url("../images/fb@2x.png");
-      background-size: 90px 40px;
+      background-size: 90px 41px;
     }
     .social-share .twitter-share {
       background-image: url("../images/twitter@2x.png");
-      background-size: 90px 40px;
+      background-size: 90px 41px;
     }
     .social-share .email-share {
       background-image: url("../images/email@2x.png");
-      background-size: 90px 40px;
+      background-size: 90px 41px;
     }
   }
