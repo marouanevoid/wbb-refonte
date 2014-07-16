@@ -13,7 +13,7 @@
         </li>
         <li>
             <a href="">
-                The Bar Project from Ballantine’s
+                The very very long Bar Project from Ballantine’s
             </a>
         </li>
     </ul>

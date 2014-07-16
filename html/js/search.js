@@ -49,8 +49,8 @@ meta.SearchPage = function() {
         //todo: construct neigborhood here then slidedown
         var html = '<li class="h4 radio-container">'+
                         '<label><input type="radio" name="neigborhoods" value="all"/><b></b>All Neigborhoods</label>'+
-                        '<div class="custom-scroll">'+
-                            '<ul>'+
+                        '<div '+($(window).width()>640?'class="custom-scroll"':'')+'>'+
+                            '<ul class="checkbox-container">'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyn</label></li>'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
@@ -60,6 +60,7 @@ meta.SearchPage = function() {
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
                             '</ul>'+
+                            '<br class="clear"/>'+
                         '</div>'+
                     '</li>';
 
@@ -92,14 +93,9 @@ meta.SearchPage = function() {
         that.context.$form_filter.find('.drop-btn a').click(function()
         {
             if( $(this).hasClass('plus') )
-            {
                 $(this).addClass('minus').removeClass('plus').parent().next('.drop-list').slideDown(that.config.speed);
-                that.context.$form_filter.find('.reset input[type="reset"]').show();
-            }
             else
-            {
                 $(this).addClass('plus').removeClass('minus').parent().next('.drop-list').slideUp(that.config.speed);
-            }
         });
 
 
@@ -129,6 +125,53 @@ meta.SearchPage = function() {
             }, that.config.speed);
         });
 
+        $('input[name=view-type]').change(function()
+        {
+            if( $(this).val() == "grid")
+            {
+                $('.bars-w-pic-list').fadeOut(200, 'easeInOutCubic', function()
+                {
+                    $('.bars-w-pic').show();
+
+                    var $elements = $('.bars-w-pic article');
+
+                    $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+
+                        $(this).delay(60*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
+                    });
+                });
+            }
+            else
+            {
+                $('.bars-w-pic').fadeOut(200, 'easeInOutCubic', function()
+                {
+                    $('.bars-w-pic-list').show();
+
+                    var $elements = $('.bars-w-pic-list article');
+
+                    $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+
+                        $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, 600, 'easeInOutCubic');
+                    });
+                });
+            }
+        });
+
+
+        $('.filter-btn').click(function()
+        {
+            $('.bar-filter-form, .bar-filter, .entire-content .search-bar-mobile').hide();
+            $('aside.filters').fadeIn();
+        });
+
+
+        $('aside.filters input[type=reset]').click(function()
+        {
+            $('.bar-filter-form, .bar-filter, .entire-content .search-bar-mobile').fadeIn();
+            if( $(window).width() < 640 ) $('aside.filters').hide();
+        });
+
+
 
         that.context.$form_filter.find('select[name=city]').change(function(){ that._selectCities( $(this).val() ) });
 
@@ -141,8 +184,13 @@ meta.SearchPage = function() {
     {
         that.context.$form_filter.on('change', 'input[type=radio]', function()
         {
+            that.context.$form_filter.find('.reset input[type="reset"]').show();
+
             var $others = $(this).closest('form').find('input[name='+$(this).attr('name')+']');
-            $others.parent().next().find('input[type=checkbox]').prop('checked', false);
+            $others.closest('.radio-container').find('input[type=checkbox]').prop('checked', false);
+
+            if( $(this).val() == "all" ) $(this).closest('.radio-container').find('input[type=checkbox]').prop('checked', true);
+
         });
     };
 
@@ -151,6 +199,8 @@ meta.SearchPage = function() {
     {
         that.context.$form_filter.on('change', 'input[type=checkbox]', function()
         {
+            that.context.$form_filter.find('.reset input[type="reset"]').show();
+
             var $radio_container =  $(this).closest('.radio-container');
             var $radio =  $radio_container.find('input[type=radio]');
             $radio.prop('checked', true);

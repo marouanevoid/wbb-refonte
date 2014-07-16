@@ -4,11 +4,16 @@
         <div class="img">
             <a href="" class="cover">
                 <img src="tmp/article1.jpg" width="600" height="400" alt="article1"/>
-                <?php if($has_video): ?>
+                <?php if( isset($has_video) and $has_video ): ?>
                     <span class="video"></span>
                 <?php endif ?>
+                <?php if( isset($has_sponsor) and $has_sponsor ): ?>
+                    <span class="sponsor">
+                        <img src="tmp/burton.png" alt="sponsor"/>
+                    </span>
+                <?php endif ?>
             </a>
-            <a class="plus-btn" href=""></a>
+            <a class="plus-btn" href=""><span></span></a>
         </div>
     <?php endif ?>
 
@@ -37,7 +42,7 @@
         <?php endif ?>
 
         <?php if(!$has_image): ?>
-            <a class="plus-btn" href=""></a>
+            <a class="plus-btn" href=""><span></span></a>
         <?php endif ?>
     </div>
 </article>

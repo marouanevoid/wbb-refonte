@@ -1,8 +1,13 @@
-.bar-w-pic { position: relative;
-
+.bar-w-pic {
+  position: relative;
   .btn-round { z-index: 25; position: absolute; right: 1em; top: 1em; }
-  .txt { position: absolute; z-index: 20; bottom: 2em; left: 2.5em; right: 2.5em;
-    .number { width: 40px; height: 40px; background-color: $color-brown; color: #fff; display: none; text-align: center; @include box-sizing(border-box); padding-top: 10px; margin-bottom: 1em; @include border-radius(50%); }
+  .txt {
+    position: absolute; z-index: 20; bottom: 2em; left: 2.5em; right: 2.5em;
+    .number { width: 40px; height: 40px; background-color: $color-brown; color: #fff; display: none; text-align: center; @include box-sizing(border-box); padding-top: 9px; margin-bottom: 1em; @include border-radius(50%); }
+    @media screen and (-webkit-min-device-pixel-ratio:0)
+    {
+      .number { padding-top: 10px }
+    }
     h2 { color: $color-subtle-yellow; text-transform: uppercase; font-weight: bold; margin-bottom: 0.5em; }
     h3 { color: $color-cream; text-transform: none; @include transition( margin ease-in-out 0.2s); margin-bottom: 0 }
     .hover { font-size: 1.4em; color: $color-cream; padding-top: 0.2em; position: absolute; bottom: 0; left: 0; width: 100%; opacity : 0; @include transition( opacity ease-in-out 0.2s);
