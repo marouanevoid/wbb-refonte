@@ -403,7 +403,7 @@
   .sub-header .title h3 {font-size: 1.8em;}
   .btn-round.dark.star:hover,
   .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
-
+  
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
   #bar-finder.mobile .form-radio {
