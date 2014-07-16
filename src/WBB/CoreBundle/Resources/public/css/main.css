@@ -401,6 +401,8 @@
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
   .sub-header .title h3 {font-size: 1.8em;}
+  .btn-round.dark.star:hover,
+  .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
@@ -431,7 +433,7 @@
   @media only screen and (max-width: 768px) {
     .mobile section.bars .bar-w-pic .btn-round:before, .mobile section.bar-filter .bar-w-pic .btn-round:before {
       background-size: 128px 256px;
-      background-position: -80px -40px;
+      background-position: -80px -40px!important;
     }
     .mobile section.bars .bar-w-pic .btn-round, .mobile section.bar-filter .bar-w-pic .btn-round {
       width: 20px;
