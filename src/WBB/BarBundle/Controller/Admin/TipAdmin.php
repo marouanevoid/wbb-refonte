@@ -79,19 +79,6 @@ class TipAdmin extends Admin {
         ;
     }
 
-    public function createQuery($context = 'list')
-    {
-        $qb = parent::createQuery($context);
-        $alias = $qb->getRootAliases();
-
-        if ($this->getContainer()->get('request')->query->get('wbbexpert')) {
-            $alias = $qb->getRootAliases();
-            // here the user that have the role ROLE_EXPERT
-        }
-
-        return $qb;
-    }
-
     public function getBatchActions()
     {
         // retrieve the default (currently only the delete action) actions
