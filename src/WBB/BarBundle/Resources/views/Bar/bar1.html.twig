@@ -9,7 +9,7 @@
         <div class="hover">
             <div class="tags">
                 {% if b.energyLevel %}
-                    {{ b.energyLevel }}
+                    {{ b.energyLevel }},
                 {% endif %}
                 {% for tr in b.tags |slice(0, ((b.energyLevel)? 4 : 5)) %}
                     {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
