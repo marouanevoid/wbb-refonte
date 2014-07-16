@@ -31,29 +31,28 @@
 
             if($.cookie){
                 var $finder = $('.bar-finder'),
-                $city = $finder.find('.city li'),
-                $gowith = $finder.find('.friend li'),
-                $chilot = $('.chillout'),
-                $casual = $('.casual'),
-                $party = $('.party');
+                    $city = $finder.find('.city li'),
+                    $gowith = $finder.find('.friend li'),
+                    $moodItem = $('.mood-item');
 
                 if($.cookie('finder_city')){
                     // Focus on city
                     $finder.find('.'+$.cookie('finder_city')).click();
+                    $.cookie('finder_city', null , 0);
                 }   
 
                 if($.cookie('finder_gowith')){
                     // Focus on go width
                     $finder.find('.'+$.cookie('finder_gowith')).click();
+                    $.cookie('finder_gowith', null , 0);
                 }
 
-                if($.cookie('finder_mood')){
+                if($.cookie('finder_mood') && $.cookie('finder_mood') != null){
                     //focus on Mood
                     // Remove Class the the all Mood
-                    $chilot.removeClass('active');
-                    $casual.removeClass('active');
-                    $party.removeClass('active');
-                    $finder.find('.' + $.cookie('finder_mood')).addClass('active')
+                    $moodItem.parent('a').removeClass('active');
+                    $('.mood-item[data-index=' + $.cookie('finder_mood') + ']').parent('a').addClass('active');
+                    $.cookie('finder_mood',null , 0)
                 }
 
                 // OPEN THE FINDER
