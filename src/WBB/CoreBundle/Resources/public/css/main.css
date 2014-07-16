@@ -400,10 +400,11 @@
   .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -52px -240px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
-  .sub-header .title h3 {font-size: 1.8em;}
+  .sub-header .title h3 {font-size: 2em;}
   .btn-round.dark.star:hover,
   .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
-  
+  .btn-radius.with-icon.list {margin: 0 0 0 5px;}
+
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
   #bar-finder.mobile .form-radio {
@@ -443,6 +444,11 @@
     }
     section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
       font-size: 80%!important;
+    }
+    .social-share .fb-share,
+    .social-share .twitter-share,
+    .social-share .email-share {
+      background-repeat: no-repeat;
     }
     .social-share .fb-share {
       background-image: url("../images/fb@2x.png");
