@@ -47,7 +47,7 @@
   .full-white {background-color: #fff;}
 
   /* TEMPS */
-    .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #000; opacity: 0.8;} /* TEMPS !!! */
+    .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #000; opacity: 0.8; z-index: 77;}
     .mask.brown {background-color: #4b4d4e; opacity: 1;}
     .group-form {overflow: hidden;}
     .separator-top {border-top: 1px solid #818a8c;}
@@ -183,6 +183,7 @@
   #UI.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
 /* Register1 (Popup) - PSDN : PSDs/login/desktop/register1.psd & register2.psd; */
   #register {padding: 0 25px;}
+  #register.void-popup {position: absolute; left: 25%; z-index: 77;}
   #register .title {width: 55%;}
   #register #UI {width: 860px}
   #register #account {width: 300px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
@@ -417,7 +418,7 @@
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .no-results h3 a:last-child {margin-top: 10px; display: block;}
-  .btn-radius.with-icon.chillout:before {background-position: -52px -200px;}
+  .btn-radius.with-icon.chillout:before {background-position: -52px -200px;}  
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
 
@@ -426,5 +427,20 @@
   #bar-finder.mobile .form-radio {
     width: 93px;
     margin-right: 8px;
+  }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+  .social-share .fb-share {
+    background-image: url("../images/fb@2x.png");
+    background-size: 105px 40px;
+  }
+  .social-share .twitter-share {
+    background-image: url("../images/twitter@2x.png");
+    background-size: 105px 40px;
+  }
+  .social-share .email-share {
+    background-image: url("../images/email@2x.png");
+    background-size: 105px 40px;
   }
 }
