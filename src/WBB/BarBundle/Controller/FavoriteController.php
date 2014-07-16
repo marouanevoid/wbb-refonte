@@ -38,11 +38,14 @@ class FavoriteController extends Controller
 
         return new JsonResponse(array(
             'code' => 200,
-            'message' => 'Bar added to the current user !'
+            'message' => 'Bar added to the current user !',
+            'href' => $this->generateUrl('wbb_favorite_bar_delete', array(
+                'barId' => $barId
+            ))
         ));
     }
 
-    public function deleteBar($barId)
+    public function deleteBarAction($barId)
     {
         $user = $this->getUser();
         if (!$user) {
@@ -72,7 +75,10 @@ class FavoriteController extends Controller
 
         return new JsonResponse(array(
             'code' => 200,
-            'message' => 'Bar deleted from the favirites of the current user !'
+            'message' => 'Bar deleted from the favirites of the current user !',
+            'href' => $this->generateUrl('wbb_favorite_bar_add', array(
+                'barId' => $barId
+            ))
         ));
     }
 
@@ -106,11 +112,14 @@ class FavoriteController extends Controller
 
         return new JsonResponse(array(
             'code' => 200,
-            'message' => 'BestOf added to the current user !'
+            'message' => 'BestOf added to the current user !',
+            'href' => $this->generateUrl('wbb_favorite_bestof_delete', array(
+                'bestOfId' => $bestOfId
+            ))
         ));
     }
     
-    public function deleteBestOf($bestOfId)
+    public function deleteBestOfAction($bestOfId)
     {
         $user = $this->getUser();
         if (!$user) {
@@ -140,7 +149,10 @@ class FavoriteController extends Controller
 
         return new JsonResponse(array(
             'code' => 200,
-            'message' => 'BestOf deleted from the favirites of the current user !'
+            'message' => 'BestOf deleted from the favirites of the current user !',
+            'href' => $this->generateUrl('wbb_favorite_bestof_add', array(
+                'bestOfId' => $bestOfId
+            ))
         ));
     }
 

@@ -1,6 +1,15 @@
 <article class="bar-wo-pic">
 
-    <a href="#0" class="btn-round dark star nc"></a>
+    <a href="
+       {% if app.user %}
+           {% if b in app.user.favoriteBars %}
+               {{ path('wbb_favorite_bar_delete', {'barId':b.id}) }}
+           {% else%}
+               {{ path('wbb_favorite_bar_add', {'barId':b.id}) }}
+           {% endif %}
+       {% else %}
+           #
+       {% endif %}" class="btn-round dark star nc favorite-btn"></a>
 
     <div class="txt">
         <h2>{{ b.name|truncate(30, true) }}</h2>

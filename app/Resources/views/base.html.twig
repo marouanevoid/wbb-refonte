@@ -84,16 +84,18 @@
 
         <script>
             $(document).ready(function(){
-                $('.favorite-bar-btn').on('click',function(e){
+                $('.favorite-btn').on('click',function(e){
                     e.preventDefault();
+                    var btn = $(this);
                     var url = $(this).attr('href');
                     $.ajax({
                         url: url,
                         success:function(response) {
                             if (response.code === 200) {
-                                alert('Success !');
+                                btn.attr('href', response.href);
+                                console.log(response.message);
                             } else {
-                                alert('Sign up fool !');
+                                console.log('sign in fool !');
                             }
                         }
                     });

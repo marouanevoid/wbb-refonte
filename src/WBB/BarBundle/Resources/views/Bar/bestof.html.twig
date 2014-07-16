@@ -1,6 +1,15 @@
 <article class="bestof">
 
-    <a href="#0" class="btn-round dark star"></a>
+    <a href="
+       {% if app.user %}
+           {% if b in app.user.favoriteBestOfs %}
+               {{ path('wbb_favorite_bestof_delete', {'bestOfId':b.id}) }}
+           {% else%}
+               {{ path('wbb_favorite_bestof_add', {'bestOfId':b.id}) }}
+           {% endif %}
+       {% else %}
+           #
+       {% endif %}" class="btn-round dark star favorite-btn"></a>
 
     <div class="txt vcenter">
         <div class="circle vcenter">

@@ -1,5 +1,15 @@
 <article class="bar-w-pic {% if bestof is defined %}best-of{% endif %}">
-    <a href="{{ path('wbb_favorite_bar_add', {'barId':b.id}) }}" class="btn-round dark star favorite-bar-btn"></a>
+    <a href="
+       {% if app.user %}
+           {% if b in app.user.favoriteBars %}
+               {{ path('wbb_favorite_bar_delete', {'barId':b.id}) }}
+           {% else%}
+               {{ path('wbb_favorite_bar_add', {'barId':b.id}) }}
+           {% endif %}
+       {% else %}
+           #
+       {% endif %}"
+       class="btn-round dark star favorite-btn"></a>
     <div class="txt">
         {% if (bestof is defined) and ordered %}
             <span class="number h2">{{ loop.index }}</span>
