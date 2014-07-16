@@ -35,16 +35,36 @@
                     $gowith = $finder.find('.friend li'),
                     $moodItem = $('.mood-item');
 
-                if($.cookie('finder_city')){
-                    // Focus on city
-                    $finder.find('.'+$.cookie('finder_city')).click();
-                    $.cookie('finder_city', null , 0);
-                }   
+                if($('.ipad').length <= 0 ){
+                    if($.cookie('finder_city')){
+                        // Focus on city
+                        $finder.find('.'+$.cookie('finder_city')).click();
+                        $.cookie('finder_city', null , 0);
+                    }   
 
-                if($.cookie('finder_gowith')){
-                    // Focus on go width
-                    $finder.find('.'+$.cookie('finder_gowith')).click();
-                    $.cookie('finder_gowith', null , 0);
+                    if($.cookie('finder_gowith')){
+                        // Focus on go width
+                        $finder.find('.'+$.cookie('finder_gowith')).click();
+                        $.cookie('finder_gowith', null , 0);
+                    }
+                }else{
+                    $city = $finder.find('[name=city]');
+                    $gowith = $finder.find('[name=go_out]');
+
+                    if($.cookie('finder_city')){
+                        $city[0].selectedIndex = $.cookie('finder_city');
+                        var valc = $.cookie('finder_city'),
+                            coption = $city.find('option')[valc];
+                        $finder.find('.city').find('.selected').text($(coption).text());
+
+                    }
+                    if($.cookie('finder_gowith')){
+                        $gowith[0].selectedIndex = $.cookie('finder_gowith');
+                        var valc = $.cookie('finder_gowith'),
+                            coption = $gowith.find('option')[valc];
+                        $finder.find('.friend').find('.selected').text($(coption).text());
+
+                    }
                 }
 
                 if($.cookie('finder_mood') && $.cookie('finder_mood') != null){
