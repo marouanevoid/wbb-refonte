@@ -14,6 +14,11 @@
        $('.fake-go-item').remove();
     });
 </script>
+{% if is_tablet() %}
+    <style type="text/css">
+        section.bar-finder .ui-dropdown.btn-radius.with-icon {width: 176px!important;}
+    </style>
+{% endif %}
 <section class="bar-finder">
     <div class="container">
         <img class="finder-arrow" src="{{ asset('bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
