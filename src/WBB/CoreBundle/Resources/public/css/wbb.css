@@ -282,3 +282,6 @@ article.tip .content .excerpt td .scroll{
 aside > article.interview-frist-child{ margin-top:0 !important; }
 .ads-pannel + article.interview-frist-child , article + article.interview-frist-child {margin-top: 8% !important; }
 
+.entire-content.show {
+    display: block !important;
+}
