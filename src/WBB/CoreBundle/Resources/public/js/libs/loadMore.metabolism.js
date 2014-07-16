@@ -25,11 +25,29 @@ meta.LoadMore = function(config) {
     /* Public attributes. */
     that._setupEvents = function(){
 
-        /*that.config.$button.on('click', function(e)
-        {
-            e.preventDefault();
-            that._updateContent();
-        });*/
+
+         // that.config.$button.on('click', function(e)
+         // {
+         //     e.preventDefault();
+ 
+         //     if(that.context.is_loading) return;
+ 
+ 
+         //     var $button     = $(this);
+         //     var $target     = that.context.$container.find('.load-target');
+         //     var url         = $button.attr('href')+that.config.page+that.context.page;
+ 
+         //     $button.data('text', $button.text());
+         //    $button.width($button.width());
+
+         //    $button.addClass('loading').text(TRAD.loading);
+
+         //    that._load(url, $target, function()
+         //    {
+         //        $button.removeAttr('style');
+         //         $button.removeClass('loading').text( $button.data('text'));
+         //     });
+         // });
     };
 
     that._updateContent = function() {
