@@ -1,2 +1,0 @@
-<?php header('Content-type: application/json'); ?>
-{"code":200,"q":"fe","values":[{"name":"New York"},{"name":"Paris"},{"name":"Madrid"},{"name":"Helsinki"},{"name":"New York"},{"name":"Paris"},{"name":"Madrid"},{"name":"Helsinki"}]}
