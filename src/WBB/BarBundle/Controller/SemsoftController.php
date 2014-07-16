@@ -347,7 +347,7 @@ class SemsoftController extends Controller
 
                 if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
                     $ssBar->setEnergyLevel($tag);
-                }elseif($type == Tag::WBB_TAG_TYPE_THEME or $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
+                }elseif($type == Tag::WBB_TAG_TYPE_THEME || $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
                     $barTag = new BarTag();
                     $barTag
                         ->setType($type)

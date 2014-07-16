@@ -1,5 +1,4 @@
 parameters:
-
     #Mailer Class
     wbb_core.twig_swift.class: WBB\CoreBundle\Mailer\TwigSwiftMailer
 
@@ -18,6 +17,19 @@ parameters:
     wbb_core.city_bestof.entity.class: WBB\CoreBundle\Entity\CityBestOf
 
 services:
+    #PDO SESSION
+    pdo:
+        class: PDO
+        arguments:
+            - "mysql:host=%database_host%;dbname=%database_name%"
+            - "%database_user%"
+            - "%database_password%"
+        calls:
+            - [setAttribute, [3, 2]]
+
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: ["@pdo", "%pdo.db_options%"]
 
     #Admin Class
     wbb.core.admin.country:
@@ -80,13 +92,7 @@ services:
         factory_method: getRepository
         arguments: ['WBBCoreBundle:CitySuburb']
 
-    #Twig Show Media Extension
-    wbb.twig.show_media_extension:
-        class: WBB\CoreBundle\Twig\Extension\ShowMediaExtension
-        arguments: ['@service_container']
-        tags:
-          - { name: twig.extension }
-
+    #Twig Extensions
     wbb.twig.show_media_filter_extension:
         class: WBB\CoreBundle\Twig\Extension\ShowMediaFilterExtension
         arguments: ['@service_container']

@@ -66,12 +66,6 @@ class BarTagRepository extends EntityRepository
                 ->groupBy('b')
                 ->setMaxResults($limit);
 
-
-//            if($location==BarRepository::BAR_LOCATION_CITY && $tags == false)
-//            {
-//                var_dump($limit);die;
-//            }
-
             return $qb->getQuery()->getResult();
         }
         else{

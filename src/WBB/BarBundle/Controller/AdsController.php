@@ -4,11 +4,11 @@ namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WBB\BarBundle\Entity\Ad;
-use WBB\BarBundle\Entity\News;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class NewsController extends Controller
+class AdsController extends Controller
 {
-    public function landingPageAction($citySlug = false)
+    public function showAction($adSize)
     {
         $session = $this->container->get('session');
         if ($citySlug == "world-wide")

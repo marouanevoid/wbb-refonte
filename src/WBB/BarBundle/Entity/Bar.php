@@ -1432,7 +1432,8 @@ class Bar implements IndexableEntity
         $curNb = 0;
         $curDelta = 0;
         $i = 1;
-        for ($i = 1 ; $i < count($fullArray) ; $i++) {
+        $count = count($fullArray);
+        for ($i = 1 ; $i < $count ; $i++) {
             $cur = $fullArray[$i];
             $curNb = strlen($cur);
             $curSize = strlen($init) + $curNb;
@@ -1905,7 +1906,7 @@ class Bar implements IndexableEntity
     {
         $response = '';
 
-        for($i=1; $i <= $this->getPrice(); $i++)
+        for($i=1; $i <= $this->price; $i++)
         {
             $response.= "$";
         }
