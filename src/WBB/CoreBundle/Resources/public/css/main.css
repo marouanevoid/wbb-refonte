@@ -401,7 +401,7 @@
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
   .sub-header .title h3 {font-size: 1.8em;}
-  
+
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
   #bar-finder.mobile .form-radio {
@@ -442,16 +442,16 @@
     section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
       font-size: 80%!important;
     }
-    .social-share > a {
-      background-size: 90px 40px;
-    }
     .social-share .fb-share {
       background-image: url("../images/fb@2x.png");
+      background-size: 90px 40px;
     }
     .social-share .twitter-share {
       background-image: url("../images/twitter@2x.png");
+      background-size: 90px 40px;
     }
     .social-share .email-share {
       background-image: url("../images/email@2x.png");
+      background-size: 90px 40px;
     }
   }
