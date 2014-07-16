@@ -34,6 +34,6 @@
         <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
     {% endfor %}
     {% else %}
-        <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ b.title }}"/>
+        <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt=""/>
     {% endif %}
 </article>
