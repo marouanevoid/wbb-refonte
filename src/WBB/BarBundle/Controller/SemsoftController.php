@@ -5,8 +5,6 @@ namespace WBB\BarBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Ddeboer\DataImport\Reader\CsvReader;
-use Ddeboer\DataImportWorkflow;
-use Ddeboer\DataImport\Writer\DoctrineWriter;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BarOpening;
@@ -17,7 +15,6 @@ use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\BarBundle\Form\SemsoftType;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Entity\Tip;
-use Ddeboer\DataImport\Writer\CsvWriter;
 
 class SemsoftController extends Controller
 {

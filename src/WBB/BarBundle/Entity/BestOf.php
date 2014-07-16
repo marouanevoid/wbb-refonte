@@ -5,7 +5,6 @@ namespace WBB\BarBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\Collections\BestOfTag;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 

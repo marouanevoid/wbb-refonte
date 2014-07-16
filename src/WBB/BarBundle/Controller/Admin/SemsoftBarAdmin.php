@@ -6,12 +6,9 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
-use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 
 class SemsoftBarAdmin extends Admin
 {

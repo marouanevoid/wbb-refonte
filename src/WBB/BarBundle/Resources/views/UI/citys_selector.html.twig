@@ -44,19 +44,17 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-                        {% if city is defined and  city and city !='' %}
-                            {% if from == 'home' %}
-                            <li><a data-type="redirect" href="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</a></li>
-                            {% elseif from == 'news' %}
-                            <li><a data-type="redirect" href="{{ path('wbb_news_landing_page_city',{citySlug:"world-wide"}) }}">World Wide</a></li>
-                            {% elseif from == 'barguide' %}
-                            <li><a data-type="redirect" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">World Wide</a></li>
-                            {% endif %}
-                        {% endif %}
+                {% if city is defined and  city and city !='' %}
+                    {% if from == 'home' %}
+                    <li><a data-type="redirect" href="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</a></li>
+                    {% elseif from == 'news' %}
+                    <li><a data-type="redirect" href="{{ path('wbb_news_landing_page_city',{citySlug:"world-wide"}) }}">World Wide</a></li>
+                    {% elseif from == 'barguide' %}
+                    <li><a data-type="redirect" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">World Wide</a></li>
+                    {% endif %}
+                {% endif %}
             </ul>
             <a class="btn-radius border brown" href="cities">See a list of cities</a>
         </div>
     </div>
-
-
 </div>

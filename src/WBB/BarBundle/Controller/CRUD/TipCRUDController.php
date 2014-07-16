@@ -5,11 +5,7 @@ namespace WBB\BarBundle\Controller\CRUD;
 use Sonata\AdminBundle\Controller\CRUDController as Controller,
     Sonata\AdminBundle\Datagrid\ProxyQueryInterface,
     Symfony\Component\HttpFoundation\RedirectResponse,
-    Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\HttpKernel\Exception\NotFoundHttpException,
     Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-use Sonata\AdminBundle\Exception\ModelManagerException;
 
 class TipCRUDController extends Controller
 {

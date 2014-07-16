@@ -5,7 +5,6 @@ namespace WBB\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Entity\CitySuburb;
