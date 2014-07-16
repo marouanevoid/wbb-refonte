@@ -30,6 +30,7 @@ class SuburbRepository extends EntityRepository
             ->leftJoin($this->getAlias().".city", "c")
             ->where($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)))
             ->andWhere($qb->expr()->eq('c.id', $city->getId()))
+            ->setMaxResults(1)
         ;
 
         return $qb->getQuery()->getOneOrNullResult();

@@ -109,7 +109,6 @@ class SemsoftController extends Controller
                         $em->flush();
                     }
                     $suburb = $this->getSuburb($data['District'], $city);
-                    if(!$suburb)
                     $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
                     $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
                     $ssBar->setCountry($this->setFieldValue('Country', $data, $country, $newBar));
@@ -297,14 +296,12 @@ class SemsoftController extends Controller
 
     private function getSuburb($suburbName, $city)
     {
-        $suburb = null;
-
-        if(!empty($suburbName)){
-            $em = $this->getDoctrine()->getManager();
-            $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
-        }else{
+        if(empty($suburbName)){
             $suburbName = 'Unspecified';
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
 
         if(!$suburb)
         {
