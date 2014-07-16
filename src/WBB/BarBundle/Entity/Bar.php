@@ -1950,16 +1950,6 @@ class Bar implements IndexableEntity
     }
 
     /**
-     * Get outDoorSeating
-     *
-     * @return boolean 
-     */
-    public function getOutDoorSeating()
-    {
-        return $this->outDoorSeating;
-    }
-
-    /**
      * Add users
      *
      * @param \WBB\UserBundle\Entity\User $users

@@ -1,4 +1,3 @@
-<div class="mask"></div>
 <div id="register" style="display:none">
     <div id="UI" class="wrap">
         <div class="margin-top-20">
@@ -9,14 +8,14 @@
             <div id="create-account" class="left">
                 <div class="subtitle text-transform-uppercase bold">Create an account now</div>
                 <div class="connect-fb margin-top-20">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
-                <form action="" {{ path('wbb_user_registration_register_light') }} method="POST" id="register_form">
+                <form action="{{ path('wbb_user_registration_register_light') }}" method="POST" id="register_form">
                     <div class="text-align-left margin-bottom-20">
-                        {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Name' } }) }}
-                        {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
-                        {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
-                        {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
+                        {{ form_widget(form.username, { 'attr' : { 'class': 'form-text margin-top-30', 'placeholder': 'Name' } }) }}
+                        {{ form_widget(form.email, { 'attr' : { 'class': 'form-text margin-top-10', 'placeholder': 'Email' } }) }}
+                        {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text margin-top-10', 'placeholder': 'Password' } }) }}
+                        {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text margin-top-10', 'placeholder': 'Confirm Password' } }) }}
                     </div>
-                    <div id="date-birthday" class="text-align-center">
+                    <div id="date-birthday" class="text-align-center ui-dropdown-list-form">
                         <label class="margin-bottom-15">Date of Birth</label>
                         <div class="select-wrap left">
                             {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
@@ -29,7 +28,7 @@
                         </div>
                     </div> <!-- #date-birthday -->
                     <div class="clear"></div>
-                    <div id="countries" class="margin-top-10">
+                    <div id="countries" class="margin-top-10 ui-dropdown-list-form">
                         {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                     </div><!-- #countries -->
 
@@ -38,7 +37,7 @@
                         <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Register">
                     </div>
                 </form>
-                {#{% if form.points.vars.errors|length %}#}
+
                 <div id="message" class="margin-top-20 right">
                     <div>
                         <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
