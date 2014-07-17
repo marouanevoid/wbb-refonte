@@ -45,7 +45,7 @@
   .no-text {text-indent: -7777px; font-size: 0!important; color: transparent;}
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
-  .void-popup {z-index: 107;}
+  .void-popup {z-index: 107; margin-left: -430px; margin-top: -430px; left: 50%; z-index: 107; top: 50%;}
 
   /* TEMPS */
     .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #000; opacity: 0.8; z-index: 100;}
@@ -393,8 +393,8 @@
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
-  .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;} 
-  .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -52px -240px;} 
+  .bar-finder .ui-radio.btn-radius.with-icon:after,
+  .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -92px -200px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
   .sub-header .title h3 {font-size: 2em;}
@@ -402,7 +402,7 @@
   .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
-.articles article .img .cover .sponsor {bottom: 0px; /* Cible IE9 */}
+  .articles article .img .cover .sponsor {bottom: 0px; /* Cible IE9 */}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
