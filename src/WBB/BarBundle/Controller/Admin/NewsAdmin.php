@@ -122,8 +122,8 @@ class NewsAdmin extends Admin {
     
     public function getNewInstance(){
         $newInstance = parent::getNewInstance();
-        $newInstance->setIsAnInterview(true);
-        $newInstance->setIsOnTop(true);
+        $newInstance->setInterview(true);
+        $newInstance->setOnTop(true);
 
         return $newInstance;
     }
