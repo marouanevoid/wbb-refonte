@@ -283,8 +283,8 @@
         {% endblock %}
         <!-- AD -->
         {% block footerAd %}
-            {% include '::ads/adsFooter.html.twig' %}
-            {#{{ render(controller('WBBBarBundle:Ads:show', { 'position': 'HP_728x90' })) }}#}
+            {#{% include '::ads/adsFooter.html.twig' %}#}
+            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
         {% endblock %}
 
         {% block footer %}

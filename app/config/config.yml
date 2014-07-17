@@ -172,7 +172,7 @@ sonata_media:
                 city_small :    { width: 340 , height: 350, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
 
-        ads:
+        banner:
             download:
                 strategy: sonata.media.security.connected_strategy
                 mode: http

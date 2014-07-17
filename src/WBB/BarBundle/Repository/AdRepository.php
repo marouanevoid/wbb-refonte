@@ -20,7 +20,8 @@ class AdRepository extends EntityRepository
         $qb
             ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.position', $qb->expr()->literal($position)))
-            ->andWhere($qb->expr()->between($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.beginAt', $this->getAlias().'.endAt'))
+            ->andWhere($qb->expr()->gte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.beginAt'))
+            ->andWhere($qb->expr()->lte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.endAt'))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->setMaxResults(1);
         ;
@@ -32,6 +33,6 @@ class AdRepository extends EntityRepository
             ;
         }
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 } 

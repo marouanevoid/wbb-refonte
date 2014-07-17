@@ -6,10 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AdsController extends Controller
 {
-    public function showAction($position)
+    public function showAction($format)
     {
-        $size = explode('_', $position);
-        $size = explode('x', $size[1]);
+        $size = explode('_', $format);
 
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
@@ -19,9 +18,9 @@ class AdsController extends Controller
             $city = $this->container->get('city.repository')->findOneBySlug($slug);
         }
 
-        $ad = $this->get('ad.repository')->findOneByPositionAndCountry($position, ($city)?$city->getCountry():null);
+        $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city)?$city->getCountry():null);
 
-        $this->render('WBBBarBundle:Ads:show.html.twig', array(
+        return $this->render('WBBBarBundle:Ads:show.html.twig', array(
                 'ad'    => $ad,
                 'format' => $size[1]
             )
