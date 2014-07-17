@@ -39,7 +39,11 @@ class CloudSearchSearcher
             $q = $q . "entity_type:'{$parameters['entity']}'";
         }
         if ($parameters['city']) {
-            $q = $q . " city:'{$parameters['city']}'";
+            if ($parameters['entity'] == 'News') {
+                $q = $q . " cities:'{$parameters['city']}'";
+            } else {
+                $q = $q . " city:'{$parameters['city']}'";
+            }
         }
         $tagsTypes = array(
             'style',
@@ -55,6 +59,13 @@ class CloudSearchSearcher
                     $q = $q . " tags_$tagType:'$tag'";
                 }
             }
+        }
+        if ($parameters['district']) {
+            $or = '';
+            foreach (explode(',', $parameters['district']) as $district) {
+                $or = $or . " district:'$district'";
+            }
+            $q = $q . " (or $or)";
         }
 
         $q = $q . ")";
