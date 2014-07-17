@@ -232,7 +232,7 @@
   #bar-finder.mobile .ui-radio.btn-radius.with-icon:before {left:10px !important}
   #bar-finder.mobile .group-form.radio ul {width: 320px!important;}
   #bar-finder.mobile .form-radio {width: 95px; margin-right: 10px;} /* Page : Mobile_BarFinder.html */
-  #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; text-indent: 18px;}
+  #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; font-size: 16px;}
   #bar-finder.mobile .form-submit {width: 90%; color: #faf3e1; font-size: 20px; background-color: #b3955f; line-height: 42px; font-weight: bold;}
 /* Barfinder Results (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_results.psd; */
   /*
@@ -403,15 +403,17 @@
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
   .articles article .img .cover .sponsor {bottom: 0px; /* Cible IE9 */}
+  #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
+  #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 15px;}
+  #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 5px;}
 
 /* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
-  #bar-finder.mobile .form-radio {
-    width: 93px;
-    margin-right: 8px;
+  @media only screen and (max-width : 320px) {
+    #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
   }
-}
-
+  @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
+    #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
+  }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   .social-share .fb-share {
     background-image: url("../images/fb@2x.png");
