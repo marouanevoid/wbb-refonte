@@ -168,6 +168,6 @@
 
 {% endblock %}
 {% block footerAd %}
-    {{ parent() }}
-</div>
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BG_728x90' })) }}
+    </div>
 {% endblock %}
