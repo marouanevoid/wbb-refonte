@@ -58,6 +58,7 @@ class SearchController extends Controller
         $mood = $request->query->get('mood', null);
         $occasion = $request->query->get('occasion', null);
         $cocktails = $request->query->get('cocktails', null);
+        $district = $request->query->get('district', null);
 
         $results = $this->get('cloudsearch.searcher')->search(array(
             'q' => $q,
@@ -68,7 +69,8 @@ class SearchController extends Controller
             'style' => $style,
             'mood' => $mood,
             'occasion' => $occasion,
-            'cocktails' => $cocktails
+            'cocktails' => $cocktails,
+            'district' => $district
         ));
 
         return $results;
