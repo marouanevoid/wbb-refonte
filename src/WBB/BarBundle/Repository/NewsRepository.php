@@ -28,11 +28,11 @@ class NewsRepository extends EntityRepository
 
         if($onlyOnTop){
             $qb
-                ->where($qb->expr()->eq($this->getAlias().'.isOnTop', $qb->expr()->literal(true)))
+                ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
                 ->orderBy($this->getAlias().'.createdAt', 'DESC');
         }else{
             $qb
-                ->orderBy($this->getAlias().'.isOnTop', 'DESC')
+                ->orderBy($this->getAlias().'.onTop', 'DESC')
                 ->addOrderBy($this->getAlias().'.createdAt', 'DESC');
         }
 
@@ -55,7 +55,7 @@ class NewsRepository extends EntityRepository
         $qb
             ->select($this->getAlias())
             ->where($qb->expr()->notIn($this->getAlias().'.id', $exceptIds))
-            ->orderBy($this->getAlias().'.isOnTop', 'DESC')
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
         ;
 
         if($limit > 0)
