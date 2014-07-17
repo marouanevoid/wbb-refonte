@@ -6,17 +6,6 @@
             Insider Tips
         </div>
 
-        {% if app.user == null %}
-            <script>
-                $(document).ready(function() {
-                    $('#tips').on('submit', function(e) {
-                        e.preventDefault();
-                        alert('Prevented !');
-                    });
-                });
-            </script>
-        {% endif %}
-
         <div class="load-target">
             <div class="line" style="height: 0px;width: 0px;"></div>
             <div class="line wbbtips">

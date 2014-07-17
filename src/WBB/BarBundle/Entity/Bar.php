@@ -399,6 +399,10 @@ class Bar implements IndexableEntity
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="favoriteBars")
+     */
+    private $users;
 
     /**
      * Get id
@@ -1945,6 +1949,39 @@ class Bar implements IndexableEntity
     }
 
     /**
+     * Add users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     * @return Bar
+     */
+    public function addUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     */
+    public function removeUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
      * @return boolean
      */
     public function isHappyHour()
@@ -2068,4 +2105,5 @@ class Bar implements IndexableEntity
     {
         return $this->wifi;
     }
+
 }
