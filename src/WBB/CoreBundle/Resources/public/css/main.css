@@ -405,6 +405,7 @@
   #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 15px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 5px;}
+  .cities-content input[type="text"] + .cities-content input[type="submit"] {right: -5px;}
 
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
