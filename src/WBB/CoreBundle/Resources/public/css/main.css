@@ -401,6 +401,7 @@
   .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
+.articles article .img .cover .sponsor {bottom: 0px; /* Cible IE9 */}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
