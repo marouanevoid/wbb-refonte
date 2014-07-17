@@ -3,6 +3,7 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Ddeboer\DataImport\Reader\CsvReader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -11,6 +12,7 @@ use WBB\BarBundle\Entity\BarOpening;
 use WBB\BarBundle\Entity\Collections\BarTag;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
 use WBB\BarBundle\Entity\Tag;
+use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\BarBundle\Form\SemsoftType;
 use WBB\BarBundle\Form\TipType;
@@ -41,9 +43,18 @@ class SemsoftController extends Controller
         ));
     }
 
-    public function mergeAction()
+    public function mergeAction($ssBarId)
     {
-        // TODO: After tags edited
+        $em = $this->getDoctrine()->getManager();
+
+        $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
+        $bar = $ssBar->getUpdatedBar();
+
+        $em->persist($bar);
+        $em->remove($ssBar);
+        $em->flush();
+
+        return new RedirectResponse($this->generateUrl("admin_wbb_bar_semsoft_semsoftbar_list"));
     }
 
     public function importFormAction()
@@ -83,20 +94,24 @@ class SemsoftController extends Controller
                         $newBar = false;
                     }
                 }
+                $country = $this->getCountry($data['Country']);
+                if($country && ($bar || !empty($data['Name']))){
 
-                if($bar || !empty($data['Name'])){
-                    $country    = $this->getCountry($data['Country']);
-                    if($country){
-                        $city   = $this->getCity($data['City'], $country);
-                        if($city)
-                        {
-                            $suburb = $this->getSuburb($data['District'], $city);
-                            $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
-                            $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
-                        }
-                        $ssBar->setCountry($this->setFieldValue('Country', $data, $country, $newBar));
+                    $city   = $this->getCity($data['City'], $country);
+                    if(!$city){
+                        $city = new City();
+                        $city
+                            ->setName($data['City'])
+                            ->setCountry($country)
+                            ->setPostalCode($data['PostalCode'])
+                        ;
+                        $em->persist($city);
+                        $em->flush();
                     }
-
+                    $suburb = $this->getSuburb($data['District'], $city);
+                    $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
+                    $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
+                    $ssBar->setCountry($this->setFieldValue('Country', $data, $country, $newBar));
                     $ssBar->setName($this->setFieldValue('Name', $data, null, $newBar));
                     $ssBar->setCounty($this->setFieldValue('County', $data, null, $newBar));
                     $ssBar->setPostalCode($this->setFieldValue('PostalCode', $data, null, $newBar));
@@ -108,11 +123,11 @@ class SemsoftController extends Controller
                     $ssBar->setWebsite($this->setFieldValue('Website', $data, null, $newBar));
                     $ssBar->setEmail($this->setFieldValue('Email', $data, null, $newBar));
                     $ssBar->setPhone($this->setFieldValue('Phone', $data, null, $newBar));
-                    $ssBar->setIsOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
-                    $ssBar->setIsHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
-                    $ssBar->setIsWiFi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
+                    $ssBar->setOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
+                    $ssBar->setHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
+                    $ssBar->setWifi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
                     $ssBar->setPrice($this->setFieldValue('PriceRange', $data, $this->getPriceValue($data['PriceRange']), $newBar));
-                    $ssBar->setIsCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
+                    $ssBar->setCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
                     $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
                     $ssBar->setReservation($this->setFieldValue('Booking', $data, null, $newBar));
                     $ssBar->setParkingType($this->setFieldValue('ParkingType', $data, null, $newBar));
@@ -131,7 +146,7 @@ class SemsoftController extends Controller
                     $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
                     $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
                     $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
-                    $ssBar->setIsPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
+                    $ssBar->setPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
                     $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, null, $newBar));
                     $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
                     $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));
@@ -281,6 +296,10 @@ class SemsoftController extends Controller
 
     private function getSuburb($suburbName, $city)
     {
+        if(empty($suburbName)){
+            $suburbName = 'Unspecified';
+        }
+
         $em = $this->getDoctrine()->getManager();
         $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
 
@@ -293,6 +312,7 @@ class SemsoftController extends Controller
             $em->persist($suburb);
             $em->flush();
         }
+
 
         return $suburb;
     }
@@ -344,6 +364,7 @@ class SemsoftController extends Controller
                         ->setType($type);
                 }
                 $em->persist($tag);
+                $em->flush();
 
                 if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
                     $ssBar->setEnergyLevel($tag);
@@ -356,9 +377,10 @@ class SemsoftController extends Controller
                     $ssBar->addTag($barTag);
                     $tag->addBar($barTag);
                     $em->persist($barTag);
+                    $em->persist($ssBar);
+                    $em->flush();
                 }
             }
-            $em->flush();
         }
     }
 }

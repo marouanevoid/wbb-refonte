@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -177,6 +176,18 @@ sonata_media:
                 city_small :    { width: 340 , height: 350, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
 
+        ads:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small: { width: 100 , quality: 100}
+                300x250 : { width: 300 , height: 250, quality: 100 }
+                300x600 : { width: 300 , height: 600, quality: 100 }
+                728x90 : { width: 728 , height: 90, quality: 100 }
+
         sponsor:
             download:
                 strategy: sonata.media.security.connected_strategy
@@ -184,7 +195,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                small:          { width: 100 , quality: 100}
+                small:          { width: 82 , quality: 82}
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }
@@ -197,7 +208,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                small:          { width: 100 , quality: 100}
+                small:          { width: 82 , quality: 82}
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }

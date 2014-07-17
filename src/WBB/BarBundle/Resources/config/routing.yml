@@ -118,6 +118,10 @@ wbb_semsoft_export:
     pattern: /admin/semsoft/csv/export
     defaults: { _controller: WBBBarBundle:Semsoft:export }
 
+wbb_semsoft_merge:
+    pattern: /admin/semsoft/bar/{ssBarId}/merge
+    defaults: { _controller: WBBBarBundle:Semsoft:merge }
+
 wbb_semsoft_preview:
     pattern: /admin/semsoft/bar/{ssBarId}/preview
     defaults: { _controller: WBBBarBundle:Semsoft:preview }

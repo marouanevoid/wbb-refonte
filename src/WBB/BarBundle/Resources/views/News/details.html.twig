@@ -102,10 +102,25 @@
             padding: 0;
         }
         html.mobile article.bestof img.scale-with-grid {
-            height: 210px;
+            min-height: 210px;
         }
+        .ui-slider .ui-slide {
+            height: 99% !important;
+        }
+        .ui-slider.articles .ui-wrapper article.small {
+            min-height: 34em;
+            height: 34em;
+        }
+        .ui-slider.articles .ui-wrapper {
+            border: 1px solid #b3955f;
+            width: 99%;
+        }
+        .ui-slider.articles .ui-wrapper .small {
+            border: none;
+        }      
     </style>
     {% endif %}
+
 {% endblock %}
 {% block bodyTag %}
 <body class="news-details {% if is_mobile() %}mobile{% endif %} ">
@@ -181,7 +196,7 @@
                                                     set init = random(news.bestofs|length - 1)
                                                 %}
                                                     {% for b in news.bestofs |slice(init,1) %}
-                                                        <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                                                        <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
                                                             {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
                                                         </div>
                                                     {% endfor %}

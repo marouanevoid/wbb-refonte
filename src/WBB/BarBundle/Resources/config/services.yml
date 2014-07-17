@@ -187,6 +187,12 @@ services:
         factory_method: getRepository
         arguments: ['WBBBarBundle:News']
 
+    ad.repository:
+        class: WBB\BarBundle\Repository\AdRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBBarBundle:Ad']
+
     tip.repository:
         class: WBB\BarBundle\Repository\TipRepository
         factory_service: doctrine.orm.default_entity_manager

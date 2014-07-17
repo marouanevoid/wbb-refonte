@@ -88,6 +88,11 @@ class Tag
     private $barsLevel;
 
     /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="energyLevel", cascade={"all"}, orphanRemoval=true)
+     */
+    private $semsoftBarsLevel;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Bar", mappedBy="toGoWith")
      */
     private $barOccasions;
@@ -466,5 +471,38 @@ class Tag
     public function getBestofOccasions()
     {
         return $this->bestofOccasions;
+    }
+
+    /**
+     * Add semsoftBarsLevel
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel
+     * @return Tag
+     */
+    public function addSemsoftBarsLevel(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel)
+    {
+        $this->semsoftBarsLevel[] = $semsoftBarsLevel;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBarsLevel
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel
+     */
+    public function removeSemsoftBarsLevel(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel)
+    {
+        $this->semsoftBarsLevel->removeElement($semsoftBarsLevel);
+    }
+
+    /**
+     * Get semsoftBarsLevel
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSemsoftBarsLevel()
+    {
+        return $this->semsoftBarsLevel;
     }
 }

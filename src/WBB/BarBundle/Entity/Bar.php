@@ -196,14 +196,14 @@ class Bar implements IndexableEntity
      *
      * @ORM\Column(name="is_credit_card", type="boolean", nullable=true)
      */
-    private $isCreditCard;
+    private $creditCard;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_coat_check", type="boolean", nullable=true)
      */
-    private $isCoatCheck;
+    private $coatCheck;
 
     /**
      * @var string
@@ -231,14 +231,14 @@ class Bar implements IndexableEntity
      *
      * @ORM\Column(name="is_reservation", type="boolean", nullable=true)
      */
-    private $isReservation;
+    private $reservation;
 
     /**
      * @var string
      *
      * @ORM\Column(name="reservation", type="string", length=255, nullable=true)
      */
-    private $reservation;
+    private $reservationLink;
 
     /**
      * @var string
@@ -656,9 +656,9 @@ class Bar implements IndexableEntity
      * @param boolean $isCreditCard
      * @return Bar
      */
-    public function setIsCreditCard($isCreditCard)
+    public function setCreditCard($isCreditCard)
     {
-        $this->isCreditCard = $isCreditCard;
+        $this->creditCard = $isCreditCard;
 
         return $this;
     }
@@ -668,9 +668,9 @@ class Bar implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsCreditCard()
+    public function isCreditCard()
     {
-        return $this->isCreditCard;
+        return $this->creditCard;
     }
 
     /**
@@ -679,9 +679,9 @@ class Bar implements IndexableEntity
      * @param boolean $isCoatCheck
      * @return Bar
      */
-    public function setIsCoatCheck($isCoatCheck)
+    public function setCoatCheck($isCoatCheck)
     {
-        $this->isCoatCheck = $isCoatCheck;
+        $this->coatCheck = $isCoatCheck;
 
         return $this;
     }
@@ -691,9 +691,9 @@ class Bar implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsCoatCheck()
+    public function isCoatCheck()
     {
-        return $this->isCoatCheck;
+        return $this->coatCheck;
     }
 
     /**
@@ -777,9 +777,9 @@ class Bar implements IndexableEntity
      * @param boolean $isReservation
      * @return Bar
      */
-    public function setIsReservation($isReservation)
+    public function setReservation($isReservation)
     {
-        $this->isReservation = $isReservation;
+        $this->reservation = $isReservation;
 
         return $this;
     }
@@ -789,25 +789,25 @@ class Bar implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsReservation()
+    public function isReservation()
     {
-        return $this->isReservation;
+        return $this->reservation;
     }
 
     /**
      * Set reservation
      *
-     * @param string $reservation
+     * @param string $reservationLink
      * @return Bar
      */
-    public function setReservation($reservation)
+    public function setReservationLink($reservationLink)
     {
-        if ((strpos($reservation,'http://') !== false) || (strpos($reservation,'https://') !== false)) {
-            $this->reservation = $reservation;
+        if ((strpos($reservationLink,'http://') !== false) || (strpos($reservationLink,'https://') !== false)) {
+            $this->reservationLink = $reservationLink;
         }
         else
         {
-            $this->reservation = 'http://'.$reservation;
+            $this->reservationLink = 'http://'.$reservationLink;
         }
 
         return $this;
@@ -818,7 +818,7 @@ class Bar implements IndexableEntity
      *
      * @return string
      */
-    public function getReservation()
+    public function getReservationLink()
     {
         return $this->reservation;
     }
@@ -981,7 +981,6 @@ class Bar implements IndexableEntity
         $this->longitude = 0;
 
         $this->news = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     /**
@@ -1624,7 +1623,7 @@ class Bar implements IndexableEntity
     /**
      * Set energyLevel
      *
-     * @param integer $energyLevel
+     * @param Tag $energyLevel
      * @return Bar
      */
     public function setEnergyLevel($energyLevel)
@@ -2014,8 +2013,7 @@ class Bar implements IndexableEntity
         $this->wifi = $wifi;
     }
 
-    private function prepareString($string)
-    {
+    private function prepareString($string){
 
         return str_replace(array("\r", "\n"), "", $string);
     }
@@ -2023,58 +2021,58 @@ class Bar implements IndexableEntity
     public function toCSVArray()
     {
         return array(
-            'ID' => $this->getId(),
-            'Name' => $this->getName(),
-            'Country' => ($this->getCity() && $this->getCity()->getCountry()) ? $this->getCity()->getCountry()->getName() : '',
-            'County' => $this->getCounty(),
-            'City' => ($this->getCity()) ? $this->getCity()->getName() : '',
-            'PostalCode' => ($this->getCity()) ? $this->getCity()->getPostalCode() : '',
-            'District' => ($this->getSuburb()) ? $this->getSuburb()->getName() : '',
-            'Street1' => $this->getAddress(),
-            'Street2' => $this->getAddress2(),
-            'Intro' => $this->prepareString($this->getSeoDescription()),
-            'Description' => $this->prepareString($this->getDescription()),
-            'GeocoordinateString' => $this->getLatitude() . ',' . $this->getLongitude(),
-            'Website' => $this->getWebsite(),
-            'Email' => $this->getEmail(),
-            'Phone' => $this->getPhone(),
-            'MondayOpenHours' => $this->getOpeningsByDay(1),
-            'TuesdayOpenHours' => $this->getOpeningsByDay(2),
-            'WednesdayOpenHours' => $this->getOpeningsByDay(3),
-            'ThursdayOpenHours' => $this->getOpeningsByDay(4),
-            'FridayOpenHours' => $this->getOpeningsByDay(5),
-            'SaturdayOpenHours' => $this->getOpeningsByDay(6),
-            'SundayOpenHours' => $this->getOpeningsByDay(7),
-            'Category' => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
-            'Mood' => ($this->getEnergyLevel()) ? $this->getEnergyLevel()->getName() : '',
-            'OutdoorSeating' => $this->isOutDoorSeating(),
-            'HappyHour' => $this->isHappyHour(),
-            'Wifi' => $this->isWifi(),
-            'PriceRange' => $this->getPriceSymbols(),
-            'PaymentAccepted' => ($this->getIsCreditCard()) ? 'Card' : '',
-            'RestaurantServices' => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
-            'MenuUrl' => $this->getMenu(),
-            'Booking' => $this->getReservation(),
-            'ParkingType' => $this->getParking(),
-            'Public Transport' => '',
-            'FacebookId' => $this->getFacebook(),
-            'FacebookUserPage' => 'http://facebook.com/' . $this->getFacebook(),
-            'TwitterName' => $this->getTwitter(),
-            'TwitterUserPage' => '',
-            'InstagramId' => $this->getInstagramId(),
-            'InstagramUserPage' => $this->getInstagram(),
-            'GooglePlusUserPage' => $this->getGooglePlus(),
-            'FoursquareId' => $this->getFoursquare(),
-            'FoursquareUserPage' => '' . $this->getFoursquare(),
-            'FacebookLikes' => '',
-            'FacebookCheckins' => '',
-            'FoursquareLikes' => '',
-            'FoursquareCheckIns' => '',
-            'FoursquareTips' => '',
-            'IsPermanentlyClosed' => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE) ? "true" : '',
-            'BusinessFound' => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) ? "true" : '',
-            'Updated Columns' => '',
-            'Overwritten Columns' => ''
+            'ID'                    => $this->getId(),
+            'Name'                  => $this->getName(),
+            'Country'               => ($this->getCity() && $this->getCity()->getCountry())?$this->getCity()->getCountry()->getName():'',
+            'County'                => $this->getCounty(),
+            'City'                  => ($this->getCity())?$this->getCity()->getName():'',
+            'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',
+            'District'              => ($this->getSuburb())?$this->getSuburb()->getName():'',
+            'Street1'               => $this->getAddress(),
+            'Street2'               => $this->getAddress2(),
+            'Intro'                 => $this->prepareString($this->getSeoDescription()),
+            'Description'           => $this->prepareString($this->getDescription()),
+            'GeocoordinateString'   => $this->getLatitude().','.$this->getLongitude(),
+            'Website'               => $this->getWebsite(),
+            'Email'                 => $this->getEmail(),
+            'Phone'                 => $this->getPhone(),
+            'MondayOpenHours'       => $this->getOpeningsByDay(1),
+            'TuesdayOpenHours'      => $this->getOpeningsByDay(2),
+            'WednesdayOpenHours'    => $this->getOpeningsByDay(3),
+            'ThursdayOpenHours'     => $this->getOpeningsByDay(4),
+            'FridayOpenHours'       => $this->getOpeningsByDay(5),
+            'SaturdayOpenHours'     => $this->getOpeningsByDay(6),
+            'SundayOpenHours'       => $this->getOpeningsByDay(7),
+            'Category'              => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
+            'Mood'                  => ($this->getEnergyLevel())?$this->getEnergyLevel()->getName():'',
+            'OutdoorSeating'        => $this->isOutDoorSeating(),
+            'HappyHour'             => $this->isHappyHour(),
+            'Wifi'                  => $this->isWifi(),
+            'PriceRange'            => $this->getPriceSymbols(),
+            'PaymentAccepted'       => ($this->isCreditCard())? 'Card' : '',
+            'RestaurantServices'    => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
+            'MenuUrl'               => $this->getMenu(),
+            'Booking'               => $this->getReservationLink(),
+            'ParkingType'           => $this->getParking(),
+            'Public Transport'      => '',
+            'FacebookId'            => $this->getFacebook(),
+            'FacebookUserPage'      => 'http://facebook.com/'.$this->getFacebook(),
+            'TwitterName'           => $this->getTwitter(),
+            'TwitterUserPage'       => '',
+            'InstagramId'           => $this->getInstagramId(),
+            'InstagramUserPage'     => $this->getInstagram(),
+            'GooglePlusUserPage'    => $this->getGooglePlus(),
+            'FoursquareId'          => $this->getFoursquare(),
+            'FoursquareUserPage'    => ''.$this->getFoursquare(),
+            'FacebookLikes'         => '',
+            'FacebookCheckins'      => '',
+            'FoursquareLikes'       => '',
+            'FoursquareCheckIns'    => '',
+            'FoursquareTips'        => '',
+            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? "true" : '',
+            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? "true" : '',
+            'Updated Columns'       => '',
+            'Overwritten Columns'   => ''
         );
     }
 
