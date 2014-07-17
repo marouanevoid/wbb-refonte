@@ -4,10 +4,10 @@
 
 {% block body %}
 <div id="bar-finder" class="mobile bar-finder margin-top-60">
-    <div class="content">
-        <div class="title text-transform-uppercase margin-bottom-20 bold">find your best bar</div>
+    <div class="title text-transform-uppercase bold">find your best bar</div>
+    <div class="content padding-top-10">
         <form action="{{ path('wbb_bar_finder_results') }}" method="post">
-            <div class="group-select margin-bottom-40">
+            <div class="group-select padding-bottom-10">
                 <label class="text-transform-uppercase">city</label>
                 <select class="ui-dropdown dark" name="city" data-class="with-icon city">
                     <option value="">Choose a City</option>
@@ -16,8 +16,8 @@
                         <option class="cty{{ loop.index }}" value="{{ c.slug }}">{{ c.name }}</option>
                     {% endfor %}
                 </select>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
             <div class="group-select margin-bottom-10">
                 <label class="text-transform-uppercase">To go out with</label>
                 <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
