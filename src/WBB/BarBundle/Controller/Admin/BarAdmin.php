@@ -115,13 +115,13 @@ class BarAdmin extends Admin
                 ->add('twitter')
                 ->add('facebook')
                 ->add('instagram')
-                ->add('isCreditCard')
-                ->add('isCoatCheck')
+                ->add('creditCard')
+                ->add('coatCheck')
                 ->add('parking')
                 ->add('price')
                 ->add('menu')
-                ->add('isReservation')
                 ->add('reservation')
+                ->add('reservationLink')
                 ->add('description')
                 ->add('onTop')
                 ->add('status')
@@ -173,8 +173,8 @@ class BarAdmin extends Admin
                 }
 
         $formMapper
-            ->add('isCreditCard')
-            ->add('isCoatCheck')
+            ->add('creditCard')
+            ->add('coatCheck')
             ->add('parking', 'choice', array(
                 'required' => false,
                 'choices'  => array(
@@ -187,15 +187,15 @@ class BarAdmin extends Admin
             ->add('price', 'choice', array(
                 'required' => false,
                 'choices'  => array(
-                    1 => 1,
-                    2 => 2,
-                    3 => 3,
-                    4 => 4
+                    1 => '$',
+                    2 => '$$',
+                    3 => '$$$',
+                    4 => '$$$$'
                 )
             ))
             ->add('menu', null, array('help' => 'Example : http://www.url.com'))
-            ->add('isReservation')
-            ->add('reservation', null, array('help' => 'Example : http://www.url.com'));
+            ->add('reservation')
+            ->add('reservationLink', null, array('help' => 'Example : http://www.url.com'));
 
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper

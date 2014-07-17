@@ -8,6 +8,9 @@ class AdsController extends Controller
 {
     public function showAction($position)
     {
+        $size = explode('_', $position);
+        $size = explode('x', $size[1]);
+
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         $city = null;
@@ -19,7 +22,8 @@ class AdsController extends Controller
         $ad = $this->get('ad.repository')->findOneByPositionAndCountry($position, $city->getCountry());
 
         $this->render('WBBBarBundle:Ads:show.html.twig', array(
-                'ad' => $ad
+                'ad'    => $ad,
+                'format' => $size[1]
             )
         );
     }

@@ -81,14 +81,14 @@ class News implements IndexableEntity
      *
      * @ORM\Column(name="is_an_interview", type="boolean", nullable=true)
      */
-    private $isAnInterview;
+    private $interview;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
-    private $isOnTop;
+    private $onTop;
 
     /**
      * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news")
@@ -303,8 +303,8 @@ class News implements IndexableEntity
      * @param boolean $isAnInterview
      * @return News
      */
-    public function setIsAnInterview($isAnInterview){
-        $this->isAnInterview = $isAnInterview;
+    public function setInterview($isAnInterview){
+        $this->interview = $isAnInterview;
         return $this;
     }
 
@@ -313,8 +313,8 @@ class News implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsAnInterview(){
-        return $this->isAnInterview;
+    public function isInterview(){
+        return $this->interview;
     }
 
 
@@ -324,8 +324,8 @@ class News implements IndexableEntity
      * @param boolean $isOnTop
      * @return News
      */
-    public function setIsOnTop($isOnTop){
-        $this->isOnTop = $isOnTop;
+    public function setOnTop($isOnTop){
+        $this->onTop = $isOnTop;
         return $this;
     }
 
@@ -334,8 +334,8 @@ class News implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsOnTop(){
-        return $this->isOnTop;
+    public function isOnTop(){
+        return $this->onTop;
     }
 
     /**
