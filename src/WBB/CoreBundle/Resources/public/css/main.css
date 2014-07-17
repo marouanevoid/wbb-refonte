@@ -433,17 +433,24 @@
   TEMPS STYLE
 */
   @media only screen and (max-width: 768px) {
-    .mobile section.bars .bar-w-pic .btn-round:before, .mobile section.bar-filter .bar-w-pic .btn-round:before {
+    .mobile section.bars .bar-w-pic .btn-round:before, 
+    .mobile section.bar-filter .bar-w-pic .btn-round:before {
       background-size: 128px 256px;
       background-position: -80px -40px!important;
     }
-    .mobile section.bars .bar-w-pic .btn-round, .mobile section.bar-filter .bar-w-pic .btn-round {
+    .mobile section.bars .bar-w-pic .btn-round.active:before, 
+    .mobile section.bar-filter .bar-w-pic .btn-round.active:before {
+      background-position: -100px -80px!important;
+    }
+    .mobile section.bars .bar-w-pic .btn-round, 
+    .mobile section.bar-filter .bar-w-pic .btn-round {
       width: 20px;
       height: 20px;
       right: 0.5em;
       top: 0.5em;
     }
-    section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {
+    section.bars .bar-w-pic .txt, 
+    section.bar-filter .bar-w-pic .txt {
       font-size: 80%!important;
     }
     .social-share .fb-share,
