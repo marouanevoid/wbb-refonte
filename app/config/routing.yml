@@ -37,7 +37,3 @@ _security_login:
 
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml"
-
-sonata_media_pixlr:
-    resource: '@SonataMediaBundle/Resources/config/routing/pixlr.xml'
-    prefix: /admin/media

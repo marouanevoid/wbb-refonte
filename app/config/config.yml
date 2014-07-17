@@ -136,10 +136,6 @@ sonata_block:
 
 #Sonata Media Bundle
 sonata_media:
-    pixlr:
-        enabled:  true
-        secret:   %secret%
-        referrer: WBB_DEV
     default_context: default
     db_driver: doctrine_orm
     contexts:
