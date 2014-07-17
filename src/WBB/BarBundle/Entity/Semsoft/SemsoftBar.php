@@ -110,7 +110,7 @@ class SemsoftBar
      *
      * @ORM\Column(name="is_credit_card", type="boolean", nullable=true)
      */
-    private $isCreditCard;
+    private $creditCard;
 
     /**
      * @var string
@@ -124,21 +124,21 @@ class SemsoftBar
      *
      * @ORM\Column(name="is_out_door_seating", type="boolean", nullable=true)
      */
-    private $isOutDoorSeating;
+    private $outDoorSeating;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_happy_hour", type="boolean", nullable=true)
      */
-    private $isHappyHour;
+    private $happyHour;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_wifi", type="boolean", nullable=true)
      */
-    private $isWiFi;
+    private $wifi;
 
     /**
      * @var string
@@ -264,7 +264,7 @@ class SemsoftBar
      *
      * @ORM\Column(name="is_permanently_closed", type="boolean", nullable=true)
      */
-    private $isPermanentlyClosed;
+    private $permanentlyClosed;
 
     /**
      * @var boolean
@@ -558,9 +558,9 @@ class SemsoftBar
      * @param boolean $isCreditCard
      * @return SemsoftBar
      */
-    public function setIsCreditCard($isCreditCard)
+    public function setcreditCard($isCreditCard)
     {
-        $this->isCreditCard = $isCreditCard;
+        $this->creditCard = $isCreditCard;
 
         return $this;
     }
@@ -570,9 +570,9 @@ class SemsoftBar
      *
      * @return boolean 
      */
-    public function getIsCreditCard()
+    public function isCreditCard()
     {
-        return $this->isCreditCard;
+        return $this->creditCard;
     }
 
     /**
@@ -604,9 +604,9 @@ class SemsoftBar
      * @param boolean $isOutDoorSeating
      * @return SemsoftBar
      */
-    public function setIsOutDoorSeating($isOutDoorSeating)
+    public function setOutDoorSeating($isOutDoorSeating)
     {
-        $this->isOutDoorSeating = $isOutDoorSeating;
+        $this->outDoorSeating = $isOutDoorSeating;
 
         return $this;
     }
@@ -616,9 +616,9 @@ class SemsoftBar
      *
      * @return boolean 
      */
-    public function getIsOutDoorSeating()
+    public function isOutDoorSeating()
     {
-        return $this->isOutDoorSeating;
+        return $this->outDoorSeating;
     }
 
     /**
@@ -627,9 +627,9 @@ class SemsoftBar
      * @param boolean $isHappyHour
      * @return SemsoftBar
      */
-    public function setIsHappyHour($isHappyHour)
+    public function setHappyHour($isHappyHour)
     {
-        $this->isHappyHour = $isHappyHour;
+        $this->happyHour = $isHappyHour;
 
         return $this;
     }
@@ -639,9 +639,9 @@ class SemsoftBar
      *
      * @return boolean 
      */
-    public function getIsHappyHour()
+    public function isHappyHour()
     {
-        return $this->isHappyHour;
+        return $this->happyHour;
     }
 
     /**
@@ -650,9 +650,9 @@ class SemsoftBar
      * @param boolean $isWiFi
      * @return SemsoftBar
      */
-    public function setIsWiFi($isWiFi)
+    public function setWifi($isWiFi)
     {
-        $this->isWiFi = $isWiFi;
+        $this->wifi = $isWiFi;
 
         return $this;
     }
@@ -662,9 +662,9 @@ class SemsoftBar
      *
      * @return boolean 
      */
-    public function getIsWiFi()
+    public function isWifi()
     {
-        return $this->isWiFi;
+        return $this->wifi;
     }
 
     /**
@@ -708,7 +708,7 @@ class SemsoftBar
      *
      * @return boolean 
      */
-    public function getReservation()
+    public function isReservation()
     {
         return $this->reservation;
     }
@@ -995,9 +995,9 @@ class SemsoftBar
      * @param boolean $isPermanentlyClosed
      * @return SemsoftBar
      */
-    public function setIsPermanentlyClosed($isPermanentlyClosed)
+    public function setPermanentlyClosed($isPermanentlyClosed)
     {
-        $this->isPermanentlyClosed = $isPermanentlyClosed;
+        $this->permanentlyClosed = $isPermanentlyClosed;
 
         return $this;
     }
@@ -1007,9 +1007,9 @@ class SemsoftBar
      *
      * @return boolean 
      */
-    public function getIsPermanentlyClosed()
+    public function isPermanentlyClosed()
     {
-        return $this->isPermanentlyClosed;
+        return $this->permanentlyClosed;
     }
 
     /**
@@ -1372,6 +1372,31 @@ class SemsoftBar
         return $this->bar;
     }
 
+
+
+    /**
+     * Set energyLevel
+     *
+     * @param \WBB\BarBundle\Entity\Tag $energyLevel
+     * @return SemsoftBar
+     */
+    public function setEnergyLevel(\WBB\BarBundle\Entity\Tag $energyLevel = null)
+    {
+        $this->energyLevel = $energyLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get energyLevel
+     *
+     * @return \WBB\BarBundle\Entity\Tag
+     */
+    public function getEnergyLevel()
+    {
+        return $this->energyLevel;
+    }
+
     public function hydrateByBar(Bar $bar)
     {
         $this
@@ -1388,14 +1413,14 @@ class SemsoftBar
             ->setWebsite($bar->getWebsite())
             ->setTwitterName($bar->getTwitter())
             ->setSuburb($bar->getSuburb())
-            ->setReservation($bar->getIsReservation())
+            ->setReservation($bar->isReservation())
             ->setPrice($bar->getPrice())
             ->setPhone($bar->getPhone())
             ->setLatitude($bar->getLatitude())
             ->setLongitude($bar->getLongitude())
             ->setParkingType($bar->getParking())
             ->setMenu($bar->getMenu())
-            ->setIsCreditCard($bar->getIsCreditCard())
+            ->setCreditCard($bar->isCreditCard())
             ->setFoursquareID($bar->getFoursquare());
 
         return $this;
@@ -1443,8 +1468,8 @@ class SemsoftBar
         if($this->getSuburb())
             $bar->setSuburb($this->getSuburb());
 
-        if($this->getReservation())
-            $bar->setIsReservation($this->getReservation());
+        if($this->isReservation())
+            $bar->setReservation($this->isReservation());
 
         if($this->getPrice())
             $bar->setPrice($this->getPrice());
@@ -1464,8 +1489,8 @@ class SemsoftBar
         if($this->getMenu())
             $bar->setMenu($this->getMenu());
 
-        if($this->getIsCreditCard())
-            $bar->setIsCreditCard($this->getIsCreditCard());
+        if($this->isCreditCard())
+            $bar->setCreditCard($this->isCreditCard());
 
         if($this->getFoursquareID())
             $bar->setFoursquare($this->getFoursquareID());
@@ -1473,14 +1498,14 @@ class SemsoftBar
         if($this->getCounty())
             $bar->setCounty($this->getCounty());
 
-        if($this->getIsOutDoorSeating())
-            $bar->setOutDoorSeating($this->getIsOutDoorSeating());
+        if($this->isOutDoorSeating())
+            $bar->setOutDoorSeating($this->isOutDoorSeating());
 
-        if($this->getIsHappyHour())
-            $bar->setHappyHour($this->getIsHappyHour());
+        if($this->isHappyHour())
+            $bar->setHappyHour($this->isHappyHour());
 
-        if($this->getIsWiFi())
-            $bar->setWifi($this->getIsWiFi());
+        if($this->isWifi())
+            $bar->setWifi($this->isWifi());
 //
 //        if($this->getFacebookUserPage())
 //            $bar->setFacebookUserPage($this->getFacebookUserPage());
@@ -1515,7 +1540,7 @@ class SemsoftBar
         if($this->getBusinessFound())
             $bar->setStatus(Bar::BAR_STATUS_ENABLED_VALUE);
 
-        if($this->getIsPermanentlyClosed())
+        if($this->isPermanentlyClosed())
             $bar->setStatus(Bar::BAR_STATUS_DISABLED_VALUE);
 
         if($this->getEnergyLevel())
@@ -1540,28 +1565,5 @@ class SemsoftBar
         }
 
         return $bar;
-    }
-
-    /**
-     * Set energyLevel
-     *
-     * @param \WBB\BarBundle\Entity\Tag $energyLevel
-     * @return SemsoftBar
-     */
-    public function setEnergyLevel(\WBB\BarBundle\Entity\Tag $energyLevel = null)
-    {
-        $this->energyLevel = $energyLevel;
-
-        return $this;
-    }
-
-    /**
-     * Get energyLevel
-     *
-     * @return \WBB\BarBundle\Entity\Tag 
-     */
-    public function getEnergyLevel()
-    {
-        return $this->energyLevel;
     }
 }

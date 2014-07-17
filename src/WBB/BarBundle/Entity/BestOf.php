@@ -165,6 +165,11 @@ class BestOf implements IndexableEntity
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="favoriteBestOfs")
+     */
+    private $users;
 
     /**
      * Get id
@@ -830,5 +835,38 @@ class BestOf implements IndexableEntity
     public function getToGoWith()
     {
         return $this->toGoWith;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     * @return BestOf
+     */
+    public function addUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \WBB\UserBundle\Entity\User $users
+     */
+    public function removeUser(\WBB\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

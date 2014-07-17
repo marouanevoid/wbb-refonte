@@ -42,10 +42,10 @@ class NewsController extends Controller
 
         foreach($allNews as $news)
         {
-            if($news->getIsAnInterview() && $nbInteviews < 4 ){
+            if($news->isInterview() && $nbInteviews < 4 ){
                 $interviews[] = $news;
                 $nbInteviews++;
-            }elseif(!$news->getIsAnInterview() && $nbArticles < 8){
+            }elseif(!$news->isInterview() && $nbArticles < 8){
                 $articles[] = $news;
                 $nbArticles++;
             }else{
