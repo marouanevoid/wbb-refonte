@@ -130,63 +130,63 @@
   #date-birthday .select-wrap {width: 95px; margin-right: 7px;}
   #date-birthday .ui-dropdown-container {width: 95px!important;}
   #countries .ui-dropdown-container {width: 100%!important;}
-  #UI form label {font-size: 17px;}
-  #UI .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
-  #UI .load-more   {text-decoration: none;}
-  #UI .load-more:hover {color: #faf3e1;}
-  #UI.mobile.container {width: 100%!important;}
+  .ui form label {font-size: 17px;}
+  .ui .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+  .ui .load-more   {text-decoration: none;}
+  .ui .load-more:hover {color: #faf3e1;}
+  .ui.mobile.container {width: 100%!important;}
 /* Globale Mobile Classes */
-  #UI.mobile .content,
+  .ui.mobile .content,
   #bar-finder-result.mobile .content,
   #bar-finder.mobile .content {padding: 0 10px 60px;}
-  #UI.mobile .radius {border-radius: 100%;} 
+  .ui.mobile .radius {border-radius: 100%;} 
 /* Globale Mobile */
-  #UI.mobile a,
-  #UI.mobile p {font-size: 16px;}
-  #UI.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
+  .ui.mobile a,
+  .ui.mobile p {font-size: 16px;}
+  .ui.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
   /*.mobile form label {display: none; visibility: hidden;}*/
   .mobile .btn {/*height: 120px; font-size: 42px;*/}
   /*.mobile .col {float: none;}*/
-  .mobile #UI .title {font-size: 17px;}
-  .mobile #UI .separator {width: 100%; background-position: center center;}
-  #UI.mobile .ui-dropdown-container .ui-dropdown {height: 38px;}
-  #UI.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
-  #UI.mobile .col-4 {width: 237px;}
+  .mobile .ui .title {font-size: 17px;}
+  .mobile .ui .separator {width: 100%; background-position: center center;}
+  .ui.mobile .ui-dropdown-container .ui-dropdown {height: 38px;}
+  .ui.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
+  .ui.mobile .col-4 {width: 237px;}
   /*
-  #UI.mobile .bar-w-pic .txt h2,
-  #UI.mobile .bar-w-pic .txt h3 {text-align: left;}
+  .ui.mobile .bar-w-pic .txt h2,
+  .ui.mobile .bar-w-pic .txt h3 {text-align: left;}
   */
 
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
-  #UI {background-color: #faf3e1; position: relative; top: 145px;}
-  #UI a {color: #818a8c; font-size: 17px; text-decoration: underline;}
-  #UI a.ui-radio {color: #b3955f; text-decoration: none;}
-  #UI a.ui-radio.active,
-  #UI a.ui-radio:hover {background: #b3955f !important; color: #faf3e1;}
-  #UI a:hover {text-decoration: none;}
-  #UI.wrap {width: 720px; padding: 25px 25px 60px;}
-  #UI .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
-  #UI .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif; letter-spacing: -1px;}
-  #UI .block {width: 300px;}
-  #UI .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
-  #UI .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
-  #UI .form-submit {background-color: #b3955f; font-size: 22px; font-weight: bold;}
-  #UI .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
-  #UI .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
-  #UI .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
+  .ui {background-color: #faf3e1; position: relative; top: 145px;}
+  .ui a {color: #818a8c; font-size: 17px; text-decoration: underline;}
+  .ui a.ui-radio {color: #b3955f; text-decoration: none;}
+  .ui a.ui-radio.active,
+  .ui a.ui-radio:hover {background: #b3955f !important; color: #faf3e1;}
+  .ui a:hover {text-decoration: none;}
+  .ui.wrap {width: 720px; padding: 25px 25px 60px;}
+  .ui .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
+  .ui .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif; letter-spacing: -1px;}
+  .ui .block {width: 300px;}
+  .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
+  .ui .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
+  .ui .form-submit {background-color: #b3955f; font-size: 22px; font-weight: bold;}
+  .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
+  .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
+  .ui .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* Version mobile */
-  #UI.mobile {width: auto; padding: 80px 20px; top: 80px;}
-  #UI.mobile .form-text {height: 60px; border-radius: 2em;}
-  #UI.mobile .block {width: 100%;}
-  #UI.mobile .separator {margin: 0 auto;}
-  #UI.mobile .btn {height: 60px; font-size: 28px;}
-  #UI.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
+  .ui.mobile {width: auto; padding: 80px 20px; top: 80px;}
+  .ui.mobile .form-text {height: 60px; border-radius: 2em;}
+  .ui.mobile .block {width: 100%;}
+  .ui.mobile .separator {margin: 0 auto;}
+  .ui.mobile .btn {height: 60px; font-size: 28px;}
+  .ui.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
 /* Register1 (Popup) - PSDN : PSDs/login/desktop/register1.psd & register2.psd; */
   #register {padding: 0 25px;}
   #register.void-popup {position: fixed; left: 25%;}
   #register .title {width: 55%;}
-  #register #UI {width: 860px}
+  #register .ui {width: 860px}
   #register #account {width: 300px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
   #register #create-account {width: 300px; padding: 0 0 0 50px;}
   #register #create-account .form-text {text-align: left; text-indent: 15px;}
@@ -208,7 +208,7 @@
   .alert .subtitle {font-size: 32px;}
 /* Register4 (Page) - PSDN : PSDs/login/desktop/register4.psd; */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
-  #register.page #UI {position: static; width: 560px;}
+  #register.page .ui {position: static; width: 560px;}
   #register.page .title {width: 100%;}
   #register.page #create-account {width: 100%; padding: 0;}
   #register.page #create-account label {display: block; text-align: right; float: left; width: 200px; line-height: 35px; padding: 0 15px 0 0;}
@@ -216,7 +216,7 @@
   #register.page #message {width: 53%; margin: 0 50px 0 0;}
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 38%;}
-  #register.page #UI.select-wrap {padding-bottom: 30px;}
+  #register.page .ui.select-wrap {padding-bottom: 30px;}
   #register.page .group-action {width: 128%;}
   #register.page .group-action .form-submit {width: 50%; margin: auto; display: block;}
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
@@ -270,26 +270,26 @@
 /* Register1 (Mobile) */
   #register.mobile {padding: 25px 25px 60px; background-color: #faf3e1;}
   #register.mobile .btn {/*height: 120px; */font-size: 17px;}
-  #register.mobile #UI {width: auto; top: 80px; position: relative;}
-  #register.mobile #UI .title {/*text-transform: none;*/ width: 90%;}
-  #register.mobile #UI .subtitle {font-size: 15px; padding: 0 20%;}
-  #register.mobile #UI .btn-close {background-image: url("../images/UI/close_vm.png"); height: 40px; width: 40px; top: -28px; right: -15px;}
+  #register.mobile .ui {width: auto; top: 80px; position: relative;}
+  #register.mobile .ui .title {/*text-transform: none;*/ width: 90%;}
+  #register.mobile .ui .subtitle {font-size: 15px; padding: 0 20%;}
+  #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); height: 40px; width: 40px; top: -28px; right: -15px;}
   #register.mobile form .form-text {height: 38px; font-size: 15px; border-radius: 2em;}
   #register.mobile form .btn-facebook {background-image: url("../images/UI/icon_fb.jpg"); background-position: 25px center; line-height: 64px;}
-  #register.mobile #UI form .btn-facebook {font-size: 13px; border-radius: 4em; letter-spacing: -1px; }
+  #register.mobile .ui form .btn-facebook {font-size: 13px; border-radius: 4em; letter-spacing: -1px; }
   #register.mobile form .btn {border-radius: 2em;}
   #register.mobile #account {text-transform: none; width: 100%; padding: 0; border: none;}
   #register.mobile #create-account {width: 100%; padding: 40px 0;}
   #register.mobile #create-account a {font-size: 17px; line-height: 64px; border-radius: 2em;}
 /* Register2 Close (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register2_Close.psd; */
-  #register.mobile #UI.close {padding: 0;}  
-  #register.mobile #UI.close #close {/*margin: 15% 0 0;*/ position: relative;   top: 50px;}
-  #register.mobile #UI.close #close .btn {color: #333; /*padding: 20px;*/ display: block; /*width: 55%;*/}
-  #register.mobile #UI.close #close .title {width: 100%;}
+  #register.mobile .ui.close {padding: 0;}  
+  #register.mobile .ui.close #close {/*margin: 15% 0 0;*/ position: relative;   top: 50px;}
+  #register.mobile .ui.close #close .btn {color: #333; /*padding: 20px;*/ display: block; /*width: 55%;*/}
+  #register.mobile .ui.close #close .title {width: 100%;}
 /* Register4 (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register4.psd; */
   #register.page.mobile {padding: 0; width: auto;}
-  #register.page.mobile #UI .title,
-  #register.page.mobile #UI .subtitle {width: 100%; padding: 0;}
+  #register.page.mobile .ui .title,
+  #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
   #register.page.mobile #create-account .form-text {width: 100%; margin: 0 0 10px;}
   #register.page.mobile #create-account .btn-create-with-fb {border-radius: 0; line-height: normal; height: 42px;}
@@ -302,11 +302,11 @@
   #register.page.mobile #create-account label {margin: 20px 0 20px; float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 20px; font-weight: lighter;}
   #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0;}
 /* Register3 (Mobile) */
-  #register.mobile #UI #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
-  #register.mobile #UI #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
+  #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
+  #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
-  #editprofile #UI {top: 0; width: 530px; background-color: #fff;}
-  #editprofile #UI .form-text {background-color: #fff;}
+  #editprofile .ui {top: 0; width: 530px; background-color: #fff;}
+  #editprofile .ui .form-text {background-color: #fff;}
   #editprofile .title h5 {color: #333; font-size: 30px; font-family: "Myriad Pro", sans-serif;}
   #editprofile .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
   #editprofile .group.right {width: 410px;}
@@ -332,50 +332,50 @@
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
   #view-account .filter-view a.ui-radio {margin-left: 0.5em;}
 
-  #UI .btn-editprofile .btn {border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
-  #UI.tips {width: 100% !important; }
-  #UI.tips .list-tips {background-color: #faf3e1;}
-  #UI.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
-  #UI.tips .list-tips ul {}
-  #UI.tips .list-tips li {position: relative; margin-bottom: 20px;}
-  #UI.tips .list-tips li p {font-size: 14px; text-align: center; line-height: 21px;}
-  #UI.tips .list-tips li img {margin: 0 10px 0 0;}
-  #UI.tips .list-tips li .block-tip {padding: 20px; background-color: #fff; margin: 0 0 0 10px;}
-  #UI.tips .list-tips li .profil {border-color: #ebeced;}
-  #UI.tips .list-tips li .expert {color: #333;}
-  #UI.tips .list-tips li .name {}
-  #UI.tips .list-tips li .close {background: url("../images/UI/icon_close_tip.png") no-repeat 0 0; display: block; height: 30px; width: 30px; position: absolute; top: -10px; right: -10px;}
+  .ui .btn-editprofile .btn {border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
+  .ui.tips {width: 100% !important; }
+  .ui.tips .list-tips {background-color: #faf3e1;}
+  .ui.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
+  .ui.tips .list-tips ul {}
+  .ui.tips .list-tips li {position: relative; margin-bottom: 20px;}
+  .ui.tips .list-tips li p {font-size: 14px; text-align: center; line-height: 21px;}
+  .ui.tips .list-tips li img {margin: 0 10px 0 0;}
+  .ui.tips .list-tips li .block-tip {padding: 20px; background-color: #fff; margin: 0 0 0 10px;}
+  .ui.tips .list-tips li .profil {border-color: #ebeced;}
+  .ui.tips .list-tips li .expert {color: #333;}
+  .ui.tips .list-tips li .name {}
+  .ui.tips .list-tips li .close {background: url("../images/UI/icon_close_tip.png") no-repeat 0 0; display: block; height: 30px; width: 30px; position: absolute; top: -10px; right: -10px;}
 /* EditProfile (Mobile) */
-  #editprofile #UI.mobile {width: 100%; padding-right: 0; padding-left: 0;}
-  #editprofile #UI.mobile .avatar-profil {width: 100%; position: relative;}
-  #editprofile #UI.mobile .avatar-profil img {margin: 0 auto;}
-  #editprofile #UI.mobile .group.right {float: none; width: 100%;}
-  #editprofile #UI.mobile .title h5 {line-height: 55px;}
-  #editprofile #UI.mobile #edit-account label {visibility: visible; width: 100%; text-align: center;}
-  #editprofile #UI.mobile #edit-account .group-form,
-  #editprofile #UI.mobile #edit-account .group-select {padding: 0 10px;}
-  #editprofile #UI.mobile #edit-account .form-text {width: 100%; margin: 0;}
-  #editprofile #UI.mobile #edit-account .group-actions {float: none; width: auto; margin: 0;}
-  #editprofile #UI.mobile #edit-account .form-submit {margin: 0 20px; width: 90%;}
-  #editprofile #UI.mobile #date-birthday .select-wrap {margin-right: 9px; width: 90px;}
-  #editprofile #UI.mobile #date-birthday .ui-dropdown-container {width: 100%!important;}
+  #editprofile .ui.mobile {width: 100%; padding-right: 0; padding-left: 0;}
+  #editprofile .ui.mobile .avatar-profil {width: 100%; position: relative;}
+  #editprofile .ui.mobile .avatar-profil img {margin: 0 auto;}
+  #editprofile .ui.mobile .group.right {float: none; width: 100%;}
+  #editprofile .ui.mobile .title h5 {line-height: 55px;}
+  #editprofile .ui.mobile #edit-account label {visibility: visible; width: 100%; text-align: center;}
+  #editprofile .ui.mobile #edit-account .group-form,
+  #editprofile .ui.mobile #edit-account .group-select {padding: 0 10px;}
+  #editprofile .ui.mobile #edit-account .form-text {width: 100%; margin: 0;}
+  #editprofile .ui.mobile #edit-account .group-actions {float: none; width: auto; margin: 0;}
+  #editprofile .ui.mobile #edit-account .form-submit {margin: 0 20px; width: 90%;}
+  #editprofile .ui.mobile #date-birthday .select-wrap {margin-right: 9px; width: 90px;}
+  #editprofile .ui.mobile #date-birthday .ui-dropdown-container {width: 100%!important;}
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
-  #editprofile #view-account.mobile #UI,
+  #editprofile #view-account.mobile .ui,
 
-  #view-account #UI.mobile .group.right {/*float: left; margin: 0 0 0 70px;*/}
-  #view-account #UI.mobile .btn-editprofile .btn {font-size: 16px;}
-  #view-account #UI.mobile .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
-  #view-account #UI.mobile .block-top {width: auto;}
-  #view-account #UI.mobile .sort-by label {display: none;}
-  #view-account #UI.mobile .sort-by .four.columns {}
-  #view-account #UI.mobile .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
-  #view-account #UI.mobile .container {width: 100%!important;}
-  #view-account #UI.mobile .filter-view a.ui-radio {color: transparent;}
-  #view-account #UI.mobile .filter-view .right {margin: 0 20px 0 0;}
-  #view-account #UI.mobile .filter-view a:nth-child(2) {margin-left: 2px;}
-  #view-account #UI.mobile .filter-profil {width: 285px;}
-  #view-account #UI.mobile .list-bars .col {margin: 0;}
-  #view-account #UI.mobile .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
+  #view-account .ui.mobile .group.right {/*float: left; margin: 0 0 0 70px;*/}
+  #view-account .ui.mobile .btn-editprofile .btn {font-size: 16px;}
+  #view-account .ui.mobile .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
+  #view-account .ui.mobile .block-top {width: auto;}
+  #view-account .ui.mobile .sort-by label {display: none;}
+  #view-account .ui.mobile .sort-by .four.columns {}
+  #view-account .ui.mobile .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
+  #view-account .ui.mobile .container {width: 100%!important;}
+  #view-account .ui.mobile .filter-view a.ui-radio {color: transparent;}
+  #view-account .ui.mobile .filter-view .right {margin: 0 20px 0 0;}
+  #view-account .ui.mobile .filter-view a:nth-child(2) {margin-left: 2px;}
+  #view-account .ui.mobile .filter-profil {width: 285px;}
+  #view-account .ui.mobile .list-bars .col {margin: 0;}
+  #view-account .ui.mobile .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
