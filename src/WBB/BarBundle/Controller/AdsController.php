@@ -19,7 +19,7 @@ class AdsController extends Controller
             $city = $this->container->get('city.repository')->findOneBySlug($slug);
         }
 
-        $ad = $this->get('ad.repository')->findOneByPositionAndCountry($position, $city->getCountry());
+        $ad = $this->get('ad.repository')->findOneByPositionAndCountry($position, ($city)?$city->getCountry():null);
 
         $this->render('WBBBarBundle:Ads:show.html.twig', array(
                 'ad'    => $ad,
