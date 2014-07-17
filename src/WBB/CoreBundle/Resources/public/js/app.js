@@ -1,4 +1,3 @@
-
 /**
  * Application
  *
@@ -417,4 +416,3 @@ $(document).ready(function()
     //     });
     // })
 });
-

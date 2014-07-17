@@ -188,7 +188,7 @@
 
                                 <div class="bar-w-pic list">
 
-                                    <a href="#0" class="btn-round dark star"></a>
+                                    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
 
                                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
 

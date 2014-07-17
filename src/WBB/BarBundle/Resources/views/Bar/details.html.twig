@@ -6,504 +6,500 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript">
         var _bar = {{ bar.id }};
-        var _offset = 0;
-        var _limit = 3;
-        var is_mobile = 0;
-        {% if is_mobile() and not is_tablet() %}
-            is_mobile = 1;
-        {% endif %}
+                var _offset = 0;
+                var _limit = 3;
+                var is_mobile = 0;        {% if is_mobile() and not is_tablet() %}
+                            is_mobile = 1;        {% endif %}
     </script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMoreTips.wbb.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.nicescroll.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/modules/bar-details.wbb.js') }}"></script>
 
     <script type="text/javascript">
-        /**
-         * TODO : Créer des fonctions JS pour gérer cette partie
-         */
-        var barId = "{{ bar.id }}",
-                venue  = "{{ bar.foursquare }}",
+                /**
+                 * TODO : Créer des fonctions JS pour gérer cette partie
+                 */
+                var barId = "{{ bar.id }}",
+                venue = "{{ bar.foursquare }}",
                 insta = "{{ bar.instagram }}",
                 imgs = [],
                 i, m, n, reste, lastImages,
                 fsq = [],
                 ins = [],
                 html = "";
-        $(document).ready(function(){
-            $('#showOpenings').click(function(){
-                var link = $(this);
+                $(document).ready(function(){
+        $('#showOpenings').click(function(){
+        var link = $(this);
                 $('.openings').show();
                 link.hide();
                 $('#hideOpenings').show();
-            });
-            $('#hideOpenings').click(function(){
-                var link = $(this);
+        });
+                $('#hideOpenings').click(function(){
+        var link = $(this);
                 $('.openings').hide();
                 link.show();
                 $('#showOpenings').show();
-            });
-            $.ajax({
+        });
+                $.ajax({
                 type: "POST",
-                url:  Routing.generate('wbb_bar_feeds_list',
+                        url:  Routing.generate('wbb_bar_feeds_list',
                         { type: "fsimgs", bar: barId }),
-                dataType: 'json',
-                success: function(r) {
-                    $.ajax({
-                        type: "POST",
-                        url:  Routing.generate('wbb_bar_feeds_find',
-                                { type: "fsimgs", id: venue }),
                         dataType: 'json',
-                        success: function(response) {
-                            i = 0;
-                            if (typeof response.data != 'undefined') {
-                                $.each(response.data, function(key, feed){
-                                    if(in_array(feed.id, r) && i<5) {
-                                        fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="" data-src="'+feed.prefix+"640x480"+feed.suffix+'" itemprop="photo" /></div></div>');
-                                        i++;
-                                    }
-                                });
-                            }
-                            $.ajax({
-                                type: "POST",
-                                url:  Routing.generate('wbb_bar_feeds_list',
-                                        { type: "instagram", bar: barId}),
+                        success: function(r) {
+                        $.ajax({
+                        type: "POST",
+                                url:  Routing.generate('wbb_bar_feeds_find',
+                                { type: "fsimgs", id: venue }),
                                 dataType: 'json',
-                                success: function(r) {
-                                    $.ajax({
-                                        type: "POST",
-                                        url:  Routing.generate('wbb_bar_feeds_find',
-                                                { type: "instagram", id: insta}),
+                                success: function(response) {
+                                i = 0;
+                                        if (typeof response.data != 'undefined') {
+                                $.each(response.data, function(key, feed){
+                                if (in_array(feed.id, r) && i < 5) {
+                                fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="" data-src="' + feed.prefix + "640x480" + feed.suffix + '" itemprop="photo" /></div></div>');
+                                        i++;
+                                }
+                                });
+                                }
+                                $.ajax({
+                                type: "POST",
+                                        url:  Routing.generate('wbb_bar_feeds_list',
+                                        { type: "instagram", bar: barId}),
                                         dataType: 'json',
-                                        success: function(response) {
-                                            i = 0;
-                                            if (typeof response.data != 'undefined') {
+                                        success: function(r) {
+                                        $.ajax({
+                                        type: "POST",
+                                                url:  Routing.generate('wbb_bar_feeds_find',
+                                                { type: "instagram", id: insta}),
+                                                dataType: 'json',
+                                                success: function(response) {
+                                                i = 0;
+                                                        if (typeof response.data != 'undefined') {
                                                 $.each(response.data.data, function(key, feed){
-                                                    if(!in_array(feed.id, r) && i<5) {
-                                                        ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="" data-src="'+feed.images.standard_resolution.url+'" itemprop="photo"/></div></div>');
+                                                if (!in_array(feed.id, r) && i < 5) {
+                                                ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="" data-src="' + feed.images.standard_resolution.url + '" itemprop="photo"/></div></div>');
                                                         i++;
-                                                    }
-                                                });
-                                            }
-                                            for(i=0; i<=4; i+=2){
-                                                if(typeof ins[i] != 'undefined') { html+=ins[i]; }
-                                                if(typeof ins[i+1] != 'undefined') { html+=ins[i+1]; }
-                                                if(typeof fsq[i] != 'undefined') { html+=fsq[i]; }
-                                                if(typeof fsq[i+1] != 'undefined') { html+=fsq[i+1]; }
-                                            }
-                                            $('.ui-slide').append(html);
-                                            imgs = $('.ui-slide .image');
-                                            $('.ui-slide').remove();
-                                            html = "";
-                                            for(n=0; n<Math.ceil(imgs.length/4); n++){
-                                                html+='<div class="ui-slide">';
-                                                for(m=n*4; m<(n+1)*4; m++){
-                                                    if(imgs[m]){
-                                                        html+=nodeToString(imgs[m]);
-                                                    }
                                                 }
-                                                html+='</div>';
-                                            }
-                                            $(".loader").css('display','none');
-                                            $('.ui-slider').append(html);
-                                            reste  = 4-$('.ui-slide .image').length%4;
-                                            lastImages = $('.ui-slide .image').slice(0,reste);
-                                            i=1;
-                                            if($('.ui-slide .image').length>1){
-                                            $.each(lastImages, function(key, element){
-                                                if(i<=reste){
-                                                    $('.ui-slide:last-child').append('<div class="image">'+element.innerHTML+'</div>');
+                                                });
+                                                }
+                                                for (i = 0; i <= 4; i += 2){
+                                                if (typeof ins[i] != 'undefined') { html += ins[i]; }
+                                                if (typeof ins[i + 1] != 'undefined') { html += ins[i + 1]; }
+                                                if (typeof fsq[i] != 'undefined') { html += fsq[i]; }
+                                                if (typeof fsq[i + 1] != 'undefined') { html += fsq[i + 1]; }
+                                                }
+                                                $('.ui-slide').append(html);
+                                                        imgs = $('.ui-slide .image');
+                                                        $('.ui-slide').remove();
+                                                        html = "";
+                                                        for (n = 0; n < Math.ceil(imgs.length / 4); n++){
+                                                html += '<div class="ui-slide">';
+                                                        for (m = n * 4; m < (n + 1) * 4; m++){
+                                                if (imgs[m]){
+                                                html += nodeToString(imgs[m]);
+                                                }
+                                                }
+                                                html += '</div>';
+                                                }
+                                                $(".loader").css('display', 'none');
+                                                        $('.ui-slider').append(html);
+                                                        reste = 4 - $('.ui-slide .image').length % 4;
+                                                        lastImages = $('.ui-slide .image').slice(0, reste);
+                                                        i = 1;
+                                                        if ($('.ui-slide .image').length > 1){
+                                                $.each(lastImages, function(key, element){
+                                                if (i <= reste){
+                                                $('.ui-slide:last-child').append('<div class="image">' + element.innerHTML + '</div>');
                                                 }
                                                 i++;
-                                            });
-                                            }
-                                            initializeSliders();
+                                                });
+                                                }
+                                                initializeSliders();
+                                                },
+                                                error: function(e) {
+                                                console.log(e);
+                                                }
+                                        });
                                         },
                                         error: function(e) {
-                                            console.log(e);
+                                        console.log(e);
                                         }
-                                    });
+                                });
                                 },
                                 error: function(e) {
-                                    console.log(e);
+                                console.log(e);
                                 }
-                            });
-
+                        });
                         },
                         error: function(e) {
-                            console.log(e);
+                        console.log(e);
                         }
-                    });
-                },
-                error: function(e) {
-                    console.log(e);
-                }
-            });
+                });
         });
-        function initialise() {
-            var myLatlng = new google.maps.LatLng({{ bar.latitude }},{{ bar.longitude }}); // Add the coordinates
-            var mapOptions = {
-                zoom: 14, // The initial zoom level when your map loads (0-20)
-                minZoom: 6, // Minimum zoom level allowed (0-20)
-                maxZoom: 17, // Maximum soom level allowed (0-20)
-                zoomControl:true, // Set to true if using zoomControlOptions below, or false to remove all zoom controls.
-                zoomControlOptions: {
-                    style:google.maps.ZoomControlStyle.SMALL // Change to SMALL to force just the + and - buttons.
-                },
-                center: myLatlng, // Centre the Map to our coordinates variable
-                mapTypeId: google.maps.MapTypeId.ROADMAP, // Set the type of Map
-                scrollwheel: false, // Disable Mouse Scroll zooming (Essential for responsive sites!)
-                // All of the below are set to true by default, so simply remove if set to true:
-                panControl:false, // Set to false to disable
-                mapTypeControl:false, // Disable Map/Satellite switch
-                scaleControl:false, // Set to false to hide scale
-                streetViewControl:false, // Set to disable to hide street view
-                overviewMapControl:false, // Set to false to remove overview control
-                rotateControl:false // Set to false to disable rotate control
-            }
-            var map = new google.maps.Map(document.getElementById('gmap'), mapOptions); // Render our map within the empty div
+                function initialise() {
+                var myLatlng = new google.maps.LatLng({{ bar.latitude }},{{ bar.longitude }} ); // Add the coordinates
+                        var mapOptions = {
+                        zoom: 14, // The initial zoom level when your map loads (0-20)
+                                minZoom: 6, // Minimum zoom level allowed (0-20)
+                                maxZoom: 17, // Maximum soom level allowed (0-20)
+                                zoomControl:true, // Set to true if using zoomControlOptions below, or false to remove all zoom controls.
+                                zoomControlOptions: {
+                                style:google.maps.ZoomControlStyle.SMALL // Change to SMALL to force just the + and - buttons.
+                                },
+                                center: myLatlng, // Centre the Map to our coordinates variable
+                                mapTypeId: google.maps.MapTypeId.ROADMAP, // Set the type of Map
+                                scrollwheel: false, // Disable Mouse Scroll zooming (Essential for responsive sites!)
+                                // All of the below are set to true by default, so simply remove if set to true:
+                                panControl:false, // Set to false to disable
+                                mapTypeControl:false, // Disable Map/Satellite switch
+                                scaleControl:false, // Set to false to hide scale
+                                streetViewControl:false, // Set to disable to hide street view
+                                overviewMapControl:false, // Set to false to remove overview control
+                                rotateControl:false // Set to false to disable rotate control
+                        }
+                var map = new google.maps.Map(document.getElementById('gmap'), mapOptions); // Render our map within the empty div
 
-            var image = new google.maps.MarkerImage("http://wbb.lapreprod.com/bundles/wbbcore/images/map.pin1.png", null, null, null, new google.maps.Size(39,58)); // Create a variable for our marker image.
+                        var image = new google.maps.MarkerImage("http://wbb.lapreprod.com/bundles/wbbcore/images/map.pin1.png", null, null, null, new google.maps.Size(39, 58)); // Create a variable for our marker image.
 
-            var marker = new google.maps.Marker({ // Set the marker
-                position: myLatlng, // Position marker to coordinates
-                icon:image, //use our image as the marker
-                map: map, // assign the market to our map variable
-                title: '{{ bar.name }}' // Marker ALT Text
-            });
+                        var marker = new google.maps.Marker({ // Set the marker
+                        position: myLatlng, // Position marker to coordinates
+                                icon:image, //use our image as the marker
+                                map: map, // assign the market to our map variable
+                                title: '{{ bar.name }}' // Marker ALT Text
+                        });
+                        // 	google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
+                        //		window.location='http://www.snowdonrailway.co.uk/shop_and_cafe.php'; // URL to Link Marker to (i.e Google Places Listing)
+                        // 	});
 
-            // 	google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
-            //		window.location='http://www.snowdonrailway.co.uk/shop_and_cafe.php'; // URL to Link Marker to (i.e Google Places Listing)
-            // 	});
-
-            var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
-                content:"{{ bar.name }}" // HTML contents of the InfoWindow
-            });
-
-            google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
-                infowindow.open(map,marker); // Open our InfoWindow
-            });
-
-            google.maps.event.addDomListener(window, 'resize', function() { map.setCenter(myLatlng); }); // Keeps the Pin Central when resizing the browser on responsive sites
-             $('#gmap').append('<div class="get-directions h4"><a href="https://www.google.fr/maps/dir//{{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a></div>')
-        }
+                        var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
+                        content:"{{ bar.name }}" // HTML contents of the InfoWindow
+                        });
+                        google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
+                        infowindow.open(map, marker); // Open our InfoWindow
+                        });
+                        google.maps.event.addDomListener(window, 'resize', function() { map.setCenter(myLatlng); }); // Keeps the Pin Central when resizing the browser on responsive sites
+                        $('#gmap').append('<div class="get-directions h4"><a href="https://www.google.fr/maps/dir//{{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a></div>')
+                }
         google.maps.event.addDomListener(window, 'load', initialise); // Execute our 'initialise' function once the page has loaded.
     </script>
 {% endblock %}
 {% block bodyTag %}
-<body class="bar-details">
-{% endblock %}
-{% block body %}
-<div itemscope itemtype="http://schema.org/BarOrPub">
-    <!-- SUBHEADER -->
-<div class="container">
-    <section class="sub-header">
-        <table>
-            <tr>
-                {% if not is_mobile() or is_tablet() %}
-                <td>
-                {% if bar.city %}
-                    {% if bar.city.onTopCity %}
-                        <div class="city-selector h3">
-                            You are in
-                            <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:bar.city.slug}) }}">{{ bar.city.name|default('Unspecified') }}</a>
-                        </div>
-                    {% endif %}
-                {% endif %}
-                </td>
-                {% endif %}
-                <td class="title">
-                    <h1 itemprop="name">{{ bar.name }}</h1>
-                    <h3>{{ bar.suburb.name|default('Unspecified') }}, {{ bar.city.name|default('Unspecified') }}</h3>
-                </td>
+    <body class="bar-details">
+    {% endblock %}
+    {% block body %}
+        <div itemscope itemtype="http://schema.org/BarOrPub">
+            <!-- SUBHEADER -->
+            <div class="container">
+                <section class="sub-header">
+                    <table>
+                        <tr>
+                            {% if not is_mobile() or is_tablet() %}
+                                <td>
+                                    {% if bar.city %}
+                                        {% if bar.city.onTopCity %}
+                                            <div class="city-selector h3">
+                                                You are in
+                                                <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:bar.city.slug}) }}">{{ bar.city.name|default('Unspecified') }}</a>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                            <td class="title">
+                                <h1 itemprop="name">{{ bar.name }}</h1>
+                                <h3>{{ bar.suburb.name|default('Unspecified') }}, {{ bar.city.name|default('Unspecified') }}</h3>
+                            </td>
 
-                <td class="star-share">
-                    <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href="#0"></a>
-                </td>
-            </tr>
-        </table>
-    </section>
-</div>
-    <!-- SLIDER -->
-    <div class="container full">
-    <section class="gallery">
-        <div class="main">
-            {% for m in bar.medias|slice(0,1) %}
-                {% if m.media.providerName == 'sonata.media.provider.youtube' %}
-                    <div class="video has_sizer" data-size="4x3">
-                        <iframe width="853" height="480" src="http://www.youtube.com/embed/{{ m.media.providerReference }}?autoplay=0&modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light&wmode=transparent" frameborder="0" allowfullscreen></iframe>
+                            <td class="star-share">
+                                <a href="{{ favorite_url(app.user, bar) }}" class="btn-round star {% if is_favorite(app.user, bar) %}active brown changed{% endif %}"></a>
+                                <a class="btn-round brown share" href="#0"></a>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+            <!-- SLIDER -->
+            <div class="container full">
+                <section class="gallery">
+                    <div class="main">
+                        {% for m in bar.medias|slice(0,1) %}
+                            {% if m.media.providerName == 'sonata.media.provider.youtube' %}
+                                <div class="video has_sizer" data-size="4x3">
+                                    <iframe width="853" height="480" src="http://www.youtube.com/embed/{{ m.media.providerReference }}?autoplay=0&modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light&wmode=transparent" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            {% else %}
+                                <div class="image">
+                                    <div class="content">
+                                        <div class="overlay"></div>
+                                        <img src="{% path m.media, 'slider_large' %}" />
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                {% else %}
-                    <div class="image">
-                        <div class="content">
-                            <div class="overlay"></div>
-                            <img src="{% path m.media, 'slider_large' %}" />
+                    <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
+                        <div class="loader"></div>
+                        <div class="ui-slide" style="display:none">
+                            {% for m in bar.medias %}
+
+                                {% if not loop.first %}
+                                    <div class="image">
+                                        <div class="content">
+                                            <div class="overlay"></div>
+                                            <img src="" data-src="{% path m.media, 'slider_small' %}" itemprop="photo"/>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
-                {% endif %}
-            {% endfor %}
+                </section>
+            </div>
+            <div class="container">
+                <section class="content">
+                    <!-- MAIN CONTENT -->
+                    <article class="main">
+                        {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
+                        <div class="eight columns l-margin-top">
+
+                            <ul class="trends">
+                                <li>At a Glance :</li>
+                                    {% if bar.energyLevel %}
+                                    <li>{{ bar.energyLevel }}</li>
+                                    {% endif %}
+                                    {% for tr in bar.tags |slice(0, ((bar.energyLevel)? 4 : 5)) %}
+                                        {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
+                                        <li>{{ tr.tag }}</li>
+                                        {% endif %}
+                                    {% endfor%}
+                            </ul>
+
+                            <p>
+                                {% if is_mobile() and not is_tablet() %}
+                                    {{ bar.getDescriptionIntro(true)|raw|nl2br }}
+                                    {% if bar.getDescriptionMore(true) %}<a class="see-more">Read More</a>
+                                        <span class="more">
+                                            {{ bar.getDescriptionMore(true)|raw|nl2br }}
+                                        </span>
+                                    {% endif %}
+                                {% else %}
+                                    {{ bar.getDescriptionIntro|raw|nl2br }}
+                                    {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
+                                        <span class="more">
+                                            {{ bar.getDescriptionMore|raw|nl2br }}
+                                        </span>
+                                    {% endif %}
+                                {% endif %}
+
+                            </p>
+                            <!-- ALSO APPEARS -->
+                            {% if not is_mobile() or is_tablet() %}
+                                <div class="also-appears">
+                                    <hr class="l-margin"/>
+                                    <div class="m-margin-top h2">This bar appears also in</div>
+                                    <div class="m-margin-top h3">
+                                        <ul>
+                                            {% for b in bar.bestofs %}
+                                                <li>
+                                                    {% if b.bestof.city %}
+                                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                                            Best {{ b.bestof.name }} in {{ b.bestof.city }}
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                                            Best {{ b.bestof.name }} in world
+                                                        </a>
+                                                    {% endif %}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- ASIDE -->
+                        <aside class="columns four">
+                            <div class="block informations">
+                                <div class="contain">
+                                    <div class="gmap" id="gmap" style="height:124px; width:100%;">
+
+                                    </div>
+                                    <p>
+                                        <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                            <span itemprop="streetAddress">{{ bar.address }}</span><br/>
+                                            <span itemprop="addressLocality">{{ bar.city }}</span>
+                                        </span>
+                                        <br/>
+                                        {% if is_mobile() and not is_tablet() %}
+                                            <span itemprop="telephone"><a href='tel:{{ bar.phone }}'>{{ bar.phone }}</a></span><br/>
+                                            {% else %}
+                                            <span itemprop="telephone">{{ bar.phone }}</span><br/>
+                                        {% endif %}
+                                        <a href="mailto:{{ bar.email }}" itemprop="email">{{ bar.email }}</a>
+                                        <br/>
+                                        {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank" itemprop="url" ></a>{% endif %}
+                                        {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
+                                        {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook" target="_blank"></a>{% endif %}
+                                        {% if bar.foursquare %}<a href="https://www.foursquare.com/v/{{ bar.foursquare }}" class="btn-small-round foursquare" target="_blank"></a>{% endif %}
+                                        {% if bar.instagram %}<a href="https://www.instagram.com/{{ bar.instagram }}" class="btn-small-round instagram" target="_blank"></a>{% endif %}
+                                    </p>
+                                    <hr class="s-margin"/>
+                                    <div class="p">
+                                        {% if bar.openings|length > 0 %}
+                                            Hours:
+                                            {% for opening in bar.openings %}
+                                                {% if opening.openingDay == "now"|date("N") %}
+                                                    Today
+                                                    {% if opening.fromHour|number_format<=12 %}
+                                                        {{ opening.fromHour }}:00 am
+                                                    {% else %}
+                                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                                    {% endif %}
+                                                    -
+                                                    {% if opening.toHour|number_format<=12 %}
+                                                        {{ opening.toHour }}:00 am
+                                                    {% else %}
+                                                        {{ (opening.toHour|number_format)-12 }}:00 pm
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor%}
+                                            <a href="#0" id="showOpenings">(See all)</a><br/>
+                                            <span class="openings" style="display: none; margin-bottom: 30px">
+                                                {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
+                                                {% for opening in bar.openings %}
+                                                    {{ days[opening.openingDay-1] }} :
+                                                    {% if opening.fromHour|number_format<=12 %}
+                                                        {{ opening.fromHour }}:00 am
+                                                    {% else %}
+                                                        {{ (opening.fromHour|number_format)-12 }}:00 pm
+                                                    {% endif %}
+                                                    -
+                                                    {% if opening.toHour|number_format<=12 %}
+                                                        {{ opening.toHour }}:00 am
+                                                    {% else %}
+                                                        {{ (opening.toHour|number_format)-12 }}:00 pm
+                                                    {% endif %}
+                                                    <br />
+                                                {% endfor%}
+                                                <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 20px;">(Show less)</a>
+                                            </span>
+                                        {% endif %}
+                                        Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
+                                        Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
+                                        {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
+                                        Price: <span itemprop="priceRange">{% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %}</span> {% if bar.menu %}<a href="{{ bar.menu }}" itemprop="menu" target="_blank">(View menu)</a>{% endif %}<br/>
+                                        Reservation: <span itemprop="acceptsReservations">{% if bar.isReservation %}Yes{% else %}No{% endif %}</span><br/>
+                                        {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not is_mobile() or is_tablet() %}
+                                <div class="block">
+                                    <div class="side-ad m-margin-top">
+                                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                                        <div class="txt">Advertising</div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </aside>
+                    </article>
+                </section>
+            </div>
+            <!-- INSIDER TIPS -->
+            {% include "WBBBarBundle:Bar:details-tips-block.html.twig" with { 'bar': bar } %}
+            <!-- ALSO APPEARS -->
+            {% if is_mobile() and not is_tablet() %}
+                <div class="container">
+                    <div class="twelve columns">
+                        <div class="also-appears">
+                            <div class="m-margin-top h2">This bar appears also in</div>
+                            <div class="m-margin-top h3">
+                                <ul>
+                                    {% for b in bar.bestofs %}
+                                        <li>
+                                            {% if b.bestof.city %}
+                                                <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                                    Best {{ b.bestof.name }} in {{ b.bestof.city }}
+                                                </a>
+                                            {% else %}
+                                                <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                                    Best {{ b.bestof.name }} in world
+                                                </a>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <hr class="l-margin-top"/>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
-        <div class="ui-slider type-bar-detail has_sizer arrows" data-size="4x3" data-animation="latency">
-            <div class="loader"></div>
-            <div class="ui-slide" style="display:none">
-                {% for m in bar.medias %}
-
-                    {% if not loop.first %}
-                    <div class="image">
-                        <div class="content">
-                            <div class="overlay"></div>
-                            <img src="" data-src="{% path m.media, 'slider_small' %}" itemprop="photo"/>
-                        </div>
+        <!-- ALSO LIKE -->
+        <section class="also-like force-load">
+            <div class="container m-padding-bottom">
+                <div class="h1 twelve columns align-center l-margin-top m-margin-bottom">
+                    {% if oneCity %}Related bars in {{ bar.city.name|default('Unspecified') }}{% else %}You May Also Like{% endif %}
+                </div>
+                {% for b in barLike %}
+                    <div class="three columns">
+                        {% if is_mobile() and not is_tablet() %}
+                            {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                        {% else %}
+                            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
+                        {% endif %}
                     </div>
-                    {% endif %}
                 {% endfor %}
             </div>
-        </div>
-    </section>
-    </div>
-<div class="container">
-<section class="content">
-        <!-- MAIN CONTENT -->
-        <article class="main">
-            {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
-            <div class="eight columns l-margin-top">
-
-                <ul class="trends">
-                    <li>At a Glance :</li>
-                    {% if bar.energyLevel %}
-                        <li>{{ bar.energyLevel }}</li>
-                    {% endif %}
-                    {% for tr in bar.tags |slice(0, ((bar.energyLevel)? 4 : 5)) %}
-                        {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
-                            <li>{{ tr.tag }}</li>
-                        {% endif %}
-                    {% endfor%}
-                </ul>
-
-                    <p>
-                        {% if is_mobile() and not is_tablet() %}
-                            {{ bar.getDescriptionIntro(true)|raw|nl2br }}
-                            {% if bar.getDescriptionMore(true) %}<a class="see-more">Read More</a>
-                                <span class="more">
-                                {{ bar.getDescriptionMore(true)|raw|nl2br }}
-                                </span>
-                            {% endif %}
-                        {% else %}
-                            {{ bar.getDescriptionIntro|raw|nl2br }}
-                            {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
-                                <span class="more">
-                                {{ bar.getDescriptionMore|raw|nl2br }}
-                                </span>
-                            {% endif %}
-                        {% endif %}
-
-                    </p>
-                <!-- ALSO APPEARS -->
-                {% if not is_mobile() or is_tablet() %}
-                <div class="also-appears">
-                    <hr class="l-margin"/>
-                    <div class="m-margin-top h2">This bar appears also in</div>
-                    <div class="m-margin-top h3">
-                        <ul>
-                            {% for b in bar.bestofs %}
-                                <li>
-                                    {% if b.bestof.city %}
-                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
-                                            Best {{ b.bestof.name }} in {{ b.bestof.city }}
-                                        </a>
-                                    {% else %}
-                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
-                                            Best {{ b.bestof.name }} in world
-                                        </a>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-            <!-- ASIDE -->
-            <aside class="columns four">
-                <div class="block informations">
-                    <div class="contain">
-                        <div class="gmap" id="gmap" style="height:124px; width:100%;">
-
-                        </div>
-                        <p>
-                            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                <span itemprop="streetAddress">{{ bar.address }}</span><br/>
-                                <span itemprop="addressLocality">{{ bar.city }}</span>
-                            </span>
-                            <br/>
-                            {% if is_mobile() and not is_tablet() %}
-                            <span itemprop="telephone"><a href='tel:{{ bar.phone }}'>{{ bar.phone }}</a></span><br/>
-                            {% else %}
-                            <span itemprop="telephone">{{ bar.phone }}</span><br/>
-                            {% endif %}
-                            <a href="mailto:{{ bar.email }}" itemprop="email">{{ bar.email }}</a>
-                            <br/>
-                            {% if bar.website %}<a href="{{ bar.website }}" class="btn-small-round www brown" target="_blank" itemprop="url" ></a>{% endif %}
-                            {% if bar.twitter %}<a href="http://www.twitter.com/{{ bar.twitter }}" class="btn-small-round twitter" target="_blank"></a>{% endif %}
-                            {% if bar.facebook %}<a href="https://www.facebook.com/{{ bar.facebook }}" class="btn-small-round facebook" target="_blank"></a>{% endif %}
-                            {% if bar.foursquare %}<a href="https://www.foursquare.com/v/{{ bar.foursquare }}" class="btn-small-round foursquare" target="_blank"></a>{% endif %}
-                            {% if bar.instagram %}<a href="https://www.instagram.com/{{ bar.instagram }}" class="btn-small-round instagram" target="_blank"></a>{% endif %}
-                        </p>
-                        <hr class="s-margin"/>
-                        <div class="p">
-                            {% if bar.openings|length > 0 %}
-                                Hours:
-                                {% for opening in bar.openings %}
-                                    {% if opening.openingDay == "now"|date("N") %}
-                                        Today
-                                        {% if opening.fromHour|number_format<=12 %}
-                                            {{ opening.fromHour }}:00 am
-                                        {% else %}
-                                            {{ (opening.fromHour|number_format)-12 }}:00 pm
-                                        {% endif %}
-                                        -
-                                        {% if opening.toHour|number_format<=12 %}
-                                            {{ opening.toHour }}:00 am
-                                        {% else %}
-                                            {{ (opening.toHour|number_format)-12 }}:00 pm
-                                        {% endif %}
-                                    {% endif %}
-                                {% endfor%}
-                                <a href="#0" id="showOpenings">(See all)</a><br/>
-                                <span class="openings" style="display: none; margin-bottom: 30px">
-                                {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
-                                    {% for opening in bar.openings %}
-                                        {{ days[opening.openingDay-1] }} :
-                                        {% if opening.fromHour|number_format<=12 %}
-                                            {{ opening.fromHour }}:00 am
-                                        {% else %}
-                                            {{ (opening.fromHour|number_format)-12 }}:00 pm
-                                        {% endif %}
-                                        -
-                                        {% if opening.toHour|number_format<=12 %}
-                                            {{ opening.toHour }}:00 am
-                                        {% else %}
-                                            {{ (opening.toHour|number_format)-12 }}:00 pm
-                                        {% endif %}
-                                        <br />
-                                    {% endfor%}
-                                    <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 20px;">(Show less)</a>
-                                </span>
-                            {% endif %}
-                            Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
-                            Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
-                            {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
-                            Price: <span itemprop="priceRange">{% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %}</span> {% if bar.menu %}<a href="{{ bar.menu }}" itemprop="menu" target="_blank">(View menu)</a>{% endif %}<br/>
-                            Reservation: <span itemprop="acceptsReservations">{% if bar.isReservation %}Yes{% else %}No{% endif %}</span><br/>
-                            {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
-                        </div>
-                    </div>
-                </div>
-                {% if not is_mobile() or is_tablet() %}
-                <div class="block">
-                    <div class="side-ad m-margin-top">
-                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
-                        <div class="txt">Advertising</div>
-                    </div>
-                </div>
-                {% endif %}
-            </aside>
-        </article>
-    </section>
-</div>
-    <!-- INSIDER TIPS -->
-    {% include "WBBBarBundle:Bar:details-tips-block.html.twig" with { 'bar': bar } %}
-    <!-- ALSO APPEARS -->
-    {% if is_mobile() and not is_tablet() %}
-    <div class="container">
-        <div class="twelve columns">
-            <div class="also-appears">
-                <div class="m-margin-top h2">This bar appears also in</div>
-                <div class="m-margin-top h3">
-                    <ul>
-                        {% for b in bar.bestofs %}
-                            <li>
-                                {% if b.bestof.city %}
-                                    <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
-                                    Best {{ b.bestof.name }} in {{ b.bestof.city }}
-                                    </a>
-                                {% else %}
-                                    <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
-                                    Best {{ b.bestof.name }} in world
-                                    </a>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <hr class="l-margin-top"/>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    </div>
-    <!-- ALSO LIKE -->
-    <section class="also-like force-load">
-        <div class="container m-padding-bottom">
-            <div class="h1 twelve columns align-center l-margin-top m-margin-bottom">
-                {% if oneCity %}Related bars in {{ bar.city.name|default('Unspecified') }}{% else %}You May Also Like{% endif %}
-            </div>
-            {% for b in barLike %}
-                <div class="three columns">
-                    {% if is_mobile() and not is_tablet() %}
-                        {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
-                    {% else %}
-                        {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
-    <script type="text/javascript">
-        new meta.Form(
-                {
-                    $form : $('form#tips'),
-                    onComplete:function($form, data)
-                    {
-                        var $count = $form.find(".count");
-                        var count = $count.text();
-
-                        $count.addClass('success').text(data.message);
-
-                        $form.get(0).reset();
-
-                        setTimeout(function()
-                        {
-                            //restore state
-                            $('form#tips textarea').val("");
-                            $count.removeClass('success').text("250 left");
-
-                        }, 2000);
-                    },
-                    onError:function($form, message)
-                    {
-                        var $count = $form.find(".count");
-                        var count = $count.text();
-
-                        $count.addClass('error').text(message);
-                        $form.find("textarea").addClass('error').focus();
-
-                        setTimeout(function()
-                        {
-                            //restore state
-                            $count.removeClass('error').text(count);
-                            $form.find("textarea").removeClass('error');
-
-                        }, 2000);
-                    }
+        </section>
+         
+       <script type="text/javascript">
+            {% if app.user is null %}
+                $(document).ready(function() {
+                    $('#tips').on('submit', function(e) {
+                        e.preventDefault();
+                        $('#show-popin-tips').click();
+                    });
                 });
+            {% else %}
+                        new meta.Form(
+                        {
+                        $form : $('form#tips'),
+                                onComplete:function($form, data)
+                                {
+                                var $count = $form.find(".count");
+                                        var count = $count.text();
+                                        $count.addClass('success').text(data.message);
+                                        $form.get(0).reset();
+                                        setTimeout(function()
+                                        {
+                                        //restore state
+                                        $('form#tips textarea').val("");
+                                                $count.removeClass('success').text("250 left");
+                                        }, 2000);
+                                },
+                                onError:function($form, message)
+                                {
+                                var $count = $form.find(".count");
+                                        var count = $count.text();
+                                        $count.addClass('error').text(message);
+                                        $form.find("textarea").addClass('error').focus();
+                                        setTimeout(function()
+                                        {
+                                        //restore state
+                                        $count.removeClass('error').text(count);
+                                                $form.find("textarea").removeClass('error');
+                                        }, 2000);
+                                }
+                        });            {% endif %}
 
-        $('form#tips textarea').keydown(function()
-        {
-            var length = $(this).val().length;
-            $('form#tips .count').text( 250-length+' left' );
-        });
-    </script>
-{% endblock %}
+                                    $('form#tips textarea').keydown(function()
+                            {
+                            var length = $(this).val().length;
+                                    $('form#tips .count').text(250 - length + ' left');
+                            });
+            </script>
+    {% endblock %}
 
 

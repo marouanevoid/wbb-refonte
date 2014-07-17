@@ -1,6 +1,6 @@
 <article class="bar-wo-pic">
 
-    <a href="#0" class="btn-round dark star nc"></a>
+    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %} nc"></a>
 
     <div class="txt">
         <h2>{{ b.name|truncate(30, true) }}</h2>
