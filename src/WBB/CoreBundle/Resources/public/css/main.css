@@ -444,10 +444,10 @@
     }
     .mobile section.bars .bar-w-pic .btn-round, 
     .mobile section.bar-filter .bar-w-pic .btn-round {
-      width: 20px;
-      height: 20px;
-      right: 0.5em;
-      top: 0.5em;
+        width: 20px;
+        height: 20px;
+        right: 0.5em;
+        top: 0.5em;
     }
     section.bars .bar-w-pic .txt, 
     section.bar-filter .bar-w-pic .txt {
