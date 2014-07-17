@@ -20,8 +20,8 @@ class NewsAdmin extends Admin {
             ->add('quoteAuthor', null, array('editable' => true))
             ->add('quoteText', null, array('editable' => true))
             ->add('seoDescription', null, array('editable' => true))
-            ->add('isAnInterview', null, array('editable' => true))
-            ->add('isOnTop', null, array('editable' => true))
+            ->add('interview', null, array('editable' => true))
+            ->add('onTop', null, array('editable' => true))
             ->add('createdAt', null, array('editable' => true))
             ->add('updatedAt', null, array('editable' => true))
         ;
@@ -39,8 +39,8 @@ class NewsAdmin extends Admin {
             ->add('quoteText')
             ->add('seoDescription')
             ->add('richDescription')
-            ->add('isAnInterview')
-            ->add('isOnTop')
+            ->add('interview')
+            ->add('onTop')
         ;
     }
 
@@ -57,8 +57,8 @@ class NewsAdmin extends Admin {
                 ->add('quoteText')
                 ->add('seoDescription')
                 ->add('richDescription')
-                ->add('isAnInterview')
-                ->add('isOnTop')
+                ->add('interview')
+                ->add('onTop')
                 ->add('createdAt')
                 ->add('updatedAt')
             ->end()
@@ -78,8 +78,8 @@ class NewsAdmin extends Admin {
                 ->add('quoteText')
                 ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
                 ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
-                ->add('isAnInterview')
-                ->add('isOnTop')
+                ->add('interview')
+                ->add('onTop')
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
                     'required' => false,

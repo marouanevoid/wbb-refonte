@@ -76,12 +76,12 @@ class AdAdmin extends Admin {
                     'required' => false
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'default'
+                        'context' => 'ads'
                     )
                 ))
                 ->add('beginAt', 'datePicker') 
                 ->add('endAt', 'datePicker')
-                ->add('countries', 'sonata_type_model', array('multiple' => true))
+                ->add('countries', 'sonata_type_model', array('multiple' => true, 'required' => false))
             ->end()
         ;
     }

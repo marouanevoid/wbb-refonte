@@ -68,7 +68,7 @@ class City implements IndexableEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="postal_code", type="string", length=10)
+     * @ORM\Column(name="postal_code", type="string", length=10, nullable=true)
      */
     private $postalCode;
 

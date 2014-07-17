@@ -344,21 +344,21 @@ class Ad {
 
     public static function getAdsPositionArray(){
         return array(
-            WBB_ADS_HP_300x250    => "Home Page (300x250)",
-            WBB_ADS_HP_728x90     => "Home Page (728x90)",
-            WBB_ADS_BF_728x90     => "Bar Finder (728x90)",
-            WBB_ADS_SR_728x90     => "Search Results (728x90)",
-            WBB_ADS_BG_728x90     => "Bar Guide (728x90)",
-            WBB_ADS_BD_300x250    => "Bar Detail (300x250)",
-            WBB_ADS_BD_728x90     => "Bar Detail (728x90)",
-            WBB_ADS_BOD_300x250   => "Best of Detail (300x250)",
-            WBB_ADS_BOD_728x90    => "Best of Detail (728x90)",
-            WBB_ADS_NLP_300x250   => "News Landing Page (300x250)",
-            WBB_ADS_NLP_300x600   => "News Landing Page (300x600)",
-            WBB_ADS_NLP_728x90    => "News Landing Page (728x90)",
-            WBB_ADS_ND_300x250    => "News Detail (300x250)",
-            WBB_ADS_ND_728x90     => "News Detail (728x90)",
-            WBB_ADS_UP_728x90     => "User Profile (728x90)"
+            Ad::WBB_ADS_HP_300x250    => "Home Page (300x250)",
+            Ad::WBB_ADS_HP_728x90     => "Home Page (728x90)",
+            Ad::WBB_ADS_BF_728x90     => "Bar Finder (728x90)",
+            Ad::WBB_ADS_SR_728x90     => "Search Results (728x90)",
+            Ad::WBB_ADS_BG_728x90     => "Bar Guide (728x90)",
+            Ad::WBB_ADS_BD_300x250    => "Bar Detail (300x250)",
+            Ad::WBB_ADS_BD_728x90     => "Bar Detail (728x90)",
+            Ad::WBB_ADS_BOD_300x250   => "Best of Detail (300x250)",
+            Ad::WBB_ADS_BOD_728x90    => "Best of Detail (728x90)",
+            Ad::WBB_ADS_NLP_300x250   => "News Landing Page (300x250)",
+            Ad::WBB_ADS_NLP_300x600   => "News Landing Page (300x600)",
+            Ad::WBB_ADS_NLP_728x90    => "News Landing Page (728x90)",
+            Ad::WBB_ADS_ND_300x250    => "News Detail (300x250)",
+            Ad::WBB_ADS_ND_728x90     => "News Detail (728x90)",
+            Ad::WBB_ADS_UP_728x90     => "User Profile (728x90)"
         );
     }
 

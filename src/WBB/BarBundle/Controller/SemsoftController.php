@@ -123,11 +123,11 @@ class SemsoftController extends Controller
                     $ssBar->setWebsite($this->setFieldValue('Website', $data, null, $newBar));
                     $ssBar->setEmail($this->setFieldValue('Email', $data, null, $newBar));
                     $ssBar->setPhone($this->setFieldValue('Phone', $data, null, $newBar));
-                    $ssBar->setIsOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
-                    $ssBar->setIsHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
-                    $ssBar->setIsWiFi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
+                    $ssBar->setOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
+                    $ssBar->setHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
+                    $ssBar->setWifi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
                     $ssBar->setPrice($this->setFieldValue('PriceRange', $data, $this->getPriceValue($data['PriceRange']), $newBar));
-                    $ssBar->setIsCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
+                    $ssBar->setCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
                     $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
                     $ssBar->setReservation($this->setFieldValue('Booking', $data, null, $newBar));
                     $ssBar->setParkingType($this->setFieldValue('ParkingType', $data, null, $newBar));
@@ -146,7 +146,7 @@ class SemsoftController extends Controller
                     $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
                     $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
                     $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
-                    $ssBar->setIsPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
+                    $ssBar->setPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
                     $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, null, $newBar));
                     $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
                     $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));

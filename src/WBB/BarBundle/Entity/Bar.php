@@ -196,14 +196,14 @@ class Bar implements IndexableEntity
      *
      * @ORM\Column(name="is_credit_card", type="boolean", nullable=true)
      */
-    private $isCreditCard;
+    private $creditCard;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_coat_check", type="boolean", nullable=true)
      */
-    private $isCoatCheck;
+    private $coatCheck;
 
     /**
      * @var string
@@ -231,14 +231,14 @@ class Bar implements IndexableEntity
      *
      * @ORM\Column(name="is_reservation", type="boolean", nullable=true)
      */
-    private $isReservation;
+    private $reservation;
 
     /**
      * @var string
      *
      * @ORM\Column(name="reservation", type="string", length=255, nullable=true)
      */
-    private $reservation;
+    private $reservationLink;
 
     /**
      * @var string
@@ -652,9 +652,9 @@ class Bar implements IndexableEntity
      * @param boolean $isCreditCard
      * @return Bar
      */
-    public function setIsCreditCard($isCreditCard)
+    public function setCreditCard($isCreditCard)
     {
-        $this->isCreditCard = $isCreditCard;
+        $this->creditCard = $isCreditCard;
 
         return $this;
     }
@@ -664,9 +664,9 @@ class Bar implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsCreditCard()
+    public function isCreditCard()
     {
-        return $this->isCreditCard;
+        return $this->creditCard;
     }
 
     /**
@@ -675,9 +675,9 @@ class Bar implements IndexableEntity
      * @param boolean $isCoatCheck
      * @return Bar
      */
-    public function setIsCoatCheck($isCoatCheck)
+    public function setCoatCheck($isCoatCheck)
     {
-        $this->isCoatCheck = $isCoatCheck;
+        $this->coatCheck = $isCoatCheck;
 
         return $this;
     }
@@ -687,9 +687,9 @@ class Bar implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsCoatCheck()
+    public function isCoatCheck()
     {
-        return $this->isCoatCheck;
+        return $this->coatCheck;
     }
 
     /**
@@ -773,9 +773,9 @@ class Bar implements IndexableEntity
      * @param boolean $isReservation
      * @return Bar
      */
-    public function setIsReservation($isReservation)
+    public function setReservation($isReservation)
     {
-        $this->isReservation = $isReservation;
+        $this->reservation = $isReservation;
 
         return $this;
     }
@@ -785,25 +785,25 @@ class Bar implements IndexableEntity
      *
      * @return boolean
      */
-    public function getIsReservation()
+    public function isReservation()
     {
-        return $this->isReservation;
+        return $this->reservation;
     }
 
     /**
      * Set reservation
      *
-     * @param string $reservation
+     * @param string $reservationLink
      * @return Bar
      */
-    public function setReservation($reservation)
+    public function setReservationLink($reservationLink)
     {
-        if ((strpos($reservation,'http://') !== false) || (strpos($reservation,'https://') !== false)) {
-            $this->reservation = $reservation;
+        if ((strpos($reservationLink,'http://') !== false) || (strpos($reservationLink,'https://') !== false)) {
+            $this->reservationLink = $reservationLink;
         }
         else
         {
-            $this->reservation = 'http://'.$reservation;
+            $this->reservationLink = 'http://'.$reservationLink;
         }
 
         return $this;
@@ -814,7 +814,7 @@ class Bar implements IndexableEntity
      *
      * @return string
      */
-    public function getReservation()
+    public function getReservationLink()
     {
         return $this->reservation;
     }
@@ -1619,7 +1619,7 @@ class Bar implements IndexableEntity
     /**
      * Set energyLevel
      *
-     * @param integer $energyLevel
+     * @param Tag $energyLevel
      * @return Bar
      */
     public function setEnergyLevel($energyLevel)
