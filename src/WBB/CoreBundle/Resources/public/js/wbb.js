@@ -60,10 +60,11 @@ function fillInForm(formId) {
                     $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
                     $(formId + ' #fos_user_registration_form_email').val(response.email);
                     if (response.gender === 'male') {
-                        $('#fos_user_registration_form_title').find('option[value="M"]').attr('selected', 'selected');
+                        $('#fos_user_registration_form_title').find('option[value="M"]').attr('selected', 'selected').change();
                     } else {
-                        $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected');
+                        $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected').change();
                     }
+                    //alert(reponse.);
                 } else if (formId === '#register_form') {
                     $(formId + ' #fos_user_registration_form_email').val(response.email);
                 }
@@ -145,22 +146,24 @@ jQuery(document).ready(function($) {
 
         if (current_id.length > 0) {
             //show lightbox window
-            current_id.show('slow');
+            current_id.fadeIn("slow");
+
             // Add class to trigger ID
             current_id.addClass('void-popup');
+
             //show the mask
-            mask.show('fast');
+            mask.fadeIn("slow");
         } else {
             $('.mask').hide();
             current_id.removeClass("void-popup");
         }
-    });
+    })
     $(".btn-close").click(function(e) {
         var current_popup = $(this).closest(".void-popup");
         current_popup.removeClass("void-popup");
-        current_popup.hide("fast");
-        $(".mask").hide("slow");
-    });
+        current_popup.fadeOut("fast");
+        $(".mask").fadeOut("slow");
+    })
 });
 
 // Favorites star

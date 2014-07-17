@@ -127,6 +127,11 @@ meta.Dropdown = function(config){
                     that._lockscroll();
                 });
             }
+
+            $dropdown.find('select').on('change', function()
+            {
+                that.config.$dropdown_value.text( $(this).find('option:selected').text() );
+            });
         }
         else
         {

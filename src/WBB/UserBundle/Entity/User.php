@@ -245,6 +245,13 @@ class User extends BaseUser
      */
     private $favoriteBestOfs;
 
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
+     */
+    private $tipsShouldBeModerated;
+
     public function serialize()
     {
         return serialize(array($this->facebookId, parent::serialize()));
@@ -261,6 +268,7 @@ class User extends BaseUser
         parent::__construct();
         $this->setEnabled(true);
         $this->setStayInformed(true);
+        $this->tipsShouldBeModerated = true;
         $this->favoriteBars = new ArrayCollection();
     }
 
@@ -1108,5 +1116,28 @@ class User extends BaseUser
     public function getFavoriteBestOfs()
     {
         return $this->favoriteBestOfs;
+    }
+
+    /**
+     * Set tipsShouldBeModerated
+     *
+     * @param boolean $tipsShouldBeModerated
+     * @return User
+     */
+    public function setTipsShouldBeModerated($tipsShouldBeModerated)
+    {
+        $this->tipsShouldBeModerated = $tipsShouldBeModerated;
+
+        return $this;
+    }
+
+    /**
+     * Get tipsShouldBeModerated
+     *
+     * @return boolean 
+     */
+    public function getTipsShouldBeModerated()
+    {
+        return $this->tipsShouldBeModerated;
     }
 }

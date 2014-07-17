@@ -33,9 +33,12 @@ class TipsController extends Controller
         }
 
         $tip = new Tip();
-        $tip
-            ->setUser($user)
-            ->setStatus(1);
+        $tip->setUser($user);
+        if ($user->getTipsShouldBeModerated()) {
+            $tip->setStatus(0);
+        } else {
+            $tip->setStatus(1);
+        }
 
         $form = $this->createForm(new TipType(), $tip, array('em' => $this->container->get('doctrine.orm.entity_manager')));
 

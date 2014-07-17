@@ -184,6 +184,7 @@ class RegistrationController extends ContainerAware
 
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
+        $user->setTipsShouldBeModerated(false);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
@@ -191,7 +192,9 @@ class RegistrationController extends ContainerAware
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
+            $url = $this->container->get('router')->generate('homepage', array(
+                'confirmed' => true
+            ));
             $response = new RedirectResponse($url);
         }
 
