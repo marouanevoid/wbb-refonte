@@ -402,7 +402,7 @@
   .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
-  .articles article .img .cover .sponsor {bottom: 0px; /* Cible IE9 */}
+  .articles article .img .cover .sponsor {bottom: 1px; /* Cible IE9 */}
   #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 15px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 5px;}
