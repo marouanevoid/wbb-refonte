@@ -413,7 +413,7 @@
 
   /* IE9 */
   .articles article .img .cover .sponsor {bottom: 0px\0/;}
-  section.bar-finder tr:nth-child(2) td:nth-child(7) .ui-radio.btn-radius.with-icon {border: 1px solid red\0/;}
+  section.bar-finder tr:nth-child(2) td:nth-child(7) .ui-radio.btn-radius.with-icon {margin-right: 20px\0/;}
   section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
 /* Smartphones (portrait) ----------- */
