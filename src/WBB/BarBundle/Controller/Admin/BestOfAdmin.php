@@ -169,6 +169,7 @@ class BestOfAdmin extends Admin
                             'required' => false,
                             'multiple' => true,
                             'by_reference' => false,
+                            'label' => 'With Who',
                             'query_builder' => function ($er) {
                                     return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
                                 }
