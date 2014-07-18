@@ -400,13 +400,16 @@
   .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
-  .articles article .img .cover .sponsor {bottom: 0px\0/; /* Cible IE9 (must go at the END of all rules) */}
   #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 15px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 5px;}
   .cities-content input[type="text"] + input[type="submit"] {right: -5px;}
   .bar-details .content ul.trends {line-height: 1.6em;}
   .bar-details .content ul.trends li {line-height: 20px;}
+
+  /* IE9 */
+  section.bar-finder .ui-radio.btn-radius.with-icon {border: 1px solid red\0/;}
+  section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px\0/;}
 
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
@@ -445,10 +448,20 @@
     }
     .mobile section.bars .bar-w-pic .btn-round, 
     .mobile section.bar-filter .bar-w-pic .btn-round {
-        width: 20px;
-        height: 20px;
-        right: 0.5em;
-        top: 0.5em;
+      width: 20px;
+      height: 20px;
+      right: 0.5em;
+      top: 0.5em;
+    }
+    .mobile section.bars .ui-slides .bar-w-pic:first-child .btn-round {
+      width: 40px;
+      height: 40px;
+      right: 1em;
+      top: 1em;
+    }
+    .mobile section.bars .ui-slides .bar-w-pic:first-child .btn-round:before {
+      background-size: 256px 512px;
+      background-position: -160px -80px;
     }
     section.bars .bar-w-pic .txt, 
     section.bar-filter .bar-w-pic .txt {
