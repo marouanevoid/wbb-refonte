@@ -101,9 +101,10 @@ class NewsAdmin extends Admin {
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection',
                     array(
-                        'required'     => false,
-                        'by_reference' => false,
-                        'type_options' => array('delete' => true)
+                        'required'      => false,
+                        'by_reference'  => false,
+                        'help'          => 'Preferred size (width: 95px , height: 105px)',
+                        'type_options'  => array('delete' => true)
                     ),
                     array(
                         'edit'      => 'inline',
