@@ -299,15 +299,22 @@
                     <div class="m-margin-top h2">This bar appears also in</div>
                     <div class="m-margin-top h3">
                         <ul>
-                            {% for b in bar.bestofs %}
+                            {% for n in news %}
                                 <li>
-                                    {% if b.bestof.city %}
-                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
-                                            Best {{ b.bestof.name }} in {{ b.bestof.city }}
+                                    <a href="{{ path('wbb_news_details_page', {newsSlug: n.slug}) }}">
+                                        {{ n.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            {% for b in bestofs %}
+                                <li>
+                                    {% if b.city %}
+                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}">
+                                            Best {{ b.name }} in {{ b.city }}
                                         </a>
                                     {% else %}
-                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
-                                            Best {{ b.bestof.name }} in world
+                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}">
+                                            Best {{ b.name }} in world
                                         </a>
                                     {% endif %}
                                 </li>

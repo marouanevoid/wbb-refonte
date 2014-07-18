@@ -145,4 +145,20 @@ class BestOfRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBarRelatedBestofs($bar)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->innerJoin($this->getAlias().'.bars', 'bb')
+            ->innerJoin('bb.bar', 'b')
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq('b.id', $bar->getId()))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 } 

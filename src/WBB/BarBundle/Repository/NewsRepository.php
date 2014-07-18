@@ -77,4 +77,19 @@ class NewsRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBarRelatedNews($bar)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->innerJoin($this->getAlias().'.bars', 'b')
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq('b.id', $bar->getId()))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 } 
