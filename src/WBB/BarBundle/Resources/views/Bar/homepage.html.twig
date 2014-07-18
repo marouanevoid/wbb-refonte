@@ -165,7 +165,7 @@
             </div>
             {% if topNews|length>2 %}
             {% for n in topNews|slice(0,1) %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1, 'is_small' : 1, } %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'is_small' : 1, } %}
                 {# <article class="small">
                     <div class="img">
                         <a href="" class="cover">
@@ -199,7 +199,7 @@
              #}
             {% endfor %}
             {% for n in topNews|slice(2,1) %}
-                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
+                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1} %}
                 {#
                     <article class="large">
                     <div class="img">

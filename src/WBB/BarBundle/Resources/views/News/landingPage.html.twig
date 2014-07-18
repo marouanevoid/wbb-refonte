@@ -79,7 +79,10 @@
                         </tr>
                     </table>
                 {% else %}
-                    <h1>Discover the World’s Best Bars</h1>
+                    <h1>{% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %}
+                                in {{ city }}
+                                {% endif %}
+                    </h1>
                 {% endif %}
             </section>
 

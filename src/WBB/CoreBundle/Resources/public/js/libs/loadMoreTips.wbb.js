@@ -77,6 +77,7 @@ meta.LoadMoreTips = function(config) {
             dataType: "json",
             success: function(msg) {
                 $target.append(msg.htmldata);
+                
                 if(parseInt(msg.difference)==0){
                     that.config.$button.hide();
                     if(is_mobile == 1)
@@ -91,6 +92,8 @@ meta.LoadMoreTips = function(config) {
                 that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
                 that.context.is_loading = false;
                 that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
+                $(".thisdiv").niceScroll({cursorcolor:"#b3955f"});
+
             },
             error: function(e) {
                 console.log('Error : ' + e);

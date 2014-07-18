@@ -239,13 +239,14 @@ meta.App = function() {
         $('a.see-more').click(function(e)
         {
             e.preventDefault();
-
+            var speed = Math.min(500, $(window).scrollTop()*2);
+            
             if( $(this).hasClass('fade') )
-                $(this).velocity('fadeOut', { duration: speed, easing:easing});
+                $(this).velocity('fadeOut', { duration: speed, easing:that.config.easing});
             else
-                $(this).velocity('slideUp', { duration: speed, easing:easing});
+                $(this).velocity('slideUp', { duration: speed, easing:that.config.easing});
 
-            $(this).next('.more').velocity('slideDown', { duration: speed, easing:easing});
+            $(this).next('.more').velocity('slideDown', { duration: speed, easing:that.config.easing});
         });
 
         $('a.scrolltop').click(function(e)

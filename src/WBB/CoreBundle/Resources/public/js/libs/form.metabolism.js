@@ -133,7 +133,16 @@ meta.Form = function(config){
                         }
                     }
 
+                    // After Appending Data to Dom
+                    $('.line.wbbtips').find('.scroll').add('.thisdiv').each(function(){
+                        var selftaget = $(this);
+                        if(selftaget.getNiceScroll){
+                            selftaget.getNiceScroll().remove();
+                        }
+                        selftaget.niceScroll({cursorcolor:"#b3955f"});
 
+                    });
+                    console.log('ended scroll');
                 }
                 else
                 {
