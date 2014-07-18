@@ -102,8 +102,8 @@
     * TODO : Add the nigative response on PERMISSION_DENIED 
     * Geo localisation 
     **/
-    if( ( !$.cookie('near_permission') ) /*&&  ( ! window.isCity ) */ && ( ! $.cookie('currentLat') )  )
-       navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong , userNotAccept);
+//    if( ( !$.cookie('near_permission') ) /*&&  ( ! window.isCity ) */ && ( ! $.cookie('currentLat') )  )
+//       navigator.geolocation.getCurrentPosition(stockCurrentLatAndLong , userNotAccept);
   })
 
 
