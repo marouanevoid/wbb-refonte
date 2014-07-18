@@ -18,7 +18,7 @@ class BarController extends Controller
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
-           return $this->cityHomeAction($session->get('citySlug'));
+            return $this->cityHomeAction($session->get('citySlug'));
         $session->set('citySlug', "");
 
         $topCities = $this->container->get('city.repository')->findTopCities();
@@ -62,8 +62,6 @@ class BarController extends Controller
         }else{
             $response['distance'] = false;
         }
-
-
 
         $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars($city);
@@ -150,6 +148,9 @@ class BarController extends Controller
         $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
         $user = $this->container->get('user.repository')->findOneById(1);
 
+        $relatedBestOfs = $this->container->get('bestof.repository')->findBarRelatedBestofs($bar);
+        $relatedNews = $this->container->get('news.repository')->findBarRelatedNews($bar);
+
         $response = $this->getYouMayAlsoLike($bar);
 
         $tip = new Tip();
@@ -162,6 +163,8 @@ class BarController extends Controller
 
         return $this->render('WBBBarBundle:Bar:details.html.twig', array(
             'bar'       => $bar,
+            'bestofs'   => $relatedBestOfs,
+            'news'   => $relatedNews,
             'barLike'   => $response['bars'],
             'oneCity'   => $response['oneCity'],
             'tipForm'   => $form->createView()
@@ -197,7 +200,7 @@ class BarController extends Controller
             $city = $this->get('city.repository')->findOneBySlug($slug);
 
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
-        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL);
+        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
         $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
 
         return $this->render('WBBBarBundle:BarFinder:barFinderForm.html.twig', array(
@@ -316,7 +319,7 @@ class BarController extends Controller
                 'distance'  => $distance,
                 'latitude'  => $latitude,
                 'longitude' => $longitude
-        ));
+            ));
     }
 
     // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")
