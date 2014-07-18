@@ -407,6 +407,7 @@
   .bar-details .content ul.trends {line-height: 1.6em;}
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content .trends {margin-bottom: 0;}
+  .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
 
   /* IE9 */
   section.bar-finder .ui-radio.btn-radius.with-icon {border: 1px solid red\0/;}
