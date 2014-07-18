@@ -2,6 +2,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use WBB\BarBundle\Entity\Ad;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -67,12 +68,7 @@ class AdAdmin extends Admin {
                 ->add('name')
                 ->add('position', 'choice', array(
                     'required' => false,
-                    'choices'  => array(
-                        3 => '3',
-                        2 => '2',
-                        1 => '1',
-                        0 => '0'
-                    )
+                    'choices'  => Ad::getAdsPositionArray()
                 ))
                 ->add('tag')
                 ->add('link')
@@ -80,12 +76,12 @@ class AdAdmin extends Admin {
                     'required' => false
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'default'
+                        'context' => 'ads'
                     )
                 ))
                 ->add('beginAt', 'datePicker') 
                 ->add('endAt', 'datePicker')
-                ->add('countries', 'sonata_type_model', array('multiple' => true))
+                ->add('countries', 'sonata_type_model', array('multiple' => true, 'required' => false))
             ->end()
         ;
     }

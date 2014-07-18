@@ -3,13 +3,23 @@
 {% block title %}World Best Bars{% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function(){
-            {% if city is defined %}
-            $('.city-selector .city>span').html('{{ city.name }}');
-            {% endif %}
             initializeSliders();
         });
+
+    {% if city is not defined %}
+        window.homepage = true;
+        if($.cookie('shown-nav')){
+            window.shownav = false;
+        }else{
+            window.shownav = true;
+            $.cookie('shown-nav', true , 0)
+        }
+        $(window).unload( function () { $.cookie('shown-nav', null, {path:'/'})} );
+
+    {% endif %}
     </script>
 {% endblock %}
 {% block bodyTag %}
@@ -24,20 +34,7 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="city-selector h3">
-                                You are in
-                                <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
-                                    <option disabled="disabled">Choose a City</option>
-                                    {% for c in topCities %}
-                                        <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}"
-                                            {% if city is defined and c.id==city.id %}
-                                                selected="selected"
-                                            {% endif %}
-                                        >{{ c.name }}</option>
-                                    {% endfor %}
-                                    <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
-                                </select>
-                            </div>
+                             {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
                         </td>
 
                         <td class="title">
@@ -107,7 +104,7 @@
                             </div>
                             <div class="overlay"></div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            <img src="" class="scale-with-grid" data-src="{% path c.image, 'city_small' %}" alt="{{ c.name }}"/>
+                            <img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_small' %}{% endfilter %}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}
@@ -168,7 +165,8 @@
             </div>
             {% if topNews|length>2 %}
             {% for n in topNews|slice(0,1) %}
-                <article class="small">
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1, 'is_small' : 1, } %}
+                {# <article class="small">
                     <div class="img">
                         <a href="" class="cover">
                             {% for m in n.medias|slice(0,1) %}
@@ -181,8 +179,13 @@
                         <h2><a href="">{{ n.title }}</a></h2>
                     </div>
                 </article>
+                #}
             {% endfor %}
             {% for n in topNews|slice(1,1) %}
+                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_text' : 1 , 'is_small' : 1 , 'has_text' : 1} %}
+                {#
+
+
                 <article class="small">
                     <div class="title vcenter">
                         <h2><a href="">{{ n.title }}</a></h2>
@@ -193,12 +196,14 @@
                     </div>
 
                 </article>
+             #}
             {% endfor %}
             {% for n in topNews|slice(2,1) %}
-                <article class="large">
+                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
+                {#
+                    <article class="large">
                     <div class="img">
                         <a href="" class="cover">
-                        {# dump(n.medias) #}
                         {% for m in n.medias|slice(0,1) %}
                             <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
                         {% endfor %}
@@ -213,6 +218,9 @@
                     </div>
 
                 </article>
+
+                 #}
+                
             {% endfor %}
             {% elseif topNews|length==2 %}
                 {% for n in topNews|slice(0,1) %}
@@ -265,7 +273,9 @@
                 {% endfor %}
             {% endif %}
 
-            <a class="btn-radius border brown h4 s-margin-top" href="#0" style="clear: left; float:left;">See all news</a>
+
+            <a class="btn-radius border brown h4 s-margin-top" href="{{ city is defined ? path('wbb_news_landing_page_city',{citySlug:city.slug}) : path('wbb_news_landing_page') }}" style="clear: left; float:left;">See all news</a>
+
 
         </section>
 
@@ -299,5 +309,3 @@
         </aside>
     </div>
 {% endblock %}
-
-

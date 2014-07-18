@@ -61,10 +61,16 @@ class AppKernel extends Kernel
 
 //            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 
+            //Bitly Bundle
+            new Hpatoio\BitlyBundle\HpatoioBitlyBundle(),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),
             new WBB\BarBundle\WBBBarBundle(),
+            new WBB\CloudSearchBundle\WBBCloudSearchBundle(),
+            
+            new FOS\FacebookBundle\FOSFacebookBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

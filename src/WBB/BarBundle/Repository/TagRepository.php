@@ -12,16 +12,16 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
-    public function findOccasionTags()
+    public function findByType($type, $onlyQueryBuilder = false)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.isOccasion', true))
+            ->where($qb->expr()->eq($this->getAlias().'.type', $type))
             ->orderBy($this->getAlias().'.name', 'ASC')
         ;
 
-        return $qb->getQuery()->getResult();
+        return ($onlyQueryBuilder)? $qb : $qb->getQuery()->getResult();
     }
 } 

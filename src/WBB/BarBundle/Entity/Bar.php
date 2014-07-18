@@ -5,11 +5,13 @@ namespace WBB\BarBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use WBB\BarBundle\Entity\Tip;
 use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
 use JMS\Serializer\Annotation as JMS;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 
 /**
  * Bar
@@ -19,7 +21,7 @@ use JMS\Serializer\Annotation as JMS;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class Bar
+class Bar implements IndexableEntity
 {
     const BAR_STATUS_ENABLED_VALUE = 2;
     const BAR_STATUS_ENABLED_TEXT = "Enabled";
@@ -73,9 +75,23 @@ class Bar
     /**
      * @var string
      *
+     * @ORM\Column(name="county", type="string", length=255, nullable=true)
+     */
+    private $county;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address_2", type="string", length=255, nullable=true)
+     */
+    private $address2;
 
     /**
      * @var string
@@ -115,9 +131,58 @@ class Bar
     /**
      * @var string
      *
+     * @ORM\Column(name="google_plus", type="string", length=255, nullable=true)
+     */
+    private $googlePlus;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instagram_id", type="string", length=255, nullable=true)
+     */
+    private $instagramId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
      */
     private $facebook;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook_checkins", type="integer", nullable=true)
+     */
+    private $facebookCheckIns;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook_likes", type="integer", nullable=true)
+     */
+    private $facebookLikes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_checkins", type="integer", nullable=true)
+     */
+    private $foursquareCheckIns;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_likes", type="integer", nullable=true)
+     */
+    private $foursquareLikes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foursquare_tips", type="integer", nullable=true)
+     */
+    private $foursquareTips;
 
     /**
      * @var string
@@ -131,14 +196,14 @@ class Bar
      *
      * @ORM\Column(name="is_credit_card", type="boolean", nullable=true)
      */
-    private $isCreditCard;
+    private $creditCard;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_coat_check", type="boolean", nullable=true)
      */
-    private $isCoatCheck;
+    private $coatCheck;
 
     /**
      * @var string
@@ -166,14 +231,14 @@ class Bar
      *
      * @ORM\Column(name="is_reservation", type="boolean", nullable=true)
      */
-    private $isReservation;
+    private $reservation;
 
     /**
      * @var string
      *
      * @ORM\Column(name="reservation", type="string", length=255, nullable=true)
      */
-    private $reservation;
+    private $reservationLink;
 
     /**
      * @var string
@@ -188,6 +253,27 @@ class Bar
      * @ORM\Column(name="seo_description", type="string", length=255, nullable = true)
      */
     private $seoDescription;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="out_door_seating", type="boolean", nullable=true)
+     */
+    private $outDoorSeating;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="happyHour", type="boolean", nullable=true)
+     */
+    private $happyHour;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="wifi", type="boolean", nullable=true)
+     */
+    private $wifi;
 
     /**
      * @var boolean
@@ -246,6 +332,20 @@ class Bar
     private $medias;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="barsLevel")
+     */
+    private $energyLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="barOccasions", cascade={"all"})
+     * @ORM\JoinTable(name="wbb_bar_occasion",
+     *      joinColumns={@ORM\JoinColumn(name="bar_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $toGoWith;
+
+    /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -268,7 +368,7 @@ class Bar
      * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $tips;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="News", inversedBy="bars")
      * @ORM\JoinTable(name="wbb_news_bars",
@@ -276,7 +376,12 @@ class Bar
      *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
      *      )
      **/
-    private $news;      
+    private $news;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     */
+    private $semsoftBars;
 
     /**
      * @var \DateTime
@@ -298,7 +403,7 @@ class Bar
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -321,7 +426,7 @@ class Bar
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -344,7 +449,7 @@ class Bar
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
@@ -367,7 +472,7 @@ class Bar
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -390,7 +495,7 @@ class Bar
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -413,7 +518,7 @@ class Bar
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -436,7 +541,7 @@ class Bar
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -451,7 +556,7 @@ class Bar
      */
     public function setWebsite($website)
     {
-        if ((strpos($website,'http://') !== false) or (strpos($website,'https://') !== false)) {
+        if ((strpos($website,'http://') !== false) || (strpos($website,'https://') !== false)) {
             $this->website = $website;
         }
         else
@@ -465,7 +570,7 @@ class Bar
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -488,7 +593,7 @@ class Bar
     /**
      * Get twitter
      *
-     * @return string 
+     * @return string
      */
     public function getTwitter()
     {
@@ -511,7 +616,7 @@ class Bar
     /**
      * Get facebook
      *
-     * @return string 
+     * @return string
      */
     public function getFacebook()
     {
@@ -534,7 +639,7 @@ class Bar
     /**
      * Get instagram
      *
-     * @return string 
+     * @return string
      */
     public function getInstagram()
     {
@@ -547,9 +652,9 @@ class Bar
      * @param boolean $isCreditCard
      * @return Bar
      */
-    public function setIsCreditCard($isCreditCard)
+    public function setCreditCard($isCreditCard)
     {
-        $this->isCreditCard = $isCreditCard;
+        $this->creditCard = $isCreditCard;
 
         return $this;
     }
@@ -557,11 +662,11 @@ class Bar
     /**
      * Get isCreditCard
      *
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsCreditCard()
+    public function isCreditCard()
     {
-        return $this->isCreditCard;
+        return $this->creditCard;
     }
 
     /**
@@ -570,9 +675,9 @@ class Bar
      * @param boolean $isCoatCheck
      * @return Bar
      */
-    public function setIsCoatCheck($isCoatCheck)
+    public function setCoatCheck($isCoatCheck)
     {
-        $this->isCoatCheck = $isCoatCheck;
+        $this->coatCheck = $isCoatCheck;
 
         return $this;
     }
@@ -580,11 +685,11 @@ class Bar
     /**
      * Get isCoatCheck
      *
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsCoatCheck()
+    public function isCoatCheck()
     {
-        return $this->isCoatCheck;
+        return $this->coatCheck;
     }
 
     /**
@@ -603,7 +708,7 @@ class Bar
     /**
      * Get parking
      *
-     * @return string 
+     * @return string
      */
     public function getParking()
     {
@@ -626,7 +731,7 @@ class Bar
     /**
      * Get price
      *
-     * @return integer 
+     * @return integer
      */
     public function getPrice()
     {
@@ -641,7 +746,7 @@ class Bar
      */
     public function setMenu($menu)
     {
-        if ((strpos($menu,'http://') !== false) or (strpos($menu,'https://') !== false)) {
+        if ((strpos($menu,'http://') !== false) || (strpos($menu,'https://') !== false)) {
             $this->menu = $menu;
         }
         else
@@ -655,7 +760,7 @@ class Bar
     /**
      * Get menu
      *
-     * @return string 
+     * @return string
      */
     public function getMenu()
     {
@@ -668,9 +773,9 @@ class Bar
      * @param boolean $isReservation
      * @return Bar
      */
-    public function setIsReservation($isReservation)
+    public function setReservation($isReservation)
     {
-        $this->isReservation = $isReservation;
+        $this->reservation = $isReservation;
 
         return $this;
     }
@@ -678,27 +783,27 @@ class Bar
     /**
      * Get isReservation
      *
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsReservation()
+    public function isReservation()
     {
-        return $this->isReservation;
+        return $this->reservation;
     }
 
     /**
      * Set reservation
      *
-     * @param string $reservation
+     * @param string $reservationLink
      * @return Bar
      */
-    public function setReservation($reservation)
+    public function setReservationLink($reservationLink)
     {
-        if ((strpos($reservation,'http://') !== false) or (strpos($reservation,'https://') !== false)) {
-            $this->reservation = $reservation;
+        if ((strpos($reservationLink,'http://') !== false) || (strpos($reservationLink,'https://') !== false)) {
+            $this->reservationLink = $reservationLink;
         }
         else
         {
-            $this->reservation = 'http://'.$reservation;
+            $this->reservationLink = 'http://'.$reservationLink;
         }
 
         return $this;
@@ -707,9 +812,9 @@ class Bar
     /**
      * Get reservation
      *
-     * @return string 
+     * @return string
      */
-    public function getReservation()
+    public function getReservationLink()
     {
         return $this->reservation;
     }
@@ -730,7 +835,7 @@ class Bar
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -753,7 +858,7 @@ class Bar
     /**
      * Get onTop
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTop()
     {
@@ -776,7 +881,7 @@ class Bar
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -799,7 +904,7 @@ class Bar
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -822,7 +927,7 @@ class Bar
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -870,7 +975,7 @@ class Bar
 
         $this->latitude = 0;
         $this->longitude = 0;
-        
+
         $this->news = new ArrayCollection();
     }
 
@@ -902,7 +1007,7 @@ class Bar
     /**
      * Get medias
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMedias()
     {
@@ -925,7 +1030,7 @@ class Bar
     /**
      * Get foursquare
      *
-     * @return string 
+     * @return string
      */
     public function getFoursquare()
     {
@@ -976,7 +1081,7 @@ class Bar
     /**
      * Get seoDescription
      *
-     * @return string 
+     * @return string
      */
     public function getSeoDescription()
     {
@@ -1022,7 +1127,7 @@ class Bar
     /**
      * Get fsExcludedTips
      *
-     * @return array 
+     * @return array
      */
     public function getFsExcludedTips()
     {
@@ -1036,7 +1141,7 @@ class Bar
 
         return $this;
     }
-    
+
     public function removeFsExcludedTips($hash)
     {
         if(($key = array_search($hash, $this->fsExcludedTips)) !== false) {
@@ -1074,7 +1179,7 @@ class Bar
 
         return $this;
     }
-    
+
     public function removeFsSelectedImgs($hash)
     {
         if(($key = array_search($hash, $this->fsSelectedImgs)) !== false) {
@@ -1108,7 +1213,7 @@ class Bar
     /**
      * Get openings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpenings()
     {
@@ -1184,7 +1289,7 @@ class Bar
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -1207,7 +1312,7 @@ class Bar
     /**
      * Get instagramExcludedImgs
      *
-     * @return array 
+     * @return array
      */
     public function getInstagramExcludedImgs()
     {
@@ -1244,6 +1349,22 @@ class Bar
             return array(0);
     }
 
+    public function getGoWithIds()
+    {
+        $tags = array();
+        foreach ($this->getToGoWith() as $tag) {
+            if ($tag) {
+                $tags[] = $tag->getId();
+            }
+        }
+
+        if (sizeof($tags) > 0) {
+            return $tags;
+        } else {
+            return array(0);
+        }
+    }
+
     /**
      * Add bestofs
      *
@@ -1270,7 +1391,7 @@ class Bar
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -1293,7 +1414,7 @@ class Bar
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -1311,7 +1432,8 @@ class Bar
         $curNb = 0;
         $curDelta = 0;
         $i = 1;
-        for ($i = 1 ; $i < count($fullArray) ; $i++) {
+        $count = count($fullArray);
+        for ($i = 1 ; $i < $count ; $i++) {
             $cur = $fullArray[$i];
             $curNb = strlen($cur);
             $curSize = strlen($init) + $curNb;
@@ -1373,4 +1495,577 @@ class Bar
     public function getNews(){
          return $this->news;
      }
+
+    /**
+     * Add semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @return Bar
+     */
+    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars[] = $semsoftBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBars
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     */
+    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    {
+        $this->semsoftBars->removeElement($semsoftBars);
+    }
+
+    /**
+     * Get semsoftBars
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSemsoftBars()
+    {
+        return $this->semsoftBars;
+    }
+
+    public function getCloudSearchFields()
+    {
+        $cityName = ($this->city) ? $this->city->getName() : '';
+        $countryName = ($this->city->getCountry()) ? $this->city->getCountry()->getName() : '';
+        $lat = ($this->latitude) ? $this->latitude : 0;
+        $lon = ($this->longitude) ? $this->longitude : 0;
+
+        $tags = $this->getTagsArrays();
+
+        return array(
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'city' => $cityName,
+            'country' => $countryName,
+            'district' => ($this->suburb) ? $this->suburb->getName() : '',
+            'location' => $lat . ',' . $lon,
+            'address' => ($this->address) ? $this->address : '',
+            'website' => ($this->website) ? $this->website : '',
+            'description' => ($this->description) ? $this->description : '',
+            'seo_description' => ($this->seoDescription) ? $this->seoDescription : '',
+            'tags_style' => $tags['tags_style'],
+            'tags_mood' => $tags['tags_mood'],
+            'tags_occasion' => $tags['tags_occasion'],
+            'tags_cocktails' => $tags['tags_cocktails'],
+            //'tags_food' => '',
+            //'tags_special' => '',
+            'wbb_id' => $this->id
+        );
+    }
+
+    public function getTagsArrays()
+    {
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+
+        foreach ($this->tags as $barTag) {
+            $tag = $barTag->getTag();
+            if ($tag) {
+                if ($tag->getType() == Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
+                    $tags['tags_mood'][] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
+                    $tags['tags_cocktails'][] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_THEME) {
+                    $tags['tags_style'][] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_WITH_WHO) {
+                    $tags['tags_occasion'][] = $tag->getName();
+                }
+            }
+        }
+
+        return $tags;
+    }
+
+    public function calculateDistance($latitude, $longitude, $unit = 'km')
+    {
+        $theta = $this->getLongitude() - $longitude;
+        $dist = sin(deg2rad($this->getLatitude())) * sin(deg2rad($latitude)) + cos(deg2rad($this->getLatitude())) * cos(deg2rad($latitude)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if($unit == "m")
+        {
+            return round($miles, 2);
+        }
+        elseif($unit == "nm") {
+            return round(($miles * 0.8684), 2);
+        }
+        else
+        {
+            return round(($miles * 1.609344), 2);
+        }
+    }
+
+    public static function getEnergyLevels()
+    {
+        $result = array(1 => 'Chillout', 2 => "Casual", 3 => "Party");
+
+        return $result;
+    }
+
+
+    /**
+     * Set energyLevel
+     *
+     * @param Tag $energyLevel
+     * @return Bar
+     */
+    public function setEnergyLevel($energyLevel)
+    {
+        $this->energyLevel = $energyLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get energyLevel
+     *
+     * @return integer
+     */
+    public function getEnergyLevel()
+    {
+        return $this->energyLevel;
+    }
+
+    /**
+     * Add toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     * @return Bar
+     */
+    public function addToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith[] = $toGoWith;
+
+        return $this;
+    }
+
+    /**
+     * Remove toGoWith
+     *
+     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     */
+    public function removeToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
+    {
+        $this->toGoWith->removeElement($toGoWith);
+    }
+
+    /**
+     * Get toGoWith
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getToGoWith()
+    {
+        return $this->toGoWith;
+    }
+
+    /**
+     * Set county
+     *
+     * @param string $county
+     * @return Bar
+     */
+    public function setCounty($county)
+    {
+        $this->county = $county;
+
+        return $this;
+    }
+
+    /**
+     * Get county
+     *
+     * @return string
+     */
+    public function getCounty()
+    {
+        return $this->county;
+    }
+
+    /**
+     * Set address2
+     *
+     * @param string $address2
+     * @return Bar
+     */
+    public function setAddress2($address2)
+    {
+        $this->address2 = $address2;
+
+        return $this;
+    }
+
+    /**
+     * Get address2
+     *
+     * @return string
+     */
+    public function getAddress2()
+    {
+        return $this->address2;
+    }
+
+    /**
+     * Set googlePlus
+     *
+     * @param string $googlePlus
+     * @return Bar
+     */
+    public function setGooglePlus($googlePlus)
+    {
+        $this->googlePlus = $googlePlus;
+
+        return $this;
+    }
+
+    /**
+     * Get googlePlus
+     *
+     * @return string
+     */
+    public function getGooglePlus()
+    {
+        return $this->googlePlus;
+    }
+
+    /**
+     * Set instagramId
+     *
+     * @param string $instagramId
+     * @return Bar
+     */
+    public function setInstagramId($instagramId)
+    {
+        $this->instagramId = $instagramId;
+
+        return $this;
+    }
+
+    /**
+     * Get instagramId
+     *
+     * @return string
+     */
+    public function getInstagramId()
+    {
+        return $this->instagramId;
+    }
+
+    /**
+     * Set facebookCheckIns
+     *
+     * @param integer $facebookCheckIns
+     * @return Bar
+     */
+    public function setFacebookCheckIns($facebookCheckIns)
+    {
+        $this->facebookCheckIns = $facebookCheckIns;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookCheckIns
+     *
+     * @return integer
+     */
+    public function getFacebookCheckIns()
+    {
+        return $this->facebookCheckIns;
+    }
+
+    /**
+     * Set facebookLikes
+     *
+     * @param integer $facebookLikes
+     * @return Bar
+     */
+    public function setFacebookLikes($facebookLikes)
+    {
+        $this->facebookLikes = $facebookLikes;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookLikes
+     *
+     * @return integer
+     */
+    public function getFacebookLikes()
+    {
+        return $this->facebookLikes;
+    }
+
+    /**
+     * Set foursquareCheckIns
+     *
+     * @param integer $foursquareCheckIns
+     * @return Bar
+     */
+    public function setFoursquareCheckIns($foursquareCheckIns)
+    {
+        $this->foursquareCheckIns = $foursquareCheckIns;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareCheckIns
+     *
+     * @return integer
+     */
+    public function getFoursquareCheckIns()
+    {
+        return $this->foursquareCheckIns;
+    }
+
+    /**
+     * Set foursquareLikes
+     *
+     * @param integer $foursquareLikes
+     * @return Bar
+     */
+    public function setFoursquareLikes($foursquareLikes)
+    {
+        $this->foursquareLikes = $foursquareLikes;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareLikes
+     *
+     * @return integer
+     */
+    public function getFoursquareLikes()
+    {
+        return $this->foursquareLikes;
+    }
+
+    /**
+     * Set foursquareTips
+     *
+     * @param integer $foursquareTips
+     * @return Bar
+     */
+    public function setFoursquareTips($foursquareTips)
+    {
+        $this->foursquareTips = $foursquareTips;
+
+        return $this;
+    }
+
+    /**
+     * Get foursquareTips
+     *
+     * @return integer
+     */
+    public function getFoursquareTips()
+    {
+        return $this->foursquareTips;
+    }
+
+    /**
+     * Set outDoorSeating
+     *
+     * @param boolean $outDoorSeating
+     * @return Bar
+     */
+    public function setOutDoorSeating($outDoorSeating)
+    {
+        $this->outDoorSeating = $outDoorSeating;
+
+        return $this;
+    }
+
+    /**
+     * Get outDoorSeating
+     *
+     * @return boolean
+     */
+    public function isOutDoorSeating()
+    {
+        return $this->outDoorSeating;
+    }
+
+    public function getPriceSymbols()
+    {
+        $response = '';
+
+        for($i=1; $i <= $this->price; $i++)
+        {
+            $response.= "$";
+        }
+
+        return $response;
+    }
+
+    private function getOpeningsByDay($day)
+    {
+        $openings = $this->getOpenings();
+        $response = '';
+
+        foreach($openings as $op)
+        {
+            if($day == $op->getOpeningDay())
+            {
+                $response.= $op->getFromHour().'-'.$op->getToHour().',';
+            }
+        }
+
+        return substr($response, 0, -1);
+    }
+
+    private function getTagsByType($type){
+        $tags = $this->getTags();
+        $response = '';
+
+        foreach($tags as $tag)
+        {
+            if($tag->getType() == $type && $tag->getTag())
+            {
+                $response.= $tag->getTag()->getName().',';
+            }
+        }
+        return substr($response, 0, -1);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isHappyHour()
+    {
+        return $this->happyHour;
+    }
+
+    /**
+     * @param boolean $happyHour
+     */
+    public function setHappyHour($happyHour)
+    {
+        $this->happyHour = $happyHour;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isWifi()
+    {
+        return $this->wifi;
+    }
+
+    /**
+     * @param boolean $wifi
+     */
+    public function setWifi($wifi)
+    {
+        $this->wifi = $wifi;
+    }
+
+    private function prepareString($string){
+
+        return str_replace(array("\r", "\n"), "", $string);
+    }
+
+    public function toCSVArray()
+    {
+        return array(
+            'ID'                    => $this->getId(),
+            'Name'                  => $this->getName(),
+            'Country'               => ($this->getCity() && $this->getCity()->getCountry())?$this->getCity()->getCountry()->getName():'',
+            'County'                => $this->getCounty(),
+            'City'                  => ($this->getCity())?$this->getCity()->getName():'',
+            'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',
+            'District'              => ($this->getSuburb())?$this->getSuburb()->getName():'',
+            'Street1'               => $this->getAddress(),
+            'Street2'               => $this->getAddress2(),
+            'Intro'                 => $this->prepareString($this->getSeoDescription()),
+            'Description'           => $this->prepareString($this->getDescription()),
+            'GeocoordinateString'   => $this->getLatitude().','.$this->getLongitude(),
+            'Website'               => $this->getWebsite(),
+            'Email'                 => $this->getEmail(),
+            'Phone'                 => $this->getPhone(),
+            'MondayOpenHours'       => $this->getOpeningsByDay(1),
+            'TuesdayOpenHours'      => $this->getOpeningsByDay(2),
+            'WednesdayOpenHours'    => $this->getOpeningsByDay(3),
+            'ThursdayOpenHours'     => $this->getOpeningsByDay(4),
+            'FridayOpenHours'       => $this->getOpeningsByDay(5),
+            'SaturdayOpenHours'     => $this->getOpeningsByDay(6),
+            'SundayOpenHours'       => $this->getOpeningsByDay(7),
+            'Category'              => $this->getTagsByType(Tag::WBB_TAG_TYPE_THEME),
+            'Mood'                  => ($this->getEnergyLevel())?$this->getEnergyLevel()->getName():'',
+            'OutdoorSeating'        => $this->isOutDoorSeating(),
+            'HappyHour'             => $this->isHappyHour(),
+            'Wifi'                  => $this->isWifi(),
+            'PriceRange'            => $this->getPriceSymbols(),
+            'PaymentAccepted'       => ($this->isCreditCard())? 'Card' : '',
+            'RestaurantServices'    => $this->getTagsByType(Tag::WBB_TAG_TYPE_SPECIAL_FEATURES),
+            'MenuUrl'               => $this->getMenu(),
+            'Booking'               => $this->getReservationLink(),
+            'ParkingType'           => $this->getParking(),
+            'Public Transport'      => '',
+            'FacebookId'            => $this->getFacebook(),
+            'FacebookUserPage'      => 'http://facebook.com/'.$this->getFacebook(),
+            'TwitterName'           => $this->getTwitter(),
+            'TwitterUserPage'       => '',
+            'InstagramId'           => $this->getInstagramId(),
+            'InstagramUserPage'     => $this->getInstagram(),
+            'GooglePlusUserPage'    => $this->getGooglePlus(),
+            'FoursquareId'          => $this->getFoursquare(),
+            'FoursquareUserPage'    => ''.$this->getFoursquare(),
+            'FacebookLikes'         => '',
+            'FacebookCheckins'      => '',
+            'FoursquareLikes'       => '',
+            'FoursquareCheckIns'    => '',
+            'FoursquareTips'        => '',
+            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? "true" : '',
+            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? "true" : '',
+            'Updated Columns'       => '',
+            'Overwritten Columns'   => ''
+        );
+    }
+
+    /**
+     * Get outDoorSeating
+     *
+     * @return boolean 
+     */
+    public function getOutDoorSeating()
+    {
+        return $this->outDoorSeating;
+    }
+
+    /**
+     * Get happyHour
+     *
+     * @return boolean 
+     */
+    public function getHappyHour()
+    {
+        return $this->happyHour;
+    }
+
+    /**
+     * Get wifi
+     *
+     * @return boolean 
+     */
+    public function getWifi()
+    {
+        return $this->wifi;
+    }
 }

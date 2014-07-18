@@ -25,11 +25,29 @@ meta.LoadMore = function(config) {
     /* Public attributes. */
     that._setupEvents = function(){
 
-        /*that.config.$button.on('click', function(e)
-        {
-            e.preventDefault();
-            that._updateContent();
-        });*/
+
+         // that.config.$button.on('click', function(e)
+         // {
+         //     e.preventDefault();
+ 
+         //     if(that.context.is_loading) return;
+ 
+ 
+         //     var $button     = $(this);
+         //     var $target     = that.context.$container.find('.load-target');
+         //     var url         = $button.attr('href')+that.config.page+that.context.page;
+ 
+         //     $button.data('text', $button.text());
+         //    $button.width($button.width());
+
+         //    $button.addClass('loading').text(TRAD.loading);
+
+         //    that._load(url, $target, function()
+         //    {
+         //        $button.removeAttr('style');
+         //         $button.removeClass('loading').text( $button.data('text'));
+         //     });
+         // });
     };
 
     that._updateContent = function() {
@@ -58,7 +76,7 @@ meta.LoadMore = function(config) {
 
         var target_height = $target.show().height();
 
-        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, that.config.speed, that.config.easing);
         });
@@ -66,7 +84,6 @@ meta.LoadMore = function(config) {
         setTimeout(function()
         {
             if(callback) callback();
-            $elements.removeClass('enable3d');
 
         }, 100*$elements.length+that.config.speed );
     };
@@ -91,6 +108,9 @@ meta.LoadMore = function(config) {
                     $(this).error(that._imageLoaded);
                     $(this).attr('src', $(this).data('src'));
                 });
+
+                $(window).resize();
+                
                 if(parseInt(msg.difference)==0)
                     that.config.$button.hide();
                 $('.disableClick').hide();

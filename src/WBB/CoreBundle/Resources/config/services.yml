@@ -1,4 +1,6 @@
 parameters:
+    #Mailer Class
+    wbb_core.twig_swift.class: WBB\CoreBundle\Mailer\TwigSwiftMailer
 
     #Admin Classes
     wbb_core.country.admin.class: WBB\CoreBundle\Controller\Admin\CountryAdmin
@@ -15,6 +17,19 @@ parameters:
     wbb_core.city_bestof.entity.class: WBB\CoreBundle\Entity\CityBestOf
 
 services:
+    #PDO SESSION
+    pdo:
+        class: PDO
+        arguments:
+            - "mysql:host=%database_host%;dbname=%database_name%"
+            - "%database_user%"
+            - "%database_password%"
+        calls:
+            - [setAttribute, [3, 2]]
+
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: ["@pdo", "%pdo.db_options%"]
 
     #Admin Class
     wbb.core.admin.country:
@@ -59,6 +74,12 @@ services:
             - [setTranslationDomain, ["WBBCoreBundle"]]
 
     #Repositories
+    country.repository:
+        class: WBB\CoreBundle\Repository\CountryRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBCoreBundle:Country']
+
     city.repository:
         class: WBB\CoreBundle\Repository\CityRepository
         factory_service: doctrine.orm.default_entity_manager
@@ -70,3 +91,24 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBCoreBundle:CitySuburb']
+
+    #Twig Extensions
+    wbb.twig.show_media_filter_extension:
+        class: WBB\CoreBundle\Twig\Extension\ShowMediaFilterExtension
+        arguments: ['@service_container']
+        tags:
+          - { name: twig.extension }
+
+    wbb.twig.bitly_filter_extension:
+        class: WBB\CoreBundle\Twig\Extension\BitlyFilterExtension
+        arguments: ['@hpatoio_bitly.client']
+        tags:
+          - { name: twig.extension }
+
+#    # TwigSwiftMailer
+#    wbb_core.mailer.twig_swift:
+#        class:  %wbb_core.twig_swift.class%
+#        parent: fos_user.mailer.twig_swift
+#        public: false
+#        calls:
+#            - [setContainer, [@service_container]]
