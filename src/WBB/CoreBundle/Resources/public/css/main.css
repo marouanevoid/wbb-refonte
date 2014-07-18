@@ -409,7 +409,7 @@
 
   /* IE9 */
   section.bar-finder .ui-radio.btn-radius.with-icon {border: 1px solid red\0/;}
-  section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px\0/;}
+  section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
@@ -437,31 +437,18 @@
   TEMPS STYLE
 */
   @media only screen and (max-width: 768px) {
-    .mobile section.bars .bar-w-pic .btn-round:before, 
     .mobile section.bar-filter .bar-w-pic .btn-round:before {
       background-size: 128px 256px;
-      background-position: -80px -40px!important;
+      background-position: -80px -40px;
     }
-    .mobile section.bars .bar-w-pic .btn-round.active:before, 
     .mobile section.bar-filter .bar-w-pic .btn-round.active:before {
       background-position: -100px -80px!important;
     }
-    .mobile section.bars .bar-w-pic .btn-round, 
     .mobile section.bar-filter .bar-w-pic .btn-round {
-      width: 20px;
-      height: 20px;
-      right: 0.5em;
-      top: 0.5em;
-    }
-    .mobile section.bars .ui-slides .bar-w-pic:first-child .btn-round {
-      width: 40px;
-      height: 40px;
-      right: 1em;
-      top: 1em;
-    }
-    .mobile section.bars .ui-slides .bar-w-pic:first-child .btn-round:before {
-      background-size: 256px 512px;
-      background-position: -160px -80px;
+        width: 20px;
+        height: 20px;
+        right: 0.5em;
+        top: 0.5em;
     }
     section.bars .bar-w-pic .txt, 
     section.bar-filter .bar-w-pic .txt {
