@@ -13,7 +13,7 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class AdRepository extends EntityRepository
 {
-    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300x250, $country = null)
+    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300X250, $country = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 

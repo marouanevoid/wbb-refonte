@@ -33,7 +33,7 @@ class AdsController extends Controller
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         $city = null;
-        $format = Ad::WBB_ADS_NLP_300x600;
+        $format = Ad::WBB_ADS_NLP_300X600;
 
         if(!empty($slug)){
             $city = $this->container->get('city.repository')->findOneBySlug($slug);
@@ -42,7 +42,7 @@ class AdsController extends Controller
         $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city) ? $city->getCountry():null);
 
         if(!$ad){
-            $format = Ad::WBB_ADS_NLP_300x250;
+            $format = Ad::WBB_ADS_NLP_300X250;
             $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city) ? $city->getCountry():null);
         }
 

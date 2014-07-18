@@ -12,7 +12,7 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
-    public function findByType($type, $onlyQueryBuilder = false)
+    public function findByType($type, $onlyQueryBuilder = false, $limit = 0)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -21,6 +21,11 @@ class TagRepository extends EntityRepository
             ->where($qb->expr()->eq($this->getAlias().'.type', $type))
             ->orderBy($this->getAlias().'.name', 'ASC')
         ;
+
+        if($limit > 0)
+        {
+            $qb->setMaxResults($limit);
+        }
 
         return ($onlyQueryBuilder)? $qb : $qb->getQuery()->getResult();
     }

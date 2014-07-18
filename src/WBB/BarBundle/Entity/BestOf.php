@@ -115,16 +115,16 @@ class BestOf implements IndexableEntity
     private $energyLevel;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="bestofOccasions", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="bestofOccasions", cascade={"persist", "detach"})
      * @ORM\JoinTable(name="wbb_bestof_occasion",
      *      joinColumns={@ORM\JoinColumn(name="bestof_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
      *      )
      **/
     private $toGoWith;
-    
+
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="bestof", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="bestof", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
@@ -149,7 +149,7 @@ class BestOf implements IndexableEntity
      **/
     private $bestofs;
 
-    
+
     /**
      * @var \DateTime
      *
@@ -165,16 +165,11 @@ class BestOf implements IndexableEntity
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="favoriteBestOfs")
-     */
-    private $users;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -197,7 +192,7 @@ class BestOf implements IndexableEntity
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -221,7 +216,7 @@ class BestOf implements IndexableEntity
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -244,7 +239,7 @@ class BestOf implements IndexableEntity
     /**
      * Get sponsor
      *
-     * @return string 
+     * @return string
      */
     public function getSponsor()
     {
@@ -267,7 +262,7 @@ class BestOf implements IndexableEntity
     /**
      * Get seoDescription
      *
-     * @return string 
+     * @return string
      */
     public function getSeoDescription()
     {
@@ -290,7 +285,7 @@ class BestOf implements IndexableEntity
     /**
      * Get byTag
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getByTag()
     {
@@ -313,7 +308,7 @@ class BestOf implements IndexableEntity
     /**
      * Get onTop
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTop()
     {
@@ -336,7 +331,7 @@ class BestOf implements IndexableEntity
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -359,7 +354,7 @@ class BestOf implements IndexableEntity
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -382,7 +377,7 @@ class BestOf implements IndexableEntity
     /**
      * Get city
      *
-     * @return \WBB\CoreBundle\Entity\City 
+     * @return \WBB\CoreBundle\Entity\City
      */
     public function getCity()
     {
@@ -405,7 +400,7 @@ class BestOf implements IndexableEntity
     /**
      * Get country
      *
-     * @return \WBB\CoreBundle\Entity\Country 
+     * @return \WBB\CoreBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -421,7 +416,7 @@ class BestOf implements IndexableEntity
         $this->setOnTop(true);
         $this->setByTag(false);
         $this->setOrdered(true);
-        
+
         $this->news = new ArrayCollection();
         $this->bars = new ArrayCollection();
         $this->tags = new ArrayCollection();
@@ -453,7 +448,7 @@ class BestOf implements IndexableEntity
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -476,13 +471,13 @@ class BestOf implements IndexableEntity
     /**
      * Get ordered
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOrdered()
     {
         return $this->ordered;
     }
-    
+
     /**
      * Set news
      *
@@ -529,7 +524,7 @@ class BestOf implements IndexableEntity
     /**
      * Get bars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBars()
     {
@@ -562,7 +557,7 @@ class BestOf implements IndexableEntity
     /**
      * Get inBestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getInBestofs()
     {
@@ -595,7 +590,7 @@ class BestOf implements IndexableEntity
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -618,7 +613,7 @@ class BestOf implements IndexableEntity
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -701,7 +696,7 @@ class BestOf implements IndexableEntity
     /**
      * Get image
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getImage()
     {
@@ -724,7 +719,7 @@ class BestOf implements IndexableEntity
     /**
      * Get sponsorImage
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getSponsorImage()
     {
@@ -797,7 +792,7 @@ class BestOf implements IndexableEntity
     /**
      * Get energyLevel
      *
-     * @return \WBB\BarBundle\Entity\Tag 
+     * @return \WBB\BarBundle\Entity\Tag
      */
     public function getEnergyLevel()
     {
@@ -830,43 +825,10 @@ class BestOf implements IndexableEntity
     /**
      * Get toGoWith
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getToGoWith()
     {
         return $this->toGoWith;
-    }
-
-    /**
-     * Add users
-     *
-     * @param \WBB\UserBundle\Entity\User $users
-     * @return BestOf
-     */
-    public function addUser(\WBB\UserBundle\Entity\User $users)
-    {
-        $this->users[] = $users;
-
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param \WBB\UserBundle\Entity\User $users
-     */
-    public function removeUser(\WBB\UserBundle\Entity\User $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->users;
     }
 }
