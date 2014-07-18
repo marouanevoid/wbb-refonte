@@ -36,7 +36,7 @@ class FoursquareImgs implements FeedInterface
      */
     public function find($id = null, $next = 0)
     {
-        $params = array( 'venue_id' => $id, 'limit' => ($this->limit + 1));
+        $params = array( 'venue_id' => $id, 'limit' => $this->limit);
 
         if($next > 0) $params['offset'] = $next;
 
@@ -45,8 +45,8 @@ class FoursquareImgs implements FeedInterface
         $tips = $command->execute();
 
         return array(
-            'type'  => 'fsImgs',
-            'data'  => $tips['response']['photos']['items']
+            'type' => 'fsImgs',
+            'data' => $tips['response']['photos']['items']
         );
     }
 
