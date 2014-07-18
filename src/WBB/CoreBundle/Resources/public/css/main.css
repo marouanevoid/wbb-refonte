@@ -410,7 +410,7 @@
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .cities .ui-slide article.city,
   .cities .ui-slide article.city > img {height: 100%;}
-  .bar-guides {}
+  section.bar-filter .sort-by .btn-radius:last-of-type {margin-left: 0px;}
   .index .sub-header .title h1 {text-align: left;}
 
   /* IE9 */
