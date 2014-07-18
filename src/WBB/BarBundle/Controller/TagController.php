@@ -20,9 +20,9 @@ class TagController extends Controller
         $i = 1;
         foreach($tags as $tag){
             if($tagID == $tag->getId())
-                $html .= '<option value="'.$tag->getId().'" selected>'.$i.': '.$tag->getName().'</option>';
+                $html .= '<option value="'.$tag->getId().'" selected>'.$tag->getName().'</option>';
             else
-                $html .= '<option value="'.$tag->getId().'" >'.$i.': '.$tag->getName().'</option>';
+                $html .= '<option value="'.$tag->getId().'" >'.$tag->getName().'</option>';
 
             $i++;
         }

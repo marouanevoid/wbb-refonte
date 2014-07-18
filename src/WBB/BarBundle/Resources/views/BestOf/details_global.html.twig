@@ -38,7 +38,7 @@
                 <tr>
                     <td></td>
                     <td class="title">
-                        <h3>{% if bestOf.city %}{{ bestOf.city.name }} Best's{% else %}World's Best{% endif %}</h3>
+                        <h3>{% if bestOf.city %}{{ bestOf.city.name }}'s Best{% else %}World's Best{% endif %}</h3>
                         <h1>{{ bestOf.name }}</h1>
                         <h3>
                             {{ bestOf.description | raw }}

@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class TagAdmin extends Admin
 {
+
     /**
      * {@inheritdoc}
      */
@@ -22,12 +23,14 @@ class TagAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('type', 'choice', array(
-                    'required' => false,
-                    'choices'  => Tag::getTypeNames()
-                ))
-                ->add('name')
-                ->add('onTop')
+            ->add('type', 'choice', array(
+                'required'  => false,
+                'choices'   => Tag::getTypeNames(),
+                'label'     => 'Type *',
+                'help'      => 'Mandatory'
+            ))
+            ->add('name', null, array('help'=> 'Mandatory', 'label'=> 'Name *'))
+            ->add('onTop')
             ->end();
     }
 
@@ -77,9 +80,9 @@ class TagAdmin extends Admin
     {
         $showMapper
             ->with('General')
-                ->add('name')
-                ->add('type')
-                ->add('onTop')
+            ->add('name')
+            ->add('type')
+            ->add('onTop')
             ->end()
         ;
     }
