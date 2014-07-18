@@ -38,7 +38,7 @@
                 <tr>
                     <td></td>
                     <td class="title">
-                        <h3>{% if bestOf.city %}{{ bestOf.city.name }} Best's{% else %}World's Best{% endif %}</h3>
+                        <h3>{% if bestOf.city %}{{ bestOf.city.name }}'s Best{% else %}World's Best{% endif %}</h3>
                         <h1>{{ bestOf.name }}</h1>
                         <h3>
                             {{ bestOf.description | raw }}
@@ -68,9 +68,15 @@
         {% endif %}#}
         <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}
-                {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
+                {% include "WBBBarBundle:Bar:bar1.html.twig" with {
+                        'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered,
+                        'distance': distance, 'latitude': latitude, 'longitude': longitude}
+                %}
             {% else %}
-                {% include "WBBBarBundle:BestOf:bar.html.twig" with { 'b': b, 'bestof' : bestOf} %}
+                {% include "WBBBarBundle:BestOf:bar.html.twig" with {
+                    'b': b, 'bestof' : bestOf, 'distance': distance,
+                    'latitude': latitude, 'longitude': longitude}
+                %}
             {% endif %}
         </div>
     {% endfor %}

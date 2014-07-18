@@ -5,7 +5,7 @@
             <table class="content expert">
                 <tr class="excerpt">
                     <td colspan="2">
-                        <div class="scroll">
+                        <div class="scroll thisdiv">
                             “{{ tip.description }}”
                         </div>
                     </td>
@@ -45,3 +45,7 @@
     </div>
 {% endfor %}
 </div>
+
+<script type="text/javascript">
+     $(".thisdiv").niceScroll({cursorcolor:"#b3955f"});
+</script>

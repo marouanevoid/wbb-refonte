@@ -118,6 +118,10 @@ function foursquareTips() {
                         loader.hide();
                         $('.btload').show();
                         var template = null;
+
+                        //// TODO COUNT THE POST GETED AND COMPARE WITH THE TOTAL ////
+
+                        //////////////////////////////////////////////////////////////
                         $.each(response.data, function(key, feed){
                             var tipsHtml = $("#tips").html();
                             var checked = "checked";

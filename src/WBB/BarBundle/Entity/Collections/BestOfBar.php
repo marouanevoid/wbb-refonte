@@ -2,7 +2,6 @@
 
 namespace WBB\BarBundle\Entity\Collections;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -10,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * BarTag
  *
  * @ORM\Table(name="wbb_bestof_bar")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestofBarRepository")
  */
 class BestOfBar
 {

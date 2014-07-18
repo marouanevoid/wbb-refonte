@@ -1,20 +1,33 @@
 parameters:
+    #Mailer Class
+    wbb_core.twig_swift.class: WBB\CoreBundle\Mailer\TwigSwiftMailer
 
     #Admin Classes
     wbb_core.country.admin.class: WBB\CoreBundle\Controller\Admin\CountryAdmin
     wbb_core.city.admin.class: WBB\CoreBundle\Controller\Admin\CityAdmin
     wbb_core.citysuburb.admin.class: WBB\CoreBundle\Controller\Admin\CitySuburbAdmin
-    wbb_core.city_tag.admin.class: WBB\CoreBundle\Controller\Admin\Collections\CityTagAdmin
     wbb_core.city_bestof.admin.class: WBB\CoreBundle\Controller\Admin\CityBestOfAdmin
 
     #Entities
     wbb_core.country.entity.class: WBB\CoreBundle\Entity\Country
     wbb_core.city.entity.class: WBB\CoreBundle\Entity\City
     wbb_core.citysuburb.entity.class: WBB\CoreBundle\Entity\CitySuburb
-    wbb_core.city_tag.entity.class: WBB\CoreBundle\Entity\Collections\CityTag
     wbb_core.city_bestof.entity.class: WBB\CoreBundle\Entity\CityBestOf
 
 services:
+    #PDO SESSION
+    pdo:
+        class: PDO
+        arguments:
+            - "mysql:host=%database_host%;dbname=%database_name%"
+            - "%database_user%"
+            - "%database_password%"
+        calls:
+            - [setAttribute, [3, 2]]
+
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: ["@pdo", "%pdo.db_options%"]
 
     #Admin Class
     wbb.core.admin.country:
@@ -42,14 +55,6 @@ services:
         calls:
             - [setTranslationDomain, ["WBBCoreBundle"]]
 
-    wbb.core.admin.city.tag:
-        class: %wbb_core.city_tag.admin.class%
-        tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_location_hidden, label: city_tag, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_core.city_tag.entity.class%, SonataAdminBundle:CRUD]
-        calls:
-            - [setTranslationDomain, ["WBBCoreBundle"]]
-
     wbb.core.admin.city.bestof:
         class: %wbb_core.city_bestof.admin.class%
         tags:
@@ -59,6 +64,12 @@ services:
             - [setTranslationDomain, ["WBBCoreBundle"]]
 
     #Repositories
+    country.repository:
+        class: WBB\CoreBundle\Repository\CountryRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBCoreBundle:Country']
+
     city.repository:
         class: WBB\CoreBundle\Repository\CityRepository
         factory_service: doctrine.orm.default_entity_manager
@@ -70,3 +81,24 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBCoreBundle:CitySuburb']
+
+    #Twig Extensions
+    wbb.twig.show_media_filter_extension:
+        class: WBB\CoreBundle\Twig\Extension\ShowMediaFilterExtension
+        arguments: ['@service_container']
+        tags:
+          - { name: twig.extension }
+
+    wbb.twig.bitly_filter_extension:
+        class: WBB\CoreBundle\Twig\Extension\BitlyFilterExtension
+        arguments: ['@hpatoio_bitly.client']
+        tags:
+          - { name: twig.extension }
+
+#    # TwigSwiftMailer
+#    wbb_core.mailer.twig_swift:
+#        class:  %wbb_core.twig_swift.class%
+#        parent: fos_user.mailer.twig_swift
+#        public: false
+#        calls:
+#            - [setContainer, [@service_container]]

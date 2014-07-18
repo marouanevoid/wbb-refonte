@@ -7,6 +7,7 @@
 namespace WBB\BarBundle\Controller\Admin;
 
 use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -114,13 +115,13 @@ class BarAdmin extends Admin
                 ->add('twitter')
                 ->add('facebook')
                 ->add('instagram')
-                ->add('isCreditCard')
-                ->add('isCoatCheck')
+                ->add('creditCard')
+                ->add('coatCheck')
                 ->add('parking')
                 ->add('price')
                 ->add('menu')
-                ->add('isReservation')
                 ->add('reservation')
+                ->add('reservationLink')
                 ->add('description')
                 ->add('onTop')
                 ->add('status')
@@ -172,8 +173,8 @@ class BarAdmin extends Admin
                 }
 
         $formMapper
-            ->add('isCreditCard')
-            ->add('isCoatCheck')
+            ->add('creditCard')
+            ->add('coatCheck')
             ->add('parking', 'choice', array(
                 'required' => false,
                 'choices'  => array(
@@ -186,15 +187,15 @@ class BarAdmin extends Admin
             ->add('price', 'choice', array(
                 'required' => false,
                 'choices'  => array(
-                    1 => 1,
-                    2 => 2,
-                    3 => 3,
-                    4 => 4
+                    1 => '$',
+                    2 => '$$',
+                    3 => '$$$',
+                    4 => '$$$$'
                 )
             ))
             ->add('menu', null, array('help' => 'Example : http://www.url.com'))
-            ->add('isReservation')
-            ->add('reservation', null, array('help' => 'Example : http://www.url.com'));
+            ->add('reservation')
+            ->add('reservationLink', null, array('help' => 'Example : http://www.url.com'));
 
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper
@@ -223,6 +224,27 @@ class BarAdmin extends Admin
                     ))
             ->end()
             ->with('Tags')
+                ->add('energyLevel', 'entity', array(
+                        'class'    => 'WBBBarBundle:Tag',
+                        'help'     => 'Mandatory',
+                        'required' => false,
+                        'property' => 'name',
+                        'empty_value' => 'Please choose a mood',
+                        'query_builder' => function ($er) {
+                                return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
+                            }
+                    )
+                )
+                ->add('toGoWith', null,
+                    array(
+                        'required' => false,
+                        'multiple' => true,
+                        'by_reference' => false,
+                        'query_builder' => function ($er) {
+                                return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
+                            }
+                    )
+                )
                 ->add('tags', 'sonata_type_collection', array(
                     'required' => false,
                     'help' => 'Associate a tag minimum to the bar is mandatory'),
@@ -230,7 +252,8 @@ class BarAdmin extends Admin
                         'edit' => 'inline',
                         'inline' => 'table',
                         'sortable'  => 'position'
-                    ))
+                    )
+                )
             ->end()
             ->with('Openings')
                 ->add('openings', 'sonata_type_collection', array('required' => false),
@@ -259,7 +282,7 @@ class BarAdmin extends Admin
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setBar($object);
                 }else{
                     $object->removeMedia($media);
@@ -269,7 +292,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() and $tag->getTag()->getName()){
+                if($tag->getTag() && $tag->getTag()->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
@@ -279,7 +302,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening and $opening->getOpeningDay()){
+                if($opening && $opening->getOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);
@@ -292,7 +315,7 @@ class BarAdmin extends Admin
     {
         if($object->getMedias()){
             foreach ($object->getMedias() as $media) {
-                if($media and $media->getMedia()){
+                if($media && $media->getMedia()){
                     $media->setBar($object);
                 }else{
                     $object->removeMedia($media);
@@ -302,7 +325,7 @@ class BarAdmin extends Admin
 
         if($object->getTags()){
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() and $tag->getTag()->getName()){
+                if($tag->getTag() && $tag->getTag()->getName()){
                     $tag->setBar($object);
                 }else{
                     $object->removeTag($tag);
@@ -312,7 +335,7 @@ class BarAdmin extends Admin
 
         if($object->getOpenings()){
             foreach ($object->getOpenings() as $opening) {
-                if($opening and $opening->getOpeningDay()){
+                if($opening && $opening->getOpeningDay()){
                     $opening->setBar($object);
                 }else{
                     $object->removeOpening($opening);

@@ -118,12 +118,29 @@ meta.App = function() {
             }
         });
 
-        $('.detect-scroll').swipe(
+        $('aside.mobile-menu a').on('click', function(e){
+            $('html,body').animate({scrollTop:0},300);
+            $('section.bar-finder').fadeIn(that.config.speed, that.config.easing, function()
+            {
+                $('header.mobile .nav-icon a').click();
+                $('.mobile-menu').hide().removeAttr('style');
+                $('.entire-content').hide();
+            });
+        });
+
+        $('section.bar-finder .finder-close').click(function(){
+            $('.entire-content').show();
+            $('section.bar-finder').fadeOut(that.config.speed, that.config.easing, function()
+            {
+                $('section.bar-finder .finder-close').css('opacity',1);
+            });
+        });
+        /*$('.detect-scroll').swipe(
         {
             swipeLeft:function(){ $('header.mobile .nav-icon a').click() },
             swipeRight:function(){ $('header.mobile .nav-icon a').click() },
             threshold:4
-        });
+        });*/
 
         $('.mobile-menu').swipe(
         {
@@ -178,6 +195,17 @@ meta.App = function() {
             $bar_finder.find('.finder-close').animate({opacity: '0'}, that.config.speed/2, that.config.easing);
             $container.slideUp(that.config.speed, that.config.easing, function(){ $is_animating = false });
         });
+
+        if(window.homepage && window.shownav){
+            // demeande de dispatch lick on finder
+             $('header .finder').click();
+             var closed = false;
+             $(window).on('scroll' , function(){
+                if(!closed)
+                    $('header .finder').click();
+                closed = true
+             });
+        }
     };
 
 
@@ -227,6 +255,41 @@ meta.App = function() {
             $('html, body').animate({scrollTop:0}, that.config.speed, that.config.easing);
         });
 
+
+        if( $('html').hasClass('mobile') )
+        {
+            var options_are_visible = false;
+
+            $('header.desktop .logged').click(function(){
+
+                if( !options_are_visible )
+                    $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing);
+                else
+                    $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
+                    {
+                        $(this).hide();
+                    });
+
+                options_are_visible = !options_are_visible;
+            });
+        }
+        else
+        {
+            $('header.desktop .logged').hover(function(){
+
+                $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing)
+
+            }, function()
+            {
+                $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
+                {
+                    $(this).hide();
+                })
+            });
+        }
+
+
+
         that._barFinderEvents();
 
         that._mobileMenuEvents();
@@ -260,8 +323,81 @@ meta.App = function() {
         that._setupEvents();
         that._customScroll();
     };
+    /**
+    *** Add listner on bar
+    *    finder
+    ***/
+
+    that.bareFinderHandler = function(){
+            var $finder = $('.bar-finder'),
+                $city = $finder.find('.city li'),
+                $gowith = $finder.find('.friend li'),
+                $moodItem = $('.mood-item');
+
+            if($('.ipad').length <= 0 ){
+                $city.on('click',function(){
+                    // stock the current city on session cookie
+                    $.cookie('finder_city' , $(this).prop('class'), 0);
+                });            
+
+                $gowith.on('click',function(){
+                    // stock the current city on session cookie
+                    $.cookie('finder_gowith' , $(this).prop('class'), 0);
+                });
+            }
+            else{
+                $city = $finder.find('[name=city]');
+                $gowith = $finder.find('[name=go_out]');
+                $city.on('change' , function(){
+                    var Index = this.selectedIndex;
+                    if(Index == 0)
+                        return;
+                    $.cookie('finder_city' ,Index, 0);
+                    console.log('city changed :: ' + Index);
+                });                
+                $gowith.on('change' , function(){
+                    var Index = this.selectedIndex;
+                    if(Index == 0)
+                        return;
+                    $.cookie('finder_gowith' ,Index, 0);
+                });  
+            }  
+            
+
+
+            $moodItem.parent('a').on('click',function(){ 
+                var indexMood = $(this).find('input').attr('data-index');
+                $.cookie('finder_mood' , indexMood, 0);
+            });
+
+
+
+    }
 
     that.__construct();
+    that.bareFinderHandler();
+
+    // Script Injection for Select UI
+    ////////
+    //$('.ui-dropdown-container').each(function(){})
+    $('select').on('change',function(){
+       var  $target = $(this),
+            parent  = $target.parent('.ui-dropdown-container'),
+            li = parent.find('li')
+            selected = parent.find('.selected').text();
+
+            li.show();
+
+            li.each(function(){
+                if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+                    $(this).hide();
+            });
+
+    });
+
+    // Trigger change on select
+    $('select').change();
+
 };
 
 
@@ -270,6 +406,9 @@ $(document).ready(function()
     new meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
     new meta.App();
 
+    $('.entire-content').show();
+    $('.entire-content').addClass('show');
+    $('#common-loader').hide();
     // TEMP
     // setInterval(function(){
     //             $('.scroll').not('.jspScrollable').each(function()
