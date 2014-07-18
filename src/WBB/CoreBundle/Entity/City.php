@@ -112,8 +112,8 @@ class City implements IndexableEntity
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\CityBestOf", mappedBy="city", cascade={"all"})
      */
-    private $bestofs;  
-    
+    private $bestofs;
+
     /**
      * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"all"})
      * @ORM\JoinTable(name="wbb_news_cities",
@@ -122,11 +122,6 @@ class City implements IndexableEntity
      *      )
      **/
     private $news;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTag", mappedBy="city", cascade={"all"})
-     */
-    private $tags;
 
     /**
      * @var \DateTime
@@ -147,7 +142,7 @@ class City implements IndexableEntity
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId() {
         return $this->id;
@@ -168,7 +163,7 @@ class City implements IndexableEntity
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName() {
         return $this->name;
@@ -189,7 +184,7 @@ class City implements IndexableEntity
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude() {
         return $this->latitude;
@@ -210,7 +205,7 @@ class City implements IndexableEntity
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude() {
         return $this->longitude;
@@ -231,7 +226,7 @@ class City implements IndexableEntity
     /**
      * Get seoDescription
      *
-     * @return string 
+     * @return string
      */
     public function getSeoDescription() {
         return $this->seoDescription;
@@ -252,7 +247,7 @@ class City implements IndexableEntity
     /**
      * Get onTopCity
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTopCity() {
         return $this->onTopCity;
@@ -314,7 +309,7 @@ class City implements IndexableEntity
     /**
      * Get suburbs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSuburbs() {
         return $this->suburbs;
@@ -345,7 +340,7 @@ class City implements IndexableEntity
     /**
      * Get bars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBars() {
         return $this->bars;
@@ -370,7 +365,7 @@ class City implements IndexableEntity
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt() {
         return $this->createdAt;
@@ -391,43 +386,10 @@ class City implements IndexableEntity
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt() {
         return $this->updatedAt;
-    }
-
-    /**
-     * Add tags
-     *
-     * @param CityTag $tags
-     * @return City
-     */
-    public function addTag(CityTag $tags)
-    {
-        $this->tags[] = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Remove tags
-     *
-     * @param CityTag $tags
-     */
-    public function removeTag(CityTag $tags)
-    {
-        $this->tags->removeElement($tags);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTags()
-    {
-        return $this->tags;
     }
 
     /**
@@ -456,7 +418,7 @@ class City implements IndexableEntity
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -479,7 +441,7 @@ class City implements IndexableEntity
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -512,7 +474,7 @@ class City implements IndexableEntity
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
@@ -550,7 +512,7 @@ class City implements IndexableEntity
     /**
      * Get image
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getImage()
     {
@@ -583,7 +545,7 @@ class City implements IndexableEntity
     /**
      * Get semsoftBars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSemsoftBars()
     {
@@ -616,7 +578,7 @@ class City implements IndexableEntity
     /**
      * Get news
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getNews()
     {
@@ -649,7 +611,7 @@ class City implements IndexableEntity
     /**
      * Get userHomes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserHomes()
     {
@@ -682,7 +644,7 @@ class City implements IndexableEntity
     /**
      * Get userCities1
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserCities1()
     {
@@ -715,13 +677,13 @@ class City implements IndexableEntity
     /**
      * Get userCities2
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserCities2()
     {
         return $this->userCities2;
     }
-    
+
     public function getCloudSearchFields()
     {
         $countryName = ($this->country) ? $this->country->getName() : '';
@@ -759,7 +721,7 @@ class City implements IndexableEntity
     /**
      * Get postalCode
      *
-     * @return string 
+     * @return string
      */
     public function getPostalCode()
     {
