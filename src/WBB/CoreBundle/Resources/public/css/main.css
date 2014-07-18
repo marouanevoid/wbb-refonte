@@ -410,12 +410,11 @@
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .cities .ui-slide article.city,
   .cities .ui-slide article.city > img {height: 100%;}
-  section.bar-filter .sort-by .btn-radius:last-of-type {margin-left: 0px;}
   .index .sub-header .title h1 {text-align: left;}
 
   /* IE9 */
   .articles article .img .cover .sponsor {bottom: 0px\0/;}
-  section.bar-finder tr:nth-child(2) td:nth-child(7) .ui-radio.btn-radius.with-icon {margin-right: 20px\0/;}
+  section.bar-finder tr:nth-child(2) td:nth-child(7) .ui-radio.btn-radius.with-icon {border: 1px solid red; margin-right: 20px\0/;}
   section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
 /* Smartphones (portrait) ----------- */
