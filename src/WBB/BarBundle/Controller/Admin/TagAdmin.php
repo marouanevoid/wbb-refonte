@@ -22,17 +22,11 @@ class TagAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('name')
-                ->add('energyLevel', 'choice', array(
+                ->add('type', 'choice', array(
                     'required' => false,
-                    'choices'  => Tag::getEnergyLevels()
+                    'choices'  => Tag::getTypeNames()
                 ))
-                ->add('isStyle')
-                ->add('isOccasion')
-                ->add('isAtmosphere')
-                ->add('isAlcohol')
-                ->add('isCocktail')
-                ->add('isMood')
+                ->add('name')
                 ->add('onTop')
             ->end();
     }
@@ -48,15 +42,9 @@ class TagAdmin extends Admin
         ;
         if(!$this->hasParentFieldDescription()) {
             $listMapper
-                ->add('energyLevel', null, array(
-                    'template' => 'WBBBarBundle:Admin:Tag\status_field.html.twig'
+                ->add('type', null, array(
+                    'template' => 'WBBBarBundle:Admin:Tag\type_field.html.twig'
                 ))
-                ->add('isStyle', null, array('editable' => true))
-                ->add('isOccasion', null, array('editable' => true))
-                ->add('isAtmosphere', null, array('editable' => true))
-                ->add('isAlcohol', null, array('editable' => true))
-                ->add('isCocktail', null, array('editable' => true))
-                ->add('isMood', null, array('editable' => true))
                 ->add('createdAt')
                 ->addIdentifier('_action', 'actions', array(
                     'field'   => 'name',
@@ -77,13 +65,7 @@ class TagAdmin extends Admin
     {
         $filterMapper
             ->add('name')
-            ->add('energyLevel')
-            ->add('isStyle')
-            ->add('isOccasion')
-            ->add('isAtmosphere')
-            ->add('isAlcohol')
-            ->add('isCocktail')
-            ->add('isMood')
+            ->add('type', 'doctrine_orm_string', array(), 'choice', array('choices' => Tag::getTypeNames()))
             ->add('onTop')
         ;
     }
@@ -95,13 +77,8 @@ class TagAdmin extends Admin
     {
         $showMapper
             ->with('General')
-                ->add('energyLevel')
-                ->add('isStyle')
-                ->add('isOccasion')
-                ->add('isAtmosphere')
-                ->add('isAlcohol')
-                ->add('isCocktail')
-                ->add('isMood')
+                ->add('name')
+                ->add('type')
                 ->add('onTop')
             ->end()
         ;

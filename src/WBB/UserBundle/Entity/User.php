@@ -114,6 +114,69 @@ class User extends BaseUser
     private $prefCity3;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar1", type="string", length=255, nullable=true)
+     */
+    private $prefBar1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar2", type="string", length=255, nullable=true)
+     */
+    private $prefBar2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar3", type="string", length=255, nullable=true)
+     */
+    private $prefBar3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_1", type="string", length=255, nullable=true)
+     */
+    private $prefDrinkBrand1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_2", type="string", length=255, nullable=true)
+     */
+    private $prefDrinkBrand2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
+     */
+    private $prefDrinkBrand3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_1", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_2", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_3", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails3;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="stay_informed", type="boolean", nullable=true)
@@ -161,6 +224,24 @@ class User extends BaseUser
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
+     */
+    protected $facebookId;
+
+    public function serialize()
+    {
+        return serialize(array($this->facebookId, parent::serialize()));
+    }
+
+    public function unserialize($data)
+    {
+        list($this->facebookId, $parentData) = unserialize($data);
+        parent::unserialize($parentData);
+    }
 
     public function __construct()
     {
@@ -553,75 +634,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set prefCity1
-     *
-     * @param string $prefCity1
-     * @return User
-     */
-    public function setPrefCity1($prefCity1)
-    {
-        $this->prefCity1 = $prefCity1;
-
-        return $this;
-    }
-
-    /**
-     * Get prefCity1
-     *
-     * @return string 
-     */
-    public function getPrefCity1()
-    {
-        return $this->prefCity1;
-    }
-
-    /**
-     * Set prefCity2
-     *
-     * @param string $prefCity2
-     * @return User
-     */
-    public function setPrefCity2($prefCity2)
-    {
-        $this->prefCity2 = $prefCity2;
-
-        return $this;
-    }
-
-    /**
-     * Get prefCity2
-     *
-     * @return string 
-     */
-    public function getPrefCity2()
-    {
-        return $this->prefCity2;
-    }
-
-    /**
-     * Set prefCity3
-     *
-     * @param string $prefCity3
-     * @return User
-     */
-    public function setPrefCity3($prefCity3)
-    {
-        $this->prefCity3 = $prefCity3;
-
-        return $this;
-    }
-
-    /**
-     * Get prefCity3
-     *
-     * @return string 
-     */
-    public function getPrefCity3()
-    {
-        return $this->prefCity3;
-    }
-
-    /**
      * Set prefStartCity
      *
      * @param \WBB\CoreBundle\Entity\City $prefStartCity
@@ -712,4 +724,309 @@ class User extends BaseUser
     {
         return $this->country;
     }
+
+    /**
+     * Set prefCity1
+     *
+     * @param string $prefCity1
+     * @return User
+     */
+    public function setPrefCity1($prefCity1)
+    {
+        $this->prefCity1 = $prefCity1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity1
+     *
+     * @return string 
+     */
+    public function getPrefCity1()
+    {
+        return $this->prefCity1;
+    }
+
+    /**
+     * Set prefCity2
+     *
+     * @param string $prefCity2
+     * @return User
+     */
+    public function setPrefCity2($prefCity2)
+    {
+        $this->prefCity2 = $prefCity2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity2
+     *
+     * @return string 
+     */
+    public function getPrefCity2()
+    {
+        return $this->prefCity2;
+    }
+
+    /**
+     * Set prefCity3
+     *
+     * @param string $prefCity3
+     * @return User
+     */
+    public function setPrefCity3($prefCity3)
+    {
+        $this->prefCity3 = $prefCity3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity3
+     *
+     * @return string 
+     */
+    public function getPrefCity3()
+    {
+        return $this->prefCity3;
+    }
+
+    /**
+     * Set prefBar1
+     *
+     * @param string $prefBar1
+     * @return User
+     */
+    public function setPrefBar1($prefBar1)
+    {
+        $this->prefBar1 = $prefBar1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefBar1
+     *
+     * @return string 
+     */
+    public function getPrefBar1()
+    {
+        return $this->prefBar1;
+    }
+
+    /**
+     * Set prefBar2
+     *
+     * @param string $prefBar2
+     * @return User
+     */
+    public function setPrefBar2($prefBar2)
+    {
+        $this->prefBar2 = $prefBar2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefBar2
+     *
+     * @return string 
+     */
+    public function getPrefBar2()
+    {
+        return $this->prefBar2;
+    }
+
+    /**
+     * Set prefBar3
+     *
+     * @param string $prefBar3
+     * @return User
+     */
+    public function setPrefBar3($prefBar3)
+    {
+        $this->prefBar3 = $prefBar3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefBar3
+     *
+     * @return string 
+     */
+    public function getPrefBar3()
+    {
+        return $this->prefBar3;
+    }
+
+    /**
+     * Set prefDrinkBrand1
+     *
+     * @param string $prefDrinkBrand1
+     * @return User
+     */
+    public function setPrefDrinkBrand1($prefDrinkBrand1)
+    {
+        $this->prefDrinkBrand1 = $prefDrinkBrand1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefDrinkBrand1
+     *
+     * @return string 
+     */
+    public function getPrefDrinkBrand1()
+    {
+        return $this->prefDrinkBrand1;
+    }
+
+    /**
+     * Set prefDrinkBrand2
+     *
+     * @param string $prefDrinkBrand2
+     * @return User
+     */
+    public function setPrefDrinkBrand2($prefDrinkBrand2)
+    {
+        $this->prefDrinkBrand2 = $prefDrinkBrand2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefDrinkBrand2
+     *
+     * @return string 
+     */
+    public function getPrefDrinkBrand2()
+    {
+        return $this->prefDrinkBrand2;
+    }
+
+    /**
+     * Set prefDrinkBrand3
+     *
+     * @param string $prefDrinkBrand3
+     * @return User
+     */
+    public function setPrefDrinkBrand3($prefDrinkBrand3)
+    {
+        $this->prefDrinkBrand3 = $prefDrinkBrand3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefDrinkBrand3
+     *
+     * @return string 
+     */
+    public function getPrefDrinkBrand3()
+    {
+        return $this->prefDrinkBrand3;
+    }
+
+    /**
+     * Set prefCocktails1
+     *
+     * @param string $prefCocktails1
+     * @return User
+     */
+    public function setPrefCocktails1($prefCocktails1)
+    {
+        $this->prefCocktails1 = $prefCocktails1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCocktails1
+     *
+     * @return string 
+     */
+    public function getPrefCocktails1()
+    {
+        return $this->prefCocktails1;
+    }
+
+    /**
+     * Set prefCocktails2
+     *
+     * @param string $prefCocktails2
+     * @return User
+     */
+    public function setPrefCocktails2($prefCocktails2)
+    {
+        $this->prefCocktails2 = $prefCocktails2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCocktails2
+     *
+     * @return string 
+     */
+    public function getPrefCocktails2()
+    {
+        return $this->prefCocktails2;
+    }
+
+    /**
+     * Set prefCocktails3
+     *
+     * @param string $prefCocktails3
+     * @return User
+     */
+    public function setPrefCocktails3($prefCocktails3)
+    {
+        $this->prefCocktails3 = $prefCocktails3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCocktails3
+     *
+     * @return string 
+     */
+    public function getPrefCocktails3()
+    {
+        return $this->prefCocktails3;
+    }
+    
+    /**
+     * @param string $facebookId
+     * @return void
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+        $this->setUsername($facebookId);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param Array
+     */
+    public function setFBData($fbdata)
+    {
+        if (isset($fbdata['id'])) {
+            $this->setFacebookId($fbdata['id']);
+        }
+    }
+
 }

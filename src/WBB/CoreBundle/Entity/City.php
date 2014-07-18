@@ -5,13 +5,13 @@ namespace WBB\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\CoreBundle\Entity\CityBestOf;
 use WBB\CoreBundle\Entity\Collections\CityTag;
 use WBB\CoreBundle\Entity\Country;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 
 /**
  * City
@@ -19,7 +19,8 @@ use WBB\CoreBundle\Entity\Country;
  * @ORM\Table(name="wbb_city")
  * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\CityRepository")
  */
-class City {
+class City implements IndexableEntity
+{
 
     /**
      * @var integer
@@ -65,21 +66,16 @@ class City {
     private $seoDescription;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="postal_code", type="string", length=10, nullable=true)
+     */
+    private $postalCode;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $image;
-
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-//     */
-//    private $image;
-//
-//    /**
-//     * @var FileUpload
-//     */
-//    private $file;
 
     /**
      * @var boolean
@@ -99,7 +95,7 @@ class City {
     private $suburbs;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"persist"})
      */
     private $users;
 
@@ -119,13 +115,13 @@ class City {
     private $bestofs;  
     
     /**
-     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities")
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"all"})
      * @ORM\JoinTable(name="wbb_news_cities",
      *      joinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="news_id", referencedColumnName="id")}
      *      )
      **/
-    private $news;    
+    private $news;
     
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTag", mappedBy="city", cascade={"all"})
@@ -530,36 +526,12 @@ class City {
 
     public function getNbNews()
     {
-        return count($this->getNews());
+        return count($this->news);
     }
 
     public function getNbAreas()
     {
         return count($this->getSuburbs());
-    }
-
-
-    /**
-     * Add news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     * @return City
-     */
-    public function addNews(\WBB\BarBundle\Entity\News $news)
-    {
-        $this->news[] = $news;
-
-        return $this;
-    }
-
-    /**
-     * Remove news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     */
-    public function removeNews(\WBB\BarBundle\Entity\News $news)
-    {
-        $this->news->removeElement($news);
     }
 
     /**
@@ -619,6 +591,29 @@ class City {
     }
 
     /**
+     * Add news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     * @return City
+     */
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \WBB\BarBundle\Entity\News $news
+     */
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
+
+    /**
      * Get news
      *
      * @return \Doctrine\Common\Collections\Collection 
@@ -626,5 +621,148 @@ class City {
     public function getNews()
     {
         return $this->news;
+    }
+
+    /**
+     * Add userHomes
+     *
+     * @param \WBB\UserBundle\Entity\User $userHomes
+     * @return City
+     */
+    public function addUserHome(\WBB\UserBundle\Entity\User $userHomes)
+    {
+        $this->userHomes[] = $userHomes;
+
+        return $this;
+    }
+
+    /**
+     * Remove userHomes
+     *
+     * @param \WBB\UserBundle\Entity\User $userHomes
+     */
+    public function removeUserHome(\WBB\UserBundle\Entity\User $userHomes)
+    {
+        $this->userHomes->removeElement($userHomes);
+    }
+
+    /**
+     * Get userHomes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserHomes()
+    {
+        return $this->userHomes;
+    }
+
+    /**
+     * Add userCities1
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities1
+     * @return City
+     */
+    public function addUserCities1(\WBB\UserBundle\Entity\User $userCities1)
+    {
+        $this->userCities1[] = $userCities1;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCities1
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities1
+     */
+    public function removeUserCities1(\WBB\UserBundle\Entity\User $userCities1)
+    {
+        $this->userCities1->removeElement($userCities1);
+    }
+
+    /**
+     * Get userCities1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserCities1()
+    {
+        return $this->userCities1;
+    }
+
+    /**
+     * Add userCities2
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities2
+     * @return City
+     */
+    public function addUserCities2(\WBB\UserBundle\Entity\User $userCities2)
+    {
+        $this->userCities2[] = $userCities2;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCities2
+     *
+     * @param \WBB\UserBundle\Entity\User $userCities2
+     */
+    public function removeUserCities2(\WBB\UserBundle\Entity\User $userCities2)
+    {
+        $this->userCities2->removeElement($userCities2);
+    }
+
+    /**
+     * Get userCities2
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserCities2()
+    {
+        return $this->userCities2;
+    }
+    
+    public function getCloudSearchFields()
+    {
+        $countryName = ($this->country) ? $this->country->getName() : '';
+        $lat = ($this->latitude) ? $this->latitude : 0;
+        $lon = ($this->longitude) ? $this->longitude : 0;
+        $suburbs = array();
+
+        foreach ($this->getSuburbs() as $suburb) {
+            $suburbs[] = $suburb->getName();
+        }
+
+        return array(
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'wbb_id' => $this->id,
+            'country' => $countryName,
+            'location' => $lat . ',' . $lon,
+            'districts' => $suburbs
+        );
+    }
+
+    /**
+     * Set postalCode
+     *
+     * @param string $postalCode
+     * @return City
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode
+     *
+     * @return string 
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
     }
 }

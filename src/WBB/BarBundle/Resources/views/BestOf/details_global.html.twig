@@ -68,9 +68,15 @@
         {% endif %}#}
         <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}
-                {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
+                {% include "WBBBarBundle:Bar:bar1.html.twig" with {
+                        'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered,
+                        'distance': distance, 'latitude': latitude, 'longitude': longitude}
+                %}
             {% else %}
-                {% include "WBBBarBundle:BestOf:bar.html.twig" with { 'b': b, 'bestof' : bestOf} %}
+                {% include "WBBBarBundle:BestOf:bar.html.twig" with {
+                    'b': b, 'bestof' : bestOf, 'distance': distance,
+                    'latitude': latitude, 'longitude': longitude}
+                %}
             {% endif %}
         </div>
     {% endfor %}

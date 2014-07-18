@@ -4,7 +4,6 @@ namespace WBB\BarBundle\Repository;
 
 use WBB\CoreBundle\Repository\EntityRepository;
 use WBB\BarBundle\Entity\BestOf;
-use Doctrine\ORM\Query\Expr;
 
 /**
  * BestOfRepository
@@ -43,16 +42,26 @@ class BestOfRepository extends EntityRepository
                 ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
         }
 
-        if($bestof->getByTag() and $forceTags){
-            // TODO common tags
+        if($bestof->getByTag() && $forceTags){
             $qb
-                ->addSelect('count(t.id) as HIDDEN nbTags')
+                ->addSelect('(count(t.id) + count(tgw.id)) as HIDDEN nbTags')
+                ->leftjoin($this->getAlias().'.energyLevel', 'el')
+                ->leftjoin($this->getAlias().'.toGoWith', 'tgw')
                 ->leftjoin($this->getAlias().'.tags', 'bt')
                 ->leftjoin('bt.tag', 't')
-                ->andWhere($qb->expr()->in('t.id', ':tags'))
+                ->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->in('t.id', ':tags'),
+                        $qb->expr()->orX(
+                            $qb->expr()->in('tgw.id', ':goWith'),
+                            $qb->expr()->eq('el.id', ($bestof->getEnergyLevel()) ? $bestof->getEnergyLevel()->getId() : 0)
+                        )
+
+                    )
+                )
                 ->setParameter('tags', $bestof->getTagsIds())
-                ->addOrderBy('nbTags','DESC')
-            ;
+                ->setParameter('goWith', $bestof->getGoWithIds())
+                ->addOrderBy('nbTags', 'DESC');
         }
 
         $qb

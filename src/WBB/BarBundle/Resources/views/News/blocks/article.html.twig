@@ -1,26 +1,60 @@
-<article class="{% if is_small is defined %}small{% else %}large{% endif %}">
+<article class="{% if is_small is defined %}small{% else %}large{% endif %} {% if firstchild is defined and firstchild %} interview-frist-child{% endif %}">
 
     {% if has_image is defined %}
         <div class="img">
-            <a href="" class="cover">
-                {% for m in n.medias|slice(0,1) %}
-                    <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
-                {% endfor %}
+            <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="cover">
+                {% if n.medias|length>0 %}
+                    {% for m in n.medias|slice(0,1) %}
+                        <img src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}" width="600" height="400" alt="{{ n.title }}"/>
+                        {% if m.media.providerName == 'sonata.media.provider.youtube' %}
+                            <span class="video"></span>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ n.title }}"/>
+                {% endif %}
+
+                {% if n.sponsorImageSmall is defined and n.sponsorImageSmall != '' %}
+                    <span class="sponsor">
+                            <img src="{% path n.sponsorImageSmall , 'small' %}" alt="sponsor"/>
+                    </span>
+                {% endif %}
+
             </a>
-            <a class="plus-btn" href=""></a>
+            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
         </div>
     {% endif %}
 
     <div class="title vcenter">
-
+        {% set margin_class = "" %}
+        {% if n.seoDescription is defined and n.seoDescription != '' or has_image is defined or n.quoteText is not  defined or n.quoteText == '' %}
+         <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+        {% endif %}
         {% if has_text is defined %}
             <p class="m-margin">
-                {{ n.seoDescription }}
+                {% if n.seoDescription %}
+                    {{ n.seoDescription|truncate(60, true, '...') }}
+                {% else %}
+                {% if show_quote is defined %}
+                {% if n.quoteText is defined and n.quoteText and n.quoteText != '' %}
+                    <h1>
+                        {% if become_url is defined and become_url %}
+                            <a  class="quote-cls" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">“{{ n.quoteText|truncate(60, true, '...') }}”</a>
+                        {% else %}
+                            “{{ n.quoteText|truncate(60, true, '...') }}”
+                        {% endif %}
+                    </h1>
+                    <p class="m-margin">{{ n.quoteAuthor|truncate(20, true, '...') }}</p>
+                {% else %}
+                    {% set margin_class = "margin-top-15" %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
             </p>
         {% endif %}
 
-        {% if has_image is defined %}
-            <h2><a href="">{{ n.title }}</a></h2>
+        {% if has_image is not defined %}
+            <a class="plus-btn {{ margin_class }}" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
         {% endif %}
     </div>
 </article>

@@ -61,6 +61,16 @@ meta.Form = function(config){
         that.form.submit(function(e)
         {
             e.preventDefault();
+            var placeholder = 'Type a tip ...',
+                textarea = $("form#tips textarea").val();
+            if(textarea.indexOf(placeholder)>-1 || textarea.length == 0 || textarea == ""){
+
+                $("form#tips textarea").addClass('error');
+                return false;
+            }else{
+                $("form#tips textarea").removeClass('error');
+            }
+
             if( that.config.onSubmit )
             {
                 if( that.config.onSubmit() ) that._sendData();

@@ -29,7 +29,14 @@ class NewsMedia {
      *
      * @ORM\Column(name="alt", type="string", length=255, nullable=true)
      */
-    private $alt;    
+    private $alt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="smallint", nullable=true)
+     */
+    private $position;
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\News", inversedBy="medias")
@@ -185,4 +192,27 @@ class NewsMedia {
         return $this->updatedAt;
     }
 
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return NewsMedia
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
 }

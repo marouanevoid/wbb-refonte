@@ -10,7 +10,6 @@ use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class BarController extends Controller
 {
@@ -21,8 +20,10 @@ class BarController extends Controller
         if (!empty($slug))
            return $this->cityHomeAction($session->get('citySlug'));
         $session->set('citySlug', "");
+
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
+
         $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars();
         $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
@@ -40,12 +41,29 @@ class BarController extends Controller
             $session->set('citySlug', "");
             return $this->homeAction();
         }
+
+        if($slug != $session->get('citySlug')){
+            $session->set('citySlug', $slug);
+            $session->set('userLatitude', '');
+            $session->set('userLongitude', '');
+        }
+
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
 
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
 
-        $session->set('citySlug', $slug);
+        if(!empty($latitude) && !empty($longitude)){
+            $response['distance'] = true;
+            $response['latitude'] = $latitude;
+            $response['longitude'] = $longitude;
+        }else{
+            $response['distance'] = false;
+        }
+
+
 
         $response['topCities']  = $topCities;
         $response['topBars']    = $this->container->get('bar.repository')->findBestBars($city);
@@ -65,10 +83,21 @@ class BarController extends Controller
             return $this->barGuideCityAction($session->get('citySlug'));
         $session->set('citySlug', "");
 
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
+
+        if(!empty($latitude) && !empty($longitude) && !empty($slug)){
+            $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude);
+            $response['distance'] = true;
+            $response['latitude'] = $latitude;
+            $response['longitude'] = $longitude;
+        }else{
+            $response['distance'] = false;
+        }
+
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs(null, true, 5, false);
-        // $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars();
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }
@@ -81,14 +110,31 @@ class BarController extends Controller
             $session->set('citySlug', "");
             return $this->barGuideAction();
         }
-        $session->set('citySlug', $slug);
+
+        if($slug != $session->get('citySlug')){
+            $session->set('citySlug', $slug);
+            $session->set('userLatitude', '');
+            $session->set('userLongitude', '');
+        }
+
         $city = $this->container->get('city.repository')->findOneBySlug($slug);
+
+        $latitude = $session->get('userLatitude' );
+        $longitude = $session->get('userLongitude');
+
+        if(!empty($latitude) && !empty($longitude) && !empty($slug)){
+            $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
+            $response['distance'] = true;
+            $response['latitude'] = $latitude;
+            $response['longitude'] = $longitude;
+        }else{
+            $response['distance'] = false;
+        }
 
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
         $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5, false);
-        // $response['nearestBars']    = $this->container->get('bar.repository')->findNearestBars($city);
-        $response['city']       = $city;
+        $response['city']           = $city;
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }
@@ -122,14 +168,43 @@ class BarController extends Controller
         ));
     }
 
+    public function barFinderAction()
+    {
+        $session = $this->container->get('session');
+        $slug = $session->get('citySlug');
+        $city = null;
+        if (!empty($slug))
+            $city = $this->get('city.repository')->findOneBySlug($slug);
+
+        $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
+        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL);
+        $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
+
+        return $this->render('WBBBarBundle:BarFinder:Mobile\barFinderForm.html.twig', array(
+            'city'      => $city,
+            'cities'    => $cities,
+            'firstTags' => $toGoOutWith,
+            'moods'     => $moods
+        ));
+    }
+
     public function barFinderFormAction()
     {
-        $toGoOutWith    = $this->container->get('tag.repository')->findOccasionTags();
-        $cities         = $this->container->get('city.repository')->findBarFinderCities();
+        $session = $this->container->get('session');
+        $slug = $session->get('citySlug');
+        $city = null;
+        if (!empty($slug))
+            $city = $this->get('city.repository')->findOneBySlug($slug);
+
+        $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
+        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL);
+        $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
 
         return $this->render('WBBBarBundle:BarFinder:barFinderForm.html.twig', array(
+            'city'      => $city,
             'cities'    => $cities,
-            'firstTags' => $toGoOutWith
+            'firstTags' => $toGoOutWith,
+            'moods'     => $moods
         ));
     }
 
@@ -141,7 +216,7 @@ class BarController extends Controller
 
         if($request->request->get('mood') != "")
         {
-            $mood = array_search(ucfirst($request->request->get('mood')), Tag::getEnergyLevels());
+            $mood = $request->request->get('mood');
         }
 
         if($request->request->get('city') != "")
@@ -156,8 +231,20 @@ class BarController extends Controller
 
         $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
 
+        $session = $this->container->get('session');
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
+        $distance = false;
+
+        if(!empty($latitude) && !empty($longitude)){
+            $distance = true;
+        }
+
         return $this->render('WBBBarBundle:BarFinder:barFinderResults.html.twig', array(
-            'bars' => $bars
+            'bars'      => $bars,
+            'distance'  => $distance,
+            'latitude'  => $latitude,
+            'longitude' => $longitude
         ));
     }
 
@@ -208,15 +295,27 @@ class BarController extends Controller
             }
         }
 
-        if(!$bestOf->getOrdered() and $bars){
+        if(!$bestOf->getOrdered() && $bars){
             shuffle($bars);
+        }
+
+        $session = $this->container->get('session');
+        $latitude  = $session->get('userLatitude');
+        $longitude = $session->get('userLongitude');
+        $distance = false;
+
+        if(!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))){
+            $distance = true;
         }
 
         return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
             array(
-                'bestOf'   => $bestOf,
-                'bestofs'  => $bestOfs,
-                'bars'     => $bars
+                'bestOf'    => $bestOf,
+                'bestofs'   => $bestOfs,
+                'bars'      => $bars,
+                'distance'  => $distance,
+                'latitude'  => $latitude,
+                'longitude' => $longitude
         ));
     }
 
@@ -228,6 +327,10 @@ class BarController extends Controller
         $nbResults          = null;
         $nbResultsRemaining = null;
         $html               = null;
+
+        $latitude   = null;
+        $longitude  = null;
+        $distance   = false;
 
         $cityObject = $this->container->get('city.repository')->findOneById($city);
 
@@ -242,22 +345,32 @@ class BarController extends Controller
                 $response = $this->container->get('bar.repository')->findLatestBars($cityObject, $limit, $offset, false);
                 $all = $this->container->get('bar.repository')->findLatestBars($cityObject, 0, $offset, false);
             }elseif($filter === "distance"){
-                $response = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, $limit);
-                $all = $this->container->get('bar.repository')->findNearestBars(0, 0, $offset, 0);
+                $session = $this->container->get('session');
+                $latitude = $session->get('userLatitude' );
+                $longitude = $session->get('userLongitude');
+                $distance = true;
+                $response = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, $limit);
+                $all = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, 0);
             }
 
             if($display=="grid"){
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
-                        'limit'  => $limit
+                        'limit'  => $limit,
+                        'distance' => $distance,
+                        'latitude' => $latitude,
+                        'longitude'=> $longitude
                     )
                 );
             }else{
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
-                    'limit'  => $limit
+                    'limit'  => $limit,
+                    'distance' => $distance,
+                    'latitude' => $latitude,
+                    'longitude'=> $longitude
                 ));
             }
 

@@ -14,6 +14,7 @@
         {% endif %}
     </script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMoreTips.wbb.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.nicescroll.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/modules/bar-details.wbb.js') }}"></script>
 
     <script type="text/javascript">
@@ -268,8 +269,13 @@
 
                 <ul class="trends">
                     <li>At a Glance :</li>
-                    {% for tr in bar.tags %}
-                        <li>{{ tr.tag }}</li>
+                    {% if bar.energyLevel %}
+                        <li>{{ bar.energyLevel }}</li>
+                    {% endif %}
+                    {% for tr in bar.tags |slice(0, ((bar.energyLevel)? 4 : 5)) %}
+                        {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
+                            <li>{{ tr.tag }}</li>
+                        {% endif %}
                     {% endfor%}
                 </ul>
 

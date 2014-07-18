@@ -7,6 +7,12 @@ parameters:
     wbb_user.user.entity.class: WBB\UserBundle\Entity\User
 
 services:
+    facebook.user:
+        class: WBB\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
 
     #Admin Class
     wbb.user.admin.user:
@@ -25,3 +31,21 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBUserBundle:User']
+
+    #User Registration Form
+    wbb_user.registration.form.type:
+        class: WBB\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: wbb_user_registration }
+
+    wbb_user.registration.light.form.type:
+        class: WBB\UserBundle\Form\Type\RegistrationLightFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: wbb_user_registration_light }
+
+    #FormFactory
+    wbb_user.registration.form.factory:
+        class: WBB\UserBundle\Form\Factory\FormFactory
+        arguments: [@form.factory, %fos_user.registration.form.name%, %fos_user.registration.form.type%, %fos_user.registration.form.validation_groups% ]
