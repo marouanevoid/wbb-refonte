@@ -171,7 +171,7 @@ sonata_media:
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 city_small :    { width: 340 , height: 350, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
-        banner:
+        ads:
             download:
                 strategy: sonata.media.security.connected_strategy
                 mode: http
