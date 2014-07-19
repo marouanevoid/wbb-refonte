@@ -78,12 +78,12 @@ class NewsAdmin extends Admin {
                 ->add('quoteText')
                 ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
                 ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
-                ->add('interview')
+                ->add('interview', null, array('label' => 'Interview'))
                 ->add('onTop')
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
                     'required' => false,
-                    'help'      => 'Preferred size (width: 368px , height: 170px)'
+                    'help'      => 'Preferred size (width: 640px , height: 480px)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor'
@@ -91,7 +91,7 @@ class NewsAdmin extends Admin {
                 ))
                 ->add('sponsorImageSmall', 'sonata_type_model_list', array(
                     'required'  => false,
-                    'help'      => 'Preferred size (width: 95px , height: 105px)'
+                    'help'      => 'Preferred size (width: 82px , height: 82px)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor_small'
