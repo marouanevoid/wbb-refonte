@@ -170,6 +170,7 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 city_small :    { width: 340 , height: 350, quality: 100 }
+                city_square :   { width: 170 , height: 175, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
         ads:
             download:
