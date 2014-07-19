@@ -89,10 +89,10 @@ meta.LoadMoreTips = function(config) {
                     $('.line .three').addClass('six').removeClass('three');
                 }
                 if( callback ) callback();
-                that._animate($target, $target.find(".line:last-child").find('> *').not('br') , function(){                    
-                    that.context.is_loading = false;
-                    that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
-                    $(".thisdiv").niceScroll({cursorcolor:"#b3955f"});
+                that._animate($target, $target.find(".line:last-child").find('> *').not('br') , function(){  
+                        that.context.is_loading = false;
+                        that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
+                        $(".thisdiv").niceScroll({cursorcolor:"#b3955f"});               
                 });
 
             },
