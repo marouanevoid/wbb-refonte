@@ -205,6 +205,7 @@ wbb.Map = function(config){
 
                         var align = "right";
                         if( map.getBounds().getNorthEast().lng() - marker.getPosition().lng() < that.config.offset[map.getZoom()] ) align = "left";
+                        console.log('the Zoom is ::' + map.getZoom());
                         console.log(" MAP OVER ");
                         console.log(map.getBounds().getNorthEast().lng() - marker.getPosition().lng());
                         that.config.$map.gmap3({
