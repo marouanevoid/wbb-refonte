@@ -78,7 +78,7 @@ class NewsAdmin extends Admin {
                 ->add('quoteText')
                 ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
                 ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
-                ->add('interview')
+                ->add('interview', null, array('label' => 'Interview'))
                 ->add('onTop')
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
