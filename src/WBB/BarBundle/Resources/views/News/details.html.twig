@@ -168,13 +168,13 @@
                         {% endif %}
                     {% endfor %}
                 {% if is_mobile() and not is_tablet() %}
-                    <div class="eight columns">
+                    <div class="eight columns padding-bottom-20">
                 {% endif %}
                     {% if is_mobile() and not is_tablet() %}
                         {% if news.sponsorImage %}
-                            <div class="block padding-top-10">
-                                <img src="{% path news.sponsorImage, 'slider_large' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
-                            </div>
+                        <div class="block padding-top-10">
+                            <img src="{% path news.sponsorImage, 'slider_large' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
+                        </div>
                         {% endif %}
                     {% endif %}
                    
@@ -216,7 +216,7 @@
                       
                     <div style='clear:both;'></div>
 
-                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} l-margin-bottom {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() and not is_tablet() %}<div class="margin-top-10">{% endif %} {{ news.sponsor }}{% if is_mobile() and not is_tablet() %}</div>{% endif %}</div>{% endif %}
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} margin-bottom-20 {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() and not is_tablet() %}<div class="margin-top-10">{% endif %} {{ news.sponsor }}{% if is_mobile() and not is_tablet() %}</div>{% endif %}</div>{% endif %}
                 {% if not is_mobile() or is_tablet() %}
                     <div class="share-btns l-margin-top">
                         <hr />
