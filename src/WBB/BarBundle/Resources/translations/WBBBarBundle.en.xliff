@@ -152,18 +152,18 @@
                 <target>Instagram pseudo</target>
             </trans-unit>
 
-            <trans-unit id="form.label_is_credit_card">
-                <source>form.label_is_credit_card</source>
+            <trans-unit id="form.label_credit_card">
+                <source>form.label_credit_card</source>
                 <target>Credit Card</target>
             </trans-unit>
 
-            <trans-unit id="form.label_is_coat_check">
-                <source>form.label_is_coat_check</source>
+            <trans-unit id="form.label_coat_check">
+                <source>form.label_coat_check</source>
                 <target>Coat Check</target>
             </trans-unit>
 
-            <trans-unit id="form.label_is_reservation">
-                <source>form.label_is_reservation</source>
+            <trans-unit id="form.label_reservation">
+                <source>form.label_reservation</source>
                 <target>Reservation</target>
             </trans-unit>
 
@@ -182,8 +182,8 @@
                 <target>Menu link</target>
             </trans-unit>
 
-            <trans-unit id="form.label_reservation">
-                <source>form.label_reservation</source>
+            <trans-unit id="form.label_reservation_link">
+                <source>form.label_reservation_link</source>
                 <target>Reservation Link</target>
             </trans-unit>
 
@@ -506,18 +506,18 @@
                 <source>filter.label_rich_description</source>
                 <target>Rich description</target>
             </trans-unit>
-            <!-- isAnInterview -->
-            <trans-unit id="form.label_is_an_interview">
-                <source>form.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <!-- interview -->
+            <trans-unit id="form.label_interview">
+                <source>form.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
-            <trans-unit id="list.label_is_an_interview">
-                <source>list.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <trans-unit id="list.label_interview">
+                <source>list.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
-            <trans-unit id="filter.label_is_an_interview">
-                <source>filter.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <trans-unit id="filter.label_interview">
+                <source>filter.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
             <!-- isOnTop -->
             <trans-unit id="form.label_is_on_top">
