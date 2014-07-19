@@ -299,25 +299,26 @@
                     <div class="m-margin-top h2">This bar appears also in</div>
                     <div class="m-margin-top h3">
                         <ul>
-                            {% for n in news %}
-                                <li>
-                                    <a href="{{ path('wbb_news_details_page', {newsSlug: n.slug}) }}">
-                                        {{ n.title }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                            {% for b in bestofs %}
-                                <li>
-                                    {% if b.city %}
-                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}">
-                                            Best {{ b.name }} in {{ b.city }}
+                            {% for r in related |slice(0, 5) %}
+                                {% if r.title is defined %}
+                                    <li>
+                                        <a href="{{ path('wbb_news_details_page', {newsSlug: r.slug}) }}">
+                                            {{ r.title }}
                                         </a>
-                                    {% else %}
-                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}">
-                                            Best {{ b.name }} in world
-                                        </a>
-                                    {% endif %}
-                                </li>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        {% if r.city %}
+                                            <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: r.slug, citySlug: r.city.slug}) }}">
+                                                Best {{ r.name }} in {{ r.city }}
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: r.slug}) }}">
+                                                Best {{ r.name }} in world
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
