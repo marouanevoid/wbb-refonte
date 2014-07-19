@@ -219,19 +219,19 @@
   #register.page .group-action {width: 128%;}
   #register.page .group-action .form-submit {width: 50%; margin: auto; display: block;}
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
-  #bar-finder.mobile {/* margin-top: 77px; */ background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
-  #bar-finder.mobile .title {color: #b3955f; font-size: 28px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
-  #bar-finder.mobile form label {font-size: 16px; color: #b3955f; margin: 40px 0 15px; display: block; visibility: visible;}
+  #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
+  #bar-finder.mobile .title {color: #b3955f; font-size: 26px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
+  #bar-finder.mobile form label {font-size: 14px; color: #b3955f; margin: 40px 0 15px; display: block; visibility: visible;}
   #bar-finder.mobile .ui-dropdown-container {width: 100%!important;}
-  #bar-finder.mobile .ui-dropdown-container .selected {text-align: center; font-size: 18px;}
+  #bar-finder.mobile .ui-dropdown-container .selected {text-align: center; font-size: 16px;}
   #bar-finder.mobile .ui-dropdown-container .btn-radius.with-icon:after {top: 20px !important;}
   #bar-finder.mobile .ui-dropdown-container .btn-radius.with-icon:before {top: 20px !important;}
   #bar-finder.mobile .ui-dropdown-container .ui-dropdown span {padding-right: 0;}
   #bar-finder.mobile .ui-radio.btn-radius.with-icon:after, 
   #bar-finder.mobile .ui-radio.btn-radius.with-icon:before {left:10px !important}
   #bar-finder.mobile .group-form.radio ul {width: 320px!important;}
-  #bar-finder.mobile .form-radio {width: 95px; margin-right: 10px;} /* Page : Mobile_BarFinder.html */
-  #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; font-size: 16px;}
+  #bar-finder.mobile .form-radio {width: 95px; margin-right: 10px;}
+  #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; font-size: 14px;}
   #bar-finder.mobile .form-submit {width: 90%; color: #faf3e1; font-size: 20px; background-color: #b3955f; line-height: 42px; font-weight: bold;}
 /* Barfinder Results (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_results.psd; */
   /*
@@ -397,15 +397,28 @@
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
   .sub-header .title h3 {font-size: 2em;}
-  .btn-round.dark.star:hover,
   .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
+<<<<<<< HEAD
   .articles article .img .cover .sponsor {bottom: 0px; /* Cible IE9 */}
+=======
+>>>>>>> c4c4ba5a34baf358a7cd13dd641ec977cd6b1804
   #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 15px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 5px;}
-  .cities-content input[type="text"] + .cities-content input[type="submit"] {right: -5px;}
+  .cities-content input[type="text"] + input[type="submit"] {right: -5px;}
+  .bar-details .content ul.trends {line-height: 1.6em;}
+  .bar-details .content ul.trends li {line-height: 20px;}
+  .bar-details .content .trends {margin-bottom: 0;}
+  .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
+  .cities .ui-slide article.city,
+  .cities .ui-slide article.city > img {height: 100%;}
+
+  /* IE9 */
+  .articles article .img .cover .sponsor {bottom: 0px\0/;}
+  section.bar-finder tr:nth-child(2) td:nth-child(7) .ui-radio.btn-radius.with-icon {border: 1px solid red\0/;}
+  section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
@@ -433,16 +446,13 @@
   TEMPS STYLE
 */
   @media only screen and (max-width: 768px) {
-    .mobile section.bars .bar-w-pic .btn-round:before, 
     .mobile section.bar-filter .bar-w-pic .btn-round:before {
       background-size: 128px 256px;
-      background-position: -80px -40px!important;
+      background-position: -80px -40px;
     }
-    .mobile section.bars .bar-w-pic .btn-round.active:before, 
     .mobile section.bar-filter .bar-w-pic .btn-round.active:before {
       background-position: -100px -80px!important;
     }
-    .mobile section.bars .bar-w-pic .btn-round, 
     .mobile section.bar-filter .bar-w-pic .btn-round {
         width: 20px;
         height: 20px;
@@ -457,17 +467,15 @@
     .social-share .twitter-share,
     .social-share .email-share {
       background-repeat: no-repeat;
+      background-size: 90px 40px;
     }
     .social-share .fb-share {
-      background-image: url("../images/fb@2x.png");
-      background-size: 90px 40px;
+      background-image: url("../images/fbx2.png");
     }
     .social-share .twitter-share {
-      background-image: url("../images/twitter@2x.png");
-      background-size: 90px 40px;
+      background-image: url("../images/twitterx2.png");
     }
     .social-share .email-share {
-      background-image: url("../images/email@2x.png");
-      background-size: 90px 40px;
+      background-image: url("../images/emailx2.png");
     }
   }
