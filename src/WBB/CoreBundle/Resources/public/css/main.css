@@ -420,6 +420,7 @@
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
+    .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
   }
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
