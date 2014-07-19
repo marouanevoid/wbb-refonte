@@ -482,7 +482,8 @@ wbb.CitiesPage = function () {
                     cityName = cityName.replace(re, '<b>$1</b>');
                 }
                 if( display_list ) html += '<li data-id="'+city.id+'">'+cityName+'</li>';
-                markers.push({address:city.latitude+','+city.longitude, options:{icon:BASEURL+'images/map.pin.png', optimized: false}, id:city.id});
+                var icon = new google.maps.MarkerImage(BASEURL+'images/map.pin'+(that._isRetina()?'@2x':'')+'.png', null, null, null, new google.maps.Size(20,30));
+                markers.push({address:city.latitude+','+city.longitude, options:{icon:icon, optimized: false}, id:city.id});
             }
         });
 
