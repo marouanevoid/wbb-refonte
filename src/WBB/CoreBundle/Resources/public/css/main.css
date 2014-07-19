@@ -470,4 +470,13 @@
       background-image: url("../images/email@2x.png");
       background-size: 90px 40px;
     }
+    .mobile .bar-details .sub-header .star-share .btn-round.star:hover {
+      background-color: transparent!important;
+    }
+    .mobile .bar-details .sub-header .star-share .btn-round.star:hover {
+      background-color: transparent!important;
+    }
+    .mobile .bar-details .btn-round.star:after {
+      background-position: 0 0;
+    }
   }
