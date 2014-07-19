@@ -104,7 +104,7 @@
                             </div>
                             <div class="overlay"></div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            <img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_small' %}{% endfilter %}" alt="{{ c.name }}"/>
+                            <img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_square' %}{% endfilter %}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}
