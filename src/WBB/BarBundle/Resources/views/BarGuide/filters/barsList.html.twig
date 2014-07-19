@@ -9,10 +9,13 @@
                     <a href="#0" class="btn-round dark star"></a>
 
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
-
-                    {% for m in b.medias|slice(0,1) %}
-                        <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
-                    {% endfor %}
+                    {% if b.medias|length>0 %}
+                        {% for m in b.medias|slice(0,1) %}
+                            <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
+                        {% endfor %}
+                    {% else %}
+                        <img class="scale-with-grid" src="{% filter showMedia %}{% endfilter %}" width="282" height="210" alt=""/>
+                    {% endif %}
                 </div>
             </div>
 
