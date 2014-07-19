@@ -103,7 +103,7 @@ class NewsAdmin extends Admin {
                     array(
                         'required'      => false,
                         'by_reference'  => false,
-                        'help'          => 'Preferred size (width: 95px , height: 105px)',
+                        'help'          => 'Preferred size (width: 900px , height: 600px)',
                         'type_options'  => array('delete' => true)
                     ),
                     array(
