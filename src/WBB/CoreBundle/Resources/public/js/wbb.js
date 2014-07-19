@@ -1,6 +1,6 @@
 function in_array(needle, haystack, argStrict) {
     var key = '',
-        strict = !!argStrict;
+            strict = !!argStrict;
 
     if (strict) {
         for (key in haystack) {
