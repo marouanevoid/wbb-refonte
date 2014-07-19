@@ -33,7 +33,11 @@
 {% endblock %}
 {% block body %}
 <style type="text/css">
-    /*section.bar-filter .bars-w-pic {width: auto;}*/ /* For fix [Bug d'integration #8025] */
+    {% if is_mobile() or not is_tablet() %}
+      .bar-guides .bar-filter .filters a {
+        line-height: 45px;
+      }
+    {% endif %}
     {% if not distance %}
         .bar-filter .ui-dropdown.drop-light {
             max-height: 110px !important;
