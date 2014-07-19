@@ -262,6 +262,7 @@
                         {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
                         <div class="eight columns l-margin-top">
 
+<<<<<<< HEAD
                             <ul class="trends">
                                 <li>At a Glance :</li>
                                     {% if bar.energyLevel %}
@@ -281,6 +282,57 @@
                                         <span class="more">
                                             {{ bar.getDescriptionMore(true)|raw|nl2br }}
                                         </span>
+=======
+                <ul class="trends">
+                    <li>At a Glance :</li>
+                    {% for tr in bar.tagsToShow |slice(0, 5) %}
+                        <li>{{ tr.name }}</li>
+                    {% endfor%}
+                </ul>
+
+                    <p>
+                        {% if is_mobile() and not is_tablet() %}
+                            {{ bar.getDescriptionIntro(true)|raw|nl2br }}
+                            {% if bar.getDescriptionMore(true) %}<a class="see-more">Read More</a>
+                                <span class="more">
+                                {{ bar.getDescriptionMore(true)|raw|nl2br }}
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            {{ bar.getDescriptionIntro|raw|nl2br }}
+                            {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
+                                <span class="more">
+                                {{ bar.getDescriptionMore|raw|nl2br }}
+                                </span>
+                            {% endif %}
+                        {% endif %}
+
+                    </p>
+                <!-- ALSO APPEARS -->
+                {% if not is_mobile() or is_tablet() %}
+                <div class="also-appears">
+                    <hr class="l-margin"/>
+                    <div class="m-margin-top h2">This bar appears also in</div>
+                    <div class="m-margin-top h3">
+                        <ul>
+                            {% for n in news %}
+                                <li>
+                                    <a href="{{ path('wbb_news_details_page', {newsSlug: n.slug}) }}">
+                                        {{ n.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            {% for b in bestofs %}
+                                <li>
+                                    {% if b.city %}
+                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}">
+                                            Best {{ b.name }} in {{ b.city }}
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}">
+                                            Best {{ b.name }} in world
+                                        </a>
+>>>>>>> c4c4ba5a34baf358a7cd13dd641ec977cd6b1804
                                     {% endif %}
                                 {% else %}
                                     {{ bar.getDescriptionIntro|raw|nl2br }}
@@ -437,7 +489,49 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
             {% endif %}
+=======
+                {% if not is_mobile() or is_tablet() %}
+                <div class="block">
+                    <div class="side-ad m-margin-top">
+                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                        <div class="txt">Advertising</div>
+                    </div>
+                </div>
+                {% endif %}
+            </aside>
+        </article>
+    </section>
+</div>
+    <!-- INSIDER TIPS -->
+    {% include "WBBBarBundle:Bar:details-tips-block.html.twig" with { 'bar': bar } %}
+    <!-- ALSO APPEARS -->
+    {% if is_mobile() and not is_tablet() %}
+    <div class="container">
+        <div class="twelve columns">
+            <div class="also-appears">
+                <div class="m-margin-top h2 text-align-center">This bar appears also in</div>
+                <div class="m-margin-top h3">
+                    <ul>
+                        {% for b in bar.bestofs %}
+                            <li>
+                                {% if b.bestof.city %}
+                                    <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                    Best {{ b.bestof.name }} in {{ b.bestof.city }}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                    Best {{ b.bestof.name }} in world
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <hr class="l-margin-top"/>
+            </div>
+>>>>>>> c4c4ba5a34baf358a7cd13dd641ec977cd6b1804
         </div>
         <!-- ALSO LIKE -->
         <section class="also-like force-load">

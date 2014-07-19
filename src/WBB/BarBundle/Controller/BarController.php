@@ -148,6 +148,9 @@ class BarController extends Controller
         $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
         $user = $this->container->get('user.repository')->findOneById(1);
 
+        $relatedBestOfs = $this->container->get('bestof.repository')->findBarRelatedBestofs($bar);
+        $relatedNews = $this->container->get('news.repository')->findBarRelatedNews($bar);
+
         $response = $this->getYouMayAlsoLike($bar);
 
         $tip = new Tip();
@@ -160,6 +163,8 @@ class BarController extends Controller
 
         return $this->render('WBBBarBundle:Bar:details.html.twig', array(
             'bar'       => $bar,
+            'bestofs'   => $relatedBestOfs,
+            'news'   => $relatedNews,
             'barLike'   => $response['bars'],
             'oneCity'   => $response['oneCity'],
             'tipForm'   => $form->createView()

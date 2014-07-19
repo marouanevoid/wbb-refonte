@@ -2068,4 +2068,22 @@ class Bar implements IndexableEntity
     {
         return $this->wifi;
     }
+
+    public function getTagsToShow()
+    {
+        $tags = array();
+
+        if($this->getEnergyLevel()){
+            $tags[] = $this->getEnergyLevel();
+        }
+        $tmps = $this->getTags();
+
+        foreach($tmps as $tmp){
+            if($tmp->getType() != Tag::WBB_TAG_TYPE_BEST_COCKTAILS){
+                $tags[] = $tmp->getTag();
+            }
+        }
+
+        return $tags;
+    }
 }
