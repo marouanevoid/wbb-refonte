@@ -290,4 +290,7 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     /*background: url(../images/loading-slider.gif) no-repeat center center;*/
 
 }
+.custom-scroll{
+    overflow: auto;
+}
 
