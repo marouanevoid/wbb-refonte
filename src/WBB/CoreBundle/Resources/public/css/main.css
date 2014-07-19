@@ -427,6 +427,9 @@
     background-image: url("../images/email@2x.png");
     background-size: 105px 40px;
   }
+  .cities-content .heading input[type="text"] + input[type="submit"] {
+    background-position: -200px -200px;
+  }
 }
 
 /*
