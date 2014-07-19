@@ -257,14 +257,13 @@ section.bar-filter .container:nth-child(2) {
     color: #999999;
     opacity: 0.29;
 }
-.entire-content{
-    display: none;
-}
 
 #common-loader{
     left:50%;
     position:absolute;
     top:50px;
+
+    display: none;
 }
 .quote-cls{
     color :#333333;
@@ -281,4 +280,13 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
 
 .entire-content.show {
     display: block !important;
+}
+
+/*
+* Background loading on images slider
+***/
+.ui-slides .ui-slide.loading {
+    /*background: url(../images/common/loader.gif) no-repeat center center;*/
+    /*background: url(../images/loading-slider.gif) no-repeat center center;*/
+
 }
