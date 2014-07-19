@@ -403,17 +403,18 @@
   #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 15px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 5px;}
-  .cities-content input[type="text"] + input[type="submit"] {right: -5px;}
   .bar-details .content ul.trends {line-height: 1.6em;}
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
-  .cities .ui-slide article.city,
-  .cities .ui-slide article.city > img {height: 100%;}
+  .index .sub-header .title h1 {text-align: left;}
+
+  /* iPad */
+  .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
 
   /* IE9 */
   .articles article .img .cover .sponsor {bottom: 0px\0/;}
-  section.bar-finder tr:nth-child(2) td:nth-child(7) .ui-radio.btn-radius.with-icon {border: 1px solid red\0/;}
+  .ie9 section.bar-finder tr:nth-child(2) td:nth-child(8) .ui-radio.btn-radius.with-icon {margin-right: 20px;}
   section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
 /* Smartphones (portrait) ----------- */
