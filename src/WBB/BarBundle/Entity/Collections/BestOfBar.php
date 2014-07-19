@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * BarTag
  *
  * @ORM\Table(name="wbb_bestof_bar")
- * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestofBarRepository")
+ * @ORM\Entity()
  */
 class BestOfBar
 {
