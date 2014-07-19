@@ -16,10 +16,8 @@
             </script>
         {% endif %}
 
-        <div class="load-target">
-            <div class="line" style="height: 0px;width: 0px;"></div>
-            <div class="line wbbtips">
 
+            <div class="line">
                 {% if not is_mobile() or is_tablet() %}
                     <div class="three columns box"  id="tipsForm">
                         <article class="tip">
@@ -36,10 +34,11 @@
                         </article>
                     </div>
                 {% endif %}
+
+                 <div class='tips-area'></div>
+
             </div>
-        </div>
-
-
+        <div class="line load-target"></div>
         {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">
