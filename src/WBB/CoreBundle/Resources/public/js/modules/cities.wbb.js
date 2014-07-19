@@ -31,7 +31,6 @@ wbb.CitiesPage = function () {
         that._hideCitySelector();
         that._showBarsSelector();
         that.context.$container.find(".scroll-bars").find('ul').html("<span>Loading...</span>");
-        console.log("[Cities] _searchBars - neighborhood_id :" + neighborhood_id);
         that._requestBars(city_id, neighborhood_id, function(neighborhoods, bars)
         {
             if(neighborhoods.length) that._showNeighborhoodSelector(neighborhoods);
@@ -44,9 +43,6 @@ wbb.CitiesPage = function () {
    };
     that._requestBars = function( city_id, neighborhood_id, callback )
     {
-        console.log(" Request Bars : " + Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}));
-        console.log("[Cities] _requestBars - neighborhood_id :" + neighborhood_id);
-
         that.context.ajaxRequest = $.ajax({
                                             url: Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}),
                                             success: function( data )
@@ -56,7 +52,6 @@ wbb.CitiesPage = function () {
                                             },
                                             beforeSend: function()
                                             {
-                                                console.log("beforeSend");
                                                 if (that.context.ajaxRequest != null)
                                                     that.context.ajaxRequest.abort();
                                             }
@@ -89,7 +84,7 @@ wbb.CitiesPage = function () {
         if( display_list )
         {
             var $scrollBars = that.context.$container.find('.scroll-bars');
-            $scrollBars.css({ opacity: 0 });
+            //$scrollBars.css({ opacity: 0 });
             if(bars.length>0)
                 $scrollBars.find('ul').html(html);
             else
@@ -99,7 +94,7 @@ wbb.CitiesPage = function () {
             api.scrollToY(0, false);
 
 
-            $scrollBars.velocity('fadeIn', { duration: that.config.speed});
+            //$scrollBars.velocity('fadeIn', { duration: that.config.speed});
             setTimeout(function(){ that._resize() }, 50);
         }
         that._hideCitySelector();
@@ -247,17 +242,16 @@ wbb.CitiesPage = function () {
 
             /* Show the Reset button, it's to clear input */
             $(this).find('input[type=reset]').show();
-            if (that.context.is_clicked == true)
+            if (that.context.is_clicked == true){
                 that._searchBars( city_id, neighborhood_id );
+            }
             else
             {
                 that._requestCities($(this).find('input[name=city]').val(), function(query, cities)
                 {
-                    console.log("Cities Submit : " + cities.length);
                     if (cities.length > 1 )
                         that._showCities(query, cities, true, false);
                     else if (cities.length == 1 ) {
-                        console.log("Cities Submit id : " + cities[0].id);
                         that.context.$container.find('form input[name=city]').val( cities[0].name );
                         that.context.city_id = cities[0].id;
                         that._searchBars( cities[0].id, 0 );
@@ -274,7 +268,6 @@ wbb.CitiesPage = function () {
 
 
         that.context.map.addZoomListener(function( zoomLevel ){
-            console.log("zooming..." + zoomLevel);
 
             if( that.current_zoom_level > zoomLevel && zoomLevel == 6 )
             {
@@ -339,7 +332,6 @@ wbb.CitiesPage = function () {
         /* On click */
         $selector.find('input[name=city], input[type=submit]').click(function()
         {
-            console.log("click on input selector");
             if( !$('html').hasClass('mobile') || $(window).width() > 640 )
             {
                 that._openFilter();
@@ -394,7 +386,7 @@ wbb.CitiesPage = function () {
 
             that.context.$container.find(".scroll-bars").find('ul').html("<span>Loading...</span>");
             that._searchBars( city_id, neighborhood_id );
-
+            console.log('change dispatched');
         });
 
 
@@ -461,7 +453,6 @@ wbb.CitiesPage = function () {
 
     that._requestCities = function( query, callback )
     {
-        console.log("[Cities] _requestCities, URL : " + Routing.generate('wbb_cities_list', {keywords: query}));
         that.context.ajaxRequest = $.ajax({
                                             url: Routing.generate('wbb_cities_list', {keywords: query}) ,
                                             success: function( data )
@@ -470,7 +461,6 @@ wbb.CitiesPage = function () {
                                                     callback(query, data.cities);
                                             }, beforeSend: function()
                                             {
-                                                console.log("beforeSend");
                                                 if (that.context.ajaxRequest != null)
                                                     that.context.ajaxRequest.abort();
                                             }
