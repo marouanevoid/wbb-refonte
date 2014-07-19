@@ -157,7 +157,7 @@ class BestOfAdmin extends Admin
                     ->add('energyLevel', 'entity', array(
                             'class'    => 'WBBBarBundle:Tag',
                             'required' => true,
-                            'label'     => 'Mood *',
+                            'label'     => 'Mood',
                             'empty_value' => 'Please choose a mood',
                             'property' => 'name',
                             'help'  => 'Mandatory',
