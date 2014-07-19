@@ -408,6 +408,7 @@
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .index .sub-header .title h1 {text-align: left;}
+  .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
@@ -420,6 +421,7 @@
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
+    .articles article .img .plus-btn,
     .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
   }
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
@@ -428,15 +430,15 @@
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
   .social-share .fb-share {
     background-image: url("../images/fb@2x.png");
-    background-size: 105px 40px;
+    background-size: 90px 40px;
   }
   .social-share .twitter-share {
     background-image: url("../images/twitter@2x.png");
-    background-size: 105px 40px;
+    background-size: 90px 40px;
   }
   .social-share .email-share {
     background-image: url("../images/email@2x.png");
-    background-size: 105px 40px;
+    background-size: 90px 40px;
   }
 }
 
