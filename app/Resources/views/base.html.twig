@@ -26,7 +26,7 @@
             {% endif %}
             var DEBUGMODE = "{{app.environment }}";
         </script>
-
+            
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
@@ -80,6 +80,7 @@
                 var MARKET = "US";
                 var LANG = "en";
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
+                window.userConnected = {% if app.user%}true{% else %}false{% endif %};
         </script>
 
         {% if is_tablet() %}
@@ -108,158 +109,29 @@
         <body>
 
         {% endblock %}
-
+        <div class="mask"></div>
         {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <div id="register-light">
-                {% render url('wbb_user_registration_register_light') %}
+                {% render url('wbb_user_registration_register_light') %}    
             </div>
-            <script>
-                jQuery(document).ready(function($) {
-                    // Click anywhere on the page to get rid of lightbox window
-                    $('.mask').hide();
-                    $('.lighbox').click(function(e) {
-                        e.preventDefault();
-                        //Get clicked link data-show ID of tag to show
-                        var id_content = $(this).attr("data-show");
-                        var current_id = $("#" + id_content);
-                        var mask = $(".mask");
-
-                        if (current_id.length > 0) {
-                            //show lightbox window
-                            current_id.show('slow');
-                            // Add class to trigger ID
-                            current_id.addClass('void-popup');
-                            //show the mask
-                            mask.show('fast');
-                        } else {
-                            $('.mask').hide();
-                            current_id.removeClass("void-popup");
-                        }
-                    })
-                    $(".btn-close").click(function(e) {
-                        var current_popup = $(this).closest(".void-popup");
-                        current_popup.removeClass("void-popup");
-                        current_popup.hide("fast");
-                        $(".mask").hide("slow");
-                    })
-                });
-                $(document).ready(function() {
-                    $('#message').hide();
-                    $('#register_form').on('submit', function(e) {
-                        e.preventDefault();
-                        var form = $(this);
-                        var formUrl = '{{ path('wbb_user_registration_register_light') }}';
-
-                        $.ajax({
-                            type: "POST",
-                            url: formUrl,
-                            data: form.serialize(),
-                            success: function(data) {
-                                if (data.code === '400') {
-                                    var errors = data.errors;
-                                    var errorsList = $('#message').show().find('img').html('<ul></ul>');
-                                    for (var i = 0; i < errors.length; i++) {
-                                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
-                                    }
-                                } else {
-
-                                }
-                            },
-                            error: function(xhr, ajaxOptions, thrownError) {
-                                // Si erreur communication ?
-                            }
-                        });
-                    });
-                    $('#login_form').on('submit', function(e) {
-                        e.preventDefault();
-                        var form = $(this);
-                        var formUrl = '{{ path('fos_user_security_check') }}';
-
-                        $.ajax({
-                            type: "POST",
-                            url: formUrl,
-                            data: form.serialize(),
-                            success: function(data) {
-                                console.log(data);
-                                if (data.code === '400') {
-                                    $('#login_error').html(data.error);
-                                } else {
-                                    window.location.reload();
-                                }
-                            },
-                            error: function(xhr, ajaxOptions, thrownError) {
-                                // Si erreur communication ?
-                            }
-                        });
-                    });
-                });
-            </script>
+            {{ include('WBBUserBundle:Registration:register_tips.html.twig') }}
         {% endif %}
+        <div data-show="register" class="lighbox" id="show-popin"></div>
+        <div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>
         <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
-            $(document).ready(function() {
-                $('#facebook-signup').on('click', function() {
-                    FB.getLoginStatus(function(response) {
-                        if (response.status === 'connected') {
-                            FB.api('/me', function(response) {
-                                console.log(response);
-                                setTimeout(securityCheck, 500);
-                            });
+            function securityCheck() {
+                $.ajax({
+                    url: '{{ path('_security_check') }}',
+                    success: function(response) {
+                        if (response.code === '400') {
+                            alert('Create an account please !');
                         } else {
-                            FB.login(function(response) {
-                                if (response.authResponse) {
-                                    console.log('Welcome!  Fetching your information.... ');
-                                    setTimeout(securityCheck, 500);
-                                } else {
-                                    console.log('User cancelled login or did not fully authorize.');
-                                }
-                            });
+                            window.location.reload();
                         }
-                    });
-                });
-                function securityCheck() {
-                    $.ajax({
-                        url: '{{ path('_security_check') }}',
-                        success: function(response) {
-                            if (response.code === '400') {
-                                alert('Create an account please !');
-                            } else {
-                                window.location.reload();
-                            }
-                        }
-                    })
-                }
-            });
-            function fillInForm(formId) {
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        FB.api('/me', function(response) {
-                            console.log(response);
-                            if (formId === '#register_form_full') {
-                                $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
-                                $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
-                                $(formId + ' #fos_user_registration_form_email').val(response.email);
-                                if (response.gender === 'male') {
-                                    $('#fos_user_registration_form_title').find('option[value="M"]').attr('selected', 'selected');
-                                } else {
-                                    $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected');
-                                }
-                            } else if (formId === '#register_form') {
-                                $(formId + ' #fos_user_registration_form_email').val(response.email);
-                            }
-                        });
-                    } else {
-                        FB.login(function(response) {
-                            if (response.authResponse) {
-                                console.log('Welcome!  Fetching your information.... ');
-                                fillInForm(formId);
-                            } else {
-                                console.log('User cancelled login or did not fully authorize.');
-                            }
-                        });
                     }
-                });
+                })
             }
         </script>
         <script type="text/javascript">
@@ -282,12 +154,15 @@
         {% endblock %}
         <!-- AD -->
         {% block footerAd %}
-            {% if not is_mobile() or is_tablet() %}
-            {% include '::ads/adsFooter.html.twig' %}
-            {% endif %}
-            {#{{ render(controller('WBBBarBundle:Ads:show', { 'position': 'HP_728x90' })) }}#}
+            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
         {% endblock %}
-
+        <script>
+        $(document).ready(function(){
+            $('.ui-dropdown-list-form').find('.ui-dropdown').on('click',function(){
+                $(this).find('li').css('display','list-item');
+            });
+        });
+        </script>
         {% block footer %}
             {% include '::footer.html.twig' %}
         {% endblock %}

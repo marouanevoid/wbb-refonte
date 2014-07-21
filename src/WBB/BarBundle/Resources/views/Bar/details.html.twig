@@ -22,7 +22,7 @@
          * TODO : Créer des fonctions JS pour gérer cette partie
          */
         var barId = "{{ bar.id }}",
-                venue  = "{{ bar.foursquare }}",
+                venue = "{{ bar.foursquare }}",
                 insta = "{{ bar.instagram }}",
                 imgs = [],
                 i, m, n, reste, lastImages,
@@ -57,8 +57,8 @@
                             i = 0;
                             if (typeof response.data != 'undefined') {
                                 $.each(response.data, function(key, feed){
-                                    if(in_array(feed.id, r) && i<5) {
-                                        fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="" data-src="'+feed.prefix+"640x480"+feed.suffix+'" itemprop="photo" /></div></div>');
+                                    if (in_array(feed.id, r) && i < 5) {
+                                        fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="" data-src="' + feed.prefix + "640x480" + feed.suffix + '" itemprop="photo" /></div></div>');
                                         i++;
                                     }
                                 });
@@ -78,40 +78,40 @@
                                             i = 0;
                                             if (typeof response.data != 'undefined') {
                                                 $.each(response.data.data, function(key, feed){
-                                                    if(!in_array(feed.id, r) && i<5) {
-                                                        ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="" data-src="'+feed.images.standard_resolution.url+'" itemprop="photo"/></div></div>');
+                                                    if (!in_array(feed.id, r) && i < 5) {
+                                                        ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="" data-src="' + feed.images.standard_resolution.url + '" itemprop="photo"/></div></div>');
                                                         i++;
                                                     }
                                                 });
                                             }
-                                            for(i=0; i<=4; i+=2){
-                                                if(typeof ins[i] != 'undefined') { html+=ins[i]; }
-                                                if(typeof ins[i+1] != 'undefined') { html+=ins[i+1]; }
-                                                if(typeof fsq[i] != 'undefined') { html+=fsq[i]; }
-                                                if(typeof fsq[i+1] != 'undefined') { html+=fsq[i+1]; }
+                                            for (i = 0; i <= 4; i += 2){
+                                                if (typeof ins[i] != 'undefined') { html += ins[i]; }
+                                                if (typeof ins[i + 1] != 'undefined') { html += ins[i + 1]; }
+                                                if (typeof fsq[i] != 'undefined') { html += fsq[i]; }
+                                                if (typeof fsq[i + 1] != 'undefined') { html += fsq[i + 1]; }
                                             }
                                             $('.ui-slide').append(html);
                                             imgs = $('.ui-slide .image');
                                             $('.ui-slide').remove();
                                             html = "";
-                                            for(n=0; n<Math.ceil(imgs.length/4); n++){
-                                                html+='<div class="ui-slide">';
-                                                for(m=n*4; m<(n+1)*4; m++){
-                                                    if(imgs[m]){
-                                                        html+=nodeToString(imgs[m]);
+                                            for (n = 0; n < Math.ceil(imgs.length / 4); n++){
+                                                html += '<div class="ui-slide">';
+                                                for (m = n * 4; m < (n + 1) * 4; m++){
+                                                    if (imgs[m]){
+                                                        html += nodeToString(imgs[m]);
                                                     }
                                                 }
-                                                html+='</div>';
+                                                html += '</div>';
                                             }
-                                            $(".loader").css('display','none');
+                                            $(".loader").css('display', 'none');
                                             $('.ui-slider').append(html);
-                                            reste  = 4-$('.ui-slide .image').length%4;
-                                            lastImages = $('.ui-slide .image').slice(0,reste);
-                                            i=1;
-                                            if($('.ui-slide .image').length>1){
+                                            reste = 4 - $('.ui-slide .image').length % 4;
+                                            lastImages = $('.ui-slide .image').slice(0, reste);
+                                            i = 1;
+                                            if ($('.ui-slide .image').length > 1){
                                                 $.each(lastImages, function(key, element){
-                                                    if(i<=reste){
-                                                        $('.ui-slide:last-child').append('<div class="image">'+element.innerHTML+'</div>');
+                                                    if (i <= reste){
+                                                        $('.ui-slide:last-child').append('<div class="image">' + element.innerHTML + '</div>');
                                                     }
                                                     i++;
                                                 });
@@ -127,7 +127,6 @@
                                     console.log(e);
                                 }
                             });
-
                         },
                         error: function(e) {
                             console.log(e);
@@ -140,7 +139,7 @@
             });
         });
         function initialise() {
-            var myLatlng = new google.maps.LatLng({{ bar.latitude }},{{ bar.longitude }}); // Add the coordinates
+            var myLatlng = new google.maps.LatLng({{ bar.latitude }},{{ bar.longitude }} ); // Add the coordinates
             var mapOptions = {
                 zoom: 14, // The initial zoom level when your map loads (0-20)
                 minZoom: 6, // Minimum zoom level allowed (0-20)
@@ -162,7 +161,7 @@
             }
             var map = new google.maps.Map(document.getElementById('gmap'), mapOptions); // Render our map within the empty div
 
-            var image = new google.maps.MarkerImage("http://wbb.lapreprod.com/bundles/wbbcore/images/map.pin1.png", null, null, null, new google.maps.Size(39,58)); // Create a variable for our marker image.
+            var image = new google.maps.MarkerImage("http://wbb.lapreprod.com/bundles/wbbcore/images/map.pin1.png", null, null, null, new google.maps.Size(39, 58)); // Create a variable for our marker image.
 
             var marker = new google.maps.Marker({ // Set the marker
                 position: myLatlng, // Position marker to coordinates
@@ -170,7 +169,6 @@
                 map: map, // assign the market to our map variable
                 title: '{{ bar.name }}' // Marker ALT Text
             });
-
             // 	google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
             //		window.location='http://www.snowdonrailway.co.uk/shop_and_cafe.php'; // URL to Link Marker to (i.e Google Places Listing)
             // 	});
@@ -178,11 +176,9 @@
             var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
                 content:"{{ bar.name }}" // HTML contents of the InfoWindow
             });
-
             google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
-                infowindow.open(map,marker); // Open our InfoWindow
+                infowindow.open(map, marker); // Open our InfoWindow
             });
-
             google.maps.event.addDomListener(window, 'resize', function() { map.setCenter(myLatlng); }); // Keeps the Pin Central when resizing the browser on responsive sites
             $('#gmap').append('<div class="get-directions h4"><a href="https://www.google.fr/maps/dir//{{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a></div>')
         }
@@ -217,6 +213,8 @@
                     </td>
 
                     <td class="star-share">
+                        {#<a href="{{ favorite_url(app.user, bar) }}" class="btn-round star {% if is_favorite(app.user, bar) %}active brown changed{% endif %}"></a>#}
+                        {#<a class="btn-round brown share" href="#0"></a>#}
                         <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
@@ -266,7 +264,6 @@
             <article class="main">
                 {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
                 <div class="eight columns l-margin-top">
-
                     <ul class="trends margin-bottom-40">
                         <li>At a Glance :</li>
                         {% if bar.energyLevel %}
@@ -284,15 +281,15 @@
                             {{ bar.getDescriptionIntro(true)|raw|nl2br }}
                             {% if bar.getDescriptionMore(true) %}<a class="see-more">Read More</a>
                                 <span class="more">
-                                {{ bar.getDescriptionMore(true)|raw|nl2br }}
-                                </span>
+                                            {{ bar.getDescriptionMore(true)|raw|nl2br }}
+                                        </span>
                             {% endif %}
                         {% else %}
                             {{ bar.getDescriptionIntro|raw|nl2br }}
                             {% if bar.getDescriptionMore %}<a class="see-more">Read More</a>
                                 <span class="more">
-                                {{ bar.getDescriptionMore|raw|nl2br }}
-                                </span>
+                                            {{ bar.getDescriptionMore|raw|nl2br }}
+                                        </span>
                             {% endif %}
                         {% endif %}
 
@@ -330,10 +327,10 @@
 
                             </div>
                             <p>
-                            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                <span itemprop="streetAddress">{{ bar.address }}</span><br/>
-                                <span itemprop="addressLocality">{{ bar.city }}</span>
-                            </span>
+                                <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                    <span itemprop="streetAddress">{{ bar.address }}</span><br/>
+                                    <span itemprop="addressLocality">{{ bar.city }}</span>
+                                </span>
                                 <br/>
                                 {% if is_mobile() and not is_tablet() %}
                                     <span itemprop="telephone"><a href='tel:{{ bar.phone }}'>{{ bar.phone }}</a></span><br/>
@@ -370,7 +367,7 @@
                                     {% endfor%}
                                     <a href="#0" id="showOpenings">(See all)</a><br/>
                                     <span class="openings" style="display: none; margin-bottom: 30px">
-                                {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
+                                                {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
                                         {% for opening in bar.openings %}
                                             {{ days[opening.openingDay-1] }} :
                                             {% if opening.fromHour|number_format<=12 %}
@@ -387,7 +384,7 @@
                                             <br />
                                         {% endfor%}
                                         <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 20px;">(Show less)</a>
-                                </span>
+                                            </span>
                                 {% endif %}
                                 Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                                 Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
@@ -460,6 +457,14 @@
     </section>
 
     <script type="text/javascript">
+        {% if app.user is null %}
+        $(document).ready(function() {
+            $('#tips').on('submit', function(e) {
+                e.preventDefault();
+                $('#show-popin-tips').click();
+            });
+        });
+        {% else %}
         new meta.Form(
                 {
                     $form : $('form#tips'),
@@ -467,43 +472,35 @@
                     {
                         var $count = $form.find(".count");
                         var count = $count.text();
-
                         $count.addClass('success').text(data.message);
-
                         $form.get(0).reset();
-
                         setTimeout(function()
                         {
                             //restore state
                             $('form#tips textarea').val("");
                             $count.removeClass('success').text("250 left");
-
                         }, 2000);
                     },
                     onError:function($form, message)
                     {
                         var $count = $form.find(".count");
                         var count = $count.text();
-
                         $count.addClass('error').text(message);
                         $form.find("textarea").addClass('error').focus();
-
                         setTimeout(function()
                         {
                             //restore state
                             $count.removeClass('error').text(count);
                             $form.find("textarea").removeClass('error');
-
                         }, 2000);
                     }
-                });
+                });            {% endif %}
 
         $('form#tips textarea').keydown(function()
         {
             var length = $(this).val().length;
-            $('form#tips .count').text( 250-length+' left' );
+            $('form#tips .count').text(250 - length + ' left');
         });
     </script>
 {% endblock %}
-
 
