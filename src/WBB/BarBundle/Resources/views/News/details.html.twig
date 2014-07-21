@@ -1,0 +1,343 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ news.title }} | World Best Bars{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initializeSliders();
+        });
+    </script>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        div.description { /* Just for resend commit */
+            float : left;
+            padding : 70px 35px;
+            text-align: center;
+            display: block;
+            width:300px;
+        }
+        div.description p {
+            margin-bottom: 0 !important;
+        }
+        div.description h1 {
+            text-transform: inherit !important;
+        }
+        a.twitter-share , a.fb-share, a.email-share{
+            -webkit-transition: opacity 1s ease-fade-in;
+            -moz-transition: opacity 1s ease-fade-in;
+            -ms-transition: opacity 1s ease-fade-in;
+            -o-transition: opacity 1s ease-fade-in;
+            transition: opacity 1s ease-fade-in;
+        }
+        a.twitter-share:hover ,a.fb-share:hover, a.email-share:hover{
+            zoom: 1;
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+        }
+        .margin-best-of-list{
+            padding: 0 21px;
+        }
+    </style>
+    {% if is_mobile() and not is_tablet() %}
+        <style type="text/css">
+            .ui-slider .arrows {
+                display: none !important;
+            }
+            .ui-slider .ui-wrapper {
+                height: 350px;
+            }
+            div.description {
+                float: left;
+                padding: 50px 0;
+                text-align: center;
+                display: block;
+                width: 100%;
+            }
+
+            article.main p , .sponsor-name{text-align: center;}
+
+            a.fb-share{
+                width:90px;
+                height:41px;
+                background: url({{ asset('bundles/wbbcore/images/icon_fb-mobile.jpg') }});
+            }
+            .twitter-share{
+                width:90px;
+                height:41px;
+                background: url({{ asset('bundles/wbbcore/images/icon_tw-mobile.jpg') }});
+            }
+            .email-share{
+                width:90px;
+                height:41px;
+                background: url({{ asset('bundles/wbbcore/images/icon_email-mobile.jpg') }});
+            }
+            .showallbars-btn{
+                position: relative;
+                top: 16px;
+                text-align: center;
+            }
+            .social-share ul{padding: 0 ; margin: 0; width: 320px;
+                position:relative;
+                left: -6%;
+                top: 6px;
+                bottom: 10px;}
+            .social-share ul li{display: inline;float: left;}
+
+            .social-share {
+                width: 260px;
+                margin-left:auto;
+                margin-right:auto;
+            }
+            body article p {
+                font-size: 18px !important;
+            }
+
+            article .hr-parent hr {
+                width : 90%;
+                margin: 0 auto;
+            }
+            div .margin-best-of-list{
+                padding: 0;
+            }
+            html.mobile article.bestof img.scale-with-grid {
+                min-height: 210px;
+            }
+            .ui-slider .ui-slide {
+                height: 99% !important;
+            }
+            .ui-slider.articles .ui-wrapper article.small {
+                min-height: 34em;
+                height: 34em;
+            }
+            .ui-slider.articles .ui-wrapper {
+                border: 1px solid #b3955f;
+                width: 99%;
+            }
+            .ui-slider.articles .ui-wrapper .small {
+                border: none;
+            }
+        </style>
+    {% endif %}
+
+{% endblock %}
+{% block bodyTag %}
+<body class="news-details {% if is_mobile() %}mobile{% endif %} ">
+{% endblock %}
+{% block body %}
+<div>
+<!-- SUBHEADER -->
+<div class="container">
+    <section class="sub-header">
+        <table>
+            <tr>
+                {% if not is_mobile() or is_tablet() %}
+                    <td>
+                        {% if oneTopCity %}
+                            <div class="city-selector h3">
+                                You are in
+                                <a class="btn-radius with-icon border brown city" href="{{ path('city_homepage',{slug:oneTopCity.slug}) }}">{{ oneTopCity.name|default('Unspecified') }}</a>
+                            </div>
+                        {% endif %}
+                    </td>
+                {% endif %}
+                <td class="title">
+                    <h1 itemprop="name">{{ news.title }}</h1>
+                </td>
+
+                <td class="star-share">
+                    <a class="btn-round brown share" href="#0"></a>
+                </td>
+            </tr>
+        </table>
+    </section>
+</div>
+<div class="container">
+    <section class="content">
+        <!-- MAIN CONTENT -->
+        <article class="main">
+            {% if not is_mobile() or is_tablet() %}
+            <div class="eight columns">
+                {% endif %}
+                {% for m in news.medias|slice(0,1) %}
+                    {% if m.media.providerName == 'sonata.media.provider.youtube' %}
+                        <iframe width="100%" height="480" src="http://www.youtube.com/embed/{{ m.media.providerReference }}?autoplay=0&modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light&wmode=transparent" frameborder="0"  class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" allowfullscreen ></iframe>
+                    {% else %}
+                        <img src="{% path m.media, 'slider_large' %}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
+                    {% endif %}
+                {% endfor %}
+                {% if is_mobile() and not is_tablet() %}
+                <div class="eight columns padding-bottom-20">
+                    {% endif %}
+                    {% if is_mobile() and not is_tablet() %}
+                        {% if news.sponsorImage %}
+                            <div class="block padding-top-10">
+                                <img src="{% path news.sponsorImage, 'slider_large' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {%    set txt = news.richDescription|trim("<br>") %}
+
+                    {%   set paragraphs = txt|split('<br><br>') %}
+                    <p>
+                        {% if paragraphs|length>=3 %}
+                        {% for p in paragraphs %}
+                        {% if loop.index == 3 %}
+
+                        {% if news.quoteText %}
+
+                    </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
+
+                {% else %}
+                </p><p>
+                {%
+                set init = random(news.bestofs|length - 1)
+                %}
+                    {% for b in news.bestofs |slice(init,1) %}
+                    <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                        {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
+                    </div>
+                    {% endfor %}
+                    </p><p>
+
+                        {% endif %}
+
+                        {% endif %}
+                        {{ p|raw }}
+                        {% if not loop.last %}<br><br>{% endif %}
+                        {% endfor %}
+                        {% else %}
+                            {{ news.richDescription|raw }}
+                        {% endif %}
+
+                    </p>
+
+                    <div style='clear:both;'></div>
+
+                    {% if news.sponsor %}<div class="sponsor-name l-margin-top {% if is_mobile() %} margin-bottom-20 {% endif %}"><strong>Brought to you by </strong> {% if is_mobile() and not is_tablet() %}<div class="margin-top-10">{% endif %} {{ news.sponsor }}{% if is_mobile() and not is_tablet() %}</div>{% endif %}</div>{% endif %}
+                    {% if not is_mobile() or is_tablet() %}
+                        <div class="share-btns l-margin-top">
+                            <hr />
+                            <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
+                            <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} margin-top-20">
+                                <a href="#0" class="fb-share">Post</a>
+                                <a href="#0" class="twitter-share">Tweet</a>
+                                <a href="#0" class="email-share">Email</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if is_mobile() and not is_tablet()  %}
+                    <div class="share-btns l-margin-top full full hr-parent">
+                        <hr />
+                        <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
+                        <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
+                            <ul>
+                                <li><a href="#0" class="fb-share">Post</a></li>
+                                <li><a href="#0" class="twitter-share">Tweet</a></li>
+                                <li><a href="#0" class="email-share">Email</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                <!-- ASIDE -->
+                <aside  class="columns four">
+                    {% if not is_mobile() or is_tablet() %}
+                        {% if news.sponsorImage %}
+                            <div class="block">
+                                <img src="{% path news.sponsorImage, 'sponsor_sponsor_detail' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    <!-- NEWLY ADDED BARS -->
+                    <aside {% if is_mobile() and not is_tablet() %}class="l-margin-top" {% else %}class="first-h-item"{% endif %}>
+                        {% if is_mobile() and not is_tablet() %}<hr/>{% endif %}
+                        {% if news.sponsorImage %}
+                        <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top {% else %}l-margin-top{% endif %}">
+                            {% else %}
+                            <div class="h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center m-margin-top{% endif %}">
+                                {% endif %}
+                                {% if news.bars|length>0 %}
+                                    Related bars
+                                {% else %}
+                                    Newly Added Bars
+                                {% endif %}
+                            </div>
+                            {% if news.bars|length>0 %}
+                                {% for b in news.bars %}
+                                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                                {% endfor %}
+                            {% else %}
+                                {% for b in latestBars %}
+                                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if city is defined and city and city.slug is defined and city.slug %}
+                                <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:city.slug}) }}">See all bars</a>
+                            {% else %}
+                                <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">See all bars</a>
+                            {% endif %}
+
+                    </aside>
+                    {% if not is_mobile() or is_tablet() %}
+                        <div class="block">
+                            <div class="side-ad l-margin-top">
+                                <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                                <div class="txt">Advertising</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </aside>
+        </article>
+    </section>
+</div>
+<!-- ALSO LIKE -->
+<section class="also-like force-load">
+    <div class="container m-padding-bottom">
+        <div class="twelve columns l-margin-top">
+            <hr/>
+            <div class="h1 m-margin-bottom color-brown  align-center {% if is_mobile() and not is_tablet() %}m-margin-top {% else %}l-margin-top{% endif %}">
+                You May Also Like
+            </div>
+
+            <div class="container full {% if not is_mobile() or is_tablet() %}m-margin-top{% endif %}">
+
+                <!-- 12 COLS -->
+                {% if is_mobile() and not is_tablet() %}
+                <div class="ui-slider articles older-news has_sizer arrows dots l-margin-bottom" data-size="4x3" data-display="1">
+                    {% else %}
+                    <div class="articles older-news">
+                        {% endif %}
+                        {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
+                            {% for n in alsoLike|slice(0,1) %}
+                                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                            {% endfor %}
+                            {% if is_mobile() and not is_tablet() %}</div>{% endif %}
+                        {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
+                            {% for n in alsoLike|slice(1,1) %}
+                                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
+                            {% endfor %}
+                            {% if is_mobile() and not is_tablet() %}</div>{% endif %}
+                        {% if is_mobile() and not is_tablet() %}<div class="ui-slide">{% endif %}
+                            {% for n in alsoLike|slice(2,1) %}
+                                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                            {% endfor %}
+                            {% if is_mobile() and not is_tablet() %}</div>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $(function(){
+                    setTimeout(function(){
+                        UTILS._cover();
+                        UTILS._resizeCover();
+                    },1000);
+                });
+            </script>
+        </div>
+</section>
+{% endblock %}

@@ -43,6 +43,9 @@ meta.Utils = function() {
         });
     };
 
+    /* 
+    Cette fontion scan toutes images qui ont une class cover et met à jour le width et height en fonction du ratio 
+    */
 
     that._resizeCover = function()
     {
@@ -54,9 +57,10 @@ meta.Utils = function() {
             var $element            = $cover.find(' > img');
             var ratio               = $element.data('ratio');
             var margin              = parseInt($cover.data('margin'));
+
             if( isNaN(margin)) margin = 0;
 
-            var container_width     = $cover.width()*(1+margin/100);
+            var container_width     = $cover.width()*(1+(margin/100));
             var container_height    = $cover.height();
 
             if( container_width/ratio < container_height )
@@ -78,11 +82,10 @@ meta.Utils = function() {
     that._cover = function( ratio_only )
     {
         var $covers = $('.cover');
-
         $covers.each(function()
         {
             var $element   = $(this).find(' > img');
-            $element.data('ratio', parseInt($element.attr('width'))/parseInt($element.attr('height')));
+            $element.attr('data-ratio', parseInt($element.prop('width'))/parseInt($element.prop('height')));
         });
 
         if( ratio_only ) return;
