@@ -92,11 +92,12 @@ meta.LoadMoreTips = function(config) {
                 that._animate($target, $target.find(".line:last-child").find('> *').not('br') , function(){  
                         that.context.is_loading = false;
                         that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
-                        
-                        $('.custom-scroll').not('.jspScrollable').each(function()
-                        {
-                            $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
-                        });
+                        setTimeout(function(){
+                            $('.custom-scroll').not('.jspScrollable').each(function()
+                            {
+                                $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+                            });
+                        },500)
 
                 });
             },

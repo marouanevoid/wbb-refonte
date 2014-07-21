@@ -72,13 +72,13 @@
                     {% if loop.index0 % 2 == 0 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1} %}
                     {%  else %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 } %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
                     {%  endif %}
                 {% endfor %}
 
                 {% for n in newsList %}
                     {% if loop.index0 % 2 == 0 %}
-                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1  } %}
+                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
                     {% else %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                     {% endif %}
