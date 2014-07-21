@@ -176,6 +176,8 @@ $(document).ready(function() {
     $(document).on("click", ".star", function(e) {
         e.preventDefault();
         var btn = $(this);
+//        var url = $(this).attr('href');
+//        if (window.userConnected) {
         //var url = $(this).attr('href');
         var url = "/app_dev.php";
         //if (window.userConnected) {

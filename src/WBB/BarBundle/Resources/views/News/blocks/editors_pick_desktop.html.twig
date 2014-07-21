@@ -1,6 +1,6 @@
 
 
- <div class="container l-margin-top m-padding-bottom">
+<div class="container l-margin-top m-padding-bottom">
 
         <div class="twelve columns h1 m-margin-bottom color-brown">
             Editor's Picks
@@ -25,14 +25,18 @@
 
         <!-- 4 COLS -->
             <aside class="articles padding four columns">
-                <div class="block ads-pannel">
-                    <div class="side-ad m-margin-top">
-                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300"
-                             height="250"/>
+                {#<div class="block ads-pannel">#}
+                    {#<div class="side-ad m-margin-top">#}
+                        {#<img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300"#}
+                             {#height="250"/>#}
 
-                        <div class="txt">Advertising</div>
-                    </div>
-                </div>
+                        {#<div class="txt">Advertising</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {% if not is_mobile() or is_tablet() %}
+                    {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
+                {% endif %}
+
   {#               {% set bigAd = true %} #}
                 {%  if not bigAd %}
                     {% for n in interviews|slice(1,1) %}
@@ -66,9 +70,9 @@
 
 
     <!-- AD -->
-        {% block footerAd %}
-           {% include '::ads/adsFooter.html.twig' %}
-        {% endblock %}
+    {% block footerAd %}
+        {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'NLP_728x90' })) }}
+    {% endblock %}
 
   
     <div class="load-container">

@@ -1,4 +1,3 @@
-
 /**
  * Application
  *
@@ -409,7 +408,4 @@ $(document).ready(function()
 
     $('.entire-content').show();
     $('.entire-content').addClass('show');
-
-
 });
-

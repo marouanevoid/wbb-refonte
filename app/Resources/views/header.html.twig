@@ -29,11 +29,25 @@
             </tr>
             <tr class="signin">
                 <td>
-                    <span class="register h4">
-                        <a href="">Sign in</a>
-                        or
-                        <a class="btn-radius" href="#{#{ path('fos_user_registration_register') }#}">Register</a>
-                    </span>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <span class="logged h3">
+                            <a>
+                                <img src="{{ asset('apple-touch-icon.png') }}" alt="robert" width="40" height="40"/>
+                                <span>{{ app.user.username }}</span>
+                            </a>
+                            <span class="actions">
+                                <a href="#">My profile</a>
+                                <a href="#">Settings</a>
+                                <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                            </span>
+                        </span>
+                    {% else %}
+                        <span class="register h4">
+                            <a data-show="register" class="lighbox" href="#">Sign in</a>
+                            or
+                            <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                        </span>
+                    {% endif %}
                 </td>
             </tr>
             <tr class="footer-nav">
@@ -168,10 +182,17 @@
                         </td>
                         <td>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                                <a href="{{ path('fos_user_security_logout') }}">
-                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                                </a>
+                                <span class="logged h3">
+                                    <a>
+                                        <img src="{{ asset('apple-touch-icon.png') }}" alt="robert" width="40" height="40"/>
+                                        <span>{{ app.user.username }}</span>
+                                    </a>
+                                    <span class="actions">
+                                        <a href="#">My profile</a>
+                                        <a href="#">Settings</a>
+                                        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                                    </span>
+                                </span>
                             {% else %}
                                 <span class="register h4">
                                     <a data-show="register-remove" class="lighbox-remove" href="#">Sign in</a>
