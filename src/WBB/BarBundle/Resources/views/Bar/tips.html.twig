@@ -1,12 +1,14 @@
 <div class="line">
 {% for tip in tips %}
     <div class="three columns box">
-        <article class="tip">
+        <article class="tip"  itemprop="review" itemscope="" itemtype="http://schema.org/Review">
             <table class="content expert">
                 <tr class="excerpt">
                     <td colspan="2">
-                        <div class="scroll thisdiv">
-                            “{{ tip.description }}”
+                        <div class="scroll custom-scroll">
+                            <span itemprop="description">
+                                “{{ tip.description }}”
+                            </span>
                         </div>
                     </td>
                 </tr>

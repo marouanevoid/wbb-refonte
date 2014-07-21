@@ -33,7 +33,7 @@ meta.LoadMoreTips = function(config) {
 
         if(that.context.is_loading) return;
 
-        var $target     = that.context.$container.find('.load-target');
+        var $target     = that.context.$container.find('.tips-area');
 
         /* Récupérer la traduction pour loading */
         that.config.$button.addClass('loading').text(TRAD.common.loading);
@@ -92,9 +92,13 @@ meta.LoadMoreTips = function(config) {
                 that._animate($target, $target.find(".line:last-child").find('> *').not('br') , function(){  
                         that.context.is_loading = false;
                         that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
-                        $(".thisdiv").niceScroll({cursorcolor:"#b3955f"});               
-                });
+                        
+                        $('.custom-scroll').not('.jspScrollable').each(function()
+                        {
+                            $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+                        });
 
+                });
             },
             error: function(e) {
                 console.log('Error : ' + e);
