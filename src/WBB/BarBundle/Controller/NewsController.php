@@ -55,7 +55,7 @@ class NewsController extends Controller
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
 
-        $ad = $this->get('ad.repository')->findOneByPositionAndCountry(Ad::WBB_ADS_NLP_300X600, ($city) ? $city->getCountry():null);
+        $ad = new Ad();
 
         return $this->render('WBBBarBundle:News:landingPage.html.twig', array(
             'city'      => $city,
@@ -64,7 +64,8 @@ class NewsController extends Controller
             'interviews'=> $interviews,
             'newsList'  => $newsList,
             'topCities' => $topCities,
-            'bigAd'     => ($ad)? true : false
+            'ad'        => $ad,
+            'bigAd'     => false
         ));
     }
 

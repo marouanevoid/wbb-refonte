@@ -1,9 +1,7 @@
-{% if ad %}
-    {% if format == "300x250" %}
-        {% include 'WBBBarBundle:Ads:show_300x250.html.twig' %}
-    {% elseif format == "300x600" %}
-        {% include 'WBBBarBundle:Ads:show_300x600.html.twig' %}
-    {% elseif format == "728x90" %}
-        {% include 'WBBBarBundle:Ads:show_728x90.html.twig' %}
-    {% endif %}
+{% if format is same as "300x250" %}
+    {% include 'WBBBarBundle:Ads:show_300x250.html.twig' %}
+{% elseif format is same as "300x600" %}
+    {% include 'WBBBarBundle:Ads:show_300x600.html.twig' %}
+{% elseif format is same as "728x90" %}
+    {% include 'WBBBarBundle:Ads:show_728x90.html.twig' %}
 {% endif %}

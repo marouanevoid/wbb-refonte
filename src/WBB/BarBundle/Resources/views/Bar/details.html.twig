@@ -304,38 +304,19 @@
                             <div class="m-margin-top h2">This bar appears also in</div>
                             <div class="m-margin-top h3">
                                 <ul>
-                                    {% for r in related |slice(0, 5) %}
+                                    {% for b in bar.bestofs %}
                                         <li>
-                                            {% if r.title is defined %}
-                                                <a href="{{ path('wbb_news_details_page', {newsSlug: r.slug}) }}">
-                                                    {{ r.title }}
+                                            {% if b.bestof.city %}
+                                                <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                                    Best {{ b.bestof.name }} in {{ b.bestof.city }}
                                                 </a>
                                             {% else %}
-                                                {% if r.city %}
-                                                    <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: r.slug, citySlug: r.city.slug}) }}">
-                                                        Best {{ r.name }} in {{ r.city }}
-                                                    </a>
-                                                {% else %}
-                                                    <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: r.slug}) }}">
-                                                        Best {{ r.name }} in world
-                                                    </a>
-                                                {% endif %}
+                                                <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                                    Best {{ b.bestof.name }} in world
+                                                </a>
                                             {% endif %}
                                         </li>
                                     {% endfor %}
-                                    {#{% for b in bar.bestofs %}#}
-                                        {#<li>#}
-                                            {#{% if b.bestof.city %}#}
-                                                {#<a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">#}
-                                                    {#Best {{ b.bestof.name }} in {{ b.bestof.city }}#}
-                                                {#</a>#}
-                                            {#{% else %}#}
-                                                {#<a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">#}
-                                                    {#Best {{ b.bestof.name }} in world#}
-                                                {#</a>#}
-                                            {#{% endif %}#}
-                                        {#</li>#}
-                                    {#{% endfor %}#}
                                 </ul>
                             </div>
                         </div>
@@ -389,7 +370,7 @@
                                     {% endfor%}
                                     <a href="#0" id="showOpenings">(See all)</a><br/>
                                     <span class="openings" style="display: none; margin-bottom: 30px">
-                                        {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
+                                {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
                                         {% for opening in bar.openings %}
                                             {{ days[opening.openingDay-1] }} :
                                             {% if opening.fromHour|number_format<=12 %}
@@ -439,22 +420,16 @@
                     <div class="m-margin-top h2">This bar appears also in</div>
                     <div class="m-margin-top h3">
                         <ul>
-                            {% for r in related |slice(0, 5) %}
+                            {% for b in bar.bestofs %}
                                 <li>
-                                    {% if r.title is defined %}
-                                        <a href="{{ path('wbb_news_details_page', {newsSlug: r.slug}) }}">
-                                            {{ r.title }}
+                                    {% if b.bestof.city %}
+                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
+                                            Best {{ b.bestof.name }} in {{ b.bestof.city }}
                                         </a>
                                     {% else %}
-                                        {% if r.city %}
-                                            <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: r.slug, citySlug: r.city.slug}) }}">
-                                                Best {{ r.name }} in {{ r.city }}
-                                            </a>
-                                        {% else %}
-                                            <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: r.slug}) }}">
-                                                Best {{ r.name }} in world
-                                            </a>
-                                        {% endif %}
+                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
+                                            Best {{ b.bestof.name }} in world
+                                        </a>
                                     {% endif %}
                                 </li>
                             {% endfor %}
@@ -530,6 +505,5 @@
         });
     </script>
 {% endblock %}
-
 
 

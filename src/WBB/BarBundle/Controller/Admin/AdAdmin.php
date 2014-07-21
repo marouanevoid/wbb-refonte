@@ -34,8 +34,8 @@ class AdAdmin extends Admin {
             ->add('tag')
             ->add('link')
             ->add('countries')
-//            ->add('beginAt', 'stnw_date_filter')
-//            ->add('endAt', 'stnw_date_filter')
+            ->add('beginAt', 'stnw_date_filter')
+            ->add('endAt', 'stnw_date_filter')
         ;
     }
 
@@ -73,14 +73,13 @@ class AdAdmin extends Admin {
                 ->add('tag')
                 ->add('link')
                 ->add('image', 'sonata_type_model_list', array(
-                        'required' => false
-                    ), array(
-                        'link_parameters' => array(
-                            'context' => 'banner'
-                        )
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'ads'
                     )
-                )
-                ->add('beginAt', 'datePicker')
+                ))
+                ->add('beginAt', 'datePicker') 
                 ->add('endAt', 'datePicker')
                 ->add('countries', 'sonata_type_model', array('multiple' => true, 'required' => false))
             ->end()

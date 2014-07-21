@@ -282,16 +282,13 @@
                             {% endif %}
 
                     </aside>
-                    {#{% if not is_mobile() or is_tablet() %}#}
-                        {#<div class="block">#}
-                            {#<div class="side-ad l-margin-top">#}
-                                {#<img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>#}
-                                {#<div class="txt">Advertising</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#{% endif %}#}
                     {% if not is_mobile() or is_tablet() %}
-                        {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'ND_300x250' })) }}
+                        <div class="block">
+                            <div class="side-ad l-margin-top">
+                                <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                                <div class="txt">Advertising</div>
+                            </div>
+                        </div>
                     {% endif %}
                 </aside>
         </article>
@@ -342,9 +339,5 @@
                 });
             </script>
         </div>
-    </section>
-{% endblock %}
-
-{% block footerAd %}
-    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'ND_728x90' })) }}
+</section>
 {% endblock %}

@@ -44,7 +44,7 @@
                                 </div>
                             </div>
 
-                            <div id="date-birthday" class="text-align-center ui-dropdown-list-form">
+                            <div id="date-birthday" class="text-align-center">
                                 <label>Date of Birth</label>
                                 <div class="select-wrap left">
                                     {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
@@ -58,7 +58,7 @@
                             </div> <!-- #date-birthday -->
                             <div class="clear"></div>
 
-                            <div id="countries" class="margin-top-10 ui-dropdown-list-form">
+                            <div id="countries" class="margin-top-10">
                                 <label>Country</label>
                                 <div class="left" style="width: 300px">
                                     {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
@@ -99,35 +99,33 @@
                             </div>
                         </form>
                         <div class="clear"></div>
-                        {% if not form.vars.valid %}
-                            <div id="message" class="margin-top-20 right">
-                                <div>
-                                    <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
-                                    {{ form_errors(form) }}
-                                    {{ form_errors(form.plainPassword.first) }}
-                                    {{ form_errors(form.plainPassword.second) }}
-                                    {{ form_errors(form.username) }}
-                                    {{ form_errors(form.title) }}
-                                    {{ form_errors(form.firstname) }}
-                                    {{ form_errors(form.lastname) }}
-                                    {{ form_errors(form.email) }}
-                                    {{ form_errors(form.birthdate) }}
-                                    {{ form_errors(form.country) }}
-                                    {{ form_errors(form.prefCity1) }}
-                                    {{ form_errors(form.prefCity2) }}
-                                    {{ form_errors(form.prefCity3) }}
-                                    {{ form_errors(form.prefBar1) }}
-                                    {{ form_errors(form.prefBar2) }}
-                                    {{ form_errors(form.prefBar3) }}
-                                    {{ form_errors(form.prefDrinkBrand1) }}
-                                    {{ form_errors(form.prefDrinkBrand2) }}
-                                    {{ form_errors(form.prefDrinkBrand3) }}
-                                    {{ form_errors(form.prefCocktails1) }}
-                                    {{ form_errors(form.prefCocktails2) }}
-                                    {{ form_errors(form.prefCocktails3) }}
-                                </div>
+                        <div id="message" class="margin-top-20 right">
+                            <div>
+                                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+                                {{ form_errors(form) }}
+                                {{ form_errors(form.plainPassword.first) }}
+                                {{ form_errors(form.plainPassword.second) }}
+                                {{ form_errors(form.username) }}
+                                {{ form_errors(form.title) }}
+                                {{ form_errors(form.firstname) }}
+                                {{ form_errors(form.lastname) }}
+                                {{ form_errors(form.email) }}
+                                {{ form_errors(form.birthdate) }}
+                                {{ form_errors(form.country) }}
+                                {{ form_errors(form.prefCity1) }}
+                                {{ form_errors(form.prefCity2) }}
+                                {{ form_errors(form.prefCity3) }}
+                                {{ form_errors(form.prefBar1) }}
+                                {{ form_errors(form.prefBar2) }}
+                                {{ form_errors(form.prefBar3) }}
+                                {{ form_errors(form.prefDrinkBrand1) }}
+                                {{ form_errors(form.prefDrinkBrand2) }}
+                                {{ form_errors(form.prefDrinkBrand3) }}
+                                {{ form_errors(form.prefCocktails1) }}
+                                {{ form_errors(form.prefCocktails2) }}
+                                {{ form_errors(form.prefCocktails3) }}
                             </div>
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
                 <div class="clear"></div>
