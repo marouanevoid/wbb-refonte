@@ -78,14 +78,13 @@ class NewsAdmin extends Admin {
                 ->add('quoteText')
                 ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
                 ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
-
-                ->add('interview')
+                ->add('interview', null, array('label' => 'Interview'))
                 ->add('onTop')
 
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
                     'required' => false,
-                    'help'      => 'Preferred size (width: 368px , height: 170px)'
+                    'help'      => 'Preferred size (width: 640px , height: 480px)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor'
@@ -93,7 +92,7 @@ class NewsAdmin extends Admin {
                 ))
                 ->add('sponsorImageSmall', 'sonata_type_model_list', array(
                     'required'  => false,
-                    'help'      => 'Preferred size (width: 95px , height: 105px)'
+                    'help'      => 'Preferred size (width: 82px , height: 82px)'
                 ), array(
                     'link_parameters' => array(
                         'context' => 'sponsor_small'
@@ -103,9 +102,10 @@ class NewsAdmin extends Admin {
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection',
                     array(
-                        'required'     => false,
-                        'by_reference' => false,
-                        'type_options' => array('delete' => true)
+                        'required'      => false,
+                        'by_reference'  => false,
+                        'help'          => 'Preferred size (width: 900px , height: 600px)',
+                        'type_options'  => array('delete' => true)
                     ),
                     array(
                         'edit'      => 'inline',

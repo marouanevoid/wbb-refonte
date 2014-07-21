@@ -185,6 +185,13 @@ class User extends BaseUser
     private $stayInformed;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="stay_brand_informed", type="boolean", nullable=true)
+     */
+    private $stayBrandInformed;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="users")
      * @ORM\JoinColumn(name="pref_city_id_start", referencedColumnName="id")
      */
@@ -1061,7 +1068,18 @@ class User extends BaseUser
     public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
     {
         $this->favoriteBars[] = $favoriteBars;
+        return $this;
+    }
 
+    /**
+     * Set stayBrandInformed
+     *
+     * @param boolean $stayBrandInformed
+     * @return User
+     */
+    public function setStayBrandInformed($stayBrandInformed)
+    {
+        $this->stayBrandInformed = $stayBrandInformed;
         return $this;
     }
 
@@ -1139,5 +1157,15 @@ class User extends BaseUser
     public function getTipsShouldBeModerated()
     {
         return $this->tipsShouldBeModerated;
+    }
+
+    /**
+     * Get stayBrandInformed
+     *
+     * @return boolean 
+     */
+    public function getStayBrandInformed()
+    {
+        return $this->stayBrandInformed;
     }
 }
