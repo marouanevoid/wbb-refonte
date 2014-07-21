@@ -304,16 +304,22 @@
                             <div class="m-margin-top h2">This bar appears also in</div>
                             <div class="m-margin-top h3">
                                 <ul>
-                                    {% for b in bar.bestofs %}
+                                    {% for r in related |slice(0, 5) %}
                                         <li>
-                                            {% if b.bestof.city %}
-                                                <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
-                                                    Best {{ b.bestof.name }} in {{ b.bestof.city }}
+                                            {% if r.title is defined %}
+                                                <a href="{{ path('wbb_news_details_page', {newsSlug: r.slug}) }}">
+                                                    {{ r.title }}
                                                 </a>
                                             {% else %}
-                                                <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
-                                                    Best {{ b.bestof.name }} in world
-                                                </a>
+                                                {% if r.city %}
+                                                    <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: r.slug, citySlug: r.city.slug}) }}">
+                                                        Best {{ r.name }} in {{ r.city }}
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: r.slug}) }}">
+                                                        Best {{ r.name }} in world
+                                                    </a>
+                                                {% endif %}
                                             {% endif %}
                                         </li>
                                     {% endfor %}
@@ -420,16 +426,22 @@
                     <div class="m-margin-top h2">This bar appears also in</div>
                     <div class="m-margin-top h3">
                         <ul>
-                            {% for b in bar.bestofs %}
+                            {% for r in related |slice(0, 5) %}
                                 <li>
-                                    {% if b.bestof.city %}
-                                        <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">
-                                            Best {{ b.bestof.name }} in {{ b.bestof.city }}
+                                    {% if r.title is defined %}
+                                        <a href="{{ path('wbb_news_details_page', {newsSlug: r.slug}) }}">
+                                            {{ r.title }}
                                         </a>
                                     {% else %}
-                                        <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">
-                                            Best {{ b.bestof.name }} in world
-                                        </a>
+                                        {% if r.city %}
+                                            <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: r.slug, citySlug: r.city.slug}) }}">
+                                                Best {{ r.name }} in {{ r.city }}
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: r.slug}) }}">
+                                                Best {{ r.name }} in world
+                                            </a>
+                                        {% endif %}
                                     {% endif %}
                                 </li>
                             {% endfor %}
