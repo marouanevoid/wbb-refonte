@@ -414,6 +414,7 @@
 
   /* mobile */
   .mobile .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
+  .mobile .bar-details .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .bar-details .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
 
   /* iPad */
