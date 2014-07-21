@@ -397,7 +397,7 @@
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
   .sub-header .title h3 {font-size: 2em;}
-  .btn-round.dark.star.active {color: #faf3e1; background: #b3955f !important; border-color: #b3955f;}
+  .btn-round.dark.star.active {color: #faf3e1; background-color: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
   #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
@@ -414,7 +414,7 @@
 
   /* mobile */
   .mobile .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
-  .mobile .bar-details .sub-header .star-share .btn-round.star:after {opacity: 0;}
+  .mobile .bar-details .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
