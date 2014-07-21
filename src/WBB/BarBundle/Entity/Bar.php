@@ -337,7 +337,7 @@ class Bar implements IndexableEntity
     private $energyLevel;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="barOccasions", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="barOccasions", cascade={"persist", "detach"})
      * @ORM\JoinTable(name="wbb_bar_occasion",
      *      joinColumns={@ORM\JoinColumn(name="bar_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
@@ -346,7 +346,7 @@ class Bar implements IndexableEntity
     private $toGoWith;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"persist", "remove", "detach"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
@@ -399,10 +399,6 @@ class Bar implements IndexableEntity
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="favoriteBars")
-     */
-    private $users;
 
     /**
      * Get id
@@ -1492,13 +1488,13 @@ class Bar implements IndexableEntity
     }
 
     /**
-    * Get $news
-    *
-    * @return \Doctrine\Common\Collections\Collection
-    **/
+     * Get $news
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     **/
     public function getNews(){
-         return $this->news;
-     }
+        return $this->news;
+    }
 
     /**
      * Add semsoftBars
@@ -1949,39 +1945,6 @@ class Bar implements IndexableEntity
     }
 
     /**
-     * Add users
-     *
-     * @param \WBB\UserBundle\Entity\User $users
-     * @return Bar
-     */
-    public function addUser(\WBB\UserBundle\Entity\User $users)
-    {
-        $this->users[] = $users;
-
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param \WBB\UserBundle\Entity\User $users
-     */
-    public function removeUser(\WBB\UserBundle\Entity\User $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    /**
      * @return boolean
      */
     public function isHappyHour()
@@ -2079,7 +2042,7 @@ class Bar implements IndexableEntity
     /**
      * Get outDoorSeating
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOutDoorSeating()
     {
@@ -2089,7 +2052,7 @@ class Bar implements IndexableEntity
     /**
      * Get happyHour
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHappyHour()
     {
@@ -2099,11 +2062,28 @@ class Bar implements IndexableEntity
     /**
      * Get wifi
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getWifi()
     {
         return $this->wifi;
     }
 
+    public function getTagsToShow()
+    {
+        $tags = array();
+
+        if($this->getEnergyLevel()){
+            $tags[] = $this->getEnergyLevel();
+        }
+        $tmps = $this->getTags();
+
+        foreach($tmps as $tmp){
+            if($tmp->getType() != Tag::WBB_TAG_TYPE_BEST_COCKTAILS){
+                $tags[] = $tmp->getTag();
+            }
+        }
+
+        return $tags;
+    }
 }

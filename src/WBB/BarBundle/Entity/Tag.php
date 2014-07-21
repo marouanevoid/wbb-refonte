@@ -66,29 +66,24 @@ class Tag
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="tags")
-     */
-    private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="tag", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="tag", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $bars;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="tag", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="tag", cascade={"persist"}, orphanRemoval=true)
      */
     private $bestofs;
 
     /**
-     * @ORM\OneToMany(targetEntity="Bar", mappedBy="energyLevel", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Bar", mappedBy="energyLevel", cascade={"persist", "detach"}, orphanRemoval=true)
      */
     private $barsLevel;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="energyLevel", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="energyLevel", cascade={"persist", "detach"}, orphanRemoval=true)
      */
     private $semsoftBarsLevel;
 
@@ -98,7 +93,7 @@ class Tag
     private $barOccasions;
 
     /**
-     * @ORM\OneToMany(targetEntity="BestOf", mappedBy="energyLevel", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="BestOf", mappedBy="energyLevel", cascade={"persist", "detach"}, orphanRemoval=true)
      */
     private $bestofsLevel;
 
@@ -111,7 +106,7 @@ class Tag
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -134,7 +129,7 @@ class Tag
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -157,7 +152,7 @@ class Tag
     /**
      * Get onTop
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTop()
     {
@@ -184,7 +179,7 @@ class Tag
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -207,36 +202,13 @@ class Tag
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Set city
-     *
-     * @param \WBB\CoreBundle\Entity\City $city
-     * @return Tag
-     */
-    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return \WBB\CoreBundle\Entity\City 
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-    
     public function __toString() {
         return $this->getName();
     }
@@ -267,7 +239,7 @@ class Tag
     /**
      * Get bars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBars()
     {
@@ -300,7 +272,7 @@ class Tag
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -334,7 +306,7 @@ class Tag
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -367,7 +339,7 @@ class Tag
     /**
      * Get barsLevel
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBarsLevel()
     {
@@ -400,7 +372,7 @@ class Tag
     /**
      * Get barOccasions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBarOccasions()
     {
@@ -433,7 +405,7 @@ class Tag
     /**
      * Get bestofsLevel
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofsLevel()
     {
@@ -466,7 +438,7 @@ class Tag
     /**
      * Get bestofOccasions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofOccasions()
     {
@@ -499,7 +471,7 @@ class Tag
     /**
      * Get semsoftBarsLevel
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSemsoftBarsLevel()
     {

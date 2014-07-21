@@ -51,11 +51,8 @@
 <body class="news">
 {% endblock %}
 {% block body %}
-    
     {% block landingNewsTop %}
     <div class="full-cream l-padding-bottom">
-
-
         <!-- SUBHEADER -->
         <div class="container  {% if is_mobile() and not is_tablet() %} mobile-device {% endif %}">
 
@@ -82,10 +79,7 @@
                     <h1>Discover the World’s Best Bars</h1>
                 {% endif %}
             </section>
-
         </div>
-
-
         <!-- LATEST NEWS -->
         <div class="container full">
 
@@ -95,17 +89,16 @@
                 {% else %}
                     <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1">
                 {% endif %}
-                        {% for n in latest %}
-                            <div class="ui-slide">
-                                {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n , 'secand_media' : true } %}
-                            </div>
-                        {% endfor %}
+                    {% for n in latest %}
+                        <div class="ui-slide">
+                            {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n , 'secand_media' : true } %}
+                        </div>
+                    {% endfor %}
                     </div>
             </section>
         </div>
     </div>
     {% endblock %}
-
 
     <!-- EDITOR'S PICK -->
     {% if is_mobile() and not is_tablet() %}
@@ -117,6 +110,5 @@
         <div class="twelve columns align-center l-margin-bottom load-more-container">
             <a class="h4 btn-radius border load-more brown large" href="#0">Older news</a>
         </div>
-
 {% endblock %}
 

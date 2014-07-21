@@ -176,7 +176,7 @@ sonata_media:
                 city_small :    { width: 340 , height: 350, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
 
-        ads:
+        banner:
             download:
                 strategy: sonata.media.security.connected_strategy
                 mode: http
@@ -199,7 +199,7 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }
-                sponsor_detail :  { width: 368 , height: 170, quality: 100 }
+                sponsor_detail :  { width: 372 , height: 170, quality: 100 }
 
         sponsor_small:
             download:
@@ -212,7 +212,7 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 slider_large :  { width: 640 , height: 480, quality: 100 }
-                sponsor_detail :  { width: 368 , height: 170, quality: 100 }
+                sponsor_detail :  { width: 372 , height: 170, quality: 100 }
 
     cdn:
         server:
@@ -239,7 +239,7 @@ sonata_media:
     providers:
         image:
 #            filesystem: sonata.media.filesystem.s3
-            resizer: sonata.media.resizer.custom
+            resizer: sonata.media.resizer.custom #sonata.media.resizer.custom
             cdn: sonata.media.cdn.server
 
 #Fake Data Generator

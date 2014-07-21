@@ -23,8 +23,6 @@
             {% endif %}
 
             initializeSliders();
-
-
         });
     </script>
 {% endblock %}
@@ -33,7 +31,11 @@
 {% endblock %}
 {% block body %}
 <style type="text/css">
-    /*section.bar-filter .bars-w-pic {width: auto;}*/ /* For fix [Bug d'integration #8025] */
+    {% if is_mobile() and not is_tablet() %}
+        section.bar-filter .sort-by .btn-radius:last-of-type {
+            margin-left: 0px;
+        }
+    {% endif %}
     {% if not distance %}
         .bar-filter .ui-dropdown.drop-light {
             max-height: 110px !important;
@@ -45,7 +47,6 @@
     <!-- SUBHEADER -->
     <div class="container">
         <section class="sub-header">
-
             {% if not is_mobile() or is_tablet() %}
             <table>
                 <tr>
@@ -168,6 +169,6 @@
 
 {% endblock %}
 {% block footerAd %}
-    {{ parent() }}
-</div>
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BG_728x90' })) }}
+    </div>
 {% endblock %}
