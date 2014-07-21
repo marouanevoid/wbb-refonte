@@ -78,6 +78,10 @@ meta.Radio = function(config){
         {
             var html = that.config.template.replace('%color%', that.config.color);
             html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light')+($(this).hasClass('with-icon')?' with-icon':''));
+           
+           if ($(this).data("value"))
+            html = html.replace('%name%', $(this).data("value").replace(/_/g,' '));
+           else 
             html = html.replace('%name%', $(this).val().replace(/_/g,' '));
 
             var $component = $(html);

@@ -15,7 +15,7 @@ parameters:
     mailer_password:   AojZacS7wAU/4lZ3WmlCgGIgnb6dCG4GWwssbBUUMPzj # to be created in the SES console
 
     locale: en
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: ThisTokenIsNowSecretIChangedIt
 
     foursquare_client_id: IO0TI5QMTBY5U2P2JHWIYF2D3NHM30V2F5VT3W3011BPMQ4W
     foursquare_client_secret: B5ADSJPXA5VP20DYFII1FIU0LCJFT0AFIEGWGURACLG3HNZ2
@@ -35,3 +35,14 @@ parameters:
     aws_bucket: staging.worldsbestbars.com
     aws_key: AKIAJM6ZSVZZ3WLRHZIA
     aws_secret: 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
+
+    aws_cloudsearch_domain_name:    bars
+    aws_cloudsearch_domain_id:      dv6lxa6k65rwcpqkq7thta6d24
+    aws_cloudsearch_region:         eu-west-1
+    aws_cloudsearch_key:            AKIAJ6WSWPZUXSICYDPQ
+    aws_cloudsearch_secret:         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
+
+    facebook_app_id:        test
+    facebook_app_secret:    test
+
+    bitly_access_token: 2dc4e633c58b8a735d59724a667ccaacc0c9b11e

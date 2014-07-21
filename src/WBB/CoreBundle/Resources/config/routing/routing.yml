@@ -32,6 +32,12 @@ wbb_cities_list:
     options:
         expose: true
 
+wbb_nearest_city:
+    pattern: /cities/nearest/{latitude}/{longitude}
+    defaults: { _controller: WBBCoreBundle:City:nearestCity, latitude: 0, longitude: 0 }
+    options:
+        expose: true
+
 wbb_cities_list_all:
     pattern: /cities/list/
     defaults: { _controller: WBBCoreBundle:City:citiesList, keywords: "" }

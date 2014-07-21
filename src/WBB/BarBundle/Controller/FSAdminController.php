@@ -3,12 +3,7 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Guzzle\Http\Client;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use WBB\BarBundle\Entity\Bar;
 
 /**
@@ -16,32 +11,6 @@ use WBB\BarBundle\Entity\Bar;
  */
 class FSAdminController extends Controller
 {
-
-    public function testFSAction()
-    {
-        $client = new Client("https://api.instagram.com");
-
-        $response = $client->get("/v1/users/search?q=_mangetsu_&client_id=03af4f044b524a4ca9958053b7a6cb18")->send();
-
-        $data = json_decode($response->getBody());
-        $temp = $data->data[0]->id;
-
-        var_dump($temp);die;
-
-        $params = array( 'venue_id' => $venue, 'limit' => 4);
-
-        //if($next > 0) $params['offset'] = $next;
-
-        $client = $this->container->get('jcroll_foursquare_client');
-        $command = $client->getCommand('venues/tips', $params);
-        $tips = $command->execute();
-
-        return new JsonResponse(array(
-            'type' => 'fsTips',
-            'data' => $tips['response']['tips']['items']
-        ));
-    }
-
     /**
      * findAction
      *
@@ -120,7 +89,7 @@ class FSAdminController extends Controller
 
         $difference = count($all) - count($tips);
         $FsTips = array();
-        if(($nbResults < $limit) and !is_null($bar->getFoursquare()) and $bar->getFoursquare() != ""){
+        if(($nbResults < $limit) && !is_null($bar->getFoursquare()) && $bar->getFoursquare() != ""){
             $excluded = $bar->getFsExcludedTips();
             $index = 0;
             $count = $offset;
@@ -144,7 +113,7 @@ class FSAdminController extends Controller
                 }
                 $count += $nbFsTips;
                 $recursive++;
-            }while(($index < ($limit - $nbResults)) and $recursive < 5);
+            }while(($index < ($limit - $nbResults)) && $recursive < 5);
             $nbResults += $index;
         }
 

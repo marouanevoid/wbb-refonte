@@ -36,7 +36,7 @@ class FoursquareTips implements FeedInterface
      */
     public function find($id = null, $next = 0)
     {
-        $params = array( 'venue_id' => $id, 'limit' => $this->limit);
+        $params = array( 'venue_id' => $id, 'limit' => ($this->limit + 1));
 
         if($next > 0) $params['offset'] = $next;
 

@@ -2,7 +2,6 @@
 
 namespace WBB\BarBundle\Entity\Collections;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -22,6 +21,13 @@ class BarTag
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
 
     /**
      * @var integer
@@ -213,5 +219,28 @@ class BarTag
     public function getSemsoftBar()
     {
         return $this->semsoftBar;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return BarTag
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

@@ -5,15 +5,11 @@ namespace WBB\BarBundle\Controller\CRUD;
 use Sonata\AdminBundle\Controller\CRUDController as Controller,
     Sonata\AdminBundle\Datagrid\ProxyQueryInterface,
     Symfony\Component\HttpFoundation\RedirectResponse,
-    Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\HttpKernel\Exception\NotFoundHttpException,
     Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-use Sonata\AdminBundle\Exception\ModelManagerException;
 
 class TipCRUDController extends Controller
 {
-    public function batchActionEnabled(ProxyQueryInterface $selectedTipsQuery)
+    protected function batchActionEnabled(ProxyQueryInterface $selectedTipsQuery)
     {
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
         {
@@ -45,7 +41,7 @@ class TipCRUDController extends Controller
         );
     }
 
-    public function batchActionDisabled(ProxyQueryInterface $selectedTipsQuery)
+    protected function batchActionDisabled(ProxyQueryInterface $selectedTipsQuery)
     {
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
         {
@@ -77,7 +73,7 @@ class TipCRUDController extends Controller
         );
     }
 
-    public function batchActionPending(ProxyQueryInterface $selectedTipsQuery)
+    protected function batchActionPending(ProxyQueryInterface $selectedTipsQuery)
     {
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
         {

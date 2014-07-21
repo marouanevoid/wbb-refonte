@@ -33,10 +33,10 @@ meta.LoadMoreTips = function(config) {
 
         if(that.context.is_loading) return;
 
-        var $target     = that.context.$container.find('.load-target');
+        var $target     = that.context.$container.find('.tips-area');
 
         /* Récupérer la traduction pour loading */
-        that.config.$button.addClass('loading').text(TRAD.common.loadmore);
+        that.config.$button.addClass('loading').text(TRAD.common.loading);
         that._loadAjax(that.config.url, $target, function()
         {
 
@@ -55,7 +55,7 @@ meta.LoadMoreTips = function(config) {
 
         var target_height = $target.show().height();
 
-        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, that.config.speed, that.config.easing);
         });
@@ -63,7 +63,6 @@ meta.LoadMoreTips = function(config) {
         setTimeout(function()
         {
             if(callback) callback();
-            $elements.removeClass('enable3d');
 
         }, 100*$elements.length+that.config.speed );
     };
@@ -78,6 +77,7 @@ meta.LoadMoreTips = function(config) {
             dataType: "json",
             success: function(msg) {
                 $target.append(msg.htmldata);
+                
                 if(parseInt(msg.difference)==0){
                     that.config.$button.hide();
                     if(is_mobile == 1)
@@ -89,9 +89,16 @@ meta.LoadMoreTips = function(config) {
                     $('.line .three').addClass('six').removeClass('three');
                 }
                 if( callback ) callback();
-                that._animate($target, $target.find(".line:last-child").find('> *').not('br') );
-                that.context.is_loading = false;
-                that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
+                that._animate($target, $target.find(".line:last-child").find('> *').not('br') , function(){  
+                        that.context.is_loading = false;
+                        that.config.$button.removeClass('loading').text( TRAD.common.loadmore);
+                        
+                        $('.custom-scroll').not('.jspScrollable').each(function()
+                        {
+                            $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+                        });
+
+                });
             },
             error: function(e) {
                 console.log('Error : ' + e);

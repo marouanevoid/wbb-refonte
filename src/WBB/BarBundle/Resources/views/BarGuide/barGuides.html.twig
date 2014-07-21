@@ -23,8 +23,6 @@
             {% endif %}
 
             initializeSliders();
-
-
         });
     </script>
 {% endblock %}
@@ -33,35 +31,27 @@
 {% endblock %}
 {% block body %}
 <style type="text/css">
-    section.bar-filter .bars-w-pic {
-        width: auto;
-    }
+    {% if is_mobile() and not is_tablet() %}
+        section.bar-filter .sort-by .btn-radius:last-of-type {
+            margin-left: 0px;
+        }   
+    {% endif %}
+    {% if not distance %}
+        .bar-filter .ui-dropdown.drop-light {
+            max-height: 110px !important;
+        }
+    {% endif %}
 </style>
 <div class="full-cream">
 
     <!-- SUBHEADER -->
     <div class="container">
-
         <section class="sub-header">
-
             {% if not is_mobile() or is_tablet() %}
             <table>
                 <tr>
                     <td>
-                        <div class="city-selector h3">
-                            You are in
-                            <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
-                                <option disabled="disabled">Choose a City</option>
-                                {% for c in topCities %}
-                                    <option data-type="redirect" value="{{ path('wbb_bar_guides_city',{slug:c.slug}) }}"
-                                            {% if city is defined and c.id==city.id %}
-                                                selected="selected"
-                                            {% endif %}
-                                            >{{ c.name }}</option>
-                                {% endfor %}
-                                <option value="{{ path('wbb_bar_guides_city',{slug:"world-wide"}) }}">World Wide</option>
-                            </select>
-                        </div>
+                        {% include "WBBBarBundle:UI:citys_selector.html.twig"  with { 'from' : 'barguide' } %}
                     </td>
 
                     <td class="title">
@@ -149,10 +139,12 @@
                 <div class="disableClick"></div>
                 <span class="sort">Sort by :</span>
 
-                <select class="ui-dropdown light" name="criteria" id="criteria">
+                <select class="ui-dropdown light filter-distance" name="criteria" id="criteria" style="{% if not distance %}height:110px !important;{% endif %}">
+                    {% if distance is defined and distance %}
+                    <option value="distance" data-type="criteria">Distance</option>
+                    {% endif %}
                     <option value="popularity" data-type="criteria">Popularity</option>
                     <option value="date" data-type="criteria">Date</option>
-                    <option value="distance" data-type="criteria">Distance</option>
                     <option value="alphabetical" data-type="criteria">Alphabetical order</option>
                 </select>
 
