@@ -410,7 +410,7 @@
   /*.index .sub-header .title h1 {text-align: left;}*/
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
   .bar-details .also-appears .h2 {text-align: center;}
-  .mobile .bar-guides .filters .ui-radio {line-height: 42px;}
+  .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
 
   /* mobile */
   .mobile .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
@@ -423,6 +423,7 @@
 
   /* IE9 */
   .articles article .img .cover .sponsor {bottom: 0px\0/;}
+  .articles.older-news article .img .cover .sponsor {bottom: 1px\0/;}
   .ie9 section.bar-finder tr:nth-child(2) td:nth-child(8) .ui-radio.btn-radius.with-icon {margin-right: 20px;}
   section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
