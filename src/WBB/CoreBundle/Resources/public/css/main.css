@@ -410,7 +410,7 @@
   /*.index .sub-header .title h1 {text-align: left;}*/
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
   .bar-details .also-appears .h2 {text-align: center;}
-  /*.bar-guides .filters .ui-radio {line-height: 42px;}*/
+  .mobile .bar-guides .filters .ui-radio {line-height: 42px;}
 
   /* mobile */
   .mobile .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
