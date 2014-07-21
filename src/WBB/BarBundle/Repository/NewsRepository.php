@@ -66,7 +66,7 @@ class NewsRepository extends EntityRepository
         if($cities){
             $qb
                 ->addSelect('count(c.id) as HIDDEN nbCities')
-                ->innerjoin($this->getAlias().'.cities', 'c')
+                ->leftjoin($this->getAlias().'.cities', 'c')
                 ->andWhere($qb->expr()->in('c.id', $cities))
                 ->groupBy($this->getAlias().'.id')
                 ->addOrderBy('nbCities', 'DESC')
