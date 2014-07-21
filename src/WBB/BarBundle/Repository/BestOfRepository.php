@@ -36,7 +36,7 @@ class BestOfRepository extends EntityRepository
             ->groupBy($this->getAlias().'.id')
         ;
 
-        if ($city) {
+        if ($city && $bestof->getCity()) {
             $qb
                 ->leftJoin($this->getAlias().'.city', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));

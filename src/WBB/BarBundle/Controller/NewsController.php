@@ -80,7 +80,13 @@ class NewsController extends Controller
         $news = $this->container->get('news.repository')->findOneBySlug($newsSlug);
 
         $tmp1 = $this->container->get('news.repository')->findRelatedNews($news->getCitiesAsArray(), 3, array($news->getId()));
-        $tmp2 = $this->container->get('news.repository')->findRelatedNews(null, (3 - count($tmp1)), array($news->getId()));
+        $ids = $news->getId();
+
+        foreach($tmp1 as $tmp){
+            $ids[] = $tmp->getId();
+        }
+
+        $tmp2 = $this->container->get('news.repository')->findRelatedNews(null, (3 - count($tmp1)), $ids);
 
         $alsoLike = array_merge($tmp1, $tmp2);
 
