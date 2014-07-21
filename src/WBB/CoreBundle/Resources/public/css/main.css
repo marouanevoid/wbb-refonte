@@ -413,13 +413,14 @@
   .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
 
   /* mobile */
-  .mobile .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
-  .mobile .bar-details .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
-  .mobile .bar-details .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
+  .mobile .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
+  .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
+  .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
   .ipad .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
+  .ipad .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .ipad .bar-details .sub-header .star-share .btn-round.star:after {opacity: 0;}
 
   /* IE9 */
