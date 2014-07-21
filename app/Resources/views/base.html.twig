@@ -278,12 +278,13 @@
         {% block header %}
             {% include '::header.html.twig' %}
         {% endblock %}
-        <div id="common-loader"><img src="{{ asset('bundles/wbbcore/images/common/loader.gif') }}" /></div>
         {% block body %}
         {% endblock %}
         <!-- AD -->
         {% block footerAd %}
+            {% if not is_mobile() or is_tablet() %}
             {% include '::ads/adsFooter.html.twig' %}
+            {% endif %}
             {#{{ render(controller('WBBBarBundle:Ads:show', { 'position': 'HP_728x90' })) }}#}
         {% endblock %}
 

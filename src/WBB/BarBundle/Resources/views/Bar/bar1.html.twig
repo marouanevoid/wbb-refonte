@@ -8,13 +8,8 @@
         <h3>{% if b.suburb %}{{ b.suburb.name|default('Unspecified') }}, {% endif %}{% if b.city %}{{ b.city.name|default('Unspecified') }}{% endif %}</h3>
         <div class="hover">
             <div class="tags">
-                {% if b.energyLevel %}
-                    {{ b.energyLevel }},
-                {% endif %}
-                {% for tr in b.tags |slice(0, ((b.energyLevel)? 4 : 5)) %}
-                    {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
-                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                    {% endif %}
+                {% for tr in b.tagsToShow |slice(0, 5) %}
+                    {{ tr.name }}{% if not loop.last %}, {% endif %}
                 {% endfor%}
             </div>
             {% if bestof is defined %}

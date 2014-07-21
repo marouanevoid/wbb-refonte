@@ -212,7 +212,7 @@ section.bar-filter .container:nth-child(2) {
     width: 14px !important;
     opacity: 1 !important;
     padding-bottom: 3px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 .nicescroll-rails div{
     background : none repeat scroll 0 0 #b3955f;
@@ -226,9 +226,9 @@ section.bar-filter .container:nth-child(2) {
     left : -2px;
 
 }
-article.tip .content .excerpt td .scroll{
+/*article.tip .content .excerpt td .scroll{
     width: 209px;
-}
+}*/
 
 .sub-header table tr td:nth-child(1), .sub-header table td:nth-child(3){
     width : 28%;
@@ -257,14 +257,13 @@ article.tip .content .excerpt td .scroll{
     color: #999999;
     opacity: 0.29;
 }
-.entire-content{
-    display: none;
-}
 
 #common-loader{
     left:50%;
     position:absolute;
     top:50px;
+
+    display: none;
 }
 .quote-cls{
     color :#333333;
@@ -282,3 +281,16 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
 .entire-content.show {
     display: block !important;
 }
+
+/*
+* Background loading on images slider
+***/
+.ui-slides .ui-slide.loading {
+    /*background: url(../images/common/loader.gif) no-repeat center center;*/
+    /*background: url(../images/loading-slider.gif) no-repeat center center;*/
+
+}
+.custom-scroll{
+    overflow: auto;
+}
+

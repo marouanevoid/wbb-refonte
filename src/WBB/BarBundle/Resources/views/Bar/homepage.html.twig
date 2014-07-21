@@ -5,7 +5,17 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(function(){
+                // $('.ui-slide.loading').each(function(){
+                //     var that_ = $(this);
+                //     that_.find('img:nth-child(2)').each(function(){
+                //         $(this).on('load error' , function(){
+                //             $(this).parents('.loading').removeClass('loading');
+                //         });
+                //     });
+                // });
+                // // End listner of Image Loading
+
             initializeSliders();
         });
 
@@ -69,7 +79,7 @@
             {% endif %}
 
             {% for b in topBars %}
-                <div class="ui-slide">
+                <div class="ui-slide loading">
                     {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
                 </div>
             {% endfor %}
@@ -96,7 +106,7 @@
                     <div class="ui-slider type-cities has_sizer arrows dots" data-size="1x6" data-display="6">
                 {% endif %}
                 {% for c in topCities %}
-                    <div class="ui-slide">
+                    <div class="ui-slide loading">
                         <article class="city">
                             <div class="txt">
                                 <h3> {{ c.name }} </h3>
@@ -104,7 +114,8 @@
                             </div>
                             <div class="overlay"></div>
                             <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            <img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_small' %}{% endfilter %}" alt="{{ c.name }}"/>
+                            {#<img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_square' %}{% endfilter %}" alt="{{ c.name }}"/>#}
+                            <img src="" class="scale-with-grid" data-src="{{  showImage(c.image, 'city_square') }}" alt="{{ c.name }}"/>
                         </article>
                     </div>
                 {% endfor %}
@@ -165,7 +176,7 @@
             </div>
             {% if topNews|length>2 %}
             {% for n in topNews|slice(0,1) %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1, 'is_small' : 1, } %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'is_small' : 1, } %}
                 {# <article class="small">
                     <div class="img">
                         <a href="" class="cover">
@@ -199,7 +210,7 @@
              #}
             {% endfor %}
             {% for n in topNews|slice(2,1) %}
-                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
+                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1} %}
                 {#
                     <article class="large">
                     <div class="img">

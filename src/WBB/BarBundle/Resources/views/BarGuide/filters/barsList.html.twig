@@ -9,17 +9,20 @@
                     <a href="#0" class="btn-round dark star"></a>
 
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
-
-                    {% for m in b.medias|slice(0,1) %}
-                        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
-                    {% endfor %}
+                    {% if b.medias|length>0 %}
+                        {% for m in b.medias|slice(0,1) %}
+                            <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
+                        {% endfor %}
+                    {% else %}
+                        <img class="scale-with-grid" src="{% filter showMedia %}{% endfilter %}" width="282" height="210" alt=""/>
+                    {% endif %}
                 </div>
             </div>
 
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top">
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">
-                        {{ b.name }}{% if distance is defined %} - {{ b.calculateDistance(latitude, longitude) }} KM{% endif %}
+                        {{ b.name }}{% if distance is defined and distance %} - {{ b.calculateDistance(latitude, longitude) }} KM{% endif %}
                     </a>
                 </h2>
                 {% if b.city and b.suburb %}
@@ -29,13 +32,8 @@
                     {{ b.seoDescription|truncate(200, true, '...')|striptags }}
                 </p>
                 <div class="tags">
-                    {% if b.energyLevel %}
-                        {{ b.energyLevel }}
-                    {% endif %}
-                    {% for tr in b.tags |slice(0, ((b.energyLevel)? 4 : 5)) %}
-                        {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
-                            {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                        {% endif %}
+                    {% for tr in b.tagsToShow |slice(0, 5) %}
+                        {{ tr.name }}{% if not loop.last %}, {% endif %}
                     {% endfor%}
                 </div>
             </div>
