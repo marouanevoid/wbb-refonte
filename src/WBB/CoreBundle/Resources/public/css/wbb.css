@@ -7,7 +7,7 @@
     display: none;
 }
 .bar-details .content .trends li {
-    line-height: 26px;
+    line-height: 16px; /* Taches #8188 */
 }
 .bar-details .content aside .informations .contain .gmap .get-directions {
     position: relative;
@@ -15,7 +15,7 @@
     z-index: 99999;
     margin: 0 auto;
     margin-top: 33px;
-    width: auto !important;
+    width: 60% !important;
     height: auto !important;
     background-image: none !important;
     background-repeat: inherit !important;
