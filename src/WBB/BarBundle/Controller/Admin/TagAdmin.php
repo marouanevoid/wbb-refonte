@@ -29,7 +29,7 @@ class TagAdmin extends Admin
                 'label'     => 'Type *',
                 'help'      => 'Mandatory'
             ))
-            ->add('name', null, array('help'=> 'Mandatory', 'label'=> 'Name *'))
+            ->add('name', null, array('help'=> 'Mandatory', 'label'=> 'Name'))
             ->add('onTop')
             ->end();
     }

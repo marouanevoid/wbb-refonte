@@ -5,6 +5,17 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function () {
+
+
+            // $('.ui-slide.loading').each(function(){
+            //     var that_ = $(this);
+            //     that_.find('img:nth-child(2)').each(function(){
+            //         $(this).on('load error' , function(){
+            //             $(this).parents('.loading').removeClass('loading');
+            //         });
+            //     });
+            // });
+            // // End listner of Image Loading
             initializeSliders();
             $(".older-news article").hide();
             {% if not is_mobile() or is_tablet() %}
@@ -76,7 +87,10 @@
                         </tr>
                     </table>
                 {% else %}
-                    <h1>Discover the World’s Best Bars</h1>
+                    <h1>{% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %}
+                                in {{ city }}
+                                {% endif %}
+                    </h1>
                 {% endif %}
             </section>
         </div>
@@ -86,15 +100,15 @@
             <section class="bars">
                 {% if not is_mobile() or is_tablet() %}
                 <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
-                {% else %}
-                    <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1">
-                {% endif %}
+                    {% else %}
+                        <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1">
+                    {% endif %}
                     {% for n in latest %}
-                        <div class="ui-slide">
+                        <div class="ui-slide loading">
                             {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n , 'secand_media' : true } %}
                         </div>
                     {% endfor %}
-                    </div>
+                </div>
             </section>
         </div>
     </div>

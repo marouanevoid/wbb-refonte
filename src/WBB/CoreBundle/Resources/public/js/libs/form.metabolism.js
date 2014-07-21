@@ -105,14 +105,14 @@ meta.Form = function(config){
                         that.config.onComplete( that.form, data );
                     if($('.line:last-child .three').length==0)
                         $('.line:last-child').remove();
-                    nbItems = $('.insider-tips .three').length;
+                    nbItems = $('.insider-tips .tips-area .three').length;
                     
                     if(ismobile==1)
                     {
-                        $('.line.wbbtips').prepend(data.tip);
-                        if(nbItems>=4)
+                        $('.line .tips-area').prepend(data.tip);
+                        if(nbItems>=3)
                         {
-                            $('.line:last-child .three:last-child').remove();
+                            $('.line .tips-area:last-child .three:last-child').remove();
                             $(".load-more").show();
                             $(".load-more").parent().show();
                         }
@@ -120,19 +120,26 @@ meta.Form = function(config){
                     {
                         if(nbItems==0)
                         {
-                            $('.line.wbbtips .six').removeClass('six').addClass('three').after(data.tip);
+                            $('.line .tips-area').addClass('three').prepend(data.tip);
+                            $('#tipsForm').removeClass('six').addClass('three');
                         }else
                         {
-                            $('.line.wbbtips .three:first-child').after(data.tip);
+
+                                $('.line .tips-area .three:first-child').before(data.tip);
                         }
-                        if(nbItems>=4)
+                        if(nbItems>=3)
                         {
-                            $('.line:last-child .three:last-child').remove();
+                            $('.line .tips-area:last-child .three:last-child').remove();
                             $(".load-more").show();
                             $(".load-more").parent().show();
                         }
                     }
 
+                        
+                    $('.custom-scroll').not('.jspScrollable').each(function()
+                    {
+                        $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+                    });
 
                 }
                 else

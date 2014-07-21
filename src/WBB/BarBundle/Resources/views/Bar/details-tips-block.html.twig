@@ -6,10 +6,18 @@
             Insider Tips
         </div>
 
-        <div class="load-target">
-            <div class="line" style="height: 0px;width: 0px;"></div>
-            <div class="line wbbtips">
+        {% if app.user == null %}
+            <script>
+                $(document).ready(function() {
+                    $('#tips').on('submit', function(e) {
+                        e.preventDefault();
+                    });
+                });
+            </script>
+        {% endif %}
 
+
+            <div class="line">
                 {% if not is_mobile() or is_tablet() %}
                     <div class="three columns box"  id="tipsForm">
                         <article class="tip">
@@ -26,10 +34,45 @@
                         </article>
                     </div>
                 {% endif %}
+
+                 <div class='tips-area'>
+{#                  <div class="three columns box">
+                     <article class="tip" itemprop="review" itemscope="" itemtype="http://schema.org/Review">
+                            <table class="content expert">
+
+                                <tr class="excerpt">
+                                    <td colspan="2">
+                                        <div class="scroll custom-scroll">
+                                         <span itemprop="description">
+                                            NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.
+                                            NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.
+                                            NY. This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience.
+                                        </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr class="s-margin-bottom"/>
+                                    </td>
+                                </tr>
+
+                                <tr class="author">
+                                    <td>
+                                        <img src="tmp/user.ryan.png" alt="user" width="40" height="40"/>
+                                    </td>
+                                    <td>
+                                        <b>Expert</b>
+                                        <span itemprop="name">Ryan Melon</span>
+                                    </td>
+                                </tr>
+                            </table>
+                     </article>
+                     </div> #}
+                 </div>
+
             </div>
-        </div>
-
-
+        <div class="line load-target"></div>
         {% if is_mobile() and not is_tablet() %}
 
             <div class="twelve columns align-center m-margin">

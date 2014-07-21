@@ -146,7 +146,7 @@ class BestOfRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBarRelatedBestofs($bar)
+    public function findBarRelatedBestofs($bar, $onTop = true, $limit = 5)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -154,10 +154,15 @@ class BestOfRepository extends EntityRepository
             ->select($this->getAlias())
             ->innerJoin($this->getAlias().'.bars', 'bb')
             ->innerJoin('bb.bar', 'b')
-            ->orderBy($this->getAlias().'.onTop', 'DESC')
-            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->where($qb->expr()->eq('b.id', $bar->getId()))
+            ->setMaxResults($limit)
         ;
+
+        if($onTop)
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        elseif($onTop == false)
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(false)));
 
         return $qb->getQuery()->getResult();
     }

@@ -15,7 +15,7 @@
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
             {% endfor %}
             {% for n in interviews|slice(0,1) %}
-                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , 'has_quote' : 1 } %}
+                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , 'has_quote' : 1 , become_url : true , show_quote : 1 } %}
             {% endfor %}
             {% for n in articles|slice(2,1) %}
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
@@ -71,13 +71,13 @@
                     {% if loop.index0 % 2 == 0 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1} %}
                     {%  else %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 } %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
                     {%  endif %}
                 {% endfor %}
 
                 {% for n in newsList %}
                     {% if loop.index0 % 2 == 0 %}
-                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1  } %}
+                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
                     {% else %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
                     {% endif %}
