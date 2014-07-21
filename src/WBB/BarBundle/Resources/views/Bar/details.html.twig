@@ -325,10 +325,10 @@
 
                             </div>
                             <p>
-                                        <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                            <span itemprop="streetAddress">{{ bar.address }}</span><br/>
-                                            <span itemprop="addressLocality">{{ bar.city }}</span>
-                                        </span>
+                                <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                    <span itemprop="streetAddress">{{ bar.address }}</span><br/>
+                                    <span itemprop="addressLocality">{{ bar.city }}</span>
+                                </span>
                                 <br/>
                                 {% if is_mobile() and not is_tablet() %}
                                     <span itemprop="telephone"><a href='tel:{{ bar.phone }}'>{{ bar.phone }}</a></span><br/>

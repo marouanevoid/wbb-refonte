@@ -506,18 +506,18 @@
                 <source>filter.label_rich_description</source>
                 <target>Rich description</target>
             </trans-unit>
-            <!-- isAnInterview -->
-            <trans-unit id="form.label_is_an_interview">
-                <source>form.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <!-- interview -->
+            <trans-unit id="form.label_interview">
+                <source>form.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
-            <trans-unit id="list.label_is_an_interview">
-                <source>list.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <trans-unit id="list.label_interview">
+                <source>list.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
-            <trans-unit id="filter.label_is_an_interview">
-                <source>filter.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <trans-unit id="filter.label_interview">
+                <source>filter.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
             <!-- isOnTop -->
             <trans-unit id="form.label_is_on_top">
