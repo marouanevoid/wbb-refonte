@@ -52,6 +52,7 @@
         .btn-round{
           width: 40px; height: 40px; right: 1em; top: 1em;
           &:before{ background-size: 256px 512px; background-position: -160px -80px }
+          &.active:before{ background-position: -200px -160px }
         }
       }
       .bar-w-pic{border-right: 1px solid transparent;}

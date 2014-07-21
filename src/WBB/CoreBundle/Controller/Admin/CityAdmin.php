@@ -18,62 +18,45 @@ class CityAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-//        $imageOptions = array('required' => false);
-//        if (($object = $this->getSubject()) && $object->getImage()) {
-//            $path = $object->getWebPath();
-//            $imageOptions['help'] = 'Associate a visual is mandatory for top cities<br /><img width="250px" src="/' . $path . '" />';
-//        }else{
-//            $imageOptions['help'] = 'Associate a visual is mandatory for top cities';
-//        }
-        
         $formMapper
             ->with('General')
-                ->add('name', null, array('label' => 'Name of the City', 'help' => 'Mandatory'))
-                ->add('country', null, array('help' => 'Mandatory'))
-                ->add('seoDescription', null, array('help' => 'Mandatory (160 characters max)'))
-                ->add('onTopCity')
-                ->add('suburbs', 'sonata_type_collection',
-                    array(
-                        'required'  => false,
-                        'help'      => 'Associate an area minimum to the city is mandatory'
-                    ), array(
-                        'edit' => 'inline',
-                        'inline' => 'table'
-                    )
+            ->add('name', null, array('label' => 'Name of the City', 'help' => 'Mandatory'))
+            ->add('country', null, array('help' => 'Mandatory'))
+            ->add('seoDescription', null, array('help' => 'Mandatory (160 characters max)'))
+            ->add('onTopCity')
+            ->add('suburbs', 'sonata_type_collection',
+                array(
+                    'required'  => false,
+                    'help'      => 'Associate an area minimum to the city is mandatory'
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table'
                 )
-                ->add('latitude', 'hidden')
-                ->add('longitude', 'hidden')
+            )
+            ->add('latitude', 'hidden')
+            ->add('longitude', 'hidden')
             ->end()
             ->with('Media')
-//                ->add('file', 'file', $imageOptions)
-                ->add('image', 'sonata_type_model_list',
-                    array(
-                        'required'  => false,
-                        'btn_list'  => false,
-                        'help'      => 'Associate a visual is mandatory for top cities',
-                        'label'     => 'Main visual *'
-                    ), array(
-                        'link_parameters' => array(
-                            'context' => 'simple_image'
-                        )
-                    ))
+            ->add('image', 'sonata_type_model_list',
+                array(
+                    'required'  => false,
+                    'btn_list'  => false,
+                    'help'      => 'Associate a visual is mandatory for top cities',
+                    'label'     => 'Main visual *'
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'simple_image'
+                    )
+                ))
             ->end()
             ->with('Related Best Of')
-                ->add('bestofs', 'sonata_type_collection', array('required' => false),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                        'sortable'  => 'position'
-                    ))
+            ->add('bestofs', 'sonata_type_collection', array('required' => false),
+                array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable'  => 'position'
+                ))
             ->end()
-//            ->with('Tags')
-//                ->add('tags', 'sonata_type_collection', array('required' => false),
-//                    array(
-//                        'edit' => 'inline',
-//                        'inline' => 'table',
-//                        'sortable'  => 'position'
-//                    ))
-//            ->end()
         ;
     }
 
@@ -105,7 +88,6 @@ class CityAdmin extends Admin
                 'field'   => 'name',
                 'label'    => 'Actions',
                 'actions' => array(
-//                    'show'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
                     'edit'   => array(),
                     'delete' => array(),
                 )
@@ -123,7 +105,6 @@ class CityAdmin extends Admin
             ->add('country')
             ->add('seoDescription')
             ->add('suburbs')
-            ->add('tags')
             ->add('onTopCity')
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
@@ -167,23 +148,20 @@ class CityAdmin extends Admin
     {
         $showMapper
             ->with('General')
-                ->add('name')
-                ->add('country')
-                ->add('seoDescription')
-                ->add('suburbs')
-                ->add('tags')
-                ->add('onTopCity')
+            ->add('name')
+            ->add('country')
+            ->add('seoDescription')
+            ->add('suburbs')
+            ->add('onTopCity')
             ->end()
         ;
     }
 
     public function prePersist($object)
     {
-//        $object->preUpload();
-
         if($object->getSuburbs()){
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb and $suburb->getName()){
+                if($suburb && $suburb->getName()){
                     $suburb->setCity($object);
                 }else{
                     $object->removeSuburb($suburb);
@@ -194,11 +172,9 @@ class CityAdmin extends Admin
 
     public function preUpdate($object)
     {
-//        $object->preUpload();
-
         if($object->getSuburbs()){
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb and $suburb->getName()){
+                if($suburb && $suburb->getName()){
                     $suburb->setCity($object);
                 }else{
                     $object->removeSuburb($suburb);
@@ -206,28 +182,4 @@ class CityAdmin extends Admin
             }
         }
     }
-
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function postUpdate($object)
-//    {
-//        $object->upload();
-//    }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function postPersist($object)
-//    {
-//        $object->upload();
-//    }
-//
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function postRemove($object)
-//    {
-//        $object->removeUpload();
-//    }
 }

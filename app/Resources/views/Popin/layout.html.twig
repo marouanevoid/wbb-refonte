@@ -1,0 +1,7 @@
+{% spaceless %}
+    {#<div class="popin {{ block('class') }}">#}
+    <div class="{{ block('class') }}">
+        <h2>{{ block('title') }}</h2>
+        {{ block('content') }}
+    </div>
+{% endspaceless %}

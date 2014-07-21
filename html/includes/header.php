@@ -28,7 +28,7 @@
                     </td>
 
                     <td>
-                        <?php include('components/header/signin-register.php') ?>
+                        <?php include('components/header/logged.php') ?>
                     </td>
                 </tr>
             </table>

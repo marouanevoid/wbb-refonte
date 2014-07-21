@@ -1,0 +1,14 @@
+<form id="login_form" action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <div class="text-align-center">
+        <input type="email" placeholder="Email" class="form-text margin-top-30" id="username" name="_username" value="{{ last_username }}" required="required" />
+        <input type="password" id="password" name="_password" required="required" class="form-text form-password margin-top-10" placeholder="Password"/>
+        <div id="login_error"></div>
+        <input type="submit" id="_submit" name="_submit" class="form-submit btn margin-top-30 bold" value="CONFIRM" />
+    </div>
+    <div class="clear"></div>
+    <a href="#" class="text-align-center margin-top-20">Forgot your password?</a> <!-- TODO Forgot ? -->
+    <div class="separator margin-top-40"></div>
+    <a href="#linktoAPIFacebook" id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30">Sign up with Facebook</a>
+</form>

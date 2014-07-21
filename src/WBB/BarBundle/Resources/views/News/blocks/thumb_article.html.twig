@@ -3,10 +3,21 @@
     <div class="txt">
         <h2>{{ n.title }}</h2>
     </div>
-    <a href="#0" class="overlay-link"></a>
+    <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="overlay-link"></a>
 
     <div class="gradient"></div>
-    {% for m in n.medias|slice(0,1) %}
-        <img src="" class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}" alt="{{ n.title }}" width="852" height="639"/>
+    {% if n.medias|length > 1 and secand_media is defined and secand_media %}
+    {% for m in n.medias|slice(1,1) %}
+        <img src="" class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}" alt="{{ n.title|truncate(60, true, '...') }}" width="852" height="639"/>
     {% endfor %}
+    {% else %}
+    {% for m in n.medias|slice(0,1) %}
+        <img src="" class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}" alt="{{ n.title|truncate(60, true, '...') }}" width="852" height="639"/>
+    {% endfor %}
+    {% endif %}
+
+    {% if n.medias|length <= 0 %}
+        <img src="" class="scale-with-grid" data-src="{{ asset('bundles/wbbcore/images/default.jpg') }}" alt="{{ n.title|truncate(60, true, '...') }}" width="852" height="639"/>
+    {% endif %}
+
 </article>

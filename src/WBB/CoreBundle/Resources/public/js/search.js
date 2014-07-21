@@ -49,8 +49,8 @@ meta.SearchPage = function() {
         //todo: construct neigborhood here then slidedown
         var html = '<li class="h4 radio-container">'+
                         '<label><input type="radio" name="neigborhoods" value="all"/><b></b>All Neigborhoods</label>'+
-                        '<div class="custom-scroll">'+
-                            '<ul>'+
+                        '<div '+($(window).width()>640?'class="custom-scroll"':'')+'>'+
+                            '<ul class="checkbox-container">'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyn</label></li>'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
@@ -60,6 +60,7 @@ meta.SearchPage = function() {
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
                                 '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
                             '</ul>'+
+                            '<br class="clear"/>'+
                         '</div>'+
                     '</li>';
 

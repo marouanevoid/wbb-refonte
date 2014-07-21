@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- adress form type -->
+        <service id="wbb.bar.sharenews.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>wbb_barbundle_share_news_type</argument>
+            <argument>wbb_barbundle_share_news_type</argument>
+            <argument>null</argument>
+        </service>
+
+        <service id="wbb.bar.sharenews.form.type" class="WBB\BarBundle\Form\Email\ShareNewsFormType">
+            <argument>%fos_user.model.user.class%</argument>
+            <tag name="form.type" alias="wbb_barbundle_share_news_type" />
+        </service>
+
+        <service id="bmwi.forum.sharenews.form.handler" class="WBB\BarBundle\Form\Email\Handler\ShareNewsHandler" scope="request" >
+            <argument type="service" id="wbb.bar.sharenews.form" />
+            <argument type="service" id="request" />
+            <argument type="service" id="wbb_bar.mailer" />
+        </service>
+
+
+    </services>
+</container>

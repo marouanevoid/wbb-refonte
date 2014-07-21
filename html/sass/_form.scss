@@ -5,20 +5,15 @@
 button,
 input[type="submit"],
 input[type="reset"],
-input[type="button"] {
-  background: none;
-  padding: 0.5em 1.5em;
-  border-radius: 2em;
-  border: 1px solid $color-brown;
-  color: $color-brown;
-  display: inline-block;
-  font-size: 1.4em;
-  font-weight: normal;
-  text-decoration: none;
-  cursor: pointer;
-  line-height: normal;
-  outline: none;
-  font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+input[type="button"] { background: none; padding: 0.5em 1.5em; border-radius: 2em;
+  border: 1px solid $color-brown; color: $color-brown; display: inline-block; font-size: 1.4em;
+  font-weight: normal; text-decoration: none; cursor: pointer; line-height: normal; outline: none;
+  font-family: "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  @media screen and (-webkit-min-device-pixel-ratio:0)
+  {
+    &{ padding-top: 0.6em; padding-bottom: 0.4em }
+  }
+}
 
 /* Fix for odd Mozilla border & padding issues */
 button::-moz-focus-inner,
@@ -69,7 +64,7 @@ select {
   line-height: 1em;
   @include transition(border 0.2s ease-in-out)
 }
-textarea{ overflow: auto }
+textarea{ overflow: auto; -webkit-appearance:none  }
 input[type="text"],
 input[type="password"],
 input[type="email"]{ border-radius:25px; padding: 0 5%; height: 40px; color:$color-brown; @include placeholder{ color: $color-brown }; -webkit-appearance:none }
@@ -80,24 +75,24 @@ input[type="submit"], input[type="reset"]{
 
 input[type="text"]:disabled{ -webkit-text-fill-color:$color-brown; opacity: 1 }
 
+
 label{
   position: relative;
   input[type="checkbox"], input[type="radio"]{
     width: 20px; height: 20px; margin: 0; padding: 0; margin-right: 0.5em; vertical-align: bottom;
-    &+b{ display: block; background: url("../images/misc/form.ckeckbox.empty.png") #fff no-repeat center; width: 20px; height: 20px; background-size: 100% 100%; position: absolute; left: 0; top: 0 }
-    &:checked+b{ background-image: url("../images/misc/form.checkbox.checked.png") }
+    &+b{ display: block; background: url("../images/misc/form.ckeckbox.png") #fff no-repeat center left; width: 20px; height: 20px; background-size: 200% 100%; position: absolute; left: 0; top: 0 }
+    &:checked+b{ background-position: center right }
   }
   input[type="radio"]{
-    &+b{ background-image: url("../images/misc/form.radio.empty.png") }
-    &:checked+b{ background-image: url("../images/misc/form.radio.checked.png") }
+    &+b{ background-image: url("../images/misc/form.radio.png") }
+    &:checked+b{ background-position: center right }
   }
 }
 
 input[type="text"].error,
 input[type="password"].error,
 input[type="email"].error,
-textarea.error{ border-color: $color-error }
-textarea.error:focus{ box-shadow: inset 0 0 2px $color-error }
+textarea.error{ box-shadow: 0 0 0 1px #B3955F!important; }
 
 input[type="text"]::-ms-clear { display: none  }
 input[type="text"]+input[type="submit"]{ border-radius: 0 25px 25px 0; position: absolute; top: 0; right: -2px; width: 40px; padding: 0; height: 42px;
@@ -108,7 +103,7 @@ input[type="text"]+input[type="submit"]{ border-radius: 0 25px 25px 0; position:
 }
 
 
-input[type="text"]+input[type="submit"].search+input[type="reset"] { margin-right: 2.7em; display: none }
+input[type="text"]+input[type="submit"].search+input[type="reset"] { margin-right: 40px; display: none }
 
 form.dark input[type="text"]+input[type="submit"]{
   background: url('../images/sprite.png') no-repeat $color-gray; height: 40px; border-left:1px solid $color-dark-gray; box-shadow: none;

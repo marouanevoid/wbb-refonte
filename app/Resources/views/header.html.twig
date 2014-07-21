@@ -15,13 +15,13 @@
                     <nav class="h3">
                         <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
                         <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
-                        <a href="#0" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
+                        <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
                     </nav>
                 </td>
             </tr>
             <tr class="links">
                 <td>
-                    <a class="finder h3">
+                    <a href="#{#{ path('wbb_bar_finder') }#}" class="finder h3">
                         <img src="{{ asset('bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
                         Bar Finder
                     </a>
@@ -32,7 +32,7 @@
                     <span class="register h4">
                         <a href="">Sign in</a>
                         or
-                        <a class="btn-radius" href="">Register</a>
+                        <a class="btn-radius" href="#{#{ path('fos_user_registration_register') }#}">Register</a>
                     </span>
                 </td>
             </tr>
@@ -40,7 +40,8 @@
                 <td>
                     <nav class="h4">
                         <a href="">About</a>
-                        <a href="">Legal</a>
+                        <a href="">Terms & conditions</a>
+                        <a href="">Privacy Policy</a>
                         <a href="">Cookies</a>
                         <a href="mailto:editor@worldsbestbars.com">Submit a bar</a>
                         {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a>{% endif %}
@@ -113,7 +114,8 @@
             <div class="container">
                 <div class="twelve columns s-margin">
                     <form action="search.php">
-                        <input type="text" name="q" placeholder="Search"/>
+                        <input type="text" name="q" placeholder="Search" class="form-text" />
+                        <input type="submit" class="form-submit no-text">
                         <input type="reset" value=" "/>
                     </form>
                     <a class="btn-radius border h4 close">Cancel</a>
@@ -138,9 +140,9 @@
                             <nav class="h3">
                                 <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
                                 <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
-                                <a href="#0" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
+                                <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
                             </nav>
-                            <form>
+                            <form action="{#{ path('wbb_cloudsearch_searchresults') }#}">
                                 <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
                             </form>
                         </td>
@@ -157,6 +159,7 @@
                             </div>
                             <div class="search-mode">
                                 <a class="btn-round brown close"></a>
+                                <a class="btn-round brown open radius-60 text-align-center">GO</a>
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
                                 <a href="" class="advanced-search h4">
                                     Advanced Search
@@ -164,11 +167,18 @@
                             </div>
                         </td>
                         <td>
-                            <span class="register h4">
-                                <a href="">Sign in</a>
-                                or
-                                <a class="btn-radius" href="">Register</a>
-                            </span>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            {% else %}
+                                <span class="register h4">
+                                    <a data-show="register-remove" class="lighbox-remove" href="#">Sign in</a>
+                                    or
+                                    <a class="btn-radius" href="#{#{ path('fos_user_registration_register') }#}">Register</a>
+                                </span>
+                            {% endif %}
                         </td>
                     </tr>
                 </table>
@@ -176,8 +186,9 @@
         </div>
         <div class="search-result-proposal"><ul></ul></div>
     </header>
-
-    {{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}
+    {% if not is_mobile() or is_tablet() %}
+        {{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}
+    {% endif %}
 
 {% endif %}
 <div class="entire-content">

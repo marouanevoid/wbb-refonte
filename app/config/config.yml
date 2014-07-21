@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -83,6 +82,10 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: WBB\UserBundle\Entity\User
+    registration:
+        confirmation: { enabled: true }
+        form:
+            type: wbb_user_registration
 
 # Sonata Admin bundle
 sonata_admin:
@@ -103,7 +106,7 @@ sonata_admin:
                         Vous aurez la possibilité de gérer les utilisateurs,
                         les informations relatives aux bars, tips, et villes. </p><br /><br />
             - { position: left, type: sonata.admin.block.admin_list }
-#            - { position: right, type: wbb.block.service.semsoft.import }
+            - { position: right, type: wbb.block.service.semsoft.import }
 
         groups:
             wbb_location: ~
@@ -128,7 +131,7 @@ sonata_block:
         sonata.admin.block.search_result:
             contexts:   [admin]
         sonata.block.service.text:
-#        wbb.block.service.semsoft.import: ~
+        wbb.block.service.semsoft.import: ~
         sonata.block.service.rss:
 
 #Sonata Media Bundle
@@ -143,7 +146,6 @@ sonata_media:
             providers:
                 - sonata.media.provider.youtube
                 - sonata.media.provider.image
-
             formats:
                 small:          { width: 100 , quality: 100}
                 big:            { width: 500 , quality: 100}
@@ -159,7 +161,6 @@ sonata_media:
                 mode: http
             providers:
                 - sonata.media.provider.image
-
             formats:
                 small:          { width: 100 , quality: 100}
                 big:            { width: 500 , quality: 100}
@@ -169,34 +170,73 @@ sonata_media:
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
                 city_small :    { width: 340 , height: 350, quality: 100 }
+                city_square :   { width: 170 , height: 175, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
+        ads:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small: { width: 100 , quality: 100}
+                300x250 : { width: 300 , height: 250, quality: 100 }
+                300x600 : { width: 300 , height: 600, quality: 100 }
+                728x90 : { width: 728 , height: 90, quality: 100 }
+
+        sponsor:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small:          { width: 82 , quality: 82}
+                news :          { width: 600 , height: 400, quality: 100 }
+                news_large :    { width: 900 , height: 600, quality: 100 }
+                slider_large :  { width: 640 , height: 480, quality: 100 }
+                sponsor_detail :  { width: 372 , height: 170, quality: 100 }
+
+        sponsor_small:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small:          { width: 82 , quality: 82}
+                news :          { width: 600 , height: 400, quality: 100 }
+                news_large :    { width: 900 , height: 600, quality: 100 }
+                slider_large :  { width: 640 , height: 480, quality: 100 }
+                sponsor_detail :  { width: 372 , height: 170, quality: 100 }
 
     cdn:
         server:
             path: /uploads/media
-#            path: http://staging.worldsbestbars.com.s3-website-eu-west-1.amazonaws.com
+#            path: http://wbb-bucket.s3-website-us-east-1.amazonaws.com #http://staging.worldsbestbars.com.s3-website-eu-west-1.amazonaws.com
 
     filesystem:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     true
 #        s3:
-#            bucket: staging.worldsbestbars.com
-#            accessKey: AKIAJM6ZSVZZ3WLRHZIA
-#            secretKey: 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
-#            create:         true
-#            region:         s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
-#            storage:        standard # can be one of: standard or reduced
-#            acl:            public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
+#            bucket: wbb-bucket
+#            accessKey: AKIAJ6WSWPZUXSICYDPQ #AKIAJM6ZSVZZ3WLRHZIA
+#            secretKey: 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 #Sw9IbIoSTjfQIamFAFWqljY/tNhQmDBnChYzSC9T
+#            create: true
+#            region:         s3-website-us-east-1.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
+#            storage: standard # can be one of: standard or reduced
+#            acl: public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
 #            encryption:     aes256 # can be aes256 or not set
 #            cache_control:  max-age=86400 # or any other
 #            meta:
-#                key1:       value1 #any amount of metas(sent as x-amz-meta-key1 = value1)
+#                key1:       value1 #any amount of metas(s ent as x-amz-meta-key1 = value1)
 
     providers:
         image:
 #            filesystem: sonata.media.filesystem.s3
-            resizer: sonata.media.resizer.custom
+            resizer: sonata.media.resizer.custom #sonata.media.resizer.custom
+            cdn: sonata.media.cdn.server
 
 #Fake Data Generator
 hautelook_alice:
@@ -252,3 +292,13 @@ stof_doctrine_extensions:
        default:
            timestampable: true
            sluggable:  true
+
+fos_facebook:
+    alias:  facebook
+    app_id: %facebook_app_id%
+    secret: %facebook_app_secret%
+    cookie: true
+    permissions: [email, user_birthday, user_location]
+
+hpatoio_bitly:
+    access_token: %bitly_access_token%
