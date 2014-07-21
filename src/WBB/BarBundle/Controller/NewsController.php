@@ -55,7 +55,7 @@ class NewsController extends Controller
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
 
-        $ad = $this->get('ad.repository')->findOneByPositionAndCountry(Ad::WBB_ADS_NLP_300x600, ($city) ? $city->getCountry():null);
+        $ad = $this->get('ad.repository')->findOneByPositionAndCountry(Ad::WBB_ADS_NLP_300X600, ($city) ? $city->getCountry():null);
 
         return $this->render('WBBBarBundle:News:landingPage.html.twig', array(
             'city'      => $city,
