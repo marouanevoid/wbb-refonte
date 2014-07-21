@@ -156,12 +156,14 @@ class BestOfAdmin extends Admin
                 ->with('Tags')
                     ->add('energyLevel', 'entity', array(
                             'class'    => 'WBBBarBundle:Tag',
-                            'required' => false,
+                            'required' => true,
+                            'label'     => 'Mood',
                             'empty_value' => 'Please choose a mood',
                             'property' => 'name',
+                            'help'  => 'Mandatory',
                             'query_builder' => function ($er) {
-                                    return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
-                                }
+                                return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
+                            }
                         )
                     )
                     ->add('toGoWith', null,
