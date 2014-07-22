@@ -129,7 +129,7 @@
 /* Globale ID's */
   #date-birthday .select-wrap {width: 95px; margin-right: 7px;}
   #date-birthday .ui-dropdown-container {width: 95px!important;}
-  #countries .ui-dropdown-container {width: 100%!important;}
+  .select-two .ui-dropdown-container {width: 100%!important;}
   .ui form label {font-size: 17px;}
   .ui .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
   .ui .load-more   {text-decoration: none;}
