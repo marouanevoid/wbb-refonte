@@ -50,102 +50,22 @@
                     <!-- List of Tips -->
                     <div class="list-tips padding-top-40">
                         <ul class="container">
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
+                            {% for tip in user.tips %}
+                                <li class="col col-4">
+                                    <div class="block-tip">
+                                        <p>
+                                            {{ tip.description }}
+                                        </p>
+                                        <div class="profil margin-top-10 padding-top-10 separator-top">
+                                            <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                            <div class="expert bold">{{ user.userRole }}</div>
+                                            <div class="name">{{ user.firstname }} {{ user.lastname }}</div>
+                                        </div>
+                                        <a href="#close" class="close no-text">Close</a>
+                                        <div class="clear"></div>
                                     </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
-                                    </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
-                                    </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
-                                    </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
-                                    </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
-                                    </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
-                                    </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
-                            <li class="col col-4">
-                                <div class="block-tip">
-                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
-                                    <div class="profil margin-top-10 padding-top-10 separator-top">
-                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-                                        <div class="expert bold">Expert</div>
-                                        <div class="name">Ryan Melon</div>
-                                    </div>
-                                    <a href="#close" class="close no-text">Close</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </li>
+                                </li>
+                            {% endfor %}
                         </ul>
                         <div class="clear"></div>
 

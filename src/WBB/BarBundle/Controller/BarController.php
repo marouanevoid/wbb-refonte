@@ -122,17 +122,17 @@ class BarController extends Controller
 
         if(!empty($latitude) && !empty($longitude) && !empty($slug)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
-            $response['distance'] = true;
-            $response['latitude'] = $latitude;
+            $response['distance']  = true;
+            $response['latitude']  = $latitude;
             $response['longitude'] = $longitude;
         }else{
-            $response['distance'] = false;
+            $response['distance']  = false;
         }
 
-        $response['topCities']      = $this->container->get('city.repository')->findTopCities();
-        $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
-        $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5, false);
-        $response['city']           = $city;
+        $response['topCities']     = $this->container->get('city.repository')->findTopCities();
+        $response['popularBars']   = $this->container->get('bar.repository')->findPopularBars($city);
+        $response['topBestofs']    = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5, false);
+        $response['city']          = $city;
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }
