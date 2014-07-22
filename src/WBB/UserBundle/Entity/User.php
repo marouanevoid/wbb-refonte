@@ -60,6 +60,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
+     */
+    protected $facebookId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -215,7 +222,19 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\News", mappedBy="user")
      */
     private $news;
-    
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="usersFavorite")
+     * @ORM\JoinTable(name="wbb_user_favorite_bars")
+     */
+    private $favoriteBars;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\BestOf", inversedBy="usersFavorite")
+     * @ORM\JoinTable(name="wbb_user_favorite_bestof")
+     */
+    private $favoriteBestOfs;
+
     /**
      * @var datetime
      *
@@ -231,13 +250,6 @@ class User extends BaseUser
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
-     */
-    protected $facebookId;
 
     public function serialize()
     {
