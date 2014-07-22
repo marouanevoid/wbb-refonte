@@ -213,6 +213,17 @@ sonata_media:
                 slider_large :  { width: 640 , height: 480, quality: 100 }
                 sponsor_detail :  { width: 372 , height: 170, quality: 100 }
 
+        avatar:
+            download:
+                strategy: sonata.media.security.connected_strategy
+                mode: http
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small:   { width: 82 , quality: 82}
+                medium:  { width: 82 , quality: 82}
+                large:   { width: 145 , quality: 145}
+
     cdn:
         server:
             path: /uploads/media
