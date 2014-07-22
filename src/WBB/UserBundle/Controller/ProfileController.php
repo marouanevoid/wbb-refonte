@@ -1,15 +1,6 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace FOS\UserBundle\Controller;
+namespace WBB\UserBundle\Controller;
 
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
@@ -38,7 +29,7 @@ class ProfileController extends ContainerAware
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+        return $this->container->get('templating')->renderResponse('WBBUserBundle:Profile:show.html.twig', array('user' => $user));
     }
 
     /**
@@ -91,7 +82,7 @@ class ProfileController extends ContainerAware
         }
 
         return $this->container->get('templating')->renderResponse(
-            'FOSUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
+            'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
             array('form' => $form->createView())
         );
     }

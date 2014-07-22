@@ -1,0 +1,136 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="full-white">
+        <div id="editprofile" class="page wrap margin-bottom-20">
+            <div  class="ui wrap">
+                <div class="margin-top-20">
+                    <div id="edit-account">
+                        <div class="avatar-profil left">
+                            <img src="images/UI/_images/robert_smithson.jpg" height="145" width="145" class="radius-max">
+                        </div>
+
+                        <div class="group right">
+                            <div class="title text-transform-capitalize unbold">
+                                <h5>Robert simthson</h5>
+                            </div>
+                            <div class="subgroup margin-top-10 wrap">
+                                <div class="text-transform-capitalize text-align-center">
+                                    <div class="city"><img src="images/UI/icon_map.jpg"> New York, USA</div>
+                                </div>
+                                <form>
+                                    <div class="form-group">
+                                        <div class="file-image wrap">
+                                            <input type="file" class="form-file">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> <!-- .subgroup.right -->
+                        </div> <!-- .group.right -->
+
+                        <div class="clear"></div>
+                        <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+                            <div class="select-two margin-top-10">
+                                <label>Gender</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="group-form margin-top-10">
+                                <label>Firstname</label>
+                                {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
+                            </div>
+                            <div class="group-form margin-top-10">
+                                <label>Lastname</label>
+                                {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
+                            </div>
+                            <div class="group-form margin-top-10">
+                                <label>Email</label>
+                                {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
+                            </div>
+                            <div id="date-birthday" class="text-align-center margin-top-10">
+                                <label>Date of Birth</label>
+                                <div class="select-wrap left">
+                                    {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                </div>
+                                <div class="select-wrap left">
+                                    {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
+                                </div>
+                                <div class="select-wrap left last">
+                                    {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                </div>
+                            </div> <!-- #date-birthday -->
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10">
+                                <label>Country</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                </div>
+                            </div><!-- #countries -->
+                            <div class="clear"></div>
+
+                            <div class="group-form margin-top-10">
+                                <label>Cities you like to go</label>
+                                {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a city' } }) }}
+                                {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
+                                {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
+                            </div>
+
+                            <div class="group-form margin-top-10">
+                                <label>Favorite Bars</label>
+                                {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a bar' } }) }}
+                                {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
+                                {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
+                            </div>
+
+                            <div class="group-form margin-top-10">
+                                <label>Drink brands</label>
+                                {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a brand' } }) }}
+                                {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
+                                {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
+                            </div>
+
+                            <div class="group-form margin-top-10">
+                                <label>Categories or cocktails</label>
+                                {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a cocktail' } }) }}
+                                {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
+                                {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
+                            </div>
+
+                            <div class="group-form checkbox margin-top-10">
+                                <label class="wrap"><input type="checkbox" class="form-checkbox left">
+                                    Unsubscribe the newsletter</label>
+                            </div>
+                            {{ form_rest(form) }}
+                            <div class="group-actions margin-top-20 right">
+                                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
+                            </div>
+
+                        </form>
+                        <div class="clear"></div>
+                    </div>
+                </div> <!-- .margin-top-20 -->
+                <div class="clear"></div>
+            </div> <!-- #UI -->
+        </div> <!-- #editprofile -->
+        <div id="banner-bottom" class="margin-bottom-20 text-align-center">
+            <a href="#"><img src="images/UI/banner.jpg" align="center"></a>
+        </div> <!--  -->
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/icheck.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.form-checkbox').iCheck({
+                checkboxClass: 'icheckbox_flat',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+{% endblock %}

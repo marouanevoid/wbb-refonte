@@ -1071,4 +1071,70 @@ class User extends BaseUser
     {
         return $this->stayBrandInformed;
     }
+
+    /**
+     * Add favoriteBars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @return User
+     */
+    public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    {
+        $this->favoriteBars[] = $favoriteBars;
+
+        return $this;
+    }
+
+    /**
+     * Remove favoriteBars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     */
+    public function removeFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    {
+        $this->favoriteBars->removeElement($favoriteBars);
+    }
+
+    /**
+     * Get favoriteBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteBars()
+    {
+        return $this->favoriteBars;
+    }
+
+    /**
+     * Add favoriteBestOfs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @return User
+     */
+    public function addFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    {
+        $this->favoriteBestOfs[] = $favoriteBestOfs;
+
+        return $this;
+    }
+
+    /**
+     * Remove favoriteBestOfs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     */
+    public function removeFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    {
+        $this->favoriteBestOfs->removeElement($favoriteBestOfs);
+    }
+
+    /**
+     * Get favoriteBestOfs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteBestOfs()
+    {
+        return $this->favoriteBestOfs;
+    }
 }

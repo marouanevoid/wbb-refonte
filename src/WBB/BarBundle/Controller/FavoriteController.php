@@ -20,7 +20,7 @@ class FavoriteController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $bar = $em->getRepository('WBBBarBundle:Bar')
-                ->findOneBy(array('id' => $barId));
+            ->findOneBy(array('id' => $barId));
 
         if (!$bar) {
             return new JsonResponse(array(
@@ -40,8 +40,8 @@ class FavoriteController extends Controller
             'code' => 200,
             'message' => 'Bar added to the current user !',
             'href' => $this->generateUrl('wbb_favorite_bar_delete', array(
-                'barId' => $barId
-            ))
+                    'barId' => $barId
+                ))
         ));
     }
 
@@ -54,10 +54,10 @@ class FavoriteController extends Controller
                 'message' => 'User not authenticated !'
             ));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $bar = $em->getRepository('WBBBarBundle:Bar')
-                ->findOneBy(array('id' => $barId));
+            ->findOneBy(array('id' => $barId));
 
         if (!$bar) {
             return new JsonResponse(array(
@@ -65,10 +65,10 @@ class FavoriteController extends Controller
                 'message' => 'Bar not found !'
             ));
         }
-        
+
         $bar->removeUser($user);
         $user->removeFavoriteBar($bar);
-        
+
         $em->persist($bar);
         $em->persist($user);
         $em->flush();
@@ -77,8 +77,8 @@ class FavoriteController extends Controller
             'code' => 200,
             'message' => 'Bar deleted from the favirites of the current user !',
             'href' => $this->generateUrl('wbb_favorite_bar_add', array(
-                'barId' => $barId
-            ))
+                    'barId' => $barId
+                ))
         ));
     }
 
@@ -94,7 +94,7 @@ class FavoriteController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $bestOf = $em->getRepository('WBBBarBundle:BestOf')
-                ->findOneBy(array('id' => $bestOfId));
+            ->findOneBy(array('id' => $bestOfId));
 
         if (!$bestOf) {
             return new JsonResponse(array(
@@ -114,11 +114,11 @@ class FavoriteController extends Controller
             'code' => 200,
             'message' => 'BestOf added to the current user !',
             'href' => $this->generateUrl('wbb_favorite_bestof_delete', array(
-                'bestOfId' => $bestOfId
-            ))
+                    'bestOfId' => $bestOfId
+                ))
         ));
     }
-    
+
     public function deleteBestOfAction($bestOfId)
     {
         $user = $this->getUser();
@@ -128,10 +128,10 @@ class FavoriteController extends Controller
                 'message' => 'User not authenticated !'
             ));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $bestOf = $em->getRepository('WBBBarBundle:BestOf')
-                ->findOneBy(array('id' => $bestOfId));
+            ->findOneBy(array('id' => $bestOfId));
 
         if (!$bestOf) {
             return new JsonResponse(array(
@@ -142,7 +142,7 @@ class FavoriteController extends Controller
 
         $bestOf->removeUser($user);
         $user->removeFavoriteBestOf($bestOf);
-        
+
         $em->persist($bestOf);
         $em->persist($user);
         $em->flush();
@@ -151,8 +151,8 @@ class FavoriteController extends Controller
             'code' => 200,
             'message' => 'BestOf deleted from the favirites of the current user !',
             'href' => $this->generateUrl('wbb_favorite_bestof_add', array(
-                'bestOfId' => $bestOfId
-            ))
+                    'bestOfId' => $bestOfId
+                ))
         ));
     }
 

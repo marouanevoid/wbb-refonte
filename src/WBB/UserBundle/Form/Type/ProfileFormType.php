@@ -34,12 +34,12 @@ class ProfileFormType extends BaseType
 
         $this->buildUserForm($builder, $options);
 
-        $builder->add('current_password', 'password', array(
-            'label' => 'form.current_password',
-            'translation_domain' => 'FOSUserBundle',
-            'mapped' => false,
-            'constraints' => $constraint,
-        ));
+//        $builder->add('current_password', 'password', array(
+//            'label' => 'form.current_password',
+//            'translation_domain' => 'FOSUserBundle',
+//            'mapped' => false,
+//            'constraints' => $constraint,
+//        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -64,6 +64,16 @@ class ProfileFormType extends BaseType
     protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title', 'choice', array(
+                'expanded' => false,
+                'multiple' => false,
+                'required' => false,
+                'empty_value' => 'Please choose your gender',
+                'choices'  => array(
+                    'F'   =>  'F',
+                    'M'   =>  'M'
+                )
+            ))
             ->add('firstname')
             ->add('lastname')
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
