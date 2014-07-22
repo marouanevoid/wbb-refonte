@@ -1,0 +1,172 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div id="editprofile" class="page margin-bottom-20">
+        <div class="margin-top-20">
+            <div id="view-account">
+                <div class="ui tips">
+
+                    <!-- Profile -->
+                    <div class="container">
+                        <div class="block-top wrap">
+                            <div class="avatar-profil left">
+                                <img src="images/UI/_images/robert_smithson.jpg" height="145" width="145" class="radius-max">
+                            </div>
+
+                            <div class="group right">
+                                <div class="title text-transform-capitalize unbold">
+                                    <h5>{{ user.firstname }} {{ user.lastname }}</h5>
+                                </div>
+                                <div class="subgroup margin-top-10 wrap">
+                                    <div class="text-transform-capitalize text-align-center">
+                                        <div class="city"><img src="images/UI/icon_map.jpg"> New York, USA</div>
+                                    </div>
+                                    <div class="btn-editprofile">
+                                        <a href="{{ path('fos_user_profile_edit') }}" class="btn radius-30">Edit Profile</a>
+                                    </div>
+                                </div> <!-- .subgroup.right -->
+                            </div> <!-- .group.right -->
+                            <div class="clear"></div>
+                        </div> <!-- .block-top -->
+                        <div class="clear"></div>
+                    </div>
+
+                    <!-- Filter -->
+                    <div class="container">
+                        <div class="filter-profil padding-bottom-20 wrap">
+                            <div class="margin-top-80">
+                                <div class="disableClick"></div>
+                                <input type="radio" name="filter" value="(94) Bars" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                                <input type="radio" name="filter" value="(38) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                                <input type="radio" name="filter" value="(359) tips" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div> <!-- .filter-profil -->
+                    </div>
+
+                    <!-- Separator -->
+                    <hr>
+                    <div class="clear"></div>
+
+                    <!-- List of Tips -->
+                    <div class="list-tips padding-top-40">
+                        <ul class="container">
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                            <li class="col col-4">
+                                <div class="block-tip">
+                                    <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                    <div class="profil margin-top-10 padding-top-10 separator-top">
+                                        <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                        <div class="expert bold">Expert</div>
+                                        <div class="name">Ryan Melon</div>
+                                    </div>
+                                    <a href="#close" class="close no-text">Close</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+
+                        <!-- Button See more Bars -->
+                        <div class="container">
+                            <div class="bars-w-pic force-load load-container">
+                                <div class="load-target"></div>
+                                <div class="twelve columns align-center m-margin load-more-container">
+                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            </div> <!-- .margin-top-20 -->
+            <div class="clear"></div>
+        </div> <!-- #UI -->
+    </div> <!-- #editprofile -->
+    <div id="banner-bottom" class="margin-bottom-20 text-align-center">
+        <a href="#"><img src="images/UI/banner.jpg" align="center"></a>
+    </div> <!-- #banner-bottom -->
+{% endblock %}

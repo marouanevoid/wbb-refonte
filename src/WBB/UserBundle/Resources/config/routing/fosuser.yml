@@ -3,10 +3,10 @@ fos_user_security:
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /your-profile
+    prefix: /profile
 
 fos_user_registration_register:
-    pattern: /profile
+    pattern: /register
     defaults: { _controller:FOSUserBundle:Registration:register }
     options:
         expose: true
@@ -18,19 +18,19 @@ wbb_user_registration_register_light:
         expose: true
 
 fos_user_registration_check_email:
-    pattern: /inscription/check-email
+    pattern: /register/check-email
     defaults: { _controller:FOSUserBundle:Registration:checkEmail }
     requirements:
         _method: GET
 
 fos_user_registration_confirm:
-    pattern: /inscription/confirm/{token}
+    pattern: /register/confirm/{token}
     defaults: { _controller:FOSUserBundle:Registration:confirm }
     requirements:
         _method: GET
 
 fos_user_registration_confirmed:
-    pattern: /inscription/confirmed
+    pattern: /register/confirmed
     defaults: { _controller:FOSUserBundle:Registration:confirmed }
     requirements:
         _method: GET

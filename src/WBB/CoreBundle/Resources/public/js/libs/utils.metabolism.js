@@ -28,6 +28,7 @@ meta.Utils = function() {
     /* Public attributes. */
 
     that.timeout = false;
+    that.first_launch = true;
 
     /* Public methods. */
 
@@ -43,37 +44,43 @@ meta.Utils = function() {
         });
     };
 
-    /* 
-    Cette fontion scan toutes images qui ont une class cover et met à jour le width et height en fonction du ratio 
-    */
 
     that._resizeCover = function()
     {
-        var $covers = $('.cover');
+        clearTimeout(that.timeout);
 
-        $covers.each(function()
-        {
-            var $cover              = $(this);
-            var $element            = $cover.find(' > img');
-            var ratio               = $element.data('ratio');
-            var margin              = parseInt($cover.data('margin'));
+        that.timeout = setTimeout(function(){
 
-            if( isNaN(margin)) margin = 0;
+            var $covers = $('.cover');
 
-            var container_width     = $cover.width()*(1+(margin/100));
-            var container_height    = $cover.height();
-
-            if( container_width/ratio < container_height )
+            $covers.each(function()
             {
-                var width = parseInt(container_height*ratio);
-                $element.css({width:width, height:container_height, left:(container_width-width)/2+'px', top:0});
-            }
-            else
-            {
-                var height  = parseInt(container_width/ratio);
-                $element.css({width:container_width, height:height, top:(container_height-height)/2+'px', left:(-$cover.width()*margin/100)/2});
-            }
-        });
+                var $cover              = $(this);
+                var $element            = $cover.find(' > img');
+                var ratio               = $element.data('ratio');
+                var margin              = parseInt($cover.data('margin'));
+                if( isNaN(margin)) margin = 0;
+
+                var container_width     = $cover.width()*(1+margin/100);
+                var container_height    = $cover.height();
+
+                if( container_width/ratio < container_height )
+                {
+                    var width = parseInt(container_height*ratio);
+                    $element.css({width:width, height:container_height, left:(container_width-width)/2+'px', top:0});
+                }
+                else
+                {
+                    var height  = parseInt(container_width/ratio);
+                    $element.css({width:container_width, height:height, top:(container_height-height)/2+'px', left:(-$cover.width()*margin/100)/2});
+                }
+            });
+
+        }, that.first_launch?0:100);
+
+        that.first_launch = false;
+
+
     };
 
     /**
@@ -82,47 +89,22 @@ meta.Utils = function() {
     that._cover = function( ratio_only )
     {
         var $covers = $('.cover');
+
         $covers.each(function()
         {
             var $element   = $(this).find(' > img');
-            $element.attr('data-ratio', parseInt($element.prop('width'))/parseInt($element.prop('height')));
+            $element.data('ratio', parseInt($element.prop('width'))/parseInt($element.prop('height')));
         });
 
         if( ratio_only ) return;
 
+        that._resizeCover();
+
         $(window).resize(function(){
-            clearTimeout(that.timeout);
-            that.timeout = setTimeout(function(){ that._resizeCover() }, 50);
+            that._resizeCover();
         });
     };
 
-
-    /**
-     *
-     */
-    that._matchElements = function()
-    {
-        var $match_elements = $('[data-match]');
-
-        $(window).resize(function()
-        {
-            $match_elements.each(function()
-            {
-                var $element1 = $(this);
-                var $element2 = $(this).closest('article').find( $(this).data('match') );
-
-                var element1_height = $element1.css('height', 'auto').height();
-                var element2_height = $element2.css('height', 'auto').height();
-
-                if( element1_height > element2_height )
-                    $element2.height( element1_height );
-                else
-                    $element1.height( element2_height );
-            });
-        });
-
-        $(window).load(function(){ $(this).resize() });
-    };
 
 
     /**
@@ -143,41 +125,14 @@ meta.Utils = function() {
         {
             var $sizer = $('<img src="'+BASEURL+'images/sizer/'+$(this).data("size")+'.png" class="sizer"/>');
 
-            $sizer.load(function(){ $(window).resize() });
+            $sizer.load(function(){ that._resizeCover() });
 
             $(this).append($sizer);
             $(this).removeClass('has_sizer');
-
-            var $covers = $('.cover');
-            that._resizeCover($covers);
         });
     };
 
 
-    /**
-     *
-     */
-    that._svgPlaceholder = function()
-    {
-        $('[data-svg]').each(function()
-        {
-            var $this = $(this);
-
-            if(Modernizr.svg)
-            {
-                $.get( BASEURL+'svg/'+$this.data('svg')+'.svg', function(svgDoc){
-
-                    var importedSVGRootElement = document.importNode(svgDoc.documentElement,true);
-                    $this.replaceWith( importedSVGRootElement );
-
-                },"xml");
-            }
-            else
-            {
-                $this.replaceWith( '<img src="'+BASEURL+'images/'+$this.data( $this.data('img')?'img':'svg')+'.png"/>' );
-            }
-        });
-    };
 
     /**
      *
@@ -190,9 +145,6 @@ meta.Utils = function() {
             that._detectSmartphone();
             that._sizer();
             that._cover();
-            that._resizeCover();
-            that._matchElements();
-            that._svgPlaceholder();
         });
 
         $( document ).ajaxComplete(function() {

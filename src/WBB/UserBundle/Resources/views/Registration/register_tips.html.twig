@@ -1,0 +1,15 @@
+<div id="register-tips" style="display:none">
+    <div class="wrap ui">
+        <div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>
+        <div id="account" class="left">
+            <div class="subtitle text-transform-uppercase bold">I already have an account</div>
+            {% render url('fos_user_security_login') %}
+        </div> <!-- #account.block.wrap -->
+        <div id="create-account" class="left">
+            <div class="subtitle text-transform-uppercase bold">Create an account now</div>
+            <a href="{{ path('fos_user_registration_register') }}" class="btn btn-create-account text-align-center margin-top-30 radius-30 bold">REGISTER</a>
+        </div>
+        <a href="#close" class="btn btn-close">Close</a>
+        <div class="clear"></div>
+    </div> <!-- #UI -->
+</div>
