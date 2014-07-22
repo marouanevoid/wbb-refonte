@@ -75,8 +75,7 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    encryption: "%mailer_encryption%"
-    #spool:     { type: memory }
+    spool:     { type: memory }
 
 # FOS UserBundle config
 fos_user:
@@ -87,9 +86,6 @@ fos_user:
         confirmation: { enabled: true }
         form:
             type: wbb_user_registration
-    from_email:
-        address:        myportal@pernod-ricard.com
-        sender_name:    WBB
 
 # Sonata Admin bundle
 sonata_admin:
@@ -176,8 +172,7 @@ sonata_media:
                 city_small :    { width: 340 , height: 350, quality: 100 }
                 city_square :   { width: 170 , height: 175, quality: 100 }
                 bestof_small :  { width: 387 , height: 290, quality: 100 }
-
-        banner:
+        ads:
             download:
                 strategy: sonata.media.security.connected_strategy
                 mode: http

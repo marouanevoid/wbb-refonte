@@ -283,7 +283,11 @@
                     </article>
                 {% endfor %}
             {% endif %}
+
+
             <a class="btn-radius border brown h4 s-margin-top" href="{{ city is defined ? path('wbb_news_landing_page_city',{citySlug:city.slug}) : path('wbb_news_landing_page') }}" style="clear: left; float:left;">See all news</a>
+
+
         </section>
 
         <!-- NEWLY ADDED BARS -->
@@ -305,7 +309,12 @@
             {% endif %}
 
             {% if not is_mobile() or is_tablet() %}
-                {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_300x250' })) }}
+                <div class="block">
+                    <div class="side-ad xl-margin-top">
+                        <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
+                        <div class="txt">Advertising</div>
+                    </div>
+                </div>
             {% endif %}
 
         </aside>

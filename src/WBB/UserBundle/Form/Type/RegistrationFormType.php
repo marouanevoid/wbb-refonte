@@ -38,9 +38,7 @@ class RegistrationFormType extends BaseType
                 'second_options'  => array('attr' => array('placeholder' => 'form.password_confirmation')),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
-            ->add('birthdate', 'date', array(
-                'years' => range(1900, date('Y'))
-            ))
+            ->add('birthdate')
             ->add('country')
 
             ->add('prefCity1')
