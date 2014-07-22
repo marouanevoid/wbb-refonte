@@ -97,6 +97,8 @@ wbb_bar_finder:
 wbb_bar_finder_results:
     pattern: /bar-finder-results
     defaults: { _controller: WBBBarBundle:Bar:barFinderResults }
+    requirements:
+        _method:  POST
 
 wbb_news_landing_page:
     pattern: /news
