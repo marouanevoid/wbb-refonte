@@ -39,13 +39,13 @@
                     if($.cookie('finder_city')){
                         // Focus on city
                         $finder.find('.'+$.cookie('finder_city')).click();
-                        $.cookie('finder_city', null , 0);
+                        //$.cookie('finder_city', null , 0);
                     }   
 
                     if($.cookie('finder_gowith')){
                         // Focus on go width
                         $finder.find('.'+$.cookie('finder_gowith')).click();
-                        $.cookie('finder_gowith', null , 0);
+                        //$.cookie('finder_gowith', null , 0);
                     }
                 }else{
                     $city = $finder.find('[name=city]');
@@ -72,7 +72,7 @@
                     // Remove Class the the all Mood
                     $moodItem.parent('a').removeClass('active');
                     $('.mood-item[data-index=' + $.cookie('finder_mood') + ']').parent('a').addClass('active');
-                    $.cookie('finder_mood',null , 0)
+                    //$.cookie('finder_mood',null , 0)
                 }
 
                 // OPEN THE FINDER
