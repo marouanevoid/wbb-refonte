@@ -11,6 +11,10 @@ homepage:
     options:
         expose: true
 
+wbb_bar_ads:
+    pattern: /wbb/ads/{format}
+    defaults: { _controller: WBBBarBundle:Ads:show }
+
 wbb_bar_guides:
     pattern: /bar-guides
     defaults: { _controller: WBBBarBundle:Bar:barGuide }

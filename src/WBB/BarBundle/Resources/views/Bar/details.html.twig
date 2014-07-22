@@ -323,6 +323,19 @@
                                             {% endif %}
                                         </li>
                                     {% endfor %}
+                                    {#{% for b in bar.bestofs %}#}
+                                        {#<li>#}
+                                            {#{% if b.bestof.city %}#}
+                                                {#<a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">#}
+                                                    {#Best {{ b.bestof.name }} in {{ b.bestof.city }}#}
+                                                {#</a>#}
+                                            {#{% else %}#}
+                                                {#<a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">#}
+                                                    {#Best {{ b.bestof.name }} in world#}
+                                                {#</a>#}
+                                            {#{% endif %}#}
+                                        {#</li>#}
+                                    {#{% endfor %}#}
                                 </ul>
                             </div>
                         </div>
@@ -376,7 +389,7 @@
                                     {% endfor%}
                                     <a href="#0" id="showOpenings">(See all)</a><br/>
                                     <span class="openings" style="display: none; margin-bottom: 30px">
-                                {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
+                                        {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
                                         {% for opening in bar.openings %}
                                             {{ days[opening.openingDay-1] }} :
                                             {% if opening.fromHour|number_format<=12 %}
@@ -517,5 +530,6 @@
         });
     </script>
 {% endblock %}
+
 
 

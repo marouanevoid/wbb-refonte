@@ -654,13 +654,15 @@ class News implements IndexableEntity
     {
         $cities = array();
         $bars = array();
+        $districts = array();
         foreach ($this->cities as $city) {
             $cities[] = $city->getName();
         }
         foreach ($this->bars as $bar) {
             $bars[] = $bar->getName();
+            $districts[] = $bar->getSuburb()->getName();
         }
-        
+
         $bestOfs = array();
         foreach ($this->bestOfs as $bestOf) {
             $bestOfs[] = $bestOf->getName();
@@ -685,6 +687,7 @@ class News implements IndexableEntity
             'slug' => $this->slug,
             'text' => ($this->richDescription) ? $this->richDescription : '',
             'cities' => $cities,
+            'districts' => $districts,
             'quote' => ($this->quoteText) ? $this->quoteText : '',
             'quote_author' => ($this->quoteAuthor) ? $this->quoteAuthor : '',
             'seo_description' => ($this->seoDescription) ? $this->seoDescription : '',
