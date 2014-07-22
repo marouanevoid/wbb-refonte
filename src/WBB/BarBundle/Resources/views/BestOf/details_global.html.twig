@@ -45,8 +45,7 @@
                         </h3>
                     </td>
                     <td class="star-share">
-                        <a href="{{ favorite_url(app.user, bestOf) }}" class="btn-round star {% if is_favorite(app.user, bestOf) %}active brown changed{% endif %}"></a>
-                        <a class="btn-round brown share" href=""></a>
+                        <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href=""></a>
                     </td>
                 </tr>
             </table>
@@ -67,9 +66,6 @@
                 </div>
             </div>
         {% endif %}#}
-        {% if not is_mobile() or is_tablet() %}
-            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
-        {% endif %}
         <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}
                 {% include "WBBBarBundle:Bar:bar1.html.twig" with {
@@ -113,8 +109,4 @@
             {% endif %}
         </section>
 </div>
-{% endblock %}
-
-{% block footerAd %}
-{{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_728x90' })) }}
 {% endblock %}

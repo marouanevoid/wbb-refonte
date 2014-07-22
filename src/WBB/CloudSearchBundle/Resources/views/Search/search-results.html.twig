@@ -40,25 +40,21 @@
                                 </div>
                             </div>
                         </li>
-                        {% for tags in tagsByType %}
-                            {% if tags.tags|length > 0 %}
-                                <li>
-                                    <div class="drop-btn">
-                                        <h3>{{ tags.name }}</h3>
-                                        <a class="btn-round plus brown"></a>
-                                    </div>
+                        <li>
+                            <div class="drop-btn">
+                                <h3>Bar style</h3>
+                                <a class="btn-round plus brown"></a>
+                            </div>
 
-                                    <div class="drop-list">
-                                        <ul class="checkbox-container">
-                                            {% for tag in tags.tags %}
-                                                <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name }}"/><b></b>{{ tag.name }}</label></li>
-                                            {% endfor %}
-                                        </ul>
-                                        <br class="clear"/>
-                                    </div>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
+                            <div class="drop-list">
+                                <ul class="checkbox-container">
+                                    <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Hotel Bar</label></li>
+                                    <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Amazing Views</label></li>
+                                    <li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Speakeasy</label></li>
+                                </ul>
+                                <br class="clear"/>
+                            </div>
+                        </li>
                     </ul>
 
                     <div class="submit s-margin-top">
