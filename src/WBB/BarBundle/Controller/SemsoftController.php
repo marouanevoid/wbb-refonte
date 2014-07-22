@@ -38,6 +38,7 @@ class SemsoftController extends Controller
         return $this->render('WBBBarBundle:Bar:details.html.twig', array(
             'bar'       => $bar,
             'barLike'   => array(),
+            'related'   => null,
             'oneCity'   => true,
             'tipForm'   => $form->createView()
         ));
@@ -95,7 +96,7 @@ class SemsoftController extends Controller
                     }
                 }
                 $country = $this->getCountry($data['Country']);
-                if($country && ($bar || !empty($data['Name']))){
+                if($country && $data['City'] &&($bar || !empty($data['Name']))){
 
                     $city   = $this->getCity($data['City'], $country);
                     if(!$city){

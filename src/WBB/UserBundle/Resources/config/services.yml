@@ -45,6 +45,12 @@ services:
         tags:
             - { name: form.type, alias: wbb_user_registration_light }
 
+    wbb_user.profile.form.type:
+            class: WBB\UserBundle\Form\Type\ProfileFormType
+            arguments: [%fos_user.model.user.class%]
+            tags:
+                - { name: form.type, alias: wbb_user_profile }
+
     #FormFactory
     wbb_user.registration.form.factory:
         class: WBB\UserBundle\Form\Factory\FormFactory
