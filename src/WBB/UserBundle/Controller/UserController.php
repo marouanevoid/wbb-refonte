@@ -8,8 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-    public function loadProfileDataAction($barsOnly = 1, $filter = "date" , $offset = 0, $limit = 8, $display = 'grid')
+    public function loadProfileDataAction($content = 1, $filter = "date" , $offset = 0, $limit = 8, $display = 'grid')
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(array(
+                'code' => 403,
+                'message' => 'User not authenticated !'
+            ));
+        }
+
         $response           = null;
         $all                = null;
         $nbResults          = null;
@@ -18,7 +26,7 @@ class UserController extends Controller
 
         $distance   = false;
 
-        if($barsOnly){
+        if($content == "bars"){
             $session = $this->container->get('session');
             $latitude = $session->get('userLatitude' );
             $longitude = $session->get('userLongitude');
@@ -57,11 +65,32 @@ class UserController extends Controller
                 ));
             }
 
-        }else{
+        }elseif($content == "bars"){
             if($filter === "city"){
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, $limit, 'DESC');
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0, 'DESC');
             }elseif($filter === "alphabetical"){
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit);
+                $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0);
+            }elseif($filter === "date"){
+                $response = $this->container->get('bestof.repository')->findLatestBestofs(null, $limit, $offset, false);
+                $all = $this->container->get('bestof.repository')->findLatestBestofs(null, 0, $offset, false);
+            }
+            if($display=="grid"){
+                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
+                    'bestofs' => $response,
+                    'offset'  => $offset,
+                    'limit'   => $limit
+                ));
+            }else{
+                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofsList.html.twig', array(
+                    'bestofs' => $response,
+                    'offset'  => $offset,
+                    'limit'   => $limit
+                ));
+            }
+        }else{
+            if($filter === "alphabetical"){
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0);
             }elseif($filter === "date"){

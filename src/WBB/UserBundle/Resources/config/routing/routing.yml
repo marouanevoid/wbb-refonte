@@ -9,3 +9,9 @@ wbb_user_favoris_add:
 wbb_user_ajax_cities:
     pattern: /ajax/cities
     defaults: { _controller: WBBUserBundle:Ajax:cities }
+
+wbb_profile_filters:
+    pattern: /profile/filter/{content}/{filter}/{offset}/{limit}/{display}
+    defaults: { _controller: WBBUserBundle:User:loadProfileData, content: bars, filter: date, offset: 0, limit: 8, display: grid }
+    options:
+        expose: true

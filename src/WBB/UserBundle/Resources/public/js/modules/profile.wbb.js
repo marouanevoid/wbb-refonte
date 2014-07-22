@@ -1,128 +1,78 @@
-$(document).ready(function()
-{
-    var barsLimit = 8;
-    var bestofLimit = 9;
+var wbb = wbb || {};
 
-   $("form[name=filter]")[0].reset();
-   var loadData = function(){
-       if(istablet==1)
-       {
-           if($('.bar-filter .bar-w-pic').length>0)
-               barsLimit = 4;
-           else
-               barsLimit = 8;
+/**
+ *
+ */
+wbb.LoadProfile = function() {
 
-           if($('.bar-filter .best-of-container').length>0)
-               bestofLimit = 3;
-           else
-               bestofLimit = 9;
-       }
-       var _type, _sortby, _limit, _display;
-       if($("input[name=filter]:checked").val()=='best_of')
-       {
-           _type = 0;
-           _limit   = bestofLimit;
-       }
-       else if($("input[name=filter]:checked").val()=='bar_list')
-       {
-           _type = 1;
-           _limit   = barsLimit;
-       }
-       _sortby  = $("#criteria").val();
-       _display = $('input[name=view-type]:checked').val();
-       console.log("Type : " + $("input[name=filter]:checked").val() );
-//       console.log("City : " + _city );
-       console.log("Sort by : " + _sortby );
-//       console.log("Offset : " + _offset );
-//       console.log("Limit : " + _limit );
-       console.log("Display : " + _display );
+    var that = this;
 
-       ////// TODO ADD THE LAT AND LON TO THE RESQUEST ////////
-       var cibling_long = $.cookie('currentLong'),
-           cibling_lat = $.cookie('currentLat');
-      ///////////////////////////////////////////////////////
-       var _url = Routing.generate('homepage')+"barguide/filter/"+_type+"/"+_city+"/"+_sortby+"/"+_offset+"/"+_limit+"/"+_display;
+    that.context = {
+        requestID: null,
+        $barsTarget: $('.list-bars'),
+        $bestofsTarget: $('.list-bars'),
+        $tipsTarget: $('.list-bars')
+    };
 
+    that.config = {
+      content : 'bars',
+      filter: 'date',
+      offset: 0,
+      limit: 8,
+      display: 'grid'
+    };
 
-       if (_type==1)
-           _offset += barsLimit;
-       else
-           _offset += bestofLimit;
-       var Guides = new meta.LoadMore({$button:$(".load-more"), url:_url});
-       Guides._updateContent();
-   }
-   $(".load-more").on('click', function()
-   {
-       if(istablet==1)
-       {
-               barsLimit = 4;
-               bestofLimit = 3;
-       }
-       $('.disableClick').show();
-       loadData();
-   });
-   $("#criteria, input[name=view-type]").change(function(){
-       if(istablet==1)
-       {
-           if($('.bar-filter .bar-w-pic').length>0)
-               barsLimit = 4;
-           else
-               barsLimit = 8;
-
-           if($('.bar-filter .best-of-container').length>0)
-               bestofLimit = 3;
-           else
-               bestofLimit = 9;
-       }
-       $('.disableClick').show();
-       $(".load-more").show();
-       _offset = 0;
-       if($('input[name=filter]:checked').val()=='bar_list')
-       {
-           _limit = barsLimit;
-       }else{
-           _limit = bestofLimit;
-       }
-       $(".load-target").html('');
-       loadData();
-   });
-   loadData();
-
-    $('input[name=filter]').change(function()
+    that._setupEvents = function ()
     {
-        if(istablet==1)
-        {
-            if($('.bar-filter .bar-w-pic').length>0)
-                barsLimit = 4;
-            else
-                barsLimit = 8;
+        //Load bars on first page load
+        that._request(that.context.$barsTarget);
 
-            if($('.bar-filter .best-of-container').length>0)
-                bestofLimit = 3;
-            else
-                bestofLimit = 9;
-        }
-        $('.disableClick').show();
-        $(".load-more").show();
-        _offset = 0;
-        if( $('input[name=filter]:checked').val() == "bar_list")
+        //load bars on radio buttons change
+        $('input[name=filter]').change(function()
         {
-            $('li.distance').css('display','block');
-            _limit = barsLimit;
-        }
-        else
-        {
-            $('li.distance').css('display','none');
-            if($('#criteria').val()=='distance')
-            {
-                $('.jspPane li.popularity').trigger("click");
-                $('#criteria').val('popularity');
-                $('li.popularity').css('display','block');
+            if($(this).data('tab') == "bars"){
+                that._request(that.context.$barsTarget);
             }
-            _limit = bestofLimit;
-        }
-        $(".load-target").html('');
-        loadData();
-    });
-});
 
+            if($(this).data('tab') == "bestofs"){
+                that._request(that.context.$bestofsTarget);
+            }
+
+            if($(this).data('tab') == "tips"){
+                that._request(that.context.$tipsTarget);
+            }
+        });
+    };
+
+    that._request = function ($target)
+    {
+        var _url = Routing.generate('wbb_profile_filters', {'content': that.config.content, 'filter': that.config.filter, 'offset': that.config.offset, 'limit': that.config.limit, 'display': that.config.display});
+        that.context.requestID = $.ajax({
+            type: "GET",
+            url: _url,
+            dataType: "json",
+            success: function(msg) {
+                console.log(msg);
+                $target.append(msg.htmldata);
+
+            },
+            beforeSend: function()
+            {
+                if (that.context.requestID != null)
+                    that.context.requestID.abort();
+            },
+            error: function(e) {
+                console.log('Profile.wbb.js - Error : ' + e);
+            }
+        });
+
+    };
+
+    that.__construct = function(  )
+    {
+            //
+        that._setupEvents();
+    };
+
+    that.__construct();
+};
