@@ -155,15 +155,17 @@ meta.Dropdown = function(config){
 
         var html     = "";
         var $options = that.config.$dropdown.find('option');
-
+        var selected_value = $options.first().text();
         $options.each(function()
         {
             if( !$(this).attr('disabled') )
                 html += "<li class='"+$(this).val()+"' "+($(this).index()==0?'style="display:none"':'')+">"+$(this).text()+"</li>"
+            if ($(this).attr("selected"))
+                selected_value = $(this).text();
         });
 
         html = that.config.template.replace('%options%', html);
-        html = html.replace('%name%', $options.first().text());
+        html = html.replace('%name%', selected_value);
         html = html.replace('%color%', 'drop-'+that.config.color+' '+that.config.$dropdown.data('class'));
 
         that.config.$dropdown_replacement = $(html);

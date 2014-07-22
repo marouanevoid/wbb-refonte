@@ -198,6 +198,11 @@ class BarController extends Controller
     {
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
+
+        $mood_selected = $session->get('barfinder_mood');
+        $city_selected = $session->get('barfinder_city');
+        $toGoOutWith_selected = $session->get('barfinder_tag');
+
         $city = null;
         if (!empty($slug))
             $city = $this->get('city.repository')->findOneBySlug($slug);
@@ -210,7 +215,10 @@ class BarController extends Controller
             'city'      => $city,
             'cities'    => $cities,
             'firstTags' => $toGoOutWith,
-            'moods'     => $moods
+            'moods'     => $moods,
+            'mood_selected' => $mood_selected,
+            'city_selected' => $city_selected,
+            'toGoOutWith_selected' => $toGoOutWith_selected
         ));
     }
 
@@ -220,24 +228,31 @@ class BarController extends Controller
         $city = null;
         $tag = null;
 
+        $session = $this->container->get('session');
         if($request->request->get('mood') != "")
         {
             $mood = $request->request->get('mood');
+            $session->set('barfinder_mood', $mood);
+        }else{
+            $session->set('barfinder_mood', "");
         }
 
-        if($request->request->get('city') != "")
+        if($request->request->get('city') != "") 
         {
-            $city = $this->container->get('city.repository')->findOneBySlug($request->request->get('city'));
+            if ($request->request->get('city') != 'all')
+                $city = $this->container->get('city.repository')->findOneBySlug($request->request->get('city'));
+            $session->set('barfinder_city', $request->request->get('city'));
         }
 
         if($request->request->get('go_out') != "")
         {
-            $tag = $request->request->get('go_out');
+            if ($request->request->get('go_out') != 'all')
+                $tag = $request->request->get('go_out');
+            $session->set('barfinder_tag', $request->request->get('go_out'));        
         }
 
         $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
 
-        $session = $this->container->get('session');
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
         $distance = false;

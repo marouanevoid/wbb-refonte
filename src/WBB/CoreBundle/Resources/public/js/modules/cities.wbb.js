@@ -247,6 +247,7 @@ wbb.CitiesPage = function () {
             }
             else
             {
+                $.address.state($(this).find('input[name=city]').val());  
                 that._requestCities($(this).find('input[name=city]').val(), function(query, cities)
                 {
                     if (cities.length > 1 )
@@ -326,11 +327,12 @@ wbb.CitiesPage = function () {
 
                 $mode_list.parent().addClass('active');
                 $mode_list.prop('checked', true).trigger("change");
+
             }
         });
 
         /* On click */
-        $selector.find('input[name=city], input[type=submit]').click(function()
+     /*   $selector.find('input[name=city], input[type=submit]').click(function()
         {
             if( !$('html').hasClass('mobile') || $(window).width() > 640 )
             {
@@ -349,7 +351,7 @@ wbb.CitiesPage = function () {
                 $mode_list.parent().addClass('active');
                 $mode_list.prop('checked', true).trigger("change");
             }
-        });
+        });*/
 
         /* Changes on the input of city */
         that.context.$container.find('form input[name=city]').on('keyup', function()
@@ -614,6 +616,14 @@ wbb.CitiesPage = function () {
 
         that._setupEvents();
         that._showAllCities(false);
+         // Init and change handlers
+
+        // $.address.init(function(event){});
+        // $.address.change(function(event) {});
+
+        
+        // if (parameter)
+         //   that._showCity(parameter);
 
         that._resize();
     };

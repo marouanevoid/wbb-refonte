@@ -324,59 +324,9 @@ meta.App = function() {
         that._setupEvents();
         that._customScroll();
     };
-    /**
-    *** Add listner on bar
-    *    finder
-    ***/
-
-    that.bareFinderHandler = function(){
-            var $finder = $('.bar-finder'),
-                $city = $finder.find('.city li'),
-                $gowith = $finder.find('.friend li'),
-                $moodItem = $('.mood-item');
-
-            if($('.ipad').length <= 0 ){
-                $city.on('click',function(){
-                    // stock the current city on session cookie
-                    $.cookie('finder_city' , $(this).prop('class'), 0);
-                });            
-
-                $gowith.on('click',function(){
-                    // stock the current city on session cookie
-                    $.cookie('finder_gowith' , $(this).prop('class'), 0);
-                });
-            }
-            else{
-                $city = $finder.find('[name=city]');
-                $gowith = $finder.find('[name=go_out]');
-                $city.on('change' , function(){
-                    var Index = this.selectedIndex;
-                    if(Index == 0)
-                        return;
-                    $.cookie('finder_city' ,Index, 0);
-                    console.log('city changed :: ' + Index);
-                });                
-                $gowith.on('change' , function(){
-                    var Index = this.selectedIndex;
-                    if(Index == 0)
-                        return;
-                    $.cookie('finder_gowith' ,Index, 0);
-                });  
-            }  
-            
-
-
-            $moodItem.parent('a').on('click',function(){ 
-                var indexMood = $(this).find('input').attr('data-index');
-                $.cookie('finder_mood' , indexMood, 0);
-            });
-
-
-
-    }
 
     that.__construct();
-    that.bareFinderHandler();
+
 
     // Script Injection for Select UI
     ////////
