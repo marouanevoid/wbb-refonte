@@ -122,17 +122,17 @@ class BarController extends Controller
 
         if(!empty($latitude) && !empty($longitude) && !empty($slug)){
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
-            $response['distance'] = true;
-            $response['latitude'] = $latitude;
+            $response['distance']  = true;
+            $response['latitude']  = $latitude;
             $response['longitude'] = $longitude;
         }else{
-            $response['distance'] = false;
+            $response['distance']  = false;
         }
 
-        $response['topCities']      = $this->container->get('city.repository')->findTopCities();
-        $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars($city);
-        $response['topBestofs']     = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5, false);
-        $response['city']           = $city;
+        $response['topCities']     = $this->container->get('city.repository')->findTopCities();
+        $response['popularBars']   = $this->container->get('bar.repository')->findPopularBars($city);
+        $response['topBestofs']    = $this->container->get('bestof.repository')->findTopBestOfs($city, true, 5, false);
+        $response['city']          = $city;
 
         return $this->render('WBBBarBundle:BarGuide:barGuides.html.twig', $response);
     }
@@ -183,7 +183,7 @@ class BarController extends Controller
             $city = $this->get('city.repository')->findOneBySlug($slug);
 
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
-        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL);
+        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
         $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
 
         return $this->render('WBBBarBundle:BarFinder:Mobile\barFinderForm.html.twig', array(
