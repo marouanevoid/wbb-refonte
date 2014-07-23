@@ -430,6 +430,7 @@
   .bar-guides .sub-header {width: 99%;}
   .no-results h1 {font-size: 4em;}
   section.bar-finder .ui-radio.btn-radius.with-icon {text-align: left; padding-left: 2em;}
+  .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
