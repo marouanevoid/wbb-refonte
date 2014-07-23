@@ -319,6 +319,21 @@ meta.App = function() {
      */
     that.__construct = function()
     {
+        /*
+        * First visite
+        */
+
+        // Tester si le cookies first visit existe
+        // On le crée
+        if ( $.cookie('first_visite') === undefined ){
+            $.cookie('first_visite' , true , 0);
+        }
+        else{
+            if($.cookie('first_visite') == 'true'){
+                $.cookie('first_visite' , false , 0);
+            }
+        }
+
         that._setupElements();
         that._setupEvents();
         that._customScroll();
@@ -339,7 +354,7 @@ meta.App = function() {
             li.show();
 
             li.each(function(){
-                if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+                if($(this).text().toLowerCase().indexOf(selected.toLowerCase())>-1 || ($(this).text().indexOf('Choose with who')>-1 || $(this).text().indexOf('Choose a City')>-1 ))
                     $(this).hide();
             });
 
@@ -355,7 +370,6 @@ $(document).ready(function()
 {
     new meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
     new meta.App();
-
     $('.entire-content').show();
     $('.entire-content').addClass('show');
 });

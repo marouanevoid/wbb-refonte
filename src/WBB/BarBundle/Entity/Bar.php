@@ -384,6 +384,11 @@ class Bar implements IndexableEntity
     private $semsoftBars;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="favoriteBars")
+     */
+    private $usersFavorite;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -1593,18 +1598,23 @@ class Bar implements IndexableEntity
         $dist = acos($dist);
         $dist = rad2deg($dist);
         $miles = $dist * 60 * 1.1515;
-        $unit = strtoupper($unit);
+        if($miles < 125){
+            $unit = strtoupper($unit);
+            $response = " - ";
 
-        if($unit == "m")
-        {
-            return round($miles, 2);
-        }
-        elseif($unit == "nm") {
-            return round(($miles * 0.8684), 2);
-        }
-        else
-        {
-            return round(($miles * 1.609344), 2);
+            if($unit == "M"){
+                $response.= round($miles, 2)." Mi";
+            }
+            elseif($unit == "NM"){
+                $response.= round(($miles * 0.8684), 2)." Nm";
+            }
+            else{
+                $response.= round(($miles * 1.609344), 2)." Km";
+            }
+
+            return $response;
+        }else{
+            return '';
         }
     }
 
@@ -2085,5 +2095,68 @@ class Bar implements IndexableEntity
         }
 
         return $tags;
+    }
+
+    /**
+     * Get creditCard
+     *
+     * @return boolean 
+     */
+    public function getCreditCard()
+    {
+        return $this->creditCard;
+    }
+
+    /**
+     * Get coatCheck
+     *
+     * @return boolean 
+     */
+    public function getCoatCheck()
+    {
+        return $this->coatCheck;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return boolean 
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
+
+    /**
+     * Add usersFavorite
+     *
+     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     * @return Bar
+     */
+    public function addUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
+    {
+        $this->usersFavorite[] = $usersFavorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove usersFavorite
+     *
+     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     */
+    public function removeUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
+    {
+        $this->usersFavorite->removeElement($usersFavorite);
+    }
+
+    /**
+     * Get usersFavorite
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsersFavorite()
+    {
+        return $this->usersFavorite;
     }
 }

@@ -267,11 +267,11 @@
                             </div>
                             {% if news.bars|length>0 %}
                                 {% for b in news.bars %}
-                                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                                    {% include "WBBBarBundle:Bar:bar-mobile.html.twig" with { 'b': b } %}
                                 {% endfor %}
                             {% else %}
                                 {% for b in latestBars %}
-                                    {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                                    {% include "WBBBarBundle:Bar:bar-mobile.html.twig" with { 'b': b } %}
                                 {% endfor %}
                             {% endif %}
 

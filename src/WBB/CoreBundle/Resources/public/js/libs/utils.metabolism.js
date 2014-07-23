@@ -92,8 +92,12 @@ meta.Utils = function() {
 
         $covers.each(function()
         {
-            var $element   = $(this).find(' > img');
-            $element.data('ratio', parseInt($element.prop('width'))/parseInt($element.prop('height')));
+            var $element = $(this).find(' > img').first();
+            var width    = parseInt($element.attr('width'));
+            var height   = parseInt($element.attr('height'));
+            var ratio    = width/height;
+
+            $element.data('ratio', ratio);
         });
 
         if( ratio_only ) return;
