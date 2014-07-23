@@ -381,7 +381,7 @@
   #page-standard .min-height {min-height: 450px;}
   #page-standard .content .h3 {color: #b3955f;}
 /* SHARE Tooltips */
-  .wrap-share {width: 388px;}
+  .wrap-share {width: 388px; display: none;}
   .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px;}
   .wrap-share .social-share .share-label {}
   .wrap-share .social-share ul {}
@@ -422,7 +422,6 @@
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
-  /*.index .sub-header .title h1 {text-align: left;}*/
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
   .bar-details .also-appears .h2 {text-align: center;}
   .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
