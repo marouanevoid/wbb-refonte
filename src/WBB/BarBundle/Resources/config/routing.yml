@@ -11,6 +11,10 @@ homepage:
     options:
         expose: true
 
+wbb_bar_ads:
+    pattern: /wbb/ads/{format}
+    defaults: { _controller: WBBBarBundle:Ads:show }
+
 wbb_bar_guides:
     pattern: /bar-guides
     defaults: { _controller: WBBBarBundle:Bar:barGuide }
@@ -93,6 +97,8 @@ wbb_bar_finder:
 wbb_bar_finder_results:
     pattern: /bar-finder-results
     defaults: { _controller: WBBBarBundle:Bar:barFinderResults }
+    requirements:
+        _method:  POST
 
 wbb_news_landing_page:
     pattern: /news

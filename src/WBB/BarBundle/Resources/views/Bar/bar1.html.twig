@@ -1,5 +1,5 @@
 <article class="bar-w-pic {% if bestof is defined %}best-of{% endif %}">
-    <a href="#0" class="btn-round dark star"></a>
+    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
     <div class="txt">
         {% if (bestof is defined) and ordered %}
             <span class="number h2">{{ loop.index }}</span>
@@ -20,7 +20,7 @@
         </div>
     </div>
     {% if b.suburb %}
-        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
@@ -29,6 +29,6 @@
         <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
     {% endfor %}
     {% else %}
-        <img class="scale-with-grid" src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="282" height="210" alt=""/>
+        <img class="scale-with-grid" src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
     {% endif %}
 </article>  

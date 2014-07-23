@@ -6,6 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -236,6 +237,13 @@ class User extends BaseUser
     private $favoriteBestOfs;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
+     */
+    private $tipsShouldBeModerated;
+
+    /**
      * @var datetime
      *
      * @Gedmo\Timestampable(on="create")
@@ -267,6 +275,8 @@ class User extends BaseUser
         parent::__construct();
         $this->setEnabled(true);
         $this->setStayInformed(true);
+        $this->tipsShouldBeModerated = true;
+        $this->favoriteBars = new ArrayCollection();
     }
 
     /**
@@ -1050,29 +1060,6 @@ class User extends BaseUser
 
 
     /**
-     * Set stayBrandInformed
-     *
-     * @param boolean $stayBrandInformed
-     * @return User
-     */
-    public function setStayBrandInformed($stayBrandInformed)
-    {
-        $this->stayBrandInformed = $stayBrandInformed;
-
-        return $this;
-    }
-
-    /**
-     * Get stayBrandInformed
-     *
-     * @return boolean 
-     */
-    public function getStayBrandInformed()
-    {
-        return $this->stayBrandInformed;
-    }
-
-    /**
      * Add favoriteBars
      *
      * @param \WBB\BarBundle\Entity\Bar $favoriteBars
@@ -1081,7 +1068,18 @@ class User extends BaseUser
     public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
     {
         $this->favoriteBars[] = $favoriteBars;
+        return $this;
+    }
 
+    /**
+     * Set stayBrandInformed
+     *
+     * @param boolean $stayBrandInformed
+     * @return User
+     */
+    public function setStayBrandInformed($stayBrandInformed)
+    {
+        $this->stayBrandInformed = $stayBrandInformed;
         return $this;
     }
 
@@ -1136,5 +1134,38 @@ class User extends BaseUser
     public function getFavoriteBestOfs()
     {
         return $this->favoriteBestOfs;
+    }
+
+    /**
+     * Set tipsShouldBeModerated
+     *
+     * @param boolean $tipsShouldBeModerated
+     * @return User
+     */
+    public function setTipsShouldBeModerated($tipsShouldBeModerated)
+    {
+        $this->tipsShouldBeModerated = $tipsShouldBeModerated;
+
+        return $this;
+    }
+
+    /**
+     * Get tipsShouldBeModerated
+     *
+     * @return boolean 
+     */
+    public function getTipsShouldBeModerated()
+    {
+        return $this->tipsShouldBeModerated;
+    }
+
+    /**
+     * Get stayBrandInformed
+     *
+     * @return boolean 
+     */
+    public function getStayBrandInformed()
+    {
+        return $this->stayBrandInformed;
     }
 }

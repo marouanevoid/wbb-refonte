@@ -5,6 +5,8 @@ namespace WBB\CloudSearchBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use WBB\BarBundle\Entity\Tag;
+use WBB\CloudSearchBundle\Searcher\CloudSearchSearcher;
 
 class SearchController extends Controller
 {
@@ -23,14 +25,25 @@ class SearchController extends Controller
 
     public function searchResultsAction(Request $request)
     {
-        $barResults = $this->getSearchResults($request, 'Bar');
-        $newsResults = $this->getSearchResults($request, 'News');
+        $em = $this->getDoctrine()->getManager();
 
-        $cities = $this->getDoctrine()->getManager()->getRepository('WBBCoreBundle:City')->findAll();
+        $cities = $em->getRepository('WBBCoreBundle:City')->findAll();
+        $types = Tag::getTypeNames();
+        $tagsByType = array();
+        $csNames = CloudSearchSearcher::getCSTagsNames();
+
+        foreach ($types as $type => $name) {
+            if (isset($csNames[$type])) {
+                $tagsByType[] = array(
+                    'name' => $name,
+                    'csName' => $csNames[$type],
+                    'tags' => $em->getRepository('WBBBarBundle:Tag')->findByType($type)
+                );
+            }
+        }
 
         return $this->render('WBBCloudSearchBundle:Search:search-results.html.twig', array(
-                    'bar_results' => $barResults,
-                    'news_results' => $newsResults,
+                    'tagsByType' => $tagsByType,
                     'cities' => $cities
         ));
     }
@@ -45,6 +58,7 @@ class SearchController extends Controller
         $mood = $request->query->get('mood', null);
         $occasion = $request->query->get('occasion', null);
         $cocktails = $request->query->get('cocktails', null);
+        $district = $request->query->get('district', null);
 
         $results = $this->get('cloudsearch.searcher')->search(array(
             'q' => $q,
@@ -55,7 +69,8 @@ class SearchController extends Controller
             'style' => $style,
             'mood' => $mood,
             'occasion' => $occasion,
-            'cocktails' => $cocktails
+            'cocktails' => $cocktails,
+            'district' => $district
         ));
 
         return $results;
