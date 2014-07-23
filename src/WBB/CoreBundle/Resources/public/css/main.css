@@ -435,13 +435,12 @@
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
-  .mobile .sub-header .title h3 {font-size: 16px; line-height: 24px;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
-  .ipad .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
+  .ipad .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
   .ipad .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
-  .ipad .bar-details .sub-header .star-share .btn-round.star:after {opacity: 0;}
+  .ipad .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
 
   /* IE9 */
   .articles article .img .cover .sponsor,
@@ -478,14 +477,14 @@
   TEMPS STYLE
 */
   @media only screen and (max-width: 768px) {
-    .mobile section.bar-filter .bar-w-pic .btn-round:before {
+    section.bar-filter .bar-w-pic .btn-round:before {
       background-size: 128px 256px;
       background-position: -80px -40px;
     }
     section.bar-filter .bar-w-pic .btn-round.active:before {
       background-position: -80px -120px!important;
     }
-    .mobile section.bar-filter .bar-w-pic .btn-round {
+    section.bar-filter .bar-w-pic .btn-round {
         width: 20px;
         height: 20px;
         right: 0.5em;
@@ -501,25 +500,12 @@
       background-repeat: no-repeat;
       background-size: 90px 40px;
     }
-    .social-share .fb-share {
-      background-image: url("../images/fbx2.png");
-    }
-    .social-share .twitter-share {
-      background-image: url("../images/twitterx2.png");
-    }
-    .social-share .email-share {
-      background-image: url("../images/emailx2.png");
-    }
-    .mobile .bar-guides .filters .ui-radio {
-      line-height: 45px;
-    }
-    .bar-details .also-appears .h2 {
-      text-align: center;
-    }
-    .no-results h1 {
-      font-size: 2em;
-    }
-    .sub-header .star-share .btn-round.star:hover {
-      background-color: transparent!important;
-    }
+    .social-share .fb-share {background-image: url("../images/fbx2.png");}
+    .social-share .twitter-share {background-image: url("../images/twitterx2.png");}
+    .social-share .email-share {background-image: url("../images/emailx2.png");}
+    .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
+    .bar-details .also-appears .h2 {text-align: center;}
+    .no-results h1 {font-size: 2em;}
+    .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
+    .sub-header .title h3 {font-size: 16px; line-height: 20px; width: 78%; margin: auto;}
   }
