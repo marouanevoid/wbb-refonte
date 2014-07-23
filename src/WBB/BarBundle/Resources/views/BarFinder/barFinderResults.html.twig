@@ -117,7 +117,7 @@
                     <td class="title margin-top-10">
                         <h1 itemprop="name">Bar finder results</h1>
                         <h3 class="bold">
-                            We found {{ bars|length }} {% if bars|length > 1 %}bars{% else %}bar{% endif %} that matches your request!
+                            We found {{ bars|length }} {% if bars|length > 1 %}bars that match{% else %}bar that matches{% endif %} your request!
                         </h3>
                     </td>
                     <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
