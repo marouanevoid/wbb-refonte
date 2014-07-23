@@ -38,7 +38,7 @@
                         {% for mood in moods %}
                             <li class="left">
                                 <div class="form-radio">
-                                    <input type="radio" name="mood" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="ui-radio dark with-icon text-transform-capitalize" data-color="brown">
+                                    <input type="radio" name="mood" data-value="{{ mood |lower }}" value="{{ mood }}" class="ui-radio dark with-icon text-transform-capitalize" data-color="brown">
                                 </div>
                             </li>
                         {% endfor %}

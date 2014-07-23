@@ -140,10 +140,9 @@ meta.LoadMore = function(config) {
             {
                 that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
             }
+            that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
+            that.context.is_loading = false;
         }
-        that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
-
-        that.context.is_loading = false;
     }
 
     /**

@@ -223,7 +223,12 @@ class BarController extends Controller
             $city = $this->get('city.repository')->findOneBySlug($slug);
 
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
-        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
+        $moods          = array(
+            'Chill Out',
+            'Casual',
+            'Party'
+        );
+//        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
         $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
 
         return $this->render('WBBBarBundle:BarFinder:barFinderForm.html.twig', array(
@@ -246,13 +251,13 @@ class BarController extends Controller
         $session = $this->container->get('session');
         if($request->request->get('mood') != "")
         {
-            $mood = $request->request->get('mood');
-            $session->set('barfinder_mood', $mood);
+            $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, $limit = 1, $request->request->get('mood'));
+            $session->set('barfinder_mood', $mood[0]);
         }else{
             $session->set('barfinder_mood', "");
         }
 
-        if($request->request->get('city') != "") 
+        if($request->request->get('city') != "")
         {
             if ($request->request->get('city') != 'all')
                 $city = $this->container->get('city.repository')->findOneBySlug($request->request->get('city'));
@@ -263,10 +268,10 @@ class BarController extends Controller
         {
             if ($request->request->get('go_out') != 'all')
                 $tag = $request->request->get('go_out');
-            $session->set('barfinder_tag', $request->request->get('go_out'));        
+            $session->set('barfinder_tag', $request->request->get('go_out'));
         }
 
-        $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
+        $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood[0]);
 
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');

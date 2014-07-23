@@ -344,7 +344,7 @@ class BarRepository extends EntityRepository
         }
 
         if($mood){
-            $qb->andWhere($qb->expr()->eq($this->getAlias().'.energyLevel', $mood));
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.energyLevel', $mood->getId()));
         }
 
         return $qb->getQuery()->getResult();
