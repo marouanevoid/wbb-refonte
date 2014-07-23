@@ -20,7 +20,7 @@
         </div>
     </div>
     {% if b.suburb %}
-        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
@@ -29,6 +29,6 @@
         <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
     {% endfor %}
     {% else %}
-        <img class="scale-with-grid" src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="282" height="210" alt=""/>
+        <img class="scale-with-grid" src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
     {% endif %}
 </article>  
