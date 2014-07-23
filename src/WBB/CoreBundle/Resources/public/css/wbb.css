@@ -298,3 +298,12 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     overflow: auto;
 }
 
+
+.loader-search-page {
+    background: url(../images/gif-load.gif) no-repeat center;
+    height:36px;
+    width:36px;
+    position: relative;
+    top: -34px;
+    display: none;
+}
