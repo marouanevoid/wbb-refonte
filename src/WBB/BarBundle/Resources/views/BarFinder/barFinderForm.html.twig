@@ -1,18 +1,45 @@
 <script type="text/javascript">
     $(function(){
+            toGoOutWith_selected = "{{toGoOutWith_selected}}";
+            city_selected = "{{city_selected}}";
+            mood_selected = "{{mood_selected}}";
+
         var showGo = function(){
             $('.go').removeClass('disabled');
             $('.go').removeAttr('disabled');
         };
        
-       $('.trigger-handler').parent('a').on('click' , showGo);
+
+        // remove Class active on input if is not checked
+       $('.trigger-handler').parent('a').on('click' , function(){
+
+                $('.trigger-handler').each(function(){
+                if( ! $(this).is(':checked'))
+                    $(this).parent('a.ui-radio').removeClass('active');
+                });
+                showGo();
+       });
+       
        $('.trigger-select-go').on('change' , showGo);
 
        $('.go').addClass('disabled');
        $('.go').attr('disabled' , 'disabled');
        // Delete the fake item on the list
        $('.fake-go-item').remove();
+
+
+       // if already one filter is checked 
+      //thene active Go button
+
+      var $gobtn = ('.bar-finder .go');
+      if(toGoOutWith_selected !='' || city_selected != '' || mood_selected != '')
+            showGo();
     });
+
+
+
+
+
 </script>
 {% if is_tablet() %}
     <style type="text/css">
@@ -24,7 +51,7 @@
         <img class="finder-arrow" src="{{ asset('bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
         <div class="twelve columns">
             <a class="finder-close"></a>
-            <form action="{#{ path('wbb_bar_finder_results') }#}" method="post">
+            <form action="{{ path('wbb_bar_finder_results') }}" method="post">
                 <table>
                     <tr>
                         <td rowspan="2">
@@ -41,9 +68,12 @@
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
                                 <option value="">Choose a City</option>
+                                <option value="all" {% if city_selected ==  "all" %} selected="selected" {% endif %}>All</option>
                                 {% if city %} <option value="">{{ city.name }}</option> {% endif %}
                                 {% for c in cities %}
-                                    <option value="{{ c.slug }}">{{ c.name }}</option>
+                                    <option value="{{ c.slug }}" 
+                                    {% if city_selected ==  c.slug %} selected {% endif %}
+                                    >{{ c.name }}</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -51,8 +81,11 @@
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
                                 <option value="">Choose with who</option>
+                                <option value="all" {% if toGoOutWith_selected ==  "all" %} selected="selected" {% endif %}>All</option>
                                 {% for tag in firstTags %}
-                                    <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                    <option value="{{ tag.id }}"
+                                    {% if toGoOutWith_selected ==  tag.id %} selected {% endif %}
+                                    >{{ tag.name }}</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -65,7 +98,9 @@
                         {% for mood in moods %}
                         {% set curostIndex  = curostIndex + 1 %}
                             <td>
-                                <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"/>
+                                <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"
+                                 {% if mood_selected ==  mood.id %} checked="checked" {% endif %}
+                                />
                             </td>
                         {% endfor %}
                         {#<td>#}
@@ -80,6 +115,13 @@
                         </td>
                     </tr>
                 </table>
+
+                <!-- 
+                    SESSION :
+                    mood > {{ mood_selected }}
+                    toGoOutWith_selected > {{ toGoOutWith_selected }}
+                    city_selected > {{ city_selected }}
+                -->
             </form>
         </div>
     </div>

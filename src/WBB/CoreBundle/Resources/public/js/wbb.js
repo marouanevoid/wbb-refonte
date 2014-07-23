@@ -176,15 +176,15 @@ $(document).ready(function() {
     $(document).on("click", ".star", function(e) {
         e.preventDefault();
         var btn = $(this);
-        //var url = $(this).attr('href');
-        var url = "/app_dev.php";
-        //if (window.userConnected) {
+        var url = $(this).attr('href');
+//        var url = "/app_dev.php";
+        if (window.userConnected) {
             $.ajax({
                 type: "POST",
                 url: url,
                 success: function(response) {
-                   // if (response.code === 200) {
-                        //btn.attr('href', response.href);
+                   if (response.code === 200) {
+                        btn.attr('href', response.href);
                         if (btn.hasClass('active')) {
                             btn.hide();
                             btn.removeClass('active');
@@ -210,14 +210,14 @@ $(document).ready(function() {
                             }
                             btn.show();
                         }
-                        //console.log(response.message);
-                    // } else {
+                        console.log(response.message);
+                    } else {
 
-                    // }
+                    }
                 }
             });
-        // } else {
-        //     $('#show-popin-tips').click();
-        // }
+        } else {
+             $('#show-popin-tips').click();
+        }
     });
 });

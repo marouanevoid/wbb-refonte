@@ -13,14 +13,15 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class AdRepository extends EntityRepository
 {
-    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300x250, $country = null)
+    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300X250, $country = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
             ->where($qb->expr()->eq($this->getAlias().'.position', $qb->expr()->literal($position)))
-            ->andWhere($qb->expr()->between($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.beginAt', $this->getAlias().'.endAt'))
+            ->andWhere($qb->expr()->gte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.beginAt'))
+            ->andWhere($qb->expr()->lte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.endAt'))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->setMaxResults(1);
         ;
@@ -28,10 +29,10 @@ class AdRepository extends EntityRepository
         if($country){
             $qb
                 ->leftJoin($this->getAlias().'.countries', 'c')
-                ->andWhere($qb->expr()->eq($this->getAlias().'.country', $country->getId()))
+                ->andWhere($qb->expr()->eq('c.id', $country->getId()))
             ;
         }
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 } 

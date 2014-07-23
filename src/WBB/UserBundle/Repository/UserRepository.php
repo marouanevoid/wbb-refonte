@@ -13,4 +13,14 @@ use WBB\CoreBundle\Repository\EntityRepository;
 class UserRepository extends EntityRepository
 {
 
+    public function findAdminUsers()
+    {
+        $role = \FOS\UserBundle\Model\User::ROLE_SUPER_ADMIN;
+        $qb = $this->createQueryBuilder('u')
+                ->where('u.roles LIKE :roles')
+                ->setParameter('roles', '%"' . $role . '"%');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

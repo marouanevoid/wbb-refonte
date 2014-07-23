@@ -47,9 +47,9 @@ class CityController extends Controller
 
         $session->set('userLatitude', $latitude);
         $session->set('userLongitude', $longitude);
-        $session->set('citySlug', $city->getSlug());
 
         if($city){
+            $session->set('citySlug', $city->getSlug());
             return new JsonResponse(array(
                 'id'    => $city->getId(),
                 'name'  => $city->getName(),
