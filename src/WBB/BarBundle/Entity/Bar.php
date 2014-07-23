@@ -346,7 +346,7 @@ class Bar implements IndexableEntity
     private $toGoWith;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"persist", "remove", "detach"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
@@ -636,7 +636,7 @@ class Bar implements IndexableEntity
      */
     public function setInstagram($instagram)
     {
-        $this->instagram = $instagram;
+        $this->instagram = str_replace("http://instagram.com/", '', $instagram);
 
         return $this;
     }
@@ -1996,7 +1996,7 @@ class Bar implements IndexableEntity
         return array(
             'ID'                    => $this->getId(),
             'Name'                  => $this->getName(),
-            'Country'               => ($this->getCity() && $this->getCity()->getCountry())?$this->getCity()->getCountry()->getName():'',
+            'Country'               => ($this->getCity() && $this->getCity()->getCountry())?$this->getCity()->getCountry()->getAcronym():'',
             'County'                => $this->getCounty(),
             'City'                  => ($this->getCity())?$this->getCity()->getName():'',
             'PostalCode'            => ($this->getCity())?$this->getCity()->getPostalCode():'',

@@ -257,7 +257,7 @@ class BarController extends Controller
         if($request->request->get('mood') != "")
         {
             $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, $limit = 1, $request->request->get('mood'));
-            $session->set('barfinder_mood', $mood[0]);
+            $session->set('barfinder_mood', (count($mood)>0)?$mood[0]:null);
         }else{
             $session->set('barfinder_mood', "");
         }
