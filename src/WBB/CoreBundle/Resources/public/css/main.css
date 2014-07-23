@@ -195,11 +195,12 @@
   #register-tips #create-account {width: 300px; padding: 0 0 0 50px;}
   #register-tips #create-account .form-text {text-align: left; text-indent: 15px;}
   #register-tips .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
-  #register-tips .btn-create-with-fb {margin: 0 0 0 16px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
-  #register-tips .connect-fb {line-height: 45px; font-size: 15px;}
   #register-tips #date-birthday label {color: #818a8c; font-size: 17px;}
   #register-tips #date-birthday .select-wrap.last {margin-right: 0;}
-  
+  .ui .btn-create-with-fb {margin: 0 0 0 16px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
+  .ui .btn-create-with-fb {border-radius: 0; line-height: normal; height: 42px;}
+  .ui .connect-fb {line-height: 45px; font-size: 15px;}
+
   /* Message's */
   #message {background-color: #818a8c; width: 100%; padding-left: 10px;}
   #message img {margin: 0 20px 0 0;}
@@ -217,7 +218,8 @@
     /* Popup */
     .popup #success p {margin: 0 0 30px; line-height: 26px; font-size: 26px;}
     .popup #success .subtitle {margin: 0 0 25px; font-size: 40px;}
-/* Register4 (Page) - PSDN : PSDs/login/desktop/register4.psd; */
+
+/* Register Page */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
   #register.page .ui {position: static; width: 560px;}
   #register.page .title {width: 100%;}
@@ -228,8 +230,10 @@
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 38%;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
-  #register.page .group-action {width: 128%;}
-  #register.page .group-action .form-submit {width: 50%; margin: auto; display: block;}
+  #register.page .group-action {/*width: 128%;*/}
+  #register.page .group-action .form-submit {/*width: 50%; margin: auto; display: block;*/}
+  #register.page .group-actions .form-submit {position: relative; right: 105px;}
+
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 26px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
@@ -285,7 +289,6 @@
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
   #register.page.mobile #create-account .form-text {width: 100%; margin: 0 0 10px;}
-  #register.page.mobile #create-account .btn-create-with-fb {border-radius: 0; line-height: normal; height: 42px;}
   #register.page.mobile #countries .left,
   #register.page.mobile #countries .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile #countries label {display: none!important;}
@@ -381,11 +384,13 @@
   #page-standard .min-height {min-height: 450px;}
   #page-standard .content .h3 {color: #b3955f;}
 /* SHARE Tooltips */
-  .wrap-share {width: 388px; display: none;}
-  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px;}
-  .wrap-share .social-share .share-label {}
-  .wrap-share .social-share ul {}
-  .wrap-share .social-share li a {height: 41px; width: 90px;}
+  .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
+  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px;}
+  .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}  
+  .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
+  .wrap-share .social-share li {height: 41px; width: 90px; margin-right: 4px;}
+  .wrap-share .social-share li:last-child {margin: 0;}
+  .wrap-share .social-share li a {height: 41px; width: 90px; margin: 0;}
   .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
@@ -423,8 +428,6 @@
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
-  .bar-details .also-appears .h2 {text-align: center;}
-  .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
   .bar-guides .sub-header {width: 100%;}
   .no-results h1 {font-size: 4em;}
 
@@ -433,7 +436,6 @@
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
   .mobile .sub-header .title h3 {font-size: 16px; line-height: 24px;}
-  .mobile .no-results h1 {font-size: 2em;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
@@ -507,5 +509,14 @@
     }
     .social-share .email-share {
       background-image: url("../images/emailx2.png");
+    }
+    .mobile .bar-guides .filters .ui-radio {
+      line-height: 45px;
+    }
+    .bar-details .also-appears .h2 {
+      text-align: center;
+    }
+    .no-results h1 {
+      font-size: 2em;
     }
   }
