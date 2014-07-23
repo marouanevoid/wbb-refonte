@@ -31,6 +31,12 @@ class TagRepository extends EntityRepository
             $qb->andWhere($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)));
         }
 
-        return ($onlyQueryBuilder)? $qb : $qb->getQuery()->getResult();
+        if($onlyQueryBuilder){
+            return $qb;
+        }elseif($limit == 1){
+            return $qb->getQuery()->getOneOrNullResult();
+        }else{
+            return $qb->getQuery()->getResult();
+        }
     }
 } 
