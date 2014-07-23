@@ -29,7 +29,7 @@ class FavoriteController extends Controller
             ));
         }
 
-        $bar->addUser($user);
+        $bar->addUsersFavorite($user);
         $user->addFavoriteBar($bar);
 
         $em->persist($bar);
@@ -66,7 +66,7 @@ class FavoriteController extends Controller
             ));
         }
 
-        $bar->removeUser($user);
+        $bar->removeUsersFavorite($user);
         $user->removeFavoriteBar($bar);
 
         $em->persist($bar);

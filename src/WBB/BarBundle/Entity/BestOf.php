@@ -149,6 +149,10 @@ class BestOf implements IndexableEntity
      **/
     private $bestofs;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="favoriteBestOfs")
+     */
+    private $usersFavorite;
 
     /**
      * @var \DateTime
@@ -830,5 +834,38 @@ class BestOf implements IndexableEntity
     public function getToGoWith()
     {
         return $this->toGoWith;
+    }
+
+    /**
+     * Add usersFavorite
+     *
+     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     * @return BestOf
+     */
+    public function addUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
+    {
+        $this->usersFavorite[] = $usersFavorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove usersFavorite
+     *
+     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     */
+    public function removeUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
+    {
+        $this->usersFavorite->removeElement($usersFavorite);
+    }
+
+    /**
+     * Get usersFavorite
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsersFavorite()
+    {
+        return $this->usersFavorite;
     }
 }
