@@ -100,7 +100,7 @@ meta.LoadMore = function(config) {
                 that.config.$target.append(msg.htmldata);
 
                 if( callback ) callback();
-//                that.config.$target.find(".line:last-child").hide();
+                that.config.$target.find(".line:last-child").hide();
                 that.context.itemsNumber = that.config.$target.find('img[data-src]').length;
                 that.config.$target.find('img[data-src]').each(function()
                 {
@@ -140,10 +140,9 @@ meta.LoadMore = function(config) {
             {
                 that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
             }
+            that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
+            that.context.is_loading = false;
         }
-        that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
-
-        that.context.is_loading = false;
     }
 
     /**
