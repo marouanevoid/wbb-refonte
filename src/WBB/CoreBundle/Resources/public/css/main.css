@@ -427,8 +427,9 @@
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
-  .bar-guides .sub-header {width: 100%;}
+  .bar-guides .sub-header {width: 99%;}
   .no-results h1 {font-size: 4em;}
+  section.bar-finder .ui-radio.btn-radius.with-icon {text-align: left; padding-left: 2em;}
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
