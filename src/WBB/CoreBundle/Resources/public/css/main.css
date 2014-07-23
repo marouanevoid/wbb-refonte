@@ -432,6 +432,8 @@
   .mobile .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
+  .mobile .sub-header .title h3 {font-size: 16px; line-height: 24px;}
+  .mobile .no-results h1 {font-size: 2em;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
@@ -478,8 +480,8 @@
       background-size: 128px 256px;
       background-position: -80px -40px;
     }
-    .mobile section.bar-filter .bar-w-pic .btn-round.active:before {
-      background-position: -100px -80px!important;
+    section.bar-filter .bar-w-pic .btn-round.active:before {
+      background-position: -80px -120px!important;
     }
     .mobile section.bar-filter .bar-w-pic .btn-round {
         width: 20px;
