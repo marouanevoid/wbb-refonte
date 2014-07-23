@@ -55,7 +55,7 @@
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
   .popup {width: 1136px; height: 830px;}
-  .void-popup {z-index: 107; margin-left: -568px; margin-top: -400px; left: 50%; z-index: 107; top: 50%; position: fixed;}
+  .void-popup {margin-left: -568px; margin-top: -400px; left: 50%; z-index: 107; top: 50%; position: fixed;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .select-two .ui-dropdown-container {width: 100%!important;}
 
@@ -164,7 +164,7 @@
   .ui.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
   .ui.mobile .col-4 {width: 237px;}
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
-  .ui {background-color: #faf3e1; position: relative; top: 145px;}
+  .ui {background-color: #faf3e1; position: relative; /*top: 145px;*/}
   .ui a {color: #818a8c; font-size: 17px; text-decoration: underline;}
   .ui a.ui-radio {color: #b3955f; text-decoration: none;}
   .ui a.ui-radio.active,
@@ -186,18 +186,20 @@
     .ui.mobile .separator {margin: 0 auto;}
     .ui.mobile .btn {height: 60px; font-size: 28px;}
     .ui.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
+
 /* Register1 (Popup) */
-  #register-light {/*padding: 0 25px;*/}
-  .popup .title {width: 55%;}
-  .popup .ui {width: 860px}
-  .popup #account {width: 300px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
-  .popup #create-account {width: 300px; padding: 0 0 0 50px;}
-  .popup #create-account .form-text {text-align: left; text-indent: 15px;}
-  .popup #date-birthday label {color: #818a8c; font-size: 17px;}
-  .popup #date-birthday .select-wrap.last {margin-right: 0;}
+  .ui.register {width: 780px;}
+  .ui.register .title {width: 55%;}
+  .ui.register .ui {width: 860px}
+  .ui.register #account {width: 300px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
+  .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
+  .ui.register #create-account .form-text {text-align: left; text-indent: 15px;}
+  .ui.register #date-birthday label {color: #818a8c; font-size: 17px;}
+  .ui.register #date-birthday .select-wrap.last {margin-right: 0;}
+  .ui.register .group-form {position: relative; right: 20%;}
+
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
-  .ui .btn-create-with-fb {margin: 0 0 0 16px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
-  .ui .btn-create-with-fb {border-radius: 0; line-height: normal; height: 42px; position: relative; top: -15px;}
+  .ui .btn-create-with-fb {border-radius: 0; line-height: normal; height: 42px; position: relative; top: -15px; margin: 0 0 0 16px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
   .ui .connect-fb {line-height: 45px; font-size: 15px;}
 
   /* Message's */
