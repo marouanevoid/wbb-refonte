@@ -59,7 +59,7 @@ meta.Tips = function(config){
 
         that.config.$selector.mouseover(function()
         {
-            $.cookie( 'ui-tips_'+that.config.$selector.attr('id'), true, { expires: 365, path: '/' });
+            //$.cookie( 'ui-tips_'+that.config.$selector.attr('id'), true, { expires: 365, path: '/' });
 
             var $tips = that.context.tips;
 
@@ -97,7 +97,8 @@ function initializeTips()
     {
         var $selector = $(this);
 
-        if( $.cookie( 'ui-tips_'+$selector.attr('id') ) != 'true' )
+        //if( $.cookie( 'ui-tips_'+$selector.attr('id') ) != 'true' )
+        if( ( $.cookie('first_visite') === undefined || $.cookie('first_visite') == 'true') &&  ! window.isCity ) 
             new meta.Tips({$selector:$selector});
 
         $selector.addClass('ui-initialized');
