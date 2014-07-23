@@ -178,7 +178,6 @@
   .ui .form-submit {background-color: #b3955f; font-size: 22px; font-weight: bold;}
   .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
-  
 
   /* Version mobile */
     .ui.mobile {width: auto; padding: 80px 20px; top: 80px;}
@@ -187,18 +186,18 @@
     .ui.mobile .separator {margin: 0 auto;}
     .ui.mobile .btn {height: 60px; font-size: 28px;}
     .ui.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
-/* Register1 (Popup) - PSDN : PSDs/login/desktop/register1.psd & register2.psd; */
-  #register-tips {padding: 0 25px;}
-  #register-tips .title {width: 55%;}
-  #register-tips .ui {width: 860px}
-  #register-tips #account {width: 300px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
-  #register-tips #create-account {width: 300px; padding: 0 0 0 50px;}
-  #register-tips #create-account .form-text {text-align: left; text-indent: 15px;}
-  #register-tips .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
-  #register-tips #date-birthday label {color: #818a8c; font-size: 17px;}
-  #register-tips #date-birthday .select-wrap.last {margin-right: 0;}
+/* Register1 (Popup) */
+  #register-light {/*padding: 0 25px;*/}
+  .popup .title {width: 55%;}
+  .popup .ui {width: 860px}
+  .popup #account {width: 300px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
+  .popup #create-account {width: 300px; padding: 0 0 0 50px;}
+  .popup #create-account .form-text {text-align: left; text-indent: 15px;}
+  .popup #date-birthday label {color: #818a8c; font-size: 17px;}
+  .popup #date-birthday .select-wrap.last {margin-right: 0;}
+  .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
   .ui .btn-create-with-fb {margin: 0 0 0 16px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
-  .ui .btn-create-with-fb {border-radius: 0; line-height: normal; height: 42px;}
+  .ui .btn-create-with-fb {border-radius: 0; line-height: normal; height: 42px; position: relative; top: -15px;}
   .ui .connect-fb {line-height: 45px; font-size: 15px;}
 
   /* Message's */
