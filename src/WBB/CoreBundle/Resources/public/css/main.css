@@ -415,7 +415,6 @@
   .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -92px -200px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
-  .sub-header .title h3 {font-size: 2em; line-height: 30px;}
   .btn-round.dark.star.active {color: #faf3e1; background-color: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
@@ -428,7 +427,6 @@
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
   .bar-guides .sub-header {width: 99%;}
-  .no-results h1 {font-size: 4em;}
   section.bar-finder .ui-radio.btn-radius.with-icon {text-align: left; padding-left: 2em;}
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
 
@@ -505,7 +503,6 @@
     .social-share .email-share {background-image: url("../images/emailx2.png");}
     .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
     .bar-details .also-appears .h2 {text-align: center;}
-    .no-results h1 {font-size: 2em;}
     .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
     .sub-header .title h3 {font-size: 16px; line-height: 20px; width: 78%; margin: auto;}
   }
