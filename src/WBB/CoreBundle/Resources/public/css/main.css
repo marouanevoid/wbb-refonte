@@ -293,7 +293,7 @@
   #register.page.mobile #date-birthday .select-wrap {width: 30%;}
   #register.page.mobile #date-birthday .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile #create-account label {margin: 20px 0 20px; float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 20px; font-weight: lighter;}
-  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0;}
+  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0; width: 77%;}
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
@@ -380,6 +380,15 @@
   #page-standard .content ul {list-style: disc; padding: 0 0 0 40px; margin-bottom: 30px;}
   #page-standard .min-height {min-height: 450px;}
   #page-standard .content .h3 {color: #b3955f;}
+/* SHARE Tooltips */
+  .wrap-share {width: 388px;}
+  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px;}
+  .wrap-share .social-share .share-label {}
+  .wrap-share .social-share ul {}
+  .wrap-share .social-share li a {height: 41px; width: 90px;}
+  .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
+  .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
+  .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
@@ -394,6 +403,7 @@
     .search-bar-mobile .container .form-text {background-image: none!important; padding-left: 0px!important; text-indent: 15px;}
     .search-bar-mobile .container .form-submit {position: absolute; right: 86px; height: 40px; background-position: -84px -361px!important;}
     .search-bar-mobile .container .form-submit:hover {background-position: -84px -401px!important;}
+
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
@@ -401,7 +411,7 @@
   .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -92px -200px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
-  .sub-header .title h3 {font-size: 2em;}
+  .sub-header .title h3 {font-size: 2em; line-height: 30px;}
   .btn-round.dark.star.active {color: #faf3e1; background-color: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
@@ -416,11 +426,14 @@
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
   .bar-details .also-appears .h2 {text-align: center;}
   .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
+  .bar-guides .sub-header {width: 100%;}
+  .no-results h1 {font-size: 4em;}
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
+  .mobile .sub-header .title h3 {font-size: 16px; line-height: 24px;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
@@ -444,20 +457,20 @@
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
   }
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
-  .social-share .fb-share {
-    background-image: url("../images/fb@2x.png");
-    background-size: 90px 40px;
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+    .social-share .fb-share {
+      background-image: url("../images/fb@2x.png");
+      background-size: 90px 40px;
+    }
+    .social-share .twitter-share {
+      background-image: url("../images/twitter@2x.png");
+      background-size: 90px 40px;
+    }
+    .social-share .email-share {
+      background-image: url("../images/email@2x.png");
+      background-size: 90px 40px;
+    }
   }
-  .social-share .twitter-share {
-    background-image: url("../images/twitter@2x.png");
-    background-size: 90px 40px;
-  }
-  .social-share .email-share {
-    background-image: url("../images/email@2x.png");
-    background-size: 90px 40px;
-  }
-}
 
 /*
   TEMPS STYLE
