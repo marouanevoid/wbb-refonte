@@ -42,10 +42,25 @@
   .bold {font-weight: bold;}
   .unbold {font-weight: lighter;}
   .wrap {margin-left: auto; margin-right: auto;}
+
+  /* USER INTERFACE */
+    .ui form label {font-size: 17px;}
+    .ui .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+    .ui .load-more   {text-decoration: none;}
+    .ui .load-more:hover {color: #faf3e1;}
+    .ui.mobile.container {width: 100%!important;}
+
   .no-text {text-indent: -7777px; font-size: 0!important; color: transparent;}
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
-  .void-popup {z-index: 107; margin-left: -430px; margin-top: -430px; left: 50%; z-index: 107; top: 50%; position: fixed;}
+  .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
+  .popup {width: 1136px; height: 830px;}
+  .void-popup {z-index: 107; margin-left: -568px; margin-top: -400px; left: 50%; z-index: 107; top: 50%; position: fixed;}
+  .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
+  .select-two .ui-dropdown-container {width: 100%!important;}
+
+  /* Popup */
+  .popup .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
     .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #000; opacity: 0.8; z-index: 100; display: none;}
@@ -53,6 +68,8 @@
     .group-form {overflow: hidden;}
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
+    .forgetpassword {width: 300px;}
+
   /* Radius */
     .radius-30 {-webkit-border-radius: 30px;
           -moz-border-radius: 30px;
@@ -114,6 +131,7 @@
       .padding-bottom-20 {padding-bottom: 20px!important; display: block;}
       .padding-bottom-30 {padding-bottom: 30px!important; display: block;}
       .padding-bottom-40 {padding-bottom: 40px!important; display: block;}
+      .padding-bottom-50 {padding-bottom: 40px!important; display: block;}
   /* Typographs */
     .text-align-center {text-align: center;}
     .text-align-left {text-align: left;}
@@ -129,12 +147,7 @@
 /* Globale ID's */
   #date-birthday .select-wrap {width: 95px; margin-right: 7px;}
   #date-birthday .ui-dropdown-container {width: 95px!important;}
-  .select-two .ui-dropdown-container {width: 100%!important;}
-  .ui form label {font-size: 17px;}
-  .ui .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
-  .ui .load-more   {text-decoration: none;}
-  .ui .load-more:hover {color: #faf3e1;}
-  .ui.mobile.container {width: 100%!important;}
+
 /* Globale Mobile Classes */
   .ui.mobile .content,
   #bar-finder-result.mobile .content,
@@ -144,19 +157,12 @@
   .ui.mobile a,
   .ui.mobile p {font-size: 16px;}
   .ui.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
-  /*.mobile form label {display: none; visibility: hidden;}*/
   .mobile .btn {/*height: 120px; font-size: 42px;*/}
-  /*.mobile .col {float: none;}*/
   .mobile .ui .title {font-size: 17px;}
   .mobile .ui .separator {width: 100%; background-position: center center;}
   .ui.mobile .ui-dropdown-container .ui-dropdown {height: 38px;}
   .ui.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
   .ui.mobile .col-4 {width: 237px;}
-  /*
-  .ui.mobile .bar-w-pic .txt h2,
-  .ui.mobile .bar-w-pic .txt h3 {text-align: left;}
-  */
-
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
   .ui {background-color: #faf3e1; position: relative; top: 145px;}
   .ui a {color: #818a8c; font-size: 17px; text-decoration: underline;}
@@ -166,22 +172,21 @@
   .ui a:hover {text-decoration: none;}
   .ui.wrap {width: 720px; padding: 25px 25px 60px;}
   .ui .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
-  .ui .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif; letter-spacing: -1px;}
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
   .ui .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 22px; font-weight: bold;}
   .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
-  .ui .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
+  
 
   /* Version mobile */
-  .ui.mobile {width: auto; padding: 80px 20px; top: 80px;}
-  .ui.mobile .form-text {height: 60px; border-radius: 2em;}
-  .ui.mobile .block {width: 100%;}
-  .ui.mobile .separator {margin: 0 auto;}
-  .ui.mobile .btn {height: 60px; font-size: 28px;}
-  .ui.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
+    .ui.mobile {width: auto; padding: 80px 20px; top: 80px;}
+    .ui.mobile .form-text {height: 60px; border-radius: 2em;}
+    .ui.mobile .block {width: 100%;}
+    .ui.mobile .separator {margin: 0 auto;}
+    .ui.mobile .btn {height: 60px; font-size: 28px;}
+    .ui.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
 /* Register1 (Popup) - PSDN : PSDs/login/desktop/register1.psd & register2.psd; */
   #register-tips {padding: 0 25px;}
   #register-tips .title {width: 55%;}
@@ -194,10 +199,13 @@
   #register-tips .connect-fb {line-height: 45px; font-size: 15px;}
   #register-tips #date-birthday label {color: #818a8c; font-size: 17px;}
   #register-tips #date-birthday .select-wrap.last {margin-right: 0;}
-  #register-tips #message {background-color: #818a8c; width: 100%; padding: 20px 0;}
-  #register-tips #message img {margin: 0 20px 0 7px;}
-  #register-tips #message div {padding: 0 10px 0 0; line-height: 16px;}
-  #register-tips #message ul li {color: #faf3e1; font-size: 15px;}
+  
+  /* Message's */
+  #message {background-color: #818a8c; width: 100%; padding-left: 10px;}
+  #message img {margin: 0 20px 0 0;}
+  #message div {padding: 0 10px 0 0; line-height: 16px;}
+  #message p,
+  #message li {color: #faf3e1; font-size: 15px; line-height: 16px;}
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   #success p {color: #818a8c; font-size: 22px;}
   #success {position: static; top: 0; min-height: 500px;}
@@ -205,6 +213,10 @@
   .alert p {color: #818a8c; font-size: 20px; line-height: 28px;}
   .alert {position: static; top: 0; min-height: 500px;}
   .alert .subtitle {font-size: 32px;}
+
+    /* Popup */
+    .popup #success p {margin: 0 0 30px; line-height: 26px; font-size: 26px;}
+    .popup #success .subtitle {margin: 0 0 25px; font-size: 40px;}
 /* Register4 (Page) - PSDN : PSDs/login/desktop/register4.psd; */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
   #register.page .ui {position: static; width: 560px;}
@@ -233,24 +245,6 @@
   #bar-finder.mobile .form-radio {width: 95px; margin-right: 10px;}
   #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon {width: 100%; color: #b3955f; font-size: 14px;}
   #bar-finder.mobile .form-submit {width: 90%; color: #faf3e1; font-size: 20px; background-color: #b3955f; line-height: 42px; font-weight: bold;}
-/* Barfinder Results (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder_results.psd; */
-  /*
-  #bar-finder-result.mobile {text-align: center; font-family: "Avenir", Helvetica, Arial, sans-serif;}
-  #bar-finder-result.mobile .title {color: #333; font-size: 24px; line-height: 34px;}
-  #bar-finder-result.mobile .btn:hover {color: #fff; background-color: #b3955f;}
-  #bar-finder-result.mobile .btn-grid {background-color: #b3955f; margin-right: 2px;}
-  #bar-finder-result.mobile .btn-list {background-color: #fff; border: 1px solid #b3955f;}
-  #bar-finder-result.mobile .btn-list,
-  #bar-finder-result.mobile .btn-grid {height: 38px; width: 38px; display: inline-block; text-indent: -7777px; font-size: 0; background-repeat: no-repeat;}
-  #bar-finder-result.mobile .btn-more {border: 1px solid #b3955f; height: 42px; display: block; font-size: 16px; font-family: "Avenir", Helvetica, Arial, sans-serif; color: #b4955f; line-height: 42px;}
-  #bar-finder-result.mobile ul li img {display: block; width: 100%;}
-  #bar-finder-result.mobile ul li .block-text {position: absolute; left: 10px; top: 55px; text-align: left; font-family: "Avenir", sans-serif;}
-  #bar-finder-result.mobile ul li .name {color: #ffe4af; font-size: 14px; font-weight: bold; margin: 0 0 5px; text-transform: uppercase;}
-  #bar-finder-result.mobile ul li .city {color: #faf3e1; font-size: 12px;}
-  #bar-finder-result.mobile ul li .background-gradient {background: url("../images/barfinder/line_gradient.png") repeat-x left bottom; bottom: 0; height: 100%; left: 0; position: absolute; width: 100%;}
-  #bar-finder-result.mobile ul li .star {opacity: 0.6; background: url("../images/barfinder/star_mobile.png") no-repeat center center; background-color: #333; height: 20px; width: 20px; position: absolute; top: 7px; right: 7px;}
-  #bar-finder-result.mobile ul li .star:hover {opacity: 0.8;}
-  */
 
   .filter-search .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
   .filter-search .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}  
@@ -299,7 +293,7 @@
   #register.page.mobile #date-birthday .select-wrap {width: 30%;}
   #register.page.mobile #date-birthday .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile #create-account label {margin: 20px 0 20px; float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 20px; font-weight: lighter;}
-  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0;}
+  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0; width: 77%;}
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
@@ -375,6 +369,26 @@
   #view-account .ui.mobile .filter-profil {width: 285px;}
   #view-account .ui.mobile .list-bars .col {margin: 0;}
   #view-account .ui.mobile .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
+/* Page standard */
+  #page-standard {width: 770px;}
+  #page-standard .title {margin-bottom: 25px;}
+  #page-standard .content p {margin-bottom: 15px;}
+  #page-standard .content p + div {margin-bottom: 7px;}
+  #page-standard .content p,
+  #page-standard .content li {line-height: 21px; font-size: 17px;}
+  #page-standard .content li {margin-bottom: 10px;}
+  #page-standard .content ul {list-style: disc; padding: 0 0 0 40px; margin-bottom: 30px;}
+  #page-standard .min-height {min-height: 450px;}
+  #page-standard .content .h3 {color: #b3955f;}
+/* SHARE Tooltips */
+  .wrap-share {width: 388px; display: none;}
+  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px;}
+  .wrap-share .social-share .share-label {}
+  .wrap-share .social-share ul {}
+  .wrap-share .social-share li a {height: 41px; width: 90px;}
+  .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
+  .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
+  .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
@@ -389,6 +403,7 @@
     .search-bar-mobile .container .form-text {background-image: none!important; padding-left: 0px!important; text-indent: 15px;}
     .search-bar-mobile .container .form-submit {position: absolute; right: 86px; height: 40px; background-position: -84px -361px!important;}
     .search-bar-mobile .container .form-submit:hover {background-position: -84px -401px!important;}
+
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
@@ -396,7 +411,7 @@
   .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -92px -200px;} 
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
-  .sub-header .title h3 {font-size: 2em;}
+  .sub-header .title h3 {font-size: 2em; line-height: 30px;}
   .btn-round.dark.star.active {color: #faf3e1; background-color: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
@@ -407,8 +422,11 @@
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
-  /*.index .sub-header .title h1 {text-align: left;}*/
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
+  .bar-details .also-appears .h2 {text-align: center;}
+  .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
+  .bar-guides .sub-header {width: 100%;}
+  .no-results h1 {font-size: 4em;}
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
@@ -421,74 +439,71 @@
   .ipad .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .ipad .bar-details .sub-header .star-share .btn-round.star:after {opacity: 0;}
 
-/* IE9 */
-.articles article .img .cover .sponsor,
-.news-details .articles.older-news article .img .cover .sponsor {bottom: 0px\0/;}
-.articles.older-news article .img .cover .sponsor {bottom: 2px\0/;}
-.ie9 section.bar-finder tr:nth-child(2) td:nth-child(8) .ui-radio.btn-radius.with-icon {margin-right: 20px;}
-section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
+  /* IE9 */
+  .articles article .img .cover .sponsor,
+  .news-details .articles.older-news article .img .cover .sponsor {bottom: 0px\0/;}
+  .articles.older-news article .img .cover .sponsor {bottom: 2px\0/;}
+  .ie9 section.bar-finder tr:nth-child(2) td:nth-child(8) .ui-radio.btn-radius.with-icon {margin-right: 20px;}
+  section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
 /* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
+  @media only screen and (max-width : 320px) {
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
     .articles article .img .plus-btn,
     .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
-}
-@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
+  }
+  @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
-}
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+  }
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
     .social-share .fb-share {
-    background-image: url("../images/fb@2x.png");
-    background-size: 90px 40px;
-}
+      background-image: url("../images/fb@2x.png");
+      background-size: 90px 40px;
+    }
     .social-share .twitter-share {
-    background-image: url("../images/twitter@2x.png");
-    background-size: 90px 40px;
-}
+      background-image: url("../images/twitter@2x.png");
+      background-size: 90px 40px;
+    }
     .social-share .email-share {
-    background-image: url("../images/email@2x.png");
-    background-size: 90px 40px;
-}
-}
+      background-image: url("../images/email@2x.png");
+      background-size: 90px 40px;
+    }
+  }
 
 /*
   TEMPS STYLE
 */
-@media only screen and (max-width: 768px) {
-    .bar-details .also-appears .h2 {
-        text-align: center;
-    }
+  @media only screen and (max-width: 768px) {
     .mobile section.bar-filter .bar-w-pic .btn-round:before {
-    background-size: 128px 256px;
-    background-position: -80px -40px;
-}
+      background-size: 128px 256px;
+      background-position: -80px -40px;
+    }
     .mobile section.bar-filter .bar-w-pic .btn-round.active:before {
-    background-position: -100px -80px!important;
-}
+      background-position: -100px -80px!important;
+    }
     .mobile section.bar-filter .bar-w-pic .btn-round {
-    width: 20px;
-    height: 20px;
-    right: 0.5em;
-    top: 0.5em;
-}
-    section.bars .bar-w-pic .txt,
+        width: 20px;
+        height: 20px;
+        right: 0.5em;
+        top: 0.5em;
+    }
+    section.bars .bar-w-pic .txt, 
     section.bar-filter .bar-w-pic .txt {
-    font-size: 80%!important;
-}
+      font-size: 80%!important;
+    }
     .social-share .fb-share,
     .social-share .twitter-share,
     .social-share .email-share {
-    background-repeat: no-repeat;
-    background-size: 90px 40px;
-}
+      background-repeat: no-repeat;
+      background-size: 90px 40px;
+    }
     .social-share .fb-share {
-    background-image: url("../images/fbx2.png");
-}
+      background-image: url("../images/fbx2.png");
+    }
     .social-share .twitter-share {
-    background-image: url("../images/twitterx2.png");
-}
+      background-image: url("../images/twitterx2.png");
+    }
     .social-share .email-share {
-    background-image: url("../images/emailx2.png");
-}
-}
+      background-image: url("../images/emailx2.png");
+    }
+  }
