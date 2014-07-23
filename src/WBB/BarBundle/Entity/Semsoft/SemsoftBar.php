@@ -553,19 +553,6 @@ class SemsoftBar
     }
 
     /**
-     * Set isCreditCard
-     *
-     * @param boolean $isCreditCard
-     * @return SemsoftBar
-     */
-    public function setcreditCard($isCreditCard)
-    {
-        $this->creditCard = $isCreditCard;
-
-        return $this;
-    }
-
-    /**
      * Get isCreditCard
      *
      * @return boolean 
@@ -1565,5 +1552,78 @@ class SemsoftBar
         }
 
         return $bar;
+    }
+
+    /**
+     * Set creditCard
+     *
+     * @param boolean $creditCard
+     * @return SemsoftBar
+     */
+    public function setCreditCard($creditCard)
+    {
+        $this->creditCard = $creditCard;
+
+        return $this;
+    }
+
+    /**
+     * Get creditCard
+     *
+     * @return boolean 
+     */
+    public function getCreditCard()
+    {
+        return $this->creditCard;
+    }
+
+    /**
+     * Get outDoorSeating
+     *
+     * @return boolean 
+     */
+    public function getOutDoorSeating()
+    {
+        return $this->outDoorSeating;
+    }
+
+    /**
+     * Get happyHour
+     *
+     * @return boolean 
+     */
+    public function getHappyHour()
+    {
+        return $this->happyHour;
+    }
+
+    /**
+     * Get wifi
+     *
+     * @return boolean 
+     */
+    public function getWifi()
+    {
+        return $this->wifi;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return boolean 
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
+
+    /**
+     * Get permanentlyClosed
+     *
+     * @return boolean 
+     */
+    public function getPermanentlyClosed()
+    {
+        return $this->permanentlyClosed;
     }
 }
