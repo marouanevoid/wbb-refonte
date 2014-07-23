@@ -29,7 +29,7 @@ class AdRepository extends EntityRepository
         if($country){
             $qb
                 ->leftJoin($this->getAlias().'.countries', 'c')
-                ->andWhere($qb->expr()->eq($this->getAlias().'.country', $country->getId()))
+                ->andWhere($qb->expr()->eq('c.id', $country->getId()))
             ;
         }
 
