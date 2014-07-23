@@ -354,7 +354,7 @@ meta.App = function() {
             li.show();
 
             li.each(function(){
-                if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+                if($(this).text().toLowerCase().indexOf(selected.toLowerCase())>-1 || ($(this).text().indexOf('Choose with who')>-1 || $(this).text().indexOf('Choose a City')>-1 ))
                     $(this).hide();
             });
 
