@@ -117,7 +117,7 @@
                     <td class="title margin-top-10">
                         <h1 itemprop="name">Bar finder results</h1>
                         <h3 class="bold">
-                            We found {{ bars|length }} {% if bars|length > 1 %}bars{% else %}bar{% endif %} that match your request!
+                            We found {{ bars|length }} {% if bars|length > 1 %}bars{% else %}bar{% endif %} that matches your request!
                         </h3>
                     </td>
                     <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
@@ -154,7 +154,7 @@
                     <td></td>
                     <td class="title margin-top-10">
                         <h1 itemprop="name">Bar finder results</h1>
-                        <img src="{{ asset('bundles/wbbcore/') }}images/glass.png" width="113" style="margin: 50px 0 40px" />
+                        <img src="{{ asset('bundles/wbbcore/') }}images/glass.png" width="130" style="margin: 60px 0" />
                         <h3 class="padding-bottom-40">
                             Sorry we didn’t find any bars that matched your request.<br>
                             Please change your criteria or <a href='https://twitter.com/WorldsBestBars' target='_blank'>contact us</a> on Twitter<br>
@@ -191,10 +191,13 @@
                                     <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
 
                                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
-
-                                    {% for m in b.medias|slice(0,1) %}
-                                        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
-                                    {% endfor %}
+                                    {% if b.medias|length>0 %}
+                                        {% for m in b.medias|slice(0,1) %}
+                                            <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
+                                        {% endfor %}
+                                    {% else %}
+                                        <img class="scale-with-grid" src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
+                                    {% endif %}
                                 </div>
                             </div>
 
@@ -206,9 +209,11 @@
                                 <p class="s-margin-top">
                                     {{ b.description|truncate(200, true, '...')|striptags }}
                                 </p>
-                                <div class="tags">{% for tr in b.tags %}
+                                <div class="tags">
+                                    {% for tr in b.tags %}
                                         {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                                    {% endfor%}</div>
+                                    {% endfor%}
+                                </div>
                             </div>
                             <div class="separator"><hr/></div>
                         </article>

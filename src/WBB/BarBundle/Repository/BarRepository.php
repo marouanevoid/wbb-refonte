@@ -87,7 +87,7 @@ class BarRepository extends EntityRepository
 
     }
 
-    public function findLatestBars($city = null, $limit = 5, $offset = 0, $onTop = true)
+    public function findLatestBars($city = null, $limit = 5, $offset = 0, $onTop = true, $user = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -108,6 +108,12 @@ class BarRepository extends EntityRepository
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id',$user->getId()));
         }
 
         return $qb->getQuery()->getResult();
@@ -216,7 +222,7 @@ class BarRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBarsOrderedByName($city = null, $offset = 0, $limit = 8)
+    public function findBarsOrderedByName($city = null, $offset = 0, $limit = 8, $user = null, $orderBy = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -233,6 +239,47 @@ class BarRepository extends EntityRepository
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id',$user->getId()));
+        }
+
+        if($orderBy){
+            foreach($orderBy as $field => $order){
+                $qb
+                    ->addOrderBy($field, $order)
+                ;
+            }
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBarsOrderedByCityAndName($user = null, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->leftJoin($this->getAlias().'.city', 'c')
+                ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
+                ->orderBy('c.name', 'ASC')
+                ->addOrderBy($this->getAlias().'.name', 'ASC')
+            ;
         }
 
         return $qb->getQuery()->getResult();
