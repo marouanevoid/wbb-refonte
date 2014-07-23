@@ -253,7 +253,7 @@
   .filter-search .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}  
   .filter-search .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
   .filter-search ul li {width: 50%; float: left; position: relative;}
-  .filter-search ul {width: 101%;}
+  .filter-search ul {width: 96%; margin: auto;}
 
   #bar-finder-result.mobile ul.list {position: relative;}
   #bar-finder-result.mobile ul.list li {width: 50%; border-right: none; /*border-bottom: 2px solid transparent;*/}
