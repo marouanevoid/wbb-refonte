@@ -208,7 +208,7 @@
         <div class="search-result-proposal"><ul></ul></div>
     </header>
     {% if not is_mobile() or is_tablet() %}
-        {#{{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}#}
+        {{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}
     {% endif %}
 
 {% endif %}
