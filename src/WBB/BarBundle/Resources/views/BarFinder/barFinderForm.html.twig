@@ -67,8 +67,10 @@
                     <tr>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
-                                <option value="">{% if city_selected !='' %}  {{city_selected}} {% else %} Choose a City {% endif %}</option>
-                                <option value="all" {% if city_selected ==  "all" %} selected="selected" {% endif %}>All</option>
+                                <option value="{{city_selected}}">{% if city_selected !='' %}  {{city_selected == 'all' ? 'All'}} {% else %} Choose a City {% endif %}</option>
+                                {% if(city_selected != 'all') %}
+                                    <option value="all">All</option>
+                                {% endif %}
                                 {% if city %} <option value="{{ city.slug }}">{{ city.name }}</option> {% endif %}
                                 {% for c in cities %}
                                     <option value="{{ c.slug }}" 
@@ -80,8 +82,10 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
-                                <option value="">{% if toGoOutWith_selected !='' %}  {{toGoOutWith_selected}} {% else %}Choose with who {% endif %}</option>
-                                <option value="all" {% if toGoOutWith_selected ==  "all" %} selected="selected" {% endif %}>All</option>
+                                <option value="{{toGoOutWith_selected}}">{% if toGoOutWith_selected !='' %}  {{toGoOutWith_selected}} {% else %}Choose with who {% endif %}</option>
+                                {% if(toGoOutWith_selected != 'all') %}
+                                     <option value="all">All</option>
+                                {% endif %}
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}"
                                     {% if toGoOutWith_selected ==  tag.id %} selected {% endif %}
