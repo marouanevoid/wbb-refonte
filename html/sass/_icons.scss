@@ -108,6 +108,14 @@
   }
 }
 
+
+html.ipad .btn-radius.with-icon{
+  &.city, &.map{
+    &:before{ background-position: -212px -0px }
+    &:after{ background-position: -212px -40px }
+  }
+}
+
 .btn-small-round{
 
   &.www{

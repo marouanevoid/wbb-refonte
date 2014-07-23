@@ -74,10 +74,10 @@
   .also-appears {
     li{ margin-bottom:0.8em; position: relative;
       &:before {
-        content: ''; display: inline-block; width: 8px; height: 13px; background-image: url('../images/misc/chevron.png'); background-size: 100% 100%; margin-right: 0.5em; vertical-align: baseline;
+        content: ''; margin-bottom: 10px; display: block; float: left; width: 8px; height: 13px;
+        background-image: url('../images/misc/chevron.png'); background-size: 100% 100%; margin-right: 0.5em; margin-top: 2px;
       }
       a {
-        display: inline-block;
         img{ margin-left: 0.25em; vertical-align: middle }
       }
     }
@@ -135,6 +135,14 @@
     .insider-tips {
       padding-bottom: 5%;
       .box { margin-top: 1em }
+    }
+  }
+}
+
+html.webkit .also-appears {
+  li{
+    &:before {
+      margin-top: 1px;
     }
   }
 }
