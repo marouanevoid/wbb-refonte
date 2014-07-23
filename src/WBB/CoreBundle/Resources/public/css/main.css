@@ -432,7 +432,6 @@
   .mobile .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
-  .mobile .sub-header .title h3 {font-size: 16px; line-height: 24px;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
