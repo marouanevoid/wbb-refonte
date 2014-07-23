@@ -11,7 +11,7 @@
                         <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
                         <form action="" {{ form_enctype(form) }} method="POST" id="register_form_full">
                             <div class="text-align-left margin-bottom-20">
-                                <div class="group-form margin-top-20">
+                                <div class="group-form margin-top-10">
                                     <label>Username</label>
                                     {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Username' } }) }}
                                 </div>

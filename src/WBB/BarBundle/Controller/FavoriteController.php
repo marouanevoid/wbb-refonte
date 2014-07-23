@@ -103,7 +103,7 @@ class FavoriteController extends Controller
             ));
         }
 
-        $bestOf->addUser($user);
+        $bestOf->addUsersFavorite($user);
         $user->addFavoriteBestOf($bestOf);
 
         $em->persist($bestOf);

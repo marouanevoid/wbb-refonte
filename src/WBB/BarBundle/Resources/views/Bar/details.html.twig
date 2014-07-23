@@ -217,13 +217,13 @@
                     </td>
 
                     <td class="star-share">
-                        <a id="share" class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href="#0"></a>
+                        <a class="btn-round brown star" href="#0"></a><a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
             </table>
-            <div class="wrap-share">
+            <div class="wrap-share" style="display:none">
                 <div class="social-share radius-max">
-                    <div class="share-label left">SHARE</div>
+                    <div class="share-label left bold">SHARE</div>
                     <ul>
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
@@ -232,6 +232,13 @@
                     <div class="clear"></div>
                 </div>
             </div>
+            <script type="text/javascript">
+            $(document).ready(function(){
+                $("#share").hover(function() {
+                    $(".wrap-share").fadeIn("slow");
+                });
+            })
+            </script>
         </section>
     </div>
     <!-- SLIDER -->
@@ -486,7 +493,7 @@
             {% for b in barLike %}
                 <div class="three columns">
                     {% if is_mobile() and not is_tablet() %}
-                        {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                        {% include "WBBBarBundle:Bar:bar-mobile.html.twig" with { 'b': b } %}
                     {% else %}
                         {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
                     {% endif %}

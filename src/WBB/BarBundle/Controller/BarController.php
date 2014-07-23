@@ -198,7 +198,12 @@ class BarController extends Controller
             $city = $this->get('city.repository')->findOneBySlug($slug);
 
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
-        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
+//        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
+        $moods          = array(
+            'Chill Out',
+            'Casual',
+            'Party'
+        );
         $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
 
         return $this->render('WBBBarBundle:BarFinder:Mobile\barFinderForm.html.twig', array(
@@ -252,7 +257,7 @@ class BarController extends Controller
         if($request->request->get('mood') != "")
         {
             $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, $limit = 1, $request->request->get('mood'));
-            $session->set('barfinder_mood', $mood[0]);
+            $session->set('barfinder_mood', (count($mood)>0)?$mood[0]:null);
         }else{
             $session->set('barfinder_mood', "");
         }

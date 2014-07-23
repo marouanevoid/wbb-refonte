@@ -87,8 +87,8 @@ class SemsoftController extends Controller
                 $bar = null;
                 $newBar = true;
 
-                if($data['ID'] && is_numeric($data['ID'])){
-                    $bar = $this->get('bar.repository')->findOneById($data['ID']);
+                if($data['Id'] && is_numeric($data['Id'])){
+                    $bar = $this->get('bar.repository')->findOneById($data['Id']);
 
                     if($bar){
                         $ssBar->hydrateByBar($bar);
@@ -188,7 +188,7 @@ class SemsoftController extends Controller
             $handle = fopen('php://output', 'r+');
 
             fputcsv($handle, array(
-                'ID', 'Name', 'Country', 'County', 'City', 'PostalCode', 'District', 'Street1', 'Street2',
+                'Id', 'Name', 'Country', 'County', 'City', 'PostalCode', 'District', 'Street1', 'Street2',
                 'Intro', 'Description', 'GeocoordinateString', 'Website', 'Email', 'Phone', 'MondayOpenHours',
                 'TuesdayOpenHours', 'WednesdayOpenHours', 'ThursdayOpenHours', 'FridayOpenHours', 'SaturdayOpenHours',
                 'SundayOpenHours', 'Category', 'Mood', 'OutdoorSeating', 'HappyHour', 'Wifi', 'PriceRange', 'PaymentAccepted',
@@ -270,7 +270,7 @@ class SemsoftController extends Controller
 
     private function isCreditCard($methodsString)
     {
-        $cards = array('cash','mastercard','visa','amex','discover');
+        $cards = array('card','mastercard','visa','amex','discover');
 
         $methods = explode(',', $methodsString);
 
