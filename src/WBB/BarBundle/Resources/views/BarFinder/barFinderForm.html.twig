@@ -1,8 +1,8 @@
 <script type="text/javascript">
     $(function(){
-            toGoOutWith_selected = "{{toGoOutWith_selected}}";
-            city_selected = "{{city_selected}}";
-            mood_selected = "{{mood_selected}}";
+            toGoOutWith_selected = "{{selected.outWith}}";
+            city_selected = "{{selected.city}}";
+            mood_selected = "{{selected.mood}}";
 
         var showGo = function(){
             $('.go').removeClass('disabled');
@@ -67,14 +67,16 @@
                     <tr>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
-                                <option value="{{city_selected}}">{% if city_selected !='' %}  {{city_selected == 'all' ? 'All'}} {% else %} Choose a City {% endif %}</option>
-                                {% if(city_selected != 'all') %}
+                                <option value="{{selected.city}}">
+                                    {% if selected.city !='' %}  {{selected.city == 'all' ? 'All'}} {% else %} Choose a City {% endif %}
+                                </option>
+                                {% if(selected.city != 'all') %}
                                     <option value="all">All</option>
                                 {% endif %}
                                 {% if city %} <option value="{{ city.slug }}">{{ city.name }}</option> {% endif %}
                                 {% for c in cities %}
                                     <option value="{{ c.slug }}" 
-                                    {% if city_selected ==  c.slug %} selected {% endif %}
+                                    {% if selected.city ==  c.slug %} selected {% endif %}
                                     >{{ c.name }}</option>
                                 {% endfor %}
                             </select>
@@ -82,13 +84,13 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
-                                <option value="{{toGoOutWith_selected}}">{% if toGoOutWith_selected !='' %}  {{toGoOutWith_selected}} {% else %}Choose with who {% endif %}</option>
-                                {% if(toGoOutWith_selected != 'all') %}
+                                <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith}} {% else %}Choose with who {% endif %}</option>
+                                {% if(selected.outWith != 'all') %}
                                      <option value="all">All</option>
                                 {% endif %}
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}"
-                                    {% if toGoOutWith_selected ==  tag.id %} selected {% endif %}
+                                    {% if selected.outWith ==  tag.id %} selected {% endif %}
                                     >{{ tag.name }}</option>
                                 {% endfor %}
                             </select>
@@ -103,7 +105,7 @@
                         {% set curostIndex  = curostIndex + 1 %}
                             <td>
                                 <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood |lower }}" value="{{ mood }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"
-                                 {% if mood_selected ==  mood %} checked="checked" {% endif %}
+                                 {% if selected.mood ==  mood %} checked="checked" {% endif %}
                                 />
                             </td>
                         {% endfor %}
@@ -122,9 +124,9 @@
 
                 <!-- 
                     SESSION :
-                    mood > {{ mood_selected }}
-                    toGoOutWith_selected > {{ toGoOutWith_selected }}
-                    city_selected > {{ city_selected }}
+                    mood > {{ selected.mood }}
+                    selected.outWith > {{ selected.outWith }}
+                    city > {{ city }}
                 -->
             </form>
         </div>
