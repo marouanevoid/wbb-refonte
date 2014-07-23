@@ -30,7 +30,7 @@ meta.SearchPage = function() {
         compteurNews = 0,
         start = 0 , 
         lastConsultedURL  = "",
-        compteurBars = 0
+        compteurBars = 0,
         currentTabActive = "Bar";
     that.config = {
         speed   : 500,
@@ -199,8 +199,6 @@ meta.SearchPage = function() {
             if(res.hits && res.hits.found ){
                 var totalExist = res.hits.found;
                 var totalLoaded = $('.display-bar-width-list-parent .bar-w-pic').length;
-                console.log('loaded :: ' + totalLoaded );
-                console.log('exist :: ' + totalExist );
                 if(totalLoaded < totalExist){
                     // Set Text 
 
@@ -235,8 +233,8 @@ meta.SearchPage = function() {
     that.getSearchResult = function(q , callbackHandler ){
 
         $('.loader-search-page').show();
-
-        lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + formatedUrl) : '')  + ( '&limit=12') + ('&start=' + start) ;
+        var limit = ((ismobile || $('.ipad').length > 0) ? 3 : 12 ;
+        lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) ;
         $.get(lastConsultedURL, function(response){
             //// ///////
             $('.loader-search-page').hide();
