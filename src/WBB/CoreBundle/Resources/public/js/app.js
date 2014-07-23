@@ -319,6 +319,21 @@ meta.App = function() {
      */
     that.__construct = function()
     {
+        /*
+        * First visite
+        */
+
+        // Tester si le cookies first visit existe
+        // On le crée
+        if ( $.cookie('first_visite') === undefined ){
+            $.cookie('first_visite' , true , 0);
+        }
+        else{
+            if($.cookie('first_visite') == 'true'){
+                $.cookie('first_visite' , false , 0);
+            }
+        }
+
         that._setupElements();
         that._setupEvents();
         that._customScroll();
@@ -355,7 +370,6 @@ $(document).ready(function()
 {
     new meta.Ratio({max_width:1200,min_width:1024, default_width:1200});
     new meta.App();
-
     $('.entire-content').show();
     $('.entire-content').addClass('show');
 });
