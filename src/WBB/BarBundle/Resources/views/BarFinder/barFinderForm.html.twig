@@ -67,9 +67,9 @@
                     <tr>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
-                                <option value="">Choose a City</option>
+                                <option value="">{% if city_selected !='' %}  {{city_selected}} {% else %} Choose a City {% endif %}</option>
                                 <option value="all" {% if city_selected ==  "all" %} selected="selected" {% endif %}>All</option>
-                                {% if city %} <option value="">{{ city.name }}</option> {% endif %}
+                                {% if city %} <option value="{{ city.slug }}">{{ city.name }}</option> {% endif %}
                                 {% for c in cities %}
                                     <option value="{{ c.slug }}" 
                                     {% if city_selected ==  c.slug %} selected {% endif %}
@@ -80,7 +80,7 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
-                                <option value="">Choose with who</option>
+                                <option value="">{% if toGoOutWith_selected !='' %}  {{toGoOutWith_selected}} {% else %}Choose with who {% endif %}</option>
                                 <option value="all" {% if toGoOutWith_selected ==  "all" %} selected="selected" {% endif %}>All</option>
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}"
@@ -98,8 +98,8 @@
                         {% for mood in moods %}
                         {% set curostIndex  = curostIndex + 1 %}
                             <td>
-                                <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood.name |lower }}" value="{{ mood.id }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"
-                                 {% if mood_selected ==  mood.id %} checked="checked" {% endif %}
+                                <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood |lower }}" value="{{ mood }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"
+                                 {% if mood_selected ==  mood %} checked="checked" {% endif %}
                                 />
                             </td>
                         {% endfor %}

@@ -296,7 +296,7 @@
                 Newly Added Bars
             </div>
             {% for b in latestBars %}
-                {% include "WBBBarBundle:Bar:bar2.html.twig" with { 'b': b } %}
+                {% include "WBBBarBundle:Bar:bar-mobile.html.twig" with { 'b': b } %}
             {% endfor %}
             {% if city is defined %}
                 <a class="btn-radius border brown h4 s-margin-top" href="{{ path('wbb_bar_guides_city',{slug:city.slug}) }}">See all bars</a>

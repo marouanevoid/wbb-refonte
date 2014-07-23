@@ -87,8 +87,8 @@ class SemsoftController extends Controller
                 $bar = null;
                 $newBar = true;
 
-                if($data['ID'] && is_numeric($data['ID'])){
-                    $bar = $this->get('bar.repository')->findOneById($data['ID']);
+                if($data['Id'] && is_numeric($data['Id'])){
+                    $bar = $this->get('bar.repository')->findOneById($data['Id']);
 
                     if($bar){
                         $ssBar->hydrateByBar($bar);
