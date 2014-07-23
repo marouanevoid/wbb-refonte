@@ -381,11 +381,13 @@
   #page-standard .min-height {min-height: 450px;}
   #page-standard .content .h3 {color: #b3955f;}
 /* SHARE Tooltips */
-  .wrap-share {width: 388px; display: none;}
-  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px;}
-  .wrap-share .social-share .share-label {}
-  .wrap-share .social-share ul {}
-  .wrap-share .social-share li a {height: 41px; width: 90px;}
+  .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
+  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px;}
+  .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}  
+  .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
+  .wrap-share .social-share li {height: 41px; width: 90px; margin-right: 4px;}
+  .wrap-share .social-share li:last-child {margin: 0;}
+  .wrap-share .social-share li a {height: 41px; width: 90px; margin: 0;}
   .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
