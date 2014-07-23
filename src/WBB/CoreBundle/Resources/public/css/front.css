@@ -3244,10 +3244,6 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
 .ui-dropdown-container .ui-dropdown .choice .jspTrack {
   height: 108px !important;
 }
-/* line 35, ../sass/components/_ui-dropdown.scss */
-.ui-dropdown-container .ui-dropdown .choice ul {
-  padding: 0.6em 0;
-}
 /* line 36, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice ul li {
   padding-bottom: 1em;
