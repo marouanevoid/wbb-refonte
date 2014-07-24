@@ -13,7 +13,7 @@
         <div class="hover">
             <div class="tags">
                 {% for tr in b.tagsToShow |slice(0, 5) %}
-                    {{ tr.name }}{% if not loop.last %}, {% endif %}
+                    {{ tr.name|capitalize }}{% if not loop.last %}, {% endif %}
                 {% endfor %}
             </div>
             {% if bestof is defined %}

@@ -292,7 +292,7 @@
                         {% endif %}
                         {% for tr in bar.tags |slice(0, ((bar.energyLevel)? 4 : 5)) %}
                             {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
-                                <li>{{ tr.tag }}</li>
+                                <li>{{ tr.tag.name|capitalize }}</li>
                             {% endif %}
                         {% endfor%}
                     </ul>
