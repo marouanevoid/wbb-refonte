@@ -120,9 +120,9 @@ class SemsoftController extends Controller
                     $ssBar->setWebsite($this->setFieldValue('Website', $data, null, $newBar));
                     $ssBar->setEmail($this->setFieldValue('Email', $data, null, $newBar));
                     $ssBar->setPhone($this->setFieldValue('Phone', $data, null, $newBar));
-                    $ssBar->setOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
-                    $ssBar->setHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
-                    $ssBar->setWifi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
+                    $ssBar->setOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, ((strtolower($data['OutdoorSeating']) == "true")?true:false), $newBar));
+                    $ssBar->setHappyHour($this->setFieldValue('HappyHour', $data, ((strtolower($data['HappyHour']) == "true")?true:false), $newBar));
+                    $ssBar->setWifi($this->setFieldValue('Wifi', $data, ((strtolower($data['Wifi']) == "true")?true:false), $newBar));
                     $ssBar->setPrice($this->setFieldValue('PriceRange', $data, $this->getPriceValue($data['PriceRange']), $newBar));
                     $ssBar->setCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
                     $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
