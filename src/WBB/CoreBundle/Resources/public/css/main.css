@@ -439,9 +439,7 @@
   .ui-radio.radio-dark.active {background-color: transparent!important;}
   .bar-guides .entire-content .bar-filter {min-height: 550px;}
   .sub-header .title h3 {font-size: 2em; line-height: 30px;}
-  .container .bar-w-pic img.scale-with-grid {display: block; height: 100%; width: 100%;}
-  .container .bar-filter .bars-w-pic {min-height: 168px;}
-  
+
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
