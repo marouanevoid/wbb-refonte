@@ -144,9 +144,9 @@
     .col-3 {width: 380px;}
     .col-4 {width: 283px;}
 
-/* Globale ID's */
-  #date-birthday .select-wrap {width: 95px; margin-right: 7px;}
-  #date-birthday .ui-dropdown-container {width: 95px!important;}
+/* Globale form styles */
+  .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
+  .date-birthday .ui-dropdown-container {width: 95px!important;}
 
 /* Globale Mobile Classes */
   .ui.mobile .content,
@@ -193,13 +193,12 @@
   .ui.register .title {width: 55%;}
   .ui.register .ui {width: 860px}
   .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
+  .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center;}
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
   .ui.register #create-account .form-text {text-align: left; text-indent: 15px;}
-  /*
-  .ui.register #date-birthday label {color: #818a8c; font-size: 17px;}
-  .ui.register #date-birthday .select-wrap.last {margin-right: 0;}
-  */
+  .ui.register .date-birthday label {color: #818a8c; font-size: 17px;}
+  .ui.register .date-birthday .select-wrap.last {margin-right: 0;}
   .ui.register .group-actions {position: relative; right: 20%;}
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}

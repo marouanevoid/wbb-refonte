@@ -78,7 +78,7 @@ class SemsoftController extends Controller
 
             $file['file']->move('upload', 'import.csv');
             $file = new \SplFileObject($this->container->getParameter('kernel.root_dir').'/../web/upload/import.csv');
-            $reader = new CsvReader($file, ';');
+            $reader = new CsvReader($file, ',');
 
             $reader->setHeaderRowNumber(0);
             foreach ($reader as $data)
@@ -377,29 +377,32 @@ class SemsoftController extends Controller
         $tagNames = explode(',', $tags);
         if($tagNames){
             foreach($tagNames as $tagName){
-                $tag = $this->get('tag.repository')->findOneByName($tagName);
-                if(!$tag){
-                    $tag = new Tag();
-                    $tag
-                        ->setName($tagName)
-                        ->setType($type);
-                }
-                $em->persist($tag);
-                $em->flush();
-
-                if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
-                    $ssBar->setEnergyLevel($tag);
-                }elseif($type == Tag::WBB_TAG_TYPE_THEME || $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
-                    $barTag = new BarTag();
-                    $barTag
-                        ->setType($type)
-                        ->setSemsoftBar($ssBar)
-                        ->setTag($tag);
-                    $ssBar->addTag($barTag);
-                    $tag->addBar($barTag);
-                    $em->persist($barTag);
-                    $em->persist($ssBar);
+                if($tagName != ""){
+                    $tagName = ucfirst($tagName);
+                    $tag = $this->get('tag.repository')->findOneByName($tagName);
+                    if(!$tag){
+                        $tag = new Tag();
+                        $tag
+                            ->setName($tagName)
+                            ->setType($type);
+                    }
+                    $em->persist($tag);
                     $em->flush();
+
+                    if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
+                        $ssBar->setEnergyLevel($tag);
+                    }elseif($type == Tag::WBB_TAG_TYPE_THEME || $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
+                        $barTag = new BarTag();
+                        $barTag
+                            ->setType($type)
+                            ->setSemsoftBar($ssBar)
+                            ->setTag($tag);
+                        $ssBar->addTag($barTag);
+                        $tag->addBar($barTag);
+                        $em->persist($barTag);
+                        $em->persist($ssBar);
+                        $em->flush();
+                    }
                 }
             }
         }

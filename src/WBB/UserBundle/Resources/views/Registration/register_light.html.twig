@@ -17,7 +17,7 @@
                             {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text margin-top-10 text-align-center', 'placeholder': 'Password' } }) }}
                             {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text margin-top-10 text-align-center', 'placeholder': 'Confirm Password' } }) }}
                         </div>
-                        <div id="date-birthday" class="text-align-center ui-dropdown-list-form">
+                        <div class="select-two date-birthday text-align-center ui-dropdown-list-form">
                             <label class="margin-bottom-15">Date of Birth</label>
                             <div class="select-wrap left">
                                 {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
@@ -28,11 +28,11 @@
                             <div class="select-wrap left last">
                                 {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                             </div>
-                        </div> <!-- #date-birthday -->
+                        </div>
                         <div class="clear"></div>
                         <div class="select-two margin-top-10 ui-dropdown-list-form">
                             {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
-                        </div><!-- #countries -->
+                        </div>
 
                         {{ form_rest(form) }}
                         <div class="group-actions margin-top-20 right">
@@ -52,5 +52,5 @@
             <a href="#close" class="btn btn-close">Close</a>
         </div>
         <div class="clear"></div>
-    </div> <!-- #UI -->
+    </div>
 </div> <!-- #register -->
