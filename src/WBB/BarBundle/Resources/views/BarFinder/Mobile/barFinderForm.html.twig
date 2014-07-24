@@ -1,6 +1,20 @@
 {% extends "::base.html.twig" %}
 {% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
 {% block title %}World Best Bars{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        // remove Class active on input if is not checked
+        $('.trigger-handler').parent('a').on('click' , function(){
+
+            $('.trigger-handler').each(function(){
+                if( ! $(this).is(':checked'))
+                    $(this).parent('a.ui-radio').removeClass('active');
+            });
+            showGo();
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
 <div id="bar-finder" class="mobile bar-finder margin-top-60">
@@ -27,7 +41,9 @@
                     <option value="">Choose with who</option>
                     <option value="all" {% if selected.outWith ==  "all" %} selected="selected" {% endif %}>All</option>
                     {% for tag in firstTags %}
-                        <option value="{{ tag.id }}">{{ tag.name }}</option>
+                        <option value="{{ tag.id }}"{% if selected.outWith ==  tag.id %} selected {% endif %}>
+                            {{ tag.name }}
+                        </option>
                     {% endfor %}
                 </select>
             </div>
@@ -42,8 +58,9 @@
                         {% for mood in moods %}
                             <li class="left">
                                 <div class="form-radio">
-                                    <input type="radio" name="mood" data-value="{{ mood |lower }}" value="{{ mood }}" class="ui-radio dark with-icon text-transform-capitalize"
-                                            {% if selected.mood ==  mood %} checked="checked" {% endif %}
+                                    <input type="radio" name="mood" data-value="{{ mood |lower }}" value="{{ mood }}"
+                                           class="ui-radio dark with-icon text-transform-capitalize trigger-handler"
+                                            {% if selected.mood|lower ==  mood|lower %} checked="checked" {% endif %}
                                            data-color="brown">
                                 </div>
                             </li>
@@ -52,7 +69,7 @@
                 </div>
             </div>
             <div class="group-form margin-bottom-40">
-                <input type="submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold">
+                <input type="submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold go disabled">
             </div>
         </form>
     </div>

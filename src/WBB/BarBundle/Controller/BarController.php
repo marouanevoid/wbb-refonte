@@ -196,7 +196,7 @@ class BarController extends Controller
         $city = null;
 
         $selected = array(
-            'mood'      => $request->query->get('sel_mood'),
+            'mood'      => urldecode($request->query->get('sel_mood')),
             'city'      => $request->query->get('sel_city'),
             'outWith'   => $request->query->get('sel_outwith')
         );
@@ -228,7 +228,7 @@ class BarController extends Controller
         $slug = $session->get('citySlug');
 
         $selected = array(
-            'mood'      => $session->get('sel_mood'),
+            'mood'      => urldecode($session->get('sel_mood')),
             'city'      => $session->get('barfinder_city'),
             'outWith'   => $session->get('barfinder_tag')
         );
@@ -286,7 +286,7 @@ class BarController extends Controller
         }
 
         $selected = array(
-            'mood'      => $session->get('barfinder_mood'),
+            'mood'      => urldecode($session->get('barfinder_mood')),
             'city'      => $session->get('barfinder_city'),
             'outWith'   => $session->get('barfinder_tag')
         );
