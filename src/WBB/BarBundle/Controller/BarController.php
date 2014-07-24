@@ -223,7 +223,7 @@ class BarController extends Controller
         $slug = $session->get('citySlug');
 
         $selected = array(
-            'mood'      => urldecode($session->get('sel_mood')),
+            'mood'      => urldecode($session->get('barfinder_mood')),
             'city'      => $session->get('barfinder_city'),
             'outWith'   => $session->get('barfinder_tag')
         );
@@ -263,17 +263,17 @@ class BarController extends Controller
             $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, $limit = 1, $request->request->get('mood'));
             $session->set('barfinder_mood', $mood);
         }else{
-            $session->set('barfinder_mood', "");
+            $session->set('barfinder_mood', "empty");
         }
 
-        if($request->request->get('city') != "" && $request->request->get('city') != "all")
+        if($request->request->get('city') != "")
         {
             if ($request->request->get('city') != 'all')
                 $city = $this->container->get('city.repository')->findOneBySlug($request->request->get('city'));
             $session->set('barfinder_city', $request->request->get('city'));
         }
 
-        if($request->request->get('go_out') != "" && $request->request->get('go_out') != "all")
+        if($request->request->get('go_out') != "")
         {
             if ($request->request->get('go_out') != 'all')
                 $tag = $request->request->get('go_out');
@@ -285,6 +285,7 @@ class BarController extends Controller
             'city'      => $session->get('barfinder_city'),
             'outWith'   => $session->get('barfinder_tag')
         );
+
 
         $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
 
