@@ -418,11 +418,11 @@
   .btn-round.dark.star.active {color: #faf3e1; background-color: #b3955f !important; border-color: #b3955f;}
   .btn-radius.with-icon.list {margin: 0 0 0 5px;}
   section.bar-finder .finder-close {right: 18px !important;}
-  /*
+  
   #bar-finder.mobile .group-form.radio ul li:first-child a {text-indent: 10px;}
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 15px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 5px;}
-  */
+  
   .bar-details .content ul.trends {line-height: 1.6em;}
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content .trends {margin-bottom: 0;}
@@ -442,6 +442,10 @@
   .ipad .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
   .ipad .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .ipad .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
+
+  /* Mobile & tablet */
+  .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon,
+  .mobile section.bar-finder .ui-radio.btn-radius.with-icon:hover {background-color: transparent!important; border-color: #b3955f; color: #b3955f;}
 
   /* IE9 */
   .articles article .img .cover .sponsor,
