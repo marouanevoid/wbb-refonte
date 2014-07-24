@@ -84,7 +84,7 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
-                                <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith}} {% else %}Choose with who {% endif %}</option>
+                                <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' }} {% else %}Choose with who {% endif %}</option>
                                 {% if(selected.outWith != 'all') %}
                                      <option value="all">All</option>
                                 {% endif %}
@@ -105,7 +105,7 @@
                         {% set curostIndex  = curostIndex + 1 %}
                             <td>
                                 <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood |lower }}" value="{{ mood }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"
-                                 {% if selected.mood ==  mood %} checked="checked" {% endif %}
+                                 {% if selected.mood|lower ==  mood|lower %} checked="checked" {% endif %}
                                 />
                             </td>
                         {% endfor %}
@@ -126,7 +126,7 @@
                     SESSION :
                     mood > {{ selected.mood }}
                     selected.outWith > {{ selected.outWith }}
-                    city > {{ city }}
+                    city > {{ selected.city }}
                 -->
             </form>
         </div>
