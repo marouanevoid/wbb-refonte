@@ -144,6 +144,7 @@ class BarController extends Controller
      * detailsAction
      *
      * @param $slug
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return Response
      */
     public function detailsAction($slug)
@@ -160,6 +161,10 @@ class BarController extends Controller
         }
 
         $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
+        if (!$bar) {
+            throw $this->createNotFoundException('Object not found!');
+        }
+
         $user = $this->container->get('user.repository')->findOneById(1);
 
         $topRelatedBestOfs = $this->container->get('bestof.repository')->findBarRelatedBestofs($bar, true);
