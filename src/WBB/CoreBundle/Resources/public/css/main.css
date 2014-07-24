@@ -177,7 +177,7 @@
   .ui .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 20px; font-weight: bold;}
   .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
-  .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 17px; text-decoration: none; line-height: 65px; text-indent: 20px;}
+  .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
 
   /* Version mobile */
     .ui.mobile {width: auto; padding: 80px 20px; top: 80px;}
@@ -192,17 +192,16 @@
   .ui.wrap {padding: 25px 40px 60px;}
   .ui.register .title {width: 55%;}
   .ui.register .ui {width: 860px}
-  .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 50px;}
+  .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 45px 0 50px;}
   .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center; text-indent: 0;}
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
-  .ui.register #create-account .form-text {text-align: left;  }
+  .ui.register #create-account .form-text {text-align: left; line-height: 40px;}
   .ui.register .date-birthday label {color: #818a8c; font-size: 17px;}
   .ui.register .date-birthday .select-wrap.last {margin-right: 0;}
-  .ui.register .group-actions {position: relative; right: 20%;}
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
-  .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;position: relative; top: -15px;*/ margin: 0 0 0 16px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
+  .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 20px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
 
   /* Message's */
@@ -434,7 +433,7 @@
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
   .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29;}
   .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;}
-  .ui-radio.radio-dark:hover {background-color: transparent!important; border-color: #ffe4af !important;}
+  /*.ui-radio.radio-dark:hover {background-color: transparent!important; border-color: #ffe4af !important;}*/
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
