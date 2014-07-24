@@ -700,4 +700,24 @@ class News implements IndexableEntity
             'wbb_id' => $this->id
         );
     }
+
+    /**
+     * Get interview
+     *
+     * @return boolean 
+     */
+    public function getInterview()
+    {
+        return $this->interview;
+    }
+
+    /**
+     * Get onTop
+     *
+     * @return boolean 
+     */
+    public function getOnTop()
+    {
+        return $this->onTop;
+    }
 }
