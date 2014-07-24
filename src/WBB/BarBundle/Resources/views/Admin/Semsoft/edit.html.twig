@@ -21,119 +21,51 @@ file that was distributed with this source code.
 
 {% block actions %}
     <div class="sonata-actions btn-group">
-        {% if object.slug %}
-            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city, suburb: object.suburb, slug:object.slug}) }}" target="_blank">
+        {% if object.id %}
+            <a class="btn sonata-action-element" href="{{ path('wbb_semsoft_preview',{ssBarId: object.id}) }}" target="_blank">
                 <i class="icon-zoom-in"></i>
                 {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
             </a>
         {% endif %}
-        {% include 'SonataAdminBundle:Button:history_button.html.twig' %}
-        {% include 'SonataAdminBundle:Button:acl_button.html.twig' %}
-        {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
         {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
     </div>
 {% endblock %}
 
 {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}{% endblock %}
 
-{% use 'WBBBarBundle:Admin:Bar/base_edit_form.html.twig' with form as parentForm %}
-
+{#{% use 'WBBBarBundle:Admin:Bar/base_edit_form.html.twig' with form as parentForm %}#}
+{% use 'SonataAdminBundle:CRUD:base_edit_form.html.twig' with form as parentForm %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-    <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
-    <script src="{{ asset('bundles/wbbbar/js/admin/locationpicker.jquery.js') }}"></script>
-    <script type="text/javascript">
-        var barId = "{{ admin.id(object) }}";
-        var venue, insta, fsTipsOffset, fsImagesOffset, instagramImagesOffset;
-        $(document).ready(function(){
-            venue = "{{ object.foursquare }}";
-            insta = "{{ object.instagram }}";
-
-            $("#{{ admin.uniqid }}_foursquare").change(function(){
-                venue = $(this).val();
-            });
-            $("#{{ admin.uniqid }}_instagram").change(function(){
-                insta = $(this).val();
-            });
-        });
-    </script>
-    <script src="{{ asset('bundles/wbbbar/js/admin/foursquare.js') }}"></script>
-    <script type="text/template" id="tips">
-        <div class="fstip" id="{0}">
-            <div class="tipBody">{1}</div>
-            <div class="tipLikes">{2} Likes</div>
-            <div class="user">
-                <img src="{4}">
-                <span>{3}</span>
-            </div>
-            <div style="clear:both;"></div>
-
-            <div class="mt_footer">
-                <img class="loader" style="display:none;" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
-                <input type="checkbox" id="add-{0}" class="add btn btn-mini" name="excludedTips" value="{0}" {5} />
-            </div>
-        </div>
-    </script>
-    <script type="text/template" id="imgs">
-        <div class="fsimg" id="{0}">
-            <img src="{1}">
-            <div style="clear:both;"></div>
-            <div class="mt_footer">
-                <img class="loader" style="display:none;" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
-                <input type="checkbox" id="add-{0}" class="add btn btn-mini" name="excludedFsImages" value="{0}" {2} />
-            </div>
-        </div>
-    </script>
-    <script type="text/template" id="instimgs">
-        <div class="instimg" id="{0}">
-            <img src="{1}">
-            <div style="clear:both;"></div>
-            <div class="mt_footer">
-                <img class="loader" style="display:none;" src="{{ asset('bundles/wbbbar/img/loader.gif') }}" alt="" />
-                <input type="checkbox" id="add-{0}" class="add btn btn-mini" name="excludedImages" value="{0}" {2} />
-            </div>
-        </div>
-    </script>
     <script type="text/javascript">
         $(document).ready(function(){
 
-            $("#{{ admin.uniqId }}_website").after(function(){
-                if($("#{{ admin.uniqId }}_website").val() != "")
-                {
-                    return '&nbsp;&nbsp;&nbsp;<a href="'+$("#{{ admin.uniqId }}_website").val()+'" target="_blank">Visit</a>';
-                }
-            });
+            var country = $("#{{ admin.uniqId }}_country");
+            country.change(updateCities());
+            country.change();
 
-            $("#{{ admin.uniqId }}_foursquare").after(function(){
-                if($("#{{ admin.uniqId }}_foursquare").val() != "")
-                {
-                    return '&nbsp;&nbsp;&nbsp;<a href="https://foursquare.com/v/'+$("#{{ admin.uniqId }}_foursquare").val()+'" target="_blank">Visit</a>';
-                }
-            });
+            function updateCities(){
+                return function () {
+                    var countryId = $("#{{ admin.uniqId }}_country option:selected").val();
+                    var city = $("#{{ admin.uniqId }}_city");
 
-            $("#{{ admin.uniqId }}_twitter").after(function(){
-                if($("#{{ admin.uniqId }}_twitter").val() != "")
-                {
-                    return '&nbsp;&nbsp;&nbsp;<a href="http://www.twitter.com/'+$("#{{ admin.uniqId }}_twitter").val()+'" target="_blank">Visit</a>';
-                }
-            });
+                    city.empty();
+                    city.trigger("list:updated");
 
-            $("#{{ admin.uniqId }}_facebook").after(function(){
-                if($("#{{ admin.uniqId }}_facebook").val() != "")
-                {
-                    return '&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/'+$("#{{ admin.uniqId }}_facebook").val()+'" target="_blank">Visit</a>';
-                }
-            });
+                    var url = Routing.generate('get_cities_from_country', {'bestof': '0', 'countryId': countryId });
+                    $.post(url, { countryId: countryId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        city.empty().append(options);
+                        city.trigger("list:updated");
+                    },"text");
 
-            $("#{{ admin.uniqId }}_instagram").after(function(){
-                if($("#{{ admin.uniqId }}_instagram").val() != "")
-                {
-                    return '&nbsp;&nbsp;&nbsp;<a href="https://www.instagram.com/'+$("#{{ admin.uniqId }}_instagram").val()+'" target="_blank">Visit</a>';
-                }
-            });
+                    city.val("option:first").attr("selected", true);
+                };
+            }
+
 
             var city = $("#{{ admin.uniqId }}_city");
             city.change(updateSuburbs());
@@ -147,7 +79,7 @@ file that was distributed with this source code.
                     suburb.enable(false);
                     $.ajax({
                         type: "POST",
-                        url:  Routing.generate('get_suburbs_from_city', {'bar': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'cityId': cityId, 'suburbId': suburbId }),
+                        url:  Routing.generate('get_suburbs_from_city', {'bar': '0', 'cityId': cityId, 'suburbId': suburbId }),
                         dataType: 'json',
                         success: function(r) {
                             suburb.empty();
@@ -167,7 +99,7 @@ file that was distributed with this source code.
                     suburb.empty();
                     suburb.trigger("list:updated");
 
-                    var url = Routing.generate('get_suburbs_from_city', {'bar': '{% if admin.id(object) %}{{ admin.id(object) }}{% else %}0{% endif %}', 'cityId': cityId });
+                    var url = Routing.generate('get_suburbs_from_city', {'bar': '0', 'cityId': cityId });
                     $.post(url, { cityId: cityId }, function(data){
                         var options = JSON && JSON.parse(data) || $.parseJSON(data);
                         suburb.empty().append(options);
@@ -177,185 +109,8 @@ file that was distributed with this source code.
                     suburb.val("option:first").attr("selected", true);
                 };
             }
-
-            $('ul.nav-tabs li a').click(function() {
-                setTimeout(function(){
-                $('.mapcontainer').locationpicker({
-                    location: { latitude: $('#{{ admin.uniqId }}_latitude').val(), longitude: $('#{{ admin.uniqId }}_longitude').val() },
-                    radius: 0,
-                    zoom: 15,
-                    scrollwheel: true,
-                    inputBinding: {
-                        latitudeInput: $('#lat, #{{ admin.uniqId }}_latitude'),
-                        longitudeInput: $('#lon, #{{ admin.uniqId }}_longitude'),
-                        locationNameInput: $('#mpAddress')
-                    },
-                    enableAutocomplete: true
-                })
-                },300);
-            });
-
-            //Bar tags relations
-            $('select').each(function(){
-                var type = $(this).attr('id');
-                var extension = type.substr(type.length - 5);
-                if (extension != "_type"){
-                    return;
-                }
-                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
-                typeId = $(this).val();
-                tagId = tag.val() || 0;
-
-                tag.empty();
-                tag.trigger("list:updated");
-
-                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
-                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
-                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
-                    tag.empty().append(options);
-                    tag.trigger("list:updated");
-                },"text");
-            });
-
-            $('select').live('change', function(){
-                var type = $(this).attr('id');
-                var extension = type.substr(type.length - 5);
-                if (extension != "_type"){
-                    return;
-                }
-                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
-                typeId = $(this).val();
-                tagId = tag.val() || 0;
-
-                tag.empty();
-                tag.trigger("list:updated");
-
-                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
-                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
-                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
-                    tag.empty().append(options);
-                    tag.trigger("list:updated");
-                    tag.select2("val", "");
-                },"text");
-            });
-
-            jQuery(document).on('sonata.add_element',function(){
-                $('select').each(function(){
-                    var type = $(this).attr('id');
-                    var extension = type.substr(type.length - 5);
-                    if (extension != "_type"){
-                        return;
-                    }
-                    var tag = $('#'+type.substr(0,(type.length-4))+'tag');
-                    typeId = $(this).val();
-                    tagId = tag.val() || 0;
-
-                    tag.empty();
-                    tag.trigger("list:updated");
-
-                    var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
-                    $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
-                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
-                        tag.empty().append(options);
-                        tag.trigger("list:updated");
-                    },"text");
-                });
-            });
         });
     </script>
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .fstip {
-            border-bottom: 1px solid #666666;
-            padding: 20px 0;
-            display: block;
-            float: left;
-            clear: both;
-            width: 100%;
-            position: relative;
-        }
-        .fstip input {
-            position: absolute;
-            top: 10px;
-            right: 0;
-        }
-        .tipLikes {
-            color: #999999;
-            font-style: italic;
-        }
-        .mt_footer { float: right; }
-        .user {
-            margin-top: 20px;
-        }
-        .user img {
-            float: left;
-            margin-right: 10px;
-        }
-        .user span {
-            color:#1b1b1b;
-            font-size: 11px;
-            font-weight: bold;
-            padding-top: 11px;
-            display: block;
-            float: left;
-        }
-        .fsimg, .instimg {
-            width: 200px;
-            display: block;
-            float: left;
-            margin-right: 20px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .fsimg input, .instimg input {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .fsimg .mt_footer img, .instimgs  .mt_footer img {
-            position: absolute;
-            top: 98px;
-            left: 96px;
-        }
-        .mapcontainer img {
-            max-width: none;
-        }
-        .mapcontainer {
-            float: left;
-            margin-right: 20px;
-        }
-        .mapinfos {
-            float: left;
-        }
-        .mapinfos div {
-            clear: left;
-            margin-bottom: 15px;
-        }
-        .mapinfos label {
-            width: 100px;
-            float: left;
-            line-height: 30px;
-            margin-bottom: 0;
-        }
-        .mapinfos input {
-            float: left;
-        }
-        .tips_action, .imgs_action, .instimgs_action {
-            width: 100%;
-            clear: both;
-            text-align: center;
-            margin: 30px 0;
-        }
-        .btload {
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-            margin : 30px 0;
-        }
-    </style>
 {% endblock %}
 
 {% block form %}
