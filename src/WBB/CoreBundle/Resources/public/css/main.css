@@ -433,7 +433,8 @@
   section.bar-finder .ui-radio.btn-radius.with-icon {text-align: left; padding-left: 2em;}
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
   .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29;}
-  .ui-radio.radio-dark.active {background: #4b4d4e!important;}
+  .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;}
+
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
