@@ -63,6 +63,7 @@ services:
         arguments: [null, %wbb_bar.semsoftbar.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
+            - [setTemplates, [{ edit: "WBBBarBundle:Admin:Semsoft/edit.html.twig" }]]
 
     wbb.bar.admin.bar.media:
         class: %wbb_bar.bar_media.admin.class%

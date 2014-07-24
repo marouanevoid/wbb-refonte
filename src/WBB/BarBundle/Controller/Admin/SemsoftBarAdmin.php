@@ -9,6 +9,7 @@ namespace WBB\BarBundle\Controller\Admin;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class SemsoftBarAdmin extends Admin
 {
@@ -21,7 +22,7 @@ class SemsoftBarAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('name', null, array('read_only' => true, 'disabled'  => true))
-                ->add('country', null, array('read_only' => true, 'disabled'  => true))
+                ->add('country')
                 ->add('county', null)
                 ->add('city', null)
                 ->add('postalCode', null, array('read_only' => true, 'disabled'  => true))
@@ -95,5 +96,14 @@ class SemsoftBarAdmin extends Admin
                 )
             ))
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        // to remove a single route
+        $collection->remove('create');
+        $collection->remove('show');
+        // OR remove all route except named ones
+//        $collection->clearExcept(array('list', 'edit'));
     }
 }
