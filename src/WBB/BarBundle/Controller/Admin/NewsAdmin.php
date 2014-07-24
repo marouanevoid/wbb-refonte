@@ -16,7 +16,7 @@ class NewsAdmin extends Admin {
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
             ->addIdentifier('title')
-            ->add('shareText', null, array('editable' => true))
+//            ->add('shareText', null, array('editable' => true))
             ->add('quoteAuthor', null, array('editable' => true))
             ->add('quoteText', null, array('editable' => true))
             ->add('seoDescription', null, array('editable' => true))
@@ -34,7 +34,7 @@ class NewsAdmin extends Admin {
         $filterMapper
             ->add('id')
             ->add('title')
-            ->add('shareText')
+//            ->add('shareText')
             ->add('quoteAuthor')
             ->add('quoteText')
             ->add('seoDescription')
@@ -52,7 +52,7 @@ class NewsAdmin extends Admin {
             ->with('General')
                 ->add('id')
                 ->add('title')
-                ->add('shareText')
+//                ->add('shareText')
                 ->add('quoteAuthor')
                 ->add('quoteText')
                 ->add('seoDescription')
@@ -73,7 +73,7 @@ class NewsAdmin extends Admin {
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
                 ->add('title', null, array('help'=> 'Mandatory', 'label'=> 'Title *'))
-                ->add('shareText', null, array('help'=> 'Mandatory', 'label'=> 'Share text *'))
+//                ->add('shareText', null, array('help'=> 'Mandatory', 'label'=> 'Share text *'))
                 ->add('quoteAuthor')
                 ->add('quoteText')
                 ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
