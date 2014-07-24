@@ -457,6 +457,7 @@
   .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon.active {color: #ffe4af; border-color: #ffe4af!important;}
   .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon,
   .mobile section.bar-finder .ui-radio.btn-radius.with-icon:hover {background-color: transparent!important; border-color: #b3955f; color: #b3955f;}
+  .mobile section.bar-finder .ui-radio.btn-radius.with-icon.active:hover {color: #ffe4af!important;}
 
   /* IE9 */
   .articles article .img .cover .sponsor,
