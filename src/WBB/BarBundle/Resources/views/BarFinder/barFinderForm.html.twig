@@ -68,7 +68,7 @@
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
                                 <option value="{{selected.city}}">
-                                    {% if selected.city !='' %}  {{selected.city == 'all' ? 'All'}} {% else %} Choose a City {% endif %}
+                                    {% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city}} {% else %} Choose a City {% endif %}
                                 </option>
                                 {% if(selected.city != 'all') %}
                                     <option value="all">All</option>
@@ -84,7 +84,7 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
                             <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
-                                <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' }} {% else %}Choose with who {% endif %}</option>
+                                <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option>
                                 {% if(selected.outWith != 'all') %}
                                      <option value="all">All</option>
                                 {% endif %}
