@@ -23,8 +23,11 @@ class SemsoftController extends Controller
     public function previewAction($ssBarId)
     {
         $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
-        $bar = $ssBar->getUpdatedBar();
+        if (!$ssBar) {
+            throw $this->createNotFoundException('Object not found!');
+        }
 
+        $bar = $ssBar->getUpdatedBar();
         $user = $this->container->get('user.repository')->findOneById(1);
 
         $tip = new Tip();
@@ -49,6 +52,10 @@ class SemsoftController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
+        if (!$ssBar) {
+            throw $this->createNotFoundException('Object not found!');
+        }
+
         $bar = $ssBar->getUpdatedBar();
 
         $em->persist($bar);
