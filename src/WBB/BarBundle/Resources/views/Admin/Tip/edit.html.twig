@@ -3,7 +3,7 @@
 {% block actions %}
     <div class="sonata-actions btn-group">
         {% if object.bar and object.bar.slug %}
-            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city: object.bar.city, suburb: object.bar.suburb, slug: object.bar.slug}) }}" target="_blank">
+            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city: object.bar.city, suburb: object.bar.suburb.slug, slug: object.bar.slug}) }}" target="_blank">
                 <i class="icon-zoom-in"></i>
                 {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
             </a>

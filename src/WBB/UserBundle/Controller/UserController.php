@@ -31,17 +31,21 @@ class UserController extends Controller
             $latitude = $session->get('userLatitude' );
             $longitude = $session->get('userLongitude');
             if(!empty($latitude) && !empty($longitude))
-                $distance = true;
+                $distance = array(
+                    'latitude'  => $latitude,
+                    'longitude' => $longitude,
+                    'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
+                );
 
             if($filter === "alphabetical"){
-                $response = $this->container->get('bar.repository')->findBarsOrderedByName(null, $offset ,$limit);
-                $all = $this->container->get('bar.repository')->findBarsOrderedByName(null, $offset , 0);
+                $response = $this->container->get('bar.repository')->findBarsOrderedByName(null, $offset, $limit, $user);
+                $all = $this->container->get('bar.repository')->findBarsOrderedByName(null, $offset, 0, $user);
             }elseif($filter === "date"){
-                $response = $this->container->get('bar.repository')->findLatestBars(null, $limit, $offset, false);
-                $all = $this->container->get('bar.repository')->findLatestBars(null, 0, $offset, false);
+                $response = $this->container->get('bar.repository')->findLatestBars(null, $limit, $offset, false, $user);
+                $all = $this->container->get('bar.repository')->findLatestBars(null, 0, $offset, false, $user);
             }elseif($filter === "city"){
-                $response = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude, $offset, $limit);
-                $all = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude, $offset, 0);
+                $response = $this->container->get('bar.repository')->findBarsOrderedByCityAndName($user, $offset, $limit);
+                $all = $this->container->get('bar.repository')->findBarsOrderedByCityAndName($user, $offset, 0);
             }
 
             if($display=="grid"){
@@ -49,9 +53,7 @@ class UserController extends Controller
                         'bars'   => $response,
                         'offset' => $offset,
                         'limit'  => $limit,
-                        'distance' => $distance,
-                        'latitude' => $latitude,
-                        'longitude'=> $longitude
+                        'distance' => $distance
                     )
                 );
             }else{
@@ -59,22 +61,21 @@ class UserController extends Controller
                     'bars'   => $response,
                     'offset' => $offset,
                     'limit'  => $limit,
-                    'distance' => $distance,
-                    'latitude' => $latitude,
-                    'longitude'=> $longitude
+                    'distance' => $distance
                 ));
             }
 
-        }elseif($content == "bars"){
+        }elseif($content == "bestofs"){
+
             if($filter === "city"){
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, $limit, 'DESC');
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0, 'DESC');
+                $response = $this->container->get('bestof.repository')->findBarsOrderedByCityAndName($user, $offset, $limit);
+                $all = $this->container->get('bestof.repository')->findBarsOrderedByCityAndName($user, $offset, 0);
             }elseif($filter === "alphabetical"){
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit);
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0);
+                $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit, 'ASC', $user);
+                $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset , 0, 'ASC', $user);
             }elseif($filter === "date"){
-                $response = $this->container->get('bestof.repository')->findLatestBestofs(null, $limit, $offset, false);
-                $all = $this->container->get('bestof.repository')->findLatestBestofs(null, 0, $offset, false);
+                $response = $this->container->get('bestof.repository')->findLatestBestofs(null, $limit, $offset, false, $user);
+                $all = $this->container->get('bestof.repository')->findLatestBestofs(null, 0, $offset, false, $user);
             }
             if($display=="grid"){
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
@@ -90,26 +91,16 @@ class UserController extends Controller
                 ));
             }
         }else{
-            if($filter === "alphabetical"){
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit);
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0);
-            }elseif($filter === "date"){
-                $response = $this->container->get('bestof.repository')->findLatestBestofs(null, $limit, $offset, false);
-                $all = $this->container->get('bestof.repository')->findLatestBestofs(null, 0, $offset, false);
-            }
-            if($display=="grid"){
-                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
-                    'bestofs' => $response,
-                    'offset'  => $offset,
-                    'limit'   => $limit
-                ));
-            }else{
-                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofsList.html.twig', array(
-                    'bestofs' => $response,
-                    'offset'  => $offset,
-                    'limit'   => $limit
-                ));
-            }
+
+            $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit);
+            $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0);
+
+            $html = $this->renderView('WBBUserBundle:Profile/filters:tip.html.twig', array(
+                'tips'    => $response,
+                'user'    => $user,
+                'offset'  => $offset,
+                'limit'   => $limit
+            ));
         }
 
         $nbResults = count($response);

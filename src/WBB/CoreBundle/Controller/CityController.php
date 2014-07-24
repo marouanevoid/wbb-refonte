@@ -51,10 +51,10 @@ class CityController extends Controller
         if($city){
             $session->set('citySlug', $city->getSlug());
             return new JsonResponse(array(
-                'id'    => $city->getId(),
-                'name'  => $city->getName(),
-                'slug'  => $city->getSlug(),
-                'latitude' => $city->getLatitude(),
+                'id'        => $city->getId(),
+                'name'      => $city->getName(),
+                'slug'      => $city->getSlug(),
+                'latitude'  => $city->getLatitude(),
                 'longitude' => $city->getLongitude()
             ));
         }

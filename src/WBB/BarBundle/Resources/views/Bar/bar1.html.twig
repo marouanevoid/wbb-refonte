@@ -4,12 +4,16 @@
         {% if (bestof is defined) and ordered %}
             <span class="number h2">{{ loop.index }}</span>
         {% endif %}
-        <h2>{{ b.name }}{% if distance is defined and distance|length>0  %}{{ b.calculateDistance(distance.latitude, distance.longitude) }}{% endif %}</h2>
+        <h2>{{ b.name }}
+            {% if distance is defined and distance|length>0 and distance.city is not null %}
+                {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
+            {% endif %}
+        </h2>
         <h3>{% if b.suburb %}{{ b.suburb.name|default('Unspecified') }}, {% endif %}{% if b.city %}{{ b.city.name|default('Unspecified') }}{% endif %}</h3>
         <div class="hover">
             <div class="tags">
                 {% for tr in b.tagsToShow |slice(0, 5) %}
-                    {{ tr.name }}{% if not loop.last %}, {% endif %}
+                    {{ tr.name|capitalize }}{% if not loop.last %}, {% endif %}
                 {% endfor %}
             </div>
             {% if bestof is defined %}

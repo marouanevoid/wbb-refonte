@@ -23,8 +23,11 @@ class SemsoftController extends Controller
     public function previewAction($ssBarId)
     {
         $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
-        $bar = $ssBar->getUpdatedBar();
+        if (!$ssBar) {
+            throw $this->createNotFoundException('Object not found!');
+        }
 
+        $bar = $ssBar->getUpdatedBar();
         $user = $this->container->get('user.repository')->findOneById(1);
 
         $tip = new Tip();
@@ -49,6 +52,10 @@ class SemsoftController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $ssBar = $this->getDoctrine()->getRepository('WBBBarBundle:Semsoft\SemsoftBar')->findOneById($ssBarId);
+        if (!$ssBar) {
+            throw $this->createNotFoundException('Object not found!');
+        }
+
         $bar = $ssBar->getUpdatedBar();
 
         $em->persist($bar);
@@ -78,7 +85,7 @@ class SemsoftController extends Controller
 
             $file['file']->move('upload', 'import.csv');
             $file = new \SplFileObject($this->container->getParameter('kernel.root_dir').'/../web/upload/import.csv');
-            $reader = new CsvReader($file, ';');
+            $reader = new CsvReader($file, ',');
 
             $reader->setHeaderRowNumber(0);
             foreach ($reader as $data)
@@ -97,18 +104,7 @@ class SemsoftController extends Controller
                 }
                 $country = $this->getCountry($data['Country']);
                 if($country && $data['City'] &&($bar || !empty($data['Name']))){
-
-                    $city   = $this->getCity($data['City'], $country);
-                    if(!$city){
-                        $city = new City();
-                        $city
-                            ->setName($data['City'])
-                            ->setCountry($country)
-                            ->setPostalCode($data['PostalCode'])
-                        ;
-                        $em->persist($city);
-                        $em->flush();
-                    }
+                    $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
                     $suburb = $this->getSuburb($data['District'], $city);
                     $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
                     $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
@@ -132,25 +128,14 @@ class SemsoftController extends Controller
                     $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
                     $ssBar->setReservation($this->setFieldValue('Booking', $data, null, $newBar));
                     $ssBar->setParkingType($this->setFieldValue('ParkingType', $data, null, $newBar));
-                    //Public Transport
-                    $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, $newBar));
-                    $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, $newBar));
-                    $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, $newBar));
-                    $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, $newBar));
-                    $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, $newBar));
-                    $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, $newBar));
-                    $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, $newBar));
-                    $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, $newBar));
-                    $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, $newBar));
-                    $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, $newBar));
-                    $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, $newBar));
-                    $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
-                    $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
-                    $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
                     $ssBar->setPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
                     $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, null, $newBar));
                     $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
                     $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));
+                    //Public Transport not imported
+
+                    //Social Media
+                    $ssBar = $this->setSocialMedia($ssBar, $data, $newBar);
 
                     //Tags
                     $this->getTagsFromString($data['Category'], Tag::WBB_TAG_TYPE_THEME, $ssBar);
@@ -158,13 +143,7 @@ class SemsoftController extends Controller
                     $this->getTagsFromString($data['RestaurantServices'], Tag::WBB_TAG_TYPE_SPECIAL_FEATURES, $ssBar);
 
                     //Open hours
-                    $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
-                    $ssBar = $this->getOpenHoursArray($data['TuesdayOpenHours'], 2, $ssBar);
-                    $ssBar = $this->getOpenHoursArray($data['WednesdayOpenHours'], 3, $ssBar);
-                    $ssBar = $this->getOpenHoursArray($data['ThursdayOpenHours'], 4, $ssBar);
-                    $ssBar = $this->getOpenHoursArray($data['FridayOpenHours'], 5, $ssBar);
-                    $ssBar = $this->getOpenHoursArray($data['SaturdayOpenHours'], 6, $ssBar);
-                    $ssBar = $this->getOpenHoursArray($data['SundayOpenHours'], 7, $ssBar);
+                    $ssBar = $this->getOpenings($ssBar, $data);
 
                     $em->persist($ssBar);
                 }
@@ -176,6 +155,39 @@ class SemsoftController extends Controller
         }
 
         return $this->render('WBBBarBundle:Block:empty_block.html.twig');
+    }
+
+    public function setSocialMedia($ssBar, $data, $newBar)
+    {
+        $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, $newBar));
+        $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, $newBar));
+        $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, $newBar));
+        $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, $newBar));
+        $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, $newBar));
+        $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, $newBar));
+        $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, $newBar));
+        $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, $newBar));
+        $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, $newBar));
+        $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, $newBar));
+        $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, $newBar));
+        $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
+        $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
+        $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
+
+        return $ssBar;
+    }
+
+    public function getOpenings($ssBar, $data)
+    {
+        $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['TuesdayOpenHours'], 2, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['WednesdayOpenHours'], 3, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['ThursdayOpenHours'], 4, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['FridayOpenHours'], 5, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['SaturdayOpenHours'], 6, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['SundayOpenHours'], 7, $ssBar);
+
+        return $ssBar;
     }
 
     public function exportAction()
@@ -290,15 +302,30 @@ class SemsoftController extends Controller
         return ($countryAcronym)?$this->container->get('country.repository')->findOneByAcronym($countryAcronym) : null;
     }
 
-    private function getCity($cityName, $country)
+    private function getCity($cityName, $country, $postalCode)
     {
-        return ($cityName)?$this->container->get('city.repository')->findByNameAndCountry($cityName, $country) : null;
+        $em = $this->getDoctrine()->getManager();
+
+        $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, $country);
+
+        if(!$city){
+            $city = new City();
+            $city
+                ->setName($cityName)
+                ->setCountry($country)
+                ->setPostalCode($postalCode)
+            ;
+            $em->persist($city);
+            $em->flush();
+        }
+
+        return $city;
     }
 
     private function getSuburb($suburbName, $city)
     {
         if(empty($suburbName)){
-            $suburbName = 'Unspecified';
+            $suburbName = 'City-Center';
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -357,29 +384,32 @@ class SemsoftController extends Controller
         $tagNames = explode(',', $tags);
         if($tagNames){
             foreach($tagNames as $tagName){
-                $tag = $this->get('tag.repository')->findOneByName($tagName);
-                if(!$tag){
-                    $tag = new Tag();
-                    $tag
-                        ->setName($tagName)
-                        ->setType($type);
-                }
-                $em->persist($tag);
-                $em->flush();
-
-                if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
-                    $ssBar->setEnergyLevel($tag);
-                }elseif($type == Tag::WBB_TAG_TYPE_THEME || $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
-                    $barTag = new BarTag();
-                    $barTag
-                        ->setType($type)
-                        ->setSemsoftBar($ssBar)
-                        ->setTag($tag);
-                    $ssBar->addTag($barTag);
-                    $tag->addBar($barTag);
-                    $em->persist($barTag);
-                    $em->persist($ssBar);
+                if($tagName != ""){
+                    $tagName = ucfirst($tagName);
+                    $tag = $this->get('tag.repository')->findOneByName($tagName);
+                    if(!$tag){
+                        $tag = new Tag();
+                        $tag
+                            ->setName($tagName)
+                            ->setType($type);
+                    }
+                    $em->persist($tag);
                     $em->flush();
+
+                    if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
+                        $ssBar->setEnergyLevel($tag);
+                    }elseif($type == Tag::WBB_TAG_TYPE_THEME || $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
+                        $barTag = new BarTag();
+                        $barTag
+                            ->setType($type)
+                            ->setSemsoftBar($ssBar)
+                            ->setTag($tag);
+                        $ssBar->addTag($barTag);
+                        $tag->addBar($barTag);
+                        $em->persist($barTag);
+                        $em->persist($ssBar);
+                        $em->flush();
+                    }
                 }
             }
         }
