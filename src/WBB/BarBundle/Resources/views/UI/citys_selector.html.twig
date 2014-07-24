@@ -21,7 +21,11 @@
         </a>
         <div class="selector">
             <span></span>
-            <a class="close btn-round brown"></a>
+            {% if topCities|length <= 9 %}
+                <a class="close btn-round brown"></a>
+            {% else %}
+            <div class="custom-scroll">
+            {% endif %}
             <ul>
                 {% for c in topCities %}
                     {% if city is defined %}
@@ -54,6 +58,9 @@
                     {% endif %}
                 {% endif %}
             </ul>
+            {% if topCities|length > 9 %}
+            </div>
+            {% endif %}
             <a class="btn-radius border brown" href="cities">See a list of cities</a>
         </div>
     </div>
