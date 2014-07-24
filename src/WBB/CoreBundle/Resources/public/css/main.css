@@ -439,7 +439,7 @@
   .ui-radio.radio-dark.active {background-color: transparent!important;}
   .bar-guides .entire-content .bar-filter {min-height: 550px;}
   .sub-header .title h3 {font-size: 2em; line-height: 30px;}
-    
+
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
@@ -453,6 +453,7 @@
   /* Mobile & tablet */
   .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon:hover {background-color: transparent!important; border-color: #b3955f!important;}
   .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon:hover:after {background-position: -92px -200px;}
+  .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon.active:after {background-position: -52px -240px;}
   .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon.active {color: #ffe4af; border-color: #ffe4af!important;}
   .mobile #bar-finder.mobile .form-radio .ui-radio.btn-radius.with-icon,
   .mobile section.bar-finder .ui-radio.btn-radius.with-icon:hover {background-color: transparent!important; border-color: #b3955f; color: #b3955f;}
