@@ -120,9 +120,9 @@ class SemsoftController extends Controller
                     $ssBar->setWebsite($this->setFieldValue('Website', $data, null, $newBar));
                     $ssBar->setEmail($this->setFieldValue('Email', $data, null, $newBar));
                     $ssBar->setPhone($this->setFieldValue('Phone', $data, null, $newBar));
-                    $ssBar->setOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, (($data['OutdoorSeating'] == "true")?true:false), $newBar));
-                    $ssBar->setHappyHour($this->setFieldValue('HappyHour', $data, (($data['HappyHour'] == "true")?true:false), $newBar));
-                    $ssBar->setWifi($this->setFieldValue('Wifi', $data, (($data['Wifi'] == "true")?true:false), $newBar));
+                    $ssBar->setOutDoorSeating($this->setFieldValue('OutdoorSeating', $data, ((strtolower($data['OutdoorSeating']) == "true")?true:false), $newBar));
+                    $ssBar->setHappyHour($this->setFieldValue('HappyHour', $data, ((strtolower($data['HappyHour']) == "true")?true:false), $newBar));
+                    $ssBar->setWifi($this->setFieldValue('Wifi', $data, ((strtolower($data['Wifi']) == "true")?true:false), $newBar));
                     $ssBar->setPrice($this->setFieldValue('PriceRange', $data, $this->getPriceValue($data['PriceRange']), $newBar));
                     $ssBar->setCreditCard($this->setFieldValue('PaymentAccepted', $data, $this->isCreditCard($data['PaymentAccepted']), $newBar));
                     $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
@@ -157,39 +157,6 @@ class SemsoftController extends Controller
         return $this->render('WBBBarBundle:Block:empty_block.html.twig');
     }
 
-    public function setSocialMedia($ssBar, $data, $newBar)
-    {
-        $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, $newBar));
-        $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, $newBar));
-        $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, $newBar));
-        $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, $newBar));
-        $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, $newBar));
-        $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, $newBar));
-        $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, $newBar));
-        $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, $newBar));
-        $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, $newBar));
-        $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, $newBar));
-        $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, $newBar));
-        $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
-        $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
-        $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
-
-        return $ssBar;
-    }
-
-    public function getOpenings($ssBar, $data)
-    {
-        $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['TuesdayOpenHours'], 2, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['WednesdayOpenHours'], 3, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['ThursdayOpenHours'], 4, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['FridayOpenHours'], 5, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['SaturdayOpenHours'], 6, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['SundayOpenHours'], 7, $ssBar);
-
-        return $ssBar;
-    }
-
     public function exportAction()
     {
         $container = $this->container;
@@ -222,6 +189,39 @@ class SemsoftController extends Controller
         $response->headers->set('Content-Disposition','attachment; filename="export.csv"');
 
         return $response;
+    }
+
+    private function setSocialMedia($ssBar, $data, $newBar)
+    {
+        $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, $newBar));
+        $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, $newBar));
+        $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, $newBar));
+        $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, $newBar));
+        $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, $newBar));
+        $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, $newBar));
+        $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, $newBar));
+        $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, $newBar));
+        $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, $newBar));
+        $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, $newBar));
+        $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, $newBar));
+        $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
+        $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
+        $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
+
+        return $ssBar;
+    }
+
+    private function getOpenings($ssBar, $data)
+    {
+        $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['TuesdayOpenHours'], 2, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['WednesdayOpenHours'], 3, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['ThursdayOpenHours'], 4, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['FridayOpenHours'], 5, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['SaturdayOpenHours'], 6, $ssBar);
+        $ssBar = $this->getOpenHoursArray($data['SundayOpenHours'], 7, $ssBar);
+
+        return $ssBar;
     }
 
     private function setFieldValue($fieldName, $data, $value = null, $forceUpdate = false)
