@@ -24,13 +24,15 @@ class TipsController extends Controller
      */
     public function addAction(Request $request)
     {
-        $user = $this->getUser();
-        if (!$user) {
-            return new JsonResponse(array(
-                'code' => 403,
-                'message' => 'User not authenticated !'
-            ));
-        }
+//        $user = $this->getUser();
+//        if (!$user) {
+//            return new JsonResponse(array(
+//                'code' => 403,
+//                'message' => 'User not authenticated !'
+//            ));
+//        }
+
+        $user = $this->get('user.repository')->findOneById(1);
 
         $tip = new Tip();
         $tip->setUser($user);
