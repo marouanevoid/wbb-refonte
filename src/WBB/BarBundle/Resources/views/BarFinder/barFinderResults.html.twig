@@ -28,7 +28,7 @@
 
             // OPEN THE FINDER
             $('header .finder').click();
-            
+
 
             animate = function($target, $elements, callback ){
 
@@ -117,7 +117,6 @@
             $('.loadmore-trigger').on('click' , function(){
                currentIndexToLoad++;
                 var cibletag = ( currentMode == 'grid' ) ?  'gridview' :  'listview';
-                alert(currentIndexToLoad);
                 var currentCible = $($(".line." + cibletag )[currentIndexToLoad]);
                 currentCible.show();
                 initAnimate(currentCible.find('> *').not('br'),false,true);
