@@ -8,7 +8,7 @@
 
                     <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
 
-                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                     {% if b.medias|length>0 %}
                         {% for m in b.medias|slice(0,1) %}
                             <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
@@ -21,7 +21,7 @@
 
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top">
-                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">
+                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">
                         {{ b.name }}
                         {% if distance is defined and distance|length>0 and distance.city is not null %}
                             {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
@@ -29,7 +29,7 @@
                     </a>
                 </h2>
                 {% if b.city and b.suburb %}
-                <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
+                <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
                 {% endif %}
                 <p class="s-margin-top">
                     {{ b.seoDescription|truncate(200, true, '...')|striptags }}

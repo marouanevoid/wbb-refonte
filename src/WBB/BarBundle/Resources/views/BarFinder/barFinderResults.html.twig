@@ -253,7 +253,7 @@
 
                                     <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
 
-                                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+                                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                                     {% if b.medias|length>0 %}
                                         {% for m in b.medias|slice(0,1) %}
                                             <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
@@ -265,7 +265,7 @@
                             </div>
 
                             <div class="nine columns s-margin-top">
-                                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.name }}</a></h2>
+                                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">{{ b.name }}</a></h2>
                                 {% if b.city and b.suburb %}
                                     <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
                                 {% endif %}
@@ -274,7 +274,7 @@
                                 </p>
                                 <div class="tags">
                                     {% for tr in b.tags %}
-                                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                                        {{ tr.tag.name|capitalize }}{% if not loop.last %}, {% endif %}
                                     {% endfor%}
                                 </div>
                             </div>
