@@ -318,7 +318,7 @@ class SemsoftController extends Controller
     private function getSuburb($suburbName, $city)
     {
         if(empty($suburbName)){
-            $suburbName = 'Unspecified';
+            $suburbName = 'City-Center';
         }
 
         $em = $this->getDoctrine()->getManager();
