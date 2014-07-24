@@ -22,7 +22,10 @@
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top">
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">
-                        {{ b.name }}{% if distance is defined and distance %} - {{ b.calculateDistance(latitude, longitude) }} KM{% endif %}
+                        {{ b.name }}
+                        {% if distance is defined and distance|length>0 and distance.city is not null %}
+                            {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
+                        {% endif %}
                     </a>
                 </h2>
                 {% if b.city and b.suburb %}

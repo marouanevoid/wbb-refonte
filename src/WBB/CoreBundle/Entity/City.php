@@ -727,4 +727,13 @@ class City implements IndexableEntity
     {
         return $this->postalCode;
     }
+
+    public function isUSCity()
+    {
+        if($this->getCountry()->getAcronym() == 'US'){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

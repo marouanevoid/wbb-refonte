@@ -36,8 +36,7 @@ class BarController extends Controller
     public function cityHomeAction($slug)
     {
         $session = $this->container->get('session');
-        if ($slug == "world-wide")
-        {
+        if ($slug == "world-wide"){
             $session->set('citySlug', "");
             return $this->homeAction();
         }
@@ -58,7 +57,8 @@ class BarController extends Controller
         if(!empty($latitude) && !empty($longitude)){
             $response['distance']  = array(
                 'latitude'  => $latitude,
-                'longitude' => $longitude
+                'longitude' => $longitude,
+                'city'      => $city
             );
         }else{
             $response['distance'] = false;
@@ -81,19 +81,7 @@ class BarController extends Controller
         if (!empty($slug))
             return $this->barGuideCityAction($session->get('citySlug'));
         $session->set('citySlug', "");
-
-        $latitude  = $session->get('userLatitude');
-        $longitude = $session->get('userLongitude');
-
-        if(!empty($latitude) && !empty($longitude) && !empty($slug)){
-            $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars(null, $latitude, $longitude);
-            $response['distance']  = array(
-                'latitude'  => $latitude,
-                'longitude' => $longitude
-            );
-        }else{
-            $response['distance'] = false;
-        }
+        $response['distance'] = false;
 
         $response['topCities']      = $this->container->get('city.repository')->findTopCities();
         $response['popularBars']    = $this->container->get('bar.repository')->findPopularBars();
@@ -126,7 +114,8 @@ class BarController extends Controller
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
             $response['distance']  = array(
                 'latitude'  => $latitude,
-                'longitude' => $longitude
+                'longitude' => $longitude,
+                'city'      => $city
             );
         }else{
             $response['distance']  = false;
@@ -158,6 +147,7 @@ class BarController extends Controller
         if(!empty($city) && !empty($latitude) && !empty($longitude)){
             $distance['latitude']   = $latitude;
             $distance['longitude']  = $longitude;
+            $distance['city']         = $this->get('city.repository')->findOneBySlug($city);
         }
 
         $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
@@ -306,7 +296,8 @@ class BarController extends Controller
         if(!empty($latitude) && !empty($longitude)){
             $distance  = array(
                 'latitude'  => $latitude,
-                'longitude' => $longitude
+                'longitude' => $longitude,
+                'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
             );
         }
 
@@ -376,7 +367,8 @@ class BarController extends Controller
         if(!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))){
             $distance  = array(
                 'latitude'  => $latitude,
-                'longitude' => $longitude
+                'longitude' => $longitude,
+                'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
             );
         }
 
@@ -418,7 +410,8 @@ class BarController extends Controller
                 $session = $this->container->get('session');
                 $distance  = array(
                     'latitude'  => $session->get('userLatitude' ),
-                    'longitude' => $session->get('userLongitude')
+                    'longitude' => $session->get('userLongitude'),
+                    'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
                 );
                 $response = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, $limit);
                 $all = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, 0);

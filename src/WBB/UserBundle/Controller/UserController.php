@@ -31,7 +31,11 @@ class UserController extends Controller
             $latitude = $session->get('userLatitude' );
             $longitude = $session->get('userLongitude');
             if(!empty($latitude) && !empty($longitude))
-                $distance = true;
+                $distance = array(
+                    'latitude'  => $latitude,
+                    'longitude' => $longitude,
+                    'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
+                );
 
             if($filter === "alphabetical"){
                 $response = $this->container->get('bar.repository')->findBarsOrderedByName(null, $offset, $limit, $user);
@@ -49,9 +53,7 @@ class UserController extends Controller
                         'bars'   => $response,
                         'offset' => $offset,
                         'limit'  => $limit,
-                        'distance' => $distance,
-                        'latitude' => $latitude,
-                        'longitude'=> $longitude
+                        'distance' => $distance
                     )
                 );
             }else{
@@ -59,9 +61,7 @@ class UserController extends Controller
                     'bars'   => $response,
                     'offset' => $offset,
                     'limit'  => $limit,
-                    'distance' => $distance,
-                    'latitude' => $latitude,
-                    'longitude'=> $longitude
+                    'distance' => $distance
                 ));
             }
 
