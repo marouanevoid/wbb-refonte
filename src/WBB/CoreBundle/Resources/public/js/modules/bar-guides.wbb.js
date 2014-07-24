@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     var barsLimit = 8;
     var bestofLimit = 9;
-
+    var haveDistance = $('#criteria').find('option[value=distance]').length;
    $("form[name=filter]")[0].reset();
    var loadData = function(){
        if(istablet==1)
@@ -106,19 +106,40 @@ $(document).ready(function()
         $(".load-more").show();
         _offset = 0;
         if( $('input[name=filter]:checked').val() == "bar_list")
-        {
-            $('li.distance').css('display','block');
+        {   
+            if(istablet || ismobile){
+              if(haveDistance){
+                $('#criteria').prepend('<option value=distance>Distance</option>');
+              }
+            }else{
+             $('li.distance').css('display','block');  
+            }
             _limit = barsLimit;
         }
         else
         {
-            $('li.distance').css('display','none');
-            if($('#criteria').val()=='distance')
-            {
-                $('.jspPane li.popularity').trigger("click");
-                $('#criteria').val('popularity');
-                $('li.popularity').css('display','block');
+            //$('#criteria')._instance._remove('popularity');
+            if(istablet || ismobile ){
+              var optionDistance = $('#criteria').find('option[value=distance]');
+              if($('#criteria').val() == 'distance'){
+                // dispatch click on popularity
+                $('#criteria').find('option[value=popularity]').attr('selected' , 'selected');
+                $('#criteria').parent('.ui-dropdown-container').find('.selected').text('Popularity');
+              }
+              if(optionDistance.length){
+                  optionDistance.remove();
+              }
+                
+            }else{
+              $('li.distance').css('display','none');
+              if($('#criteria').val()=='distance')
+              {
+                  $('.jspPane li.popularity').trigger("click");
+                  $('#criteria').val('popularity');
+                  $('li.popularity').css('display','block');
+              } 
             }
+
             _limit = bestofLimit;
         }
         $(".load-target").html('');

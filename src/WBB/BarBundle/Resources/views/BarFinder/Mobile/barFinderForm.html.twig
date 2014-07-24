@@ -11,9 +11,12 @@
                 <label class="text-transform-uppercase">city</label>
                 <select class="ui-dropdown dark" name="city" data-class="with-icon city">
                     <option value="">Choose a City</option>
+                    <option value="all" {% if selected.city ==  "all" %} selected="selected" {% endif %}>All</option>
                     {% if city %} <option value="">{{ city.name }}</option> {% endif %}
                     {% for c in cities %}
-                        <option class="cty{{ loop.index }}" value="{{ c.slug }}">{{ c.name }}</option>
+                        <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
+                            {{ c.name }}
+                        </option>
                     {% endfor %}
                 </select>
                 <div class="clear"></div>
@@ -22,6 +25,7 @@
                 <label class="text-transform-uppercase">To go out with</label>
                 <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
                     <option value="">Choose with who</option>
+                    <option value="all" {% if selected.outWith ==  "all" %} selected="selected" {% endif %}>All</option>
                     {% for tag in firstTags %}
                         <option value="{{ tag.id }}">{{ tag.name }}</option>
                     {% endfor %}
@@ -38,7 +42,9 @@
                         {% for mood in moods %}
                             <li class="left">
                                 <div class="form-radio">
-                                    <input type="radio" name="mood" data-value="{{ mood |lower }}" value="{{ mood }}" class="ui-radio dark with-icon text-transform-capitalize" data-color="brown">
+                                    <input type="radio" name="mood" data-value="{{ mood |lower }}" value="{{ mood }}" class="ui-radio dark with-icon text-transform-capitalize"
+                                            {% if selected.mood ==  mood %} checked="checked" {% endif %}
+                                           data-color="brown">
                                 </div>
                             </li>
                         {% endfor %}

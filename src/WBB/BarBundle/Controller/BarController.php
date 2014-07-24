@@ -189,11 +189,18 @@ class BarController extends Controller
         ));
     }
 
-    public function barFinderAction()
+    public function barFinderAction(Request $request)
     {
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         $city = null;
+
+        $selected = array(
+            'mood'      => $request->query->get('sel_mood'),
+            'city'      => $request->query->get('sel_city'),
+            'outWith'   => $request->query->get('sel_outwith')
+        );
+
         if (!empty($slug))
             $city = $this->get('city.repository')->findOneBySlug($slug);
 
@@ -204,13 +211,14 @@ class BarController extends Controller
             'Casual',
             'Party'
         );
-        $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
+        $cities = $this->container->get('city.repository')->findBarFinderCities($city);
 
         return $this->render('WBBBarBundle:BarFinder:Mobile\barFinderForm.html.twig', array(
             'city'      => $city,
             'cities'    => $cities,
             'firstTags' => $toGoOutWith,
-            'moods'     => $moods
+            'moods'     => $moods,
+            'selected'  => $selected
         ));
     }
 
@@ -219,9 +227,12 @@ class BarController extends Controller
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
 
-        $mood_selected = $session->get('barfinder_mood');
-        $city_selected = $session->get('barfinder_city');
-        $toGoOutWith_selected = $session->get('barfinder_tag');
+        $selected = array(
+            'mood'      => $session->get('sel_mood'),
+            'city'      => $session->get('barfinder_city'),
+            'outWith'   => $session->get('barfinder_tag')
+        );
+
 
         $city = null;
         if (!empty($slug))
@@ -241,9 +252,7 @@ class BarController extends Controller
             'cities'    => $cities,
             'firstTags' => $toGoOutWith,
             'moods'     => $moods,
-            'mood_selected' => $mood_selected,
-            'city_selected' => $city_selected,
-            'toGoOutWith_selected' => $toGoOutWith_selected
+            'selected'  => $selected
         ));
     }
 
@@ -257,26 +266,32 @@ class BarController extends Controller
         if($request->request->get('mood') != "")
         {
             $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, $limit = 1, $request->request->get('mood'));
-            $session->set('barfinder_mood', $mood[0]);
+            $session->set('barfinder_mood', $mood);
         }else{
             $session->set('barfinder_mood', "");
         }
 
-        if($request->request->get('city') != "")
+        if($request->request->get('city') != "" && $request->request->get('city') != "all")
         {
             if ($request->request->get('city') != 'all')
                 $city = $this->container->get('city.repository')->findOneBySlug($request->request->get('city'));
             $session->set('barfinder_city', $request->request->get('city'));
         }
 
-        if($request->request->get('go_out') != "")
+        if($request->request->get('go_out') != "" && $request->request->get('go_out') != "all")
         {
             if ($request->request->get('go_out') != 'all')
                 $tag = $request->request->get('go_out');
             $session->set('barfinder_tag', $request->request->get('go_out'));
         }
 
-        $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood[0]);
+        $selected = array(
+            'mood'      => $session->get('barfinder_mood'),
+            'city'      => $session->get('barfinder_city'),
+            'outWith'   => $session->get('barfinder_tag')
+        );
+
+        $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
 
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
@@ -291,7 +306,8 @@ class BarController extends Controller
 
         return $this->render('WBBBarBundle:BarFinder:barFinderResults.html.twig', array(
             'bars'      => $bars,
-            'distance'  => $distance
+            'distance'  => $distance,
+            'selected'  => $selected
         ));
     }
 

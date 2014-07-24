@@ -1539,6 +1539,8 @@ class SemsoftBar
             {
                 $tag->setBar($bar);
                 $bar->addTag($tag);
+                $this->removeTag($tag);
+                $tag->setSemsoftBar(null);
             }
         }
 
@@ -1548,6 +1550,8 @@ class SemsoftBar
             {
                 $op->setBar($bar);
                 $bar->addOpening($op);
+                $this->removeOpening($op);
+                $op->setSemsoftBar(null);
             }
         }
 
