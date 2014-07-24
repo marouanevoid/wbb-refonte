@@ -21,9 +21,8 @@
         </a>
         <div class="selector">
             <span></span>
-            {% if topCities|length <= 9 %}
-                <a class="close btn-round brown"></a>
-            {% else %}
+                <a class="close btn-round brown" {% if topCities|length > 9 %} style="display:none;" {%  endif %}></a>
+            {% if topCities|length > 9 %}
             <div class="custom-scroll">
             {% endif %}
             <ul>

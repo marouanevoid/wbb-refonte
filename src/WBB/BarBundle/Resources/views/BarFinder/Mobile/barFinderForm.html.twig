@@ -23,7 +23,7 @@
         <form action="{{ path('wbb_bar_finder_results') }}" method="post" id="form-finderbar">
             <div class="group-select padding-bottom-10">
                 <label class="text-transform-uppercase">city</label>
-                <select class="ui-dropdown dark" name="city" data-class="with-icon city">
+                <select class="trigger-select-go ui-dropdown dark" name="city" data-class="with-icon city">
                     <option value="">Choose a City</option>
                     <option value="all" {% if selected.city ==  "all" %} selected="selected" {% endif %}>All</option>
                     {% if city %} <option value="">{{ city.name }}</option> {% endif %}
@@ -37,7 +37,7 @@
             </div>
             <div class="group-select margin-bottom-10">
                 <label class="text-transform-uppercase">To go out with</label>
-                <select class="ui-dropdown dark" name="go_out" data-class="with-icon friend">
+                <select class="trigger-select-go ui-dropdown dark" name="go_out" data-class="with-icon friend">
                     <option value="">Choose with who</option>
                     <option value="all" {% if selected.outWith ==  "all" %} selected="selected" {% endif %}>All</option>
                     {% for tag in firstTags %}
@@ -74,18 +74,41 @@
         </form>
         <script type="text/javascript">
             $(document).ready(function(){
+
+                var showGo = function(){
+
+                   var totalSelectedMood =  $('.trigger-handler:checked').length;
+                       totalSelectedSelect = 0;
+                   $('.trigger-select-go').each(function(){
+                      if($(this).val()=="")
+                        totalSelectedSelect++;
+                   });
+                   
+                   if(totalSelectedSelect < 2 || totalSelectedMood > 0){
+                        $('.go').removeClass('disabled');
+                        $('.go').removeAttr('disabled');
+                   }else{
+                    $('.go').addClass('disabled');
+                    $('.go').attr('disabled' , 'disabled');
+                   }  
+
+                };
+
+
                 var objRadio = $("input[name='mood']");
                 var objDropdown = $("select.ui-dropdown");
                 objDropdown.each(function(){
                     $(this).change(function() {
-                        if ($(this).val()) {
-                            $("#go-submit").removeClass("disabled");
-                            return true
-                        }
+ 
+                        showGo();
                     })
                 })
                 objRadio.change(function() {
-                    $("#go-submit").removeClass("disabled");
+                    $('.trigger-handler').each(function(){
+                        if( ! $(this).is(':checked'))
+                            $(this).parent('a.ui-radio').removeClass('active');
+                    });
+                    showGo();
                 })
             })
         </script>
