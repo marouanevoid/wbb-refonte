@@ -42,78 +42,211 @@
                             <div class="clear"></div>
                         </div> <!-- .filter-profil -->
 
-
                     <!-- Separator -->
                     <hr>
                     <div class="clear"></div>
 
-
-                    <!-- Filters -->
-                    <div class="container">
-                        <div class="margin-top-20">
-                            <div class="sort-by six columns">
-                                <label class="sort left text-transform-uppercase unbold">Sort by :</label>
-                                <div class="four columns">
-                                    <select class="ui-dropdown light" name="criteria" id="criteria">
-                                        <option value="popularity" data-type="criteria">Date added</option>
-                                        <option value="date" data-type="criteria">Date</option>
-                                        <option value="distance" data-type="criteria">Distance</option>
-                                        <option value="alphabetical" data-type="criteria">Alphabetical order</option>
-                                    </select>
-                                </div>
-                            </div> <!-- .sort-by -->
-
-                            <div class="filter-view">
-                                <div class="right">
-                                    <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                    <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
-                                </div>
-                            </div> <!-- .filter-view -->
-                        </div> <!-- .margin-top-20 -->
-                    </div> <!-- .container -->
-
-                    <!-- List of Bars -->
-                    <div class="margin-top-40 list-bars container">
-
-                    </div>
-                    <!-- List of Tips -->
-                    <div class="list-tips padding-top-40">
-                        <ul class="container">
-                            {#{% for tip in user.tips %}#}
-                                {#<li class="col col-4">#}
-                                    {#<div class="block-tip">#}
-                                        {#<p>#}
-                                            {#{{ tip.description }}#}
-                                        {#</p>#}
-                                        {#<div class="profil margin-top-10 padding-top-10 separator-top">#}
-                                            {#<img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">#}
-                                            {#<div class="expert bold">{{ user.userRole }}</div>#}
-                                            {#<div class="name">{{ user.firstname }} {{ user.lastname }}</div>#}
-                                        {#</div>#}
-                                        {#<a href="#close" class="close no-text">Close</a>#}
-                                        {#<div class="clear"></div>#}
-                                    {#</div>#}
-                                {#</li>#}
-                            {#{% endfor %}#}
-                        </ul>
-                        <div class="clear"></div>
-
-                        <!-- Button See more Bars -->
+                    <div id="tab-bars" class="tab active">
+                        <!-- Filters -->
                         <div class="container">
-                            <div class="bars-w-pic force-load load-container">
-                                <div class="load-target"></div>
-                                <div class="twelve columns align-center m-margin load-more-container">
-                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                            <div class="margin-top-20">
+                                <div class="sort-by six columns">
+                                    <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+                                    <div class="four columns">
+                                        <select class="ui-dropdown light" name="criteria" id="criteria">
+                                            <option value="popularity" data-type="criteria">Date added</option>
+                                            <option value="date" data-type="criteria">Date</option>
+                                            <option value="distance" data-type="criteria">Distance</option>
+                                            <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- .sort-by -->
+
+                                <div class="filter-view">
+                                    <div class="right">
+                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                    </div>
+                                </div> <!-- .filter-view -->
+                            </div> <!-- .margin-top-20 -->
+                        </div> <!-- .container -->
+
+                        <!-- List of Bars -->
+                        <div class="margin-top-40 list-bars container">
+                            {# AJAX LOADING #}
+                        </div>
+                    </div><!-- #tab-bars -->
+                    <div class="clear"></div>
+
+                    <div id="tab-bestof"  class="tab"style="display:none">
+                        <!-- Filters -->
+                        <div class="container">
+                            <div class="margin-top-20">
+                                <div class="sort-by six columns">
+                                    <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+                                    <div class="four columns">
+                                        <select class="ui-dropdown light" name="criteria" id="criteria">
+                                            <option value="popularity" data-type="criteria">Date added</option>
+                                            <option value="date" data-type="criteria">Date</option>
+                                            <option value="distance" data-type="criteria">Distance</option>
+                                            <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- .sort-by -->
+
+                                <div class="filter-view">
+                                    <div class="right">
+                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                    </div>
+                                </div> <!-- .filter-view -->
+                            </div> <!-- .margin-top-20 -->
+                        </div> <!-- .container -->
+
+                        <!-- List of Bars -->
+                        <div class="margin-top-40 list-bars container">
+                            {# AJAX LOADING #}
+                        </div>
+                    </div><!-- #tab-bestof -->
+                    <div class="clear"></div>
+
+                    <div id="tab-tips"  class="tab"style="display:none">
+                        <!-- List of Tips -->
+                        <div class="list-tips padding-top-40">
+                            <ul class="container">
+                                {#{% for tip in user.tips %}#}
+                                    {#<li class="col col-4">#}
+                                        {#<div class="block-tip">#}
+                                            {#<p>#}
+                                                {#{{ tip.description }}#}
+                                            {#</p>#}
+                                            {#<div class="profil margin-top-10 padding-top-10 separator-top">#}
+                                                {#<img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">#}
+                                                {#<div class="expert bold">{{ user.userRole }}</div>#}
+                                                {#<div class="name">{{ user.firstname }} {{ user.lastname }}</div>#}
+                                            {#</div>#}
+                                            {#<a href="#close" class="close no-text">Close</a>#}
+                                            {#<div class="clear"></div>#}
+                                        {#</div>#}
+                                    {#</li>#}
+                                {#{% endfor %}#}
+                                <li class="col col-4">
+                                    <div class="block-tip">
+                                        <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                        <div class="profil margin-top-10 padding-top-10 separator-top">
+                                            <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                            <div class="expert bold">Expert</div>
+                                            <div class="name">Ryan Melon</div>
+                                        </div>
+                                        <a href="#close" class="close no-text">Close</a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li class="col col-4">
+                                    <div class="block-tip">
+                                        <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                        <div class="profil margin-top-10 padding-top-10 separator-top">
+                                            <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                            <div class="expert bold">Expert</div>
+                                            <div class="name">Ryan Melon</div>
+                                        </div>
+                                        <a href="#close" class="close no-text">Close</a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li class="col col-4">
+                                    <div class="block-tip">
+                                        <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                        <div class="profil margin-top-10 padding-top-10 separator-top">
+                                            <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                            <div class="expert bold">Expert</div>
+                                            <div class="name">Ryan Melon</div>
+                                        </div>
+                                        <a href="#close" class="close no-text">Close</a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li class="col col-4">
+                                    <div class="block-tip">
+                                        <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                        <div class="profil margin-top-10 padding-top-10 separator-top">
+                                            <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                            <div class="expert bold">Expert</div>
+                                            <div class="name">Ryan Melon</div>
+                                        </div>
+                                        <a href="#close" class="close no-text">Close</a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </li>
+                                    <li class="col col-4">
+                                        <div class="block-tip">
+                                            <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                            <div class="profil margin-top-10 padding-top-10 separator-top">
+                                                <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                                <div class="expert bold">Expert</div>
+                                                <div class="name">Ryan Melon</div>
+                                            </div>
+                                            <a href="#close" class="close no-text">Close</a>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                    <li class="col col-4">
+                                        <div class="block-tip">
+                                            <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                            <div class="profil margin-top-10 padding-top-10 separator-top">
+                                                <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                                <div class="expert bold">Expert</div>
+                                                <div class="name">Ryan Melon</div>
+                                            </div>
+                                            <a href="#close" class="close no-text">Close</a>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                    <li class="col col-4">
+                                        <div class="block-tip">
+                                            <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                            <div class="profil margin-top-10 padding-top-10 separator-top">
+                                                <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                                <div class="expert bold">Expert</div>
+                                                <div class="name">Ryan Melon</div>
+                                            </div>
+                                            <a href="#close" class="close no-text">Close</a>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                                    <li class="col col-4">
+                                        <div class="block-tip">
+                                            <p>“This Portuguese/ Chinese fusion restaurant offers an exciting blend of exotic dishes that make dining at Macao a unique experience. Try the mushroom and truffle croquettes appetizer to start. If in TriBeCa and looking for a unique meal.”</p>
+                                            <div class="profil margin-top-10 padding-top-10 separator-top">
+                                                <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
+                                                <div class="expert bold">Expert</div>
+                                                <div class="name">Ryan Melon</div>
+                                            </div>
+                                            <a href="#close" class="close no-text">Close</a>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </li>
+                            </ul>
+                                
+                            <div class="clear"></div>
+
+                            <!-- Button See more Bars -->
+                            <div class="container">
+                                <div class="bars-w-pic force-load load-container">
+                                    <div class="load-target"></div>
+                                    <div class="twelve columns align-center m-margin load-more-container">
+                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    </div><!-- #tab-tips -->
                     <div class="clear"></div>
+
                 </div>
             </div> <!-- .margin-top-20 -->
             <div class="clear"></div>
-        </div> <!-- #UI -->
+        </div>
     </div> <!-- #editprofile -->
     <div id="banner-bottom" class="margin-bottom-20 text-align-center">
         <a href="#"><img src="images/UI/banner.jpg" align="center"></a>
@@ -121,6 +254,32 @@
     <script>
         $(document).ready(function(){
             new wbb.LoadProfile();
+            console.clear();
+            var tabElement = $("input[name='filter']");
+            tabElement.change(function(){
+                var currentTab = $(this).data("tab");
+                if (currentTab == "bars") {
+                    tabClose();
+                    $("#tab-bars").fadeIn("slow");
+                    $("#tab-bars").addClass("active");
+                } else if(currentTab == "bestof") {
+                    tabClose();
+                    $("#tab-bestof").fadeIn("slow");
+                    $("#tab-bestof").addClass("active");
+                } else if (currentTab == "tips") {
+                    tabClose();
+                    $("#tab-tips").fadeIn("slow");
+                    $("#tab-tips").addClass("active");
+                }
+            })
+            function tabClose(){
+                $(".tab").each(function(){
+                    if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                        $(this).hide("slow");
+                    }
+                })
+            }
         });
     </script>
 {% endblock %}
