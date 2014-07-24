@@ -20,7 +20,7 @@
 <div id="bar-finder" class="mobile bar-finder margin-top-60">
     <div class="title text-transform-uppercase bold">find your best bar</div>
     <div class="content padding-top-10">
-        <form action="{{ path('wbb_bar_finder_results') }}" method="post">
+        <form action="{{ path('wbb_bar_finder_results') }}" method="post" id="form-finderbar">
             <div class="group-select padding-bottom-10">
                 <label class="text-transform-uppercase">city</label>
                 <select class="ui-dropdown dark" name="city" data-class="with-icon city">
@@ -69,9 +69,26 @@
                 </div>
             </div>
             <div class="group-form margin-bottom-40">
-                <input type="submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold go disabled">
+                <input type="submit" id="go-submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold go disabled">
             </div>
         </form>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var objRadio = $("input[name='mood']");
+                var objDropdown = $("select.ui-dropdown");
+                objDropdown.each(function(){
+                    $(this).change(function() {
+                        if ($(this).val()) {
+                            $("#go-submit").removeClass("disabled");
+                            return true
+                        }
+                    })
+                })
+                objRadio.change(function() {
+                    $("#go-submit").removeClass("disabled");
+                })
+            })
+        </script>
     </div>
 </div> <!-- #bar-finder -->
 {% endblock %}
