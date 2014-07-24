@@ -1591,7 +1591,7 @@ class Bar implements IndexableEntity
         return $tags;
     }
 
-    public function calculateDistance($latitude, $longitude, $unit = 'km')
+    public function calculateDistance($latitude, $longitude, $usCity = false, $unit = 'km')
     {
         $theta = $this->getLongitude() - $longitude;
         $dist = sin(deg2rad($this->getLatitude())) * sin(deg2rad($latitude)) + cos(deg2rad($this->getLatitude())) * cos(deg2rad($latitude)) * cos(deg2rad($theta));
@@ -1602,7 +1602,7 @@ class Bar implements IndexableEntity
             $unit = strtoupper($unit);
             $response = " - ";
 
-            if($unit == "M"){
+            if($unit == "M" || $usCity){
                 $response.= round($miles, 2)." Mi";
             }
             elseif($unit == "NM"){

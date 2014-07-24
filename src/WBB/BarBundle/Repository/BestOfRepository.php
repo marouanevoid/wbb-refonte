@@ -99,7 +99,7 @@ class BestOfRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8, $order = 'ASC')
+    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8, $order = 'ASC', $user = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -117,10 +117,44 @@ class BestOfRepository extends EntityRepository
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id', $user->getId()));
+        }
+
         return $qb->getQuery()->getResult();
     }
 
-    public function findLatestBestofs($city = null, $limit = 8, $offset = 0, $onTop = true)
+    public function findBarsOrderedByCityAndName($user = null, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->addSelect('c, cn')
+            ->leftjoin($this->getAlias().'.city', 'c')
+            ->leftjoin($this->getAlias().'.country', 'cn')
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
+                ->orderBy('c.name', 'ASC')
+                ->addOrderBy($this->getAlias().'.name', 'ASC')
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findLatestBestofs($city = null, $limit = 8, $offset = 0, $onTop = true, $user = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -141,6 +175,13 @@ class BestOfRepository extends EntityRepository
 
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
+            ;
         }
 
         return $qb->getQuery()->getResult();

@@ -4,9 +4,7 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function(){
-            setTimeout(function(){
-                $('.go').removeClass('disabled').removeAttr('disabled');
-            },100);
+
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
@@ -26,58 +24,104 @@
                 }
             });
 
+            // OPEN THE FINDER
+            $('header .finder').click();
 
-            // auto focus on perviews result search
 
-            if($.cookie){
-                var $finder = $('.bar-finder'),
-                    $city = $finder.find('.city li'),
-                    $gowith = $finder.find('.friend li'),
-                    $moodItem = $('.mood-item');
+            animate = function($target, $elements, callback ){
 
-                if($('.ipad').length <= 0 ){
-                    if($.cookie('finder_city')){
-                        // Focus on city
-                        $finder.find('.'+$.cookie('finder_city')).click();
-                        //$.cookie('finder_city', null , 0);
-                    }   
+                var target_height = $target.show().height();
 
-                    if($.cookie('finder_gowith')){
-                        // Focus on go width
-                        $finder.find('.'+$.cookie('finder_gowith')).click();
-                        //$.cookie('finder_gowith', null , 0);
-                    }
-                }else{
-                    $city = $finder.find('[name=city]');
-                    $gowith = $finder.find('[name=go_out]');
+                $elements.css({opacity:0, top:'20em', position:'relative'}).each(function(index){
 
-                    if($.cookie('finder_city')){
-                        $city[0].selectedIndex = $.cookie('finder_city');
-                        var valc = $.cookie('finder_city'),
-                            coption = $city.find('option')[valc];
-                        $finder.find('.city').find('.selected').text($(coption).text());
+                    $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, 500, 'easeInOutCubic');
+                });
 
-                    }
-                    if($.cookie('finder_gowith')){
-                        $gowith[0].selectedIndex = $.cookie('finder_gowith');
-                        var valc = $.cookie('finder_gowith'),
-                            coption = $gowith.find('option')[valc];
-                        $finder.find('.friend').find('.selected').text($(coption).text());
+                setTimeout(function()
+                {
+                    if(callback) callback();
 
-                    }
-                }
+                }, 100*$elements.length+500);
+            };
 
-                if($.cookie('finder_mood') && $.cookie('finder_mood') != null){
-                    //focus on Mood
-                    // Remove Class the the all Mood
-                    $moodItem.parent('a').removeClass('active');
-                    $('.mood-item[data-index=' + $.cookie('finder_mood') + ']').parent('a').addClass('active');
-                    //$.cookie('finder_mood',null , 0)
-                }
+            /*
+            * get Activate Tab
+            **/
 
-                // OPEN THE FINDER
-                $('header .finder').click();
+            var getTab = function(){
+                var cibleTab = $('.sort-by').find('.active');
+                return cibleTab.hasClass('grid') ? 'grid' : 'list';
+
             }
+
+            var steelshowLoadMoreBtn = function(){
+                var ccible = ( getTab() == 'grid' ? '.line.gridview' : '.line.listview' );
+
+                if($(ccible + ':visible').length < $(ccible).length)
+                    $('.loadmore-trigger').show();
+                else
+                    $('.loadmore-trigger').hide();
+            }
+
+            // paginate load More
+            var currentIndexToLoad = 1;
+            var currentMode = 'grid';
+            /*
+            * Initalise Show item
+            **/
+            var initialiseShowItem = function(type){
+
+            }
+
+            $('.loadmore-trigger').hide();
+
+
+            /*
+            * initAnimate
+            */
+            var initAnimate = function($cible , delay , showmore){
+                setTimeout(function(){
+                    $cible.show();
+                    animate($(".load-target"), $cible.find('> *').not('br'));
+                    if(showmore){
+                        steelshowLoadMoreBtn();
+                    }
+                },delay ? 2000 : 0);
+            }
+
+            initAnimate( $(".line.gridview:lt(2)") ,  true , true);
+
+            $('.sort-by a').on('click' , function(){
+
+                setTimeout(function(){
+                    currentIndexToLoad = 1;
+
+                    if(getTab() == 'grid'){
+                       $(".line.gridview").hide(); 
+                       $(".line.listview").hide(); 
+                       initAnimate($(".line.gridview:lt(2)"),false,true); 
+                    }else{
+                        $(".line.gridview").hide();
+                        $(".line.listview").hide(); 
+                        initAnimate($(".line.listview").first().add( $($(".line.listview")[1]) ),false,true); 
+                    }
+                    
+                    currentMode = getTab();
+                },100)
+
+            });
+
+
+            $('.loadmore-trigger').on('click' , function(){
+               currentIndexToLoad++;
+                var cibletag = ( currentMode == 'grid' ) ?  'gridview' :  'listview';
+                var currentCible = $($(".line." + cibletag )[currentIndexToLoad]);
+                currentCible.show();
+                initAnimate(currentCible.find('> *').not('br'),false,true);
+
+                steelshowLoadMoreBtn();
+                return false;
+            });
         });
     </script>
 {% endblock %}
@@ -176,15 +220,31 @@
     <div class="container">
         <div class="bars-w-pic force-load   load-container">
             <div class="load-target">
-                <div class="line gridview">
+                <div class="line gridview" style="display: none;">
+                    {% set index = 8 %}
                     {% for bar in bars %}
+                        {% if index == 0 %}
+                            </div>
+                            <!-- New Line -->
+                            <div class="line gridview" style="display: none;">
+                            {% set index = 8 %}
+                        {% endif %}
                         {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
                             {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
                         {% if not is_mobile() or is_tablet() %}</div>{% endif %}
+                        {% set index = index - 1 %}
                     {% endfor %}
                 </div>
+
                 <div class="line listview" style="display: none;">
+                    {% set index2 = 8 %}
                     {% for b in bars %}
+                        {% if index2 == 0 %}
+                            </div>
+                            <!-- New Line -->
+                            <div class="line listview" style="display: none;">
+                            {% set index2 = 8 %}
+                        {% endif %}
                         <article class="bar-w-pic-list">
 
                             <div class="three columns s-margin-top">
@@ -193,7 +253,7 @@
 
                                     <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
 
-                                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+                                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                                     {% if b.medias|length>0 %}
                                         {% for m in b.medias|slice(0,1) %}
                                             <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
@@ -205,7 +265,7 @@
                             </div>
 
                             <div class="nine columns s-margin-top">
-                                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.name }}</a></h2>
+                                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">{{ b.name }}</a></h2>
                                 {% if b.city and b.suburb %}
                                     <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
                                 {% endif %}
@@ -214,18 +274,20 @@
                                 </p>
                                 <div class="tags">
                                     {% for tr in b.tags %}
-                                        {{ tr.tag }}{% if not loop.last %}, {% endif %}
+                                        {{ tr.tag.name|capitalize }}{% if not loop.last %}, {% endif %}
                                     {% endfor%}
                                 </div>
                             </div>
                             <div class="separator"><hr/></div>
                         </article>
+                        {% set index2 = index2 - 1 %}
                     {% endfor %}
                 </div>
             </div>
             <div class="twelve columns align-center m-margin load-more-container">
-                <br /><br /><br />
+                <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars">See more bars</a>
             </div>
+
         </div>
 
     </div>

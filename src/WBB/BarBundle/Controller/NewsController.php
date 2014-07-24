@@ -78,6 +78,10 @@ class NewsController extends Controller
 
         $news = $this->container->get('news.repository')->findOneBySlug($newsSlug);
 
+        if (!$news) {
+            throw $this->createNotFoundException('Object not found!');
+        }
+
         $tmp1 = $this->container->get('news.repository')->findRelatedNews($news->getCitiesAsArray(), 3, array($news->getId()));
         $ids = array($news->getId());
 
