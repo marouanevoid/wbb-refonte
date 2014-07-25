@@ -164,6 +164,15 @@ meta.Dropdown = function(config){
             }
     };
 
+    that._updateVal = function (val) {
+        /*var $drop = that.config.$dropdown_replacement;
+            select = $drop.find('select'),
+        select.val(val);
+        that.config.$dropdown.trigger('change');*/
+        var $dropdown = that.config.$dropdown_replacement;
+        $dropdown.find('.choice li[class='+ val+ ']').click();
+    };
+
     /**
      *
      */

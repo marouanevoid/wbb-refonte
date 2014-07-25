@@ -43,9 +43,11 @@
                         </span>
                     {% else %}
                         <span class="register h4">
-                            <a data-show="register" class="lighbox" href="#">Sign in</a>
+                            {#<a data-show="register" class="lighbox" href="#">Sign in</a>#}
+                            <a data-show="register-remove" class="lighbox-remove" href="#">Sign in</a>
                             or
-                            <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                            {#<a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>#}
+                            <a class="btn-radius" href="#">Register</a>
                         </span>
                     {% endif %}
                 </td>
@@ -127,7 +129,7 @@
         <div class="search-bar-mobile nav">
             <div class="container">
                 <div class="twelve columns s-margin">
-                    <form action="search.php">
+                    <form action="#{#search.php#}">
                         <input type="text" name="q" placeholder="Search" class="form-text" />
                         <input type="submit" class="form-submit no-text">
                         <input type="reset" value=" "/>
@@ -156,7 +158,7 @@
                                 <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
                                 <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
                             </nav>
-                            <form action="{{ path('wbb_cloudsearch_searchresults') }}">
+                            <form action="#{#{ path('wbb_cloudsearch_searchresults') }#}">
                                 <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
                             </form>
                         </td>
@@ -182,22 +184,23 @@
                         </td>
                         <td>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <span class="logged h3">
-                                    <a>
-                                        <img src="{{ asset('apple-touch-icon.png') }}" alt="robert" width="40" height="40"/>
-                                        <span>{{ app.user.username }}</span>
-                                    </a>
-                                    <span class="actions">
-                                        <a href="{{ path('fos_user_profile_show') }}">My profile</a>
-                                        <a href="{{ path('fos_user_profile_edit') }}">Settings</a>
-                                        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
-                                    </span>
-                                </span>
+                                {#<span class="logged h3">#}
+                                    {#<a>#}
+                                        {#<img src="{{ asset('apple-touch-icon.png') }}" alt="robert" width="40" height="40"/>#}
+                                        {#<span>{{ app.user.username }}</span>#}
+                                    {#</a>#}
+                                    {#<span class="actions">#}
+                                        {#<a href="{{ path('fos_user_profile_show') }}">My profile</a>#}
+                                        {#<a href="{{ path('fos_user_profile_edit') }}">Settings</a>#}
+                                        {#<a href="{{ path('fos_user_security_logout') }}">Logout</a>#}
+                                    {#</span>#}
+                                {#</span>#}
                             {% else %}
                                 <span class="register h4">
-                                    <a data-show="register" class="lighbox" href="#">Sign in</a>
+                                    {#<a data-show="register" class="lighbox" href="#">Sign in</a>#}
+                                    <a data-show="register-remove" class="lighbox-remove" href="#">Sign in</a>
                                     or
-                                    <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                                    <a class="btn-radius" href="#{#{ path('fos_user_registration_register') }#}">Register</a>
                                 </span>
                             {% endif %}
                         </td>

@@ -244,7 +244,7 @@
   #bar-finder.mobile .ui-dropdown-container .btn-radius.with-icon:after {top: 20px !important;}
   #bar-finder.mobile .ui-dropdown-container .btn-radius.with-icon:before {top: 20px !important;}
   #bar-finder.mobile .ui-dropdown-container .ui-dropdown span {padding-right: 0;}
-  #bar-finder.mobile .ui-radio.btn-radius.with-icon:after, 
+  #bar-finder.mobile .ui-radio.btn-radius.with-icon:after,
   #bar-finder.mobile .ui-radio.btn-radius.with-icon:before {left:10px !important}
   #bar-finder.mobile .group-form.radio ul {width: 320px!important;}
   #bar-finder.mobile .form-radio {width: 95px; margin-right: 10px;}
@@ -252,7 +252,7 @@
   #bar-finder.mobile .form-submit {width: 90%; color: #faf3e1; font-size: 20px; background-color: #b3955f; line-height: 42px; font-weight: bold;}
 
   .filter-search .btn-redefine-search {border: 1px solid #b3955f; height: 38px; display: block; font-size: 15px; color: #b4955f; line-height: 42px;}
-  .filter-search .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}  
+  .filter-search .btn-redefine-search:hover {background-color: #b3955f; color: #fff;}
   .filter-search .count-results {color: #818a8c; font-size: 16px; padding: 0 40px;}
   .filter-search ul li {width: 50%; float: left; position: relative;}
   .filter-search ul {width: 96%; margin: auto;}
@@ -280,7 +280,7 @@
   #register.mobile #create-account {width: 100%; padding: 40px 0;}
   #register.mobile #create-account a {font-size: 17px; line-height: 64px; border-radius: 2em;}
 /* Register2 Close (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register2_Close.psd; */
-  #register.mobile .ui.close {padding: 0;}  
+  #register.mobile .ui.close {padding: 0;}
   #register.mobile .ui.close #close {/*margin: 15% 0 0;*/ position: relative;   top: 50px;}
   #register.mobile .ui.close #close .btn {color: #333; /*padding: 20px;*/ display: block; /*width: 55%;*/}
   #register.mobile .ui.close #close .title {width: 100%;}
@@ -387,7 +387,7 @@
 /* SHARE Tooltips */
   .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
   .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px;}
-  .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}  
+  .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}
   .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
   .wrap-share .social-share li {height: 41px; width: 90px; margin-right: 4px;}
   .wrap-share .social-share li:last-child {margin: 0;}
@@ -404,7 +404,7 @@
       .search-mode .open {height: 38px; width: 57px; line-height: 38px; font-size: 18px; border: 1px solid #b3955f; margin: 0 0 0 6px;}
       .search-mode .open:before,
       .search-mode .open:after {background-image: none;}
-    
+
       /* Mobile */
     .search-bar-mobile .container .form-text {background-image: none!important; padding-left: 0px!important; text-indent: 15px;}
     .search-bar-mobile .container .form-submit {position: absolute; right: 86px; height: 40px; background-position: -84px -361px!important;}
@@ -414,7 +414,7 @@
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .bar-finder .ui-radio.btn-radius.with-icon:after,
-  .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -92px -200px;} 
+  .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -92px -200px;}
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
   .btn-round.dark.star.active {color: #faf3e1; background-color: #b3955f !important; border-color: #b3955f;}
@@ -508,7 +508,7 @@
         right: 0.5em;
         top: 0.5em;
     }
-    section.bars .bar-w-pic .txt, 
+    section.bars .bar-w-pic .txt,
     section.bar-filter .bar-w-pic .txt {
       font-size: 80%!important;
     }

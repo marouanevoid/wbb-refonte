@@ -1,8 +1,10 @@
 <script type="text/javascript">
     $(function(){
-            toGoOutWith_selected = "{{selected.outWith}}";
-            city_selected = "{{selected.city}}";
-            mood_selected = "{{selected.mood}}";
+
+
+        toGoOutWith_selected = "{{selected.outWith}}";
+        city_selected = "{{selected.city}}";
+        mood_selected = "{{selected.mood}}";
 
         var showGo = function(){
 
@@ -47,6 +49,7 @@
        // if already one filter is checked 
       //thene active Go button
 
+
       var $gobtn = ('.bar-finder .go');
 
        showGo();
@@ -89,12 +92,22 @@
                                 {% if(selected.city != 'all') %}
                                     <option value="all">All</option>
                                 {% endif %}
-                                {% if city %} <option value="{{ city.slug }}">{{ city.name }}</option> {% endif %}
-                                {% for c in cities %}
-                                    <option value="{{ c.slug }}" 
-                                    {% if selected.city ==  c.slug %} selected {% endif %}
-                                    >{{ c.name }}</option>
-                                {% endfor %}
+                                {% if city %}
+                                    <option value="{{ city.slug }}">{{ city.name }}</option>
+                                    {% for c in cities %}
+                                        {% if city.id != c.id %}
+                                            <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
+                                                {{ c.name }}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for c in cities %}
+                                        <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
+                                            {{ c.name }}
+                                        </option>
+                                    {% endfor %}
+                                {% endif %}
                             </select>
                         </td>
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
