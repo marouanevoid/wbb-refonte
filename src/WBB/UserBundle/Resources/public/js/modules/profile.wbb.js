@@ -10,8 +10,8 @@ wbb.LoadProfile = function() {
     that.context = {
         requestID: null,
         $barsTarget: $('.list-bars'),
-        $bestofsTarget: $('.list-bars'),
-        $tipsTarget: $('.list-bars')
+        $bestofsTarget: $('.list-bestof'),
+        $tipsTarget: $('.list-tips')
     };
 
     that.config = {
