@@ -29,7 +29,7 @@
 /* Globale Libs */
     form .icheckbox_flat {display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
     form .icheckbox_flat {background-position: 0 0;}
-    form .icheckbox_flat.checked {background-position: 0 -21px;}
+    form .icheckbox_flat.checked {background-position: 0 -20px;}
     form .icheckbox_flat.disabled {background-position: 0 0; cursor: default;}
     form .icheckbox_flat.checked.disabled {background-position: 0 0;}
 /* Globale Classes */
@@ -310,7 +310,7 @@
   #editprofile .subgroup.wrap {width: 211 px;}
   #editprofile .avatar-profil {position: absolute;}
   #editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
-  #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.jpg") no-repeat 0 0;}
+  #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.gif") no-repeat 0 0;}
   #editprofile .file-image:hover {cursor: pointer;}
   #editprofile .file-image input {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
   #editprofile #edit-account {position: relative;}
