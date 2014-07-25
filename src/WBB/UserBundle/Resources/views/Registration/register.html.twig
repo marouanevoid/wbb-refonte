@@ -4,48 +4,48 @@
     <div class="full-cream">
         <div id="register" class="page wrap margin-bottom-20">
             <div class="ui wrap">
-                <div class="title text-transform-uppercase bold">Register</div>
+                <div class="title text-transform-uppercase margin-top-25 bold">Register</div>
                 <div class="margin-top-20">
                     <div id="create-account">
-                        <div class="subtitle text-transform-uppercase bold">Create an account now</div>
+                        <div class="subtitle text-transform-uppercase margin-top-25 bold">Create an account now</div>
                         <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
                         <form action="" {{ form_enctype(form) }} method="POST" id="register_form_full">
                             <div class="text-align-left margin-bottom-20">
-                                <div class="group-form margin-top-10">
-                                    <label>Username</label>
+                                <div class="group-form margin-top-25">
+                                    <label class="margin-right-20">Username</label>
                                     {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Username' } }) }}
                                 </div>
                                 <div class="select-two margin-top-10">
-                                    <label>Gender</label>
+                                    <label class="margin-right-20">Gender</label>
                                     <div class="left" style="width: 300px">
                                         {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                     </div>
                                 </div>
                                 <div class="clear"></div>
                                 <div class="group-form margin-top-10">
-                                    <label>Firstname</label>
+                                    <label class="margin-right-20">Firstname</label>
                                     {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label>Lastname</label>
+                                    <label class="margin-right-20">Lastname</label>
                                     {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label>Email</label>
+                                    <label class="margin-right-20">Email</label>
                                     {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label>Password</label>
+                                    <label class="margin-right-20">Password</label>
                                     {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label>Confirm Password</label>
+                                    <label class="margin-right-20">Confirm Password</label>
                                     {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
                                 </div>
                             </div>
 
                             <div class="date-birthday text-align-center ui-dropdown-list-form">
-                                <label>Date of Birth</label>
+                                <label class="margin-right-20">Date of Birth</label>
                                 <div class="select-wrap left">
                                     {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
@@ -59,7 +59,7 @@
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 ui-dropdown-list-form">
-                                <label>Country</label>
+                                <label class="margin-right-20">Country</label>
                                 <div class="left" style="width: 300px">
                                     {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
@@ -67,28 +67,28 @@
                             <div class="clear"></div>
 
                             <div class="group-form margin-top-10">
-                                <label>Cities you like to go</label>
+                                <label class="margin-right-20">Cities you like to go</label>
                                 {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a city' } }) }}
                                 {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
                                 {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label>Favorite Bars</label>
+                                <label class="margin-right-20">Favorite Bars</label>
                                 {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a bar' } }) }}
                                 {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
                                 {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label>Drink brands</label>
+                                <label class="margin-right-20">Drink brands</label>
                                 {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a brand' } }) }}
                                 {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
                                 {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label>Categories or cocktails</label>
+                                <label class="margin-right-20">Categories or cocktails</label>
                                 {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a cocktail' } }) }}
                                 {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
                                 {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}

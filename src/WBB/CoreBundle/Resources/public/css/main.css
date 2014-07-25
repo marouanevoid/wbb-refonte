@@ -89,6 +89,7 @@
       .margin-top-10 {margin-top: 10px!important; display: block;}
       .margin-top-15 {margin-top: 15px!important; display: block;}
       .margin-top-20 {margin-top: 20px!important; display: block;}
+      .margin-top-25 {margin-top: 25px!important; display: block;}
       .margin-top-30 {margin-top: 30px!important; display: block;}
       .margin-top-40 {margin-top: 40px!important; display: block;}
       .margin-top-50 {margin-top: 50px!important; display: block;}
@@ -226,7 +227,7 @@
   #register.page .ui {position: static; width: 560px;}
   #register.page .title {width: 100%;}
   #register.page #create-account {width: 100%; padding: 0;}
-  #register.page #create-account label {display: block; text-align: right; float: left; width: 200px; line-height: 35px; padding: 0 15px 0 0;}
+  #register.page #create-account label {display: block; text-align: right; float: left; width: 200px; line-height: 35px;}
   #register.page #create-account .form-text {float: left; width: 300px;}
   #register.page #message {width: 53%; margin: 0 50px 0 0;}
   #register.page #date-birthday label {font-size: 13px;}
