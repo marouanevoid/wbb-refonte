@@ -3234,7 +3234,7 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   text-align: left;
   font-size: 90%;
   margin-bottom: 1.2em;
-  height: 110px;
+  height: 120px;
 }
 /* line 33, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice .jspContainer {
@@ -3518,12 +3518,12 @@ html.mobile .ui-dropdown-container select {
 .ui-selector .selector ul li:hover {
   color: #b3955f;
 }
-/* line 14, ../sass/components/_ui-selector.scss */
+/* line 15, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .custom-scroll {
-  height: 210px;
+  height: 213px;
   margin-top: 0.5em;
 }
-/* line 15, ../sass/components/_ui-selector.scss */
+/* line 16, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .close {
   position: absolute;
   right: 3px;
@@ -3531,25 +3531,24 @@ html.mobile .ui-dropdown-container select {
   width: 30px;
   height: 30px;
   border-color: #d1c9b2;
-  display: none;
 }
-/* line 17, ../sass/components/_ui-selector.scss */
+/* line 18, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .close:before, .ui-selector .selector .close:after {
   background-size: 192px 384px;
 }
-/* line 18, ../sass/components/_ui-selector.scss */
+/* line 19, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .close:before {
   background-position: -90px 0;
 }
-/* line 19, ../sass/components/_ui-selector.scss */
+/* line 20, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .close:after {
   background-position: -90px -30px;
 }
-/* line 20, ../sass/components/_ui-selector.scss */
+/* line 21, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .close:hover {
   border-color: #b3955f;
 }
-/* line 22, ../sass/components/_ui-selector.scss */
+/* line 23, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .btn-radius {
   font-size: 100%;
   margin-top: 1em;
@@ -3557,7 +3556,7 @@ html.mobile .ui-dropdown-container select {
   padding: 0.6em 2em;
   border-color: #d1c9b2;
 }
-/* line 24, ../sass/components/_ui-selector.scss */
+/* line 25, ../sass/components/_ui-selector.scss */
 .ui-selector .selector .btn-radius:hover {
   border-color: #b3955f;
 }
