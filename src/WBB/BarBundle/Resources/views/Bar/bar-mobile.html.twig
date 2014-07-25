@@ -1,17 +1,26 @@
 <article class="bar-wo-pic">
+
     <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %} nc"></a>
+
     <div class="txt">
         <h2>
             {% if is_mobile() and not is_tablet() %}
-        	    {{ b.name|truncate(4, true) }}
+                {{ b.name|slice(0,15) }}
+                {% if b.name|length > 15 %}
+                    ...
+                {% endif %}
             {% else %}
-                {{ b.name|truncate(10, true) }}
+                {{ b.name|slice(0,25) }}
+                {% if b.name|length > 25 %}
+                    ...
+                {% endif %}
             {% endif %}
         </h2>
-        <h3>
-            {% if b.address %}{{ b.address|default('Unspecified')|truncate(15, true) }}, {% endif %}
+        <h3>{% if b.address %}{{ b.address|default('Unspecified')|truncate(15, true) }}, {% endif %}
             {% if b.city %}{{ b.city.name|default('Unspecified')|truncate(15, true) }}{% endif %}
         </h3>
     </div>
+
     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
+
 </article>
