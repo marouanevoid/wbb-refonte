@@ -434,6 +434,7 @@
   .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29;}
   .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;}
   .ui-radio.radio-dark:hover,
+  .ui-dropdown-container .ui-dropdown.drop-dark.active,
   .ui-dropdown-container .ui-dropdown.drop-dark:hover {background-color: transparent!important; border-color: #ffe4af;}
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark:hover {background-color: #6f7072!important; border-color: #6f7072 !important;}
   .ui-radio.radio-dark.active {background-color: transparent!important;}
