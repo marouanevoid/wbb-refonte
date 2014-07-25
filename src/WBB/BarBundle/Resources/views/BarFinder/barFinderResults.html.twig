@@ -80,6 +80,7 @@
             * initAnimate
             */
             var initAnimate = function($cible , delay , showmore){
+                $cible.find('> *').not('br').css({opacity:0});
                 setTimeout(function(){
                     $cible.show();
                     animate($(".load-target"), $cible.find('> *').not('br'));
@@ -91,7 +92,7 @@
 
             initAnimate( $(".line.gridview:lt(2)") ,  true , true);
 
-            $('.sort-by a').on('click' , function(){
+            $('.sort-by a.grid').add('.sort-by a.list').on('click' , function(){
                $(".line.gridview").hide(); 
                $(".line.listview").hide(); 
                 setTimeout(function(){
