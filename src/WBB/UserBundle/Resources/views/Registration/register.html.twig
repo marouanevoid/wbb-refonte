@@ -12,40 +12,40 @@
                         <form action="" {{ form_enctype(form) }} method="POST" id="register_form_full">
                             <div class="text-align-left margin-bottom-20">
                                 <div class="group-form margin-top-25">
-                                    <label class="margin-right-20">Username</label>
-                                    {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Username' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold">Username</label>
+                                    {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Username' } }) }}
                                 </div>
                                 <div class="select-two margin-top-10">
-                                    <label class="margin-right-20">Gender</label>
+                                    <label class="margin-right-20 text-align-right unbold">Gender</label>
                                     <div class="left" style="width: 300px">
                                         {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                     </div>
                                 </div>
                                 <div class="clear"></div>
                                 <div class="group-form margin-top-10">
-                                    <label class="margin-right-20">Firstname</label>
-                                    {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold">Firstname</label>
+                                    {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Firstname' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label class="margin-right-20">Lastname</label>
-                                    {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold">Lastname</label>
+                                    {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Lastname' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label class="margin-right-20">Email</label>
-                                    {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold">Email</label>
+                                    {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Email' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label class="margin-right-20">Password</label>
-                                    {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold">Password</label>
+                                    {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Password' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
-                                    <label class="margin-right-20">Confirm Password</label>
-                                    {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold">Confirm Password</label>
+                                    {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Confirm Password' } }) }}
                                 </div>
                             </div>
 
                             <div class="date-birthday text-align-center ui-dropdown-list-form">
-                                <label class="margin-right-20">Date of Birth</label>
+                                <label class="margin-right-20 text-align-right unbold">Date of Birth</label>
                                 <div class="select-wrap left">
                                     {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
@@ -59,7 +59,7 @@
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 ui-dropdown-list-form">
-                                <label class="margin-right-20">Country</label>
+                                <label class="margin-right-20 text-align-right unbold">Country</label>
                                 <div class="left" style="width: 300px">
                                     {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
@@ -67,34 +67,34 @@
                             <div class="clear"></div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Cities you like to go</label>
+                                <label class="margin-right-20 text-align-right unbold">Cities you like to go</label>
                                 {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a city' } }) }}
                                 {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
                                 {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Favorite Bars</label>
+                                <label class="margin-right-20 text-align-right unbold">Favorite Bars</label>
                                 {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a bar' } }) }}
                                 {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
                                 {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Drink brands</label>
+                                <label class="margin-right-20 text-align-right unbold">Drink brands</label>
                                 {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a brand' } }) }}
                                 {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
                                 {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Categories or cocktails</label>
+                                <label class="margin-right-20 text-align-right unbold">Categories or cocktails</label>
                                 {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a cocktail' } }) }}
                                 {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
                                 {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
                             </div>
                             {{ form_rest(form) }}
-                            <div class="group-actions margin-top-20 right">
+                            <div class="group-actions margin-top-20 wrap">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Register">
                             </div>
                         </form>

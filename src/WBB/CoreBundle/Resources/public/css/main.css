@@ -224,18 +224,18 @@
     .popup #success .subtitle {margin: 0 0 25px; font-size: 40px;}
 /* Register Page */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
-  #register.page .ui {position: static; width: 560px;}
+  #register.page .ui {width: 765px;}
   #register.page .title {width: 100%;}
   #register.page #create-account {width: 100%; padding: 0;}
-  #register.page #create-account label {display: block; text-align: right; float: left; width: 200px; line-height: 35px;}
+  #register.page #create-account label {display: block; float: left; width: 200px; line-height: 35px;}
   #register.page #create-account .form-text {float: left; width: 300px;}
   #register.page #message {width: 53%; margin: 0 50px 0 0;}
   #register.page #date-birthday label {font-size: 13px;}
-  #register.page #create-account .form-text-without-label {margin: 0 0 0 38%;}
+  #register.page #create-account .form-text-without-label {margin: 0 0 0 29%;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
   #register.page .group-action {/*width: 128%;*/}
   #register.page .group-action .form-submit {/*width: 50%; margin: auto; display: block;*/}
-  #register.page .group-actions .form-submit {position: relative; right: 105px;}
+  #register.page .group-actions {width: 50%;}
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 26px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
