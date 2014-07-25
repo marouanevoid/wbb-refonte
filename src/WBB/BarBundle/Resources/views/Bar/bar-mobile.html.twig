@@ -5,7 +5,7 @@
     <div class="txt">
         <h2>
             {% if is_mobile() and not is_tablet() %}
-        	    {{ b.name|truncate(15, true) }}
+        	    {{ b.name|truncate(10, true) }}
             {% else %}
                 {{ b.name|truncate(20, true) }}
             {% endif %}
