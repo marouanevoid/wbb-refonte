@@ -3,12 +3,13 @@
     <div class="txt">
         <h2>
             {% if is_mobile() and not is_tablet() %}
-        	    {{ b.name|truncate(10, true) }}
+        	    {{ b.name|truncate(4, true) }}
             {% else %}
-                {{ b.name|truncate(20, true) }}
+                {{ b.name|truncate(10, true) }}
             {% endif %}
         </h2>
-        <h3>{% if b.address %}{{ b.address|default('Unspecified')|truncate(15, true) }}, {% endif %}
+        <h3>
+            {% if b.address %}{{ b.address|default('Unspecified')|truncate(15, true) }}, {% endif %}
             {% if b.city %}{{ b.city.name|default('Unspecified')|truncate(15, true) }}{% endif %}
         </h3>
     </div>
