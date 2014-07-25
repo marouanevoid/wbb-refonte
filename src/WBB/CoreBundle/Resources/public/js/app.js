@@ -202,7 +202,6 @@ meta.App = function() {
              $(window).on('scroll' , function(){
                 if( ( !closed )  && $(document).scrollTop() >= 288){
                     $('header .finder').click();
-                    console.log('--------------------> scroll top > 288');
                     closed = true;
                 }
                 
