@@ -4,7 +4,17 @@
 
     <div class="txt">
         <h2>
-        	{{ b.name|truncate(20, true) }}
+            {% if is_mobile() and not is_tablet() %}
+                {{ b.name|slice(0,12) }}
+                {% if b.name|length > 12 %}
+                    ...
+                {% endif %}
+            {% else %}
+                {{ b.name|slice(0,25) }}
+                {% if b.name|length > 25 %}
+                    ...
+                {% endif %}
+            {% endif %}
         </h2>
         <h3>{% if b.address %}{{ b.address|default('Unspecified')|truncate(15, true) }}, {% endif %}
             {% if b.city %}{{ b.city.name|default('Unspecified')|truncate(15, true) }}{% endif %}
