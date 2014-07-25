@@ -8,6 +8,7 @@
             </div> <!-- #account.block.wrap -->
             <div id="create-account" class="left">
                 <div class="subtitle text-transform-uppercase bold">Create an account now</div>
+                {#<a href="{{ path('fos_user_registration_register') }}" class="btn btn-create-account text-align-center margin-top-30 radius-30 bold">REGISTER</a>#}
                 <div id="register-form">
                     <div class="connect-fb margin-top-20">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
                     <form action="{{ path('wbb_user_registration_register_light') }}" method="POST" id="register_form">

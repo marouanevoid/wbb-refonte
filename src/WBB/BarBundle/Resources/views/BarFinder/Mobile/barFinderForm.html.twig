@@ -11,7 +11,6 @@
                 if( ! $(this).is(':checked'))
                     $(this).parent('a.ui-radio').removeClass('active');
             });
-            showGo();
         });
     </script>
 {% endblock %}
@@ -26,12 +25,22 @@
                 <select class="trigger-select-go ui-dropdown dark" name="city" data-class="with-icon city">
                     <option value="">Choose a City</option>
                     <option value="all" {% if selected.city ==  "all" %} selected="selected" {% endif %}>All</option>
-                    {% if city %} <option value="">{{ city.name }}</option> {% endif %}
-                    {% for c in cities %}
-                        <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
-                            {{ c.name }}
-                        </option>
-                    {% endfor %}
+                    {% if city %}
+                        <option value="{{ city.slug }}">{{ city.name }}</option>
+                        {% for c in cities %}
+                            {% if city.id != c.id %}
+                                <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
+                                    {{ c.name }}
+                                </option>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for c in cities %}
+                            <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
+                                {{ c.name }}
+                            </option>
+                        {% endfor %}
+                    {% endif %}
                 </select>
                 <div class="clear"></div>
             </div>
@@ -86,10 +95,10 @@
                    
                    if(totalSelectedSelect < 2 || totalSelectedMood > 0){
                         $('.go').removeClass('disabled');
-                        $('.go').removeAttr('disabled');
+                        $('.go').prop('disabled' , false);
                    }else{
                     $('.go').addClass('disabled');
-                    $('.go').attr('disabled' , 'disabled');
+                    $('.go').prop('disabled' , true);
                    }  
 
                 };
@@ -109,7 +118,9 @@
                             $(this).parent('a.ui-radio').removeClass('active');
                     });
                     showGo();
-                })
+                });
+
+                showGo();
             })
         </script>
     </div>

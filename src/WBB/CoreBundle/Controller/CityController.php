@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CityController extends Controller
 {
+
+
     public function citiesAction()
     {
         return $this->render('WBBCoreBundle:City:cities.html.twig');
@@ -29,7 +31,8 @@ class CityController extends Controller
                 'id'        => $city->getId(),
                 'name'      => $city->getName() .', '. $city->getCountry(),
                 'latitude'  => $city->getLatitude(),
-                'longitude' => $city->getLongitude()
+                'longitude' => $city->getLongitude(),
+                'slug'      => $city->getSlug()
             );
         }
 
@@ -67,16 +70,27 @@ class CityController extends Controller
     }
 
     //Returns a list on Point of interest in a city (and a suburb)
-    public function barsListAction($cityID = 0, $suburbID = 0, Request $request)
+    public function barsListAction($citySlug, $suburbSlug = 'undefined', Request $request)
     {
-        if($suburbID=='undefined')
-            $suburbID=0;
-        if($cityID > 0)
+        if($suburbSlug=='undefined' || $suburbSlug == "-1")
+            $suburbSlug= null;
+        if($citySlug != "")
         {
-            $city = $this->container->get('city.repository')->findOneById($cityID);
-            $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
+            $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
 
+            //$suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
+            //if ($suburbID == 0)
+            //  $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
+            //else
+            $suburb = null;
+            if ($suburbSlug)
+                $suburb = $this->container->get('suburb.repository')->findOneBySlug($suburbSlug);
+
+        
             $bars = $this->container->get('bar.repository')->findAllEnabled($city, $suburb);
+            
+
+
             $suburbs = $this->container->get('suburb.repository')->findByCityWithBars($city);
             $result = array('bars' => array(), 'suburbs' => array());
 
@@ -115,14 +129,16 @@ class CityController extends Controller
             {
                 $result['suburbs'][] = array(
                     'id'    => $suburb->getId(),
-                    'name'  => $suburb->getName()
+                    'name'  => $suburb->getName(),
+                    'slug'  => $suburb->getSlug()
                 );
             }
 
             return new JsonResponse(array(
                 'code'          => 200,
                 'bars'          => $result['bars'],
-                'neighborhoods' => $result['suburbs']
+                'neighborhoods' => $result['suburbs'],
+                'city'      => array( "name" => $city->getName() .', '. $city->getCountry(), "id" => $city->getId()) 
             ));
         }else{
             return new JsonResponse(array(
