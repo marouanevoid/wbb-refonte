@@ -18,6 +18,7 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_COUNTRY = 2;
     const BAR_LOCATION_WORLDWIDE = 3;
 
+    /* Find Bars By City and Suburb Id */
     public function findAllEnabled($city = null, $suburb = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
@@ -36,6 +37,27 @@ class BarRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /* Find Bars By City and Suburb Slugs */
+    public function findByAllEnabledSlug($citySlug = null, $suburbSlug = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)));
+
+        if($citySlug){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city.slug', $qb->expr()->literal($citySlug)));
+        }
+
+        if($suburbSlug){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.suburb.slug', $qb->expr()->literal($suburbSlug)));
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 
     public function findBestBars($city = null, $limit = 6)
     {
