@@ -1,36 +1,41 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-
     <div class="full-white">
         <div id="editprofile" class="page wrap margin-bottom-20">
-            <div  class="ui wrap">
+            <div  class="ui wrap {% if is_mobile() and not is_tablet() %}mobile{% endif %}">
                 <div class="margin-top-20">
                     <div id="edit-account">
                         <div class="avatar-profil left">
-                            <img src="images/UI/_images/robert_smithson.jpg" height="145" width="145" class="radius-max">
+                            <img src="{{  showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
                         </div>
-
-                        <div class="group right">
-                            <div class="title text-transform-capitalize unbold">
-                                <h5>Robert simthson</h5>
-                            </div>
-                            <div class="subgroup margin-top-10 wrap">
-                                <div class="text-transform-capitalize text-align-center">
-                                    <div class="city"><img src="images/UI/icon_map.jpg"> New York, USA</div>
+                        <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+                            <div class="group right">
+                                <div class="title text-transform-capitalize unbold">
+                                    <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                                 </div>
-                                <form>
+                                <div class="subgroup margin-top-10 wrap">
+                                    {% if user.prefStartCity or user.country %}
+                                        <div class="text-transform-capitalize text-align-center">
+                                            <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                                {% if user.prefStartCity %}
+                                                    {{ user.prefStartCity ~ ',' }}
+                                                {% endif %}
+                                                {% if user.country %}
+                                                    {{ user.country }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="form-group">
                                         <div class="file-image wrap">
-                                            <input type="file" class="form-file">
+                                            {{ form_widget(form.avatar, { 'attr' : { 'class': 'form-file no-text' } }) }}
                                         </div>
                                     </div>
-                                </form>
-                            </div> <!-- .subgroup.right -->
-                        </div> <!-- .group.right -->
+                                </div> <!-- .subgroup.right -->
+                            </div> <!-- .group.right -->
 
-                        <div class="clear"></div>
-                        <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+                            <div class="clear"></div>
                             <div class="select-two margin-top-10">
                                 <label>Gender</label>
                                 <div class="left" style="width: 300px">
@@ -50,7 +55,7 @@
                                 <label>Email</label>
                                 {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
                             </div>
-                            <div id="date-birthday" class="text-align-center margin-top-10">
+                            <div class="date-birthday text-align-center margin-top-10">
                                 <label>Date of Birth</label>
                                 <div class="select-wrap left">
                                     {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
@@ -101,14 +106,18 @@
                             </div>
 
                             <div class="group-form checkbox margin-top-10">
-                                <label class="wrap"><input type="checkbox" class="form-checkbox left">
+                                <label class="wrap">{{ form_widget(form.stayInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
                                     Unsubscribe the newsletter</label>
+                            </div>
+
+                            <div class="group-form checkbox margin-top-10">
+                                <label class="wrap">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
+                                    Unsubscribe the brand newsletter</label>
                             </div>
                             {{ form_rest(form) }}
                             <div class="group-actions margin-top-20 right">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
                             </div>
-
                         </form>
                         <div class="clear"></div>
                     </div>

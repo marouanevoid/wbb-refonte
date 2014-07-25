@@ -9,7 +9,7 @@
 
                         <div class="block-top wrap">
                             <div class="avatar-profil left">
-                                <img src="images/UI/_images/robert_smithson.jpg" height="145" width="145" class="radius-max">
+                                <img src="{{ showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
                             </div>
 
                             <div class="group right">
@@ -17,9 +17,18 @@
                                     <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                                 </div>
                                 <div class="subgroup margin-top-10 wrap">
-                                    <div class="text-transform-capitalize text-align-center">
-                                        <div class="city"><img src="images/UI/icon_map.jpg"> New York, USA</div>
-                                    </div>
+                                    {% if user.prefStartCity or user.country %}
+                                        <div class="text-transform-capitalize text-align-center">
+                                            <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                                {% if user.prefStartCity %}
+                                                    {{ user.prefStartCity ~ ',' }}
+                                                {% endif %}
+                                                {% if user.country %}
+                                                    {{ user.country }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="btn-editprofile">
                                         <a href="{{ path('fos_user_profile_edit') }}" class="btn radius-30">Edit Profile</a>
                                     </div>
@@ -35,9 +44,9 @@
                         <div class="filter-profil padding-bottom-20 wrap">
                             <div class="margin-top-80">
                                 <div class="disableClick"></div>
-                                <input type="radio" name="filter" data-tab="bars" value="(94) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
-                                <input type="radio" name="filter" data-tab="bestof" value="(38) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
-                                <input type="radio" name="filter" data-tab="tips" value="(359) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                                <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
+                                <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                                <input type="radio" name="filter" data-tab="tips" value="({{ user.tips|length }}) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
                             </div>
                             <div class="clear"></div>
                         </div> <!-- .filter-profil -->
