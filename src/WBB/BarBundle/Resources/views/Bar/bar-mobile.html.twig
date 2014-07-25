@@ -5,11 +5,8 @@
     <div class="txt">
         <h2>
         	{{ b.name|truncate(20, true) }}
-        	{% if distance is defined and distance|length>0 and distance.city is not null %}
-                {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
-            {% endif %}
         </h2>
-        <h3>{% if b.address %}{{ b.address|default('Unspecified')|truncate(20, true) }}, {% endif %}
+        <h3>{% if b.address %}{{ b.address|default('Unspecified')|truncate(15, true) }}, {% endif %}
             {% if b.city %}{{ b.city.name|default('Unspecified')|truncate(15, true) }}{% endif %}
         </h3>
     </div>
