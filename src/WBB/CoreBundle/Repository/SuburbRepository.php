@@ -35,4 +35,5 @@ class SuburbRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
 } 

@@ -200,9 +200,12 @@ meta.App = function() {
              $('header .finder').click();
              var closed = false;
              $(window).on('scroll' , function(){
-                if(!closed)
+                if( ( !closed )  && $(document).scrollTop() >= 288){
                     $('header .finder').click();
-                closed = true
+                    console.log('--------------------> scroll top > 288');
+                    closed = true;
+                }
+                
              });
         }
     };
