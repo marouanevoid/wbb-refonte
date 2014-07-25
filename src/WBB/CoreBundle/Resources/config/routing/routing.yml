@@ -21,8 +21,8 @@ get_medias_from_bar:
         expose: true
 
 wbb_cities_bars:
-    pattern: /getbars-bycity/{cityID}/{suburbID}
-    defaults: { _controller: WBBCoreBundle:City:barsList, cityID: 0, suburbID: 0}
+    pattern: /getbars-bycity/{citySlug}/{suburbSlug}
+    defaults: { _controller: WBBCoreBundle:City:barsList, suburbSlug: "-1"}
     options:
         expose: true
 
@@ -44,6 +44,14 @@ wbb_cities_list_all:
     options:
         expose: true
 
+wbb_cities_city:
+    pattern: /cities/{slug}/{suburb}
+    defaults: { _controller: WBBCoreBundle:City:cities, suburb: "-1" }
+    options:
+        expose: true
+
 wbb_cities:
     pattern: /cities
     defaults: { _controller: WBBCoreBundle:City:cities }
+    options:
+        expose: true

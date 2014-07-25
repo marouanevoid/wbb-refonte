@@ -14,11 +14,12 @@ wbb.CitiesPage = function () {
 
     that.context = {
         //filter_is_open: false
-        city_id : 0,
-        neighborhood_id : 0,
+        city : {id: 0, slug: ""},
+        neighborhood_id : -1,
         is_clicked : false,
-        ajaxRequest : null
+        ajaxRequest : null,
     };
+
 
     that.first_resize = true;
     that.current_zoom_level = 3;
@@ -26,12 +27,12 @@ wbb.CitiesPage = function () {
     that.timer = false;
 
     /* Search the bars after submitting */
-    that._searchBars = function( city_id, neighborhood_id )
+    that._searchBars = function( city_slug, neighborhood_id )
     {
         that._hideCitySelector();
         that._showBarsSelector();
         that.context.$container.find(".scroll-bars").find('ul').html("<span>Loading...</span>");
-        that._requestBars(city_id, neighborhood_id, function(neighborhoods, bars)
+        that._requestBars(city_slug, neighborhood_id, function(neighborhoods, bars)
         {
             if(neighborhoods.length) that._showNeighborhoodSelector(neighborhoods);
             that._showBars(bars, true, true);
@@ -41,14 +42,14 @@ wbb.CitiesPage = function () {
        if (window.devicePixelRatio === undefined) return false; // No pixel ratio available. Assume 1:1.
        return window.devicePixelRatio > 1.5;
    };
-    that._requestBars = function( city_id, neighborhood_id, callback )
-    {
+    that._requestBars = function( city_Slug, neighborhood_id, callback )
+    { 
         that.context.ajaxRequest = $.ajax({
-                                            url: Routing.generate('wbb_cities_bars', { cityID:city_id, suburbID:neighborhood_id}),
+                                            url: Routing.generate('wbb_cities_bars', { citySlug:city_Slug, suburbSlug:neighborhood_id}),
                                             success: function( data )
                                             {
                                                 if(data.code == 200 && callback)
-                                                    callback(data.neighborhoods, data.bars);
+                                                    callback(data.neighborhoods, data.bars, data.city);
                                             },
                                             beforeSend: function()
                                             {
@@ -169,8 +170,9 @@ wbb.CitiesPage = function () {
             /* Update the text on the input */
             that.context.$container.find('form input[name=city]').val( $(this).text() );
             that.context.is_clicked = true;
-            that.context.city_id = $(this).data('id');
+            that.context.city = {id : $(this).data('id'), slug: $(this).data('slug')};
             that.context.$container.find('form').submit();
+
         });
 
         // Effet Hover ///
@@ -230,7 +232,7 @@ wbb.CitiesPage = function () {
 
             $(this).find('input[name=city]').prop('disabled', true);
 
-            var city_id         = that.context.city_id;
+            var city_id         = that.context.city.id;
             var neighborhood_id = that.context.neighborhood_id;
 
             /* Empty the list of bars and Neighborhood from the last time */
@@ -243,28 +245,35 @@ wbb.CitiesPage = function () {
             /* Show the Reset button, it's to clear input */
             $(this).find('input[type=reset]').show();
             if (that.context.is_clicked == true){
-                that._searchBars( city_id, neighborhood_id );
+                var slug = that.context.$container.find('li[data-id=' + city_id + ']').data("slug");
+                that._searchBars( slug, neighborhood_id );
             }
             else
-            {
-                $.address.state($(this).find('input[name=city]').val());  
+            { 
                 that._requestCities($(this).find('input[name=city]').val(), function(query, cities)
                 {
                     if (cities.length > 1 )
                         that._showCities(query, cities, true, false);
                     else if (cities.length == 1 ) {
                         that.context.$container.find('form input[name=city]').val( cities[0].name );
-                        that.context.city_id = cities[0].id;
-                        that._searchBars( cities[0].id, 0 );
+
+                        that.context.city = {id: cities[0].id, slug: cities[0].slug};
+                        that._searchBars( cities[0].slug, 0 );
                     }
                 });
             }
+
+            var slug = that.context.$container.find('li[data-id=' + city_id + ']').data("slug");
+            // set the city 
+
+             window.router_app.navigate( slug , {trigger : false});
         });
 
 
         that.context.$container.find('form input[type=reset]').click(function(e)
         {
             that._backToCities(true);
+            window.router_app.navigate( "/" , {trigger : false});
         });
 
 
@@ -383,12 +392,19 @@ wbb.CitiesPage = function () {
         /* Update the Bars when we change Neighborhood */
         $(document).on('change', '.selector select[name=neighborhood]', function()
         {
-            var city_id         = that.context.city_id;
+            var city_id         = that.context.city.id;
             var neighborhood_id = $(".selector select[name=neighborhood]").val();
-
+            if (neighborhood_id == that.context.neighborhood_id)
+                return ;
+            that.context.neighborhood_id = neighborhood_id;
             that.context.$container.find(".scroll-bars").find('ul').html("<span>Loading...</span>");
-            that._searchBars( city_id, neighborhood_id );
-            console.log('change dispatched');
+            that._searchBars(that.context.city.slug , neighborhood_id );
+
+            //var city_slug = that.context.$container.find('li[data-id=' + city_id + ']').data("slug");
+            var url = that.context.city.slug;
+            if (neighborhood_id != -1)
+               url += "/" + neighborhood_id;
+             window.router_app.navigate( url , {trigger : false});
         });
 
 
@@ -483,7 +499,7 @@ wbb.CitiesPage = function () {
                     var re = new RegExp('(' + query + ')', 'gi');
                     cityName = cityName.replace(re, '<b>$1</b>');
                 }
-                if( display_list ) html += '<li data-id="'+city.id+'">'+cityName+'</li>';
+                if( display_list ) html += '<li data-slug="' + city.slug + '" data-id="'+city.id+'">'+cityName+'</li>';
                 var icon = new google.maps.MarkerImage(BASEURL+'images/map.pin'+(that._isRetina()?'@2x':'')+'.png', null, null, null, new google.maps.Size(20,30));
                 markers.push({address:city.latitude+','+city.longitude, options:{icon:icon, optimized: false}, id:city.id});
             }
@@ -523,7 +539,7 @@ wbb.CitiesPage = function () {
         html += '<option value="-1">All</option>';
         $.each(neighborhoods, function(index, neighborhood)
         {
-            html += '<option value="'+neighborhood.id+'">'+neighborhood.name+'</option>';
+            html += '<option value="'+neighborhood.slug+'">'+neighborhood.name+'</option>';
         });
         html += '</select>';
 
@@ -535,19 +551,19 @@ wbb.CitiesPage = function () {
         // Script Injection for Select UI
         ////////
         //$('.ui-dropdown-container').each(function(){})
-        $('select').on('change',function(){
-           var  $target = $(this),
-                parent  = $target.parent('.ui-dropdown-container'),
-                li = parent.find('li')
-                selected = parent.find('.selected').text();
+        // $('select').on('change',function(){
+        //    var  $target = $(this),
+        //         parent  = $target.parent('.ui-dropdown-container'),
+        //         li = parent.find('li')
+        //         selected = parent.find('.selected').text();
 
-                li.show();
+        //         li.show();
 
-                li.each(function(){
-                    if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
-                        $(this).hide();
-                });
-        });
+        //         li.each(function(){
+        //             if($(this).text().indexOf(selected)>-1 || ($(this).text() == 'Choose with who' || $(this).text() == 'Choose a City'))
+        //                 $(this).hide();
+        //         });
+        // });
 
         // Trigger change on select
         $('select').change();
@@ -601,10 +617,70 @@ wbb.CitiesPage = function () {
         }
     };
 
+    that._showDirectBars = function (city_slug, neighborhood_id)
+    {    
+        that._hideCitySelector();
+        that._showBarsSelector();
+        that._requestBars(city_slug, neighborhood_id, function(neighborhoods, bars, city)
+        {
+           that.context.city = {id : city.id, slug: city_slug};
+            if(neighborhoods.length) 
+            {
+                that._showNeighborhoodSelector(neighborhoods);
+                if (neighborhood_id != "-1")
+                   that.context.$container.find('select[name=neighborhood]')._instance._updateVal(neighborhood_id);
+            }
+            
+            that._showBars(bars, true, true);
+           
+
+            // Remplir la ville
+            that.context.$container.find('form input[name=city]').val( city.name );
+            that.context.$container.find('input[type=submit]').hide();
+            that.context.$container.find('input[type=reset]').show();
+
+            // Remplir le neighberhood
+
+            // Afficher le Filter
+            if( !$('html').hasClass('mobile') || $(window).width() > 640 )
+                if(!$('html').hasClass('ipad'))
+                    that._openFilter();
+
+        });
+        /*that._searchBars(1, 1);
+        
+
+        /*
+            Actuellement l'url appelée est : 
+            /app_dev.php/getbars-bycity/0/-1
+            Changer à :
+            /app_dev.php/getbars-bycity/marrakech/gueliz
+
+            Ce controleur doit nous renvoyer le name du city pour l'afficher dans l'input 
+        */
+    };
 
 
     that.__construct = function()
     {
+        /*
+        * Initliaze the Router backbone
+        ***/
+        
+
+        var routeCity = {
+        ":city" : "loadcity",
+        ":city/:neighborhood" : "loadneighborhood",
+        };
+
+        var router = Backbone.Router.extend({
+                        routes: routeCity
+        });
+
+        window.router_app = new router;
+
+
+        
         $("form[name=filter]")[0].reset();
         var $map = $('#map');
         if( !$map.length ) return;
@@ -616,6 +692,17 @@ wbb.CitiesPage = function () {
 
         that._setupEvents();
         that._showAllCities(false);
+
+        router_app.on('route:loadcity', function( city ){ 
+            that._showDirectBars(city, -1);
+        });
+
+        router_app.on('route:loadneighborhood', function( city , neighborhood ){ 
+            that._showDirectBars(city, neighborhood);
+        });
+
+        Backbone.history.start({pushState : true , root: Routing.generate('wbb_cities')});
+        //that._showDirectBars(1, 1);
          // Init and change handlers
 
         // $.address.init(function(event){});

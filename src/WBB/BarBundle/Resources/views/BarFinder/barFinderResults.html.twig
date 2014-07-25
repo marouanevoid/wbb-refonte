@@ -117,7 +117,7 @@
                 var cibletag = ( currentMode == 'grid' ) ?  'gridview' :  'listview';
                 var currentCible = $($(".line." + cibletag )[currentIndexToLoad]);
                 currentCible.show();
-                initAnimate(currentCible.find('> *').not('br'),false,true);
+                initAnimate(currentCible,false,true);
 
                 steelshowLoadMoreBtn();
                 return false;
@@ -173,6 +173,7 @@
                                         <div class="filter-search margin-top-10">
                                             <ul>
                                                 <li>
+                                                <!-- Mood : {{ selected.mood  }}-->
                                                     <a href="{{ path('wbb_bar_finder') }}?sel_mood={{ selected.mood }}&sel_outwith={{ selected.outWith }}&sel_city={{ selected.city }}"
                                                       class="btn btn-redefine-search radius-60 text-transform-capitalize">
                                                         Redefine Search
@@ -285,7 +286,7 @@
                 </div>
             </div>
             <div class="twelve columns align-center m-margin load-more-container">
-                <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars">See more bars</a>
+                <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars">Load more bars</a>
             </div>
 
         </div>
