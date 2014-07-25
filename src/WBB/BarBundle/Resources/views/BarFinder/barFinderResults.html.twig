@@ -92,7 +92,8 @@
             initAnimate( $(".line.gridview:lt(2)") ,  true , true);
 
             $('.sort-by a').on('click' , function(){
-
+               $(".line.gridview").hide(); 
+               $(".line.listview").hide(); 
                 setTimeout(function(){
                     currentIndexToLoad = 1;
 
