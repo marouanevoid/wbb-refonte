@@ -5,8 +5,8 @@
     <div class="txt">
         <h2>
             {% if is_mobile() and not is_tablet() %}
-                {{ b.name|slice(0,15) }}
-                {% if b.name|length > 15 %}
+                {{ b.name|slice(0,12) }}
+                {% if b.name|length > 12 %}
                     ...
                 {% endif %}
             {% else %}
