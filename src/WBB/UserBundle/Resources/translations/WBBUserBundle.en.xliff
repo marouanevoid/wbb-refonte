@@ -153,6 +153,11 @@
                 <target>Country *</target>
             </trans-unit>
 
+            <trans-unit id="show.label_firstname">
+                <source>form.label_country</source>
+                <target>Country *</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

@@ -6,6 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -56,6 +57,13 @@ class User extends BaseUser
      * @ORM\Column(name="website", type="string", length=255, nullable=true)
      */
     private $website;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
+     */
+    protected $facebookId;
 
     /**
      * @var string
@@ -114,11 +122,81 @@ class User extends BaseUser
     private $prefCity3;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar1", type="string", length=255, nullable=true)
+     */
+    private $prefBar1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar2", type="string", length=255, nullable=true)
+     */
+    private $prefBar2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar3", type="string", length=255, nullable=true)
+     */
+    private $prefBar3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_1", type="string", length=255, nullable=true)
+     */
+    private $prefDrinkBrand1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_2", type="string", length=255, nullable=true)
+     */
+    private $prefDrinkBrand2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
+     */
+    private $prefDrinkBrand3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_1", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_2", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_3", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails3;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="stay_informed", type="boolean", nullable=true)
      */
     private $stayInformed;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="stay_brand_informed", type="boolean", nullable=true)
+     */
+    private $stayBrandInformed;
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="users")
@@ -145,7 +223,26 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\News", mappedBy="user")
      */
     private $news;
-    
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="usersFavorite")
+     * @ORM\JoinTable(name="wbb_user_favorite_bars")
+     */
+    private $favoriteBars;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\BestOf", inversedBy="usersFavorite")
+     * @ORM\JoinTable(name="wbb_user_favorite_bestof")
+     */
+    private $favoriteBestOfs;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
+     */
+    private $tipsShouldBeModerated;
+
     /**
      * @var datetime
      *
@@ -162,11 +259,24 @@ class User extends BaseUser
      */
     private $updatedAt;
 
+    public function serialize()
+    {
+        return serialize(array($this->facebookId, parent::serialize()));
+    }
+
+    public function unserialize($data)
+    {
+        list($this->facebookId, $parentData) = unserialize($data);
+        parent::unserialize($parentData);
+    }
+
     public function __construct()
     {
         parent::__construct();
         $this->setEnabled(true);
         $this->setStayInformed(true);
+        $this->tipsShouldBeModerated = true;
+        $this->favoriteBars = new ArrayCollection();
     }
 
     /**
@@ -553,75 +663,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set prefCity1
-     *
-     * @param string $prefCity1
-     * @return User
-     */
-    public function setPrefCity1($prefCity1)
-    {
-        $this->prefCity1 = $prefCity1;
-
-        return $this;
-    }
-
-    /**
-     * Get prefCity1
-     *
-     * @return string 
-     */
-    public function getPrefCity1()
-    {
-        return $this->prefCity1;
-    }
-
-    /**
-     * Set prefCity2
-     *
-     * @param string $prefCity2
-     * @return User
-     */
-    public function setPrefCity2($prefCity2)
-    {
-        $this->prefCity2 = $prefCity2;
-
-        return $this;
-    }
-
-    /**
-     * Get prefCity2
-     *
-     * @return string 
-     */
-    public function getPrefCity2()
-    {
-        return $this->prefCity2;
-    }
-
-    /**
-     * Set prefCity3
-     *
-     * @param string $prefCity3
-     * @return User
-     */
-    public function setPrefCity3($prefCity3)
-    {
-        $this->prefCity3 = $prefCity3;
-
-        return $this;
-    }
-
-    /**
-     * Get prefCity3
-     *
-     * @return string 
-     */
-    public function getPrefCity3()
-    {
-        return $this->prefCity3;
-    }
-
-    /**
      * Set prefStartCity
      *
      * @param \WBB\CoreBundle\Entity\City $prefStartCity
@@ -711,5 +752,420 @@ class User extends BaseUser
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set prefCity1
+     *
+     * @param string $prefCity1
+     * @return User
+     */
+    public function setPrefCity1($prefCity1)
+    {
+        $this->prefCity1 = $prefCity1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity1
+     *
+     * @return string 
+     */
+    public function getPrefCity1()
+    {
+        return $this->prefCity1;
+    }
+
+    /**
+     * Set prefCity2
+     *
+     * @param string $prefCity2
+     * @return User
+     */
+    public function setPrefCity2($prefCity2)
+    {
+        $this->prefCity2 = $prefCity2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity2
+     *
+     * @return string 
+     */
+    public function getPrefCity2()
+    {
+        return $this->prefCity2;
+    }
+
+    /**
+     * Set prefCity3
+     *
+     * @param string $prefCity3
+     * @return User
+     */
+    public function setPrefCity3($prefCity3)
+    {
+        $this->prefCity3 = $prefCity3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCity3
+     *
+     * @return string 
+     */
+    public function getPrefCity3()
+    {
+        return $this->prefCity3;
+    }
+
+    /**
+     * Set prefBar1
+     *
+     * @param string $prefBar1
+     * @return User
+     */
+    public function setPrefBar1($prefBar1)
+    {
+        $this->prefBar1 = $prefBar1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefBar1
+     *
+     * @return string 
+     */
+    public function getPrefBar1()
+    {
+        return $this->prefBar1;
+    }
+
+    /**
+     * Set prefBar2
+     *
+     * @param string $prefBar2
+     * @return User
+     */
+    public function setPrefBar2($prefBar2)
+    {
+        $this->prefBar2 = $prefBar2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefBar2
+     *
+     * @return string 
+     */
+    public function getPrefBar2()
+    {
+        return $this->prefBar2;
+    }
+
+    /**
+     * Set prefBar3
+     *
+     * @param string $prefBar3
+     * @return User
+     */
+    public function setPrefBar3($prefBar3)
+    {
+        $this->prefBar3 = $prefBar3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefBar3
+     *
+     * @return string 
+     */
+    public function getPrefBar3()
+    {
+        return $this->prefBar3;
+    }
+
+    /**
+     * Set prefDrinkBrand1
+     *
+     * @param string $prefDrinkBrand1
+     * @return User
+     */
+    public function setPrefDrinkBrand1($prefDrinkBrand1)
+    {
+        $this->prefDrinkBrand1 = $prefDrinkBrand1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefDrinkBrand1
+     *
+     * @return string 
+     */
+    public function getPrefDrinkBrand1()
+    {
+        return $this->prefDrinkBrand1;
+    }
+
+    /**
+     * Set prefDrinkBrand2
+     *
+     * @param string $prefDrinkBrand2
+     * @return User
+     */
+    public function setPrefDrinkBrand2($prefDrinkBrand2)
+    {
+        $this->prefDrinkBrand2 = $prefDrinkBrand2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefDrinkBrand2
+     *
+     * @return string 
+     */
+    public function getPrefDrinkBrand2()
+    {
+        return $this->prefDrinkBrand2;
+    }
+
+    /**
+     * Set prefDrinkBrand3
+     *
+     * @param string $prefDrinkBrand3
+     * @return User
+     */
+    public function setPrefDrinkBrand3($prefDrinkBrand3)
+    {
+        $this->prefDrinkBrand3 = $prefDrinkBrand3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefDrinkBrand3
+     *
+     * @return string 
+     */
+    public function getPrefDrinkBrand3()
+    {
+        return $this->prefDrinkBrand3;
+    }
+
+    /**
+     * Set prefCocktails1
+     *
+     * @param string $prefCocktails1
+     * @return User
+     */
+    public function setPrefCocktails1($prefCocktails1)
+    {
+        $this->prefCocktails1 = $prefCocktails1;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCocktails1
+     *
+     * @return string 
+     */
+    public function getPrefCocktails1()
+    {
+        return $this->prefCocktails1;
+    }
+
+    /**
+     * Set prefCocktails2
+     *
+     * @param string $prefCocktails2
+     * @return User
+     */
+    public function setPrefCocktails2($prefCocktails2)
+    {
+        $this->prefCocktails2 = $prefCocktails2;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCocktails2
+     *
+     * @return string 
+     */
+    public function getPrefCocktails2()
+    {
+        return $this->prefCocktails2;
+    }
+
+    /**
+     * Set prefCocktails3
+     *
+     * @param string $prefCocktails3
+     * @return User
+     */
+    public function setPrefCocktails3($prefCocktails3)
+    {
+        $this->prefCocktails3 = $prefCocktails3;
+
+        return $this;
+    }
+
+    /**
+     * Get prefCocktails3
+     *
+     * @return string 
+     */
+    public function getPrefCocktails3()
+    {
+        return $this->prefCocktails3;
+    }
+    
+    /**
+     * @param string $facebookId
+     * @return void
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+        $this->setUsername($facebookId);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param Array
+     */
+    public function setFBData($fbdata)
+    {
+        if (isset($fbdata['id'])) {
+            $this->setFacebookId($fbdata['id']);
+        }
+    }
+
+
+    /**
+     * Add favoriteBars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @return User
+     */
+    public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    {
+        $this->favoriteBars[] = $favoriteBars;
+        return $this;
+    }
+
+    /**
+     * Set stayBrandInformed
+     *
+     * @param boolean $stayBrandInformed
+     * @return User
+     */
+    public function setStayBrandInformed($stayBrandInformed)
+    {
+        $this->stayBrandInformed = $stayBrandInformed;
+        return $this;
+    }
+
+    /**
+     * Remove favoriteBars
+     *
+     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     */
+    public function removeFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    {
+        $this->favoriteBars->removeElement($favoriteBars);
+    }
+
+    /**
+     * Get favoriteBars
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteBars()
+    {
+        return $this->favoriteBars;
+    }
+
+    /**
+     * Add favoriteBestOfs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @return User
+     */
+    public function addFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    {
+        $this->favoriteBestOfs[] = $favoriteBestOfs;
+
+        return $this;
+    }
+
+    /**
+     * Remove favoriteBestOfs
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     */
+    public function removeFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    {
+        $this->favoriteBestOfs->removeElement($favoriteBestOfs);
+    }
+
+    /**
+     * Get favoriteBestOfs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteBestOfs()
+    {
+        return $this->favoriteBestOfs;
+    }
+
+    /**
+     * Set tipsShouldBeModerated
+     *
+     * @param boolean $tipsShouldBeModerated
+     * @return User
+     */
+    public function setTipsShouldBeModerated($tipsShouldBeModerated)
+    {
+        $this->tipsShouldBeModerated = $tipsShouldBeModerated;
+
+        return $this;
+    }
+
+    /**
+     * Get tipsShouldBeModerated
+     *
+     * @return boolean 
+     */
+    public function getTipsShouldBeModerated()
+    {
+        return $this->tipsShouldBeModerated;
+    }
+
+    /**
+     * Get stayBrandInformed
+     *
+     * @return boolean 
+     */
+    public function getStayBrandInformed()
+    {
+        return $this->stayBrandInformed;
     }
 }

@@ -11,7 +11,7 @@
         "symfony/symfony": "2.4.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "gedmo/doctrine-extensions": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
         "twig/extensions": "1.0.*",
@@ -36,14 +36,14 @@
         "hautelook/alice-bundle": "dev-master",
         "jcroll/foursquare-api-bundle": "1.0.*",
         "guzzle/guzzle": "v3.8",
-        "sonata-project/formatter-bundle": "2.*",
         "stnw/date-picker-bundle" : "dev-master",
         "suncat/mobile-detect-bundle": "0.9.*",
-        "avalanche123/imagine-bundle": "2.*",
         "jms/serializer-bundle": "0.13.*@dev",
         "ddeboer/data-import-bundle": "0.1",
-        "cybernox/amazon-webservices-bundle": "1.5.6"
-
+        "cybernox/amazon-webservices-bundle": "1.5.6",
+        "aws/aws-sdk-php": "2.*",
+        "friendsofsymfony/facebook-bundle": "1.3.*",
+        "hpatoio/bitly-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

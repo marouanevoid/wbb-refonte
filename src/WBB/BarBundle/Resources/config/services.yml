@@ -39,6 +39,12 @@ parameters:
     wbb_feed.instagram.class: WBB\BarBundle\Feed\Instagram
 
 services:
+    #Blocks
+    wbb.block.service.semsoft.import:
+        class: WBB\BarBundle\Block\ImportService
+        arguments: [ "wbb.block.service.semsoft.import", @templating, @service_container ]
+        tags:
+         - { name: sonata.block }
 
     #Admin Class
     wbb.bar.admin.bar:
@@ -48,15 +54,16 @@ services:
         arguments: [null, %wbb_bar.bar.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
-            - [setTemplates, [{ edit:"WBBBarBundle:Admin:Bar/edit.html.twig" }]]
+            - [setTemplates, [{ edit: "WBBBarBundle:Admin:Bar/edit.html.twig", list: "WBBBarBundle:Admin:Bar/list.html.twig" }]]
 
-#    wbb.semsoftbar.admin.bar:
-#        class: %wbb_bar.semsoftbar.admin.class%
-#        tags:
-#          - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-#        arguments: [null, %wbb_bar.semsoftbar.entity.class%, SonataAdminBundle:CRUD]
-#        calls:
-#            - [setTranslationDomain, ["WBBBarBundle"]]
+    wbb.semsoftbar.admin.bar:
+        class: %wbb_bar.semsoftbar.admin.class%
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: semsoft_bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+        arguments: [null, %wbb_bar.semsoftbar.entity.class%, SonataAdminBundle:CRUD]
+        calls:
+            - [setTranslationDomain, ["WBBBarBundle"]]
+            - [setTemplates, [{ edit: "WBBBarBundle:Admin:Semsoft/edit.html.twig" }]]
 
     wbb.bar.admin.bar.media:
         class: %wbb_bar.bar_media.admin.class%
@@ -181,6 +188,12 @@ services:
         factory_method: getRepository
         arguments: ['WBBBarBundle:News']
 
+    ad.repository:
+        class: WBB\BarBundle\Repository\AdRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['WBBBarBundle:Ad']
+
     tip.repository:
         class: WBB\BarBundle\Repository\TipRepository
         factory_service: doctrine.orm.default_entity_manager
@@ -203,3 +216,28 @@ services:
     sonata.media.resizer.custom:
         class: WBB\BarBundle\Resizer\CustomResizer
         arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
+    
+    wbb.twig.favorite_extension:
+        class: WBB\BarBundle\Twig\Extension\FavoriteExtension
+        arguments:
+            - "@router"
+        tags:
+            - { name: twig.extension }
+
+    wbb.tips.event_listener:
+        class: WBB\BarBundle\EventListener\TipsListener
+        arguments:
+            - "@wbb.mailer"
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    wbb.mailer:
+        class: WBB\BarBundle\Mailer\TipsMailer
+        arguments:
+            - "@mailer"
+    # ForumMailer
+#    wbb_bar.mailer:
+#        class:  WBB\BarBundle\Mailer\BarMailer
+#        parent: bmwi_core.mailer.twig_swift
+#        public: false

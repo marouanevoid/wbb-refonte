@@ -6,7 +6,7 @@
 
                 <div class="bar-w-pic list">
 
-                    <a href="#0" class="btn-round dark star"></a>
+                    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
 
                     {% if b.city %}
                         <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
@@ -14,7 +14,7 @@
                         <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
                     {% endif %}
 
-                    <img class="scale-with-grid" data-src="{% path b.image, 'bestof_small' %}" alt="{{ b.name }}" width="570" height="428"/>
+                    <img class="scale-with-grid" data-src="{% filter showMedia %}{% path b.image, 'bestof_small' %}{% endfilter %}" alt="{{ b.name }}" width="570" height="428"/>
 
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <a target="_blank" class="btn btn-small view_link" title="{{ 'action_show'|trans({}, 'SonataAdminBundle') }}"
-   href="{{ path('wbb_bar_details',{city:object.city, suburb: object.suburb, slug:object.slug}) }}">
+   href="{{ path('wbb_bar_details',{city:object.city, suburb: object.suburb.slug, slug:object.slug}) }}">
     <i class="icon-zoom-in"></i>
     {{ 'action_show'|trans({}, 'SonataAdminBundle') }}
 </a>

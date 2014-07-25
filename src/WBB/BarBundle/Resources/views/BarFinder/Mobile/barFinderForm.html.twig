@@ -1,0 +1,128 @@
+{% extends "::base.html.twig" %}
+{% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
+{% block title %}World Best Bars{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        // remove Class active on input if is not checked
+        $('.trigger-handler').parent('a').on('click' , function(){
+
+            $('.trigger-handler').each(function(){
+                if( ! $(this).is(':checked'))
+                    $(this).parent('a.ui-radio').removeClass('active');
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+<div id="bar-finder" class="mobile bar-finder margin-top-60">
+    <div class="title text-transform-uppercase bold">find your best bar</div>
+    <div class="content padding-top-10">
+        <form action="{{ path('wbb_bar_finder_results') }}" method="post" id="form-finderbar">
+            <div class="group-select padding-bottom-10">
+                <label class="text-transform-uppercase">city</label>
+                <select class="trigger-select-go ui-dropdown dark" name="city" data-class="with-icon city">
+                    <option value="">Choose a City</option>
+                    <option value="all" {% if selected.city ==  "all" %} selected="selected" {% endif %}>All</option>
+                    {% if city %}
+                        <option value="{{ city.slug }}">{{ city.name }}</option>
+                        {% for c in cities %}
+                            {% if city.id != c.id %}
+                                <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
+                                    {{ c.name }}
+                                </option>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for c in cities %}
+                            <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>
+                                {{ c.name }}
+                            </option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <div class="clear"></div>
+            </div>
+            <div class="group-select margin-bottom-10">
+                <label class="text-transform-uppercase">To go out with</label>
+                <select class="trigger-select-go ui-dropdown dark" name="go_out" data-class="with-icon friend">
+                    <option value="">Choose with who</option>
+                    <option value="all" {% if selected.outWith ==  "all" %} selected="selected" {% endif %}>All</option>
+                    {% for tag in firstTags %}
+                        <option value="{{ tag.id }}"{% if selected.outWith ==  tag.id %} selected {% endif %}>
+                            {{ tag.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="clear"></div>
+            <div class="group-form radio margin-bottom-50 wrap"> <!-- Mobile [Warning /!\] -->
+                <label class="text-transform-uppercase">Mood</label>
+                <div class="wrap" style="width:310px">
+                    <div style='display:none' class='fake-go-item'>
+                        <input type="radio" name="mood" value="" class="ui-radio dark with-icon" data-color="brown" checked=""/>
+                    </div>
+                    <ul>
+                        {% for mood in moods %}
+                            <li class="left">
+                                <div class="form-radio">
+                                    <input type="radio" name="mood" data-value="{{ mood |lower }}" value="{{ mood }}"
+                                           class="ui-radio dark with-icon text-transform-capitalize trigger-handler"
+                                            {% if selected.mood|lower ==  mood|lower %} checked="checked" {% endif %}
+                                           data-color="brown">
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="group-form margin-bottom-40">
+                <input type="submit" id="go-submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold go disabled">
+            </div>
+        </form>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                var showGo = function(){
+
+                   var totalSelectedMood =  $('.trigger-handler:checked').length;
+                       totalSelectedSelect = 0;
+                   $('.trigger-select-go').each(function(){
+                      if($(this).val()=="")
+                        totalSelectedSelect++;
+                   });
+                   
+                   if(totalSelectedSelect < 2 || totalSelectedMood > 0){
+                        $('.go').removeClass('disabled');
+                        $('.go').prop('disabled' , false);
+                   }else{
+                    $('.go').addClass('disabled');
+                    $('.go').prop('disabled' , true);
+                   }  
+
+                };
+
+
+                var objRadio = $("input[name='mood']");
+                var objDropdown = $("select.ui-dropdown");
+                objDropdown.each(function(){
+                    $(this).change(function() {
+ 
+                        showGo();
+                    })
+                })
+                objRadio.change(function() {
+                    $('.trigger-handler').each(function(){
+                        if( ! $(this).is(':checked'))
+                            $(this).parent('a.ui-radio').removeClass('active');
+                    });
+                    showGo();
+                });
+
+                showGo();
+            })
+        </script>
+    </div>
+</div> <!-- #bar-finder -->
+{% endblock %}

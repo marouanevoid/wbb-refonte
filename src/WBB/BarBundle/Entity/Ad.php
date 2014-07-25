@@ -10,10 +10,26 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Ad
  *
  * @ORM\Table(name="wbb_ad")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\AdRepository")
  */
 
 class Ad {
+
+    const WBB_ADS_HP_300X250    = "HP_300x250";
+    const WBB_ADS_HP_728X90     = "HP_728x90";
+    const WBB_ADS_BF_728X90     = "BF_728x90";
+    const WBB_ADS_SR_728X90     = "SR_728x90";
+    const WBB_ADS_BG_728X90     = "BG_728x90";
+    const WBB_ADS_BD_300X250    = "BD_300x250";
+    const WBB_ADS_BD_728X90     = "BD_728x90";
+    const WBB_ADS_BOD_300X250   = "BOD_300x250";
+    const WBB_ADS_BOD_728X90    = "BOD_728x90";
+    const WBB_ADS_NLP_300X250   = "NLP_300x250";
+    const WBB_ADS_NLP_300X600   = "NLP_300x600";
+    const WBB_ADS_NLP_728X90    = "NLP_728x90";
+    const WBB_ADS_ND_300X250    = "ND_300x250";
+    const WBB_ADS_ND_728X90     = "ND_728x90";
+    const WBB_ADS_UP_728X90     = "UP_728x90";
 
     /**
      * @var integer
@@ -34,7 +50,7 @@ class Ad {
     /**
      * @var integer
      *
-     * @ORM\Column(name="position", type="smallint", nullable=true)
+     * @ORM\Column(name="position", type="string", length=20, nullable=true)
      */
     private $position;
 
@@ -138,7 +154,7 @@ class Ad {
     /**
      * Set position
      *
-     * @param integer $position
+     * @param string $position
      * @return Ad
      */
     public function setPosition($position){
@@ -149,7 +165,7 @@ class Ad {
     /**
      * Get position
      *
-     * @return integer
+     * @return string
      */
     public function getPosition(){
         return $this->position;
@@ -324,6 +340,26 @@ class Ad {
      */
     public function getUpdatedAt(){
         return $this->updatedAt;
+    }
+
+    public static function getAdsPositionArray(){
+        return array(
+            Ad::WBB_ADS_HP_300X250    => "Home Page (300x250)",
+            Ad::WBB_ADS_HP_728X90     => "Home Page (728x90)",
+            Ad::WBB_ADS_BF_728X90     => "Bar Finder (728x90)",
+            Ad::WBB_ADS_SR_728X90     => "Search Results (728x90)",
+            Ad::WBB_ADS_BG_728X90     => "Bar Guide (728x90)",
+            Ad::WBB_ADS_BD_300X250    => "Bar Detail (300x250)",
+            Ad::WBB_ADS_BD_728X90     => "Bar Detail (728x90)",
+            Ad::WBB_ADS_BOD_300X250   => "Best of Detail (300x250)",
+            Ad::WBB_ADS_BOD_728X90    => "Best of Detail (728x90)",
+            Ad::WBB_ADS_NLP_300X250   => "News Landing Page (300x250)",
+            Ad::WBB_ADS_NLP_300X600   => "News Landing Page (300x600)",
+            Ad::WBB_ADS_NLP_728X90    => "News Landing Page (728x90)",
+            Ad::WBB_ADS_ND_300X250    => "News Detail (300x250)",
+            Ad::WBB_ADS_ND_728X90     => "News Detail (728x90)",
+            Ad::WBB_ADS_UP_728X90     => "User Profile (728x90)"
+        );
     }
 
 }

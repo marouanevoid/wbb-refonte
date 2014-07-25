@@ -1,16 +1,20 @@
 <article class="bar-w-pic {% if bestof is defined %}best-of{% endif %}">
-    <a href="#0" class="btn-round dark star"></a>
+    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
     <div class="txt">
         {% if (bestof is defined) and ordered %}
             <span class="number h2">{{ loop.index }}</span>
         {% endif %}
-        <h2>{{ b.name }}</h2>
+        <h2>{{ b.name }}
+            {% if distance is defined and distance|length>0 and distance.city is not null %}
+                {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
+            {% endif %}
+        </h2>
         <h3>{% if b.suburb %}{{ b.suburb.name|default('Unspecified') }}, {% endif %}{% if b.city %}{{ b.city.name|default('Unspecified') }}{% endif %}</h3>
         <div class="hover">
             <div class="tags">
-                {% for tr in b.tags %}
-                    {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                {% endfor%}
+                {% for tr in b.tagsToShow |slice(0, 5) %}
+                    {{ tr.name|capitalize }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
             </div>
             {% if bestof is defined %}
                 <div class="description">
@@ -20,11 +24,15 @@
         </div>
     </div>
     {% if b.suburb %}
-        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}" class="overlay-link"></a>
+        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
-    {% for m in b.medias|slice(0,1) %}
-        <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
-    {% endfor %}
-</article>
+    {% if b.medias|length>0 %}
+        {% for m in b.medias|slice(0,1) %}
+            <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
+        {% endfor %}
+    {% else %}
+        <img class="scale-with-grid" data-src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
+    {% endif %}
+</article>  

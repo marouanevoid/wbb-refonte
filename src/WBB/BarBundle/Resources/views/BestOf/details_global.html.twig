@@ -38,14 +38,15 @@
                 <tr>
                     <td></td>
                     <td class="title">
-                        <h3>{% if bestOf.city %}{{ bestOf.city.name }} Best's{% else %}World's Best{% endif %}</h3>
+                        <h3>{% if bestOf.city %}{{ bestOf.city.name }}'s Best{% else %}World's Best{% endif %}</h3>
                         <h1>{{ bestOf.name }}</h1>
                         <h3>
                             {{ bestOf.description | raw }}
                         </h3>
                     </td>
                     <td class="star-share">
-                        <a class="btn-round brown star" href="#0"></a><a class="btn-round brown share" href=""></a>
+                        <a href="{{ favorite_url(app.user, bestOf) }}" class="btn-round star {% if is_favorite(app.user, bestOf) %}active brown changed{% endif %}"></a>
+                        <a class="btn-round brown share" href=""></a>
                     </td>
                 </tr>
             </table>
@@ -66,11 +67,20 @@
                 </div>
             </div>
         {% endif %}#}
+        {% if not is_mobile() or is_tablet() %}
+            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
+        {% endif %}
         <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}
-                {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered} %}
+                {% include "WBBBarBundle:Bar:bar1.html.twig" with {
+                        'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered,
+                        'distance': distance, 'latitude': latitude, 'longitude': longitude}
+                %}
             {% else %}
-                {% include "WBBBarBundle:BestOf:bar.html.twig" with { 'b': b, 'bestof' : bestOf} %}
+                {% include "WBBBarBundle:BestOf:bar.html.twig" with {
+                    'b': b, 'bestof' : bestOf, 'distance': distance,
+                    'latitude': latitude, 'longitude': longitude}
+                %}
             {% endif %}
         </div>
     {% endfor %}
@@ -103,4 +113,8 @@
             {% endif %}
         </section>
 </div>
+{% endblock %}
+
+{% block footerAd %}
+{{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_728x90' })) }}
 {% endblock %}

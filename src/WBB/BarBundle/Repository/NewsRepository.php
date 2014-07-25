@@ -28,11 +28,11 @@ class NewsRepository extends EntityRepository
 
         if($onlyOnTop){
             $qb
-                ->where($qb->expr()->eq($this->getAlias().'.isOnTop', $qb->expr()->literal(true)))
+                ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
                 ->orderBy($this->getAlias().'.createdAt', 'DESC');
         }else{
             $qb
-                ->orderBy($this->getAlias().'.isOnTop', 'DESC')
+                ->orderBy($this->getAlias().'.onTop', 'DESC')
                 ->addOrderBy($this->getAlias().'.createdAt', 'DESC');
         }
 
@@ -46,5 +46,55 @@ class NewsRepository extends EntityRepository
             return $qb->getQuery()->getArrayResult();
         else
             return $qb->getQuery()->getResult();
+    }
+
+    public function findRelatedNews($cities = null, $limit = 3, $exceptIds = array(0))
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->notIn($this->getAlias().'.id', $exceptIds))
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+        ;
+
+        if($limit > 0)
+        {
+            $qb->setMaxResults($limit);
+        }
+
+        if($cities){
+            $qb
+                ->addSelect('count(c.id) as HIDDEN nbCities')
+                ->leftjoin($this->getAlias().'.cities', 'c')
+                ->andWhere($qb->expr()->in('c.id', $cities))
+                ->groupBy($this->getAlias().'.id')
+                ->addOrderBy('nbCities', 'DESC')
+            ;
+        }
+
+        $qb->addOrderBy($this->getAlias().'.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBarRelatedNews($bar, $onTop = true, $limit = 5)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->innerJoin($this->getAlias().'.bars', 'b')
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq('b.id', $bar->getId()))
+            ->setMaxResults($limit)
+        ;
+
+        if($onTop)
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        elseif($onTop == false)
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(false)));
+
+        return $qb->getQuery()->getResult();
     }
 } 

@@ -23,7 +23,7 @@ class CityRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBarFinderCities()
+    public function findBarFinderCities($geoCity = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
@@ -31,6 +31,10 @@ class CityRepository extends EntityRepository
             ->orderBy($this->getAlias().'.onTopCity', 'DESC')
             ->addOrderBy($this->getAlias().'.name', 'ASC')
         ;
+
+        if($geoCity){
+            $qb->where($qb->expr()->neq($this->getAlias().'.id', $geoCity->getId()));
+        }
 
         return $qb->getQuery()->getResult();
     }
@@ -48,4 +52,49 @@ class CityRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-} 
+
+    public function findByNameAndCountry($name = "", $country = null)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias())
+            ->leftJoin($this->getAlias().".country", "c")
+            ->where($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)))
+            ->andWhere($qb->expr()->eq('c.id', $country->getId()))
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findNearestCity($latitude = 0, $longitude = 0, $maxDistance = 0, $offset = 0, $limit = 0)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().",GEO(".$this->getAlias().".latitude = :latitude, ".$this->getAlias().".longitude = :longitude) AS HIDDEN Distance")
+            ->setParameter('latitude', $latitude)
+            ->setParameter('longitude', $longitude)
+            ->where($qb->expr()->eq($this->getAlias().'.onTopCity', true))
+            ->orderBy('Distance', 'ASC')
+            ->setFirstResult($offset)
+        ;
+
+        if($maxDistance > 0){
+            $qb->having($qb->expr()->lte('Distance', $maxDistance));
+        }
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+    
+    public function findCitiesLike($name)
+    {
+        return $this->createQueryBuilder('c')
+                        ->where('c.name LIKE :name')
+                        ->setParameter('name', "$name%")
+                        ->getQuery()->getResult();
+    }
+}

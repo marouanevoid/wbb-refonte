@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     var barsLimit = 8;
     var bestofLimit = 9;
-
+    var haveDistance = $('#criteria').find('option[value=distance]').length;
    $("form[name=filter]")[0].reset();
    var loadData = function(){
        if(istablet==1)
@@ -36,7 +36,13 @@ $(document).ready(function()
 //       console.log("Offset : " + _offset );
 //       console.log("Limit : " + _limit );
        console.log("Display : " + _display );
+
+       ////// TODO ADD THE LAT AND LON TO THE RESQUEST ////////
+       var cibling_long = $.cookie('currentLong'),
+           cibling_lat = $.cookie('currentLat');
+      ///////////////////////////////////////////////////////
        var _url = Routing.generate('homepage')+"barguide/filter/"+_type+"/"+_city+"/"+_sortby+"/"+_offset+"/"+_limit+"/"+_display;
+
 
        if (_type==1)
            _offset += barsLimit;
@@ -100,19 +106,40 @@ $(document).ready(function()
         $(".load-more").show();
         _offset = 0;
         if( $('input[name=filter]:checked').val() == "bar_list")
-        {
-            $('li.distance').css('display','block');
+        {   
+            if(istablet || ismobile){
+              if(haveDistance){
+                $('#criteria').prepend('<option value=distance>Distance</option>');
+              }
+            }else{
+             $('li.distance').css('display','block');  
+            }
             _limit = barsLimit;
         }
         else
         {
-            $('li.distance').css('display','none');
-            if($('#criteria').val()=='distance')
-            {
-                $('.jspPane li.popularity').trigger("click");
-                $('#criteria').val('popularity');
-                $('li.popularity').css('display','block');
+            //$('#criteria')._instance._remove('popularity');
+            if(istablet || ismobile ){
+              var optionDistance = $('#criteria').find('option[value=distance]');
+              if($('#criteria').val() == 'distance'){
+                // dispatch click on popularity
+                $('#criteria').find('option[value=popularity]').attr('selected' , 'selected');
+                $('#criteria').parent('.ui-dropdown-container').find('.selected').text('Popularity');
+              }
+              if(optionDistance.length){
+                  optionDistance.remove();
+              }
+                
+            }else{
+              $('li.distance').css('display','none');
+              if($('#criteria').val()=='distance')
+              {
+                  $('.jspPane li.popularity').trigger("click");
+                  $('#criteria').val('popularity');
+                  $('li.popularity').css('display','block');
+              } 
             }
+
             _limit = bestofLimit;
         }
         $(".load-target").html('');

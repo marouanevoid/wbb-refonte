@@ -50,8 +50,8 @@ wbb.Map = function(config){
                 ]
             }
         ],
-        offset      : {21:0.00039, 20:0.00077, 19:0.0015, 18: 0.0031, 17:0.0062, 16:0.0123, 15:0.025, 14:0.05, 13:0.098, 12:0.19  }
-
+        //offset      : {21:0.00039, 20:0.00077, 19:0.0015, 18: 0.0031, 17:0.0062, 16:0.0123, 15:0.025, 14:0.05, 13:0.098, 12:0.19  }
+          offset      : {21:0.00039, 20:0.00077, 19:0.0015, 18: 0.0031, 17:0.0062, 16:0.0123, 15:0.025, 14:0.05, 13:0.098, 12:0.19, 11:0.38, 10:0.76  }
     };
 
     that.context = {};
@@ -205,6 +205,7 @@ wbb.Map = function(config){
 
                         var align = "right";
                         if( map.getBounds().getNorthEast().lng() - marker.getPosition().lng() < that.config.offset[map.getZoom()] ) align = "left";
+                        console.log('the Zoom is ::' + map.getZoom());
                         console.log(" MAP OVER ");
                         console.log(map.getBounds().getNorthEast().lng() - marker.getPosition().lng());
                         that.config.$map.gmap3({
