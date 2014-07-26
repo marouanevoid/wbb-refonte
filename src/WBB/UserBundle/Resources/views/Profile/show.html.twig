@@ -40,7 +40,6 @@
 
 
                     <!-- Filter -->
-
                         <div class="filter-profil padding-bottom-20 wrap">
                             <div class="margin-top-80">
                                 <div class="disableClick"></div>
@@ -121,40 +120,21 @@
 
                     <div id="tab-tips"  class="tab"style="display:none">
                         <!-- List of Tips -->
-                        <div class="list-tips padding-top-40">
-                            <ul class="container">
-                                {#{% for tip in user.tips %}#}
-                                    {#<li class="col col-4">#}
-                                        {#<div class="block-tip">#}
-                                            {#<p>#}
-                                                {#{{ tip.description }}#}
-                                            {#</p>#}
-                                            {#<div class="profil margin-top-10 padding-top-10 separator-top">#}
-                                                {#<img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">#}
-                                                {#<div class="expert bold">{{ user.userRole }}</div>#}
-                                                {#<div class="name">{{ user.firstname }} {{ user.lastname }}</div>#}
-                                            {#</div>#}
-                                            {#<a href="#close" class="close no-text">Close</a>#}
-                                            {#<div class="clear"></div>#}
-                                        {#</div>#}
-                                    {#</li>#}
-                                {#{% endfor %}#}
-                            </ul>
-                                
-                            <div class="clear"></div>
+                        <ul class="list-tips padding-top-40 container">
 
-                            <!-- Button See more Bars -->
-                            <div class="container">
-                                <div class="bars-w-pic force-load load-container">
-                                    <div class="load-target"></div>
-                                    <div class="twelve columns align-center m-margin load-more-container">
-                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
-                                    </div>
+                        </ul>
+                        <div class="clear"></div>
+
+                        <!-- Button See more Bars -->
+                        <div class="container">
+                            <div class="bars-w-pic force-load load-container">
+                                <div class="load-target"></div>
+                                <div class="twelve columns align-center m-margin load-more-container">
+                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
                                 </div>
                             </div>
                         </div>
                     </div><!-- #tab-tips -->
-                    <div class="clear"></div>
 
                 </div>
             </div> <!-- .margin-top-20 -->

@@ -15,11 +15,11 @@ wbb.LoadProfile = function() {
     };
 
     that.config = {
-      content : 'bars',
-      filter: 'date',
-      offset: 0,
-      limit: 8,
-      display: 'grid'
+        content : 'bars',
+        filter: 'date',
+        offset: 0,
+        limit: 8,
+        display: 'grid'
     };
 
     that._setupEvents = function ()
@@ -31,15 +31,21 @@ wbb.LoadProfile = function() {
         $('input[name=filter]').change(function()
         {
             if($(this).data('tab') == "bars"){
+                that.config.content = 'bars';
                 that._request(that.context.$barsTarget);
+                that.config.offset += that.config.limit;
             }
 
             if($(this).data('tab') == "bestofs"){
+                that.config.content = 'bestofs';
                 that._request(that.context.$bestofsTarget);
+                that.config.offset += that.config.limit;
             }
 
             if($(this).data('tab') == "tips"){
+                that.config.content = 'tips';
                 that._request(that.context.$tipsTarget);
+                that.config.offset += that.config.limit;
             }
         });
     };
