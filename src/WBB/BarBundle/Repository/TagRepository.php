@@ -2,6 +2,7 @@
 
 namespace WBB\BarBundle\Repository;
 
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Repository\EntityRepository;
 
 /**
@@ -38,5 +39,26 @@ class TagRepository extends EntityRepository
         }else{
             return $qb->getQuery()->getResult();
         }
+    }
+
+    public function findBarFinderMoods()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().'.name,'.$this->getAlias().'.id')
+            ->where($qb->expr()->eq($this->getAlias().'.type', Tag::WBB_TAG_TYPE_ENERGY_LEVEL))
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal('Chill out')) ,
+                        $qb->expr()->orX(
+                            $qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal('Party')),
+                            $qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal('Casual'))
+                    )
+                )
+            );
+
+        return $qb->getQuery()->getArrayResult();
+
     }
 } 

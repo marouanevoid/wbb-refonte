@@ -2,6 +2,7 @@
 
 namespace WBB\UserBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -242,6 +243,11 @@ class User extends BaseUser
      * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
      */
     private $tipsShouldBeModerated;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+     */
+    private $avatar;
 
     /**
      * @var datetime
@@ -1167,5 +1173,28 @@ class User extends BaseUser
     public function getStayBrandInformed()
     {
         return $this->stayBrandInformed;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param Media $avatar
+     * @return User
+     */
+    public function setAvatar(Media $avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return Media
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }

@@ -226,9 +226,9 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                small:   { width: 82 , quality: 82}
-                medium:  { width: 82 , quality: 82}
-                large:   { width: 145 , quality: 145}
+                small:   { width: 82, height: 82, quality: 100}
+                medium:  { width: 82, height: 82, quality: 100}
+                large:   { width: 145, height: 145, quality: 100}
 
     cdn:
         server:

@@ -31,6 +31,24 @@ class FSAdminController extends Controller
     }
 
     /**
+     * findAction
+     *
+     * @param $type
+     * @param $hash
+     *
+     * @return JsonResponse
+     */
+    public function findHashAction($type, $hash)
+    {
+
+        if(!$hash || $hash ===''){
+            return new JsonResponse(null);
+        }else{
+            return new JsonResponse($this->get("wbb.{$type}.feed")->findByHash($hash));
+        }
+    }
+
+    /**
      * listAction
      *
      * @param $type
