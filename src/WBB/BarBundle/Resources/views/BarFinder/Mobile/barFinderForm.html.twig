@@ -26,7 +26,7 @@
                     <option value="">Choose a City</option>
                     <option value="all" {% if selected.city ==  "all" %} selected="selected" {% endif %}>All</option>
                     {% if city %}
-                        <option value="{{ city.slug }}">{{ city.name }}</option>
+                        <option value="{{ city.slug }}" {% if selected.city == city.slug %} selected="selected" {% endif %}>{{ city.name }}</option>
                         {% for c in cities %}
                             {% if city.id != c.id %}
                                 <option class="cty{{ loop.index }}" value="{{ c.slug }}" {% if selected.city == c.slug %} selected="selected" {% endif %}>

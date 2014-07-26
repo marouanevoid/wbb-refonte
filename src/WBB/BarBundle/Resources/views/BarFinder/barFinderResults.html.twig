@@ -45,8 +45,8 @@
             };
 
             /*
-            * get Activate Tab
-            **/
+             * get Activate Tab
+             **/
 
             var getTab = function(){
                 var cibleTab = $('.sort-by').find('.active');
@@ -67,8 +67,8 @@
             var currentIndexToLoad = 1;
             var currentMode = 'grid';
             /*
-            * Initalise Show item
-            **/
+             * Initalise Show item
+             **/
             var initialiseShowItem = function(type){
 
             }
@@ -77,9 +77,10 @@
 
 
             /*
-            * initAnimate
-            */
+             * initAnimate
+             */
             var initAnimate = function($cible , delay , showmore){
+                $cible.find('> *').not('br').css({opacity:0});
                 setTimeout(function(){
                     $cible.show();
                     animate($(".load-target"), $cible.find('> *').not('br'));
@@ -91,22 +92,22 @@
 
             initAnimate( $(".line.gridview:lt(2)") ,  true , true);
 
-            $('.sort-by a').on('click' , function(){
+            $('.sort-by a.grid').add('.sort-by a.list').on('click' , function(){
                $(".line.gridview").hide(); 
-               $(".line.listview").hide(); 
+               $(".line.listview").hide();  
                 setTimeout(function(){
                     currentIndexToLoad = 1;
 
                     if(getTab() == 'grid'){
-                       $(".line.gridview").hide(); 
-                       $(".line.listview").hide(); 
-                       initAnimate($(".line.gridview:lt(2)"),false,true); 
+                        $(".line.gridview").hide();
+                        $(".line.listview").hide();
+                        initAnimate($(".line.gridview:lt(2)"),false,true);
                     }else{
                         $(".line.gridview").hide();
-                        $(".line.listview").hide(); 
-                        initAnimate($(".line.listview").first().add( $($(".line.listview")[1]) ),false,true); 
+                        $(".line.listview").hide();
+                        initAnimate($(".line.listview").first().add( $($(".line.listview")[1]) ),false,true);
                     }
-                    
+
                     currentMode = getTab();
                 },100)
 
@@ -114,7 +115,7 @@
 
 
             $('.loadmore-trigger').on('click' , function(){
-               currentIndexToLoad++;
+                currentIndexToLoad++;
                 var cibletag = ( currentMode == 'grid' ) ?  'gridview' :  'listview';
                 var currentCible = $($(".line." + cibletag )[currentIndexToLoad]);
                 currentCible.show();
@@ -124,179 +125,186 @@
                 return false;
             });
         });
-        
+
     </script>
 {% endblock %}
 {% block bodyTag %}
 <body class="bar-guides">
 {% endblock %}
 {% block body %}
-<style type="text/css">
-    section.bar-filter {
-        border-top : none !important;
-    }
-    section.bar-filter .bars-w-pic {
-        width: auto;
-    }
-    {% if is_mobile() and not is_tablet() %}
+    <style type="text/css">
+        section.bar-filter {
+            border-top : none !important;
+        }
+        section.bar-filter .bars-w-pic {
+            width: auto;
+        }
+        {% if is_mobile() and not is_tablet() %}
         .filters {
             margin: 15px 0 -15px 0;
         }
-    {% else %}
+        {% else %}
         .filters {
             margin: 0;
             padding: 0;
         }
-    {% endif %}
-
-    /*.sub-header .title h1{position: relative; top:6px; }*//* Duplicate STYLE */
-    /*.sub-header .title h1 {position: relative; top : 10px;}*//* #8044 */
-</style>
-<div>
-    <!-- SUBHEADER -->
-    <div class="container">
-        {% if bars|length >0 %}
-        <section class="sub-header">
-            <table>
-                <tr>
-                    <td></td>
-                    <td class="title margin-top-10">
-                        <h1 itemprop="name">Bar finder results</h1>
-                        <h3 class="bold">
-                            We found {{ bars|length }} {% if bars|length > 1 %}bars that match{% else %}bar that matches{% endif %} your request!
-                        </h3>
-                    </td>
-                    <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
-                        <div class="container s-margin-bottom {% if not is_mobile() or is_tablet() %}align-right{% endif %}" {% if not is_mobile() or is_tablet() %}style="margin:0;"{% endif %}>
-                            <form name="filter" autocomplete="off">
-                                <div class="sort-by h3 filters">
-                                    <div class="disableClick"></div>
-                                    {% if is_mobile() and not is_tablet() %}
-                                        <div class="filter-search margin-top-10">
-                                            <ul>
-                                                <li>
-                                                <!-- Mood : {{ selected.mood  }}-->
-                                                    <a href="{{ path('wbb_bar_finder') }}?sel_mood={{ selected.mood }}&sel_outwith={{ selected.outWith }}&sel_city={{ selected.city }}"
-                                                      class="btn btn-redefine-search radius-60 text-transform-capitalize">
-                                                        Redefine Search
-                                                    </a>
-                                                </li>
-                                                <li class="text-align-right">
-                                    {% endif %}
-                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
-                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
-                                    {% if is_mobile() and not is_tablet() %}
-                                                </li>
-                                                <div class="clear"></div>
-                                            </div><!-- .filter-search -->
-                                    {% endif %}
-                                </div>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </section>
-        {% else %}
-        <section class="sub-header no-results">
-            <table>
-                <tr>
-                    <td></td>
-                    <td class="title margin-top-10">
-                        <h1 itemprop="name">Bar finder results</h1>
-                        <img src="{{ asset('bundles/wbbcore/') }}images/glass.png" width="103" style="margin: 60px 0" />
-                        <h3 class="padding-bottom-40">
-                            Sorry we didn’t find any bars that matched your request.<br>
-                            Please change your criteria or <a href='https://twitter.com/WorldsBestBars' target='_blank'>contact us</a> on Twitter<br>
-                            <a href='https://twitter.com/WorldsBestBars' target='_blank'>@worldsbestbars</a>
-                        </h3>
-                    </td>
-                    <td></td>
-                </tr>
-            </table>
-        </section>
         {% endif %}
-    </div>
-</div>
-{% if bars|length >0 %}
-<section class="bar-filter">
-    <div class="container">
-        <div class="bars-w-pic force-load   load-container">
-            <div class="load-target">
-                <div class="line gridview" style="display: none;">
-                    {% set index = 8 %}
-                    {% for bar in bars %}
-                        {% if index == 0 %}
-                            </div>
-                            <!-- New Line -->
-                            <div class="line gridview" style="display: none;">
-                            {% set index = 8 %}
-                        {% endif %}
-                        {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
-                            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
-                        {% if not is_mobile() or is_tablet() %}</div>{% endif %}
-                        {% set index = index - 1 %}
-                    {% endfor %}
-                </div>
 
-                <div class="line listview" style="display: none;">
-                    {% set index2 = 8 %}
-                    {% for b in bars %}
-                        {% if index2 == 0 %}
-                            </div>
-                            <!-- New Line -->
-                            <div class="line listview" style="display: none;">
-                            {% set index2 = 8 %}
-                        {% endif %}
-                        <article class="bar-w-pic-list">
-
-                            <div class="three columns s-margin-top">
-
-                                <div class="bar-w-pic list">
-
-                                    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
-
-                                    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
-                                    {% if b.medias|length>0 %}
-                                        {% for m in b.medias|slice(0,1) %}
-                                            <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.name }}" width="570" height="428"/>
-                                        {% endfor %}
-                                    {% else %}
-                                        <img class="scale-with-grid" src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
-                                    {% endif %}
+        /*.sub-header .title h1{position: relative; top:6px; }*//* Duplicate STYLE */
+        /*.sub-header .title h1 {position: relative; top : 10px;}*//* #8044 */
+    </style>
+    <div>
+        <!-- SUBHEADER -->
+        <div class="container">
+            {% if bars|length >0 %}
+                <section class="sub-header">
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td class="title margin-top-10">
+                                <h1 itemprop="name">Bar finder results</h1>
+                                <h3 class="bold">
+                                    We found {{ bars|length }} {% if bars|length > 1 %}bars that match{% else %}bar that matches{% endif %} your request!
+                                </h3>
+                            </td>
+                            <td {% if not is_mobile() or is_tablet() %}align="right"{% endif %}>
+                                <div class="container s-margin-bottom {% if not is_mobile() or is_tablet() %}align-right{% endif %}" {% if not is_mobile() or is_tablet() %}style="margin:0;"{% endif %}>
+                                    <form name="filter" autocomplete="off">
+                                        <div class="sort-by h3 filters">
+                                            <div class="disableClick"></div>
+                                            {% if is_mobile() and not is_tablet() %}
+                                            <div class="filter-search margin-top-10">
+                                                <ul>
+                                                    <li>
+                                                        <!-- Mood : {{ selected.mood  }}-->
+                                                        <a href="{{ path('wbb_bar_finder') }}?sel_mood={{ selected.mood }}&sel_outwith={{ selected.outWith }}&sel_city={{ selected.city }}"
+                                                           class="btn btn-redefine-search radius-60 text-transform-capitalize">
+                                                            Redefine Search
+                                                        </a>
+                                                    </li>
+                                                    <li class="text-align-right">
+                                                        {% endif %}
+                                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
+                                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                                        {% if is_mobile() and not is_tablet() %}
+                                                    </li>
+                                                    <div class="clear"></div>
+                                            </div><!-- .filter-search -->
+                                            {% endif %}
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
-
-                            <div class="nine columns s-margin-top">
-                                <h2 class="s-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">{{ b.name }}</a></h2>
-                                {% if b.city and b.suburb %}
-                                    <h3 class="xs-margin-top"><a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">{{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}</a></h3>
-                                {% endif %}
-                                <p class="s-margin-top">
-                                    {{ b.description|truncate(200, true, '...')|striptags }}
-                                </p>
-                                <div class="tags">
-                                    {% for tr in b.tags %}
-                                        {{ tr.tag.name|capitalize }}{% if not loop.last %}, {% endif %}
-                                    {% endfor%}
-                                </div>
-                            </div>
-                            <div class="separator"><hr/></div>
-                        </article>
-                        {% set index2 = index2 - 1 %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="twelve columns align-center m-margin load-more-container">
-                <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars">Load more bars</a>
-            </div>
-
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            {% else %}
+                <section class="sub-header no-results">
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td class="title margin-top-10">
+                                <h1 itemprop="name">Bar finder results</h1>
+                                <img src="{{ asset('bundles/wbbcore/') }}images/glass.png" width="103" style="margin: 60px 0" />
+                                <h3 class="padding-bottom-40">
+                                    Sorry we didn’t find any bars that matched your request.<br>
+                                    Please change your criteria or <a href='https://twitter.com/WorldsBestBars' target='_blank'>contact us</a> on Twitter<br>
+                                    <a href='https://twitter.com/WorldsBestBars' target='_blank'>@worldsbestbars</a>
+                                </h3>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+            {% endif %}
         </div>
-
     </div>
+    {% if bars|length >0 %}
+        <section class="bar-filter">
+            <div class="container">
+                <div class="bars-w-pic force-load   load-container">
+                    <div class="load-target">
+                        <div class="line gridview" style="display: none;">
+                            {% set index = 8 %}
+                            {% for bar in bars %}
+                            {% if index == 0 %}
+                        </div>
+                        <!-- New Line -->
+                        <div class="line gridview" style="display: none;">
+                            {% set index = 8 %}
+                            {% endif %}
+                            {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
+                                {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
+                                {% if not is_mobile() or is_tablet() %}</div>{% endif %}
+                            {% set index = index - 1 %}
+                            {% endfor %}
+                        </div>
 
-</section>
-{% endif %}
+                        <div class="line listview" style="display: none;">
+                            {% set index2 = 8 %}
+                            {% for b in bars %}
+                            {% if index2 == 0 %}
+                        </div>
+                        <!-- New Line -->
+                        <div class="line listview" style="display: none;">
+                            {% set index2 = 8 %}
+                            {% endif %}
+                            <article class="bar-w-pic-list">
+                                <div class="three columns s-margin-top">
+                                    <div class="bar-w-pic list">
+                                        <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
+                                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
+                                        {% if b.medias|length>0 %}
+                                            {% for m in b.medias|slice(0,1) %}
+                                                <img class="scale-with-grid" data-src="{{ showImage(m.media, 'slider_large') }}"  alt="{{ b.name }}" width="570" height="428"/>
+                                            {% endfor %}
+                                        {% else %}
+                                            <img class="scale-with-grid" data-src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="nine columns s-margin-top">
+                                    <h2 class="s-margin-top">
+                                        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">
+                                            {{ b.name }}
+                                            {% if distance is defined and distance|length>0 and distance.city is not null %}
+                                                {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
+                                            {% endif %}
+                                        </a>
+                                    </h2>
+                                    {% if b.city and b.suburb %}
+                                        <h3 class="xs-margin-top">
+                                            <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb, slug: b.slug}) }}">
+                                                {{ b.suburb.name|default('Unspecified') }}, {{ b.city.name|default('Unspecified') }}
+                                            </a>
+                                        </h3>
+                                    {% endif %}
+                                    <p class="s-margin-top">
+                                        {{ b.description|truncate(200, true, '...')|striptags }}
+                                    </p>
+                                    <div class="tags">
+                                        {% for tr in b.tags %}
+                                            {{ tr.tag.name|capitalize }}{% if not loop.last %}, {% endif %}
+                                        {% endfor%}
+                                    </div>
+                                </div>
+                                <div class="separator"><hr/></div>
+                            </article>
+                            {% set index2 = index2 - 1 %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="twelve columns align-center m-margin load-more-container">
+                        <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars">Load more bars</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    {% endif %}
 {% endblock %}
 
 {% block footerAd %}
