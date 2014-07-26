@@ -1,4 +1,4 @@
-/**
+0/**
  * Slider
  *
  * Copyright (c) 2014 - Metabolism
@@ -577,5 +577,6 @@ function initializeSliders()
             }));
 
         $slider.addClass('ui-initialized');
+        $slider.show();
     })
 }
