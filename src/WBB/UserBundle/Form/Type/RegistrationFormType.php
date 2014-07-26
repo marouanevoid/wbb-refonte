@@ -65,12 +65,9 @@ class RegistrationFormType extends BaseType
     {
         parent::setDefaultOptions($resolver);
 
-        $resolver->setDefaults(
-            array(
-                'translation_domain' => 'FOSUserBundle',
-                'label'              => false
-            )
-        );
+        $resolver
+            ->setDefaults(array('translation_domain' => 'FOSUserBundle', 'label' => false))
+        ;
     }
 
     /**
@@ -80,5 +77,4 @@ class RegistrationFormType extends BaseType
     {
         return 'wbb_user_registration';
     }
-
 }

@@ -264,7 +264,6 @@
                 <div class="loader"></div>
                 <div class="ui-slide" style="display:none">
                     {% for m in bar.medias %}
-
                         {% if not loop.first %}
                             <div class="image">
                                 <div class="content">
@@ -341,19 +340,6 @@
                                             {% endif %}
                                         </li>
                                     {% endfor %}
-                                    {#{% for b in bar.bestofs %}#}
-                                        {#<li>#}
-                                            {#{% if b.bestof.city %}#}
-                                                {#<a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">#}
-                                                    {#Best {{ b.bestof.name }} in {{ b.bestof.city }}#}
-                                                {#</a>#}
-                                            {#{% else %}#}
-                                                {#<a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">#}
-                                                    {#Best {{ b.bestof.name }} in world#}
-                                                {#</a>#}
-                                            {#{% endif %}#}
-                                        {#</li>#}
-                                    {#{% endfor %}#}
                                 </ul>
                             </div>
                         </div>
