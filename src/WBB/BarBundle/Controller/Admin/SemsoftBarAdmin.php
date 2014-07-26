@@ -6,6 +6,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -21,20 +22,20 @@ class SemsoftBarAdmin extends Admin
 
         $formMapper
             ->with('General')
-                ->add('name', null, array('read_only' => true, 'disabled'  => true))
+                ->add('name', null)
                 ->add('country')
                 ->add('county', null, array('label'=> 'County'))
                 ->add('city', null)
-                ->add('postalCode', null, array('label'=>'Postal Code','read_only' => true, 'disabled'  => true))
+                ->add('postalCode', null, array('label'=>'Postal Code'))
                 ->add('suburb', null)
-                ->add('address', null, array('read_only' => true, 'disabled'  => true))
-                ->add('seoDescription', null, array('read_only' => true, 'disabled'  => true))
-                ->add('description', null, array('read_only' => true, 'disabled'  => true))
-                ->add('latitude', null, array('read_only' => true, 'disabled'  => true))
-                ->add('longitude', null, array('read_only' => true, 'disabled'  => true))
-                ->add('website', null, array('read_only' => true, 'disabled'  => true))
-                ->add('email', null, array('read_only' => true, 'disabled'  => true))
-                ->add('phone', null, array('read_only' => true, 'disabled'  => true))
+                ->add('address', null)
+                ->add('seoDescription', null)
+                ->add('description', null)
+                ->add('latitude', null)
+                ->add('longitude', null)
+                ->add('website', null)
+                ->add('email', null)
+                ->add('phone', null)
                 ->add('openings', 'sonata_type_collection', array('required' => false),
                     array(
                         'edit' => 'inline',
@@ -43,35 +44,45 @@ class SemsoftBarAdmin extends Admin
                         'disabled'  => true
                     )
                 )
-                ->add('tags', null, array('label'=>'Tags', 'read_only' => true, 'disabled'  => true))
-                ->add('energyLevel', null, array('read_only' => true, 'disabled'  => true))
-                ->add('outDoorSeating', null, array('label'=>'Outdoor Seating', 'read_only' => true, 'disabled'  => true))
-                ->add('happyHour', null, array('label'=>'Happy Hour', 'read_only' => true, 'disabled'  => true))
-                ->add('wifi', null, array('label'=>'Wifi', 'read_only' => true, 'disabled'  => true))
-                ->add('price', null, array('read_only' => true, 'disabled'  => true))
-                ->add('creditCard', null, array('read_only' => true, 'disabled'  => true))
-                ->add('menu', null, array('read_only' => true, 'disabled'  => true))
-                ->add('reservation', null, array('read_only' => true, 'disabled'  => true))
-                ->add('parkingType', null, array('label' => 'Parking Type', 'read_only' => true, 'disabled'  => true))
-                ->add('facebookID', null, array('label' => 'Facebook ID', 'read_only' => true, 'disabled'  => true))
-                ->add('facebookUserPage', null, array('label' => 'Facebook User Page','read_only' => true, 'disabled'  => true))
-                ->add('twitterName', null, array('label' => 'Twitter Name', 'read_only' => true, 'disabled'  => true))
-                ->add('twitterUserPage', null, array('label' => 'Twitter User Page','read_only' => true, 'disabled'  => true))
-                ->add('instagramID', null, array('label' => 'Instagram ID','read_only' => true, 'disabled'  => true))
-                ->add('instagramUserPage', null, array('label' => 'Instagram User Page','read_only' => true, 'disabled'  => true))
-                ->add('googlePlusUserPage', null, array('label' => 'Google+ User Page','read_only' => true, 'disabled'  => true))
-                ->add('foursquareID', null, array('label' => 'Foursquare ID','read_only' => true, 'disabled'  => true))
-                ->add('foursquareUserPage', null, array('label' => 'Foursquare User Page', 'read_only' => true, 'disabled'  => true))
-                ->add('facebookLikes', null, array('label' => 'Facebook Likes', 'read_only' => true, 'disabled'  => true))
-                ->add('facebookCheckIns', null, array('label' => 'Facebook Checkins', 'read_only' => true, 'disabled'  => true))
-                ->add('foursquareLikes', null, array('label' => 'Foursquare Likes', 'read_only' => true, 'disabled'  => true))
-                ->add('foursquareCheckIns', null, array('label' => 'Foursquare Checkins','read_only' => true, 'disabled'  => true))
-                ->add('foursquareTips', null, array('label' => 'Foursquare Tips', 'read_only' => true, 'disabled'  => true))
-                ->add('permanentlyClosed', null, array('label' => 'Permanently Closed', 'read_only' => true, 'disabled'  => true))
-                ->add('businessFound', null, array('label' => 'Business Found', 'read_only' => true, 'disabled'  => true))
+                ->add('tags', null, array('label'=>'Tags'))
+                ->add('energyLevel', 'entity', array(
+                        'class'    => 'WBBBarBundle:Tag',
+                        'label'     => 'Mood',
+                        'required' => true,
+                        'property' => 'name',
+                        'empty_value' => 'Please choose a mood',
+                        'query_builder' => function ($er) {
+                                return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
+                            }
+                    )
+                )
+                ->add('outDoorSeating', null, array('label'=>'Outdoor Seating'))
+                ->add('happyHour', null, array('label'=>'Happy Hour'))
+                ->add('wifi', null, array('label'=>'Wifi'))
+                ->add('price', null)
+                ->add('creditCard', null)
+                ->add('menu', null)
+                ->add('reservation', null)
+                ->add('parkingType', null, array('label' => 'Parking Type'))
+                ->add('facebookID', null, array('label' => 'Facebook ID'))
+                ->add('facebookUserPage', null, array('label' => 'Facebook User Page'))
+                ->add('twitterName', null, array('label' => 'Twitter Name'))
+                ->add('twitterUserPage', null, array('label' => 'Twitter User Page'))
+                ->add('instagramID', null, array('label' => 'Instagram ID'))
+                ->add('instagramUserPage', null, array('label' => 'Instagram User Page'))
+                ->add('googlePlusUserPage', null, array('label' => 'Google+ User Page'))
+                ->add('foursquareID', null, array('label' => 'Foursquare ID'))
+                ->add('foursquareUserPage', null, array('label' => 'Foursquare User Page'))
+                ->add('facebookLikes', null, array('label' => 'Facebook Likes'))
+                ->add('facebookCheckIns', null, array('label' => 'Facebook Checkins'))
+                ->add('foursquareLikes', null, array('label' => 'Foursquare Likes'))
+                ->add('foursquareCheckIns', null, array('label' => 'Foursquare Checkins'))
+                ->add('foursquareTips', null, array('label' => 'Foursquare Tips'))
+                ->add('permanentlyClosed', null, array('label' => 'Permanently Closed'))
+                ->add('businessFound', null, array('label' => 'Business Found'))
                 ->add('bar', null, array('read_only' => true, 'disabled'  => true))
-                ->add('updatedColumns', null, array('label' => 'Updated Columns', 'read_only' => true, 'disabled'  => true))
-                ->add('overwrittenColumns', null, array('label' => 'Overwritten Columns', 'read_only' => true, 'disabled'  => true))
+                ->add('updatedColumns', null, array('label' => 'Updated Columns'))
+                ->add('overwrittenColumns', null, array('label' => 'Overwritten Columns'))
             ->end()
         ;
     }
