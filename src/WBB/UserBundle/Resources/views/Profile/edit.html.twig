@@ -4,7 +4,7 @@
 
     <div class="full-white">
         <div id="editprofile" class="page wrap margin-bottom-20">
-            <div  class="ui wrap">
+            <div  class="ui {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap">
                 <div class="margin-top-20">
                     <div id="edit-account">
                         <div class="avatar-profil left">

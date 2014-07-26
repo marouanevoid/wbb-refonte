@@ -183,10 +183,10 @@
 
   /* Version mobile */
     .ui.mobile {width: auto; padding: 80px 20px; top: 80px;}
-    .ui.mobile .form-text {height: 60px; border-radius: 2em;}
+    .ui.mobile .form-text {height: 38px; border-radius: 2em;}
     .ui.mobile .block {width: 100%;}
     .ui.mobile .separator {margin: 0 auto;}
-    .ui.mobile .btn {height: 60px; font-size: 28px;}
+    .ui.mobile .btn {height: 60px; font-size: 22px;}
     .ui.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
 
 /* Register1 (Popup) */
@@ -236,7 +236,6 @@
   #register.page .ui.select-wrap {padding-bottom: 30px;}
   #register.page .group-actions {width: 40%;}
   #register.page .group-actions .form-submit {position: relative; left: -10px;}
-
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 26px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
@@ -305,8 +304,7 @@
   #register.page.mobile .group-actions .form-submit {left: 0;}
   #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center;}
   #register.page.mobile .ui .connect-fb {line-height: normal;}
-  #register.page.mobile .btn-create-with-fb {line-height: 45px;}
-
+  #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
@@ -358,17 +356,15 @@
   #editprofile .ui.mobile .group.right {float: none; width: 100%;}
   #editprofile .ui.mobile .title h5 {line-height: 55px;}
   #editprofile .ui.mobile #edit-account label {visibility: visible; width: 100%; text-align: center;}
-  #editprofile .ui.mobile #edit-account .group-form,
-  #editprofile .ui.mobile #edit-account .group-select {padding: 0 10px;}
+  #editprofile .ui.mobile #edit-account .checkbox label {text-align: left;}
+
   #editprofile .ui.mobile #edit-account .form-text {width: 100%; margin: 0;}
   #editprofile .ui.mobile #edit-account .group-actions {float: none; width: auto; margin: 0;}
   #editprofile .ui.mobile #edit-account .form-submit {margin: 0 20px; width: 90%;}
   #editprofile .ui.mobile #date-birthday .select-wrap {margin-right: 9px; width: 90px;}
   #editprofile .ui.mobile #date-birthday .ui-dropdown-container {width: 100%!important;}
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
-  #editprofile #view-account.mobile .ui,
 
-  #view-account .ui.mobile .group.right {/*float: left; margin: 0 0 0 70px;*/}
   #view-account .ui.mobile .btn-editprofile .btn {font-size: 16px;}
   #view-account .ui.mobile .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
   #view-account .ui.mobile .block-top {width: auto;}
@@ -440,7 +436,7 @@
   .bar-guides .sub-header {width: 99%;}
   section.bar-finder .ui-radio.btn-radius.with-icon {text-align: left; padding-left: 2em;}
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
-  .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29;}
+  .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29; display: none;}
   .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;}
   .ui-radio.radio-dark:hover,
   .ui-dropdown-container .ui-dropdown.drop-dark.active,
@@ -545,4 +541,5 @@
     .bar-details .also-appears .h2 {text-align: center;}
     .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
     .sub-header .title h3 {font-size: 16px; line-height: 20px; width: 78%; margin: auto;}
+    #editprofile {padding: 0 10px;}
   }
