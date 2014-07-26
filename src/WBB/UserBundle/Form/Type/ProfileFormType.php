@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace WBB\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,16 +21,7 @@ class ProfileFormType extends BaseType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $constraint = new UserPassword();
-
         $this->buildUserForm($builder, $options);
-
-//        $builder->add('current_password', 'password', array(
-//            'label' => 'form.current_password',
-//            'translation_domain' => 'FOSUserBundle',
-//            'mapped' => false,
-//            'constraints' => $constraint,
-//        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -77,12 +59,6 @@ class ProfileFormType extends BaseType
             ->add('firstname')
             ->add('lastname')
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-//            ->add('plainPassword', 'repeated', array(
-//                'type' => 'password',
-//                'first_options'   => array('attr' => array('placeholder' => 'form.password')),
-//                'second_options'  => array('attr' => array('placeholder' => 'form.password_confirmation')),
-//                'invalid_message' => 'fos_user.password.mismatch',
-//            ))
             ->add('birthdate')
             ->add('country')
             ->add('prefCity1')
@@ -97,6 +73,13 @@ class ProfileFormType extends BaseType
             ->add('prefCocktails1')
             ->add('prefCocktails2')
             ->add('prefCocktails3')
+            ->add('stayInformed')
+            ->add('stayBrandInformed')
+            ->add('avatar', 'sonata_media_type', array(
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'avatar',
+                'required' => false
+            ))
         ;
     }
 }

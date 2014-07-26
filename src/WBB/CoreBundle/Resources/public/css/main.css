@@ -321,7 +321,8 @@
   #editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
   #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.gif") no-repeat 0 0;}
   #editprofile .file-image:hover {cursor: pointer;}
-  #editprofile .file-image input {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
+  #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
+  #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
   #editprofile #edit-account {position: relative;}
   #editprofile #edit-account label {display: block; text-align: right; float: left; width: 200px; line-height: 35px; padding: 0 15px 0 0; font-weight: lighter;}
   #editprofile #edit-account .form-text {float: left; width: 300px;}
