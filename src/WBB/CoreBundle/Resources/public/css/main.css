@@ -120,6 +120,7 @@
       .padding-top-10 {padding-top: 10px!important; display: block;}
       .padding-top-15 {padding-top: 15px!important; display: block;}
       .padding-top-20 {padding-top: 20px!important; display: block;}
+      .padding-top-25 {padding-top: 25px!important; display: block;}
       .padding-top-30 {padding-top: 30px!important; display: block;}
       .padding-top-40 {padding-top: 40px!important; display: block;}
       .padding-top-50 {padding-top: 50px!important; display: block;}
@@ -233,9 +234,9 @@
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 29%;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
-  #register.page .group-action {/*width: 128%;*/}
-  #register.page .group-action .form-submit {/*width: 50%; margin: auto; display: block;*/}
-  #register.page .group-actions {width: 50%;}
+  #register.page .group-actions {width: 40%;}
+  #register.page .group-actions .form-submit {position: relative; left: -10px;}
+
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 26px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
@@ -269,7 +270,7 @@
 /* Register1 (Mobile) */
   #register.mobile {padding: 25px 25px 60px; background-color: #faf3e1;}
   #register.mobile .btn {/*height: 120px; */font-size: 17px;}
-  #register.mobile .ui {width: auto; top: 80px; position: relative;}
+  #register.mobile .ui {width: auto; padding: 0 10px;}
   #register.mobile .ui .title {/*text-transform: none;*/ width: 90%;}
   #register.mobile .ui .subtitle {font-size: 15px; padding: 0 20%;}
   #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); height: 40px; width: 40px; top: -28px; right: -15px;}
@@ -286,19 +287,26 @@
   #register.mobile .ui.close #close .btn {color: #333; /*padding: 20px;*/ display: block; /*width: 55%;*/}
   #register.mobile .ui.close #close .title {width: 100%;}
 /* Register4 (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register4.psd; */
-  #register.page.mobile {padding: 0; width: auto;}
+  #register.page.mobile {padding: 0; width: auto; border: none;}
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
   #register.page.mobile #create-account .form-text {width: 100%; margin: 0 0 10px;}
-  #register.page.mobile #countries .left,
-  #register.page.mobile #countries .ui-dropdown-container {width: 100% !important;}
-  #register.page.mobile #countries label {display: none!important;}
-  #register.page.mobile #date-birthday {margin: 0 auto; width: 108%;}
-  #register.page.mobile #date-birthday .select-wrap {width: 30%;}
-  #register.page.mobile #date-birthday .ui-dropdown-container {width: 100% !important;}
-  #register.page.mobile #create-account label {margin: 20px 0 20px; float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 20px; font-weight: lighter;}
-  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0; width: 77%;}
+  #register.page.mobile .select-two .left,
+  #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
+  #register.page.mobile .select-two label {display: none!important;}
+  #register.page.mobile .date-birthday {margin: 0 auto; width: 104%;}
+  #register.page.mobile .date-birthday .select-wrap {width: 30%; margin-right: 10px;}
+  #register.page.mobile .date-birthday .ui-dropdown-container {width: 100% !important;}
+  #register.page.mobile #create-account label {/*margin: 20px 0 20px;*/ float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 18px; font-weight: lighter;}
+  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0; /*width: 77%*/;}
+  #register.page.mobile .group-form {overflow: visible;}
+  #register.page.mobile .group-actions {width: 100%;}
+  #register.page.mobile .group-actions .form-submit {left: 0;}
+  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center;}
+  #register.page.mobile .ui .connect-fb {line-height: normal;}
+  #register.page.mobile .btn-create-with-fb {line-height: 45px;}
+
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
@@ -478,9 +486,18 @@
     .articles article .img .plus-btn,
     .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
   }
+  
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
   }
+
+  /* Tablets (landscape) ----------- */
+  @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    #register.page {width: 100%;}
+    #register.page .ui {padding-left: 0; padding-right: 0;}
+  }
+
+  /* iPad */
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
     .social-share .fb-share {
       background-image: url("../images/fb@2x.png");

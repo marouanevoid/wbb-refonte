@@ -2,9 +2,9 @@
 
 {% block body %}
     <div class="full-cream">
-        <div id="register" class="page wrap margin-bottom-20">
+        <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap margin-bottom-20">
             <div class="ui wrap">
-                <div class="title text-transform-uppercase margin-top-25 bold">Register</div>
+                <div class="title text-transform-uppercase padding-top-25 bold">Register</div>
                 <div class="margin-top-20">
                     <div id="create-account">
                         <div class="subtitle text-transform-uppercase margin-top-25 bold">Create an account now</div>
@@ -12,7 +12,9 @@
                         <form action="" {{ form_enctype(form) }} method="POST" id="register_form_full">
                             <div class="text-align-left margin-bottom-20">
                                 <div class="group-form margin-top-25">
-                                    <label class="margin-right-20 text-align-right unbold">Username</label>
+                                    {% if not is_mobile() %}
+                                        <label class="margin-right-20 text-align-right unbold">Username</label>
+                                    {% endif %}
                                     {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Username' } }) }}
                                 </div>
                                 <div class="select-two margin-top-10">
@@ -23,23 +25,33 @@
                                 </div>
                                 <div class="clear"></div>
                                 <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
                                     <label class="margin-right-20 text-align-right unbold">Firstname</label>
+                                    {% endif %}
                                     {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Firstname' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
                                     <label class="margin-right-20 text-align-right unbold">Lastname</label>
+                                    {% endif %}
                                     {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Lastname' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
                                     <label class="margin-right-20 text-align-right unbold">Email</label>
+                                    {% endif %}
                                     {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Email' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
                                     <label class="margin-right-20 text-align-right unbold">Password</label>
+                                    {% endif %}
                                     {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Password' } }) }}
                                 </div>
                                 <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
                                     <label class="margin-right-20 text-align-right unbold">Confirm Password</label>
+                                    {% endif %}
                                     {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Confirm Password' } }) }}
                                 </div>
                             </div>
@@ -55,7 +67,7 @@
                                 <div class="select-wrap left last">
                                     {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
-                            </div> <!-- #date-birthday -->
+                            </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 ui-dropdown-list-form">
@@ -63,7 +75,7 @@
                                 <div class="left" style="width: 300px">
                                     {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
-                            </div><!-- #countries -->
+                            </div>
                             <div class="clear"></div>
 
                             <div class="group-form margin-top-10">
