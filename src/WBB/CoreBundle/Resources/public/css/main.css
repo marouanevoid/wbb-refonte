@@ -299,7 +299,7 @@
   #register.page.mobile .date-birthday .select-wrap {width: 30%; margin-right: 10px;}
   #register.page.mobile .date-birthday .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile #create-account label {/*margin: 20px 0 20px;*/ float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 18px; font-weight: lighter;}
-  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 30px 0 0; /*width: 77%*/;}
+  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px 0 0; /*width: 77%*/;}
   #register.page.mobile .group-form {overflow: visible;}
   #register.page.mobile .group-actions {width: 100%;}
   #register.page.mobile .group-actions .form-submit {left: 0;}
