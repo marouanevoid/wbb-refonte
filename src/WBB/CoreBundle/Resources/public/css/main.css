@@ -448,7 +448,6 @@
   .sub-header .title h3 {font-size: 2em; line-height: 30px;}
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
-  .index .ui-slides .scale-with-grid {height: 315px;}
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
