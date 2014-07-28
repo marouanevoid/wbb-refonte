@@ -111,10 +111,23 @@ class SemsoftBarAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        // to remove a single route
         $collection->remove('create');
         $collection->remove('show');
-        // OR remove all route except named ones
-//        $collection->clearExcept(array('list', 'edit'));
+    }
+
+    public function getBatchActions()
+    {
+        // retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+
+        // check user permissions
+        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+            $actions['merge'] = array(
+                'label'            => 'Merge',
+                'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+            );
+        }
+
+        return $actions;
     }
 }

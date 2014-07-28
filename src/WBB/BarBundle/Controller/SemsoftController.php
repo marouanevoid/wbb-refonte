@@ -85,7 +85,7 @@ class SemsoftController extends Controller
 
             $file['file']->move('upload', 'import.csv');
             $file = new \SplFileObject($this->container->getParameter('kernel.root_dir').'/../web/upload/import.csv');
-            $reader = new CsvReader($file, ',');
+            $reader = new CsvReader($file, ';');
 
             $reader->setHeaderRowNumber(0);
             foreach ($reader as $data)
@@ -102,8 +102,10 @@ class SemsoftController extends Controller
                         $newBar = false;
                     }
                 }
+
                 $country = $this->getCountry($data['Country']);
-                if($country && $data['City'] &&($bar || !empty($data['Name']))){
+                if($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))){
+
                     $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
                     $suburb = $this->getSuburb($data['District'], $city);
                     $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
@@ -129,7 +131,7 @@ class SemsoftController extends Controller
                     $ssBar->setReservation($this->setFieldValue('Booking', $data, null, $newBar));
                     $ssBar->setParkingType($this->setFieldValue('ParkingType', $data, null, $newBar));
                     $ssBar->setPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
-                    $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, null, $newBar));
+                    $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, ((strtolower($data['BusinessFound']) == "true")?true:false), $newBar));
                     $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
                     $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));
                     //Public Transport not imported

@@ -375,9 +375,6 @@ class BarRepository extends EntityRepository
     public function getExportQuery()
     {
         $qb = $this->createQueryBuilder($this->getAlias());
-        $qb
-            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
-        ;
 
         return $qb->getQuery();
     }
