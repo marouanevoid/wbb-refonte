@@ -305,6 +305,7 @@
   #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center;}
   #register.page.mobile .ui .connect-fb {line-height: normal;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
+  #register.page.mobile #create-account .form-text-without-label {margin: 0;}
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
@@ -551,4 +552,5 @@
     section.bars .bar-w-pic {min-height: 119px;}
     section.bars .bar-w-pic:first-child {min-height: 239px;}
     section.bar-filter .bar-w-pic {height: 119px;}
+    
   }
