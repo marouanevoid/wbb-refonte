@@ -79,33 +79,93 @@
                             </div><!-- #countries -->
                             <div class="clear"></div>
 
-                            <div class="group-form margin-top-10">
-                                <label>Cities you like to go</label>
-                                {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a city' } }) }}
-                                {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
-                                {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Cities you like to go</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
+                                </div>
                             </div>
+                            <div class="clear"></div>
 
-                            <div class="group-form margin-top-10">
-                                <label>Favorite Bars</label>
-                                {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a bar' } }) }}
-                                {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
-                                {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
+                                </div>
                             </div>
+                            <div class="clear"></div>
 
-                            <div class="group-form margin-top-10">
-                                <label>Drink brands</label>
-                                {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a brand' } }) }}
-                                {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
-                                {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
+                                </div>
                             </div>
+                            <div class="clear"></div>
 
-                            <div class="group-form margin-top-10">
-                                <label>Categories or cocktails</label>
-                                {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a cocktail' } }) }}
-                                {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
-                                {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Favorite Bars</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
+                                </div>
                             </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Drink brands</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Categories or cocktails</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
 
                             <div class="group-form checkbox margin-top-10">
                                 <label class="wrap">{{ form_widget(form.stayInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
