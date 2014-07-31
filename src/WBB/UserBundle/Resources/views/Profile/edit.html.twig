@@ -2,9 +2,9 @@
 
 {% block body %}
     <div class="full-white">
-        <div id="editprofile" class="page wrap margin-bottom-20">
+        <div id="editprofile" class="page {% if is_mobile() and not is_tablet() %}mobile {% endif %}wrap margin-bottom-20">
 
-            <div  class="ui {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap">
+            <div  class="ui wrap">
 
                 <div class="margin-top-20">
                     <div id="edit-account">
@@ -16,7 +16,7 @@
                                 <div class="title text-transform-capitalize unbold">
                                     <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                                 </div>
-                                <div class="subgroup margin-top-10 wrap">
+                                <div class="subgroup margin-top-10 margin-bottom-40 wrap">
                                     {% if user.prefStartCity or user.country %}
                                         <div class="text-transform-capitalize text-align-center">
                                             <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
@@ -26,6 +26,12 @@
                                                 {% if user.country %}
                                                     {{ user.country }}
                                                 {% endif %}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="text-transform-capitalize text-align-center">
+                                            <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                                Not set
                                             </div>
                                         </div>
                                     {% endif %}
@@ -39,26 +45,26 @@
 
                             <div class="clear"></div>
                             <div class="select-two margin-top-10">
-                                <label>Gender</label>
-                                <div class="left" style="width: 300px">
+                                <label class="margin-right-20">Gender</label>
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}{% endif %}">
                                     {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
                             <div class="group-form margin-top-10">
-                                <label>Firstname</label>
+                                <label class="margin-right-20">Firstname</label>
                                 {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
                             </div>
                             <div class="group-form margin-top-10">
-                                <label>Lastname</label>
+                                <label class="margin-right-20">Lastname</label>
                                 {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
                             </div>
                             <div class="group-form margin-top-10">
-                                <label>Email</label>
+                                <label class="margin-right-20">Email</label>
                                 {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
                             </div>
                             <div class="date-birthday text-align-center margin-top-10">
-                                <label>Date of Birth</label>
+                                <label class="margin-right-20">Date of Birth</label>
                                 <div class="select-wrap left">
                                     {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
@@ -68,12 +74,12 @@
                                 <div class="select-wrap left last">
                                     {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
-                            </div> <!-- #date-birthday -->
+                            </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10">
-                                <label>Country</label>
-                                <div class="left" style="width: 300px">
+                                <label class="margin-right-20">Country</label>
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
                             </div><!-- #countries -->
@@ -81,21 +87,21 @@
 
                             <div class="select-two margin-top-10 ui-dropdown-list-form">
                                 <label class="margin-right-20 text-align-right unbold">Cities you like to go</label>
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
                                 </div>
                             </div>
@@ -103,21 +109,21 @@
 
                             <div class="select-two margin-top-10 ui-dropdown-list-form">
                                 <label class="margin-right-20 text-align-right unbold">Favorite Bars</label>
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
                                 </div>
                             </div>
@@ -125,21 +131,21 @@
 
                             <div class="select-two margin-top-10 ui-dropdown-list-form">
                                 <label class="margin-right-20 text-align-right unbold">Drink brands</label>
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
                                 </div>
                             </div>
@@ -147,21 +153,21 @@
 
                             <div class="select-two margin-top-10 ui-dropdown-list-form">
                                 <label class="margin-right-20 text-align-right unbold">Categories or cocktails</label>
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
 
                             <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
-                                <div class="left" style="width: 300px">
+                                <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                     {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
                                 </div>
                             </div>
@@ -173,7 +179,7 @@
                             </div>
 
                             <div class="group-form checkbox margin-top-10">
-                                <label class="wrap">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
+                                <label class="wrap {% if not is_mobile() %}margin-left-40{% endif %}">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
                                     Unsubscribe the brand newsletter</label>
                             </div>
                             {{ form_rest(form) }}
