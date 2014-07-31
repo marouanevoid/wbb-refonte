@@ -221,13 +221,17 @@
                     </td>
                 </tr>
             </table>
-            <div class="wrap-share" style="display:none">
+            <div class="wrap-share {% if is_mobile() and not is_tablet() %}mobile{% endif %}" style="display:none">
                 <div class="social-share radius-max">
                     <div class="share-label left bold">SHARE</div>
                     <ul>
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
-                        <li class="left"><a href="#0" class="email-share">Email</a></li>
+                        {% if is_mobile() and not is_tablet() %}
+                            <li class="left"><a href="#0" class="sms-share">SMS</a></li>
+                        {% else %}
+                            <li class="left"><a href="#0" class="email-share">Email</a></li>
+                        {% endif %}
                     </ul>
                     <div class="clear"></div>
                 </div>

@@ -133,7 +133,8 @@
       .padding-bottom-20 {padding-bottom: 20px!important; display: block;}
       .padding-bottom-30 {padding-bottom: 30px!important; display: block;}
       .padding-bottom-40 {padding-bottom: 40px!important; display: block;}
-      .padding-bottom-50 {padding-bottom: 40px!important; display: block;}
+      .padding-bottom-50 {padding-bottom: 50px!important; display: block;}
+      .padding-bottom-80 {padding-bottom: 80px!important; display: block;}
   /* Typographs */
     .text-align-center {text-align: center;}
     .text-align-left {text-align: left;}
@@ -269,17 +270,22 @@
 /* Register1 (Mobile) */
   #register.mobile {padding: 25px 25px 60px; background-color: #faf3e1;}
   #register.mobile .btn {/*height: 120px; */font-size: 17px;}
-  #register.mobile .ui {width: auto; padding: 0 10px;}
+  #register.mobile .ui {width: auto; padding: 0 10px; position: relative;}
   #register.mobile .ui .title {/*text-transform: none;*/ width: 90%;}
   #register.mobile .ui .subtitle {font-size: 15px; padding: 0 20%;}
-  #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); height: 40px; width: 40px; top: -28px; right: -15px;}
+  #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); background-size: 40px 40px; top: -45px; right: 20px;}
   #register.mobile form .form-text {height: 38px; font-size: 15px; border-radius: 2em;}
   #register.mobile form .btn-facebook {background-image: url("../images/UI/icon_fb.jpg"); background-position: 25px center; line-height: 64px;}
-  #register.mobile .ui form .btn-facebook {font-size: 13px; border-radius: 4em; letter-spacing: -1px; }
+  #register.mobile .ui form .btn-facebook {font-size: 16px; border-radius: 4em; letter-spacing: -1px; }
   #register.mobile form .btn {border-radius: 2em;}
   #register.mobile #account {text-transform: none; width: 100%; padding: 0; border: none;}
   #register.mobile #create-account {width: 100%; padding: 40px 0;}
   #register.mobile #create-account a {font-size: 17px; line-height: 64px; border-radius: 2em;}
+  /* POPUP */
+    #register.mobile.popup {padding: 25px 0 0; position: absolute; top: 80px; height: auto; width: 100%; left: 0px; margin: 0;}
+    #register.mobile.popup .subtitle {width: 210px; margin: auto; font-size: 22px;}
+    #register.mobile.popup #create-account a {width: 300px;}
+
 /* Register2 Close (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register2_Close.psd; */
   #register.mobile .ui.close {padding: 0;}
   #register.mobile .ui.close #close {/*margin: 15% 0 0;*/ position: relative;   top: 50px;}
@@ -302,9 +308,10 @@
   #register.page.mobile .group-form {overflow: visible;}
   #register.page.mobile .group-actions {width: 100%;}
   #register.page.mobile .group-actions .form-submit {left: 0;}
-  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center;}
+  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center; text-indent: 55px;}
   #register.page.mobile .ui .connect-fb {line-height: normal;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
+  #register.page.mobile #create-account .form-text-without-label {margin: 0;}
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; margin: 0 0 20px;}
@@ -401,6 +408,9 @@
   .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
+  /* Mobile */
+    .wrap-share.mobile {}
+    .wrap-share .social-share li .sms-share {background-image: url("../images/icon_sms-mobile.jpg");}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
@@ -449,7 +459,8 @@
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
-
+  aside.mobile-menu table tr.signin td .logged .actions {position: relative; left: -30px; width: 200px;}
+  
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
@@ -551,4 +562,5 @@
     section.bars .bar-w-pic {min-height: 119px;}
     section.bars .bar-w-pic:first-child {min-height: 239px;}
     section.bar-filter .bar-w-pic {height: 119px;}
+    
   }
