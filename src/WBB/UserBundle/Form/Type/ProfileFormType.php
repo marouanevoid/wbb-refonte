@@ -6,6 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
+use WBB\BarBundle\Entity\Tag;
 
 class ProfileFormType extends BaseType
 {
@@ -61,18 +62,72 @@ class ProfileFormType extends BaseType
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
             ->add('birthdate')
             ->add('country')
-            ->add('prefCity1')
-            ->add('prefCity2')
-            ->add('prefCity3')
-            ->add('prefBar1')
-            ->add('prefBar2')
-            ->add('prefBar3')
-            ->add('prefDrinkBrand1')
-            ->add('prefDrinkBrand2')
-            ->add('prefDrinkBrand3')
-            ->add('prefCocktails1')
-            ->add('prefCocktails2')
-            ->add('prefCocktails3')
+            ->add('prefCity1', null, array('empty_value' => 'Choose a city'))
+            ->add('prefCity2', null, array('empty_value' => 'Choose a city'))
+            ->add('prefCity3', null, array('empty_value' => 'Choose a city'))
+            ->add('prefBar1', null, array('empty_value' => 'Choose a bar'))
+            ->add('prefBar2', null, array('empty_value' => 'Choose a bar'))
+            ->add('prefBar3', null, array('empty_value' => 'Choose a bar'))
+            ->add('prefDrinkBrand1', 'entity', array(
+                    'class'    => 'WBBBarBundle:Tag',
+                    'required' => false,
+                    'property' => 'name',
+                    'empty_value' => 'Choose a brand',
+                    'query_builder' => function ($er) {
+                            return $er->findByType(Tag::WBB_TAG_TYPE_DRINK_BRANDS, true);
+                        }
+                )
+            )
+            ->add('prefDrinkBrand2', 'entity', array(
+                    'class'    => 'WBBBarBundle:Tag',
+                    'required' => false,
+                    'property' => 'name',
+                    'empty_value' => 'Choose a brand',
+                    'query_builder' => function ($er) {
+                            return $er->findByType(Tag::WBB_TAG_TYPE_DRINK_BRANDS, true);
+                        }
+                )
+            )
+            ->add('prefDrinkBrand3', 'entity', array(
+                    'class'    => 'WBBBarBundle:Tag',
+                    'required' => false,
+                    'property' => 'name',
+                    'empty_value' => 'Choose a brand',
+                    'query_builder' => function ($er) {
+                            return $er->findByType(Tag::WBB_TAG_TYPE_DRINK_BRANDS, true);
+                        }
+                )
+            )
+            ->add('prefCocktails1', 'entity', array(
+                    'class'    => 'WBBBarBundle:Tag',
+                    'required' => false,
+                    'property' => 'name',
+                    'empty_value' => 'Choose a cocktail',
+                    'query_builder' => function ($er) {
+                            return $er->findByType(Tag::WBB_TAG_TYPE_BEST_COCKTAILS, true);
+                        }
+                )
+            )
+            ->add('prefCocktails2', 'entity', array(
+                    'class'    => 'WBBBarBundle:Tag',
+                    'required' => false,
+                    'property' => 'name',
+                    'empty_value' => 'Choose a cocktail',
+                    'query_builder' => function ($er) {
+                            return $er->findByType(Tag::WBB_TAG_TYPE_BEST_COCKTAILS, true);
+                        }
+                )
+            )
+            ->add('prefCocktails3', 'entity', array(
+                    'class'    => 'WBBBarBundle:Tag',
+                    'required' => false,
+                    'property' => 'name',
+                    'empty_value' => 'Choose a cocktail',
+                    'query_builder' => function ($er) {
+                            return $er->findByType(Tag::WBB_TAG_TYPE_BEST_COCKTAILS, true);
+                        }
+                )
+            )
             ->add('stayInformed')
             ->add('stayBrandInformed')
             ->add('avatar', 'sonata_media_type', array(
