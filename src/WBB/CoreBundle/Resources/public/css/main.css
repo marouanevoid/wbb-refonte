@@ -169,7 +169,7 @@
 
 /* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
   .ui {background-color: #faf3e1; position: relative; /*top: 145px;*/}
-  .ui a {color: #818a8c; font-size: 17px; text-decoration: underline;}
+  .ui p a {color: #818a8c; font-size: 17px; text-decoration: underline;}
   .ui a.ui-radio {color: #b3955f; text-decoration: none;}
   .ui a.ui-radio.active,
   .ui a.ui-radio:hover {background: #b3955f !important; color: #faf3e1;}
