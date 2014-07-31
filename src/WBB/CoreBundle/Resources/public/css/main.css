@@ -204,7 +204,7 @@
   .ui.register .date-birthday .select-wrap.last {margin-right: 0;}
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
-  .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 20px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
+  .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 15px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
 
   /* Message's */
@@ -229,14 +229,15 @@
   #register.page .ui {width: 765px;}
   #register.page .title {width: 100%;}
   #register.page #create-account {width: 100%; padding: 0;}
-  #register.page #create-account label {display: block; float: left; width: 200px; line-height: 35px;}
+  #register.page #create-account label {display: block; float: left; width: 220px; line-height: 35px;}
   #register.page #create-account .form-text {float: left; width: 300px;}
-  #register.page #message {width: 53%; margin: 0 50px 0 0;}
+  #register.page #message {width: 50%; /*margin: 0 50px 0 0;*/ padding: 10px;}
+  #register.page #message ul {float: left; margin-top: 10px;}
   #register.page #date-birthday label {font-size: 13px;}
-  #register.page #create-account .form-text-without-label {margin: 0 0 0 29%;}
+  #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
   #register.page .group-actions {width: 40%;}
-  #register.page .group-actions .form-submit {position: relative; left: -10px;}
+
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
   #bar-finder.mobile .title {color: #b3955f; font-size: 26px; border-bottom: 1px solid #b3955f; letter-spacing: -1px; line-height: 40px; padding: 20px 0;}
@@ -284,7 +285,11 @@
   /* POPUP */
     #register.mobile.popup {padding: 25px 0 0; position: absolute; top: 80px; height: auto; width: 100%; left: 0px; margin: 0;}
     #register.mobile.popup .subtitle {width: 210px; margin: auto; font-size: 22px;}
-    #register.mobile.popup #create-account a {width: 300px;}
+    #register.mobile.popup #create-account a.btn-create-account {width: 300px;}
+    #register.mobile.popup a.connect-fb {text-indent: 7%;}
+    #register.mobile.popup .date-birthday {width: 380px; overflow: hidden;}
+    #register.mobile.popup .date-birthday .select-wrap {width: 110px; margin-right: 8px;}
+    #register.mobile.popup .date-birthday .ui-dropdown-container {width: 105px!important;}
 
 /* Register2 Close (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register2_Close.psd; */
   #register.mobile .ui.close {padding: 0;}
@@ -308,7 +313,7 @@
   #register.page.mobile .group-form {overflow: visible;}
   #register.page.mobile .group-actions {width: 100%;}
   #register.page.mobile .group-actions .form-submit {left: 0;}
-  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center; text-indent: 55px;}
+  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center; /*text-indent: 55px;*/}
   #register.page.mobile .ui .connect-fb {line-height: normal;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
@@ -460,7 +465,7 @@
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
   aside.mobile-menu table tr.signin td .logged .actions {position: relative; left: -30px; width: 200px;}
-  
+
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
