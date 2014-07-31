@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use WBB\BarBundle\Entity\Bar;
 
 /**
- * FSAdminController
+ * FeedController
  */
-class FSAdminController extends Controller
+class FeedController extends Controller
 {
     /**
      * findAction
@@ -27,6 +27,24 @@ class FSAdminController extends Controller
             return new JsonResponse(null);
         }else{
             return new JsonResponse($this->get("wbb.{$type}.feed")->find($id, $offset));
+        }
+    }
+
+    /**
+     * findAction
+     *
+     * @param $type
+     * @param $hash
+     *
+     * @return JsonResponse
+     */
+    public function findHashAction($type, $hash)
+    {
+
+        if(!$hash || $hash === ''){
+            return new JsonResponse(null);
+        }else{
+            return new JsonResponse($this->get("wbb.{$type}.feed")->findByHash($hash));
         }
     }
 
