@@ -33,4 +33,26 @@ class TipRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findUserTips($user, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->where($qb->expr()->eq($this->getAlias().'.status', 1))
+            ->andWhere($qb->expr()->eq($this->getAlias().'.user', $user->getId()))
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($offset > 0){
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 } 

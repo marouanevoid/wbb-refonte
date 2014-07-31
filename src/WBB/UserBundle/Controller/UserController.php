@@ -92,8 +92,8 @@ class UserController extends Controller
             }
         }else{
 
-            $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit);
-            $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0);
+            $response = $this->container->get('tip.repository')->findUserTips($user, $offset ,$limit);
+            $all = $this->container->get('tip.repository')->findUserTips($user, $offset, 0);
 
             $html = $this->renderView('WBBUserBundle:Profile/filters:tip.html.twig', array(
                 'tips'    => $response,
