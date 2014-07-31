@@ -402,6 +402,9 @@
   .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
+  /* Mobile */
+    .wrap-share.mobile {}
+    .wrap-share .social-share li .sms-share {background-image: url("../images/icon_sms-mobile.jpg");}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
