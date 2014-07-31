@@ -1,6 +1,33 @@
 {% extends "::base.html.twig" %}
-{% block meta %}<meta name="description" content="{{ bar.seoDescription }}" />{% endblock %}
+
 {% block title %}{{ bar.name }} | World Best Bars{% endblock %}
+{% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+{% block meta %}
+    <meta name="description" content="{{ bar.seoDescription|slice(0, 150) }}" />
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@wbb">
+    <meta name="twitter:title" content="{{ bar.name }} | World Best Bars">
+    <meta name="twitter:description" content="{{ bar.seoDescription|slice(0, 150) }}">
+    <meta name="twitter:creator" content="@wbb">
+    <meta property="twitter:url" content="{{ currentPath| bitly }}" />
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="{{ bar.name }} | World Best Bars" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ currentPath| bitly }}" />
+    <meta property="og:description" content="{{ bar.seoDescription|slice(0, 200) }}" />
+    <meta property="og:site_name" content="World Best Bars" />
+    <meta property="fb:admins" content="149071961796732" />
+
+    {% for m in bar.medias|slice(0,1) %}
+        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}">
+        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}" />
+    {% endfor %}
+
+{% endblock %}
+
 
 {% block javascripts %}
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -16,6 +43,7 @@
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMoreTips.wbb.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.nicescroll.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/modules/bar-details.wbb.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbbar/js/social-share.js') }}"></script>
 
     <script type="text/javascript">
         /**
@@ -237,11 +265,17 @@
                 </div>
             </div>
             <script type="text/javascript">
-//            $(document).ready(function(){
-//                $("#share").hover(function() {
-//                    $(".wrap-share").fadeIn("slow");
-//                });
-//            })
+                $(document).ready(function(){
+                    $("#share").hover(function() {
+                        $(".wrap-share").fadeIn("slow");
+                    });
+
+                    $(".wrap-share").hover(function() {
+                        $(".wrap-share").fadeIn("slow");
+                    }, function() {
+                        $(".wrap-share").fadeOut("slow");
+                    });
+                })
             </script>
         </section>
     </div>

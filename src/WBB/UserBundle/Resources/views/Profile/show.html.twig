@@ -61,19 +61,18 @@
                                 <div class="sort-by six columns">
                                     <label class="sort left text-transform-uppercase unbold">Sort by :</label>
                                     <div class="four columns">
-                                        <select class="ui-dropdown light" name="criteria" id="criteria">
-                                            <option value="popularity" data-type="criteria">Date added</option>
-                                            <option value="date" data-type="criteria">Date</option>
-                                            <option value="distance" data-type="criteria">Distance</option>
+                                        <select class="ui-dropdown light" name="criteria" id="criteria-bar">
+                                            <option value="date" data-type="criteria" selected="selected">Date</option>
                                             <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                            <option value="city" data-type="criteria">City</option>
                                         </select>
                                     </div>
                                 </div> <!-- .sort-by -->
 
                                 <div class="filter-view">
                                     <div class="right">
-                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                        <input type="radio" name="bars-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                        <input type="radio" name="bars-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
                                     </div>
                                 </div> <!-- .filter-view -->
                             </div> <!-- .margin-top-20 -->
@@ -83,29 +82,39 @@
                         <div class="margin-top-40 list-bars container">
                             {# AJAX LOADING #}
                         </div>
+
+                        <!-- Button See more Bars -->
+                        <div class="container">
+                            <div class="more-bars force-load load-container">
+                                <div class="load-target"></div>
+                                <div class="twelve columns align-center m-margin load-more-container">
+                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div><!-- #tab-bars -->
                     <div class="clear"></div>
 
-                    <div id="tab-bestof"  class="tab"style="display:none">
+                    <div id="tab-bestof"  class="bar-filter tab"style="display:none">
                         <!-- Filters -->
                         <div class="container">
                             <div class="margin-top-20">
                                 <div class="sort-by six columns">
                                     <label class="sort left text-transform-uppercase unbold">Sort by :</label>
                                     <div class="four columns">
-                                        <select class="ui-dropdown light" name="criteria" id="criteria">
-                                            <option value="popularity" data-type="criteria">Date added</option>
-                                            <option value="date" data-type="criteria">Date</option>
-                                            <option value="distance" data-type="criteria">Distance</option>
+                                        <select class="ui-dropdown light" name="criteria" id="criteria-bestof">
+                                            <option value="date" data-type="criteria" selected="selected">Date</option>
                                             <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                            <option value="city" data-type="criteria">City</option>
                                         </select>
                                     </div>
                                 </div> <!-- .sort-by -->
 
                                 <div class="filter-view">
                                     <div class="right">
-                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                        <input type="radio" name="bestof-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                        <input type="radio" name="bestof-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
                                     </div>
                                 </div> <!-- .filter-view -->
                             </div> <!-- .margin-top-20 -->
@@ -115,22 +124,34 @@
                         <div class="margin-top-40 list-bestof container">
                             {# AJAX LOADING #}
                         </div>
-                    </div><!-- #tab-bestof -->
-                    <div class="clear"></div>
-
-                    <div id="tab-tips"  class="tab"style="display:none">
-                        <!-- List of Tips -->
-                        <ul class="list-tips padding-top-40 container">
-
-                        </ul>
-                        <div class="clear"></div>
 
                         <!-- Button See more Bars -->
                         <div class="container">
-                            <div class="bars-w-pic force-load load-container">
+                            <div class="more-bestofs force-load load-container">
                                 <div class="load-target"></div>
                                 <div class="twelve columns align-center m-margin load-more-container">
                                     <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- #tab-bestof -->
+                    <div class="clear"></div>
+
+                    <div id="tab-tips" class="tab"style="display:none">
+                        <div class="full-cream">
+                            <!-- List of Tips -->
+                            <ul class="list-tips padding-top-40 container">
+
+                            </ul>
+                            <div class="clear"></div>
+
+                            <!-- Button See more Bars -->
+                            <div class="container">
+                                <div class="more-tips force-load load-container">
+                                    <div class="load-target"></div>
+                                    <div class="twelve columns align-center m-margin load-more-container">
+                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
