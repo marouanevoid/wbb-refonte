@@ -202,7 +202,6 @@
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
   .ui.register #create-account .form-text {text-align: left; line-height: 40px;}
   .ui.register .date-birthday label {color: #818a8c; font-size: 17px;}
-  .ui.register .date-birthday .select-wrap.last {margin-right: 0;}
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
   .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 15px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
@@ -284,13 +283,15 @@
   #register.mobile #create-account {width: 100%; padding: 40px 0;}
   #register.mobile #create-account a {font-size: 17px; line-height: 64px; border-radius: 2em;}
   /* POPUP */
-    #register.mobile.popup {padding: 25px 0 0; position: absolute; top: 80px; height: auto; width: 100%; left: 0px; margin: 0;}
+    #register.mobile.popup {padding: 25px 0 0; position: absolute; top: 80px; height: auto; width: 100%; left: 0px; margin: 0; overflow: hidden;}
     #register.mobile.popup .subtitle {width: 210px; margin: auto; font-size: 22px;}
     #register.mobile.popup #create-account a.btn-create-account {width: 300px;}
     #register.mobile.popup a.connect-fb {text-indent: 7%;}
-    #register.mobile.popup .date-birthday {width: 380px; overflow: hidden;}
-    #register.mobile.popup .date-birthday .select-wrap {width: 110px; margin-right: 8px;}
-    #register.mobile.popup .date-birthday .ui-dropdown-container {width: 105px!important;}
+    #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
+    #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
+    #register.mobile.popup .date-birthday .ui-dropdown-container {width: 95px!important;}
+    #register.mobile.popup .date-birthday .select-wrap.last {margin-right: 0;}
+    #register.mobile.popup #create-account .btn-create-with-fb {line-height: 45px;}
 
 /* Register2 Close (Mobile) - PSDN : PSDs/bar_finder/Mobile/Register2_Close.psd; */
   #register.mobile .ui.close {padding: 0;}
@@ -327,7 +328,7 @@
   #editprofile .title h5 {color: #333; font-size: 30px; font-family: "Myriad Pro", sans-serif;}
   #editprofile .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
   #editprofile .group.right {width: 410px;}
-  #editprofile .subgroup.wrap {width: 211 px;}
+  #editprofile .subgroup.wrap {width: 211px;}
   #editprofile .avatar-profil {position: absolute;}
   #editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
   #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.gif") no-repeat 0 0;}
@@ -350,6 +351,8 @@
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
   #view-account .filter-view a {font-size: 16px;}
   #view-account .filter-view a.ui-radio {margin-left: 0.5em;}
+  #view-account .ui .container {width: 100%!important; min-height: 100%;}
+  .bar-filter .container .three.columns {width: 24.2%; margin-left: 0.4%; margin-right: 0.4%; margin-top: 0.8% !important;}
 
   .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
   .ui.tips {width: 100% !important; }
@@ -388,7 +391,6 @@
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
-  #editprofile.mobile #view-account .ui .container {width: 100%!important;}
   #editprofile.mobile #view-account .ui .filter-view a.ui-radio {color: transparent;}
   #editprofile.mobile #view-account .ui .filter-view a:nth-child(2) {margin-left: 2px;}
   #editprofile.mobile #view-account .ui .filter-profil {width: auto; padding: 0 10px;}
@@ -474,7 +476,7 @@
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
-  aside.mobile-menu table tr.signin td .logged .actions {position: relative; left: -30px; width: 200px;}
+  aside.mobile-menu table tr.signin td .logged .actions {position: absolute; left: 0; width: 200px;}
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -504,19 +506,9 @@
   .ie9 section.bar-finder tr:nth-child(2) td:nth-child(8) .ui-radio.btn-radius.with-icon {margin-right: 20px;}
   section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
-/* Smartphones (portrait) ----------- */
-  @media only screen and (max-width : 320px) {
-    #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
-    .articles article .img .plus-btn,
-    .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
-  }
-/* Large smartphones (Exemples: note 2, 3) */
-  @media only screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
-    section.bar-filter .bar-w-pic {/*height: 219px;*/}
-  }
-
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
+    section.bar-filter .bar-w-pic {height: 119px;}
   }
 
   /* Tablets (landscape) ----------- */
@@ -581,6 +573,15 @@
     .sub-header .title h3 {font-size: 16px; line-height: 20px; width: 78%; margin: auto;}
     section.bars .bar-w-pic {min-height: 119px;}
     section.bars .bar-w-pic:first-child {min-height: 239px;}
+    section.bar-filter .bar-w-pic {height: 210px;}
+    .min-height {min-height: 100%;}
+    #editprofile #edit-account {padding: 0 10px;}
+  }
+
+/* Smartphones (portrait) ----------- */
+  @media only screen and (max-width : 320px) {
+    #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
+    .articles article .img .plus-btn,
+    .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
     section.bar-filter .bar-w-pic {height: 119px;}
-    
   }

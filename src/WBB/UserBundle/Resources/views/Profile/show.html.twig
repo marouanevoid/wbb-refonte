@@ -15,7 +15,7 @@
                             <div class="title text-transform-capitalize unbold">
                                 <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                             </div>
-                            <div class="subgroup margin-top-10 wrap">
+                            <div class="subgroup wrap {% if not is_mobile() and is_tablet() %}margin-top-10{% endif %}">
                                 {% if user.prefStartCity or user.country %}
                                     <div class="text-transform-capitalize text-align-center">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
@@ -46,7 +46,7 @@
 
                     <!-- Filter -->
                     <div class="filter-profil padding-bottom-20 wrap">
-                        <div class="{% if is_mobile() and not is_tablet() %}margin-top-40{% else %}margin-top-80{% endif %}">
+                        <div class="{% if is_mobile() and not is_tablet() %}margin-top-20{% else %}margin-top-80{% endif %}">
                             <div class="disableClick"></div>
                             <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
                             <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
@@ -77,7 +77,7 @@
 
                                     <div class="filter-view">
                                         <div class="right">
-                                            <div class="margin-right-10">
+                                            <div class="{% if is_mobile() %}margin-right-10{% endif %}">
                                                 <input type="radio" name="bars-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
                                                 <input type="radio" name="bars-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
                                             </div>
@@ -87,19 +87,21 @@
                             </div> <!-- .container -->
 
                             <!-- List of Bars -->
-                            <div class="margin-top-20 list-bars container">
-                                {# AJAX LOADING #}
-                            </div>
+                            <section class="bar-filter">
+                                <div class="margin-top-20 list-bars container">
+                                    {# AJAX LOADING #}
+                                </div>
 
-                            <!-- Button See more Bars -->
-                            <div class="container">
-                                <div class="more-bars force-load load-container">
-                                    <div class="load-target"></div>
-                                    <div class="twelve columns align-center m-margin load-more-container">
-                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                <!-- Button See more Bars -->
+                                <div class="container">
+                                    <div class="more-bars force-load load-container">
+                                        <div class="load-target"></div>
+                                        <div class="twelve columns align-center m-margin load-more-container">
+                                            <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                             </section>
 
                         </div><!-- #tab-bars -->
                         <div class="clear"></div>
@@ -122,8 +124,10 @@
 
                                     <div class="filter-view">
                                         <div class="right">
-                                            <input type="radio" name="bestof-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                            <input type="radio" name="bestof-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                            <div class="{% if is_mobile() %}margin-right-10{% endif %}">
+                                                <input type="radio" name="bestof-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                                <input type="radio" name="bestof-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                            </div>
                                         </div>
                                     </div> <!-- .filter-view -->
                                 </div> <!-- .margin-top-20 -->
