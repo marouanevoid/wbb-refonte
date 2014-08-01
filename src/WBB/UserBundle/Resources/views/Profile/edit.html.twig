@@ -221,9 +221,9 @@
                 <div class="clear"></div>
             </div> <!-- #UI -->
         </div> <!-- #editprofile -->
-        <div id="banner-bottom" class="margin-bottom-20 text-align-center">
-            <a href="#"><img src="images/UI/banner.jpg" align="center"></a>
-        </div> <!--  -->
+        {% block footerAd %}
+            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'UP_728x90' })) }}
+        {% endblock %}
     </div>
 
 {% endblock %}

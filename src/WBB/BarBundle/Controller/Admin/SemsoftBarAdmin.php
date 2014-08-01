@@ -45,7 +45,7 @@ class SemsoftBarAdmin extends Admin
                     )
                 )
                 ->add('tags', null, array(
-                        'label'=>'Tags',
+                        'label' => 'Tags',
                         'required' => false
                     )
                 )
@@ -133,5 +133,31 @@ class SemsoftBarAdmin extends Admin
         }
 
         return $actions;
+    }
+
+    public function preUpdate($object)
+    {
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                if($tag->getTag() && $tag->getTag()->getName()){
+                    $tag->setSemsoftBar($object);
+                }else{
+                    $object->removeTag($tag);
+                }
+            }
+        }
+    }
+
+    public function postUpdate($object)
+    {
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                if($tag->getTag() && $tag->getTag()->getName()){
+                    $tag->setSemsoftBar($object);
+                }else{
+                    $object->removeTag($tag);
+                }
+            }
+        }
     }
 }

@@ -140,7 +140,7 @@ class FavoriteController extends Controller
             ));
         }
 
-        $bestOf->removeUser($user);
+        $bestOf->removeUsersFavorite($user);
         $user->removeFavoriteBestOf($bestOf);
 
         $em->persist($bestOf);

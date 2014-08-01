@@ -313,13 +313,13 @@ class SemsoftBar
     private $energyLevel;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"persist", "remove"} , orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"openingDay" = "ASC"})
      */
     private $openings;

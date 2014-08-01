@@ -94,7 +94,6 @@ class UserController extends Controller
 
             $response = $this->container->get('tip.repository')->findUserTips($user, $offset ,$limit);
             $all = $this->container->get('tip.repository')->findUserTips($user, $offset, 0);
-
             $html = $this->renderView('WBBUserBundle:Profile/filters:tip.html.twig', array(
                 'tips'    => $response,
                 'user'    => $user,
@@ -105,7 +104,7 @@ class UserController extends Controller
 
         $nbResults = count($response);
         $nbResultsRemaining = count($all) - $nbResults;
-
+        
         return new JsonResponse(
             array(
                 'htmldata'   => $html,

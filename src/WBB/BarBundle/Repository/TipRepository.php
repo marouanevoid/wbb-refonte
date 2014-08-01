@@ -40,7 +40,6 @@ class TipRepository extends EntityRepository
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.status', 1))
             ->andWhere($qb->expr()->eq($this->getAlias().'.user', $user->getId()))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
         ;
