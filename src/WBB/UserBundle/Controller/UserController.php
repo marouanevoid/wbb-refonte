@@ -49,7 +49,7 @@ class UserController extends Controller
             }
 
             if($display=="grid"){
-                $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
                         'limit'  => $limit,
@@ -57,7 +57,7 @@ class UserController extends Controller
                     )
                 );
             }else{
-                $html = $this->renderView('WBBBarBundle:BarGuide:filters\barsList.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
                     'limit'  => $limit,
@@ -78,13 +78,13 @@ class UserController extends Controller
                 $all = $this->container->get('bestof.repository')->findLatestBestofs(null, 0, $offset, false, $user);
             }
             if($display=="grid"){
-                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile/filters:bestofs.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
                 ));
             }else{
-                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofsList.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile/filters:bestofsList.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit

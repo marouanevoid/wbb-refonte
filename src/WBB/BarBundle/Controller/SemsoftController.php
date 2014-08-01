@@ -92,7 +92,6 @@ class SemsoftController extends Controller
             {
                 if(!isset($data['Id'])){
                     $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Errors during import : File not valid !');
-
                     return new RedirectResponse($this->get('router')->generate('admin_wbb_bar_semsoft_semsoftbar_list'));
                 }
 
