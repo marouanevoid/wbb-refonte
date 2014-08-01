@@ -384,7 +384,7 @@
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
 
   #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
-  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 130px;}
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
@@ -393,8 +393,14 @@
   #editprofile.mobile #view-account .ui .filter-view .right {margin: 0 20px 0 0;}
   #editprofile.mobile #view-account .ui .filter-view a:nth-child(2) {margin-left: 2px;}
   #editprofile.mobile #view-account .ui .filter-profil {width: 285px;}
+  #editprofile.mobile #view-account .ui .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
+  #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
+  #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 75px!important;}
+
+  /*
   #editprofile.mobile #view-account .ui .list-bars .col {margin: 0;}
   #editprofile.mobile #view-account .ui .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
+  */
 
 /* Page standard */
   #page-standard {width: 770px;}
