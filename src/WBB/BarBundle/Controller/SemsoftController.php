@@ -120,13 +120,14 @@ class SemsoftController extends Controller
                 }
 
                 $country = $this->getCountry($data['Country']);
-                if($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))){
+//                if($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))){
+                if(($bar && (!empty($data['Updated Columns']) || (!empty($data['Overwritten Columns'])))) || !empty($data['Name'])){
 
                     $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
                     $suburb = $this->getSuburb($data['District'], $city);
-                    $ssBar->setCity($this->setFieldValue('City', $data, $city, $newBar));
-                    $ssBar->setSuburb($this->setFieldValue('District', $data, $suburb, $newBar));
-                    $ssBar->setCountry($this->setFieldValue('Country', $data, $country, $newBar));
+                    $ssBar->setCity(($city)?$city:null);
+                    $ssBar->setSuburb(($suburb)?$suburb:null);
+                    $ssBar->setCountry(($country)?$country:null);
                     $ssBar->setName($this->setFieldValue('Name', $data, null, $newBar));
                     $ssBar->setCounty($this->setFieldValue('County', $data, null, $newBar));
                     $ssBar->setPostalCode($this->setFieldValue('PostalCode', $data, null, $newBar));
@@ -327,7 +328,7 @@ class SemsoftController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, $country);
+        $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
 
         if(!$city){
             $city = new City();
