@@ -42,11 +42,12 @@
   .bold {font-weight: bold;}
   .unbold {font-weight: lighter;}
   .wrap {margin-left: auto; margin-right: auto;}
+  .min-height {min-height: 500px;}
 
   /* USER INTERFACE */
     .ui form label {font-size: 17px;}
     .ui .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
-    .ui .load-more   {text-decoration: none;}
+    .ui .load-more {text-decoration: none;}
     .ui .load-more:hover {color: #faf3e1;}
     .ui.mobile.container {width: 100%!important;}
 
@@ -183,7 +184,7 @@
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
 
   /* Version mobile */
-    .ui.mobile {width: auto; padding: 80px 20px; top: 80px;}
+    .ui.mobile {width: auto; /*padding: 80px 20px;*/ top: 80px;} /* Padding 0 for Userprofile  */
     .ui.mobile .form-text {height: 38px; border-radius: 2em;}
     .ui.mobile .block {width: 100%;}
     .ui.mobile .separator {margin: 0 auto;}
@@ -382,18 +383,18 @@
   #editprofile.mobile .ui #edit-account .form-text-without-label {margin: 0;}
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
 
-  #view-account .ui.mobile .btn-editprofile .btn {font-size: 16px;}
-  #view-account .ui.mobile .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
-  #view-account .ui.mobile .block-top {width: auto;}
-  #view-account .ui.mobile .sort-by label {display: none;}
-  #view-account .ui.mobile .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
-  #view-account .ui.mobile .container {width: 100%!important;}
-  #view-account .ui.mobile .filter-view a.ui-radio {color: transparent;}
-  #view-account .ui.mobile .filter-view .right {margin: 0 20px 0 0;}
-  #view-account .ui.mobile .filter-view a:nth-child(2) {margin-left: 2px;}
-  #view-account .ui.mobile .filter-profil {width: 285px;}
-  #view-account .ui.mobile .list-bars .col {margin: 0;}
-  #view-account .ui.mobile .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
+  #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
+  #editprofile.mobile #view-account .ui .block-top {width: auto;}
+  #editprofile.mobile #view-account .ui .sort-by label {display: none;}
+  #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
+  #editprofile.mobile #view-account .ui .container {width: 100%!important;}
+  #editprofile.mobile #view-account .ui .filter-view a.ui-radio {color: transparent;}
+  #editprofile.mobile #view-account .ui .filter-view .right {margin: 0 20px 0 0;}
+  #editprofile.mobile #view-account .ui .filter-view a:nth-child(2) {margin-left: 2px;}
+  #editprofile.mobile #view-account .ui .filter-profil {width: 285px;}
+  #editprofile.mobile #view-account .ui .list-bars .col {margin: 0;}
+  #editprofile.mobile #view-account .ui .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
 
 /* Page standard */
   #page-standard {width: 770px;}
@@ -533,6 +534,12 @@
       background-image: url("../images/email@2x.png");
       background-size: 90px 40px;
     }
+  }
+  
+  /* Portrait tablet to landscape and desktop */  
+  @media (min-width: 768px) and (max-width: 979px) {
+    #view-account .filter-profil {width: 590px;}
+    #view-account .filter-profil a.ui-radio {width: 140px;}
   }
 
 /* TEMPS STYLE */

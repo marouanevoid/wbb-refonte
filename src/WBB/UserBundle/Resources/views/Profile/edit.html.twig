@@ -65,14 +65,16 @@
                             </div>
                             <div class="date-birthday text-align-center margin-top-10">
                                 <label class="margin-right-20">Date of Birth</label>
-                                <div class="select-wrap left">
-                                    {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
-                                </div>
-                                <div class="select-wrap left">
-                                    {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
-                                </div>
-                                <div class="select-wrap left last">
-                                    {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                <div{% if is_mobile() and not is_tablet() %} style="width: 380px"{% endif %}>
+                                    <div class="select-wrap left">
+                                        {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                    </div>
+                                    <div class="select-wrap left">
+                                        {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
+                                    </div>
+                                    <div class="select-wrap left last">
+                                        {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="clear"></div>
