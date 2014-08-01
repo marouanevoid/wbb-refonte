@@ -51,8 +51,8 @@
                             <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
                             <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
                             <input type="radio" name="filter" data-tab="tips" value="({{ user.tips|length }}) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                            <div class="clear"></div>
                         </div>
-                        <div class="clear"></div>
                     </div> <!-- .filter-profil -->
 
                     <!-- Separator -->
@@ -77,8 +77,10 @@
 
                                     <div class="filter-view">
                                         <div class="right">
-                                            <input type="radio" name="bars-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                            <input type="radio" name="bars-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                            <div class="margin-right-10">
+                                                <input type="radio" name="bars-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                                <input type="radio" name="bars-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                            </div>
                                         </div>
                                     </div> <!-- .filter-view -->
                                 </div> <!-- .margin-top-20 -->
