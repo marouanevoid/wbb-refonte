@@ -326,19 +326,19 @@ class SemsoftController extends Controller
 
     private function getCity($cityName, $country, $postalCode)
     {
-        $em = $this->getDoctrine()->getManager();
+//        $em = $this->getDoctrine()->getManager();
 
         $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
 
-        if(!$city){
+        if(!$city and !empty($cityName)){
             $city = new City();
             $city
                 ->setName($cityName)
                 ->setCountry($country)
                 ->setPostalCode($postalCode)
             ;
-            $em->persist($city);
-            $em->flush();
+//            $em->persist($city);
+//            $em->flush();
         }
 
         return $city;
@@ -350,17 +350,17 @@ class SemsoftController extends Controller
             $suburbName = 'City-Center';
         }
 
-        $em = $this->getDoctrine()->getManager();
+//        $em = $this->getDoctrine()->getManager();
         $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
 
-        if(!$suburb)
+        if(!$suburb && !empty($suburbName))
         {
             $suburb = new CitySuburb();
             $suburb
                 ->setName($suburbName)
                 ->setCity($city);
-            $em->persist($suburb);
-            $em->flush();
+//            $em->persist($suburb);
+//            $em->flush();
         }
 
 
