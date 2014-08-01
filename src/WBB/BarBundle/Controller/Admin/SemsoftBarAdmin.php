@@ -44,11 +44,15 @@ class SemsoftBarAdmin extends Admin
                         'disabled'  => true
                     )
                 )
-                ->add('tags', null, array('label'=>'Tags'))
+                ->add('tags', null, array(
+                        'label'=>'Tags',
+                        'required' => false
+                    )
+                )
                 ->add('energyLevel', 'entity', array(
                         'class'    => 'WBBBarBundle:Tag',
                         'label'     => 'Mood',
-                        'required' => true,
+                        'required' => false,
                         'property' => 'name',
                         'empty_value' => 'Please choose a mood',
                         'query_builder' => function ($er) {
