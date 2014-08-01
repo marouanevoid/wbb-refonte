@@ -340,19 +340,21 @@
   #editprofile #edit-account .group-form.checkbox label {width: 397px; font-size: 13px;}
   #editprofile #edit-account .group-actions {width: 300px; margin-right: 15px;}
 /* UserProfile */
-  #view-account .filter-profil {width: 660px;}
-  #view-account .filter-profil a.ui-radio {width: 660px; text-align: center; width: 160px;}
+  #view-account .filter-profil {width: 660px; font-size: 18px;}
+  #view-account .filter-profil a.ui-radio {text-align: center; width: 160px;}
   #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
   #view-account .block-top {width: 520px;}
   #view-account .list-bars li {margin-bottom: 10px;}
   #view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
+  #view-account .filter-view a {font-size: 16px;}
   #view-account .filter-view a.ui-radio {margin-left: 0.5em;}
 
-  .ui .btn-editprofile .btn {border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
+  .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
   .ui.tips {width: 100% !important; }
   .ui.tips .list-tips {background-color: #faf3e1;}
   .ui.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
+  /*
   .ui.tips .list-tips ul {}
   .ui.tips .list-tips li {position: relative; margin-bottom: 20px;}
   .ui.tips .list-tips li p {font-size: 14px; text-align: center; line-height: 21px;}
@@ -361,7 +363,9 @@
   .ui.tips .list-tips li .profil {border-color: #ebeced;}
   .ui.tips .list-tips li .expert {color: #333;}
   .ui.tips .list-tips li .name {}
+  */
   .ui.tips .list-tips li .close {background: url("../images/UI/icon_close_tip.png") no-repeat 0 0; display: block; height: 30px; width: 30px; position: absolute; top: -10px; right: -10px;}
+
 /* EditProfile (Mobile) */
   #editprofile.mobile .ui {width: 100%; padding-right: 0; padding-left: 0;}
   #editprofile.mobile .ui .avatar-profil {width: 100%; position: relative;}
@@ -382,7 +386,6 @@
   #view-account .ui.mobile .filter-profil a.ui-radio {font-size: 13px; line-height: 17px; padding-top: 9px; white-space: pre-line; width: 93px;}
   #view-account .ui.mobile .block-top {width: auto;}
   #view-account .ui.mobile .sort-by label {display: none;}
-  #view-account .ui.mobile .sort-by .four.columns {}
   #view-account .ui.mobile .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
   #view-account .ui.mobile .container {width: 100%!important;}
   #view-account .ui.mobile .filter-view a.ui-radio {color: transparent;}
