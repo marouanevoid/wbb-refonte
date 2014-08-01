@@ -1,0 +1,16 @@
+{% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
+
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% if object.bar and object.bar.slug %}
+            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city: object.bar.city, suburb: object.bar.suburb.slug, slug: object.bar.slug}) }}" target="_blank">
+                <i class="icon-zoom-in"></i>
+                {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
+            </a>
+        {% endif %}
+        {% include 'SonataAdminBundle:Button:history_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:acl_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
+        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
+    </div>
+{% endblock %}

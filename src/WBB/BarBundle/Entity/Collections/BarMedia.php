@@ -43,7 +43,7 @@ class BarMedia
     private $bar;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfBar", mappedBy="media", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfBar", mappedBy="media", cascade={"persist"}, orphanRemoval=true)
      */
     private $bestofs;
 
@@ -230,7 +230,7 @@ class BarMedia
     public function __toString()
     {
         if($this->alt)
-            return $this->alt;
+            return $this->position.': '.$this->alt;
         else
             return '';
     }

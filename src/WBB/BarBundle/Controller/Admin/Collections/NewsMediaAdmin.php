@@ -4,9 +4,6 @@ namespace WBB\BarBundle\Controller\Admin\Collections;
 
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 
 class NewsMediaAdmin extends Admin
 {
@@ -24,7 +21,8 @@ class NewsMediaAdmin extends Admin
                         'context' => 'default'
                     )
                 ))
-                ->add('alt')
+                ->add('alt', 'textarea', array('attr'=>array('cols'=>220, 'rows'=>6)))
+                ->add('position', 'hidden')
             ->end();
     }
 }

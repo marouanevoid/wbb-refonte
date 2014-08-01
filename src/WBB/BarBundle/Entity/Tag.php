@@ -9,10 +9,18 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Tag
  *
  * @ORM\Table(name="wbb_tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\TagRepository")
  */
 class Tag
 {
+    const WBB_TAG_TYPE_SPECIAL_FEATURES = 1;
+    const WBB_TAG_TYPE_THEME            = 2;
+    const WBB_TAG_TYPE_BEST_COCKTAILS   = 3;
+    const WBB_TAG_TYPE_WITH_WHO         = 4;
+    const WBB_TAG_TYPE_ENERGY_LEVEL     = 5;
+    const WBB_TAG_TYPE_DRINK_BRANDS     = 6;
+
+
     /**
      * @var integer
      *
@@ -25,58 +33,16 @@ class Tag
     /**
      * @var string
      *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_style", type="boolean", nullable=true)
-     */
-    private $isStyle;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_occasion", type="boolean", nullable=true)
-     */
-    private $isOccasion;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_atmosphere", type="boolean", nullable=true)
-     */
-    private $isAtmosphere;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_alcohol", type="boolean", nullable=true)
-     */
-    private $isAlcohol;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_cocktail", type="boolean", nullable=true)
-     */
-    private $isCocktail;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_mood", type="boolean", nullable=true)
-     */
-    private $isMood;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="energy_level", type="smallint", nullable=true)
-     */
-    private $energyLevel;
 
     /**
      * @var boolean
@@ -100,27 +66,47 @@ class Tag
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="tags")
-     */
-    private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="tag", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="tag", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $bars;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="tag", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BestOfTag", mappedBy="tag", cascade={"persist"}, orphanRemoval=true)
      */
     private $bestofs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Bar", mappedBy="energyLevel", cascade={"persist", "detach"}, orphanRemoval=true)
+     */
+    private $barsLevel;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="energyLevel", cascade={"persist", "detach"}, orphanRemoval=true)
+     */
+    private $semsoftBarsLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="toGoWith")
+     */
+    private $barOccasions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BestOf", mappedBy="energyLevel", cascade={"persist", "detach"}, orphanRemoval=true)
+     */
+    private $bestofsLevel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="toGoWith")
+     */
+    private $bestofOccasions;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -135,7 +121,7 @@ class Tag
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = ucfirst($name);
 
         return $this;
     }
@@ -143,172 +129,11 @@ class Tag
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set isStyle
-     *
-     * @param boolean $isStyle
-     * @return Tag
-     */
-    public function setIsStyle($isStyle)
-    {
-        $this->isStyle = $isStyle;
-
-        return $this;
-    }
-
-    /**
-     * Get isStyle
-     *
-     * @return boolean 
-     */
-    public function getIsStyle()
-    {
-        return $this->isStyle;
-    }
-
-    /**
-     * Set isOccasion
-     *
-     * @param boolean $isOccasion
-     * @return Tag
-     */
-    public function setIsOccasion($isOccasion)
-    {
-        $this->isOccasion = $isOccasion;
-
-        return $this;
-    }
-
-    /**
-     * Get isOccasion
-     *
-     * @return boolean 
-     */
-    public function getIsOccasion()
-    {
-        return $this->isOccasion;
-    }
-
-    /**
-     * Set isAtmosphere
-     *
-     * @param boolean $isAtmosphere
-     * @return Tag
-     */
-    public function setIsAtmosphere($isAtmosphere)
-    {
-        $this->isAtmosphere = $isAtmosphere;
-
-        return $this;
-    }
-
-    /**
-     * Get isAtmosphere
-     *
-     * @return boolean 
-     */
-    public function getIsAtmosphere()
-    {
-        return $this->isAtmosphere;
-    }
-
-    /**
-     * Set isAlcohol
-     *
-     * @param boolean $isAlcohol
-     * @return Tag
-     */
-    public function setIsAlcohol($isAlcohol)
-    {
-        $this->isAlcohol = $isAlcohol;
-
-        return $this;
-    }
-
-    /**
-     * Get isAlcohol
-     *
-     * @return boolean 
-     */
-    public function getIsAlcohol()
-    {
-        return $this->isAlcohol;
-    }
-
-    /**
-     * Set isCocktail
-     *
-     * @param boolean $isCocktail
-     * @return Tag
-     */
-    public function setIsCocktail($isCocktail)
-    {
-        $this->isCocktail = $isCocktail;
-
-        return $this;
-    }
-
-    /**
-     * Get isCocktail
-     *
-     * @return boolean 
-     */
-    public function getIsCocktail()
-    {
-        return $this->isCocktail;
-    }
-
-    /**
-     * Set isMood
-     *
-     * @param boolean $isMood
-     * @return Tag
-     */
-    public function setIsMood($isMood)
-    {
-        $this->isMood = $isMood;
-
-        return $this;
-    }
-
-    /**
-     * Get isMood
-     *
-     * @return boolean 
-     */
-    public function getIsMood()
-    {
-        return $this->isMood;
-    }
-
-    /**
-     * Set energyLevel
-     *
-     * @param integer $energyLevel
-     * @return Tag
-     */
-    public function setEnergyLevel($energyLevel)
-    {
-        $this->energyLevel = $energyLevel;
-
-        return $this;
-    }
-
-    /**
-     * Get energyLevel
-     *
-     * @return integer 
-     */
-    public function getEnergyLevel()
-    {
-        return $this->energyLevel;
     }
 
     /**
@@ -327,27 +152,14 @@ class Tag
     /**
      * Get onTop
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTop()
     {
         return $this->onTop;
     }
 
-    public static function getEnergyLevels()
-    {
-        $result = array(1 => 'Chillout', 2 => "Casual", 3 => "Party");
-
-        return $result;
-    }
-
     public function __construct(){
-        $this->setIsAlcohol(true);
-        $this->setIsAtmosphere(true);
-        $this->setIsCocktail(true);
-        $this->setIsMood(true);
-        $this->setIsOccasion(true);
-        $this->setIsStyle(true);
         $this->setOnTop(true);
     }
 
@@ -367,7 +179,7 @@ class Tag
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -390,59 +202,13 @@ class Tag
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Set position
-     *
-     * @param integer $position
-     * @return Tag
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get position
-     *
-     * @return integer 
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
-     * Set city
-     *
-     * @param \WBB\CoreBundle\Entity\City $city
-     * @return Tag
-     */
-    public function setCity(\WBB\CoreBundle\Entity\City $city = null)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return \WBB\CoreBundle\Entity\City 
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-    
     public function __toString() {
         return $this->getName();
     }
@@ -473,7 +239,7 @@ class Tag
     /**
      * Get bars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBars()
     {
@@ -506,10 +272,209 @@ class Tag
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    public static function getTypeNames(){
+        return array(
+            Tag::WBB_TAG_TYPE_SPECIAL_FEATURES  => 'Special Features',
+            Tag::WBB_TAG_TYPE_THEME             => 'Style',
+            Tag::WBB_TAG_TYPE_BEST_COCKTAILS    => 'Best Cocktails',
+            Tag::WBB_TAG_TYPE_WITH_WHO          => 'With Who',
+            Tag::WBB_TAG_TYPE_ENERGY_LEVEL      => 'Mood',
+            Tag::WBB_TAG_TYPE_DRINK_BRANDS      => 'Drink Brands'
+        );
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Tag
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Add barsLevel
+     *
+     * @param \WBB\BarBundle\Entity\Bar $barsLevel
+     * @return Tag
+     */
+    public function addBarsLevel(\WBB\BarBundle\Entity\Bar $barsLevel)
+    {
+        $this->barsLevel[] = $barsLevel;
+
+        return $this;
+    }
+
+    /**
+     * Remove barsLevel
+     *
+     * @param \WBB\BarBundle\Entity\Bar $barsLevel
+     */
+    public function removeBarsLevel(\WBB\BarBundle\Entity\Bar $barsLevel)
+    {
+        $this->barsLevel->removeElement($barsLevel);
+    }
+
+    /**
+     * Get barsLevel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBarsLevel()
+    {
+        return $this->barsLevel;
+    }
+
+    /**
+     * Add barOccasions
+     *
+     * @param \WBB\BarBundle\Entity\Bar $barOccasions
+     * @return Tag
+     */
+    public function addBarOccasion(\WBB\BarBundle\Entity\Bar $barOccasions)
+    {
+        $this->barOccasions[] = $barOccasions;
+
+        return $this;
+    }
+
+    /**
+     * Remove barOccasions
+     *
+     * @param \WBB\BarBundle\Entity\Bar $barOccasions
+     */
+    public function removeBarOccasion(\WBB\BarBundle\Entity\Bar $barOccasions)
+    {
+        $this->barOccasions->removeElement($barOccasions);
+    }
+
+    /**
+     * Get barOccasions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBarOccasions()
+    {
+        return $this->barOccasions;
+    }
+
+    /**
+     * Add bestofsLevel
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofsLevel
+     * @return Tag
+     */
+    public function addBestofsLevel(\WBB\BarBundle\Entity\BestOf $bestofsLevel)
+    {
+        $this->bestofsLevel[] = $bestofsLevel;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofsLevel
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofsLevel
+     */
+    public function removeBestofsLevel(\WBB\BarBundle\Entity\BestOf $bestofsLevel)
+    {
+        $this->bestofsLevel->removeElement($bestofsLevel);
+    }
+
+    /**
+     * Get bestofsLevel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBestofsLevel()
+    {
+        return $this->bestofsLevel;
+    }
+
+    /**
+     * Add bestofOccasions
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofOccasions
+     * @return Tag
+     */
+    public function addBestofOccasion(\WBB\BarBundle\Entity\BestOf $bestofOccasions)
+    {
+        $this->bestofOccasions[] = $bestofOccasions;
+
+        return $this;
+    }
+
+    /**
+     * Remove bestofOccasions
+     *
+     * @param \WBB\BarBundle\Entity\BestOf $bestofOccasions
+     */
+    public function removeBestofOccasion(\WBB\BarBundle\Entity\BestOf $bestofOccasions)
+    {
+        $this->bestofOccasions->removeElement($bestofOccasions);
+    }
+
+    /**
+     * Get bestofOccasions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBestofOccasions()
+    {
+        return $this->bestofOccasions;
+    }
+
+    /**
+     * Add semsoftBarsLevel
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel
+     * @return Tag
+     */
+    public function addSemsoftBarsLevel(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel)
+    {
+        $this->semsoftBarsLevel[] = $semsoftBarsLevel;
+
+        return $this;
+    }
+
+    /**
+     * Remove semsoftBarsLevel
+     *
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel
+     */
+    public function removeSemsoftBarsLevel(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel)
+    {
+        $this->semsoftBarsLevel->removeElement($semsoftBarsLevel);
+    }
+
+    /**
+     * Get semsoftBarsLevel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSemsoftBarsLevel()
+    {
+        return $this->semsoftBarsLevel;
     }
 }

@@ -7,16 +7,23 @@ parameters:
     wbb_user.user.entity.class: WBB\UserBundle\Entity\User
 
 services:
+    facebook.user:
+        class: WBB\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
 
     #Admin Class
     wbb.user.admin.user:
         class: %wbb_user.user.admin.class%
         tags:
-          - { name: sonata.admin, manager_type: orm, group: wbb_user_hidden, label: users, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+          - { name: sonata.admin, manager_type: orm, group: wbb_user, label: users, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
         arguments: [null, %wbb_user.user.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setUserManager, ["@fos_user.user_manager"]]
             - [setTranslationDomain, ["WBBUserBundle"]]
+            - [setTemplates, [{ edit: "WBBUserBundle:Admin:User/edit.html.twig"}]]
 
     #User repository
     user.repository:
@@ -24,3 +31,27 @@ services:
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['WBBUserBundle:User']
+
+    #User Registration Form
+    wbb_user.registration.form.type:
+        class: WBB\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: wbb_user_registration }
+
+    wbb_user.registration.light.form.type:
+        class: WBB\UserBundle\Form\Type\RegistrationLightFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: wbb_user_registration_light }
+
+    wbb_user.profile.form.type:
+            class: WBB\UserBundle\Form\Type\ProfileFormType
+            arguments: [%fos_user.model.user.class%]
+            tags:
+                - { name: form.type, alias: wbb_user_profile }
+
+    #FormFactory
+    wbb_user.registration.form.factory:
+        class: WBB\UserBundle\Form\Factory\FormFactory
+        arguments: [@form.factory, %fos_user.registration.form.name%, %fos_user.registration.form.type%, %fos_user.registration.form.validation_groups% ]

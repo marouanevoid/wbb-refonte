@@ -4,6 +4,54 @@ wbb_sonata:
 
 get_suburbs_from_city:
     pattern: /ajax/get-suburbs-from-city/{bar}/{cityId}/{suburbId}
-    defaults: {_controller: WBBCoreBundle:Admin\Ajax\Ajax:getSuburbsFromCity, bar: 0, suburbId: 0}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getSuburbsFromCity, bar: 0, suburbId: 0}
+    options:
+        expose: true
+
+get_cities_from_country:
+    pattern: /ajax/get-cities-from-country/{bestof}/{countryId}/{cityId}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getCitiesFromCountry, bestof: 0, cityId: 0}
+    options:
+        expose: true
+
+get_medias_from_bar:
+    pattern: /ajax/get-medias-from-bar/{barID}/{mediaID}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getMediasFromBar, barID: 0, mediaID: 0}
+    options:
+        expose: true
+
+wbb_cities_bars:
+    pattern: /getbars-bycity/{citySlug}/{suburbSlug}
+    defaults: { _controller: WBBCoreBundle:City:barsList, suburbSlug: "-1"}
+    options:
+        expose: true
+
+wbb_cities_list:
+    pattern: /cities/list/{keywords}
+    defaults: { _controller: WBBCoreBundle:City:citiesList, keywords: "" }
+    options:
+        expose: true
+
+wbb_nearest_city:
+    pattern: /cities/nearest/{latitude}/{longitude}
+    defaults: { _controller: WBBCoreBundle:City:nearestCity, latitude: 0, longitude: 0 }
+    options:
+        expose: true
+
+wbb_cities_list_all:
+    pattern: /cities/list/
+    defaults: { _controller: WBBCoreBundle:City:citiesList, keywords: "" }
+    options:
+        expose: true
+
+wbb_cities_city:
+    pattern: /cities/{slug}/{suburb}
+    defaults: { _controller: WBBCoreBundle:City:cities, suburb: "-1" }
+    options:
+        expose: true
+
+wbb_cities:
+    pattern: /cities
+    defaults: { _controller: WBBCoreBundle:City:cities }
     options:
         expose: true

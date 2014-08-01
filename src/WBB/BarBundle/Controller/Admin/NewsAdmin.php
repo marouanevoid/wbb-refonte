@@ -15,14 +15,13 @@ class NewsAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->addIdentifier('id')
-            ->add('title', null, array('editable' => true))
-            ->add('shareText', null, array('editable' => true))
+            ->addIdentifier('title')
+//            ->add('shareText', null, array('editable' => true))
             ->add('quoteAuthor', null, array('editable' => true))
             ->add('quoteText', null, array('editable' => true))
             ->add('seoDescription', null, array('editable' => true))
-            ->add('isAnInterview', null, array('editable' => true))
-            ->add('isOnTop', null, array('editable' => true))
+            ->add('interview', null, array('editable' => true))
+            ->add('onTop', null, array('editable' => true))
             ->add('createdAt', null, array('editable' => true))
             ->add('updatedAt', null, array('editable' => true))
         ;
@@ -35,13 +34,13 @@ class NewsAdmin extends Admin {
         $filterMapper
             ->add('id')
             ->add('title')
-            ->add('shareText')
+//            ->add('shareText')
             ->add('quoteAuthor')
             ->add('quoteText')
             ->add('seoDescription')
             ->add('richDescription')
-            ->add('isAnInterview')
-            ->add('isOnTop')
+            ->add('interview')
+            ->add('onTop')
         ;
     }
 
@@ -53,13 +52,13 @@ class NewsAdmin extends Admin {
             ->with('General')
                 ->add('id')
                 ->add('title')
-                ->add('shareText')
+//                ->add('shareText')
                 ->add('quoteAuthor')
                 ->add('quoteText')
                 ->add('seoDescription')
                 ->add('richDescription')
-                ->add('isAnInterview')
-                ->add('isOnTop')
+                ->add('interview')
+                ->add('onTop')
                 ->add('createdAt')
                 ->add('updatedAt')
             ->end()
@@ -73,29 +72,40 @@ class NewsAdmin extends Admin {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
-                ->add('title')
-                ->add('shareText')
+                ->add('title', null, array('help'=> 'Mandatory', 'label'=> 'Title *'))
+//                ->add('shareText', null, array('help'=> 'Mandatory', 'label'=> 'Share text *'))
                 ->add('quoteAuthor')
                 ->add('quoteText')
-                ->add('seoDescription')
-                ->add('richDescription', 'textarea', array('attr'=>array('class'=>'wysihtml5')))
-                ->add('isAnInterview')
-                ->add('isOnTop')
-                ->add('sponsor')
+                ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
+                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
+                ->add('interview', null, array('label' => 'Interview'))
+                ->add('onTop')
+
+                ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorImage', 'sonata_type_model_list', array(
-                    'required' => false
+                    'required' => false,
+                    'help'      => 'Preferred size (width: 640px , height: 480px)'
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'default'
+                        'context' => 'sponsor'
+                    )
+                ))
+                ->add('sponsorImageSmall', 'sonata_type_model_list', array(
+                    'required'  => false,
+                    'help'      => 'Preferred size (width: 82px , height: 82px)'
+                ), array(
+                    'link_parameters' => array(
+                        'context' => 'sponsor_small'
                     )
                 ))
             ->end()
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection',
                     array(
-                        'required'     => false,
-                        'by_reference' => false,
-                        'type_options' => array('delete' => true)
+                        'required'      => false,
+                        'by_reference'  => false,
+                        'help'          => 'Preferred size (width: 900px , height: 600px)',
+                        'type_options'  => array('delete' => true)
                     ),
                     array(
                         'edit'      => 'inline',
@@ -104,31 +114,46 @@ class NewsAdmin extends Admin {
                     )
                 )
             ->end()
-            ->with('Related')    
-                ->add('bars', 'sonata_type_collection',
-                    array(
-                        'required'     => false,
-                        'by_reference' => false,
-                        'type_options' => array('delete' => true)
-                    ),
-                    array(
-                        'edit'      => 'inline',
-                        'inline'    => 'table',
-                        'sortable'  => 'position'
-                    )
-                )                      
-                ->add('cities', 'sonata_type_model', array('required' => false,'multiple' => true))          
-                ->add('bestOfs', 'sonata_type_model', array('required' => false,'multiple' => true))
+            ->with('Related')
+                ->add('bars', null, array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('cities', null, array('required' => false, 'multiple' => true, 'by_reference' => false))
+                ->add('bestOfs', null, array('required' => false, 'multiple' => true, 'by_reference' => false))
             ->end()
         ;
     }
     
     public function getNewInstance(){
         $newInstance = parent::getNewInstance();
-        $newInstance->setIsAnInterview(true);
-        $newInstance->setIsOnTop(true);
+        $newInstance->setInterview(true);
+        $newInstance->setOnTop(true);
 
         return $newInstance;
-    }    
+    }
+
+    public function prePersist($object)
+    {
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media && $media->getMedia()){
+                    $media->setNews($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
+        }
+    }
+
+    public function preUpdate($object)
+    {
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media && $media->getMedia()){
+                    $media->setNews($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
+        }
+    }
 
 }

@@ -2,7 +2,6 @@
 
 namespace WBB\BarBundle\Entity\Collections;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -10,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * BarTag
  *
  * @ORM\Table(name="wbb_bestof_bar")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class BestOfBar
 {
@@ -22,6 +21,13 @@ class BestOfBar
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
 
     /**
      * @var integer
@@ -97,7 +103,10 @@ class BestOfBar
 
     public function __toString()
     {
-        return $this->tag->getName();
+        if($this->bar)
+            return $this->bar->getName();
+        else
+            return "";
     }
 
     /**
@@ -213,5 +222,28 @@ class BestOfBar
     public function getMedia()
     {
         return $this->media;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return BestOfBar
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

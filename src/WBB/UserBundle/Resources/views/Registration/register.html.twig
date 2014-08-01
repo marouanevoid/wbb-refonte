@@ -1,0 +1,211 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="full-cream">
+        <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap margin-bottom-20">
+            <div class="ui wrap">
+                <div class="title text-transform-uppercase padding-top-25 bold">Register</div>
+                <div class="margin-top-20">
+                    <div id="create-account">
+                        <div class="subtitle text-transform-uppercase margin-top-25 bold">Create an account now</div>
+                        <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
+                        <form action="" {{ form_enctype(form) }} method="POST" id="register_form_full">
+                            <div class="text-align-left margin-bottom-20">
+                                <div class="group-form margin-top-25">
+                                    {% if not is_mobile() %}
+                                        <label class="margin-right-20 text-align-right unbold">Username</label>
+                                    {% endif %}
+                                    {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Username' } }) }}
+                                </div>
+                                <div class="select-two margin-top-10">
+                                    <label class="margin-right-20 text-align-right unbold">Gender</label>
+                                    <div class="left" style="width: 300px">
+                                        {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
+                                    <label class="margin-right-20 text-align-right unbold">Firstname</label>
+                                    {% endif %}
+                                    {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Firstname' } }) }}
+                                </div>
+                                <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
+                                    <label class="margin-right-20 text-align-right unbold">Lastname</label>
+                                    {% endif %}
+                                    {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Lastname' } }) }}
+                                </div>
+                                <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
+                                    <label class="margin-right-20 text-align-right unbold">Email</label>
+                                    {% endif %}
+                                    {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Email' } }) }}
+                                </div>
+                                <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
+                                    <label class="margin-right-20 text-align-right unbold">Password</label>
+                                    {% endif %}
+                                    {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Password' } }) }}
+                                </div>
+                                <div class="group-form margin-top-10">
+                                    {% if not is_mobile() %}
+                                    <label class="margin-right-20 text-align-right unbold">Confirm Password</label>
+                                    {% endif %}
+                                    {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Confirm Password' } }) }}
+                                </div>
+                            </div>
+
+                            <div class="date-birthday text-align-center ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Date of Birth</label>
+                                <div class="select-wrap left">
+                                    {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                </div>
+                                <div class="select-wrap left">
+                                    {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
+                                </div>
+                                <div class="select-wrap left last">
+                                    {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Country</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Cities you like to go</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a city' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Favorite Bars</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a bar' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Drink brands</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a brand' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Categories or cocktails</label>
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="select-two margin-top-10 form-text-without-label ui-dropdown-list-form">
+                                <div class="left" style="width: 300px">
+                                    {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': 'Choose a cocktail' } }) }}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            {{ form_rest(form) }}
+                            <div class="group-actions margin-top-20 wrap">
+                                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Register">
+                            </div>
+                        </form>
+                        <div class="clear"></div>
+                        {% if not form.vars.valid %}
+                            <div id="message" class="margin-top-20 wrap">
+                                <div>
+                                    <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+                                    {{ form_errors(form) }}
+                                    {{ form_errors(form.plainPassword.first) }}
+                                    {{ form_errors(form.plainPassword.second) }}
+                                    {{ form_errors(form.username) }}
+                                    {{ form_errors(form.title) }}
+                                    {{ form_errors(form.firstname) }}
+                                    {{ form_errors(form.lastname) }}
+                                    {{ form_errors(form.email) }}
+                                    {{ form_errors(form.birthdate) }}
+                                    {{ form_errors(form.country) }}
+                                    {{ form_errors(form.prefCity1) }}
+                                    {{ form_errors(form.prefCity2) }}
+                                    {{ form_errors(form.prefCity3) }}
+                                    {{ form_errors(form.prefBar1) }}
+                                    {{ form_errors(form.prefBar2) }}
+                                    {{ form_errors(form.prefBar3) }}
+                                    {{ form_errors(form.prefDrinkBrand1) }}
+                                    {{ form_errors(form.prefDrinkBrand2) }}
+                                    {{ form_errors(form.prefDrinkBrand3) }}
+                                    {{ form_errors(form.prefCocktails1) }}
+                                    {{ form_errors(form.prefCocktails2) }}
+                                    {{ form_errors(form.prefCocktails3) }}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div> <!-- ui.wrap -->
+        </div> <!-- #register -->
+    </div>
+{% endblock %}

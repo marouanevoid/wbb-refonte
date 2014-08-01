@@ -2,10 +2,162 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="" >
         <body>
+
             <trans-unit id="users">
                 <source>users</source>
                 <target>Users</target>
             </trans-unit>
+
+            <trans-unit id="breadcrumb.link_user_list">
+                <source>breadcrumb.link_user_list</source>
+                <target>Users list</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_username">
+                <source>list.label_username</source>
+                <target>User Name</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_username">
+                <source>filter.label_username</source>
+                <target>User Name</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_username">
+                <source>form.label_username</source>
+                <target>User Name</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_locked">
+                <source>form.label_locked</source>
+                <target>Blacklisted</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_enabled">
+                <source>form.label_enabled</source>
+                <target>Enable</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_firstname">
+                <source>form.label_firstname</source>
+                <target>Firstname *</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_lastname">
+                <source>form.label_lastname</source>
+                <target>Lastname *</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_website">
+                <source>form.label_website</source>
+                <target>Website</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target>Description</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_pref_when">
+                <source>form.label_pref_when</source>
+                <target>Preferences - when</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_pref_home">
+                <source>form.label_pref_home</source>
+                <target>Preferences - home</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_pref_city1">
+                <source>form.label_pref_city1</source>
+                <target>Preferences - City 1</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_pref_city2">
+                <source>form.label_pref_city2</source>
+                <target>Preferences - City 2</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_pref_city3">
+                <source>form.label_pref_city3</source>
+                <target>Preferences - City 3</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_pref_start_city">
+                <source>form.label_pref_start_city</source>
+                <target>Preferences - Start City</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_stay_informed">
+                <source>form.label_stay_informed</source>
+                <target>Stay informed</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_email">
+                <source>list.label_email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_email">
+                <source>filter.label_email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_email">
+                <source>form.label_email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_enabled">
+                <source>list.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_enabled">
+                <source>filter.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_locked">
+                <source>list.label_locked</source>
+                <target>Blacklisted</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_locked">
+                <source>filter.label_locked</source>
+                <target>Blacklisted</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_plain_password">
+                <source>form.label_plain_password</source>
+                <target>Password</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_roles">
+                <source>form.label_roles</source>
+                <target>Profile *</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_birthdate">
+                <source>form.label_birthdate</source>
+                <target>Birthdate *</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_country">
+                <source>form.label_country</source>
+                <target>Country *</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_firstname">
+                <source>form.label_country</source>
+                <target>Country *</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

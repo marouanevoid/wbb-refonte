@@ -7,6 +7,7 @@
 namespace WBB\BarBundle\Controller\Admin;
 
 use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -60,8 +61,38 @@ class BarAdmin extends Admin
                     Bar::BAR_STATUS_DISABLED_VALUE  => 'Disabled'
                 )
             ))
-            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
-            ->add('updatedAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'format' => 'M/d/y', 'required' => false,  'attr' => array('class' => 'datepicker')))
+            ->add('createdAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Created After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
+                            $queryBuilder->setParameter('createdAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
+            ->add('updatedAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Updated After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
+                            $queryBuilder->setParameter('updatedAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
 
         ;
     }
@@ -84,13 +115,13 @@ class BarAdmin extends Admin
                 ->add('twitter')
                 ->add('facebook')
                 ->add('instagram')
-                ->add('isCreditCard')
-                ->add('isCoatCheck')
+                ->add('creditCard')
+                ->add('coatCheck')
                 ->add('parking')
                 ->add('price')
                 ->add('menu')
-                ->add('isReservation')
                 ->add('reservation')
+                ->add('reservationLink')
                 ->add('description')
                 ->add('onTop')
                 ->add('status')
@@ -142,8 +173,8 @@ class BarAdmin extends Admin
                 }
 
         $formMapper
-            ->add('isCreditCard')
-            ->add('isCoatCheck')
+            ->add('creditCard')
+            ->add('coatCheck')
             ->add('parking', 'choice', array(
                 'required' => false,
                 'choices'  => array(
@@ -156,15 +187,15 @@ class BarAdmin extends Admin
             ->add('price', 'choice', array(
                 'required' => false,
                 'choices'  => array(
-                    1 => 1,
-                    2 => 2,
-                    3 => 3,
-                    4 => 4
+                    1 => '$',
+                    2 => '$$',
+                    3 => '$$$',
+                    4 => '$$$$'
                 )
             ))
             ->add('menu', null, array('help' => 'Example : http://www.url.com'))
-            ->add('isReservation')
-            ->add('reservation', null, array('help' => 'Example : http://www.url.com'));
+            ->add('reservation')
+            ->add('reservationLink', null, array('help' => 'Example : http://www.url.com'));
 
         if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
             $formMapper
@@ -193,6 +224,28 @@ class BarAdmin extends Admin
                     ))
             ->end()
             ->with('Tags')
+                ->add('energyLevel', 'entity', array(
+                        'class'    => 'WBBBarBundle:Tag',
+                        'help'     => 'Mandatory',
+                        'label'     => 'Mood',
+                        'required' => true,
+                        'property' => 'name',
+                        'empty_value' => 'Please choose a mood',
+                        'query_builder' => function ($er) {
+                                return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
+                            }
+                    )
+                )
+                ->add('toGoWith', null,
+                    array(
+                        'required' => false,
+                        'multiple' => true,
+                        'by_reference' => false,
+                        'query_builder' => function ($er) {
+                                return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
+                            }
+                    )
+                )
                 ->add('tags', 'sonata_type_collection', array(
                     'required' => false,
                     'help' => 'Associate a tag minimum to the bar is mandatory'),
@@ -200,7 +253,8 @@ class BarAdmin extends Admin
                         'edit' => 'inline',
                         'inline' => 'table',
                         'sortable'  => 'position'
-                    ))
+                    )
+                )
             ->end()
             ->with('Openings')
                 ->add('openings', 'sonata_type_collection', array('required' => false),
@@ -227,31 +281,67 @@ class BarAdmin extends Admin
 
     public function prePersist($object)
     {
-        foreach ($object->getMedias() as $media) {
-            $media->setBar($object);
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media && $media->getMedia()){
+                    $media->setBar($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
         }
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBar($object);
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                if($tag->getTag() && $tag->getTag()->getName()){
+                    $tag->setBar($object);
+                }else{
+                    $object->removeTag($tag);
+                }
+            }
         }
 
-        foreach ($object->getOpenings() as $opening) {
-            $opening->setBar($object);
+        if($object->getOpenings()){
+            foreach ($object->getOpenings() as $opening) {
+                if($opening && $opening->getOpeningDay()){
+                    $opening->setBar($object);
+                }else{
+                    $object->removeOpening($opening);
+                }
+            }
         }
     }
 
     public function preUpdate($object)
     {
-        foreach ($object->getMedias() as $media) {
-            $media->setBar($object);
+        if($object->getMedias()){
+            foreach ($object->getMedias() as $media) {
+                if($media && $media->getMedia()){
+                    $media->setBar($object);
+                }else{
+                    $object->removeMedia($media);
+                }
+            }
         }
 
-        foreach ($object->getTags() as $tag) {
-            $tag->setBar($object);
+        if($object->getTags()){
+            foreach ($object->getTags() as $tag) {
+                if($tag->getTag() && $tag->getTag()->getName()){
+                    $tag->setBar($object);
+                }else{
+                    $object->removeTag($tag);
+                }
+            }
         }
 
-        foreach ($object->getOpenings() as $opening) {
-            $opening->setBar($object);
+        if($object->getOpenings()){
+            foreach ($object->getOpenings() as $opening) {
+                if($opening && $opening->getOpeningDay()){
+                    $opening->setBar($object);
+                }else{
+                    $object->removeOpening($opening);
+                }
+            }
         }
     }
 }

@@ -1,25 +1,39 @@
-wbb_bar_test:
-    pattern:  /feed/test
-    defaults: { _controller: WBBBarBundle:FSAdmin:testFS }
-
 #Actions
-
-homepage:
-    pattern: /
-    defaults: { _controller: WBBBarBundle:Bar:home }
-
 city_homepage:
     pattern: /top-{slug}
     defaults: { _controller: WBBBarBundle:Bar:cityHome }
+    options:
+        expose: true
+
+homepage:
+    pattern: /
+    defaults: { _controller: WBBBarBundle:Bar:home}
+    options:
+        expose: true
+
+wbb_bar_ads:
+    pattern: /wbb/ads/{format}
+    defaults: { _controller: WBBBarBundle:Ads:show }
+
+wbb_bar_guides:
+    pattern: /bar-guides
+    defaults: { _controller: WBBBarBundle:Bar:barGuide }
+
+wbb_bar_guides_city:
+    pattern: /bar-guides/top-{slug}
+    defaults: { _controller: WBBBarBundle:Bar:barGuideCity }
+    options:
+        expose: true
 
 wbb_bar_tips:
-    pattern: /bar/{barID}/tips/{offset}/{limit}/{showwbb}
+    pattern: /bar/{barID}/tips/{offset}/{limit}
     requirements:
           id: \d+
           offset: \d+
           limit: \d+
-          showwbb : \d+
-    defaults: { _controller: WBBBarBundle:FSAdmin:tips , offset: 0 , limit: 8 , showwbb: 1 }
+    defaults: { _controller: WBBBarBundle:Feed:tips , offset: 0 , limit: 8}
+    options:
+        expose: true
 
 wbb_bar_details:
     pattern: /bar/{city}/{suburb}/{slug}
@@ -27,37 +41,121 @@ wbb_bar_details:
 
 #Services
 wbb_bar_feeds_find:
-    pattern:  /feed/find/{type}/{id}
-    defaults: { _controller: WBBBarBundle:FSAdmin:find, id: 0 }
+    pattern:  /feed/find/{type}/{id}/{offset}
+    defaults: { _controller: WBBBarBundle:Feed:find, id: 0, offset: 0 }
     options:
-            expose: true
+        expose: true
+
+wbb_bar_feed_find_hash:
+    pattern:  /feed/hash/{type}/{hash}
+    defaults: { _controller: WBBBarBundle:Feed:find}
+    options:
+        expose: true
 
 wbb_bar_feeds_list:
     pattern:  /feed/list/{type}/{bar}
-    defaults: { _controller: WBBBarBundle:FSAdmin:list }
+    defaults: { _controller: WBBBarBundle:Feed:list }
     options:
-            expose: true
+        expose: true
 
 wbb_bar_feed_add:
     pattern:  /feed/save/{type}/{hash}/{bar}
-    defaults: { _controller: WBBBarBundle:FSAdmin:add }
+    defaults: { _controller: WBBBarBundle:Feed:add }
     options:
-            expose: true
-            
+        expose: true
+
 wbb_bar_feed_remove:
     pattern:  /feed/remove/{type}/{hash}/{bar}
-    defaults: { _controller: WBBBarBundle:FSAdmin:remove }
+    defaults: { _controller: WBBBarBundle:Feed:remove }
     options:
-            expose: true
+        expose: true
 
 wbb_bar_tips_add:
     pattern:  /tips/add/
     defaults: { _controller: WBBBarBundle:Tips:add }
     options:
-            expose: true
+        expose: true
 
-wbb_bar_tips_fetch:
-    pattern:  /tips/fetch/{barID}/{offset}/{limit}
-    defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
+#wbb_bar_tips_fetch:
+#    pattern:  /tips/fetch/{barID}/{offset}/{limit}
+#    defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
+#    options:
+#        expose: true
+
+wbb_bar_guide_filters:
+    pattern: /barguide/filter/{barsOnly}/{city}/{filter}/{offset}/{limit}/{display}
+    defaults: { _controller: WBBBarBundle:Bar:barGuideFilter, barsOnly: 1, city: 0, filter: popularity, offset: 0, limit: 8, display: grid }
     options:
-            expose: true
+        expose: true
+
+wbb_bar_bestof_global:
+    pattern: /best-of/{bestOfSlug}
+    defaults: { _controller: WBBBarBundle:Bar:bestOf }
+
+wbb_bar_bestof_local:
+    pattern: /best-of/{citySlug}/{bestOfSlug}
+    defaults: { _controller: WBBBarBundle:Bar:bestOf }
+
+wbb_bar_finder:
+    pattern: /bar-finder
+    defaults: { _controller: WBBBarBundle:Bar:barFinder }
+
+wbb_bar_finder_results:
+    pattern: /bar-finder-results
+    defaults: { _controller: WBBBarBundle:Bar:barFinderResults }
+    requirements:
+        _method:  POST
+
+wbb_news_landing_page:
+    pattern: /news
+    defaults: { _controller: WBBBarBundle:News:landingPage }
+
+wbb_news_landing_page_city:
+    pattern: /news/{citySlug}
+    defaults: { _controller: WBBBarBundle:News:landingPage }
+
+wbb_news_details:
+    pattern: /news/city/{citySlug}
+    defaults: { _controller: WBBBarBundle:News:landingPage }
+
+wbb_news_details_page:
+    pattern: /news/details/{newsSlug}
+    defaults: { _controller: WBBBarBundle:News:details }
+
+wbb_semsoft_import:
+    pattern: /admin/semsoft/csv/import
+    defaults: { _controller: WBBBarBundle:Semsoft:import }
+
+wbb_semsoft_export:
+    pattern: /admin/semsoft/csv/export
+    defaults: { _controller: WBBBarBundle:Semsoft:export }
+
+wbb_semsoft_merge:
+    pattern: /admin/semsoft/bar/{ssBarId}/merge
+    defaults: { _controller: WBBBarBundle:Semsoft:merge }
+
+wbb_semsoft_preview:
+    pattern: /admin/semsoft/bar/{ssBarId}/preview
+    defaults: { _controller: WBBBarBundle:Semsoft:preview }
+
+get_tags_by_type:
+    pattern: /ajax/get-tags-by-type/{typeID}/{tagID}
+    defaults: { _controller: WBBBarBundle:Tag:getByType }
+    options:
+        expose: true
+
+wbb_favorite_bar_add:
+    pattern: /ajax/favorite/add/bar/{barId}
+    defaults: { _controller: WBBBarBundle:Favorite:addBar }
+
+wbb_favorite_bestof_add:
+    pattern: /ajax/favorite/add/bestof/{bestOfId}
+    defaults: { _controller: WBBBarBundle:Favorite:addBestOf }
+
+wbb_favorite_bar_delete:
+    pattern: /ajax/favorite/delete/bar/{barId}
+    defaults: { _controller: WBBBarBundle:Favorite:deleteBar }
+
+wbb_favorite_bestof_delete:
+    pattern: /ajax/favorite/delete/bestof/{bestOfId}
+    defaults: { _controller: WBBBarBundle:Favorite:deleteBestOf }

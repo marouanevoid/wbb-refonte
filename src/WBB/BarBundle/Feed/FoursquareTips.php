@@ -36,17 +36,18 @@ class FoursquareTips implements FeedInterface
      */
     public function find($id = null, $next = 0)
     {
-        $params = array( 'venue_id' => $id, 'limit' => $this->limit);
+        $params = array( 'venue_id' => $id, 'limit' => ($this->limit + 1));
 
         if($next > 0) $params['offset'] = $next;
 
-        $client = $this->container->get('jcroll_foursquare_client');
+        $client  = $this->container->get('jcroll_foursquare_client');
         $command = $client->getCommand('venues/tips', $params);
-        $tips = $command->execute();
+        $response= $command->execute();
+        $tips    = $response['response']['tips']['items'];
 
         return array(
             'type' => 'fsTips',
-            'data' => $tips['response']['tips']['items']
+            'data' => $tips
         );
     }
 

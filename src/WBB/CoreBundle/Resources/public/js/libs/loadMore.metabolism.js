@@ -1,21 +1,3 @@
-/**
- * Load More
- *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
- *
- * License: GPL
- * Version: 1.0
- *
- * Requires:
- *   - jQuery
- *
- **/
-
-/**
- * indigen namespace.
- */
 var meta = meta || {};
 
 /**
@@ -26,15 +8,14 @@ meta.LoadMore = function(config) {
     var that = this;
 
     that.context = {
-
-        page : 1,
-        is_loading : false
+        is_loading : false,
+        itemsNumber : 0,
+        requestBars : null
     };
 
     that.config = {
-
         $button : false,
-        page    : '&page=',
+        $target : null,
         class   : 'line',
         speed   : 500,
         easing  : 'easeInOutCubic'
@@ -44,28 +25,42 @@ meta.LoadMore = function(config) {
     /* Public attributes. */
     that._setupEvents = function(){
 
-        that.config.$button.on('click', function(e)
+
+         // that.config.$button.on('click', function(e)
+         // {
+         //     e.preventDefault();
+ 
+         //     if(that.context.is_loading) return;
+ 
+ 
+         //     var $button     = $(this);
+         //     var $target     = that.context.$container.find('.load-target');
+         //     var url         = $button.attr('href')+that.config.page+that.context.page;
+ 
+         //     $button.data('text', $button.text());
+         //    $button.width($button.width());
+
+         //    $button.addClass('loading').text(TRAD.loading);
+
+         //    that._load(url, $target, function()
+         //    {
+         //        $button.removeAttr('style');
+         //         $button.removeClass('loading').text( $button.data('text'));
+         //     });
+         // });
+    };
+
+    that._updateContent = function() {
+
+        if(that.context.is_loading) return;
+
+        that.config.$target     = that.context.$container.find('.load-target');
+
+        /* Récupérer la traduction pour loading */
+        that.config.$button.addClass('loading').text(TRAD.common.loading);
+        that._loadAjax(that.config.url, function()
         {
-            e.preventDefault();
 
-            if(that.context.is_loading) return;
-
-
-            var $button     = $(this);
-            var $target     = that.context.$container.find('.load-target');
-            var limit       = $button.data('limit');
-            var offset      = $button.data('offset');
-            var showwbb     = $button.data('showwbb');
-            var url         = $button.attr('href');
-            url += '/'+offset+'/'+limit+'/'+showwbb;
-
-            $button.data('text', $button.text());
-            $button.addClass('loading').text(TRAD.loading);
-
-            that._load(url, $target, function()
-            {
-                $button.removeClass('loading').text( $button.data('text'));
-            });
         });
     };
 
@@ -81,38 +76,74 @@ meta.LoadMore = function(config) {
 
         var target_height = $target.show().height();
 
-        $elements.addClass('enable3d').css({opacity:0, top:'6em', position:'relative'}).each(function(index){
+        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index){
 
             $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, that.config.speed, that.config.easing);
         });
-    };
 
-
-    that._load = function( url, $target, callback)
-    {
-        that.context.is_loading = true;
-
-        callback()
-        $target.load(url, function()
+        setTimeout(function()
         {
-            $target.hide();
+            if(callback) callback();
 
-            $target.removeClass('load-target');
-            $target.after('<div class="'+that.config.class+' load-target"/>');
-
-            $target.find('img[data-src]').each(function()
-            {
-                $(this).attr('src', $(this).data('src'));
-                $(this).removeAttr('data-src');
-            });
-
-            that._animate($target, $target.find('> *').not('br'), callback );
-
-            that.context.page +=1;
-            that.context.is_loading = false;
-        })
+        }, 100*$elements.length+that.config.speed );
     };
 
+    that._loadAjax = function( url, callback)
+    {
+
+        that.context.is_loading = true;
+        that.context.requestBars = $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(msg) {
+                that.config.$target.append(msg.htmldata);
+
+                if( callback ) callback();
+                that.config.$target.find(".line:last-child").hide();
+                that.context.itemsNumber = that.config.$target.find('img[data-src]').length;
+                that.config.$target.find('img[data-src]').each(function()
+                {
+                    $(this).load(that._imageLoaded);
+                    $(this).error(that._imageLoaded);
+                    $(this).attr('src', $(this).data('src'));
+                });
+
+                $(window).resize();
+                
+                if(parseInt(msg.difference)==0)
+                    that.config.$button.hide();
+                $('.disableClick').hide();
+            },
+            beforeSend: function()
+            {
+                if (that.context.requestBars != null)
+                    that.context.requestBars.abort();
+            },
+            error: function(e) {
+                console.log('Load More - Error : ' + e);
+            }
+        });
+    };
+
+    that._imageLoaded = function ()
+    {
+        that.context.itemsNumber--;
+        console.log(" itemsNumber : " + that.context.itemsNumber + " , " + $(this));
+        $(this).removeAttr('data-src');
+        if (that.context.itemsNumber <= 0){
+            that.config.$target.find(".line:last-child").show();
+            if($("input[name=filter]:checked").val()=='bar_list')
+            {
+                that.config.$button.removeClass('loading').text( TRAD.common.morebars);
+            }else
+            {
+                that.config.$button.removeClass('loading').text( TRAD.common.morebestof);
+            }
+            that._animate(that.config.$target, that.config.$target.find(".line:last-child").find('> *').not('br') );
+            that.context.is_loading = false;
+        }
+    }
 
     /**
      *
@@ -127,13 +158,4 @@ meta.LoadMore = function(config) {
 
     that.__construct( config );
 };
-
-$(document).ready(function()
-{
-   $('.load-more').each(function()
-   {
-        new meta.LoadMore({$button:$(this)});
-   });
-
-});
 

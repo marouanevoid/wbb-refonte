@@ -22,7 +22,7 @@ file that was distributed with this source code.
 {% block actions %}
     <div class="sonata-actions btn-group">
         {% if object.slug %}
-            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city, suburb: object.suburb, slug:object.slug}) }}" target="_blank">
+            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city.slug, suburb: object.suburb.slug, slug:object.slug}) }}" target="_blank">
                 <i class="icon-zoom-in"></i>
                 {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
             </a>
@@ -47,7 +47,7 @@ file that was distributed with this source code.
     <script src="{{ asset('bundles/wbbbar/js/admin/locationpicker.jquery.js') }}"></script>
     <script type="text/javascript">
         var barId = "{{ admin.id(object) }}";
-        var venue, insta;
+        var venue, insta, fsTipsOffset, fsImagesOffset, instagramImagesOffset;
         $(document).ready(function(){
             venue = "{{ object.foursquare }}";
             insta = "{{ object.instagram }}";
@@ -179,6 +179,7 @@ file that was distributed with this source code.
             }
 
             $('ul.nav-tabs li a').click(function() {
+                setTimeout(function(){
                 $('.mapcontainer').locationpicker({
                     location: { latitude: $('#{{ admin.uniqId }}_latitude').val(), longitude: $('#{{ admin.uniqId }}_longitude').val() },
                     radius: 0,
@@ -190,6 +191,74 @@ file that was distributed with this source code.
                         locationNameInput: $('#mpAddress')
                     },
                     enableAutocomplete: true
+                })
+                },300);
+            });
+
+            //Bar tags relations
+            $('select').each(function(){
+                var type = $(this).attr('id');
+                var extension = type.substr(type.length - 5);
+                if (extension != "_type"){
+                    return;
+                }
+                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                typeId = $(this).val();
+                tagId = tag.val() || 0;
+
+                tag.empty();
+                tag.trigger("list:updated");
+
+                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                    tag.empty().append(options);
+                    tag.trigger("list:updated");
+                },"text");
+            });
+
+            $('select').live('change', function(){
+                var type = $(this).attr('id');
+                var extension = type.substr(type.length - 5);
+                if (extension != "_type"){
+                    return;
+                }
+                var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                typeId = $(this).val();
+                tagId = tag.val() || 0;
+
+                tag.empty();
+                tag.trigger("list:updated");
+
+                var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                    var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                    tag.empty().append(options);
+                    tag.trigger("list:updated");
+                    tag.select2("val", "");
+                },"text");
+            });
+
+            jQuery(document).on('sonata.add_element',function(){
+                $('select').each(function(){
+                    var type = $(this).attr('id');
+                    var extension = type.substr(type.length - 5);
+                    if (extension != "_type"){
+                        return;
+                    }
+                    var tag = $('#'+type.substr(0,(type.length-4))+'tag');
+                    typeId = $(this).val();
+                    tagId = tag.val() || 0;
+
+                    tag.empty();
+                    tag.trigger("list:updated");
+
+                    var url = Routing.generate('get_tags_by_type', {'typeID': typeId, 'tagID': tagId });
+                    $.post(url, { 'typeID': typeId, 'tagID': tagId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        tag.empty().append(options);
+                        tag.trigger("list:updated");
+                    },"text");
                 });
             });
         });
@@ -273,6 +342,18 @@ file that was distributed with this source code.
         }
         .mapinfos input {
             float: left;
+        }
+        .tips_action, .imgs_action, .instimgs_action {
+            width: 100%;
+            clear: both;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .btload {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            margin : 30px 0;
         }
     </style>
 {% endblock %}

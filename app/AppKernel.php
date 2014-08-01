@@ -41,9 +41,6 @@ class AppKernel extends Kernel
             //Foursquare
             new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),
 
-            //Avalanche Imagine Bundle
-            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
-
             //Mobile Detecte
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
 
@@ -59,10 +56,21 @@ class AppKernel extends Kernel
             //Serializer Bundle
             new JMS\SerializerBundle\JMSSerializerBundle($this),
 
+            //CSV Import Bundle
+            new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
+
+//            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
+
+            //Bitly Bundle
+            new Hpatoio\BitlyBundle\HpatoioBitlyBundle(),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),
             new WBB\BarBundle\WBBBarBundle(),
+            new WBB\CloudSearchBundle\WBBCloudSearchBundle(),
+            
+            new FOS\FacebookBundle\FOSFacebookBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

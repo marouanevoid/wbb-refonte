@@ -1,0 +1,205 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div id="editprofile" class="page">
+        <div class="margin-top-20">
+            <div id="view-account">
+                <div class="ui tips{% if is_mobile() and not is_tablet() %} mobile{% endif %}">
+
+                    <!-- Profile -->
+
+                        <div class="block-top wrap">
+                            <div class="avatar-profil left">
+                                <img src="{{ showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
+                            </div>
+
+                            <div class="group right">
+                                <div class="title text-transform-capitalize unbold">
+                                    <h5>{{ user.firstname }} {{ user.lastname }}</h5>
+                                </div>
+                                <div class="subgroup margin-top-10 wrap">
+                                    {% if user.prefStartCity or user.country %}
+                                        <div class="text-transform-capitalize text-align-center">
+                                            <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                                {% if user.prefStartCity %}
+                                                    {{ user.prefStartCity ~ ',' }}
+                                                {% endif %}
+                                                {% if user.country %}
+                                                    {{ user.country }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="btn-editprofile">
+                                        <a href="{{ path('fos_user_profile_edit') }}" class="btn radius-30">Edit Profile</a>
+                                    </div>
+                                </div> <!-- .subgroup.right -->
+                            </div> <!-- .group.right -->
+                            <div class="clear"></div>
+                        </div> <!-- .block-top -->
+                        <div class="clear"></div>
+
+
+                    <!-- Filter -->
+                        <div class="filter-profil padding-bottom-20 wrap">
+                            <div class="margin-top-80">
+                                <div class="disableClick"></div>
+                                <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
+                                <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                                <input type="radio" name="filter" data-tab="tips" value="({{ user.tips|length }}) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div> <!-- .filter-profil -->
+
+                    <!-- Separator -->
+                    <hr>
+                    <div class="clear"></div>
+
+                    <div id="tab-bars" class="tab margin-bottom-40 active">
+                        <!-- Filters -->
+                        <div class="container">
+                            <div class="margin-top-20">
+                                <div class="sort-by six columns">
+                                    <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+                                    <div class="four columns">
+                                        <select class="ui-dropdown light" name="criteria" id="criteria-bar">
+                                            <option value="date" data-type="criteria" selected="selected">Date</option>
+                                            <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                            <option value="city" data-type="criteria">City</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- .sort-by -->
+
+                                <div class="filter-view">
+                                    <div class="right">
+                                        <input type="radio" name="bars-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                        <input type="radio" name="bars-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                    </div>
+                                </div> <!-- .filter-view -->
+                            </div> <!-- .margin-top-20 -->
+                        </div> <!-- .container -->
+
+                        <!-- List of Bars -->
+                        <div class="margin-top-40 list-bars container">
+                            {# AJAX LOADING #}
+                        </div>
+
+                        <!-- Button See more Bars -->
+                        <div class="container">
+                            <div class="more-bars force-load load-container">
+                                <div class="load-target"></div>
+                                <div class="twelve columns align-center m-margin load-more-container">
+                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- #tab-bars -->
+                    <div class="clear"></div>
+
+                    <div id="tab-bestof"  class="bar-filter tab margin-bottom-40"style="display:none">
+                        <!-- Filters -->
+                        <div class="container">
+                            <div class="margin-top-20">
+                                <div class="sort-by six columns">
+                                    <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+                                    <div class="four columns">
+                                        <select class="ui-dropdown light" name="criteria" id="criteria-bestof">
+                                            <option value="date" data-type="criteria" selected="selected">Date</option>
+                                            <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                            <option value="city" data-type="criteria">City</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- .sort-by -->
+
+                                <div class="filter-view">
+                                    <div class="right">
+                                        <input type="radio" name="bestof-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                        <input type="radio" name="bestof-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                    </div>
+                                </div> <!-- .filter-view -->
+                            </div> <!-- .margin-top-20 -->
+                        </div> <!-- .container -->
+
+                        <!-- List of Bars -->
+                        <div class="margin-top-40 list-bestof container">
+                            {# AJAX LOADING #}
+                        </div>
+
+                        <!-- Button See more Bars -->
+                        <div class="container">
+                            <div class="more-bestofs force-load load-container">
+                                <div class="load-target"></div>
+                                <div class="twelve columns align-center m-margin load-more-container">
+                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Collections</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- #tab-bestof -->
+                    <div class="clear"></div>
+                    <div id="tab-tips" class="tab" style="display:none">
+                        <div class="full-cream padding-bottom-40">
+                            <!-- List of Tips -->
+                            <ul class="list-tips padding-top-40 container">
+
+                            </ul>
+                            <div class="clear"></div>
+
+                            <!-- Button See more Bars -->
+                            <div class="container">
+                                <div class="more-tips force-load load-container">
+                                    <div class="load-target"></div>
+                                    <div class="twelve columns align-center m-margin load-more-container">
+                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Tips</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- #tab-tips -->
+
+                </div>
+            </div> <!-- .margin-top-20 -->
+            <div class="clear"></div>
+        </div>
+    </div> <!-- #editprofile -->
+    {% block footerAd %}
+        {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'UP_728x90' })) }}
+    {% endblock %}
+
+    <script>
+        $(document).ready(function(){
+            new wbb.LoadProfile();
+            console.clear();
+            var tabElement = $("input[name='filter']");
+            tabElement.change(function(){
+                var currentTab = $(this).data("tab");
+                if (currentTab == "bars") {
+                    tabClose();
+                    $("#tab-bars").fadeIn("slow");
+                    $("#tab-bars").addClass("active");
+                } else if(currentTab == "bestof") {
+                    tabClose();
+                    $("#tab-bestof").fadeIn("slow");
+                    $("#tab-bestof").addClass("active");
+                } else if (currentTab == "tips") {
+                    tabClose();
+                    $("#tab-tips").fadeIn("slow");
+                    $("#tab-tips").addClass("active");
+                }
+            })
+            function tabClose(){
+                $(".tab").each(function(){
+                    if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                        $(this).fadeOut("fast");
+                    }
+                })
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="/bundles/wbbuser/js/modules/profile.wbb.js"></script>
+{% endblock %}
+

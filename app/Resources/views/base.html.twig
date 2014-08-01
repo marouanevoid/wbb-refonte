@@ -1,94 +1,196 @@
 <!DOCTYPE html>
 <html lang="fr" class="utf8">
-<head>
-    <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, initial-scale=1"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
+    <head>
+        <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, initial-scale=1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta charset="utf-8"/>
 
-    {% block meta %}
-        <meta name="description" content="{% block mDescription %}World Best Bars{% endblock %}" />
+        <title>{% block title %}{{ "World Best Bars"|trans }}{% endblock %}</title>
+        {% block meta %}
+            <meta name="description" content="{% block mDescription %}World Best Bars{% endblock %}" />
+        {% endblock %}
 
+        <link rel="icon" type="image/png" href="{{ asset('bundles/wbbcore/images/favicon.png') }}" />
 
-    {% endblock %}
+        <!--[if lt IE 9]>
+        <script src="{{ asset('bundles/wbbcore/js/plugins/html5.js') }}"></script>
+        <![endif]-->
+        <script type="text/javascript">
+            var ismobile, istablet;
+            ismobile = 0;
+            istablet = 0;
+            {% if is_mobile() and not is_tablet() %}ismobile = 1;{% endif %}
+            {% if is_tablet() %}istablet = 1;{% endif %}
+            {% if city is defined and city != ''  %}
+                window.isCity = true;
+            {% endif %}
+            var DEBUGMODE = "{{app.environment }}";
+        </script>
+            
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
-    <title>{% block title %}{{ "World Best Bars"|trans }}{% endblock %}</title>
+        {% block stylesheets %}
 
-    <link rel="stylesheet" media="screen" href="/bundles/wbbcore/css/front.css"/>
+            {% stylesheets filter="cssrewrite"
+                "bundles/wbbcore/css/front.css"
+                "bundles/wbbcore/css/wbb.css"
+                "bundles/wbbcore/css/main.css"
+            %}
 
-    <!-–[if lt IE 9]>
-    <script src="/bundles/wbbcore/js/plugins/html5.js"></script>
-    <![endif]–->
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.min.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.easing.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.velocity.min.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.transform3d.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/modernizr.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/placeholders.min.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.mousewheel.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.jscrollpane.js"></script>
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
 
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/utils.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/slider.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/ratio.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/loadMore.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/dropdown.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/radio.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/search.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/map.metabolism.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/libs/form.metabolism.js"></script>
+            {#{% javascripts#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.velocity.min.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.transform3d.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/modernizr.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.browser.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/app.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/wbb.js'#}
+                {#'@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'#}
+            {#%}#}
+            {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+            {#{% endjavascripts %}#}
+        {% endblock %}
 
-    <script type="text/javascript" src="/bundles/wbbcore/js/app.js"></script>
-    <script type="text/javascript" src="/bundles/wbbcore/js/anim.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.min.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.easing.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.velocity.min.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.transform3d.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/modernizr.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/placeholders.min.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.jscrollpane.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.cookie.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/utils.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/slider.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/ratio.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/loadMore.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/dropdown.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/selector.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/radio.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/search.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/form.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/app.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/tips.metabolism.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/geolocalisation.wbb.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/wbb.js"></script>
+        <script type="text/javascript" src="/bundles/wbbcore/js/libs/translate.wbb.js"></script>
 
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        {% block javascripts %}
 
-    <script type="text/javascript">
-        var MARKET  = "US";
-        var LANG    = "en";
-        var BASEURL = "/bundles/wbbcore/";
-        var TRAD    = { loading: 'Loading...'};
-    </script>
-    {% block javascripts %}
-    {% endblock %}
+        {% endblock %}
 
+        <script type="text/javascript">
+                var MARKET = "US";
+                var LANG = "en";
+                var BASEURL = "{{ asset('bundles/wbbcore/') }}";
+                window.userConnected = {% if app.user%}true{% else %}false{% endif %};
+        </script>
 
-</head>
+        {% if is_tablet() %}
+            <style type="text/css">
+                article.bar-wo-pic:hover {
+                    background: #faf3e1 !important;
+                }
+                article.bar-wo-pic:hover h2 {
+                    color: #333 !important;
+                }
+                article.bar-wo-pic:hover h3 {
+                    color: #B3955F !important;
+                }
+                article.bar-wo-pic .btn-round.star{
+                    background : #faf3e1 !important;
+                }
+                article.bar-wo-pic .btn-round.star.active, article.bar-wo-pic .btn-round.star:hover {
+                    border-color: transparent !important;
+                    background: transparent !important;
+                }
+            </style>
+        {% endif %}
+    </head>
 
-{% block bodyTag %}
-<body>
-{% endblock %}
-<div id="fb-root"></div>
+    {% block bodyTag %}
+        <body>
 
-<script type="text/javascript">
+        {% endblock %}
+        <div class="mask"></div>
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div id="register-light">
+                {% render url('wbb_user_registration_register_light') %}    
+            </div>
+            {{ include('WBBUserBundle:Registration:register_tips.html.twig') }}
+        {% endif %}
+        <div data-show="register" class="lighbox" id="show-popin"></div>
+        {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
+        <div id="fb-root"></div>
+        {{ facebook_initialize({'xfbml': true}) }}
+        <script>
+            function securityCheck() {
+                $.ajax({
+                    url: '{{ path('_security_check') }}',
+                    success: function(response) {
+                        if (response.code === '400') {
+                            alert('Create an account please !');
+                        } else {
+                            window.location.reload();
+                        }
+                    }
+                })
+            }
+        </script>
+        <script type="text/javascript">
 
-    //facebook
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    //twitter
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-
-</script>
-
-{% block header %}
-    {% include '::header.html.twig' %}
-{% endblock %}
-
-{% block body %}
-{% endblock %}
-
-{% block footer %}
-    {% include '::footer.html.twig' %}
-{% endblock %}
-
-</body>
+            //twitter
+            !function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + '://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }(document, 'script', 'twitter-wjs');
+        </script>
+        {% block header %}
+            {% include '::header.html.twig' %}
+        {% endblock %}
+        {% block body %}
+        {% endblock %}
+        <!-- AD -->
+        {% block footerAd %}
+            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
+        {% endblock %}
+        <script>
+        $(document).ready(function(){
+            $('.ui-dropdown-list-form').find('.ui-dropdown').on('click',function(){
+                $(this).find('li').css('display','list-item');
+            });
+        });
+        </script>
+        {% block footer %}
+            {% include '::footer.html.twig' %}
+        {% endblock %}
+    </body>
 </html>

@@ -1,0 +1,56 @@
+{% extends "::base.html.twig" %}
+{% block title %}World Best Bars{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/gmap3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/vendor/unserscore.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/vendor/backbone.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/modules/cities.wbb.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/map.metabolism.js') }}"></script>
+{% endblock %}
+{% block bodyTag %}
+<body class="cities">
+{% endblock %}
+{% block body %}
+
+{# The contenair #}
+<section class="cities-content">
+
+    {# The MAP #}
+    <div id="map"></div>
+
+    <div class="zoom">
+        <a class="plus btn-round brown"></a><br/>
+        <a class="minus btn-round brown"></a>
+    </div>
+
+    <div class="selector">
+        <div class="heading">
+            <h3>Find your city</h3>
+            <form class="s-margin" name="filter">
+                <input type="text" name="city" placeholder="Type your city name..."/>
+                <input type="submit" value=" "/>
+                <input type="reset" value=" "/>
+            </form>
+            {% if is_mobile() and not is_tablet() %}
+                <input type="radio" name="display-mode" value="map" checked="checked" class="ui-radio with-icon" data-color="brown"/>
+                <input type="radio" name="display-mode" value="list" class="ui-radio with-icon" data-color="brown"/>
+            {% endif %}
+        </div>
+
+        <div class="scrolls">
+            <div class="scroll-cities scroll custom-scroll">
+                <ul></ul>
+            </div>
+            <div class="scroll-bars scroll custom-scroll">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% block footerAd %}{% endblock %}
+{% endblock %}

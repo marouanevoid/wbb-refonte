@@ -67,18 +67,45 @@ class UserAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('username')
-                ->add('firstname')
-                ->add('lastname')
-                ->add('email')
-                ->add('plainPassword', 'text', array('required' => false))
+                ->add('title', 'choice', array(
+                    'help' => 'Mandatory',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => true,
+                    'choices'  => array(
+                        'Mrs'   =>  'Madam',
+                        'Miss'  =>  'Miss',
+                        'Mr'    =>  'Mister'
+                    )
+                ))
+                ->add('username', null, array('help' => 'Mandatory'))
+                ->add('email', null, array('help' => 'Mandatory'))
+                ->add('firstname', null, array('help' => 'Mandatory'))
+                ->add('lastname', null, array('help' => 'Mandatory'))
+                ->add('birthdate', null, array('help' => 'Mandatory'))
+                ->add('website')
+                ->add('country', null, array('help' => 'Mandatory'))
+                ->add('latitude', 'hidden')
+                ->add('longitude', 'hidden')
+                ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
+                ->add('plainPassword', 'text', array('required' => false, 'help' => 'Mandatory', 'label' => 'Password *'))
+            ->end()
+            ->with('Preferences')
+                ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefHome', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCity3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefStartCity', null, array('read_only' => true, 'disabled'  => true))
+                ->add('stayInformed')
             ->end()
         ;
 
-        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if(!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->with('Management')
                     ->add('roles', 'choice', array(
+                        'help' => 'Mandatory',
                         'expanded' => true,
                         'multiple' => true,
                         'required' => false,
@@ -114,10 +141,24 @@ class UserAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('username', 'show', 'label'))  => 'username',
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('firstname', 'show', 'label')) => 'firstname',
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))  => 'lastname',
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('email', 'show', 'label'))     => 'email',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('firstname', 'show', 'label'))           => 'firstname',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'lastname',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'birthdate',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'country.name',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity1', 'show', 'label'))           => 'prefCity1',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity2', 'show', 'label'))           => 'prefCity2',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity3', 'show', 'label'))           => 'prefCity3',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefBar1', 'show', 'label'))            => 'prefBar1',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefBar2', 'show', 'label'))            => 'prefBar2',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefBar3', 'show', 'label'))            => 'prefBar3',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefDrinkBrand1', 'show', 'label'))     => 'prefDrinkBrand1',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefDrinkBrand2', 'show', 'label'))     => 'prefDrinkBrand2',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefDrinkBrand3', 'show', 'label'))     => 'prefDrinkBrand3',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCocktails1', 'show', 'label'))      => 'prefCocktails1',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCocktails2', 'show', 'label'))      => 'prefCocktails2',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCocktails3', 'show', 'label'))      => 'prefCocktails3',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('stayInformed', 'show', 'label'))        => 'stayInformed',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('stayBrandInformed', 'show', 'label'))   => 'stayBrandInformed',
         );
     }
 

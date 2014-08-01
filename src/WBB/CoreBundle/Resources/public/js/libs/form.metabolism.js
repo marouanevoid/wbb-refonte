@@ -61,6 +61,16 @@ meta.Form = function(config){
         that.form.submit(function(e)
         {
             e.preventDefault();
+            var placeholder = 'Type a tip ...',
+                textarea = $("form#tips textarea").val();
+            if(textarea.indexOf(placeholder)>-1 || textarea.length == 0 || textarea == ""){
+
+                $("form#tips textarea").addClass('error');
+                return false;
+            }else{
+                $("form#tips textarea").removeClass('error');
+            }
+
             if( that.config.onSubmit )
             {
                 if( that.config.onSubmit() ) that._sendData();
@@ -76,21 +86,68 @@ meta.Form = function(config){
     that._sendData = function()
     {
         var data = that.form.serializeArray();
+        /*console.log(data[0].value.replace(/^\s+|\s+$/g,''));*/
         var url = that.form.attr('action');
+        var nbItems = 0;
 
-        $.post( url, data, function(data)
+        if(data[0].value.replace(/^\s+|\s+$/g,'')=="")
         {
-            if(data.code == 200)
+            $("form#tips textarea").val('');
+            that.form.find(".count").text("250 left");
+            $("form#tips textarea").focus();
+        }else
+        {
+            $.post( url, data, function(data)
             {
-                if( that.config.onComplete ) that.config.onComplete( that.form, data );
-                $('.line.first').prepend(data.tip);
-                $('.line.first .three:last-child').remove();
-            }
-            else
-            {
-                if( that.config.onError ) that.config.onError( that.form, data.message );
-            }
-        });
+                if(data.code == 200)
+                {
+                    if( that.config.onComplete )
+                        that.config.onComplete( that.form, data );
+                    if($('.line:last-child .three').length==0)
+                        $('.line:last-child').remove();
+                    nbItems = $('.insider-tips .tips-area .three').length;
+                    
+                    if(ismobile==1)
+                    {
+                        $('.line .tips-area').prepend(data.tip);
+                        if(nbItems>=3)
+                        {
+                            $('.line .tips-area:last-child .three:last-child').remove();
+                            $(".load-more").show();
+                            $(".load-more").parent().show();
+                        }
+                    }else
+                    {
+                        if(nbItems==0)
+                        {
+                            $('.line .tips-area').addClass('three').prepend(data.tip);
+                            $('#tipsForm').removeClass('six').addClass('three');
+                        }else
+                        {
+
+                                $('.line .tips-area .three:first-child').before(data.tip);
+                        }
+                        if(nbItems>=3)
+                        {
+                            $('.line .tips-area:last-child .three:last-child').remove();
+                            $(".load-more").show();
+                            $(".load-more").parent().show();
+                        }
+                    }
+
+                        
+                    $('.custom-scroll').not('.jspScrollable').each(function()
+                    {
+                        $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+                    });
+
+                }
+                else
+                {
+                    if( that.config.onError ) that.config.onError( that.form, data.message );
+                }
+            });
+        }
     };
 
     that.__construct(config);
