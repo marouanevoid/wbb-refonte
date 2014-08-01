@@ -83,10 +83,7 @@ class ProfileController extends ContainerAware
 
         return $this->container->get('templating')->renderResponse(
             'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
-            array(
-                'form' => $form->createView(),
-                'user' => $user
-            )
+            array('form' => $form->createView())
         );
     }
 }

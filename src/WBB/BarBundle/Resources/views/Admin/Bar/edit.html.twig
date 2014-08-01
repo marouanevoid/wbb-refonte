@@ -22,7 +22,7 @@ file that was distributed with this source code.
 {% block actions %}
     <div class="sonata-actions btn-group">
         {% if object.slug %}
-            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city.slug, suburb: object.suburb.slug, slug:object.slug}) }}" target="_blank">
+            <a class="btn sonata-action-element" href="{{ path('wbb_bar_details',{city:object.city, suburb: object.suburb.slug, slug:object.slug}) }}" target="_blank">
                 <i class="icon-zoom-in"></i>
                 {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
             </a>

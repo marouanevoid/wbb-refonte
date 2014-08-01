@@ -73,9 +73,9 @@
 
         <section class="bars">
             {% if is_mobile() and not is_tablet() %}
-            <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
+            <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1">
             {% else %}
-            <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
+            <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
             {% endif %}
 
             {% for b in topBars %}
@@ -101,9 +101,9 @@
 
             <div class="twelve columns">
                 {% if is_mobile() and not is_tablet() %}
-                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="8x3" data-display="3" style="display:none;">
+                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="8x3" data-display="3">
                 {% else %}
-                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="1x6" data-display="6" style="display:none;">
+                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="1x6" data-display="6">
                 {% endif %}
                 {% for c in topCities %}
                     <div class="ui-slide loading">
@@ -140,9 +140,9 @@
                     {% endif %}
                 </div>
                 {% if is_mobile() and not is_tablet() %}
-                    <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
+                    <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1">
                 {% else %}
-                        <div class="ui-slider type-bestof has_sizer arrows dots" data-size="3x3" data-display="3" style="display:none;">
+                        <div class="ui-slider type-bestof has_sizer arrows dots" data-size="3x3" data-display="3">
                 {% endif %}
 
                 {% for b in topBestofs %}

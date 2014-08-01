@@ -200,7 +200,7 @@ class BarController extends Controller
             $city = $this->get('city.repository')->findOneBySlug($slug);
 
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
-
+//        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
         $moods          = array(
             'Chill Out',
             'Casual',
@@ -260,7 +260,7 @@ class BarController extends Controller
         $session = $this->container->get('session');
         if($request->request->get('mood') != "")
         {
-            $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, 1, $request->request->get('mood'));
+            $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, $limit = 1, $request->request->get('mood'));
             $session->set('barfinder_mood', $mood);
         }else{
             $session->set('barfinder_mood', "empty");
@@ -560,16 +560,5 @@ class BarController extends Controller
             'bars'      =>  $youMayAlsoLike,
             'oneCity'   =>  $oneCity
         );
-    }
-
-    private function getBarFinderMoods()
-    {
-        $moodsFound = $this->container->get('tag.repository')->findBarFinderMoods();
-        $moods = array();
-        foreach($moodsFound as $mood){
-            $moods[] = $mood['name'];
-        }
-
-        return $moods;
     }
 }

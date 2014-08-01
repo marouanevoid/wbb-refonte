@@ -2,15 +2,16 @@
 
 namespace WBB\CoreBundle\Entity;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\News;
-use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
+use WBB\BarBundle\Entity\Bar;
+use WBB\CoreBundle\Entity\CitySuburb;
+use WBB\CoreBundle\Entity\CityBestOf;
+use WBB\CoreBundle\Entity\Collections\CityTag;
+use WBB\CoreBundle\Entity\Country;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
-use WBB\UserBundle\Entity\User;
 
 /**
  * City
@@ -450,10 +451,10 @@ class City implements IndexableEntity
     /**
      * Add users
      *
-     * @param User $users
+     * @param \WBB\UserBundle\Entity\User $users
      * @return City
      */
-    public function addUser(User $users)
+    public function addUser(\WBB\UserBundle\Entity\User $users)
     {
         $this->users[] = $users;
 
@@ -463,9 +464,9 @@ class City implements IndexableEntity
     /**
      * Remove users
      *
-     * @param User $users
+     * @param \WBB\UserBundle\Entity\User $users
      */
-    public function removeUser(User $users)
+    public function removeUser(\WBB\UserBundle\Entity\User $users)
     {
         $this->users->removeElement($users);
     }
@@ -498,10 +499,10 @@ class City implements IndexableEntity
     /**
      * Set image
      *
-     * @param Media $image
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
      * @return City
      */
-    public function setImage(Media $image = null)
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
     {
         $this->image = $image;
 
@@ -511,7 +512,7 @@ class City implements IndexableEntity
     /**
      * Get image
      *
-     * @return Media
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getImage()
     {
@@ -521,10 +522,10 @@ class City implements IndexableEntity
     /**
      * Add semsoftBars
      *
-     * @param SemsoftBar $semsoftBars
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
      * @return City
      */
-    public function addSemsoftBar(SemsoftBar $semsoftBars)
+    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
     {
         $this->semsoftBars[] = $semsoftBars;
 
@@ -534,9 +535,9 @@ class City implements IndexableEntity
     /**
      * Remove semsoftBars
      *
-     * @param SemsoftBar $semsoftBars
+     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
      */
-    public function removeSemsoftBar(SemsoftBar $semsoftBars)
+    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
     {
         $this->semsoftBars->removeElement($semsoftBars);
     }
@@ -554,10 +555,10 @@ class City implements IndexableEntity
     /**
      * Add news
      *
-     * @param News $news
+     * @param \WBB\BarBundle\Entity\News $news
      * @return City
      */
-    public function addNews(News $news)
+    public function addNews(\WBB\BarBundle\Entity\News $news)
     {
         $this->news[] = $news;
 
@@ -567,9 +568,9 @@ class City implements IndexableEntity
     /**
      * Remove news
      *
-     * @param News $news
+     * @param \WBB\BarBundle\Entity\News $news
      */
-    public function removeNews(News $news)
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
     {
         $this->news->removeElement($news);
     }
@@ -587,10 +588,10 @@ class City implements IndexableEntity
     /**
      * Add userHomes
      *
-     * @param User $userHomes
+     * @param \WBB\UserBundle\Entity\User $userHomes
      * @return City
      */
-    public function addUserHome(User $userHomes)
+    public function addUserHome(\WBB\UserBundle\Entity\User $userHomes)
     {
         $this->userHomes[] = $userHomes;
 
@@ -600,9 +601,9 @@ class City implements IndexableEntity
     /**
      * Remove userHomes
      *
-     * @param User $userHomes
+     * @param \WBB\UserBundle\Entity\User $userHomes
      */
-    public function removeUserHome(User $userHomes)
+    public function removeUserHome(\WBB\UserBundle\Entity\User $userHomes)
     {
         $this->userHomes->removeElement($userHomes);
     }
@@ -620,10 +621,10 @@ class City implements IndexableEntity
     /**
      * Add userCities1
      *
-     * @param User $userCities1
+     * @param \WBB\UserBundle\Entity\User $userCities1
      * @return City
      */
-    public function addUserCities1(User $userCities1)
+    public function addUserCities1(\WBB\UserBundle\Entity\User $userCities1)
     {
         $this->userCities1[] = $userCities1;
 
@@ -633,9 +634,9 @@ class City implements IndexableEntity
     /**
      * Remove userCities1
      *
-     * @param User $userCities1
+     * @param \WBB\UserBundle\Entity\User $userCities1
      */
-    public function removeUserCities1(User $userCities1)
+    public function removeUserCities1(\WBB\UserBundle\Entity\User $userCities1)
     {
         $this->userCities1->removeElement($userCities1);
     }
@@ -653,10 +654,10 @@ class City implements IndexableEntity
     /**
      * Add userCities2
      *
-     * @param User $userCities2
+     * @param \WBB\UserBundle\Entity\User $userCities2
      * @return City
      */
-    public function addUserCities2(User $userCities2)
+    public function addUserCities2(\WBB\UserBundle\Entity\User $userCities2)
     {
         $this->userCities2[] = $userCities2;
 
@@ -666,9 +667,9 @@ class City implements IndexableEntity
     /**
      * Remove userCities2
      *
-     * @param User $userCities2
+     * @param \WBB\UserBundle\Entity\User $userCities2
      */
-    public function removeUserCities2(User $userCities2)
+    public function removeUserCities2(\WBB\UserBundle\Entity\User $userCities2)
     {
         $this->userCities2->removeElement($userCities2);
     }

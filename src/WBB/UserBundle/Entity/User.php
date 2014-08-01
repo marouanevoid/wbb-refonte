@@ -2,7 +2,6 @@
 
 namespace WBB\UserBundle\Entity;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -102,148 +101,88 @@ class User extends BaseUser
     private $prefHome;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
+     * @var string
+     *
+     * @ORM\Column(name="pref_city1", type="string", length=255, nullable=true)
      */
     private $prefCity1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
+     * @var string
+     *
+     * @ORM\Column(name="pref_city2", type="string", length=255, nullable=true)
      */
     private $prefCity2;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
+     * @var string
+     *
+     * @ORM\Column(name="pref_city3", type="string", length=255, nullable=true)
      */
     private $prefCity3;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_city1", type="string", length=255, nullable=true)
-//     */
-//    private $prefCity1;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_city2", type="string", length=255, nullable=true)
-//     */
-//    private $prefCity2;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_city3", type="string", length=255, nullable=true)
-//     */
-//    private $prefCity3;
-
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar1", type="string", length=255, nullable=true)
      */
     private $prefBar1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar2", type="string", length=255, nullable=true)
      */
     private $prefBar2;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar3", type="string", length=255, nullable=true)
      */
     private $prefBar3;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_bar1", type="string", length=255, nullable=true)
-//     */
-//    private $prefBar1;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_bar2", type="string", length=255, nullable=true)
-//     */
-//    private $prefBar2;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_bar3", type="string", length=255, nullable=true)
-//     */
-//    private $prefBar3;
-
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_1", type="string", length=255, nullable=true)
      */
     private $prefDrinkBrand1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_2", type="string", length=255, nullable=true)
      */
     private $prefDrinkBrand2;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
      */
     private $prefDrinkBrand3;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_drink_brand_1", type="string", length=255, nullable=true)
-//     */
-//    private $prefDrinkBrand1;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_drink_brand_2", type="string", length=255, nullable=true)
-//     */
-//    private $prefDrinkBrand2;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
-//     */
-//    private $prefDrinkBrand3;
-
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_1", type="string", length=255, nullable=true)
      */
     private $prefCocktails1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_2", type="string", length=255, nullable=true)
      */
     private $prefCocktails2;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_3", type="string", length=255, nullable=true)
      */
     private $prefCocktails3;
-
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_cocktails_1", type="string", length=255, nullable=true)
-//     */
-//    private $prefCocktails1;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_cocktails_2", type="string", length=255, nullable=true)
-//     */
-//    private $prefCocktails2;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_cocktails_3", type="string", length=255, nullable=true)
-//     */
-//    private $prefCocktails3;
 
     /**
      * @var boolean
@@ -303,11 +242,6 @@ class User extends BaseUser
      * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
      */
     private $tipsShouldBeModerated;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
-     */
-    private $avatar;
 
     /**
      * @var datetime
@@ -1233,28 +1167,5 @@ class User extends BaseUser
     public function getStayBrandInformed()
     {
         return $this->stayBrandInformed;
-    }
-
-    /**
-     * Set avatar
-     *
-     * @param Media $avatar
-     * @return User
-     */
-    public function setAvatar(Media $avatar = null)
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return Media
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
     }
 }

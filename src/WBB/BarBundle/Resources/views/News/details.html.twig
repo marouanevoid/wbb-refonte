@@ -1,31 +1,5 @@
 {% extends "::base.html.twig" %}
 {% block title %}{{ news.title }} | World Best Bars{% endblock %}
-{% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
-
-{% block meta %}
-    <meta name="description" content="{{ news.seoDescription|slice(0, 150) }}" />
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@wbb">
-    <meta name="twitter:title" content="{{ news.title }} | World Best Bars">
-    <meta name="twitter:description" content="{{ news.seoDescription|slice(0, 150) }}">
-    <meta name="twitter:creator" content="@wbb">
-    <meta property="twitter:url" content="{{ currentPath| bitly }}" />
-
-    <!-- Open Graph data -->
-    <meta property="og:title" content="{{ news.title }} | World Best Bars" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ currentPath| bitly }}" />
-    <meta property="og:description" content="{{ news.seoDescription|slice(0, 200) }}" />
-    <meta property="og:site_name" content="World Best Bars" />
-    <meta property="fb:admins" content="149071961796732" />
-    {% for m in news.medias|slice(0,1) %}
-        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}">
-        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}" />
-    {% endfor %}
-{% endblock %}
-
-
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
@@ -33,7 +7,6 @@
             initializeSliders();
         });
     </script>
-    <script type="text/javascript" src="{{ asset('bundles/wbbbar/js/social-share.js') }}"></script>
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}

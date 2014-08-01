@@ -133,7 +133,7 @@ $(document).ready(function() {
     });
 });
 
-// Popin
+// Register Popin
 jQuery(document).ready(function($) {
     // Click anywhere on the page to get rid of lightbox window
     $('.mask').hide();
@@ -177,13 +177,13 @@ $(document).ready(function() {
         e.preventDefault();
         var btn = $(this);
         var url = $(this).attr('href');
-//        var url = "/app_dev.php"; //comment this line if you want it to work
-        if (window.userConnected) {
+        var url = "/app_dev.php"; //comment this line if you want it to work
+//        if (window.userConnected) {
             $.ajax({
                 type: "POST",
                 url: url,
                 success: function(response) {
-                   if (response.code === 200) {
+//                   if (response.code === 200) {
                         btn.attr('href', response.href);
                         if (btn.hasClass('active')) {
                             btn.hide();
@@ -211,13 +211,13 @@ $(document).ready(function() {
                             btn.show();
                         }
                         console.log(response.message);
-                    } else {
-
-                    }
+//                    } else {
+//
+//                    }
                 }
             });
-        } else {
-             $('#show-popin').click();
-        }
+//        } else {
+//             $('#show-popin-tips').click();
+//        }
     });
 });

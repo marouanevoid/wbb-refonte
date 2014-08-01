@@ -2042,8 +2042,8 @@ class Bar implements IndexableEntity
             'FoursquareLikes'       => '',
             'FoursquareCheckIns'    => '',
             'FoursquareTips'        => '',
-            'IsPermanentlyClosed'   => '',//($ this -> get Status () = = Bar :: BAR_STATUS_DISABLED_VALUE ) ? "true" : '',
-            'BusinessFound'         => '',//($ this -> getStatus () = = Bar :: BAR_STATUS_ENABLED_VALUE) ? "true" : '',
+            'IsPermanentlyClosed'   => ($this->getStatus() == Bar::BAR_STATUS_DISABLED_VALUE)? "true" : '',
+            'BusinessFound'         => ($this->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE)? "true" : '',
             'Updated Columns'       => '',
             'Overwritten Columns'   => ''
         );

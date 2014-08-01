@@ -17,7 +17,6 @@ parameters:
 
     #CRUD Controllers
     wbb_bar.tip.crud.class: WBBBarBundle:CRUD\TipCRUD
-    wbb_bar.semsoft.crud.class: WBBBarBundle:CRUD\SemsoftCRUD
 
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
@@ -61,7 +60,7 @@ services:
         class: %wbb_bar.semsoftbar.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: semsoft_bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.semsoftbar.entity.class%, %wbb_bar.semsoft.crud.class%]
+        arguments: [null, %wbb_bar.semsoftbar.entity.class%, SonataAdminBundle:CRUD]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
             - [setTemplates, [{ edit: "WBBBarBundle:Admin:Semsoft/edit.html.twig" }]]

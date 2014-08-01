@@ -42,21 +42,6 @@ class CityController extends Controller
         ));
     }
 
-    //Returns a list of all cities
-    public function allCitiesAction()
-    {
-        $cities = $this->container->get('city.repository')->findAll();
-
-        $response = array();
-
-        foreach($cities as $city)
-        {
-            $response[$city->getName().'/'.$city->getCountry()] = $city->getName().'/'.$city->getCountry();
-        }
-
-        return new JsonResponse($response);
-    }
-
     public function nearestCityAction($latitude, $longitude)
     {
         $session = $this->container->get('session');

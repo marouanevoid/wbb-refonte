@@ -69,8 +69,8 @@ class RegistrationController extends ContainerAware
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-//                $session = $this->container->get('session');
-//                $session->save();
+                $session = $this->container->get('session');
+                $session->save();
 
                 return $response;
             }
