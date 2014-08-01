@@ -59,9 +59,16 @@ class SemsoftController extends Controller
 
         $bar = $ssBar->getUpdatedBar();
 
-        $em->persist($bar);
-        $em->remove($ssBar);
-        $em->flush();
+        if($bar->getCity() and $bar->getSuburb())
+        {
+            $em->persist($bar);
+            $em->remove($ssBar);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Merge Successful !');
+        }else{
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Merge incomplete : City or suburb missing !');
+        }
 
         return new RedirectResponse($this->generateUrl("admin_wbb_bar_semsoft_semsoftbar_list"));
     }
