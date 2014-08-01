@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <div id="editprofile" class="page margin-bottom-20">
+    <div id="editprofile" class="page">
         <div class="margin-top-20">
             <div id="view-account">
                 <div class="ui tips{% if is_mobile() and not is_tablet() %} mobile{% endif %}">
@@ -54,7 +54,7 @@
                     <hr>
                     <div class="clear"></div>
 
-                    <div id="tab-bars" class="tab active">
+                    <div id="tab-bars" class="tab margin-bottom-40 active">
                         <!-- Filters -->
                         <div class="container">
                             <div class="margin-top-20">
@@ -96,7 +96,7 @@
                     </div><!-- #tab-bars -->
                     <div class="clear"></div>
 
-                    <div id="tab-bestof"  class="bar-filter tab"style="display:none">
+                    <div id="tab-bestof"  class="bar-filter tab margin-bottom-40"style="display:none">
                         <!-- Filters -->
                         <div class="container">
                             <div class="margin-top-20">
@@ -130,15 +130,14 @@
                             <div class="more-bestofs force-load load-container">
                                 <div class="load-target"></div>
                                 <div class="twelve columns align-center m-margin load-more-container">
-                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Collections</a>
                                 </div>
                             </div>
                         </div>
                     </div><!-- #tab-bestof -->
                     <div class="clear"></div>
-
-                    <div id="tab-tips" class="tab"style="display:none">
-                        <div class="full-cream">
+                    <div id="tab-tips" class="tab" style="display:none">
+                        <div class="full-cream padding-bottom-40">
                             <!-- List of Tips -->
                             <ul class="list-tips padding-top-40 container">
 
@@ -150,7 +149,7 @@
                                 <div class="more-tips force-load load-container">
                                     <div class="load-target"></div>
                                     <div class="twelve columns align-center m-margin load-more-container">
-                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Tips</a>
                                     </div>
                                 </div>
                             </div>

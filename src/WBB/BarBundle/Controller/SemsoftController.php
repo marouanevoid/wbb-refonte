@@ -85,11 +85,17 @@ class SemsoftController extends Controller
 
             $file['file']->move('upload', 'import.csv');
             $file = new \SplFileObject($this->container->getParameter('kernel.root_dir').'/../web/upload/import.csv');
-            $reader = new CsvReader($file, ';');
+            $reader = new CsvReader($file, ',');
 
             $reader->setHeaderRowNumber(0);
             foreach ($reader as $data)
             {
+                if(!isset($data['Id'])){
+                    $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Errors during import : File not valid !');
+
+                    return new RedirectResponse($this->get('router')->generate('admin_wbb_bar_semsoft_semsoftbar_list'));
+                }
+
                 $ssBar = new SemsoftBar();
                 $bar = null;
                 $newBar = true;
