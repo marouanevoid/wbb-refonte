@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Ddeboer\DataImport\Reader\CsvReader;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BarOpening;
@@ -87,6 +88,9 @@ class SemsoftController extends Controller
             $file = new \SplFileObject($this->container->getParameter('kernel.root_dir').'/../web/upload/import.csv');
             $reader = new CsvReader($file, ',');
 
+            $outPut = $this->createOutPutStream();
+            $fullImport = true;
+
             $reader->setHeaderRowNumber(0);
             foreach ($reader as $data)
             {
@@ -153,15 +157,29 @@ class SemsoftController extends Controller
                     $ssBar = $this->getOpenings($ssBar, $data);
 
                     $em->persist($ssBar);
+                }else{
+                    fputcsv($outPut, $data, ',');
+                    $fullImport = false;
                 }
             }
 
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
-        }
+            if($fullImport){
+                fclose($outPut);
+                return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
+            }else{
+                $content = stream_get_contents($outPut);
+                fclose($outPut);
 
-        return $this->render('WBBBarBundle:Block:empty_block.html.twig');
+                return new Response($content, 200, array(
+                    'Content-Type' => 'application/force-download',
+                    'Content-Disposition' => 'attachment; filename="export.csv"'
+                ));
+            }
+        }
+        $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Errors during import : Form not valid !');
+        return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
     }
 
     public function exportAction()
@@ -171,19 +189,8 @@ class SemsoftController extends Controller
 
             $em = $container->get('doctrine')->getManager();
             $results = $em->getRepository('WBBBarBundle:Bar')->getExportQuery()->iterate();
-            $handle = fopen('php://output', 'r+');
 
-            fputcsv($handle, array(
-                'Id', 'Name', 'Country', 'County', 'City', 'PostalCode', 'District', 'Street1', 'Street2',
-                'Intro', 'Description', 'GeocoordinateString', 'Website', 'Email', 'Phone', 'MondayOpenHours',
-                'TuesdayOpenHours', 'WednesdayOpenHours', 'ThursdayOpenHours', 'FridayOpenHours', 'SaturdayOpenHours',
-                'SundayOpenHours', 'Category', 'Mood', 'OutdoorSeating', 'HappyHour', 'Wifi', 'PriceRange', 'PaymentAccepted',
-                'RestaurantServices', 'MenuUrl', 'Booking', 'ParkingType', 'PublicTransport', 'FacebookId', 'FacebookUserPage',
-                'TwitterName', 'TwitterUserPage', 'InstagramId', 'InstagramUserPage', 'GooglePlusUserPage', 'FoursquareId',
-                'FoursquareUserPage', 'FacebookLikes', 'FacebookCheckins', 'FoursquareLikes', 'FoursquareCheckIns',
-                'FoursquareTips', 'IsPermanentlyClosed', 'BusinessFound', 'Updated Columns', 'Overwritten Columns'
-            ), ',');
-
+            $handle = $this->createOutPutStream();
             while (false !== ($row = $results->next())) {
                 fputcsv($handle, $row[0]->toCSVArray(), ',');
                 $em->detach($row[0]);
@@ -420,5 +427,23 @@ class SemsoftController extends Controller
                 }
             }
         }
+    }
+
+    private function createOutPutStream()
+    {
+        $handle = fopen('php://output', 'r+');
+
+        fputcsv($handle, array(
+            'Id', 'Name', 'Country', 'County', 'City', 'PostalCode', 'District', 'Street1', 'Street2',
+            'Intro', 'Description', 'GeocoordinateString', 'Website', 'Email', 'Phone', 'MondayOpenHours',
+            'TuesdayOpenHours', 'WednesdayOpenHours', 'ThursdayOpenHours', 'FridayOpenHours', 'SaturdayOpenHours',
+            'SundayOpenHours', 'Category', 'Mood', 'OutdoorSeating', 'HappyHour', 'Wifi', 'PriceRange', 'PaymentAccepted',
+            'RestaurantServices', 'MenuUrl', 'Booking', 'ParkingType', 'PublicTransport', 'FacebookId', 'FacebookUserPage',
+            'TwitterName', 'TwitterUserPage', 'InstagramId', 'InstagramUserPage', 'GooglePlusUserPage', 'FoursquareId',
+            'FoursquareUserPage', 'FacebookLikes', 'FacebookCheckins', 'FoursquareLikes', 'FoursquareCheckIns',
+            'FoursquareTips', 'IsPermanentlyClosed', 'BusinessFound', 'Updated Columns', 'Overwritten Columns'
+        ), ',');
+
+        return $handle;
     }
 }
