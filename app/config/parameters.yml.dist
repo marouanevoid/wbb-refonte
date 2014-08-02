@@ -47,3 +47,15 @@ parameters:
     facebook_app_secret:    test
 
     bitly_access_token: 2dc4e633c58b8a735d59724a667ccaacc0c9b11e
+
+    lsw_memcache:
+        session:
+            client: default
+            prefix: "session_"
+            ttl: 7200
+            locking: true
+            spin_lock_wait: 150000
+        clients:
+            default:
+                hosts:
+                  - { dsn: wbb-staging.fkektq.0001.use1.cache.amazonaws.com, port: 11211 }
