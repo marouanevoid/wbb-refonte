@@ -60,7 +60,9 @@ class ProfileFormType extends BaseType
             ->add('firstname')
             ->add('lastname')
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-            ->add('birthdate')
+            ->add('birthdate', 'date', array(
+                'years' => range(1900, date('Y'))
+            ))
             ->add('country')
             ->add('prefCity1', null, array('empty_value' => 'Choose a city'))
             ->add('prefCity2', null, array('empty_value' => 'Choose a city'))

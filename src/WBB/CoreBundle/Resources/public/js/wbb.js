@@ -133,7 +133,7 @@ $(document).ready(function() {
     });
 });
 
-// Register Popin
+// Popin
 jQuery(document).ready(function($) {
     // Click anywhere on the page to get rid of lightbox window
     $('.mask').hide();
@@ -218,7 +218,6 @@ $(document).ready(function() {
             });
         } else {
              $('#show-popin').click();
-             $('#show-popin-tips').click(); //remove this line
         }
     });
 });

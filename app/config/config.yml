@@ -31,6 +31,7 @@ twig:
             - 'StnwDatePickerBundle:Form:fields.html.twig'
     globals:
         feedsLimit: %feeds_limit%
+        websiteUrl: %website_url%
 
 # Assetic Configuration
 assetic:
