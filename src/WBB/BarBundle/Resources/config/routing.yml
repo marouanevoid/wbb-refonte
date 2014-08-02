@@ -76,6 +76,10 @@ wbb_bar_tips_add:
     options:
         expose: true
 
+wbb_bar_tips_delete:
+    pattern: /tips/delete/{tipId}
+    defaults: { _controller: WBBBarBundle:Tips:delete }
+
 #wbb_bar_tips_fetch:
 #    pattern:  /tips/fetch/{barID}/{offset}/{limit}
 #    defaults: { _controller: WBBBarBundle:Tips:loadTips, offset: 3, limit: 8 }
