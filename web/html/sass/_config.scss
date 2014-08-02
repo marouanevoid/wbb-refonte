@@ -1,0 +1,39 @@
+/* Size
+--------------------------------------------------- */
+    $footer-height :        105px;
+    $header-height :        13em;
+    $document-max-width :   1280px;
+
+
+/* Grid
+--------------------------------------------------- */
+    $grid-max-width:           1200px;
+    $grid-breakpoint-mobile:   768px;
+
+/* Colors
+--------------------------------------------------- */
+    $color-brown:         #b3955f;
+    $color-brown-dark:    #7e613f;
+    $color-subtle-yellow: #ffe4af;
+    $color-cream:         #faf3e1;
+    $color-gray:          #4b4d4e;
+    $color-dark-gray:     #333333;
+    $color-medium-gray:   #818a8c;
+    $color-light-gray:    #6f7072;
+    $color-ultralight-gray: #c8c9cb;
+    $color-error:         #cc4a45;
+    $color-success:       #4acc4f;
+
+/* Margins
+--------------------------------------------------- */
+    $margin-padding-xs:  5px;
+    $margin-padding-s:   15px;
+    $margin-padding-m:   25px;
+    $margin-padding-l:   45px;
+    $margin-padding-xl:  75px;
+    $margin-padding-xxl: 100px;
+
+@mixin reduceFlickering()
+{
+  -webkit-backface-visibility: hidden; border:1px solid transparent; -moz-transform:rotate(0); box-sizing: border-box;
+}

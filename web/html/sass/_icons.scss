@@ -1,0 +1,149 @@
+.btn-small-radius, .btn-round, .btn-radius, .btn-small-round{
+
+  &.brown{ color: $color-brown; border-color: $color-brown }
+  &.brown.active{ color: $color-cream; border-color: $color-cream }
+  &.brown:hover{ background: $color-brown!important; color: $color-cream; border-color: $color-brown }
+
+  &.dark{ color: $color-dark-gray; background: $color-dark-gray; opacity: 0.8 }
+  &.dark:hover{ opacity: 1 }
+}
+
+.btn-round{
+
+  &.star{
+    &:before{ background-position: 0 0 }
+    &:after{ background-position: 0 -40px }
+  }
+
+  &.scrolltop{
+    border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-bottom: 0; background: $color-brown; position: absolute; bottom: 100%; right: 1em;
+    &:before{ background-position: -120px -360px }
+    &:after{ display: none }
+  }
+
+  &.star.active{
+    border-color: $color-brown; background: $color-brown;
+    &:before{ background-position: -160px -240px }
+    &:after{ display: none }
+  }
+
+  &.dark.star{
+    &:before{ background-position: -160px -80px }
+    &:after{ display: none }
+  }
+
+  &.dark.star.active{
+    opacity: 1; background: #333; border-color: #333;
+    &:before{ background-position: -200px -160px }
+  }
+
+  &.share{
+    &:before{ background-position: -40px 0 }
+    &:after{ background-position: -40px -40px }
+  }
+
+  &.foursquare{
+    &:before{ background-position: -120px -80px }
+    &:after{ display: none }
+  }
+
+  &.instagram{
+    &:before{ background-position: -80px -80px }
+    &:after{ display: none }
+  }
+
+  &.close{
+    &:before{ background-position: -120px -0px }
+    &:after{ background-position: -120px -40px }
+  }
+
+  &.plus{
+    &:before{ background-position: -80px -0px }
+    &:after{ background-position: -80px -40px }
+  }
+
+  &.minus{
+    &:before{ background-position: 0px -360px }
+    &:after{ background-position: 0px -400px }
+  }
+
+}
+
+.btn-radius.with-icon{
+
+  &.city, &.map{
+    &:before{ background-position: -212px -2px }
+    &:after{ background-position: -212px -42px }
+  }
+
+  &.friend{
+    &:before{ background-position: -12px -200px }
+    &:after{ background-position: -12px -240px }
+    &.active:after{ opacity: 1 }
+  }
+
+  &.chillout{
+    &:before{ background-position: -52px -200px }
+    &:after{ background-position: -52px -240px }
+  }
+
+  &.casual{
+    &:before{ background-position: -92px -200px }
+    &:after{ background-position: -92px -240px }
+  }
+
+  &.party{
+    &:before{ background-position: -132px -200px }
+    &:after{ background-position: -132px -240px }
+  }
+
+  &.grid{ padding-right: 1.2em!important;
+    &:before{ background-position: -0px -320px; width: 40px!important; left: 0.4em!important; }
+    &:after{ background-position: -0px -280px; width: 40px!important; left: 0.4em!important; }
+  }
+
+  &.list{ padding-right: 1.2em!important;
+    &:before{ background-position: -40px -320px; width: 40px!important; left: 0.4em!important; }
+    &:after{ background-position: -40px -280px; width: 40px!important; left: 0.4em!important; }
+  }
+}
+
+.btn-small-round{
+
+  &.www{
+    &:before{ background-position:-5px -125px }
+    &:after{ background-position: -5px -165px }
+  }
+
+  &.twitter{
+    border-color: #00c3f3;
+    &:hover{ background: #00c3f3 }
+    &:before{ background-position:-45px -125px }
+    &:after{ background-position: -45px -165px }
+  }
+
+  &.facebook{
+    border-color: #2960a3;
+    &:hover{ background: #2960a3 }
+    &:before{ background-position:-86px -125px }
+    &:after{ background-position: -86px -165px }
+  }
+
+  &.instagram{
+    border-color: #818a8c;
+    &:hover{ background: #818a8c }
+    &:before{ background-position:-165px -165px }
+    &:after{ background-position: -165px -205px }
+  }
+
+  &.foursquare{
+    border-color: #209fca;
+    &:hover{ background: #209fca }
+    &:before{ background-position:-125px -125px }
+    &:after{ background-position: -125px -165px }
+  }
+}
+
+.finder-close{
+  &:before{ background-position:-160px -120px }
+}
