@@ -61,8 +61,11 @@ class CityRepository extends EntityRepository
             ->select($this->getAlias())
             ->leftJoin($this->getAlias().".country", "c")
             ->where($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)))
-            ->andWhere($qb->expr()->eq('c.id', $country->getId()))
         ;
+
+        if($country){
+            $qb->andWhere($qb->expr()->eq('c.id', $country->getId()));
+        }
 
         return $qb->getQuery()->getOneOrNullResult();
     }
