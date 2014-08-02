@@ -8,40 +8,42 @@
 
                 <div class="margin-top-20">
                     <div id="edit-account">
-                        <div class="avatar-profil left">
-                            <img src="{{  showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
-                        </div>
                         <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-                            <div class="group right">
-                                <div class="title text-transform-capitalize unbold">
-                                    <h5>{{ user.firstname }} {{ user.lastname }}</h5>
+                            <div class="block-top wrap">
+                                <div class="avatar-profil left">
+                                    <img src="{{  showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
                                 </div>
-                                <div class="subgroup margin-top-10 margin-bottom-40 wrap">
-                                    {% if user.prefStartCity or user.country %}
-                                        <div class="text-transform-capitalize text-align-center">
-                                            <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
-                                                {% if user.prefStartCity %}
-                                                    {{ user.prefStartCity ~ ',' }}
-                                                {% endif %}
-                                                {% if user.country %}
-                                                    {{ user.country }}
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    {% else %}
-                                        <div class="text-transform-capitalize text-align-center">
-                                            <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
-                                                Not set
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                    <div class="form-group">
-                                        <div class="file-image wrap">
-                                            {{ form_widget(form.avatar, { 'attr' : { 'class': 'form-file no-text' } }) }}
-                                        </div>
+                                <div class="group left">
+                                    <div class="title text-transform-capitalize unbold">
+                                        <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                                     </div>
-                                </div> <!-- .subgroup.right -->
-                            </div> <!-- .group.right -->
+                                    <div class="subgroup margin-top-10 margin-bottom-40 wrap">
+                                        {% if user.prefStartCity or user.country %}
+                                            <div class="text-transform-capitalize text-align-center">
+                                                <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                                    {% if user.prefStartCity %}
+                                                        {{ user.prefStartCity ~ ',' }}
+                                                    {% endif %}
+                                                    {% if user.country %}
+                                                        {{ user.country }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="text-transform-capitalize text-align-center">
+                                                <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                                    Not set
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            <div class="file-image wrap">
+                                                {{ form_widget(form.avatar, { 'attr' : { 'class': 'form-file no-text' } }) }}
+                                            </div>
+                                        </div>
+                                    </div> <!-- .subgroup.right -->
+                                </div> <!-- .group.right -->
+                            </div>
 
                             <div class="clear"></div>
                             <div class="select-two margin-top-10">

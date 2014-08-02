@@ -329,7 +329,7 @@
   #editprofile .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
-  #editprofile .avatar-profil {position: absolute;}
+  #editprofile .avatar-profil {/*position: absolute;*/}
   #editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
   #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.gif") no-repeat 0 0;}
   #editprofile .file-image:hover {cursor: pointer;}
@@ -342,10 +342,10 @@
   #editprofile #edit-account .group-form.checkbox label {width: 397px; font-size: 13px;}
   #editprofile #edit-account .group-actions {width: 300px; margin-right: 15px;}
 /* UserProfile */
-  #view-account .filter-profil {width: 660px; font-size: 18px;}
-  #view-account .filter-profil a.ui-radio {text-align: center; width: 160px;}
+  #view-account .filter-profil {width: 660px; font-size: 18px; clear: both;}
+  #view-account .filter-profil a.ui-radio {text-align: center; width: 164px;}
   #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
-  #view-account .block-top {width: 520px;}
+  #editprofile .block-top {width: 660px; overflow: hidden;}
   #view-account .list-bars li {margin-bottom: 10px;}
   #view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
@@ -397,6 +397,8 @@
   #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type {padding-right: 10px;}
   #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
   #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px!important;}
+  #editprofile.mobile #view-account .ui .group.left {margin: 0 auto!important; width: 50%; float: none; overflow: hidden;}
+  #editprofile.mobile #view-account .ui .subgroup.wrap {width: 100%;}
 
   /*
   #editprofile.mobile #view-account .ui .list-bars .col {margin: 0;}
@@ -515,9 +517,10 @@
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}
+    #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
   }
 
-  /* iPad */
+  /* iPad Only */
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
     .social-share .fb-share {
       background-image: url("../images/fb@2x.png");

@@ -1,23 +1,24 @@
 {% extends '::base.html.twig' %}
 {% block body %}
     <div id="editprofile" class="page{% if is_mobile() and not is_tablet() %} mobile{% endif %} padding-bottom-40">
-        <div class="margin-top-20">
+        <div class="margin-top-40">
             <div id="view-account">
                 <div class="ui tips">
 
                     <!-- Profile -->
                     <div class="block-top wrap">
+                        
                         <div class="avatar-profil left">
                             <img src="{{ showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
                         </div>
 
-                        <div class="group right">
-                            <div class="title text-transform-capitalize unbold">
+                        <div class="group left margin-left-30">
+                            <div class="title text-transform-capitalize bold">
                                 <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                             </div>
                             <div class="subgroup wrap {% if not is_mobile() and is_tablet() %}margin-top-10{% endif %}">
                                 {% if user.prefStartCity or user.country %}
-                                    <div class="text-transform-capitalize text-align-center">
+                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                             {% if user.prefStartCity %}
                                                 {{ user.prefStartCity ~ ',' }}
@@ -28,7 +29,7 @@
                                         </div>
                                     </div>
                                 {% else %}
-                                    <div class="text-transform-capitalize text-align-center">
+                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() %}margin-top-20{% endif %}">
                                         <div class="city">
                                             <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                             Not set
@@ -40,13 +41,13 @@
                                 </div>
                             </div> <!-- .subgroup.right -->
                         </div> <!-- .group.right -->
+
                     </div> <!-- .block-top -->
                     <div class="clear"></div>
 
-
                     <!-- Filter -->
-                    <div class="filter-profil padding-bottom-20 wrap">
-                        <div class="{% if is_mobile() and not is_tablet() %}margin-top-20{% else %}margin-top-80{% endif %}">
+                    <div class="filter-profil padding-bottom-20 padding-top-20 wrap">
+                        <div class="{% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                             <div class="disableClick"></div>
                             <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
                             <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
