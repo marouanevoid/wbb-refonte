@@ -47,7 +47,7 @@ class BarTag
     private $semsoftBar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bars")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bars", fetch="EAGER")
      */
     private $tag;
 

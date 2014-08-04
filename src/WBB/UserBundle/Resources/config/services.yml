@@ -6,6 +6,9 @@ parameters:
     #Entities
     wbb_user.user.entity.class: WBB\UserBundle\Entity\User
 
+    #Password Encoder Class
+    wbb_user.user.md5_password_encoder.class: WBB\UserBundle\Security\Password\Encoder\Md5Encoder
+
 services:
     facebook.user:
         class: WBB\UserBundle\Security\User\Provider\FacebookProvider
@@ -55,3 +58,7 @@ services:
     wbb_user.registration.form.factory:
         class: WBB\UserBundle\Form\Factory\FormFactory
         arguments: [@form.factory, %fos_user.registration.form.name%, %fos_user.registration.form.type%, %fos_user.registration.form.validation_groups% ]
+
+    #MD5 password encoder
+    wbb_md5_password_encoder:
+        class: %wbb_user.user.md5_password_encoder.class%

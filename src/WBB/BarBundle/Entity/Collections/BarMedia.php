@@ -48,19 +48,9 @@ class BarMedia
     private $bestofs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", fetch="EAGER")
      */
     private $media;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     */
-    private $video1;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     */
-    private $video2;
 
     /**
      * @var \DateTime
