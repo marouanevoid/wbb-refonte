@@ -87,4 +87,38 @@ class TipsController extends Controller
 
         return new JsonResponse($response);
     }
+
+    public function deleteAction($tipId)
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(array(
+                'code' => 403,
+                'message' => 'User not authenticated !'
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $tip = $em->getRepository('WBBBarBundle:Tip')
+            ->findOneBy(array('id' => $tipId));
+
+        if (!$tip) {
+            return new JsonResponse(array(
+                'code' => 404,
+                'message' => 'Tip not found !'
+            ));
+        }
+
+        $user->removeTip($tip);
+
+        $em->persist($user);
+        $em->remove($tip);
+        $em->flush();
+
+        return new JsonResponse(array(
+            'code' => 200,
+            'message' => 'Tip deleted !',
+            'tipId' => $tipId
+        ));
+    }
 }

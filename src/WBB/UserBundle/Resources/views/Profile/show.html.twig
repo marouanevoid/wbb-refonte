@@ -1,143 +1,179 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <div id="editprofile" class="page margin-bottom-20">
-        <div class="margin-top-20">
+    <div id="editprofile" class="page{% if is_mobile() and not is_tablet() %} mobile{% endif %} padding-bottom-40">
+        <div class="margin-top-40">
             <div id="view-account">
-                <div class="ui tips{% if is_mobile() and not is_tablet() %} mobile{% endif %}">
+                <div class="ui tips">
 
                     <!-- Profile -->
+                    <div class="block-top wrap">
+                        
+                        <div class="avatar-profil left">
+                            <img src="{{ showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
+                        </div>
 
-                        <div class="block-top wrap">
-                            <div class="avatar-profil left">
-                                <img src="{{ showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
+                        <div class="group left margin-left-30">
+                            <div class="title text-transform-capitalize bold">
+                                <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                             </div>
-
-                            <div class="group right">
-                                <div class="title text-transform-capitalize unbold">
-                                    <h5>{{ user.firstname }} {{ user.lastname }}</h5>
-                                </div>
-                                <div class="subgroup margin-top-10 wrap">
-                                    {% if user.prefStartCity or user.country %}
-                                        <div class="text-transform-capitalize text-align-center">
-                                            <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
-                                                {% if user.prefStartCity %}
-                                                    {{ user.prefStartCity ~ ',' }}
-                                                {% endif %}
-                                                {% if user.country %}
-                                                    {{ user.country }}
-                                                {% endif %}
-                                            </div>
+                            <div class="subgroup wrap {% if not is_mobile() and is_tablet() %}margin-top-10{% endif %}">
+                                {% if user.prefStartCity or user.country %}
+                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
+                                        <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                            {% if user.prefStartCity %}
+                                                {{ user.prefStartCity ~ ',' }}
+                                            {% endif %}
+                                            {% if user.country %}
+                                                {{ user.country }}
+                                            {% endif %}
                                         </div>
-                                    {% endif %}
-                                    <div class="btn-editprofile">
-                                        <a href="{{ path('fos_user_profile_edit') }}" class="btn radius-30">Edit Profile</a>
                                     </div>
-                                </div> <!-- .subgroup.right -->
-                            </div> <!-- .group.right -->
-                            <div class="clear"></div>
-                        </div> <!-- .block-top -->
-                        <div class="clear"></div>
+                                {% else %}
+                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() %}margin-top-20{% endif %}">
+                                        <div class="city">
+                                            <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                            Not set
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="btn-editprofile">
+                                    <a href="{{ path('fos_user_profile_edit') }}" class="btn radius-30">Edit Profile</a>
+                                </div>
+                            </div> <!-- .subgroup.right -->
+                        </div> <!-- .group.right -->
 
+                    </div> <!-- .block-top -->
+                    <div class="clear"></div>
 
                     <!-- Filter -->
-                        <div class="filter-profil padding-bottom-20 wrap">
-                            <div class="margin-top-80">
-                                <div class="disableClick"></div>
-                                <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
-                                <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
-                                <input type="radio" name="filter" data-tab="tips" value="({{ user.tips|length }}) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
-                            </div>
+                    <div class="filter-profil padding-bottom-20 padding-top-20 wrap">
+                        <div class="{% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
+                            <div class="disableClick"></div>
+                            <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
+                            <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                            <input type="radio" name="filter" data-tab="tips" value="({{ user.tips|length }}) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
                             <div class="clear"></div>
-                        </div> <!-- .filter-profil -->
+                        </div>
+                    </div> <!-- .filter-profil -->
 
                     <!-- Separator -->
                     <hr>
                     <div class="clear"></div>
 
-                    <div id="tab-bars" class="tab active">
-                        <!-- Filters -->
-                        <div class="container">
-                            <div class="margin-top-20">
-                                <div class="sort-by six columns">
-                                    <label class="sort left text-transform-uppercase unbold">Sort by :</label>
-                                    <div class="four columns">
-                                        <select class="ui-dropdown light" name="criteria" id="criteria">
-                                            <option value="popularity" data-type="criteria">Date added</option>
-                                            <option value="date" data-type="criteria">Date</option>
-                                            <option value="distance" data-type="criteria">Distance</option>
-                                            <option value="alphabetical" data-type="criteria">Alphabetical order</option>
-                                        </select>
+                    <div class="min-height">
+                        <div id="tab-bars" class="tab margin-bottom-40 active">
+                            <!-- Filters -->
+                            <div class="container">
+                                <div class="margin-top-20">
+                                    <div class="sort-by six columns">
+                                        <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+                                        <div class="four columns">
+                                            <select class="ui-dropdown light" name="criteria" id="criteria-bar">
+                                                <option value="date" data-type="criteria" selected="selected">Date</option>
+                                                <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                                <option value="city" data-type="criteria">City</option>
+                                            </select>
+                                        </div>
+                                    </div> <!-- .sort-by -->
+
+                                    <div class="filter-view">
+                                        <div class="right">
+                                            <div class="{% if is_mobile() %}margin-right-10{% endif %}">
+                                                <input type="radio" name="bars-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                                <input type="radio" name="bars-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                            </div>
+                                        </div>
+                                    </div> <!-- .filter-view -->
+                                </div> <!-- .margin-top-20 -->
+                            </div> <!-- .container -->
+
+                            <!-- List of Bars -->
+                            <section class="bar-filter">
+                                <div class="margin-top-20 list-bars container">
+                                    {# AJAX LOADING #}
+                                </div>
+
+                                <!-- Button See more Bars -->
+                                <div class="container">
+                                    <div class="more-bars force-load load-container">
+                                        <div class="load-target"></div>
+                                        <div class="twelve columns align-center m-margin load-more-container">
+                                            <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                                        </div>
                                     </div>
-                                </div> <!-- .sort-by -->
+                                </div>
+                             </section>
 
-                                <div class="filter-view">
-                                    <div class="right">
-                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
-                                    </div>
-                                </div> <!-- .filter-view -->
-                            </div> <!-- .margin-top-20 -->
-                        </div> <!-- .container -->
-
-                        <!-- List of Bars -->
-                        <div class="margin-top-40 list-bars container">
-                            {# AJAX LOADING #}
-                        </div>
-                    </div><!-- #tab-bars -->
-                    <div class="clear"></div>
-
-                    <div id="tab-bestof"  class="tab"style="display:none">
-                        <!-- Filters -->
-                        <div class="container">
-                            <div class="margin-top-20">
-                                <div class="sort-by six columns">
-                                    <label class="sort left text-transform-uppercase unbold">Sort by :</label>
-                                    <div class="four columns">
-                                        <select class="ui-dropdown light" name="criteria" id="criteria">
-                                            <option value="popularity" data-type="criteria">Date added</option>
-                                            <option value="date" data-type="criteria">Date</option>
-                                            <option value="distance" data-type="criteria">Distance</option>
-                                            <option value="alphabetical" data-type="criteria">Alphabetical order</option>
-                                        </select>
-                                    </div>
-                                </div> <!-- .sort-by -->
-
-                                <div class="filter-view">
-                                    <div class="right">
-                                        <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                        <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
-                                    </div>
-                                </div> <!-- .filter-view -->
-                            </div> <!-- .margin-top-20 -->
-                        </div> <!-- .container -->
-
-                        <!-- List of Bars -->
-                        <div class="margin-top-40 list-bestof container">
-                            {# AJAX LOADING #}
-                        </div>
-                    </div><!-- #tab-bestof -->
-                    <div class="clear"></div>
-
-                    <div id="tab-tips"  class="tab"style="display:none">
-                        <!-- List of Tips -->
-                        <ul class="list-tips padding-top-40 container">
-
-                        </ul>
+                        </div><!-- #tab-bars -->
                         <div class="clear"></div>
 
-                        <!-- Button See more Bars -->
-                        <div class="container">
-                            <div class="bars-w-pic force-load load-container">
-                                <div class="load-target"></div>
-                                <div class="twelve columns align-center m-margin load-more-container">
-                                    <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
+                        <div id="tab-bestof"  class="bar-filter tab margin-bottom-40"style="display:none">
+
+                            <!-- Filters -->
+                            <div class="container">
+                                <div class="margin-top-20">
+                                    <div class="sort-by six columns">
+                                        <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+                                        <div class="four columns">
+                                            <select class="ui-dropdown light" name="criteria" id="criteria-bestof">
+                                                <option value="date" data-type="criteria" selected="selected">Date</option>
+                                                <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                                <option value="city" data-type="criteria">City</option>
+                                            </select>
+                                        </div>
+                                    </div> <!-- .sort-by -->
+
+                                    <div class="filter-view">
+                                        <div class="right">
+                                            <div class="{% if is_mobile() %}margin-right-10{% endif %}">
+                                                <input type="radio" name="bestof-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                                <input type="radio" name="bestof-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                            </div>
+                                        </div>
+                                    </div> <!-- .filter-view -->
+                                </div> <!-- .margin-top-20 -->
+                            </div> <!-- .container -->
+
+                            <!-- List of Bars -->
+                            <div class="margin-top-20 list-bestof container">
+                                {# AJAX LOADING #}
+                            </div>
+
+                            <!-- Button See more Bars -->
+                            <div class="container">
+                                <div class="more-bestofs force-load load-container">
+                                    <div class="load-target"></div>
+                                    <div class="twelve columns align-center m-margin load-more-container">
+                                        <a class="h4 btn-radius large border load-more brown" href="#0">See more Collections</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- #tab-tips -->
+                        </div><!-- #tab-bestof -->
+                        <div class="clear"></div>
 
+                        <div id="tab-tips" class="tab" style="display:none">
+                            <div class="full-cream padding-bottom-40">
+
+                                <!-- List of Tips -->
+                                <ul class="list-tips padding-top-30 container">
+
+                                </ul>
+                                <div class="clear"></div>
+
+                                <!-- Button See more Bars -->
+                                <div class="container">
+                                    <div class="more-tips force-load load-container">
+                                        <div class="load-target"></div>
+                                        <div class="twelve columns align-center m-margin load-more-container">
+                                            <a class="h4 btn-radius large border load-more brown" href="#0">See more Tips</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- #tab-tips -->
+                    </div><!-- .min-height -->
                 </div>
-            </div> <!-- .margin-top-20 -->
+            </div><!-- .margin-top-20 -->
             <div class="clear"></div>
         </div>
     </div> <!-- #editprofile -->

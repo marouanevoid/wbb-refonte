@@ -10,24 +10,7 @@
                     </form>
                 </td>
             </tr>
-            <tr class="header-nav">
-                <td>
-                    <nav class="h3">
-                        <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
-                        <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
-                        <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
-                    </nav>
-                </td>
-            </tr>
-            <tr class="links">
-                <td>
-                    <a href="{{ path('wbb_bar_finder') }}" class="finder h3">
-                        <img src="{{ asset('bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
-                        Bar Finder
-                    </a>
-                </td>
-            </tr>
-            <tr class="signin">
+            <tr class="signin {% if app.user %}logged{% endif %}">
                 <td>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <span class="logged h3">
@@ -48,6 +31,23 @@
                             <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
                         </span>
                     {% endif %}
+                </td>
+            </tr>
+            <tr class="header-nav">
+                <td>
+                    <nav class="h3">
+                        <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
+                        <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
+                        <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
+                    </nav>
+                </td>
+            </tr>
+            <tr class="links">
+                <td>
+                    <a href="{{ path('wbb_bar_finder') }}" class="finder h3">
+                        <img src="{{ asset('bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
+                        Bar Finder
+                    </a>
                 </td>
             </tr>
             <tr class="footer-nav">

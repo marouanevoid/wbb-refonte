@@ -19,13 +19,19 @@ class SemsoftCRUDController extends Controller
         $modelManager = $this->admin->getModelManager();
 
         $ssBars = $selected->execute();
+        $allMerged = true;
 
         // the merge process works here
         try {
             foreach ($ssBars as $ssBar) {
                 $bar = $ssBar->getUpdatedBar();
-                $modelManager->update($bar);
-                $modelManager->delete($ssBar);
+                if($bar->getCity() and $bar->getSuburb())
+                {
+                    $modelManager->update($bar);
+                    $modelManager->delete($ssBar);
+                }else{
+                    $allMerged = false;
+                }
             }
 
         } catch (\Exception $e) {
@@ -36,7 +42,11 @@ class SemsoftCRUDController extends Controller
             );
         }
 
-        $this->addFlash('sonata_flash_success', 'Merge Successful !');
+        if($allMerged){
+            $this->addFlash('sonata_flash_success', 'Merge Successful !');
+        }else{
+            $this->addFlash('sonata_flash_error', 'Merge incomplete : City or suburb missing from some bars!');
+        }
 
         return new RedirectResponse(
             $this->admin->generateUrl('list',$this->admin->getFilterParameters())
