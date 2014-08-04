@@ -4,7 +4,6 @@ namespace WBB\BarBundle\Repository;
 
 use WBB\CoreBundle\Repository\EntityRepository;
 use WBB\BarBundle\Entity\BestOf;
-use Doctrine\ORM\Query\Expr;
 
 /**
  * BestOfRepository
@@ -37,22 +36,32 @@ class BestOfRepository extends EntityRepository
             ->groupBy($this->getAlias().'.id')
         ;
 
-        if ($city) {
+        if ($city && $bestof->getCity()) {
             $qb
                 ->leftJoin($this->getAlias().'.city', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
         }
 
-        if($bestof->getByTag() and $forceTags){
-            // TODO common tags
+        if($bestof->getByTag() && $forceTags){
             $qb
-                ->addSelect('count(t.id) as HIDDEN nbTags')
+                ->addSelect('(count(t.id) + count(tgw.id)) as HIDDEN nbTags')
+                ->leftjoin($this->getAlias().'.energyLevel', 'el')
+                ->leftjoin($this->getAlias().'.toGoWith', 'tgw')
                 ->leftjoin($this->getAlias().'.tags', 'bt')
                 ->leftjoin('bt.tag', 't')
-                ->andWhere($qb->expr()->in('t.id', ':tags'))
+                ->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->in('t.id', ':tags'),
+                        $qb->expr()->orX(
+                            $qb->expr()->in('tgw.id', ':goWith'),
+                            $qb->expr()->eq('el.id', ($bestof->getEnergyLevel()) ? $bestof->getEnergyLevel()->getId() : 0)
+                        )
+
+                    )
+                )
                 ->setParameter('tags', $bestof->getTagsIds())
-                ->addOrderBy('nbTags','DESC')
-            ;
+                ->setParameter('goWith', $bestof->getGoWithIds())
+                ->addOrderBy('nbTags', 'DESC');
         }
 
         $qb
@@ -90,7 +99,7 @@ class BestOfRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8, $order = 'ASC')
+    public function findBestofOrderedByName($city = null, $offset = 0, $limit = 8, $order = 'ASC', $user = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -108,10 +117,44 @@ class BestOfRepository extends EntityRepository
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id', $user->getId()));
+        }
+
         return $qb->getQuery()->getResult();
     }
 
-    public function findLatestBestofs($city = null, $limit = 8, $offset = 0, $onTop = true)
+    public function findBarsOrderedByCityAndName($user = null, $offset = 0, $limit = 8)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->addSelect('c, cn')
+            ->leftjoin($this->getAlias().'.city', 'c')
+            ->leftjoin($this->getAlias().'.country', 'cn')
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
+                ->orderBy('c.name', 'ASC')
+                ->addOrderBy($this->getAlias().'.name', 'ASC')
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findLatestBestofs($city = null, $limit = 8, $offset = 0, $onTop = true, $user = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -133,6 +176,34 @@ class BestOfRepository extends EntityRepository
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
+
+        if($user){
+            $qb
+                ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBarRelatedBestofs($bar, $onTop = true, $limit = 5)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias())
+            ->innerJoin($this->getAlias().'.bars', 'bb')
+            ->innerJoin('bb.bar', 'b')
+            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->where($qb->expr()->eq('b.id', $bar->getId()))
+            ->setMaxResults($limit)
+        ;
+
+        if($onTop)
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
+        elseif($onTop == false)
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(false)));
 
         return $qb->getQuery()->getResult();
     }

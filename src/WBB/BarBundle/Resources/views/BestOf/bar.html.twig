@@ -1,5 +1,5 @@
 <article class="bar-w-pic best-of">
-    <a href="#0" class="btn-round dark star"></a>
+    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
     <div class="txt">
         {% if bestof.ordered %}
             <span class="number h2">{{ loop.index }}</span>
@@ -25,15 +25,15 @@
         </div>
     </div>
     {% if b.bar.suburb and b.bar.city %}
-        <a href="{{ path('wbb_bar_details',{ city: b.bar.city, suburb: b.bar.suburb, slug: b.bar.slug }) }}" class="overlay-link"></a>
+        <a href="{{ path('wbb_bar_details',{ city: b.bar.city, suburb: b.bar.suburb.slug, slug: b.bar.slug }) }}" class="overlay-link"></a>
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
     {% if b.media and b.media.media %}
-        <img class="scale-with-grid" data-src="{% path b.media.media, 'slider_large' %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
+        <img class="scale-with-grid" data-src="{% filter showMedia %}{% path b.media.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
     {% else %}
         {% for m in b.bar.medias|slice(0,1) %}
-            <img class="scale-with-grid" data-src="{% path m.media, 'slider_large' %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
+            <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
         {% endfor %}
     {% endif %}
 </article>

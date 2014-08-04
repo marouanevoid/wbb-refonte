@@ -5,7 +5,9 @@ namespace WBB\BarBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use JMS\Serializer\Annotation as JMS;
+use WBB\CoreBundle\Entity\City;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 /**
  * News
  *
@@ -13,7 +15,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\NewsRepository")
  */
 
-class News {
+class News implements IndexableEntity
+{
 
     /**
      * @var integer
@@ -30,6 +33,13 @@ class News {
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"}, style="camel", separator="-")
+     * @ORM\Column(unique=true)
+     * @JMS\Expose
+     */
+    private $slug;
 
     /**
      * @var string
@@ -71,38 +81,39 @@ class News {
      *
      * @ORM\Column(name="is_an_interview", type="boolean", nullable=true)
      */
-    private $isAnInterview;
+    private $interview;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="on_top", type="boolean", nullable=true)
      */
-    private $isOnTop;
+    private $onTop;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news")
      */
     private $bars; 
     
     /**
-     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news")
      */
-    private $cities;    
+    private $cities;
 
     /**
-     * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="news", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="news")
      */
     private $bestOfs;     
     
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news")
      * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\NewsMedia", mappedBy="news", cascade={"remove", "persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\NewsMedia", mappedBy="news", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $medias;
 
@@ -116,8 +127,13 @@ class News {
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
-    private $sponsorImage;    
-    
+    private $sponsorImage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     */
+    private $sponsorImageSmall;
+
     /**
      * @var \DateTime
      *
@@ -141,6 +157,7 @@ class News {
         $this->bars    = new ArrayCollection();
         $this->cities  = new ArrayCollection();
         $this->bestOfs = new ArrayCollection();
+        $this->medias  = new ArrayCollection();
     }
 
     /**
@@ -286,8 +303,8 @@ class News {
      * @param boolean $isAnInterview
      * @return News
      */
-    public function setIsAnInterview($isAnInterview){
-        $this->isAnInterview = $isAnInterview;
+    public function setInterview($isAnInterview){
+        $this->interview = $isAnInterview;
         return $this;
     }
 
@@ -296,8 +313,8 @@ class News {
      *
      * @return boolean
      */
-    public function getIsAnInterview(){
-        return $this->isAnInterview;
+    public function isInterview(){
+        return $this->interview;
     }
 
 
@@ -307,8 +324,8 @@ class News {
      * @param boolean $isOnTop
      * @return News
      */
-    public function setIsOnTop($isOnTop){
-        $this->isOnTop = $isOnTop;
+    public function setOnTop($isOnTop){
+        $this->onTop = $isOnTop;
         return $this;
     }
 
@@ -317,8 +334,8 @@ class News {
      *
      * @return boolean
      */
-    public function getIsOnTop(){
-        return $this->isOnTop;
+    public function isOnTop(){
+        return $this->onTop;
     }
 
     /**
@@ -340,7 +357,7 @@ class News {
      */
     public function removeBar($bar){
         $this->bars->removeElement($bar);
-        $bar->removeNews($this);
+        $bar->getNews()->removeElement($this);
     }
 
     /**
@@ -351,38 +368,6 @@ class News {
     public function getBars(){
         return $this->bars;
     }
-
-    /**
-     * Add city
-     *
-     * @param City $city
-     * @return News
-     */
-    public function addCity($city){
-        $city->addNews($this);
-        $this->cities[] = $city;
-        return $this;
-    }
-
-    /**
-     * Remove city
-     *
-     * @param City $city
-     */
-    public function removeCity($city){
-        $this->cities->removeElement($city);
-        $city->removeNews($this);
-    }
-
-    /**
-     * Get cities
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCities(){
-        return $this->cities;
-    }
-
 
     /**
      * Add BestOf
@@ -403,7 +388,7 @@ class News {
      */
     public function removeBestOf($bestOf){
         $this->cities->removeElement($bestOf);
-        $bestOf->removeNews($this);
+        $bestOf->getNews()->removeElement($this);
     }
 
     /**
@@ -449,10 +434,10 @@ class News {
     /**
      * Remove medias
      *
-     * @param NewsMedia $medias
+     * @param NewsMedia $media
      */
-    public function removeMedia($medias){
-        $this->medias->removeElement($medias);
+    public function removeMedia($media){
+        $this->medias->removeElement($media);
     }
 
     /**
@@ -544,4 +529,195 @@ class News {
         return $this->updatedAt;
     }
 
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return News
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function getFirstVideo()
+    {
+        $medias = $this->getMedias();
+        foreach($medias as $media)
+        {
+            if($media->getMedia()->getProviderName() === "sonata.media.provider.youtube")
+                return $media;
+        }
+
+        return null;
+    }
+
+    public function hasOnlyOneTopCity()
+    {
+        $count = 0;
+        $city = null;
+
+        foreach($this->getCities() as $obj)
+        {
+            if($obj->getOnTopCity()){
+                $count++;
+                $city = $obj;
+            }
+        }
+
+        return ($count == 1) ? $city : null;
+    }
+
+    public function getCitiesAsArray()
+    {
+        $ids = array();
+
+        foreach($this->getCities() as $city){
+            $ids[] = $city->getId();
+        }
+
+        return $ids;
+    }
+
+    /**
+     * Set sponsorImageSmall
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall
+     * @return News
+     */
+    public function setSponsorImageSmall(\Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall = null)
+    {
+        $this->sponsorImageSmall = $sponsorImageSmall;
+
+        return $this;
+    }
+
+    /**
+     * Get sponsorImageSmall
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getSponsorImageSmall()
+    {
+        return $this->sponsorImageSmall;
+    }
+
+    /**
+     * Add cities
+     *
+     * @param City $city
+     * @return News
+     */
+    public function addCity(City $city)
+    {
+        $this->cities[] = $city;
+        $city->addNews($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove cities
+     *
+     * @param City $city
+     */
+    public function removeCity(City $city)
+    {
+        $this->cities->removeElement($city);
+        $city->getNews()->removeElement($this);
+    }
+
+    /**
+     * Get cities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCities()
+    {
+        return $this->cities;
+    }
+    
+    public function getCloudSearchFields()
+    {
+        $cities = array();
+        $bars = array();
+        $districts = array();
+        foreach ($this->cities as $city) {
+            $cities[] = $city->getName();
+        }
+        foreach ($this->bars as $bar) {
+            $bars[] = $bar->getName();
+            $districts[] = $bar->getSuburb()->getName();
+        }
+
+        $bestOfs = array();
+        foreach ($this->bestOfs as $bestOf) {
+            $bestOfs[] = $bestOf->getName();
+        }
+
+        $tags = array(
+            'tags_style' => array(),
+            'tags_mood' => array(),
+            'tags_occasion' => array(),
+            'tags_cocktails' => array(),
+        );
+        foreach ($this->bars as $bar) {
+            $barTags = $bar->getTagsArrays();
+            $tags['tags_style'] = array_unique(array_merge($tags['tags_style'], $barTags['tags_style']));
+            $tags['tags_mood'] = array_unique(array_merge($tags['tags_mood'], $barTags['tags_mood']));
+            $tags['tags_occasion'] = array_unique(array_merge($tags['tags_occasion'], $barTags['tags_occasion']));
+            $tags['tags_cocktails'] = array_unique(array_merge($tags['tags_cocktails'], $barTags['tags_cocktails']));
+        }
+
+        return array(
+            'name' => ($this->title) ? $this->title : '',
+            'slug' => $this->slug,
+            'text' => ($this->richDescription) ? $this->richDescription : '',
+            'cities' => $cities,
+            'districts' => $districts,
+            'quote' => ($this->quoteText) ? $this->quoteText : '',
+            'quote_author' => ($this->quoteAuthor) ? $this->quoteAuthor : '',
+            'seo_description' => ($this->seoDescription) ? $this->seoDescription : '',
+            'bestofs' => $bestOfs,
+            'bars' => $bars,
+            'tags_mood' => $tags['tags_mood'],
+            'tags_occasion' => $tags['tags_occasion'],
+            'tags_cocktails' => $tags['tags_cocktails'],
+            //'tags_special' => '',
+            'wbb_id' => $this->id
+        );
+    }
+
+    /**
+     * Get interview
+     *
+     * @return boolean 
+     */
+    public function getInterview()
+    {
+        return $this->interview;
+    }
+
+    /**
+     * Get onTop
+     *
+     * @return boolean 
+     */
+    public function getOnTop()
+    {
+        return $this->onTop;
+    }
 }

@@ -60,11 +60,29 @@ meta.Radio = function(config){
         {
             e.preventDefault();
 
-            that.config.$radios.filter('.active').find('input').prop('checked', false);
-            that.config.$radios.removeClass('active');
+            /*
+            *    if is not the radio of the barfined Mood
+            */
+            if (!$(this).find('input').data("value")){
+                that.config.$radios.filter('.active').find('input').prop('checked', false);
+                that.config.$radios.removeClass('active');
 
-            $(this).addClass('active');
-            $(this).find('input').prop('checked', true).trigger("change");
+                $(this).addClass('active');
+                $(this).find('input').prop('checked', true).trigger("change");
+            }else{
+
+               /*
+               * Radio UI select/unselect 
+               **/
+                var $t = $(this);
+                if($t.hasClass('active')){
+                    $t.removeClass('active');
+                    $(this).find('input').prop('checked', false).trigger("change");
+                }else{
+                    $t.addClass('active');
+                    $(this).find('input').prop('checked', true).trigger("change");
+                }
+            }
         })
     };
 
@@ -78,11 +96,19 @@ meta.Radio = function(config){
         {
             var html = that.config.template.replace('%color%', that.config.color);
             html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light')+($(this).hasClass('with-icon')?' with-icon':''));
+           
+           if ($(this).data("value"))
+            html = html.replace('%name%', $(this).data("value").replace(/_/g,' '));
+           else 
             html = html.replace('%name%', $(this).val().replace(/_/g,' '));
 
             var $component = $(html);
-
+            /*
+            *    if is not the radio of the barfined Mood
+            */
+            //if (!$(this).data("value")){
             if( $(this).is(':checked') ) $component.addClass('active');
+            //}
 
             $(this).wrap( $component );
         });

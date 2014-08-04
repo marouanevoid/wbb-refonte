@@ -2,16 +2,15 @@
 
 namespace WBB\CoreBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Bar;
-use WBB\CoreBundle\Entity\CitySuburb;
-use WBB\CoreBundle\Entity\CityBestOf;
-use WBB\CoreBundle\Entity\Collections\CityTag;
-use WBB\CoreBundle\Entity\Country;
+use WBB\BarBundle\Entity\News;
+use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
+use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use WBB\UserBundle\Entity\User;
 
 /**
  * City
@@ -19,7 +18,8 @@ use WBB\CoreBundle\Entity\Country;
  * @ORM\Table(name="wbb_city")
  * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\CityRepository")
  */
-class City {
+class City implements IndexableEntity
+{
 
     /**
      * @var integer
@@ -65,21 +65,16 @@ class City {
     private $seoDescription;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="postal_code", type="string", length=10, nullable=true)
+     */
+    private $postalCode;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $image;
-
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-//     */
-//    private $image;
-//
-//    /**
-//     * @var FileUpload
-//     */
-//    private $file;
 
     /**
      * @var boolean
@@ -99,7 +94,7 @@ class City {
     private $suburbs;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\UserBundle\Entity\User", mappedBy="prefStartCity", cascade={"persist"})
      */
     private $users;
 
@@ -116,21 +111,16 @@ class City {
     /**
      * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\CityBestOf", mappedBy="city", cascade={"all"})
      */
-    private $bestofs;  
-    
+    private $bestofs;
+
     /**
-     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities")
+     * @ORM\ManyToMany(targetEntity="WBB\BarBundle\Entity\News", inversedBy="cities", cascade={"all"})
      * @ORM\JoinTable(name="wbb_news_cities",
      *      joinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="new_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="news_id", referencedColumnName="id")}
      *      )
      **/
-    private $news;    
-    
-    /**
-     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Collections\CityTag", mappedBy="city", cascade={"all"})
-     */
-    private $tags;
+    private $news;
 
     /**
      * @var \DateTime
@@ -151,7 +141,7 @@ class City {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId() {
         return $this->id;
@@ -172,7 +162,7 @@ class City {
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName() {
         return $this->name;
@@ -193,7 +183,7 @@ class City {
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude() {
         return $this->latitude;
@@ -214,7 +204,7 @@ class City {
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude() {
         return $this->longitude;
@@ -235,7 +225,7 @@ class City {
     /**
      * Get seoDescription
      *
-     * @return string 
+     * @return string
      */
     public function getSeoDescription() {
         return $this->seoDescription;
@@ -256,7 +246,7 @@ class City {
     /**
      * Get onTopCity
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTopCity() {
         return $this->onTopCity;
@@ -318,7 +308,7 @@ class City {
     /**
      * Get suburbs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSuburbs() {
         return $this->suburbs;
@@ -349,7 +339,7 @@ class City {
     /**
      * Get bars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBars() {
         return $this->bars;
@@ -374,7 +364,7 @@ class City {
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt() {
         return $this->createdAt;
@@ -395,43 +385,10 @@ class City {
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt() {
         return $this->updatedAt;
-    }
-
-    /**
-     * Add tags
-     *
-     * @param CityTag $tags
-     * @return City
-     */
-    public function addTag(CityTag $tags)
-    {
-        $this->tags[] = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Remove tags
-     *
-     * @param CityTag $tags
-     */
-    public function removeTag(CityTag $tags)
-    {
-        $this->tags->removeElement($tags);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTags()
-    {
-        return $this->tags;
     }
 
     /**
@@ -460,7 +417,7 @@ class City {
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -483,7 +440,7 @@ class City {
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -493,10 +450,10 @@ class City {
     /**
      * Add users
      *
-     * @param \WBB\UserBundle\Entity\User $users
+     * @param User $users
      * @return City
      */
-    public function addUser(\WBB\UserBundle\Entity\User $users)
+    public function addUser(User $users)
     {
         $this->users[] = $users;
 
@@ -506,9 +463,9 @@ class City {
     /**
      * Remove users
      *
-     * @param \WBB\UserBundle\Entity\User $users
+     * @param User $users
      */
-    public function removeUser(\WBB\UserBundle\Entity\User $users)
+    public function removeUser(User $users)
     {
         $this->users->removeElement($users);
     }
@@ -516,7 +473,7 @@ class City {
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
@@ -530,7 +487,7 @@ class City {
 
     public function getNbNews()
     {
-        return count($this->getNews());
+        return count($this->news);
     }
 
     public function getNbAreas()
@@ -538,37 +495,13 @@ class City {
         return count($this->getSuburbs());
     }
 
-
-    /**
-     * Add news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     * @return City
-     */
-    public function addNews(\WBB\BarBundle\Entity\News $news)
-    {
-        $this->news[] = $news;
-
-        return $this;
-    }
-
-    /**
-     * Remove news
-     *
-     * @param \WBB\BarBundle\Entity\News $news
-     */
-    public function removeNews(\WBB\BarBundle\Entity\News $news)
-    {
-        $this->news->removeElement($news);
-    }
-
     /**
      * Set image
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @param Media $image
      * @return City
      */
-    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    public function setImage(Media $image = null)
     {
         $this->image = $image;
 
@@ -578,7 +511,7 @@ class City {
     /**
      * Get image
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return Media
      */
     public function getImage()
     {
@@ -588,10 +521,10 @@ class City {
     /**
      * Add semsoftBars
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @param SemsoftBar $semsoftBars
      * @return City
      */
-    public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    public function addSemsoftBar(SemsoftBar $semsoftBars)
     {
         $this->semsoftBars[] = $semsoftBars;
 
@@ -601,9 +534,9 @@ class City {
     /**
      * Remove semsoftBars
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @param SemsoftBar $semsoftBars
      */
-    public function removeSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
+    public function removeSemsoftBar(SemsoftBar $semsoftBars)
     {
         $this->semsoftBars->removeElement($semsoftBars);
     }
@@ -611,7 +544,7 @@ class City {
     /**
      * Get semsoftBars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSemsoftBars()
     {
@@ -619,12 +552,187 @@ class City {
     }
 
     /**
+     * Add news
+     *
+     * @param News $news
+     * @return City
+     */
+    public function addNews(News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param News $news
+     */
+    public function removeNews(News $news)
+    {
+        $this->news->removeElement($news);
+    }
+
+    /**
      * Get news
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getNews()
     {
         return $this->news;
+    }
+
+    /**
+     * Add userHomes
+     *
+     * @param User $userHomes
+     * @return City
+     */
+    public function addUserHome(User $userHomes)
+    {
+        $this->userHomes[] = $userHomes;
+
+        return $this;
+    }
+
+    /**
+     * Remove userHomes
+     *
+     * @param User $userHomes
+     */
+    public function removeUserHome(User $userHomes)
+    {
+        $this->userHomes->removeElement($userHomes);
+    }
+
+    /**
+     * Get userHomes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserHomes()
+    {
+        return $this->userHomes;
+    }
+
+    /**
+     * Add userCities1
+     *
+     * @param User $userCities1
+     * @return City
+     */
+    public function addUserCities1(User $userCities1)
+    {
+        $this->userCities1[] = $userCities1;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCities1
+     *
+     * @param User $userCities1
+     */
+    public function removeUserCities1(User $userCities1)
+    {
+        $this->userCities1->removeElement($userCities1);
+    }
+
+    /**
+     * Get userCities1
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserCities1()
+    {
+        return $this->userCities1;
+    }
+
+    /**
+     * Add userCities2
+     *
+     * @param User $userCities2
+     * @return City
+     */
+    public function addUserCities2(User $userCities2)
+    {
+        $this->userCities2[] = $userCities2;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCities2
+     *
+     * @param User $userCities2
+     */
+    public function removeUserCities2(User $userCities2)
+    {
+        $this->userCities2->removeElement($userCities2);
+    }
+
+    /**
+     * Get userCities2
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserCities2()
+    {
+        return $this->userCities2;
+    }
+
+    public function getCloudSearchFields()
+    {
+        $countryName = ($this->country) ? $this->country->getName() : '';
+        $lat = ($this->latitude) ? $this->latitude : 0;
+        $lon = ($this->longitude) ? $this->longitude : 0;
+        $suburbs = array();
+
+        foreach ($this->getSuburbs() as $suburb) {
+            $suburbs[] = $suburb->getName();
+        }
+
+        return array(
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'wbb_id' => $this->id,
+            'country' => $countryName,
+            'location' => $lat . ',' . $lon,
+            'districts' => $suburbs
+        );
+    }
+
+    /**
+     * Set postalCode
+     *
+     * @param string $postalCode
+     * @return City
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode
+     *
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    public function isUSCity()
+    {
+        if($this->getCountry()->getAcronym() == 'US'){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

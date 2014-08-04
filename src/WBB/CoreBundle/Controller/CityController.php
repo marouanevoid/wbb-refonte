@@ -5,13 +5,14 @@ namespace WBB\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * CityController
  */
 class CityController extends Controller
 {
+
+
     public function citiesAction()
     {
         return $this->render('WBBCoreBundle:City:cities.html.twig');
@@ -30,7 +31,8 @@ class CityController extends Controller
                 'id'        => $city->getId(),
                 'name'      => $city->getName() .', '. $city->getCountry(),
                 'latitude'  => $city->getLatitude(),
-                'longitude' => $city->getLongitude()
+                'longitude' => $city->getLongitude(),
+                'slug'      => $city->getSlug()
             );
         }
 
@@ -40,17 +42,93 @@ class CityController extends Controller
         ));
     }
 
-    //Returns a list on Point of interest in a city (and a suburb)
-    public function barsListAction($cityID = 0, $suburbID = 0, Request $request)
+    //Returns a list of city subrubs
+    public function citySuburbsAction($citySlug)
     {
-        if($suburbID=='undefined')
-            $suburbID=0;
-        if($cityID > 0)
-        {
-            $city = $this->container->get('city.repository')->findOneById($cityID);
-            $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
+        $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
 
+        $response = array();
+
+        foreach($city->getSuburbs() as $suburb)
+        {
+            $response[] = array(
+                'id'        => $suburb->getId(),
+                'name'      => $suburb->getName(),
+                'slug'      => $suburb->getSlug()
+            );
+        }
+
+        return new JsonResponse(array(
+            'code'   => 200,
+            'suburbs' => $response
+        ));
+    }
+
+    //Returns a list of all cities
+    public function allCitiesAction()
+    {
+        $cities = $this->container->get('city.repository')->findAll();
+
+        $response = array();
+
+        foreach($cities as $city)
+        {
+            $response[$city->getName().'/'.$city->getCountry()] = $city->getName().'/'.$city->getCountry();
+        }
+
+        return new JsonResponse($response);
+    }
+
+    public function nearestCityAction($latitude, $longitude)
+    {
+        $session = $this->container->get('session');
+
+        $city = $this->get('city.repository')->findNearestCity($latitude, $longitude, 150, 0, 1);
+
+        $session->set('userLatitude', $latitude);
+        $session->set('userLongitude', $longitude);
+
+        if($city){
+            $session->set('citySlug', $city->getSlug());
+            $session->set('citySlugGeo', $city->getSlug());
+            return new JsonResponse(array(
+                'id'        => $city->getId(),
+                'name'      => $city->getName(),
+                'slug'      => $city->getSlug(),
+                'latitude'  => $city->getLatitude(),
+                'longitude' => $city->getLongitude()
+            ));
+        }
+        else{
+            return new JsonResponse(array(
+                'message' => 'No near city found!'
+            ));
+        }
+
+    }
+
+    //Returns a list on Point of interest in a city (and a suburb)
+    public function barsListAction($citySlug, $suburbSlug = 'undefined', Request $request)
+    {
+        if($suburbSlug=='undefined' || $suburbSlug == "-1")
+            $suburbSlug= null;
+        if($citySlug != "")
+        {
+            $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
+
+            //$suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
+            //if ($suburbID == 0)
+            //  $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
+            //else
+            $suburb = null;
+            if ($suburbSlug)
+                $suburb = $this->container->get('suburb.repository')->findOneBySlug($suburbSlug);
+
+        
             $bars = $this->container->get('bar.repository')->findAllEnabled($city, $suburb);
+            
+
+
             $suburbs = $this->container->get('suburb.repository')->findByCityWithBars($city);
             $result = array('bars' => array(), 'suburbs' => array());
 
@@ -89,14 +167,16 @@ class CityController extends Controller
             {
                 $result['suburbs'][] = array(
                     'id'    => $suburb->getId(),
-                    'name'  => $suburb->getName()
+                    'name'  => $suburb->getName(),
+                    'slug'  => $suburb->getSlug()
                 );
             }
 
             return new JsonResponse(array(
                 'code'          => 200,
                 'bars'          => $result['bars'],
-                'neighborhoods' => $result['suburbs']
+                'neighborhoods' => $result['suburbs'],
+                'city'      => array( "name" => $city->getName() .', '. $city->getCountry(), "id" => $city->getId()) 
             ));
         }else{
             return new JsonResponse(array(

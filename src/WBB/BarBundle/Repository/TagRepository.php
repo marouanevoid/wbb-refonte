@@ -2,6 +2,7 @@
 
 namespace WBB\BarBundle\Repository;
 
+use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Repository\EntityRepository;
 
 /**
@@ -12,16 +13,52 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
-    public function findOccasionTags()
+    public function findByType($type, $onlyQueryBuilder = false, $limit = 0, $name = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
             ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.isOccasion', true))
+            ->where($qb->expr()->eq($this->getAlias().'.type', $type))
             ->orderBy($this->getAlias().'.name', 'ASC')
         ;
 
-        return $qb->getQuery()->getResult();
+        if($limit > 0)
+        {
+            $qb->setMaxResults($limit);
+        }
+
+        if($name){
+            $qb->andWhere($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)));
+        }
+
+        if($onlyQueryBuilder){
+            return $qb;
+        }elseif($limit == 1){
+            return $qb->getQuery()->getOneOrNullResult();
+        }else{
+            return $qb->getQuery()->getResult();
+        }
+    }
+
+    public function findBarFinderMoods()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().'.name,'.$this->getAlias().'.id')
+            ->where($qb->expr()->eq($this->getAlias().'.type', Tag::WBB_TAG_TYPE_ENERGY_LEVEL))
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal('Chill out')) ,
+                        $qb->expr()->orX(
+                            $qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal('Party')),
+                            $qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal('Casual'))
+                    )
+                )
+            );
+
+        return $qb->getQuery()->getArrayResult();
+
     }
 } 

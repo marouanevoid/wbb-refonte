@@ -1,0 +1,118 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends base_template %}
+
+{% block title %}
+    {% if admin.id(object) is not null %}
+        {{ "title_edit"|trans({'%name%': admin.toString(object) }, 'SonataAdminBundle') }}
+    {% else %}
+        {{ "title_create"|trans({}, 'SonataAdminBundle') }}
+    {% endif %}
+{% endblock%}
+
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% if object.id %}
+            <a class="btn sonata-action-element" href="{{ path('wbb_semsoft_preview',{ssBarId: object.id}) }}" target="_blank">
+                <i class="icon-zoom-in"></i>
+                {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}
+            </a>
+        {% endif %}
+        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}{% endblock %}
+
+{#{% use 'WBBBarBundle:Admin:Bar/base_edit_form.html.twig' with form as parentForm %}#}
+{% use 'SonataAdminBundle:CRUD:base_edit_form.html.twig' with form as parentForm %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var country = $("#{{ admin.uniqId }}_country");
+            country.change(updateCities());
+            country.change();
+
+            function updateCities(){
+                return function () {
+                    var countryId = $("#{{ admin.uniqId }}_country option:selected").val();
+                    var city = $("#{{ admin.uniqId }}_city");
+
+                    city.empty();
+                    city.trigger("list:updated");
+
+                    var url = Routing.generate('get_cities_from_country', {'bestof': '0', 'countryId': countryId });
+                    $.post(url, { countryId: countryId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        city.empty().append(options);
+                        city.trigger("list:updated");
+                    },"text");
+
+                    city.val("option:first").attr("selected", true);
+                };
+            }
+
+
+            var city = $("#{{ admin.uniqId }}_city");
+            city.change(updateSuburbs());
+            city.change();
+
+            jQuery(document).on('sonata-admin-append-form-element',
+                function(){
+                    var suburb = $("#{{ admin.uniqId }}_suburb");
+                    var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
+                    var suburbId = $("#{{ admin.uniqId }}_suburb option:selected").val();
+                    suburb.enable(false);
+                    $.ajax({
+                        type: "POST",
+                        url:  Routing.generate('get_suburbs_from_city', {'bar': '0', 'cityId': cityId, 'suburbId': suburbId }),
+                        dataType: 'json',
+                        success: function(r) {
+                            suburb.empty();
+                            suburb.append(r);
+                            suburb.trigger("list:updated");
+                            suburb.enable(true);
+                        }
+                    });
+                }
+            )
+
+            function updateSuburbs(){
+                return function () {
+                    var cityId = $("#{{ admin.uniqId }}_city option:selected").val();
+                    var suburb = $("#{{ admin.uniqId }}_suburb");
+
+                    suburb.empty();
+                    suburb.trigger("list:updated");
+
+                    var url = Routing.generate('get_suburbs_from_city', {'bar': '0', 'cityId': cityId });
+                    $.post(url, { cityId: cityId }, function(data){
+                        var options = JSON && JSON.parse(data) || $.parseJSON(data);
+                        suburb.empty().append(options);
+                        suburb.trigger("list:updated");
+                    },"text");
+
+                    suburb.val("option:first").attr("selected", true);
+                };
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block form %}
+    {{ block('parentForm') }}
+{% endblock %}

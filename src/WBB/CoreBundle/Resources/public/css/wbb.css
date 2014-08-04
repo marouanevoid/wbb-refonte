@@ -7,7 +7,7 @@
     display: none;
 }
 .bar-details .content .trends li {
-    line-height: 26px;
+    line-height: 16px; /* Taches #8188 */
 }
 .bar-details .content aside .informations .contain .gmap .get-directions {
     position: relative;
@@ -15,7 +15,7 @@
     z-index: 99999;
     margin: 0 auto;
     margin-top: 33px;
-    width: auto !important;
+    width: 60% !important;
     height: auto !important;
     background-image: none !important;
     background-repeat: inherit !important;
@@ -51,7 +51,7 @@
 .bar-details .gallery .loader {
     display:block;
 }
-.btn-round.star.active:before {
+.bestof .btn-round.star.active:before {
     background-position: -160px -240px !important;
 }
 .bar-filter .best-of-container{
@@ -139,4 +139,177 @@ article.tip .content .author b {
     display: block;
     color: #333;
     margin-top: 2px;
+}
+
+.fb-share, .twitter-share, .email-share {
+    height: 40px;
+    width: 105px;
+    display: inline-block;
+    text-indent: -10000px;
+}
+.fb-share {
+    background: url(../images/fb.png) no-repeat;
+}
+.twitter-share{
+    background: url(../images/twitter.png) no-repeat;
+    margin: 0 10px;
+}
+.email-share{
+    background: url(../images/email.png) no-repeat;
+}
+
+article .table {table-layout: fixed;}
+article .table .td {
+    word-wrap:break-word !important;
+}
+.sub-header {
+    white-space: normal;
+}
+.news-details .sponsor-img {
+    outline: 1px solid #B3955F;
+}
+
+/*******
+Added By Khalid
+****/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
+
+/*    .heading input[type="text"] + input[type="submit"]{
+        right: -1.4px !important;
+    }*/
+
+}
+
+.heading input[type="text"] + input[type="submit"]:hover{
+        background-color: white;
+        background-position: -200px -200px;
+    }
+
+.heading input[type="text"] + input[type="submit"].active {
+    background-color: #b3955f;
+    background-position: -200px -240px;
+}
+
+section.bar-filter .container:nth-child(2) {
+    min-height: 423px;
+}
+
+.sponsor-name {
+    font-size: 1.6em;
+}
+.news-details .articles.older-news article.small:nth-of-type(3n+2) {
+    margin-left: 2.7%;
+    margin-right: 2.7%;
+}
+
+.nicescroll-rails{
+    background : none repeat scroll 0 0 #fff;
+    border : 1px solid #b3955f;
+
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius : 10px !important;
+    width: 14px !important;
+    opacity: 1 !important;
+    padding-bottom: 3px;
+    /*margin-left: 10px;*/
+}
+.nicescroll-rails div{
+    background : none repeat scroll 0 0 #b3955f;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius : 10px !important;
+    cursor : pointer;
+    width : 8px !important;
+    position: relative !important;
+    margin: 2px auto auto;
+    left : -2px;
+
+}
+/*article.tip .content .excerpt td .scroll{
+    width: 209px;
+}*/
+
+/*
+.sub-header table tr td:nth-child(1), .sub-header table td:nth-child(3){
+    width : 28%;
+}
+*/
+
+.bar-w-pic-list .separator{
+    left: 24.5%;
+}
+
+.articles.padding article.small + article.small{
+    margin-left : 4% ;
+}
+.mobile-device .articles.padding article.small + article.small{
+    margin-left : 0 !important;
+}
+section.bar-finder .go{
+    line-height: 41px !important;
+}
+section.bar-finder .go.disabled{
+    background-color: #ccc !important;
+    color: #999999;
+    opacity: 0.29;
+    border: none !important;
+    display: none;
+}
+section.bar-finder .go.disabled:hover {
+    background-color: #ccc !important;
+    color: #999999!important;
+    opacity: 0.29!important;
+    border: none !important;
+    display: none;
+}
+
+#common-loader{
+    left:50%;
+    position:absolute;
+    top:50px;
+
+    display: none;
+}
+.quote-cls{
+    color :#333333;
+}
+.first-h-item{
+    position:  relative;
+    top: -6px;
+}
+.ui-selector .ui-tips{width: 155%;}
+.ui-selector .ui-tips .tips{ left: -46px !important;}
+
+aside > article.interview-frist-child{ margin-top:0 !important; }
+.ads-pannel + article.interview-frist-child , article + article.interview-frist-child {margin-top: 8% !important; }
+
+.entire-content.show {
+    display: block !important;
+}
+
+/*
+* Background loading on images slider
+***/
+.ui-slides .ui-slide.loading {
+    /*background: url(../images/common/loader.gif) no-repeat center center;*/
+    /*background: url(../images/loading-slider.gif) no-repeat center center;*/
+
+}
+.custom-scroll{
+    overflow: auto;
+}
+
+
+.loader-search-page {
+    background: url(../images/gif-load.gif) no-repeat center;
+    height:36px;
+    width:36px;
+    position: relative;
+    top: -34px;
+    display: none;
+}
+.loader-search-page.mobile {
+    right: -130px;
+    top: 1px;
 }

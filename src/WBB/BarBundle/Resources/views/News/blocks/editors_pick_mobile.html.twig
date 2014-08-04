@@ -1,0 +1,87 @@
+
+
+ <div class="container l-margin-top s-padding-bottom">
+
+        <div class="twelve columns h1 m-margin-bottom color-brown align-center">
+            Editor's Picks
+        </div>
+
+        <!-- 8 COLS -->
+        <section class="articles padding eight columns">
+            {% for n in articles|slice(0,1) %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
+            {% endfor %}
+            {% for n in articles|slice(1,1) %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+            {% endfor %}
+            {% for n in interviews|slice(0,1) %}
+                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , 'has_quote' : 1 , become_url : true , show_quote : 1 } %}
+            {% endfor %}
+            {% for n in articles|slice(2,1) %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
+            {% endfor %}
+            {% for n in interviews|slice(1,1) %}
+                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
+            {% endfor %}
+
+        </section>
+
+        <!-- 4 COLS -->
+        {% if not is_mobile() or is_tablet() %}
+            <aside class="articles padding four columns">
+                {#<div class="block ads-pannel">#}
+                    {#<div class="side-ad m-margin-top">#}
+                        {#<img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300"#}
+                             {#height="250"/>#}
+
+                        {#<div class="txt">Advertising</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {% if not is_mobile() or is_tablet() %}
+                    {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
+                {% endif %}
+            </aside>
+        {% endif %}
+    </div>
+
+
+    <div class="load-container margin-bottom-40">
+        <!-- OLDER NEWS -->
+        <div class="container">
+            <!-- 12 COLS -->
+            <div class="articles older-news twelve columns">
+                {% for n in interviews|slice(2,1) %}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1 ,'has_image' : 1 } %}
+                {% endfor %}
+
+                {% for n in articles|slice(3,1) %}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 ,'is_small' : 1} %}
+                {% endfor %}
+
+                {% for n in interviews|slice(3,1) %}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1,'has_image' : 1 } %}
+                {% endfor %}
+
+                {% for n in articles|slice(4,1) %}
+                     {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
+                {% endfor %}
+
+
+                {% for n in articles|slice(5,3) %}
+                    {% if loop.index0 % 2 == 0 %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1} %}
+                    {%  else %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
+                    {%  endif %}
+                {% endfor %}
+
+                {% for n in newsList %}
+                    {% if loop.index0 % 2 == 0 %}
+                            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
+                    {% else %}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>

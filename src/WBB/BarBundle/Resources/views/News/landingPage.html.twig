@@ -1,196 +1,128 @@
-{#{% if city %}{{ city.name }}<br />{% endif %}
-
-<h1>Latest News</h1>
-{% for n in latest %}
-    {{ n.title }}<br/>
-{% endfor %}
-
-<h1>Articles</h1>
-{% for n in articles %}
-    {{ n.title }}<br/>
-{% endfor %}
-
-<h1>Interviews</h1>
-{% for n in interviews %}
-    {{ n.title }}<br/>
-{% endfor %}
-
-<h1>Other News</h1>
-{% for n in newsList %}
-    {{ n.title }}<br/>
-{% endfor %}#}
-
-
-
 {% extends "::base.html.twig" %}
-{% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
+{% block meta %}
+    <meta name="description" content="World Best Bars"/>{% endblock %}
 {% block title %}World Best Bars{% endblock %}
 {% block javascripts %}
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
+
+
+            // $('.ui-slide.loading').each(function(){
+            //     var that_ = $(this);
+            //     that_.find('img:nth-child(2)').each(function(){
+            //         $(this).on('load error' , function(){
+            //             $(this).parents('.loading').removeClass('loading');
+            //         });
+            //     });
+            // });
+            // // End listner of Image Loading
             initializeSliders();
-        });
+            $(".older-news article").hide();
+            {% if not is_mobile() or is_tablet() %}
+                $(".older-news article:lt(3)").show();
+            {% endif %}
+            if($('.older-news article').length>3)
+                $(".load-more-container").show();
+            else
+                $(".load-more-container").hide();
+            var display;
+            $(".load-more").click(function(){
+                display = $('.older-news article:visible').length+3;
+                $(".older-news article:lt("+display+")").fadeIn(500);
+                if($('.older-news article:hidden').length<=0){
+                    $('.load-more-container').hide();
+                }
+                
+                UTILS._cover();
+                UTILS._resizeCover();
+            });
+            $(".footer-ad:eq(1)").css('display', 'none');
+            
+                {% if city is defined and city != '' %}
+                    $('.sub-header .selected').text('{{city}}')
+                {% endif %}
+                
+            });
     </script>
+    <style type="text/css">
+        .footer-ad:last-child {
+            display: none !important;
+        }
+        .older-news article {
+            display: none;
+        }
+        {% if is_mobile() and not is_tablet() %}
+            .articles.padding article.small + article.small {
+                margin-left: 0!important;
+            }
+        {% endif %}
+    </style>
 {% endblock %}
 {% block bodyTag %}
 <body class="news">
 {% endblock %}
 {% block body %}
+    {% block landingNewsTop %}
+    <div class="full-cream l-padding-bottom">
+        <!-- SUBHEADER -->
+        <div class="container  {% if is_mobile() and not is_tablet() %} mobile-device {% endif %}">
 
-<div class="full-cream l-padding-bottom">
+            <section class="sub-header">
 
+                {% if not is_mobile() or is_tablet() %}
+                    <table>
+                        <tr>
+                            <td>
+                                {% include "WBBBarBundle:UI:citys_selector.html.twig"  with { 'from' : 'news' } %}
+                            </td>
 
-    <!-- SUBHEADER -->
-    <div class="container">
+                            <td class="title">
+                                <h1>{% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %}
+                                in {{ city }}
+                                {% endif %}
+                                </h1>
+                            </td>
 
-        <section class="sub-header">
+                            <td></td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <h1>{% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %}
+                                in {{ city }}
+                                {% endif %}
+                    </h1>
+                {% endif %}
+            </section>
+        </div>
+        <!-- LATEST NEWS -->
+        <div class="container full">
 
-            {% if not is_mobile() or is_tablet() %}
-            <table>
-                <tr>
-                    <td>
-
-                        <div class="city-selector h3">
-                            You are in
-                            <select class="ui-dropdown" name="city" data-class="with-icon city" id="city_selector">
-                                <option disabled="disabled">Choose a City</option>
-                                {% for c in topCities %}
-                                    <option data-type="redirect" value="{{ path('city_homepage',{slug:c.slug}) }}"
-                                            {#{% if city is defined and c.id==city.id %}#}
-                                                {#selected="selected"#}
-                                            {#{% endif %}#}
-                                            >{{ c.name }}</option>
-                                {% endfor %}
-                                <option value="{{ path('city_homepage',{slug:"world-wide"}) }}">World Wide</option>
-                            </select>
-                        </div>
-
-                    </td>
-
-                    <td class="title">
-                        <h1>The Latest News</h1>
-                    </td>
-
-                    <td></td>
-                </tr>
-            </table>
-            {% else %}
-            <h1>Discover the World’s Best Bars</h1>
-            {% endif %}
-        </section>
-
-    </div>
-
-
-    <!-- LATEST NEWS -->
-    <div class="container full">
-
-        <section class="bars">
-            {% if not is_mobile() or is_tablet() %}
-                <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
-            {% else %}
-                <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1">
-            {% endif %}
-
-                {% for n in latest %}
-                    {% if not n.isAnInterview %}
-                        <div class="ui-slide">
-                            {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n } %}
-                        </div>
+            <section class="bars">
+                {% if not is_mobile() or is_tablet() %}
+                <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
+                    {% else %}
+                        <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
                     {% endif %}
-
-                {% endfor %}
-            </div>
-        </section>
-    </div>
-</div>
-
-<!-- EDITOR'S PICK -->
-<div class="container l-margin-top m-padding-bottom">
-
-    <div class="twelve columns h1 m-margin-bottom color-brown {% if is_mobile() and not is_tablet() %}align-center{% endif %}">
-        Editor's Pick
-    </div>
-
-    <!-- 8 COLS -->
-    <section class="articles padding eight columns">
-        {% for n in articles|slice(0,1) %}
-            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
-        {% endfor %}
-        {% for n in articles|slice(1,1) %}
-            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
-        {% endfor %}
-        {% for n in interviews|slice(0,1) %}
-        {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
-        {% endfor %}
-        {% for n in articles|slice(2,1) %}
-            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
-        {% endfor %}
-
-    </section>
-
-    <!-- 4 COLS -->
-    <aside class="articles padding four columns">
-
-        {% if not is_mobile() or is_tablet() %}
-            <div class="block">
-                <div class="side-ad m-margin-top">
-                    <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
-                    <div class="txt">Advertising</div>
+                    {% for n in latest %}
+                        <div class="ui-slide loading">
+                            {% include "WBBBarBundle:News/blocks:thumb_article.html.twig" with { 'n' : n , 'secand_media' : true } %}
+                        </div>
+                    {% endfor %}
                 </div>
-            </div>
-        {% endif %}
-        {% for n in interviews|slice(1,1) %}
-            {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
-        {% endfor %}
-
-        {% for n in articles|slice(3,1) %}
-            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
-        {% endfor %}
-
-        {% for n in interviews|slice(2,1) %}
-            {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
-        {% endfor %}
-
-        {% for n in articles|slice(4,1) %}
-            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
-        {% endfor %}
-
-        {% for n in interviews|slice(3,1) %}
-            {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
-        {% endfor %}
-
-    </aside>
-</div>
-
-
-<!-- AD -->
-{% if not is_mobile() or is_tablet() %}
-    {% block footerAd %}
-        {{ parent() }}
-    {% endblock %}
-{% endif %}
-
-<!-- OLDER NEWS -->
-<div class="container l-margin-top m-padding-bottom">
-
-    <!-- 12 COLS -->
-    <div class="articles older-news twelve columns">
-        {% set newsIndex = 0 %}
-        {% for n in newsList %}
-            {% if newsIndex <= 0 %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
-                {% set newsIndex=newsIndex+1 %}
-            {% else %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 } %}
-                {% set newsIndex = -1 %}
-            {% endif %}
-        {% endfor %}
+            </section>
+        </div>
     </div>
-</div>
+    {% endblock %}
 
-<div class="twelve columns align-center m-margin-bottom">
-    <a class="h4 btn-radius border load-more brown" href="tmp/data/tips.php">Older News</a>
-</div>
+    <!-- EDITOR'S PICK -->
+    {% if is_mobile() and not is_tablet() %}
+        {% include "WBBBarBundle:News/blocks:editors_pick_mobile.html.twig"  with { 'articles' : articles , 'interviews' : interviews, 'newsList' : newsList, 'bigAd' : bigAd } %}
+    {% else %}
+        {% include "WBBBarBundle:News/blocks:editors_pick_desktop.html.twig"  with { 'articles' : articles , 'interviews' : interviews, 'newsList' : newsList } %}
+    {% endif %}
+    
+        <div class="twelve columns align-center l-margin-bottom load-more-container">
+            <a class="h4 btn-radius border load-more brown large" href="#0">Older news</a>
+        </div>
 {% endblock %}
 

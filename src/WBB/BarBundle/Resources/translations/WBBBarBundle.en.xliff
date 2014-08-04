@@ -7,6 +7,16 @@
                 <target>Detail Bar Page</target>
             </trans-unit>
 
+            <trans-unit id="breadcrumb.link_semsoft_bars_list">
+                <source>breadcrumb.link_semsoft_bars_list</source>
+                <target>Semsoft imported bars</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_semsoft_bar_list">
+                <source>breadcrumb.link_semsoft_bar_list</source>
+                <target>Semsoft imported bars</target>
+            </trans-unit>
+
             <trans-unit id="breadcrumb.link_tag_list">
                 <source>breadcrumb.link_tag_list</source>
                 <target>Tag list</target>
@@ -17,9 +27,29 @@
                 <target>Best of list</target>
             </trans-unit>
 
+            <trans-unit id="list.label_type">
+                <source>list.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_type">
+                <source>filter.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_type">
+                <source>form.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+
             <trans-unit id="bars">
                 <source>bars</source>
                 <target>Bars</target>
+            </trans-unit>
+
+            <trans-unit id="semsoft_bars">
+                <source>semsoft_bars</source>
+                <target>Semsoft Imported Bars</target>
             </trans-unit>
 
             <trans-unit id="tags">
@@ -127,18 +157,18 @@
                 <target>Instagram pseudo</target>
             </trans-unit>
 
-            <trans-unit id="form.label_is_credit_card">
-                <source>form.label_is_credit_card</source>
+            <trans-unit id="form.label_credit_card">
+                <source>form.label_credit_card</source>
                 <target>Credit Card</target>
             </trans-unit>
 
-            <trans-unit id="form.label_is_coat_check">
-                <source>form.label_is_coat_check</source>
+            <trans-unit id="form.label_coat_check">
+                <source>form.label_coat_check</source>
                 <target>Coat Check</target>
             </trans-unit>
 
-            <trans-unit id="form.label_is_reservation">
-                <source>form.label_is_reservation</source>
+            <trans-unit id="form.label_reservation">
+                <source>form.label_reservation</source>
                 <target>Reservation</target>
             </trans-unit>
 
@@ -157,8 +187,8 @@
                 <target>Menu link</target>
             </trans-unit>
 
-            <trans-unit id="form.label_reservation">
-                <source>form.label_reservation</source>
+            <trans-unit id="form.label_reservation_link">
+                <source>form.label_reservation_link</source>
                 <target>Reservation Link</target>
             </trans-unit>
 
@@ -481,18 +511,18 @@
                 <source>filter.label_rich_description</source>
                 <target>Rich description</target>
             </trans-unit>
-            <!-- isAnInterview -->
-            <trans-unit id="form.label_is_an_interview">
-                <source>form.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <!-- interview -->
+            <trans-unit id="form.label_interview">
+                <source>form.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
-            <trans-unit id="list.label_is_an_interview">
-                <source>list.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <trans-unit id="list.label_interview">
+                <source>list.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
-            <trans-unit id="filter.label_is_an_interview">
-                <source>filter.label_is_an_interview</source>
-                <target>Is an interview</target>
+            <trans-unit id="filter.label_interview">
+                <source>filter.label_interview</source>
+                <target>Interview</target>
             </trans-unit>
             <!-- isOnTop -->
             <trans-unit id="form.label_is_on_top">
@@ -528,6 +558,10 @@
             <trans-unit id="form.label_sponsor_image">
                 <source>form.label_sponsor_image</source>
                 <target>Sponsor image</target>
+            </trans-unit>
+            <trans-unit id="form.label_sponsor_image_small">
+                <source>form.label_sponsor_image_small</source>
+                <target>Small Sponsor image</target>
             </trans-unit>
             <trans-unit id="list.label_sponsor_image">
                 <source>list.label_sponsor_image</source>
@@ -622,87 +656,27 @@
             </trans-unit>
             <trans-unit id="filter.label_energy_level">
                 <source>filter.label_energy_level</source>
-                <target>Energy level</target>
-            </trans-unit>
-            <trans-unit id="filter.label_is_style">
-                <source>filter.label_is_style</source>
-                <target>Style</target>
-            </trans-unit>
-            <trans-unit id="filter.label_is_occasion">
-                <source>filter.label_is_occasion</source>
-                <target>Occasion</target>
-            </trans-unit>
-            <trans-unit id="filter.label_is_atmosphere">
-                <source>filter.label_is_atmosphere</source>
-                <target>Atmosphere</target>
-            </trans-unit>
-            <trans-unit id="filter.label_is_alcohol">
-                <source>filter.label_is_alcohol</source>
-                <target>Alcohol</target>
-            </trans-unit>
-            <trans-unit id="filter.label_is_cocktail">
-                <source>filter.label_is_cocktail</source>
-                <target>Cocktail</target>
-            </trans-unit>
-            <trans-unit id="filter.label_is_mood">
-                <source>filter.label_is_mood</source>
                 <target>Mood</target>
             </trans-unit>
-            <trans-unit id="list.label_is_style">
-                <source>list.label_is_style</source>
-                <target>Style</target>
+            <trans-unit id="form.label_to_go_with">
+                <source>form.label_to_go_with</source>
+                <target>To go out with</target>
             </trans-unit>
-            <trans-unit id="list.label_is_occasion">
-                <source>list.label_is_occasion</source>
-                <target>Occasion</target>
+            <trans-unit id="filter.label_to_go_with">
+                <source>filter.label_to_go_with</source>
+                <target>To go out with</target>
             </trans-unit>
-            <trans-unit id="list.label_is_atmosphere">
-                <source>list.label_is_atmosphere</source>
-                <target>Atmosphere</target>
-            </trans-unit>
-            <trans-unit id="list.label_is_alcohol">
-                <source>list.label_is_alcohol</source>
-                <target>Alcohol</target>
-            </trans-unit>
-            <trans-unit id="list.label_is_cocktail">
-                <source>list.label_is_cocktail</source>
-                <target>Cocktail</target>
-            </trans-unit>
-            <trans-unit id="list.label_is_mood">
-                <source>list.label_is_mood</source>
-                <target>Mood</target>
+            <trans-unit id="list.label_to_go_with">
+                <source>list.label_to_go_with</source>
+                <target>With Who</target>
             </trans-unit>
             <trans-unit id="form.label_energy_level">
                 <source>form.label_energy_level</source>
-                <target>Energy level</target>
-            </trans-unit>
-            <trans-unit id="form.label_is_style">
-                <source>form.label_is_style</source>
-                <target>Style</target>
-            </trans-unit>
-            <trans-unit id="form.label_is_occasion">
-                <source>form.label_is_occasion</source>
-                <target>Occasion</target>
-            </trans-unit>
-            <trans-unit id="form.label_is_atmosphere">
-                <source>form.label_is_atmosphere</source>
-                <target>Atmosphere</target>
-            </trans-unit>
-            <trans-unit id="form.label_is_alcohol">
-                <source>form.label_is_alcohol</source>
-                <target>Alcohol</target>
-            </trans-unit>
-            <trans-unit id="form.label_is_cocktail">
-                <source>form.label_is_cocktail</source>
-                <target>Cocktail</target>
-            </trans-unit>
-            <trans-unit id="form.label_is_mood">
-                <source>form.label_is_mood</source>
-                <target>Mood</target>
+                <target>Mood *</target>
             </trans-unit>
             <trans-unit id="list.label_energy_level">
                 <source>list.label_energy_level</source>
-                <target>Energy level</target>
+                <target>Mood</target>
             </trans-unit>
             <trans-unit id="list.label_by_tag">
                 <source>list.label_by_tag</source>
