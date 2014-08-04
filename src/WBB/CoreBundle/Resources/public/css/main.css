@@ -62,6 +62,7 @@
 
   /* Popup */
   .popup .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
+  .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
     .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 100; display: none;}
@@ -429,8 +430,17 @@
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
   /* Mobile */
-    .wrap-share.mobile {}
-    .wrap-share .social-share li .sms-share {background-image: url("../images/icon_sms-mobile.jpg");}
+    .wrap-share.mobile {z-index: 777; top: 50%; height: 280px; background-color: transparent; width: 100%;}
+    .wrap-share.mobile .social-share {padding: 0 10px;}
+    .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; left: 0; padding: 95px 90px 0;}
+    .wrap-share.mobile .social-share li,
+    .wrap-share.mobile .social-share li a {width: 106px; margin: 0 auto 9px; float: none;}
+    .wrap-share.mobile .social-share li a {display: inline-block; text-indent: -10000px; background-size: 106px 41px;}
+    .wrap-share.mobile .social-share li .sms-share {background-image: url("../images/UI/bar/icon_share-sms.jpg");}
+    .wrap-share.mobile .social-share li .fb-share {background-image: url("../images/UI/bar/Share_Mobile-facebook.jpg");}
+    .wrap-share.mobile .social-share li .twitter-share {background-image: url("../images/UI/bar/icon_share-twitter.jpg");}
+    .wrap-share.mobile .btn-close-brown {background-size: 40px 40px; top: 0;}
+    .wrap-share.mobile .social-share .share-label {position: absolute; z-index: 77; text-align: center; width: 93%; margin: 0 auto; top: 50px; font-size: 26px;}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
@@ -512,6 +522,7 @@
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
     section.bar-filter .bar-w-pic {height: 119px;}
+    .wrap-share.mobile .social-share .share-label {width: 96%;}
   }
 
   /* Tablets (landscape) ----------- */
