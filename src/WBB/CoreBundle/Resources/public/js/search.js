@@ -96,16 +96,24 @@ meta.SearchPage = function() {
     * Clear the content 
     **/
     that.clearContent = function(){
-        $('.bars-w-pic-list').empty();
-        $('.bars-w-pic-list').html('');
-        $('.details-barlist').empty();
-        $('.details-barlist').html('');
+        $('.bars-w-pic-list .dist-target').empty();
+        $('.bars-w-pic-list .dist-target').html('');
+        $('.details-barlist .dist-target').empty();
+        $('.details-barlist .dist-target').html('');
     }
 
+    /*
+    * Utils
+    **/
+    that.shortName = function(str , leng , strconcat){
+        var length = str.length;
+        return str.substr(0,leng) + (length > leng ? ( strconcat ? strconcat : '...'  ) : '');
+    }
     /*
     * Generate the Html list by response
     **/
     that.generateListByResults = function(res , callbackHandler , notreset){
+ 
         if(res.hits && res.hits.hit && res.hits.hit.length > 0){
             var htmlBar = "",
                 htmlBarList = "",
@@ -127,8 +135,10 @@ meta.SearchPage = function() {
                 var chtml = that.template.barWithPicture.replace('%type' , type);
                 var chtml2 = that.template.barWithPictureList.replace('%type' , type);
                 //if(type == 'Bar'){
-                    chtml = chtml.replace(new RegExp('%title','ig') , curor.fields.name);
-                    chtml2 = chtml2.replace(new RegExp('%title','ig') , curor.fields.name);
+                    var nameString = curor.fields.name;
+
+                    chtml = chtml.replace(new RegExp('%title','ig') , that.shortName(nameString , 25) );
+                    chtml2 = chtml2.replace(new RegExp('%title','ig') , nameString);
                     chtml = chtml.replace('%city' , curor.fields.city);
                     chtml2 = chtml2.replace('%city' , curor.fields.city);
                     chtml = chtml.replace('%country' , curor.fields.country);
@@ -177,8 +187,8 @@ meta.SearchPage = function() {
 
             // Append The HTML to Dom
 
-            $('.bars-w-pic-list').append(htmlBarList);
-            $('.details-barlist').append(htmlBar);
+            $('.bars-w-pic-list .dist-target').append(htmlBarList);
+            $('.details-barlist .dist-target').append(htmlBar);
 
             if(callbackHandler)
                 callbackHandler();
@@ -192,6 +202,12 @@ meta.SearchPage = function() {
             // hide buttons Load More
             $('.load-more-bars-btn').hide();
             $('.load-more-news-btn').hide();
+            $('.bars-w-pic-list .dist-target').empty();
+            $('.details-barlist .dist-target').empty();
+            $('.details-barlist .dist-target').html('');
+            $('.bars-w-pic-list .dist-target').html('');
+            $('.bars-w-pic-list .dist-target').append("<p>There are no results matching your request.</p>");
+            $('.details-barlist .dist-target').append("<p>There are no results matching your request.</p>");
         }
 
         setTimeout(function(){
@@ -233,7 +249,11 @@ meta.SearchPage = function() {
     that.getSearchResult = function(q , callbackHandler ){
 
         $('.loader-search-page').show();
-        var limit = ((ismobile || $('.ipad').length > 0) ? 3 : 12 ;
+        // Hide the button load More on strat generating 
+        $('.load-more-bars-btn').hide();
+        $('.load-more-news-btn').hide();
+
+        var limit = ((ismobile || $('.ipad').length > 0) ? 3 : 12 ),
         lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) ;
         $.get(lastConsultedURL, function(response){
             //// ///////
@@ -252,36 +272,35 @@ meta.SearchPage = function() {
         var $neigborhood = that.context.$form_filter.find('.neigborhood');
 
         // Load Ajax
-        $.get(Routing.generate('get_suburbs_from_city')+'/0/' + slug  + '/0', function(res){
-                console.log('result is ::' + res );
+        $.get(Routing.generate('wbb_city_suburbs' , {citySlug : slug}), function(res){
+            //todo: construct neigborhood here then slidedown
+            var html = '<li class="h4 radio-container">'+
+                            '<label><input type="radio" name="neigborhoods" value="all"/><b></b>All Neigborhoods</label>'+
+                            '<div '+($(window).width()>640?'class="custom-scroll"':'')+'>'+
+                                '<ul class="checkbox-container">';
+
+                                var liSubrb = "";
+                                $.each(res.suburbs , function(index , cursor){
+                                    liSubrb+= '<li><label><input type="checkbox" name="district[]" value="' + cursor.slug+ '"/><b></b>' + cursor.name+ '</label></li>';
+                                });
+
+                                html+=liSubrb;
+
+                                html += '</ul>'+
+                                '<br class="clear"/>'+
+                            '</div>'+
+                        '</li>';
+
+            $neigborhood.find('ul').html(html);
+
+            $neigborhood.find('.custom-scroll').each(function()
+            {
+                $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+            });
+
+            $neigborhood.slideDown();
+            that.setUpEventFilterAjax()
         });
-        //todo: construct neigborhood here then slidedown
-        var html = '<li class="h4 radio-container">'+
-                        '<label><input type="radio" name="neigborhoods" value="all"/><b></b>All Neigborhoods</label>'+
-                        '<div '+($(window).width()>640?'class="custom-scroll"':'')+'>'+
-                            '<ul class="checkbox-container">'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyn</label></li>'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
-                                '<li><label><input type="checkbox" name="neigborhood[]" value="brooklyn"/><b></b>Brooklyon</label></li>'+
-                            '</ul>'+
-                            '<br class="clear"/>'+
-                        '</div>'+
-                    '</li>';
-
-        $neigborhood.find('ul').html(html);
-
-        $neigborhood.find('.custom-scroll').each(function()
-        {
-            $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
-        });
-
-        $neigborhood.slideDown();
-        that.setUpEventFilterAjax()
     };
 
     /*
@@ -324,6 +343,7 @@ meta.SearchPage = function() {
         });
 
         formatedUrl = "";
+         start = 0;
         // Generate the url of query
         for( k in arrayFilter ){
             formatedUrl += (k.substr(0,k.length-2)) + '=' + arrayFilter[k].join(',') + '&';
@@ -369,6 +389,7 @@ meta.SearchPage = function() {
 
         that.context.$form_search.find('input[type=reset]').click(function()
         {
+
             $(this).hide();
         });
 
@@ -376,6 +397,9 @@ meta.SearchPage = function() {
         that.context.$form_filter.find('input[type=reset]').click(function()
         {
             $(this).hide();
+            // Empty the url format
+            formatedUrl = "";
+            start = 0;
             that.context.$form_filter.find('.drop-btn a.minus').click();
 
             setTimeout(function()
@@ -406,14 +430,15 @@ meta.SearchPage = function() {
             
             if(dataindex == 0){
                 currentFilter  = "Bar";
-                $('.load-more-bars-btn').show();
-                $('.load-more-news-btn').hide();
+                //$('.load-more-bars-btn').show();
+                //$('.load-more-news-btn').hide();
             }
             else{
                 currentFilter = "News";
-                $('.load-more-bars-btn').hide();
-                $('.load-more-news-btn').show();
             }
+
+            $('.load-more-bars-btn').hide();
+            $('.load-more-news-btn').hide();
 
             that.goSearch();
 
@@ -423,17 +448,18 @@ meta.SearchPage = function() {
         that.setUpEventFilterAjax();
 
         // Add Event On buttoms
-        $($('.sort-by a')[0]).attr('data-index' , 0);
-        $($('.sort-by a')[1]).attr('data-index' , 1);
-        $('.sort-by a').on('click' , function(){
+        $('.sort-by a.grid').attr('data-index' , 0);
+        $('.sort-by a.list').attr('data-index' , 1);
+        $('.sort-by a.grid').add('.sort-by a.list').on('click' , function(){
             var cindex = $(this).attr('data-index');
-            if(cindex == 0){
+            if($(this).hasClass('grid')){
                 $('.display-bar-width-picture-parent').show();
                 $('.display-bar-width-list-parent').hide();
             }else{
-                $('.display-bar-width-picture-parent').hide();
-                $('.display-bar-width-list-parent').show();
-                
+                if($(this).hasClass('list')){
+                    $('.display-bar-width-picture-parent').hide();
+                    $('.display-bar-width-list-parent').show();
+                }
             }
         });
 
@@ -459,6 +485,9 @@ meta.SearchPage = function() {
         $('#applay-filter').on('click' , function(){
             that.clearContent();
             that.goSearch();
+
+            // hide form on the Mobile
+             that.context.$form_filter.find('input[type=reset]').click();
             return false;
         });
     };
@@ -536,6 +565,12 @@ meta.SearchPage = function() {
 
         // add the callps class
         $('.screen-compteur .ui-radio').addClass('collapsed');
+
+
+
+        // hide the button load More on Init
+        $('.load-more-bars-btn').hide();
+        $('.load-more-news-btn').hide();
     };
 
     that.__construct();

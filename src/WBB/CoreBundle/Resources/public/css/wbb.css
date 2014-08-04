@@ -254,12 +254,14 @@ section.bar-finder .go.disabled{
     color: #999999;
     opacity: 0.29;
     border: none !important;
+    display: none;
 }
 section.bar-finder .go.disabled:hover {
     background-color: #ccc !important;
     color: #999999!important;
     opacity: 0.29!important;
     border: none !important;
+    display: none;
 }
 
 #common-loader{
@@ -306,4 +308,8 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     position: relative;
     top: -34px;
     display: none;
+}
+.loader-search-page.mobile {
+    right: -130px;
+    top: 1px;
 }
