@@ -10,7 +10,7 @@
                     </form>
                 </td>
             </tr>
-            <tr class="signin">
+            <tr class="signin {% if app.user %}logged{% endif %}">
                 <td>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <span class="logged h3">
