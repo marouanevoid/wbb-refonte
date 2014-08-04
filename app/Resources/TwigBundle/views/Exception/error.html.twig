@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Error 500</title>
-
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" href="/bundles/wbbcore/css/front.css" />
     <link rel="stylesheet" href="/bundles/wbbcore/css/wbb.css" />
     <link rel="stylesheet" href="/bundles/wbbcore/css/main.css" />
@@ -14,89 +14,161 @@
     <script type="text/javascript" src="/bundles/wbbcore/js/libs/utils.metabolism.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/app.js"></script>
 </head>
-<body>
-<header class="desktop">
-    <div class="container">
-        <div class="twelve columns">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="logo">
-                        <a href="{{ url('homepage') }}">
-                            <img src="{{ asset('bundles/wbbcore/images/logo-placeholder.png') }}" alt="logo" width="157" height="85"/>
-                        </a>
-                    </td>
-                    <td class="nav">
-                        <nav class="h3">
-                            <a href="{{ path('wbb_cities') }}">Cities</a>
-                            <a href="{{ path('wbb_bar_guides') }}" >Bar Guides</a>
-                            <a href="{{ path('wbb_news_landing_page') }}" >News</a>
-                        </nav>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+<body class="error">
+    <header class="desktop">
+        <div class="container">
+            <div class="twelve columns">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td class="logo">
+                            <a href="{{ url('homepage') }}">
+                                <img src="{{ asset('bundles/wbbcore/images/logo-placeholder.png') }}" alt="logo" width="157" height="85"/>
+                            </a>
+                        </td>
+                        <td class="nav">
+                            <nav class="h3">
+                                <a href="{{ path('wbb_cities') }}">Cities</a>
+                                <a href="{{ path('wbb_bar_guides') }}" >Bar Guides</a>
+                                <a href="{{ path('wbb_news_landing_page') }}" >News</a>
+                            </nav>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-</header>
-
-<div class="full-cream">
-    <div id="error" class="min-height padding-top-100">
-        <div class="wrap padding-bottom-80">
-            <div id="alert" class="text-align-center text-transform-uppercase">
-                <img src="{{ asset('bundles/wbbcore/images/404_desktop.png') }}">
-                <div class="subtitle margin-top-30">500 ERROR</div>
-                <p class="margin-top-20 padding-bottom-40">Sorry...<br />
-                    we’re experiencing an internal server problem. <br />Please try again later.</p>
-            </div> <!-- #alert -->
+    </header>
+    <header class="mobile">
+        <div class="container">
+            <div class="twelve columns">
+                <table>
+                    <tbody><tr>
+                        <td class="nav-icon">
+                            <a>
+                                <img src="images/icons/nav.mobile.png" alt="nav.mobile" width="19" height="17">
+                            </a>
+                        </td>
+                        <td class="logo">
+                            <a href="/app_dev.php/?city=1">
+                                <img src="images/logo.png" alt="logo" width="104" height="56">
+                            </a>
+                        </td>
+                        <td class="search-pin-icon">
+                            <a href="/app_dev.php/cities">
+                                <img src="images/icons/pin.border.png" alt="pin.border" width="12" height="16">
+                            </a>
+                            <a class="search" href="#0">
+                                <img src="images/icons/search.png" alt="search" width="16" height="16">
+                            </a>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </div>
         </div>
-    </div> <!-- #error -->
-</div>
-
-<footer>
-    <div class="container">
-        <div class="twelve columns">
-            <div class="left vcenter">
-                <nav class="h4">
-                    <a href="">About</a>
-                    <a href="">Terms & conditions</a>
-                    <a href="">Privacy Policy</a>
-                    <a href="">Cookies</a>
-                    <a href="mailto:editor@worldsbestbars.com">Submit a bar</a>
-                    {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a>{% endif %}
-                    <a href="">Responsible Drinking</a>
-                </nav>
-                <div class="copy h4">
-                    &copy; 2014 World's Best Bars
+        <div class="search-bar-mobile nav">
+            <div class="container">
+                <div class="twelve columns s-margin">
+                    <form action="search.php">
+                        <input type="text" name="q" placeholder="Search" autocomplete="off">
+                        <input type="reset" value=" " autocomplete="off">
+                    </form>
+                    <a class="btn-radius border h4 close">Cancel</a>
                 </div>
             </div>
-            <div class="right">
-                <div class="social-icons vcenter">
-                    <a href="https://www.facebook.com/worldsbestbars" class="facebook">
-                        <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="13" height="24"/></span>
-                    </a>
-                    <a href="https://twitter.com/WorldsBestBars" class="twitter">
-                        <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="28" height="24"/></span>
-                    </a>
-                    <a href="http://instagram.com/worldsbestbars" class="instagram">
-                        <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="25" height="24"/></span>
-                    </a>
-                    <a href="http://www.pinterest.com/worldsbestbars/" class="pinterest">
-                        <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="24" height="24"/></span>
-                    </a>
-                </div>
-                <div class="keep-in-touch vcenter">
-                    <h3 class="s-margin-bottom">Keep in touch</h3>
+            <div class="search-result-proposal"><ul></ul></div>
+        </div>
+    </header>
+    
+    <div class="full-cream">
+        <div id="error" class="min-height padding-top-100">
+            <div class="wrap padding-bottom-80">
+                <div id="alert" class="text-align-center text-transform-uppercase">
+                    <img src="{{ asset('bundles/wbbcore/images/404_desktop.png') }}">
+                    <div class="subtitle margin-top-30">500 ERROR</div>
+                    <p class="margin-top-20 padding-bottom-40">Sorry...<br />
+                        we’re experiencing an internal server problem. <br />Please try again later.</p>
+                </div> <!-- #alert -->
+            </div>
+        </div> <!-- #error -->
+    </div>
 
-                    <div class="socials">
-                        {# TO DO : Activae socials #}
-                        {#  <div class="fb-like" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-                         <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a> #}
+    <footer class="desktop">
+        <div class="container">
+            <div class="twelve columns">
+                <div class="left vcenter">
+                    <nav class="h4">
+                        <a href="">About</a>
+                        <a href="">Terms & conditions</a>
+                        <a href="">Privacy Policy</a>
+                        <a href="">Cookies</a>
+                        <a href="mailto:editor@worldsbestbars.com">Submit a bar</a>
+                        {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a>{% endif %}
+                        <a href="">Responsible Drinking</a>
+                    </nav>
+                    <div class="copy h4">
+                        &copy; 2014 World's Best Bars
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="social-icons vcenter">
+                        <a href="https://www.facebook.com/worldsbestbars" class="facebook">
+                            <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="13" height="24"/></span>
+                        </a>
+                        <a href="https://twitter.com/WorldsBestBars" class="twitter">
+                            <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="28" height="24"/></span>
+                        </a>
+                        <a href="http://instagram.com/worldsbestbars" class="instagram">
+                            <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="25" height="24"/></span>
+                        </a>
+                        <a href="http://www.pinterest.com/worldsbestbars/" class="pinterest">
+                            <span><img src="{{ asset('bundles/wbbcore/images/blank.png') }}" alt="social-icon" width="24" height="24"/></span>
+                        </a>
+                    </div>
+                    <div class="keep-in-touch vcenter">
+                        <h3 class="s-margin-bottom">Keep in touch</h3>
+
+                        <div class="socials">
+                            {# TO DO : Activae socials #}
+                            {#  <div class="fb-like" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                             <a href="https://twitter.com/WorldsBestBars" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @WorldsBestBars</a> #}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
+
+    <footer class="mobile">
+        <div class="container right left">
+            <div class="social-icons" style="height: 32px">
+                <a href="" class="facebook">
+                    <span><img src="/bundles/wbbcore/images/blank.png" alt="social-icon" width="13" height="24"></span>
+                </a>
+                <a href="" class="twitter">
+                    <span><img src="/bundles/wbbcore/images/blank.png" alt="social-icon" width="28" height="24"></span>
+                </a>
+                <a href="" class="instagram">
+                    <span><img src="/bundles/wbbcore/images/blank.png" alt="social-icon" width="25" height="24"></span>
+                </a>
+                <a href="" class="pinterest">
+                    <span><img src="/bundles/wbbcore/images/blank.png" alt="social-icon" width="24" height="24"></span>
+                </a>
+            </div>
+            <div class="keep-in-touch" style="height: 55px">
+                <h3 class="s-margin-bottom">Keep in touch</h3>
+
+                <div class="socials">
+                    <div class="fb-like fb_iframe_widget fb_iframe_widget_fluid" data-href="http://www.facebook.com/worldsbestbars" data-layout="button" data-action="like" data-show-faces="false" data-share="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;href=http%3A%2F%2Fwww.facebook.com%2Fworldsbestbars&amp;layout=button&amp;locale=en_US&amp;sdk=joey&amp;share=false&amp;show_faces=false" style="display: block; width: 100%; height: auto;"><span style="vertical-align: top; width: 100%; height: auto; overflow: hidden;"><iframe name="f1a629bd4c" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/plugins/like.php?action=like&amp;app_id=&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FoDB-fAAStWy.js%3Fversion%3D41%23cb%3Df3ac6bd33%26domain%3D192.168.2.153%26origin%3Dhttp%253A%252F%252F192.168.2.153%252Ffa72a446c%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fwww.facebook.com%2Fworldsbestbars&amp;layout=button&amp;locale=en_US&amp;sdk=joey&amp;share=false&amp;show_faces=false" style="border: none; visibility: visible; width: 0px; height: 0px; position: static;"></iframe></span></div>
+                    <iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1406859257.html#_=1407146767696&amp;id=twitter-widget-1&amp;lang=fr&amp;screen_name=WorldsBestBars&amp;show_count=false&amp;show_screen_name=false&amp;size=m" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 59px; height: 20px;"></iframe>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="copy h4">
+                    © 2014 World's Best Bars
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
