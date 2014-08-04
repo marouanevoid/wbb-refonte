@@ -51,7 +51,7 @@
 .bar-details .gallery .loader {
     display:block;
 }
-.btn-round.star.active:before {
+.bestof .btn-round.star.active:before {
     background-position: -160px -240px !important;
 }
 .bar-filter .best-of-container{
