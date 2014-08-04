@@ -200,11 +200,10 @@ meta.App = function() {
              $('header .finder').click();
              var closed = false;
              $(window).on('scroll' , function(){
-                if( ( !closed )  && $(document).scrollTop() >= 288){
+                if( ( !closed )  && $(document).scrollTop() >= ($('.ipad').length ? 240 : 288 ) ){
                     $('header .finder').click();
                     closed = true;
-                }
-                
+                }            
              });
         }
     };
@@ -235,6 +234,7 @@ meta.App = function() {
         $(window).load(function()
         {
             $("body").removeClass("loading").addClass("loaded");
+            that._customScroll();
         });
 
         $('a.see-more').click(function(e)
@@ -297,7 +297,7 @@ meta.App = function() {
         that._mobileMenuEvents();
 
         that._loadImages();
-        that._customScroll();
+        //that._customScroll();
 
         $( document ).ajaxComplete(function() {
 
