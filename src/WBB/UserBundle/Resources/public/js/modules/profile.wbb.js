@@ -1,5 +1,5 @@
 var wbb = wbb || {};
-
+console.log($('.remove-tip').data('id'));
 /**
  *
  */
@@ -12,6 +12,7 @@ wbb.LoadProfile = function() {
         $barsTarget: $('.list-bars'),
         $bestofsTarget: $('.list-bestof'),
         $tipsTarget: $('.list-tips'),
+        $tipUser: $('.remove-tip'),
         content: 'bars'
     };
 
@@ -129,9 +130,10 @@ wbb.LoadProfile = function() {
             url: _url,
             dataType: "json",
             success: function(msg) {
-                console.log(msg);
                 $target.append(msg.htmldata);
-
+                if($target === that.context.$tipsTarget){
+                    console.log("Is TIPS !!!");
+                }
                 if(msg.nbResults < config.limit)
                     config.$more.hide();
 
@@ -157,6 +159,11 @@ wbb.LoadProfile = function() {
     that.__construct = function()
     {
         that._setupEvents();
+    };
+
+    that.removeTip = function(id)
+    {
+
     };
 
     that.__construct();

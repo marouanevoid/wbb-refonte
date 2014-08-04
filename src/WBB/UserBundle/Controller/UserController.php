@@ -104,7 +104,7 @@ class UserController extends Controller
 
         $nbResults = count($response);
         $nbResultsRemaining = count($all) - $nbResults;
-        
+
         return new JsonResponse(
             array(
                 'htmldata'   => $html,
