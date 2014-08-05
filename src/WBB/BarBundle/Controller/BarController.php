@@ -13,8 +13,25 @@ use WBB\BarBundle\Repository\BarRepository;
 
 class BarController extends Controller
 {
+
+    private function reGeolocate(){
+
+        $session = $this->container->get('session');
+        $cookies = $this->get('request')->cookies;
+
+        if($cookies->has('first_visite') == false || ( $cookies->has('first_visite') && $cookies->get('first_visite') != "false" ) ){
+            $geoSlug = $session->get('citySlugGeo');
+            if(!empty($geoSlug))
+            {
+                $session->set('citySlug', $geoSlug);
+            }
+        }
+    }
+
     public function homeAction()
     {
+        $this->reGeolocate();
+
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
@@ -35,6 +52,7 @@ class BarController extends Controller
 
     public function cityHomeAction($slug)
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         if ($slug == "world-wide"){
             $session->set('citySlug', "");
@@ -76,6 +94,7 @@ class BarController extends Controller
 
     public function barGuideAction()
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
@@ -92,6 +111,7 @@ class BarController extends Controller
 
     public function barGuideCityAction($slug)
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         if ($slug == "world-wide")
         {
@@ -186,6 +206,7 @@ class BarController extends Controller
 
     public function barFinderAction(Request $request)
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         $city = null;
@@ -219,6 +240,7 @@ class BarController extends Controller
 
     public function barFinderFormAction()
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
 
