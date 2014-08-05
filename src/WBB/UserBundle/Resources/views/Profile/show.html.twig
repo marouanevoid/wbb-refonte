@@ -16,7 +16,7 @@
                             <div class="title text-transform-capitalize bold">
                                 <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                             </div>
-                            <div class="subgroup wrap {% if not is_mobile() or is_tablet() %}margin-top-10{% endif %}">
+                            <div class="subgroup wrap margin-top-10">
                                 {% if user.prefStartCity or user.country %}
                                     <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
@@ -89,7 +89,7 @@
 
                             <!-- List of Bars -->
                             <section class="bar-filter">
-                                <div class="margin-top-20 list-bars container">
+                                <div class="margin-top-20 list-bestof container profile-fav-block">
                                     {# AJAX LOADING #}
                                 </div>
 

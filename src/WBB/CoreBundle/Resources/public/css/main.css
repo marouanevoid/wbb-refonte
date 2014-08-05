@@ -185,7 +185,9 @@
   .ui .form-submit {background-color: #b3955f; font-size: 20px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
-  .popup .ui a {font-size: 16px;}
+  .popup .ui a {font-size: 16px; text-decoration: underline;}
+  .popup .ui a:hover,
+  .popup .ui .btn {text-decoration: none;}
 
   /* Version mobile */
     .ui.mobile {width: auto; /*padding: 80px 20px;*/ top: 80px;} /* Padding 0 for Userprofile  */
@@ -390,7 +392,6 @@
   #editprofile.mobile .ui .block-top,
   #editprofile.mobile .ui .avatar-profil {width: 100%;}
   #editprofile.mobile .ui .avatar-profil img {margin: 0 auto;}
-  #editprofile.mobile .ui .title h5 {line-height: 55px;}
   #editprofile.mobile .ui #edit-account label {visibility: visible; width: 100%; text-align: center;}
   #editprofile.mobile .ui #edit-account .checkbox label {text-align: left;}
   #editprofile.mobile .ui #edit-account .form-text {width: 99%; margin: 0;}
@@ -472,6 +473,13 @@
     .search-bar-mobile .container .form-submit {position: absolute; right: 86px; height: 40px; background-position: -84px -361px!important;}
     .search-bar-mobile .container .form-submit:hover {background-position: -84px -401px!important;}
 
+/* PAGE */
+  .page label {}
+  .page .form-text {}
+  .page .form-submit {}
+  .page .group-form {}
+  .page .group-actions {}
+
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
@@ -547,6 +555,11 @@
     #register.page .ui {padding-left: 0; padding-right: 0;}
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
     .void-popup {margin-top: -320px;}
+    .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}
+    .wrap-share .social-share {border-radius: 30px;}
+    .wrap-share .social-share .share-label {display: none;}
+    .wrap-share .social-share ul {left: 0;}
+    .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
   }
 
   /* iPad Only */
