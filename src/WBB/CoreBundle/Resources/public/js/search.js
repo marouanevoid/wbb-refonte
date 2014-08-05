@@ -227,6 +227,15 @@ meta.SearchPage = function() {
            },10);
 
 
+            // disabled buttons compteurs
+            var cursorIndex = 0;
+            if(currentFilter == 'News'){
+                cursorIndex = 1;
+            }else{
+                cursorIndex = 0 ;
+            }
+            that.desibledBtn($('.screen-compteur a[data-index='+ cursorIndex +']') , true );
+
         }else{
             // TODO : No results then show label no resluts
             // there is no more to loaded
@@ -239,6 +248,16 @@ meta.SearchPage = function() {
             $('.bars-w-pic-list .dist-target').html('');
             $('.bars-w-pic-list .dist-target').append("<p>There are no results matching your request.</p>");
             $('.details-barlist .dist-target').append("<p>There are no results matching your request.</p>");
+
+            // disabled buttons compteurs
+            var cursorIndex = 0;
+            if(currentFilter == 'News'){
+                cursorIndex = 1;
+            }else{
+                cursorIndex = 0 ;
+            }
+            that.desibledBtn($('.screen-compteur a[data-index='+ cursorIndex +']'));
+            
         }
 
         setTimeout(function(){
@@ -300,6 +319,10 @@ meta.SearchPage = function() {
     **/
     that._selectCities = function( slug )
     {
+        if(!slug || slug == "" || slug.length == 1)
+        {
+            return false;
+        }
         var $neigborhood = that.context.$form_filter.find('.neigborhood');
 
         // Load Ajax
@@ -344,6 +367,20 @@ meta.SearchPage = function() {
             $('.sort-by').find('.active').click();
         });
         return false;
+    }
+
+    /*
+    * Desibled prop
+    ***/
+    that.desibledBtn = function(cible ,status){
+        if(!status){
+            cible.addClass('disabled-search');
+            cible.attr('disabled' , 'disabled');
+        }else{
+            cible.removeClass('disabled-search');
+            cible.removeAttr();
+        }
+
     }
     /*
     * Get the current Tab Active
@@ -436,6 +473,9 @@ meta.SearchPage = function() {
             start = 0;
             that.context.$form_filter.find('.drop-btn a.minus').click();
 
+            // hide the select
+            $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+            $('.city-drop-down').val('');
             setTimeout(function()
             {
                 that.context.$form_filter.find('.neigborhood > ul').empty();
@@ -456,6 +496,9 @@ meta.SearchPage = function() {
 
         $('.screen-compteur').find('a').click(function(){
 
+            if($(this).hasClass('disabled-search')){
+                return false;
+            }
             // Rest the start Index to 0 
             start = 0
             var dataindex = $(this).attr('data-index');
@@ -479,7 +522,7 @@ meta.SearchPage = function() {
             return false;
         });
 
-        // that.setUpEventFilterAjax();
+        that.setUpEventFilterAjax();
 
         // Add Event On buttoms
         $('.sort-by a.grid').attr('data-index' , 0);
@@ -548,7 +591,7 @@ meta.SearchPage = function() {
                 that._filterResults();
         }
         //$('.checkbox-container').find('label').off('click',handler).on('click' , handler);
-        that.context.$form_filter.find('input[type=checkbox]').off('change',handler).on('change' , handler);
+        that.context.$form_filter.find('input[type=checkbox]').off('change').on('change' , handler);
 
     }
 
@@ -633,6 +676,17 @@ meta.SearchPage = function() {
 
         // dispatch click on the city select 
         that.context.$form_filter.find('select[name=city]').change();
+
+        // setup default value of select city
+        $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+        $('.city-drop-down').val('');
+
+        that.context.$form_filter.find('.neigborhood > ul').empty();
+        that.context.$form_filter.find('.neigborhood').hide();
+
+        // uncheck all CheakBox
+        that.context.$form_filter.find('input[type=checkbox]').prop('checked', false);
+
     };
 
     that.__construct();
