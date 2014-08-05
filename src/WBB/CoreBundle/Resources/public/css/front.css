@@ -3235,14 +3235,8 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   font-size: 90%;
   margin-bottom: 1.2em;
   height: 120px;
-}
-/* line 33, ../sass/components/_ui-dropdown.scss */
-.ui-dropdown-container .ui-dropdown .choice .jspContainer {
-  height: 110px !important;
-}
-/* line 34, ../sass/components/_ui-dropdown.scss */
-.ui-dropdown-container .ui-dropdown .choice .jspTrack {
-  height: 108px !important;
+  /*.jspContainer{ height: 110px!important }
+  .jspTrack{ height: 108px!important }*/
 }
 /* line 36, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice ul li {
@@ -3251,6 +3245,10 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   -moz-transition: color 0.2s ease-in-out;
   -o-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
+  display: block;
+  width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* line 38, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice ul li:last-child {
@@ -3270,8 +3268,8 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   height: 32px !important;
 }
 /* line 45, ../sass/components/_ui-dropdown.scss */
-.ui-dropdown-container .ui-dropdown .choice.length-1 .jspTrack {
-  height: 30px !important;
+.ui-dropdown-container .ui-dropdown .choice.length-1 .jspVerticalBar {
+  display: none !important;
 }
 /* line 47, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice.length-2 {
@@ -3283,8 +3281,8 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   height: 60px !important;
 }
 /* line 50, ../sass/components/_ui-dropdown.scss */
-.ui-dropdown-container .ui-dropdown .choice.length-2 .jspTrack {
-  height: 58px !important;
+.ui-dropdown-container .ui-dropdown .choice.length-2 .jspVerticalBar {
+  display: none !important;
 }
 /* line 52, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown .choice.length-3 {
@@ -3296,8 +3294,8 @@ html.safari.csstransforms3d .ui-slider.type-bestof .ui-slide {
   height: 90px !important;
 }
 /* line 55, ../sass/components/_ui-dropdown.scss */
-.ui-dropdown-container .ui-dropdown .choice.length-3 .jspTrack {
-  height: 88px !important;
+.ui-dropdown-container .ui-dropdown .choice.length-3 .jspVerticalBar {
+  display: none !important;
 }
 /* line 58, ../sass/components/_ui-dropdown.scss */
 .ui-dropdown-container .ui-dropdown.drop-light {
