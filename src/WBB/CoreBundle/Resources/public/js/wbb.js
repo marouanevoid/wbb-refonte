@@ -27,24 +27,19 @@ function nodeToString(node) {
     return str;
 }
 
-// facebook sign up
 $(document).ready(function() {
-    $('#facebook-signup').on('click', function() {
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                FB.api('/me', function(response) {
-                    console.log(response);
-                    setTimeout(securityCheck, 500);
-                });
-            } else {
-                FB.login(function(response) {
-                    if (response.authResponse) {
-                        console.log('Welcome!  Fetching your information.... ');
-                        setTimeout(securityCheck, 500);
-                    } else {
-                        console.log('User cancelled login or did not fully authorize.');
-                    }
-                });
+    $('.btn-signin').on('click', function(e) {
+        e.preventDefault();
+        $('.popin-block').html('');
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(html) {
+                $('.popin-block').html(html);
+                initializeDropdowns();
+                initRegisterLoginForms();
+                $('#show-popin').click();
             }
         });
     });
@@ -64,26 +59,60 @@ function fillInForm(formId) {
                     } else {
                         $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected').change();
                     }
-                    //alert(reponse.);
+
+                    var birthdayParts = response.birthday.split('/');
+                    var month = (parseInt(birthdayParts[0]));
+                    var day = (parseInt(birthdayParts[1]));
+                    var year = (parseInt(birthdayParts[2]));
+                    $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
+                    $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
+                    $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
                 } else if (formId === '#register_form') {
                     $(formId + ' #fos_user_registration_form_email').val(response.email);
+                    var birthdayParts = response.birthday.split('/');
+                    var month = (parseInt(birthdayParts[0]));
+                    var day = (parseInt(birthdayParts[1]));
+                    var year = (parseInt(birthdayParts[2]));
+
+                    $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
+                    $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
+                    $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
                 }
             });
         } else {
             FB.login(function(response) {
                 if (response.authResponse) {
-                    console.log('Welcome!  Fetching your information.... ');
                     fillInForm(formId);
                 } else {
                     console.log('User cancelled login or did not fully authorize.');
                 }
-            });
+            }, {scope: 'email,user_birthday,user_location'});
         }
     });
 }
 
 // Register forms actions
-$(document).ready(function() {
+function initRegisterLoginForms() {
+    $('#facebook-signup').on('click', function() {
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                FB.api('/me', function(response) {
+                    console.log(response);
+                    setTimeout(securityCheck, 500);
+                });
+            } else {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        console.log('Welcome!  Fetching your information.... ');
+                        setTimeout(securityCheck, 500);
+                    } else {
+                        console.log('User cancelled login or did not fully authorize.');
+                    }
+                }, {scope: 'email,user_birthday,user_location'});
+            }
+        });
+    });
+
     $('#message').hide();
     $('#register_form').on('submit', function(e) {
         e.preventDefault();
@@ -97,12 +126,18 @@ $(document).ready(function() {
                 if (data.code === '400') {
                     var errors = data.errors;
                     $('#message').find('ul').remove();
-                    var errorsList = $('#message').show().append('<ul></ul>');
+                    var errorsList = $('#message').show().find('img').after('<ul></ul>').parent();
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
                 } else {
-                    alert('Check your email fool !');
+                    var html = '<div id="success" class="text-align-center padding-top-80">' +
+                            '<div class="subtitle text-transform-uppercase margin-top-80">Congratulations!</div>' +
+                            '<p class="margin-top-20 margin-bottom-20">You are now registered on  World’s Best Bars.</p>' +
+                            '<p>Check your mailbox <br />' +
+                            'to confirm your subscription.</p>' +
+                            '</div>';
+                    $('.popin-block').html(html);
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -110,6 +145,7 @@ $(document).ready(function() {
             }
         });
     });
+
     $('#login_form').on('submit', function(e) {
         e.preventDefault();
         var form = $(this);
@@ -131,7 +167,7 @@ $(document).ready(function() {
             }
         });
     });
-});
+}
 
 // Popin
 jQuery(document).ready(function($) {
@@ -157,13 +193,33 @@ jQuery(document).ready(function($) {
             $('.mask').hide();
             current_id.removeClass("void-popup");
         }
-    })
+    });
+
     $(".btn-close").click(function(e) {
         var current_popup = $(this).closest(".void-popup");
-        current_popup.removeClass("void-popup");
         current_popup.fadeOut("fast");
-        $(".mask").fadeOut("slow");
-    })
+        $(".mask").fadeOut("slow", function() {
+            current_popup.removeClass("void-popup");
+        });
+    });
+
+    if (showNewPassword) {
+        var url = newPasswordUrl;
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(html) {
+                $('.popin-block').html(html);
+                $('#show-popin').click();
+            }
+        });
+    }
+    if (showConfirmed) {
+        var html = 'Your email is now confirmed. Welcome in the World’s Best Bars community!' +
+                'You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars';
+        $('.popin-block').html(html);
+        $('#show-popin').click();
+    }
 });
 
 // Favorites star
@@ -183,7 +239,7 @@ $(document).ready(function() {
                 type: "POST",
                 url: url,
                 success: function(response) {
-                   if (response.code === 200) {
+                    if (response.code === 200) {
                         btn.attr('href', response.href);
                         if (btn.hasClass('active')) {
                             btn.hide();
@@ -217,7 +273,18 @@ $(document).ready(function() {
                 }
             });
         } else {
-             $('#show-popin').click();
+            $('.popin-block').html('');
+            var url = $('.btn-signin').attr('href');
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(html) {
+                    $('.popin-block').html(html);
+                    initializeDropdowns();
+                    initRegisterLoginForms();
+                    $('#show-popin').click();
+                }
+            });
         }
     });
 });

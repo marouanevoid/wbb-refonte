@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="title margin-bottom-30 wrap bold">FORGOT YOUR PASSWORD</div>
+<div class="subtitle text-transform-uppercase bold">Enter your email to create a new password</div>
+
+<div class="forgetpassword wrap">
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST">
+        <div class="text-align-center">
+            <input type="email" name="username" class="form-text margin-top-30" placeholder="Your email">
+            <input type="submit" class="form-submit btn margin-top-30 bold" value="{{ 'resetting.request.submit'|trans }}">
+        </div>
+    </form>
+    <div class="clear"></div>
+
+    {% if invalid_username is defined %}
+        <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20">
+            <div>
+                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+                <ul><li>
+                        {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- #message -->
+    {% endif %}
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.forgetpassword').find('form').on('submit', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('action');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(html) {
+                    $('.popin-block').html(html);
+                }
+            });
+        });
+    });
+</script>

@@ -6,6 +6,12 @@ wbb_user_favoris_add:
     pattern:  /favoris/add
     defaults: { _controller: WBBBarBundle:Favoris:add }
     
+wbb_ajax_signin_popin:
+    pattern: /ajax/signin-popin
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    'WBBUserBundle::popin.html.twig'
+
 wbb_user_ajax_cities:
     pattern: /ajax/cities
     defaults: { _controller: WBBUserBundle:Ajax:cities }

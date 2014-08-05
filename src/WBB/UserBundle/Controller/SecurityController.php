@@ -43,7 +43,7 @@ class SecurityController extends Controller
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
 
-            return new JsonResponse(array('code' => '400', 'error' => $error));
+            return new JsonResponse(array('code' => '400', 'error' => $this->get('translator')->trans($error)));
         }
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);

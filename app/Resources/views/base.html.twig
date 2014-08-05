@@ -107,6 +107,10 @@
                 var LANG = "en";
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
+                
+                var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
+                var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
+                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
         </script>
 
         {% if is_tablet() %}
@@ -136,12 +140,18 @@
 
         {% endblock %}
         <div class="mask"></div>
-        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <div id="register-light">
-                {% render url('wbb_user_registration_register_light') %}    
+        <div id="register" style="display:none" class="{% if is_mobile() and not is_tablet() %}mobile{% endif %} popup">
+            <div class="wrap ui register">
+                <div class="margin-top-20">
+                    <div class="popin-block">
+                    </div>
+                    <div>
+                        <a href="#close" class="btn btn-close">Close</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
             </div>
-            {{ include('WBBUserBundle:Registration:register_tips.html.twig') }}
-        {% endif %}
+        </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
         {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
         <div id="fb-root"></div>

@@ -43,7 +43,7 @@ parameters:
     aws_cloudsearch_key:            AKIAJ6WSWPZUXSICYDPQ
     aws_cloudsearch_secret:         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
 
-    facebook_app_id:        test
-    facebook_app_secret:    test
+    facebook_app_id:        444821895657717
+    facebook_app_secret:    81b3c56cefb95cba10460d136270736e
 
     bitly_access_token: 2dc4e633c58b8a735d59724a667ccaacc0c9b11e
