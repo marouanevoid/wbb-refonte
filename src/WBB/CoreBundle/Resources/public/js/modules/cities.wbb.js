@@ -86,17 +86,27 @@ wbb.CitiesPage = function () {
         {
             var $scrollBars = that.context.$container.find('.scroll-bars');
             //$scrollBars.css({ opacity: 0 });
+
+            var api = $scrollBars.data('jsp');
             if(bars.length>0)
                 $scrollBars.find('ul').html(html);
             else
                 $scrollBars.find('ul').html("No results");
-
-            var api = $scrollBars.data('jsp');
-            api.scrollToY(0, false);
+            /////api.scrollToY(0, false);
 
 
             //$scrollBars.velocity('fadeIn', { duration: that.config.speed});
-            setTimeout(function(){ that._resize() }, 50);
+            //////setTimeout(function(){ that._resize() }, 50);
+
+               if( typeof (api) != "undefined" )
+                {
+                    api.scrollToY(0, false);
+                    api.reinitialise();
+                }
+
+                setTimeout(function(){  that._resize() });
+
+
         }
         that._hideCitySelector();
 
@@ -128,18 +138,31 @@ wbb.CitiesPage = function () {
     that._openFilter = function()
     {
 
-        var $head       = that.context.$container.find('.heading');
-        var $selector   = that.context.$container.find('.selector');
+        // var $head       = that.context.$container.find('.heading');
+        // var $selector   = that.context.$container.find('.selector');
+        var $head           = that.context.$container.find('.heading');
+        var $selector       = that.context.$container.find('.selector');
+        var $scrolls        = that.context.$container.find('.scrolls');
+        var $custom_scroll  = $scrolls.find('.custom-scroll');
 
         if( !that.context.filter_is_open )
         {
             that.context.filter_is_open = true;
 
             //$selector.height($selector.height());
-            that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
-            that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+            /// that.context.$container.find('.scrolls').css({opacity:0, display:'block'});
+            /// that.context.$container.find('.scrolls .custom-scroll').height(that.context.$container.height()*0.8-$head.height()-90);
+
+            $scrolls.css({opacity:0, display:'block'});
+            $custom_scroll.height(that.context.$container.height()*0.8-$head.height()-90);
 
             $selector.velocity({height:that.context.$container.height()*0.8-70}, that.config.speed, that.config.easing);
+
+            $custom_scroll.each(function()
+            {
+                var api = $(this).data('jsp');
+                if(typeof(api) != "undefined") api.reinitialise();
+            });
 
 
             // if the iPad Reduise the timer
@@ -512,11 +535,14 @@ wbb.CitiesPage = function () {
             {
                 $scrollCities.find('ul').html(html);
                 var api = $scrollCities.data('jsp');
-                api.scrollToY(0, false);
+               ////// api.scrollToY(0, false);
 
-                ///// TEMP ///
-                    // Show List
-                /////////////
+                if( typeof (api) != "undefined" )
+                {
+                    api.scrollToY(0, false);
+                    api.reinitialise();
+                }
+
             }else
             {
                 $scrollCities.find('ul').html("No results");
@@ -527,6 +553,9 @@ wbb.CitiesPage = function () {
         that.context.map.addMarkers(markers, false);
 
         //if( fit ) that.context.map.reset();
+
+        setTimeout(function(){ if( typeof (api) != "undefined" ) api.reinitialise() });
+
         if( callback )
             callback();
     };

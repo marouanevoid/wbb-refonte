@@ -17,6 +17,7 @@
 /**
  * indigen namespace.
  */
+
 var meta = meta || {};
 
 /**
@@ -31,6 +32,7 @@ meta.SearchPage = function() {
         start = 0 , 
         lastConsultedURL  = "",
         compteurBars = 0,
+        currentQuery = "",
         currentTabActive = "Bar";
     that.config = {
         speed   : 500,
@@ -83,7 +85,7 @@ meta.SearchPage = function() {
                             '    <h2 class="s-margin-top"><a href="bar-details.php">%title</a></h2>' + 
                             '    <h3 class="xs-margin-top"><a href="bar-details.php">%city, %country</a></h3>' + 
                             '    <p class="s-margin-top">' + 
-                            '        %description,' + 
+                            '        %description' + 
 
                             '    </p>' + 
                             '    <div class="tags %tag-non-founed">%tags</div>' + 
@@ -120,6 +122,10 @@ meta.SearchPage = function() {
                 htmlBarList = "";
             $.each(res.hits.hit , function(index , curor){
                 var type = "";
+                
+                var chtml = that.template.barWithPicture.replace('%type' , type);
+                var chtml2 = that.template.barWithPictureList.replace('%type' , type);
+
                 // Update Labels of Bar and News
                 if(curor.id.indexOf('News')>-1){
                     compteurNews++;
@@ -132,12 +138,10 @@ meta.SearchPage = function() {
                     }
                 }
 
-                var chtml = that.template.barWithPicture.replace('%type' , type);
-                var chtml2 = that.template.barWithPictureList.replace('%type' , type);
                 //if(type == 'Bar'){
                     var nameString = curor.fields.name;
 
-                    chtml = chtml.replace(new RegExp('%title','ig') , that.shortName(nameString , 25) );
+                    chtml = chtml.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 50 : 25 ) )  );
                     chtml2 = chtml2.replace(new RegExp('%title','ig') , nameString);
                     chtml = chtml.replace('%city' , curor.fields.city);
                     chtml2 = chtml2.replace('%city' , curor.fields.city);
@@ -146,8 +150,16 @@ meta.SearchPage = function() {
 
                     // if there is tags
                     if(curor.fields.tags_style && curor.fields.tags_style.length){
+                        // make tags url
+                        // var stringtag = "";
+                        // for(var i=0,ln = curor.fields.tags_style.length ; i<ln ; i++ ){
+                        //    stringtag = "<a href='?tag=" + curor.fields.tags_style[i] + "'>"+ curor.fields.tags_style[i]  + "</a>, " 
+                        // }
+                        // chtml = chtml.replace('%tags' , stringtag.substr(0, stringtag.length-2) );
+                        // chtml2 = chtml2.replace('%tags' , stringtag.substr(0, stringtag.length-2)  );
                         chtml = chtml.replace('%tags' , curor.fields.tags_style.join(', '));
                         chtml2 = chtml2.replace('%tags' , curor.fields.tags_style.join(', '));
+
                         chtml = chtml.replace('%tags-non-founed' , "");
                         chtml2 = chtml2.replace('%tags-non-founed' , "");
                     }else{
@@ -187,13 +199,32 @@ meta.SearchPage = function() {
 
             // Append The HTML to Dom
 
-            $('.bars-w-pic-list .dist-target').append(htmlBarList);
-            $('.details-barlist .dist-target').append(htmlBar);
+            $('.bars-w-pic-list .dist-target').append('<div class="line">' + htmlBarList + '</div>');
+            $('.details-barlist .dist-target').append( '<div class="line">' + htmlBar  + '</div>');
+
+            // preprocess of html List after appending 
+            var preprocess  = function(){
+                // Remove Tag on News
+                if(currentFilter == 'News'){
+                    $('.bars-w-pic-list .dist-target').add('.details-barlist .dist-target').find('.cover').remove();
+                    $('.bars-w-pic-list .dist-target').add('.details-barlist .dist-target').find('.tags').remove();
+
+                    // Remove country and city
+                    $('.bars-w-pic-list .dist-target').add('.details-barlist .dist-target').find('h3').remove();
+                }
+            }
+
+            preprocess();
 
             if(callbackHandler)
                 callbackHandler();
 
-            that._animate($('.load-target'),$("article.bar-w-pic"));
+           // that._animate($('.load-target'),$("article.bar-w-pic"));
+           $('.dist-target .line').find('> *').not('br').css({opacity:0, top:'6em', position:'relative'});
+
+           setTimeout(function(){
+               that._animate($(".load-target"), $('.dist-target .line').find('> *').not('br'));
+           },10);
 
 
         }else{
@@ -309,7 +340,7 @@ meta.SearchPage = function() {
     ***/
 
     that.goSearch = function(q){
-        that.getSearchResult(q ? q : 'q=bar' , function(){
+        that.getSearchResult(q ? q : ( 'q='+ currentQuery ) , function(){
             $('.sort-by').find('.active').click();
         });
         return false;
@@ -389,8 +420,11 @@ meta.SearchPage = function() {
 
         that.context.$form_search.find('input[type=reset]').click(function()
         {
-
+            that.context.$form_search.find('#city_search').val('');
             $(this).hide();
+            // Reset the current Query
+            currentQuery = "";
+            return false;
         });
 
 
@@ -445,7 +479,7 @@ meta.SearchPage = function() {
             return false;
         });
 
-        that.setUpEventFilterAjax();
+        // that.setUpEventFilterAjax();
 
         // Add Event On buttoms
         $('.sort-by a.grid').attr('data-index' , 0);
@@ -476,7 +510,8 @@ meta.SearchPage = function() {
             var querry = $(this).find('input[type=text]').val();
             if( querry !=''){
                 that.clearContent();
-                that.goSearch('q=' + querry);
+                currentQuery = querry;
+                that.goSearch('q=' + currentQuery);
             }
             return false;
         });
@@ -490,6 +525,17 @@ meta.SearchPage = function() {
              that.context.$form_filter.find('input[type=reset]').click();
             return false;
         });
+
+        // Add Event on submit 
+        that.context.$form_filter.on('submit' , function(){
+            that.clearContent();
+            that.goSearch();
+
+            // hide form on the Mobile
+             that.context.$form_filter.find('input[type=reset]').click();
+            return false;
+        });
+
     };
 
     /*
@@ -503,7 +549,9 @@ meta.SearchPage = function() {
         }
         //$('.checkbox-container').find('label').off('click',handler).on('click' , handler);
         that.context.$form_filter.find('input[type=checkbox]').off('change',handler).on('change' , handler);
+
     }
+
     that._animate = function($target, $elements, callback ){
 
         var target_height = $target.show().height();
@@ -559,9 +607,20 @@ meta.SearchPage = function() {
         // check if tab already actived
         that.getCurrentTabActive();
 
-        that.getSearchResult('q=bar' , function(){
-            $('.sort-by').find('.active').click();
-        });
+        // if the query is existed on the url then start search with given query
+        if(queryestQ && queryestQ != "undefined"){
+            that.goSearch('q=' + queryestQ);
+            currentQuery = queryestQ ;
+        }else{
+            // if the Tag is exist then get bar by Tag
+            if(queryestTag && queryestTag != "undefined")
+            {
+                that.goSearch('tag=' + queryestTag);
+            }
+        }
+
+
+        
 
         // add the callps class
         $('.screen-compteur .ui-radio').addClass('collapsed');
@@ -571,6 +630,9 @@ meta.SearchPage = function() {
         // hide the button load More on Init
         $('.load-more-bars-btn').hide();
         $('.load-more-news-btn').hide();
+
+        // dispatch click on the city select 
+        that.context.$form_filter.find('select[name=city]').change();
     };
 
     that.__construct();
