@@ -152,12 +152,13 @@
   .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
   .date-birthday .ui-dropdown-container {width: 95px!important;}
 
-/* Globale Mobile Classes */
+/* Globale Desktop style's */
+  .error .mobile {display: none; visibility: hidden;}
+/* Globale Mobile */
   .ui.mobile .content,
   #bar-finder-result.mobile .content,
   #bar-finder.mobile .content {padding: 0 10px 60px;}
   .ui.mobile .radius {border-radius: 100%;}
-/* Globale Mobile */
   .ui.mobile a,
   .ui.mobile p {font-size: 16px;}
   .ui.mobile .ui-dropdown-container .ui-dropdown .choice ul li {font-size: 18px;}
@@ -478,11 +479,11 @@
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
-  aside.mobile-menu table tr.signin td .logged .actions {margin-left: -30px; width: 205px;}
 
   /* mobile */
   .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
+  aside.mobile-menu table tr.signin.logged td {padding: 0; border-bottom: 0;}
 
   /* iPad */
   .ipad .cities-content input[type="text"] + input[type="submit"] {right: 0px;}
@@ -579,6 +580,9 @@
     section.bar-filter .bar-w-pic {height: 210px;}
     .min-height {min-height: 100%;}
     #editprofile #edit-account {padding: 0 10px;}
+    .error .mobile {display: block; visibility: visible;}
+    .error .desktop {display: none; visibility: hidden;}
+    #error {position: relative; top: 100px;}
   }
 
 /* Smartphones (portrait) ----------- */
