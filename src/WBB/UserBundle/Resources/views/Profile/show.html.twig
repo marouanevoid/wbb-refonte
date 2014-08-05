@@ -132,14 +132,12 @@
                                         </div> <!-- .filter-view -->
                                     </div> <!-- .margin-top-20 -->
                                 </div> <!-- .container -->
-
                             <section class="bar-filter">
                                 <!-- List of Bars -->
-                                <div class="margin-top-20 list-bestof container">
+                                <div class="margin-top-20 list-bestof container profile-fav-block">
                                     {# AJAX LOADING #}
                                 </div>
                             </section>
-
                             <!-- Button See more Bars -->
                             <div class="container">
                                 <div class="more-bestofs force-load load-container">
@@ -186,31 +184,31 @@
         $(document).ready(function(){
             new wbb.LoadProfile();
             console.clear();
-            var tabElement = $("input[name='filter']");
-            tabElement.change(function(){
-                var currentTab = $(this).data("tab");
-                if (currentTab == "bars") {
-                    tabClose();
-                    $("#tab-bars").fadeIn("slow");
-                    $("#tab-bars").addClass("active");
-                } else if(currentTab == "bestof") {
-                    tabClose();
-                    $("#tab-bestof").fadeIn("slow");
-                    $("#tab-bestof").addClass("active");
-                } else if (currentTab == "tips") {
-                    tabClose();
-                    $("#tab-tips").fadeIn("slow");
-                    $("#tab-tips").addClass("active");
-                }
-            })
-            function tabClose(){
-                $(".tab").each(function(){
-                    if ($(this).hasClass("active")) {
-                        $(this).removeClass("active");
-                        $(this).fadeOut("fast");
-                    }
-                })
-            }
+            // var tabElement = $("input[name='filter']");
+            // tabElement.change(function(){
+            //     var currentTab = $(this).data("tab");
+            //     if (currentTab == "bars") {
+            //         tabClose();
+            //         $("#tab-bars").fadeIn("slow");
+            //         $("#tab-bars").addClass("active");
+            //     } else if(currentTab == "bestof") {
+            //         tabClose();
+            //         $("#tab-bestof").fadeIn("slow");
+            //         $("#tab-bestof").addClass("active");
+            //     } else if (currentTab == "tips") {
+            //         tabClose();
+            //         $("#tab-tips").fadeIn("slow");
+            //         $("#tab-tips").addClass("active");
+            //     }
+            // })
+            // function tabClose(){
+            //     $(".tab").each(function(){
+            //         if ($(this).hasClass("active")) {
+            //             $(this).removeClass("active");
+            //             $(this).fadeOut("fast");
+            //         }
+            //     })
+            // }
         });
     </script>
 {% endblock %}

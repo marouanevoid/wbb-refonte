@@ -1,5 +1,5 @@
 {% for tip in tips %}
-    <li class="three columns box margin-bottom-30">
+    <li class="three columns box margin-bottom-30 item-tips">
         <article class="tip">
             <table class="content expert">
                 <tbody><tr class="excerpt">
@@ -29,7 +29,7 @@
                 </tr>
                 </tbody>
             </table>
-        <a href="javascript:;" class="close remove-tip no-text" data-id="{{ tip.id|raw }}">Close</a>
+        <a href="#" class="close remove-tip no-text" data-id="{{ tip.id|raw }}">Close</a>
         </article>
     </li>
 {% endfor %}
