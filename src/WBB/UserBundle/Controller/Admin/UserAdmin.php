@@ -65,14 +65,17 @@ class UserAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $generatePasswordBtn = '<input type="button" id="pwd-generator" class="pwd-generator btn" value="Generate Password" />';
+
         $formMapper
             ->with('General')
                 ->add('title', 'choice', array(
-                    'help' => 'Mandatory',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => true,
-                    'choices'  => array(
+                    'help'      => 'Mandatory',
+                    'expanded'  => false,
+                    'multiple'  => false,
+                    'required'  => true,
+                    'label'     => 'Gender',
+                    'choices'   => array(
                         'Mrs'   =>  'Madam',
                         'Miss'  =>  'Miss',
                         'Mr'    =>  'Mister'
@@ -88,7 +91,15 @@ class UserAdmin extends Admin
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
-                ->add('plainPassword', 'text', array('required' => false, 'help' => 'Mandatory', 'label' => 'Password *'))
+                ->add('plainPassword', 'text', array(
+                        'required' => false,
+                        'help' => $generatePasswordBtn.'Mandatory',
+                        'label' => 'Password *',
+                        'attr' => array(
+                            'class' => 'span5 pwd-field'
+                        )
+                    )
+                )
             ->end()
             ->with('Preferences')
                 ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))
@@ -98,6 +109,7 @@ class UserAdmin extends Admin
                 ->add('prefCity3', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefStartCity', null, array('read_only' => true, 'disabled'  => true))
                 ->add('stayInformed')
+                ->add('stayBrandInformed')
             ->end()
         ;
 
@@ -131,6 +143,12 @@ class UserAdmin extends Admin
      */
     public function preUpdate($user)
     {
+        //Get the plain password before encryption
+        $newPassword = $user->getPlainPassword();
+
+        //Send Email containing the New Password
+
+
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
     }
