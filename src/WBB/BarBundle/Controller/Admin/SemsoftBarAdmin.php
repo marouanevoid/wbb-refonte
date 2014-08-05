@@ -6,6 +6,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -14,6 +15,18 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class SemsoftBarAdmin extends Admin
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
+        $filterMapper
+            ->add('name')
+            ->add('country')
+            ->add('city')
+            ->add('bar');
+    }
 
     /**
      * {@inheritdoc}

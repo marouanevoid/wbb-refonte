@@ -197,6 +197,29 @@ $(document).ready(function() {
                                 btn.addClass('force-disabled')
                             }
                             btn.show();
+
+                            // destroy the item parent on profile
+                            if(btn.parents('.profile-fav-block').length){
+
+                                var TypeEvent = "removeitem",
+                                    cible = "";
+                                if(btn.parents('.three.columns.m-margin-top').length){
+                                    btn.parents('.three.columns.m-margin-top').remove();
+                                    cible = 'bars';
+                                }
+                                else{
+                                    if( btn.parents('.best-of-container').length){
+                                        btn.parents('.best-of-container').remove();
+                                         cible = 'bestof';
+                                    }
+                                }
+
+                                // dispatching Event removeitem
+                                $.event.trigger({
+                                    type: "removeitem",
+                                    cible: cible
+                                });
+                            }
                         } else {
                             btn.hide();
                             btn.addClass('active');

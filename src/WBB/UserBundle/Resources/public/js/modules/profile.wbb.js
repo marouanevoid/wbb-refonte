@@ -45,22 +45,54 @@ wbb.LoadProfile = function() {
         that.config.bars.offset += that.config.bars.limit;
 
         //load bars on radio buttons change
-        $('input[name=filter]').change(function()
+        $('.filter-profil a.ui-radio').on('click', function()
         {
-            if($(this).data('tab') == "bars"){
+            var _this = $(this).find('.ui-radio');
+            var tabClose = function(){
+                $(".tab").each(function(){
+                    // if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                        $(this).fadeOut("fast");
+                   // }
+                })
+            };
+
+            if($(_this).data('tab') == "bars"){
                 that.context.content = 'bars';
+                console.log('show barrs');
+                tabClose();
+                $("#tab-bars").fadeIn("slow");
+                $("#tab-bars").addClass("active");
+
+                if(that.config.bars.offset > 0)
+                    return;
                 that._request(that.context.$barsTarget, that.config.bars);
                 that.config.bars.offset += that.config.bars.limit;
             }
 
-            if($(this).data('tab') == "bestof"){
+            if($(_this).data('tab') == "bestof"){
+                tabClose();
+                console.log('show best of');
+
+                $("#tab-bestof").fadeIn("slow");
+                $("#tab-bestof").addClass("active");
+
                 that.context.content = 'bestofs';
+                if(that.config.bestofs.offset > 0)
+                    return;
                 that._request(that.context.$bestofsTarget, that.config.bestofs);
                 that.config.bestofs.offset += that.config.bestofs.limit;
             }
 
-            if($(this).data('tab') == "tips"){
+            if($(_this).data('tab') == "tips"){
+                console.log('show tips');
+                tabClose();
+                $("#tab-tips").fadeIn("slow");
+                $("#tab-tips").addClass("active");
+
                 that.context.content = 'tips';
+                if(that.config.tips.offset > 0)
+                    return;
                 that._request(that.context.$tipsTarget, that.config.tips);
                 that.config.tips.offset += that.config.tips.limit;
             }
@@ -120,7 +152,78 @@ wbb.LoadProfile = function() {
             that._request(that.context.$barsTarget, that.config.bars);
             that.config.bars.offset += that.config.bars.limit;
         });
+
+
+
+        var descrimentFunction = function(cible){
+            var str = $(cible).html(),
+                arr = str.split(')'),
+                cstr = arr[0].substr(1),
+                cint = Number(cstr),
+                ncint = cint;
+            cint--;
+
+            str = str.replace(cstr , cint);
+
+            $(cible).html(str);
+
+            return cint;
+        }
+        // Add listner on Remove Items 
+        $(document).on('removeitem' , function(e){
+            var filterprof = $('.filter-profil');
+            if(e.cible =='bars'){
+                descrimentFunction(filterprof.find('.Bars'));
+
+                that.context.content = 'bars';
+                console.log('the offest is ::' + that.config.bars.offset);
+                that._request(that.context.$barsTarget, {limit : 1 , offset : that.config.bars.offset-1 , filter : that.config.bars.filter , display : that.config.bars.display , $more : that.config.bars.$more});
+            }
+            if(e.cible =='bestof'){
+                console.log('the offest is bestofs::' + that.config.bestofs.offset);
+                descrimentFunction(filterprof.find('.collections'));
+                that.context.content = 'bestofs';
+                that._request(that.context.$bestofsTarget, {limit : 1 , offset : that.config.bestofs.offset-1 , filter : that.config.bestofs.filter , display : that.config.bestofs.display , $more : that.config.bestofs.$more});
+            }
+            if(e.cible == 'tips'){
+                 console.log('the offest tips  is ::' + that.config.tips.offset);
+                descrimentFunction(filterprof.find('.tips'));
+
+                that.context.content = 'tips';
+                that._request(that.context.$tipsTarget, {limit : 1 , offset : that.config.tips.offset-1 , filter : 'date' , display : 'grid' , $more : that.config.tips.$more});
+            }
+        }); 
+
+
+        // focus on active Tab
+        var activedTab = $('.filter-profil .ui-radio.active');
+        if(activedTab.length)
+        {
+            activedTab.click();
+        }
     };
+
+    // Aadd Handler on Ajax loaded
+    that.setpEventAfterAjax = function(){
+        // add listner on delete tips
+
+        var removeHandler = function(){
+            var _btnclose = $(this);
+            $.get(Routing.generate('wbb_bar_tips_delete' , {tipId : $(this).attr('data-id') }) , function(res){
+                // if is deleted
+                _btnclose.parents('li.item-tips').remove();
+                // dispatching Event removeitem
+                $.event.trigger({
+                    type: "removeitem",
+                    cible: 'tips'
+                });
+            });
+
+            return false;
+        }
+
+        $('.remove-tip').off('click').on('click' , removeHandler);
+    }
 
     that._request = function ($target, config)
     {
@@ -132,7 +235,8 @@ wbb.LoadProfile = function() {
             success: function(msg) {
                 $target.append(msg.htmldata);
                 if($target === that.context.$tipsTarget){
-                    console.log("Is TIPS !!!");
+                    // SetUp events of tips
+                    that.setpEventAfterAjax();
                 }
                 if(msg.nbResults < config.limit)
                     config.$more.hide();
