@@ -62,3 +62,9 @@ services:
     #MD5 password encoder
     wbb_md5_password_encoder:
         class: %wbb_user.user.md5_password_encoder.class%
+
+    #Mailers
+    wbb_user.generate_password.mailer:
+        class:  WBB\UserBundle\Mailer\GeneratePasswordMailer
+        parent: wbb_core.mailer.twig_swift
+        public: true
