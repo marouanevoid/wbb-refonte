@@ -68,10 +68,21 @@ meta.Selector = function(config){
             $(this).addClass('active');
 
             var $selector = that.config.$selector.find('.selector');
-
+            var $scroll = $selector.find('.custom-scroll');
             $selector.css({opacity:0.01, display:'block', top:'70%'});
             $selector.css({left:($(this).outerWidth()-$selector.outerWidth())/2});
-            $selector.animate({opacity:1, top:'100%'}, that.config.speed, that.config.easing);
+            //$selector.animate({opacity:1, top:'100%'}, that.config.speed, that.config.easing);
+            $selector.animate({opacity:1, top:'100%'}, that.config.speed, that.config.easing, function()
+            {
+                if($scroll.length) api.reinitialise();
+            });
+
+            if($scroll.length)
+            {
+                var api = $scroll.data('jsp');
+                api.reinitialise();
+            }
+
 
         });
 
