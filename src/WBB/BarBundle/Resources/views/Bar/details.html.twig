@@ -249,7 +249,7 @@
                     </td>
                 </tr>
             </table>
-            <div class="wrap-share {% if is_mobile() and not is_tablet() %}mobile{% endif %}" style="display:none">
+            <div id="share-pop" class="wrap-share {% if is_mobile() and not is_tablet() %}mobile popup{% endif %}" style="display:none">
                 <div class="social-share radius-max">
                     <div class="share-label left bold">SHARE</div>
                     <ul>
@@ -263,18 +263,32 @@
                     </ul>
                     <div class="clear"></div>
                 </div>
+                {% if is_mobile() and not is_tablet() %}<a href="javascript:;" id="close-pop" class="close btn-close-brown no-text">close</a>{% endif %}
             </div>
             <script type="text/javascript">
                 $(document).ready(function(){
                     $("#share").hover(function() {
                         $(".wrap-share").fadeIn("slow");
+                        if ($(this).hasClass("popup")) {
+                            $(".mask").fadeIn("slow");
+                        }
                     });
 
                     $(".wrap-share").hover(function() {
                         $(".wrap-share").fadeIn("slow");
+                        if ($(this).hasClass("popup")) {
+                            $(".mask").fadeIn("slow");
+                        }
                     }, function() {
                         $(".wrap-share").fadeOut("slow");
+                        if ($(this).hasClass("popup")) {
+                            $(".mask").fadeOut("slow");
+                        }
                     });
+                    $("#close-pop").click(function(){
+                        $("#share-pop").fadeOut("slow");
+                        $(".mask").fadeOut("slow");
+                    })
                 })
             </script>
         </section>

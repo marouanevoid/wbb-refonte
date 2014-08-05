@@ -16,7 +16,7 @@
                             <div class="title text-transform-capitalize bold">
                                 <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                             </div>
-                            <div class="subgroup wrap {% if not is_mobile() and is_tablet() %}margin-top-10{% endif %}">
+                            <div class="subgroup wrap margin-top-10">
                                 {% if user.prefStartCity or user.country %}
                                     <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
@@ -89,7 +89,7 @@
 
                             <!-- List of Bars -->
                             <section class="bar-filter">
-                                <div class="margin-top-20 list-bars container profile-fav-block">
+                                <div class="margin-top-20 list-bestof container profile-fav-block">
                                     {# AJAX LOADING #}
                                 </div>
 
@@ -107,38 +107,37 @@
                         </div><!-- #tab-bars -->
                         <div class="clear"></div>
 
-                        <div id="tab-bestof"  class="bar-filter tab margin-bottom-40"style="display:none">
-
-                            <!-- Filters -->
-                            <div class="container">
-                                <div class="margin-top-20">
-                                    <div class="sort-by six columns">
-                                        <label class="sort left text-transform-uppercase unbold">Sort by :</label>
-                                        <div class="four columns">
-                                            <select class="ui-dropdown light" name="criteria" id="criteria-bestof">
-                                                <option value="date" data-type="criteria" selected="selected">Date</option>
-                                                <option value="alphabetical" data-type="criteria">Alphabetical order</option>
-                                                <option value="city" data-type="criteria">City</option>
-                                            </select>
-                                        </div>
-                                    </div> <!-- .sort-by -->
-
-                                    <div class="filter-view">
-                                        <div class="right">
-                                            <div class="{% if is_mobile() %}margin-right-10{% endif %}">
-                                                <input type="radio" name="bestof-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
-                                                <input type="radio" name="bestof-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                        <div id="tab-bestof"  class="tab margin-bottom-40"style="display:none">
+                                <!-- Filters -->
+                                <div class="container">
+                                    <div class="margin-top-20">
+                                        <div class="sort-by six columns">
+                                            <label class="sort left text-transform-uppercase unbold">Sort by :</label>
+                                            <div class="four columns">
+                                                <select class="ui-dropdown light" name="criteria" id="criteria-bestof">
+                                                    <option value="date" data-type="criteria" selected="selected">Date</option>
+                                                    <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                                    <option value="city" data-type="criteria">City</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                    </div> <!-- .filter-view -->
-                                </div> <!-- .margin-top-20 -->
-                            </div> <!-- .container -->
+                                        </div> <!-- .sort-by -->
 
-                            <!-- List of Bars -->
-                            <div class="margin-top-20 list-bestof container profile-fav-block">
-                                {# AJAX LOADING #}
-                            </div>
-
+                                        <div class="filter-view">
+                                            <div class="right">
+                                                <div class="{% if is_mobile() %}margin-right-10{% endif %}">
+                                                    <input type="radio" name="bestof-view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
+                                                    <input type="radio" name="bestof-view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                                                </div>
+                                            </div>
+                                        </div> <!-- .filter-view -->
+                                    </div> <!-- .margin-top-20 -->
+                                </div> <!-- .container -->
+                            <section class="bar-filter">
+                                <!-- List of Bars -->
+                                <div class="margin-top-20 list-bestof container profile-fav-block">
+                                    {# AJAX LOADING #}
+                                </div>
+                            </section>
                             <!-- Button See more Bars -->
                             <div class="container">
                                 <div class="more-bestofs force-load load-container">

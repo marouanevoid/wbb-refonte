@@ -2,10 +2,8 @@
 
 {% block body %}
     <div class="full-white">
-        <div id="editprofile" class="page {% if is_mobile() and not is_tablet() %}mobile {% endif %}wrap margin-bottom-20">
-
+        <div id="editprofile" class="page {% if is_mobile() and not is_tablet() %}mobile {% endif %}wrap padding-bottom-20">
             <div  class="ui wrap">
-
                 <div class="margin-top-20">
                     <div id="edit-account">
                         <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
@@ -14,10 +12,10 @@
                                     <img src="{{  showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
                                 </div>
                                 <div class="group left">
-                                    <div class="title text-transform-capitalize unbold">
+                                    <div class="title text-transform-capitalize bold">
                                         <h5>{{ user.firstname }} {{ user.lastname }}</h5>
                                     </div>
-                                    <div class="subgroup margin-top-10 margin-bottom-40 wrap">
+                                    <div class="subgroup margin-top-10 {% if is_mobile() and not is_tablet() %}margin-bottom-10{% else %}margin-bottom-40{% endif %} wrap">
                                         {% if user.prefStartCity or user.country %}
                                             <div class="text-transform-capitalize text-align-center">
                                                 <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
@@ -183,7 +181,7 @@
                             </div>
 
                             <div class="group-form checkbox margin-top-10">
-                                <label class="wrap {% if not is_mobile() %}margin-left-40{% endif %}">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
+                                <label class="wrap {% if not is_mobile() or is_tablet() %}margin-left-40{% endif %}">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
                                     Unsubscribe the brand newsletter</label>
                             </div>
                             {{ form_rest(form) }}
