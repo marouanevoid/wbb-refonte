@@ -171,6 +171,15 @@ function initRegisterLoginForms() {
 
 // Popin
 jQuery(document).ready(function($) {
+
+    function resizer(element){
+        //Centred popup
+        var current_id = $("#" + element);
+        width = -1 * parseInt((current_id.width()/2));
+        height = -1 * parseInt((current_id.height()/2));
+        current_id.css('margin-left', width).css('margin-top', height);
+    }
+
     // Click anywhere on the page to get rid of lightbox window
     $('.mask').hide();
     $('.lighbox').click(function(e) {
@@ -184,9 +193,7 @@ jQuery(document).ready(function($) {
         if (current_id.length > 0) {
 
             //Centred popup
-            // width = -1 * parseInt((current_ui.width()/2));
-            // height = -1 * parseInt((current_ui.height()/2));
-            // current_ui.css('margin-left', width).css('margin-top', height);
+            resizer(id_content);
 
             //show lightbox window
             current_id.fadeIn("slow");
@@ -207,6 +214,7 @@ jQuery(document).ready(function($) {
         current_popup.fadeOut("fast");
         $(".mask").fadeOut("slow", function() {
             current_popup.removeClass("void-popup");
+            current_popup.attr("class", "popup");
         });
     });
 
@@ -215,6 +223,7 @@ jQuery(document).ready(function($) {
         current_popup.fadeOut("fast");
         $(".mask").fadeOut("slow", function() {
             current_popup.removeClass("void-popup");
+            current_popup.attr("class", "popup");
         });
     });
 

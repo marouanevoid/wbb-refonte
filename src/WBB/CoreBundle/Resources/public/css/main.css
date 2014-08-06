@@ -55,8 +55,8 @@
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
-  .popup {width: 1136px; height: 830px;}
-  .void-popup {margin-left: -568px; margin-top: -280px; left: 50%; z-index: 107; top: 50%; position: fixed;}
+  .popup {width: 911px; height: 666px;}
+  .void-popup {/*margin-left: -568px; margin-top: -280px;*/ left: 50%; z-index: 107; top: 50%; position: fixed;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .select-two .ui-dropdown-container {width: 100%!important;}
 
@@ -198,10 +198,9 @@
     .ui.mobile .btn-facebook {font-size: 32px; background-image: url("../images/UI/mobile/icon_fb.jpg"); background-position: 25px center; line-height: 130px; border-radius: 2em;}
 
 /* Register1 (Popup) */
-  .ui.register {width: 828px;}
-  .ui.wrap {padding: 25px 40px 60px;}
+  .ui.register {/*width: 828px;*/}
+  .ui.wrap {padding: 25px 40px;}
   .ui.register .title {width: 55%;}
-  .ui.register .ui {width: 860px}
   .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 45px 0 50px;}
   .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center; text-indent: 0;}
@@ -482,6 +481,8 @@
 
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
+/* Popup's */
+  .popup.forgotPassword {height: 350px; margin-top: -175px!important;}
 
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
@@ -557,7 +558,7 @@
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
-    .void-popup {margin-top: -320px;}
+    .void-popup {}
     .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}
     .wrap-share .social-share {border-radius: 30px;}
     .wrap-share .social-share .share-label {display: none;}
@@ -632,3 +633,7 @@
     .full-cream {width: 1280px; margin: auto;}
     */
   }
+
+@media only screen and (max-width : 1200px) {
+  .void-popup {margin-top: -280px;}
+}
