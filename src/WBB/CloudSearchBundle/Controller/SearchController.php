@@ -27,6 +27,11 @@ class SearchController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $showAllBars = false;
+        if ($request->get('_route') == 'wbb_search_all_bars') {
+            $showAllBars = true;
+        }
+
         $cities = $em->getRepository('WBBCoreBundle:City')->findAll();
         $types = Tag::getTypeNames();
         $tagsByType = array();
@@ -44,7 +49,8 @@ class SearchController extends Controller
 
         return $this->render('WBBCloudSearchBundle:Search:search-results.html.twig', array(
                     'tagsByType' => $tagsByType,
-                    'cities' => $cities
+                    'cities' => $cities,
+                    'showAllBars' => $showAllBars
         ));
     }
 

@@ -3,7 +3,11 @@
     <body class="search">
     <script type="text/javascript">
         var defaultImg = "{{ asset('bundles/wbbcore/images/default.jpg') }}";
-        var queryestQ = "{{app.request.query.get('q','undefined')}}";
+        {% if showAllBars %}
+        var queryestQ = "{{app.request.query.get('q', '*')}}";    
+        {% else %}
+        var queryestQ = "{{app.request.query.get('q', 'undefined')}}";
+        {% endif %}
         var queryestTag = "{{app.request.query.get('tag','undefined')}}";
     </script>
 
