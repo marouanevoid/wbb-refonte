@@ -1,168 +1,20 @@
+{% extends '::Email/layout.email.twig' %}
+
 {% block subject %}Confirmation{% endblock %}
-
-{% block body_text %}
-    {% autoescape false %}
-    {% endautoescape %}
-{% endblock %}
-
-{% block body_html %}
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-            <!-- If you delete this meta tag, Half Life 3 will never be released. -->
-            <meta name="viewport" content="width=device-width" />
-
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title>WBB - email charter</title>
-            <style type="text/css">
-                * {font-family: Verdana, Arial;}
-                .reset {margin-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; padding-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0;}
-                .center { text-align: center;}
-                .container { display:block!important; max-width:700px!important; margin:0 auto!important; clear:both!important; overflow: hidden;} /* makes it centered */ 
-                .wrap { width: 100%;}
-                .content-wrap { width: 100%;}
-                .content-wrap p { color: #818a8c; font-size: 15px;}
-                .socials a { display: block; float: left; margin-right: 25px;}
-                .name { color: #b3955f; text-transform: uppercase;}
-                .city { color: #373736; margin-top: 5px; }
-                .bold { font-weight: bold; }
-                .tags { line-height: 30px; margin-top: 24px;}
-            </style>
-        </head>
-
-        <body bgcolor="#FFFFFF">
-
-            <!-- HEADER -->
-            <table class="wrap" bgcolor="#333333" style="height:124px">
+{% block title %}Confirmation{% endblock %}
+{% block body_content %}
+    <tr>
+        <td class="container">
+            <table class="wrap">
                 <tr>
-                    <td></td>
-                    <td class="container">
-
-                        <div class="content">
-                            <table bgcolor="#333333" class="wrap">
-                                <tr>
-                                    <td>
-                                        <p align="center" class="reset" style="margin-top: 10px">
-                                            <img src="images/email/logo_email.jpg" align="center" class="center" height="87" width="167" />
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                    </td>
-                    <td></td>
-                </tr>
-            </table><!-- /HEADER -->
-
-
-            <!-- SEPARATOR -->
-            <table class="wrap" bgcolor="#faf3e1" style="background-color:#faf3e1;"><tr><td height="30"></td></tr></table>
-
-
-            <!-- CONTENT -->
-            <table class="content-wrap" bgcolor="#faf3e1" style="background-color:#faf3e1;">
-                <!-- [ MESSAGE BODY ] -->
-                <tr>
-                    <td class="container">
-                        <table class="wrap">
-                            <tr>
-                                <td align="center">
-                                    <p style="margin-bottom: 35px">Hello {{ user.username }},</p>
+                    <td align="center">
+                        <p style="margin-bottom: 35px">Hello {{ user.username }},</p>
                                     
-                                    <p style="margin-bottom: 35px">CONGRATULATIONS ! You are now registered on World’s Best Bars.<br/>
-                                        Please click on the link below to confirm your subscription: {{ confirmationUrl }}</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-                <!-- [ DETAIL BAR ] -->
-                <tr>
-                    <td class="container">
-                        <table class="wrap">
-                            <tr>
-                                <td width="308">
-                                    <a hef="#URL"><img src="images/email/_images/1.jpg"></a>
-                                </td>
-                                <td>
-                                    <div class="name" style="font-size: 19px;">Berry Park</div>
-                                    <div class="city" style="font-size: 16px;">Lower Manhattan, New York</div>
-                                    <p style="color:#818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">From the team behind the acclaimed Employees <br />Only and David Waltuck, chef and owner </p>
-                                    <p class="tags"><img src="images/email/tags.jpg" style="padding-top: 9px; padding-right: 10px; display:block; float:left">  rooftop, romance, classy, ambiente</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-            </table> <!-- CONTENT -->
-
-            <!-- SEPARATOR -->
-            <table class="wrap" bgcolor="#faf3e1" style="background-color:#faf3e1;"><tr><td height="40"></td></tr></table>
-
-            <!-- FOOTER -->
-            <table class="wrap" bgcolor="#333333" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td valign="top">
-                        <table class="container" height="90" style="border-bottom: 1px solid #49453f;"  valign="top" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td width="260" valign="middle" align="center">
-                                    <p style="color: #fedf9f; font-size: 14px; margin-top: 5px; font-family: 'Myriad Pro', serif;">© 2014 World's Best Bars</p>
-                                </td>
-                                <td width="220">
-                                    <table style="border-left: 1px solid #49453f;" height="90" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="20"></td>
-                                            <td>
-                                                <!-- [ Socials Media ] -->
-                                                <div class="socials">
-                                                    <a href="#link">
-                                                        <img src="images/email/icon_fb.jpg">
-                                                    </a>
-                                                    <a href="#link">
-                                                        <img src="images/email/icon_twiter.jpg">
-                                                    </a>
-                                                    <a href="#link">
-                                                        <img src="images/email/icon_viadeo.jpg">
-                                                    </a>
-                                                    <a href="#link" style="margin-right: 0;">
-                                                        <img src="images/email/icon_pinterest.jpg">
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td width="215">
-                                    <table style="border-left: 1px solid #49453f;" height="90" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="31"></td>
-                                            <td>
-                                                <div style="color: #fedf9f; font-weight: bold; font-family: arial, serif; margin-bottom: 15px;">
-                                                    KEEP IN TOUCH
-                                                </div>
-                                                <a href="#link" style="margin-left: 12px; display: block; float: left">
-                                                    <img src="images/email/share_fb.jpg">
-                                                </a>
-                                                <a href="#link" style="margin-left: 12px; display: block; float: left">
-                                                    <img src="images/email/share_twitter.jpg">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p align="center" style="color: #fedf9f; font-size: 13px">If you do not wish to receive emails from us anymore please <a href="#unsubsribe" style="color: #fedf9f;">click here</a></p>
+                        <p style="margin-bottom: 35px">CONGRATULATIONS ! You are now registered on World’s Best Bars.<br/>
+                        Please click on the link below to confirm your subscription: {{ confirmationUrl }}</p>
                     </td>
                 </tr>
             </table>
-        </body>
-    </html>
+        </td>
+    </tr>
 {% endblock %}
