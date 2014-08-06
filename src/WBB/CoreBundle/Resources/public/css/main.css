@@ -589,6 +589,7 @@
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 10px;}
     #error {position: relative; top: 100px;}
+    #message {padding-left: 0;}
   /* Globales Classes */
     section.bar-filter .bar-w-pic .btn-round:before {background-size: 128px 256px; background-position: -80px -40px;}
     section.bar-filter .bar-w-pic .btn-round.active:before {background-position: -80px -120px!important;}
