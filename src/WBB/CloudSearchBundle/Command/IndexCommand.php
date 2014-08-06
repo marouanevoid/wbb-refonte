@@ -25,7 +25,13 @@ class IndexCommand extends ContainerAwareCommand
             $entities = $this->getContainer()->get($repo)->findAll();
 
             foreach ($entities as $entity) {
-                $indexer->index($entity);
+                if ($entity instanceof Bar) {
+                    if ($entity->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) {
+                        $indexer->index($entity);
+                    }
+                } else {
+                    $indexer->index($entity);
+                }
             }
         }
     }
