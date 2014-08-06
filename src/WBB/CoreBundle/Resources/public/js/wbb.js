@@ -175,9 +175,13 @@ jQuery(document).ready(function($) {
     function resizer(element){
         //Centred popup
         var current_id = $("#" + element);
-        width = -1 * parseInt((current_id.width()/2));
-        height = -1 * parseInt((current_id.height()/2));
-        current_id.css('margin-left', width).css('margin-top', height);
+        // width = -1 * parseInt((current_id.width()/2));
+        // height = -1 * parseInt((current_id.height()/2));
+        // current_id.css('margin-left', width).css('margin-top', height);
+        current_id.css({
+            "top": (($(window).height() – current_id.height()) / 2) + $(window).scrollTop(),
+            "left": (($(window).width() – current_id.width()) / 2) + $(window).scrollLeft()
+        });
     }
 
     // Click anywhere on the page to get rid of lightbox window
