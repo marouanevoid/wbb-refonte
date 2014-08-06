@@ -285,7 +285,7 @@
   #register.mobile .ui {width: auto; padding: 0 10px; position: relative;}
   #register.mobile .ui .title {/*text-transform: none;*/ width: 90%;}
   #register.mobile .ui .subtitle {font-size: 15px; padding: 0 20%;}
-  #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); background-size: 40px 40px; top: -45px; right: 20px;}
+  #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); background-size: 40px 40px; top: -45px; right: 20px; display: block;}
   #register.mobile form .form-text {height: 38px; font-size: 15px; border-radius: 2em;}
   #register.mobile form .btn-facebook {background-image: url("../images/UI/icon_fb.jpg"); background-position: 25px center; line-height: 64px;}
   #register.mobile .ui form .btn-facebook {font-size: 16px; border-radius: 4em; letter-spacing: -1px; }
@@ -323,7 +323,7 @@
   #register.page.mobile .date-birthday .select-wrap {width: 30%; margin-right: 10px;}
   #register.page.mobile .date-birthday .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile #create-account label {/*margin: 20px 0 20px;*/ float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 18px; font-weight: lighter;}
-  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px 0 0; /*width: 77%*/;}
+  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px auto 0; /*width: 77%*/; display: block;}
   #register.page.mobile .group-form {overflow: visible;}
   #register.page.mobile .group-actions {width: 100%;}
   #register.page.mobile .group-actions .form-submit {left: 0;}
@@ -474,11 +474,11 @@
     .search-bar-mobile .container .form-submit:hover {background-position: -84px -401px!important;}
 
 /* PAGE */
-  .page label {}
-  .page .form-text {}
-  .page .form-submit {}
-  .page .group-form {}
-  .page .group-actions {}
+  .page-form {padding: 0 3%;}
+  .page-form label {line-height: 34px;width: 10%;font-size: 18px;}
+  .page-form .form-text {width: 90%;}
+  .page-form .form-textarea {padding: 10px 10px 50px;}
+  .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
