@@ -178,9 +178,16 @@ jQuery(document).ready(function($) {
         //Get clicked link data-show ID of tag to show
         var id_content = $(this).attr("data-show");
         var current_id = $("#" + id_content);
+        var current_ui = $("#" + id_content +" .ui");
         var mask = $(".mask");
 
         if (current_id.length > 0) {
+
+            //Centred popup
+            // width = -1 * parseInt((current_ui.width()/2));
+            // height = -1 * parseInt((current_ui.height()/2));
+            // current_ui.css('margin-left', width).css('margin-top', height);
+
             //show lightbox window
             current_id.fadeIn("slow");
 
@@ -197,6 +204,14 @@ jQuery(document).ready(function($) {
 
     $(".btn-close").click(function(e) {
         var current_popup = $(this).closest(".void-popup");
+        current_popup.fadeOut("fast");
+        $(".mask").fadeOut("slow", function() {
+            current_popup.removeClass("void-popup");
+        });
+    });
+
+    $(".mask").click(function(e) {
+        var current_popup = $("body").find(".void-popup");
         current_popup.fadeOut("fast");
         $(".mask").fadeOut("slow", function() {
             current_popup.removeClass("void-popup");
