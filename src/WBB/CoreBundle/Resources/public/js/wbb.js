@@ -203,6 +203,14 @@ jQuery(document).ready(function($) {
         });
     });
 
+    $(".mask").click(function(e) {
+        var current_popup = $("body").find(".void-popup");
+        current_popup.fadeOut("fast");
+        $(".mask").fadeOut("slow", function() {
+            current_popup.removeClass("void-popup");
+        });
+    });
+
     if (showNewPassword) {
         var url = newPasswordUrl;
         $.ajax({

@@ -1,0 +1,16 @@
+/* Admin WBB custom style */
+body {}
+.navbar-fixed-top .container-fluid {padding-top: 20px; background-color: #333; padding-bottom: 20px;}
+.sonata-bc .navbar-fixed-top .navbar-inner, .sonata-bc .navbar-static-top .navbar-inner {min-height: 100px;}
+.sonata-bc a {color: #b3955f; padding: 2px; }
+.sonata-bc a:hover {background-color: #b3955f; color: #fff;  text-decoration: none;}
+.sonata-bc .navbar .nav>li>a {color: #b3955f; text-shadow: none;}
+.sonata-bc .navbar .nav>li>a:hover {color: #fff;}
+.sonata-bc .btn {background-image: linear-gradient(to bottom, #EDCD93, #b3955f);}
+.sonata-bc .btn-primary:hover, 
+.sonata-bc .btn-primary:active, 
+.sonata-bc .btn-primary.active, 
+.sonata-bc .btn-primary.disabled, 
+.sonata-bc .btn-primary[disabled] {background-color: #b3955f;}
+.sonata-bc .label {text-transform: uppercase;}
+.sonata-bc .table-striped tbody tr:nth-child(odd) td, .sonata-bc .table-striped tbody tr:nth-child(odd) th {background-color: #faf3e1;}
