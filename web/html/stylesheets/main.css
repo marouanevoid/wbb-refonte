@@ -71,6 +71,10 @@
     .forgetpassword {width: 300px;}
 
   /* Radius */
+    .radius-20 {-webkit-border-radius: 20px;
+          -moz-border-radius: 20px;
+          -o-border-radius: 20px;
+          border-radius: 20px;}
     .radius-30 {-webkit-border-radius: 30px;
           -moz-border-radius: 30px;
           -o-border-radius: 30px;
@@ -412,7 +416,6 @@
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
-  /*.index .sub-header .title h1 {text-align: left;}*/
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
   .bar-details .also-appears .h2 {text-align: center;}
   .mobile .bar-guides .filters .ui-radio {line-height: 45px;}
@@ -427,6 +430,13 @@
   .ipad .bar-details .sub-header .star-share .btn-round.star:hover {background-color: transparent!important;}
   .ipad .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
   .ipad .bar-details .sub-header .star-share .btn-round.star:after {opacity: 0;}
+
+/* PAGE */
+  .page {padding: 0 3%;}
+  .page label {line-height: 34px; width: 10%; font-size: 18px;}
+  .page .form-text {width: 90%;}
+  .page .form-submit {background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
+  .page .form-textarea {padding: 10px 10px 50px;}
 
   /* IE9 */
   .articles article .img .cover .sponsor,

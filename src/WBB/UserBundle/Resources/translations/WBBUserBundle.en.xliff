@@ -90,7 +90,12 @@
 
             <trans-unit id="form.label_stay_informed">
                 <source>form.label_stay_informed</source>
-                <target>Stay informed</target>
+                <target>NL subscriber</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_stay_brand_informed">
+                <source>form.label_stay_brand_informed</source>
+                <target>NL Brand subscriber</target>
             </trans-unit>
 
             <trans-unit id="list.label_email">

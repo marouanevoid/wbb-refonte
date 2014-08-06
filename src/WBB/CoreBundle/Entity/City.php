@@ -258,8 +258,6 @@ class City implements IndexableEntity
     public function __construct() {
         $this->suburbs = new ArrayCollection();
         $this->news    = new ArrayCollection();
-
-        $this->setOnTopCity(true);
     }
 
     /**

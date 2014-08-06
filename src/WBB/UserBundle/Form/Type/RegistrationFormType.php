@@ -40,7 +40,7 @@ class RegistrationFormType extends BaseType
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
             ->add('birthdate', 'date', array(
-                'years' => range(1900, date('Y'))
+                'years' => range(1914, date('Y'))
             ))
             ->add('country')
             ->add('prefCity1', null, array('empty_value' => 'Choose a city'))
@@ -120,7 +120,7 @@ class RegistrationFormType extends BaseType
         parent::setDefaultOptions($resolver);
 
         $resolver
-            ->setDefaults(array('translation_domain' => 'FOSUserBundle', 'label' => false))
+            ->setDefaults(array('translation_domain' => 'WBBUserBundle', 'label' => false))
         ;
     }
 

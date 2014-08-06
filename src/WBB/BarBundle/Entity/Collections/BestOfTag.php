@@ -42,7 +42,7 @@ class BestOfTag
     private $bestof;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bestofs")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bestofs", fetch="EAGER")
      */
     private $tag;
 

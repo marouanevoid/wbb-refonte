@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+    </div>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $('.fos_user_resetting_reset').on('submit', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('action');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(html) {
+                    $('.popin-block').html(html);
+                    setTimeout(function() {
+                        location.href="{{ path('homepage') }}";
+                    }, 1500);
+                }
+            });
+        });
+    });
+</script>
