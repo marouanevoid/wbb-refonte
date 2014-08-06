@@ -55,7 +55,7 @@
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
-  .popup {width: 911px; height: 666px;}
+  .popup {width: 911px; height: 530px;}
   .void-popup {/*margin-left: -568px; margin-top: -280px;*/ left: 50%; z-index: 107; top: 50%; position: fixed;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .select-two .ui-dropdown-container {width: 100%!important;}
