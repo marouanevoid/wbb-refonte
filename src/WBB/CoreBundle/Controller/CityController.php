@@ -89,6 +89,18 @@ class CityController extends Controller
         $session->set('userLongitude', $longitude);
 
         if($city){
+            $user = $this->getUser();
+            if($user){
+                $user->setPrefStartCity($city);
+                $user->setCountry($city->getCountry());
+                $user->setLatitude($latitude);
+                $user->setLongitude($longitude);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+            }
+
             $session->set('citySlug', $city->getSlug());
             $session->set('citySlugGeo', $city->getSlug());
             return new JsonResponse(array(
