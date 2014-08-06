@@ -15,7 +15,7 @@
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <span class="logged h3">
                             <a>
-                                <img src="{{  showImage(app.user.avatar, 'small') }}" alt="robert" width="40" height="40"/>
+                                <img src="{{  showImage(app.user.avatar, 'small') }}" alt="{{ app.user.username }}" width="40" height="40"/>
                                 <span>{{ app.user.username }}</span>
                             </a>
                             <span class="actions">
@@ -184,7 +184,7 @@
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                 <span class="logged h3">
                                     <a>
-                                        <img src="{{ showImage(app.user.avatar, 'small') }}" alt="robert" width="40" height="40"/>
+                                        <img src="{{ showImage(app.user.avatar, 'small') }}" alt="{{ app.user.username }}" width="40" height="40"/>
                                         <span>{{ app.user.username }}</span>
                                     </a>
                                     <span class="actions">
