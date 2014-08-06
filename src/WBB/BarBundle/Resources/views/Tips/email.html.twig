@@ -1,7 +1,7 @@
 {% extends '::Email/layout.email.twig' %}
 
-{% block subject %}Confirmation{% endblock %}
-{% block title %}Confirmation{% endblock %}
+{% block subject %}Tip created{% endblock %}
+{% block title %}Tip created{% endblock %}
 {% block body_content %}
     <tr>
         <td class="container">
@@ -9,9 +9,8 @@
                 <tr>
                     <td align="center">
                         <p style="margin-bottom: 35px">Hello {{ user.username }},</p>
-                                    
-                        <p style="margin-bottom: 35px">CONGRATULATIONS ! You are now registered on World’s Best Bars.<br/>
-                        Please click on the link below to confirm your subscription: {{ confirmationUrl }}</p>
+
+                        <p style="margin-bottom: 35px">A tip needs moderation : {{ tipUrl }}</p>
                     </td>
                 </tr>
             </table>

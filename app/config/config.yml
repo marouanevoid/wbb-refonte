@@ -98,6 +98,9 @@ fos_user:
     resetting:
         email:
             template: WBBUserBundle:User:resetting.email.html.twig
+            
+    service:
+        mailer: fos_user.mailer.twig_swift
 
 # Sonata Admin bundle
 sonata_admin:
