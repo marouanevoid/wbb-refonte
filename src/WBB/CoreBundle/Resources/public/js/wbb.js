@@ -220,6 +220,9 @@ jQuery(document).ready(function($) {
         $('.popin-block').html(html);
         $('#show-popin').click();
     }
+    if (showResettingForm !== "0") {
+        $('#show-popin').click();
+    }
 });
 
 // Favorites star

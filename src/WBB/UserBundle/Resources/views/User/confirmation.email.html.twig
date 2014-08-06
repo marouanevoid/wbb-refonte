@@ -1,4 +1,4 @@
-{% block subject %}Reset your password{% endblock %}
+{% block subject %}Confirmation{% endblock %}
 
 {% block body_text %}
     {% autoescape false %}
@@ -71,7 +71,7 @@
                                     <p style="margin-bottom: 35px">Hello {{ user.username }},</p>
                                     
                                     <p style="margin-bottom: 35px">CONGRATULATIONS ! You are now registered on World’s Best Bars.<br/>
-                                        Please click on the link below to confirm your subscription: link</p>
+                                        Please click on the link below to confirm your subscription: {{ confirmationUrl }}</p>
                                 </td>
                             </tr>
                         </table>

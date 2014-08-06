@@ -72,31 +72,31 @@
             {#{% endjavascripts %}#}
         {% endblock %}
 
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.easing.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.velocity.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.transform3d.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/modernizr.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/placeholders.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.mousewheel.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.jscrollpane.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.cookie.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/utils.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/slider.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/ratio.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/loadMore.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/dropdown.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/selector.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/radio.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/search.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/form.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/app.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/tips.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/geolocalisation.wbb.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/wbb.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/translate.wbb.js"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.transform3d.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/modernizr.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.browser.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/placeholders.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.mousewheel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMore.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/dropdown.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/selector.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/radio.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/search.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/form.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/tips.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
 
         {% block javascripts %}
 
@@ -111,6 +111,7 @@
                 var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
+                var showResettingForm = "{{ app.request.query.get('token', 0) }}";
         </script>
 
         {% if is_tablet() %}
@@ -144,6 +145,9 @@
             <div class="wrap ui register">
                 <div class="margin-top-20">
                     <div class="popin-block">
+                        {% if resetting_form is defined %}
+                            {{ resetting_form|raw }}
+                        {% endif %}
                     </div>
                     <div>
                         <a href="#close" class="btn btn-close">Close</a>

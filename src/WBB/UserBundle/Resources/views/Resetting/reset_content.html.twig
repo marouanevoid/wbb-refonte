@@ -6,3 +6,23 @@
         <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('.fos_user_resetting_reset').on('submit', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('action');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(html) {
+                    $('.popin-block').html(html);
+                    setTimeout(function() {
+                        location.href="{{ path('homepage') }}";
+                    }, 1500);
+                }
+            });
+        });
+    });
+</script>

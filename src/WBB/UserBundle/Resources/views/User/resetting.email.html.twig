@@ -2,22 +2,10 @@
 
 {% block body_text %}
     {% autoescape false %}
-        Hello {{ user.username }} !
-
-        You can reset your email by accessing {{ confirmationUrl }}
-
-        Greetings,
-        the WBB team
     {% endautoescape %}
 {% endblock %}
 
 {% block body_html %}
-    {#
-        You can of course render the html directly here.
-        Including a template as done here allows keeping things DRY by using
-        the template inheritance in it
-    #}
-
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
@@ -36,7 +24,7 @@
                 .content-wrap p { color: #818a8c; font-size: 15px;}
                 .socials a { display: block; float: left; margin-right: 25px;}
                 .name { color: #b3955f; text-transform: uppercase;}
-                .city { color: #373736; margin-top: 5px; font-size: }
+                .city { color: #373736; margin-top: 5px;}
                 .bold { font-weight: bold; }
                 .tags { line-height: 30px; margin-top: 24px;}
             </style>
@@ -82,9 +70,8 @@
                                 <td align="center">
                                     <p style="margin-bottom: 35px">Hello {{ user.username }},</p>
 
-                                    <p style="margin-bottom: 35px; line-height: 24px;">Thank you for joining the World’s Best Bars community. <br />
-                                        You can now save your favourite bars to your personal profile <br />
-                                        and leaving tips telling others about the bars you have visited.</p>
+                                    <p style="margin-bottom: 35px; line-height: 24px;">Click on the link below to reset your password <br />
+                                        {{ confirmationUrl }}</p>
 
                                     <p style="margin-bottom: 35px; line-height: 24px;">We will also send you a regular email based on the cities you are <br /> interested in with any new bars that have opened.</p>
                                 </td>
