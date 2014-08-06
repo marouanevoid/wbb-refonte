@@ -1,5 +1,17 @@
 {% extends '::base.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+    
 {% block body %}
     <div class="full-cream">
         <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap margin-bottom-20">
@@ -176,6 +188,7 @@
                             <div id="message" class="margin-top-20 wrap">
                                 <div>
                                     <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+                                    <ul>
                                     {{ form_errors(form) }}
                                     {{ form_errors(form.plainPassword.first) }}
                                     {{ form_errors(form.plainPassword.second) }}
@@ -198,6 +211,7 @@
                                     {{ form_errors(form.prefCocktails1) }}
                                     {{ form_errors(form.prefCocktails2) }}
                                     {{ form_errors(form.prefCocktails3) }}
+                                    </ul>
                                 </div>
                                 <div class="clear"></div>
                             </div>
