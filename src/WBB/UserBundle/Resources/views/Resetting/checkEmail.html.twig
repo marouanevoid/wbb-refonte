@@ -1,0 +1,7 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="subtitle text-transform-uppercase bold">
+        {{ 'resetting.check_email'|trans({'%email%': email}) }}
+    </div>
+{% endblock %}

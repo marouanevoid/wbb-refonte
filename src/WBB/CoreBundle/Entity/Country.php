@@ -37,6 +37,11 @@ class Country
     private $acronym;
 
     /**
+     * @ORM\Column(name="drinking_age", type="integer")
+     */
+    private $drinkingAge = 18;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -345,5 +350,28 @@ class Country
     public function getSemsoftBars()
     {
         return $this->semsoftBars;
+    }
+
+    /**
+     * Set drinkingAge
+     *
+     * @param integer $drinkingAge
+     * @return Country
+     */
+    public function setDrinkingAge($drinkingAge)
+    {
+        $this->drinkingAge = $drinkingAge;
+
+        return $this;
+    }
+
+    /**
+     * Get drinkingAge
+     *
+     * @return integer 
+     */
+    public function getDrinkingAge()
+    {
+        return $this->drinkingAge;
     }
 }
