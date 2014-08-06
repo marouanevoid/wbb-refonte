@@ -147,7 +147,7 @@ class SemsoftController extends Controller
                     $ssBar->setMenu($this->setFieldValue('MenuUrl', $data, null, $newBar));
                     $ssBar->setReservation($this->setFieldValue('Booking', $data, null, $newBar));
                     $ssBar->setParkingType($this->setFieldValue('ParkingType', $data, null, $newBar));
-                    $ssBar->setPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, null, $newBar));
+                    $ssBar->setPermanentlyClosed($this->setFieldValue('IsPermanentlyClosed', $data, ((strtolower($data['IsPermanentlyClosed']) == "true")?true:false), $newBar));
                     $ssBar->setBusinessFound($this->setFieldValue('BusinessFound', $data, ((strtolower($data['BusinessFound']) == "true")?true:false), $newBar));
                     $ssBar->setUpdatedColumns($this->strToArray($data['Updated Columns']));
                     $ssBar->setOverwrittenColumns($this->strToArray($data['Overwritten Columns']));

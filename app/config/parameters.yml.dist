@@ -13,6 +13,8 @@ parameters:
     mailer_encryption: tls # TLS encryption is required
     mailer_user:       AKIAI2ZOQF4246RARD5A # to be created in the SES console
     mailer_password:   AojZacS7wAU/4lZ3WmlCgGIgnb6dCG4GWwssbBUUMPzj # to be created in the SES console
+    mailer_email: myportal@pernod-ricard.com
+    mailer_username: World's Best Bars
 
     locale: en
     secret: ThisTokenIsNowSecretIChangedIt

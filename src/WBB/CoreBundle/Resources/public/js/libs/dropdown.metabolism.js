@@ -80,11 +80,20 @@ meta.Dropdown = function(config){
 
                     that.currentScroll = $(window).scrollTop();
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
-
-                    $dropdown.addClass('dropdown-open').find('.slide').slideDown(that.config.speed, that.config.easing, function()
+                    var $slide = $dropdown.addClass('dropdown-open').find('.slide');
+                    var $scroll = $slide.find('.custom-scroll');
+                    $slide.slideDown(that.config.speed, that.config.easing, function()
+                    //$dropdown.addClass('dropdown-open').find('.slide').slideDown(that.config.speed, that.config.easing, function()
                     {
+                        if($scroll.length) api.reinitialise();
                         that.active = true;
                     });
+
+                    if($scroll.length)
+                    {
+                       var api = $scroll.data('jsp');
+                       api.reinitialise();
+                    }
                 }
             });
 
