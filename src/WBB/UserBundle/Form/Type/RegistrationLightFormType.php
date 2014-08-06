@@ -47,7 +47,7 @@ class RegistrationLightFormType extends BaseType
 
         $resolver->setDefaults(
             array(
-                'translation_domain' => 'FOSUserBundle',
+                'translation_domain' => 'WBBUserBundle',
                 'label'              => false,
                 'error_bubbling'=>true
             )

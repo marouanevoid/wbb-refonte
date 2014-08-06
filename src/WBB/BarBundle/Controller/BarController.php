@@ -10,6 +10,12 @@ use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use FOS\UserBundle\Event\FormEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class BarController extends Controller
 {
@@ -28,8 +34,20 @@ class BarController extends Controller
         }
     }
 
-    public function homeAction()
+    public function homeAction(Request $request)
     {
+        $resettingForm = null;
+        if ($request->query->get('token', null)) {
+            $res = $this->resetAction($request, $request->query->get('token'));
+            if (!is_array($res)) {
+                $resettingForm = $res->getContent();
+                if($request->isXmlHttpRequest()) {
+                    return $res;
+                }
+            } else {
+                return $res[0];
+            }
+        }
         $this->reGeolocate();
 
         $session = $this->container->get('session');
@@ -46,8 +64,62 @@ class BarController extends Controller
         $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
         $response['topNews']    = $this->container->get('news.repository')->findLatestNews(null, 3);
         $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars(null, 5);
+        if ($resettingForm) {
+            $response['resetting_form'] = $resettingForm;
+        }
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
+    }
+    
+    private function resetAction(Request $request, $token)
+    {
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('fos_user.resetting.form.factory');
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->container->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
+        $user = $userManager->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+        }
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        $form = $formFactory->createForm();
+        $form->setData($user);
+
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_SUCCESS, $event);
+
+                $userManager->updateUser($user);
+
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->container->get('router')->generate('wbb_user_reset_success');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return array($response);
+            }
+        }
+
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:reset.html.twig', array(
+            'token' => $token,
+            'form' => $form->createView(),
+        ));
     }
 
     public function cityHomeAction($slug)

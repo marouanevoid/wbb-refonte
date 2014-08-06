@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -1256,5 +1258,21 @@ class User extends BaseUser
     public function getAvatar()
     {
         return $this->avatar;
+    }
+    
+    /**
+     * @Assert\Callback()
+     */
+    public function validateBirthday(ExecutionContextInterface $context)
+    {
+        $country = $this->getCountry();
+        $drinkingAge = 18;
+        $age = $this->birthdate->diff(new \DateTime('now'))->y;
+        if ($country) {
+            $drinkingAge = $country->getDrinkingAge();
+        }
+        if ($drinkingAge > $age) {
+            $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+        }
     }
 }

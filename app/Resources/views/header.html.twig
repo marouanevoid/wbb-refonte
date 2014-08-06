@@ -26,7 +26,7 @@
                         </span>
                     {% else %}
                         <span class="register h4">
-                            <a data-show="register" class="lighbox" href="#">Sign in</a>
+                            <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
                             or
                             <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
                         </span>
@@ -195,7 +195,7 @@
                                 </span>
                             {% else %}
                                 <span class="register h4">
-                                    <a data-show="register" class="lighbox" href="#">Sign in</a>
+                                    <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
                                     or
                                     <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
                                 </span>
