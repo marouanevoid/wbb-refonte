@@ -22,6 +22,7 @@ class CountryAdmin extends Admin
             ->with('General')
                 ->add('name')
                 ->add('acronym')
+                ->add('drinkingAge')
             ->end();
     }
 

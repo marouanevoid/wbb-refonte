@@ -9,6 +9,7 @@ class CloudSearchSearcher
 {
 
     private $cloudSearchClient;
+    private $container;
 
     public static function getCSTagsNames()
     {
@@ -20,8 +21,9 @@ class CloudSearchSearcher
         );
     }
 
-    public function __construct($parameters)
+    public function __construct($container, $parameters)
     {
+        $this->container = $container;
         $this->cloudSearchClient = CloudSearchDomainClient::factory(array(
                     'base_url' => 'http://search-' . $parameters[0] . '-' . $parameters[1] . '.' . $parameters[2] . '.cloudsearch.amazonaws.com/2013-01-01',
                     'key' => $parameters[3],
@@ -30,6 +32,48 @@ class CloudSearchSearcher
     }
 
     public function search(array $parameters)
+    {
+        $response = $this->favorites($this->doSearch($parameters));
+
+        $parameters['entity'] = 'Bar';
+        $barResponse = $this->doSearch($parameters);
+        $parameters['entity'] = 'News';
+        $newsResponse = $this->doSearch($parameters);
+
+        $response['hits']['bars'] = $barResponse['hits']['found'];
+        $response['hits']['news'] = $newsResponse['hits']['found'];
+
+        return $response;
+    }
+
+    private function favorites($response)
+    {
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $ext = $this->container->get('wbb.twig.favorite_extension');
+            $user = $this->container->get('security.context')->getToken()->getUser();
+
+            $c = 0;
+            foreach ($response['hits']['hit'] as $bar) {
+                if (isset($bar['fields']['entity_type']) && $bar['fields']['entity_type'] === 'Bar') {
+                    $dbBar = $this->container->get('bar.repository')->find($bar['fields']['wbb_id']);
+                    if ($dbBar) {
+                        $bar['fields']['favorite'] = $ext->isFavorite($user, $dbBar);
+                        $bar['fields']['favorite_url'] = $ext->getFavoriteUrl($user, $dbBar);
+                    } else {
+                        $bar['fields']['favorite'] = false;
+                        $bar['fields']['favorite_url'] = '#';
+                    }
+
+                    $response['hits']['hit'][$c] = $bar;
+                }
+                $c++;
+            }
+        }
+
+        return $response;
+    }
+
+    private function doSearch(array $parameters)
     {
         $request = $this->cloudSearchClient->get('search');
         $query = $request->getQuery();
