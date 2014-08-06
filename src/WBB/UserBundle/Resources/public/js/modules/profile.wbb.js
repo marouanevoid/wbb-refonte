@@ -26,7 +26,7 @@ wbb.LoadProfile = function() {
         },
         bestofs: {
             offset: 0,
-            limit: 8,
+            limit: 6,
             filter: 'date',
             display: 'grid',
             $more: $('.more-bestofs')
