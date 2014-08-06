@@ -60,6 +60,11 @@ meta.Radio = function(config){
         {
             e.preventDefault();
 
+            // if is desibled
+            if($(this).hasClass('disabled-search')){
+                return false;
+            }
+
             /*
             *    if is not the radio of the barfined Mood
             */

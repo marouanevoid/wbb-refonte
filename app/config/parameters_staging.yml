@@ -1,0 +1,51 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: wbb-refonte
+    database_user: wbb_refonte
+    database_password: LkekBmgrRW
+
+    mailer_transport:  smtp
+    mailer_host:       email-smtp.eu-west-1.amazonaws.com
+    mailer_port:       587 # different ports are available, see SES console
+    mailer_encryption: tls # TLS encryption is required
+    mailer_user:       AKIAI2ZOQF4246RARD5A # to be created in the SES console
+    mailer_password:   AojZacS7wAU/4lZ3WmlCgGIgnb6dCG4GWwssbBUUMPzj # to be created in the SES console
+    mailer_email: myportal@pernod-ricard.com
+    mailer_username: World's Best Bars
+
+    locale: en
+    secret: ThisTokenIsNowSecretIChangedIt
+
+    foursquare_client_id: IO0TI5QMTBY5U2P2JHWIYF2D3NHM30V2F5VT3W3011BPMQ4W
+    foursquare_client_secret: B5ADSJPXA5VP20DYFII1FIU0LCJFT0AFIEGWGURACLG3HNZ2
+
+    feeds_limit: 20
+    website_url: 'http://wbb-recette.lapreprod.com'
+
+    instagram_client_id: 03af4f044b524a4ca9958053b7a6cb18
+
+    #Parameters for PdoSessionHandler
+    pdo.db_options:
+        db_table:    wbb_session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time
+
+    #AWS
+    aws_bucket: staging.worldsbestbars.com
+    aws_key: AKIAJM6ZSVZZ3WLRHZIA
+    aws_secret: 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
+
+    aws_cloudsearch_domain_name:    bars
+    aws_cloudsearch_domain_id:      dv6lxa6k65rwcpqkq7thta6d24
+    aws_cloudsearch_region:         eu-west-1
+    aws_cloudsearch_key:            AKIAJ6WSWPZUXSICYDPQ
+    aws_cloudsearch_secret:         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
+
+    facebook_app_id:        444821895657717
+    facebook_app_secret:    81b3c56cefb95cba10460d136270736e
+
+    bitly_access_token: 2dc4e633c58b8a735d59724a667ccaacc0c9b11e
