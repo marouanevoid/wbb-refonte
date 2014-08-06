@@ -12,6 +12,11 @@
                 <target>Semsoft imported bars</target>
             </trans-unit>
 
+            <trans-unit id="breadcrumb.link_semsoft_bar_list">
+                <source>breadcrumb.link_semsoft_bar_list</source>
+                <target>Semsoft imported bars</target>
+            </trans-unit>
+
             <trans-unit id="breadcrumb.link_tag_list">
                 <source>breadcrumb.link_tag_list</source>
                 <target>Tag list</target>

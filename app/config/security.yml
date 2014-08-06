@@ -1,6 +1,6 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        FOS\UserBundle\Model\UserInterface: {id: wbb_md5_password_encoder } #sha512
 
     providers:
         chain_provider:

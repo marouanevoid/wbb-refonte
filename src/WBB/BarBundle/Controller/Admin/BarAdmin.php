@@ -266,6 +266,22 @@ class BarAdmin extends Admin
         ;
     }
 
+    public function getBatchActions()
+    {
+        // retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+
+        // check user permissions
+        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+            $actions['export'] = array(
+                'label'            => 'Export',
+                'ask_confirmation' => false
+            );
+        }
+
+        return $actions;
+    }
+
     /**
      * {@inheritdoc}
      */

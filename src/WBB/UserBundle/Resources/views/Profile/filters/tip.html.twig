@@ -1,16 +1,47 @@
 {% for tip in tips %}
-<li class="col col-4">
-    <div class="block-tip">
-        <p>
-            {{ tip.description }}
-        </p>
-        <div class="profil margin-top-10 padding-top-10 separator-top">
-            <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-            <div class="expert bold">{{ user.userRole }}</div>
-            <div class="name">{{ user.firstname }} {{ user.lastname }}</div>
-        </div>
-        <a href="#close" class="close no-text">Close</a>
-        <div class="clear"></div>
-    </div>
-</li>
+    <li class="three columns box margin-bottom-30 item-tips">
+        <article class="tip">
+            <table class="content expert">
+                <tbody><tr class="excerpt">
+                    <td colspan="2">
+                        <div class="scroll custom-scroll" style="overflow: hidden; padding: 0px; width: 226px;">
+                            <div class="jspContainer" style="width: 226px; height: 144px;">
+                                <div class="jspPane" style="padding: 0px; top: 0px; left: 0px; width: 226px;">
+                            <span itemprop="description">
+                                "{{ tip.description|raw }}"
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr class="s-margin-bottom">
+                    </td>
+                </tr>
+                <tr class="author">
+                    <td colspan="2">
+                        <img src="{{ showImage(user.avatar, 'small') }}" alt="user" width="40" height="40">
+                        <b>{{ user.userRole }}</b>
+                        {{ user.firstname }} {{ user.lastname }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        <a href="#" class="close remove-tip no-text" data-id="{{ tip.id|raw }}">Close</a>
+        </article>
+    </li>
 {% endfor %}
+    {#<div class="block-tip">#}
+        {#<p>#}
+            {#{{ tip.description|raw }}#}
+        {#</p>#}
+        {#<div class="profil margin-top-10 padding-top-10 separator-top">#}
+            {#<img src="{{ showImage(user.avatar, 'small') }}" height="40" width="40" class="left">#}
+            {#<div class="expert bold">{{ user.userRole }}</div>#}
+            {#<div class="name">{{ user.firstname }} {{ user.lastname }}</div>#}
+        {#</div>#}
+
+        {#<div class="clear"></div>#}
+    {#</div>#}

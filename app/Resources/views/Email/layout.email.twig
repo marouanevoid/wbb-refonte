@@ -1,0 +1,65 @@
+{% block body_html %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" style="font-family: Verdana, Arial;">
+<head>
+    <!-- If you delete this meta tag, Half Life 3 will never be released. -->
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{% block title %}World's Best Bars{% endblock %}</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-family: Verdana, Arial;">
+
+<!-- HEADER -->
+<table class="wrap" bgcolor="#333333" style="height: 124px; font-family: Verdana, Arial; width: 100%;"><tr><td></td>
+        <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
+
+            <div class="content" style="font-family: Verdana, Arial;">
+                <table bgcolor="#333333" class="wrap" style="font-family: Verdana, Arial; width: 100%;"><tr><td>
+                            <p align="center" class="reset" style="font-family: Verdana, Arial; margin: 10px 0 0; padding: 0;">
+                                <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/logo_email.jpg')}}" align="center" class="center" height="87" width="167" style="font-family: Verdana, Arial; text-align: center;" /></p>
+                        </td>
+                    </tr></table></div>
+
+        </td>
+        <td></td>
+    </tr></table><!-- /HEADER --><!-- SEPARATOR -->
+
+<table class="wrap" bgcolor="#faf3e1" style="font-family: Verdana, Arial; width: 100%; background-color: #faf3e1;"><tr><td height="30" style="font-family: Verdana, Arial;"></td></tr></table><!-- CONTENT --><table class="content-wrap" bgcolor="#faf3e1" style="font-family: Verdana, Arial; width: 100%; background-color: #faf3e1;"><!-- [ MESSAGE BODY ] -->{% block body_content %}{% endblock %}</table><!-- CONTENT --><!-- SEPARATOR --><table class="wrap" bgcolor="#faf3e1" style="font-family: Verdana, Arial; width: 100%; background-color: #faf3e1;"><tr><td height="40" style="font-family: Verdana, Arial;"></td></tr></table><!-- FOOTER --><table class="wrap" bgcolor="#333333" border="0" cellpadding="0" cellspacing="0" style="font-family: Verdana, Arial; width: 100%;"><tr><td valign="top" style="font-family: Verdana, Arial;">
+            <table class="container" height="90" style="border-bottom-width: 1px; border-bottom-color: #49453f; border-bottom-style: solid; font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;" valign="top" cellpadding="0" cellspacing="0"><tr><td width="260" valign="middle" align="center" style="font-family: Verdana, Arial;">
+                        <p style="color: #fedf9f; font-size: 14px; margin-top: 5px; font-family: 'Myriad Pro', serif;">© 2014 World's Best Bars</p>
+                    </td>
+                    <td width="220" style="font-family: Verdana, Arial;">
+                        <table style="border-left-width: 1px; border-left-color: #49453f; border-left-style: solid; font-family: Verdana, Arial;" height="90" cellpadding="0" cellspacing="0"><tr><td width="20" style="font-family: Verdana, Arial;"></td>
+                                <td>
+                                    <!-- [ Socials Media ] -->
+                                    <div class="socials" style="font-family: Verdana, Arial;">
+                                        <a href="#link" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
+                                            <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg')}}" /></a>
+                                        <a href="#link" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
+                                            <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_twiter.jpg')}}" /></a>
+                                        <a href="#link" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
+                                            <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_viadeo.jpg')}}" /></a>
+                                        <a href="#link" style="margin-right: 0; font-family: Verdana, Arial; display: block; float: left;">
+                                            <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_pinterest.jpg')}}" /></a>
+                                    </div>
+                                </td>
+                            </tr></table></td>
+                    <td width="215" style="font-family: Verdana, Arial;">
+                        <table style="border-left-width: 1px; border-left-color: #49453f; border-left-style: solid; font-family: Verdana, Arial;" height="90" cellpadding="0" cellspacing="0"><tr><td width="31" style="font-family: Verdana, Arial;"></td>
+                                <td>
+                                    <div style="color: #fedf9f; font-weight: bold; font-family: arial, serif; margin-bottom: 15px;">
+                                        KEEP IN TOUCH
+                                    </div>
+                                    <a href="#link" style="margin-left: 12px; display: block; float: left; font-family: Verdana, Arial;">
+                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/share_fb.jpg')}}" /></a>
+                                    <a href="#link" style="margin-left: 12px; display: block; float: left; font-family: Verdana, Arial;">
+                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/share_twitter.jpg')}}" /></a>
+                                </td>
+                            </tr></table></td>
+                </tr></table></td>
+    </tr><tr><td>
+            <p align="center" style="color: #fedf9f; font-size: 13px; font-family: Verdana, Arial;">If you do not wish to receive emails from us anymore please <a href="#unsubsribe" style="color: #fedf9f; font-family: Verdana, Arial;">click here</a></p>
+        </td>
+    </tr></table></body>
+</html>
+{% endblock %}

@@ -11,7 +11,7 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enable_annotations: true, enabled: true, api: 2.4 }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -85,7 +85,7 @@ fos_user:
     firewall_name: main
     user_class: WBB\UserBundle\Entity\User
     registration:
-        confirmation: { enabled: true }
+        confirmation: { enabled: true, template: WBBUserBundle:User:confirmation.email.html.twig }
         form:
             type: wbb_user_registration
     profile:
@@ -95,6 +95,9 @@ fos_user:
     from_email:
         address:        myportal@pernod-ricard.com
         sender_name:    WBB
+    resetting:
+        email:
+            template: WBBUserBundle:User:resetting.email.html.twig
 
 # Sonata Admin bundle
 sonata_admin:

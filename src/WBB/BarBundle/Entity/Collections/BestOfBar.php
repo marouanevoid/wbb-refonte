@@ -42,12 +42,12 @@ class BestOfBar
     private $bestof;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="bestofs")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar", inversedBy="bestofs", fetch="EAGER")
      */
     private $bar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Collections\BarMedia", inversedBy="bestofs")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Collections\BarMedia", inversedBy="bestofs", fetch="EAGER")
      */
     private $media;
 

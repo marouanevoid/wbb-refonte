@@ -3,14 +3,48 @@
     <body class="search">
     <script type="text/javascript">
         var defaultImg = "{{ asset('bundles/wbbcore/images/default.jpg') }}";
+        var queryestQ = "{{app.request.query.get('q','undefined')}}";
+        var queryestTag = "{{app.request.query.get('tag','undefined')}}";
     </script>
+
+    <style type="text/css">
+       .bar-filter-form a.disabled-search{
+            color:#ddd !important;
+            background-color :#99998f !important;
+        }      
+        .bar-filter-form a.disabled-search:hover{
+            color:#ddd !important;
+            background-color :#99998f !important;
+        }
+    </style>
     {% endblock %}
 
     {% block body %}
-        <div class="container l-padding">
+        {% if is_mobile() and not is_tablet() %}
+            <div class="search-bar-mobile nav">
+
+                <div class="container">
+
+                    <div class="twelve columns s-margin">
+                        <form id="search" action="/">
+                            {# <input type="text" name="q" placeholder="Search"/> #}
+                            <input type="text" name="city" placeholder="Type your city name..."/>
+                            <input type="reset" value=" "/>
+                        </form>
+                        <a class="btn-radius border h4 close">Cancel</a>
+                    </div>
+                </div>
+
+                <div class="search-result-proposal"><ul></ul></div>
+
+            </div>
+        {% endif %}
+
+        <div class="container l-padding{% if is_mobile() and not is_tablet() %}-top{% endif %}">
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/search.js') }}"></script>
+
             <aside class="three columns filters">
-                <form id="filter">
+                <form id="filter" class="{% if is_mobile() and not is_tablet() %}filter-from{% endif %}">
                     <div class="reset m-margin-bottom">
                         <h3>Filters</h3>
                         <input type="reset" value="{% if is_mobile() and not is_tablet() %} {% else %}Reset{% endif %}"/>
@@ -25,8 +59,8 @@
                             <div class="drop-list">
                                 {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
 
-                                <select class="ui-dropdown" name="city" data-class="city">
-                                    <option disabled="disabled">Choose a City</option>
+                                <select class="ui-dropdown city-drop-down" name="city" data-class="city">
+                                    <option value="" disabled="disabled">Choose a City</option>
                                     {% for city in cities %}
                                         <option value="{{ city.slug }}">{{ city.name }}</option>
                                     {% endfor %}
@@ -59,9 +93,12 @@
                         {% endfor %}
                     </ul>
 
-                    <div class="submit s-margin-top">
-                        <input type="submit" id='applay-filter' value="Apply Filters"/>
+                    {% if  is_mobile() and not is_tablet() %}
+                    <div class="submit m-margin-top">
+                        <input type="submit" class="apply-filters" id="applay-filter" value="Apply Filters"/>
+                        <input type="reset" value="Cancel" class="large"/>
                     </div>
+                    {% endif %}
                 </form>
             </aside>
 
@@ -70,9 +107,9 @@
                     <h1>Search results</h1>
                     <div class="six columns m-margin  search-box">
                         <form id="search">
-                            <input type="text" name="city" placeholder="Type your city name..."/>
+                            <input type="text" id="city_search" name="city" {% if app.request.query.get('q') is defined and app.request.query.get('q') %} value="{{app.request.query.get('q')}}" {% endif %} placeholder="Type your city name..."/>
                             <input type="submit" class="search" value=" "/>
-                            <input type="reset" value=" "/>
+                            <input type="reset" value=" " {% if app.request.query.get('q') is defined and app.request.query.get('q') %} style='display:inline;' {% endif %}/>
                         </form>
                     </div>
                 {% endif %}
@@ -84,33 +121,40 @@
 
                 <div class="six columns sort-by h3">
                     
+                        {% if  is_mobile() and not is_tablet() %}
                         <a class="btn-radius border brown filter-btn">Filter</a>
-                    
+                            <div class='loader-search-page mobile'></div>
+                        {% endif %}
                     <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
                     <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
-
-                    <div class='loader-search-page'></div>
+                    {% if not is_mobile() or is_tablet() %}
+                        <div class='loader-search-page'></div>
+                    {% endif %}
                 </div>
             </div>
 
             <section class="nine columns bar-filter m-margin-top">
                 <div class='display-bar-width-picture-parent'>
                     <div class="details-barlist bars-w-pic force-load  {% if is_mobile() and not is_tablet() %}m-margin-top{% endif %} load-container">
+                        <div class='dist-target'></div>
                         <div class="load-target"></div>
-                    </div>
+                    <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
                         <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
                         <a class="h4 btn-radius large border load-more brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                    </div>
                     </div>
                 </div>
 
                 <div class='display-bar-width-list-parent'>
                     <div class="bars-w-pic-list load-container" style="display: none">
-                        <div class="load-target"></div>
-                    </div>
+                    <div class='dist-target'></div>
+                    <div class="load-target"></div>
+                    <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
                         <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
                         <a class="h4 btn-radius large border load-more brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                    </div>
                     </div>
                 </div>
             </section>

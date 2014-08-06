@@ -200,11 +200,10 @@ meta.App = function() {
              $('header .finder').click();
              var closed = false;
              $(window).on('scroll' , function(){
-                if( ( !closed )  && $(document).scrollTop() >= 288){
+                if( ( !closed )  && $(document).scrollTop() >= ($('.ipad').length ? 240 : 288 ) ){
                     $('header .finder').click();
                     closed = true;
-                }
-                
+                }            
              });
         }
     };
@@ -214,8 +213,26 @@ meta.App = function() {
     {
         $('.custom-scroll').not('.jspScrollable').each(function()
         {
-            $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+            //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+            $(this).jScrollPane({hideFocus:true});
         });
+
+        var customScrollTimeout = false;
+
+        $(window).resize(function()
+        {
+            clearTimeout(customScrollTimeout);
+            customScrollTimeout = setTimeout(that._resizeCustomScroll, 10);
+        });
+    };
+
+    that._resizeCustomScroll = function()
+    {
+        $('.custom-scroll').each(function()
+        {
+            var api = $(this).data('jsp');
+            if( typeof(api) != "undefined" && $(this).is(':visible') ) api.reinitialise();
+         });
     };
 
 
@@ -235,6 +252,8 @@ meta.App = function() {
         $(window).load(function()
         {
             $("body").removeClass("loading").addClass("loaded");
+            //that._customScroll();
+            that._resizeCustomScroll();
         });
 
         $('a.see-more').click(function(e)
@@ -297,15 +316,12 @@ meta.App = function() {
         that._mobileMenuEvents();
 
         that._loadImages();
-        that._customScroll();
+        //that._customScroll();
 
         $( document ).ajaxComplete(function() {
 
-            setTimeout(function()
-            {
-                that._customScroll();
-
-            }, 600);
+            that._customScroll();
+            setTimeout(that._resizeCustomScroll, 600);
         });
     };
 

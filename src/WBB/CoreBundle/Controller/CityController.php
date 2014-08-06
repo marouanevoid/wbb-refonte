@@ -42,6 +42,43 @@ class CityController extends Controller
         ));
     }
 
+    //Returns a list of city subrubs
+    public function citySuburbsAction($citySlug)
+    {
+        $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
+
+        $response = array();
+
+        foreach($city->getSuburbs() as $suburb)
+        {
+            $response[] = array(
+                'id'        => $suburb->getId(),
+                'name'      => $suburb->getName(),
+                'slug'      => $suburb->getSlug()
+            );
+        }
+
+        return new JsonResponse(array(
+            'code'   => 200,
+            'suburbs' => $response
+        ));
+    }
+
+    //Returns a list of all cities
+    public function allCitiesAction()
+    {
+        $cities = $this->container->get('city.repository')->findAll();
+
+        $response = array();
+
+        foreach($cities as $city)
+        {
+            $response[$city->getName().'/'.$city->getCountry()] = $city->getName().'/'.$city->getCountry();
+        }
+
+        return new JsonResponse($response);
+    }
+
     public function nearestCityAction($latitude, $longitude)
     {
         $session = $this->container->get('session');
@@ -53,6 +90,7 @@ class CityController extends Controller
 
         if($city){
             $session->set('citySlug', $city->getSlug());
+            $session->set('citySlugGeo', $city->getSlug());
             return new JsonResponse(array(
                 'id'        => $city->getId(),
                 'name'      => $city->getName(),

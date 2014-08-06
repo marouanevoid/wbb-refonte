@@ -1,0 +1,27 @@
+fos_user:
+    username:
+        already_used: Sorry, this username has already been taken
+        blank: Please enter a username
+        short: "[-Inf,Inf]The username is too short"
+        long: "[-Inf,Inf]The username is too long"
+    email:
+        already_used: Sorry this email is already associated with an account
+        blank: Please enter an email
+        short: "[-Inf,Inf]The email is too short"
+        long: "[-Inf,Inf]The email is too long"
+        invalid: Please enter a valid email address
+    password:
+        blank: Please enter a password
+        short: "[-Inf,Inf]The password is too short"
+        mismatch: Please enter the same password
+    birthday:
+        legal: Sorry, you are not of the legal drinking age in your country
+    new_password:
+        blank: Please enter a new password
+        short: "[-Inf,Inf]The new password is too short"
+    current_password:
+        invalid: The entered password is invalid
+    group:
+        blank: Please enter a name
+        short: "[-Inf,Inf]The name is too short"
+        long: "[-Inf,Inf]The name is too long"
