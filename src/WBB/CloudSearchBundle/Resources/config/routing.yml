@@ -5,3 +5,7 @@ wbb_cloudsearch_searchresults:
 wbb_cloudsearch_search:
     pattern: /search
     defaults: { _controller: WBBCloudSearchBundle:Search:search }
+
+wbb_search_all_bars:
+    pattern: /all-bars
+    defaults: { _controller: WBBCloudSearchBundle:Search:searchResults }

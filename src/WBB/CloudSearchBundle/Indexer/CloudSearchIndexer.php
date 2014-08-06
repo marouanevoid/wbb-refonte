@@ -8,11 +8,13 @@ class CloudSearchIndexer implements IndexerInterface
 {
 
     private $container;
+    private $router;
     private $cloudSearchClient;
 
     public function __construct($container, $parameters)
     {
         $this->container = $container;
+        $this->router = $container->get('router');
         $this->cloudSearchClient = CloudSearchDomainClient::factory(array(
                     'base_url' => 'http://doc-' . $parameters[0] . '-' . $parameters[1] . '.' . $parameters[2] . '.cloudsearch.amazonaws.com/2013-01-01',
                     'key' => $parameters[3],
@@ -33,6 +35,7 @@ class CloudSearchIndexer implements IndexerInterface
         ));
 
         $body[0]['fields']['entity_type'] = $this->getEntityType($entity);
+        $body[0]['fields']['url'] = $this->getUrlForEntity($entity);
 
         if ($this->getEntityType($entity) == 'BestOf') {
             $image = $entity->getImage();
@@ -78,6 +81,29 @@ class CloudSearchIndexer implements IndexerInterface
         $parts = explode('\\', $fqcn);
 
         return $parts[count($parts) - 1];
+    }
+
+    private function getUrlForEntity($entity)
+    {
+        if ($entity instanceof \WBB\BarBundle\Entity\Bar) {
+            return $this->router->generate('wbb_bar_details', array(
+                        'city' => $entity->getCity()->getSlug(),
+                        'suburb' => $entity->getSuburb()->getSlug(),
+                        'slug' => $entity->getSlug()
+            ));
+        } elseif ($entity instanceof \WBB\BarBundle\Entity\News) {
+            return $this->router->generate('wbb_news_details_page', array(
+                        'newsSlug' => $entity->getSlug()
+            ));
+        } elseif ($entity instanceof \WBB\CoreBundle\Entity\City) {
+            return $this->router->generate('city_homepage', array(
+                        'slug' => $entity->getSlug()
+            ));
+        } elseif ($entity instanceof \WBB\BarBundle\Entity\BestOf) {
+            return $this->router->generate('wbb_bar_bestof_global', array(
+                        'bestOfSlug' => $entity->getSlug()
+            ));
+        }
     }
 
     private function generateEntityId($entity)
