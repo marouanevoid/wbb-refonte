@@ -16,18 +16,18 @@ parameters:
 
 services:
     #PDO SESSION
-    pdo:
-        class: PDO
-        arguments:
-            - "mysql:host=%database_host%;dbname=%database_name%"
-            - "%database_user%"
-            - "%database_password%"
-        calls:
-            - [setAttribute, [3, 2]]
-
-    session.handler.pdo:
-        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-        arguments: ["@pdo", "%pdo.db_options%"]
+#    pdo:
+#        class: PDO
+#        arguments:
+#            - "mysql:host=%database_host%;dbname=%database_name%"
+#            - "%database_user%"
+#            - "%database_password%"
+#        calls:
+#            - [setAttribute, [3, 2]]
+#
+#    session.handler.pdo:
+#        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+#        arguments: ["@pdo", "%pdo.db_options%"]
 
     #Admin Class
     wbb.core.admin.country:

@@ -17,8 +17,9 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:
-        handler_id: session.handler.pdo
+    session:         ~
+#    session:
+#        handler_id: session.handler.pdo
     fragments:       ~
     http_method_override: true
 
@@ -98,6 +99,9 @@ fos_user:
     resetting:
         email:
             template: WBBUserBundle:User:resetting.email.html.twig
+            
+    service:
+        mailer: fos_user.mailer.twig_swift
 
 # Sonata Admin bundle
 sonata_admin:
@@ -326,3 +330,31 @@ fos_facebook:
 
 hpatoio_bitly:
     access_token: %bitly_access_token%
+
+aequasi_cache:
+    instances:
+        default:
+          persistent: true # Boolean or persistent_id
+          namespace: mc
+          type: memcached
+          hosts:
+              - { host: localhost, port: 11211 }
+
+    session:
+        enabled: true
+        instance: default
+        prefix: "session_"
+        ttl: 7200
+
+    doctrine:
+        enabled: true
+        metadata:
+            instance: default
+            entity_managers:   [ default ]
+            document_managers: [ default ]
+        result:
+            instance: default
+            entity_managers:   [ default ]
+        query:
+            instance: default
+            entity_managers: [ default ]

@@ -64,6 +64,9 @@ class AppKernel extends Kernel
             //Bitly Bundle
             new Hpatoio\BitlyBundle\HpatoioBitlyBundle(),
 
+            //Memcached
+            new Aequasi\Bundle\CacheBundle\AequasiCacheBundle(),
+
             // WBB Bundles
             new WBB\UserBundle\WBBUserBundle(),
             new WBB\CoreBundle\WBBCoreBundle(),
