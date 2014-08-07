@@ -182,7 +182,9 @@ meta.Search = function(config){
         var q = that.context.$input.val();
         that.q = q;
         // Set Up the form action
-        that.context.$form.attr('action'  , Routing.generate('wbb_cloudsearch_searchresults')+'?q=' + q);
+        if(that.q !=''){
+            that.context.$form.attr('action'  , Routing.generate('wbb_cloudsearch_searchresults')+'?q=' + that.q);
+        }
 
         if( $(window).width() < 640 )
         {
@@ -357,7 +359,12 @@ meta.Search = function(config){
 
         // append Event on go Button
         $('.bar-finder .open').add('.advanced-search').on('click' , function(){
+            if(that.q == "#" || that.q == '' ){
+                that.context.$form.attr('action'  , Routing.generate('wbb_cloudsearch_searchresults')+'?q=*');
+            }
             that.context.$form.submit();
+
+            console.log('advanced-search:::');
             return false;
         });
 
@@ -366,8 +373,14 @@ meta.Search = function(config){
         that.context.$form.on('submit' , function(){
             // if the query is empty 
             // then dont send query
-            if(that.q == "#" || that.q == '' )
-                return false;
+            // if(that.q == "#" || that.q == '')
+            //     return false;
+        });
+
+        // rest the input 
+        $('.search-mode .close.reset-trigger').on('click' , function(){
+            that.context.$form.attr('action'  , Routing.generate('wbb_cloudsearch_searchresults')+'?q=*');
+            return false;
         });
     };
 
