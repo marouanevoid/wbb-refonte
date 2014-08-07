@@ -9,15 +9,24 @@
                     <div class="block-top wrap">
                         
                         <div class="avatar-profil left">
-                            <img src="{{ showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
+                            <img src="{{ showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max">
                         </div>
 
                         <div class="group left margin-left-30">
                             <div class="title text-transform-capitalize bold">
-                                <h5>{{ user.firstname }} {{ user.lastname }}</h5>
+                                <h5>{{ user.username }}</h5>
                             </div>
                             <div class="subgroup wrap margin-top-10">
-                                {% if user.prefStartCity or user.country %}
+                                {% if city %}
+                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
+                                        <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                            {{ city ~ ',' }}
+                                            {% if city.country %}
+                                                {{ city.country }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% elseif user.prefStartCity or user.country %}
                                     <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                             {% if user.prefStartCity %}
@@ -31,8 +40,7 @@
                                 {% else %}
                                     <div class="text-transform-capitalize text-align-center {% if not is_mobile() %}margin-top-20{% endif %}">
                                         <div class="city">
-                                            <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
-                                            Not set
+                                            &nbsp;
                                         </div>
                                     </div>
                                 {% endif %}
@@ -151,7 +159,7 @@
                         <div class="clear"></div>
 
                         <div id="tab-tips" class="tab" style="display:none">
-                            <div class="full-cream padding-bottom-40">
+                            <div class="full-cream padding-bottom-40 min-height">
 
                                 <!-- List of Tips -->
                                 <ul class="list-tips padding-top-30 container">

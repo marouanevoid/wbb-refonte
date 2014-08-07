@@ -290,13 +290,13 @@ $(document).ready(function() {
 
                                 var TypeEvent = "removeitem",
                                     cible = "";
-                                if(btn.parents('.three.columns.m-margin-top').length){
-                                    btn.parents('.three.columns.m-margin-top').remove();
+                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length){
+                                    btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
                                 }
                                 else{
-                                    if( btn.parents('.best-of-container').length){
-                                        btn.parents('.best-of-container').remove();
+                                    if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length){
+                                        btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
                                          cible = 'bestof';
                                     }
                                 }

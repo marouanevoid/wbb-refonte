@@ -1,8 +1,5 @@
 var wbb = wbb || {};
-console.log($('.remove-tip').data('id'));
-/**
- *
- */
+
 wbb.LoadProfile = function() {
 
     var that = this;
@@ -26,7 +23,7 @@ wbb.LoadProfile = function() {
         },
         bestofs: {
             offset: 0,
-            limit: 6,
+            limit: 8,
             filter: 'date',
             display: 'grid',
             $more: $('.more-bestofs')
@@ -153,8 +150,6 @@ wbb.LoadProfile = function() {
             that.config.bars.offset += that.config.bars.limit;
         });
 
-
-
         var descrimentFunction = function(cible){
             var str = $(cible).html(),
                 arr = str.split(')'),
@@ -208,6 +203,9 @@ wbb.LoadProfile = function() {
         // add listner on delete tips
 
         var removeHandler = function(){
+            if(!confirm(' Are you sure you want to delete this tip ?'))
+                return false;
+
             var _btnclose = $(this);
             $.get(Routing.generate('wbb_bar_tips_delete' , {tipId : $(this).attr('data-id') }) , function(res){
                 // if is deleted
@@ -265,10 +263,7 @@ wbb.LoadProfile = function() {
         that._setupEvents();
     };
 
-    that.removeTip = function(id)
-    {
-
-    };
+    that.removeTip = function(id){};
 
     that.__construct();
 };
