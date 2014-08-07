@@ -8,8 +8,8 @@
                     <div id="edit-account">
                         <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
                             <div class="block-top wrap">
-                                <div class="avatar-profil left">
-                                    <img src="{{  showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
+                                <div class="avatar-profil left" >
+                                    <img src="{{  showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max" id="avatar-img">
                                 </div>
                                 <div class="group left">
                                     <div class="title text-transform-capitalize bold">
@@ -18,7 +18,8 @@
                                     <div class="subgroup margin-top-10 {% if is_mobile() and not is_tablet() %}margin-bottom-10{% else %}margin-bottom-40{% endif %} wrap">
                                         {% if user.prefStartCity or user.country %}
                                             <div class="text-transform-capitalize text-align-center">
-                                                <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                                <div class="city">
+                                                    <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                                     {% if user.prefStartCity %}
                                                         {{ user.prefStartCity ~ ',' }}
                                                     {% endif %}
@@ -237,6 +238,20 @@
             $('.form-checkbox').iCheck({
                 checkboxClass: 'icheckbox_flat',
                 increaseArea: '20%' // optional
+            });
+
+            function readImage(input) {
+                if ( input.files && input.files[0] ) {
+                    var FR= new FileReader();
+                    FR.onload = function(e) {
+                        $('#avatar-img').attr("src", e.target.result );
+                    };
+                    FR.readAsDataURL( input.files[0] );
+                }
+            }
+            
+            $("#fos_user_profile_form_avatar_binaryContent").change(function(){
+                readImage( this );
             });
         });
     </script>
