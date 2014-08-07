@@ -37,7 +37,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=45, nullable=true)
-     * @Assert\NotBlank(message="not.blank")
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full"})
      */
     private $firstname;
 
@@ -45,7 +45,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=45, nullable=true)
-     * @Assert\NotBlank(message="not.blank")
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full"})
      */
     private $lastname;
 

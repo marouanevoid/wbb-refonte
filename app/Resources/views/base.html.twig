@@ -160,7 +160,6 @@
         </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
         {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
-        <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
             function securityCheck() {
@@ -168,7 +167,10 @@
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            alert('Create an account please !');
+                            $('#facebook-signup').after($('#message'));
+                            $('#login_form #message').find('ul').remove();
+                            var errorsList = $('#login_form #message').show().find('img').after('<ul></ul>').parent();
+                            errorsList.find('ul').append('<li>Created an account please !</li>');
                         } else {
                             window.location.reload();
                         }

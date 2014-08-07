@@ -10,7 +10,7 @@
             {% for error in errors %}
                 {% if error.message not in errorsMessages %}
                     {% if error.message == 'not.blank' %}
-                        <li> Please complete all required fields</li>
+                        <li>Please complete all required fields</li>
                     {% else %}
                         <li>{{ error.message }}</li>
                     {% endif %}

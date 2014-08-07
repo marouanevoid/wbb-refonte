@@ -126,8 +126,9 @@ function initRegisterLoginForms() {
             success: function(data) {
                 if (data.code === '400') {
                     var errors = data.errors;
-                    $('#message').find('ul').remove();
-                    var errorsList = $('#message').show().find('img').after('<ul></ul>').parent();
+                    $('#register_form').after($('#message'));
+                    $('#register-form #message').find('ul').remove();
+                    var errorsList = $('#register-form #message').show().find('img').after('<ul></ul>').parent();
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
@@ -158,7 +159,12 @@ function initRegisterLoginForms() {
             success: function(data) {
                 console.log(data);
                 if (data.code === '400') {
-                    $('#login_error').html(data.error);
+                    $('#username').addClass('error');
+                    $('#password').addClass('error');
+                    $('#facebook-signup').after($('#message'));
+                    $('#login_form #message').find('ul').remove();
+                    var errorsList = $('#login_form #message').show().find('img').after('<ul></ul>').parent();
+                    errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
                     window.location.reload();
                 }

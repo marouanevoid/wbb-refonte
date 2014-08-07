@@ -141,7 +141,11 @@ class RegistrationFormType extends BaseType
         parent::setDefaultOptions($resolver);
 
         $resolver
-                ->setDefaults(array('translation_domain' => 'WBBUserBundle', 'label' => false))
+                ->setDefaults(array(
+                    'translation_domain' => 'WBBUserBundle',
+                    'label' => false,
+                    'validation_groups' => 'registration_full'
+                ))
         ;
     }
 
