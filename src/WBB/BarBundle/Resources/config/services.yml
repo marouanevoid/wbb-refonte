@@ -228,15 +228,16 @@ services:
     wbb.tips.event_listener:
         class: WBB\BarBundle\EventListener\TipsListener
         arguments:
-            - "@wbb.mailer"
+            - "@swiftmailer.mailer.default"
+            - "@router"
+            - "@twig"
             - "@doctrine.orm.entity_manager"
         tags:
             - { name: kernel.event_subscriber }
 
     wbb.mailer:
         class: WBB\BarBundle\Mailer\TipsMailer
-        arguments:
-            - "@mailer"
+
     # ForumMailer
 #    wbb_bar.mailer:
 #        class:  WBB\BarBundle\Mailer\BarMailer

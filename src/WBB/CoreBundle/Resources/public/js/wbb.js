@@ -179,8 +179,8 @@ jQuery(document).ready(function($) {
         // height = -1 * parseInt((current_id.height()/2));
         // current_id.css('margin-left', width).css('margin-top', height);
         current_id.css({
-            "top": (($(window).height() – current_id.height()) / 2) + $(window).scrollTop(),
-            "left": (($(window).width() – current_id.width()) / 2) + $(window).scrollLeft()
+            "top": (($(window).height() - current_id.height()) / 2) + $(window).scrollTop(),
+            "left": (($(window).width() - current_id.width()) / 2) + $(window).scrollLeft()
         });
     }
 
