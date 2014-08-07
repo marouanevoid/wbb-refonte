@@ -1,0 +1,32 @@
+/* Admin WBB custom style */
+body {}
+.navbar-fixed-top .container-fluid {padding-top: 20px; background-color: #333; padding-bottom: 20px;}
+.sonata-bc .navbar-fixed-top .navbar-inner, .sonata-bc .navbar-static-top .navbar-inner {min-height: 100px;}
+.sonata-bc a {color: #b3955f; padding: 2px; }
+.sonata-bc a:hover {background-color: #b3955f; color: #fff;  text-decoration: none;}
+.sonata-bc .navbar .nav>li>a {color: #b3955f; text-shadow: none;}
+.sonata-bc .navbar .nav>li>a:hover {color: #fff;}
+.sonata-bc .btn {background-image: linear-gradient(to bottom, #EDCD93, #b3955f); text-shadow:none!important;}
+.sonata-bc .btn:hover {background-position: 0 0; color: #b3955f; background-image: linear-gradient(to bottom, #fff, #fff); border: 1px solid #b3955f;	}
+.sonata-bc .btn-primary:hover {color: #fff;}
+.sonata-bc .btn-primary:hover, 
+.sonata-bc .btn-primary:active, 
+.sonata-bc .btn-primary.active, 
+.sonata-bc .btn-primary.disabled, 
+.sonata-bc .btn-primary[disabled] {background-color: #b3955f; background-image: linear-gradient(to bottom, #EDCD93, #b3955f); color: #fff;}
+.sonata-bc .label {text-transform: uppercase;}
+.sonata-bc .table-striped tbody tr:nth-child(odd) td, .sonata-bc .table-striped tbody tr:nth-child(odd) th {background-color: #faf3e1;}
+.sonata-bc .navbar a.brand {text-shadow:none; color: #fff;}
+.sonata-bc .navbar a.brand:hover {background-color: transparent;}
+.sonata-bc .select2-choice:hover {color: #b3955f;}
+.sonata-bc .btn-danger
+.sonata-bc .btn-danger:hover, 
+.sonata-bc .btn-danger:active, 
+.sonata-bc .btn-danger.active, 
+.sonata-bc .btn-danger.disabled, 
+.sonata-bc .btn-danger[disabled] {background-image: linear-gradient(to bottom, #ED7D77, #bd362f);}
+a.btn,
+input[type="submit"].btn {border-radius: 20px; background-color: transparent;}
+.sonata-bc .btn-link {color: #fff;}
+.sonata-bc .btn-link:hover {text-decoration: none;}
+body.sonata-bc { padding-top: 120px; }

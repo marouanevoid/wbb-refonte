@@ -25,6 +25,7 @@
                 window.isCity = true;
             {% endif %}
             var DEBUGMODE = "{{app.environment }}";
+            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '/');
         </script>
             
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

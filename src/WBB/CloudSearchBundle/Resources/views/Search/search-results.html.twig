@@ -3,7 +3,11 @@
     <body class="search">
     <script type="text/javascript">
         var defaultImg = "{{ asset('bundles/wbbcore/images/default.jpg') }}";
-        var queryestQ = "{{app.request.query.get('q','undefined')}}";
+        {% if showAllBars %}
+        var queryestQ = "{{app.request.query.get('q', '*')}}";    
+        {% else %}
+        var queryestQ = "{{app.request.query.get('q', 'undefined')}}";
+        {% endif %}
         var queryestTag = "{{app.request.query.get('tag','undefined')}}";
     </script>
 
@@ -11,7 +15,7 @@
        .bar-filter-form a.disabled-search{
             color:#ddd !important;
             background-color :#99998f !important;
-        }      
+        }
         .bar-filter-form a.disabled-search:hover{
             color:#ddd !important;
             background-color :#99998f !important;
@@ -28,7 +32,7 @@
                     <div class="twelve columns s-margin">
                         <form id="search" action="/">
                             {# <input type="text" name="q" placeholder="Search"/> #}
-                            <input type="text" name="city" placeholder="Type your city name..."/>
+                            <input type="text" name="city" placeholder="Type your city name..." {% if app.request.query.get('q') is defined and app.request.query.get('q') %} value="{{app.request.query.get('q')}}" {% endif %} />
                             <input type="reset" value=" "/>
                         </form>
                         <a class="btn-radius border h4 close">Cancel</a>
@@ -120,7 +124,7 @@
                 </div>
 
                 <div class="six columns sort-by h3">
-                    
+
                         {% if  is_mobile() and not is_tablet() %}
                         <a class="btn-radius border brown filter-btn">Filter</a>
                             <div class='loader-search-page mobile'></div>
@@ -140,8 +144,8 @@
                         <div class="load-target"></div>
                     <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
-                        <a class="h4 btn-radius large border load-more brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
                     </div>
                     </div>
                 </div>
@@ -152,8 +156,8 @@
                     <div class="load-target"></div>
                     <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
-                        <a class="h4 btn-radius large border load-more brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
                     </div>
                     </div>
                 </div>

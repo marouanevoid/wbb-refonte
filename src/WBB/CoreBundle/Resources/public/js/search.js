@@ -32,6 +32,7 @@ meta.SearchPage = function() {
         start = 0 , 
         lastConsultedURL  = "",
         compteurBars = 0,
+        currentFilterLoaded = "";
         currentQuery = "",
         currentTabActive = "Bar";
     that.config = {
@@ -53,45 +54,62 @@ meta.SearchPage = function() {
     * The HTML template of tow display ( list and row of results)
     ***/
     that.template = {
-        barWithPicture : (!ismobile ? '<div class="three columns m-margin-top">' : '') + '<article class="bar-w-pic" data-type="%type">'+
-                                '<a href="" class="btn-round dark star"></a>' +
-                                '<div class="txt">' +
-                                '    <h2>%title</h2>' +
-                                '    <h3>%city, %country</h3>' +
-                                '    <div class="hover">' +
-                                '        <div class="tags %tag-non-founed">%tags</div>' +
-                                '    </div>' +
-                                '</div>' +
-                                '<a href="%link" class="overlay-link"></a>' +
-                                '<div class="color gradient"></div>' +
-                                '<div class="color gray"></div>' +
-                                '<img src="%img" class="scale-with-grid" data-src="%img" alt="%title" width="570" height="428"/>' +
-                            '</article>' + (!ismobile ? '</div>' : ''),
+        barWithPicture : function(filter,isfavorite , fav_url , url_link){
+                                var htmlT = (!ismobile ? '<div class="three columns m-margin-top">' : '') + '<article class="bar-w-pic" data-type="%type">';
+                                if(filter != 'News'){ 
+                                    htmlT += '<a href="'+ fav_url +'" class="btn-round dark star'+ (isfavorite ? ' active ' : '') +'"></a>' ;
+                                }
+                                htmlT +='<div class="txt">' ;
+                                    htmlT +='    <h2>%title</h2>' ;
+                                if(filter != 'News'){
+                                    htmlT +='    <h3>%city, %country</h3>';
+                                }
+
+                                if(filter != 'News'){
+                                    htmlT +='    <div class="hover">' ;
+                                    htmlT +='        <div class="tags %tag-non-founed">%tags</div>';
+                                    htmlT +='    </div>' ;
+                                }
+
+                                htmlT +='</div>' ;
+                                htmlT +='<a href="' + url_link + '" class="overlay-link"></a>' ;
+                                htmlT +='<div class="color gradient"></div>' ;
+                                htmlT +='<div class="color gray"></div>' ;
+                                htmlT +='<img src="%img" class="image-search-item scale-with-grid" data-src="%img" alt="%title" width="570" height="428"/>';
+                                htmlT +='</article>' + (!ismobile ? '</div>' : '');
+
+                                return htmlT;
 
 
-        barWithPictureList : '<article class="bar-w-pic-list" data-type="%type">' + 
-                            '<div class="three columns s-margin-top">' + 
+        },
+        barWithPictureList : function(filter,isfavorite , fav_url , url_link){
+                            var htmlT = '<article class="bar-w-pic-list" data-type="%type">';
+                            htmlT += '<div class="three columns s-margin-top">';
 
-                            '    <div class="bar-w-pic list">' + 
+                            htmlT += '    <div class="bar-w-pic list">';
+                            if(filter != 'News') 
+                                htmlT += '<a href="'+ fav_url +'" class="btn-round dark star'+ (isfavorite ? ' active ' : '') +'"></a>' ;
 
-                             '       <a href="%link" class="btn-round dark star"></a>' + 
+                            htmlT +='        <a href="' + url_link + '" class="overlay-link"></a>';
 
-                            '        <a href="%link" class="overlay-link"></a>' + 
+                            htmlT += '        <img class="scale-with-grid image-search-item" src="%img" alt="%title" width="570" height="428"/>' ;
+                            htmlT += '    </div>' ;
+                            htmlT += '</div>';
+                            htmlT += ' <div class="nine columns s-margin-top">';
+                            htmlT += '    <h2 class="s-margin-top"><a href="bar-details.php">%title</a></h2>';
+                            htmlT +='    <h3 class="xs-margin-top"><a href="bar-details.php">%city, %country</a></h3>' ; 
+                            htmlT +='    <p class="s-margin-top">';
+                            htmlT += '        %description' ;
 
-                            '        <img class="scale-with-grid" src="%img" alt="%title" width="570" height="428"/>' + 
-                            '    </div>' + 
-                            '</div>' + 
-                           ' <div class="nine columns s-margin-top">' + 
-                            '    <h2 class="s-margin-top"><a href="bar-details.php">%title</a></h2>' + 
-                            '    <h3 class="xs-margin-top"><a href="bar-details.php">%city, %country</a></h3>' + 
-                            '    <p class="s-margin-top">' + 
-                            '        %description' + 
+                            htmlT +='    </p>';
+                            if(filter != 'News') 
+                                htmlT +='    <div class="tags %tag-non-founed">%tags</div>';
+                            htmlT +=' </div>';
+                            htmlT +='  <div class="separator"><hr/></div>'; 
+                            htmlT +='</article>';
 
-                            '    </p>' + 
-                            '    <div class="tags %tag-non-founed">%tags</div>' + 
-                           ' </div>' + 
-                          '  <div class="separator"><hr/></div>' + 
-                        '</article>'
+                            return htmlT;
+                    }
     }
 
     /*
@@ -115,16 +133,55 @@ meta.SearchPage = function() {
     * Generate the Html list by response
     **/
     that.generateListByResults = function(res , callbackHandler , notreset){
- 
+        
+
+        var heighlightFunction = function(){
+            // test if there is News and Bars 
+            var newsLength = Number(res.hits.news),
+                BarsLength = Number(res.hits.bars);
+
+            // if there is News on The Results
+
+            var replaceIntger = function(number , cible){
+                var str = cible.html();
+                    arr = str.split(')'),
+                    strl = arr[0].substr(1);
+
+                cible.html(str.replace(strl , number));
+            }
+            var ccibleNews = $('.screen-compteur a[data-index=1]'),
+                ccibleBars = $('.screen-compteur a[data-index=0]');
+
+            if(newsLength > 0){
+                that.desibledBtn( ccibleNews, true );
+                replaceIntger( newsLength ,ccibleNews);
+                // Set Compteur News
+            }else{
+                that.desibledBtn(ccibleNews , false);
+                replaceIntger( 0 ,ccibleNews);
+            }
+
+            // if there is Bars on the Results
+            if(BarsLength > 0){
+                that.desibledBtn(ccibleBars , true );
+                replaceIntger( BarsLength ,ccibleBars);
+            }else{
+                that.desibledBtn(ccibleBars , false);
+                replaceIntger( 0 ,ccibleBars);
+            }
+        }
+
         if(res.hits && res.hits.hit && res.hits.hit.length > 0){
             var htmlBar = "",
                 htmlBarList = "",
                 htmlBarList = "";
             $.each(res.hits.hit , function(index , curor){
                 var type = "";
-                
-                var chtml = that.template.barWithPicture.replace('%type' , type);
-                var chtml2 = that.template.barWithPictureList.replace('%type' , type);
+                var isFaved = ( curor.fields.favorite ? curor.fields.favorite  : false );
+                var favUrl = (curor.fields.favorite_url ? curor.fields.favorite_url : '#' );
+                var url_link = (curor.fields.url ? ( URL_MODE +  curor.fields.url )  : '#');
+                var chtml = that.template.barWithPicture(currentFilter,isFaved, favUrl , url_link).replace('%type' , type);
+                var chtml2 = that.template.barWithPictureList(currentFilter,isFaved , favUrl , url_link).replace('%type' , type);
 
                 // Update Labels of Bar and News
                 if(curor.id.indexOf('News')>-1){
@@ -170,8 +227,8 @@ meta.SearchPage = function() {
 
                     }
                     if(curor.fields.wbb_media_url){
-                        chtml = chtml.replace('%img' , defaultImg/* curor.fields.wbb_media_url */);
-                        chtml2 = chtml2.replace('%img' , defaultImg/*curor.fields.wbb_media_url */ );
+                        chtml = chtml.replace('%img' , curor.fields.wbb_media_url );
+                        chtml2 = chtml2.replace('%img' ,curor.fields.wbb_media_url);
                     }else{
                         chtml = chtml.replace('%img' , defaultImg );
                         chtml2 = chtml2.replace('%img' , defaultImg );
@@ -199,31 +256,24 @@ meta.SearchPage = function() {
 
             // Append The HTML to Dom
 
-            $('.bars-w-pic-list .dist-target').append('<div class="line">' + htmlBarList + '</div>');
-            $('.details-barlist .dist-target').append( '<div class="line">' + htmlBar  + '</div>');
+            $('.bars-w-pic-list .dist-target').append(htmlBarList );
+            $('.details-barlist .dist-target').append( htmlBar);
 
-            // preprocess of html List after appending 
-            var preprocess  = function(){
-                // Remove Tag on News
-                if(currentFilter == 'News'){
-                    $('.bars-w-pic-list .dist-target').add('.details-barlist .dist-target').find('.cover').remove();
-                    $('.bars-w-pic-list .dist-target').add('.details-barlist .dist-target').find('.tags').remove();
-
-                    // Remove country and city
-                    $('.bars-w-pic-list .dist-target').add('.details-barlist .dist-target').find('h3').remove();
-                }
-            }
-
-            preprocess();
+            // if the image is not loaded then 
+            // Load the default Image
+            $('.image-search-item').error(function(){
+                //$(this).attr('src' , defaultImg);
+            });
 
             if(callbackHandler)
                 callbackHandler();
 
            // that._animate($('.load-target'),$("article.bar-w-pic"));
-           $('.dist-target .line').find('> *').not('br').css({opacity:0, top:'6em', position:'relative'});
+           //$('.dist-target .line').find('> *').not('br').css({opacity:0, top:'6em', position:'relative'});
 
            setTimeout(function(){
-               that._animate($(".load-target"), $('.dist-target .line').find('> *').not('br'));
+              // that._animate($(".load-target"), $(".load-target").find('> *').not('br'));
+               //that._animate($(".load-target"), $('.dist-target .line').find('> *').not('br'));
            },10);
 
 
@@ -234,7 +284,6 @@ meta.SearchPage = function() {
             }else{
                 cursorIndex = 0 ;
             }
-            that.desibledBtn($('.screen-compteur a[data-index='+ cursorIndex +']') , true );
 
         }else{
             // TODO : No results then show label no resluts
@@ -248,17 +297,11 @@ meta.SearchPage = function() {
             $('.bars-w-pic-list .dist-target').html('');
             $('.bars-w-pic-list .dist-target').append("<p>There are no results matching your request.</p>");
             $('.details-barlist .dist-target').append("<p>There are no results matching your request.</p>");
-
-            // disabled buttons compteurs
-            var cursorIndex = 0;
-            if(currentFilter == 'News'){
-                cursorIndex = 1;
-            }else{
-                cursorIndex = 0 ;
-            }
-            that.desibledBtn($('.screen-compteur a[data-index='+ cursorIndex +']'));
             
         }
+
+
+        heighlightFunction();
 
         setTimeout(function(){
 
@@ -297,6 +340,12 @@ meta.SearchPage = function() {
     ** Send the Request To the Server 
     ***/
     that.getSearchResult = function(q , callbackHandler ){
+        
+        // test if Result is aleady Loaded
+        // By Filter
+        // if(currentFilterLoaded == currentFilter){
+        //     return false;
+        // }
 
         $('.loader-search-page').show();
         // Hide the button load More on strat generating 
@@ -305,12 +354,16 @@ meta.SearchPage = function() {
 
         var limit = ((ismobile || $('.ipad').length > 0) ? 3 : 12 ),
         lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) ;
+
+
         $.get(lastConsultedURL, function(response){
             //// ///////
             $('.loader-search-page').hide();
             ////// /////
             that.generateListByResults(response , callbackHandler);
         });
+
+        currentFilterLoaded = currentFilter;
     }
 
     /*
@@ -496,7 +549,11 @@ meta.SearchPage = function() {
 
         $('.screen-compteur').find('a').click(function(){
 
-            if($(this).hasClass('disabled-search')){
+            // if the is btn is desibled or the filter is already loaded then 
+            // Return False
+            var ccible = $($(this).find('input[type=radio]')[0]).attr('data-type');
+
+            if($(this).hasClass('disabled-search') || ccible == currentFilterLoaded){
                 return false;
             }
             // Rest the start Index to 0 
@@ -514,14 +571,21 @@ meta.SearchPage = function() {
                 currentFilter = "News";
             }
 
+            // hide the Load More Buttons
+            // and waiting for Answer
             $('.load-more-bars-btn').hide();
             $('.load-more-news-btn').hide();
 
+            // Start Search
             that.goSearch();
 
+            // save the curren Filter to cancel the 
+            // Re-search if is already Loaded
+            currentFilterLoaded = currentFilter ;
             return false;
         });
-
+        
+        // Append the Ajax Event
         that.setUpEventFilterAjax();
 
         // Add Event On buttoms
@@ -541,8 +605,8 @@ meta.SearchPage = function() {
         });
 
         // click on load More button
-        $('.loadmore-trigger').on('click' ,function(){
-
+        $('.loadmore-trigger').on('click' ,function(e){
+            e.preventDefault();
             $(this).text(TRAD.common.loading);
             that.goSearch();
             return false;
@@ -587,8 +651,10 @@ meta.SearchPage = function() {
     */
     that.setUpEventFilterAjax = function(){
         var handler = function(e){
-                //if(this.checked)
+                // Set the default the flag of already Loaded
+                currentFilterLoaded = "";
                 that._filterResults();
+
         }
         //$('.checkbox-container').find('label').off('click',handler).on('click' , handler);
         that.context.$form_filter.find('input[type=checkbox]').off('change').on('change' , handler);
@@ -696,7 +762,6 @@ meta.SearchPage = function() {
 $(document).ready(function()
 {
     if( !$('form#filter').length ) return;
-
     new meta.SearchPage();
 
 
