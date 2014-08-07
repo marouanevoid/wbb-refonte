@@ -13,6 +13,7 @@ services:
     cloudsearch.searcher:
         class: WBB\CloudSearchBundle\Searcher\CloudSearchSearcher
         arguments:
+            - "@service_container"
             -
                 - "%aws_cloudsearch_domain_name%"
                 - "%aws_cloudsearch_domain_id%"

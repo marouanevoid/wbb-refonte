@@ -7,15 +7,15 @@
     <form action="{{ path('fos_user_resetting_send_email') }}" method="POST">
         <div class="text-align-center">
             <input type="email" name="username" class="form-text margin-top-30" placeholder="Your email">
-            <input type="submit" class="form-submit btn margin-top-30 bold" value="{{ 'resetting.request.submit'|trans }}">
+            <input type="submit" class="form-submit btn margin-top-30 {% if is_mobile() %}margin-bottom-30{% endif %} bold" value="{{ 'resetting.request.submit'|trans }}">
         </div>
     </form>
     <div class="clear"></div>
 
     {% if invalid_username is defined %}
-        <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20">
+        <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20 {% if is_mobile() %}margin-bottom-20{% endif %}">
             <div>
-                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left" {% if is_mobile() %}class="margin-left-20"{% endif %}>
                 <ul><li>
                         {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
                     </li>
