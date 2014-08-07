@@ -115,6 +115,12 @@
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
 
                 var popinFrom = '';
+                
+                {% if app.session.has('profileHover') %}
+                    $(document).ready(function() {
+                         $('header.desktop .logged').mouseover();
+                    });
+                {% endif %}
         </script>
 
         {% if is_tablet() %}

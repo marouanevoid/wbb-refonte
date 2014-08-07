@@ -260,8 +260,10 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = 'Your email is now confirmed. Welcome in the World’s Best Bars community!' +
-                'You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars';
+        var html = '<div id="success" class="text-align-center padding-top-80">' +
+                '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
+                '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
+                '</div>';
         $('.popin-block').html(html);
         $('#show-popin').click();
     }

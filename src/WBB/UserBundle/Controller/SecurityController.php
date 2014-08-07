@@ -56,6 +56,8 @@ class SecurityController extends Controller
             ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
             : null;
 
+        $this->container->get('session')->set('profileHover', true);
+
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error'         => $error,

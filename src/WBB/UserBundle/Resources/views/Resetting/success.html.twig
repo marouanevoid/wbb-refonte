@@ -1,1 +1,13 @@
-<h1> Congratulations ! You have changed your password</h1>
+<div class="title margin-bottom-30 wrap bold">Reset password</div>
+<div class="subtitle text-transform-uppercase bold">Congratulations ! You have changed your password</div>
+
+<script>
+    $(document).ready(function() {
+        $('.btn-close').on('click', function() {
+            window.location.href = "{{ path('homepage') }}";
+        });
+        $('.mask').on('click', function() {
+            window.location.href = "{{ path('homepage') }}";
+        });
+    });
+</script>
