@@ -20,6 +20,12 @@ get_medias_from_bar:
     options:
         expose: true
 
+wbb_cities_by_name:
+    pattern: /get-cities-by-name
+    defaults: { _controller: WBBCoreBundle:City:getCitesByName}
+    options:
+        expose: true
+
 wbb_cities_bars:
     pattern: /getbars-bycity/{citySlug}/{suburbSlug}
     defaults: { _controller: WBBCoreBundle:City:barsList, suburbSlug: "-1"}

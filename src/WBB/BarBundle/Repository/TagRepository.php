@@ -13,7 +13,7 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
-    public function findByType($type, $onlyQueryBuilder = false, $limit = 0, $name = null)
+    public function findByType($type, $onlyQueryBuilder = false, $limit = 0, $name = null, $exacteName = true)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -29,7 +29,9 @@ class TagRepository extends EntityRepository
         }
 
         if($name){
-            $qb->andWhere($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)));
+            $nameValue = $name;
+            if(!$exacteName)$nameValue.='%';
+            $qb->andWhere($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($nameValue)));
         }
 
         if($onlyQueryBuilder){
