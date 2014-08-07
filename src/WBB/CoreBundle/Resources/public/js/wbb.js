@@ -308,15 +308,15 @@ $(document).ready(function() {
                             if (btn.parents('.profile-fav-block').length) {
 
                                 var TypeEvent = "removeitem",
-                                        cible = "";
-                                if (btn.parents('.three.columns.m-margin-top').length) {
-                                    btn.parents('.three.columns.m-margin-top').remove();
+                                    cible = "";
+                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length){
+                                    btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
                                 }
-                                else {
-                                    if (btn.parents('.best-of-container').length) {
-                                        btn.parents('.best-of-container').remove();
-                                        cible = 'bestof';
+                                else{
+                                    if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length){
+                                        btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
+                                         cible = 'bestof';
                                     }
                                 }
 

@@ -718,8 +718,8 @@ meta.SearchPage = function() {
 
         // if the query is existed on the url then start search with given query
         if(queryestQ && queryestQ != "undefined"){
-            that.goSearch('q=' + queryestQ);
-            currentQuery = queryestQ ;
+            that.goSearch('q=' + (queryestQ == '' ? '*' : queryestQ ));
+            currentQuery = (queryestQ == '' ? '*' : queryestQ ) ;
         }else{
             // if the Tag is exist then get bar by Tag
             if(queryestTag && queryestTag != "undefined")

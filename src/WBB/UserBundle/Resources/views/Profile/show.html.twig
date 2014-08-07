@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <div id="editprofile" class="page{% if is_mobile() and not is_tablet() %} mobile{% endif %} padding-bottom-40">
+    <div id="editprofile" class="page{% if is_mobile() and not is_tablet() %} mobile{% endif %}">
         <div class="padding-top-40">
             <div id="view-account">
                 <div class="ui tips">
@@ -9,15 +9,24 @@
                     <div class="block-top wrap">
                         
                         <div class="avatar-profil left">
-                            <img src="{{ showImage(user.avatar, 'large') }}" height="145" width="145" class="radius-max">
+                            <img src="{{ showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max">
                         </div>
 
                         <div class="group left margin-left-30">
                             <div class="title text-transform-capitalize bold">
-                                <h5>{{ user.firstname }} {{ user.lastname }}</h5>
+                                <h5>{{ user.username }}</h5>
                             </div>
                             <div class="subgroup wrap margin-top-10">
-                                {% if user.prefStartCity or user.country %}
+                                {% if city %}
+                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
+                                        <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
+                                            {{ city ~ ',' }}
+                                            {% if city.country %}
+                                                {{ city.country }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% elseif user.prefStartCity or user.country %}
                                     <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                             {% if user.prefStartCity %}
@@ -31,8 +40,7 @@
                                 {% else %}
                                     <div class="text-transform-capitalize text-align-center {% if not is_mobile() %}margin-top-20{% endif %}">
                                         <div class="city">
-                                            <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
-                                            Not set
+                                            &nbsp;
                                         </div>
                                     </div>
                                 {% endif %}
@@ -57,11 +65,10 @@
                     </div> <!-- .filter-profil -->
 
                     <!-- Separator -->
-                    <hr>
-                    <div class="clear"></div>
+                    <div class="container hr"><hr></div>
 
                     <div class="min-height">
-                        <div id="tab-bars" class="tab margin-bottom-40 active">
+                        <div id="tab-bars" class="tab margin-bottom-40 padding-bottom-40 active">
                             <!-- Filters -->
                             <div class="container">
                                 <div class="margin-top-20">
@@ -107,7 +114,7 @@
                         </div><!-- #tab-bars -->
                         <div class="clear"></div>
 
-                        <div id="tab-bestof"  class="tab margin-bottom-40"style="display:none">
+                        <div id="tab-bestof"  class="tab margin-bottom-40 padding-bottom-40"style="display:none">
                                 <!-- Filters -->
                                 <div class="container">
                                     <div class="margin-top-20">
@@ -151,7 +158,7 @@
                         <div class="clear"></div>
 
                         <div id="tab-tips" class="tab" style="display:none">
-                            <div class="full-cream padding-bottom-40">
+                            <div class="full-cream padding-bottom-40 min-height">
 
                                 <!-- List of Tips -->
                                 <ul class="list-tips padding-top-30 container">
@@ -184,31 +191,6 @@
         $(document).ready(function(){
             new wbb.LoadProfile();
             console.clear();
-            // var tabElement = $("input[name='filter']");
-            // tabElement.change(function(){
-            //     var currentTab = $(this).data("tab");
-            //     if (currentTab == "bars") {
-            //         tabClose();
-            //         $("#tab-bars").fadeIn("slow");
-            //         $("#tab-bars").addClass("active");
-            //     } else if(currentTab == "bestof") {
-            //         tabClose();
-            //         $("#tab-bestof").fadeIn("slow");
-            //         $("#tab-bestof").addClass("active");
-            //     } else if (currentTab == "tips") {
-            //         tabClose();
-            //         $("#tab-tips").fadeIn("slow");
-            //         $("#tab-tips").addClass("active");
-            //     }
-            // })
-            // function tabClose(){
-            //     $(".tab").each(function(){
-            //         if ($(this).hasClass("active")) {
-            //             $(this).removeClass("active");
-            //             $(this).fadeOut("fast");
-            //         }
-            //     })
-            // }
         });
     </script>
 {% endblock %}
