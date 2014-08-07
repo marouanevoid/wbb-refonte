@@ -182,7 +182,7 @@
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
   .ui .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
-  .ui .form-submit {background-color: #b3955f; font-size: 20px; font-weight: bold;}
+  .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
   .popup .ui a {font-size: 16px; text-decoration: underline;}
@@ -521,6 +521,7 @@
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
   .ui .sort-by {margin-left: 0;}
+  .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
