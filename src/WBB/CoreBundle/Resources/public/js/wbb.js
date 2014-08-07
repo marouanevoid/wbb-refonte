@@ -197,7 +197,9 @@ jQuery(document).ready(function($) {
         if (current_id.length > 0) {
 
             //Centred popup
-            resizer(id_content);
+            if (!current_id.hasClass("mobile")) {
+                resizer(id_content);
+            }
 
             //show lightbox window
             current_id.fadeIn("slow");
@@ -218,7 +220,11 @@ jQuery(document).ready(function($) {
         current_popup.fadeOut("fast");
         $(".mask").fadeOut("slow", function() {
             current_popup.removeClass("void-popup");
-            current_popup.attr("class", "popup");
+            if (current_popup.hasClass("mobile")) {
+                current_popup.attr("class", "popup mobile");
+            } else {
+                current_popup.attr("class", "popup");
+            };
         });
     });
 
@@ -227,7 +233,11 @@ jQuery(document).ready(function($) {
         current_popup.fadeOut("fast");
         $(".mask").fadeOut("slow", function() {
             current_popup.removeClass("void-popup");
-            current_popup.attr("class", "popup");
+            if (current_popup.hasClass("mobile")) {
+                current_popup.attr("class", "popup mobile");
+            } else {
+                current_popup.attr("class", "popup");
+            };
         });
     });
 

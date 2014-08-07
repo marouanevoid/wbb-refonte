@@ -60,6 +60,7 @@ wbb.LoadProfile = function() {
                 tabClose();
                 $("#tab-bars").fadeIn("slow");
                 $("#tab-bars").addClass("active");
+                $("#view-account").attr("class", "bars-tab");
 
                 if(that.config.bars.offset > 0)
                     return;
@@ -73,6 +74,7 @@ wbb.LoadProfile = function() {
 
                 $("#tab-bestof").fadeIn("slow");
                 $("#tab-bestof").addClass("active");
+                $("#view-account").attr("class", "bestof-tab");
 
                 that.context.content = 'bestofs';
                 if(that.config.bestofs.offset > 0)
@@ -86,6 +88,7 @@ wbb.LoadProfile = function() {
                 tabClose();
                 $("#tab-tips").fadeIn("slow");
                 $("#tab-tips").addClass("active");
+                $("#view-account").attr("class", "tips-tab");
 
                 that.context.content = 'tips';
                 if(that.config.tips.offset > 0)
