@@ -115,18 +115,30 @@ meta.Search = function(config){
                         // TODO : Type of Search is City
                         if(value.fields.name){
                             result = wrapB(value.fields.name , q);
+                        }else{
+                            if(value.fields.title){
+                                result = wrapB(value.fields.title , q);
+                            } 
                         }
                     }
                     if(searchType.indexOf('Bar') >-1){
                         // TODO : Type of Search is Bar
                         if(value.fields.name){
                             result = wrapB(value.fields.name , q);
+                        }else{
+                            if(value.fields.title){
+                                result = wrapB(value.fields.title , q);
+                            }  
                         }
                     }
                     if(searchType.indexOf('News')>-1){
                         // TODO : Type of search is News
                         if(value.fields.title){
                             result = wrapB(value.fields.title , q);
+                        }else{
+                            if(value.fields.name){
+                                result = wrapB(value.fields.name , q);
+                            }
                         }
                     }else{
                         // TODO : Type of search is News
@@ -344,7 +356,7 @@ meta.Search = function(config){
         // });
 
         // append Event on go Button
-        $('.bar-finder .open').on('click' , function(){
+        $('.bar-finder .open').add('.advanced-search').on('click' , function(){
             that.context.$form.submit();
             return false;
         });
