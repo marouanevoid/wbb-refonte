@@ -345,7 +345,7 @@
   #editprofile .avatar-profil {/*position: absolute;*/}
   #editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
   #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.gif") no-repeat 0 0;}
-  #editprofile .file-image:hover {cursor: pointer;}
+  #editprofile .file-image:hover {display: block; cursor: pointer; opacity: 0.8;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
   #editprofile #edit-account label {font-size: 16px;}
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
@@ -369,6 +369,8 @@
   #view-account .filter-view a.ui-radio {margin-left: 0.5em;}
   #view-account .ui .container {width: 100%!important; min-height: 100%;}
   .bar-filter .container .three.columns {width: 24.2%; margin-left: 0.4%; margin-right: 0.4%; margin-top: 0.8% !important;}
+  #view-account.tips-tab .hr,
+  #view-account.tips-tab .filter-content {display: none; visibility: hidden;}
 
   .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
   .ui.tips {width: 100% !important; }
@@ -481,8 +483,6 @@
 
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
-/* Popup's */
-  .popup.forgotPassword {height: 350px; margin-top: -175px!important;}
 
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
@@ -517,6 +517,7 @@
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
+  .ui .sort-by {margin-left: 0;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
