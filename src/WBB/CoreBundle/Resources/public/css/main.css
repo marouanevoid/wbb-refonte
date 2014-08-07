@@ -373,7 +373,8 @@
   #view-account.tips-tab .filter-content {display: none; visibility: hidden;}
 
   .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
-  .ui.tips {width: 100% !important; }
+  .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
+  .ui.tips {width: 100% !important;}
   .ui.tips .list-tips {background-color: #faf3e1;}
   .ui.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
   /*
