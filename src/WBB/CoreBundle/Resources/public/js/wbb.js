@@ -29,6 +29,7 @@ function nodeToString(node) {
 
 $(document).ready(function() {
     $('.btn-signin').on('click', function(e) {
+        popinFrom = 'signin';
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
@@ -258,18 +259,18 @@ $(document).ready(function() {
                             btn.show();
 
                             // destroy the item parent on profile
-                            if(btn.parents('.profile-fav-block').length){
+                            if (btn.parents('.profile-fav-block').length) {
 
                                 var TypeEvent = "removeitem",
-                                    cible = "";
-                                if(btn.parents('.three.columns.m-margin-top').length){
+                                        cible = "";
+                                if (btn.parents('.three.columns.m-margin-top').length) {
                                     btn.parents('.three.columns.m-margin-top').remove();
                                     cible = 'bars';
                                 }
-                                else{
-                                    if( btn.parents('.best-of-container').length){
+                                else {
+                                    if (btn.parents('.best-of-container').length) {
                                         btn.parents('.best-of-container').remove();
-                                         cible = 'bestof';
+                                        cible = 'bestof';
                                     }
                                 }
 
@@ -301,10 +302,12 @@ $(document).ready(function() {
         } else {
             $('.popin-block').html('');
             var url = $('.btn-signin').attr('href');
+            popinFrom = 'favorite';
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
                     initializeDropdowns();
                     initRegisterLoginForms();

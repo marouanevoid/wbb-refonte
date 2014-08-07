@@ -1,12 +1,21 @@
 {% extends '::base.html.twig' %}
 
+{% trans_default_domain 'FOSUserBundle' %}
 {% form_theme form _self %}
 
 {% block form_errors %}
+    {% set errorsMessages = [] %}
     {% spaceless %}
         {% if errors|length > 0 %}
             {% for error in errors %}
-                <li>{{ error.message }}</li>
+                {% if error.message not in errorsMessages %}
+                    {% if error.message == 'not.blank' %}
+                        <li> Please complete all required fields</li>
+                    {% else %}
+                        <li>{{ error.message }}</li>
+                    {% endif %}
+                {% set errorsMessages = errorsMessages|merge([error.message]) %}
+                {% endif %}
             {% endfor %}
         {% endif %}
     {% endspaceless %}
@@ -25,9 +34,9 @@
                             <div class="text-align-left margin-bottom-20">
                                 <div class="group-form margin-top-25">
                                     {% if not is_mobile() %}
-                                        <label class="margin-right-20 text-align-right unbold">Username</label>
+                                        <label class="margin-right-20 text-align-right unbold">Pseudo</label>
                                     {% endif %}
-                                    {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Username' } }) }}
+                                    {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
                                 </div>
                                 <div class="select-two margin-top-10">
                                     <label class="margin-right-20 text-align-right unbold">Gender</label>
@@ -190,27 +199,6 @@
                                     <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
                                     <ul>
                                     {{ form_errors(form) }}
-                                    {{ form_errors(form.plainPassword.first) }}
-                                    {{ form_errors(form.plainPassword.second) }}
-                                    {{ form_errors(form.username) }}
-                                    {{ form_errors(form.title) }}
-                                    {{ form_errors(form.firstname) }}
-                                    {{ form_errors(form.lastname) }}
-                                    {{ form_errors(form.email) }}
-                                    {{ form_errors(form.birthdate) }}
-                                    {{ form_errors(form.country) }}
-                                    {{ form_errors(form.prefCity1) }}
-                                    {{ form_errors(form.prefCity2) }}
-                                    {{ form_errors(form.prefCity3) }}
-                                    {{ form_errors(form.prefBar1) }}
-                                    {{ form_errors(form.prefBar2) }}
-                                    {{ form_errors(form.prefBar3) }}
-                                    {{ form_errors(form.prefDrinkBrand1) }}
-                                    {{ form_errors(form.prefDrinkBrand2) }}
-                                    {{ form_errors(form.prefDrinkBrand3) }}
-                                    {{ form_errors(form.prefCocktails1) }}
-                                    {{ form_errors(form.prefCocktails2) }}
-                                    {{ form_errors(form.prefCocktails3) }}
                                     </ul>
                                 </div>
                                 <div class="clear"></div>

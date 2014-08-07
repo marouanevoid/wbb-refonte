@@ -18,23 +18,28 @@ class RegistrationLightFormType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, array('error_bubbling' => true))
+            ->add('username', null, array('error_bubbling' => true,'required'=>false))
             ->add('email', 'email', array(
                 'error_bubbling' => true,
+                'required'=>false,
                 'label' => 'form.email', 
                 'translation_domain' => 'FOSUserBundle'
                 ))
             ->add('plainPassword', 'repeated', array(
                 'error_bubbling' => true,
+                'required'=>false,
                 'type' => 'password',
                 'first_options'   => array('attr' => array('placeholder' => 'form.password')),
                 'second_options'  => array('attr' => array('placeholder' => 'form.password_confirmation')),
                 'invalid_message' => 'fos_user.password.mismatch'
             ))
             ->add('birthdate', 'date', array(
-                'years' => range(1900, date('Y'))
+                'years' => range(1900, date('Y')),
+                'required'=>false
             ))
-            ->add('country')
+            ->add('country',null,array(
+                'required'=>false
+                ))
         ;
     }
 

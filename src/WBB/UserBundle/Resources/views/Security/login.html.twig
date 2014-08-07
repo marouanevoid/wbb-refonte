@@ -1,9 +1,11 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
 <form id="login_form" action="{{ path("fos_user_security_check") }}" method="post" class="wrap">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
     <div class="text-align-center">
-        <input type="email" placeholder="Email" class="form-text margin-top-30" id="username" name="_username" value="{{ last_username }}" required="required" />
-        <input type="password" id="password" name="_password" required="required" class="form-text form-password margin-top-10" placeholder="Password"/>
+        <input type="email" placeholder="Email" class="form-text margin-top-30" id="username" name="_username" value="{{ last_username }}" />
+        <input type="password" id="password" name="_password" class="form-text form-password margin-top-10" placeholder="Password"/>
         <div id="login_error"></div>
         <input type="submit" id="_submit" name="_submit" class="form-submit btn margin-top-30 bold" value="CONFIRM" />
     </div>

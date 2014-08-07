@@ -112,6 +112,8 @@
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
+
+                var popinFrom = '';
         </script>
 
         {% if is_tablet() %}

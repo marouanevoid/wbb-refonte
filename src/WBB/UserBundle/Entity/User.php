@@ -37,6 +37,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=45, nullable=true)
+     * @Assert\NotBlank(message="not.blank")
      */
     private $firstname;
 
@@ -44,6 +45,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=45, nullable=true)
+     * @Assert\NotBlank(message="not.blank")
      */
     private $lastname;
 
@@ -51,6 +53,7 @@ class User extends BaseUser
      * @var date
      *
      * @ORM\Column(name="birthdate", type="date", nullable=true)
+     * @Assert\NotBlank(message="not.blank")
      */
     private $birthdate;
 
@@ -269,6 +272,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="users")
+     * @Assert\NotBlank(message="not.blank")
      */
     private $country;
 
@@ -1267,12 +1271,15 @@ class User extends BaseUser
     {
         $country = $this->getCountry();
         $drinkingAge = 18;
-        $age = $this->birthdate->diff(new \DateTime('now'))->y;
-        if ($country) {
-            $drinkingAge = $country->getDrinkingAge();
-        }
-        if ($drinkingAge > $age) {
-            $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+        if ($this->birthdate) {
+            $age = $this->birthdate->diff(new \DateTime('now'))->y;
+            if ($country) {
+                $drinkingAge = $country->getDrinkingAge();
+            }
+            if ($drinkingAge > $age) {
+                $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+            }
         }
     }
+
 }
