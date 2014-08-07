@@ -40,9 +40,9 @@
             </div>
         </form>
 
-        <div id="message" class="margin-top-20 wrap">
+        <div id="message" class="wrap margin-top-20 padding-top-20 padding-bottom-20">
             <div>
-                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left" {% if is_mobile() %}class="margin-left-20"{% endif %}>
             </div>
             <div class="clear"></div>
         </div>

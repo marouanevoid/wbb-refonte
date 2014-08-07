@@ -17,12 +17,13 @@
     $(document).ready(function() {
         $('.forgot-password').on('click', function(e) {
             e.preventDefault();
-            var url = $(this).attr('href');
+            var url = $(this).attr('href'); 
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
                     $('.popin-block').html(html);
+                    $("#register").addClass("forgotPassword");
                 }
             });
         });
