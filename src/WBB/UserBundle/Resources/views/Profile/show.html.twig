@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <div id="editprofile" class="page{% if is_mobile() and not is_tablet() %} mobile{% endif %} padding-bottom-40">
+    <div id="editprofile" class="page{% if is_mobile() and not is_tablet() %} mobile{% endif %}">
         <div class="padding-top-40">
             <div id="view-account">
                 <div class="ui tips">
@@ -57,11 +57,10 @@
                     </div> <!-- .filter-profil -->
 
                     <!-- Separator -->
-                    <hr>
-                    <div class="clear"></div>
+                    <div class="container hr"><hr></div>
 
                     <div class="min-height">
-                        <div id="tab-bars" class="tab margin-bottom-40 active">
+                        <div id="tab-bars" class="tab margin-bottom-40 padding-bottom-40 active">
                             <!-- Filters -->
                             <div class="container">
                                 <div class="margin-top-20">
@@ -107,7 +106,7 @@
                         </div><!-- #tab-bars -->
                         <div class="clear"></div>
 
-                        <div id="tab-bestof"  class="tab margin-bottom-40"style="display:none">
+                        <div id="tab-bestof"  class="tab margin-bottom-40 padding-bottom-40"style="display:none">
                                 <!-- Filters -->
                                 <div class="container">
                                     <div class="margin-top-20">
@@ -184,31 +183,6 @@
         $(document).ready(function(){
             new wbb.LoadProfile();
             console.clear();
-            // var tabElement = $("input[name='filter']");
-            // tabElement.change(function(){
-            //     var currentTab = $(this).data("tab");
-            //     if (currentTab == "bars") {
-            //         tabClose();
-            //         $("#tab-bars").fadeIn("slow");
-            //         $("#tab-bars").addClass("active");
-            //     } else if(currentTab == "bestof") {
-            //         tabClose();
-            //         $("#tab-bestof").fadeIn("slow");
-            //         $("#tab-bestof").addClass("active");
-            //     } else if (currentTab == "tips") {
-            //         tabClose();
-            //         $("#tab-tips").fadeIn("slow");
-            //         $("#tab-tips").addClass("active");
-            //     }
-            // })
-            // function tabClose(){
-            //     $(".tab").each(function(){
-            //         if ($(this).hasClass("active")) {
-            //             $(this).removeClass("active");
-            //             $(this).fadeOut("fast");
-            //         }
-            //     })
-            // }
         });
     </script>
 {% endblock %}
