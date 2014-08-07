@@ -34,12 +34,12 @@ meta.Search = function(config){
         template    : '<li>'+
                             '<div class="container">'+
                                 '<div class="twelve columns">'+
-                                    '<a>%s</a>'+
+                                    '<a href="%h" data-target="from-list">%s</a>'+
                                 '</div>'+
                             '</div>'+
                         '</li>',
         template_mobile    : '<li>'+
-                                '<a herf="%h">%s</a>'+
+                                '<a href="%h" data-target="from-list">%s</a>'+
                              '</li>'
     };
 
@@ -48,6 +48,7 @@ meta.Search = function(config){
     that.show_results = false;
     that.show_form = false;
 
+    that.q = "#";
 
     /* Contructor. */
 
@@ -98,7 +99,7 @@ meta.Search = function(config){
     that.searchResult = function(data ,q ){
         var html    = "";
 
-        if(data.hits){
+        if(data && data.hits){
             if(data.hits.hit && data.hits.hit.length > 0){
 
                 var values  = data.hits.hit;
@@ -114,28 +115,49 @@ meta.Search = function(config){
                         // TODO : Type of Search is City
                         if(value.fields.name){
                             result = wrapB(value.fields.name , q);
+                        }else{
+                            if(value.fields.title){
+                                result = wrapB(value.fields.title , q);
+                            } 
                         }
                     }
                     if(searchType.indexOf('Bar') >-1){
                         // TODO : Type of Search is Bar
                         if(value.fields.name){
                             result = wrapB(value.fields.name , q);
+                        }else{
+                            if(value.fields.title){
+                                result = wrapB(value.fields.title , q);
+                            }  
                         }
                     }
                     if(searchType.indexOf('News')>-1){
                         // TODO : Type of search is News
                         if(value.fields.title){
                             result = wrapB(value.fields.title , q);
+                        }else{
+                            if(value.fields.name){
+                                result = wrapB(value.fields.name , q);
+                            }
                         }
+                    }else{
+                        // TODO : Type of search is News
+                        if(value.fields.title){
+                            result = wrapB(value.fields.title , q);
+                        }else{
+                            if(value.fields.name){
+                                result = wrapB(value.fields.name , q);
+                            }
+                        } 
                     }
                     
-                   
-                    console.log('the result is ' + result);
-
-                    if( $(window).width() < 640 )
+                    if( $(window).width() < 640 ){
                         html += that.config.template_mobile.replace('%s', result);
-                    else
+                        html = html.replace('%h', (value.fields && value.fields.url ? ( URL_MODE + value.fields.url )  : '#'));
+                    }else{
                         html += that.config.template.replace('%s', result);
+                        html = html.replace('%h',(value.fields && value.fields.url ? ( URL_MODE + value.fields.url )  : '#'));   
+                    }
                 });
 
                 that.context.$result.html( html );
@@ -158,6 +180,10 @@ meta.Search = function(config){
 
 
         var q = that.context.$input.val();
+        that.q = q;
+        // Set Up the form action
+        that.context.$form.attr('action'  , Routing.generate('wbb_cloudsearch_searchresults')+'?q=' + q);
+
         if( $(window).width() < 640 )
         {
             var result_height = $(window).height()-$('header.mobile .search-bar-mobile > .container').height();
@@ -167,30 +193,32 @@ meta.Search = function(config){
         }
 
 
-        // $.ajax({
-        //     type: 'GET',
-        //     url: 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search',
-        //     async: false,
-        //     contentType: "application/json",
-        //     dataType: 'json',
-        // data : {
-        //     q : q
-        // },
-        // success  :function(){
-        //     console.log('done');
-        // }
-
-        // });
         $.ajax({
-          url: "/proxy.php?url_get=" + 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search?q=' + q, 
-          type: "GET",
-          dataType:'jsonp',
-          async : false,
-          contentType : "application/json",
-          success: function(data){
+            type: 'GET',
+            url: URL_MODE + '/search?entity=*&q='+q+'&limit=20&start=0',
+            async: true,
+            contentType: "application/json",
+            dataType: 'json',
+        data : {
+            q : q
+        },
+        success  :function(data){
             that.searchResult(data , q);
-          }
+        }
+
         });
+
+
+        // $.ajax({
+        //   url: "/proxy.php?url_get=" + 'http://search-bars-dv6lxa6k65rwcpqkq7thta6d24.eu-west-1.cloudsearch.amazonaws.com/2013-01-01/search?q=' + q, 
+        //   type: "GET",
+        //   dataType:'jsonp',
+        //   async : false,
+        //   contentType : "application/json",
+        //   success: function(data){
+        //     that.searchResult(data , q);
+        //   }
+        // });
 
     };
 
@@ -299,24 +327,47 @@ meta.Search = function(config){
 
         that.context.$result.on('click', 'a', function(){
             that.context.$input.val( $(this).text() );
-
+            var _tthis = $(this),
+                data_target = _tthis.attr('data-target');
             that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
             {
                 $(this).removeAttr('style');
                 that.context.$result.empty();
-                that.context.$form.submit();
+                //that.context.$form.submit();
+                // redirect to the correct Url
+
+                if( data_target == 'from-list'){
+                    window.location.href = _tthis.attr('href');
+                }else{
+                    that.context.$form.submit();
+                }
             }});
         });
 
-        $(document).click(function(e){
-            if(that.show_results)
-            {
-                that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
-                {
-                    $(this).removeAttr('style');
-                    that.context.$result.empty();
-                }});
-            }
+        // $(document).click(function(e){
+        //     if(that.show_results)
+        //     {
+        //         that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
+        //         {
+        //             $(this).removeAttr('style');
+        //             that.context.$result.empty();
+        //         }});
+        //     }
+        // });
+
+        // append Event on go Button
+        $('.bar-finder .open').add('.advanced-search').on('click' , function(){
+            that.context.$form.submit();
+            return false;
+        });
+
+        // add the listner on Submit 
+        // Form
+        that.context.$form.on('submit' , function(){
+            // if the query is empty 
+            // then dont send query
+            if(that.q == "#" || that.q == '' )
+                return false;
         });
     };
 
