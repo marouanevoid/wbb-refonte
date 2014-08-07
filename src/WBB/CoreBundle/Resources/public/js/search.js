@@ -256,8 +256,8 @@ meta.SearchPage = function() {
 
             // Append The HTML to Dom
 
-            $('.bars-w-pic-list .dist-target').append('<div class="line">' + htmlBarList + '</div>');
-            $('.details-barlist .dist-target').append( '<div class="line">' + htmlBar  + '</div>');
+            $('.bars-w-pic-list .dist-target').append(htmlBarList );
+            $('.details-barlist .dist-target').append( htmlBar);
 
             // if the image is not loaded then 
             // Load the default Image
@@ -269,10 +269,11 @@ meta.SearchPage = function() {
                 callbackHandler();
 
            // that._animate($('.load-target'),$("article.bar-w-pic"));
-           $('.dist-target .line').find('> *').not('br').css({opacity:0, top:'6em', position:'relative'});
+           //$('.dist-target .line').find('> *').not('br').css({opacity:0, top:'6em', position:'relative'});
 
            setTimeout(function(){
-               that._animate($(".load-target"), $('.dist-target .line').find('> *').not('br'));
+              // that._animate($(".load-target"), $(".load-target").find('> *').not('br'));
+               //that._animate($(".load-target"), $('.dist-target .line').find('> *').not('br'));
            },10);
 
 
@@ -604,8 +605,8 @@ meta.SearchPage = function() {
         });
 
         // click on load More button
-        $('.loadmore-trigger').on('click' ,function(){
-
+        $('.loadmore-trigger').on('click' ,function(e){
+            e.preventDefault();
             $(this).text(TRAD.common.loading);
             that.goSearch();
             return false;
