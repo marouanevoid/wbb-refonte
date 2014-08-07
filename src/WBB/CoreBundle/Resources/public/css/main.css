@@ -558,7 +558,6 @@
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
-    .void-popup {}
     .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}
     .wrap-share .social-share {border-radius: 30px;}
     .wrap-share .social-share .share-label {display: none;}
@@ -613,6 +612,7 @@
     .min-height {min-height: 100%;}
     .error .mobile {display: block; visibility: visible;}
     .error .desktop {display: none; visibility: hidden;}
+    .xs-hidden {display: none!important; visibility: hidden;} 
   }
 
 /* Smartphones (portrait) ----------- */
@@ -633,7 +633,3 @@
     .full-cream {width: 1280px; margin: auto;}
     */
   }
-
-@media only screen and (max-width : 1200px) {
-  .void-popup {margin-top: -280px;}
-}
