@@ -53,7 +53,7 @@ class BarController extends Controller
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
-            return $this->cityHomeAction($session->get('citySlug'));
+            return $this->cityHomeAction($session->get('citySlug'), $request);
         $session->set('citySlug', "");
 
         $topCities = $this->container->get('city.repository')->findTopCities();
@@ -122,13 +122,13 @@ class BarController extends Controller
         ));
     }
 
-    public function cityHomeAction($slug)
+    public function cityHomeAction($slug, Request $request)
     {
         $this->reGeolocate();
         $session = $this->container->get('session');
         if ($slug == "world-wide"){
             $session->set('citySlug', "");
-            return $this->homeAction();
+            return $this->homeAction($request);
         }
 
         if($slug != $session->get('citySlug')){
@@ -565,6 +565,23 @@ class BarController extends Controller
                 'difference' => $nbResultsRemaining
             )
         );
+    }
+
+    public function getBarsByNameAction(Request $request)
+    {
+        $term = $request->get('term');
+        $bars = $this->container->get('bar.repository')->findBarsLike($term, 5);
+
+        $json = array();
+
+        foreach ($bars as $bar) {
+            $json[] = array(
+                'value' => $bar->getName(),
+                'id'    => $bar->getName()
+            );
+        }
+
+        return new JsonResponse($json);
     }
 
     private function getYouMayAlsoLike($bar)

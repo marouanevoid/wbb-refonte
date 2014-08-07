@@ -79,6 +79,23 @@ class CityController extends Controller
         return new JsonResponse($response);
     }
 
+    public function getCitesByNameAction(Request $request)
+    {
+        $term = $request->get('term');
+        $cities = $this->container->get('city.repository')->findCitiesLike($term, 5);
+
+        $json = array();
+
+        foreach ($cities as $city) {
+            $json[] = array(
+                'value' => $city->getName(),
+                'id'    => $city->getName()
+            );
+        }
+
+        return new JsonResponse($json);
+    }
+
     public function nearestCityAction($latitude, $longitude)
     {
         $session = $this->container->get('session');
