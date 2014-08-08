@@ -29,6 +29,7 @@ function nodeToString(node) {
 
 $(document).ready(function() {
     $('.btn-signin').on('click', function(e) {
+        popinFrom = 'signin';
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
@@ -125,8 +126,9 @@ function initRegisterLoginForms() {
             success: function(data) {
                 if (data.code === '400') {
                     var errors = data.errors;
-                    $('#message').find('ul').remove();
-                    var errorsList = $('#message').show().find('img').after('<ul></ul>').parent();
+                    $('#register_form').after($('#message'));
+                    $('#register-form #message').find('ul').remove();
+                    var errorsList = $('#register-form #message').show().find('img').after('<ul></ul>').parent();
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
@@ -157,7 +159,12 @@ function initRegisterLoginForms() {
             success: function(data) {
                 console.log(data);
                 if (data.code === '400') {
-                    $('#login_error').html(data.error);
+                    $('#username').addClass('error');
+                    $('#password').addClass('error');
+                    $('#facebook-signup').after($('#message'));
+                    $('#login_form #message').find('ul').remove();
+                    var errorsList = $('#login_form #message').show().append('<div><ul></ul></div>').parent();
+                    errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
                     window.location.reload();
                 }
@@ -169,11 +176,54 @@ function initRegisterLoginForms() {
     });
 }
 
-// Popin
 jQuery(document).ready(function($) {
 
+    $('#register_form_full').on('submit', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('action');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data.code === 400) {
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+
+                    $('#message').show();
+                    $('#create-account #message').find('ul').remove();
+                    var errorsList = $('#create-account #message div').show().append('<ul></ul>').parent();
+
+                    for (var i = 0; i < errors.length; i++) {
+                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    var idPrefix = '#fos_user_registration_form_';
+                    for (var i = 0; i < fields.length; i++) {
+
+                        switch (fields[i]) {
+                            case 'birthdate':
+                                // birthday error
+                                break;
+                            case 'plainPassword':
+                                $(idPrefix + fields[i] + '_first').addClass('error');
+                                $(idPrefix + fields[i] + '_second').addClass('error');
+                                break;
+                            default:
+                                $(idPrefix + fields[i]).addClass('error');
+                                break;
+                        }
+                    }
+                } else {
+                    window.location.href = profileWithPopinUrl;
+                }
+            }
+        });
+    });
+
+    $('#message').hide();
     // PopIn.resize($('#register'));
-    
+
     if (showNewPassword) {
         var url = newPasswordUrl;
         $.ajax({
@@ -186,13 +236,18 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = 'Your email is now confirmed. Welcome in the World’s Best Bars community!' +
-                'You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars';
+        var html = '<div id="success" class="text-align-center padding-top-80">' +
+                '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
+                '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
+                '</div>';
         $('.popin-block').html(html);
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
+    }
+    if(showEmailPopin) {
+        alert('Congrats');
     }
 });
 
@@ -229,10 +284,10 @@ $(document).ready(function() {
                             btn.show();
 
                             // destroy the item parent on profile
-                            if(btn.parents('.profile-fav-block').length){
+                            if (btn.parents('.profile-fav-block').length) {
 
                                 var TypeEvent = "removeitem",
-                                    cible = "";
+                                        cible = "";
                                 if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length){
                                     btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
@@ -240,7 +295,7 @@ $(document).ready(function() {
                                 else{
                                     if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length){
                                         btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
-                                         cible = 'bestof';
+                                        cible = 'bestof';
                                     }
                                 }
 
@@ -272,10 +327,12 @@ $(document).ready(function() {
         } else {
             $('.popin-block').html('');
             var url = $('.btn-signin').attr('href');
+            popinFrom = 'favorite';
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
                     initializeDropdowns();
                     initRegisterLoginForms();
