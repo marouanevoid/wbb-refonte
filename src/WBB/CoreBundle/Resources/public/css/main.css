@@ -56,7 +56,7 @@
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
   .popup {width: 911px; height: 530px;}
-  .void-popup {/*margin-left: -568px; margin-top: -280px;*/ left: 50%; z-index: 107; top: 50%; position: fixed;}
+  .void-popup {/*margin-left: -568px; margin-top: -280px; left: 50%; top: 50%; */z-index: 107; position: fixed;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .select-two .ui-dropdown-container {width: 100%!important;}
 
@@ -214,11 +214,12 @@
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
   /* Message's */
-  #message {background-color: #818a8c; width: 100%; padding-left: 10px; min-height: 65px;}
+  #message {background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; padding-left: 10px; min-height: 65px;}
   #message img {margin: 0 20px 0 0;}
   #message div {padding: 0 10px 0 0; line-height: 16px;}
   #message p,
-  #message li {color: #faf3e1; font-size: 15px; line-height: 16px;}
+  #message li {color: #faf3e1; font-size: 14px; line-height: 16px; margin-bottom: 5px;}
+  #register.page #message {width: 207px; padding: 10px 10px 10px 90px;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   #success p {color: #818a8c; font-size: 22px;}
@@ -239,8 +240,6 @@
   #register.page #create-account {width: 100%; padding: 0;}
   #register.page #create-account label {display: block; float: left; width: 220px; line-height: 35px;}
   #register.page #create-account .form-text {float: left; width: 300px;}
-  #register.page #message {width: 50%; /*margin: 0 50px 0 0;*/ padding: 10px;}
-  #register.page #message ul {float: left; margin-top: 10px;}
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
@@ -522,6 +521,7 @@
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
   .ui .sort-by {margin-left: 0;}
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
+  .search-bar-mobile .container input[type="reset"] {right: 43%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}

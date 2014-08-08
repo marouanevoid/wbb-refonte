@@ -6,7 +6,7 @@ body {}
 .sonata-bc a:hover {background-color: #b3955f; color: #fff;  text-decoration: none;}
 .sonata-bc .navbar .nav>li>a {color: #b3955f; text-shadow: none;}
 .sonata-bc .navbar .nav>li>a:hover {color: #fff;}
-.sonata-bc .btn {background-image: linear-gradient(to bottom, #EDCD93, #b3955f); text-shadow:none!important;}
+.sonata-bc .btn {border-radius: 20px; background-image: linear-gradient(to bottom, #EDCD93, #b3955f); text-shadow:none!important;}
 .sonata-bc .btn:hover {background-position: 0 0; color: #b3955f; background-image: linear-gradient(to bottom, #fff, #fff); border: 1px solid #b3955f;	}
 .sonata-bc .btn-primary:hover {color: #fff;}
 .sonata-bc .btn-primary:hover, 
@@ -29,4 +29,4 @@ a.btn,
 input[type="submit"].btn {border-radius: 20px; background-color: transparent;}
 .sonata-bc .btn-link {color: #fff;}
 .sonata-bc .btn-link:hover {text-decoration: none;}
-body.sonata-bc { padding-top: 120px; }
+body.sonata-bc {padding-top: 120px;}
