@@ -479,9 +479,7 @@
                         </div>
                     </div>
                     {% if not is_mobile() or is_tablet() %}
-                        {% block footerAd %}
-                            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_728x90' })) }}
-                        {% endblock %}
+                        {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_300x250' })) }}
                     {% endif %}
                 </aside>
             </article>
@@ -587,6 +585,9 @@
             $('form#tips .count').text( 250-length+' left' );
         });
     </script>
+{% endblock %}
+{% block footerAd %}
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_728x90' })) }}
 {% endblock %}
 
 
