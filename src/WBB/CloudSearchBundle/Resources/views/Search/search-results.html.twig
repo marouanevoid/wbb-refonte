@@ -7,6 +7,8 @@
         var queryestQ = "{{app.request.query.get('q', '*')}}";    
         {% else %}
         var queryestQ = "{{app.request.query.get('q', 'undefined')}}";
+        if(queryestQ == "")
+            queryestQ = "*";
         {% endif %}
         var queryestTag = "{{app.request.query.get('tag','undefined')}}";
     </script>
