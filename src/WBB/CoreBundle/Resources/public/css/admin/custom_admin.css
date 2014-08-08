@@ -1,5 +1,4 @@
 /* Admin WBB custom style */
-body {}
 .navbar-fixed-top .container-fluid {padding-top: 20px; background-color: #333; padding-bottom: 20px;}
 .sonata-bc .navbar-fixed-top .navbar-inner, .sonata-bc .navbar-static-top .navbar-inner {min-height: 100px;}
 .sonata-bc a {color: #b3955f; padding: 2px; }
@@ -26,7 +25,23 @@ body {}
 .sonata-bc .btn-danger.disabled, 
 .sonata-bc .btn-danger[disabled] {background-image: linear-gradient(to bottom, #ED7D77, #bd362f);}
 a.btn,
-input[type="submit"].btn {border-radius: 20px; background-color: transparent;}
+input[type="submit"].btn {border-radius: 20px!important; background-color: transparent; padding: 7px 15px!important;}
 .sonata-bc .btn-link {color: #fff;}
 .sonata-bc .btn-link:hover {text-decoration: none;}
 body.sonata-bc {padding-top: 120px;}
+.breadcrumb li:first-child a {font-size: 25px;}
+input[type="text"] {border-radius: 20px;}
+thead a {text-transform: uppercase;}
+.sonata-bc .btn-danger,
+.sonata-bc .btn-danger:hover, 
+.sonata-bc .btn-danger:active, 
+.sonata-bc .btn-danger.active, 
+.sonata-bc .btn-danger.disabled, 
+.sonata-bc .btn-danger[disabled] {color: #fff; background-image: linear-gradient(to bottom, #B54D47, #bd362f); 	border: 1px solid #870C05;}
+.sonata-bc .nav-tabs>li>a:hover {}
+.sonata-actions a {margin-right: 5px;}
+.sonata-bc .form-horizontal .help-block {text-transform: uppercase; font-size: 12px; font-weight: bold;}
+.sonata-bc .navbar {color: #fff;}
+.btn-group .btn-small {margin-right: 5px;}
+.sonata-bc table thead th {background-color: #333; color: #fff; vertical-align: middle;}
+.sonata-bc table thead th a {color: #fff;}

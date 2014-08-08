@@ -23,7 +23,7 @@ class FormFactory implements FactoryInterface
     public function createForm($light = false)
     {
         if($light){
-            return $this->formFactory->createNamed($this->name, 'wbb_user_registration_light', null, array('validation_groups' => $this->validationGroups));
+            return $this->formFactory->createNamed($this->name, 'wbb_user_registration_light', null, array('validation_groups' => array('Registration', 'Default')));
         }else{
             return $this->formFactory->createNamed($this->name, $this->type, null, array('validation_groups' => $this->validationGroups));
         }
