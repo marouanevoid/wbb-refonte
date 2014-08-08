@@ -236,18 +236,20 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="text-align-center padding-top-80">' +
+        var html = '<div id="success" class="text-align-center padding-top-80 padding-bottom-80">' +
                 '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
                 '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
                 '</div>';
         $('.popin-block').html(html);
+        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
     }
     if(showEmailPopin) {
-        alert('Congrats');
+        $('#show-popin').click();
+        PopIn.resize($('#register'));
     }
 });
 
