@@ -211,6 +211,6 @@
             });
         </script>
     {% endblock %}
-     {% block footerAd %}
-   {#     {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'SR_728x90' })) }} #}
-   {% endblock %}
+{% block footerAd %}
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'SR_728x90' })) }}
+{% endblock %}

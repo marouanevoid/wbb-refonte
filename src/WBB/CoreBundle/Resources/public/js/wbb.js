@@ -172,75 +172,8 @@ function initRegisterLoginForms() {
 // Popin
 jQuery(document).ready(function($) {
 
-    function resizer(element){
-        //Centred popup
-        var current_id = $("#" + element);
-        // width = -1 * parseInt((current_id.width()/2));
-        // height = -1 * parseInt((current_id.height()/2));
-        // current_id.css('margin-left', width).css('margin-top', height);
-        current_id.css({
-            "top": (($(window).height() - current_id.height()) / 2) + $(window).scrollTop(),
-            "left": (($(window).width() - current_id.width()) / 2) + $(window).scrollLeft()
-        });
-    }
-
-    // Click anywhere on the page to get rid of lightbox window
-    $('.mask').hide();
-    $('.lighbox').click(function(e) {
-        e.preventDefault();
-        //Get clicked link data-show ID of tag to show
-        var id_content = $(this).attr("data-show");
-        var current_id = $("#" + id_content);
-        var current_ui = $("#" + id_content +" .ui");
-        var mask = $(".mask");
-
-        if (current_id.length > 0) {
-
-            //Centred popup
-            if (!current_id.hasClass("mobile")) {
-                resizer(id_content);
-            }
-
-            //show lightbox window
-            current_id.fadeIn("slow");
-
-            // Add class to trigger ID
-            current_id.addClass('void-popup');
-
-            //show the mask
-            mask.fadeIn("slow");
-        } else {
-            $('.mask').hide();
-            current_id.removeClass("void-popup");
-        }
-    });
-
-    $(".btn-close").click(function(e) {
-        var current_popup = $(this).closest(".void-popup");
-        current_popup.fadeOut("fast");
-        $(".mask").fadeOut("slow", function() {
-            current_popup.removeClass("void-popup");
-            if (current_popup.hasClass("mobile")) {
-                current_popup.attr("class", "popup mobile");
-            } else {
-                current_popup.attr("class", "popup");
-            };
-        });
-    });
-
-    $(".mask").click(function(e) {
-        var current_popup = $("body").find(".void-popup");
-        current_popup.fadeOut("fast");
-        $(".mask").fadeOut("slow", function() {
-            current_popup.removeClass("void-popup");
-            if (current_popup.hasClass("mobile")) {
-                current_popup.attr("class", "popup mobile");
-            } else {
-                current_popup.attr("class", "popup");
-            };
-        });
-    });
-
+    // PopIn.resize($('#register'));
+    
     if (showNewPassword) {
         var url = newPasswordUrl;
         $.ajax({
