@@ -128,7 +128,7 @@ function initRegisterLoginForms() {
                     var errors = data.errors;
                     $('#register_form').after($('#message'));
                     $('#register-form #message').find('ul').remove();
-                    var errorsList = $('#register-form #message').show().find('img').after('<ul></ul>').parent();
+                    var errorsList = $('#register-form #message').show().append('<div><ul></ul></div>').parent();
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
