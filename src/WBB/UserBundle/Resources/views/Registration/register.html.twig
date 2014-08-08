@@ -138,14 +138,16 @@
                                 <div class="clear"></div>
                             </div>
 
-                            <div class="group-form checkbox margin-top-10">
-                                <label class="wrap">{{ form_widget(form.stayInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
-                                    Subscribe to our newsletters</label>
-                            </div>
+                            <div class="group-checkbox">
+                                <div class="group-form checkbox margin-top-10">
+                                    <label class="wrap">{{ form_widget(form.stayInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
+                                        Subscribe to our newsletters</label>
+                                </div>
 
-                            <div class="group-form checkbox margin-top-10">
-                                <label class="wrap {% if not is_mobile() or is_tablet() %}margin-left-60{% endif %}">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
-                                    Subscribe to our partners newsletters</label>
+                                <div class="group-form checkbox margin-top-10">
+                                    <label class="wrap">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
+                                        Subscribe to our partners newsletters</label>
+                                </div>
                             </div>
 
                             {{ form_rest(form) }}
@@ -168,6 +170,7 @@
     </div>
 {% endblock %}
 
+
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/wbbcore/css/jquery_ui/jquery-ui.min.css') }}" media="all" rel="stylesheet" type="text/css" />
@@ -176,5 +179,14 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/icheck.min.js"></script>
     <script type="text/javascript" src="/bundles/wbbuser/js/modules/profile.edit.wbb.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.form-checkbox').iCheck({
+                checkboxClass: 'icheckbox_flat',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
 {% endblock %}
