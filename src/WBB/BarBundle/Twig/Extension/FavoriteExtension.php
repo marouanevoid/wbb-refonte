@@ -61,7 +61,9 @@ class FavoriteExtension extends \Twig_Extension
             }
         }
 
-        return '#';
+        return $this->router->generate('wbb_favorite_bar_add', array(
+                    'barId' => $bar->getId()
+        ));
     }
 
     private function isBarFavorite($user, Bar $bar)
@@ -91,7 +93,9 @@ class FavoriteExtension extends \Twig_Extension
             }
         }
 
-        return '#';
+        return $this->router->generate('wbb_favorite_bestof_add', array(
+                    'bestOfId' => $bestOf->getId()
+        ));
     }
 
     private function isBestOfFavorite($user, BestOf $bestOf)

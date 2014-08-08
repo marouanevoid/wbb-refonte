@@ -1,4 +1,7 @@
 {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <script>
+        var addFavorite = "{{ app.request.query.get('favorite', 0) }}";
+    </script>
     <div id="register-light">
         {% render url('wbb_user_registration_register_light') %}    
     </div>

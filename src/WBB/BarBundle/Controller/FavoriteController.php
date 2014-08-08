@@ -29,16 +29,18 @@ class FavoriteController extends Controller
             ));
         }
 
-        $bar->addUsersFavorite($user);
-        $user->addFavoriteBar($bar);
+        if (!$user->getFavoriteBars()->contains($bar)) {
+            $bar->addUsersFavorite($user);
+            $user->addFavoriteBar($bar);
 
-        $em->persist($bar);
-        $em->persist($user);
-        $em->flush();
+            $em->persist($bar);
+            $em->persist($user);
+            $em->flush();
+        }
 
         return new JsonResponse(array(
             'code' => 200,
-            'message' => 'Bar added to the current user !',
+            'message' => $bar->getName(),
             'href' => $this->generateUrl('wbb_favorite_bar_delete', array(
                     'barId' => $barId
                 ))
@@ -103,16 +105,18 @@ class FavoriteController extends Controller
             ));
         }
 
-        $bestOf->addUsersFavorite($user);
-        $user->addFavoriteBestOf($bestOf);
+        if (!$bestOf->addFavoriteBestOf()->contains($bestOf)) {
+            $bestOf->addUsersFavorite($user);
+            $user->addFavoriteBestOf($bestOf);
 
-        $em->persist($bestOf);
-        $em->persist($user);
-        $em->flush();
+            $em->persist($bestOf);
+            $em->persist($user);
+            $em->flush();
+        }
 
         return new JsonResponse(array(
             'code' => 200,
-            'message' => 'BestOf added to the current user !',
+            'message' => $bestOf->getName(),
             'href' => $this->generateUrl('wbb_favorite_bestof_delete', array(
                     'bestOfId' => $bestOfId
                 ))
