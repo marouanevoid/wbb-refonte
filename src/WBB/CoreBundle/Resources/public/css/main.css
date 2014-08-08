@@ -55,7 +55,7 @@
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
-  .popup {width: 911px; height: 530px;}
+  .popup {width: 911px; /*height: 530px;*/}
   .void-popup {/*margin-left: -568px; margin-top: -280px; left: 50%; top: 50%; */z-index: 107; position: absolute;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .select-two .ui-dropdown-container {width: 100%!important;}
@@ -67,7 +67,7 @@
   /* TEMPS */
     .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 100; display: none;}
     .mask.brown {background-color: #4b4d4e;}
-    .group-form {overflow: hidden;}
+    .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
@@ -110,6 +110,7 @@
       .margin-left-20 {margin-left: 20px!important; display: block;}
       .margin-left-30 {margin-left: 30px!important; display: block;}
       .margin-left-40 {margin-left: 40px!important; display: block;}
+      .margin-left-50 {margin-left: 50px!important; display: block;}
     /* Margin right */
       .margin-right-10 {margin-right: 10px!important; display: block;}
       .margin-right-15 {margin-right: 15px!important; display: block;}
@@ -181,10 +182,7 @@
   .ui .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
-  .ui .form-text {border: 1px solid #818a8c; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
-  .ui .form-text:focus,
-  .ui .form-text:active,
-  .ui .form-text:visited {border-color: #b3955f;}
+  .ui .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
@@ -349,15 +347,16 @@
   #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.gif") no-repeat 0 0;}
   #editprofile .file-image:hover {display: block; cursor: pointer; opacity: 0.8;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
-  #editprofile #edit-account label {font-size: 16px;}
+  #editprofile #edit-account label {font-size: 15px;}
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
   #editprofile #edit-account {position: relative;}
   #editprofile #edit-account label {display: block; text-align: right; float: left; width: 165px; line-height: 35px; font-weight: lighter;}
   #editprofile #edit-account .form-text {float: left; width: 298px;}
   #editprofile #edit-account .form-text-without-label {margin: 0 0 0 184px;}
   #editprofile #edit-account .group.left {width: 345px;}
-  #editprofile #edit-account .group-form.checkbox label {width: 367px; font-size: 13px;}
   #editprofile #edit-account .group-actions {width: 300px; margin-right: 45px;}
+  .group-checkbox {width: 300px; float: right; margin-right: 46px;}
+  .group-form.checkbox label {width: 367px; font-size: 13px; white-space: nowrap;}
 
 /* UserProfile */
   #view-account .filter-profil {width: 660px; font-size: 18px; clear: both;}
@@ -379,16 +378,6 @@
   .ui.tips {width: 100% !important;}
   .ui.tips .list-tips {background-color: #faf3e1;}
   .ui.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
-  /*
-  .ui.tips .list-tips ul {}
-  .ui.tips .list-tips li {position: relative; margin-bottom: 20px;}
-  .ui.tips .list-tips li p {font-size: 14px; text-align: center; line-height: 21px;}
-  .ui.tips .list-tips li img {margin: 0 10px 0 0;}
-  .ui.tips .list-tips li .block-tip {padding: 20px; background-color: #fff; margin: 0 0 0 10px;}
-  .ui.tips .list-tips li .profil {border-color: #ebeced;}
-  .ui.tips .list-tips li .expert {color: #333;}
-  .ui.tips .list-tips li .name {}
-  */
   .ui.tips .list-tips li .close {background: url("../images/UI/icon_close_tip.png") no-repeat 0 0; display: block; height: 30px; width: 30px; position: absolute; top: -10px; right: -10px;}
 
 /* EditProfile (Mobile) */
@@ -399,8 +388,8 @@
   #editprofile.mobile .ui #edit-account label {visibility: visible; width: 100%; text-align: center;}
   #editprofile.mobile .ui #edit-account .checkbox label {text-align: left;}
   #editprofile.mobile .ui #edit-account .form-text {width: 99%; margin: 0;}
-  #editprofile.mobile .ui #edit-account .group-actions {float: none; width: auto; margin: 0;}
-  #editprofile.mobile .ui #edit-account .form-submit {margin: 0 20px; width: 90%;}
+  #editprofile.mobile .ui #edit-account .group-actions {/*float: none; width: auto;*/ margin: 0;}
+  #editprofile.mobile .ui #edit-account .form-submit {/*margin: 0 20px; width: 90%;*/}
   #editprofile.mobile .ui #date-birthday .select-wrap {margin-right: 9px; width: 90px;}
   #editprofile.mobile .ui #date-birthday .ui-dropdown-container {width: 100%!important;}
   #editprofile.mobile .ui #edit-account .form-text-without-label {margin: 0;}
@@ -420,11 +409,6 @@
   #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px!important;}
   #editprofile.mobile #view-account .ui .group.left {margin: 0 auto!important; width: 50%; float: none; overflow: hidden;}
   #editprofile.mobile #view-account .ui .subgroup.wrap {width: 100%;}
-
-  /*
-  #editprofile.mobile #view-account .ui .list-bars .col {margin: 0;}
-  #editprofile.mobile #view-account .ui .list-bars .col-4 {width: 50%; position: relative; left: -1px;}
-  */
 
 /* Page standard */
   #page-standard {width: 770px;}
@@ -620,7 +604,8 @@
     .min-height {min-height: 100%;}
     .error .mobile {display: block; visibility: visible;}
     .error .desktop {display: none; visibility: hidden;}
-    .xs-hidden {display: none!important; visibility: hidden;} 
+    .xs-hidden {display: none!important; visibility: hidden;}
+    .group-checkbox {margin-right: 0;}
   }
 
 /* Smartphones (portrait) ----------- */
