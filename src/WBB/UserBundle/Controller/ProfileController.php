@@ -29,7 +29,14 @@ class ProfileController extends ContainerAware
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->container->get('templating')->renderResponse('WBBUserBundle:Profile:show.html.twig', array('user' => $user));
+        $session = $this->container->get('session');
+        $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
+
+        return $this->container->get('templating')->renderResponse('WBBUserBundle:Profile:show.html.twig', array(
+                'user'  => $user,
+                'city'  => $city
+            )
+        );
     }
 
     /**
@@ -81,11 +88,15 @@ class ProfileController extends ContainerAware
             }
         }
 
+        $session = $this->container->get('session');
+        $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
+
         return $this->container->get('templating')->renderResponse(
             'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
             array(
                 'form' => $form->createView(),
-                'user' => $user
+                'user' => $user,
+                'city' => $city
             )
         );
     }
