@@ -151,7 +151,7 @@ function initRegisterLoginForms() {
     $('#login_form').on('submit', function(e) {
         e.preventDefault();
         var form = $(this);
-        var formUrl = form.attr('action');
+        var formUrl = form.attr('action') 
         $.ajax({
             type: "POST",
             url: formUrl,
@@ -166,7 +166,7 @@ function initRegisterLoginForms() {
                     var errorsList = $('#login_form #message').show().append('<div><ul></ul></div>').parent();
                     errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
-                    window.location.reload();
+                    window.location.href = currentPage + '?favoriteAction=' + addFavorite;
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -251,6 +251,9 @@ jQuery(document).ready(function($) {
         $('#show-popin').click();
         PopIn.resize($('#register'));
     }
+    if(showLoginForm) {
+        $('.btn-signin').click();
+    }
 });
 
 // Favorites star
@@ -263,12 +266,12 @@ $(document).ready(function() {
     $(document).on("click", ".star", function(e) {
         e.preventDefault();
         var btn = $(this);
-        var url = $(this).attr('href');
+        var favUrl = $(this).attr('href');
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
             $.ajax({
                 type: "POST",
-                url: url,
+                url: favUrl,
                 success: function(response) {
                     if (response.code === 200) {
                         btn.attr('href', response.href);
@@ -320,6 +323,7 @@ $(document).ready(function() {
                             }
                             btn.show();
                         }
+                        favoriteName = response.message;
                         console.log(response.message);
                     } else {
 
@@ -328,7 +332,7 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href');
+            var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
             popinFrom = 'favorite';
             $.ajax({
                 url: url,
