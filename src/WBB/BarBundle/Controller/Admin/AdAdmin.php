@@ -16,8 +16,8 @@ class AdAdmin extends Admin {
      */
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->addIdentifier('id')
-            ->add('name', null, array('editable' => true))
+            ->addIdentifier('name')
+            ->addIdentifier('position')
             ->add('beginAt', null, array('editable' => true))
             ->add('endAt', null, array('editable' => true))
         ;
@@ -34,8 +34,38 @@ class AdAdmin extends Admin {
             ->add('tag')
             ->add('link')
             ->add('countries')
-//            ->add('beginAt', 'stnw_date_filter')
-//            ->add('endAt', 'stnw_date_filter')
+            ->add('createdAfter', 'doctrine_orm_callback',
+                array(
+                    'label' => 'Created After',
+                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                            if (!$value['value']) {
+                                return;
+                            }
+                            $time = strtotime($value['value']);
+                            $inputValue = date('Y-m-d', $time);
+                            $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
+                            $queryBuilder->setParameter('createdAt', $inputValue);
+                            return true;
+                        },
+                    'field_type' => 'text'
+                ), null, array('attr' => array('class' => 'datepicker'))
+            )
+            ->add('updatedAfter', 'doctrine_orm_callback',
+            array(
+                'label' => 'Updated After',
+                'callback' => function($queryBuilder, $alias, $field, $value) {
+                        if (!$value['value']) {
+                            return;
+                        }
+                        $time = strtotime($value['value']);
+                        $inputValue = date('Y-m-d', $time);
+                        $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
+                        $queryBuilder->setParameter('updatedAt', $inputValue);
+                        return true;
+                    },
+                'field_type' => 'text'
+            ), null, array('attr' => array('class' => 'datepicker'))
+        )
         ;
     }
 

@@ -311,3 +311,7 @@
         </aside>
     </div>
 {% endblock %}
+
+{% block footerAd %}
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
+{% endblock %}
