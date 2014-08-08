@@ -115,14 +115,15 @@
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
+                var showLoginForm = {{ app.request.query.get('login', 0) }};
 
                 var popinFrom = '';
                 
-                {% if app.session.has('profileHover') %}
+                {% for flashMessage in app.session.flashbag.get('profileHover') %}
                     $(document).ready(function() {
-                         $('header.desktop .logged').mouseover();
-                    });
-                {% endif %}
+                        $('header.desktop .logged').mouseover();
+                   });
+                {% endfor %}
         </script>
 
         {% if is_tablet() %}

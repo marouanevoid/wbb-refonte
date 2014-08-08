@@ -26,6 +26,9 @@ class SecurityController extends Controller
 
     public function loginAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirect($this->generateUrl('homepage', array('login' => 1)));
+        }
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -56,7 +59,7 @@ class SecurityController extends Controller
             ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
             : null;
 
-        $this->container->get('session')->set('profileHover', true);
+        $session->getFlashBag()->add('profileHover', true);
 
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
