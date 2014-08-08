@@ -14,7 +14,8 @@ PopIn.initContext = function(){
 	PopIn.dom = {
 		cible : $(''),
 		mask : $('.mask'),
-		close : $(".btn-close")
+		close : $(".btn-close"),
+		popin : $('.popup')
 	}
 
 	// Hide elements
@@ -51,11 +52,19 @@ PopIn.initEvents = function(){
 	// click on the Mask and the btn close
     PopIn.dom.mask.add(PopIn.dom.close).on('click',PopIn.close);
 
+    // add event change on Popin Change
+    if(! PopIn.dom.popin.hasClass("mobile") ) {
+	    PopIn.dom.popin.on('change' , function(){
+	    	PopIn.resize($(this));
+	    });
+	}
+
+
 }
 
 // Update PopIn
 PopIn.updatePopin = function(){
-
+	PopIn.resize(PopIn.dom.popin);
 }
 
 PopIn.show = function(e){
@@ -68,9 +77,9 @@ PopIn.show = function(e){
     if (current_id.length > 0) {
 
         //Centred popup
-        if (!current_id.hasClass("mobile")) {
-            PopIn.resize(current_id);
-        }
+        // if (!current_id.hasClass("mobile")) {
+        //     PopIn.resize(current_id);
+        // }
 
         //show lightbox window
         current_id.fadeIn("slow");
@@ -84,6 +93,8 @@ PopIn.show = function(e){
         PopIn.dom.mask.hide();
         current_id.removeClass("void-popup");
     }
+
+    PopIn.dom.popin.change();
 }
 
 // Resize the Popin
