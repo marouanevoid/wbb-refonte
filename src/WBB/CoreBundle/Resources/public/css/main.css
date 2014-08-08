@@ -46,7 +46,8 @@
 
   /* USER INTERFACE */
     .ui form label {font-size: 17px;}
-    .ui .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+    .ui .ui-dropdown-container .ui-dropdown {background-color: #faf3e1; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+    .full-white .ui .ui-dropdown-container .ui-dropdown {background-color: #fff;}
     .ui .load-more {text-decoration: none;}
     .ui .load-more:hover {color: #faf3e1;}
     .ui.mobile.container {width: 100%!important;}
