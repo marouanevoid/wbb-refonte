@@ -1,9 +1,37 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+<div class="title margin-bottom-30 wrap bold">Reset password</div>
+<div class="subtitle text-transform-uppercase bold">Enter your new password and confirm to sign in</div>
+
 <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+    <div class="forgetpassword wrap">
+        <form>
+            <div class="text-align-center">
+                <div>
+                    {{ form_widget(form.plainPassword.first, { 'required':false, 'attr' : {'class':'form-text margin-top-30', 'placeholder' : 'New password'} }) }}
+                    {{ form_widget(form.plainPassword.second, { 'required':false, 'attr' : {'class':'form-text margin-top-30', 'placeholder' : 'Confirm new password'} }) }}
+                </div>
+                <input type="submit" class="form-submit btn margin-top-30 bold" value="Confirm">
+                {{ form_rest(form) }}
+            </div>
+        </form>
+        <div class="clear"></div>
+
+        {% if not form.vars.valid %}
+            <script>
+                $(document).ready(function() {
+                    $('.forgetpassword .form-text').each(function() {
+                        $(this).addClass('error');
+                    });
+                });
+            </script>
+            <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20">
+                <p>
+                    <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
+                    Please enter the same password
+                </p>
+            </div> <!-- #message -->
+        {% endif %}
     </div>
 </form>
 
@@ -11,18 +39,37 @@
     $(document).ready(function() {
         $('.fos_user_resetting_reset').on('submit', function(e) {
             e.preventDefault();
-            var url = $(this).attr('action');
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: $(this).serialize(),
-                success: function(html) {
-                    $('.popin-block').html(html);
-                    setTimeout(function() {
-                        location.href="{{ path('homepage') }}";
-                    }, 1500);
+            var submit = true;
+            $('.forgetpassword .form-text').each(function() {
+                var val = $(this).val();
+                if (val.trim() === '') {
+                    submit = false;
                 }
             });
+
+            if (submit) {
+                var url = $(this).attr('action');
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(html) {
+                        $('.popin-block').html(html);
+                        $('#close').on('click', function() {
+                            location.href = "{{ path('homepage') }}";
+                        });
+                    }
+                });
+            } else {
+                $('.forgetpassword .form-text').each(function() {
+                    var val = $(this).val();
+                    if (val.trim() === '') {
+                        $(this).addClass('error');
+                    } else {
+                        $(this).removeClass('error');
+                    }
+                });
+            }
         });
     });
 </script>
