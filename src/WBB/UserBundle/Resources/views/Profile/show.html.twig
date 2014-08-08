@@ -4,14 +4,11 @@
         <div class="padding-top-40">
             <div id="view-account">
                 <div class="ui tips">
-
                     <!-- Profile -->
                     <div class="block-top wrap">
-                        
                         <div class="avatar-profil left">
                             <img src="{{ showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max">
                         </div>
-
                         <div class="group left margin-left-30">
                             <div class="title text-transform-capitalize bold">
                                 <h5>{{ user.username }}</h5>
@@ -49,10 +46,8 @@
                                 </div>
                             </div> <!-- .subgroup.right -->
                         </div> <!-- .group.right -->
-
                     </div> <!-- .block-top -->
                     <div class="clear"></div>
-
                     <!-- Filter -->
                     <div class="filter-profil padding-bottom-20 padding-top-20 wrap">
                         <div class="{% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
@@ -63,10 +58,8 @@
                             <div class="clear"></div>
                         </div>
                     </div> <!-- .filter-profil -->
-
                     <!-- Separator -->
                     <div class="container hr"><hr></div>
-
                     <!-- Filters -->
                     <div class="filter-content container">
                         <div class="margin-top-20">
@@ -80,7 +73,6 @@
                                     </select>
                                 </div>
                             </div> <!-- .sort-by -->
-
                             <div class="filter-view">
                                 <div class="right">
                                     <div class="{% if is_mobile() %}margin-right-10{% endif %}">
@@ -91,7 +83,6 @@
                             </div> <!-- .filter-view -->
                         </div> <!-- .margin-top-20 -->
                     </div> <!-- .container -->
-
                     <div class="min-height">
                         <div id="tab-bars" class="tab margin-bottom-40 padding-bottom-40 active">
                             <!-- List of Bars -->
@@ -99,7 +90,6 @@
                                 <div class="margin-top-20 list-bars container profile-fav-block">
                                     {# AJAX LOADING #}
                                 </div>
-
                                 <!-- Button See more Bars -->
                                 <div class="container">
                                     <div class="more-bars force-load load-container">
@@ -110,10 +100,8 @@
                                     </div>
                                 </div>
                              </section>
-
                         </div><!-- #tab-bars -->
                         <div class="clear"></div>
-
                         <div id="tab-bestof"  class="tab margin-bottom-40 padding-bottom-40"style="display:none">
                             <section class="bar-filter">
                                 <!-- List of Bars -->
@@ -132,16 +120,12 @@
                             </div>
                         </div><!-- #tab-bestof -->
                         <div class="clear"></div>
-
                         <div id="tab-tips" class="tab" style="display:none">
                             <div class="full-cream padding-bottom-40 min-height">
-
                                 <!-- List of Tips -->
                                 <ul class="list-tips padding-top-30 container">
-
                                 </ul>
                                 <div class="clear"></div>
-
                                 <!-- Button See more Bars -->
                                 <div class="container">
                                     <div class="more-tips force-load load-container">
@@ -159,10 +143,6 @@
             <div class="clear"></div>
         </div>
     </div> <!-- #editprofile -->
-    {% block footerAd %}
-        {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'UP_728x90' })) }}
-    {% endblock %}
-
     <script>
         $(document).ready(function(){
             new wbb.LoadProfile();
@@ -176,3 +156,6 @@
     <script type="text/javascript" src="/bundles/wbbuser/js/modules/profile.wbb.js"></script>
 {% endblock %}
 
+{% block footerAd %}
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'UP_728x90' })) }}
+{% endblock %}
