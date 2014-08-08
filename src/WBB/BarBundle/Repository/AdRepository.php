@@ -31,6 +31,10 @@ class AdRepository extends EntityRepository
                 ->leftJoin($this->getAlias().'.countries', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $country->getId()))
             ;
+        }else{
+            $qb
+                ->leftJoin($this->getAlias().'.countries', 'c')
+                ->having($qb->expr()->eq($qb->expr()->count('c.id'), 0));
         }
 
         return $qb->getQuery()->getOneOrNullResult();
