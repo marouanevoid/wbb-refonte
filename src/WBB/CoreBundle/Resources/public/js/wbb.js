@@ -248,6 +248,51 @@ jQuery(document).ready(function($) {
         });
     });
 
+    $('#register_form_full').on('submit', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('action');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data.code === 400) {
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+
+                    $('#message').show();
+                    $('#create-account #message').find('ul').remove();
+                    var errorsList = $('#create-account #message').show().find('img').after('<ul></ul>').parent();
+
+                    for (var i = 0; i < errors.length; i++) {
+                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    var idPrefix = '#fos_user_registration_form_';
+                    for (var i = 0; i < fields.length; i++) {
+
+                        switch (fields[i]) {
+                            case 'birthdate':
+                                // birthday error
+                                break;
+                            case 'plainPassword':
+                                $(idPrefix + fields[i] + '_first').addClass('error');
+                                $(idPrefix + fields[i] + '_second').addClass('error');
+                                break;
+                            default:
+                                $(idPrefix + fields[i]).addClass('error');
+                                break;
+                        }
+                    }
+                } else {
+                    window.location.href = profileWithPopinUrl;
+                }
+            }
+        });
+    });
+
+    $('#message').hide();
+
     if (showNewPassword) {
         var url = newPasswordUrl;
         $.ajax({
@@ -269,6 +314,9 @@ jQuery(document).ready(function($) {
     }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
+    }
+    if(showEmailPopin) {
+        alert('Congrats');
     }
 });
 
@@ -308,7 +356,7 @@ $(document).ready(function() {
                             if (btn.parents('.profile-fav-block').length) {
 
                                 var TypeEvent = "removeitem",
-                                    cible = "";
+                                        cible = "";
                                 if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length){
                                     btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
@@ -316,7 +364,7 @@ $(document).ready(function() {
                                 else{
                                     if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length){
                                         btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
-                                         cible = 'bestof';
+                                        cible = 'bestof';
                                     }
                                 }
 

@@ -113,12 +113,14 @@
                 
                 var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
-                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
+                var showEmailPopin = {{ app.request.query.get('emailPopin', 1) }};
 
+                var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
+                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var popinFrom = '';
-                
+
                 {% for flashMessage in app.session.flashbag.get('profileHover') %}
                     $(document).ready(function() {
                         $('header.desktop .logged').mouseover();

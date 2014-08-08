@@ -1,36 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
-{% form_theme form _self %}
 
-{% block form_errors %}
-    {% set errorsMessages = [] %}
-    {% spaceless %}
-        {% if errors|length > 0 %}
-            {% for error in errors %}
-                {% if error.message not in errorsMessages %}
-                    {% if error.message == 'not.blank' %}
-                        <li>Please complete all required fields</li>
-                    {% else %}
-                        <li>{{ error.message }}</li>
-                    {% endif %}
-                {% set errorsMessages = errorsMessages|merge([error.message]) %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-    {% endspaceless %}
-{% endblock form_errors %}
-    
 {% block body %}
     <div class="full-cream">
-        <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap margin-bottom-20">
+        <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap">
             <div class="ui wrap">
                 <div class="title text-transform-uppercase padding-top-25 bold">Register</div>
                 <div class="margin-top-20">
                     <div id="create-account">
                         <div class="subtitle text-transform-uppercase margin-top-25 bold">Create an account now</div>
                         <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
-                        <form action="" {{ form_enctype(form) }} method="POST" id="register_form_full">
+                        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="register_form_full">
                             <div class="text-align-left margin-bottom-20">
                                 <div class="group-form margin-top-25">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Pseudo</label>
@@ -88,7 +69,7 @@
                             <div class="clear"></div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Cities you like to go</label>
+                                <label class="margin-right-20 text-align-right unbold xs-hidden">Cities you like to go</label>
                                 {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Choose a city' } }) }}
                             </div>
 
@@ -101,7 +82,7 @@
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Favorite Bars</label>
+                                <label class="margin-right-20 text-align-right unbold xs-hidden">Favorite Bars</label>
                                 {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Choose a bar' } }) }}
                             </div>
 
@@ -114,7 +95,7 @@
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Drink brands</label>
+                                <label class="margin-right-20 text-align-right unbold xs-hidden">Drink brands</label>
                                 {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Choose a brand' } }) }}
                             </div>
 
@@ -127,7 +108,7 @@
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label class="margin-right-20">Categories or cocktails</label>
+                                <label class="margin-right-20 text-align-right unbold xs-hidden">Categories or cocktails</label>
                                 {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Choose a cocktail' } }) }}
                             </div>
 
@@ -145,17 +126,14 @@
                             </div>
                         </form>
                         <div class="clear"></div>
-                        {% if not form.vars.valid %}
-                            <div id="message" class="margin-top-20 wrap">
-                                <div>
-                                    <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
-                                    <ul>
-                                    {{ form_errors(form) }}
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
+                        <div id="message" class="margin-top-20 wrap" style="display:none;">
+                            <div>
+                                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" class="left">
+                                <ul>
+                                </ul>
                             </div>
-                        {% endif %}
+                            <div class="clear"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="clear"></div>

@@ -90,7 +90,7 @@ class RegistrationFormType extends BaseType
                 ->setDefaults(array(
                     'translation_domain' => 'WBBUserBundle',
                     'label' => false,
-                    'validation_groups' => 'registration_full'
+                    'validation_groups' => array('registration_full', 'Default')
                 ))
         ;
     }

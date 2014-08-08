@@ -1281,4 +1281,20 @@ class User extends BaseUser
         }
     }
 
+    /**
+     * @Assert\Callback()
+     */
+    public function validatePassword(ExecutionContextInterface $context)
+    {
+        if ($this->plainPassword) {
+            if (strlen($this->plainPassword) < 6) {
+                $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+            } else {
+                if (!ctype_alnum($this->plainPassword)) {
+                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+                }
+            }
+        }
+    }
+
 }
