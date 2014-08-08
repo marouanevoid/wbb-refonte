@@ -73,6 +73,25 @@ class RegistrationController extends ContainerAware
 //                $session->save();
 
                 return $response;
+            } else {
+                $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
+                $fields = array();
+                $messages = array();
+
+                foreach ($formErrors as $formError) {
+                    $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                        $messages[] = 'Please complete all required fields';
+                    } elseif($formError->getMessage() != 'not.blank') {
+                        $messages[] = $formError->getMessage();
+                    }
+                }
+                $errors = array(
+                    'fields' => $fields,
+                    'messages' => $messages
+                );
+
+                return new JsonResponse(array('code' => 400, 'errors' => $errors));
             }
         }
 

@@ -114,8 +114,38 @@
                 
                 var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
-                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
+                var showLoginForm = {{ app.request.query.get('login', 0) }};
+                var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
+                var favoriteName = '';
+
+                var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
+                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
+                var popinFrom = '';
+                {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                var currentPage = "{{ currentPath }}";
+
+                {% if app.request.query.get('favoriteAction', null) != null %}
+                    var favoriteUrl = "{{ app.request.query.get('favoriteAction')}}"
+                    $(document).ready(function() {
+                        $('.star').each(function() {
+                            if ($(this).attr('href') === favoriteUrl || $(this).attr('href').replace('delete','add') === favoriteUrl) {
+                                $(this).click();
+                                var html = '<div id="success"><p class="padding-top-40">The ' + favoriteName +
+                                ' bar/best of has been added to your favorites.</p>'+
+                                '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                $('.popin-block').html(html);
+                                $('#show-popin').click();
+                            }
+                        });
+                    });
+                {% endif %}
+
+                {% for flashMessage in app.session.flashbag.get('profileHover') %}
+                    $(document).ready(function() {
+                        $('header.desktop .logged').mouseover();
+                   });
+                {% endfor %}
         </script>
 
         {% if is_tablet() %}
@@ -152,6 +182,9 @@
                         {% if resetting_form is defined %}
                             {{ resetting_form|raw }}
                         {% endif %}
+                        {% if app.request.query.get('emailPopin', 0) == 1%}
+                            {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
+                        {% endif %}
                     </div>
                     <div>
                         <a href="#close" class="btn btn-close">Close</a>
@@ -162,7 +195,6 @@
         </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
         {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
-        <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
             function securityCheck() {
@@ -170,7 +202,10 @@
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            alert('Create an account please !');
+                            $('#facebook-signup').after($('#message'));
+                            $('#login_form #message').find('ul').remove();
+                            var errorsList = $('#login_form #message').show().find('img').after('<ul></ul>').parent();
+                            errorsList.find('ul').append('<li>Created an account please !</li>');
                         } else {
                             window.location.reload();
                         }

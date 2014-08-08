@@ -26,6 +26,9 @@ class SecurityController extends Controller
 
     public function loginAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirect($this->generateUrl('homepage', array('login' => 1)));
+        }
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -43,6 +46,10 @@ class SecurityController extends Controller
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
 
+            if($error == 'Bad credentials'){
+                $error = 'Your login or password is incorrect';
+            }
+
             return new JsonResponse(array('code' => '400', 'error' => $this->get('translator')->trans($error)));
         }
         // last username entered by the user
@@ -51,6 +58,8 @@ class SecurityController extends Controller
         $csrfToken = $this->container->has('form.csrf_provider')
             ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
             : null;
+
+        $session->getFlashBag()->add('profileHover', true);
 
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
