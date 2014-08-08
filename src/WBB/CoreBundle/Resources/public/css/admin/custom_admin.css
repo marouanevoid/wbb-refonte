@@ -44,4 +44,7 @@ thead a {text-transform: uppercase;}
 .sonata-bc .navbar {color: #fff;}
 .btn-group .btn-small {margin-right: 5px;}
 .sonata-bc table thead th {background-color: #333; color: #fff; vertical-align: middle;}
-.sonata-bc table thead th a {color: #fff;}
+.sonata-bc table thead th a {color: #fff; white-space: nowrap;}
+.sonata-bc th.sonata-ba-list-field-header-order-asc a:hover:before, 
+.sonata-bc th.sonata-ba-list-field-header-order-asc.sonata-ba-list-field-order-active a:before, 
+.sonata-bc th.sonata-ba-list-field-header-order-desc.sonata-ba-list-field-order-active a:hover:before {border-color: #fff;}
