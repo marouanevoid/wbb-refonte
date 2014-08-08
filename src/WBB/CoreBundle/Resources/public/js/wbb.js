@@ -163,7 +163,7 @@ function initRegisterLoginForms() {
                     $('#password').addClass('error');
                     $('#facebook-signup').after($('#message'));
                     $('#login_form #message').find('ul').remove();
-                    var errorsList = $('#login_form #message').show().find('img').after('<ul></ul>').parent();
+                    var errorsList = $('#login_form #message').show().append('<div><ul></ul></div>').parent();
                     errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
                     window.location.reload();
@@ -263,7 +263,7 @@ jQuery(document).ready(function($) {
 
                     $('#message').show();
                     $('#create-account #message').find('ul').remove();
-                    var errorsList = $('#create-account #message').show().find('img').after('<ul></ul>').parent();
+                    var errorsList = $('#create-account #message div').show().append('<ul></ul>').parent();
 
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
