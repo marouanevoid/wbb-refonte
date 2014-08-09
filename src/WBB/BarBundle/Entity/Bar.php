@@ -2148,9 +2148,9 @@ class Bar implements IndexableEntity
     /**
      * Remove usersFavorite
      *
-     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     * @param User $usersFavorite
      */
-    public function removeUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
+    public function removeUsersFavorite(User $usersFavorite)
     {
         $this->usersFavorite->removeElement($usersFavorite);
     }

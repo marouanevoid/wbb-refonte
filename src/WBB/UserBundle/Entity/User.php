@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use WBB\BarBundle\Entity\BestOf;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -1177,10 +1178,10 @@ class User extends BaseUser
     /**
      * Add favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      * @return User
      */
-    public function addFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function addFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs[] = $favoriteBestOfs;
 
@@ -1190,9 +1191,9 @@ class User extends BaseUser
     /**
      * Remove favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      */
-    public function removeFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function removeFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs->removeElement($favoriteBestOfs);
     }

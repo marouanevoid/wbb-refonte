@@ -14,6 +14,7 @@ class BarListener
 
         if ($entity instanceof Bar) {
             $entity = $this->updateBarRanking($entity, $entityManager);
+            $entity = $this->disableIncompleteBars($entity, $entityManager);
         }
 
     }
@@ -24,6 +25,7 @@ class BarListener
 
         if ($entity instanceof Bar) {
             $entity = $this->updateBarRanking($entity, $entityManager);
+            $entity = $this->disableIncompleteBars($entity, $entityManager);
         }
 
     }
@@ -43,6 +45,16 @@ class BarListener
         );
 
         $bar->setRanking((double) $ranking);
+
+        return $bar;
+    }
+
+    private function disableIncompleteBars(Bar $bar)
+    {
+        if(!$bar->getCity() || !$bar->getSuburb())
+        {
+            $bar->setStatus(Bar::BAR_STATUS_PENDING_VALUE);
+        }
 
         return $bar;
     }
