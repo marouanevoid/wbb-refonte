@@ -72,10 +72,6 @@
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
-    .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
-    .ui-dropdown-container .ui-dropdown {box-shadow: 0 0 0 1px #b3955f !important;}
-    #register_form_full .ui-dropdown-container.changed-ui-style .ui-dropdown , 
-    .fos_user_profile_edit .ui-dropdown-container.changed-ui-style .ui-dropdown{color: #818a8c;}
 
   /* Radius */
     .radius-30 {-webkit-border-radius: 30px;
@@ -177,7 +173,7 @@
   .ui.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
   .ui.mobile .col-4 {width: 237px;}
 
-/* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
+/* UI REGISTER & USER PROFILE */
   .ui {background-color: #faf3e1; position: relative; /*top: 145px;*/}
   .ui p a {color: #818a8c; font-size: 17px; text-decoration: underline;}
   .ui a.ui-radio {color: #b3955f; text-decoration: none;}
@@ -194,6 +190,16 @@
   .popup .ui a {font-size: 16px; text-decoration: underline;}
   .popup .ui a:hover,
   .popup .ui .btn {text-decoration: none;}
+  
+  /* Error */
+    #register.page #edit-account .ui-dropdown-container .ui-dropdown.error,
+    #EditProfile #edit-account .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
+
+    #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
+    #EditProfile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #b3955f;}
+
+    #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
+    #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
 
   /* Version mobile */
     .ui.mobile {width: auto; /*padding: 80px 20px;*/ top: 80px;} /* Padding 0 for Userprofile  */
@@ -250,7 +256,7 @@
   #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
   #register.page .group-actions {width: 40%; position: relative; left: 6px; overflow: hidden;}
-  #register.page .group-checkbox {margin: auto; position: relative; left: 6px;}
+  #register.page .group-checkbox {margin: auto; position: relative; left: 6px; float: none;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
@@ -330,12 +336,12 @@
   #register.page.mobile #create-account label {/*margin: 20px 0 20px;*/ float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 18px; font-weight: lighter;}
   #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px auto 0; /*width: 77%*/; display: block;}
   #register.page.mobile .group-form {overflow: visible;}
-  #register.page.mobile .group-actions {width: 100%;}
-  #register.page.mobile .group-actions .form-submit {left: 0;}
+  #register.page.mobile .group-actions {width: 100%; left: 0;}
   #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center; /*text-indent: 55px;*/}
   #register.page.mobile .ui .connect-fb {line-height: normal;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
+  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
 
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
