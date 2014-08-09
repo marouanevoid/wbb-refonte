@@ -72,7 +72,6 @@
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
-    #register_form_full .ui-dropdown-container.changed-ui-style .ui-dropdown , .fos_user_profile_edit .ui-dropdown-container.changed-ui-style .ui-dropdown{color: #818a8c;}
 
   /* Radius */
     .radius-30 {-webkit-border-radius: 30px;
@@ -174,7 +173,7 @@
   .ui.mobile .ui-dropdown-container .ui-dropdown span {height: 38px; line-height: 38px;}
   .ui.mobile .col-4 {width: 237px;}
 
-/* UI (Popup) - PSDN : PSDs/login/desktop/Login.psd; */
+/* UI REGISTER & USER PROFILE */
   .ui {background-color: #faf3e1; position: relative; /*top: 145px;*/}
   .ui p a {color: #818a8c; font-size: 17px; text-decoration: underline;}
   .ui a.ui-radio {color: #b3955f; text-decoration: none;}
@@ -191,6 +190,16 @@
   .popup .ui a {font-size: 16px; text-decoration: underline;}
   .popup .ui a:hover,
   .popup .ui .btn {text-decoration: none;}
+  
+  /* Error */
+    #register.page #edit-account .ui-dropdown-container .ui-dropdown.error,
+    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
+
+    #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
+    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #b3955f;}
+
+    #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
+    #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
 
   /* Version mobile */
     .ui.mobile {width: auto; /*padding: 80px 20px;*/ top: 80px;} /* Padding 0 for Userprofile  */
@@ -217,12 +226,13 @@
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
   /* Message's */
-  #message {background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; padding-left: 10px; min-height: 65px;}
+  #message {min-height: 100px; background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%;}
+  #message ul {margin: 15px 10px 10px 90px; float: left;}
   #message img {margin: 0 20px 0 0;}
   #message div {padding: 0 10px 0 0; line-height: 16px;}
   #message p,
   #message li {color: #faf3e1; font-size: 14px; line-height: 16px; margin-bottom: 5px;}
-  #register.page #message {width: 207px; padding: 10px 10px 10px 90px;}
+  #register.page #message {width: 300px; padding: 0; position: relative; left: 9px;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   #success {position: static; top: 0;}
@@ -246,8 +256,10 @@
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
-  #register.page .group-actions {width: 40%; position: relative; left: 6px; overflow: hidden;}
-  #register.page .group-checkbox {margin: auto; position: relative; left: 6px;}
+  #register.page .group-actions {width: 39%; overflow: hidden;}
+  #register.page .group-checkbox {margin: auto; float: none;}
+  #register.page .group-actions,
+  #register.page .group-checkbox {position: relative; left: 8px;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
@@ -317,7 +329,7 @@
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
-  #register.page.mobile #create-account .form-text {width: 100%; margin: 0 0 10px;}
+  #register.page.mobile #create-account .form-text {width: 298px; margin: 0 0 10px;}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -326,13 +338,13 @@
   #register.page.mobile .date-birthday .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile #create-account label {/*margin: 20px 0 20px;*/ float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 18px; font-weight: lighter;}
   #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px auto 0; /*width: 77%*/; display: block;}
-  #register.page.mobile .group-form {overflow: visible;}
-  #register.page.mobile .group-actions {width: 100%;}
-  #register.page.mobile .group-actions .form-submit {left: 0;}
+  #register.page.mobile .group-form {overflow: visible; width: 100%;}
+  #register.page.mobile .group-actions {width: 100%; left: 0;}
   #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center; /*text-indent: 55px;*/}
   #register.page.mobile .ui .connect-fb {line-height: normal;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
+  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
 
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
@@ -347,7 +359,7 @@
   #editprofile .subgroup.wrap {width: 211px;}
   #editprofile .avatar-profil {/*position: absolute;*/}
   #editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
-  #editprofile .file-image {position: relative; height: 31px; width: 145px; background: url("../images/UI/edit_avatar.gif") no-repeat 0 0;}
+  #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
   #editprofile .file-image:hover {display: block; cursor: pointer; opacity: 0.8;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
   #editprofile #edit-account label {font-size: 15px;}
@@ -466,13 +478,24 @@
 
 /* PAGE */
   .page-form {padding: 0 3%;}
-  .page-form label {line-height: 34px;width: 10%;font-size: 18px;}
+  .page-form label {line-height: 34px; width: 10%; font-size: 18px;}
   .page-form .form-text {width: 90%;}
   .page-form .form-textarea {padding: 10px 10px 50px;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
+
+/* jQuery UI Autocomplete */
+  ul.ui-autocomplete {background-color: #fff; padding: 10px; position: absolute; width: 280px!important;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: bold 16px/28px "Avenir", sans-serif; padding: 0;  text-indent: 10px;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-weight: lighter; font-size: 16px; cursor: pointer; letter-spacing: 0;}
+  .ui-state-hover,
+  .ui-widget-content .ui-state-hover,
+  .ui-widget-header .ui-state-hover,
+  .ui-state-focus,
+  .ui-widget-content .ui-state-focus,
+  .ui-widget-header .ui-state-focus {border:0; background-color: #faf3e1; font-weight:lighter; color:#b3955f; margin: 0;}
 
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
