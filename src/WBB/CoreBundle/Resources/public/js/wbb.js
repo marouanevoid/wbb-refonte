@@ -151,7 +151,7 @@ function initRegisterLoginForms() {
     $('#login_form').on('submit', function(e) {
         e.preventDefault();
         var form = $(this);
-        var formUrl = form.attr('action');
+        var formUrl = form.attr('action') 
         $.ajax({
             type: "POST",
             url: formUrl,
@@ -166,7 +166,7 @@ function initRegisterLoginForms() {
                     var errorsList = $('#login_form #message').show().append('<div><ul></ul></div>').parent();
                     errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
-                    window.location.reload();
+                    window.location.href = currentPage + '?favoriteAction=' + addFavorite;
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -236,18 +236,23 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="text-align-center padding-top-80">' +
+        var html = '<div id="success" class="text-align-center padding-top-80 padding-bottom-80">' +
                 '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
                 '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
                 '</div>';
         $('.popin-block').html(html);
+        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
     }
     if(showEmailPopin) {
-        alert('Congrats');
+        $('#show-popin').click();
+        PopIn.resize($('#register'));
+    }
+    if(showLoginForm) {
+        $('.btn-signin').click();
     }
 });
 
@@ -261,12 +266,12 @@ $(document).ready(function() {
     $(document).on("click", ".star", function(e) {
         e.preventDefault();
         var btn = $(this);
-        var url = $(this).attr('href');
+        var favUrl = $(this).attr('href');
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
             $.ajax({
                 type: "POST",
-                url: url,
+                url: favUrl,
                 success: function(response) {
                     if (response.code === 200) {
                         btn.attr('href', response.href);
@@ -318,6 +323,7 @@ $(document).ready(function() {
                             }
                             btn.show();
                         }
+                        favoriteName = response.message;
                         console.log(response.message);
                     } else {
 
@@ -326,7 +332,7 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href');
+            var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
             popinFrom = 'favorite';
             $.ajax({
                 url: url,

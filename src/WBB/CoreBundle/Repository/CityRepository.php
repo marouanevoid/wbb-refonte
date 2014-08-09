@@ -67,7 +67,7 @@ class CityRepository extends EntityRepository
             $qb->andWhere($qb->expr()->eq('c.id', $country->getId()));
         }
 
-        return $qb->getQuery()->getOneOrNullResult();
+        return $qb->getQuery()->getResult();
     }
 
     public function findNearestCity($latitude = 0, $longitude = 0, $maxDistance = 0, $offset = 0, $limit = 0)
