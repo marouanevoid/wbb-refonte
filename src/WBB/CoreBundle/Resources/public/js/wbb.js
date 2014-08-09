@@ -135,7 +135,8 @@ function initRegisterLoginForms() {
                 } else {
                     var html = '<div id="success" class="text-align-center padding-top-80">' +
                             '<div class="subtitle text-transform-uppercase margin-top-80">Congratulations!</div>' +
-                            '<p class="margin-top-20 margin-bottom-20">You are now registered on  World’s Best Bars.</p>' +
+                            '<p class="margin-top-20 margin-bottom-20">CONGRATULATIONS ! You are now registered on World’s Best Bars.<br/>'+
+                            '<p>The "'+$(this)+'" bar/best of has been added to your favorites. You can have a look at your favorite contents in your user profile.</p>' +
                             '<p>Check your mailbox <br />' +
                             'to confirm your subscription.</p>' +
                             '</div>';
