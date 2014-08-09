@@ -40,11 +40,16 @@
         $('.forgetpassword').find('form').on('submit', function(e) {
             e.preventDefault();
             var url = $(this).attr('action');
+            // Set the PopIn Loading Flag
+            PopIn.startLoading();
+
             $.ajax({
                 url: url,
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function(html) {
+                    // Set the PopIn Loading Flag
+                    PopIn.endLoading();
                     $('.popin-block').html(html);
                 }
             });

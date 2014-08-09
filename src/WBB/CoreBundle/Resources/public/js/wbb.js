@@ -33,10 +33,16 @@ $(document).ready(function() {
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
+
+        // Set the PopIn Loading Flag
+        PopIn.startLoading();
         window.ajaxRequest = $.ajax({
             url: url,
             method: 'GET',
             success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+
                 $('.popin-block').html(html);
                 initializeDropdowns();
                 initRegisterLoginForms();
@@ -130,18 +136,37 @@ function initRegisterLoginForms() {
             url: formUrl,
             data: form.serialize(),
             success: function(data) {
-                if (data.code === '400') {
-                    var errors = data.errors;
+                if (data.code == '400') {
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+
+                    $('#message').show();
                     $('#register_form').after($('#message'));
                     $('#register-form #message').find('ul').remove();
-                    var errorsList = $('#register-form #message').show().find('img').after('<ul></ul>').parent();
+                    $('#register-form #message div').append('<ul></ul>').parent();
+                    var idPrefix = '#fos_user_registration_form_';
+                    for (var i = 0; i < fields.length; i++) {
+                        switch (fields[i]) {
+                            case 'birthdate':
+                                // birthday error
+                                break;
+                            case 'plainPassword':
+                                $(idPrefix + fields[i] + '_first').addClass('error');
+                                $(idPrefix + fields[i] + '_second').addClass('error');
+                                break;
+                            default:
+                                $(idPrefix + fields[i]).addClass('error');
+                                break;
+                        }
+                    }
                     for (var i = 0; i < errors.length; i++) {
-                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                        $('#register-form #message').find('ul').append('<li>' + errors[i] + '</li>');
                     }
                 } else {
                     var html = '<div id="success" class="text-align-center padding-top-80">' +
                             '<div class="subtitle text-transform-uppercase margin-top-80">Congratulations!</div>' +
-                            '<p class="margin-top-20 margin-bottom-20">You are now registered on  World’s Best Bars.</p>' +
+                            '<p class="margin-top-20 margin-bottom-20">CONGRATULATIONS ! You are now registered on World’s Best Bars.<br/>'+
+                            '<p>The "NAME HERE" bar/best of has been added to your favorites. You can have a look at your favorite contents in your user profile.</p>' +
                             '<p>Check your mailbox <br />' +
                             'to confirm your subscription.</p>' +
                             '</div>';
@@ -169,7 +194,7 @@ function initRegisterLoginForms() {
                     $('#password').addClass('error');
                     $('#facebook-signup').after($('#message'));
                     $('#login_form #message').find('ul').remove();
-                    var errorsList = $('#login_form #message').show().append('<div><ul></ul></div>').parent();
+                    var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
                     errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
                     window.location.href = currentPage + '?favoriteAction=' + addFavorite;
@@ -393,10 +418,15 @@ $(document).ready(function() {
             $('.popin-block').html('');
             var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
             popinFrom = 'favorite';
+            // Set the PopIn Loading Flag
+            PopIn.startLoading();
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    // Set the PopIn Loading Flag
+                    PopIn.endLoading();
+
                     html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
                     initializeDropdowns();

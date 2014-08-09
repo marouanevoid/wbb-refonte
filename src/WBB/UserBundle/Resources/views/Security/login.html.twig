@@ -20,10 +20,16 @@
         $('.forgot-password').on('click', function(e) {
             e.preventDefault();
             var url = $(this).attr('href'); 
+            // start loading of PopIn
+            PopIn.startLoading();
+
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    // start loading of PopIn
+                    PopIn.endLoading();
+
                     $('.popin-block').html(html);
                     var forgotPassword = $("#register");
                     forgotPassword.addClass("forgotPassword");
