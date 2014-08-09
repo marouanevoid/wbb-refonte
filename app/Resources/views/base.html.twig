@@ -131,6 +131,7 @@
                             if($.cookie('light_action') !== undefined) {
                                 var notShown = true;
                                 var favoriteUrl = $.cookie('light_url');
+                                console.log(favoriteUrl);
                                 var from = $.cookie('light_from');
                                 var action = $.cookie('light_action');
 
@@ -140,20 +141,20 @@
                                         if (notShown) {
                                             if ($(this).attr('href') === favoriteUrl) {
                                                 $(this).click();
+                                                if(from === 'login') {
+                                                    html = '<div id="success"><p class="padding-top-40">The "' + $.cookie('light_name') +
+                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
+                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                                } else {
+                                                    html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.</p>' +
+                                                    '<p>The "' + $.cookie('light_name') +
+                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
+                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                                }
+                                                $('.popin-block').html(html);
+                                                $('#show-popin').click();
+                                                notShown = false;
                                             }
-                                            if(from === 'login') {
-                                                html = '<div id="success"><p class="padding-top-40">The "' + $.cookie('light_name') +
-                                                '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
-                                                '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
-                                            } else {
-                                                html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.</p>' +
-                                                '<p>The "' + $.cookie('light_name') +
-                                                '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
-                                                '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
-                                            }
-                                            $('.popin-block').html(html);
-                                            $('#show-popin').click();
-                                            notShown = false;
                                         }
                                     });
                                 } else {
