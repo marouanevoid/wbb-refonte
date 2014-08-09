@@ -13,6 +13,10 @@
                         e.preventDefault();
                         $('.popin-block').html('');
                         var url = $('.btn-signin').attr('href') + '?favorite=' + '{{ path('wbb_bar_tips_add') }}';
+                        window.lightType = 'tip';
+                        window.lightName = $('#wbb_barbundle_tip_description').val();
+                        console.log(window.lightType);
+                        console.log(window.lightName);
                         popinFrom = 'favorite';
                         $.ajax({
                             url: url,
