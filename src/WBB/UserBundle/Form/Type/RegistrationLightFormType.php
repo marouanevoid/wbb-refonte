@@ -19,7 +19,7 @@ class RegistrationLightFormType extends BaseType
     {
         $builder
                 ->add('username', null, array('error_bubbling' => true, 'required' => false))
-                ->add('email', 'email', array(
+                ->add('email', 'text', array(
                     'error_bubbling' => true,
                     'required' => false,
                     'label' => 'form.email',
