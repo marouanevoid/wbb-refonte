@@ -246,12 +246,9 @@
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            $('#message').show();
-                            $('#facebook-signup').after($('#message'));
-                            $('#login_form #message').find('ul').remove();
-                            var errorsList = $('#login_form #message div').append('<ul></ul>').parent();
-                            errorsList.find('ul').append('<li>Create an account please !</li>');
+                            window.location.href = "{{ path('fos_user_registration_register') }}";
                         } else {
+                            $.cookie('just_loggedin', true);
                             window.location.reload();
                         }
                     }
