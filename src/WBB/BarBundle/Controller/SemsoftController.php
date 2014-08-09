@@ -59,7 +59,7 @@ class SemsoftController extends Controller
 
         $bar = $ssBar->getUpdatedBar();
 
-        if($bar->getCity() and $bar->getSuburb())
+        if($bar->getCity() && $bar->getSuburb())
         {
             $em->persist($bar);
             $em->remove($ssBar);
@@ -124,7 +124,7 @@ class SemsoftController extends Controller
                 if(($bar && (!empty($data['Updated Columns']) || (!empty($data['Overwritten Columns'])))) || !empty($data['Name'])){
 
                     $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
-                    $suburb = $this->getSuburb($data['District'], $city);
+                    $suburb = $this->getSuburb($data['District'], ($city)?$city:null);
                     $ssBar->setCity(($city)?$city:null);
                     $ssBar->setSuburb(($suburb)?$suburb:null);
                     $ssBar->setCountry(($country)?$country:null);
@@ -326,19 +326,19 @@ class SemsoftController extends Controller
 
     private function getCity($cityName, $country, $postalCode)
     {
-//        $em = $this->getDoctrine()->getManager();
+        $cities = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
+        $city = null;
+        if(count($cities)>0){
+            $city = $cities[0];
+        }
 
-        $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
-
-        if(!$city and !empty($cityName)){
+        if(!$city && !empty($cityName)){
             $city = new City();
             $city
                 ->setName($cityName)
                 ->setCountry($country)
                 ->setPostalCode($postalCode)
             ;
-//            $em->persist($city);
-//            $em->flush();
         }
 
         return $city;
@@ -350,8 +350,10 @@ class SemsoftController extends Controller
             $suburbName = 'City-Center';
         }
 
-//        $em = $this->getDoctrine()->getManager();
-        $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
+        $suburb = null;
+        if($city instanceof City && $city->getId()){
+            $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
+        }
 
         if(!$suburb && !empty($suburbName))
         {
@@ -359,8 +361,6 @@ class SemsoftController extends Controller
             $suburb
                 ->setName($suburbName)
                 ->setCity($city);
-//            $em->persist($suburb);
-//            $em->flush();
         }
 
 

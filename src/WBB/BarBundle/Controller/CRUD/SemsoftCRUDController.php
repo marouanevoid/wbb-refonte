@@ -25,7 +25,7 @@ class SemsoftCRUDController extends Controller
         try {
             foreach ($ssBars as $ssBar) {
                 $bar = $ssBar->getUpdatedBar();
-                if($bar->getCity() and $bar->getSuburb())
+                if($bar->getCity() && $bar->getSuburb())
                 {
                     $modelManager->update($bar);
                     $modelManager->delete($ssBar);
