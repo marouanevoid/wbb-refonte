@@ -53,6 +53,24 @@ class CloudSearchIndexer implements IndexerInterface
         $request->send()->json();
     }
 
+    public function deleteById($id, $verbose = false)
+    {
+        $request = $this->cloudSearchClient->post('documents/batch');
+        $request->setHeader('content-type', 'application/json');
+
+        if ($verbose) {
+            echo "Deleting $id\n";
+        }
+
+        $body = array(array(
+                'type' => 'delete',
+                'id' => $id
+        ));
+
+        $request->setBody(json_encode($body));
+        $request->send()->json();
+    }
+
     public function delete(IndexableEntity $entity)
     {
         $request = $this->cloudSearchClient->post('documents/batch');
