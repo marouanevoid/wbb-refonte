@@ -192,8 +192,7 @@
   .popup .ui .btn {text-decoration: none;}
   
   /* Error */
-    #register.page .ui-dropdown-container .ui-dropdown.error,
-    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
+    .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
     #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #b3955f;}
@@ -231,7 +230,7 @@
   #message img {margin: 0 20px 0 0;}
   #message div {padding: 0 10px 0 0; line-height: 16px;}
   #message p,
-  #message li {color: #faf3e1; font-size: 14px; line-height: 16px; margin-bottom: 5px;}
+  #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
   #register.page #message {width: 300px; padding: 0; position: relative; left: 9px;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
@@ -367,17 +366,17 @@
   #editprofile #edit-account {position: relative;}
   #editprofile #edit-account label {display: block; text-align: right; float: left; width: 165px; line-height: 35px; font-weight: lighter;}
   #editprofile #edit-account .form-text {float: left; width: 298px;}
-  #editprofile #edit-account .form-text-without-label {margin: 0 0 0 184px;}
+  #editprofile #edit-account .form-text-without-label {margin: 0 0 0 185px;}
   #editprofile #edit-account .group.left {width: 345px;}
   #editprofile #edit-account .group-actions {width: 300px; margin-right: 45px;}
   .group-checkbox {width: 300px; float: right; margin-right: 46px;}
   .group-form.checkbox label {width: 367px; font-size: 13px; white-space: nowrap;}
 
 /* UserProfile */
+  #editprofile .block-top {width: 660px; overflow: hidden;}
   #view-account .filter-profil {width: 660px; font-size: 18px; clear: both;}
   #view-account .filter-profil a.ui-radio {text-align: center; width: 164px;}
   #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
-  #editprofile .block-top {width: 660px; overflow: hidden;}
   #view-account .list-bars li {margin-bottom: 10px;}
   #view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
@@ -490,12 +489,7 @@
   ul.ui-autocomplete {background-color: #fff; padding: 10px; position: absolute; width: 280px!important;}
   ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: bold 16px/28px "Avenir", sans-serif; padding: 0;  text-indent: 10px;}
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-weight: lighter; font-size: 16px; cursor: pointer; letter-spacing: 0;}
-  .ui-state-hover,
-  .ui-widget-content .ui-state-hover,
-  .ui-widget-header .ui-state-hover,
-  .ui-state-focus,
-  .ui-widget-content .ui-state-focus,
-  .ui-widget-header .ui-state-focus {border:0; background-color: #faf3e1; font-weight:lighter; color:#b3955f; margin: 0;}
+  .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {border:0; background-color: #faf3e1; font-weight:lighter; color:#b3955f; margin: 0;}
 
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
@@ -531,6 +525,7 @@
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
   section.bar-filter .bar-w-pic {height: 213px; overflow: hidden;}
   .ui .sort-by {margin-left: 0;}
+  .gender .ui-dropdown-container .ui-dropdown .choice,
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
   .search-bar-mobile .container input[type="reset"] {right: 43%;}
   .ui-dropdown-container .ui-dropdown span {height: 37px;}
