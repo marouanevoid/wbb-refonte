@@ -73,7 +73,7 @@
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
     .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
-
+    .ui-dropdown-container .ui-dropdown {box-shadow: 0 0 0 1px #b3955f !important;}
   /* Radius */
     .radius-30 {-webkit-border-radius: 30px;
           -moz-border-radius: 30px;
