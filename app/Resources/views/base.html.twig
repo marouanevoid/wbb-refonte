@@ -131,8 +131,8 @@
                         var notShown = true;
                         $('.star').each(function() {
                             if ($(this).attr('href') === favoriteUrl || $(this).attr('href').replace('delete','add') === favoriteUrl) {
-                                $(this).click();
                                 if (notShown) {
+                                    $(this).click();
                                     notShown = false;
                                     var html = '<div id="success"><p class="padding-top-40">The "' + $(this).attr('data-name') +
                                     '" bar/best of has been added to your favorites.</p>' +

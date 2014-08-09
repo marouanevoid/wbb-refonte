@@ -11,7 +11,20 @@
                 $(document).ready(function() {
                     $('#tips').on('submit', function(e) {
                         e.preventDefault();
-                        $('#show-popin').click();
+                        $('.popin-block').html('');
+                        var url = $('.btn-signin').attr('href') + '?favorite=' + '{{ path('wbb_bar_tips_add') }}';
+                        popinFrom = 'favorite';
+                        $.ajax({
+                            url: url,
+                            method: 'GET',
+                            success: function(html) {
+                                html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
+                                $('.popin-block').html(html);
+                                initializeDropdowns();
+                                initRegisterLoginForms();
+                                $('#show-popin').click();
+                            }
+                        });
                     });
                 });
             </script>
