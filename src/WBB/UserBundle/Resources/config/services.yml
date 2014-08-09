@@ -68,3 +68,10 @@ services:
         class:  WBB\UserBundle\Mailer\GeneratePasswordMailer
         parent: wbb_core.mailer.twig_swift
         public: true
+
+    #Login Listener
+    wbb_login_listener:
+        class: 'WBB\UserBundle\EventListener\LoginListener'
+        arguments: ['@security.context', '@doctrine', '@service_container']
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }

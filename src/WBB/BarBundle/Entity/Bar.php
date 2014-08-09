@@ -290,6 +290,13 @@ class Bar implements IndexableEntity
     private $status;
 
     /**
+     * @var decimal
+     *
+     * @ORM\Column(name="ranking", type="decimal", scale=8, nullable=true)
+     */
+    private $ranking;
+
+    /**
      * @var array
      *
      * @ORM\Column(name="foursquare_excluded_tips", type="array")
@@ -966,22 +973,20 @@ class Bar implements IndexableEntity
      */
     public function __construct()
     {
-        $this->medias = new ArrayCollection();
+        $this->medias   = new ArrayCollection();
         $this->openings = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+        $this->news     = new ArrayCollection();
+        $this->tags     = new ArrayCollection();
         $this->fsSelectedImgs = array();
         $this->fsExcludedTips = array();
         $this->instagramExcludedImgs = array();
-
         $this->isCoatCheck      = true;
         $this->isCreditCard     = true;
         $this->onTop            = true;
         $this->isReservation    = true;
-
-        $this->latitude = 0;
-        $this->longitude = 0;
-
-        $this->news = new ArrayCollection();
+        $this->latitude         = 0;
+        $this->longitude        = 0;
+        $this->ranking          = 0;
     }
 
     /**
@@ -2143,9 +2148,9 @@ class Bar implements IndexableEntity
     /**
      * Remove usersFavorite
      *
-     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     * @param User $usersFavorite
      */
-    public function removeUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
+    public function removeUsersFavorite(User $usersFavorite)
     {
         $this->usersFavorite->removeElement($usersFavorite);
     }
@@ -2158,5 +2163,28 @@ class Bar implements IndexableEntity
     public function getUsersFavorite()
     {
         return $this->usersFavorite;
+    }
+
+    /**
+     * Set ranking
+     *
+     * @param integer $ranking
+     * @return Bar
+     */
+    public function setRanking($ranking)
+    {
+        $this->ranking = $ranking;
+
+        return $this;
+    }
+
+    /**
+     * Get ranking
+     *
+     * @return integer 
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
     }
 }

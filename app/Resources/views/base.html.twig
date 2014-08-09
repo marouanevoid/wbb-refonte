@@ -25,6 +25,9 @@
                 window.isCity = true;
             {% endif %}
             var DEBUGMODE = "{{app.environment }}";
+            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '/');
+
+            // vars for fav actions
         </script>
             
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -83,6 +86,7 @@
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.mousewheel.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/popin.void.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.metabolism.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.metabolism.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.metabolism.js') }}"></script>
@@ -110,8 +114,81 @@
                 
                 var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
-                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
+                var showLoginForm = {{ app.request.query.get('login', 0) }};
+                var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
+                var favoriteName = '';
+
+                var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
+                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
+                var popinFrom = '';
+                {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                var currentPage = "{{ currentPath }}";
+
+                {% if app.user %}
+                    $(document).ready(function() {
+                        if($.cookie) {
+                            if($.cookie('light_action') !== undefined) {
+                                var notShown = true;
+                                var favoriteUrl = $.cookie('light_url');
+                                var from = $.cookie('light_from');
+                                var action = $.cookie('light_action');
+
+                                var html = '';
+                                if(action === 'favorite'){
+                                    $('.star').each(function() {
+                                        if (notShown) {
+                                            if ($(this).attr('href') === favoriteUrl) {
+                                                $(this).click();
+                                            }
+                                            if(from === 'login') {
+                                                html = '<div id="success"><p class="padding-top-40">The "' + $.cookie('light_name') +
+                                                '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
+                                                '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                            } else {
+                                                html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.</p>' +
+                                                '<p>The "' + $.cookie('light_name') +
+                                                '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
+                                                '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                            }
+                                            $('.popin-block').html(html);
+                                            $('#show-popin').click();
+                                            notShown = false;
+                                        }
+                                    });
+                                } else {
+                                    if(from !== 'login') {
+                                        var html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.<p>' +
+                                        '<p>Your tip has been posted and is currently being moderated.</p>' +
+                                        '<p>You will be able to find all your tips in your user profile.</p>';
+                                        $('.popin-block').html(html);
+                                        $('#show-popin').click();
+                                    }
+                                    $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
+                                    $('#tips_submit').click();
+                                }
+                                
+                                
+
+                                $.removeCookie('light_action');
+                                $.removeCookie('light_url');
+                                $.removeCookie('light_favorite');
+                                $.removeCookie('light_from');
+                                $.removeCookie('light_name');
+                            }
+                        }
+                    });
+                {% endif %}
+
+                $(document).ready(function() {
+                    if ($.cookie('just_loggedin') !== undefined) {
+                        $('header.desktop .logged').mouseover();
+                        $.removeCookie('just_loggedin');
+                    }
+                    $(window).on('scroll' , function(){
+                        $('header.desktop .logged').mouseout();
+                    });
+                });
         </script>
 
         {% if is_tablet() %}
@@ -148,6 +225,9 @@
                         {% if resetting_form is defined %}
                             {{ resetting_form|raw }}
                         {% endif %}
+                        {% if app.request.query.get('emailPopin', 0) == 1%}
+                            {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
+                        {% endif %}
                     </div>
                     <div>
                         <a href="#close" class="btn btn-close">Close</a>
@@ -158,7 +238,6 @@
         </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
         {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
-        <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
             function securityCheck() {
@@ -166,7 +245,11 @@
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            alert('Create an account please !');
+                            $('#message').show();
+                            $('#facebook-signup').after($('#message'));
+                            $('#login_form #message').find('ul').remove();
+                            var errorsList = $('#login_form #message div').append('<ul></ul>').parent();
+                            errorsList.find('ul').append('<li>Create an account please !</li>');
                         } else {
                             window.location.reload();
                         }
@@ -194,7 +277,6 @@
         {% endblock %}
         <!-- AD -->
         {% block footerAd %}
-            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
         {% endblock %}
         <script>
         $(document).ready(function(){

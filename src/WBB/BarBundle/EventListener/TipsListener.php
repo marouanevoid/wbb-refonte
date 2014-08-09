@@ -10,11 +10,15 @@ class TipsListener implements EventSubscriberInterface
 {
 
     private $mailer;
+    private $router;
+    private $twig;
     private $em;
 
-    public function __construct($mailer, $em)
+    public function __construct($mailer, $router, $twig, $em)
     {
         $this->mailer = $mailer;
+        $this->router = $router;
+        $this->twig = $twig;
         $this->em = $em;
     }
 
@@ -22,15 +26,39 @@ class TipsListener implements EventSubscriberInterface
     {
         if ($event->getTip()->getStatus() == 0) {
             $admins = $this->em->getRepository('WBBUserBundle:User')->findAdminUsers();
+            $tip = $event->getTip();
+            $tipUrl = $this->router->generate('admin_wbb_bar_tip_edit', array('id' => $tip->getId()), true);
 
             foreach ($admins as $admin) {
                 $data = array(
-                    'context' => array(),
+                    'context' => array(
+                        'user' => $admin,
+                        'tipUrl' => $tipUrl
+                    ),
                     'fromEmail' => 'myportal@pernod-ricard.com',
                     'toEmail' => $admin->getEmail()
                 );
 
-                $this->mailer->sendTipEmail($data);
+                $templateName = 'WBBBarBundle:Tips:email.html.twig';
+                $context = $this->twig->mergeGlobals($data['context']);
+                $template = $this->twig->loadTemplate($templateName);
+                $subject = $template->renderBlock('subject', $context);
+                $textBody = $template->renderBlock('body_text', $context);
+                $htmlBody = $template->renderBlock('body_html', $context);
+
+                $message = \Swift_Message::newInstance()
+                        ->setSubject($subject)
+                        ->setFrom($data['fromEmail'])
+                        ->setTo($data['toEmail']);
+
+                if (!empty($htmlBody)) {
+                    $message->setBody($htmlBody, 'text/html')
+                            ->addPart($textBody, 'text/plain');
+                } else {
+                    $message->setBody($textBody);
+                }
+
+                $this->mailer->send($message);
             }
         }
     }

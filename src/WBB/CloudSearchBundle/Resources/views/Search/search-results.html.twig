@@ -7,6 +7,8 @@
         var queryestQ = "{{app.request.query.get('q', '*')}}";    
         {% else %}
         var queryestQ = "{{app.request.query.get('q', 'undefined')}}";
+        if(queryestQ == "")
+            queryestQ = "*";
         {% endif %}
         var queryestTag = "{{app.request.query.get('tag','undefined')}}";
     </script>
@@ -32,7 +34,7 @@
                     <div class="twelve columns s-margin">
                         <form id="search" action="/">
                             {# <input type="text" name="q" placeholder="Search"/> #}
-                            <input type="text" name="city" placeholder="Type your city name..."/>
+                            <input type="text" name="city" placeholder="Type your city name..." {% if app.request.query.get('q') is defined and app.request.query.get('q') %} value="{{app.request.query.get('q')}}" {% endif %} />
                             <input type="reset" value=" "/>
                         </form>
                         <a class="btn-radius border h4 close">Cancel</a>
@@ -137,15 +139,15 @@
                 </div>
             </div>
 
-            <section class="nine columns bar-filter m-margin-top">
+            <section class="nine columns bar-filter m-margin-top min-height">
                 <div class='display-bar-width-picture-parent'>
                     <div class="details-barlist bars-w-pic force-load  {% if is_mobile() and not is_tablet() %}m-margin-top{% endif %} load-container">
                         <div class='dist-target'></div>
                         <div class="load-target"></div>
                     <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
-                        <a class="h4 btn-radius large border load-more brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
                     </div>
                     </div>
                 </div>
@@ -156,8 +158,8 @@
                     <div class="load-target"></div>
                     <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
-                        <a class="h4 btn-radius large border load-more brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
                     </div>
                     </div>
                 </div>
@@ -209,6 +211,6 @@
             });
         </script>
     {% endblock %}
-     {% block footerAd %}
-   {#     {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'SR_728x90' })) }} #}
-   {% endblock %}
+{% block footerAd %}
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'SR_728x90' })) }}
+{% endblock %}

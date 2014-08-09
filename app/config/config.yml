@@ -88,6 +88,8 @@ fos_user:
         confirmation: { enabled: true, template: WBBUserBundle:User:confirmation.email.html.twig }
         form:
             type: wbb_user_registration
+            validation_groups:  [Registration, Default, registration_full]
+
     profile:
         form:
             type: wbb_user_profile
@@ -98,6 +100,9 @@ fos_user:
     resetting:
         email:
             template: WBBUserBundle:User:resetting.email.html.twig
+            
+    service:
+        mailer: fos_user.mailer.twig_swift
 
 # Sonata Admin bundle
 sonata_admin:
@@ -230,9 +235,9 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                small:   { width: 82, height: 82, quality: 100}
-                medium:  { width: 82, height: 82, quality: 100}
-                large:   { width: 145, height: 145, quality: 100}
+                av_small:   { width: 82, height: 82, quality: 100}
+                av_medium:  { width: 82, height: 82, quality: 100}
+                av_large:   { width: 145, height: 145, quality: 100}
 
     cdn:
         server:

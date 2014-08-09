@@ -29,17 +29,30 @@ function nodeToString(node) {
 
 $(document).ready(function() {
     $('.btn-signin').on('click', function(e) {
+        popinFrom = 'signin';
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
-        $.ajax({
+
+        // Set the PopIn Loading Flag
+        PopIn.startLoading();
+        window.ajaxRequest = $.ajax({
             url: url,
             method: 'GET',
             success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+
                 $('.popin-block').html(html);
                 initializeDropdowns();
                 initRegisterLoginForms();
                 $('#show-popin').click();
+            },
+            beforeSend: function()
+            {
+                console.log(window.ajaxRequest);
+                if (window.ajaxRequest != null) window.ajaxRequest.abort();
+
             }
         });
     });
@@ -123,21 +136,45 @@ function initRegisterLoginForms() {
             url: formUrl,
             data: form.serialize(),
             success: function(data) {
-                if (data.code === '400') {
-                    var errors = data.errors;
-                    $('#message').find('ul').remove();
-                    var errorsList = $('#message').show().find('img').after('<ul></ul>').parent();
+                if (data.code == '400') {
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+
+                    $('#message').show();
+                    $('#register_form').after($('#message'));
+                    $('#register-form #message').find('ul').remove();
+                    $('#register-form #message div').append('<ul></ul>').parent();
+                    var idPrefix = '#fos_user_registration_form_';
+                    for (var i = 0; i < fields.length; i++) {
+                        switch (fields[i]) {
+                            case 'birthdate':
+                                // birthday error
+                                break;
+                            case 'plainPassword':
+                                $(idPrefix + fields[i] + '_first').addClass('error');
+                                $(idPrefix + fields[i] + '_second').addClass('error');
+                                break;
+                            default:
+                                $(idPrefix + fields[i]).addClass('error');
+                                break;
+                        }
+                    }
                     for (var i = 0; i < errors.length; i++) {
-                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                        $('#register-form #message').find('ul').append('<li>' + errors[i] + '</li>');
                     }
                 } else {
-                    var html = '<div id="success" class="text-align-center padding-top-80">' +
-                            '<div class="subtitle text-transform-uppercase margin-top-80">Congratulations!</div>' +
-                            '<p class="margin-top-20 margin-bottom-20">You are now registered on  World’s Best Bars.</p>' +
-                            '<p>Check your mailbox <br />' +
-                            'to confirm your subscription.</p>' +
-                            '</div>';
-                    $('.popin-block').html(html);
+                    if (addFavorite.indexOf('favorite') > -1) {
+                        $.cookie('light_action', 'favorite');
+                    } else {
+                        $.cookie('light_action', 'tips');
+                    }
+                    $.cookie('light_type', window.lightType);
+                    $.cookie('light_url', addFavorite);
+                    $.cookie('light_from', 'register');
+                    $.cookie('light_name', window.lightName);
+
+                    $.cookie('just_loggedin', true);
+                    window.location.reload();
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -149,7 +186,7 @@ function initRegisterLoginForms() {
     $('#login_form').on('submit', function(e) {
         e.preventDefault();
         var form = $(this);
-        var formUrl = form.attr('action');
+        var formUrl = form.attr('action') 
         $.ajax({
             type: "POST",
             url: formUrl,
@@ -157,8 +194,26 @@ function initRegisterLoginForms() {
             success: function(data) {
                 console.log(data);
                 if (data.code === '400') {
-                    $('#login_error').html(data.error);
+                    $('#username').addClass('error');
+                    $('#password').addClass('error');
+                    $('#facebook-signup').after($('#message'));
+                    $('#login_form #message').find('ul').remove();
+                    var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
+                    errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
+                    if( addFavorite != 0 ) {
+                        if (addFavorite.indexOf('favorite') > -1) {
+                            $.cookie('light_action', 'favorite');
+                        } else {
+                            $.cookie('light_action', 'tips');
+                        }
+                        $.cookie('light_type', window.lightType);
+                        $.cookie('light_url', addFavorite);
+                        $.cookie('light_from', 'login');
+                        $.cookie('light_name', window.lightName);
+                    }
+
+                    $.cookie('just_loggedin', true);
                     window.location.reload();
                 }
             },
@@ -169,39 +224,53 @@ function initRegisterLoginForms() {
     });
 }
 
-// Popin
 jQuery(document).ready(function($) {
-    // Click anywhere on the page to get rid of lightbox window
-    $('.mask').hide();
-    $('.lighbox').click(function(e) {
+
+    $('#register_form_full').on('submit', function(e) {
         e.preventDefault();
-        //Get clicked link data-show ID of tag to show
-        var id_content = $(this).attr("data-show");
-        var current_id = $("#" + id_content);
-        var mask = $(".mask");
+        var url = $(this).attr('action');
 
-        if (current_id.length > 0) {
-            //show lightbox window
-            current_id.fadeIn("slow");
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data.code === 400) {
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
 
-            // Add class to trigger ID
-            current_id.addClass('void-popup');
+                    $('#message').show();
+                    $('#create-account #message').find('ul').remove();
+                    var errorsList = $('#create-account #message div').show().append('<ul></ul>').parent();
 
-            //show the mask
-            mask.fadeIn("slow");
-        } else {
-            $('.mask').hide();
-            current_id.removeClass("void-popup");
-        }
-    });
+                    for (var i = 0; i < errors.length; i++) {
+                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    var idPrefix = '#fos_user_registration_form_';
+                    for (var i = 0; i < fields.length; i++) {
 
-    $(".btn-close").click(function(e) {
-        var current_popup = $(this).closest(".void-popup");
-        current_popup.fadeOut("fast");
-        $(".mask").fadeOut("slow", function() {
-            current_popup.removeClass("void-popup");
+                        switch (fields[i]) {
+                            case 'birthdate':
+                                // birthday error
+                                break;
+                            case 'plainPassword':
+                                $(idPrefix + fields[i] + '_first').addClass('error');
+                                $(idPrefix + fields[i] + '_second').addClass('error');
+                                break;
+                            default:
+                                $(idPrefix + fields[i]).addClass('error');
+                                break;
+                        }
+                    }
+                } else {
+                    window.location.href = profileWithPopinUrl;
+                }
+            }
         });
     });
+
+    $('#message').hide();
+    // PopIn.resize($('#register'));
 
     if (showNewPassword) {
         var url = newPasswordUrl;
@@ -215,15 +284,72 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = 'Your email is now confirmed. Welcome in the World’s Best Bars community!' +
-                'You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars';
+        var html = '<div id="success" class="text-align-center padding-top-80 padding-bottom-80">' +
+                '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
+                '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
+                '</div>';
         $('.popin-block').html(html);
+        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
     }
+    if(showEmailPopin) {
+        $('#show-popin').click();
+        PopIn.resize($('#register'));
+    }
+    if(showLoginForm) {
+        $('.btn-signin').click();
+    }
 });
+
+// syncronise Bar favorie
+function syncBarFav(cible,status){
+    var href = cible.attr('href'),
+        currentTitle = cible.parent('article').find('.txt h2').text();
+    // find the other Bar on dom 
+    // wich content the same name
+    $('.txt').find('h2').each(function(){
+        if($(this).text() == currentTitle){
+            // This bar is like favoried Bar
+            // set the Class active
+            var artcileParent =  $(this).parents('article');
+            if(status){
+                var btn = artcileParent.find('.star');
+                btn.hide();
+                btn.removeClass('active');
+                if (btn.hasClass('changed')) {
+                    btn.removeClass('brown');
+                    btn.addClass('dark');
+                    btn.removeClass('changed');
+                }
+                if (btn.hasClass('nc')) {
+                    btn.addClass('force-disabled')
+                }
+                btn.show();
+            }
+            else{
+                var btn = artcileParent.find('.star');
+                btn.removeClass('active');
+                btn.hide();
+                btn.addClass('active');
+
+                if (btn.hasClass('dark')) {
+                    btn.addClass('changed');
+                    btn.addClass('brown');
+                    btn.removeClass('dark');
+                }
+                if (btn.hasClass('force-disabled')) {
+                    btn.removeClass('force-disabled')
+                }
+                btn.show();
+            }
+            // set the href url
+            artcileParent.find('.star').attr('href' , href);
+        }
+    });
+} 
 
 // Favorites star
 $(document).ready(function() {
@@ -235,18 +361,22 @@ $(document).ready(function() {
     $(document).on("click", ".star", function(e) {
         e.preventDefault();
         var btn = $(this);
-        var url = $(this).attr('href');
+        var favUrl = $(this).attr('href');
+        window.lightName = $(this).attr('data-name');
+        window.lightType = $(this).attr('data-type');
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
             $.ajax({
                 type: "POST",
-                url: url,
+                url: favUrl,
                 success: function(response) {
                     if (response.code === 200) {
                         btn.attr('href', response.href);
                         if (btn.hasClass('active')) {
                             btn.hide();
                             btn.removeClass('active');
+                            // search sync bars
+                            syncBarFav(btn,true);
                             if (btn.hasClass('changed')) {
                                 btn.removeClass('brown');
                                 btn.addClass('dark');
@@ -258,18 +388,18 @@ $(document).ready(function() {
                             btn.show();
 
                             // destroy the item parent on profile
-                            if(btn.parents('.profile-fav-block').length){
+                            if (btn.parents('.profile-fav-block').length) {
 
                                 var TypeEvent = "removeitem",
-                                    cible = "";
-                                if(btn.parents('.three.columns.m-margin-top').length){
-                                    btn.parents('.three.columns.m-margin-top').remove();
+                                        cible = "";
+                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length){
+                                    btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
                                 }
                                 else{
-                                    if( btn.parents('.best-of-container').length){
-                                        btn.parents('.best-of-container').remove();
-                                         cible = 'bestof';
+                                    if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length){
+                                        btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
+                                        cible = 'bestof';
                                     }
                                 }
 
@@ -282,6 +412,10 @@ $(document).ready(function() {
                         } else {
                             btn.hide();
                             btn.addClass('active');
+
+                            // search sync bars
+                            syncBarFav(btn,false);
+
                             if (btn.hasClass('dark')) {
                                 btn.addClass('changed');
                                 btn.addClass('brown');
@@ -292,6 +426,7 @@ $(document).ready(function() {
                             }
                             btn.show();
                         }
+                        favoriteName = response.message;
                         console.log(response.message);
                     } else {
 
@@ -300,11 +435,18 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href');
+            var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
+            popinFrom = 'favorite';
+            // Set the PopIn Loading Flag
+            PopIn.startLoading();
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    // Set the PopIn Loading Flag
+                    PopIn.endLoading();
+
+                    html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
                     initializeDropdowns();
                     initRegisterLoginForms();

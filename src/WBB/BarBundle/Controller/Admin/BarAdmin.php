@@ -93,7 +93,6 @@ class BarAdmin extends Admin
                     'field_type' => 'text'
                 ), null, array('attr' => array('class' => 'datepicker'))
             )
-
         ;
     }
 

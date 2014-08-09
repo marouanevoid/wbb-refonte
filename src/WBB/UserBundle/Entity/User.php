@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use WBB\BarBundle\Entity\BestOf;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -37,6 +38,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=45, nullable=true)
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full"})
      */
     private $firstname;
 
@@ -44,6 +46,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=45, nullable=true)
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full"})
      */
     private $lastname;
 
@@ -51,6 +54,7 @@ class User extends BaseUser
      * @var date
      *
      * @ORM\Column(name="birthdate", type="date", nullable=true)
+     * @Assert\NotBlank(message="not.blank")
      */
     private $birthdate;
 
@@ -103,149 +107,148 @@ class User extends BaseUser
      */
     private $prefHome;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-     */
-    private $prefCity1;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-     */
-    private $prefCity2;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-     */
-    private $prefCity3;
-
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_city1", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
 //     */
 //    private $prefCity1;
-//
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_city2", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
 //     */
 //    private $prefCity2;
 //
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_city3", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
 //     */
 //    private $prefCity3;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
+     * @var string
+     *
+     * @ORM\Column(name="pref_city1", type="string", length=255, nullable=true)
      */
-    private $prefBar1;
+    private $prefCity1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
+     * @var string
+     *
+     * @ORM\Column(name="pref_city2", type="string", length=255, nullable=true)
      */
-    private $prefBar2;
+    private $prefCity2;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
+     * @var string
+     *
+     * @ORM\Column(name="pref_city3", type="string", length=255, nullable=true)
      */
-    private $prefBar3;
+    private $prefCity3;
 
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_bar1", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
 //     */
 //    private $prefBar1;
 //
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_bar2", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
 //     */
 //    private $prefBar2;
 //
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_bar3", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
 //     */
 //    private $prefBar3;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar1", type="string", length=255, nullable=true)
      */
-    private $prefDrinkBrand1;
+    private $prefBar1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar2", type="string", length=255, nullable=true)
      */
-    private $prefDrinkBrand2;
+    private $prefBar2;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_bar3", type="string", length=255, nullable=true)
      */
-    private $prefDrinkBrand3;
+    private $prefBar3;
 
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_drink_brand_1", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
 //     */
 //    private $prefDrinkBrand1;
 //
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_drink_brand_2", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
 //     */
 //    private $prefDrinkBrand2;
 //
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
 //     */
 //    private $prefDrinkBrand3;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_1", type="string", length=255, nullable=true)
      */
-    private $prefCocktails1;
+    private $prefDrinkBrand1;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_2", type="string", length=255, nullable=true)
      */
-    private $prefCocktails2;
+    private $prefDrinkBrand2;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
+     * @var string
+     *
+     * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
      */
-    private $prefCocktails3;
+    private $prefDrinkBrand3;
 
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_cocktails_1", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
 //     */
 //    private $prefCocktails1;
 //
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_cocktails_2", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
 //     */
 //    private $prefCocktails2;
 //
 //    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="pref_cocktails_3", type="string", length=255, nullable=true)
+//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
 //     */
 //    private $prefCocktails3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_1", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_2", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pref_cocktails_3", type="string", length=255, nullable=true)
+     */
+    private $prefCocktails3;
 
     /**
      * @var boolean
@@ -269,6 +272,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="users")
+     * @Assert\NotBlank(message="not.blank")
      */
     private $country;
 
@@ -1174,10 +1178,10 @@ class User extends BaseUser
     /**
      * Add favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      * @return User
      */
-    public function addFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function addFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs[] = $favoriteBestOfs;
 
@@ -1187,9 +1191,9 @@ class User extends BaseUser
     /**
      * Remove favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      */
-    public function removeFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function removeFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs->removeElement($favoriteBestOfs);
     }
@@ -1267,12 +1271,31 @@ class User extends BaseUser
     {
         $country = $this->getCountry();
         $drinkingAge = 18;
-        $age = $this->birthdate->diff(new \DateTime('now'))->y;
-        if ($country) {
-            $drinkingAge = $country->getDrinkingAge();
-        }
-        if ($drinkingAge > $age) {
-            $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+        if ($this->birthdate) {
+            $age = $this->birthdate->diff(new \DateTime('now'))->y;
+            if ($country) {
+                $drinkingAge = $country->getDrinkingAge();
+            }
+            if ($drinkingAge > $age) {
+                $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+            }
         }
     }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function validatePassword(ExecutionContextInterface $context)
+    {
+        if ($this->plainPassword) {
+            if (strlen($this->plainPassword) < 6) {
+                $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+            } else {
+                if (!ctype_alnum($this->plainPassword)) {
+                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+                }
+            }
+        }
+    }
+
 }

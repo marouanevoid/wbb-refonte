@@ -61,6 +61,11 @@
                 <source>list.label_country</source>
                 <target>Country</target>
             </trans-unit>
+            
+            <trans-unit id="form.label_drinking_age">
+                <source>form.label_drinking_age</source>
+                <target>Drinking age</target>
+            </trans-unit>
 
             <trans-unit id="filter.label_country">
                 <source>filter.label_country</source>

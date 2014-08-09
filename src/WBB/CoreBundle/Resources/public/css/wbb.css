@@ -313,3 +313,12 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     right: -130px;
     top: 1px;
 }
+
+.popin-loader-gif{
+    width: 54px;
+    height: 55px;
+    background:url(../images/31.gif) no-repeat center;
+    position: absolute;
+    z-index: 2000000;
+    display: none;
+}
