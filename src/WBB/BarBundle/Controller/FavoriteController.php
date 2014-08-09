@@ -105,7 +105,7 @@ class FavoriteController extends Controller
             ));
         }
 
-        if (!$bestOf->addFavoriteBestOf()->contains($bestOf)) {
+        if (!$bestOf->getUsersFavorite()->contains($bestOf)) {
             $bestOf->addUsersFavorite($user);
             $user->addFavoriteBestOf($bestOf);
 

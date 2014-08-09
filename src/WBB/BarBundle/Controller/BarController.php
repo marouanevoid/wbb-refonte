@@ -531,8 +531,8 @@ class BarController extends Controller
         }else{
             if($filter === "popularity"){
                 //TODO: Repository methode for popularity
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, $limit, 'DESC');
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0, 'DESC');
+                $response = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, $limit);
+                $all = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, 0);
             }elseif($filter === "alphabetical"){
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset ,$limit);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);

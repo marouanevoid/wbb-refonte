@@ -69,15 +69,19 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips, c, su")
+            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips, COUNT(uf) as HIDDEN nbFavoris, c, su")
+            ->addSelect('')
             ->leftJoin($this->getAlias().'.city', 'c')
             ->leftJoin($this->getAlias().'.suburb', 'su')
             ->leftJoin($this->getAlias().'.tips', 'tp', 'WITH', 'tp.status ='. $qb->expr()->literal(1))
+            ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
             ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy('nbFavoris', 'DESC')
+            ->addOrderBy($this->getAlias().'.ranking', 'DESC')
             ->addOrderBy('nbTips', 'DESC')
             ->setMaxResults($limit)
         ;
@@ -85,8 +89,6 @@ class BarRepository extends EntityRepository
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
-
-        //TODO : Add Favoris count
 
         return $qb->getQuery()->getResult();
 
@@ -97,11 +99,15 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', COUNT(uf) as HIDDEN nbFavoris')
+            ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
+            ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy('nbFavoris', 'DESC')
+            ->addOrderBy($this->getAlias().'.ranking', 'DESC')
             ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
             ->setFirstResult($offset)
         ;
@@ -113,8 +119,6 @@ class BarRepository extends EntityRepository
         if($city){
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
-
-        //TODO : Add Favoris count
 
         return $qb->getQuery()->getResult();
 
