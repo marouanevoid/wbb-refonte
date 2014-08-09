@@ -74,7 +74,7 @@ class Ad {
     private $link;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\CoreBundle\Entity\Country", mappedBy="ad", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\Country", mappedBy="ads")
      */
     private $countries;
 
@@ -232,37 +232,6 @@ class Ad {
     }
 
     /**
-     * Add country
-     *
-     * @param Country $country
-     * @return Ad
-     */
-    public function addCountry($country){
-        $this->countries[] = $country;
-        $country->setAd($this);
-        return $this;
-    }
-
-    /**
-     * Remove countries
-     *
-     * @param Country $countries
-     */
-    public function removeCountry($countries){
-        $this->countries->removeElement($countries);
-        $countries->setAd(null);
-    }
-
-    /**
-     * Get countries
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCountries(){
-        return $this->countries;
-    }
-
-    /**
      * Set beginAt
      *
      * @param \DateTime $beginAt
@@ -362,4 +331,38 @@ class Ad {
         );
     }
 
+
+    /**
+     * Add countries
+     *
+     * @param \WBB\CoreBundle\Entity\Country $country
+     * @return Ad
+     */
+    public function addCountry(\WBB\CoreBundle\Entity\Country $country)
+    {
+        $this->countries[] = $country;
+        $country->addAd($this);
+        return $this;
+    }
+
+    /**
+     * Remove countries
+     *
+     * @param \WBB\CoreBundle\Entity\Country $country
+     */
+    public function removeCountry(\WBB\CoreBundle\Entity\Country $country)
+    {
+        $this->countries->removeElement($country);
+        $country->removeAd($this);
+    }
+
+    /**
+     * Get countries
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCountries()
+    {
+        return $this->countries;
+    }
 }

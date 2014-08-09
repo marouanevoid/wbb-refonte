@@ -419,4 +419,13 @@ class BarRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    public function findMaxValueOf($field)
+    {
+        $query = $this->createQueryBuilder($this->getAlias())
+            ->select("MAX(".$this->getAlias().".".$field.")")
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
 }

@@ -128,14 +128,18 @@
                 {% if app.request.query.get('favoriteAction', null) != null %}
                     var favoriteUrl = "{{ app.request.query.get('favoriteAction')}}"
                     $(document).ready(function() {
+                        var notShown = true;
                         $('.star').each(function() {
                             if ($(this).attr('href') === favoriteUrl || $(this).attr('href').replace('delete','add') === favoriteUrl) {
                                 $(this).click();
-                                var html = '<div id="success"><p class="padding-top-40">The ' + favoriteName +
-                                ' bar/best of has been added to your favorites.</p>'+
-                                '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
-                                $('.popin-block').html(html);
-                                $('#show-popin').click();
+                                if (notShown) {
+                                    notShown = false;
+                                    var html = '<div id="success"><p class="padding-top-40">The "' + $(this).attr('data-name') +
+                                    '" bar/best of has been added to your favorites.</p>' +
+                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                    $('.popin-block').html(html);
+                                    $('#show-popin').click();
+                                }
                             }
                         });
                     });

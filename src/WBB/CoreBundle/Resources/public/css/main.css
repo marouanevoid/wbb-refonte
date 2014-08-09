@@ -74,6 +74,9 @@
     .forgetpassword {width: 300px;}
     .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
     .ui-dropdown-container .ui-dropdown {box-shadow: 0 0 0 1px #b3955f !important;}
+    #register_form_full .ui-dropdown-container.changed-ui-style .ui-dropdown , 
+    .fos_user_profile_edit .ui-dropdown-container.changed-ui-style .ui-dropdown{color: #818a8c;}
+
   /* Radius */
     .radius-30 {-webkit-border-radius: 30px;
           -moz-border-radius: 30px;
@@ -246,7 +249,8 @@
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
-  #register.page .group-actions {width: 40%;}
+  #register.page .group-actions {width: 40%; position: relative; left: 6px; overflow: hidden;}
+  #register.page .group-checkbox {margin: auto; position: relative; left: 6px;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
