@@ -33,14 +33,26 @@ $(document).ready(function() {
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
-        $.ajax({
+
+        // Set the PopIn Loading Flag
+        PopIn.startLoading();
+        window.ajaxRequest = $.ajax({
             url: url,
             method: 'GET',
             success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+
                 $('.popin-block').html(html);
                 initializeDropdowns();
                 initRegisterLoginForms();
                 $('#show-popin').click();
+            },
+            beforeSend: function()
+            {
+                console.log(window.ajaxRequest);
+                if (window.ajaxRequest != null) window.ajaxRequest.abort();
+
             }
         });
     });
@@ -292,6 +304,53 @@ jQuery(document).ready(function($) {
     }
 });
 
+// syncronise Bar favorie
+function syncBarFav(cible,status){
+    var href = cible.attr('href'),
+        currentTitle = cible.parent('article').find('.txt h2').text();
+    // find the other Bar on dom 
+    // wich content the same name
+    $('.txt').find('h2').each(function(){
+        if($(this).text() == currentTitle){
+            // This bar is like favoried Bar
+            // set the Class active
+            var artcileParent =  $(this).parents('article');
+            if(status){
+                var btn = artcileParent.find('.star');
+                btn.hide();
+                btn.removeClass('active');
+                if (btn.hasClass('changed')) {
+                    btn.removeClass('brown');
+                    btn.addClass('dark');
+                    btn.removeClass('changed');
+                }
+                if (btn.hasClass('nc')) {
+                    btn.addClass('force-disabled')
+                }
+                btn.show();
+            }
+            else{
+                var btn = artcileParent.find('.star');
+                btn.removeClass('active');
+                btn.hide();
+                btn.addClass('active');
+
+                if (btn.hasClass('dark')) {
+                    btn.addClass('changed');
+                    btn.addClass('brown');
+                    btn.removeClass('dark');
+                }
+                if (btn.hasClass('force-disabled')) {
+                    btn.removeClass('force-disabled')
+                }
+                btn.show();
+            }
+            // set the href url
+            artcileParent.find('.star').attr('href' , href);
+        }
+    });
+} 
+
 // Favorites star
 $(document).ready(function() {
     var allInputs = $(":input");
@@ -316,6 +375,8 @@ $(document).ready(function() {
                         if (btn.hasClass('active')) {
                             btn.hide();
                             btn.removeClass('active');
+                            // search sync bars
+                            syncBarFav(btn,true);
                             if (btn.hasClass('changed')) {
                                 btn.removeClass('brown');
                                 btn.addClass('dark');
@@ -351,6 +412,10 @@ $(document).ready(function() {
                         } else {
                             btn.hide();
                             btn.addClass('active');
+
+                            // search sync bars
+                            syncBarFav(btn,false);
+
                             if (btn.hasClass('dark')) {
                                 btn.addClass('changed');
                                 btn.addClass('brown');
@@ -372,10 +437,15 @@ $(document).ready(function() {
             $('.popin-block').html('');
             var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
             popinFrom = 'favorite';
+            // Set the PopIn Loading Flag
+            PopIn.startLoading();
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    // Set the PopIn Loading Flag
+                    PopIn.endLoading();
+
                     html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
                     initializeDropdowns();

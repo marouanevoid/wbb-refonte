@@ -238,6 +238,13 @@ services:
     wbb.mailer:
         class: WBB\BarBundle\Mailer\TipsMailer
 
+    #Bar Persist Listener
+    wbb.bar.listener:
+        class: WBB\BarBundle\EventListener\BarListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
+
     # ForumMailer
 #    wbb_bar.mailer:
 #        class:  WBB\BarBundle\Mailer\BarMailer
