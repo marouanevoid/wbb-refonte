@@ -33,7 +33,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
-        $.ajax({
+        window.ajaxRequest = $.ajax({
             url: url,
             method: 'GET',
             success: function(html) {
@@ -41,6 +41,12 @@ $(document).ready(function() {
                 initializeDropdowns();
                 initRegisterLoginForms();
                 $('#show-popin').click();
+            },
+            beforeSend: function()
+            {
+                console.log(window.ajaxRequest);
+                if (window.ajaxRequest != null) window.ajaxRequest.abort();
+
             }
         });
     });
@@ -151,7 +157,7 @@ function initRegisterLoginForms() {
     $('#login_form').on('submit', function(e) {
         e.preventDefault();
         var form = $(this);
-        var formUrl = form.attr('action');
+        var formUrl = form.attr('action') 
         $.ajax({
             type: "POST",
             url: formUrl,
@@ -166,7 +172,7 @@ function initRegisterLoginForms() {
                     var errorsList = $('#login_form #message').show().append('<div><ul></ul></div>').parent();
                     errorsList.find('ul').append('<li>' + data.error + '</li>');
                 } else {
-                    window.location.reload();
+                    window.location.href = currentPage + '?favoriteAction=' + addFavorite;
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -236,20 +242,72 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="text-align-center padding-top-80">' +
+        var html = '<div id="success" class="text-align-center padding-top-80 padding-bottom-80">' +
                 '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
                 '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
                 '</div>';
         $('.popin-block').html(html);
+        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
     }
     if(showEmailPopin) {
-        alert('Congrats');
+        $('#show-popin').click();
+        PopIn.resize($('#register'));
+    }
+    if(showLoginForm) {
+        $('.btn-signin').click();
     }
 });
+
+// syncronise Bar favorie
+function syncBarFav(cible,status){
+    var href = cible.attr('href'),
+        currentTitle = cible.parent('article').find('.txt h2').text();
+    // find the other Bar on dom 
+    // wich content the same name
+    $('.txt').find('h2').each(function(){
+        if($(this).text() == currentTitle){
+            // This bar is like favoried Bar
+            // set the Class active
+            var artcileParent =  $(this).parents('article');
+            if(status){
+                var btn = artcileParent.find('.star');
+                btn.hide();
+                btn.removeClass('active');
+                if (btn.hasClass('changed')) {
+                    btn.removeClass('brown');
+                    btn.addClass('dark');
+                    btn.removeClass('changed');
+                }
+                if (btn.hasClass('nc')) {
+                    btn.addClass('force-disabled')
+                }
+                btn.show();
+            }
+            else{
+                var btn = artcileParent.find('.star');
+                btn.removeClass('active');
+                btn.hide();
+                btn.addClass('active');
+
+                if (btn.hasClass('dark')) {
+                    btn.addClass('changed');
+                    btn.addClass('brown');
+                    btn.removeClass('dark');
+                }
+                if (btn.hasClass('force-disabled')) {
+                    btn.removeClass('force-disabled')
+                }
+                btn.show();
+            }
+            // set the href url
+            artcileParent.find('.star').attr('href' , href);
+        }
+    });
+} 
 
 // Favorites star
 $(document).ready(function() {
@@ -261,18 +319,20 @@ $(document).ready(function() {
     $(document).on("click", ".star", function(e) {
         e.preventDefault();
         var btn = $(this);
-        var url = $(this).attr('href');
+        var favUrl = $(this).attr('href');
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
             $.ajax({
                 type: "POST",
-                url: url,
+                url: favUrl,
                 success: function(response) {
                     if (response.code === 200) {
                         btn.attr('href', response.href);
                         if (btn.hasClass('active')) {
                             btn.hide();
                             btn.removeClass('active');
+                            // search sync bars
+                            syncBarFav(btn,true);
                             if (btn.hasClass('changed')) {
                                 btn.removeClass('brown');
                                 btn.addClass('dark');
@@ -308,6 +368,10 @@ $(document).ready(function() {
                         } else {
                             btn.hide();
                             btn.addClass('active');
+
+                            // search sync bars
+                            syncBarFav(btn,false);
+
                             if (btn.hasClass('dark')) {
                                 btn.addClass('changed');
                                 btn.addClass('brown');
@@ -318,6 +382,7 @@ $(document).ready(function() {
                             }
                             btn.show();
                         }
+                        favoriteName = response.message;
                         console.log(response.message);
                     } else {
 
@@ -326,7 +391,7 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href');
+            var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
             popinFrom = 'favorite';
             $.ajax({
                 url: url,

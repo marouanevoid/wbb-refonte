@@ -76,6 +76,8 @@ class RegistrationFormType extends BaseType
                 ->add('prefCocktails1')
                 ->add('prefCocktails2')
                 ->add('prefCocktails3')
+                ->add('stayInformed')
+                ->add('stayBrandInformed')
         ;
     }
 

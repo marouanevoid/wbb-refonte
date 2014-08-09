@@ -112,7 +112,7 @@ class AdAdmin extends Admin {
                 )
                 ->add('beginAt', 'datePicker')
                 ->add('endAt', 'datePicker')
-                ->add('countries', 'sonata_type_model', array('multiple' => true, 'required' => false))
+                ->add('countries', null, array('multiple' => true, 'required' => false, 'by_reference' => false ))
             ->end()
         ;
     }

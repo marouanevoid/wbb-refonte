@@ -71,6 +71,32 @@ class BestOfRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findPopularBestofs($city = null, $offset = 0, $limit = 5)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().', COUNT(uf) as HIDDEN nbFavoris')
+            ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
+            ->groupBy($this->getAlias())
+            ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy('nbFavoris', 'DESC')
+            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
+            ->setFirstResult($offset)
+        ;
+
+        if($limit > 0){
+            $qb->setMaxResults($limit);
+        }
+
+        if($city){
+            $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
+
+    }
+
     public function findTopBestOfs($city = null, $favoris = null, $limit = null, $onlyOnTop = true)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
@@ -78,8 +104,8 @@ class BestOfRepository extends EntityRepository
         $qb
             ->select($this->getAlias())
             ->where($qb->expr()->eq(1, 1))
+            ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
-            ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
         ;
 
         if($onlyOnTop){
@@ -94,7 +120,14 @@ class BestOfRepository extends EntityRepository
             $qb->setMaxResults($limit);
         }
 
-        // TODO: Favoris WBB
+        if($favoris){
+            $qb
+                ->addSelect('COUNT(uf) as HIDDEN nbFavoris')
+                ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
+                ->addOrderBy('nbFavoris', 'DESC');
+        }
+
+        $qb->addOrderBy($this->getAlias().'.createdAt', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
