@@ -488,14 +488,14 @@
 
 /* jQuery UI Autocomplete */
   ul.ui-autocomplete {background-color: #fff; padding: 10px; position: absolute; width: 280px!important;}
-  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #b3955f; font: bold 16px/28px "Avenir", sans-serif; padding: 0;}
-  ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #fff; color: #7e613f; font-weight: lighter; font-size: 16px; cursor: pointer; letter-spacing: 0;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: bold 16px/28px "Avenir", sans-serif; padding: 0;  text-indent: 10px;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-weight: lighter; font-size: 16px; cursor: pointer; letter-spacing: 0;}
   .ui-state-hover,
   .ui-widget-content .ui-state-hover,
   .ui-widget-header .ui-state-hover,
   .ui-state-focus,
   .ui-widget-content .ui-state-focus,
-  .ui-widget-header .ui-state-focus {border:0; background: none; font-weight:lighter; color:#7e613f; margin: 0;}
+  .ui-widget-header .ui-state-focus {border:0; background-color: #faf3e1; font-weight:lighter; color:#b3955f; margin: 0;}
 
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
