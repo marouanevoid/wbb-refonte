@@ -33,7 +33,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
-        $.ajax({
+        window.ajaxRequest = $.ajax({
             url: url,
             method: 'GET',
             success: function(html) {
@@ -41,6 +41,12 @@ $(document).ready(function() {
                 initializeDropdowns();
                 initRegisterLoginForms();
                 $('#show-popin').click();
+            },
+            beforeSend: function()
+            {
+                console.log(window.ajaxRequest);
+                if (window.ajaxRequest != null) window.ajaxRequest.abort();
+
             }
         });
     });
