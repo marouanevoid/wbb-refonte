@@ -8,11 +8,11 @@ By VOID
 window.PopIn = {}
 
 PopIn.dom = {};
-
+PopIn.loading = false;
 // Initialize the Context
 PopIn.initContext = function(){
 	PopIn.dom = {
-		cible : $(''),
+		loader : $('.popin-loader-gif'),
 		mask : $('.mask'),
 		close : $(".btn-close"),
 		popin : $('.popup')
@@ -24,6 +24,10 @@ PopIn.initContext = function(){
 
 // Close the Popin
 PopIn.close = function(){
+    // if the popin is not yet loaded
+    // return 
+    if(PopIn.loading == true)
+        return false;
 	var current_popup = $("body").find(".void-popup");
     current_popup.fadeOut("fast");
     PopIn.dom.mask.fadeOut("slow", function() {
@@ -102,15 +106,56 @@ PopIn.resize = function(target){
     //Centred popup
     var current_id = target;
     current_id.css({
-        "top": (($(window).height() - current_id.height()) / 2) + $(window).scrollTop(),
-        "left": (($(window).width() - current_id.width()) / 2) + $(window).scrollLeft()
+        "top": (($(window).height() - current_id.height()) / 2), //+ $(window).scrollTop(),
+        "left": (($(window).width() - current_id.width()) / 2) //+ $(window).scrollLeft()
     });
 }
 
+// init the Popin Loader
+PopIn.initPopinLoader = function(){
+    var html = '<div class="popin-loader-gif"></div>';
+    $('body').append(html);
+    PopIn.resize($('.popin-loader-gif'));
+}
+
+
+// Show Loader
+PopIn.showLoader = function(status){
+    if(status){
+        PopIn.dom.loader.show();
+    }else{
+        PopIn.dom.loader.hide();
+    }
+}
+
+// Init the Popin 
 PopIn.init = function(){
 	// Entry Point
+    PopIn.initPopinLoader();
 	PopIn.initContext();
 	PopIn.initEvents();
+}
+
+// Start Loading Popin
+PopIn.startLoading = function(){
+    PopIn.loading = true;
+    PopIn.dom.mask.show();
+
+    // hide the Popin
+    PopIn.dom.popin.hide();
+    PopIn.showLoader(true);
+
+    console.log('start Loading');
+}
+
+// end Loading Popin
+PopIn.endLoading = function(){
+    PopIn.loading = false;
+    // show the Popin
+    PopIn.dom.popin.show();
+    PopIn.showLoader(false);
+
+    console.log('end Loading');
 }
 
 $(function(){

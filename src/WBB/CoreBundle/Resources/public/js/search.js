@@ -513,7 +513,8 @@ meta.SearchPage = function() {
             that.context.$form_search.find('#city_search').val('');
             $(this).hide();
             // Reset the current Query
-            currentQuery = "";
+            currentQuery = "*";
+            that.goSearch();
             return false;
         });
 
@@ -535,6 +536,10 @@ meta.SearchPage = function() {
                 that.context.$form_filter.find('.neigborhood').hide();
 
             }, that.config.speed);
+
+            // Reset the current Query
+            currentQuery = "*";
+            that.goSearch();
         });
 
 

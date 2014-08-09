@@ -33,10 +33,16 @@ $(document).ready(function() {
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
+
+        // Set the PopIn Loading Flag
+        PopIn.startLoading();
         window.ajaxRequest = $.ajax({
             url: url,
             method: 'GET',
             success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+
                 $('.popin-block').html(html);
                 initializeDropdowns();
                 initRegisterLoginForms();
@@ -412,10 +418,15 @@ $(document).ready(function() {
             $('.popin-block').html('');
             var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
             popinFrom = 'favorite';
+            // Set the PopIn Loading Flag
+            PopIn.startLoading();
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    // Set the PopIn Loading Flag
+                    PopIn.endLoading();
+
                     html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
                     initializeDropdowns();
