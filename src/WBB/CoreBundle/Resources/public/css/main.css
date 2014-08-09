@@ -46,7 +46,8 @@
 
   /* USER INTERFACE */
     .ui form label {font-size: 17px;}
-    .ui .ui-dropdown-container .ui-dropdown {background-color: transparent; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+    .ui .ui-dropdown-container .ui-dropdown {background-color: #faf3e1; font-size: 17px; padding: 0 10px 0; border-radius: 20px;}
+    .full-white .ui .ui-dropdown-container .ui-dropdown {background-color: #fff;}
     .ui .load-more {text-decoration: none;}
     .ui .load-more:hover {color: #faf3e1;}
     .ui.mobile.container {width: 100%!important;}
@@ -71,7 +72,7 @@
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
-    .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
+    #register_form_full .ui-dropdown-container.changed-ui-style .ui-dropdown , .fos_user_profile_edit .ui-dropdown-container.changed-ui-style .ui-dropdown{color: #818a8c;}
 
   /* Radius */
     .radius-30 {-webkit-border-radius: 30px;
@@ -245,7 +246,8 @@
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
-  #register.page .group-actions {width: 40%;}
+  #register.page .group-actions {width: 40%; position: relative; left: 6px; overflow: hidden;}
+  #register.page .group-checkbox {margin: auto; position: relative; left: 6px;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}

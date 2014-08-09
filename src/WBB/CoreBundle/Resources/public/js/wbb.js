@@ -262,6 +262,53 @@ jQuery(document).ready(function($) {
     }
 });
 
+// syncronise Bar favorie
+function syncBarFav(cible,status){
+    var href = cible.attr('href'),
+        currentTitle = cible.parent('article').find('.txt h2').text();
+    // find the other Bar on dom 
+    // wich content the same name
+    $('.txt').find('h2').each(function(){
+        if($(this).text() == currentTitle){
+            // This bar is like favoried Bar
+            // set the Class active
+            var artcileParent =  $(this).parents('article');
+            if(status){
+                var btn = artcileParent.find('.star');
+                btn.hide();
+                btn.removeClass('active');
+                if (btn.hasClass('changed')) {
+                    btn.removeClass('brown');
+                    btn.addClass('dark');
+                    btn.removeClass('changed');
+                }
+                if (btn.hasClass('nc')) {
+                    btn.addClass('force-disabled')
+                }
+                btn.show();
+            }
+            else{
+                var btn = artcileParent.find('.star');
+                btn.removeClass('active');
+                btn.hide();
+                btn.addClass('active');
+
+                if (btn.hasClass('dark')) {
+                    btn.addClass('changed');
+                    btn.addClass('brown');
+                    btn.removeClass('dark');
+                }
+                if (btn.hasClass('force-disabled')) {
+                    btn.removeClass('force-disabled')
+                }
+                btn.show();
+            }
+            // set the href url
+            artcileParent.find('.star').attr('href' , href);
+        }
+    });
+} 
+
 // Favorites star
 $(document).ready(function() {
     var allInputs = $(":input");
@@ -284,6 +331,8 @@ $(document).ready(function() {
                         if (btn.hasClass('active')) {
                             btn.hide();
                             btn.removeClass('active');
+                            // search sync bars
+                            syncBarFav(btn,true);
                             if (btn.hasClass('changed')) {
                                 btn.removeClass('brown');
                                 btn.addClass('dark');
@@ -319,6 +368,10 @@ $(document).ready(function() {
                         } else {
                             btn.hide();
                             btn.addClass('active');
+
+                            // search sync bars
+                            syncBarFav(btn,false);
+
                             if (btn.hasClass('dark')) {
                                 btn.addClass('changed');
                                 btn.addClass('brown');
