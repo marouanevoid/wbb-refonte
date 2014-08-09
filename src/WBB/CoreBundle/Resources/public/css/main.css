@@ -193,10 +193,10 @@
   
   /* Error */
     #register.page #edit-account .ui-dropdown-container .ui-dropdown.error,
-    #EditProfile #edit-account .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
+    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
-    #EditProfile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #b3955f;}
+    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #b3955f;}
 
     #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
     #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
@@ -256,8 +256,10 @@
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
-  #register.page .group-actions {width: 39%; position: relative; left: 10px; overflow: hidden;}
-  #register.page .group-checkbox {margin: auto; position: relative; left: 6px; float: none;}
+  #register.page .group-actions {width: 39%; overflow: hidden;}
+  #register.page .group-checkbox {margin: auto; float: none;}
+  #register.page .group-actions,
+  #register.page .group-checkbox {position: relative; left: 8px;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
@@ -476,13 +478,24 @@
 
 /* PAGE */
   .page-form {padding: 0 3%;}
-  .page-form label {line-height: 34px;width: 10%;font-size: 18px;}
+  .page-form label {line-height: 34px; width: 10%; font-size: 18px;}
   .page-form .form-text {width: 90%;}
   .page-form .form-textarea {padding: 10px 10px 50px;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
+
+/* jQuery UI Autocomplete */
+  ul.ui-autocomplete {background-color: #fff; padding: 10px; position: absolute; width: 280px!important;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #b3955f; font: bold 16px/28px "Avenir", sans-serif; padding: 0;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #fff; color: #7e613f; font-weight: lighter; font-size: 16px; cursor: pointer; letter-spacing: 0;}
+  .ui-state-hover,
+  .ui-widget-content .ui-state-hover,
+  .ui-widget-header .ui-state-hover,
+  .ui-state-focus,
+  .ui-widget-content .ui-state-focus,
+  .ui-widget-header .ui-state-focus {border:0; background: none; font-weight:lighter; color:#7e613f; margin: 0;}
 
 /* Override */
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
