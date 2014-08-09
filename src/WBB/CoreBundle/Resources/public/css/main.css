@@ -72,7 +72,7 @@
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
-    #register_form_full .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
+    #register_form_full .ui-dropdown-container.changed-ui-style .ui-dropdown , .fos_user_profile_edit .ui-dropdown-container.changed-ui-style .ui-dropdown{color: #818a8c;}
 
   /* Radius */
     .radius-30 {-webkit-border-radius: 30px;
