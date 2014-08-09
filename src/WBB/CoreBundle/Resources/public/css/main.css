@@ -192,7 +192,7 @@
   .popup .ui .btn {text-decoration: none;}
   
   /* Error */
-    #register.page #edit-account .ui-dropdown-container .ui-dropdown.error,
+    #register.page .ui-dropdown-container .ui-dropdown.error,
     #editprofile #edit-account .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
@@ -226,7 +226,7 @@
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
   /* Message's */
-  #message {min-height: 100px; background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%;}
+  #message {min-height: 100px; background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; overflow: hidden;}
   #message ul {margin: 15px 10px 10px 90px; float: left;}
   #message img {margin: 0 20px 0 0;}
   #message div {padding: 0 10px 0 0; line-height: 16px;}
