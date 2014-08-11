@@ -414,17 +414,27 @@ $(document).ready(function() {
 
                                 var TypeEvent = "removeitem",
                                         cible = "";
-                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length){
+                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length || btn.parents('article').not('.bestof').length ){
                                     btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
+
+                                    if( btn.parents('article').not('.bestof').length ){
+                                        btn.parents('article').not('.bestof').remove();
+                                    }
                                 }
                                 else{
-                                    if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length){
+                                    if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length || btn.parents('article.bestof').length ){
                                         btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
                                         cible = 'bestof';
+
+                                        if( btn.parents('article.bestof').length ){
+                                            btn.parents('article.bestof').remove();
+                                        }
                                     }
                                 }
 
+                                // global var on window
+                                window.cibleDeleted = cible;
                                 // dispatching Event removeitem
                                 $.event.trigger({
                                     type: "removeitem",
