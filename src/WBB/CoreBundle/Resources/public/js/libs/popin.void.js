@@ -12,7 +12,8 @@ PopIn.loading = false;
 // Initialize the Context
 PopIn.initContext = function(){
 	PopIn.dom = {
-		loader : $('.popin-loader-gif'),
+        loader : $('.popin-loader-gif'),
+		clsloader : 'popin-loader-gif',
 		mask : $('.mask'),
 		close : $(".btn-close"),
 		popin : $('.popup')
@@ -80,11 +81,6 @@ PopIn.show = function(e){
 
     if (current_id.length > 0) {
 
-        //Centred popup
-        // if (!current_id.hasClass("mobile")) {
-        //     PopIn.resize(current_id);
-        // }
-
         //show lightbox window
         current_id.fadeIn("slow");
 
@@ -113,18 +109,20 @@ PopIn.resize = function(target){
 
 // init the Popin Loader
 PopIn.initPopinLoader = function(){
-    var html = '<div class="popin-loader-gif"></div>';
-    $('body').append(html);
-    PopIn.resize($('.popin-loader-gif'));
+    // var html = '<div class="popin-loader-gif"></div>';
+    // $('body').append(html);
+    // PopIn.resize($('.popin-loader-gif'));
 }
 
 
 // Show Loader
 PopIn.showLoader = function(status){
     if(status){
-        PopIn.dom.loader.show();
+        //PopIn.dom.loader.show();
+        PopIn.dom.mask.addClass(PopIn.dom.clsloader);
     }else{
-        PopIn.dom.loader.hide();
+        //PopIn.dom.loader.hide();
+        PopIn.dom.mask.removeClass(PopIn.dom.clsloader);
     }
 }
 
