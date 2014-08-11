@@ -314,14 +314,14 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     top: 1px;
 }
 
-.popin-loader-gif{
+/*.popin-loader-gif{
     width: 54px;
     height: 55px;
     background:url(../images/31.gif) no-repeat center;
     position: absolute;
     z-index: 2000000;
     display: none;
-}
+}*/
 
 /* TEMP For Loader */
 /*.bar-finder .search-mode .btn-round.close.loading:before , a.btn-round.star.loading:before{
