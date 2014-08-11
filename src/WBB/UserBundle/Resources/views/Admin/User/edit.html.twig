@@ -49,7 +49,7 @@
 
             $('#pwd-generator').click(function(e){
                 // Generate the password variable from the generator function
-                password = $.password(8,true);
+                password = $.password(8, false);
                 // Empty the password field then append the password and fade In
                 $('.pwd-field').hide().val(password).fadeIn('slow');
                 e.preventDefault();
