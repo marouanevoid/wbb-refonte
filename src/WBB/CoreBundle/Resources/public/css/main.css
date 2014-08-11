@@ -415,7 +415,7 @@
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
 
   #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
-  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; width: 140px; line-height: 17px; padding-top: 9px; white-space: pre-line;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 17px; padding-top: 9px; white-space: pre-line;}
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
@@ -423,8 +423,6 @@
   #editprofile.mobile #view-account .ui .filter-view a:nth-child(2) {margin-left: 2px;}
   #editprofile.mobile #view-account .ui .filter-profil {width: auto; padding: 0 10px;}
   #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type {padding-right: 10px;}
-  #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
-  #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px!important;}
   #editprofile.mobile #view-account .ui .group.left {margin: 0 auto!important; width: 50%; float: none; overflow: hidden;}
   #editprofile.mobile #view-account .ui .subgroup.wrap {width: 100%;}
 
@@ -563,12 +561,6 @@
   .ie9 section.bar-finder tr:nth-child(2) td:nth-child(8) .ui-radio.btn-radius.with-icon {margin-right: 20px;}
   section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
-  @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
-    #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
-    section.bar-filter .bar-w-pic {max-height: 119px;}
-    .wrap-share.mobile .social-share .share-label {width: 96%;}
-  }
-
 /* Tablets (landscape) ----------- */
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     #register.page {width: 100%;}
@@ -610,6 +602,11 @@
     #editprofile #edit-account {padding: 0 10px;}
     #error {position: relative; top: 100px;}
     #message {padding-left: 0;}
+    section.bar-filter .bar-w-pic {max-height: 119px;}
+    #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
+    #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
+    #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 44%;}
+
   /* Globales Classes */
     section.bar-filter .bar-w-pic .btn-round:before {background-size: 128px 256px; background-position: -80px -40px;}
     section.bar-filter .bar-w-pic .btn-round.active:before {background-position: -80px -120px!important;}
@@ -634,12 +631,22 @@
     .popin-block {padding: 0;}
   }
 
+  /* iPhone < style's */
+  @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
+    #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
+    section.bar-filter .bar-w-pic {max-height: 119px;}
+    .wrap-share.mobile .social-share .share-label {width: 96%;}
+  }
+
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
     .articles article .img .plus-btn,
     .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
     section.bar-filter .bar-w-pic {max-height: 119px;}
+    #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
+    #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
+    #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
   }
 
 /* Full Screens ----------- */
