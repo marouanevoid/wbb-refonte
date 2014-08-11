@@ -281,8 +281,8 @@ meta.App = function() {
         {
             var options_are_visible = false;
 
-            $('header.desktop .logged').click(function(){
-
+            $('header.desktop .logged').click(function(e){
+                e.preventDefault();
                 if( !options_are_visible )
                     $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing);
                 else
@@ -292,6 +292,8 @@ meta.App = function() {
                     });
 
                 options_are_visible = !options_are_visible;
+
+                return false;
             });
         }
         else
