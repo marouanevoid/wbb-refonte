@@ -1,11 +1,11 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    database_host: 127.0.0.1
+    database_host: wbb-staging.cbwtwwqvaohk.us-east-1.rds.amazonaws.com
     database_port: null
-    database_name: wbb-refonte
-    database_user: wbb_refonte
-    database_password: LkekBmgrRW
+    database_name: worldsbestbar
+    database_user: wbbstaging
+    database_password: DyWuFragcoocyel
 
     mailer_transport:  smtp
     mailer_host:       email-smtp.eu-west-1.amazonaws.com
@@ -26,6 +26,13 @@ parameters:
     website_url: 'http://54.85.74.236'
 
     instagram_client_id: 03af4f044b524a4ca9958053b7a6cb18
+
+    #Parameters for PdoSessionHandler
+    pdo.db_options:
+        db_table:    wbb_session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time
 
     #AWS
     aws_bucket: staging.worldsbestbars.com
