@@ -25,7 +25,8 @@
                     });
                 });
             </script>
-            <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20">
+
+            <div id="message" class="margin-top-20">
                 <div>
                     <ul>
                         <li>Please enter the same password</li>
@@ -56,6 +57,7 @@
                     data: $(this).serialize(),
                     success: function(html) {
                         $('.popin-block').html(html);
+                        PopIn.updatePopin();
                         $('#close').on('click', function() {
                             location.href = "{{ path('homepage') }}";
                         });

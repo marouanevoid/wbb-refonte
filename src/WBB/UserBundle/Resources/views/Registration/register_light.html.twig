@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="clear"></div>
-            <div class="select-two margin-top-10 ui-dropdown-list-form">
+            <div class="select-two margin-top-10 ui-dropdown-list-form country-dropdown">
                 {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
             </div>
 
@@ -55,22 +55,17 @@
             e.preventDefault();
             var $registerForm = $("#register-form");
             if ($registerForm.is(":visible")) {
-                $registerForm.fadeOut("slow", function(){
-                    PopIn.updatePopin();
-                });
-                $("#regiser .title").fadeOut("slow", function(){
+                $registerForm.fadeOut("slow");
+                $(".popup .title").fadeOut("slow", function(){
                     PopIn.updatePopin();
                 });
             } else {
-                $registerForm.fadeIn("slow",function(){
-                    PopIn.updatePopin();
-                });
-                $("#regiser .title").fadeIn("slow", function(){
+                $registerForm.fadeIn("slow");
+                $(".popup .title").fadeIn("slow", function(){
                     PopIn.updatePopin();
                 });
             }
             $(this).hide();
-            alert("This is test"+$("#regiser .title").html());
         }
     });
 </script>

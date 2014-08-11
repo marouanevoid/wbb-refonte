@@ -56,7 +56,7 @@
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
-  .popup {width: 911px; height: 530px;}
+  .popup {width: 911px; /*height: 530px;*/}
   .popin-block {padding: 25px 40px;}
   .void-popup {z-index: 9999999; position: fixed;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
@@ -182,7 +182,7 @@
   .ui a.ui-radio.active,
   .ui a.ui-radio:hover {background: #b3955f !important; color: #faf3e1;}
   .ui a:hover {text-decoration: none;}
-  .ui .title {font-size: 32px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
+  .ui .title {font-size: 28px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
   .ui .form-text {border: 1px solid #b3955f; line-height: 30px; height: 37px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
@@ -405,8 +405,8 @@
   #editprofile.mobile .ui .avatar-profil img {margin: 0 auto;}
   #editprofile.mobile .ui #edit-account label {visibility: visible; width: 100%; text-align: center;}
   #editprofile.mobile .ui #edit-account .checkbox label {text-align: left;}
-  #editprofile.mobile .ui #edit-account .form-text {width: 99%; margin: 0;}
-  #editprofile.mobile .ui #edit-account .group-actions {/*float: none; width: auto;*/ margin: 0;}
+  #editprofile.mobile .ui #edit-account .form-text {width: 100%; margin: 0;}
+  #editprofile.mobile .ui #edit-account .group-actions {float: none; margin: auto;}
   #editprofile.mobile .ui #edit-account .form-submit {/*margin: 0 20px; width: 90%;*/}
   #editprofile.mobile .ui #date-birthday .select-wrap {margin-right: 9px; width: 90px;}
   #editprofile.mobile .ui #date-birthday .ui-dropdown-container {width: 100%!important;}
@@ -599,7 +599,7 @@
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
   /* Globales ID's */
-    #editprofile #edit-account {padding: 0 10px;}
+    #editprofile #edit-account {padding: 0 20px;}
     #error {position: relative; top: 100px;}
     #message {padding-left: 0;}
     section.bar-filter .bar-w-pic {max-height: 119px;}
@@ -608,6 +608,7 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 44%;}
 
   /* Globales Classes */
+    .xs-hidden {display: none!important; visibility: hidden;}
     section.bar-filter .bar-w-pic .btn-round:before {background-size: 128px 256px; background-position: -80px -40px;}
     section.bar-filter .bar-w-pic .btn-round.active:before {background-position: -80px -120px!important;}
     section.bar-filter .bar-w-pic .btn-round { width: 20px; height: 20px; right: 0.5em; top: 0.5em;}
@@ -626,20 +627,29 @@
     .min-height {min-height: 100%;}
     .error .mobile {display: block; visibility: visible;}
     .error .desktop {display: none; visibility: hidden;}
-    .xs-hidden {display: none!important; visibility: hidden;}
-    .group-checkbox {margin-right: 0;}
+    .group-checkbox {margin-right: 0; float: none;}
     .popin-block {padding: 0;}
+    .date-birthday .select-wrap {width: 26%; margin-right: 12px;}
+    .date-birthday .ui-dropdown-container {width: 100%!important;}
+    .date-birthday .date-width {width: 612px!important;}
   }
+
+  @media only screen and (min-width : 320px) and (max-width: 640px) {
+    .date-birthday .date-width {width: 118%!important;}
+  } 
 
   /* iPhone < style's */
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
+    #editprofile #edit-account {padding: 0 20px;}
     #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0px;}
     section.bar-filter .bar-w-pic {max-height: 119px;}
     .wrap-share.mobile .social-share .share-label {width: 96%;}
+    .date-birthday .select-wrap {width: 105px; margin-right: 15px;}
   }
 
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
+    #editprofile #edit-account {padding: 0 10px;}
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
     .articles article .img .plus-btn,
     .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
@@ -647,6 +657,7 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
+    .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
   }
 
 /* Full Screens ----------- */
