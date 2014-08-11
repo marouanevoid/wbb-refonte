@@ -19,9 +19,8 @@
             });
         </script>
 
-        <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20 {% if is_mobile() %}margin-bottom-20{% endif %}">
+        <div id="message" class="margin-top-20 {% if is_mobile() %}margin-bottom-20{% endif %}">
             <div>
-                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left" {% if is_mobile() %}class="margin-left-20"{% endif %}>
                 <ul><li>
                         {% if invalid_username|trim != '' %}
                             {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}

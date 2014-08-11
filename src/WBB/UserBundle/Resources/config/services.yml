@@ -69,6 +69,12 @@ services:
         parent: wbb_core.mailer.twig_swift
         public: true
 
+    wbb_registration_succes_listener:
+        class: WBB\UserBundle\EventListener\RegistrationListener
+        arguments: ["@service_container"]
+        tags:
+            - { name: 'kernel.event_subscriber' }
+
     #Login Listener
     wbb_login_listener:
         class: 'WBB\UserBundle\EventListener\LoginListener'
