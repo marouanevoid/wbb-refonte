@@ -239,7 +239,7 @@ function initRegisterLoginForms() {
 }
 
 jQuery(document).ready(function($) {
-
+    
     $('#register_form_full').on('submit', function(e) {
         e.preventDefault();
         var url = $(this).attr('action');
@@ -261,6 +261,12 @@ jQuery(document).ready(function($) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
                     var idPrefix = '#fos_user_registration_form_';
+                    $('#register_form_full input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form_full .ui-dropdown').each(function() {
+                        $(this).removeClass('error');
+                    });
                     for (var i = 0; i < fields.length; i++) {
 
                         switch (fields[i]) {

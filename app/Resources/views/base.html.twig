@@ -168,8 +168,6 @@
                                     $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
                                     $('#tips_submit').click();
                                 }
-                                
-                                
 
                                 $.removeCookie('light_action');
                                 $.removeCookie('light_url');
@@ -248,6 +246,16 @@
                         if (response.code === '400') {
                             window.location.href = "{{ path('fos_user_registration_register') }}";
                         } else {
+                            if (addFavorite.indexOf('favorite') > -1) {
+                                $.cookie('light_action', 'favorite');
+                            } else {
+                                $.cookie('light_action', 'tips');
+                            }
+                            $.cookie('light_type', window.lightType);
+                            $.cookie('light_url', addFavorite);
+                            $.cookie('light_from', 'register');
+                            $.cookie('light_name', window.lightName);
+
                             $.cookie('just_loggedin', true);
                             window.location.reload();
                         }

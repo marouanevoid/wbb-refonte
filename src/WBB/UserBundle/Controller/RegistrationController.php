@@ -80,11 +80,14 @@ class RegistrationController extends ContainerAware
 
                 foreach ($formErrors as $formError) {
                     $fields[] = str_replace('data.', '', $formError->getPropertyPath());
-                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {                        
                         $messages[] = 'Please complete all required fields';
                     } elseif($formError->getMessage() != 'not.blank') {
                         $messages[] = $formError->getMessage();
                     }
+                }
+                if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
+                    $messages = array($messages[1]);
                 }
                 $errors = array(
                     'fields' => $fields,

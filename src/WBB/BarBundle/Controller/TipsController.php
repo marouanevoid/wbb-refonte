@@ -28,7 +28,7 @@ class TipsController extends Controller
         if (!$user) {
             return new JsonResponse(array(
                 'code' => 403,
-                'message' => 'User not authenticated !'
+                '_message' => 'User not authenticated !'
             ));
         }
 
