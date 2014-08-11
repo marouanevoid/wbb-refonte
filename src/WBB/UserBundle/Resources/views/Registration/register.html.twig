@@ -18,7 +18,7 @@
                                     {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
                                     <div class="clear"></div>
                                 </div>
-                                <div class="select-two margin-top-10">
+                                <div class="select-two margin-top-10 gender">
                                     <label class="margin-right-20 text-align-right unbold">Gender</label>
                                     <div class="left" style="width: 300px">
                                         {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
@@ -151,7 +151,8 @@
                             </div>
 
                             {{ form_rest(form) }}
-                            <div class="group-actions margin-top-20 wrap">
+                            <div class="clear"></div>
+                            <div class="group-actions margin-top-40 wrap">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="CREATE YOUR ACCOUNT">
                             </div>
                         </form>

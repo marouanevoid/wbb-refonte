@@ -147,8 +147,11 @@ function initRegisterLoginForms() {
                     var idPrefix = '#fos_user_registration_form_';
                     for (var i = 0; i < fields.length; i++) {
                         switch (fields[i]) {
+                            case 'country':
+                                $('#register-form .country-dropdown .ui-dropdown').addClass('error');
+                                break;
                             case 'birthdate':
-                                // birthday error
+                                $('#register-form .date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
@@ -163,14 +166,18 @@ function initRegisterLoginForms() {
                         $('#register-form #message').find('ul').append('<li>' + errors[i] + '</li>');
                     }
                 } else {
-                    var html = '<div id="success" class="text-align-center padding-top-80">' +
-                            '<div class="subtitle text-transform-uppercase margin-top-80">Congratulations!</div>' +
-                            '<p class="margin-top-20 margin-bottom-20">CONGRATULATIONS ! You are now registered on World’s Best Bars.<br/>'+
-                            '<p>The "NAME HERE" bar/best of has been added to your favorites. You can have a look at your favorite contents in your user profile.</p>' +
-                            '<p>Check your mailbox <br />' +
-                            'to confirm your subscription.</p>' +
-                            '</div>';
-                    $('.popin-block').html(html);
+                    if (addFavorite.indexOf('favorite') > -1) {
+                        $.cookie('light_action', 'favorite');
+                    } else {
+                        $.cookie('light_action', 'tips');
+                    }
+                    $.cookie('light_type', window.lightType);
+                    $.cookie('light_url', addFavorite);
+                    $.cookie('light_from', 'register');
+                    $.cookie('light_name', window.lightName);
+
+                    $.cookie('just_loggedin', true);
+                    window.location.reload();
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -182,28 +189,52 @@ function initRegisterLoginForms() {
     $('#login_form').on('submit', function(e) {
         e.preventDefault();
         var form = $(this);
-        var formUrl = form.attr('action') 
-        $.ajax({
-            type: "POST",
-            url: formUrl,
-            data: form.serialize(),
-            success: function(data) {
-                console.log(data);
-                if (data.code === '400') {
-                    $('#username').addClass('error');
-                    $('#password').addClass('error');
-                    $('#facebook-signup').after($('#message'));
-                    $('#login_form #message').find('ul').remove();
-                    var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
-                    errorsList.find('ul').append('<li>' + data.error + '</li>');
-                } else {
-                    window.location.href = currentPage + '?favoriteAction=' + addFavorite;
+        var formUrl = form.attr('action');
+        var error = false;
+        if ($('#username').val().trim() === '') {
+            error = true;
+            $('#username').addClass('error');
+        }
+        if ($('#password').val().trim() === '') {
+            error = true;
+            $('#password').addClass('error');
+        }
+        if (!error) {
+            $.ajax({
+                type: "POST",
+                url: formUrl,
+                data: form.serialize(),
+                success: function(data) {
+                    console.log(data);
+                    if (data.code === '400') {
+                        $('#username').addClass('error');
+                        $('#password').addClass('error');
+                        $('#facebook-signup').after($('#message'));
+                        $('#login_form #message').find('ul').remove();
+                        var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
+                        errorsList.find('ul').append('<li>' + data.error + '</li>');
+                    } else {
+                        if (addFavorite != 0) {
+                            if (addFavorite.indexOf('favorite') > -1) {
+                                $.cookie('light_action', 'favorite');
+                            } else {
+                                $.cookie('light_action', 'tips');
+                            }
+                            $.cookie('light_type', window.lightType);
+                            $.cookie('light_url', addFavorite);
+                            $.cookie('light_from', 'login');
+                            $.cookie('light_name', window.lightName);
+                        }
+
+                        $.cookie('just_loggedin', true);
+                        window.location.reload();
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    // Si erreur communication ?
                 }
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                // Si erreur communication ?
-            }
-        });
+            });
+        }
     });
 }
 
@@ -234,7 +265,7 @@ jQuery(document).ready(function($) {
 
                         switch (fields[i]) {
                             case 'birthdate':
-                                // birthday error
+                                $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
@@ -345,6 +376,8 @@ $(document).ready(function() {
         e.preventDefault();
         var btn = $(this);
         var favUrl = $(this).attr('href');
+        window.lightName = $(this).attr('data-name');
+        window.lightType = $(this).attr('data-type');
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
             $.ajax({
