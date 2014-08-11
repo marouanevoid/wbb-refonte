@@ -144,6 +144,12 @@ function initRegisterLoginForms() {
                     $('#register_form').after($('#message'));
                     $('#register-form #message').find('ul').remove();
                     $('#register-form #message div').append('<ul></ul>').parent();
+                    $('#register_form input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form .ui-dropdown').each(function() {
+                        $(this).removeClass('error');
+                    });
                     var idPrefix = '#fos_user_registration_form_';
                     for (var i = 0; i < fields.length; i++) {
                         switch (fields[i]) {

@@ -57,6 +57,7 @@ class RegistrationFormType extends BaseType
                     'error_bubbling' => true
                 ))
                 ->add('birthdate', 'date', array(
+                    'empty_value' => array('year' => 'YYYY', 'month' => 'MM', 'day' => 'DD'),
                     'years' => range(1914, date('Y')),
                     'required' => false,
                     'error_bubbling' => true
