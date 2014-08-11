@@ -245,8 +245,10 @@ services:
             - { name: doctrine.event_listener, event: prePersist, method: prePersist }
             - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
 
-    # ForumMailer
-#    wbb_bar.mailer:
-#        class:  WBB\BarBundle\Mailer\BarMailer
-#        parent: bmwi_core.mailer.twig_swift
-#        public: false
+
+
+    # Share Mail Service
+    wbb_bar.share.mailer:
+        class:  WBB\BarBundle\Mailer\ShareMailer
+        parent: wbb_core.mailer.twig_swift
+        public: true

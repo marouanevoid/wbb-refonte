@@ -10,21 +10,18 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 
 /**
- * ShareNewsFormType
+ * ShareFormType
  */
-class ShareNewsFormType extends AbstractType
+class ShareFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $id = $options['id'];
+
         $builder
+            ->add('id', 'hidden', array('data' => $id))
             ->add('name', 'text', array('attr' => array('placeholder' => 'Your name')))
-            ->add('friendName', 'text', array('attr' => array('placeholder' => 'Friend\'s name')))
             ->add('email', 'email', array(
-                    'constraints' => array(new Email(array('checkMX' => true))),
-                    'attr' => array('placeholder' => 'Your email')
-                )
-            )
-            ->add('friendEmail', 'email', array(
                     'constraints' => array(new Email(array('checkMX' => true))),
                     'attr' => array('placeholder' => 'Friend\'s email')
                 )
@@ -41,17 +38,22 @@ class ShareNewsFormType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver
+            ->setDefaults(array(
             'label'       => false,
             'translation_domain' => 'WBBBarBundle',
             'constraints' => array(
-                new NotBlank()
-            )
-        ));
+                    new NotBlank()
+                )
+            ))
+            ->setRequired(array(
+                'id',
+            ))
+        ;
     }
 
     public function getName()
     {
-        return 'wbb_barbundle_share_news_type';
+        return 'wbb_barbundle_share_type';
     }
 }
