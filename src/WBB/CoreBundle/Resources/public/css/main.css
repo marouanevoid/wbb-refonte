@@ -531,6 +531,7 @@
   .search-bar-mobile .container input[type="reset"] {right: 43%;}
   .ui-dropdown-container .ui-dropdown span {height: 37px;}
   .jspDrag {min-height: 10px!important;}
+  .btn-small-radius.brown:hover, .btn-round.brown:hover, .btn-radius.brown:hover, .btn-small-round.brown:hover {background: #b3955f !important;color: #faf3e1;border-color: #b3955f;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
