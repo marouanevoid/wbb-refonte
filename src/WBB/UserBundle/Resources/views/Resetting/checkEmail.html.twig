@@ -1,6 +1,20 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <div class="title margin-bottom-30 wrap bold">FORGOT YOUR PASSWORD</div>
-    <div class="subtitle text-transform-uppercase bold">{{ 'resetting.check_email'|trans({'%email%': email}) }}</div>
+<div id="success">
+	<table class="min-height" width="100%">
+		<tbody>
+			<tr>
+			  <td valign="bottom">
+				<div class="subtitle margin-bottom-20 wrap bold">FORGOT YOUR PASSWORD</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td align="center">
+				<p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
+			  </td>
+			</tr>
+		</tbody>
+	</table>
+</div><!-- #success -->
 {% endblock %}

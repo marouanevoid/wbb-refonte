@@ -58,12 +58,19 @@
                 $registerForm.fadeOut("slow", function(){
                     PopIn.updatePopin();
                 });
+                $("#regiser .title").fadeOut("slow", function(){
+                    PopIn.updatePopin();
+                });
             } else {
                 $registerForm.fadeIn("slow",function(){
                     PopIn.updatePopin();
                 });
+                $("#regiser .title").fadeIn("slow", function(){
+                    PopIn.updatePopin();
+                });
             }
             $(this).hide();
+            alert("This is test"+$("#regiser .title").html());
         }
     });
 </script>
