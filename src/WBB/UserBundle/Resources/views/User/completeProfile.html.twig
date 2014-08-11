@@ -1,18 +1,18 @@
 {% extends '::Email/layout.email.twig' %}
 
-{% block subject %}Confirmation{% endblock %}
-{% block title %}Confirmation{% endblock %}
+{% block subject %}Complete your profile{% endblock %}
+{% block title %}Complete your profile{% endblock %}
 {% block body_content %}
     <tr style="font-family: Verdana, Arial;">
         <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
             <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
                 <tr style="font-family: Verdana, Arial;">
                     <td align="center" style="font-family: Verdana, Arial;">
-                        <p class="subtitle" style="font-size: 40px; color: #b3955f; text-align: center; margin-bottom: 35px">CONGRATULATIONS!</p>
                         <p style="margin-bottom: 35px; line-height: 24px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
-                            You are now registered on World’s Best Bars.<br/>
-                            Please click on the link below to confirm your subscription:<br/> {{ confirmationUrl }}
+                            The more you refine your personal interests, the more we can adapt the editorial content & bar selections.<br/>
+                            Please complete your profile. It will only take a few minutes.
                         </p>
+                        <a href="{{ profileUrl }}" class="btn" style="display: block; width: 300px; height: 60px; color: #faf3e1; text-decoration: none; background-color: #b3955f; font-size: 19px; font-weight: bold; -webkit-border-radius: 30px; -moz-border-radius: 30px; -o-border-radius: 30px; border-radius: 30px; margin-left: auto; margin-right: auto; line-height: 58px;">Complete my profile</a>
                     </td>
                 </tr>
             </table>
