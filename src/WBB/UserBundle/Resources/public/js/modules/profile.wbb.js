@@ -3,7 +3,7 @@ var wbb = wbb || {};
 wbb.LoadProfile = function() {
 
     var that = this;
-
+    var lastactivatedTab = "";
     that.context = {
         requestID: null,
         $barsTarget: $('.list-bars'),
@@ -52,6 +52,9 @@ wbb.LoadProfile = function() {
                 })
             };
 
+            if ( $(_this).data('tab') == lastactivatedTab ) 
+                return false;
+            lastactivatedTab = $(_this).data('tab');
             if($(_this).data('tab') == "bars"){
                 that.context.content = 'bars';
                 tabClose();
@@ -169,7 +172,11 @@ wbb.LoadProfile = function() {
         }
         // Add listner on Remove Items 
         $(document).on('removeitem' , function(e){
+
             var filterprof = $('.filter-profil');
+
+            e.cible = window.cibleDeleted;
+
             if(e.cible =='bars'){
                 descrimentFunction(filterprof.find('.Bars'));
 
