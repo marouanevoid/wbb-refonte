@@ -25,6 +25,18 @@ wbb_bar_guides_city:
     options:
         expose: true
 
+wbb_bars_by_name:
+    pattern: /get-bars-by-name
+    defaults: { _controller: WBBBarBundle:Bar:getBarsByName}
+    options:
+        expose: true
+
+wbb_tags_by_type_and_name:
+    pattern: /get-brand-tags-by-name/{type}
+    defaults: { _controller: WBBBarBundle:Tag:getBrandsByName}
+    options:
+        expose: true
+
 wbb_bar_tips:
     pattern: /bar/{barID}/tips/{offset}/{limit}
     requirements:

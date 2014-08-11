@@ -4,6 +4,8 @@ namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use WBB\BarBundle\Entity\Tag;
 
 class TagController extends Controller
 {
@@ -28,5 +30,22 @@ class TagController extends Controller
         }
 
         return new JsonResponse($html);
+    }
+
+    public function getBrandsByNameAction($type, Request $request)
+    {
+        $term = $request->get('term');
+        $tags = $this->container->get('tag.repository')->findByType($type, false, 5, $term, false);
+
+        $json = array();
+
+        foreach ($tags as $tag) {
+            $json[] = array(
+                'value' => $tag->getName(),
+                'id'    => $tag->getName()
+            );
+        }
+
+        return new JsonResponse($json);
     }
 }

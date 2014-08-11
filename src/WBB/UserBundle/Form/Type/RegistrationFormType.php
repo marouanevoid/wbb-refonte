@@ -4,7 +4,6 @@ namespace WBB\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use WBB\BarBundle\Entity\Tag;
 
@@ -13,102 +12,70 @@ use WBB\BarBundle\Entity\Tag;
  */
 class RegistrationFormType extends BaseType
 {
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('title', 'choice', array(
-                'expanded' => false,
-                'multiple' => false,
-                'required' => false,
-                'empty_value' => 'Please choose your gender',
-                'choices'  => array(
-                    'F'   =>  'F',
-                    'M'   =>  'M'
-                )
-            ))
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-            ->add('plainPassword', 'repeated', array(
-                'type' => 'password',
-                'first_options'   => array('attr' => array('placeholder' => 'form.password')),
-                'second_options'  => array('attr' => array('placeholder' => 'form.password_confirmation')),
-                'invalid_message' => 'fos_user.password.mismatch',
-            ))
-            ->add('birthdate', 'date', array(
-                'years' => range(1914, date('Y'))
-            ))
-            ->add('country')
-            ->add('prefCity1', null, array('empty_value' => 'Choose a city'))
-            ->add('prefCity2', null, array('empty_value' => 'Choose a city'))
-            ->add('prefCity3', null, array('empty_value' => 'Choose a city'))
-            ->add('prefBar1', null, array('empty_value' => 'Choose a bar'))
-            ->add('prefBar2', null, array('empty_value' => 'Choose a bar'))
-            ->add('prefBar3', null, array('empty_value' => 'Choose a bar'))
-            ->add('prefDrinkBrand1', 'entity', array(
-                    'class'    => 'WBBBarBundle:Tag',
+                ->add('username', null, array(
                     'required' => false,
-                    'property' => 'name',
-                    'empty_value' => 'Choose a brand',
-                    'query_builder' => function ($er) {
-                            return $er->findByType(Tag::WBB_TAG_TYPE_DRINK_BRANDS, true);
-                        }
-                )
-            )
-            ->add('prefDrinkBrand2', 'entity', array(
-                    'class'    => 'WBBBarBundle:Tag',
+                    'error_bubbling' => true
+                ))
+                ->add('title', 'choice', array(
+                    'expanded' => false,
+                    'multiple' => false,
                     'required' => false,
-                    'property' => 'name',
-                    'empty_value' => 'Choose a brand',
-                    'query_builder' => function ($er) {
-                            return $er->findByType(Tag::WBB_TAG_TYPE_DRINK_BRANDS, true);
-                        }
-                )
-            )
-            ->add('prefDrinkBrand3', 'entity', array(
-                    'class'    => 'WBBBarBundle:Tag',
+                    'error_bubbling' => true,
+                    'empty_value' => 'Please choose your gender',
+                    'choices' => array(
+                        'F' => 'F',
+                        'M' => 'M'
+                    )
+                ))
+                ->add('firstname', null, array(
                     'required' => false,
-                    'property' => 'name',
-                    'empty_value' => 'Choose a brand',
-                    'query_builder' => function ($er) {
-                            return $er->findByType(Tag::WBB_TAG_TYPE_DRINK_BRANDS, true);
-                        }
-                )
-            )
-            ->add('prefCocktails1', 'entity', array(
-                    'class'    => 'WBBBarBundle:Tag',
+                    'error_bubbling' => true
+                ))
+                ->add('lastname', null, array(
                     'required' => false,
-                    'property' => 'name',
-                    'empty_value' => 'Choose a cocktail',
-                    'query_builder' => function ($er) {
-                            return $er->findByType(Tag::WBB_TAG_TYPE_BEST_COCKTAILS, true);
-                        }
-                )
-            )
-            ->add('prefCocktails2', 'entity', array(
-                    'class'    => 'WBBBarBundle:Tag',
+                    'error_bubbling' => true
+                ))
+                ->add('email', 'text', array(
+                    'label' => 'form.email',
+                    'translation_domain' => 'FOSUserBundle',
                     'required' => false,
-                    'property' => 'name',
-                    'empty_value' => 'Choose a cocktail',
-                    'query_builder' => function ($er) {
-                            return $er->findByType(Tag::WBB_TAG_TYPE_BEST_COCKTAILS, true);
-                        }
-                )
-            )
-            ->add('prefCocktails3', 'entity', array(
-                    'class'    => 'WBBBarBundle:Tag',
+                    'error_bubbling' => true
+                ))
+                ->add('plainPassword', 'repeated', array(
+                    'type' => 'password',
+                    'first_options' => array('attr' => array('placeholder' => 'form.password')),
+                    'second_options' => array('attr' => array('placeholder' => 'form.password_confirmation')),
+                    'invalid_message' => 'fos_user.password.mismatch',
                     'required' => false,
-                    'property' => 'name',
-                    'empty_value' => 'Choose a cocktail',
-                    'query_builder' => function ($er) {
-                            return $er->findByType(Tag::WBB_TAG_TYPE_BEST_COCKTAILS, true);
-                        }
-                )
-            )
+                    'error_bubbling' => true
+                ))
+                ->add('birthdate', 'date', array(
+                    'years' => range(1914, date('Y')),
+                    'required' => false,
+                    'error_bubbling' => true
+                ))
+                ->add('country', null, array(
+                    'error_bubbling' => true
+                ))
+                ->add('prefCity1')
+                ->add('prefCity2')
+                ->add('prefCity3')
+                ->add('prefBar1')
+                ->add('prefBar2')
+                ->add('prefBar3')
+                ->add('prefDrinkBrand1')
+                ->add('prefDrinkBrand2')
+                ->add('prefDrinkBrand3')
+                ->add('prefCocktails1')
+                ->add('prefCocktails2')
+                ->add('prefCocktails3')
         ;
     }
 
@@ -120,7 +87,11 @@ class RegistrationFormType extends BaseType
         parent::setDefaultOptions($resolver);
 
         $resolver
-            ->setDefaults(array('translation_domain' => 'WBBUserBundle', 'label' => false))
+                ->setDefaults(array(
+                    'translation_domain' => 'WBBUserBundle',
+                    'label' => false,
+                    'validation_groups' => array('registration_full', 'Default')
+                ))
         ;
     }
 
@@ -131,4 +102,5 @@ class RegistrationFormType extends BaseType
     {
         return 'wbb_user_registration';
     }
+
 }

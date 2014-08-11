@@ -256,7 +256,7 @@
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
                         {% if is_mobile() and not is_tablet() %}
-                            <li class="left"><a href="#0" class="sms-share">SMS</a></li>
+                            <li class="left"><a href="#0" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
                             <li class="left"><a href="#0" class="email-share">Email</a></li>
                         {% endif %}
@@ -289,6 +289,11 @@
                         $("#share-pop").fadeOut("slow");
                         $(".mask").fadeOut("slow");
                     })
+                    $('#smsWindow').click(function() {
+                        $(this).target = "_blank";
+                        window.open($(this).prop('href'));
+                        return false;
+                    });
                 })
             </script>
         </section>
@@ -474,9 +479,7 @@
                         </div>
                     </div>
                     {% if not is_mobile() or is_tablet() %}
-                        {% block footerAd %}
-                            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_728x90' })) }}
-                        {% endblock %}
+                        {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_300x250' })) }}
                     {% endif %}
                 </aside>
             </article>
@@ -582,6 +585,9 @@
             $('form#tips .count').text( 250-length+' left' );
         });
     </script>
+{% endblock %}
+{% block footerAd %}
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_728x90' })) }}
 {% endblock %}
 
 

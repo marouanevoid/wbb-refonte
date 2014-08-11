@@ -17,9 +17,7 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
-#    session:
-#        handler_id: session.handler.pdo
+    session: ~
     fragments:       ~
     http_method_override: true
 
@@ -89,17 +87,16 @@ fos_user:
         confirmation: { enabled: true, template: WBBUserBundle:User:confirmation.email.html.twig }
         form:
             type: wbb_user_registration
+            validation_groups:  [Registration, Default, registration_full]
     profile:
         form:
             type: wbb_user_profile
-
     from_email:
         address:        myportal@pernod-ricard.com
         sender_name:    WBB
     resetting:
         email:
             template: WBBUserBundle:User:resetting.email.html.twig
-            
     service:
         mailer: fos_user.mailer.twig_swift
 
@@ -234,9 +231,9 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                small:   { width: 82, height: 82, quality: 100}
-                medium:  { width: 82, height: 82, quality: 100}
-                large:   { width: 145, height: 145, quality: 100}
+                av_small:   { width: 82, height: 82, quality: 100}
+                av_medium:  { width: 82, height: 82, quality: 100}
+                av_large:   { width: 145, height: 145, quality: 100}
 
     cdn:
         server:
@@ -334,11 +331,11 @@ hpatoio_bitly:
 aequasi_cache:
     instances:
         default:
-          persistent: true # Boolean or persistent_id
+          persistent: true
           namespace: mc
           type: memcached
           hosts:
-              - { host: localhost, port: 11211 }
+              - { host: wbb-staging.fkektq.0001.use1.cache.amazonaws.com, port: 11211 }
 
     session:
         enabled: true

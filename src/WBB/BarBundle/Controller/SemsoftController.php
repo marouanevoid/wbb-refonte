@@ -328,7 +328,12 @@ class SemsoftController extends Controller
     {
 //        $em = $this->getDoctrine()->getManager();
 
-        $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
+//        $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
+	$cities = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
+        $city = null;
+        if(count($cities)>0){
+            $city = $cities[0];
+        }
 
         if(!$city and !empty($cityName)){
             $city = new City();
@@ -351,7 +356,11 @@ class SemsoftController extends Controller
         }
 
 //        $em = $this->getDoctrine()->getManager();
-        $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
+	$suburb = null;
+        if($city instanceof City && $city->getId()){
+            $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
+        }
+//        $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
 
         if(!$suburb && !empty($suburbName))
         {

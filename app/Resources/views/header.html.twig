@@ -14,8 +14,8 @@
                 <td>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <span class="logged h3">
-                            <a>
-                                <img src="{{  showImage(app.user.avatar, 'small') }}" alt="robert" width="40" height="40"/>
+                            <a href="{{ path('fos_user_profile_show') }}">
+                                <img src="{{  showImage(app.user.avatar, 'av_small') }}" alt="{{ app.user.username }}" width="40" height="40"/>
                                 <span>{{ app.user.username }}</span>
                             </a>
                             <span class="actions">
@@ -26,9 +26,9 @@
                         </span>
                     {% else %}
                         <span class="register h4">
-                            <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
+                            <a class="lighbox btn-signin" href="#{#{ path('wbb_ajax_signin_popin') }#}">Sign in</a>
                             or
-                            <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                            <a class="btn-radius" href="#{#{ path('fos_user_registration_register') }#}">Register</a>
                         </span>
                     {% endif %}
                 </td>
@@ -127,7 +127,7 @@
         <div class="search-bar-mobile nav">
             <div class="container">
                 <div class="twelve columns s-margin">
-                    <form action="#{#search.php#}">
+                    <form action="{{ path('wbb_cloudsearch_searchresults') }}?q=*">
                         <input type="text" name="q" placeholder="Search" class="form-text" />
                         <input type="submit" class="form-submit no-text">
                         <input type="reset" value=" "/>
@@ -156,7 +156,7 @@
                                 <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
                                 <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
                             </nav>
-                            <form action="#{#{ path('wbb_cloudsearch_searchresults') }#}">
+                            <form action="{{ path('wbb_cloudsearch_searchresults') }}?q=*">
                                 <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
                             </form>
                         </td>
@@ -172,7 +172,7 @@
                                 </a>
                             </div>
                             <div class="search-mode">
-                                <a class="btn-round brown close"></a>
+                                <a class="btn-round brown close reset-trigger"></a>
                                 <a class="btn-round brown open radius-60 text-align-center">GO</a>
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
                                 <a href="" class="advanced-search h4">
@@ -183,8 +183,8 @@
                         <td>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                 <span class="logged h3">
-                                    <a>
-                                        <img src="{{ showImage(app.user.avatar, 'small') }}" alt="robert" width="40" height="40"/>
+                                    <a href="{{ path('fos_user_profile_show') }}">
+                                        <img src="{{ showImage(app.user.avatar, 'av_small') }}" alt="{{ app.user.username }}" width="40" height="40"/>
                                         <span>{{ app.user.username }}</span>
                                     </a>
                                     <span class="actions">
@@ -195,9 +195,9 @@
                                 </span>
                             {% else %}
                                 <span class="register h4">
-                                    <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
+                                    <a class="lighbox btn-signin" href="#{#{ path('wbb_ajax_signin_popin') }#}">Sign in</a>
                                     or
-                                    <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                                    <a class="btn-radius" href="#{#{ path('fos_user_registration_register') }#}">Register</a>
                                 </span>
                             {% endif %}
                         </td>

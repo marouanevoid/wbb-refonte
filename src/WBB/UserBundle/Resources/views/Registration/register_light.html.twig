@@ -1,3 +1,5 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
 <div id="account" class="left">
     <div class="subtitle text-transform-uppercase bold">I already have an account</div>
     {% render url('fos_user_security_login') %}
@@ -7,7 +9,7 @@
 
 <div id="create-account" class="left">
     <div class="subtitle text-transform-uppercase bold">Create an account now</div>
-    <a href="javascript:;" id="register-btn" class="btn btn-create-account text-align-center margin-top-30 radius-30 wrap bold">REGISTER</a>
+    <a href="{{ path('fos_user_registration_register') }}" id="register-btn" class="btn btn-create-account text-align-center margin-top-30 radius-30 wrap bold">REGISTER</a>
     <div id="register-form" style="display:none">
         <div class="connect-fb margin-top-20 {% if is_mobile() and not is_tablet() %}text-align-center{% endif %}">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
         <form action="{{ path('wbb_user_registration_register_light') }}" method="POST" id="register_form">
@@ -36,27 +38,26 @@
 
             {{ form_rest(form) }}
             <div class="group-actions margin-top-20 margin-bottom-20">
-                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Register">
+                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Confirm">
             </div>
         </form>
 
-        <div id="message" class="margin-top-20 wrap">
-            <div>
-                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
-            </div>
-            <div class="clear"></div>
+        <div id="message" class="wrap margin-top-20 padding-top-20 padding-bottom-20">
         </div>
     </div> <!-- #register-form -->
 </div>
 
 <script type="text/javascript">
-    $("#register-btn").click(function() {
-        var $registerForm = $("#register-form");
-        if ($registerForm.is(":visible")) {
-            $registerForm.fadeOut("slow");
-        } else {
-            $registerForm.fadeIn("slow");
+    $("#register-btn").click(function(e) {
+        if (popinFrom !== 'signin') {
+            e.preventDefault();
+            var $registerForm = $("#register-form");
+            if ($registerForm.is(":visible")) {
+                $registerForm.fadeOut("slow");
+            } else {
+                $registerForm.fadeIn("slow");
+            }
+            $(this).hide();
         }
-        $(this).hide();
-    })
+    });
 </script>

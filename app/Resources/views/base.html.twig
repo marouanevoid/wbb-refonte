@@ -25,6 +25,9 @@
                 window.isCity = true;
             {% endif %}
             var DEBUGMODE = "{{app.environment }}";
+            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '/');
+
+            // vars for fav actions
         </script>
             
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -83,6 +86,7 @@
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.mousewheel.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/popin.void.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.metabolism.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.metabolism.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.metabolism.js') }}"></script>
@@ -110,8 +114,19 @@
                 
                 var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
-                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
+                var showLoginForm = {{ app.request.query.get('login', 0) }};
+                var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
+
+                var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
+                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
+                var popinFrom = '';
+
+                {% for flashMessage in app.session.flashbag.get('profileHover') %}
+                    $(document).ready(function() {
+                        $('header.desktop .logged').mouseover();
+                   });
+                {% endfor %}
         </script>
 
         {% if is_tablet() %}
@@ -158,7 +173,6 @@
         </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
         {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
-        <div id="fb-root"></div>
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
             function securityCheck() {
@@ -166,7 +180,10 @@
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            alert('Create an account please !');
+                            $('#facebook-signup').after($('#message'));
+                            $('#login_form #message').find('ul').remove();
+                            var errorsList = $('#login_form #message').show().find('img').after('<ul></ul>').parent();
+                            errorsList.find('ul').append('<li>Created an account please !</li>');
                         } else {
                             window.location.reload();
                         }
@@ -194,7 +211,6 @@
         {% endblock %}
         <!-- AD -->
         {% block footerAd %}
-            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
         {% endblock %}
         <script>
         $(document).ready(function(){

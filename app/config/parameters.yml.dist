@@ -23,16 +23,9 @@ parameters:
     foursquare_client_secret: B5ADSJPXA5VP20DYFII1FIU0LCJFT0AFIEGWGURACLG3HNZ2
 
     feeds_limit: 20
-    website_url: 'http://wbb-recette.lapreprod.com'
+    website_url: 'http://54.85.74.236'
 
     instagram_client_id: 03af4f044b524a4ca9958053b7a6cb18
-
-    #Parameters for PdoSessionHandler
-#    pdo.db_options:
-#        db_table:    wbb_session
-#        db_id_col:   session_id
-#        db_data_col: session_value
-#        db_time_col: session_time
 
     #AWS
     aws_bucket: staging.worldsbestbars.com

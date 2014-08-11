@@ -67,7 +67,8 @@ class CityRepository extends EntityRepository
             $qb->andWhere($qb->expr()->eq('c.id', $country->getId()));
         }
 
-        return $qb->getQuery()->getOneOrNullResult();
+//        return $qb->getQuery()->getOneOrNullResult();
+	return $qb->getQuery()->getResult();
     }
 
     public function findNearestCity($latitude = 0, $longitude = 0, $maxDistance = 0, $offset = 0, $limit = 0)
@@ -94,11 +95,18 @@ class CityRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
     
-    public function findCitiesLike($name)
+    public function findCitiesLike($name, $limit = false)
     {
-        return $this->createQueryBuilder('c')
-                        ->where('c.name LIKE :name')
-                        ->setParameter('name', "$name%")
-                        ->getQuery()->getResult();
+        $qb = $this->createQueryBuilder($this->getAlias());
+        $qb
+            ->where($qb->expr()->like($this->getAlias().'.name', ':name'))
+            ->setParameter('name', "$name%")
+            ;
+
+        if($limit){
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }
