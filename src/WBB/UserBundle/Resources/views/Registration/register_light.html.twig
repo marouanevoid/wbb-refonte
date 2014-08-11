@@ -55,11 +55,13 @@
             e.preventDefault();
             var $registerForm = $("#register-form");
             if ($registerForm.is(":visible")) {
-                $registerForm.fadeOut("slow", function(){
+                $registerForm.fadeOut("slow");
+                $(".popup .title").fadeOut("slow", function(){
                     PopIn.updatePopin();
                 });
             } else {
-                $registerForm.fadeIn("slow",function(){
+                $registerForm.fadeIn("slow");
+                $(".popup .title").fadeIn("slow", function(){
                     PopIn.updatePopin();
                 });
             }

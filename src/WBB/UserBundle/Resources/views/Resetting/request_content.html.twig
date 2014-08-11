@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="title margin-bottom-30 wrap bold">FORGOT YOUR PASSWORD</div>
+<div class="title wrap bold margin-bottom-30 padding-top-100">FORGOT YOUR PASSWORD</div>
 <div class="subtitle text-transform-uppercase bold">Enter your email to create a new password</div>
 
 <div class="forgetpassword wrap">
@@ -19,9 +19,11 @@
             });
         </script>
 
+
         <div id="message" class="margin-top-20 {% if is_mobile() %}margin-bottom-20{% endif %}">
             <div>
-                <ul><li>
+                <ul>
+                    <li>
                         {% if invalid_username|trim != '' %}
                             {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
                         {% else %}
