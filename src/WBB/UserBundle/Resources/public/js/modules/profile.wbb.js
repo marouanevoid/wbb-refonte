@@ -23,7 +23,7 @@ wbb.LoadProfile = function() {
         },
         bestofs: {
             offset: 0,
-            limit: 8,
+            limit: 9,
             $more: $('.more-bestofs')
         },
         tips: {

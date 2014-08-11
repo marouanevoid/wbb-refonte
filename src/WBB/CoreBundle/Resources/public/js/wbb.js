@@ -56,6 +56,60 @@ $(document).ready(function() {
             }
         });
     });
+
+    function submitShareMail(element) {
+        window.shareRequest = $.ajax({
+            url: element.attr('action'),
+            method: 'GET',
+            data: element.serialize(),
+            success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+                $('.popin-block').html(html);
+                $('#show-popin').click();
+                // add listner on click send mail
+                $('.popin-block').find('form').off('submit').on('submit' , function (e) {
+                        e.preventDefault();
+                        submitShareMail($(this));
+                    }
+                );
+            },
+            beforeSend: function()
+            {
+                if (window.shareRequest != null) window.shareRequest.abort();
+            }
+        });
+    }
+
+    $('.email-share').on('click', function(e) {
+        e.preventDefault();
+        $('.popin-block').html('');
+        var url = $(this).data('href');
+
+        // Set the PopIn Loading Flag
+        PopIn.startLoading();
+        window.ajaxRequest = $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+                $('.popin-block').html(html);
+                $('#show-popin').click();
+
+                // add listner on click send mail
+                $('.popin-block').find('form').off('submit').on('submit' , function (e) {
+                        e.preventDefault();
+                        submitShareMail($(this));
+                    }
+                );
+            },
+            beforeSend: function()
+            {
+                if (window.ajaxRequest != null) window.ajaxRequest.abort();
+            }
+        });
+    });
 });
 
 function fillInForm(formId) {
