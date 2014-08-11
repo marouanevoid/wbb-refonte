@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="date-birthday text-align-center margin-top-10">
                                     <label class="margin-right-20">Date of Birth</label>
-                                    <div{% if is_mobile() and not is_tablet() %} style="width: 380px"{% endif %}>
+                                    <div{% if is_mobile() and not is_tablet() %} class="date-width" style="width: 380px"{% endif %}>
                                         <div class="select-wrap left">
                                             {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                         </div>
@@ -180,8 +180,9 @@
                                         Subscribe to our partners newsletters</label>
                                 </div>
                             </div>
+                            <div class="clear"></div>
                             {{ form_rest(form) }}
-                            <div class="group-actions margin-top-40 right {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
+                            <div class="group-actions margin-top-40 right {% if is_mobile() and not is_tablet() %}margin-bottom-40{% endif %}">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
                             </div>
                         </form>
