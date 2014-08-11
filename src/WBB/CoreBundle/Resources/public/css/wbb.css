@@ -322,3 +322,14 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     z-index: 2000000;
     display: none;
 }
+
+/* TEMP For Loader */
+/*.bar-finder .search-mode .btn-round.close.loading:before , a.btn-round.star.loading:before{
+    background: url(../images/712.gif) no-repeat 8px center;
+    background-position: 8px !important;
+}
+a.btn-round.star.loading-active:before, .bestof .btn-round.star.active.loading-active:before{
+    background: url(../images/713.gif) no-repeat 8px center;
+    background-position: 8px !important;
+}
+*/

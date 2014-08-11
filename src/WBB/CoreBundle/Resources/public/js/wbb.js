@@ -321,11 +321,11 @@ jQuery(document).ready(function($) {
 // syncronise Bar favorie
 function syncBarFav(cible,status){
     var href = cible.attr('href'),
-        currentTitle = cible.parent('article').find('.txt h2').text();
+        currentTitle = cible.parent('article').find('.overlay-link').attr('href');
     // find the other Bar on dom 
     // wich content the same name
-    $('.txt').find('h2').each(function(){
-        if($(this).text() == currentTitle){
+    $('.star').parent('article').find('.overlay-link').each(function(){
+        if($(this).attr('href') == currentTitle){
             // This bar is like favoried Bar
             // set the Class active
             var artcileParent =  $(this).parents('article');
@@ -380,10 +380,18 @@ $(document).ready(function() {
         window.lightType = $(this).attr('data-type');
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
+            if(btn.hasClass('active')){
+                btn.addClass('loading-active');
+            }else{
+                btn.addClass('loading');
+            }
             $.ajax({
                 type: "POST",
                 url: favUrl,
                 success: function(response) {
+                    btn.removeClass('loading');
+                    btn.removeClass('loading-active');
+
                     if (response.code === 200) {
                         btn.attr('href', response.href);
                         if (btn.hasClass('active')) {
