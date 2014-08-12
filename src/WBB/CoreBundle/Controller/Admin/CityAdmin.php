@@ -27,7 +27,7 @@ class CityAdmin extends Admin
             ->add('suburbs', 'sonata_type_collection',
                 array(
                     'required'  => false,
-                    'help'      => 'Associate an area minimum to the city is mandatory'
+                    'help'      => 'Associate a neighborhood minimum to the city is mandatory'
                 ), array(
                     'edit' => 'inline',
                     'inline' => 'table'
@@ -70,7 +70,7 @@ class CityAdmin extends Admin
             ->add('country')
             ->add('seoDescription', null, array('label' => 'SEO Description'))
             ->add('nbAreas', 'string', array(
-                'label' => 'Districts',
+                'label' => 'Neighborhoods',
                 'template' => 'WBBCoreBundle:Admin:list\list_nb_areas.html.twig'
             ))
             ->add('nbBars', 'string', array(

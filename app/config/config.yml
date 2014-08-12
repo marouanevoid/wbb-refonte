@@ -93,6 +93,7 @@ fos_user:
             type: wbb_user_profile
     change_password:
         form:
+            type: wbb_user_change_password
             validation_groups:  [ChangePassword, Default]
     from_email:
         address:        myportal@pernod-ricard.com
