@@ -2,11 +2,11 @@
 
 {% block fos_user_content %}
 <div id="success">
-	<table class="min-height" width="100%">
+	<table class="min-height" width="100%" {% if is_mobile() and not is_tablet() %}height="300"{% endif %}>
 		<tbody>
 			<tr>
 			  <td valign="bottom">
-				<div class="subtitle margin-bottom-20 wrap bold">FORGOT YOUR PASSWORD</div>
+				<div class="title margin-bottom-20 wrap bold">FORGOT YOUR PASSWORD</div>
 			  </td>
 			</tr>
 			<tr>
