@@ -133,13 +133,13 @@ class BarAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        if(is_object($this->getSubject())){
-            $this->getSubject()->setUser($this->getUser());
-        }
+//        if(is_object($this->getSubject())){
+//            $this->getSubject()->setUser($this->getUser());
+//        }
         
         $formMapper
             ->with('General')
-                ->add('user', null, array('help' => 'Optional'))
+                ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
                 ->add('name', null, array('label'=>'Name of the bar', 'help' => 'Mandatory'))
                 ->add('city', null, array('help' => 'Mandatory', 'required' => true))
                 ->add('suburb', null, array('help' => 'Mandatory', 'required' => true))

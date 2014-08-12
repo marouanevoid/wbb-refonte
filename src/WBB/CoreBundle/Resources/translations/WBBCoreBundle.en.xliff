@@ -114,7 +114,7 @@
 
             <trans-unit id="form.label_suburbs">
                 <source>form.label_suburbs</source>
-                <target>Area(s) *</target>
+                <target>Neighborhood(s) *</target>
             </trans-unit>
 
             <trans-unit id="form.label_bestofs">
@@ -139,7 +139,7 @@
 
             <trans-unit id="filter.label_suburbs">
                 <source>filter.label_suburbs</source>
-                <target>Area</target>
+                <target>Neighborhood</target>
             </trans-unit>
 
             <trans-unit id="list.label_acronym">
