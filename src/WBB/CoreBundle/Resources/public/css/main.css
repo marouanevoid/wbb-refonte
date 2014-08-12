@@ -59,9 +59,9 @@
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
-  .popup {width: 911px; /*height: 530px;*/}
+  .popup {width: 911px; /*height: 530px;*/ z-index: 9999999; position: absolute; top: 50%; left: 50%;}
   .popin-block {padding: 25px 40px;}
-  .void-popup {z-index: 9999999; position: absolute;}
+  .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .subtitle.small {font-size: 13px;}
   .select-two .ui-dropdown-container {width: 100%!important;}
@@ -229,7 +229,7 @@
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
   .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 15px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
-  .ui .connect-fb {line-height: 42px; font-size: 16px;}
+  .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
   /* Message's */
@@ -269,6 +269,7 @@
   #register.page .group-checkbox {margin: auto; float: none;}
   #register.page .group-actions,
   #register.page .group-checkbox {position: relative; left: 8px;}
+  #register.page.mobile .ui .connect-fb {font-size: 17px;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
