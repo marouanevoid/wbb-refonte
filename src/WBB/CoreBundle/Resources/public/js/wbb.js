@@ -251,6 +251,8 @@ function initRegisterLoginForms() {
         var form = $(this);
         var formUrl = form.attr('action');
         var error = false;
+        $('#username').removeClass('error');
+        $('#password').removeClass('error');
         if ($('#username').val().trim() === '') {
             error = true;
             $('#username').addClass('error');
