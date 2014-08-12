@@ -355,7 +355,7 @@ class SemsoftController extends Controller
             $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
         }
 
-        if(!$suburb && !empty($suburbName))
+        if(!$suburb && !empty($suburbName) && $city instanceof City)
         {
             $suburb = new CitySuburb();
             $suburb
