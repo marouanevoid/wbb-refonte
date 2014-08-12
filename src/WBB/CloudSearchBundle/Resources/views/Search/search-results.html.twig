@@ -46,7 +46,7 @@
             </div>
         {% endif %}
 
-        <div class="container l-padding{% if is_mobile() and not is_tablet() %}-top{% endif %}">
+        <div class="container l-padding{% if is_mobile() and not is_tablet() %}-top min-height-block-mobile{% endif %}">
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/search.js') }}"></script>
 
             <aside class="three columns filters">
@@ -121,8 +121,8 @@
                 {% endif %}
 
                 <div class="six columns h2 screen-compteur">
-                    <input type="radio" name="filter" value="(0) Bars" data-type='Bar' checked="checked" class="ui-radio collapsed" data-color="brown" data-type="collapsed"/>
-                    <input type="radio" name="filter" value="(0) Articles" data-type='News' class="ui-radio" data-color="brown collapsed" data-type="collapsed"/>
+                    <input type="radio" name="filter" value="(0) Bar" data-type='Bar' checked="checked" class="ui-radio collapsed" data-color="brown" data-type="collapsed"/>
+                    <input type="radio" name="filter" value="(0) New" data-type='News' class="ui-radio" data-color="brown collapsed" data-type="collapsed"/>
                 </div>
 
                 <div class="six columns sort-by h3">
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class='display-bar-width-list-parent'>
-                    <div class="bars-w-pic-list load-container" style="display: none">
+                    <div class="bars-w-pic-list load-container">
                     <div class='dist-target'></div>
                     <div class="load-target"></div>
                     <div style='clear:both;'></div>
