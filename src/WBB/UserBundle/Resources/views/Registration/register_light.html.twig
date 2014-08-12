@@ -56,12 +56,12 @@
             var $registerForm = $("#register-form");
             if ($registerForm.is(":visible")) {
                 $registerForm.fadeOut("slow");
-                $(".popup .title").fadeOut("slow", function(){
+                $(".popup .title").fadeIn("slow", function(){
                     PopIn.updatePopin();
                 });
             } else {
                 $registerForm.fadeIn("slow");
-                $(".popup .title").fadeIn("slow", function(){
+                $(".popup .title").fadeOut("slow", function(){
                     PopIn.updatePopin();
                 });
             }
