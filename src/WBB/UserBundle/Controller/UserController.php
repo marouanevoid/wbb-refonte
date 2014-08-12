@@ -5,9 +5,22 @@ namespace WBB\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
+
+    public function simulateErrorAction($code)
+    {
+        if($code === '404')
+        {
+            throw new NotFoundHttpException;
+        }else{
+            throw new \Exception;
+        }
+
+    }
+
     public function loadProfileDataAction($content = 1, $filter = "date" , $offset = 0, $limit = 8, $display = 'grid')
     {
         $user = $this->getUser();
