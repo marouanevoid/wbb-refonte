@@ -378,7 +378,7 @@ function syncBarFav(cible,status){
         currentTitle = cible.parent('article').find('.overlay-link').attr('href');
     // find the other Bar on dom 
     // wich content the same name
-    $('.star').parent('article').find('.overlay-link').each(function(){
+    $('.star').closest('article').find('.overlay-link').each(function(){
         if($(this).attr('href') == currentTitle){
             // This bar is like favoried Bar
             // set the Class active
