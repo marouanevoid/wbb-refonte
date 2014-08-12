@@ -60,6 +60,7 @@
   .popin-block {padding: 25px 40px;}
   .void-popup {z-index: 9999999; position: fixed;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
+  .subtitle.small {font-size: 13px;}
   .select-two .ui-dropdown-container {width: 100%!important;}
 
   /* Popup */
@@ -492,7 +493,7 @@
   .popup .btn:hover {opacity: 0.8;}
 
 /* jQuery UI Autocomplete */
-  ul.ui-autocomplete {background-color: #faf3e1; padding: 10px; position: absolute; width: 260px!important; border: none; margin: 0 0 0 10px;}
+  ul.ui-autocomplete {background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
   ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: bold 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
