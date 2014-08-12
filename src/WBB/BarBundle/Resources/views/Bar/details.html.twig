@@ -258,7 +258,11 @@
                         {% if is_mobile() and not is_tablet() %}
                             <li class="left"><a href="#0" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
-                            <li class="left"><a href="#0" class="email-share">Email</a></li>
+                            <li class="left">
+                                <a href="#0" data-href="{{ path('wbb_share_email_form', {id: bar.id, type: 'bar'}) }}" class="email-share">
+                                    Email
+                                </a>
+                            </li>
                         {% endif %}
                     </ul>
                     <div class="clear"></div>

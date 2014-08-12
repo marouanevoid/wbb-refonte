@@ -272,7 +272,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="users")
-     * @Assert\NotBlank(message="not.blank")
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full", "Registration", "Profile"})
      */
     private $country;
 

@@ -194,10 +194,11 @@ meta.Search = function(config){
             $('.entire-content').hide();
         }
 
-
+        // show loader 
+        $('.bar-finder .search-mode .btn-round.close').addClass('loading');
         $.ajax({
             type: 'GET',
-            url: URL_MODE + '/search?entity=*&q='+q+'&limit=20&start=0',
+            url: getBaseURL() + URL_MODE + '/search?q='+q+'&limit=20&start=0',
             async: true,
             contentType: "application/json",
             dataType: 'json',
@@ -205,6 +206,8 @@ meta.Search = function(config){
             q : q
         },
         success  :function(data){
+            // Hide Loader 
+            $('.bar-finder .search-mode .btn-round.close').removeClass('loading');
             that.searchResult(data , q);
         }
 
@@ -395,3 +398,25 @@ $(document).ready(function(){
     new meta.Search({});
 
 });
+
+function getBaseURL() {
+    var url = location.href;  // entire url including querystring - also: window.location.href;
+    var baseURL = url.substring(0, url.indexOf('/', 14));
+
+
+    if (baseURL.indexOf('http://localhost') != -1) {
+        // Base Url for localhost
+        var url = location.href;  // window.location.href;
+        var pathname = location.pathname;  // window.location.pathname;
+        var index1 = url.indexOf(pathname);
+        var index2 = url.indexOf("/", index1 + 1);
+        var baseLocalUrl = url.substr(0, index2);
+
+        return baseLocalUrl ;
+    }
+    else {
+        // Root Url for domain name
+        return baseURL ;
+    }
+
+}
