@@ -21,7 +21,7 @@ class CitySuburbAdmin extends Admin
 
         $formMapper
             ->with('General')
-                ->add('name', null, array('label'=> 'Name of the area *', 'help'=>'Mandatory'));
+                ->add('name', null, array('label'=> 'Name of the neighborhood *', 'help'=>'Mandatory'));
 
         if(!$this->hasParentFieldDescription()) {
             $formMapper->add('city', null, array('required' => true));

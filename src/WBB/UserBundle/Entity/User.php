@@ -108,20 +108,6 @@ class User extends BaseUser
      */
     private $prefHome;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-//     */
-//    private $prefCity1;
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-//     */
-//    private $prefCity2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-//     */
-//    private $prefCity3;
-
     /**
      * @var string
      *
@@ -142,21 +128,6 @@ class User extends BaseUser
      * @ORM\Column(name="pref_city3", type="string", length=255, nullable=true)
      */
     private $prefCity3;
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
-//     */
-//    private $prefBar1;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
-//     */
-//    private $prefBar2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
-//     */
-//    private $prefBar3;
 
     /**
      * @var string
@@ -179,21 +150,6 @@ class User extends BaseUser
      */
     private $prefBar3;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefDrinkBrand1;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefDrinkBrand2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefDrinkBrand3;
-
     /**
      * @var string
      *
@@ -214,21 +170,6 @@ class User extends BaseUser
      * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
      */
     private $prefDrinkBrand3;
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefCocktails1;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefCocktails2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefCocktails3;
 
     /**
      * @var string
