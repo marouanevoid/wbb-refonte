@@ -1,0 +1,29 @@
+<div class="page-form wrap">
+    <div class="padding-top-20 padding-bottom-20">
+        <form action="{{ url }}">
+            <div class="group-form margin-top-20">
+                <label class="left">Name</label>
+                {{ form_widget(form.name, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+            </div>
+            <div class="group-form margin-top-10">
+                <label class="left">Email</label>
+                {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+            </div>
+            <div class="group-form margin-top-10">
+                <label class="left">Message</label>
+                {{ form_widget(form.content, { 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
+            </div>
+            <div class="clear"></div>
+            <div class="group-actions padding-top-20 wrap">
+                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Send email">
+                {{ form_widget(form.content, { 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
+                {{ form_rest(form) }}
+            </div>
+        </form>
+        id: {{ form_errors(form.id) }}
+        name: {{ form_errors(form.name) }}
+        email: {{ form_errors(form.email) }}
+        content: {{ form_errors(form.content) }}
+        form: {{ form_errors(form) }}
+    </div>
+</div>

@@ -55,7 +55,7 @@
                                     </div> <!-- .subgroup.right -->
                                 </div> <!-- .group.right -->
                             </div>
-
+                            {% if not is_mobile() %}
                             <div class="margin-bottom-20">
                                 <div class="clear"></div>
                                 <div class="select-two margin-top-10 gender">
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="date-birthday text-align-center margin-top-10">
                                     <label class="margin-right-20">Date of Birth</label>
-                                    <div{% if is_mobile() and not is_tablet() %} style="width: 380px"{% endif %}>
+                                    <div{% if is_mobile() and not is_tablet() %} class="date-width" style="width: 380px"{% endif %}>
                                         <div class="select-wrap left">
                                             {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                         </div>
@@ -180,8 +180,12 @@
                                         Subscribe to our partners newsletters</label>
                                 </div>
                             </div>
-                            {{ form_rest(form) }}
-                            <div class="group-actions margin-top-40 right {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
+                            {% else %}
+                                <div class="subtitle">To make further updates, use the desktop version.</div>
+                            {% endif %}
+                            <div class="clear"></div>
+                            {{ form_widget(form._token) }}
+                            <div class="group-actions margin-top-40 right {% if is_mobile() and not is_tablet() %}margin-bottom-40{% endif %}">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
                             </div>
                         </form>
@@ -190,25 +194,27 @@
                             <div id="message" class="margin-top-20 wrap">
                                 <div>
                                     {{ form_errors(form) }}
-                                    {{ form_errors(form.username) }}
-                                    {{ form_errors(form.title) }}
-                                    {{ form_errors(form.firstname) }}
-                                    {{ form_errors(form.lastname) }}
-                                    {{ form_errors(form.email) }}
-                                    {{ form_errors(form.birthdate) }}
-                                    {{ form_errors(form.country) }}
-                                    {{ form_errors(form.prefCity1) }}
-                                    {{ form_errors(form.prefCity2) }}
-                                    {{ form_errors(form.prefCity3) }}
-                                    {{ form_errors(form.prefBar1) }}
-                                    {{ form_errors(form.prefBar2) }}
-                                    {{ form_errors(form.prefBar3) }}
-                                    {{ form_errors(form.prefDrinkBrand1) }}
-                                    {{ form_errors(form.prefDrinkBrand2) }}
-                                    {{ form_errors(form.prefDrinkBrand3) }}
-                                    {{ form_errors(form.prefCocktails1) }}
-                                    {{ form_errors(form.prefCocktails2) }}
-                                    {{ form_errors(form.prefCocktails3) }}
+                                    {% if not is_mobile() %}
+                                        {{ form_errors(form.username) }}
+                                        {{ form_errors(form.title) }}
+                                        {{ form_errors(form.firstname) }}
+                                        {{ form_errors(form.lastname) }}
+                                        {{ form_errors(form.email) }}
+                                        {{ form_errors(form.birthdate) }}
+                                        {{ form_errors(form.country) }}
+                                        {{ form_errors(form.prefCity1) }}
+                                        {{ form_errors(form.prefCity2) }}
+                                        {{ form_errors(form.prefCity3) }}
+                                        {{ form_errors(form.prefBar1) }}
+                                        {{ form_errors(form.prefBar2) }}
+                                        {{ form_errors(form.prefBar3) }}
+                                        {{ form_errors(form.prefDrinkBrand1) }}
+                                        {{ form_errors(form.prefDrinkBrand2) }}
+                                        {{ form_errors(form.prefDrinkBrand3) }}
+                                        {{ form_errors(form.prefCocktails1) }}
+                                        {{ form_errors(form.prefCocktails2) }}
+                                        {{ form_errors(form.prefCocktails3) }}
+                                    {% endif %}
                                 </div>
                                 <div class="clear"></div>
                             </div>
