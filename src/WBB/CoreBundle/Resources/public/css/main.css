@@ -369,7 +369,7 @@
   #editprofile .subgroup .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
-  #editprofile .avatar-profil {/*position: absolute;*/border: 3px solid #b3955f; padding: 2px;}
+  #editprofile .avatar-profil {/*position: absolute;*/border: 3px solid #b3955f; padding: 2px;  }
   #editprofile .avatar-profil img {display: block; width: 140px; height: 140px;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
   #editprofile .file-image:hover {display: block; cursor: pointer; opacity: 0.8;}
@@ -447,7 +447,8 @@
   #page-standard .min-height {min-height: 450px;}
   #page-standard .content .h3 {color: #b3955f;}
     /* Mobile */
-    #page-standard.mobile {max-width: 640px;}
+      #page-standard.mobile {width: 100%;}
+      #page-standard.mobile .min-height {padding: 0 20px;}
 
 /* SHARE Tooltips */
   .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
