@@ -63,7 +63,7 @@ class ProfileFormType extends BaseType
             ->add('birthdate', 'date', array(
                 'years' => range(1900, date('Y'))
             ))
-            ->add('country', null, array('empty_value' => 'Choose a country'))
+            ->add('country', null, array('empty_value' => 'Choose a country', 'required' => false))
             ->add('prefCity1')
             ->add('prefCity2')
             ->add('prefCity3')
