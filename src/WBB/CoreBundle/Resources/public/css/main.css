@@ -26,6 +26,9 @@
   input[type="password  "]:-ms-input-placeholder { /* Internet Explorer 10+ */
       color:    #818a8c;
   }
+  input[type="text"], input[type="password"], input[type="email"] {
+    color: #818a8c;
+  }
 /* Globale Libs */
     form .icheckbox_flat {display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
     form .icheckbox_flat {background-position: 0 0;}
@@ -58,7 +61,7 @@
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
   .popup {width: 911px; /*height: 530px;*/}
   .popin-block {padding: 25px 40px;}
-  .void-popup {z-index: 9999999; position: fixed;}
+  .void-popup {z-index: 9999999; position: absolute;}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .subtitle.small {font-size: 13px;}
   .select-two .ui-dropdown-container {width: 100%!important;}
@@ -226,7 +229,7 @@
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
   .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 15px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
-  .ui .connect-fb {line-height: 42px; font-size: 15px;}
+  .ui .connect-fb {line-height: 42px; font-size: 16px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
   /* Message's */
