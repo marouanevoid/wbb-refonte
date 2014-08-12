@@ -258,7 +258,7 @@
 /* Register Page */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
   #register.page .ui {width: 765px;}
-  #register.page .title {width: 100%;}
+  #register.page .title {width: 100%; font-size: 28px;}
   #register.page #create-account {width: 100%; padding: 0;}
   #register.page #create-account label {display: block; float: left; width: 220px; line-height: 35px;}
   #register.page #create-account .form-text {float: left; width: 300px;}
