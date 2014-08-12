@@ -51,6 +51,7 @@
                                             <div class="file-image wrap">
                                                 {{ form_widget(form.avatar, { 'attr' : { 'class': 'form-file no-text' } }) }}
                                             </div>
+                                            <p class="subtitle small">Upload you profile picture (Accepted Formats : Png, Jpg)</p>
                                         </div>
                                     </div> <!-- .subgroup.right -->
                                 </div> <!-- .group.right -->
@@ -67,17 +68,17 @@
                                 <div class="clear"></div>
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20">Firstname</label>
-                                    {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
+                                    {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                     <div class="clear"></div>
                                 </div>
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20">Lastname</label>
-                                    {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
+                                    {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                     <div class="clear"></div>
                                 </div>
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20">Email</label>
-                                    {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
+                                    {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                     <div class="clear"></div>
                                 </div>
                                 <div class="date-birthday text-align-center margin-top-10">
@@ -107,65 +108,65 @@
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20">Cities you like to go</label>
-                                {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Choose a city' } }) }}
+                                {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Choose a city' } }) }}
+                                {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Choose a city' } }) }}
+                                {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20">Favorite Bars</label>
-                                {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Choose a bar' } }) }}
+                                {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Choose a bar' } }) }}
+                                {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Choose a bar' } }) }}
+                                {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20">Drink brands</label>
-                                {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Choose a brand' } }) }}
+                                {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Choose a brand' } }) }}
+                                {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Choose a brand' } }) }}
+                                {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20">Categories or cocktails</label>
-                                {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Choose a cocktail' } }) }}
+                                {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Choose a cocktail' } }) }}
+                                {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10 form-text-without-label">
-                                {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Choose a cocktail' } }) }}
+                                {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
                                 <div class="clear"></div>
                             </div>
 
@@ -191,11 +192,15 @@
                         </form>
                         <div class="clear"></div>
                         {% if not form.vars.valid %}
+                            <script type="text/javascript">
+                                $(function(){
+                                    $("#message").show();
+                                });
+                            </script>
                             <div id="message" class="margin-top-20 wrap">
                                 <div>
                                     {{ form_errors(form) }}
                                     {% if not is_mobile() %}
-                                        {{ form_errors(form.username) }}
                                         {{ form_errors(form.title) }}
                                         {{ form_errors(form.firstname) }}
                                         {{ form_errors(form.lastname) }}

@@ -76,7 +76,8 @@ class SearchController extends Controller
             'mood' => $mood,
             'occasion' => $occasion,
             'cocktails' => $cocktails,
-            'district' => $district
+            'district' => $district,
+            'favorites' => true
         ));
 
         return $results;

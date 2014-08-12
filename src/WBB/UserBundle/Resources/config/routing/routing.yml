@@ -27,3 +27,7 @@ wbb_profile_filters:
     defaults: { _controller: WBBUserBundle:User:loadProfileData, content: bars, filter: date, offset: 0, limit: 8, display: grid }
     options:
         expose: true
+
+wbb_simulate_errors:
+    pattern: /errors/{code}
+    defaults: { _controller: WBBUserBundle:User:simulateError }
