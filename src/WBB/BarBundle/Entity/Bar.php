@@ -318,7 +318,7 @@ class Bar implements IndexableEntity
     private $instagramExcludedImgs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="bars", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="bars")
      */
     private $user;
 

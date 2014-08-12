@@ -308,7 +308,7 @@ class SemsoftBar
     private $bar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="semsoftBarsLevel")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="semsoftBarsLevel", cascade={"persist"})
      */
     private $energyLevel;
 

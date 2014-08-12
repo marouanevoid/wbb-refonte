@@ -1,5 +1,5 @@
-FOS\UserBundle\Model\User:
-    properties:
-        password:
-            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
-                message: "The entered password is invalid."
+#FOS\UserBundle\Model\User:
+#    properties:
+#        password:
+#            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
+#                message: "The entered password is invalid."

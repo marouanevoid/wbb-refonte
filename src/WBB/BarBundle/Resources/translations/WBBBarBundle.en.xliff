@@ -84,7 +84,7 @@
 
             <trans-unit id="form.label_suburb">
                 <source>form.label_suburb</source>
-                <target>Area</target>
+                <target>Neighborhood</target>
             </trans-unit>
 
             <trans-unit id="form.label_foursquare">
@@ -624,7 +624,7 @@
             </trans-unit>
             <trans-unit id="list.label_suburb">
                 <source>list.label_suburb</source>
-                <target>Area</target>
+                <target>Neighborhood</target>
             </trans-unit>
             <trans-unit id="list.label_website">
                 <source>list.label_website</source>
@@ -636,7 +636,7 @@
             </trans-unit>
             <trans-unit id="filter.label_suburb">
                 <source>filter.label_suburb</source>
-                <target>Suburb</target>
+                <target>Neighborhood</target>
             </trans-unit>
             <trans-unit id="filter.label_on_top">
                 <source>filter.label_on_top</source>
