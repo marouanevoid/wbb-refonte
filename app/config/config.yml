@@ -17,8 +17,7 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:
-        handler_id: session.handler.pdo
+    session: ~
     fragments:       ~
     http_method_override: true
 
@@ -89,18 +88,18 @@ fos_user:
         form:
             type: wbb_user_registration
             validation_groups:  [Registration, Default, registration_full]
-
     profile:
         form:
             type: wbb_user_profile
-
+    change_password:
+        form:
+            validation_groups:  [ChangePassword, Default]
     from_email:
         address:        myportal@pernod-ricard.com
         sender_name:    WBB
     resetting:
         email:
             template: WBBUserBundle:User:resetting.email.html.twig
-            
     service:
         mailer: fos_user.mailer.twig_swift
 
