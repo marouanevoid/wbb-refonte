@@ -142,9 +142,9 @@
                                             if ($(this).attr('href') === favoriteUrl) {
                                                 $(this).click();
                                                 if(from === 'login') {
-                                                    html = '<div id="success"><p class="padding-top-40">The "' + $.cookie('light_name') +
-                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
-                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                                    html = '<table id="success" class="min-height" width="100%"><tbody><tr><td valign="bottom" style="vertical-align: bottom"><p class="padding-top-40 text-align-center">The "' + $.cookie('light_name') +
+                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p></td></tr><tr><td align="center">' +
+                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></td></tr></tbody></table>';
                                                 } else {
                                                     html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.</p>' +
                                                     '<p>The "' + $.cookie('light_name') +
