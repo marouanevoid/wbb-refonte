@@ -64,6 +64,7 @@
   .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .subtitle.small {font-size: 13px;}
+  .btn.gold:hover {background-color: #ffe4af; color: #b3955f;}
   .select-two .ui-dropdown-container {width: 100%!important;}
 
   /* Popup */
@@ -269,7 +270,7 @@
   #register.page .group-checkbox {margin: auto; float: none;}
   #register.page .group-actions,
   #register.page .group-checkbox {position: relative; left: 8px;}
-  #register.page.mobile .ui .connect-fb {font-size: 17px;}
+  #register.page .ui .connect-fb {font-size: 17px;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
@@ -341,7 +342,6 @@
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
   #register.page.mobile #create-account .form-text {width: 100%; margin: 0 0 10px;}
-  #register.page.mobile #create-account ::-webkit-input-placeholder {text-align: center; border: 1px solid red!important;}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -352,11 +352,11 @@
   #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px auto 0; /*width: 77%*/; display: block;}
   #register.page.mobile .group-form {overflow: visible; width: 100%;}
   #register.page.mobile .group-actions {width: 100%; left: 0;}
-  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center; /*text-indent: 55px;*/}
-  #register.page.mobile .ui .connect-fb {line-height: normal;}
+  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: right; /*text-indent: 55px;*/}
+  #register.page.mobile .ui .connect-fb {line-height: normal; font-size: 15px;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
-  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
+  #register.page.mobile .group-checkbox label {text-align: right!important; font-size: 16px!important;}
 
 /* Register3 (Mobile) */
   #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
@@ -537,7 +537,6 @@
   .ui .sort-by {margin-left: 0;}
   .gender .ui-dropdown-container .ui-dropdown .choice,
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
-  .search-bar-mobile .container input[type="reset"] {right: 43%;}
   .ui-dropdown-container .ui-dropdown span {height: 37px;}
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
@@ -643,7 +642,9 @@
     .date-birthday .select-wrap {width: 26%; margin-right: 12px;}
     .date-birthday .ui-dropdown-container {width: 100%!important;}
     .date-birthday .date-width {width: 612px!important;}
-      #register.page #message {left: 0;}
+    #register.page #message {left: 0;}
+    #register.page .group-checkbox {padding: 0 20px 0 0; width: 97%; left: 0;}
+    .search-bar-mobile .container input[type="reset"] {right: 39%;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -658,6 +659,21 @@
     .wrap-share.mobile .social-share .share-label {width: 96%;}
     .date-birthday .select-wrap {width: 105px; margin-right: 15px;}
     .ui.register #account .form-text {text-indent: 10px; border: 1px solid red;}
+    /* Globale Tags */
+        input[type="email"]::-webkit-input-placeholder,
+        input[type="text"]::-webkit-input-placeholder,
+        input[type="password"]::-webkit-input-placeholder { /* WebKit browsers */
+            text-indent: 10px;
+        }
+        input[type="text"]:-moz-placeholder,
+        input[type="password"]:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            text-indent: 10px;
+        }
+        input[type="email"]::-moz-placeholder,
+        input[type="text"]::-moz-placeholder,
+        input[type="password"]::-moz-placeholder { /* Mozilla Firefox 19+ */
+            text-indent: 10px;
+        }
   }
 
 /* Smartphones (portrait) ----------- */
@@ -671,7 +687,8 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
     .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
-    #register.page.mobile #create-account .form-text {width: 298px; margin: 0 0 10px;}
+    #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; text-align: right;}
+    .search-bar-mobile .container input[type="reset"] {right: 43%;}
   }
 
 /* Full Screens ----------- */
