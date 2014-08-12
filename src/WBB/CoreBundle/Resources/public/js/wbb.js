@@ -352,10 +352,7 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="full-cream-up text-align-center"><div class="padding-top-100">' +
-                '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
-                '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
-                '</div></div>';
+        var html = '<div id="success" class="text-align-center"><div class="min-height"><div class="padding-top-100"><div class="padding-top-80"><p>Your email is now confirmed. Welcome in the World’s Best Bars community!</p><p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p></div></div></div></div>';
         $('.popin-block').html(html);
         PopIn.resize($('#register'));
         $('#show-popin').click();
