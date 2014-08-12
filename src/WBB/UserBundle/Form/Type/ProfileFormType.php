@@ -51,7 +51,7 @@ class ProfileFormType extends BaseType
                 'expanded' => false,
                 'multiple' => false,
                 'required' => false,
-                'empty_value' => 'Please choose your gender',
+                'empty_value' => '',
                 'choices'  => array(
                     'F'   =>  'F',
                     'M'   =>  'M'
@@ -63,7 +63,7 @@ class ProfileFormType extends BaseType
             ->add('birthdate', 'date', array(
                 'years' => range(1900, date('Y'))
             ))
-            ->add('country', null, array('empty_value' => 'Choose a country', 'required' => false))
+            ->add('country', null, array('empty_value' => '', 'required' => false))
             ->add('prefCity1')
             ->add('prefCity2')
             ->add('prefCity3')
