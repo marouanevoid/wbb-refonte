@@ -19,7 +19,7 @@ class IndexCommand extends ContainerAwareCommand
         $output->writeln('Updating the AWS CloudSearch index...');
 
         $indexer = $this->getContainer()->get('cloudsearch.indexer');
-        $repos = array('bar.repository', 'bestof.repository');
+        $repos = array('bar.repository', 'bestof.repository', 'news.repository', 'city.repository');
 
         foreach ($repos as $repo) {
             $entities = $this->getContainer()->get($repo)->findAll();
