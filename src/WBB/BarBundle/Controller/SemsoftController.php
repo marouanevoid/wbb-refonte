@@ -122,7 +122,7 @@ class SemsoftController extends Controller
                 $country = $this->getCountry($data['Country']);
 //                if($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))){
                 if(($bar && (!empty($data['Updated Columns']) || (!empty($data['Overwritten Columns'])))) || !empty($data['Name'])){
-
+                    set_time_limit(300);
                     $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
                     $suburb = $this->getSuburb($data['District'], $city);
                     $ssBar->setCity(($city)?$city:null);
