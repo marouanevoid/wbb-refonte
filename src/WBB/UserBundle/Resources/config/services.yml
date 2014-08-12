@@ -81,3 +81,9 @@ services:
         arguments: ['@security.context', '@doctrine', '@service_container']
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }
+
+    wbb.logout.success_handler:
+        class: WBB\UserBundle\Security\Authentication\LogoutSuccessHandler
+        arguments: ["@router"]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
