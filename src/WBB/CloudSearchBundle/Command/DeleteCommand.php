@@ -16,16 +16,17 @@ class DeleteCommand extends ContainerAwareCommand
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('Deleting CloudSearch documents...');
+
         $indexer = $this->getContainer()->get('cloudsearch.indexer');
-        $repos = array('bar.repository', 'bestof.repository');
+        $searcher = $this->getContainer()->get('cloudsearch.searcher');
 
-        foreach ($repos as $repo) {
-            $entities = $this->getContainer()->get($repo)->findAll();
-
-            foreach ($entities as $entity) {
-                $indexer->deleteById($entity);
-            }
+        $results = $searcher->findAll();
+        foreach ($results['hits']['hit'] as $result) {
+            $indexer->deleteById($result['id'], $input->getOption('verbose', false));
         }
+
+        $output->writeln('Done.');
     }
 
 }

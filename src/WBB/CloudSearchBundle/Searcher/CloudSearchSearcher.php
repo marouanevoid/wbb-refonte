@@ -33,7 +33,11 @@ class CloudSearchSearcher
 
     public function search(array $parameters)
     {
-        $response = $this->favorites($this->doSearch($parameters));
+        $response = $this->doSearch($parameters);
+
+        if ($parameters['favorites']) {
+            $response = $this->favorites($response);
+        }
 
         $parameters['entity'] = 'Bar';
         $barResponse = $this->doSearch($parameters);
@@ -71,6 +75,25 @@ class CloudSearchSearcher
         }
 
         return $response;
+    }
+
+    public function findAll()
+    {
+        $parameters = array(
+            'q' => '-thisconnotbefoundincloudsearchever',
+            'start' => 0,
+            'size' => 10000,
+            'entity' => null,
+            'city' => null,
+            'style' => null,
+            'mood' => null,
+            'occasion' => null,
+            'cocktails' => null,
+            'district' => null,
+            'favorites' => false
+        );
+
+        return $this->doSearch($parameters);
     }
 
     private function doSearch(array $parameters)
@@ -114,10 +137,14 @@ class CloudSearchSearcher
 
         $q = $q . ")";
 
-        $query->set('q', $q);
-        $query->set('q.parser', 'structured');
+        if ($q == '(and \'-thisconnotbefoundincloudsearchever*\' )') {
+            $q = '(and -thisconnotbefoundincloudsearchever )';
+        } else {
+            $query->set('q.parser', 'structured');
+        }
         $query->set('size', $parameters['size']);
         $query->set('start', $parameters['start']);
+        $query->set('q', $q);
 
         $response = $request->send()->json();
 
