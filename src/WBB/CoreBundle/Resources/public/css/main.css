@@ -528,7 +528,7 @@
   .sub-header .title h3 {font-size: 2em; line-height: 30px;}
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
-  section.bar-filter .bar-w-pic {max-height: 213px;}
+  section.bar-filter .bar-w-pic {/*max-height: 213px;*/}
   .ui .sort-by {margin-left: 0;}
   .gender .ui-dropdown-container .ui-dropdown .choice,
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
