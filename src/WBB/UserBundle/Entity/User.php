@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BestOf;
 
 /**
@@ -456,10 +457,10 @@ class User extends BaseUser
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param Bar $bars
      * @return User
      */
-    public function addBar(\WBB\BarBundle\Entity\Bar $bars)
+    public function addBar(Bar $bars)
     {
         $this->bars[] = $bars;
 
@@ -469,11 +470,11 @@ class User extends BaseUser
     /**
      * Remove bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param Bar $bar
      */
-    public function removeBar(\WBB\BarBundle\Entity\Bar $bars)
+    public function removeBar(Bar $bar)
     {
-        $this->bars->removeElement($bars);
+        $this->bars->removeElement($bar);
     }
 
     /**
@@ -1134,10 +1135,10 @@ class User extends BaseUser
     /**
      * Add favoriteBars
      *
-     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @param Bar $favoriteBars
      * @return User
      */
-    public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    public function addFavoriteBar(Bar $favoriteBars)
     {
         $this->favoriteBars[] = $favoriteBars;
         return $this;
@@ -1158,9 +1159,9 @@ class User extends BaseUser
     /**
      * Remove favoriteBars
      *
-     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @param Bar $favoriteBars
      */
-    public function removeFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    public function removeFavoriteBar(Bar $favoriteBars)
     {
         $this->favoriteBars->removeElement($favoriteBars);
     }

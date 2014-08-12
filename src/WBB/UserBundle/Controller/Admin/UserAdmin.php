@@ -75,10 +75,9 @@ class UserAdmin extends Admin
                     'multiple'  => false,
                     'required'  => true,
                     'label'     => 'Gender',
-                    'choices'   => array(
-                        'Mrs'   =>  'Madam',
-                        'Miss'  =>  'Miss',
-                        'Mr'    =>  'Mister'
+                    'choices'  => array(
+                        'F'   =>  'F',
+                        'M'   =>  'M'
                     )
                 ))
                 ->add('username', null, array('help' => 'Mandatory'))
