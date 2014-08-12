@@ -178,9 +178,10 @@ class BestOfRepository extends EntityRepository
         if($user){
             $qb
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
-                ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
-                ->orderBy('c.name', 'ASC')
+                ->andWhere($qb->expr()->eq('uf.id', $user->getId()))
+                ->orderBy('c.name', 'DESC')
                 ->addOrderBy($this->getAlias().'.name', 'ASC')
+                ->groupBy($this->getAlias())
             ;
         }
 

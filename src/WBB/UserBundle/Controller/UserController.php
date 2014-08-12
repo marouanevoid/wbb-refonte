@@ -23,8 +23,7 @@ class UserController extends Controller
         $nbResults          = null;
         $nbResultsRemaining = null;
         $html               = null;
-
-        $distance   = false;
+        $distance           = false;
 
         if($content == "bars"){
             $session = $this->container->get('session');
