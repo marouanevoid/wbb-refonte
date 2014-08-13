@@ -321,7 +321,7 @@
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
-  #register.page.mobile #create-account .form-text {width: 100%; margin: 0 0 10px;}
+  #register.page.mobile #create-account .form-text {max-width: 100%; margin: 0 0 10px;}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -488,6 +488,7 @@
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
 /* Override */
+  .bar-w-pic .txt {z-index: 30;}
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .bar-finder .ui-radio.btn-radius.with-icon:after,
