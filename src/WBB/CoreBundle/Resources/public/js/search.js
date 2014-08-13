@@ -233,14 +233,15 @@ meta.SearchPage = function() {
                     // if there is tags
                     if(curor.fields.tags_style && curor.fields.tags_style.length){
                         // make tags url
-                        // var stringtag = "";
-                        // for(var i=0,ln = curor.fields.tags_style.length ; i<ln ; i++ ){
-                        //    stringtag = "<a href='?tag=" + curor.fields.tags_style[i] + "'>"+ curor.fields.tags_style[i]  + "</a>, " 
-                        // }
-                        // chtml = chtml.replace('%tags' , stringtag.substr(0, stringtag.length-2) );
-                        // chtml2 = chtml2.replace('%tags' , stringtag.substr(0, stringtag.length-2)  );
-                        chtml = chtml.replace('%tags' , curor.fields.tags_style.join(', '));
-                        chtml2 = chtml2.replace('%tags' , curor.fields.tags_style.join(', '));
+                        var stringtag = "";
+                        for(var i=0,ln = curor.fields.tags_style.length ; i<ln ; i++ ){
+                           stringtag = "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + curor.fields.tags_style[i] + "'>"+ curor.fields.tags_style[i]  + "</a>, " 
+                        }
+                        chtml = chtml.replace('%tags' , stringtag.substr(0, stringtag.length-2) );
+                        chtml2 = chtml2.replace('%tags' , stringtag.substr(0, stringtag.length-2)  );
+
+                        // chtml = chtml.replace('%tags' , curor.fields.tags_style.join(', '));
+                        // chtml2 = chtml2.replace('%tags' , curor.fields.tags_style.join(', '));
 
                         chtml = chtml.replace('%tags-non-founed' , "");
                         chtml2 = chtml2.replace('%tags-non-founed' , "");
