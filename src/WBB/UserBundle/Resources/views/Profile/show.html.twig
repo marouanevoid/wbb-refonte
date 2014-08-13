@@ -6,9 +6,13 @@
                 <div class="ui tips">
                     <!-- Profile -->
                     <div class="block-top wrap">
-                        <div class="avatar-profil left">
+
+                        <div class="avatar-profil radius-max {% if is_mobile() and not is_tablet() %}wrap{% else %}left{% endif %}">
                             <img src="{{ showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max">
                         </div>
+
+                        {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
+
                         <div class="group left margin-left-30">
                             <div class="title text-transform-capitalize bold">
                                 <h5>{{ user.username }}</h5>
@@ -130,8 +134,12 @@
                         <div id="tab-tips" class="tab" style="display:none">
                             <div class="full-cream padding-bottom-40 min-height">
                                 <!-- List of Tips -->
-                                <ul class="list-tips padding-top-30 container">
-                                </ul>
+                                <div class="container">
+                                    <div>
+                                        <ul class="list-tips padding-top-30">
+                                        </ul>   
+                                    </div>
+                                </div>
                                 <div class="clear"></div>
                                 <!-- Button See more Bars -->
                                 <div class="container">
