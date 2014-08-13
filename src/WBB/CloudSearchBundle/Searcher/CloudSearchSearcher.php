@@ -31,6 +31,42 @@ class CloudSearchSearcher
         ));
     }
 
+    public function suggest(array $parameters)
+    {
+        $request = $this->cloudSearchClient->get('search');
+        $query = $request->getQuery();
+
+        $q = "{$parameters['q']}*";
+
+        $query->set('q', $q);
+        $query->set('q.options', "{fields: ['name^50','title^50','description']}");
+        $query->set('size', 10000);
+
+        $response = $request->send()->json();
+
+        $cities = $this->getEntityResults($response['hits']['hit'], 'City');
+        $bestOfs = $this->getEntityResults($response['hits']['hit'], 'BestOf');
+        $news = $this->getEntityResults($response['hits']['hit'], 'News');
+        $bars = $this->getEntityResults($response['hits']['hit'], 'Bar');
+
+        $results = array_merge($cities, $bestOfs, $news, $bars);
+        $response['hits']['hit'] = array_slice($results, 0, $parameters['size']);
+
+        return $response;
+    }
+
+    private function getEntityResults($results, $entity)
+    {
+        $response = array();
+        foreach ($results as $result) {
+            if ($result['fields']['entity_type'] == $entity) {
+                $response[] = $result;
+            }
+        }
+
+        return $response;
+    }
+
     public function search(array $parameters)
     {
         $response = $this->doSearch($parameters);

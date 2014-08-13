@@ -4,6 +4,8 @@ fos_user_security:
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
+    options:
+        expose: true
 
 fos_user_registration_register:
     pattern: /register

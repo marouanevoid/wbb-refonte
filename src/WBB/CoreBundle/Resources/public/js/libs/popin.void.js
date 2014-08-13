@@ -16,7 +16,8 @@ PopIn.initContext = function(){
 		clsloader : 'popin-loader-gif',
 		mask : $('.mask'),
 		close : $(".btn-close"),
-		popin : $('.popup')
+        popin : $('.popup'),
+		targetPopup : $('#register')
 	}
 
 	// Hide elements
@@ -87,6 +88,15 @@ PopIn.show = function(e){
         // Add class to trigger ID
         current_id.addClass('void-popup');
 
+        //Scroll to the popup just if is mobile
+        /*
+        if (current_id.hasClass("mobile")) {
+            $(document).animate({
+                scrollTop: PopIn.dom.targetPopup.offset().top},
+            'slow');
+        }
+        */
+        
         //show the mask
         mask.fadeIn("slow");
     } else {
