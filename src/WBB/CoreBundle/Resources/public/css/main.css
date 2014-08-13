@@ -483,6 +483,7 @@
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
 /* Override */
+   img.scale-with-grid {box-sizing: initial;}
   .bar-w-pic .txt {z-index: 30;}
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
@@ -524,7 +525,6 @@
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
   .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
-  img.scale-with-grid {box-sizing: initial;}
   article.bestof img.scale-with-grid {display: inline;}
 
   /* mobile */
@@ -561,7 +561,9 @@
     #register.page #create-account .form-text {width: 300px;}
     #register.page #create-account .form-text-without-label input {width: 245px;}
     #editprofile #edit-account .form-text {width: 245px;}
-     #editprofile #edit-account .form-text-without-label input {width: 265px;}
+    #editprofile #edit-account .form-text-without-label input {width: 265px;}
+    header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;}
+    header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
   }
 
 /* Tablets (landscape) ----------- */
@@ -660,6 +662,7 @@
     .search-bar-mobile .container input[type="reset"] {right: 39%;}
     .form-input {width: 100%;}
     .search-result-proposal ul li:last-child {border-bottom: 0;}
+    .btn-small-radius.brown:hover, .btn-round.brown:hover, .btn-radius.brown:hover, .btn-small-round.brown:hover { background: transparent!important; color: #faf3e1;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
