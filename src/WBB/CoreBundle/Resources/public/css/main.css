@@ -53,7 +53,7 @@
   /* TEMPS */
     .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
-    .group-form {overflow: hidden;}
+    .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
@@ -231,7 +231,7 @@
   .alert .subtitle {font-size: 32px;}
 
     /* Popup */
-    .popup #success p {margin: 0 0 20px; line-height: 22px; font-size: 22px; text-align: center;}
+    .popup #success p {margin: 0 0 20px; line-height: 22px; font-size: 20px; text-align: center;} 
     .popup #success .subtitle {margin: 0 0 30px; font-size: 32px;}
     .popup #success table tr:first-child td {vertical-align: bottom;}
     .popup .min-height {/*min-height: 400px;*/}
@@ -242,7 +242,7 @@
   #register.page .title {width: 100%; font-size: 28px;}
   #register.page #create-account {width: 100%; padding: 0;}
   #register.page #create-account label {display: block; float: left; width: 220px; line-height: 35px;}
-  #register.page #create-account .form-text {float: left; width: 300px;}
+  #register.page #create-account .form-text {float: left; /*width: 300px;*/}
   #register.page #date-birthday label {font-size: 13px;}
   #register.page #create-account .form-text-without-label {margin: 0 0 0 240px;}
   #register.page .ui.select-wrap {padding-bottom: 30px;}
@@ -339,9 +339,9 @@
   #register.page.mobile .group-checkbox label {text-align: right!important; font-size: 16px!important;}
 
 /* Register3 (Mobile) */
-  #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 20px; /*width: 60%;*/}
-  #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; /*margin: 0 0 20px;*/}
-
+  /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
+  #register.mobile .ui #success .subtitle {padding: 0; font-size: 22px; width: 100%;}
+  .form-input {width: 270px;}
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
   #editprofile .ui {top: 0; width: 530px; background-color: #fff;}
   #editprofile .ui .form-text {background-color: #fff;}
@@ -349,8 +349,8 @@
   #editprofile .subgroup .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
-  #editprofile .avatar-profil {overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
-  #editprofile .avatar-profil img {height: 99%; width: 99%;}
+  #editprofile .avatar-profil {z-index: 11; position: relative; overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
+  #editprofile .avatar-profil img {height: 99%; width: 99%; position: relative; border-radius: 20px;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
   #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
@@ -358,7 +358,7 @@
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
   #editprofile #edit-account {position: relative;}
   #editprofile #edit-account label {display: block; text-align: right; float: left; width: 165px; line-height: 35px; font-weight: lighter;}
-  #editprofile #edit-account .form-text {float: left; width: 298px;}
+  #editprofile #edit-account .form-text {float: left;}
   #editprofile #edit-account .form-text-without-label {margin: 0 0 0 185px;}
   #editprofile #edit-account .group.left {width: 345px;}
   #editprofile #edit-account .group-actions {width: 300px; margin-right: 45px;}
@@ -389,12 +389,11 @@
 
 /* EditProfile (Mobile) */
   #editprofile.mobile .ui {width: 100%; padding-right: 0; padding-left: 0;}
-  #editprofile.mobile .ui .block-top,
-  /*#editprofile.mobile .ui .avatar-profil {width: 100%;}*/
-  #editprofile.mobile .ui .avatar-profil img {margin: 0 auto;}
+  #editprofile.mobile .ui .block-top {width: 100%;}
+  #editprofile.mobile .ui .avatar-profil img {margin: 0 auto; z-index: 1;}
   #editprofile.mobile .ui #edit-account label {visibility: visible; width: 100%; text-align: center;}
   #editprofile.mobile .ui #edit-account .checkbox label {text-align: left;}
-  #editprofile.mobile .ui #edit-account .form-text {width: 100%; margin: 0;}
+  #editprofile.mobile .ui #edit-account .form-text {width: 90%; margin: 0;}
   #editprofile.mobile .ui #edit-account .group-actions {float: none; margin: auto;}
   #editprofile.mobile .ui #edit-account .form-submit {/*margin: 0 20px; width: 90%;*/}
   #editprofile.mobile .ui #date-birthday .select-wrap {margin-right: 9px; width: 90px;}
@@ -475,9 +474,6 @@
   .page-form .form-text {width: 90%;}
   .page-form .form-textarea {padding: 10px 10px 50px;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
-
-/* Thumbnail's Size */
-  /*article.bestof {height: 290px;}*/
 
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
@@ -561,6 +557,14 @@
   .ie9 section.bar-finder tr:nth-child(2) td:nth-child(8) .ui-radio.btn-radius.with-icon {margin-right: 20px;}
   section.bar-finder table tr:nth-child(2) td:nth-child(8) {padding-left: 10px \0/;}
 
+/* GLOBALE DESKTOP STYLES */
+  @media only screen and (min-width: 768px) {
+    #register.page #create-account .form-text {width: 300px;}
+    #register.page #create-account .form-text-without-label input {width: 245px;}
+    #editprofile #edit-account .form-text {width: 245px;}
+     #editprofile #edit-account .form-text-without-label input {width: 265px;}
+  }
+
 /* Tablets (landscape) ----------- */
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     #register.page {width: 100%;}
@@ -609,7 +613,6 @@
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
   }
-
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
   /* Globales ID's */
@@ -650,6 +653,10 @@
     #register.page .group-checkbox {padding: 0 20px 0 0; width: 97%; left: 0;}
     .search-bar-mobile .container input[type="reset"] {right: 39%;}
     #message ul {margin-left: 100px;}
+    #success {padding: 0 20px;}
+    #success p {font-weight: bold; font-size: 20px;}
+    /*#register.page.mobile #create-account .form-text {width: 300px;}*/
+    .form-input {width: 100%;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
