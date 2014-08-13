@@ -17,11 +17,10 @@
                             <table bgcolor="#333333" class="wrap" style="font-family: Verdana, Arial; width: 100%;">
                                 <tr>
                                     <td>
-                                        <p align="center" class="reset"
-                                           style="font-family: Verdana, Arial; margin: 10px 0 0; padding: 0;">
+                                        <p align="center" class="reset" style="font-family: Verdana, Arial; margin: 10px 0 0; padding: 0;">
+                                            <a href="{{ url('homepage') }}"
                                             <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/logo_email.jpg') }}"
-                                                 align="center" class="center" height="87" width="167"
-                                                 style="font-family: Verdana, Arial; text-align: center;"/>
+                                                 align="center" class="center" height="87" width="167" style="font-family: Verdana, Arial; text-align: center;"/>
                                         </p>
                                     </td>
                                 </tr>
@@ -56,14 +55,13 @@
             <table class="wrap" bgcolor="#333333" border="0" cellpadding="0" cellspacing="0" style="font-family: Verdana, Arial; width: 100%;">
                 <tr>
                     <td valign="top" style="font-family: Verdana, Arial;">
-                        <table class="container" height="90"
-                               style="border-bottom-width: 1px; border-bottom-color: #49453f; border-bottom-style: solid;
+                        <table class="container" height="90" style="border-bottom-width: 1px; border-bottom-color: #49453f; border-bottom-style: solid;
                                font-family: Verdana, Arial; display: block !important; max-width: 700px !important;
                                clear: both !important; overflow: hidden; margin: 0 auto;" valign="top" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td valign="middle" align="center" style="font-family: Verdana, Arial; min-width: 260px">
                                     <p style="color: #fedf9f; font-size: 14px; margin-top: 5px; font-family: 'Myriad Pro', serif;">
-                                        © 2014 World's Best Bars
+                                        © {{ "now"|date("Y") }} World's Best Bars
                                     </p>
                                 </td>
                                 <td style="font-family: Verdana, Arial; min-width: 220px">
