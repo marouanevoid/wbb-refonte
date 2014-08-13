@@ -4,7 +4,9 @@
         <div class="container align-center">
             <div class="twelve columns">
                 <hr/>
-                <img class="m-margin scale-with-grid" src="{% path ad.image, format %}" alt="{{ ad.name }}" width="728" height="90"/>
+                <a href="{{ ad.link }}" target="_blank">
+                    <img class="m-margin scale-with-grid" src="{% path ad.image, format %}" alt="{{ ad.name }}" width="728" height="90"/>
+                </a>
             </div>
         </div>
     </section>

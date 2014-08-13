@@ -122,7 +122,7 @@ class SemsoftController extends Controller
                 $country = $this->getCountry($data['Country']);
 //                if($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))){
                 if(($bar && (!empty($data['Updated Columns']) || (!empty($data['Overwritten Columns'])))) || !empty($data['Name'])){
-                    set_time_limit(300);
+                    set_time_limit(0);
                     $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
                     $suburb = $this->getSuburb($data['District'], ($city)?$city:null);
                     $ssBar->setCity(($city)?$city:null);
@@ -402,7 +402,7 @@ class SemsoftController extends Controller
 
     private function getTagsFromString($tags, $type, SemsoftBar $ssBar)
     {
-//        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $tagNames = explode(',', $tags);
         if($tagNames){
             foreach($tagNames as $tagName){
@@ -415,8 +415,8 @@ class SemsoftController extends Controller
                             ->setName($tagName)
                             ->setType($type);
                     }
-//                    $em->persist($tag);
-//                    $em->flush();
+                    $em->persist($tag);
+                    $em->flush();
 
                     if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
                         $ssBar->setEnergyLevel($tag);
@@ -428,9 +428,9 @@ class SemsoftController extends Controller
                             ->setTag($tag);
                         $ssBar->addTag($barTag);
                         $tag->addBar($barTag);
-//                        $em->persist($barTag);
-//                        $em->persist($ssBar);
-//                        $em->flush();
+                        $em->persist($barTag);
+                        $em->persist($ssBar);
+                        $em->flush();
                     }
                 }
             }

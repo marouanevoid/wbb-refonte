@@ -50,13 +50,14 @@ class RegistrationFormType extends BaseType
                 ))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
-                    'first_options' => array('attr' => array('placeholder' => 'form.password')),
-                    'second_options' => array('attr' => array('placeholder' => 'form.password_confirmation')),
+                    'first_options' => array('attr' => array('placeholder' => 'form.password'),'error_bubbling' => true),
+                    'second_options' => array('attr' => array('placeholder' => 'form.password_confirmation'),'error_bubbling' => true),
                     'invalid_message' => 'fos_user.password.mismatch',
                     'required' => false,
                     'error_bubbling' => true
                 ))
                 ->add('birthdate', 'date', array(
+                    'empty_value' => array('year' => 'YYYY', 'month' => 'MM', 'day' => 'DD'),
                     'years' => range(1914, date('Y')),
                     'required' => false,
                     'error_bubbling' => true

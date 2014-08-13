@@ -7,6 +7,7 @@
 
 <script>
     $(document).ready(function() {
+        $.cookie('just_loggedin', true);
         $('.btn-close').on('click', function() {
             window.location.href = "{{ path('homepage') }}";
         });
