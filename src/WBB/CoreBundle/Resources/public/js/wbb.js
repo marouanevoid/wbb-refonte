@@ -213,6 +213,9 @@ function initRegisterLoginForms() {
                             case 'birthdate':
                                 $('#register-form .date-birthday .ui-dropdown').addClass('error');
                                 break;
+                            case 'birthday':
+                                $('#register-form .date-birthday .ui-dropdown').addClass('error');
+                                break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
                                 $(idPrefix + fields[i] + '_second').addClass('error');
@@ -333,6 +336,9 @@ jQuery(document).ready(function($) {
 
                         switch (fields[i]) {
                             case 'birthdate':
+                                $('.date-birthday .ui-dropdown').addClass('error');
+                                break;
+                            case 'birthday':
                                 $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
