@@ -977,6 +977,7 @@ class Bar implements IndexableEntity
         $this->openings = new ArrayCollection();
         $this->news     = new ArrayCollection();
         $this->tags     = new ArrayCollection();
+        $this->toGoWith = new ArrayCollection();
         $this->fsSelectedImgs = array();
         $this->fsExcludedTips = array();
         $this->instagramExcludedImgs = array();
@@ -1581,15 +1582,18 @@ class Bar implements IndexableEntity
         foreach ($this->tags as $barTag) {
             $tag = $barTag->getTag();
             if ($tag) {
-                if ($tag->getType() == Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
-                    $tags['tags_mood'][] = $tag->getName();
-                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
+                if ($tag->getType() == Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
                     $tags['tags_cocktails'][] = $tag->getName();
                 } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_THEME) {
                     $tags['tags_style'][] = $tag->getName();
-                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_WITH_WHO) {
-                    $tags['tags_occasion'][] = $tag->getName();
                 }
+            }
+        }
+
+        $tags['tags_mood'][] = ($this->energyLevel) ? $this->energyLevel->getName() : '';
+        foreach ($this->toGoWith as $toGoWith) {
+            if ($toGoWith) {
+                $tags['tags_occasion'][] = $toGoWith->getName();
             }
         }
 
