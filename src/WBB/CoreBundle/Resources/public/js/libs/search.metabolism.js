@@ -89,7 +89,7 @@ meta.Search = function(config){
 
             $placeholder.on('click', function(){ that.context.$input.focus() });
             that.context.$input.on('keydown', function(){ $placeholder.hide() });
-            that.context.$input.on('keyup', function(){ if(that.context.$input.val() == "") $placeholder.show() });
+            that.context.$input.on('keypress', function(){ if(that.context.$input.val() == "") $placeholder.show() });
         }
     };
 
@@ -317,7 +317,8 @@ meta.Search = function(config){
             that._hideForm();
         });
 
-        that.context.$input.on('keyup', function(){
+        that.context.$input.on('keypress', function(){
+            console.log(':::::> keypress ');
             clearInterval(that.search_timeout);
             that.search_timeout = setTimeout(function(){ that._search() }, that.config.throttle);
 

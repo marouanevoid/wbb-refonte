@@ -91,6 +91,7 @@ fos_user:
     profile:
         form:
             type: wbb_user_profile
+            validation_groups:  [Default, registration_full, Profile]
     change_password:
         form:
             type: wbb_user_change_password

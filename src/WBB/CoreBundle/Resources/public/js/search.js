@@ -19,7 +19,7 @@
  */
 
 var meta = meta || {};
-
+var globalAjaxCode;
 /**
  *
  */
@@ -28,6 +28,7 @@ meta.SearchPage = function() {
     var that = this;
     var currentFilter = "Bar",
         formatedUrl = "",
+        formatedCity = "";
         compteurNews = 0,
         start = 0 , 
         lastConsultedURL  = "",
@@ -54,10 +55,10 @@ meta.SearchPage = function() {
     * The HTML template of tow display ( list and row of results)
     ***/
     that.template = {
-        barWithPicture : function(filter,isfavorite , fav_url , url_link){
+        barWithPicture : function(filter,isfavorite , fav_url , url_link,favObj){
                                 var htmlT = (!ismobile ? '<div class="three columns m-margin-top">' : '') + '<article class="bar-w-pic" data-type="%type">';
                                 if(filter != 'News'){ 
-                                    htmlT += '<a href="'+ fav_url +'" class="btn-round dark star'+ (isfavorite ? ' active ' : '') +'"></a>' ;
+                                    htmlT += '<a data-id="'+ favObj.id +'" data-type="bar" data-name="'+ favObj.name +'" href="'+ fav_url +'" class="btn-round dark star'+ (isfavorite ? ' active ' : '') +'"></a>' ;
                                 }
                                 htmlT +='<div class="txt">' ;
                                     htmlT +='    <h2>%title</h2>' ;
@@ -72,7 +73,7 @@ meta.SearchPage = function() {
                                 }
 
                                 htmlT +='</div>' ;
-                                htmlT +='<a href="' + url_link + '" class="overlay-link"></a>' ;
+                                htmlT +='<a href="' + (getBaseURL() ) +  url_link + '" class="overlay-link"></a>' ;
                                 htmlT +='<div class="color gradient"></div>' ;
                                 htmlT +='<div class="color gray"></div>' ;
                                 htmlT +='<img src="%img" class="image-search-item scale-with-grid" data-src="%img" alt="%title" width="570" height="428"/>';
@@ -82,22 +83,22 @@ meta.SearchPage = function() {
 
 
         },
-        barWithPictureList : function(filter,isfavorite , fav_url , url_link){
-                            var htmlT = '<article class="bar-w-pic-list" data-type="%type">';
+        barWithPictureList : function(filter,isfavorite , fav_url , url_link,favObj){
+                            var htmlT = (!ismobile ? '<div>' : '') + '<article class="bar-w-pic-list" data-type="%type">';
                             htmlT += '<div class="three columns s-margin-top">';
 
                             htmlT += '    <div class="bar-w-pic list">';
                             if(filter != 'News') 
-                                htmlT += '<a href="'+ fav_url +'" class="btn-round dark star'+ (isfavorite ? ' active ' : '') +'"></a>' ;
+                                htmlT += '<a data-id="'+ favObj.id +'" data-type="bar" data-name="'+ favObj.name +'" href="'+ fav_url +'" class="btn-round dark star'+ (isfavorite ? ' active ' : '') +'"></a>' ;
 
-                            htmlT +='        <a href="' + url_link + '" class="overlay-link"></a>';
+                            htmlT +='        <a href="' + (getBaseURL() ) + url_link + '" class="overlay-link"></a>';
 
                             htmlT += '        <img class="scale-with-grid image-search-item" src="%img" alt="%title" width="570" height="428"/>' ;
                             htmlT += '    </div>' ;
                             htmlT += '</div>';
                             htmlT += ' <div class="nine columns s-margin-top">';
-                            htmlT += '    <h2 class="s-margin-top"><a href="bar-details.php">%title</a></h2>';
-                            htmlT +='    <h3 class="xs-margin-top"><a href="bar-details.php">%city, %country</a></h3>' ; 
+                            htmlT += '    <h2 class="s-margin-top"><a href="#">%title</a></h2>';
+                            htmlT +='    <h3 class="xs-margin-top"><a href="#">%city, %country</a></h3>' ; 
                             htmlT +='    <p class="s-margin-top">';
                             htmlT += '        %description' ;
 
@@ -106,7 +107,7 @@ meta.SearchPage = function() {
                                 htmlT +='    <div class="tags %tag-non-founed">%tags</div>';
                             htmlT +=' </div>';
                             htmlT +='  <div class="separator"><hr/></div>'; 
-                            htmlT +='</article>';
+                            htmlT +='</article>' + (!ismobile ? '</div>' : '');
 
                             return htmlT;
                     }
@@ -142,32 +143,56 @@ meta.SearchPage = function() {
 
             // if there is News on The Results
 
-            var replaceIntger = function(number , cible){
+            var replaceIntger = function(number , cible , nbbar, nbnews){
                 var str = cible.html();
                     arr = str.split(')'),
                     strl = arr[0].substr(1);
 
+
+                    if(nbbar <= 1){
+                        str = str.replace('Bars' , 'Bar');
+                        str = str.replace('BARS' , 'BAR');
+                    }else{
+                        if(str.indexOf(') Bars<')<=-1 && str.indexOf(') BARS<')<=-1){
+                            str = str.replace('Bar' , 'Bars');
+                            str = str.replace('BAR' , 'BARS');
+                        }
+                    }
+
+
+                    if(nbnews <= 1){
+                        str = str.replace('News' , 'New');
+                        str = str.replace('NEWS' , 'NEW');
+                    }else{
+                        if(str.indexOf(') News<')<=-1 && str.indexOf(') NEWS<')<=-1){
+                            str = str.replace('New' , 'News');
+                            str = str.replace('NEW' , 'NEWS');
+                            }
+                    }
+
                 cible.html(str.replace(strl , number));
             }
+
+
             var ccibleNews = $('.screen-compteur a[data-index=1]'),
                 ccibleBars = $('.screen-compteur a[data-index=0]');
 
             if(newsLength > 0){
                 that.desibledBtn( ccibleNews, true );
-                replaceIntger( newsLength ,ccibleNews);
+                replaceIntger( newsLength ,ccibleNews ,BarsLength, newsLength);
                 // Set Compteur News
             }else{
                 that.desibledBtn(ccibleNews , false);
-                replaceIntger( 0 ,ccibleNews);
+                replaceIntger( 0 ,ccibleNews ,BarsLength, newsLength);
             }
 
             // if there is Bars on the Results
             if(BarsLength > 0){
                 that.desibledBtn(ccibleBars , true );
-                replaceIntger( BarsLength ,ccibleBars);
+                replaceIntger( BarsLength ,ccibleBars,BarsLength, newsLength);
             }else{
                 that.desibledBtn(ccibleBars , false);
-                replaceIntger( 0 ,ccibleBars);
+                replaceIntger( 0 ,ccibleBars, BarsLength, newsLength);
             }
         }
 
@@ -180,8 +205,8 @@ meta.SearchPage = function() {
                 var isFaved = ( curor.fields.favorite ? curor.fields.favorite  : false );
                 var favUrl = (curor.fields.favorite_url ? curor.fields.favorite_url : '#' );
                 var url_link = (curor.fields.url ? ( URL_MODE +  curor.fields.url )  : '#');
-                var chtml = that.template.barWithPicture(currentFilter,isFaved, favUrl , url_link).replace('%type' , type);
-                var chtml2 = that.template.barWithPictureList(currentFilter,isFaved , favUrl , url_link).replace('%type' , type);
+                var chtml = that.template.barWithPicture(currentFilter,isFaved, favUrl , url_link , {id :curor.id ,name: curor.fields.name}).replace('%type' , type);
+                var chtml2 = that.template.barWithPictureList(currentFilter,isFaved , favUrl , url_link, {id :curor.id ,name: curor.fields.name}).replace('%type' , type);
 
                 // Update Labels of Bar and News
                 if(curor.id.indexOf('News')>-1){
@@ -200,11 +225,21 @@ meta.SearchPage = function() {
 
                     chtml = chtml.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 50 : 25 ) )  );
                     chtml2 = chtml2.replace(new RegExp('%title','ig') , nameString);
-                    chtml = chtml.replace('%city' , curor.fields.city);
-                    chtml2 = chtml2.replace('%city' , curor.fields.city);
-                    chtml = chtml.replace('%country' , curor.fields.country);
-                    chtml2 = chtml2.replace('%country' , curor.fields.country);
+                    if(curor.fields.city){
+                        chtml = chtml.replace('%city' , curor.fields.city);
+                        chtml2 = chtml2.replace('%city' , curor.fields.city);
+                    }else{
+                        chtml = chtml.replace('%city' , '');
+                        chtml2 = chtml2.replace('%city' , '');
+                    }
 
+                    if(curor.fields.country){
+                        chtml = chtml.replace('%country' , curor.fields.country);
+                        chtml2 = chtml2.replace('%country' , curor.fields.country);
+                    }else{
+                        chtml = chtml.replace(', %country' , "");
+                        chtml2 = chtml2.replace(', %country' , "");
+                    }
                     // if there is tags
                     if(curor.fields.tags_style && curor.fields.tags_style.length){
                         // make tags url
@@ -256,26 +291,19 @@ meta.SearchPage = function() {
 
             // Append The HTML to Dom
 
-            $('.bars-w-pic-list .dist-target').append(htmlBarList );
-            $('.details-barlist .dist-target').append( htmlBar);
+            $('.bars-w-pic-list .dist-target').append('<div class="line search-block-only">' + htmlBarList + '</div>' );
+            $('.details-barlist .dist-target').append( '<div class="line search-block-only">' +  htmlBar + '</div>');
 
             // if the image is not loaded then 
             // Load the default Image
             $('.image-search-item').error(function(){
-                //$(this).attr('src' , defaultImg);
+                $(this).attr('src' , defaultImg);
             });
 
             if(callbackHandler)
                 callbackHandler();
 
-           // that._animate($('.load-target'),$("article.bar-w-pic"));
-           //$('.dist-target .line').find('> *').not('br').css({opacity:0, top:'6em', position:'relative'});
-
-           setTimeout(function(){
-              // that._animate($(".load-target"), $(".load-target").find('> *').not('br'));
-               //that._animate($(".load-target"), $('.dist-target .line').find('> *').not('br'));
-           },10);
-
+               that._animate($(".load-target"), $('.dist-target .line:last-child').find('> *').not('br'));
 
             // disabled buttons compteurs
             var cursorIndex = 0;
@@ -297,11 +325,30 @@ meta.SearchPage = function() {
             $('.bars-w-pic-list .dist-target').html('');
             $('.bars-w-pic-list .dist-target').append("<p>There are no results matching your request.</p>");
             $('.details-barlist .dist-target').append("<p>There are no results matching your request.</p>");
-            
+
+            if(callbackHandler)
+                callbackHandler();   
         }
 
 
         heighlightFunction();
+
+        // auto Focus on Tab
+            var newsLength = Number(res.hits.news),
+        BarsLength = Number(res.hits.bars);
+
+        // if there is no Bar so focus on Artciles
+        if(BarsLength == 0 && currentFilter == 'Bar'){
+            if ( newsLength > 0 )
+                $($('.screen-compteur').find('a')[1]).click();
+        }
+
+        // if we was select the article and there is no artilce but bars
+        // then show bars
+        if(newsLength == 0 && currentFilter =='News'){
+            if(BarsLength > 0)
+                $($('.screen-compteur').find('a')[0]).click();
+        }
 
         setTimeout(function(){
 
@@ -352,11 +399,29 @@ meta.SearchPage = function() {
         $('.load-more-bars-btn').hide();
         $('.load-more-news-btn').hide();
 
-        var limit = ((ismobile || $('.ipad').length > 0) ? 3 : 12 ),
-        lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) ;
+        var limit;
+        if(istablet){
+            limit = 3
+        }else{
+            if(ismobile){
+                limit = 2
+            }else{
+                limit = 12;
+            }
+        }
+        
+        lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
+                            formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) +
+                            (formatedCity != '' ? formatedCity : '');
+                    ;
 
-
-        $.get(lastConsultedURL, function(response){
+       // if the resquest is started
+       // then abort it
+       if(globalAjaxCode){
+        globalAjaxCode.abort();
+       }
+       // Then Load it
+       globalAjaxCode =  $.get(lastConsultedURL, function(response){
             //// ///////
             $('.loader-search-page').hide();
             ////// /////
@@ -374,8 +439,20 @@ meta.SearchPage = function() {
     {
         if(!slug || slug == "" || slug.length == 1)
         {
+            formatedCity = '';
             return false;
         }
+
+        // Refrech 
+
+        // set the City filter
+        formatedCity = "&city=" + slug;
+        /////
+        // Send the request Serach
+        that.clearContent();
+        start = 0;
+        that.goSearch();
+        ////
         var $neigborhood = that.context.$form_filter.find('.neigborhood');
 
         // Load Ajax
@@ -405,7 +482,8 @@ meta.SearchPage = function() {
                 $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
             });
 
-            $neigborhood.slideDown();
+            if(slug !='')
+                $neigborhood.slideDown();
             that.setUpEventFilterAjax()
         });
     };
@@ -417,7 +495,17 @@ meta.SearchPage = function() {
 
     that.goSearch = function(q){
         that.getSearchResult(q ? q : ( 'q='+ currentQuery ) , function(){
-            $('.sort-by').find('.active').click();
+            var _this = $('.sort-by').find('.active');
+             var cindex = $(_this).attr('data-index');
+            if($(_this).hasClass('grid')){
+                $('.display-bar-width-picture-parent').show();
+                $('.display-bar-width-list-parent').hide();
+            }else{
+                if($(_this).hasClass('list')){
+                    $('.display-bar-width-picture-parent').hide();
+                    $('.display-bar-width-list-parent').show();
+                }
+            }
         });
         return false;
     }
@@ -525,6 +613,7 @@ meta.SearchPage = function() {
             // Empty the url format
             formatedUrl = "";
             start = 0;
+            formatedCity = "";
             that.context.$form_filter.find('.drop-btn a.minus').click();
 
             // hide the select
@@ -607,6 +696,8 @@ meta.SearchPage = function() {
                     $('.display-bar-width-list-parent').show();
                 }
             }
+
+            return false;
         });
 
         // click on load More button
@@ -619,6 +710,8 @@ meta.SearchPage = function() {
 
         // add the listener on form 
         $('#search').on('submit' , function(){
+            // rest the start
+            start = 0;
             var querry = $(this).find('input[type=text]').val();
             if( querry !=''){
                 that.clearContent();
@@ -722,14 +815,14 @@ meta.SearchPage = function() {
         that.getCurrentTabActive();
 
         // if the query is existed on the url then start search with given query
-        if(queryestQ && queryestQ != "undefined"){
-            that.goSearch('q=' + (queryestQ == '' ? '*' : queryestQ ));
-            currentQuery = (queryestQ == '' ? '*' : queryestQ ) ;
-        }else{
             // if the Tag is exist then get bar by Tag
             if(queryestTag && queryestTag != "undefined")
             {
                 that.goSearch('tag=' + queryestTag);
+            }else{
+            if( queryestQ && queryestQ != "undefined" ){
+                that.goSearch('q=' + (queryestQ == '' ? '*' : queryestQ ));
+                currentQuery = (queryestQ == '' ? '*' : queryestQ ) ;
             }
         }
 
@@ -746,14 +839,15 @@ meta.SearchPage = function() {
         $('.load-more-news-btn').hide();
 
         // dispatch click on the city select 
-        that.context.$form_filter.find('select[name=city]').change();
+        that.context.$form_filter.find('select[name=city]')[0].selectedIndex = 0;
+        that.context.$form_filter.find('input[type=reset]').click();
 
-        // setup default value of select city
-        $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
-        $('.city-drop-down').val('');
+        // // setup default value of select city
+        // $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+        // $('.city-drop-down').val('');
 
-        that.context.$form_filter.find('.neigborhood > ul').empty();
-        that.context.$form_filter.find('.neigborhood').hide();
+        // that.context.$form_filter.find('.neigborhood > ul').empty();
+        // that.context.$form_filter.find('.neigborhood').hide();
 
         // uncheck all CheakBox
         that.context.$form_filter.find('input[type=checkbox]').prop('checked', false);
@@ -771,4 +865,26 @@ $(document).ready(function()
 
 
 });
+
+function getBaseURL() {
+    var url = location.href;  // entire url including querystring - also: window.location.href;
+    var baseURL = url.substring(0, url.indexOf('/', 14));
+
+
+    if (baseURL.indexOf('http://localhost') != -1) {
+        // Base Url for localhost
+        var url = location.href;  // window.location.href;
+        var pathname = location.pathname;  // window.location.pathname;
+        var index1 = url.indexOf(pathname);
+        var index2 = url.indexOf("/", index1 + 1);
+        var baseLocalUrl = url.substr(0, index2);
+
+        return baseLocalUrl ;
+    }
+    else {
+        // Root Url for domain name
+        return baseURL ;
+    }
+
+}
 

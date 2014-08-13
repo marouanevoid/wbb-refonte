@@ -18,17 +18,19 @@
                         console.log(window.lightType);
                         console.log(window.lightName);
                         popinFrom = 'favorite';
-                        $.ajax({
-                            url: url,
-                            method: 'GET',
-                            success: function(html) {
-                                html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
-                                $('.popin-block').html(html);
-                                initializeDropdowns();
-                                initRegisterLoginForms();
-                                $('#show-popin').click();
-                            }
-                        });
+                        if ($('#wbb_barbundle_tip_description').val().trim() !== ''){
+                            $.ajax({
+                                url: url,
+                                method: 'GET',
+                                success: function(html) {
+                                    html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
+                                    $('.popin-block').html(html);
+                                    initializeDropdowns();
+                                    initRegisterLoginForms();
+                                    $('#show-popin').click();
+                                }
+                            });
+                        }
                     });
                 });
             </script>

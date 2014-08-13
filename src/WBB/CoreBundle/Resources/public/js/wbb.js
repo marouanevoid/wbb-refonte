@@ -198,6 +198,12 @@ function initRegisterLoginForms() {
                     $('#register_form').after($('#message'));
                     $('#register-form #message').find('ul').remove();
                     $('#register-form #message div').append('<ul></ul>').parent();
+                    $('#register_form input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form .ui-dropdown').each(function() {
+                        $(this).removeClass('error');
+                    });
                     var idPrefix = '#fos_user_registration_form_';
                     for (var i = 0; i < fields.length; i++) {
                         switch (fields[i]) {
@@ -245,6 +251,8 @@ function initRegisterLoginForms() {
         var form = $(this);
         var formUrl = form.attr('action');
         var error = false;
+        $('#username').removeClass('error');
+        $('#password').removeClass('error');
         if ($('#username').val().trim() === '') {
             error = true;
             $('#username').addClass('error');
@@ -293,7 +301,7 @@ function initRegisterLoginForms() {
 }
 
 jQuery(document).ready(function($) {
-
+    
     $('#register_form_full').on('submit', function(e) {
         e.preventDefault();
         var url = $(this).attr('action');
@@ -315,6 +323,12 @@ jQuery(document).ready(function($) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
                     var idPrefix = '#fos_user_registration_form_';
+                    $('#register_form_full input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form_full .ui-dropdown').each(function() {
+                        $(this).removeClass('error');
+                    });
                     for (var i = 0; i < fields.length; i++) {
 
                         switch (fields[i]) {
@@ -378,7 +392,7 @@ function syncBarFav(cible,status){
         currentTitle = cible.parent('article').find('.overlay-link').attr('href');
     // find the other Bar on dom 
     // wich content the same name
-    $('.star').parent('article').find('.overlay-link').each(function(){
+    $('.star').closest('article').find('.overlay-link').each(function(){
         if($(this).attr('href') == currentTitle){
             // This bar is like favoried Bar
             // set the Class active
