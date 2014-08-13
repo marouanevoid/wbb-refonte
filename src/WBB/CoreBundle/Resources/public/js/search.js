@@ -160,17 +160,6 @@ meta.SearchPage = function() {
                         }
                     }
 
-
-                    if(nbnews <= 1){
-                        str = str.replace('News' , 'New');
-                        str = str.replace('NEWS' , 'NEW');
-                    }else{
-                        if(str.indexOf(') News<')<=-1 && str.indexOf(') NEWS<')<=-1){
-                            str = str.replace('New' , 'News');
-                            str = str.replace('NEW' , 'NEWS');
-                            }
-                    }
-
                 cible.html(str.replace(strl , number));
             }
 
@@ -206,8 +195,8 @@ meta.SearchPage = function() {
                 var isFaved = ( curor.fields.favorite ? curor.fields.favorite  : false );
                 var favUrl = (curor.fields.favorite_url ? curor.fields.favorite_url : '#' );
                 var url_link = (curor.fields.url ? ( URL_MODE +  curor.fields.url )  : '#');
-                var chtml = that.template.barWithPicture(currentFilter,isFaved, favUrl , url_link , {id :curor.id ,name: curor.fields.name}).replace('%type' , type);
-                var chtml2 = that.template.barWithPictureList(currentFilter,isFaved , favUrl , url_link, {id :curor.id ,name: curor.fields.name}).replace('%type' , type);
+                var chtml = that.template.barWithPicture(currentFilter,isFaved, favUrl , url_link , {id :curor.fields.wbb_id ,name: curor.fields.name}).replace('%type' , type);
+                var chtml2 = that.template.barWithPictureList(currentFilter,isFaved , favUrl , url_link, {id :curor.fields.wbb_id ,name: curor.fields.name}).replace('%type' , type);
 
                 // Update Labels of Bar and News
                 if(curor.id.indexOf('News')>-1){
@@ -421,6 +410,8 @@ meta.SearchPage = function() {
             limit = 12;
         }
 
+        console.log('formated url :::: ' + formatedUrl);
+
         lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
                             formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) +
                             (formatedCity != '' ? formatedCity : '');
@@ -574,7 +565,6 @@ meta.SearchPage = function() {
         // delete the@ on the end of string url
         formatedUrl = formatedUrl.substr(0,formatedUrl.length-1);
         // Send The Request To Ajax
-
         compteurBars = 0;
         compteurNews = 0;
 
@@ -599,6 +589,12 @@ meta.SearchPage = function() {
             {
                 $(this).addClass('plus').removeClass('minus').parent().next('.drop-list').slideUp(that.config.speed);
             }
+
+            that.context.$form_filter.find('.custom-scroll').each(function()
+            {
+                var api = $(this).data('jsp');
+                if(typeof(api) != "undefined") api.reinitialise();
+            });
         });
 
 
@@ -620,8 +616,17 @@ meta.SearchPage = function() {
         });
 
 
-        that.context.$form_filter.find('input[type=reset]').click(function()
+        that.context.$form_filter.find('input[type=reset]').click(function(e,from_applay)
         {
+            // on the Mobile if there is 
+            // a filter send the serrch to get
+            // the result befor set
+            if( $(this).hasClass('mobile-reset') && ! from_applay ){
+                that.clearContent();
+                that.goSearch();
+            }
+
+
             $(this).hide();
             // Empty the url format
             formatedUrl = "";
@@ -738,12 +743,12 @@ meta.SearchPage = function() {
         });
 
         // click on Applay Filter
-        $('#applay-filter').on('click' , function(){
+        $('#applay-filter').off('click').on('click' , function(){
             that.clearContent();
             that.goSearch();
 
             // hide form on the Mobile
-             that.context.$form_filter.find('input[type=reset]').click();
+            that.context.$form_filter.find('input[type=reset]').trigger('click', ['from_applay']);
             return false;
         });
 
@@ -763,6 +768,14 @@ meta.SearchPage = function() {
         //     that.ToggleshowNavSearchMobile(false);
         // });
 
+        // add Event on Click on Close
+        // $('.mobile-reset').on('click' , function(e,fromcibling){
+        //     if( ! fromcibling ){
+        //         that.clearContent();
+        //         that.goSearch();
+        //     }
+        // });
+
     };
 
     /*
@@ -774,7 +787,6 @@ meta.SearchPage = function() {
                 // Set the default the flag of already Loaded
                 currentFilterLoaded = "";
                 that._filterResults();
-
         }
         //$('.checkbox-container').find('label').off('click',handler).on('click' , handler);
         that.context.$form_filter.find('input[type=checkbox]').off('change').on('change' , handler);
