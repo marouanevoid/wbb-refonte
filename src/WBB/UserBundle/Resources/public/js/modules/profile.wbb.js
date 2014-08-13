@@ -104,7 +104,7 @@ wbb.LoadProfile = function() {
             }
         });
 
-        //load bars on radio buttons change
+        //Changes display
         $('input[name=view-type]').change(function()
         {
             that.context.display = $(this).val();
@@ -122,7 +122,7 @@ wbb.LoadProfile = function() {
 
         });
 
-        //load bars on radio buttons change
+        //Changes filter criteria
         $('#criteria').change(function(){
             that.context.filter = $(this).val();
             if(that.context.content === 'bars'){
