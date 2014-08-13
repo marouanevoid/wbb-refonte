@@ -38,6 +38,7 @@
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
   .popup {width: 911px; /*height: 530px;*/ z-index: 9999999; position: absolute; top: 50%; left: 50%;}
+  .popup.mobile {left: 0;}
   .popin-block {padding: 25px 40px;}
   .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
@@ -338,7 +339,7 @@
 
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
-  #register.mobile .ui #success .subtitle {padding: 0; font-size: 22px; width: 100%;}
+  #register.mobile .ui #success .subtitle {padding: 0; font-size: 26px; width: 100%;}
   .form-input {width: 270px;}
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
   #editprofile .ui {top: 0; width: 530px; background-color: #fff;}
@@ -348,7 +349,7 @@
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
   #editprofile .avatar-profil {z-index: 11; position: relative; overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
-  #editprofile .avatar-profil img {height: 99%; width: 99%; position: relative; border-radius: 20px;}
+  #editprofile .avatar-profil img {height: 99%; width: 99%; position: relative; border-radius: 10em;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
   #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
@@ -439,7 +440,7 @@
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
   /* Mobile */
-    .wrap-share.mobile {z-index: 777; top: 50%; height: 280px; background-color: transparent; width: 100%;}
+    .wrap-share.mobile {z-index: 9999999; top: 50%; height: 280px; background-color: transparent; width: 100%;}
     .wrap-share.mobile .social-share {padding: 0 10px;}
     .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; left: 0; padding: 95px 90px 0;}
     .wrap-share.mobile .social-share li,
@@ -575,6 +576,7 @@
     .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
     section.bar-filter .bar-w-pic {max-height: 180px;}
     .ui.register .title {width: 45%;}
+    .ui .form-text {text-indent: 0;}
   }
 
   /* iPad Only */
@@ -593,7 +595,8 @@
     }
     form .icheckbox_flat {
       background-image: url("../images/UI/icon_checkbox@x2.jpg");
-      background-size: 40px 80px;
+      background-size: 20px 40px;
+      height: 20px;
     }
     .popup .btn-close {
       background-image: url("../images/UI/close@x2.png"); 
