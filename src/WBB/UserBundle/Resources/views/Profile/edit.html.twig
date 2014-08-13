@@ -186,7 +186,7 @@
                             {% endif %}
                             <div class="clear"></div>
                             {{ form_widget(form._token) }}
-                            <div class="group-actions margin-top-40 right {% if is_mobile() and not is_tablet() %}margin-bottom-40{% endif %}">
+                            <div class="group-actions margin-top-40 margin-bottom-50 right">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
                             </div>
                         </form>
@@ -197,7 +197,7 @@
                                     $("#message").show();
                                 });
                             </script>
-                            <div id="message" class="margin-top-20 wrap">
+                            <div id="message" class="margin-bottom-20 right">
                                 <div>
                                     {{ form_errors(form) }}
                                     {% if not is_mobile() %}

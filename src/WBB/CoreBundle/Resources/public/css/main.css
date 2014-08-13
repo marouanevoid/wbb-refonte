@@ -219,7 +219,8 @@
   #message p,
   #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
   #message li:only-of-type {margin-top: 20px;}
-  #register.page #message {width: 300px; padding: 0; position: relative; left: 9px;}
+  .page #message {width: 300px; padding: 0; position: relative; left: 9px;}
+  #editprofile #message {margin: 0 55px 0 0;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   #success {position: static; top: 0;}
@@ -351,7 +352,7 @@
   #editprofile .avatar-profil {overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
   #editprofile .avatar-profil img {height: 99%; width: 99%;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
-  #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif");}
+  #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
   #editprofile #edit-account label {font-size: 15px;}
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
@@ -527,7 +528,8 @@
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
   .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
-
+  article.bestof img.scale-with-grid {display: inline-block;}
+  
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
     .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
@@ -642,7 +644,7 @@
     .date-birthday .select-wrap {width: 26%; margin-right: 12px;}
     .date-birthday .ui-dropdown-container {width: 100%!important;}
     .date-birthday .date-width {width: 612px!important;}
-    #register.page #message {left: 0;}
+    .page #message {left: 0;}
     #register.page .group-checkbox {padding: 0 20px 0 0; width: 97%; left: 0;}
     .search-bar-mobile .container input[type="reset"] {right: 39%;}
     #message ul {margin-left: 100px;}
