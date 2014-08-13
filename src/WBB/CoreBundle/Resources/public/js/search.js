@@ -35,6 +35,7 @@ meta.SearchPage = function() {
         compteurBars = 0,
         currentFilterLoaded = "";
         currentQuery = "",
+        from_loadMore = false,
         currentTabActive = "Bar";
     that.config = {
         speed   : 500,
@@ -400,20 +401,29 @@ meta.SearchPage = function() {
         $('.load-more-news-btn').hide();
 
         var limit;
-        if(istablet){
-            limit = 3
-        }else{
-            if(ismobile){
-                limit = 2
+
+        // test if we are comming from Load More
+        // Thene set the limit by device
+
+        if(from_loadMore){
+            if(istablet){
+                limit = 3
             }else{
-                limit = 12;
+                if(ismobile){
+                    limit = 2
+                }else{
+                    limit = 12;
+                }
             }
+        }else{
+            // we are not comming from 
+            // Load More
+            limit = 12;
         }
-        
+
         lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
                             formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) +
                             (formatedCity != '' ? formatedCity : '');
-                    ;
 
        // if the resquest is started
        // then abort it
@@ -509,6 +519,9 @@ meta.SearchPage = function() {
         });
         return false;
     }
+    /*
+    * Toggle Show Search bar Nav
+    **/
 
     /*
     * Desibled prop
@@ -704,7 +717,10 @@ meta.SearchPage = function() {
         $('.loadmore-trigger').on('click' ,function(e){
             e.preventDefault();
             $(this).text(TRAD.common.loading);
+            // set the Load More flag
+            from_loadMore = true;
             that.goSearch();
+            from_loadMore = false;
             return false;
         });
 
@@ -740,6 +756,12 @@ meta.SearchPage = function() {
              that.context.$form_filter.find('input[type=reset]').click();
             return false;
         });
+
+        // // click on filter btn
+
+        // $('.search-mobile-filter-btn').on('click' , function(){
+        //     that.ToggleshowNavSearchMobile(false);
+        // });
 
     };
 
