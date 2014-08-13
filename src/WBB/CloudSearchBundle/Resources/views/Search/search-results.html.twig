@@ -74,13 +74,16 @@
                                     {% endif %}
                                         <ul class="checkbox-container">
                                             {% for tag in tags.tags %}
-                                                <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name }}"/><b></b>{{ tag.name }}</label></li>
+                                                <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name }}"/><b></b>{{ tag.name }}</label>
+                                                </li>
                                             {% endfor %}
                                         </ul>
                                     {% if not is_mobile() or is_tablet() %}
                                     </div>
                                     {% endif %}
                                     </div>
+
+                                    <div class='clear'></div>
                                 </li>
                             {% endif %}
                         {% endfor %}
