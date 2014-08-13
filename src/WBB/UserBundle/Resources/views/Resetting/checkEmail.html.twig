@@ -1,20 +1,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-<div id="success">
-	<table class="min-height" width="100%" {% if is_mobile() and not is_tablet() %}height="300"{% endif %}>
-		<tbody>
-			<tr>
-			  <td valign="bottom">
-				<div class="title margin-bottom-20 wrap bold">FORGOT YOUR PASSWORD</div>
-			  </td>
-			</tr>
-			<tr>
-			  <td align="center">
-				<p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
-			  </td>
-			</tr>
-		</tbody>
-	</table>
+<div id="success" class="min-height padding-top-100">
+	<div class="text-align-center padding-top-100">
+		<!-- <div class="title margin-bottom-20 wrap bold">FORGOT YOUR PASSWORD</div> -->
+		<p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
+	</div>
 </div><!-- #success -->
 {% endblock %}
