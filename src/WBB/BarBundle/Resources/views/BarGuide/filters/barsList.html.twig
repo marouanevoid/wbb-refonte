@@ -14,7 +14,7 @@
                             <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>
                         {% endfor %}
                     {% else %}
-                        <img class="scale-with-grid" data-src="{% filter showMedia %}{% endfilter %}" width="282" height="210" alt=""/>
+                        <img class="scale-with-grid" data-src="{% filter showMedia %}{% endfilter %}" width="570" height="428" alt=""/>
                     {% endif %}
                 </div>
             </div>
@@ -36,7 +36,10 @@
                 </p>
                 <div class="tags">
                     {% for tr in b.tagsToShow |slice(0, 5) %}
-                        {{ tr.name }}{% if not loop.last %}, {% endif %}
+                        <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
+                            {{ tr.name|capitalize }}
+                        </a>
+                        {% if not loop.last %}, {% endif %}
                     {% endfor%}
                 </div>
             </div>

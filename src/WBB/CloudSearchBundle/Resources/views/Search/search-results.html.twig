@@ -46,14 +46,14 @@
             </div>
         {% endif %}
 
-        <div class="container l-padding{% if is_mobile() and not is_tablet() %}-top min-height-block-mobile{% endif %}">
+        <div class="container l-padding">
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/search.js') }}"></script>
 
             <aside class="three columns filters">
                 <form id="filter" class="{% if is_mobile() and not is_tablet() %}filter-from{% endif %}">
                     <div class="reset m-margin-bottom">
                         <h3>Filters</h3>
-                        <input type="reset" value="{% if is_mobile() and not is_tablet() %} {% else %}Reset{% endif %}"/>
+                        <input type="reset" class="{% if is_mobile() and not is_tablet() %}mobile-reset{% endif %}" value="{% if is_mobile() and not is_tablet() %} {% else %}Reset{% endif %}"/>
                     </div>
                     <ul>
                         <li>
@@ -63,6 +63,7 @@
                             </div>
 
                             <div class="drop-list">
+                            <div class="custom-scroll">
                                 {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
 
                                 <select class="ui-dropdown city-drop-down" name="city" data-class="city">
@@ -77,6 +78,7 @@
                                     <ul></ul>
                                 </div>
                             </div>
+                            </div>
                         </li>
                         {% for tags in tagsByType %}
                             {% if tags.tags|length > 0 %}
@@ -87,12 +89,13 @@
                                     </div>
 
                                     <div class="drop-list">
+                                    <div class="custom-scroll">
                                         <ul class="checkbox-container">
                                             {% for tag in tags.tags %}
                                                 <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name }}"/><b></b>{{ tag.name }}</label></li>
                                             {% endfor %}
                                         </ul>
-                                        <br class="clear"/>
+                                    </div>
                                     </div>
                                 </li>
                             {% endif %}
@@ -122,13 +125,13 @@
 
                 <div class="six columns h2 screen-compteur">
                     <input type="radio" name="filter" value="(0) Bar" data-type='Bar' checked="checked" class="ui-radio collapsed" data-color="brown" data-type="collapsed"/>
-                    <input type="radio" name="filter" value="(0) New" data-type='News' class="ui-radio" data-color="brown collapsed" data-type="collapsed"/>
+                    <input type="radio" name="filter" value="(0) News" data-type='News' class="ui-radio" data-color="brown collapsed" data-type="collapsed"/>
                 </div>
 
                 <div class="six columns sort-by h3">
 
                         {% if  is_mobile() and not is_tablet() %}
-                        <a class="btn-radius border brown filter-btn">Filter</a>
+                        <a class="btn-radius border brown filter-btn search-mobile-filter-btn">Filter</a>
                             <div class='loader-search-page mobile'></div>
                         {% endif %}
                     <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
@@ -201,11 +204,16 @@
 
             $('.filter-btn').click(function() {
                 $('.bar-filter-form, .bar-filter').hide();
+                // hide the serach Nav Bar
+                $('.search-bar-mobile').hide();
                 $('aside.filters').fadeIn();
             });
 
             $('aside.filters input[type=reset]').click(function() {
                 $('.bar-filter-form, .bar-filter').fadeIn();
+                // Show the serach Nav Bar
+                $('.search-bar-mobile').show();
+
                 if ($(window).width() < 640)
                     $('aside.filters').hide();
             });

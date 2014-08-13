@@ -8,9 +8,10 @@
                     <div id="edit-account">
                         <form id="edit_profile_form" action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
                             <div class="block-top wrap">
-                                <div class="avatar-profil left" >
-                                    <img src="{{  showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max" id="avatar-img">
+                                <div class="avatar-profil {% if is_mobile() and not is_tablet() %}wrap{% else %}left{% endif %} radius-max" >
+                                    <img src="{{  showImage(user.avatar, 'av_large') }}" height="145" width="145" id="avatar-img">
                                 </div>
+                                {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
                                 <div class="group left">
                                     <div class="title text-transform-capitalize bold">
                                         <h5>{{ user.username }}</h5>
@@ -56,7 +57,7 @@
                                     </div> <!-- .subgroup.right -->
                                 </div> <!-- .group.right -->
                             </div>
-                            {% if not is_mobile() %}
+                            {% if not is_mobile() or is_tablet() %}
                                 <div class="margin-bottom-20">
                                     <div class="clear"></div>
                                     <div class="select-two margin-top-10 gender">
@@ -68,20 +69,32 @@
                                     <div class="clear"></div>
                                     <div class="group-form margin-top-10">
                                         <label class="margin-right-20">Firstname</label>
-                                        {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% if 'firstname' in errors.fields %}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text error'} }) }}
+                                        {% else %}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
                                     <div class="group-form margin-top-10">
                                         <label class="margin-right-20">Lastname</label>
-                                        {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text' } }) }}
+                                        {% if 'lastname' in errors.fields %}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text error'} }) }}
+                                        {% else %}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
                                     <div class="group-form margin-top-10">
                                         <label class="margin-right-20">Email</label>
-                                        {{ form_widget(form.email, { 'attr' : { 'class': 'form-text' } }) }}
+                                        {% if 'email' in errors.fields %}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text error'} }) }}
+                                        {% else %}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
-                                    <div class="date-birthday text-align-center margin-top-10">
+                                    <div class="{% if 'birthday' in errors.fields %}error{% endif %} date-birthday text-align-center margin-top-10">
                                         <label class="margin-right-20">Date of Birth</label>
                                         <div{% if is_mobile() and not is_tablet() %} class="date-width" style="width: 380px"{% endif %}>
                                             <div class="select-wrap left">
@@ -100,7 +113,11 @@
                                     <div class="country-dropdown select-two margin-top-10">
                                         <label class="margin-right-20">Country</label>
                                         <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
-                                            {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                            {% if 'country' in errors.fields %}
+                                                {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown error' } }) }}
+                                            {% else %}
+                                                {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                            {% endif %}
                                         </div>
                                     </div><!-- #countries -->
                                     <div class="clear"></div>
@@ -186,19 +203,60 @@
                             {% endif %}
                             <div class="clear"></div>
                             {{ form_widget(form._token) }}
-                            <div class="group-actions margin-top-40 right {% if is_mobile() and not is_tablet() %}margin-bottom-40{% endif %}">
+                            <div class="group-actions margin-top-40 margin-bottom-50 right">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
                             </div>
                             <div class="clear"></div>
-                            <div id="message" class="margin-top-20 wrap" style="display:none;">
-                                <div>
+                            {% if errors.messages|length > 0 %}
+                                <div id="message" class="margin-top-20 wrap show">
+                                    <div>
+                                        <ul>
+                                            {% for error in errors.messages %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         </form>
+                        <div class="clear"></div>
+                        {% if not form.vars.valid %}
+                            <script type="text/javascript">
+                                $(function(){
+                                    $("#message").show();
+                                });
+                            </script>
+                            <div id="message" class="margin-bottom-20 right">
+                                <div>
+                                    {{ form_errors(form) }}
+                                    {% if not is_mobile() %}
+                                        {{ form_errors(form.title) }}
+                                        {{ form_errors(form.firstname) }}
+                                        {{ form_errors(form.lastname) }}
+                                        {{ form_errors(form.email) }}
+                                        {{ form_errors(form.birthdate) }}
+                                        {{ form_errors(form.country) }}
+                                        {{ form_errors(form.prefCity1) }}
+                                        {{ form_errors(form.prefCity2) }}
+                                        {{ form_errors(form.prefCity3) }}
+                                        {{ form_errors(form.prefBar1) }}
+                                        {{ form_errors(form.prefBar2) }}
+                                        {{ form_errors(form.prefBar3) }}
+                                        {{ form_errors(form.prefDrinkBrand1) }}
+                                        {{ form_errors(form.prefDrinkBrand2) }}
+                                        {{ form_errors(form.prefDrinkBrand3) }}
+                                        {{ form_errors(form.prefCocktails1) }}
+                                        {{ form_errors(form.prefCocktails2) }}
+                                        {{ form_errors(form.prefCocktails3) }}
+                                    {% endif %}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div> <!-- .margin-top-20 -->
                 <div class="clear"></div>
-            </div> <!-- #UI -->
+            </div>
         </div> <!-- #editprofile -->
     </div>
 {% endblock %}
@@ -219,6 +277,7 @@
                 checkboxClass: 'icheckbox_flat',
                 increaseArea: '20%' // optional
             });
+
         });
     </script>
 {% endblock %}

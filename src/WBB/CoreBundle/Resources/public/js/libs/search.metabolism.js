@@ -203,7 +203,8 @@ meta.Search = function(config){
             contentType: "application/json",
             dataType: 'json',
         data : {
-            q : q
+            q : q,
+            suggest : true
         },
         success  :function(data){
             // Hide Loader 
@@ -236,6 +237,8 @@ meta.Search = function(config){
         if(that.show_form) return;
 
         that.show_form = true;
+
+        that.context.$input.val('');
 
         if( $(window).width() > 640 )
         {
@@ -318,7 +321,6 @@ meta.Search = function(config){
         });
 
         that.context.$input.on('keypress', function(){
-            console.log(':::::> keypress ');
             clearInterval(that.search_timeout);
             that.search_timeout = setTimeout(function(){ that._search() }, that.config.throttle);
 
@@ -332,7 +334,9 @@ meta.Search = function(config){
         });
 
         that.context.$result.on('click', 'a', function(){
-            that.context.$input.val( $(this).text() );
+            
+           // that.context.$input.val( $(this).text() );
+           
             var _tthis = $(this),
                 data_target = _tthis.attr('data-target');
             that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
