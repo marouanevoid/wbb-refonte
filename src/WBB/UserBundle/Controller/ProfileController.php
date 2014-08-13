@@ -64,7 +64,7 @@ class ProfileController extends ContainerAware
 
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('wbb_user.profile.form.factory');
-        if(!$mobileDetector->isMobile()){
+        if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
             $form = $formFactory->createForm(false, array('Default', 'registration_full'));
         }else{
             $form = $formFactory->createForm(true, array('no-validation'));
@@ -94,10 +94,8 @@ class ProfileController extends ContainerAware
 
                 return $response;
             } else {
-
-
                 $formErrors = null;
-                if(!$mobileDetector->isMobile()){
+                if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
                     $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
                 }else{
                     $formErrors = $this->container->get('validator')->validate($form, array('Default'));
