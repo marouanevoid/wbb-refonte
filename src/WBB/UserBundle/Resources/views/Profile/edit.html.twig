@@ -8,9 +8,10 @@
                     <div id="edit-account">
                         <form id="edit_profile_form" action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
                             <div class="block-top wrap">
-                                <div class="avatar-profil left radius-max" >
+                                <div class="avatar-profil {% if is_mobile() and not is_tablet() %}wrap{% else %}left{% endif %} radius-max" >
                                     <img src="{{  showImage(user.avatar, 'av_large') }}" height="145" width="145" id="avatar-img">
                                 </div>
+                                {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
                                 <div class="group left">
                                     <div class="title text-transform-capitalize bold">
                                         <h5>{{ user.username }}</h5>
