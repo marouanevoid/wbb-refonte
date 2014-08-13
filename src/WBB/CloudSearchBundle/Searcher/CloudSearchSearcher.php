@@ -36,10 +36,10 @@ class CloudSearchSearcher
         $request = $this->cloudSearchClient->get('search');
         $query = $request->getQuery();
 
-        $q = "{$parameters['q']}*";
+        $q = "{$parameters['q']}* {$parameters['q']}";
 
         $query->set('q', $q);
-        $query->set('q.options', "{fields: ['name^50','title^50','description']}");
+        $query->set('q.options', "{defaultOperator: 'or', fields: ['name^50','title^50','description']}");
         $query->set('size', 10000);
 
         $response = $request->send()->json();

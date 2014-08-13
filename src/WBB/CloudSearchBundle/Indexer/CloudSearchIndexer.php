@@ -24,6 +24,11 @@ class CloudSearchIndexer implements IndexerInterface
 
     public function index(IndexableEntity $entity)
     {
+        if ($entity instanceof \WBB\CoreBundle\Entity\City) {
+            if (!$entity->getOnTopCity() && $entity->getBars()->count() == 0) {
+                return;
+            }
+        }
         $request = $this->cloudSearchClient->post('documents/batch');
         $request->setHeader('content-type', 'application/json');
 
