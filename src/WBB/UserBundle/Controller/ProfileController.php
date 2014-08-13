@@ -60,11 +60,18 @@ class ProfileController extends ContainerAware
             return $event->getResponse();
         }
 
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.profile.form.factory');
+        $mobileDetector = $this->container->get('mobile_detect.mobile_detector');
 
-        $form = $formFactory->createForm();
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('wbb_user.profile.form.factory');
+        if(!$mobileDetector->isMobile()){
+            $form = $formFactory->createForm(false, array('Default', 'registration_full'));
+        }else{
+            $form = $formFactory->createForm(true, array('no-validation'));
+        }
+
         $form->setData($user);
+        $errors = array('fields' => array(), 'messages' => array());
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
@@ -87,7 +94,15 @@ class ProfileController extends ContainerAware
 
                 return $response;
             } else {
-                $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
+
+
+                $formErrors = null;
+                if(!$mobileDetector->isMobile()){
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
+                }else{
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default'));
+                }
+
                 $fields = array();
                 $messages = array();
 
@@ -99,12 +114,11 @@ class ProfileController extends ContainerAware
                         $messages[] = $formError->getMessage();
                     }
                 }
+
                 $errors = array(
                     'fields' => $fields,
                     'messages' => $messages
                 );
-
-                return new JsonResponse(array('code' => 400, 'errors' => $errors));
             }
         }
 
@@ -114,9 +128,10 @@ class ProfileController extends ContainerAware
         return $this->container->get('templating')->renderResponse(
             'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
             array(
-                'form' => $form->createView(),
-                'user' => $user,
-                'city' => $city
+                'form'   => $form->createView(),
+                'user'   => $user,
+                'city'   => $city,
+                'errors' => $errors
             )
         );
     }

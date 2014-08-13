@@ -54,6 +54,12 @@ services:
         tags:
             - { name: form.type, alias: wbb_user_profile }
 
+    wbb_user.profile_light.form.type:
+        class: WBB\UserBundle\Form\Type\ProfileLightFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: wbb_user_profile_light }
+
     wbb_user.change_password.form.type:
         class: WBB\UserBundle\Form\Type\ChangePasswordFormType
         arguments: [%fos_user.model.user.class%]
@@ -64,6 +70,10 @@ services:
     wbb_user.registration.form.factory:
         class: WBB\UserBundle\Form\Factory\FormFactory
         arguments: [@form.factory, %fos_user.registration.form.name%, %fos_user.registration.form.type%, %fos_user.registration.form.validation_groups% ]
+
+    wbb_user.profile.form.factory:
+        class: WBB\UserBundle\Form\Factory\FormFactory
+        arguments: [@form.factory, %fos_user.profile.form.name%, %fos_user.profile.form.type%, %fos_user.profile.form.validation_groups% ]
 
     #MD5 password encoder
     wbb_md5_password_encoder:

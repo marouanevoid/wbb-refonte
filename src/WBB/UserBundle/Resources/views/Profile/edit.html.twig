@@ -68,20 +68,32 @@
                                     <div class="clear"></div>
                                     <div class="group-form margin-top-10">
                                         <label class="margin-right-20">Firstname</label>
-                                        {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% if 'firstname' in errors.fields %}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text error'} }) }}
+                                        {% else %}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
                                     <div class="group-form margin-top-10">
                                         <label class="margin-right-20">Lastname</label>
-                                        {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text' } }) }}
+                                        {% if 'lastname' in errors.fields %}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text error'} }) }}
+                                        {% else %}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
                                     <div class="group-form margin-top-10">
                                         <label class="margin-right-20">Email</label>
-                                        {{ form_widget(form.email, { 'attr' : { 'class': 'form-text' } }) }}
+                                        {% if 'email' in errors.fields %}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text error'} }) }}
+                                        {% else %}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
-                                    <div class="date-birthday text-align-center margin-top-10">
+                                    <div class="{% if 'birthday' in errors.fields %}error{% endif %} date-birthday text-align-center margin-top-10">
                                         <label class="margin-right-20">Date of Birth</label>
                                         <div{% if is_mobile() and not is_tablet() %} class="date-width" style="width: 380px"{% endif %}>
                                             <div class="select-wrap left">
@@ -100,7 +112,11 @@
                                     <div class="country-dropdown select-two margin-top-10">
                                         <label class="margin-right-20">Country</label>
                                         <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
-                                            {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                            {% if 'country' in errors.fields %}
+                                                {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown error' } }) }}
+                                            {% else %}
+                                                {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                            {% endif %}
                                         </div>
                                     </div><!-- #countries -->
                                     <div class="clear"></div>
@@ -190,10 +206,17 @@
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Done editing">
                             </div>
                             <div class="clear"></div>
-                            <div id="message" class="margin-top-20 wrap" style="display:none;">
-                                <div>
+                            {% if errors.messages|length > 0 %}
+                                <div id="message" class="margin-top-20 wrap show">
+                                    <div>
+                                        <ul>
+                                            {% for error in errors.messages %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         </form>
                     </div>
                 </div> <!-- .margin-top-20 -->
@@ -219,6 +242,7 @@
                 checkboxClass: 'icheckbox_flat',
                 increaseArea: '20%' // optional
             });
+
         });
     </script>
 {% endblock %}
