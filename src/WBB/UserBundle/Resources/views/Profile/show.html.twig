@@ -56,9 +56,15 @@
                     <div class="filter-profil padding-bottom-20 padding-top-20 wrap">
                         <div class="{% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                             <div class="disableClick"></div>
-                            <input type="radio" name="filter" data-tab="bars" value="({{ user.favoriteBars|length }}) Bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
-                            <input type="radio" name="filter" data-tab="bestof" value="({{ user.favoriteBestOfs|length }}) collections" class="ui-radio" data-color="brown" data-type="collapsed"/>
-                            <input type="radio" name="filter" data-tab="tips" value="({{ user.tips|length }}) tips" class="ui-radio" data-color="brown" data-type="collapsed"/>
+                            {% set favBars = user.favoriteBars|length %}
+                            {% set favBestofs = user.favoriteBestOfs|length %}
+                            {% set favTips = user.tips|length %}
+                            <input type="radio" name="filter" data-tab="bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"
+                                   value="{% if favBars > 0 %}({{ favBars }}) Bar{% if favBars > 1 %}s{% endif %}{% else %}No Bar{% endif %}" />
+                            <input type="radio" name="filter" data-tab="bestof" class="ui-radio" data-color="brown" data-type="collapsed"
+                                   value="{% if favBestofs > 0 %}({{ favBestofs }}) collection{% if favBestofs > 1 %}s{% endif %}{% else %}No Collection{% endif %}" />
+                            <input type="radio" name="filter" data-tab="tips" class="ui-radio" data-color="brown" data-type="collapsed"
+                                   value="{% if favTips > 0 %}({{ favTips }}) tip{% if favTips > 0 %}s{% endif %}{% else %}No Tip{% endif %}"/>
                             <div class="clear"></div>
                         </div>
                     </div> <!-- .filter-profil -->

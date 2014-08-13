@@ -21,7 +21,10 @@
         <div class="hover">
             <div class="tags">
                 {% for tr in b.tagsToShow |slice(0, 5) %}
-                    {{ tr.name|capitalize }}{% if not loop.last %}, {% endif %}
+                    <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
+                        {{ tr.name|capitalize }}
+                    </a>
+                    {% if not loop.last %}, {% endif %}
                 {% endfor %}
             </div>
             {% if bestof is defined %}
