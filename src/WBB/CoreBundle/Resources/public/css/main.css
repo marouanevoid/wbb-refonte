@@ -170,7 +170,7 @@
   .ui .title {font-size: 28px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
-  .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px; padding: 0;*/ width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
+  .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px; padding: 0;*/ max-width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
@@ -465,7 +465,7 @@
       .search-mode .open:after {background-image: none;}
 
       /* Mobile */
-    .search-bar-mobile .container .form-text {background-image: none!important; padding-left: 0px!important; text-indent: 15px;}
+    .search-bar-mobile .container .form-text {background-image: none!important; padding-left: 15px!important; display: block;}
     .search-bar-mobile .container .form-submit {position: absolute; right: 86px; height: 40px; background-position: -84px -361px!important;}
     .search-bar-mobile .container .form-submit:hover {background-position: -84px -401px!important;}
 
@@ -664,6 +664,7 @@
     .wrap-share.mobile .social-share .share-label {width: 96%;}
     .date-birthday .select-wrap {width: 105px; margin-right: 15px;}
     .ui.register #account .form-text {text-indent: 10px; border: 1px solid red;}
+    .search-bar-mobile .container .form-text {padding-left: 15px!important;}
   }
 
 /* Smartphones (portrait) ----------- */
