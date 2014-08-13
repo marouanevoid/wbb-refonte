@@ -624,6 +624,12 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 44%;}
+    #register.page.mobile .date-birthday .select-wrap {margin-right: 11px;}
+    #register.mobile.popup .date-birthday .select-wrap {width: 105px; margin-right: 2%;}
+    #register.page .group-checkbox {padding: 0 20px 0 0; width: 97%; left: 0;}
+    #message ul {margin-left: 100px;}
+    #success {padding: 0 20px;}
+    #success p {font-weight: bold; font-size: 20px;}
 
   /* Globales Classes */
     .xs-hidden {display: none!important; visibility: hidden;}
@@ -651,15 +657,9 @@
     .date-birthday .ui-dropdown-container {width: 100%!important;}
     .date-birthday .date-width {width: 612px!important;}
     .page #message {left: 0;}
-    #register.page .group-checkbox {padding: 0 20px 0 0; width: 97%; left: 0;}
     .search-bar-mobile .container input[type="reset"] {right: 39%;}
-    #message ul {margin-left: 100px;}
-    #success {padding: 0 20px;}
-    #success p {font-weight: bold; font-size: 20px;}
-    /*#register.page.mobile #create-account .form-text {width: 300px;}*/
     .form-input {width: 100%;}
-    #register.page.mobile .date-birthday .select-wrap {margin-right: 11px;}
-    #register.mobile.popup .date-birthday .select-wrap {width: 105px; margin-right: 2%;}
+    .search-result-proposal ul li:last-child {border-bottom: 0;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
