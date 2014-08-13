@@ -21,14 +21,16 @@
             </div>
             <div class="select-two date-birthday text-align-center ui-dropdown-list-form">
                 <label class="margin-bottom-15">Date of Birth</label>
-                <div class="select-wrap left">
-                    {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
-                </div>
-                <div class="select-wrap left">
-                    {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
-                </div>
-                <div class="select-wrap left last">
-                    {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                <div class="group-small-select">
+                    <div class="select-wrap left">
+                        {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                    </div>
+                    <div class="select-wrap left">
+                        {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
+                    </div>
+                    <div class="select-wrap left last">
+                        {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                    </div>
                 </div>
             </div>
             <div class="clear"></div>

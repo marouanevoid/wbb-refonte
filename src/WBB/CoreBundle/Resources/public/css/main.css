@@ -203,7 +203,7 @@
   .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center; text-indent: 0;}
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
-  .ui.register #create-account .form-text {text-align: left; line-height: 40px;}
+  .ui.register #create-account .form-text {text-align: left; /*line-height: 40px;*/}
   .ui.register .date-birthday label {color: #818a8c; font-size: 17px;}
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
@@ -304,9 +304,7 @@
     #register.mobile.popup .subtitle {width: 210px; margin: auto; font-size: 22px; padding: 0;}
     #register.mobile.popup #create-account a.btn-create-account {width: 300px;}
     #register.mobile.popup a.connect-fb {text-indent: 7%;}
-    #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.page #date-birthday label {width: 95%;}
-    #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.mobile.popup .date-birthday .ui-dropdown-container {width: 95px!important;}
     #register.mobile.popup #create-account .btn-create-with-fb {line-height: 45px;}
 
@@ -403,14 +401,14 @@
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
 
   #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
-  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 17px; padding-top: 9px; white-space: pre-line;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 15px; padding-top: 20px; white-space: pre-line; padding-bottom: 40px;}
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
   #editprofile.mobile #view-account .ui .filter-view a.ui-radio {color: transparent;}
   #editprofile.mobile #view-account .ui .filter-view a:nth-child(2) {margin-left: 2px;}
   #editprofile.mobile #view-account .ui .filter-profil {width: auto; padding: 0 10px;}
-  #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type {padding-right: 10px;}
+  #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type {padding-right: 15px; padding-left: 25px;}
   #editprofile.mobile #view-account .ui .group.left {margin: 0 auto!important; width: 50%; float: none; overflow: hidden;}
   #editprofile.mobile #view-account .ui .subgroup.wrap {width: 100%;}
 
@@ -657,6 +655,8 @@
     #success p {font-weight: bold; font-size: 20px;}
     /*#register.page.mobile #create-account .form-text {width: 300px;}*/
     .form-input {width: 100%;}
+    #register.page.mobile .date-birthday .select-wrap {margin-right: 11px;}
+    #register.mobile.popup .date-birthday .select-wrap {width: 105px; margin-right: 2%;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -688,6 +688,8 @@
     #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; text-align: right;}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
     form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
+    #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
+    #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
   }
 
 /* Full Screens ----------- */
