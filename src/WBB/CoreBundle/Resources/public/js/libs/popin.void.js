@@ -89,11 +89,13 @@ PopIn.show = function(e){
         current_id.addClass('void-popup');
 
         //Scroll to the popup just if is mobile
+        /*
         if (current_id.hasClass("mobile")) {
             $(document).animate({
                 scrollTop: PopIn.dom.targetPopup.offset().top},
             'slow');
         }
+        */
         
         //show the mask
         mask.fadeIn("slow");
