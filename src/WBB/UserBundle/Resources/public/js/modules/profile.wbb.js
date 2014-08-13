@@ -225,7 +225,7 @@ wbb.LoadProfile = function() {
                 // dispatching Event removeitem
                 $.event.trigger({
                     type: "removeitem",
-                    cible: 'tips'
+                    cible: {type: 'tip', id: null}
                 });
             });
 
