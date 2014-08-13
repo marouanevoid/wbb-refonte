@@ -662,7 +662,7 @@
     .search-bar-mobile .container input[type="reset"] {right: 39%;}
     .form-input {width: 100%;}
     .search-result-proposal ul li:last-child {border-bottom: 0;}
-    .btn-small-radius.brown:hover, .btn-round.brown:hover, .btn-radius.brown:hover, .btn-small-round.brown:hover { background: transparent!important; color: #faf3e1;}
+    .load-more-container .btn-small-radius.brown:hover, .load-more-container .btn-radius.brown:hover, .load-more-container .btn-small-round.brown:hover { background: transparent!important; color: #b3955f;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
