@@ -483,6 +483,7 @@
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
 /* Override */
+   img.scale-with-grid {box-sizing: initial;}
   .bar-w-pic .txt {z-index: 30;}
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
@@ -524,7 +525,6 @@
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
   .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
-  img.scale-with-grid {box-sizing: initial;}
   article.bestof img.scale-with-grid {display: inline;}
 
   /* mobile */
