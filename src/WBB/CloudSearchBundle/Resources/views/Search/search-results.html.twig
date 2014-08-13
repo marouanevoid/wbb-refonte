@@ -128,7 +128,7 @@
                 <div class="six columns sort-by h3">
 
                         {% if  is_mobile() and not is_tablet() %}
-                        <a class="btn-radius border brown filter-btn">Filter</a>
+                        <a class="btn-radius border brown filter-btn search-mobile-filter-btn">Filter</a>
                             <div class='loader-search-page mobile'></div>
                         {% endif %}
                     <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
@@ -201,11 +201,16 @@
 
             $('.filter-btn').click(function() {
                 $('.bar-filter-form, .bar-filter').hide();
+                // hide the serach Nav Bar
+                $('.search-bar-mobile').hide();
                 $('aside.filters').fadeIn();
             });
 
             $('aside.filters input[type=reset]').click(function() {
                 $('.bar-filter-form, .bar-filter').fadeIn();
+                // Show the serach Nav Bar
+                $('.search-bar-mobile').show();
+
                 if ($(window).width() < 640)
                     $('aside.filters').hide();
             });
