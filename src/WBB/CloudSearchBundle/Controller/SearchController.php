@@ -57,7 +57,7 @@ class SearchController extends Controller
     private function getSearchResults(Request $request, $entity = 'Bar')
     {
         $q = $request->query->get('q', null);
-        $size = $request->query->get('size', 12);
+        $size = $request->query->get('limit', 12);
         $start = $request->query->get('start', 0);
         $city = $request->query->get('city', null);
         $style = $request->query->get('style', null);
@@ -65,20 +65,28 @@ class SearchController extends Controller
         $occasion = $request->query->get('occasion', null);
         $cocktails = $request->query->get('cocktails', null);
         $district = $request->query->get('district', null);
+        $suggest = $request->query->get('suggest', false);
 
-        $results = $this->get('cloudsearch.searcher')->search(array(
-            'q' => $q,
-            'start' => $start,
-            'size' => $size,
-            'entity' => $entity,
-            'city' => $city,
-            'style' => $style,
-            'mood' => $mood,
-            'occasion' => $occasion,
-            'cocktails' => $cocktails,
-            'district' => $district,
-            'favorites' => true
-        ));
+        if ($suggest) {
+            $results = $this->get('cloudsearch.searcher')->suggest(array(
+                'q' => $q,
+                'size' => $size
+            ));
+        } else {
+            $results = $this->get('cloudsearch.searcher')->search(array(
+                'q' => $q,
+                'start' => $start,
+                'size' => $size,
+                'entity' => $entity,
+                'city' => $city,
+                'style' => $style,
+                'mood' => $mood,
+                'occasion' => $occasion,
+                'cocktails' => $cocktails,
+                'district' => $district,
+                'favorites' => true
+            ));
+        }
 
         return $results;
     }

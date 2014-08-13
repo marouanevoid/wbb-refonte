@@ -37,10 +37,10 @@ class CloudSearchIndexer implements IndexerInterface
         $body[0]['fields']['entity_type'] = $this->getEntityType($entity);
         $body[0]['fields']['url'] = $this->getUrlForEntity($entity);
 
-        if ($this->getEntityType($entity) == 'BestOf') {
-            $image = $entity->getImage();
-            if ($image) {
-                $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($image, 'default_big');
+        if ($this->getEntityType($entity) == 'News') {
+            $medias = $entity->getMedias();
+            if (isset($medias[0])) {
+                $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($medias[0]->getMedia(), 'default_slider_large');
             }
         } elseif ($this->getEntityType($entity) == 'Bar') {
             $medias = $entity->getMedias();
@@ -114,9 +114,15 @@ class CloudSearchIndexer implements IndexerInterface
                         'newsSlug' => $entity->getSlug()
             ));
         } elseif ($entity instanceof \WBB\CoreBundle\Entity\City) {
-            return $this->router->generate('city_homepage', array(
-                        'slug' => $entity->getSlug()
-            ));
+            if ($entity->getOnTopCity()) {
+                return $this->router->generate('city_homepage', array(
+                            'slug' => $entity->getSlug()
+                ));
+            } else {
+                return $this->router->generate('wbb_cities', array(
+                            'slug' => $entity->getSlug()
+                ));
+            }
         } elseif ($entity instanceof \WBB\BarBundle\Entity\BestOf) {
             return $this->router->generate('wbb_bar_bestof_global', array(
                         'bestOfSlug' => $entity->getSlug()

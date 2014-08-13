@@ -4,27 +4,8 @@
 /* Light reset */
   * {padding: 0; margin: 0;}
 /* Globale Tags */
-  body {}
-  input[type="email"]::-webkit-input-placeholder,
-  input[type="text"]::-webkit-input-placeholder,
-  input[type="password"]::-webkit-input-placeholder { /* WebKit browsers */
-      color:    #818a8c;
-  }
-  input[type="text"]:-moz-placeholder,
-  input[type="password"]:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-      color:    #818a8c;
-      opacity:  1;
-  }
-  input[type="email"]::-moz-placeholder,
-  input[type="text"]::-moz-placeholder,
-  input[type="password"]::-moz-placeholder { /* Mozilla Firefox 19+ */
-      color:    #818a8c;
-      opacity:  1;
-  }
-  input[type="email"]:-ms-input-placeholder,
-  input[type="text"]:-ms-input-placeholder,
-  input[type="password  "]:-ms-input-placeholder { /* Internet Explorer 10+ */
-      color:    #818a8c;
+  input[type="text"], input[type="password"], input[type="email"] {
+    color: #818a8c;
   }
 /* Globale Libs */
     form .icheckbox_flat {display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
@@ -56,11 +37,12 @@
   .font-avenir {font-family: "Avenir", sans-serif;}
   .full-white {background-color: #fff;}
   .full-cream-up {background-color: #faf3e1; padding: 0 100px;}
-  .popup {width: 911px; /*height: 530px;*/}
+  .popup {width: 911px; /*height: 530px;*/ z-index: 9999999; position: absolute; top: 50%; left: 50%;}
   .popin-block {padding: 25px 40px;}
-  .void-popup {z-index: 9999999; position: fixed;}
+  .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .subtitle.small {font-size: 13px;}
+  .btn.gold:hover {background-color: #ffe4af; color: #b3955f;}
   .select-two .ui-dropdown-container {width: 100%!important;}
 
   /* Popup */
@@ -71,7 +53,7 @@
   /* TEMPS */
     .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
-    .group-form {/*overflow: hidden;*/}
+    .group-form {overflow: hidden;}
     .separator-top {border-top: 1px solid #818a8c;}
     .separator-bottom {border-bottom: 1px solid #818a8c;}
     .forgetpassword {width: 300px;}
@@ -188,7 +170,7 @@
   .ui .title {font-size: 28px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
-  .ui .form-text {border: 1px solid #b3955f; line-height: 30px; height: 38px; padding: 0; width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
+  .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px; padding: 0;*/ width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
@@ -237,7 +219,8 @@
   #message p,
   #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
   #message li:only-of-type {margin-top: 20px;}
-  #register.page #message {width: 300px; padding: 0; position: relative; left: 9px;}
+  .page #message {width: 300px; padding: 0; position: relative; left: 9px;}
+  #editprofile #message {margin: 0 55px 0 0;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   #success {position: static; top: 0;}
@@ -248,14 +231,15 @@
   .alert .subtitle {font-size: 32px;}
 
     /* Popup */
-    .popup #success p {margin: 0 0 30px; line-height: 26px; font-size: 26px;}
-    .popup #success .subtitle {margin: 0 0 25px; font-size: 32px;}
+    .popup #success p {margin: 0 0 20px; line-height: 22px; font-size: 22px; text-align: center;}
+    .popup #success .subtitle {margin: 0 0 30px; font-size: 32px;}
     .popup #success table tr:first-child td {vertical-align: bottom;}
+    .popup .min-height {/*min-height: 400px;*/}
 
 /* Register Page */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
   #register.page .ui {width: 765px;}
-  #register.page .title {width: 100%;}
+  #register.page .title {width: 100%; font-size: 28px;}
   #register.page #create-account {width: 100%; padding: 0;}
   #register.page #create-account label {display: block; float: left; width: 220px; line-height: 35px;}
   #register.page #create-account .form-text {float: left; width: 300px;}
@@ -266,6 +250,7 @@
   #register.page .group-checkbox {margin: auto; float: none;}
   #register.page .group-actions,
   #register.page .group-checkbox {position: relative; left: 8px;}
+  #register.page .ui .connect-fb {font-size: 17px;}
 
 /* Barfinder (Mobile) - PSDN : PSDs/bar_finder/Mobile/BarFinder.psd; */
   #bar-finder.mobile {background-color: #4b4d4e; font-family: "Avenir", Helvetica, Arial, sans-serif; text-align: center;}
@@ -336,8 +321,7 @@
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
-  #register.page.mobile #create-account .form-text {width: 100%; margin: 0 0 10px;}
-  #register.page.mobile #create-account ::-webkit-input-placeholder {text-align: center; border: 1px solid red!important;}
+  #register.page.mobile #create-account .form-text {max-width: 100%; margin: 0 0 10px;}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -348,14 +332,14 @@
   #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px auto 0; /*width: 77%*/; display: block;}
   #register.page.mobile .group-form {overflow: visible; width: 100%;}
   #register.page.mobile .group-actions {width: 100%; left: 0;}
-  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: center; /*text-indent: 55px;*/}
-  #register.page.mobile .ui .connect-fb {line-height: normal;}
+  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: right; /*text-indent: 55px;*/}
+  #register.page.mobile .ui .connect-fb {line-height: normal; font-size: 15px;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
-  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
+  #register.page.mobile .group-checkbox label {text-align: right!important; font-size: 16px!important;}
 
 /* Register3 (Mobile) */
-  #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
+  #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 20px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; /*margin: 0 0 20px;*/}
 
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
@@ -365,10 +349,10 @@
   #editprofile .subgroup .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
-  #editprofile .avatar-profil {/*position: absolute;*/}
-  #editprofile .avatar-profil img {display: block; border: 3px solid #b3955f; display: block; padding: 2px; width: 140px; height: 140px;}
+  #editprofile .avatar-profil {overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
+  #editprofile .avatar-profil img {height: 99%; width: 99%;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
-  #editprofile .file-image:hover {display: block; cursor: pointer; opacity: 0.8;}
+  #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
   #editprofile #edit-account label {font-size: 15px;}
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
@@ -406,7 +390,7 @@
 /* EditProfile (Mobile) */
   #editprofile.mobile .ui {width: 100%; padding-right: 0; padding-left: 0;}
   #editprofile.mobile .ui .block-top,
-  #editprofile.mobile .ui .avatar-profil {width: 100%;}
+  /*#editprofile.mobile .ui .avatar-profil {width: 100%;}*/
   #editprofile.mobile .ui .avatar-profil img {margin: 0 auto;}
   #editprofile.mobile .ui #edit-account label {visibility: visible; width: 100%; text-align: center;}
   #editprofile.mobile .ui #edit-account .checkbox label {text-align: left;}
@@ -442,6 +426,9 @@
   #page-standard .content ul {list-style: disc; padding: 0 0 0 40px; margin-bottom: 30px;}
   #page-standard .min-height {min-height: 450px;}
   #page-standard .content .h3 {color: #b3955f;}
+    /* Mobile */
+      #page-standard.mobile {width: 100%;}
+      #page-standard.mobile .min-height {padding: 0 20px;}
 
 /* SHARE Tooltips */
   .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
@@ -489,6 +476,9 @@
   .page-form .form-textarea {padding: 10px 10px 50px;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
+/* Thumbnail's Size */
+  /*article.bestof {height: 290px;}*/
+
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
 
@@ -498,6 +488,7 @@
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
 /* Override */
+  .bar-w-pic .txt {z-index: 30;}
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .bar-finder .ui-radio.btn-radius.with-icon:after,
@@ -533,11 +524,13 @@
   .ui .sort-by {margin-left: 0;}
   .gender .ui-dropdown-container .ui-dropdown .choice,
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
-  .search-bar-mobile .container input[type="reset"] {right: 43%;}
   .ui-dropdown-container .ui-dropdown span {height: 37px;}
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
+  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
+  img.scale-with-grid {box-sizing: initial;}
+  article.bestof img.scale-with-grid {display: inline;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -579,6 +572,7 @@
     .wrap-share .social-share ul {left: 0;}
     .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
     section.bar-filter .bar-w-pic {max-height: 180px;}
+    .ui.register .title {width: 45%;}
   }
 
   /* iPad Only */
@@ -595,6 +589,19 @@
       background-image: url("../images/email@2x.png");
       background-size: 90px 40px;
     }
+    form .icheckbox_flat {
+      background-image: url("../images/UI/icon_checkbox@x2.jpg");
+      background-size: 40px 80px;
+    }
+    .popup .btn-close {
+      background-image: url("../images/UI/close@x2.png"); 
+      background-size: 40px 40px;
+    }
+    .popup .btn-close:hover {
+      background-image: url("../images/UI/close_rollover@x2.png"); 
+      background-size: 40px 40px;
+    }
+
   }
   
 /* Portrait tablet to landscape and desktop */  
@@ -639,7 +646,10 @@
     .date-birthday .select-wrap {width: 26%; margin-right: 12px;}
     .date-birthday .ui-dropdown-container {width: 100%!important;}
     .date-birthday .date-width {width: 612px!important;}
-      #register.page #message {left: 0;}
+    .page #message {left: 0;}
+    #register.page .group-checkbox {padding: 0 20px 0 0; width: 97%; left: 0;}
+    .search-bar-mobile .container input[type="reset"] {right: 39%;}
+    #message ul {margin-left: 100px;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -667,7 +677,9 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
     .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
-    #register.page.mobile #create-account .form-text {width: 298px; margin: 0 0 10px;}
+    #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; text-align: right;}
+    .search-bar-mobile .container input[type="reset"] {right: 43%;}
+    form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
   }
 
 /* Full Screens ----------- */
