@@ -386,6 +386,15 @@ jQuery(document).ready(function($) {
     }
 });
 
+
+// Animate the scroll to focus on PopIn
+function animateToPopIn(){
+    if ( ismobile )
+        $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+}
+
+
+
 // syncronise Bar favorie
 function syncBarFav(cible,status){
     var href = cible.attr('href'),
@@ -551,6 +560,9 @@ $(document).ready(function() {
                     initializeDropdowns();
                     initRegisterLoginForms();
                     $('#show-popin').click();
+
+                    // focus on Popin if is Mobile
+                    animateToPopIn();
                 }
             });
         }
