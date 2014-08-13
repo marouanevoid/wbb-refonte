@@ -4,28 +4,6 @@
 /* Light reset */
   * {padding: 0; margin: 0;}
 /* Globale Tags */
-  body {}
-  input[type="email"]::-webkit-input-placeholder,
-  input[type="text"]::-webkit-input-placeholder,
-  input[type="password"]::-webkit-input-placeholder { /* WebKit browsers */
-      color:    #818a8c;
-  }
-  input[type="text"]:-moz-placeholder,
-  input[type="password"]:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-      color:    #818a8c;
-      opacity:  1;
-  }
-  input[type="email"]::-moz-placeholder,
-  input[type="text"]::-moz-placeholder,
-  input[type="password"]::-moz-placeholder { /* Mozilla Firefox 19+ */
-      color:    #818a8c;
-      opacity:  1;
-  }
-  input[type="email"]:-ms-input-placeholder,
-  input[type="text"]:-ms-input-placeholder,
-  input[type="password  "]:-ms-input-placeholder { /* Internet Explorer 10+ */
-      color:    #818a8c;
-  }
   input[type="text"], input[type="password"], input[type="email"] {
     color: #818a8c;
   }
@@ -255,7 +233,7 @@
     .popup #success p {margin: 0 0 20px; line-height: 22px; font-size: 22px; text-align: center;}
     .popup #success .subtitle {margin: 0 0 30px; font-size: 32px;}
     .popup #success table tr:first-child td {vertical-align: bottom;}
-    .popup .min-height {min-height: 400px;}
+    .popup .min-height {/*min-height: 400px;*/}
 
 /* Register Page */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
@@ -360,7 +338,7 @@
   #register.page.mobile .group-checkbox label {text-align: right!important; font-size: 16px!important;}
 
 /* Register3 (Mobile) */
-  #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 30px; /*width: 60%;*/}
+  #register.mobile .ui #success p {font-size: 17px; margin: 0 auto 20px; /*width: 60%;*/}
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 20px; /*margin: 0 0 20px;*/}
 
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
@@ -411,7 +389,7 @@
 /* EditProfile (Mobile) */
   #editprofile.mobile .ui {width: 100%; padding-right: 0; padding-left: 0;}
   #editprofile.mobile .ui .block-top,
-  #editprofile.mobile .ui .avatar-profil {width: 100%;}
+  /*#editprofile.mobile .ui .avatar-profil {width: 100%;}*/
   #editprofile.mobile .ui .avatar-profil img {margin: 0 auto;}
   #editprofile.mobile .ui #edit-account label {visibility: visible; width: 100%; text-align: center;}
   #editprofile.mobile .ui #edit-account .checkbox label {text-align: left;}
@@ -548,6 +526,7 @@
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
+  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -608,7 +587,7 @@
     }
     form .icheckbox_flat {
       background-image: url("../images/UI/icon_checkbox@x2.jpg");
-      background-size: 40px 40px;
+      background-size: 40px 80px;
     }
     .popup .btn-close {
       background-image: url("../images/UI/close@x2.png"); 
@@ -666,6 +645,7 @@
     #register.page #message {left: 0;}
     #register.page .group-checkbox {padding: 0 20px 0 0; width: 97%; left: 0;}
     .search-bar-mobile .container input[type="reset"] {right: 39%;}
+    #message ul {margin-left: 100px;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -695,7 +675,7 @@
     .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
     #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; text-align: right;}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
-    form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 40px 40px;}
+    form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
   }
 
 /* Full Screens ----------- */

@@ -6,9 +6,13 @@
                 <div class="ui tips">
                     <!-- Profile -->
                     <div class="block-top wrap">
-                        <div class="avatar-profil radius-max left">
+
+                        <div class="avatar-profil radius-max {% if is_mobile() and not is_tablet() %}wrap{% else %}left{% endif %}">
                             <img src="{{ showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max">
                         </div>
+
+                        {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
+
                         <div class="group left margin-left-30">
                             <div class="title text-transform-capitalize bold">
                                 <h5>{{ user.username }}</h5>

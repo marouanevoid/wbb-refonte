@@ -1,11 +1,17 @@
-<div id="success" class="text-align-center">
-	<div class="min-height">
-		<div class="padding-top-100">
-			<div class="padding-top-20">
-				<div class="subtitle text-transform-uppercase bold">Congratulations!</div>
+<div id="success">
+	<table class="min-height" width="100%" {% if is_mobile() and not is_tablet() %}height="300"{% endif %}>
+		<tbody>
+			<tr>
+			  <td valign="bottom">
+				<div class="subtitle text-transform-uppercase bold margin-bottom-40">Congratulations!</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td align="center">
 				<p>You are now registered on  World’s Best Bars.</p>
 				<p>Check your mailbox to confirm your subscription.</p>
-			</div>
-		</div>
-	</div>
+			  </td>
+			</tr>
+		</tbody>
+	</table>
 </div><!-- #success -->

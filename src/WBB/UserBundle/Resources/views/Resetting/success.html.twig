@@ -1,6 +1,6 @@
 <div class="min-height">
-	<div class="padding-top-100">
-		<div class="title wrap bold margin-bottom-30 margin-top-80">Reset password</div>
+	<div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-100{% endif %}">
+		<div class="title wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}margin-top-20{% else %}margin-top-80{% endif %}">Reset password</div>
 		<div class="subtitle text-transform-uppercase bold margin-top-50">Congratulations ! You have changed your password</div>
 	</div>
 </div>
