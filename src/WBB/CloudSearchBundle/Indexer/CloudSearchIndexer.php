@@ -119,8 +119,9 @@ class CloudSearchIndexer implements IndexerInterface
                             'slug' => $entity->getSlug()
                 ));
             } else {
-                return $this->router->generate('wbb_cities', array(
-                            'slug' => $entity->getSlug()
+                return $this->router->generate('wbb_cities_city', array(
+                            'slug' => $entity->getSlug(),
+                            'suburb' => null
                 ));
             }
         } elseif ($entity instanceof \WBB\BarBundle\Entity\BestOf) {

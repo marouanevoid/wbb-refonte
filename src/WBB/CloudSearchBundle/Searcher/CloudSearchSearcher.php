@@ -55,16 +55,23 @@ class CloudSearchSearcher
         return $response;
     }
 
-    private function getEntityResults($results, $entity)
+    public function findAll()
     {
-        $response = array();
-        foreach ($results as $result) {
-            if ($result['fields']['entity_type'] == $entity) {
-                $response[] = $result;
-            }
-        }
+        $parameters = array(
+            'q' => '-thisconnotbefoundincloudsearchever',
+            'start' => 0,
+            'size' => 10000,
+            'entity' => null,
+            'city' => null,
+            'style' => null,
+            'mood' => null,
+            'occasion' => null,
+            'cocktails' => null,
+            'district' => null,
+            'favorites' => false
+        );
 
-        return $response;
+        return $this->doSearch($parameters);
     }
 
     public function search(array $parameters)
@@ -82,6 +89,18 @@ class CloudSearchSearcher
 
         $response['hits']['bars'] = $barResponse['hits']['found'];
         $response['hits']['news'] = $newsResponse['hits']['found'];
+
+        return $response;
+    }
+
+    private function getEntityResults($results, $entity)
+    {
+        $response = array();
+        foreach ($results as $result) {
+            if ($result['fields']['entity_type'] == $entity) {
+                $response[] = $result;
+            }
+        }
 
         return $response;
     }
@@ -111,25 +130,6 @@ class CloudSearchSearcher
         }
 
         return $response;
-    }
-
-    public function findAll()
-    {
-        $parameters = array(
-            'q' => '-thisconnotbefoundincloudsearchever',
-            'start' => 0,
-            'size' => 10000,
-            'entity' => null,
-            'city' => null,
-            'style' => null,
-            'mood' => null,
-            'occasion' => null,
-            'cocktails' => null,
-            'district' => null,
-            'favorites' => false
-        );
-
-        return $this->doSearch($parameters);
     }
 
     private function doSearch(array $parameters)
