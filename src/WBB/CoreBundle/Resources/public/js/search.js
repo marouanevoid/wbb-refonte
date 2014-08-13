@@ -98,8 +98,8 @@ meta.SearchPage = function() {
                             htmlT += '    </div>' ;
                             htmlT += '</div>';
                             htmlT += ' <div class="nine columns s-margin-top">';
-                            htmlT += '    <h2 class="s-margin-top"><a href="#">%title</a></h2>';
-                            htmlT +='    <h3 class="xs-margin-top"><a href="#">%city, %country</a></h3>' ; 
+                            htmlT += '    <h2 class="s-margin-top"><a href="' + (getBaseURL() ) + url_link + '">%title</a></h2>';
+                            htmlT +='    <h3 class="xs-margin-top">%city, %country</h3>' ; 
                             htmlT +='    <p class="s-margin-top">';
                             htmlT += '        %description' ;
 
@@ -399,7 +399,7 @@ meta.SearchPage = function() {
                 limit = 3
             }else{
                 if(ismobile){
-                    limit = 2
+                    limit = 6
                 }else{
                     limit = 12;
                 }
@@ -461,7 +461,7 @@ meta.SearchPage = function() {
             //todo: construct neigborhood here then slidedown
             var html = '<li class="h4 radio-container">'+
                             '<label><input type="radio" name="neigborhoods" value="all"/><b></b>All Neigborhoods</label>'+
-                            '<div '+($(window).width()>640?'class="custom-scroll"':'')+'>'+
+                            '<div '+($(window).width()>640 && res.suburbs.length > 7 ?'class="custom-scroll"':'')+'>'+
                                 '<ul class="checkbox-container">';
 
                                 var liSubrb = "";
@@ -621,7 +621,10 @@ meta.SearchPage = function() {
             // on the Mobile if there is 
             // a filter send the serrch to get
             // the result befor set
-            if( $(this).hasClass('mobile-reset') && ! from_applay ){
+            if( ! from_applay ){
+                formatedUrl = "";
+                start = 0;
+                formatedCity = "";
                 that.clearContent();
                 that.goSearch();
             }
@@ -749,6 +752,9 @@ meta.SearchPage = function() {
 
             // hide form on the Mobile
             that.context.$form_filter.find('input[type=reset]').trigger('click', ['from_applay']);
+            // animate the page
+            if ( ismobile )
+                $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
             return false;
         });
 

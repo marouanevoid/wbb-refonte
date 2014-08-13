@@ -26,27 +26,9 @@
     {% endblock %}
 
     {% block body %}
-        {% if is_mobile() and not is_tablet() %}
-            <div class="search-bar-mobile nav">
 
-                <div class="container">
 
-                    <div class="twelve columns s-margin">
-                        <form id="search" action="/">
-                            {# <input type="text" name="q" placeholder="Search"/> #}
-                            <input type="text" name="city" placeholder="Search" {% if app.request.query.get('q') is defined and app.request.query.get('q') %} value="{{app.request.query.get('q')}}" {% endif %} />
-                            <input type="reset" value=" "/>
-                        </form>
-                        <a class="btn-radius border h4 close">Cancel</a>
-                    </div>
-                </div>
-
-                <div class="search-result-proposal"><ul></ul></div>
-
-            </div>
-        {% endif %}
-
-        <div class="container l-padding">
+        <div class="container l-padding {% if is_mobile() and not is_tablet() %}margin-top-20{% endif %}">
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/search.js') }}"></script>
 
             <aside class="three columns filters">
@@ -63,7 +45,6 @@
                             </div>
 
                             <div class="drop-list">
-                            <div class="custom-scroll">
                                 {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
 
                                 <select class="ui-dropdown city-drop-down" name="city" data-class="city">
@@ -78,7 +59,6 @@
                                     <ul></ul>
                                 </div>
                             </div>
-                            </div>
                         </li>
                         {% for tags in tagsByType %}
                             {% if tags.tags|length > 0 %}
@@ -89,13 +69,17 @@
                                     </div>
 
                                     <div class="drop-list">
+                                    {% if not is_mobile() or is_tablet() %}
                                     <div class="custom-scroll">
+                                    {% endif %}
                                         <ul class="checkbox-container">
                                             {% for tag in tags.tags %}
                                                 <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name }}"/><b></b>{{ tag.name }}</label></li>
                                             {% endfor %}
                                         </ul>
+                                    {% if not is_mobile() or is_tablet() %}
                                     </div>
+                                    {% endif %}
                                     </div>
                                 </li>
                             {% endif %}
@@ -174,45 +158,45 @@
             {
                 if ($(this).val() == "grid")
                 {
-                    $('.bars-w-pic-list').fadeOut(200, 'easeInOutCubic', function()
-                    {
-                        $('.bars-w-pic').show();
+                    // $('.bars-w-pic-list').fadeOut(1, 'easeInOutCubic', function()
+                    // {
+                    //     $('.bars-w-pic').show();
 
                         var $elements = $('.bars-w-pic article');
 
-                        $elements.addClass('enable3d').css({opacity: 0, top: '6em', position: 'relative'}).each(function(index) {
+                        $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index) {
 
                             $(this).delay(60 * (index + 1)).velocity({opacity: 1, top: 0}, 600, 'easeInOutCubic');
                         });
-                    });
+                    // });
                 }
                 else
                 {
-                    $('.bars-w-pic').fadeOut(200, 'easeInOutCubic', function()
-                    {
-                        $('.bars-w-pic-list').show();
+                    // $('.bars-w-pic').fadeOut(1, 'easeInOutCubic', function()
+                    // {
+                    //     $('.bars-w-pic-list').show();
 
                         var $elements = $('.bars-w-pic-list article');
 
-                        $elements.addClass('enable3d').css({opacity: 0, top: '6em', position: 'relative'}).each(function(index) {
+                        $elements.css({opacity: 0, top: '6em', position: 'relative'}).each(function(index) {
 
                             $(this).delay(100 * (index + 1)).velocity({opacity: 1, top: 0}, 600, 'easeInOutCubic');
                         });
-                    });
+                    // });
                 }
             });
 
             $('.filter-btn').click(function() {
                 $('.bar-filter-form, .bar-filter').hide();
                 // hide the serach Nav Bar
-                $('.search-bar-mobile').hide();
+                $('.search-bar-mobile.search-area').hide();
                 $('aside.filters').fadeIn();
             });
 
             $('aside.filters input[type=reset]').click(function() {
                 $('.bar-filter-form, .bar-filter').fadeIn();
                 // Show the serach Nav Bar
-                $('.search-bar-mobile').show();
+                $('.search-bar-mobile.search-area').show();
 
                 if ($(window).width() < 640)
                     $('aside.filters').hide();
