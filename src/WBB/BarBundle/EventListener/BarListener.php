@@ -37,10 +37,10 @@ class BarListener
         $maxFSLikes     = $entityManager->getRepository('WBBBarBundle:Bar')->findMaxValueOf('foursquareLikes');
 
         $ranking = (
-            ((double)$bar->getFoursquareCheckIns() / (double)$maxFSCheckIns) * 2 +
-            ((double)$bar->getFacebookCheckIns() / (double)$maxFBCheckIns) * 2 +
-            ((double)$bar->getFoursquareLikes() / (double)$maxFSLikes) * 3 +
-            ((double)$bar->getFacebookLikes() / (double)$maxFBLikes) * 3
+            ((double)$bar->getFoursquareCheckIns() / (double)(($maxFSCheckIns>0)? $maxFSCheckIns : 1)) * 2 +
+            ((double)$bar->getFacebookCheckIns() / (double)(($maxFBCheckIns>0)? $maxFBCheckIns : 1)) * 2 +
+            ((double)$bar->getFoursquareLikes() / (double)(($maxFSLikes>0)? $maxFSLikes : 1)) * 3 +
+            ((double)$bar->getFacebookLikes() / (double)(($maxFBLikes>0)? $maxFBLikes : 1)) * 3
         );
 
         $bar->setRanking((double) $ranking);

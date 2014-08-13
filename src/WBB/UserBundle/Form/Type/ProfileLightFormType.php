@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 use WBB\BarBundle\Entity\Tag;
 
-class ProfileFormType extends BaseType
+class ProfileLightFormType extends BaseType
 {
     private $class;
 
@@ -35,7 +35,7 @@ class ProfileFormType extends BaseType
 
     public function getName()
     {
-        return 'wbb_user_profile';
+        return 'wbb_user_profile_light';
     }
 
     /**
@@ -47,37 +47,6 @@ class ProfileFormType extends BaseType
     protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'choice', array(
-                'expanded' => false,
-                'multiple' => false,
-                'required' => false,
-                'empty_value' => ' ',
-                'choices'  => array(
-                    'F'   =>  'F',
-                    'M'   =>  'M'
-                )
-            ))
-            ->add('firstname',null, array('required' => false))
-            ->add('lastname',null, array('required' => false))
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle', 'required' => false))
-            ->add('birthdate', 'date', array(
-                'years' => range(1900, date('Y'))
-            ))
-            ->add('country', null, array('empty_value' => ' ', 'required' => false))
-            ->add('prefCity1')
-            ->add('prefCity2')
-            ->add('prefCity3')
-            ->add('prefBar1')
-            ->add('prefBar2')
-            ->add('prefBar3')
-            ->add('prefDrinkBrand1')
-            ->add('prefDrinkBrand2')
-            ->add('prefDrinkBrand3')
-            ->add('prefCocktails1')
-            ->add('prefCocktails2')
-            ->add('prefCocktails3')
-            ->add('stayInformed')
-            ->add('stayBrandInformed')
             ->add('avatar', 'sonata_media_type', array(
                 'provider' => 'sonata.media.provider.image',
                 'context'  => 'avatar',

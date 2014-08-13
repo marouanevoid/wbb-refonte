@@ -13,11 +13,15 @@
                         <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
                         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="register_form_full">
                             <div class="text-align-left margin-bottom-10">
+
                                 <div class="group-form margin-top-25">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Pseudo</label>
+                                    <div class="form-input left">
                                     {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
+
                                 <div class="select-two margin-top-10 gender">
                                     <label class="margin-right-20 text-align-right unbold">Gender</label>
                                     <div class="left" style="width: 300px">
@@ -25,31 +29,47 @@
                                     </div>
                                 </div>
                                 <div class="clear"></div>
+                                
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Firstname</label>
+                                    <div class="form-input left">
                                     {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Firstname' } }) }}
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
+                                
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Lastname</label>
+                                    <div class="form-input left">
                                     {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Lastname' } }) }}
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
+
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Email</label>
+                                    <div class="form-input left">
                                     {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Email' } }) }}
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
+
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Password</label>
+                                    <div class="form-input left">
                                     {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Password' } }) }}
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
+
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Confirm Password</label>
+                                    <div class="form-input left">
                                     {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Confirm Password' } }) }}
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
+
                             </div>
 
                             <div class="date-birthday text-align-center ui-dropdown-list-form">
@@ -76,7 +96,9 @@
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20 text-align-right unbold xs-hidden">Cities you like to go</label>
-                                {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Choose a city' } }) }}
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Choose a city' } }) }}
+                                </div>
                                 <div class="clear"></div>
                             </div>
 
@@ -92,7 +114,9 @@
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20 text-align-right unbold xs-hidden">Favorite Bars</label>
-                                {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Choose a bar' } }) }}
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Choose a bar' } }) }}
+                                </div>
                                 <div class="clear"></div>
                             </div>
 
@@ -108,7 +132,9 @@
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20 text-align-right unbold xs-hidden">Drink brands</label>
-                                {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Choose a brand' } }) }}
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Choose a brand' } }) }}
+                                </div>
                                 <div class="clear"></div>
                             </div>
 
@@ -124,7 +150,9 @@
 
                             <div class="group-form margin-top-10">
                                 <label class="margin-right-20 text-align-right unbold xs-hidden">Categories or cocktails</label>
-                                {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Choose a cocktail' } }) }}
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Choose a cocktail' } }) }}
+                                </div>
                                 <div class="clear"></div>
                             </div>
 
@@ -152,12 +180,12 @@
 
                             {{ form_rest(form) }}
                             <div class="clear"></div>
-                            <div class="group-actions margin-top-40 margin-bottom-40 wrap">
+                            <div class="group-actions margin-top-30 margin-bottom-50 wrap">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="CREATE YOUR ACCOUNT">
                             </div>
                         </form>
                         <div class="clear"></div>
-                        <div id="message" class="margin-top-20 wrap" style="display:none;">
+                        <div id="message" class="margin-top-20 margin-bottom-20 wrap" style="display:none;">
                             <div>
                                 <ul>
                                 </ul>

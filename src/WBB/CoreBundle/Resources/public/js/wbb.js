@@ -372,10 +372,7 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="full-cream-up text-align-center"><div class="padding-top-100">' +
-                '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
-                '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
-                '</div></div>';
+        var html = '<div id="success" class="text-align-center"><table class="min-height" width="100%" height="300"><tbody><tr><td valign="bottom"><div class="subtitle text-transform-uppercase bold margin-bottom-40">Congratulations!</div></td></tr><tr><td align="center"><p>You are now registered on  World’s Best Bars.</p><p>Check your mailbox to confirm your subscription.</p></td></tr></tbody></table></div>';
         $('.popin-block').html(html);
         PopIn.resize($('#register'));
         $('#show-popin').click();
@@ -392,13 +389,22 @@ jQuery(document).ready(function($) {
     }
 });
 
+
+// Animate the scroll to focus on PopIn
+function animateToPopIn(){
+    if ( ismobile )
+        $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+}
+
+
+
 // syncronise Bar favorie
 function syncBarFav(cible,status){
     var href = cible.attr('href'),
         currentTitle = cible.parent('article').find('.overlay-link').attr('href');
     // find the other Bar on dom 
     // wich content the same name
-    $('.star').parent('article').find('.overlay-link').each(function(){
+    $('.star').closest('article').find('.overlay-link').each(function(){
         if($(this).attr('href') == currentTitle){
             // This bar is like favoried Bar
             // set the Class active
@@ -557,6 +563,9 @@ $(document).ready(function() {
                     initializeDropdowns();
                     initRegisterLoginForms();
                     $('#show-popin').click();
+
+                    // focus on Popin if is Mobile
+                    animateToPopIn();
                 }
             });
         }

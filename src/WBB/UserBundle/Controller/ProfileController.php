@@ -8,6 +8,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -59,11 +60,18 @@ class ProfileController extends ContainerAware
             return $event->getResponse();
         }
 
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.profile.form.factory');
+        $mobileDetector = $this->container->get('mobile_detect.mobile_detector');
 
-        $form = $formFactory->createForm();
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('wbb_user.profile.form.factory');
+        if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
+            $form = $formFactory->createForm(false, array('Default', 'registration_full'));
+        }else{
+            $form = $formFactory->createForm(true, array('no-validation'));
+        }
+
         $form->setData($user);
+        $errors = array('fields' => array(), 'messages' => array());
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
@@ -85,6 +93,30 @@ class ProfileController extends ContainerAware
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
                 return $response;
+            } else {
+                $formErrors = null;
+                if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
+                }else{
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default'));
+                }
+
+                $fields = array();
+                $messages = array();
+
+                foreach ($formErrors as $formError) {
+                    $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                        $messages[] = 'Please complete all required fields';
+                    } elseif($formError->getMessage() != 'not.blank') {
+                        $messages[] = $formError->getMessage();
+                    }
+                }
+
+                $errors = array(
+                    'fields' => $fields,
+                    'messages' => $messages
+                );
             }
         }
 
@@ -94,9 +126,10 @@ class ProfileController extends ContainerAware
         return $this->container->get('templating')->renderResponse(
             'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
             array(
-                'form' => $form->createView(),
-                'user' => $user,
-                'city' => $city
+                'form'   => $form->createView(),
+                'user'   => $user,
+                'city'   => $city,
+                'errors' => $errors
             )
         );
     }

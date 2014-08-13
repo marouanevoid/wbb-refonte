@@ -25,7 +25,7 @@
                 window.isCity = true;
             {% endif %}
             var DEBUGMODE = "{{app.environment }}";
-            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '/');
+            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '');
 
             // vars for fav actions
         </script>
@@ -146,10 +146,10 @@
                                                     '" '+ $.cookie('light_type') +' has been added to your favorites.</p></td></tr><tr><td align="center">' +
                                                     '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></td></tr></tbody></table>';
                                                 } else {
-                                                    html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.</p>' +
+                                                    html = '<table id="success" class="min-height" width="100%"><tbody><tr><td valign="bottom" style="vertical-align: bottom"><div class="subtitle">CONGRATULATIONS !</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p></td></tr><tr><td align="center">' +
                                                     '<p>The "' + $.cookie('light_name') +
                                                     '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
-                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div>';
+                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></td></tr></tbody></table>';
                                                 }
                                                 $('.popin-block').html(html);
                                                 $('#show-popin').click();
