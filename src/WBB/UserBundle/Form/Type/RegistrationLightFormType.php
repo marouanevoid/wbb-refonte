@@ -34,6 +34,7 @@ class RegistrationLightFormType extends BaseType
                     'invalid_message' => 'fos_user.password.mismatch'
                 ))
                 ->add('birthdate', 'date', array(
+                    'empty_value' => array('year' => 'YYYY', 'month' => 'MM', 'day' => 'DD'),
                     'years' => range(1914, date('Y')),
                     'required' => false
                 ))

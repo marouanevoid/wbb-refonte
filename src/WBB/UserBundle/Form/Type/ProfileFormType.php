@@ -51,19 +51,19 @@ class ProfileFormType extends BaseType
                 'expanded' => false,
                 'multiple' => false,
                 'required' => false,
-                'empty_value' => '',
+                'empty_value' => ' ',
                 'choices'  => array(
                     'F'   =>  'F',
                     'M'   =>  'M'
                 )
             ))
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
+            ->add('firstname',null, array('required' => false))
+            ->add('lastname',null, array('required' => false))
+            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle', 'required' => false))
             ->add('birthdate', 'date', array(
                 'years' => range(1900, date('Y'))
             ))
-            ->add('country', null, array('empty_value' => '', 'required' => false))
+            ->add('country', null, array('empty_value' => ' ', 'required' => false))
             ->add('prefCity1')
             ->add('prefCity2')
             ->add('prefCity3')

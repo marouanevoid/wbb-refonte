@@ -53,7 +53,7 @@ class BarController extends Controller
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
-            return $this->cityHomeAction($session->get('citySlug'), $request);
+            return $this->cityHomeAction($session->get('citySlug'), $request, $resettingForm);
         $session->set('citySlug', "");
 
         $topCities = $this->container->get('city.repository')->findTopCities();
@@ -122,7 +122,7 @@ class BarController extends Controller
         ));
     }
 
-    public function cityHomeAction($slug, Request $request)
+    public function cityHomeAction($slug, Request $request,  $resettingForm = null)
     {
         $this->reGeolocate();
         $session = $this->container->get('session');
@@ -160,6 +160,9 @@ class BarController extends Controller
         $response['topNews']    = $this->container->get('news.repository')->findLatestNews($city);
         $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars($city);
         $response['city']       = $city;
+        if ($resettingForm) {
+            $response['resetting_form'] = $resettingForm;
+        }
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
