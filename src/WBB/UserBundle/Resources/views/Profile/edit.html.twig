@@ -6,7 +6,7 @@
     <div class="full-white">
         <div id="editprofile" class="page {% if is_mobile() and not is_tablet() %}mobile {% endif %}wrap padding-bottom-20">
             <div  class="ui wrap">
-                <div class="margin-top-20">
+                <div class="padding-top-20">
                     <div id="edit-account">
                         <form id="edit_profile_form" action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
                             <div class="block-top wrap">
