@@ -53,10 +53,10 @@ class ShareController extends Controller
         $form = $this->createForm(new ShareFormType(), null, array('id' => $id));
         $form->submit($request);
 
-        if (!$form->isValid()) {
+        if ($form->isValid()) {
             $data = array(
                 'fullName'  => $form["name"]->getData(),
-                'bar'       => $this->get('news.repository')->findOneById($form["id"]->getData()),
+                'news'      => $this->get('news.repository')->findOneById($form["id"]->getData()),
                 'email'     => $form["email"]->getData(),
                 'message'   => $form["content"]->getData()
             );
@@ -67,7 +67,7 @@ class ShareController extends Controller
 
         return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
             'form'  => $form->createView(),
-            'url'   => $this->get('router')->generate('wbb_share_email_bar_send', array('id' => $id))
+            'url'   => $this->get('router')->generate('wbb_share_email_news_send', array('id' => $id))
         ));
     }
 }

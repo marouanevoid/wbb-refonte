@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
-
+{% block bodyTag %}
+<body class="editprofile">
+{% endblock %}
 {% block body %}
     <div class="full-white">
         <div id="editprofile" class="page {% if is_mobile() and not is_tablet() %}mobile {% endif %}wrap padding-bottom-20">
@@ -213,7 +215,7 @@
                             </div>
                             <div class="clear"></div>
                             {% if errors.messages|length > 0 %}
-                                <div id="message" class="margin-top-20 wrap show">
+                                <div id="message" class="margin-top-20 right show">
                                     <div>
                                         <ul>
                                             {% for error in errors.messages %}

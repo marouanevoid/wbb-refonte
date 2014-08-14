@@ -245,7 +245,7 @@ class BarController extends Controller
             $distance['city']         = $this->get('city.repository')->findOneBySlug($city);
         }
 
-        $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
+        $bar = $this->container->get('bar.repository')->findBarBySlug($slug);
         if (!$bar) {
             throw $this->createNotFoundException('Object not found!');
         }
