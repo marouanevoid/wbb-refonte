@@ -516,7 +516,6 @@
   .sub-header .title h3 {font-size: 2em; line-height: 30px;}
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
   .bar-details .gallery .loader {background-size: auto; background-color: #000;}
-  section.bar-filter .bar-w-pic {/*max-height: 213px;*/}
   .ui .sort-by {margin-left: 0;}
   .gender .ui-dropdown-container .ui-dropdown .choice,
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
@@ -558,12 +557,17 @@
 
 /* GLOBALE DESKTOP STYLES */
   @media only screen and (min-width: 768px) {
+    /* Thumbnails Size's */
+      .search section.bar-filter .bar-w-pic {min-height: 210px;}
+
     #register.page #create-account .form-text {width: 300px;}
     #register.page #create-account .form-text-without-label input {width: 245px;}
     #editprofile #edit-account .form-text {width: 245px;}
     #editprofile #edit-account .form-text-without-label input {width: 265px;}
     header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;}
     header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
+    #view-account .filter-profil {width: 590px;}
+    #view-account .filter-profil a.ui-radio {width: 140px;}
   }
 
 /* Tablets (landscape) ----------- */
@@ -579,6 +583,9 @@
     section.bar-filter .bar-w-pic {max-height: 180px;}
     .ui.register .title {width: 45%;}
     .ui .form-text {text-indent: 0;}
+
+    /* Thumbnails Size's */
+      .search section.bar-filter .bar-w-pic {min-height: 175px;}
   }
 
   /* iPad Only */
@@ -612,21 +619,18 @@
       background-image: url("../images/UI/btn_fb-small@x2.jpg"); 
       background-size: 119px 42px;
     }
-
   }
   
-/* Portrait tablet to landscape and desktop */  
-  @media (min-width: 768px) and (max-width: 979px) {
-    #view-account .filter-profil {width: 590px;}
-    #view-account .filter-profil a.ui-radio {width: 140px;}
-  }
+
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
+  /* Thumbnails Size's */
+    .search section.bar-filter .bar-w-pic {min-height: 210px;}
+    
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 20px;}
     #error {position: relative; top: 100px;}
     #message {padding-left: 0;}
-    section.bar-filter .bar-w-pic {max-height: 119px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 44%;}
@@ -653,7 +657,6 @@
     .sub-header .title h3 {font-size: 16px; line-height: 20px; width: 78%; margin: auto;}
     section.bars .bar-w-pic {min-height: 119px;}
     section.bars .bar-w-pic:first-child {min-height: 239px;}
-    section.bar-filter .bar-w-pic {max-height: 210px;}
     .min-height {min-height: 100%;}
     .error .mobile {display: block; visibility: visible;}
     .error .desktop {display: none; visibility: hidden;}
@@ -670,6 +673,9 @@
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
+    /* Thumbnails Size's */
+      .search section.bar-filter .bar-w-pic {min-height: 100px;}
+
     .date-birthday .date-width {width: 118%!important;}
   } 
 
@@ -681,16 +687,21 @@
     .wrap-share.mobile .social-share .share-label {width: 96%;}
     .date-birthday .select-wrap {width: 105px; margin-right: 15px;}
     .ui.register #account .form-text {text-indent: 10px; border: 1px solid red;}
-    .search-bar-mobile .container .form-text {padding-left: 15px!important;}
+    .search-bar-mobile .container .form-text {padding-left: 15x!important;}
+
+    /* Thumbnails Size's */
+      .search section.bar-filter .bar-w-pic {min-height: 100px;}
   }
 
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
+    /* Thumbnails Size's */
+      .search section.bar-filter .bar-w-pic {min-height: 120px;}
+
     #editprofile #edit-account {padding: 0 10px;}
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
     .articles article .img .plus-btn,
     .news-details .ui-slides .ui-slide.transform3d {-webkit-backface-visibility: hidden;}
-    section.bar-filter .bar-w-pic {max-height: 119px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
