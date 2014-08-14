@@ -372,9 +372,6 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="min-height"><div class="text-align-center padding-top-100"><div class="subtitle">CONGRATULATIONS&nbsp;!</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p><p>The "100 Bars" best of has been added to your favorites.</p><p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></div>';
-        $('.popin-block').html(html);
-        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
