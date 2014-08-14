@@ -19,6 +19,8 @@ class AdAdmin extends Admin {
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('position')
+            ->add('countries')
+            ->add('createdAt')
             ->add('beginAt', null, array('editable' => true))
             ->add('endAt', null, array('editable' => true))
         ;
