@@ -221,7 +221,7 @@
   #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
   #message li:only-of-type {margin-top: 20px;}
   .page #message {width: 300px; padding: 0; position: relative; left: 9px;}
-  #editprofile #message {left: 13%;}
+  .profile #message {left: 13%;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   #success {position: static; top: 0;}
@@ -349,7 +349,7 @@
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
   #editprofile .avatar-profil {z-index: 11; position: relative; overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
-  #editprofile .avatar-profil img {height: 99%; width: 99%; position: relative; border-radius: 10em;}
+  #editprofile .avatar-profil img {height: 100%; width: 100%; position: relative; border-radius: 10em;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
   #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
@@ -402,7 +402,7 @@
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
 
   #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
-  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 15px; padding-top: 20px; white-space: pre-line; padding-bottom: 40px;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 15px; padding-top: 15px; white-space: pre-line; padding-bottom: 40px;}
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
@@ -529,7 +529,9 @@
   .ui-dropdown-container .ui-dropdown .choice ul li {/*padding-bottom: 1.2em;*/}
   .search .bar-filter-form .six.columns.h2 a.disabled-search,
   .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {border: none!important;}
-  
+  .ui-radio.collapsed:first-of-type {border-radius: 3em 0 0 3em;}
+  .ui-radio.collapsed:last-of-type {border-radius: 0 3em 3em 0;}
+
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
     .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
@@ -551,6 +553,9 @@
   .mobile section.bar-finder .ui-radio.btn-radius.with-icon.active:hover {color: #ffe4af!important;}
   .mobile .bar-finder .ui-radio.btn-radius.with-icon:hover:after {background-position: -92px -200px;} 
   .mobile .bar-finder .ui-radio.btn-radius.with-icon.active:after {background-position: -52px -240px;}
+  .mobile .search aside.filters form .btn-round.plus:hover:after {background-position: -80px -40px;}
+  .mobile .search aside.filters form .btn-round.minus:hover:after {background-position: 0px -400px;}
+  .mobile .search aside.filters form li .drop-btn .btn-round {background-color: transparent !important;}
 
 /* IE9 */
   .articles article .img .cover .sponsor,
@@ -638,7 +643,7 @@
     .search section.bar-filter .bar-w-pic,
     .profile section.bar-filter .bar-w-pic,
     .bar-details section.bar-filter .bar-w-pic,
-    .search section.bar-filter .bar-w-pic {min-height: 210px;}
+    .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
     
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 20px;}
@@ -688,6 +693,7 @@
     .search .bar-filter-form .six.columns.h2 a.active:hover {background-color: #b3955f!important; color: #faf3e1!important;}
     .search .bar-filter-form .six.columns.h2 a.disabled-search,
     .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {color: #ddd !important; background-color: #99998f !important; border: none!important;}
+    .loader-search-page.mobile {position: absolute; left: 48%; top: 65px;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -703,7 +709,7 @@
     .date-birthday .select-wrap {width: 105px; margin-right: 15px;}
     .ui.register #account .form-text {text-indent: 10px; border: 1px solid red;}
     .search-bar-mobile .container .form-text {padding-left: 15x!important;}
-
+    body {background-color: red;}
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
