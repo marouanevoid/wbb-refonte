@@ -7,34 +7,36 @@
 
 class BarListener
 {
+    private $_em;
+
     public function prePersist(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
-        $entityManager = $args->getEntityManager();
+        $this->_em = $args->getEntityManager();
 
         if ($entity instanceof Bar) {
-            $entity = $this->updateBarRanking($entity, $entityManager);
-            $entity = $this->disableIncompleteBars($entity, $entityManager);
+            $entity = $this->updateBarRanking($entity);
+            $entity = $this->disableIncompleteBars($entity);
         }
 
     }
 
     public function preUpdate(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
-        $entityManager = $args->getEntityManager();
+        $this->_em = $args->getEntityManager();
 
         if ($entity instanceof Bar) {
-            $entity = $this->updateBarRanking($entity, $entityManager);
-            $entity = $this->disableIncompleteBars($entity, $entityManager);
+            $entity = $this->updateBarRanking($entity);
+            $entity = $this->disableIncompleteBars($entity);
         }
 
     }
 
-    private function updateBarRanking(Bar $bar, EntityManager $entityManager)
+    private function updateBarRanking(Bar $bar)
     {
-        $maxFBCheckIns  = $entityManager->getRepository('WBBBarBundle:Bar')->findMaxValueOf('facebookCheckIns');
-        $maxFSCheckIns  = $entityManager->getRepository('WBBBarBundle:Bar')->findMaxValueOf('foursquareCheckIns');
-        $maxFBLikes     = $entityManager->getRepository('WBBBarBundle:Bar')->findMaxValueOf('facebookLikes');
-        $maxFSLikes     = $entityManager->getRepository('WBBBarBundle:Bar')->findMaxValueOf('foursquareLikes');
+        $maxFBCheckIns  = $this->_em->getRepository('WBBBarBundle:Bar')->findMaxValueOf('facebookCheckIns');
+        $maxFSCheckIns  = $this->_em->getRepository('WBBBarBundle:Bar')->findMaxValueOf('foursquareCheckIns');
+        $maxFBLikes     = $this->_em->getRepository('WBBBarBundle:Bar')->findMaxValueOf('facebookLikes');
+        $maxFSLikes     = $this->_em->getRepository('WBBBarBundle:Bar')->findMaxValueOf('foursquareLikes');
 
         $ranking = (
             ((double)$bar->getFoursquareCheckIns() / (double)(($maxFSCheckIns>0)? $maxFSCheckIns : 1)) * 2 +

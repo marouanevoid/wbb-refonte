@@ -673,6 +673,7 @@ class News implements IndexableEntity
             'tags_mood' => array(),
             'tags_occasion' => array(),
             'tags_cocktails' => array(),
+            'tags_special' => array()
         );
         foreach ($this->bars as $bar) {
             $barTags = $bar->getTagsArrays();
@@ -680,6 +681,7 @@ class News implements IndexableEntity
             $tags['tags_mood'] = array_unique(array_merge($tags['tags_mood'], $barTags['tags_mood']));
             $tags['tags_occasion'] = array_unique(array_merge($tags['tags_occasion'], $barTags['tags_occasion']));
             $tags['tags_cocktails'] = array_unique(array_merge($tags['tags_cocktails'], $barTags['tags_cocktails']));
+            $tags['tags_special'] = array_unique(array_merge($tags['tags_special'], $barTags['tags_special']));
         }
 
         return array(
@@ -696,7 +698,7 @@ class News implements IndexableEntity
             'tags_mood' => $tags['tags_mood'],
             'tags_occasion' => $tags['tags_occasion'],
             'tags_cocktails' => $tags['tags_cocktails'],
-            //'tags_special' => '',
+            'tags_special' => $tags['tags_special'],
             'wbb_id' => $this->id
         );
     }

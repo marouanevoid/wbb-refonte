@@ -65,6 +65,7 @@ class SearchController extends Controller
         $mood = $request->query->get('mood', null);
         $occasion = $request->query->get('occasion', null);
         $cocktails = $request->query->get('cocktails', null);
+        $special = $request->query->get('special', null);
         $district = $request->query->get('district', null);
         $suggest = $request->query->get('suggest', false);
 
@@ -85,6 +86,7 @@ class SearchController extends Controller
                 'mood' => $mood,
                 'occasion' => $occasion,
                 'cocktails' => $cocktails,
+                'special' => $special,
                 'district' => $district,
                 'favorites' => true
             ));

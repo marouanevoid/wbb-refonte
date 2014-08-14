@@ -1,4 +1,7 @@
 {% extends '::base.html.twig' %}
+{% block bodyTag %}
+<body class="profile">
+{% endblock %}
 {% block body %}
     <div id="editprofile" class="page full-white {% if is_mobile() and not is_tablet() %} mobile{% endif %}">
         <div class="padding-top-40">
@@ -7,7 +10,7 @@
                     <!-- Profile -->
                     <div class="block-top wrap">
 
-                        <div class="avatar-profil radius-max {% if is_mobile() and not is_tablet() %}wrap margin-bottom-20{% else %}left{% endif %}">
+                        <div class="avatar-profil radius-max {% if is_mobile() and not is_tablet() %}wrap margin-bottom-20{% else %}left margin-left-30{% endif %}">
                             <img src="{{ showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max">
                         </div>
 
