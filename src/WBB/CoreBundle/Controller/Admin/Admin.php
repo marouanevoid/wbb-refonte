@@ -61,4 +61,15 @@ class Admin extends BaseAdmin
     {
         return $this->getSecurityContext()->getToken()->getUser();
     }
+
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+        '_page' => 1,            // display the first page (default = 1)
+        '_sort_order' => 'DESC', // reverse order (default = 'ASC')
+        '_sort_by' => 'id'  // name of the ordered field
+    );
 }

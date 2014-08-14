@@ -354,6 +354,14 @@ a.btn-round.star.loading-active:before, .bestof .btn-round.star.active.loading-a
 }
 
 
+.search header.mobile .search {
+    display: inline;
+}
+body.search .search-bar-mobile{
+    position: fixed;
+    z-index: 0;
+}
+
 #floatingBarsG{
 position:relative;
 width:20px;

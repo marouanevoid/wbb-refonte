@@ -372,7 +372,7 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="text-align-center"><table class="min-height" width="100%" height="300"><tbody><tr><td valign="bottom"><div class="subtitle text-transform-uppercase bold margin-bottom-40">Congratulations!</div></td></tr><tr><td align="center"><p>You are now registered on  World’s Best Bars.</p><p>Check your mailbox to confirm your subscription.</p></td></tr></tbody></table></div>';
+        var html = '<div id="success" class="min-height"><div class="text-align-center padding-top-100"><div class="subtitle">CONGRATULATIONS&nbsp;!</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p><p>The "100 Bars" best of has been added to your favorites.</p><p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></div>';
         $('.popin-block').html(html);
         PopIn.resize($('#register'));
         $('#show-popin').click();
@@ -494,7 +494,7 @@ $(document).ready(function() {
 
                                 var TypeEvent = "removeitem",
                                         cible = "";
-                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length || btn.parents('article').not('.bestof').length ){
+                               /* if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length || btn.parents('article').not('.bestof').length ){
                                     btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
 
@@ -511,14 +511,16 @@ $(document).ready(function() {
                                             btn.parents('article.bestof').remove();
                                         }
                                     }
-                                }
-
+                                }*/
                                 // global var on window
-                                window.cibleDeleted = cible;
+                                //window.cibleDeleted = cible;
                                 // dispatching Event removeitem
+
+                                var clickedItem = {type:  btn.data("type"), id:  btn.data("id")};
+
                                 $.event.trigger({
                                     type: "removeitem",
-                                    cible: cible
+                                    cible: clickedItem
                                 });
                             }
                         } else {

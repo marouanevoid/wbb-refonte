@@ -7,19 +7,21 @@
                     <!-- Profile -->
                     <div class="block-top wrap">
 
-                        <div class="avatar-profil radius-max {% if is_mobile() and not is_tablet() %}wrap{% else %}left{% endif %}">
+                        <div class="avatar-profil radius-max {% if is_mobile() and not is_tablet() %}wrap margin-bottom-20{% else %}left{% endif %}">
                             <img src="{{ showImage(user.avatar, 'av_large') }}" height="145" width="145" class="radius-max">
                         </div>
 
                         {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
 
                         <div class="group left margin-left-30">
-                            <div class="title text-transform-capitalize bold">
+                            
+                            <div class="title text-transform-capitalize bold {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
                                 <h5>{{ user.username }}</h5>
                             </div>
+
                             <div class="subgroup wrap margin-top-10">
                                 {% if city %}
-                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
+                                    <div class="text-transform-capitalize text-align-center margin-top-20">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                             {{ city ~ ',' }}
                                             {% if city.country %}
@@ -28,7 +30,7 @@
                                         </div>
                                     </div>
                                 {% elseif user.prefStartCity or user.country %}
-                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
+                                    <div class="text-transform-capitalize text-align-center margin-top-20">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                             {% if user.prefStartCity %}
                                                 {{ user.prefStartCity ~ ',' }}
@@ -39,31 +41,33 @@
                                         </div>
                                     </div>
                                 {% else %}
-                                    <div class="text-transform-capitalize text-align-center {% if not is_mobile() %}margin-top-20{% endif %}">
+                                    <div class="text-transform-capitalize text-align-center margin-top-20">
                                         <div class="city">
                                             &nbsp;
                                         </div>
                                     </div>
                                 {% endif %}
-                                <div class="btn-editprofile">
+
+                                <div class="btn-editprofile {% if is_mobile() and not is_tablet() %}margin-top-20 margin-bottom-20{% endif %}">
                                     <a href="{{ path('fos_user_profile_edit') }}" class="btn radius-30">Edit Profile</a>
                                 </div>
+
                             </div> <!-- .subgroup.right -->
                         </div> <!-- .group.right -->
                     </div> <!-- .block-top -->
                     <div class="clear"></div>
                     <!-- Filter -->
-                    <div class="filter-profil padding-bottom-20 padding-top-20 wrap">
+                    <div class="filter-profil wrap padding-top-20 {% if is_mobile() and not is_tablet() %}padding-bottom-40 {% else %}padding-bottom-20{% endif %}">
                         <div class="{% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                             <div class="disableClick"></div>
                             {% set favBars = user.favoriteBars|length %}
                             {% set favBestofs = user.favoriteBestOfs|length %}
                             {% set favTips = user.tips|length %}
-                            <input type="radio" name="filter" data-tab="bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"
+                            <input type="radio" name="filter" data-count="{{ favBars }}" data-tab="bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"
                                    value="{% if favBars > 0 %}({{ favBars }}) Bar{% if favBars > 1 %}s{% endif %}{% else %}No Bar{% endif %}" />
-                            <input type="radio" name="filter" data-tab="bestof" class="ui-radio" data-color="brown" data-type="collapsed"
+                            <input type="radio" name="filter" data-count="{{ favBestofs }}" data-tab="bestof" class="ui-radio" data-color="brown" data-type="collapsed"
                                    value="{% if favBestofs > 0 %}({{ favBestofs }}) collection{% if favBestofs > 1 %}s{% endif %}{% else %}No Collection{% endif %}" />
-                            <input type="radio" name="filter" data-tab="tips" class="ui-radio" data-color="brown" data-type="collapsed"
+                            <input type="radio" name="filter" data-count="{{ favTips }}" data-tab="tips" class="ui-radio" data-color="brown" data-type="collapsed"
                                    value="{% if favTips > 0 %}({{ favTips }}) tip{% if favTips > 0 %}s{% endif %}{% else %}No Tip{% endif %}"/>
                             <div class="clear"></div>
                         </div>

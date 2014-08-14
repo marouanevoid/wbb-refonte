@@ -52,8 +52,8 @@ wbb.LoadProfile = function() {
                 })
             };
 
-            if ( $(_this).data('tab') == lastactivatedTab ) 
-                return false;
+//            if ( $(_this).data('tab') == lastactivatedTab )
+//                return false;
             lastactivatedTab = $(_this).data('tab');
             if($(_this).data('tab') == "bars"){
                 that.context.content = 'bars';
@@ -104,7 +104,7 @@ wbb.LoadProfile = function() {
             }
         });
 
-        //load bars on radio buttons change
+        //Changes display
         $('input[name=view-type]').change(function()
         {
             that.context.display = $(this).val();
@@ -122,7 +122,7 @@ wbb.LoadProfile = function() {
 
         });
 
-        //load bars on radio buttons change
+        //Changes filter criteria
         $('#criteria').change(function(){
             that.context.filter = $(this).val();
             if(that.context.content === 'bars'){
@@ -175,22 +175,27 @@ wbb.LoadProfile = function() {
 
             var filterprof = $('.filter-profil');
 
-            e.cible = window.cibleDeleted;
+            //e.cible = window.cibleDeleted;
 
-            if(e.cible =='bars'){
+            if(e.cible.type =='bar'){
                 descrimentFunction(filterprof.find('.Bars'));
-
+                var itemToDelete = $('.list-bars').find("a[data-id= " + e.cible.id + "]").parents(".bar-w-pic").parent();
+                if (itemToDelete.parents(".bar-w-pic-list").length)
+                    itemToDelete.parents(".bar-w-pic-list").remove();
+                else
+                    itemToDelete.remove();
                 that.context.content = 'bars';
                 that._request(that.context.$barsTarget, {limit : 1 , offset : that.config.bars.offset-1 , filter : that.context.filter , display : that.context.display , $more : that.config.bars.$more});
             }
-            if(e.cible =='bestof'){
+            if(e.cible.type =='best of'){
                 descrimentFunction(filterprof.find('.collections'));
+
+                $('.list-bestof').find("a[data-id= " + e.cible.id + "]").parents(".bestof-item-container").remove();
                 that.context.content = 'bestofs';
                 that._request(that.context.$bestofsTarget, {limit : 1 , offset : that.config.bestofs.offset-1 , filter : that.context.filter , display : that.context.display , $more : that.config.bestofs.$more});
             }
-            if(e.cible == 'tips'){
+            if(e.cible.type == 'tip'){
                 descrimentFunction(filterprof.find('.tips'));
-
                 that.context.content = 'tips';
                 that._request(that.context.$tipsTarget, {limit : 1 , offset : that.config.tips.offset-1 , filter : 'date' , display : 'grid' , $more : that.config.tips.$more});
             }
@@ -220,7 +225,7 @@ wbb.LoadProfile = function() {
                 // dispatching Event removeitem
                 $.event.trigger({
                     type: "removeitem",
-                    cible: 'tips'
+                    cible: {type: 'tip', id: null}
                 });
             });
 

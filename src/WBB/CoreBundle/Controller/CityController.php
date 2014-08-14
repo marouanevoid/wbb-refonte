@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CityController extends Controller
 {
-
-
     public function citiesAction()
     {
         return $this->render('WBBCoreBundle:City:cities.html.twig');
@@ -153,10 +151,7 @@ class CityController extends Controller
             if ($suburbSlug)
                 $suburb = $this->container->get('suburb.repository')->findOneBySlug($suburbSlug);
 
-        
             $bars = $this->container->get('bar.repository')->findAllEnabled($city, $suburb);
-            
-
 
             $suburbs = $this->container->get('suburb.repository')->findByCityWithBars($city);
             $result = array('bars' => array(), 'suburbs' => array());
@@ -164,7 +159,6 @@ class CityController extends Controller
             foreach($bars as $bar)
             {
                 $address = $city->getName();
-
                 $suburbBar = $bar->getSuburb();
                 if (!empty($suburbBar))
                   $address = $suburbBar->getName().", ".$city->getName();
@@ -219,26 +213,22 @@ class CityController extends Controller
     private function arrayTagsToString($tags)
     {
         $result = "";
-
         foreach($tags as $tag)
         {
             if($tag->getTag())
                 $result .= $tag->getTag()->getName().', ';
         }
-
         return substr($result, 0, -2);
     }
 
     private function barFirstImage($bar, Request $request)
     {
         $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
-
         $medias = $bar->getMedias();
         foreach($medias as $media)
         {
             return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'default_slider_large');
         }
-
         return null;
     }
 }

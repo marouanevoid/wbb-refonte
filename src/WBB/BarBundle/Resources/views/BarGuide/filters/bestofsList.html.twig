@@ -14,7 +14,8 @@
                         <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
                     {% endif %}
 
-                    <img class="scale-with-grid" data-src="{% filter showMedia %}{% path b.image, 'bestof_small' %}{% endfilter %}" alt="{{ b.name }}" width="570" height="428"/>
+                    {#<img class="scale-with-grid" data-src="{% filter showMedia %}{% path b.image, 'bestof_small' %}{% endfilter %}" alt="{{ b.name }}" width="570" height="428"/>#}
+                    <img class="scale-with-grid" data-src="{{ showImage(b.image, 'bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
 
                 </div>
             </div>
