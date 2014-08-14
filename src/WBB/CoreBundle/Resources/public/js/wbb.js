@@ -131,6 +131,13 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
+                    $('#fos_user_registration_form_country').find('option').each(function() {
+                        if ($(this).text().trim() === country) {
+                            $(this).attr('selected', 'selected').change();
+                        }
+                    });
                     $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
@@ -140,7 +147,13 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
-
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
+                    $('#fos_user_registration_form_country').find('option').each(function() {
+                        if ($(this).text().trim() === country) {
+                            $(this).attr('selected', 'selected').change();
+                        }
+                    });
                     $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
                     $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
                     $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
