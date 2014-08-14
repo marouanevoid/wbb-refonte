@@ -8,17 +8,22 @@
                     <div id="edit-account">
                         <form id="edit_profile_form" action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
                             <div class="block-top wrap">
-                                <div class="avatar-profil {% if is_mobile() and not is_tablet() %}wrap{% else %}left{% endif %} radius-max" >
+                                
+                                <div class="avatar-profil {% if is_mobile() and not is_tablet() %}wrap margin-bottom-20{% else %}left{% endif %} radius-max" >
                                     <img src="{{  showImage(user.avatar, 'av_large') }}" height="145" width="145" id="avatar-img">
                                 </div>
+
                                 {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
+
                                 <div class="group left">
-                                    <div class="title text-transform-capitalize bold">
+                                    
+                                    <div class="title text-transform-capitalize bold {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
                                         <h5>{{ user.username }}</h5>
                                     </div>
+
                                     <div class="subgroup margin-top-10 {% if is_mobile() and not is_tablet() %}margin-bottom-10{% else %}margin-bottom-40{% endif %} wrap">
                                         {% if city %}
-                                            <div class="text-transform-capitalize text-align-center">
+                                            <div class="text-transform-capitalize text-align-center margin-top-20">
                                                 <div class="city">
                                                     <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                                     {% if city %}
@@ -30,7 +35,7 @@
                                                 </div>
                                             </div>
                                         {% elseif user.prefStartCity or user.country %}
-                                            <div class="text-transform-capitalize text-align-center">
+                                            <div class="text-transform-capitalize text-align-center margin-top-20">
                                                 <div class="city">
                                                     <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                                     {% if user.prefStartCity %}
@@ -42,7 +47,7 @@
                                                 </div>
                                             </div>
                                         {% else %}
-                                            <div class="text-transform-capitalize text-align-center">
+                                            <div class="text-transform-capitalize text-align-center margin-top-20">
                                                 <div class="city">
                                                     &nbsp;
                                                 </div>
@@ -219,40 +224,6 @@
                                 </div>
                             {% endif %}
                         </form>
-                        <div class="clear"></div>
-                        {% if not form.vars.valid %}
-                            <script type="text/javascript">
-                                $(function(){
-                                    $("#message").show();
-                                });
-                            </script>
-                            <div id="message" class="margin-bottom-20 right">
-                                <div>
-                                    {{ form_errors(form) }}
-                                    {% if not is_mobile() %}
-                                        {{ form_errors(form.title) }}
-                                        {{ form_errors(form.firstname) }}
-                                        {{ form_errors(form.lastname) }}
-                                        {{ form_errors(form.email) }}
-                                        {{ form_errors(form.birthdate) }}
-                                        {{ form_errors(form.country) }}
-                                        {{ form_errors(form.prefCity1) }}
-                                        {{ form_errors(form.prefCity2) }}
-                                        {{ form_errors(form.prefCity3) }}
-                                        {{ form_errors(form.prefBar1) }}
-                                        {{ form_errors(form.prefBar2) }}
-                                        {{ form_errors(form.prefBar3) }}
-                                        {{ form_errors(form.prefDrinkBrand1) }}
-                                        {{ form_errors(form.prefDrinkBrand2) }}
-                                        {{ form_errors(form.prefDrinkBrand3) }}
-                                        {{ form_errors(form.prefCocktails1) }}
-                                        {{ form_errors(form.prefCocktails2) }}
-                                        {{ form_errors(form.prefCocktails3) }}
-                                    {% endif %}
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        {% endif %}
                     </div>
                 </div> <!-- .margin-top-20 -->
                 <div class="clear"></div>

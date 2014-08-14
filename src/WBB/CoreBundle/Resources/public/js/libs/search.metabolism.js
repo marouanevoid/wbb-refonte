@@ -198,7 +198,7 @@ meta.Search = function(config){
         $('.bar-finder .search-mode .btn-round.close').addClass('loading');
         $.ajax({
             type: 'GET',
-            url: getBaseURL() + URL_MODE + '/search?q='+q+'&limit=20&start=0',
+            url: getBaseURL() + URL_MODE + '/search?limit=20&start=0',
             async: true,
             contentType: "application/json",
             dataType: 'json',
