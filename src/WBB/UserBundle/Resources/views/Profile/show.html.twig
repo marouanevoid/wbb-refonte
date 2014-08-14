@@ -63,11 +63,11 @@
                             {% set favBars = user.favoriteBars|length %}
                             {% set favBestofs = user.favoriteBestOfs|length %}
                             {% set favTips = user.tips|length %}
-                            <input type="radio" name="filter" data-tab="bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"
+                            <input type="radio" name="filter" data-count="{{ favBars }}" data-tab="bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"
                                    value="{% if favBars > 0 %}({{ favBars }}) Bar{% if favBars > 1 %}s{% endif %}{% else %}No Bar{% endif %}" />
-                            <input type="radio" name="filter" data-tab="bestof" class="ui-radio" data-color="brown" data-type="collapsed"
+                            <input type="radio" name="filter" data-count="{{ favBestofs }}" data-tab="bestof" class="ui-radio" data-color="brown" data-type="collapsed"
                                    value="{% if favBestofs > 0 %}({{ favBestofs }}) collection{% if favBestofs > 1 %}s{% endif %}{% else %}No Collection{% endif %}" />
-                            <input type="radio" name="filter" data-tab="tips" class="ui-radio" data-color="brown" data-type="collapsed"
+                            <input type="radio" name="filter" data-count="{{ favTips }}" data-tab="tips" class="ui-radio" data-color="brown" data-type="collapsed"
                                    value="{% if favTips > 0 %}({{ favTips }}) tip{% if favTips > 0 %}s{% endif %}{% else %}No Tip{% endif %}"/>
                             <div class="clear"></div>
                         </div>

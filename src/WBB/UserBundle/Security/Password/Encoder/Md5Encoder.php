@@ -8,6 +8,8 @@ class Md5Encoder extends BasePasswordEncoder
     public function encodePassword($raw, $salt)
     {
         return md5($raw);
+//        $md5 = md5($raw);
+//        return hash("sha512", $salt.$md5.$salt );
     }
 
     public function isPasswordValid($encoded, $raw, $salt)

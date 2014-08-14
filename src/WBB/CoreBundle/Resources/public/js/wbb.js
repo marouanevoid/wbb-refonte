@@ -488,7 +488,7 @@ $(document).ready(function() {
 
                                 var TypeEvent = "removeitem",
                                         cible = "";
-                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length || btn.parents('article').not('.bestof').length ){
+                               /* if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length || btn.parents('article').not('.bestof').length ){
                                     btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
 
@@ -505,14 +505,16 @@ $(document).ready(function() {
                                             btn.parents('article.bestof').remove();
                                         }
                                     }
-                                }
-
+                                }*/
                                 // global var on window
-                                window.cibleDeleted = cible;
+                                //window.cibleDeleted = cible;
                                 // dispatching Event removeitem
+
+                                var clickedItem = {type:  btn.data("type"), id:  btn.data("id")};
+
                                 $.event.trigger({
                                     type: "removeitem",
-                                    cible: cible
+                                    cible: clickedItem
                                 });
                             }
                         } else {
