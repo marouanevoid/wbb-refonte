@@ -102,7 +102,7 @@ class AdAdmin extends Admin {
                     'choices'  => Ad::getAdsPositionArray()
                 ))
                 ->add('tag')
-                ->add('link', null, array('required' => true))
+                ->add('link', null, array('required' => false))
                 ->add('image', 'sonata_type_model_list', array(
                         'required' => false
                     ), array(
