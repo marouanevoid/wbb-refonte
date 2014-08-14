@@ -7,6 +7,11 @@
   input[type="text"], input[type="password"], input[type="email"] {
     color: #818a8c;
   }
+  input[type="text"]::-webkit-input-placeholder, 
+  input[type="password"]::-webkit-input-placeholder, 
+  input[type="email"]::-webkit-input-placeholder{
+    color: #818a8c;
+  }
 /* Globale Libs */
     form .icheckbox_flat {display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
     form .icheckbox_flat {background-position: 0 0;}
@@ -47,7 +52,7 @@
   .select-two .ui-dropdown-container {width: 100%!important;}
 
   /* Popup */
-  .popup .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
+  .popup .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 14px; right: 14px;}
   .popup .btn-close:hover {background-image: url("../images/UI/close_rollover.png");}
   .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
@@ -171,7 +176,7 @@
   .ui .title {font-size: 28px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
-  .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px; padding: 0;*/ max-width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
+  .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px;*/ padding: 0; max-width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
@@ -340,7 +345,8 @@
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 26px; width: 100%;}
-  .form-input {width: 270px;}
+  .form-input {/*width: 270px;*/}
+
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
   #editprofile .ui {top: 0; width: 530px; background-color: #fff;}
   #editprofile .ui .form-text {background-color: #fff;}
@@ -573,7 +579,7 @@
       .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
 
     #register.page #create-account .form-text {width: 300px;}
-    #register.page #create-account .form-text-without-label input {width: 245px;}
+    #register.page #create-account .form-text-without-label input {width: 300px;}
     #editprofile #edit-account .form-text {width: 245px;}
     #editprofile #edit-account .form-text-without-label input {width: 265px;}
     header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;}
@@ -639,6 +645,10 @@
 
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
+  .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
+    padding: 0 0 0 10px;
+  }
+
   /* Thumbnails Size's */
     .search section.bar-filter .bar-w-pic,
     .profile section.bar-filter .bar-w-pic,
@@ -717,6 +727,14 @@
       .bar-guides section.bar-filter .bar-w-pic {min-height: 100px;}
   }
 
+  @media only screen and (max-width : 480px) {
+    /* Thumbnails Size's */
+      .search section.bar-filter .bar-w-pic,
+      .profile section.bar-filter .bar-w-pic,
+      .bar-details section.bar-filter .bar-w-pic,
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 120px!important;}
+  }
+
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
     /* Thumbnails Size's */
@@ -732,7 +750,7 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
-    .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
+    .date-birthday .select-wrap {width: 97px; margin-right: 7px;}
     #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; /*text-align: right;*/}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
     form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
