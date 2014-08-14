@@ -595,7 +595,7 @@ wbb.CitiesPage = function () {
         // });
 
         // Trigger change on select
-        $('select').change();
+        //$('select').change();
 
 
     };

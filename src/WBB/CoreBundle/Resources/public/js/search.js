@@ -131,6 +131,18 @@ meta.SearchPage = function() {
         var length = str.length;
         return str.substr(0,leng) + (length > leng ? ( strconcat ? strconcat : '...'  ) : '');
     }
+
+    /*
+    Check the active Tab
+    **/
+    that.checkActiveTab = function(){
+        var cindex = 0;
+        if(currentFilter == 'News'){
+            cindex = 1;
+        }
+        $('.screen-compteur').find('a').removeClass('active');
+        $($('.screen-compteur').find('a')[cindex]).addClass('active');
+    }
     /*
     * Generate the Html list by response
     **/
@@ -235,7 +247,7 @@ meta.SearchPage = function() {
                         // make tags url
                         var stringtag = "";
                         for(var i=0,ln = curor.fields.tags_style.length ; i<ln ; i++ ){
-                           stringtag = "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + curor.fields.tags_style[i] + "'>"+ curor.fields.tags_style[i]  + "</a>, " 
+                           stringtag += "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + escape(curor.fields.tags_style[i]) + "'>"+ curor.fields.tags_style[i]  + "</a> , " 
                         }
                         chtml = chtml.replace('%tags' , stringtag.substr(0, stringtag.length-2) );
                         chtml2 = chtml2.replace('%tags' , stringtag.substr(0, stringtag.length-2)  );
@@ -314,8 +326,8 @@ meta.SearchPage = function() {
             $('.details-barlist .dist-target').empty();
             $('.details-barlist .dist-target').html('');
             $('.bars-w-pic-list .dist-target').html('');
-            $('.bars-w-pic-list .dist-target').append("<p>There are no results matching your request.</p>");
-            $('.details-barlist .dist-target').append("<p>There are no results matching your request.</p>");
+            $('.bars-w-pic-list .dist-target').append("<p class='text-align-center no-result'>There are no results matching your request.</p>");
+            $('.details-barlist .dist-target').append("<p class='text-align-center no-result'>There are no results matching your request.</p>");
 
             if(callbackHandler)
                 callbackHandler();   
@@ -411,8 +423,6 @@ meta.SearchPage = function() {
             limit = 12;
         }
 
-        console.log('formated url :::: ' + formatedUrl);
-
         lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
                             formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) +
                             (formatedCity != '' ? formatedCity : '');
@@ -461,13 +471,13 @@ meta.SearchPage = function() {
         $.get(Routing.generate('wbb_city_suburbs' , {citySlug : slug}), function(res){
             //todo: construct neigborhood here then slidedown
             var html = '<li class="h4 radio-container">'+
-                            '<label><input type="radio" name="neigborhoods" value="all"/><b></b>All Neigborhoods</label>'+
-                            '<div '+($(window).width()>640 && res.suburbs.length > 7 ?'class="custom-scroll"':'')+'>'+
+                            '<label><input type="checkbox" name="neigborhoods" value="all"/><b></b>All neighborhood</label>'+
+                            '<div '+($(window).width()>640 && res.suburbs.length > 7 ?'class="custom-scroll"':'class="without-scroll"')+'>'+
                                 '<ul class="checkbox-container">';
 
                                 var liSubrb = "";
                                 $.each(res.suburbs , function(index , cursor){
-                                    liSubrb+= '<li><label><input type="checkbox" name="district[]" value="' + cursor.slug+ '"/><b></b>' + cursor.name+ '</label></li>';
+                                    liSubrb+= '<li><label><input type="checkbox" class="neigborhood-checkbox" name="district[]" value="' + escape(cursor.name) + '"/><b></b>' + cursor.name+ '</label></li>';
                                 });
 
                                 html+=liSubrb;
@@ -537,12 +547,10 @@ meta.SearchPage = function() {
     /*
     * generate the URL on checkbox filters Selected 
     */
-    
-    that._filterResults = function()
-    {
+
+    that.generateUrlFromCheckBox = function(){
         var data = that.context.$form_filter.serializeArray(),
-            checkedBox = that.context.$form_filter.find('input[type=checkbox]:checked');
-        //todo: filter result using data
+            checkedBox = that.context.$form_filter.find('input[type=checkbox]:checked').not('input[name=neigborhoods]');
 
         var arrayFilter  = [];
         checkedBox.each(function(){
@@ -565,6 +573,14 @@ meta.SearchPage = function() {
 
         // delete the@ on the end of string url
         formatedUrl = formatedUrl.substr(0,formatedUrl.length-1);
+
+        console.log('formated url ::' + formatedUrl);
+    }
+    
+
+    that._filterResults = function()
+    {
+        that.generateUrlFromCheckBox();
         // Send The Request To Ajax
         compteurBars = 0;
         compteurNews = 0;
@@ -579,12 +595,15 @@ meta.SearchPage = function() {
 
     that._setupEvents = function()
     {
-        that.context.$form_filter.find('.drop-btn a').click(function()
+        that.context.$form_filter.find('.drop-btn a').click(function(e, groupeCheckBoxOpened)
         {
             if( $(this).hasClass('plus') )
             {
                 $(this).addClass('minus').removeClass('plus').parent().next('.drop-list').slideDown(that.config.speed);
                 that.context.$form_filter.find('.reset input[type="reset"]').show();
+                // if there is handler after open
+                if(groupeCheckBoxOpened)
+                    groupeCheckBoxOpened();
             }
             else
             {
@@ -619,38 +638,42 @@ meta.SearchPage = function() {
 
         that.context.$form_filter.find('input[type=reset]').click(function(e,from_applay)
         {
+            e.preventDefault();
             // on the Mobile if there is 
             // a filter send the serrch to get
             // the result befor set
             if( ! from_applay ){
-                formatedUrl = "";
+                // focus active on current Tab (bar/article)
+                that.getCurrentTabActive();
+                // formatedUrl = "";
                 start = 0;
                 formatedCity = "";
                 that.clearContent();
                 that.goSearch();
+
             }
 
 
             $(this).hide();
             // Empty the url format
-            formatedUrl = "";
+            if(!from_applay || (from_applay && from_applay != 'from_constracter'))
+                formatedUrl = "";
             start = 0;
             formatedCity = "";
-            that.context.$form_filter.find('.drop-btn a.minus').click();
+            // that.context.$form_filter.find('.drop-btn a.minus').click();
 
-            // hide the select
-            $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
-            $('.city-drop-down').val('');
-            setTimeout(function()
-            {
-                that.context.$form_filter.find('.neigborhood > ul').empty();
-                that.context.$form_filter.find('.neigborhood').hide();
+            // // hide the select
+            // $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+            // $('.city-drop-down').val('');
+            // setTimeout(function()
+            // {
+            //     that.context.$form_filter.find('.neigborhood > ul').empty();
+            //     that.context.$form_filter.find('.neigborhood').hide();
 
-            }, that.config.speed);
+            // }, that.config.speed);
 
-            // Reset the current Query
-            // currentQuery = "*";
-            // that.goSearch();
+            return false;
+
         });
 
 
@@ -752,7 +775,15 @@ meta.SearchPage = function() {
             that.goSearch();
 
             // hide form on the Mobile
-            that.context.$form_filter.find('input[type=reset]').trigger('click', ['from_applay']);
+            $('.bar-filter-form, .bar-filter').fadeIn(function(){
+                if ( ismobile )
+                    $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+            });
+                // Show the serach Nav Bar
+                $('.search-bar-mobile.search-area').show();
+            if ($(window).width() < 640)
+                $('aside.filters').hide();
+            //that.context.$form_filter.find('input[type=reset]').trigger('click', ['from_applay']);
             // animate the page
             if ( ismobile )
                 $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
@@ -769,20 +800,6 @@ meta.SearchPage = function() {
             return false;
         });
 
-        // // click on filter btn
-
-        // $('.search-mobile-filter-btn').on('click' , function(){
-        //     that.ToggleshowNavSearchMobile(false);
-        // });
-
-        // add Event on Click on Close
-        // $('.mobile-reset').on('click' , function(e,fromcibling){
-        //     if( ! fromcibling ){
-        //         that.clearContent();
-        //         that.goSearch();
-        //     }
-        // });
-
     };
 
     /*
@@ -796,7 +813,29 @@ meta.SearchPage = function() {
                 that._filterResults();
         }
         //$('.checkbox-container').find('label').off('click',handler).on('click' , handler);
-        that.context.$form_filter.find('input[type=checkbox]').off('change').on('change' , handler);
+        that.context.$form_filter.find('input[type=checkbox]').not('input[name=neigborhoods]').off('change').on('change' , handler);
+
+        // event of nieborhood
+        $('input[name=neigborhoods]').off('change').on('change' , function(){
+            if( $(this).is(':checked') ){
+                $('input.neigborhood-checkbox').prop('checked', true);
+                $('input.neigborhood-checkbox').change();
+            }else{
+                $('input.neigborhood-checkbox').prop('checked', false);
+                $('input.neigborhood-checkbox').change();
+            }
+            
+        });
+
+        $('input.neigborhood-checkbox').change(function(){
+            var checkedlength = $('input.neigborhood-checkbox:checked').length,
+                totalSelected = $('input.neigborhood-checkbox').length;
+            if(totalSelected == checkedlength){
+                $('input[name=neigborhoods]').prop('checked', true);
+            }else{
+                $('input[name=neigborhoods]').prop('checked', false);
+            }
+        });
 
     }
 
@@ -838,6 +877,44 @@ meta.SearchPage = function() {
         });
     };
 
+    /*
+    * Init the Query String 
+    To start search with the convient Query
+    */
+
+    that.initSearchQueryMode = function(){
+        // check if the checkbox is defined
+        // Then send the request
+        // search by query if there is query
+        var searchByQuery = function(){
+            if( queryestQ && queryestQ != "undefined" ){
+                currentQuery = (queryestQ == '' ? '*' : queryestQ ) ;
+            }else{
+                currentQuery = '*';
+            }
+        };
+        var groupeCheckBoxOpened = function(){
+            that.generateUrlFromCheckBox();
+            if(formatedUrl != ""){
+                // there is query tag go search
+                searchByQuery();
+                that.goSearch();
+                searchedByQuery = true;
+            }
+        }
+       
+
+        setTimeout(function(){
+             var checkedTagLength = that.context.$form_filter.find('input[type=checkbox]:checked').not('input[name=neigborhoods]');
+             if( checkedTagLength.length ){
+                // Open the parent Accordien
+                $(checkedTagLength[0]).closest('li.grouped-fields-search').find('.drop-btn a').trigger('click' , [groupeCheckBoxOpened]);
+             }else{
+                searchByQuery();
+                that.goSearch();
+             }
+        },100); 
+    }
     /**
      *
      */
@@ -855,20 +932,9 @@ meta.SearchPage = function() {
         // check if tab already actived
         that.getCurrentTabActive();
 
-        // if the query is existed on the url then start search with given query
-            // if the Tag is exist then get bar by Tag
-            if(queryestTag && queryestTag != "undefined")
-            {
-                that.goSearch('tag=' + queryestTag);
-            }else{
-            if( queryestQ && queryestQ != "undefined" ){
-                that.goSearch('q=' + (queryestQ == '' ? '*' : queryestQ ));
-                currentQuery = (queryestQ == '' ? '*' : queryestQ ) ;
-            }
-        }
 
+        that.initSearchQueryMode();
 
-        
 
         // add the callps class
         $('.screen-compteur .ui-radio').addClass('collapsed');
@@ -881,17 +947,7 @@ meta.SearchPage = function() {
 
         // dispatch click on the city select 
         that.context.$form_filter.find('select[name=city]')[0].selectedIndex = 0;
-        that.context.$form_filter.find('input[type=reset]').click();
-
-        // // setup default value of select city
-        // $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
-        // $('.city-drop-down').val('');
-
-        // that.context.$form_filter.find('.neigborhood > ul').empty();
-        // that.context.$form_filter.find('.neigborhood').hide();
-
-        // uncheck all CheakBox
-        that.context.$form_filter.find('input[type=checkbox]').prop('checked', false);
+        that.context.$form_filter.find('input[type=reset]').trigger('click', ['from_constracter']);
 
     };
 
