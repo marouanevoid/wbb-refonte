@@ -2,6 +2,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use WBB\BarBundle\Entity\Ad;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -18,6 +19,8 @@ class AdAdmin extends Admin {
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('position')
+            ->add('countries')
+            ->add('createdAt')
             ->add('beginAt', null, array('editable' => true))
             ->add('endAt', null, array('editable' => true))
         ;
@@ -37,7 +40,7 @@ class AdAdmin extends Admin {
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -53,7 +56,7 @@ class AdAdmin extends Admin {
             ->add('updatedAfter', 'doctrine_orm_callback',
             array(
                 'label' => 'Updated After',
-                'callback' => function($queryBuilder, $alias, $field, $value) {
+                'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                         if (!$value['value']) {
                             return;
                         }
@@ -95,13 +98,13 @@ class AdAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->with('General')
-                ->add('name')
+                ->add('name', null, array('required' => true))
                 ->add('position', 'choice', array(
-                    'required' => false,
+                    'required' => true,
                     'choices'  => Ad::getAdsPositionArray()
                 ))
                 ->add('tag')
-                ->add('link')
+                ->add('link', null, array('required' => false))
                 ->add('image', 'sonata_type_model_list', array(
                         'required' => false
                     ), array(

@@ -10,14 +10,39 @@ class CloudSearchSearcher
 
     private $cloudSearchClient;
     private $container;
+    private $suggestFields = array(
+        "'name^50'",
+        "'title^50'",
+        "'bestofs'",
+        "'bars'",
+        "'slug'",
+        "'address'",
+        "'cities'",
+        "'city'",
+        "'country'",
+        "'description'",
+        "'district'",
+        "'districts'",
+        "'quote'",
+        "'quote_author'",
+        "'seo_description'",
+        "'tags_cocktails'",
+        "'tags_food'",
+        "'tags_mood'",
+        "'tags_occasion'",
+        "'tags_special'",
+        "'tags_style'",
+        "'text'",
+        "'website'"
+    );
 
     public static function getCSTagsNames()
     {
         return array(
-            Tag::WBB_TAG_TYPE_BEST_COCKTAILS => 'cocktails',
             Tag::WBB_TAG_TYPE_ENERGY_LEVEL => 'mood',
             Tag::WBB_TAG_TYPE_WITH_WHO => 'occasion',
-            Tag::WBB_TAG_TYPE_THEME => 'style'
+            Tag::WBB_TAG_TYPE_THEME => 'style',
+            Tag::WBB_TAG_TYPE_SPECIAL_FEATURES => 'special'
         );
     }
 
@@ -39,7 +64,7 @@ class CloudSearchSearcher
         $q = "{$parameters['q']}* {$parameters['q']}";
 
         $query->set('q', $q);
-        $query->set('q.options', "{defaultOperator: 'or', fields: ['name^50','title^50','description']}");
+        $query->set('q.options', "{defaultOperator: 'or', fields: [" . implode(',', $this->suggestFields) . "]}");
         $query->set('size', 10000);
 
         $response = $request->send()->json();
@@ -67,6 +92,7 @@ class CloudSearchSearcher
             'mood' => null,
             'occasion' => null,
             'cocktails' => null,
+            'special' => null,
             'district' => null,
             'favorites' => false
         );
@@ -152,7 +178,8 @@ class CloudSearchSearcher
             'style',
             'mood',
             'cocktails',
-            'occasion'
+            'occasion',
+            'special'
         );
 
         foreach ($tagsTypes as $tagType) {

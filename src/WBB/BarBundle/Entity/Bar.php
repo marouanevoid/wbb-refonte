@@ -1565,7 +1565,7 @@ class Bar implements IndexableEntity
             'tags_occasion' => $tags['tags_occasion'],
             'tags_cocktails' => $tags['tags_cocktails'],
             //'tags_food' => '',
-            //'tags_special' => '',
+            'tags_special' => $tags['tags_special'],
             'wbb_id' => $this->id
         );
     }
@@ -1577,6 +1577,7 @@ class Bar implements IndexableEntity
             'tags_mood' => array(),
             'tags_occasion' => array(),
             'tags_cocktails' => array(),
+            'tags_special' => array()
         );
 
         foreach ($this->tags as $barTag) {
@@ -1586,6 +1587,8 @@ class Bar implements IndexableEntity
                     $tags['tags_cocktails'][] = $tag->getName();
                 } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_THEME) {
                     $tags['tags_style'][] = $tag->getName();
+                } elseif ($tag->getType() == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES) {
+                    $tags['tags_special'][] = $tag->getName();
                 }
             }
         }

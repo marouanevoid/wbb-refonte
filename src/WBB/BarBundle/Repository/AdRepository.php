@@ -23,7 +23,7 @@ class AdRepository extends EntityRepository
             ->where($qb->expr()->eq($this->getAlias().'.position', $qb->expr()->literal($position)))
             ->andWhere($qb->expr()->gte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.beginAt'))
             ->andWhere($qb->expr()->lte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.endAt'))
-            ->orderBy($this->getAlias().'.createdAt', 'DESC')
+            ->orderBy($this->getAlias().'.id', 'DESC')
             ->setMaxResults(1);
         ;
 
@@ -33,9 +33,11 @@ class AdRepository extends EntityRepository
                 ->leftJoin($this->getAlias().'.countries', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $country->getId()))
             ;
-        }else{
+        }
+        else{
             $qb
                 ->leftJoin($this->getAlias().'.countries', 'c')
+                ->groupBy($this->getAlias())
                 ->having($qb->expr()->eq($qb->expr()->count('c.id'), 0));
         }
 

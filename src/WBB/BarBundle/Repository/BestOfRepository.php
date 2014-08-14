@@ -2,6 +2,7 @@
 
 namespace WBB\BarBundle\Repository;
 
+use WBB\BarBundle\Entity\Bar;
 use WBB\CoreBundle\Repository\EntityRepository;
 use WBB\BarBundle\Entity\BestOf;
 
@@ -225,12 +226,13 @@ class BestOfRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBarRelatedBestofs($bar, $onTop = true, $limit = 5)
+    public function findBarRelatedBestofs(Bar $bar, $onTop = true, $limit = 5)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', c')
+            ->leftJoin($this->getAlias().'.city', 'c')
             ->innerJoin($this->getAlias().'.bars', 'bb')
             ->innerJoin('bb.bar', 'b')
             ->orderBy($this->getAlias().'.createdAt', 'DESC')

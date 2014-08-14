@@ -248,7 +248,7 @@ wbb.LoadProfile = function() {
                     // SetUp events of tips
                     that.setpEventAfterAjax();
                 }
-                if(msg.nbResults < config.limit)
+                if(msg.nbResults < config.limit || msg.difference == 0)
                     config.$more.hide();
 
                 $target.find('img[data-src]').each(function()
