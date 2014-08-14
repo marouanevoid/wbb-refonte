@@ -28,7 +28,9 @@ class BarAdmin extends Admin
             ->addIdentifier('name')
             ->add('city')
             ->add('suburb')
-            ->add('website')
+            ->add('website', 'string', array(
+                'template' => 'WBBBarBundle:Admin:Bar\list_bar_website_url.html.twig'
+            ))
             ->add('createdAt')
             ->add('updatedAt')
             ->add('onTop', null, array('editable' => true))
