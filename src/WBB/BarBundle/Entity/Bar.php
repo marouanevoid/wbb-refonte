@@ -323,28 +323,28 @@ class Bar implements IndexableEntity
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bars", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="bars")
      */
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="bars", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="bars")
      */
     private $suburb;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarMedia", mappedBy="bar", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarMedia", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $medias;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="barsLevel", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="barsLevel")
      */
     private $energyLevel;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="barOccasions", cascade={"persist", "detach"}, fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="barOccasions", cascade={"persist", "detach"})
      * @ORM\JoinTable(name="wbb_bar_occasion",
      *      joinColumns={@ORM\JoinColumn(name="bar_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="occasion_id", referencedColumnName="id")}
@@ -353,7 +353,7 @@ class Bar implements IndexableEntity
     private $toGoWith;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"persist", "remove"}, orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="bar", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
@@ -365,7 +365,7 @@ class Bar implements IndexableEntity
     private $bestofs;
 
     /**
-     * @ORM\OneToMany(targetEntity="BarOpening", mappedBy="bar", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="BarOpening", mappedBy="bar", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"openingDay" = "ASC"})
      */
     private $openings;
