@@ -30,11 +30,11 @@ class ShareMailer extends BaseTwigSwiftMailer
     public function sendShareNews($data)
     {
         $context = array(
-            'subject'   => "Check ". $data['bar']->getName() ." in ". $data['bar']->getCity() ." via www.worldsbestbars.com",
-            'gender'    => $data['gender'],
+            'subject'   => "Check this news ". $data['news']->getTitle() ." on www.worldsbestbars.com",
             'fullName'  => $data['fullName'],
-            'bar'       => $data['bar'],
-            'email'     => $data['email']
+            'news'       => $data['news'],
+            'email'     => $data['email'],
+            'message'   => $data['message']
         );
 
         $this->sendMessage(
