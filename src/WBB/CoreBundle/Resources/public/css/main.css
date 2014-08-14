@@ -647,9 +647,10 @@
 
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
-  .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
-    padding: 0 0 0 10px;
-  }
+    body {min-height: 100%;}
+    .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
+      padding: 0 0 0 10px;
+    }
 
   /* Thumbnails Size's */
     .search section.bar-filter .bar-w-pic,
@@ -729,7 +730,7 @@
       .bar-guides section.bar-filter .bar-w-pic {min-height: 100px;}
   }
 
-  @media only screen and (max-width : 48  0px) {
+  @media only screen and (max-width : 480px) {
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
