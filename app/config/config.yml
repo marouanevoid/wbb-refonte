@@ -172,6 +172,7 @@ sonata_media:
                 slider_large :  { width: 640 , height: 480, quality: 100 }
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
+                bar_square:     { width: 290 , height: 214, quality: 100 }
 
         simple_image:
             download:

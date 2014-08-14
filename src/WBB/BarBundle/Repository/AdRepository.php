@@ -3,6 +3,7 @@
 namespace WBB\BarBundle\Repository;
 
 use WBB\BarBundle\Entity\Ad;
+use WBB\CoreBundle\Entity\Country;
 use WBB\CoreBundle\Repository\EntityRepository;
 
 /**
@@ -13,7 +14,7 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class AdRepository extends EntityRepository
 {
-    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300X250, $country = null)
+    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300X250, Country $country = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -28,6 +29,7 @@ class AdRepository extends EntityRepository
 
         if($country){
             $qb
+                ->addSelect('c')
                 ->leftJoin($this->getAlias().'.countries', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $country->getId()))
             ;

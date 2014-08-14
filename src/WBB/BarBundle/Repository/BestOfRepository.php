@@ -102,7 +102,9 @@ class BestOfRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', c, m')
+            ->leftJoin($this->getAlias().'.city', 'c')
+            ->leftJoin($this->getAlias().'.image', 'm')
             ->where($qb->expr()->eq(1, 1))
             ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
