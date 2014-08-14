@@ -23,7 +23,7 @@ class DeleteCommand extends ContainerAwareCommand
 
         $results = $searcher->findAll();
         foreach ($results['hits']['hit'] as $result) {
-            $indexer->deleteById($result['id'], $input->getOption('verbose', false));
+            $indexer->deleteById($result['id']);
         }
 
         $output->writeln('Done.');

@@ -8,12 +8,14 @@ class CloudSearchIndexer implements IndexerInterface
 {
 
     private $container;
+    private $logger;
     private $router;
     private $cloudSearchClient;
 
     public function __construct($container, $parameters)
     {
         $this->container = $container;
+        $this->logger = $this->container->get('logger');
         $this->router = $container->get('router');
         $this->cloudSearchClient = CloudSearchDomainClient::factory(array(
                     'base_url' => 'http://doc-' . $parameters[0] . '-' . $parameters[1] . '.' . $parameters[2] . '.cloudsearch.amazonaws.com/2013-01-01',
@@ -24,8 +26,10 @@ class CloudSearchIndexer implements IndexerInterface
 
     public function index(IndexableEntity $entity)
     {
+        $this->logger = $this->container->get('logger');
         if ($entity instanceof \WBB\CoreBundle\Entity\City) {
             if (!$entity->getOnTopCity() && $entity->getBars()->count() == 0) {
+                $this->logger->info('[CloudSearch][Indexer] : City not on top and does not have bars : ' . $entity->getName());
                 return;
             }
         }
@@ -46,6 +50,7 @@ class CloudSearchIndexer implements IndexerInterface
             $medias = $entity->getMedias();
             foreach ($medias as $media) {
                 if ($media->getPosition() == 0) {
+                    $this->logger->info('[CloudSearch][Indexer] : Image found for a News entity : ' . $entity->getTitle());
                     $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_slider_large');
                 }
             }
@@ -53,28 +58,29 @@ class CloudSearchIndexer implements IndexerInterface
             $medias = $entity->getMedias();
             foreach ($medias as $media) {
                 if ($media->getPosition() == 0) {
+                    $this->logger->info('[CloudSearch][Indexer] : Image found for a Bar entity : ' . $entity->getName());
                     $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_big');
                 }
             }
         }
 
+        $this->logger->info('[CloudSearch][Indexer] : Trying to index the entity : ' . $body[0]['id']);
+
         $request->setBody(json_encode($body));
         $request->send()->json();
     }
 
-    public function deleteById($id, $verbose = false)
+    public function deleteById($id)
     {
         $request = $this->cloudSearchClient->post('documents/batch');
         $request->setHeader('content-type', 'application/json');
-
-        if ($verbose) {
-            echo "Deleting $id\n";
-        }
 
         $body = array(array(
                 'type' => 'delete',
                 'id' => $id
         ));
+
+        $this->logger->info('[CloudSearch][Indexer] : Trying to deleteById the entity : ' . $id);
 
         $request->setBody(json_encode($body));
         $request->send()->json();
@@ -90,6 +96,8 @@ class CloudSearchIndexer implements IndexerInterface
                 'type' => 'delete',
                 'id' => $id
         ));
+
+        $this->logger->info('[CloudSearch][Indexer] : Trying to delete the entity : ' . $id);
 
         $request->setBody(json_encode($body));
         $request->send()->json();
