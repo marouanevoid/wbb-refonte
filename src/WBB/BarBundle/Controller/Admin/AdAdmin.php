@@ -96,13 +96,13 @@ class AdAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->with('General')
-                ->add('name')
+                ->add('name', null, array('required' => true))
                 ->add('position', 'choice', array(
-                    'required' => false,
+                    'required' => true,
                     'choices'  => Ad::getAdsPositionArray()
                 ))
                 ->add('tag')
-                ->add('link')
+                ->add('link', null, array('required' => true))
                 ->add('image', 'sonata_type_model_list', array(
                         'required' => false
                     ), array(
