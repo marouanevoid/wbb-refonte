@@ -39,66 +39,58 @@
 <div class="full-cream l-padding-bottom">
     <!-- SUBHEADER -->
     <div class="container">
-            <section class="sub-header">
-                {% if not is_mobile() or is_tablet() %}
-                <table>
-                    <tr>
-                        <td>
-                             {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
-                        </td>
+        <section class="sub-header">
+            {% if not is_mobile() or is_tablet() %}
+            <table>
+                <tr>
+                    <td>
+                         {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
+                    </td>
 
-                        <td class="title">
-                            {% if city is defined %}
-                                <h1>Popular Bars in {{ city.name }}</h1>
-                            {% else %}
-                                <h1>Discover the World’s Best Bars</h1>
-                            {% endif %}
-                        </td>
+                    <td class="title">
+                        {% if city is defined %}
+                            <h1>Popular Bars in {{ city.name }}</h1>
+                        {% else %}
+                            <h1>Discover the World’s Best Bars</h1>
+                        {% endif %}
+                    </td>
 
-                        <td></td>
-                    </tr>
-                </table>
+                    <td></td>
+                </tr>
+            </table>
+            {% else %}
+                {% if city is defined %}
+                    <h1>Popular Bars in {{ city.name }}</h1>
                 {% else %}
-                    {% if city is defined %}
-                        <h1>Popular Bars in {{ city.name }}</h1>
-                    {% else %}
-                        <h1>Discover the World’s Best Bars</h1>
-                    {% endif %}
+                    <h1>Discover the World’s Best Bars</h1>
                 {% endif %}
-            </section>
+            {% endif %}
+        </section>
     </div>
-
     <!-- BARS -->
     <div class="container full">
-
         <section class="bars">
             {% if is_mobile() and not is_tablet() %}
             <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
             {% else %}
             <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
             {% endif %}
-
             {% for b in topBars %}
                 <div class="ui-slide loading">
                     {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
                 </div>
             {% endfor %}
-
             </div>
         </section>
-
     </div>
-
     {% if city is not defined %}
     <!-- CITIES -->
     <div class="container">
-
         <section class="cities">
             <div class="twelve columns align-center l-margin-top m-margin-bottom">
                 <h1>Discover Bars from Top Cities</h1>
                 <h3 class="s-margin-top">Select your city</h3>
             </div>
-
             <div class="twelve columns">
                 {% if is_mobile() and not is_tablet() %}
                     <div class="ui-slider type-cities has_sizer arrows dots" data-size="8x3" data-display="3" style="display:none;">
@@ -122,7 +114,6 @@
                 </div>
             </div>
         </section>
-
     </div>
     {% endif %}
 
