@@ -60,7 +60,9 @@
 
                                     <div class="drop-list">
                                     {% if not is_mobile() or is_tablet() %}
-                                    <div class="custom-scroll margin-top-20">
+                    
+                                    <div class="{% if tags.tags|length >= 7 %}custom-scroll{% else %} without-scroll {% endif %} margin-top-20">
+
                                     {% endif %}
                                         <ul class="checkbox-container">
                                             {% for tag in tags.tags %}
@@ -101,8 +103,8 @@
                 {% endif %}
 
                 <div class="six columns h2 screen-compteur">
-                    <input type="radio" name="filter" value="(0) Bar" data-type='Bar' checked="checked" class="ui-radio collapsed" data-color="brown" data-type="collapsed"/>
-                    <input type="radio" name="filter" value="(0) News" data-type='News' class="ui-radio" data-color="brown collapsed" data-type="collapsed"/>
+                    <input type="radio" name="filter" value="(0) Bar" data-type='Bar' checked="checked" class="ui-radio collapsed radio-from-for-search" data-color="brown" data-type="collapsed"/>
+                    <input type="radio" name="filter" value="(0) News" data-type='News' class="ui-radio radio-from-for-search" data-color="brown collapsed" data-type="collapsed"/>
                 </div>
 
                 <div class="six columns sort-by h3">

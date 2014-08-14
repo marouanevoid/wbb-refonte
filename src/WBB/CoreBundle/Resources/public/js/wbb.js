@@ -226,9 +226,6 @@ function initRegisterLoginForms() {
                             case 'birthdate':
                                 $('#register-form .date-birthday .ui-dropdown').addClass('error');
                                 break;
-                            case 'birthday':
-                                $('#register-form .date-birthday .ui-dropdown').addClass('error');
-                                break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
                                 $(idPrefix + fields[i] + '_second').addClass('error');
@@ -354,9 +351,6 @@ jQuery(document).ready(function($) {
                             case 'birthdate':
                                 $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
-                            case 'birthday':
-                                $('.date-birthday .ui-dropdown').addClass('error');
-                                break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
                                 $(idPrefix + fields[i] + '_second').addClass('error');
@@ -388,6 +382,9 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
+        var html = '<div id="success" class="min-height"><div class="text-align-center padding-top-100"><div class="subtitle">CONGRATULATIONS&nbsp;!</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p><p>The "100 Bars" best of has been added to your favorites.</p><p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></div>';
+        $('.popin-block').html(html);
+        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
@@ -405,8 +402,8 @@ jQuery(document).ready(function($) {
 
 // Animate the scroll to focus on PopIn
 function animateToPopIn(){
-    if ( ismobile )
-        $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+    // if ( ismobile )
+    $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
 }
 
 

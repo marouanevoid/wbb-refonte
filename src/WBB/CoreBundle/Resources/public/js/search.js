@@ -173,6 +173,25 @@ meta.SearchPage = function() {
                     }
 
                 cible.html(str.replace(strl , number));
+                // if(nbbar <= 0){
+                //     ccibleBar.find('span').text('NO BAR');
+                // }else{
+                //     if(nbbar == 1){
+                //         ccibleBar.find('span').text('(1) BAR');
+                //     }else{
+                //         ccibleBar.find('span').text('('+ nbbar +') BARS');
+                //     }
+                // }
+
+                // if(nbnews <= 0){
+                //     ccibleNew.find('span').text('NO NEWS');
+                // }else{
+                //     if(nbnews == 1){
+                //         ccibleNew.find('span').text('(1) NEWS');
+                //     }else{
+                //         ccibleNew.find('span').text('('+ nbnews +') NEWS');
+                //     }
+                // }
             }
 
 
