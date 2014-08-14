@@ -186,7 +186,7 @@
                     <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
                     {% if is_mobile() and not is_tablet() %}
                         {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~"[City Name] thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ currentPath| bitly  %}
-                        <li class="left"><a href="sms:;body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
+                        <li class="left"><a href="sms:0;body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                     {% else %}
                         <li class="left">
                             <a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">
