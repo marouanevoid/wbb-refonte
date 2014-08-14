@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 {% block title %}{{ news.title }} | World Best Bars{% endblock %}
 {% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set bitlyURL = currentPath| bitly %}
 
 {% block meta %}
     <meta name="description" content="{{ news.seoDescription|slice(0, 150) }}" />
@@ -10,12 +11,12 @@
     <meta name="twitter:title" content="{{ news.title }} | World Best Bars">
     <meta name="twitter:description" content="{{ news.seoDescription|slice(0, 150) }}">
     <meta name="twitter:creator" content="@wbb">
-    <meta property="twitter:url" content="{{ currentPath| bitly }}" />
+    <meta property="twitter:url" content="{{ bitlyURL }}" />
 
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ news.title }} | World Best Bars" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ currentPath| bitly }}" />
+    <meta property="og:url" content="{{ bitlyURL }}" />
     <meta property="og:description" content="{{ news.seoDescription|slice(0, 200) }}" />
     <meta property="og:site_name" content="World Best Bars" />
     <meta property="fb:admins" content="149071961796732" />
@@ -185,7 +186,8 @@
                     <li class="left"><a href="#0" class="fb-share">Post</a></li>
                     <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
                     {% if is_mobile() and not is_tablet() %}
-                        {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~"[City Name] thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ currentPath| bitly  %}
+                        {#{%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~"[City Name] thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL  %}#}
+                        {%  set smsBody = "test"  %}
                         <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                     {% else %}
                         <li class="left">
