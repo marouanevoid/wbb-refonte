@@ -1231,10 +1231,10 @@ class User extends BaseUser
     {
         if ($this->plainPassword) {
             if (strlen($this->plainPassword) < 6) {
-                $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+                $context->addViolationAt('plainPassword', 'Password is too short (minimum is 6 characters) and needs at least one number');
             } else {
                 if (!ctype_alnum($this->plainPassword)) {
-                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+                    $context->addViolationAt('plainPassword', 'Password is too short (minimum is 6 characters) and needs at least one number');
                 }
             }
         }
