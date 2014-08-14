@@ -525,7 +525,8 @@
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
   .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
   article.bestof img.scale-with-grid {display: inline;}
-
+  .bar-w-pic .txt .tags a {color: #faf3e1;}
+  
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
     .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
@@ -558,7 +559,10 @@
 /* GLOBALE DESKTOP STYLES */
   @media only screen and (min-width: 768px) {
     /* Thumbnails Size's */
-      .search section.bar-filter .bar-w-pic {min-height: 210px;}
+      .search section.bar-filter .bar-w-pic,
+      .profile section.bar-filter .bar-w-pic,
+      .bar-details section.bar-filter .bar-w-pic,
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
 
     #register.page #create-account .form-text {width: 300px;}
     #register.page #create-account .form-text-without-label input {width: 245px;}
@@ -585,7 +589,10 @@
     .ui .form-text {text-indent: 0;}
 
     /* Thumbnails Size's */
-      .search section.bar-filter .bar-w-pic {min-height: 175px;}
+      .search section.bar-filter .bar-w-pic,
+      .profile section.bar-filter .bar-w-pic,
+      .bar-details section.bar-filter .bar-w-pic,
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 175px;}
   }
 
   /* iPad Only */
@@ -625,6 +632,9 @@
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
   /* Thumbnails Size's */
+    .search section.bar-filter .bar-w-pic,
+    .profile section.bar-filter .bar-w-pic,
+    .bar-details section.bar-filter .bar-w-pic,
     .search section.bar-filter .bar-w-pic {min-height: 210px;}
     
   /* Globales ID's */
@@ -673,9 +683,6 @@
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
-    /* Thumbnails Size's */
-      .search section.bar-filter .bar-w-pic {min-height: 100px;}
-
     .date-birthday .date-width {width: 118%!important;}
   } 
 
@@ -690,13 +697,19 @@
     .search-bar-mobile .container .form-text {padding-left: 15x!important;}
 
     /* Thumbnails Size's */
-      .search section.bar-filter .bar-w-pic {min-height: 100px;}
+      .search section.bar-filter .bar-w-pic,
+      .profile section.bar-filter .bar-w-pic,
+      .bar-details section.bar-filter .bar-w-pic,
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 100px;}
   }
 
 /* Smartphones (portrait) ----------- */
   @media only screen and (max-width : 320px) {
     /* Thumbnails Size's */
-      .search section.bar-filter .bar-w-pic {min-height: 120px;}
+      .search section.bar-filter .bar-w-pic,
+      .profile section.bar-filter .bar-w-pic,
+      .bar-details section.bar-filter .bar-w-pic,
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 120px;}
 
     #editprofile #edit-account {padding: 0 10px;}
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
@@ -712,6 +725,13 @@
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
   }
+
+@media screen and (max-width: 320px) and (orientation:portrait) {
+  body {
+    background: url("../images/turn@2x.jpg") no-repeat center;
+    background-size: cover;
+  }
+}
 
 /* Full Screens ----------- */
   @media only screen and (min-width : 1280px) {
