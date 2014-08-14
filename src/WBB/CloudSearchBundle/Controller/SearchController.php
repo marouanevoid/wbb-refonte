@@ -57,6 +57,7 @@ class SearchController extends Controller
     private function getSearchResults(Request $request, $entity = 'Bar')
     {
         $q = $request->query->get('q', null);
+        $tag = $request->query->get('tag', null);
         $size = $request->query->get('limit', 12);
         $start = $request->query->get('start', 0);
         $city = $request->query->get('city', null);
@@ -75,6 +76,7 @@ class SearchController extends Controller
         } else {
             $results = $this->get('cloudsearch.searcher')->search(array(
                 'q' => $q,
+                'tag' => $tag,
                 'start' => $start,
                 'size' => $size,
                 'entity' => $entity,
