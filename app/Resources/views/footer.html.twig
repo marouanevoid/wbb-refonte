@@ -40,14 +40,14 @@
             <div class="twelve columns">
                 <div class="left vcenter">
                     <nav class="h4">
-                        <a href="{{ path('wbb_search_all_bars') }}">All bars</a>
                         <a href="">About</a>
                         <a href="">Terms & conditions</a>
                         <a href="">Privacy Policy</a>
                         <a href="">Cookies</a>
                         <a href="mailto:editor@worldsbestbars.com">Submit a bar</a>
-                        {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a>{% endif %}
+                        {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a><br />{% endif %}
                         <a href="">Responsible Drinking</a>
+                        <a href="{{ path('wbb_search_all_bars') }}">All bars</a>
                     </nav>
                     <div class="copy h4">
                         &copy; 2014 World's Best Bars

@@ -23,3 +23,33 @@ $(document).on('click', '.twitter-share',function(e){
     e.preventDefault();
     window.open('http://twitter.com/share?text='+descriptionTW + '&url='+url + '&via='+siteTW  , 'Share', 'toolbar=0,status=0,width=626,height=436');
 });
+
+$(document).ready(function(){
+    $("#share").hover(function() {
+        $(".wrap-share").fadeIn("slow");
+        if ($(this).hasClass("popup")) {
+            $(".mask").fadeIn("slow");
+        }
+    });
+
+    $(".wrap-share").hover(function() {
+        $(".wrap-share").fadeIn("slow");
+        if ($(this).hasClass("popup")) {
+            $(".mask").fadeIn("slow");
+        }
+    }, function() {
+        $(".wrap-share").fadeOut("slow");
+        if ($(this).hasClass("popup")) {
+            $(".mask").fadeOut("slow");
+        }
+    });
+    $("#close-pop").click(function(){
+        $("#share-pop").fadeOut("slow");
+        $(".mask").fadeOut("slow");
+    })
+    $('#smsWindow').click(function() {
+        $(this).target = "_blank";
+        window.open($(this).prop('href'));
+        return false;
+    });
+})

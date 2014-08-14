@@ -6,6 +6,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
@@ -68,7 +69,7 @@ class SemsoftBarAdmin extends Admin
                         'required' => false,
                         'property' => 'name',
                         'empty_value' => 'Please choose a mood',
-                        'query_builder' => function ($er) {
+                        'query_builder' => function (EntityRepository $er) {
                                 return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
                             }
                     )

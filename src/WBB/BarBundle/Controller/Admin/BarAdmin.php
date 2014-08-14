@@ -6,6 +6,7 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
@@ -13,6 +14,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Doctrine\ORM\EntityRepository;
 
 class BarAdmin extends Admin
 {
@@ -26,7 +28,9 @@ class BarAdmin extends Admin
             ->addIdentifier('name')
             ->add('city')
             ->add('suburb')
-            ->add('website')
+            ->add('website', 'string', array(
+                'template' => 'WBBBarBundle:Admin:Bar\list_bar_website_url.html.twig'
+            ))
             ->add('createdAt')
             ->add('updatedAt')
             ->add('onTop', null, array('editable' => true))
@@ -64,7 +68,7 @@ class BarAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -80,7 +84,7 @@ class BarAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -230,7 +234,7 @@ class BarAdmin extends Admin
                         'required' => true,
                         'property' => 'name',
                         'empty_value' => 'Please choose a mood',
-                        'query_builder' => function ($er) {
+                        'query_builder' => function (EntityRepository $er) {
                                 return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
                             }
                     )
@@ -240,7 +244,7 @@ class BarAdmin extends Admin
                         'required' => false,
                         'multiple' => true,
                         'by_reference' => false,
-                        'query_builder' => function ($er) {
+                        'query_builder' => function (EntityRepository $er) {
                                 return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
                             }
                     )

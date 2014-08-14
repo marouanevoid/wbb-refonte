@@ -3,21 +3,44 @@
 {% block subject %}{{ subject|raw }}{% endblock %}
 {% block title %}{{ subject|raw }}{% endblock %}
 {% block body_content %}
-    <tr style="font-family: Verdana, Arial;">
+    <tr>
         <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
             <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
-                <tr style="font-family: Verdana, Arial;">
+                <tr>
                     <td align="center" style="font-family: Verdana, Arial;">
                         <p style="margin-bottom: 35px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
-                            Hello {{ fullName }},
+                            Hi {{ fullName }}!,
                         </p>
+
                         <p style="margin-bottom: 35px; line-height: 24px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
-                            Your password has been changed, here is your new credentials: <br />
-                            Email: {{ email }} <br />
-                            Password: {{ message }}
+                            I just read this on World’s Best Bars: {{ news.title }} - the ultimate resource for the best bars in the world
                         </p>
-                        <p style="margin-bottom: 35px; line-height: 24px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
-                            Best regards
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr><!-- [ DETAIL BAR ] -->
+    <tr>
+        <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
+            <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
+                <tr>
+                    <td width="308" style="font-family: Verdana, Arial; vertical-align: top;" valign="top">
+                        <a hef="#URL" style="font-family: Verdana, Arial;">
+                            {% if news.medias|length>0 %}
+                                {% for m in news.medias|slice(0,1) %}
+                                    <img class="scale-with-grid" data-src="{{ app.request.schemeAndHttpHost}}{{ showImage(m.media, 'slider_large') }}"  alt="{{ news.title }}" width="285" height="214"/>
+                                {% endfor %}
+                            {% else %}
+                                <img class="scale-with-grid" data-src="{{ app.request.schemeAndHttpHost}}{{ showImage(null, 'slider_large') }}" alt="{{ news.title }}" width="285" height="214" alt=""/>
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td>
+                        <div class="name" style="font-size: 19px; font-family: Verdana, Arial; color: #b3955f; text-transform: uppercase;">
+                            {{ news.title }}
+                        </div>
+                        <p style="color: #818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">
+                            {{ news.seoDescription|raw }}
                         </p>
                     </td>
                 </tr>
