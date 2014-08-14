@@ -57,7 +57,7 @@
   .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
-    .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 100%; height: auto; min-height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
     .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
@@ -183,6 +183,7 @@
   .popup .ui a {font-size: 16px; text-decoration: underline;}
   .popup .ui a:hover,
   .popup .ui .btn {text-decoration: none;}
+  body.error {background-color: #333333;}
   
   /* Error */
     .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
@@ -206,6 +207,7 @@
   .ui.wrap {width: 100%; height: 100%;}
   .ui.register .title {width: 60%;}
   .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 45px 0 50px;}
+  .ui.register #account a {color: #818a8c;}
   .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center; text-indent: 0;}
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
@@ -325,7 +327,7 @@
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
-  #register.page.mobile #create-account .form-text {max-width: 100%; margin: 0 0 10px;}
+  #register.page.mobile #create-account .form-text {width: 98%; margin: 0 0 10px;}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -341,6 +343,7 @@
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
   #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
+  #register.page.mobile .select-two {margin-bottom: 20px; overflow: hidden;}
 
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
@@ -707,6 +710,7 @@
     .search .bar-filter-form .six.columns.h2 a.disabled-search,
     .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {color: #ddd !important; background-color: #99998f !important; border: none!important;}
     .loader-search-page.mobile {position: absolute; left: 48%; top: 65px;}
+    .search-bar-mobile {height: 200%!important;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
