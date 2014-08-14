@@ -24,6 +24,11 @@ class CloudSearchIndexer implements IndexerInterface
 
     public function index(IndexableEntity $entity)
     {
+        if ($entity instanceof \WBB\CoreBundle\Entity\City) {
+            if (!$entity->getOnTopCity() && $entity->getBars()->count() == 0) {
+                return;
+            }
+        }
         $request = $this->cloudSearchClient->post('documents/batch');
         $request->setHeader('content-type', 'application/json');
 
@@ -119,8 +124,9 @@ class CloudSearchIndexer implements IndexerInterface
                             'slug' => $entity->getSlug()
                 ));
             } else {
-                return $this->router->generate('wbb_cities', array(
-                            'slug' => $entity->getSlug()
+                return $this->router->generate('wbb_cities_city', array(
+                            'slug' => $entity->getSlug(),
+                            'suburb' => null
                 ));
             }
         } elseif ($entity instanceof \WBB\BarBundle\Entity\BestOf) {

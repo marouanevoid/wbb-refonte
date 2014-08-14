@@ -235,7 +235,7 @@
     .popup #success p {margin: 0 0 20px; line-height: 22px; font-size: 20px; text-align: center;} 
     .popup #success .subtitle {margin: 0 0 30px; font-size: 32px;}
     .popup #success table tr:first-child td {vertical-align: bottom;}
-    .popup .min-height {/*min-height: 400px;*/}
+    .popup .min-height {min-height: 400px;}
 
 /* Register Page */
   #register.page {width: 1160px; border-bottom: 1px solid #decdad;}
@@ -331,7 +331,7 @@
   #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px auto 0; /*width: 77%*/; display: block;}
   #register.page.mobile .group-form {overflow: visible; width: 100%;}
   #register.page.mobile .group-actions {width: 100%; left: 0;}
-  #register.page.mobile .ui-dropdown-container .ui-dropdown span {text-align: right; /*text-indent: 55px;*/}
+  #register.page.mobile .ui-dropdown-container .ui-dropdown span {/* text-align: right; text-indent: 55px;*/}
   #register.page.mobile .ui .connect-fb {line-height: normal; font-size: 15px;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
@@ -608,6 +608,10 @@
       background-image: url("../images/UI/close_rollover@x2.png"); 
       background-size: 40px 40px;
     }
+    .ui .btn-create-with-fb {
+      background-image: url("../images/UI/btn_fb-small@x2.jpg"); 
+      background-size: 119px 42px;
+    }
 
   }
   
@@ -662,7 +666,7 @@
     .search-bar-mobile .container input[type="reset"] {right: 39%;}
     .form-input {width: 100%;}
     .search-result-proposal ul li:last-child {border-bottom: 0;}
-    .btn-small-radius.brown:hover, .btn-round.brown:hover, .btn-radius.brown:hover, .btn-small-round.brown:hover { background: transparent!important; color: #faf3e1;}
+    .load-more-container .btn-small-radius.brown:hover, .load-more-container .btn-radius.brown:hover, .load-more-container .btn-small-round.brown:hover { background: transparent!important; color: #b3955f;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -691,7 +695,7 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
     .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
-    #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; text-align: right;}
+    #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; /*text-align: right;*/}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
     form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
