@@ -44,13 +44,17 @@ class CloudSearchIndexer implements IndexerInterface
 
         if ($this->getEntityType($entity) == 'News') {
             $medias = $entity->getMedias();
-            if (isset($medias[0])) {
-                $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($medias[0]->getMedia(), 'default_slider_large');
+            foreach ($medias as $media) {
+                if ($media->getPosition() == 0) {
+                    $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_slider_large');
+                }
             }
         } elseif ($this->getEntityType($entity) == 'Bar') {
             $medias = $entity->getMedias();
-            if (isset($medias[0])) {
-                $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($medias[0]->getMedia(), 'default_big');
+            foreach ($medias as $media) {
+                if ($media->getPosition() == 0) {
+                    $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_big');
+                }
             }
         }
 

@@ -23,7 +23,6 @@ class CloudSearchSearcher
         "'description'",
         "'district'",
         "'districts'",
-        "'location'",
         "'quote'",
         "'quote_author'",
         "'seo_description'",
@@ -40,7 +39,6 @@ class CloudSearchSearcher
     public static function getCSTagsNames()
     {
         return array(
-            Tag::WBB_TAG_TYPE_BEST_COCKTAILS => 'cocktails',
             Tag::WBB_TAG_TYPE_ENERGY_LEVEL => 'mood',
             Tag::WBB_TAG_TYPE_WITH_WHO => 'occasion',
             Tag::WBB_TAG_TYPE_THEME => 'style',
