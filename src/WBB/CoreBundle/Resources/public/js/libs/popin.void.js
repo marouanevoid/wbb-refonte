@@ -98,6 +98,7 @@ PopIn.show = function(e){
         */
         
         //show the mask
+        mask.css("height", $(document).height());
         mask.fadeIn("slow");
     } else {
         PopIn.dom.mask.hide();

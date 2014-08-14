@@ -57,7 +57,7 @@
   .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
-    .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 100%; position: absolute; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
     .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
@@ -647,9 +647,10 @@
 
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
-  .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
-    padding: 0 0 0 10px;
-  }
+    body {min-height: 100%;}
+    .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
+      padding: 0 0 0 10px;
+    }
 
   /* Thumbnails Size's */
     .search section.bar-filter .bar-w-pic,
@@ -729,7 +730,7 @@
       .bar-guides section.bar-filter .bar-w-pic {min-height: 100px;}
   }
 
-  @media only screen and (max-width : 48  0px) {
+  @media only screen and (max-width : 480px) {
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
