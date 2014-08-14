@@ -122,7 +122,7 @@ meta.Dropdown = function(config){
                 $options.eq( index ).prop('selected', true);
 
                 $dropdown.find('.choice li').show();
-                $(this).hide();
+               // $(this).hide();
                 
                 //$options.eq( index ).attr('selected', 'selected');
 

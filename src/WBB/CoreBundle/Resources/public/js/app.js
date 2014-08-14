@@ -332,6 +332,30 @@ meta.App = function() {
             that._customScroll();
             setTimeout(that._resizeCustomScroll, 600);
         });
+
+
+        // Add the Event Resize for Search Bar
+        $(window).on('resize' , function(){
+            $('.search-bar-mobile').css({'top'  : '0 !important'});
+            $('.search-bar-mobile').addClass('top-important-0');
+        });
+        // dispatch resize
+        $(window).resize();
+
+        // add the event on serach
+        $('.search-bar-mobile').find('.form-text').on('keyup' , function(){
+            var lentext = $(this).val();
+            if(lentext){
+                $('.search-bar-mobile').find('.form-submit').show();
+            }else{
+                 $('.search-bar-mobile').find('.form-submit').hide();
+            }
+        });
+
+        // hide the submit on rest
+         $('.search-bar-mobile').find('input[type=reset]').on('click',function(){
+            $('.search-bar-mobile').find('.form-submit').hide();
+         });
     };
 
 
@@ -372,23 +396,23 @@ meta.App = function() {
     // Script Injection for Select UI
     ////////
     //$('.ui-dropdown-container').each(function(){})
-    $('select').on('change',function(){
-       var  $target = $(this),
-            parent  = $target.parent('.ui-dropdown-container'),
-            li = parent.find('li')
-            selected = parent.find('.selected').text();
+    // $('select').on('change',function(){
+    //    var  $target = $(this),
+    //         parent  = $target.parent('.ui-dropdown-container'),
+    //         li = parent.find('li')
+    //         selected = parent.find('.selected').text();
 
-            li.show();
+    //         li.show();
 
-            li.each(function(){
-                if($(this).text().toLowerCase().indexOf(selected.toLowerCase())>-1 || ($(this).text().indexOf('Choose with who')>-1 || $(this).text().indexOf('Choose a City')>-1 ))
-                    $(this).hide();
-            });
+    //         li.each(function(){
+    //             if($(this).text().toLowerCase().indexOf(selected.toLowerCase())>-1 || ($(this).text().indexOf('Choose with who')>-1 || $(this).text().indexOf('Choose a City')>-1 ))
+    //                 $(this).hide();
+    //         });
 
-    });
+    // });
 
     // Trigger change on select
-    $('select').change();
+    //$('select').change();
 
 };
 
