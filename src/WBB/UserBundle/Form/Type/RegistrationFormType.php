@@ -6,6 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use WBB\BarBundle\Entity\Tag;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Registration Form Type
@@ -63,7 +64,13 @@ class RegistrationFormType extends BaseType
                     'error_bubbling' => true
                 ))
                 ->add('country', null, array(
-                    'error_bubbling' => true
+                    'error_bubbling' => true,
+                    'empty_value' => ' ',
+                    'required' => false,
+                    'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->orderBy('c.name', 'ASC');
+                    }
                 ))
                 ->add('prefCity1')
                 ->add('prefCity2')

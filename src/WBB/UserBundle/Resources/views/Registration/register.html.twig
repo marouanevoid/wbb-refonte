@@ -17,7 +17,11 @@
                                 <div class="group-form margin-top-25">
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Pseudo</label>
                                     <div class="form-input left">
-                                    {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
+                                        {% if is_mobile() and not is_tablet() %}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
+                                        {% else %}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                        {% endif %}
                                     </div>
                                     <div class="clear"></div>
                                 </div>
@@ -86,7 +90,7 @@
                             </div>
                             <div class="clear"></div>
 
-                            <div class="select-two margin-top-10 ui-dropdown-list-form">
+                            <div class="select-two margin-top-10 ui-dropdown-list-form country-dropdown">
                                 <label class="margin-right-20 text-align-right unbold">Country</label>
                                 <div class="left" style="width: 300px">
                                     {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}

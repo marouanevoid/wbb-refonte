@@ -335,6 +335,9 @@ jQuery(document).ready(function($) {
                     for (var i = 0; i < fields.length; i++) {
 
                         switch (fields[i]) {
+                            case 'country':
+                                $('.country-dropdown .ui-dropdown').addClass('error');
+                                break;
                             case 'birthdate':
                                 $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
