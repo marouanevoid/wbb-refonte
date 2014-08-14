@@ -65,7 +65,7 @@ class RegistrationFormType extends BaseType
                 ))
                 ->add('country', null, array(
                     'error_bubbling' => true,
-                    'empty_value' => ' ',
+                    'empty_value' => 'Country',
                     'required' => false,
                     'query_builder' => function(EntityRepository $er) {
                         return $er->createQueryBuilder('c')
