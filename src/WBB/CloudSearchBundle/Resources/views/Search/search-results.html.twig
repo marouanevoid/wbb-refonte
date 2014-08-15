@@ -45,7 +45,7 @@
                                 </select>
 
                                 <div class="neigborhood">
-                                    <label class="h3">Neigborhood</label>
+                                    <label class="h3">Neighborhood</label>
                                     <ul></ul>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                     {% endif %}
                                         <ul class="checkbox-container">
                                             {% for tag in tags.tags %}
-                                                <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name }}" {% if queryTag and queryTag == tag.name %} checked {% endif %}/><b></b>{{ tag.name }}</label>
+                                                <li><label><input type="checkbox" class="filter-tags-check" name="{{ tags.csName }}[]" value="{{ tag.name }}"  {% if queryTag and queryTag == tag.name %} checked {% endif %} /><b></b>{{ tag.name }}</label>
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -84,7 +84,7 @@
                     {% if  is_mobile() and not is_tablet() %}
                     <div class="submit m-margin-top">
                         <input type="submit" class="apply-filters" id="applay-filter" value="Apply Filters"/>
-                        <input type="reset" value="Cancel" class="large"/>
+                        <input type="reset" value="Cancel" class="large no-action-search-cancel"/>
                     </div>
                     {% endif %}
                 </form>
@@ -128,8 +128,8 @@
                         <div class="load-target"></div>
                     <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
-                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>Load more bars</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'> Load more news</a>
                     </div>
                     </div>
                 </div>
@@ -140,8 +140,8 @@
                     <div class="load-target"></div>
                     <div style='clear:both;'></div>
                     <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>See more bars</a>
-                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'>See more news</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="See more bars" style='display:none'>Load more bars</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="See more news" style='display:none'> Load more news</a>
                     </div>
                     </div>
                 </div>

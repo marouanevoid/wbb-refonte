@@ -3,7 +3,7 @@
 
 {% block body %}
     <div class="full-cream">
-        <div id="page-standard" class="wrap">
+        <div id="page-standard" class="wrap {% if is_mobile() and not is_tablet() %}mobile{% endif %}">
             <div class="padding-top-50 padding-bottom-50 min-height">
                 <div class="title h1">World's Best Bars - Cookie Policy</div>
                 <div class="content">
