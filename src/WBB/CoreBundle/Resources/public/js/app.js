@@ -355,6 +355,8 @@ meta.App = function() {
         // hide the submit on rest
          $('.search-bar-mobile').find('input[type=reset]').on('click',function(){
             $('.search-bar-mobile').find('.form-submit').hide();
+            if(ismobile)
+                $('header.mobile .search-result-proposal').hide();
          });
     };
 

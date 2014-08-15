@@ -102,6 +102,9 @@ meta.Search = function(config){
         if(data && data.hits){
             if(data.hits.hit && data.hits.hit.length > 0){
 
+                // show list
+                if(ismobile) 
+                    $('header.mobile .search-result-proposal').show();
                 var values  = data.hits.hit;
                 $.each(values, function(index, value)
                 {
@@ -133,6 +136,8 @@ meta.Search = function(config){
                                 }else{
                                         wword = wword + " in " + value.fields.city;
                                 }
+                            }else{
+                                wword =  "World's " + wword;
                             }
                             result = wrapB(wword , q);
                         }
@@ -147,6 +152,8 @@ meta.Search = function(config){
                                 }else{
                                     wword = value.fields.cities[0] + " - " + wword;
                                 }
+                            }else{
+                                wword =  "World - " + wword;
                             }
                             result = wrapB(wword , q);
                         }
@@ -177,6 +184,9 @@ meta.Search = function(config){
             }else{
                 // TODO : On no results
                 that.context.$result.html('');
+                // hide the list
+                if(ismobile)
+                    $('header.mobile .search-result-proposal').hide();
             }
         }else{
                 // TODO : On no results
