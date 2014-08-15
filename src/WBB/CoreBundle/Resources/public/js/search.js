@@ -351,8 +351,8 @@ meta.SearchPage = function() {
             $('.details-barlist .dist-target').empty();
             $('.details-barlist .dist-target').html('');
             $('.bars-w-pic-list .dist-target').html('');
-            $('.bars-w-pic-list .dist-target').append("<p class='text-align-center no-result'>There are no results matching your request.</p>");
-            $('.details-barlist .dist-target').append("<p class='text-align-center no-result'>There are no results matching your request.</p>");
+            $('.bars-w-pic-list .dist-target').append( "<p class='" + ( ismobile ? 'text-align-center' : '' ) +  ' no-result' + "'>There are no results matching your request.</p>");
+            $('.details-barlist .dist-target').append("<p class='" + ( ismobile ? 'text-align-center' : '' ) +  ' no-result' + "'>There are no results matching your request.</p>");
 
             if(callbackHandler)
                 callbackHandler();   
@@ -624,7 +624,7 @@ meta.SearchPage = function() {
         {
             if( $(this).hasClass('plus') )
             {
-                $(this).addClass('minus').removeClass('plus').parent().next('.drop-list').slideDown(that.config.speed);
+                $(this).addClass('minus').removeClass('plus').parent().next('.drop-list').stop().slideDown(that.config.speed);
                 that.context.$form_filter.find('.reset input[type="reset"]').show();
                 // if there is handler after open
                 if(groupeCheckBoxOpened)
@@ -632,7 +632,7 @@ meta.SearchPage = function() {
             }
             else
             {
-                $(this).addClass('plus').removeClass('minus').parent().next('.drop-list').slideUp(that.config.speed);
+                $(this).addClass('plus').removeClass('minus').parent().next('.drop-list').stop().slideUp(that.config.speed);
             }
 
             that.context.$form_filter.find('.custom-scroll').each(function()
@@ -661,18 +661,19 @@ meta.SearchPage = function() {
         });
 
 
-        that.context.$form_filter.find('input[type=reset]').click(function(e,from_applay)
+        that.context.$form_filter.find('input[type=reset]').not('.no-action-search-cancel').click(function(e,from_applay)
         {
-            e.preventDefault();
+            if(ismobile)
+                e.preventDefault();
             // on the Mobile if there is 
             // a filter send the serrch to get
             // the result befor set
-            if( ! from_applay ){
+            if( ! from_applay && ismobile){
                 // focus active on current Tab (bar/article)
                 that.getCurrentTabActive();
                 // formatedUrl = "";
                 start = 0;
-                formatedCity = "";
+                // formatedCity = "";
                 that.clearContent();
                 that.goSearch();
 
@@ -680,27 +681,59 @@ meta.SearchPage = function() {
 
 
             $(this).hide();
-            // Empty the url format
-            if(!from_applay || (from_applay && from_applay != 'from_constracter'))
-                formatedUrl = "";
-            start = 0;
-            formatedCity = "";
-            // that.context.$form_filter.find('.drop-btn a.minus').click();
 
-            // // hide the select
-            // $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
-            // $('.city-drop-down').val('');
-            // setTimeout(function()
-            // {
-            //     that.context.$form_filter.find('.neigborhood > ul').empty();
-            //     that.context.$form_filter.find('.neigborhood').hide();
 
-            // }, that.config.speed);
+            if(! ismobile){
+                // Empty the url format
+                if(!from_applay || (from_applay && from_applay != 'from_constracter'))
+                    formatedUrl = "";
+                start = 0;
+                formatedCity = "";
+                that.context.$form_filter.find('.drop-btn a.minus').click();
 
-            return false;
+                // hide the select
+                $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                $('.city-drop-down').val('');
+                setTimeout(function()
+                {
+                    that.context.$form_filter.find('.neigborhood > ul').empty();
+                    that.context.$form_filter.find('.neigborhood').hide();
+
+                }, that.config.speed);
+
+                // uncheck all checkbox
+                $('#filter input[type=checkbox]').prop('checked', false);
+            }
+            if(ismobile)
+                return false;
 
         });
 
+        /*
+        * Click on Cancel button
+        To cancel all filter and to rest 
+        Filters
+        ***/
+        that.context.$form_filter.find('.no-action-search-cancel').click(function(){
+                formatedUrl = "";
+                start = 0;
+                formatedCity = "";
+                that.context.$form_filter.find('.drop-btn a.minus').click();
+
+                // hide the select
+                $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                $('.city-drop-down').val('');
+                setTimeout(function()
+                {
+                    that.context.$form_filter.find('.neigborhood > ul').empty();
+                    that.context.$form_filter.find('.neigborhood').hide();
+
+                }, that.config.speed);
+
+                // uncheck all checkbox
+                $('#filter input[type=checkbox]').prop('checked', false);
+
+        });
 
         that.context.$form_filter.find('select[name=city]').change(function(){ that._selectCities( $(this).val() ) });
 
