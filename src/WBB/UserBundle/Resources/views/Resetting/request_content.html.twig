@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-    <div class="title wrap bold margin-bottom-30 {% if not is_mobile() and is_tablet() %}padding-top-20{% else %}padding-top-100{% endif %}">FORGOT YOUR PASSWORD</div>
+    <div class="title wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-100{% endif %}">FORGOT YOUR PASSWORD</div>
     <div class="subtitle text-transform-uppercase bold">Enter your email to create a new password</div>
 
     <div class="forgetpassword wrap padding-bottom-50">

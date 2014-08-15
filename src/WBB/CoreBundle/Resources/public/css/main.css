@@ -232,7 +232,7 @@
   .profile #message {left: 13%;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
-  #success {position: static; top: 0;}
+  /*#success {position: static; top: 0;}*/
   #success p {color: #818a8c; font-size: 22px;}
   #success .subtitle {font-size: 32px;}
   .alert p {color: #818a8c; font-size: 20px; line-height: 28px;}
@@ -545,7 +545,7 @@
   #search input[type="text"] {color: #b3955f;}
   .search-result-proposal {z-index: 100000;}
   header.desktop .logged {z-index: 100002;}
-  .popin-block .form-text {width: 100%;}
+  .popin-block .form-text {width: 98%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -619,6 +619,9 @@
     section.bar-filter .bar-w-pic {max-height: 180px;}
     .ui.register .title {width: 45%;}
     .ui .form-text {text-indent: 0;}
+    #editprofile .form-text {text-indent: 10px;}
+    .page #message {left: 68px;}
+    #register.page #message {left: 9px;}
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
@@ -673,6 +676,7 @@
     .profile section.bar-filter .bar-w-pic,
     .bar-details section.bar-filter .bar-w-pic,
     .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
+    .search section.bar-filter .bar-w-pic {height: 215px;}
     
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 20px;}
