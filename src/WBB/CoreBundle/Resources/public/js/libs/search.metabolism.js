@@ -136,6 +136,8 @@ meta.Search = function(config){
                                 }else{
                                         wword = wword + " in " + value.fields.city;
                                 }
+                            }else{
+                                wword =  "World's " + wword;
                             }
                             result = wrapB(wword , q);
                         }
@@ -150,6 +152,8 @@ meta.Search = function(config){
                                 }else{
                                     wword = value.fields.cities[0] + " - " + wword;
                                 }
+                            }else{
+                                wword =  "World - " + wword;
                             }
                             result = wrapB(wword , q);
                         }
