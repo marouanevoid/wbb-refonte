@@ -543,6 +543,8 @@
   .ui-radio.collapsed:last-of-type {border-radius: 0 3em 3em 0;}
   .tags a {color: #818a8c;}
   #search input[type="text"] {color: #b3955f;}
+  .search-result-proposal {z-index: 100000;}
+  header.desktop .logged {z-index: 100002;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -717,6 +719,7 @@
     .loader-search-page.mobile {position: absolute; left: 48%; top: 65px;}
     .search-bar-mobile {height: 200%!important;}
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
+    .no-result {margin: 2%;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
