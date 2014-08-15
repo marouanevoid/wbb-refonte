@@ -7,6 +7,7 @@
   input[type="text"], input[type="password"], input[type="email"] {
     color: #818a8c;
   }
+  #landscape-mobile {display: none; visibility: hidden;}
   input[type="text"]::-webkit-input-placeholder, 
   input[type="password"]::-webkit-input-placeholder, 
   input[type="email"]::-webkit-input-placeholder{
@@ -667,7 +668,7 @@
     
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 20px;}
-    #error {position: relative; top: 100px;}
+    #error {position: relative; top: 60px;}
     #message {padding-left: 0;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
@@ -772,10 +773,14 @@
   }
 
 /* Smartphones (landscape) ----------- */
-@media screen and (max-width: 320px) and (orientation : landscape) { 
-  body {
-    background: url("../images/turn@2x.jpg") no-repeat center;
-    background-size: cover;
+@media screen and (min-device-width: 480px) and (orientation: landscape) { 
+  #landscape-mobile {
+      display: block; visibility: visible;
+      position: fixed; top: -50%; left: -50%;
+      width: 200%; height: 200%; min-height: 100%; 
+      background: url("../images/turn@2x.jpg") no-repeat center center #000;
+      background-size: contain;
+      z-index: 777777777;
   }
 }
 
