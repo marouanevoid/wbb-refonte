@@ -48,7 +48,7 @@ class CloudSearchIndexer implements IndexerInterface
         if ($this->getEntityType($entity) == 'News') {
             $medias = $entity->getMedias();
             foreach ($medias as $media) {
-                if ($media->getPosition() == 0) {
+                if ($media->getPosition() == 1) {
                     echo 'Image for ' . $entity->getTitle() . "\n";
                     $this->logger->info('[CloudSearch][Indexer] : Image found for a News entity : ' . $entity->getTitle());
                     $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_slider_large');
@@ -57,7 +57,7 @@ class CloudSearchIndexer implements IndexerInterface
         } elseif ($this->getEntityType($entity) == 'Bar') {
             $medias = $entity->getMedias();
             foreach ($medias as $media) {
-                if ($media->getPosition() == 0) {
+                if ($media->getPosition() == 1) {
                     $this->logger->info('[CloudSearch][Indexer] : Image found for a Bar entity : ' . $entity->getName());
                     $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_big');
                 }
