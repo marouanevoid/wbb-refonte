@@ -133,6 +133,12 @@ meta.SearchPage = function() {
     }
 
     /*
+    * Escaped
+    **/
+    that.escapit = function(str){
+        return str.replace(new RegExp('&','g') , '%26');
+    }
+    /*
     Check the active Tab
     **/
     that.checkActiveTab = function(){
@@ -266,7 +272,7 @@ meta.SearchPage = function() {
                         // make tags url
                         var stringtag = "";
                         for(var i=0,ln = curor.fields.tags_style.length ; i<ln ; i++ ){
-                           stringtag += "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + escape(curor.fields.tags_style[i]) + "'>"+ curor.fields.tags_style[i]  + "</a> , " 
+                           stringtag += "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + that.escapit(curor.fields.tags_style[i]) + "'>"+ curor.fields.tags_style[i]  + "</a> , " 
                         }
                         chtml = chtml.replace('%tags' , stringtag.substr(0, stringtag.length-2) );
                         chtml2 = chtml2.replace('%tags' , stringtag.substr(0, stringtag.length-2)  );
@@ -496,7 +502,7 @@ meta.SearchPage = function() {
 
                                 var liSubrb = "";
                                 $.each(res.suburbs , function(index , cursor){
-                                    liSubrb+= '<li><label><input type="checkbox" class="neigborhood-checkbox" name="district[]" value="' + escape(cursor.name) + '"/><b></b>' + cursor.name+ '</label></li>';
+                                    liSubrb+= '<li><label><input type="checkbox" class="neigborhood-checkbox" name="district[]" value="' + that.escapit(cursor.name) + '"/><b></b>' + cursor.name+ '</label></li>';
                                 });
 
                                 html+=liSubrb;
@@ -978,8 +984,6 @@ $(document).ready(function()
 {
     if( !$('form#filter').length ) return;
     new meta.SearchPage();
-
-
 });
 
 function getBaseURL() {
