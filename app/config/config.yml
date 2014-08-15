@@ -11,14 +11,13 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enable_annotations: true, enabled: true, api: 2.4 }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:
-        handler_id: session.handler.pdo
+    session: ~
     fragments:       ~
     http_method_override: true
 
@@ -31,6 +30,7 @@ twig:
             - 'StnwDatePickerBundle:Form:fields.html.twig'
     globals:
         feedsLimit: %feeds_limit%
+        websiteUrl: %website_url%
 
 # Assetic Configuration
 assetic:
@@ -84,16 +84,26 @@ fos_user:
     firewall_name: main
     user_class: WBB\UserBundle\Entity\User
     registration:
-        confirmation: { enabled: true }
+        confirmation: { enabled: true, template: WBBUserBundle:User:confirmation.email.html.twig }
         form:
             type: wbb_user_registration
+            validation_groups:  [Registration, Default, registration_full]
     profile:
         form:
             type: wbb_user_profile
-
+            validation_groups:  [Default, registration_full, Profile]
+    change_password:
+        form:
+            type: wbb_user_change_password
+            validation_groups:  [ChangePassword, Default]
     from_email:
         address:        myportal@pernod-ricard.com
         sender_name:    WBB
+    resetting:
+        email:
+            template: WBBUserBundle:User:resetting.email.html.twig
+    service:
+        mailer: fos_user.mailer.twig_swift
 
 # Sonata Admin bundle
 sonata_admin:
@@ -162,6 +172,7 @@ sonata_media:
                 slider_large :  { width: 640 , height: 480, quality: 100 }
                 news :          { width: 600 , height: 400, quality: 100 }
                 news_large :    { width: 900 , height: 600, quality: 100 }
+                bar_square:     { width: 290 , height: 214, quality: 100 }
 
         simple_image:
             download:
@@ -226,9 +237,9 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                small:   { width: 82 , quality: 82}
-                medium:  { width: 82 , quality: 82}
-                large:   { width: 145 , quality: 145}
+                av_small:   { width: 82, height: 82, quality: 100}
+                av_medium:  { width: 82, height: 82, quality: 100}
+                av_large:   { width: 145, height: 145, quality: 100}
 
     cdn:
         server:

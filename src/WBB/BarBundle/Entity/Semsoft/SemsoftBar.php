@@ -293,12 +293,12 @@ class SemsoftBar
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="semsoftBars")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City", inversedBy="semsoftBars", cascade={"persist"})
      */
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars")
+     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\CitySuburb", inversedBy="semsoftBars", cascade={"persist"})
      */
     private $suburb;
 
@@ -308,18 +308,18 @@ class SemsoftBar
     private $bar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="semsoftBarsLevel")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="semsoftBarsLevel", cascade={"persist"})
      */
     private $energyLevel;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Collections\BarTag", mappedBy="semsoftBar", cascade={"persist", "remove"} , orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\BarOpening", mappedBy="semsoftBar", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"openingDay" = "ASC"})
      */
     private $openings;
@@ -343,7 +343,7 @@ class SemsoftBar
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = trim($name);
 
         return $this;
     }

@@ -10,6 +10,30 @@
                     </form>
                 </td>
             </tr>
+            <tr class="signin {% if app.user %}logged{% endif %}">
+                <td>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <span class="logged h3">
+                            <a href="{{ path('fos_user_profile_show') }}">
+                                <img src="{{  showImage(app.user.avatar, 'av_small') }}" alt="{{ app.user.username }}" width="40" height="40"/>
+                                <span>{{ app.user.username }}</span>
+                            </a>
+                            <span class="actions">
+                                <a href="{{ path('fos_user_profile_show') }}">My profile</a>
+                                <a href="{{ path('fos_user_profile_edit') }}">Settings</a>
+                                <a href="{{ path('fos_user_change_password') }}">Change Password</a>
+                                <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                            </span>
+                        </span>
+                    {% else %}
+                        <span class="register h4">
+                            <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
+                            or
+                            <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
             <tr class="header-nav">
                 <td>
                     <nav class="h3">
@@ -27,41 +51,17 @@
                     </a>
                 </td>
             </tr>
-            <tr class="signin">
-                <td>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <span class="logged h3">
-                            <a>
-                                <img src="{{ asset('apple-touch-icon.png') }}" alt="robert" width="40" height="40"/>
-                                <span>{{ app.user.username }}</span>
-                            </a>
-                            <span class="actions">
-                                <a href="#">My profile</a>
-                                <a href="#">Settings</a>
-                                <a href="{{ path('fos_user_security_logout') }}">Logout</a>
-                            </span>
-                        </span>
-                    {% else %}
-                        <span class="register h4">
-                            {#<a data-show="register" class="lighbox" href="#">Sign in</a>#}
-                            <a data-show="register-remove" class="lighbox-remove" href="#">Sign in</a>
-                            or
-                            {#<a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>#}
-                            <a class="btn-radius" href="#">Register</a>
-                        </span>
-                    {% endif %}
-                </td>
-            </tr>
             <tr class="footer-nav">
                 <td>
                     <nav class="h4">
-                        <a href="">About</a>
-                        <a href="">Terms & conditions</a>
-                        <a href="">Privacy Policy</a>
-                        <a href="">Cookies</a>
+                        <a href="{{ path('wbb_about_us') }}">About</a>
+                        <a href="{{ path('wbb_terms_and_conditions') }}">Terms & conditions</a>
+                        <a href="{{ path('wbb_privacy_policy') }}">Privacy Policy</a>
+                        <a href="{{ path('wbb_cookies_policy') }}">Cookies</a>
                         <a href="mailto:editor@worldsbestbars.com">Submit a bar</a>
-                        {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a>{% endif %}
-                        <a href="">Responsible Drinking</a>
+                        {% if app.request.attributes.get('_route') == "wbb_bar_details" %}<a href="mailto:editor@worldsbestbars.com">Claim this bar</a><br />{% endif %}
+                        <a href="{{ path('wbb_responsible_drinking') }}">Responsible Drinking</a>
+                        <a href="{{ path('wbb_search_all_bars') }}">All bars</a>
                     </nav>
                 </td>
             </tr>
@@ -129,7 +129,7 @@
         <div class="search-bar-mobile nav">
             <div class="container">
                 <div class="twelve columns s-margin">
-                    <form action="#{#search.php#}">
+                    <form action="{{ path('wbb_cloudsearch_searchresults') }}?q=*">
                         <input type="text" name="q" placeholder="Search" class="form-text" />
                         <input type="submit" class="form-submit no-text">
                         <input type="reset" value=" "/>
@@ -158,7 +158,7 @@
                                 <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
                                 <a href="{{ path('wbb_news_landing_page') }}" {% if app.request.attributes.get('_route') == "wbb_news_landing_page" %} class="active"{% endif %}>News</a>
                             </nav>
-                            <form action="#{#{ path('wbb_cloudsearch_searchresults') }#}">
+                            <form action="{{ path('wbb_cloudsearch_searchresults') }}?q=*">
                                 <input type="text" placeholder=" Start typing..." name="q" autocomplete="off"/>
                             </form>
                         </td>
@@ -174,7 +174,28 @@
                                 </a>
                             </div>
                             <div class="search-mode">
-                                <a class="btn-round brown close"></a>
+                                <a class="btn-round brown close reset-trigger">
+                                <div class='loader-anim'>
+                                    <div id="floatingBarsG">
+                                    <div class="blockG" id="rotateG_01">
+                                    </div>
+                                    <div class="blockG" id="rotateG_02">
+                                    </div>
+                                    <div class="blockG" id="rotateG_03">
+                                    </div>
+                                    <div class="blockG" id="rotateG_04">
+                                    </div>
+                                    <div class="blockG" id="rotateG_05">
+                                    </div>
+                                    <div class="blockG" id="rotateG_06">
+                                    </div>
+                                    <div class="blockG" id="rotateG_07">
+                                    </div>
+                                    <div class="blockG" id="rotateG_08">
+                                    </div>
+                                    </div>
+                                </div>
+                                </a>
                                 <a class="btn-round brown open radius-60 text-align-center">GO</a>
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
                                 <a href="" class="advanced-search h4">
@@ -184,23 +205,23 @@
                         </td>
                         <td>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                {#<span class="logged h3">#}
-                                    {#<a>#}
-                                        {#<img src="{{ asset('apple-touch-icon.png') }}" alt="robert" width="40" height="40"/>#}
-                                        {#<span>{{ app.user.username }}</span>#}
-                                    {#</a>#}
-                                    {#<span class="actions">#}
-                                        {#<a href="{{ path('fos_user_profile_show') }}">My profile</a>#}
-                                        {#<a href="{{ path('fos_user_profile_edit') }}">Settings</a>#}
-                                        {#<a href="{{ path('fos_user_security_logout') }}">Logout</a>#}
-                                    {#</span>#}
-                                {#</span>#}
+                                <span class="logged h3">
+                                    <a class='in-action' href="{{ path('fos_user_profile_show') }}">
+                                        <img src="{{ showImage(app.user.avatar, 'av_small') }}" alt="{{ app.user.username }}" width="40" height="40"/>
+                                        <span>{{ app.user.username }}</span>
+                                    </a>
+                                    <span class="actions">
+                                        <a href="{{ path('fos_user_profile_show') }}">My profile</a>
+                                        <a href="{{ path('fos_user_profile_edit') }}">Settings</a>
+                                        <a href="{{ path('fos_user_change_password') }}">Change Password</a>
+                                        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                                    </span>
+                                </span>
                             {% else %}
                                 <span class="register h4">
-                                    {#<a data-show="register" class="lighbox" href="#">Sign in</a>#}
-                                    <a data-show="register-remove" class="lighbox-remove" href="#">Sign in</a>
+                                    <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
                                     or
-                                    <a class="btn-radius" href="#{#{ path('fos_user_registration_register') }#}">Register</a>
+                                    <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
                                 </span>
                             {% endif %}
                         </td>

@@ -1,18 +1,7 @@
-{% extends "::base.html.twig" %}
-
-{% block body %}
-    <div class="full-cream">
-        <div id="register">
-            <div id="UI" class="wrap">
-                <div id="success" class="text-align-center">
-                    <div class="subtitle text-transform-uppercase">Congratulations!</div>
-                    <p class="margin-top-20 margin-bottom-20">You are now registered on  World’s Best Bars.</p>
-
-                    <p>Check your mailbox <br />
-                        to confirm your subscription.</p>
-
-                </div> <!-- #success -->
-            </div> <!-- #UI -->
-        </div> <!-- #register -->
+<div id="success" class="min-height">
+    <div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">
+        <div class="subtitle wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">Congratulations !</div>
+        <p class="padding-top-40">You are now registered on  World’s Best Bars.</p>
+        <p class="padding-bottom-40">Check your mailbox to confirm your subscription.</p>
     </div>
-{% endblock %}
+</div>

@@ -1,51 +1,103 @@
 {% extends '::base.html.twig' %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block body %}
     <div class="full-cream">
-        <div id="register" class="page wrap margin-bottom-20">
+        <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap">
             <div class="ui wrap">
-                <div class="title text-transform-uppercase bold">Register</div>
+                <div class="title text-transform-uppercase padding-top-25 bold">Register</div>
                 <div class="margin-top-20">
                     <div id="create-account">
-                        <div class="subtitle text-transform-uppercase bold">Create an account now</div>
+                        <div class="subtitle text-transform-uppercase margin-top-25 bold">Create an account now</div>
                         <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
-                        <form action="" {{ form_enctype(form) }} method="POST" id="register_form_full">
-                            <div class="text-align-left margin-bottom-20">
-                                <div class="group-form margin-top-10">
-                                    <label>Username</label>
-                                    {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Username' } }) }}
+                        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="register_form_full">
+                            <div class="text-align-left margin-bottom-10">
+
+                                <div class="group-form margin-top-25">
+                                    <label class="margin-right-20 text-align-right unbold xs-hidden">Pseudo</label>
+                                    <div class="form-input left">
+                                        {% if is_mobile() and not is_tablet() %}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
+                                        {% else %}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="select-two margin-top-10">
-                                    <label>Gender</label>
-                                    <div class="left" style="width: 300px">
+
+                                <div class="select-two margin-top-10 gender">
+                                    <label class="margin-right-20 text-align-right unbold">Gender</label>
+                                    <div class="left" style="width: 302px">
                                         {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                     </div>
                                 </div>
                                 <div class="clear"></div>
+                                
                                 <div class="group-form margin-top-10">
-                                    <label>Firstname</label>
-                                    {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold xs-hidden">Firstname</label>
+                                    <div class="form-input left">
+                                        {% if is_mobile() and not is_tablet() %}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Firstname' } }) }}
+                                        {% else %}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
+                                
                                 <div class="group-form margin-top-10">
-                                    <label>Lastname</label>
-                                    {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold xs-hidden">Lastname</label>
+                                    <div class="form-input left">
+                                        {% if is_mobile() and not is_tablet() %}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Lastname' } }) }}
+                                        {% else %}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
+
                                 <div class="group-form margin-top-10">
-                                    <label>Email</label>
-                                    {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold xs-hidden">Email</label>
+                                    <div class="form-input left">
+                                        {% if is_mobile() and not is_tablet() %}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Email' } }) }}
+                                        {% else %}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
+
                                 <div class="group-form margin-top-10">
-                                    <label>Password</label>
-                                    {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold xs-hidden">Password</label>
+                                    <div class="form-input left">
+                                        {% if is_mobile() and not is_tablet() %}
+                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Password' } }) }}
+                                        {% else %}
+                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
+
                                 <div class="group-form margin-top-10">
-                                    <label>Confirm Password</label>
-                                    {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
+                                    <label class="margin-right-20 text-align-right unbold xs-hidden">Confirm Password</label>
+                                    <div class="form-input left">
+                                        {% if is_mobile() and not is_tablet() %}
+                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Confirm Password' } }) }}
+                                        {% else %}
+                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
+
                             </div>
 
-                            <div id="date-birthday" class="text-align-center ui-dropdown-list-form">
-                                <label>Date of Birth</label>
+                            <div class="date-birthday text-align-center ui-dropdown-list-form">
+                                <label class="margin-right-20 text-align-right unbold">Date of Birth</label>
                                 <div class="select-wrap left">
                                     {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
@@ -55,83 +107,139 @@
                                 <div class="select-wrap left last">
                                     {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
-                            </div> <!-- #date-birthday -->
+                            </div>
                             <div class="clear"></div>
 
-                            <div class="select-two margin-top-10 ui-dropdown-list-form">
-                                <label>Country</label>
-                                <div class="left" style="width: 300px">
+                            <div class="select-two margin-top-10 ui-dropdown-list-form country-dropdown">
+                                <label class="margin-right-20 text-align-right unbold">Country</label>
+                                <div class="left" style="width: 302px">
                                     {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
                                 </div>
-                            </div><!-- #countries -->
+                            </div>
                             <div class="clear"></div>
 
                             <div class="group-form margin-top-10">
-                                <label>Cities you like to go</label>
-                                {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a city' } }) }}
-                                {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
-                                {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a city' } }) }}
+                                <label class="margin-right-20 text-align-right unbold">Cities you like to go</label>
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label>Favorite Bars</label>
-                                {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a bar' } }) }}
-                                {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
-                                {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a bar' } }) }}
+                                <label class="margin-right-20 text-align-right unbold">Favorite Bars</label>
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label>Drink brands</label>
-                                {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a brand' } }) }}
-                                {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
-                                {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a brand' } }) }}
+                                <label class="margin-right-20 text-align-right unbold">Drink brands</label>
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
                             </div>
 
                             <div class="group-form margin-top-10">
-                                <label>Categories or cocktails</label>
-                                {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text', 'placeholder': 'Choose a cocktail' } }) }}
-                                {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
-                                {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text margin-top-10 form-text-without-label', 'placeholder': 'Choose a cocktail' } }) }}
+                                <label class="margin-right-20 text-align-right unbold">Categories or cocktails</label>
+                                <div class="form-input left">
+                                    {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
+                                </div>
+                                <div class="clear"></div>
                             </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-form margin-top-10 form-text-without-label">
+                                {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="group-checkbox">
+                                <div class="group-form checkbox margin-top-10">
+                                    <label class="wrap">{{ form_widget(form.stayInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
+                                        Subscribe to our newsletters</label>
+                                </div>
+
+                                <div class="group-form checkbox margin-top-10">
+                                    <label class="wrap">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
+                                        Subscribe to our partners newsletters</label>
+                                </div>
+                            </div>
+
                             {{ form_rest(form) }}
-                            <div class="group-actions margin-top-20 right">
-                                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Register">
+                            <div class="clear"></div>
+                            <div class="group-actions margin-top-30 margin-bottom-50 wrap">
+                                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="CREATE YOUR ACCOUNT">
                             </div>
                         </form>
                         <div class="clear"></div>
-                        {% if not form.vars.valid %}
-                            <div id="message" class="margin-top-20 right">
-                                <div>
-                                    <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
-                                    {{ form_errors(form) }}
-                                    {{ form_errors(form.plainPassword.first) }}
-                                    {{ form_errors(form.plainPassword.second) }}
-                                    {{ form_errors(form.username) }}
-                                    {{ form_errors(form.title) }}
-                                    {{ form_errors(form.firstname) }}
-                                    {{ form_errors(form.lastname) }}
-                                    {{ form_errors(form.email) }}
-                                    {{ form_errors(form.birthdate) }}
-                                    {{ form_errors(form.country) }}
-                                    {{ form_errors(form.prefCity1) }}
-                                    {{ form_errors(form.prefCity2) }}
-                                    {{ form_errors(form.prefCity3) }}
-                                    {{ form_errors(form.prefBar1) }}
-                                    {{ form_errors(form.prefBar2) }}
-                                    {{ form_errors(form.prefBar3) }}
-                                    {{ form_errors(form.prefDrinkBrand1) }}
-                                    {{ form_errors(form.prefDrinkBrand2) }}
-                                    {{ form_errors(form.prefDrinkBrand3) }}
-                                    {{ form_errors(form.prefCocktails1) }}
-                                    {{ form_errors(form.prefCocktails2) }}
-                                    {{ form_errors(form.prefCocktails3) }}
-                                </div>
+                        <div id="message" class="margin-top-20 margin-bottom-20 wrap" style="display:none;">
+                            <div>
+                                <ul>
+                                </ul>
                             </div>
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
                 <div class="clear"></div>
-            </div>
+            </div> <!-- ui.wrap -->
         </div> <!-- #register -->
     </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/wbbcore/css/jquery_ui/jquery-ui.min.css') }}" media="all" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/icheck.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbuser/js/modules/profile.edit.wbb.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.form-checkbox').iCheck({
+                checkboxClass: 'icheckbox_flat',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
 {% endblock %}

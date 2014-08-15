@@ -65,39 +65,57 @@ class UserAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $generatePasswordBtn = '<input type="button" id="pwd-generator" class="pwd-generator btn" value="Generate Password" />';
+
         $formMapper
             ->with('General')
                 ->add('title', 'choice', array(
-                    'help' => 'Mandatory',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => true,
+                    'help'      => 'Mandatory',
+                    'expanded'  => false,
+                    'multiple'  => false,
+                    'required'  => true,
+                    'label'     => 'Gender',
                     'choices'  => array(
-                        'Mrs'   =>  'Madam',
-                        'Miss'  =>  'Miss',
-                        'Mr'    =>  'Mister'
+                        'F'   =>  'F',
+                        'M'   =>  'M'
                     )
                 ))
                 ->add('username', null, array('help' => 'Mandatory'))
                 ->add('email', null, array('help' => 'Mandatory'))
-                ->add('firstname', null, array('help' => 'Mandatory'))
-                ->add('lastname', null, array('help' => 'Mandatory'))
-                ->add('birthdate', null, array('help' => 'Mandatory'))
+                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname', 'required' => false))
+                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname', 'required' => false))
+                ->add('birthdate', null, array('years' => range(1914, date('Y')), 'help' => 'Mandatory', 'label' => 'Birthdate'))
                 ->add('website')
-                ->add('country', null, array('help' => 'Mandatory'))
+                ->add('country', null, array('help' => 'Mandatory', 'label' => 'Country'))
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
-                ->add('plainPassword', 'text', array('required' => false, 'help' => 'Mandatory', 'label' => 'Password *'))
+                ->add('plainPassword', 'text', array(
+                        'required' => false,
+                        'help' => $generatePasswordBtn.'Mandatory',
+                        'label' => 'Password *',
+                        'attr' => array(
+                            'class' => 'span5 pwd-field'
+                        )
+                    )
+                )
             ->end()
             ->with('Preferences')
-                ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))
-                ->add('prefHome', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefCity1', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefCity2', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefCity3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefBar1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefBar2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefBar3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefDrinkBrand1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefDrinkBrand2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefDrinkBrand3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCocktails1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCocktails2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCocktails3', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefStartCity', null, array('read_only' => true, 'disabled'  => true))
                 ->add('stayInformed')
+                ->add('stayBrandInformed')
             ->end()
         ;
 
@@ -131,6 +149,18 @@ class UserAdmin extends Admin
      */
     public function preUpdate($user)
     {
+        if($user->getPlainPassword()){
+            //Get the plain password before encryption and the rest of email data
+            $data = array(
+                'password'  => $user->getPlainPassword(),
+                'email'     => $user->getEmail(),
+                'gender'    => $user->getTitle(),
+                'fullName'  => $user->getFullName()
+            );
+            //Send Email containing the New Password
+            $this->getContainer()->get('wbb_user.generate_password.mailer')->sendGeneratedPassword($data);
+        }
+
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
     }

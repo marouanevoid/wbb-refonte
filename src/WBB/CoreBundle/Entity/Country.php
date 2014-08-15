@@ -4,6 +4,7 @@ namespace WBB\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use WBB\BarBundle\Entity\Ad;
 
 /**
  * Country
@@ -37,6 +38,11 @@ class Country
     private $acronym;
 
     /**
+     * @ORM\Column(name="drinking_age", type="integer")
+     */
+    private $drinkingAge = 18;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -68,9 +74,13 @@ class Country
     private $bestofs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\WBB\BarBundle\Entity\Ad", inversedBy="countries")
-     */
-    private $ad;
+     * @ORM\ManyToMany(targetEntity="\WBB\BarBundle\Entity\Ad", inversedBy="countries", cascade={"all"})
+     * @ORM\JoinTable(name="wbb_ads_countries",
+     *      joinColumns={@ORM\JoinColumn(name="country_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="ad_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $ads;
 
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="country", cascade={"all"})
@@ -236,29 +246,6 @@ class Country
     }
 
     /**
-     * Set ad
-     *
-     * @param \WBB\BarBundle\Entity\Ad $ad
-     * @return Country
-     */
-    public function setAd(\WBB\BarBundle\Entity\Ad $ad = null)
-    {
-        $this->ad = $ad;
-
-        return $this;
-    }
-
-    /**
-     * Get ad
-     *
-     * @return \WBB\BarBundle\Entity\Ad 
-     */
-    public function getAd()
-    {
-        return $this->ad;
-    }
-
-    /**
      * Set acronym
      *
      * @param string $acronym
@@ -345,5 +332,61 @@ class Country
     public function getSemsoftBars()
     {
         return $this->semsoftBars;
+    }
+
+    /**
+     * Set drinkingAge
+     *
+     * @param integer $drinkingAge
+     * @return Country
+     */
+    public function setDrinkingAge($drinkingAge)
+    {
+        $this->drinkingAge = $drinkingAge;
+
+        return $this;
+    }
+
+    /**
+     * Get drinkingAge
+     *
+     * @return integer 
+     */
+    public function getDrinkingAge()
+    {
+        return $this->drinkingAge;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param Ad $ads
+     * @return Country
+     */
+    public function addAd(Ad $ads)
+    {
+        $this->ads[] = $ads;
+
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param Ad $ads
+     */
+    public function removeAd(Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }

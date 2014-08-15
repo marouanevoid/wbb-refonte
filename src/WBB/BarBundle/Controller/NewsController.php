@@ -8,8 +8,23 @@ use WBB\BarBundle\Entity\News;
 
 class NewsController extends Controller
 {
+    private function reGeolocate(){
+
+        $session = $this->container->get('session');
+        $cookies = $this->get('request')->cookies;
+
+        if($cookies->has('first_visite') == false || ( $cookies->has('first_visite') && $cookies->get('first_visite') != "false" ) ){
+            $geoSlug = $session->get('citySlugGeo');
+            if(!empty($geoSlug))
+            {
+                $session->set('citySlug', $geoSlug);
+            }
+        }
+    }
+
     public function landingPageAction($citySlug = false)
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         if ($citySlug == "world-wide")
             $session->set('citySlug', "");
@@ -70,6 +85,7 @@ class NewsController extends Controller
 
     public function detailsAction($newsSlug)
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         $city = null;

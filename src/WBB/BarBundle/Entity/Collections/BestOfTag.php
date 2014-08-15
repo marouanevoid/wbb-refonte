@@ -25,7 +25,7 @@ class BestOfTag
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     private $type;
 
@@ -42,7 +42,7 @@ class BestOfTag
     private $bestof;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bestofs")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bestofs", fetch="EAGER")
      */
     private $tag;
 

@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CityController extends Controller
 {
-
-
     public function citiesAction()
     {
         return $this->render('WBBCoreBundle:City:cities.html.twig');
@@ -42,6 +40,60 @@ class CityController extends Controller
         ));
     }
 
+    //Returns a list of city subrubs
+    public function citySuburbsAction($citySlug)
+    {
+        $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
+
+        $response = array();
+
+        foreach($city->getSuburbs() as $suburb)
+        {
+            $response[] = array(
+                'id'        => $suburb->getId(),
+                'name'      => $suburb->getName(),
+                'slug'      => $suburb->getSlug()
+            );
+        }
+
+        return new JsonResponse(array(
+            'code'   => 200,
+            'suburbs' => $response
+        ));
+    }
+
+    //Returns a list of all cities
+    public function allCitiesAction()
+    {
+        $cities = $this->container->get('city.repository')->findAll();
+
+        $response = array();
+
+        foreach($cities as $city)
+        {
+            $response[$city->getName().'/'.$city->getCountry()] = $city->getName().'/'.$city->getCountry();
+        }
+
+        return new JsonResponse($response);
+    }
+
+    public function getCitesByNameAction(Request $request)
+    {
+        $term = $request->get('term');
+        $cities = $this->container->get('city.repository')->findCitiesLike($term, 5);
+
+        $json = array();
+
+        foreach ($cities as $city) {
+            $json[] = array(
+                'value' => $city->getName(),
+                'id'    => $city->getName()
+            );
+        }
+
+        return new JsonResponse($json);
+    }
+
     public function nearestCityAction($latitude, $longitude)
     {
         $session = $this->container->get('session');
@@ -52,7 +104,20 @@ class CityController extends Controller
         $session->set('userLongitude', $longitude);
 
         if($city){
+            $user = $this->getUser();
+            if($user){
+                $user->setPrefStartCity($city);
+                $user->setCountry($city->getCountry());
+                $user->setLatitude($latitude);
+                $user->setLongitude($longitude);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+            }
+
             $session->set('citySlug', $city->getSlug());
+            $session->set('citySlugGeo', $city->getSlug());
             return new JsonResponse(array(
                 'id'        => $city->getId(),
                 'name'      => $city->getName(),
@@ -86,10 +151,7 @@ class CityController extends Controller
             if ($suburbSlug)
                 $suburb = $this->container->get('suburb.repository')->findOneBySlug($suburbSlug);
 
-        
             $bars = $this->container->get('bar.repository')->findAllEnabled($city, $suburb);
-            
-
 
             $suburbs = $this->container->get('suburb.repository')->findByCityWithBars($city);
             $result = array('bars' => array(), 'suburbs' => array());
@@ -97,7 +159,6 @@ class CityController extends Controller
             foreach($bars as $bar)
             {
                 $address = $city->getName();
-
                 $suburbBar = $bar->getSuburb();
                 if (!empty($suburbBar))
                   $address = $suburbBar->getName().", ".$city->getName();
@@ -152,26 +213,22 @@ class CityController extends Controller
     private function arrayTagsToString($tags)
     {
         $result = "";
-
         foreach($tags as $tag)
         {
             if($tag->getTag())
                 $result .= $tag->getTag()->getName().', ';
         }
-
         return substr($result, 0, -2);
     }
 
     private function barFirstImage($bar, Request $request)
     {
         $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
-
         $medias = $bar->getMedias();
         foreach($medias as $media)
         {
             return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'default_slider_large');
         }
-
         return null;
     }
 }

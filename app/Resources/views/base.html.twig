@@ -5,11 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta charset="utf-8"/>
 
+        <title>{% block title %}{{ "World Best Bars"|trans }}{% endblock %}</title>
         {% block meta %}
             <meta name="description" content="{% block mDescription %}World Best Bars{% endblock %}" />
         {% endblock %}
 
-        <title>{% block title %}{{ "World Best Bars"|trans }}{% endblock %}</title>
         <link rel="icon" type="image/png" href="{{ asset('bundles/wbbcore/images/favicon.png') }}" />
 
         <!--[if lt IE 9]>
@@ -25,6 +25,9 @@
                 window.isCity = true;
             {% endif %}
             var DEBUGMODE = "{{app.environment }}";
+            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '');
+
+            // vars for fav actions
         </script>
             
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -72,31 +75,32 @@
             {#{% endjavascripts %}#}
         {% endblock %}
 
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.easing.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.velocity.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.transform3d.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/modernizr.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.browser.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/placeholders.min.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.mousewheel.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.jscrollpane.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.cookie.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/utils.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/slider.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/ratio.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/loadMore.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/dropdown.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/selector.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/radio.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/search.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/form.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/app.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/tips.metabolism.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/geolocalisation.wbb.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/wbb.js"></script>
-        <script type="text/javascript" src="/bundles/wbbcore/js/libs/translate.wbb.js"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.transform3d.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/modernizr.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.browser.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/placeholders.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.mousewheel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/popin.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMore.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/dropdown.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/selector.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/radio.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/search.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/form.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/tips.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
 
         {% block javascripts %}
 
@@ -107,6 +111,83 @@
                 var LANG = "en";
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
+                
+                var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
+                var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
+                var showResettingForm = "{{ app.request.query.get('token', 0) }}";
+                var showLoginForm = {{ app.request.query.get('login', 0) }};
+                var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
+                var favoriteName = '';
+
+                var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
+                var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
+                var popinFrom = '';
+                {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                var currentPage = "{{ currentPath }}";
+
+                {% if app.user %}
+                    $(document).ready(function() {
+                        if($.cookie) {
+                            if($.cookie('light_action') !== undefined) {
+                                var notShown = true;
+                                var favoriteUrl = $.cookie('light_url');
+                                console.log(favoriteUrl);
+                                var from = $.cookie('light_from');
+                                var action = $.cookie('light_action');
+
+                                var html = '';
+                                if(action === 'favorite'){
+                                    $('.star').each(function() {
+                                        if (notShown) {
+                                            if ($(this).attr('href') === favoriteUrl) {
+                                                $(this).click();
+                                                if(from === 'login') {
+                                                    html = '<table id="success" class="min-height" width="100%"><tbody><tr><td valign="bottom" style="vertical-align: bottom"><p class="padding-top-40 text-align-center">The "' + $.cookie('light_name') +
+                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p></td></tr><tr><td align="center">' +
+                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></td></tr></tbody></table>';
+                                                } else {
+                                                    html = '<table id="success" class="min-height" width="100%"><tbody><tr><td valign="bottom" style="vertical-align: bottom"><div class="subtitle">CONGRATULATIONS !</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p></td></tr><tr><td align="center">' +
+                                                    '<p>The "' + $.cookie('light_name') +
+                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
+                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></td></tr></tbody></table>';
+                                                }
+                                                $('.popin-block').html(html);
+                                                $('#show-popin').click();
+                                                notShown = false;
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    if(from !== 'login') {
+                                        var html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.<p>' +
+                                        '<p>Your tip has been posted and is currently being moderated.</p>' +
+                                        '<p>You will be able to find all your tips in your user profile.</p>';
+                                        $('.popin-block').html(html);
+                                        $('#show-popin').click();
+                                    }
+                                    $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
+                                    $('#tips_submit').click();
+                                }
+
+                                $.removeCookie('light_action');
+                                $.removeCookie('light_url');
+                                $.removeCookie('light_favorite');
+                                $.removeCookie('light_from');
+                                $.removeCookie('light_name');
+                            }
+                        }
+                    });
+                {% endif %}
+
+                $(document).ready(function() {
+                    if ($.cookie('just_loggedin') !== undefined) {
+                        $('header.desktop .logged').mouseover();
+                        $.removeCookie('just_loggedin');
+                    }
+                    $(window).on('scroll' , function(){
+                        $('header.desktop .logged').mouseout();
+                    });
+                });
         </script>
 
         {% if is_tablet() %}
@@ -136,15 +217,29 @@
 
         {% endblock %}
         <div class="mask"></div>
-        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <div id="register-light">
-                {% render url('wbb_user_registration_register_light') %}    
+        <div id="register" style="display:none" class="{% if is_mobile() and not is_tablet() %}mobile{% endif %} popup">
+            <div class="wrap ui register">
+                <div class="margin-top-20">
+                    <div class="popin-block">
+                        {% if resetting_form is defined %}
+                            {{ resetting_form|raw }}
+                        {% endif %}
+                        {% if app.request.query.get('emailPopin', 0) == 1 %}
+                            {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
+                        {% endif %}
+                        {% if app.request.query.get('confirmed', 0) == 1 %}
+                            {{ include('WBBUserBundle:Registration:confirm.html.twig') }}
+                        {% endif %}
+                    </div>
+                    <div>
+                        <a href="#close" class="btn btn-close">Close</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
             </div>
-            {{ include('WBBUserBundle:Registration:register_tips.html.twig') }}
-        {% endif %}
+        </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
-        <div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>
-        <div id="fb-root"></div>
+        {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
         {{ facebook_initialize({'xfbml': true}) }}
         <script>
             function securityCheck() {
@@ -152,12 +247,26 @@
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            alert('Create an account please !');
+                            window.location.href = "{{ path('fos_user_registration_register') }}";
                         } else {
+                            console.log(addFavorite);
+                            if (addFavorite != '0') {
+                                if (addFavorite.indexOf('favorite') > -1) {
+                                    $.cookie('light_action', 'favorite');
+                                } else {
+                                    $.cookie('light_action', 'tips');
+                                }
+                                $.cookie('light_type', window.lightType);
+                                $.cookie('light_url', addFavorite);
+                                $.cookie('light_from', 'login');
+                                $.cookie('light_name', window.lightName);
+                            }
+
+                            $.cookie('just_loggedin', true);
                             window.location.reload();
                         }
                     }
-                })
+                });
             }
         </script>
         <script type="text/javascript">
@@ -180,7 +289,6 @@
         {% endblock %}
         <!-- AD -->
         {% block footerAd %}
-            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
         {% endblock %}
         <script>
         $(document).ready(function(){
@@ -192,5 +300,6 @@
         {% block footer %}
             {% include '::footer.html.twig' %}
         {% endblock %}
+        {% if is_mobile() and not is_tablet() %}<div id="landscape-mobile"></div>{% endif %}
     </body>
 </html>

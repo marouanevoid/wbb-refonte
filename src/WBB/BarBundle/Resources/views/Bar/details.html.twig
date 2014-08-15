@@ -1,6 +1,34 @@
 {% extends "::base.html.twig" %}
-{% block meta %}<meta name="description" content="{{ bar.seoDescription }}" />{% endblock %}
+
 {% block title %}{{ bar.name }} | World Best Bars{% endblock %}
+{% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set bitlyURL = currentPath| bitly %}
+
+{% block meta %}
+    <meta name="description" content="{{ bar.seoDescription|slice(0, 150) }}" />
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@wbb">
+    <meta name="twitter:title" content="{{ bar.name }} | World Best Bars">
+    <meta name="twitter:description" content="{{ bar.seoDescription|slice(0, 150) }}">
+    <meta name="twitter:creator" content="@wbb">
+    <meta property="twitter:url" content="{{ bitlyURL }}" />
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="{{ bar.name }} | World Best Bars" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ bitlyURL }}" />
+    <meta property="og:description" content="{{ bar.seoDescription|slice(0, 200) }}" />
+    <meta property="og:site_name" content="World Best Bars" />
+    <meta property="fb:admins" content="149071961796732" />
+
+    {% for m in bar.medias|slice(0,1) %}
+        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}">
+        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}" />
+    {% endfor %}
+
+{% endblock %}
+
 
 {% block javascripts %}
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -16,6 +44,7 @@
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMoreTips.wbb.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.nicescroll.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/modules/bar-details.wbb.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbbar/js/social-share.js') }}"></script>
 
     <script type="text/javascript">
         /**
@@ -217,28 +246,32 @@
                     </td>
 
                     <td class="star-share">
-                        <a class="btn-round brown star" href="#0"></a><a id="share" class="btn-round brown share" href="#0"></a>
+                        <a data-type="{{ entity_light_type(bar) }}" class="btn-round {% if is_favorite(app.user, bar) %}active changed{% else %}brown{% endif %} star" data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
+                        <a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
             </table>
-            <div class="wrap-share" style="display:none">
+            <div id="share-pop" class="wrap-share {% if is_mobile() and not is_tablet() %}mobile popup{% endif %}" style="display:none">
                 <div class="social-share radius-max">
                     <div class="share-label left bold">SHARE</div>
                     <ul>
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
-                        <li class="left"><a href="#0" class="email-share">Email</a></li>
+                        {% if is_mobile() and not is_tablet() %}
+                            {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL %}
+                            <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
+                        {% else %}
+                            <li class="left">
+                                <a href="#0" data-href="{{ path('wbb_share_email_form', {id: bar.id, type: 'bar'}) }}" class="email-share">
+                                    Email
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                     <div class="clear"></div>
                 </div>
+                {% if is_mobile() and not is_tablet() %}<a href="javascript:;" id="close-pop" class="close btn-close-brown no-text">close</a>{% endif %}
             </div>
-            <script type="text/javascript">
-            $(document).ready(function(){
-                $("#share").hover(function() {
-                    $(".wrap-share").fadeIn("slow");
-                });
-            })
-            </script>
         </section>
     </div>
     <!-- SLIDER -->
@@ -264,7 +297,6 @@
                 <div class="loader"></div>
                 <div class="ui-slide" style="display:none">
                     {% for m in bar.medias %}
-
                         {% if not loop.first %}
                             <div class="image">
                                 <div class="content">
@@ -287,14 +319,12 @@
 
                     <ul class="trends margin-bottom-40">
                         <li>At a Glance :</li>
-                        {% if bar.energyLevel %}
-                            <li>{{ bar.energyLevel }}</li>
-                        {% endif %}
-                        {% for tr in bar.tags |slice(0, ((bar.energyLevel)? 4 : 5)) %}
-                            {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
-                                <li>{{ tr.tag.name|capitalize }}</li>
-                            {% endif %}
-                        {% endfor%}
+                        {% for tr in bar.tagsToShow |slice(0, 5) %}
+                            <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
+                                {{ tr.name|capitalize }}
+                            </a>
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
                     </ul>
 
                     <p>
@@ -341,19 +371,6 @@
                                             {% endif %}
                                         </li>
                                     {% endfor %}
-                                    {#{% for b in bar.bestofs %}#}
-                                        {#<li>#}
-                                            {#{% if b.bestof.city %}#}
-                                                {#<a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.bestof.slug, citySlug: b.bestof.city.slug}) }}">#}
-                                                    {#Best {{ b.bestof.name }} in {{ b.bestof.city }}#}
-                                                {#</a>#}
-                                            {#{% else %}#}
-                                                {#<a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.bestof.slug}) }}">#}
-                                                    {#Best {{ b.bestof.name }} in world#}
-                                                {#</a>#}
-                                            {#{% endif %}#}
-                                        {#</li>#}
-                                    {#{% endfor %}#}
                                 </ul>
                             </div>
                         </div>
@@ -436,12 +453,7 @@
                         </div>
                     </div>
                     {% if not is_mobile() or is_tablet() %}
-                        <div class="block">
-                            <div class="side-ad m-margin-top">
-                                <img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>
-                                <div class="txt">Advertising</div>
-                            </div>
-                        </div>
+                        {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_300x250' })) }}
                     {% endif %}
                 </aside>
             </article>
@@ -547,6 +559,9 @@
             $('form#tips .count').text( 250-length+' left' );
         });
     </script>
+{% endblock %}
+{% block footerAd %}
+    {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_728x90' })) }}
 {% endblock %}
 
 

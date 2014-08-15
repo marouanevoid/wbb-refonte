@@ -10,15 +10,50 @@ use WBB\BarBundle\Entity\Tag;
 use WBB\BarBundle\Entity\Tip;
 use WBB\BarBundle\Form\TipType;
 use WBB\BarBundle\Repository\BarRepository;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use FOS\UserBundle\Event\FormEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class BarController extends Controller
 {
-    public function homeAction()
+
+    private function reGeolocate(){
+
+        $session = $this->container->get('session');
+        $cookies = $this->get('request')->cookies;
+
+        if($cookies->has('first_visite') == false || ( $cookies->has('first_visite') && $cookies->get('first_visite') != "false" ) ){
+            $geoSlug = $session->get('citySlugGeo');
+            if(!empty($geoSlug))
+            {
+                $session->set('citySlug', $geoSlug);
+            }
+        }
+    }
+
+    public function homeAction(Request $request)
     {
+        $resettingForm = null;
+        if ($request->query->get('token', null)) {
+            $res = $this->resetAction($request, $request->query->get('token'));
+            if (!is_array($res)) {
+                $resettingForm = $res->getContent();
+                if($request->isXmlHttpRequest()) {
+                    return $res;
+                }
+            } else {
+                return $res[0];
+            }
+        }
+        $this->reGeolocate();
+
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
-            return $this->cityHomeAction($session->get('citySlug'));
+            return $this->cityHomeAction($session->get('citySlug'), $request, $resettingForm);
         $session->set('citySlug', "");
 
         $topCities = $this->container->get('city.repository')->findTopCities();
@@ -29,16 +64,71 @@ class BarController extends Controller
         $response['topBestofs'] = $this->container->get('bestof.repository')->findTopBestOfs();
         $response['topNews']    = $this->container->get('news.repository')->findLatestNews(null, 3);
         $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars(null, 5);
+        if ($resettingForm) {
+            $response['resetting_form'] = $resettingForm;
+        }
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
-
-    public function cityHomeAction($slug)
+    
+    private function resetAction(Request $request, $token)
     {
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('fos_user.resetting.form.factory');
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->container->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
+        $user = $userManager->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+        }
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        $form = $formFactory->createForm();
+        $form->setData($user);
+
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_SUCCESS, $event);
+
+                $userManager->updateUser($user);
+
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->container->get('router')->generate('wbb_user_reset_success');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return array($response);
+            }
+        }
+
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:reset.html.twig', array(
+            'token' => $token,
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function cityHomeAction($slug, Request $request,  $resettingForm = null)
+    {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         if ($slug == "world-wide"){
             $session->set('citySlug', "");
-            return $this->homeAction();
+            return $this->homeAction($request);
         }
 
         if($slug != $session->get('citySlug')){
@@ -70,12 +160,16 @@ class BarController extends Controller
         $response['topNews']    = $this->container->get('news.repository')->findLatestNews($city);
         $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars($city);
         $response['city']       = $city;
+        if ($resettingForm) {
+            $response['resetting_form'] = $resettingForm;
+        }
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
 
     public function barGuideAction()
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
@@ -92,6 +186,7 @@ class BarController extends Controller
 
     public function barGuideCityAction($slug)
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         if ($slug == "world-wide")
         {
@@ -150,7 +245,7 @@ class BarController extends Controller
             $distance['city']         = $this->get('city.repository')->findOneBySlug($city);
         }
 
-        $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
+        $bar = $this->container->get('bar.repository')->findBarBySlug($slug);
         if (!$bar) {
             throw $this->createNotFoundException('Object not found!');
         }
@@ -186,6 +281,7 @@ class BarController extends Controller
 
     public function barFinderAction(Request $request)
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         $city = null;
@@ -200,7 +296,7 @@ class BarController extends Controller
             $city = $this->get('city.repository')->findOneBySlug($slug);
 
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
-//        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
+
         $moods          = array(
             'Chill Out',
             'Casual',
@@ -219,6 +315,7 @@ class BarController extends Controller
 
     public function barFinderFormAction()
     {
+        $this->reGeolocate();
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
 
@@ -260,7 +357,7 @@ class BarController extends Controller
         $session = $this->container->get('session');
         if($request->request->get('mood') != "")
         {
-            $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, $limit = 1, $request->request->get('mood'));
+            $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, 1, $request->request->get('mood'));
             $session->set('barfinder_mood', $mood);
         }else{
             $session->set('barfinder_mood', "empty");
@@ -437,8 +534,8 @@ class BarController extends Controller
         }else{
             if($filter === "popularity"){
                 //TODO: Repository methode for popularity
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, $limit, 'DESC');
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0, 'DESC');
+                $response = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, $limit);
+                $all = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, 0);
             }elseif($filter === "alphabetical"){
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset ,$limit);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);
@@ -471,6 +568,23 @@ class BarController extends Controller
                 'difference' => $nbResultsRemaining
             )
         );
+    }
+
+    public function getBarsByNameAction(Request $request)
+    {
+        $term = $request->get('term');
+        $bars = $this->container->get('bar.repository')->findBarsLike($term, 5);
+
+        $json = array();
+
+        foreach ($bars as $bar) {
+            $json[] = array(
+                'value' => $bar->getName(),
+                'id'    => $bar->getName()
+            );
+        }
+
+        return new JsonResponse($json);
     }
 
     private function getYouMayAlsoLike($bar)
@@ -560,5 +674,16 @@ class BarController extends Controller
             'bars'      =>  $youMayAlsoLike,
             'oneCity'   =>  $oneCity
         );
+    }
+
+    private function getBarFinderMoods()
+    {
+        $moodsFound = $this->container->get('tag.repository')->findBarFinderMoods();
+        $moods = array();
+        foreach($moodsFound as $mood){
+            $moods[] = $mood['name'];
+        }
+
+        return $moods;
     }
 }

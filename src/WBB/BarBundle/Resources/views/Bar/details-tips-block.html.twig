@@ -11,6 +11,28 @@
                 $(document).ready(function() {
                     $('#tips').on('submit', function(e) {
                         e.preventDefault();
+                        $('.popin-block').html('');
+                        var url = $('.btn-signin').attr('href') + '?favorite=' + '{{ path('wbb_bar_tips_add') }}';
+                        window.lightType = 'tip';
+                        window.lightName = $('#wbb_barbundle_tip_description').val();
+                        console.log(window.lightType);
+                        console.log(window.lightName);
+                        popinFrom = 'favorite';
+                        if ($('#wbb_barbundle_tip_description').val().trim() !== ''){
+                            $.ajax({
+                                url: url,
+                                method: 'GET',
+                                success: function(html) {
+                                    html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
+                                    $('.popin-block').html(html);
+                                    initializeDropdowns();
+                                    initRegisterLoginForms();
+                                    $('#show-popin').click();
+                                    // scroll to top
+                                    $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+                                }
+                            });
+                        }
                     });
                 });
             </script>

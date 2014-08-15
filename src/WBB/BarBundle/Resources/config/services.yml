@@ -17,6 +17,7 @@ parameters:
 
     #CRUD Controllers
     wbb_bar.tip.crud.class: WBBBarBundle:CRUD\TipCRUD
+    wbb_bar.semsoft.crud.class: WBBBarBundle:CRUD\SemsoftCRUD
 
     #Entities
     wbb_bar.bar.entity.class: WBB\BarBundle\Entity\Bar
@@ -51,7 +52,7 @@ services:
         class: %wbb_bar.bar.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar, label: bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.bar.entity.class%, SonataAdminBundle:CRUD]
+        arguments: [null, %wbb_bar.bar.entity.class%, %wbb_bar.semsoft.crud.class%]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
             - [setTemplates, [{ edit: "WBBBarBundle:Admin:Bar/edit.html.twig", list: "WBBBarBundle:Admin:Bar/list.html.twig" }]]
@@ -60,7 +61,7 @@ services:
         class: %wbb_bar.semsoftbar.admin.class%
         tags:
           - { name: sonata.admin, manager_type: orm, group: wbb_bar_hidden, label: semsoft_bars, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
-        arguments: [null, %wbb_bar.semsoftbar.entity.class%, SonataAdminBundle:CRUD]
+        arguments: [null, %wbb_bar.semsoftbar.entity.class%, %wbb_bar.semsoft.crud.class%]
         calls:
             - [setTranslationDomain, ["WBBBarBundle"]]
             - [setTemplates, [{ edit: "WBBBarBundle:Admin:Semsoft/edit.html.twig" }]]
@@ -227,17 +228,27 @@ services:
     wbb.tips.event_listener:
         class: WBB\BarBundle\EventListener\TipsListener
         arguments:
-            - "@wbb.mailer"
+            - "@swiftmailer.mailer.default"
+            - "@router"
+            - "@twig"
             - "@doctrine.orm.entity_manager"
         tags:
             - { name: kernel.event_subscriber }
 
     wbb.mailer:
         class: WBB\BarBundle\Mailer\TipsMailer
-        arguments:
-            - "@mailer"
-    # ForumMailer
-#    wbb_bar.mailer:
-#        class:  WBB\BarBundle\Mailer\BarMailer
-#        parent: bmwi_core.mailer.twig_swift
-#        public: false
+
+    #Bar Persist Listener
+    wbb.bar.listener:
+        class: WBB\BarBundle\EventListener\BarListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
+
+
+
+    # Share Mail Service
+    wbb_bar.share.mailer:
+        class:  WBB\BarBundle\Mailer\ShareMailer
+        parent: wbb_core.mailer.twig_swift
+        public: true

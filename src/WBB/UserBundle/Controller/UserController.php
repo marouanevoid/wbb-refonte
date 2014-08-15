@@ -5,9 +5,22 @@ namespace WBB\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
+
+    public function simulateErrorAction($code)
+    {
+        if($code === '404')
+        {
+            throw new NotFoundHttpException;
+        }else{
+            throw new \Exception;
+        }
+
+    }
+
     public function loadProfileDataAction($content = 1, $filter = "date" , $offset = 0, $limit = 8, $display = 'grid')
     {
         $user = $this->getUser();
@@ -23,8 +36,7 @@ class UserController extends Controller
         $nbResults          = null;
         $nbResultsRemaining = null;
         $html               = null;
-
-        $distance   = false;
+        $distance           = false;
 
         if($content == "bars"){
             $session = $this->container->get('session');
@@ -49,7 +61,7 @@ class UserController extends Controller
             }
 
             if($display=="grid"){
-                $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
                         'limit'  => $limit,
@@ -57,7 +69,7 @@ class UserController extends Controller
                     )
                 );
             }else{
-                $html = $this->renderView('WBBBarBundle:BarGuide:filters\barsList.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
                     'limit'  => $limit,
@@ -78,13 +90,13 @@ class UserController extends Controller
                 $all = $this->container->get('bestof.repository')->findLatestBestofs(null, 0, $offset, false, $user);
             }
             if($display=="grid"){
-                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile/filters:bestofs.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
                 ));
             }else{
-                $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofsList.html.twig', array(
+                $html = $this->renderView('WBBUserBundle:Profile/filters:bestofsList.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
@@ -92,9 +104,8 @@ class UserController extends Controller
             }
         }else{
 
-            $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit);
-            $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset, 0);
-
+            $response = $this->container->get('tip.repository')->findUserTips($user, $offset ,$limit);
+            $all = $this->container->get('tip.repository')->findUserTips($user, $offset, 0);
             $html = $this->renderView('WBBUserBundle:Profile/filters:tip.html.twig', array(
                 'tips'    => $response,
                 'user'    => $user,

@@ -69,10 +69,32 @@ class RegistrationController extends ContainerAware
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-                $session = $this->container->get('session');
-                $session->save();
+//                $session = $this->container->get('session');
+//                $session->save();
 
                 return $response;
+            } else {
+                $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
+                $fields = array();
+                $messages = array();
+
+                foreach ($formErrors as $formError) {
+                    $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {                        
+                        $messages[] = 'Please complete all required fields';
+                    } elseif($formError->getMessage() != 'not.blank') {
+                        $messages[] = $formError->getMessage();
+                    }
+                }
+                if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
+                    $messages = array($messages[1]);
+                }
+                $errors = array(
+                    'fields' => $fields,
+                    'messages' => $messages
+                );
+
+                return new JsonResponse(array('code' => 400, 'errors' => $errors));
             }
         }
 
@@ -126,19 +148,32 @@ class RegistrationController extends ContainerAware
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-                $session = $this->container->get('session');
-                $session->save();
+//                $session = $this->container->get('session');
+//                $session->save();
 
                 return $response;
             } else {
-                $formErrors = $form->getErrors();
-                $errors = array();
+                $formErrors = $this->container->get('validator')->validate($form);
+                $fields = array();
+                $messages = array();
 
-                foreach ($formErrors as $error) {
-                    $errors[] = $error->getMessage();
+                foreach ($formErrors as $formError) {
+                    $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                        $messages[] = 'Please complete all required fields';
+                    } elseif($formError->getMessage() != 'not.blank') {
+                        $messages[] = $formError->getMessage();
+                    }
                 }
+                if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
+                    $messages = array($messages[1]);
+                }
+                $errors = array(
+                    'fields' => $fields,
+                    'messages' => $messages
+                );
 
-                return new JsonResponse(array('code' => '400', 'errors' => $errors));
+                return new JsonResponse(array('code' => 400, 'errors' => $errors));
             }
         }
 

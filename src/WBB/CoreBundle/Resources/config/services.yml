@@ -15,20 +15,6 @@ parameters:
     wbb_core.city_bestof.entity.class: WBB\CoreBundle\Entity\CityBestOf
 
 services:
-    #PDO SESSION
-    pdo:
-        class: PDO
-        arguments:
-            - "mysql:host=%database_host%;dbname=%database_name%"
-            - "%database_user%"
-            - "%database_password%"
-        calls:
-            - [setAttribute, [3, 2]]
-
-    session.handler.pdo:
-        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-        arguments: ["@pdo", "%pdo.db_options%"]
-
     #Admin Class
     wbb.core.admin.country:
         class: %wbb_core.country.admin.class%
@@ -101,10 +87,10 @@ services:
         tags:
           - { name: twig.extension }
 
-#    # TwigSwiftMailer
-#    wbb_core.mailer.twig_swift:
-#        class:  %wbb_core.twig_swift.class%
-#        parent: fos_user.mailer.twig_swift
-#        public: false
-#        calls:
-#            - [setContainer, [@service_container]]
+    # TwigSwiftMailer
+    wbb_core.mailer.twig_swift:
+        class:  %wbb_core.twig_swift.class%
+        parent: fos_user.mailer.twig_swift
+        public: false
+        calls:
+            - [setContainer, [@service_container]]

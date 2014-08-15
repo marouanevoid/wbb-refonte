@@ -193,14 +193,15 @@
 
 				percentInViewH = contentWidth / paneWidth;
 				percentInViewV = contentHeight / paneHeight;
-				isScrollableV = percentInViewV > 1;
+				isScrollableV = percentInViewV > 1.1;
 
-				isScrollableH = percentInViewH > 1;
+				isScrollableH = percentInViewH > 1.1;
 
 				//console.log(paneWidth, paneHeight, contentWidth, contentHeight, percentInViewH, percentInViewV, isScrollableH, isScrollableV);
 
 				if (!(isScrollableH || isScrollableV)) {
 					elem.removeClass('jspScrollable');
+					elem.addClass('jspNotScrollable');
 					pane.css({
                         top: 0,
                         left: 0,
@@ -210,8 +211,10 @@
 					removeFocusHandler();
 					removeKeyboardNav();
 					removeClickOnTrack();
+
 				} else {
 					elem.addClass('jspScrollable');
+                    elem.removeClass('jspNotScrollable');
 
 					isMaintainingPositon = settings.maintainPosition && (verticalDragPosition || horizontalDragPosition);
 					if (isMaintainingPositon) {
@@ -298,13 +301,14 @@
 
 						appendArrows(verticalTrack, settings.verticalArrowPositions, arrowUp, arrowDown);
 					}
-
 					verticalTrackHeight = paneHeight-2;
-					container.find('>.jspVerticalBar>.jspCap:visible,>.jspVerticalBar>.jspArrow').each(
+
+
+                    container.find('>.jspVerticalBar>.jspCap:visible,>.jspVerticalBar>.jspArrow').each(
 						function()
 						{
 							verticalTrackHeight -= $(this).outerHeight();
-						}
+                        }
 					);
 
 
@@ -344,7 +348,7 @@
 
 			function sizeVerticalScrollbar()
 			{
-				verticalTrack.height(verticalTrackHeight + 'px');
+                verticalTrack.height(verticalTrackHeight + 'px');
 				verticalDragPosition = 0;
 				scrollbarWidth = settings.verticalGutter + verticalTrack.outerWidth();
 
@@ -449,7 +453,7 @@
 				if (isScrollableH && isScrollableV) {
 					var horizontalTrackHeight = horizontalTrack.outerHeight(),
 						verticalTrackWidth = verticalTrack.outerWidth();
-					verticalTrackHeight -= horizontalTrackHeight;
+					//verticalTrackHeight -= horizontalTrackHeight;
 					$(horizontalBar).find('>.jspCap:visible,>.jspArrow').each(
 						function()
 						{

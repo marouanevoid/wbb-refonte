@@ -1,16 +1,33 @@
 {% for tip in tips %}
-<li class="col col-4">
-    <div class="block-tip">
-        <p>
-            {{ tip.description }}
-        </p>
-        <div class="profil margin-top-10 padding-top-10 separator-top">
-            <img src="images/UI/_images/robert_smithson.jpg" height="40" width="40" class="left">
-            <div class="expert bold">{{ user.userRole }}</div>
-            <div class="name">{{ user.firstname }} {{ user.lastname }}</div>
-        </div>
-        <a href="#close" class="close no-text">Close</a>
-        <div class="clear"></div>
-    </div>
-</li>
+    <li class="three columns box margin-bottom-30 item-tips">
+        <article class="tip">
+            <table class="content expert">
+                <tbody>
+                    <tr class="excerpt">
+                        <td colspan="2">
+                            {#<div class="scroll custom-scroll">#}
+                            <div class="">
+                                <span itemprop="description">
+                                    "{{ tip.description|raw }}"
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr class="s-margin-bottom">
+                        </td>
+                    </tr>
+                    <tr class="author">
+                        <td colspan="2">
+                            <img src="{{ showImage(user.avatar, 'av_small') }}" alt="user" width="40" height="40">
+                            <b>{{ user.userRole }}</b>
+                            {{ user.firstname }} {{ user.lastname }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <a data-type="tip" data-id="{{ tip.id }}" href="#" class="close remove-tip no-text">Close</a>
+        </article>
+    </li>
 {% endfor %}

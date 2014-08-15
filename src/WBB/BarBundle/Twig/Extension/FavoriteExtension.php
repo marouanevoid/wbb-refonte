@@ -25,8 +25,20 @@ class FavoriteExtension extends \Twig_Extension
     {
         return parent::getFunctions() + array(
             'favorite_url' => new \Twig_Function_Method($this, 'getFavoriteUrl'),
-            'is_favorite' => new \Twig_Function_Method($this, 'isFavorite')
+            'is_favorite' => new \Twig_Function_Method($this, 'isFavorite'),
+            'entity_light_type' => new \Twig_Function_Method($this, 'getType')
         );
+    }
+
+    public function getType($b)
+    {
+        if ($b instanceof Bar) {
+            return 'bar';
+        } elseif ($b instanceof BestOf) {
+            return 'best of';
+        } else {
+            return 'tip';
+        }
     }
 
     public function getFavoriteUrl($user, $object)
@@ -61,7 +73,9 @@ class FavoriteExtension extends \Twig_Extension
             }
         }
 
-        return '#';
+        return $this->router->generate('wbb_favorite_bar_add', array(
+                    'barId' => $bar->getId()
+        ));
     }
 
     private function isBarFavorite($user, Bar $bar)
@@ -91,7 +105,9 @@ class FavoriteExtension extends \Twig_Extension
             }
         }
 
-        return '#';
+        return $this->router->generate('wbb_favorite_bestof_add', array(
+                    'bestOfId' => $bestOf->getId()
+        ));
     }
 
     private function isBestOfFavorite($user, BestOf $bestOf)

@@ -2,11 +2,16 @@
 
 namespace WBB\UserBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
+use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\BestOf;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -34,6 +39,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=45, nullable=true)
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full"})
      */
     private $firstname;
 
@@ -41,6 +47,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=45, nullable=true)
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full"})
      */
     private $lastname;
 
@@ -48,6 +55,7 @@ class User extends BaseUser
      * @var date
      *
      * @ORM\Column(name="birthdate", type="date", nullable=true)
+     * @Assert\NotBlank(message="not.blank")
      */
     private $birthdate;
 
@@ -206,6 +214,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="users")
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full", "Registration", "Profile"})
      */
     private $country;
 
@@ -242,6 +251,11 @@ class User extends BaseUser
      * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
      */
     private $tipsShouldBeModerated;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+     */
+    private $avatar;
 
     /**
      * @var datetime
@@ -384,10 +398,10 @@ class User extends BaseUser
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param Bar $bars
      * @return User
      */
-    public function addBar(\WBB\BarBundle\Entity\Bar $bars)
+    public function addBar(Bar $bars)
     {
         $this->bars[] = $bars;
 
@@ -397,11 +411,11 @@ class User extends BaseUser
     /**
      * Remove bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param Bar $bar
      */
-    public function removeBar(\WBB\BarBundle\Entity\Bar $bars)
+    public function removeBar(Bar $bar)
     {
-        $this->bars->removeElement($bars);
+        $this->bars->removeElement($bar);
     }
 
     /**
@@ -1062,10 +1076,10 @@ class User extends BaseUser
     /**
      * Add favoriteBars
      *
-     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @param Bar $favoriteBars
      * @return User
      */
-    public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    public function addFavoriteBar(Bar $favoriteBars)
     {
         $this->favoriteBars[] = $favoriteBars;
         return $this;
@@ -1086,9 +1100,9 @@ class User extends BaseUser
     /**
      * Remove favoriteBars
      *
-     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @param Bar $favoriteBars
      */
-    public function removeFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    public function removeFavoriteBar(Bar $favoriteBars)
     {
         $this->favoriteBars->removeElement($favoriteBars);
     }
@@ -1106,10 +1120,10 @@ class User extends BaseUser
     /**
      * Add favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      * @return User
      */
-    public function addFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function addFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs[] = $favoriteBestOfs;
 
@@ -1119,9 +1133,9 @@ class User extends BaseUser
     /**
      * Remove favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      */
-    public function removeFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function removeFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs->removeElement($favoriteBestOfs);
     }
@@ -1168,4 +1182,62 @@ class User extends BaseUser
     {
         return $this->stayBrandInformed;
     }
+
+    /**
+     * Set avatar
+     *
+     * @param Media $avatar
+     * @return User
+     */
+    public function setAvatar(Media $avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return Media
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+    
+    /**
+     * @Assert\Callback()
+     */
+    public function validateBirthday(ExecutionContextInterface $context)
+    {
+        $country = $this->getCountry();
+        $drinkingAge = 18;
+        if ($this->birthdate) {
+            $age = $this->birthdate->diff(new \DateTime('now'))->y;
+            if ($country) {
+                $drinkingAge = $country->getDrinkingAge();
+            }
+            if ($drinkingAge > $age) {
+                $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+            }
+        }
+    }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function validatePassword(ExecutionContextInterface $context)
+    {
+        if ($this->plainPassword) {
+            if (strlen($this->plainPassword) < 6) {
+                $context->addViolationAt('plainPassword', 'Password is too short (minimum is 6 characters) and needs at least one number');
+            } else {
+                if (!ctype_alnum($this->plainPassword)) {
+                    $context->addViolationAt('plainPassword', 'Password is too short (minimum is 6 characters) and needs at least one number');
+                }
+            }
+        }
+    }
+
 }

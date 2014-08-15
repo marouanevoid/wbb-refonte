@@ -1,5 +1,32 @@
 {% extends "::base.html.twig" %}
 {% block title %}{{ news.title }} | World Best Bars{% endblock %}
+{% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set bitlyURL = currentPath| bitly %}
+
+{% block meta %}
+    <meta name="description" content="{{ news.seoDescription|slice(0, 150) }}" />
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@wbb">
+    <meta name="twitter:title" content="{{ news.title }} | World Best Bars">
+    <meta name="twitter:description" content="{{ news.seoDescription|slice(0, 150) }}">
+    <meta name="twitter:creator" content="@wbb">
+    <meta property="twitter:url" content="{{ bitlyURL }}" />
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="{{ news.title }} | World Best Bars" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ bitlyURL }}" />
+    <meta property="og:description" content="{{ news.seoDescription|slice(0, 200) }}" />
+    <meta property="og:site_name" content="World Best Bars" />
+    <meta property="fb:admins" content="149071961796732" />
+    {% for m in news.medias|slice(0,1) %}
+        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}">
+        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}" />
+    {% endfor %}
+{% endblock %}
+
+
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
@@ -7,6 +34,7 @@
             initializeSliders();
         });
     </script>
+    <script type="text/javascript" src="{{ asset('bundles/wbbbar/js/social-share.js') }}"></script>
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
@@ -147,10 +175,31 @@
                 </td>
 
                 <td class="star-share">
-                    <a class="btn-round brown share" href="#0"></a>
+                    <a id="share" class="btn-round brown share" href="#0"></a>
                 </td>
             </tr>
         </table>
+        <div id="share-pop" class="wrap-share {% if is_mobile() and not is_tablet() %}mobile popup{% endif %}" style="display:none">
+            <div class="social-share radius-max">
+                <div class="share-label left bold">SHARE</div>
+                <ul>
+                    <li class="left"><a href="#0" class="fb-share">Post</a></li>
+                    <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
+                    {% if is_mobile() and not is_tablet() %}
+                        {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL  %}
+                        <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
+                    {% else %}
+                        <li class="left">
+                            <a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">
+                                Email
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div class="clear"></div>
+            </div>
+            {% if is_mobile() and not is_tablet() %}<a href="javascript:;" id="close-pop" class="close btn-close-brown no-text">close</a>{% endif %}
+        </div>
     </section>
 </div>
 <div class="container">
@@ -193,7 +242,7 @@
                 {% else %}
                 </p><p>
                 {%
-                set init = random(news.bestofs|length - 1)
+                    set init = random(news.bestofs|length - 1)
                 %}
                     {% for b in news.bestofs |slice(init,1) %}
                     <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
@@ -224,7 +273,7 @@
                             <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} margin-top-20">
                                 <a href="#0" class="fb-share">Post</a>
                                 <a href="#0" class="twitter-share">Tweet</a>
-                                <a href="#0" class="email-share">Email</a>
+                                <a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a>
                             </div>
                         </div>
                     {% endif %}
@@ -237,7 +286,7 @@
                             <ul>
                                 <li><a href="#0" class="fb-share">Post</a></li>
                                 <li><a href="#0" class="twitter-share">Tweet</a></li>
-                                <li><a href="#0" class="email-share">Email</a></li>
+                                <li><a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a></li>
                             </ul>
                         </div>
                     </div>
@@ -282,14 +331,6 @@
                             {% endif %}
 
                     </aside>
-                    {#{% if not is_mobile() or is_tablet() %}#}
-                        {#<div class="block">#}
-                            {#<div class="side-ad l-margin-top">#}
-                                {#<img src="{{ asset('bundles/wbbcore/images/tmp/ad.side.jpg') }}" alt="ad.jameson" width="300" height="250"/>#}
-                                {#<div class="txt">Advertising</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#{% endif %}#}
                     {% if not is_mobile() or is_tablet() %}
                         {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'ND_300x250' })) }}
                     {% endif %}

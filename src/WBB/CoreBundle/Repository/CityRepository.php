@@ -16,7 +16,9 @@ class CityRepository extends EntityRepository
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', cn, ci')
+            ->leftJoin($this->getAlias().'.country', 'cn')
+            ->leftJoin($this->getAlias().'.image', 'ci')
             ->where($qb->expr()->eq($this->getAlias().'.onTopCity', $qb->expr()->literal(true)))
         ;
 
@@ -60,10 +62,13 @@ class CityRepository extends EntityRepository
             ->select($this->getAlias())
             ->leftJoin($this->getAlias().".country", "c")
             ->where($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)))
-            ->andWhere($qb->expr()->eq('c.id', $country->getId()))
         ;
 
-        return $qb->getQuery()->getOneOrNullResult();
+        if($country){
+            $qb->andWhere($qb->expr()->eq('c.id', $country->getId()));
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findNearestCity($latitude = 0, $longitude = 0, $maxDistance = 0, $offset = 0, $limit = 0)
@@ -90,11 +95,18 @@ class CityRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
     
-    public function findCitiesLike($name)
+    public function findCitiesLike($name, $limit = false)
     {
-        return $this->createQueryBuilder('c')
-                        ->where('c.name LIKE :name')
-                        ->setParameter('name', "$name%")
-                        ->getQuery()->getResult();
+        $qb = $this->createQueryBuilder($this->getAlias());
+        $qb
+            ->where($qb->expr()->like($this->getAlias().'.name', ':name'))
+            ->setParameter('name', "$name%")
+            ;
+
+        if($limit){
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

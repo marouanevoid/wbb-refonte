@@ -45,7 +45,7 @@
                         </h3>
                     </td>
                     <td class="star-share">
-                        <a href="{{ favorite_url(app.user, bestOf) }}" class="btn-round star {% if is_favorite(app.user, bestOf) %}active brown changed{% endif %}"></a>
+                        <a data-type="{{ entity_light_type(bestOf) }}" data-name="{{ bestOf.name }}" href="{{ favorite_url(app.user, bestOf) }}" class="btn-round star {% if is_favorite(app.user, bestOf) %}active brown changed{% endif %}"></a>
                         <a class="btn-round brown share" href=""></a>
                     </td>
                 </tr>
@@ -72,14 +72,10 @@
         {% endif %}
         <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}
-                {% include "WBBBarBundle:Bar:bar1.html.twig" with {
-                        'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered,
-                        'distance': distance, 'latitude': latitude, 'longitude': longitude}
+                {% include "WBBBarBundle:Bar:bar1.html.twig" with {'b': b, 'bestof' : 1 , 'ordered': bestOf.ordered, 'distance': distance}
                 %}
             {% else %}
-                {% include "WBBBarBundle:BestOf:bar.html.twig" with {
-                    'b': b, 'bestof' : bestOf, 'distance': distance,
-                    'latitude': latitude, 'longitude': longitude}
+                {% include "WBBBarBundle:BestOf:bar.html.twig" with {'b': b, 'bestof' : bestOf, 'distance': distance}
                 %}
             {% endif %}
         </div>

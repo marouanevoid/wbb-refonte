@@ -65,6 +65,17 @@ meta.Dropdown = function(config){
 
     /* Private. */
 
+
+    that.checkSelected = function(){
+        var _this = $(this);
+        if(_this.val() == ''){
+            _this.parent('.ui-dropdown-container').addClass('changed-ui-style');
+        }else{
+            _this.parent('.ui-dropdown-container').removeClass('changed-ui-style');
+        }
+    }
+
+
     /**
      *
      */
@@ -80,11 +91,20 @@ meta.Dropdown = function(config){
 
                     that.currentScroll = $(window).scrollTop();
                     that.config.$dropdown_placeholder.css({width:$dropdown.width(), height:$dropdown.height()});
-
-                    $dropdown.addClass('dropdown-open').find('.slide').slideDown(that.config.speed, that.config.easing, function()
+                    var $slide = $dropdown.addClass('dropdown-open').find('.slide');
+                    var $scroll = $slide.find('.custom-scroll');
+                    $slide.slideDown(that.config.speed, that.config.easing, function()
+                    //$dropdown.addClass('dropdown-open').find('.slide').slideDown(that.config.speed, that.config.easing, function()
                     {
+                        if($scroll.length) api.reinitialise();
                         that.active = true;
                     });
+
+                    if($scroll.length)
+                    {
+                       var api = $scroll.data('jsp');
+                       api.reinitialise();
+                    }
                 }
             });
 
@@ -102,7 +122,7 @@ meta.Dropdown = function(config){
                 $options.eq( index ).prop('selected', true);
 
                 $dropdown.find('.choice li').show();
-                $(this).hide();
+               // $(this).hide();
                 
                 //$options.eq( index ).attr('selected', 'selected');
 
@@ -133,6 +153,7 @@ meta.Dropdown = function(config){
             $dropdown.find('select').on('change', function()
             {
                 that.config.$dropdown_value.text( $(this).find('option:selected').text() );
+                that.checkSelected.apply([this]);
             });
         }
         else
@@ -141,6 +162,8 @@ meta.Dropdown = function(config){
             {
                 //$dropdown.css({width : $dropdown.width()});
                 that.config.$dropdown_value.text( $(this).find('option:selected').text() );
+
+                that.checkSelected.apply([this]);
             });
         }
     };
@@ -165,10 +188,9 @@ meta.Dropdown = function(config){
     };
 
     that._updateVal = function (val) {
-        /*var $drop = that.config.$dropdown_replacement;
-            select = $drop.find('select'),
+        var $drop = that.config.$dropdown_replacement;
+        var select = $drop.find('select');
         select.val(val);
-        that.config.$dropdown.trigger('change');*/
         var $dropdown = that.config.$dropdown_replacement;
         $dropdown.find('.choice li[class='+ val+ ']').click();
     };
