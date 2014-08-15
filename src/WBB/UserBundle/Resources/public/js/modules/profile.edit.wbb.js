@@ -26,6 +26,22 @@ $(function(){
     // Entry Point
     $("#fos_user_profile_form_avatar_binaryContent").change(function(){
         readImage( this );
+        // if is IE 9
+        if($('.ie9').length){
+            var fname = $("#fos_user_profile_form_avatar_binaryContent").val();
+            fname = fname.split('\'');
+            fname = fname[fname.length-1];
+            $('.file-name-selected-screen').find('p').text(fname);
+            $('.file-name-selected-screen').show()
+            $('.file-name-selected-screen-clear').show()
+        }
+    });
+
+    // click on close picture
+    $('.ie9-close-pic').on('click',function(){
+        $('.file-name-selected-screen').hide()
+        $('.file-name-selected-screen-clear').hide()
+        $("#fos_user_profile_form_avatar_binaryContent").val("");
     });
 
     $(".auto-city").autocomplete({
