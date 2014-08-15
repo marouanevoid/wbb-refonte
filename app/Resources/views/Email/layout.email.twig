@@ -5,6 +5,13 @@
             <!-- If you delete this meta tag, Half Life 3 will never be released. -->
             <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> -->
             <title>{% block title %}World's Best Bars{% endblock %}</title>
+            <style type="text/css">
+                @media only screen and (max-width : 480px) {
+                    .copyright {text-align: center;}
+                    .socials {margin-left: auto; margin-right: auto; width: 50%;}
+                    .socials a {margin-right: 15px!important;}
+                }
+            </style>
         </head>
         <body bgcolor="#FFFFFF" style="font-family: Verdana, Arial; margin: 0;" cellpadding="0", cellspacing="0" border="0">
             <!-- HEADER -->
@@ -56,10 +63,10 @@
             <table class="wrap" bgcolor="#333333" border="0" cellpadding="0" cellspacing="0" style="font-family: Verdana, Arial; width: 100%;">
                 <tr>
                     <td valign="top" style="font-family: Verdana, Arial;">
-                        <table class="container" height="90" style="border-bottom-width: 1px; border-bottom-color: #49453f; border-bottom-style: solid;
+                        <table class="container" style="border-bottom-width: 1px; border-bottom-color: #49453f; border-bottom-style: solid;
                                font-family: Verdana, Arial; display: block !important; max-width: 700px !important;
                                clear: both !important; overflow: hidden; margin: 0 auto;" valign="top" cellpadding="0" cellspacing="0">
-                            <tr>
+                            <!-- <tr>
                                 <td valign="middle" align="center" style="font-family: Verdana, Arial; min-width: 260px">
                                     <p style="color: #fedf9f; font-size: 14px; margin-top: 5px; font-family: 'Myriad Pro', serif;">
                                         © {{ "now"|date("Y") }} World's Best Bars
@@ -71,7 +78,6 @@
                                         <tr>
                                             <td width="20" style="font-family: Verdana, Arial;"></td>
                                             <td>
-                                                <!-- [ Socials Media ] -->
                                                 <div class="socials" style="font-family: Verdana, Arial;">
                                                     <a href="https://www.facebook.com/worldsbestbars" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
                                                         <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg') }}"/>
@@ -90,7 +96,43 @@
                                         </tr>
                                     </table>
                                 </td>
+                            </tr> -->
+
+                            <tr>
+                                <td>
+
+                                    <table height="90" align="left" style="width: 50%; min-width: 310px">
+                                        <tr>
+                                            <td>
+                                                <p class="copyright" style="text-align: center; color: #fedf9f; font-size: 14px; margin-top: 5px; font-family: 'Myriad Pro', serif;">© {{ "now"|date("Y") }} World's Best Bars</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table height="90" align="left" style="width: 50%; min-width: 310px">
+                                        <tr>
+                                            <td>
+                                                <div class="socials" style="font-family: Verdana, Arial; margin-left: auto; margin-right: auto; width: 70%;">
+                                                    <a href="https://www.facebook.com/worldsbestbars" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
+                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg') }}"/>
+                                                    </a>
+                                                    <a href="https://twitter.com/WorldsBestBars" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
+                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_twiter.jpg') }}"/>
+                                                    </a>
+                                                    <a href="http://instagram.com/worldsbestbars" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
+                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_viadeo.jpg') }}"/>
+                                                    </a>
+                                                    <a href="http://www.pinterest.com/worldsbestbars" style="margin-right: 0; font-family: Verdana, Arial; display: block; float: left;">
+                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_pinterest.jpg') }}"/>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
                             </tr>
+
                         </table>
                     </td>
                 </tr>
