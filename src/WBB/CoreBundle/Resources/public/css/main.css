@@ -545,6 +545,7 @@
   #search input[type="text"] {color: #b3955f;}
   .search-result-proposal {z-index: 100000;}
   header.desktop .logged {z-index: 100002;}
+  .popin-block .form-text {width: 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -570,7 +571,12 @@
   .mobile .search aside.filters form .btn-round.plus:hover:after {background-position: -80px -40px;}
   .mobile .search aside.filters form .btn-round.minus:hover:after {background-position: 0px -400px;}
   .mobile .search aside.filters form li .drop-btn .btn-round {background-color: transparent !important;}
-
+  .mobile .search .bar-filter-form .six.columns.h2 a:hover {color: #b3955f; border-color: #b3955f; background-color: transparent!important;}
+  .mobile .search .bar-filter-form .six.columns.h2 a.active,
+  .mobile .search .bar-filter-form .six.columns.h2 a.active:hover {background-color: #b3955f!important; color: #faf3e1!important;}
+  .mobile .search .bar-filter-form .six.columns.h2 a.disabled-search,
+  .mobile .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {color: #ddd !important; background-color: #99998f !important; border: none!important;}
+    
 /* IE9 */
   .articles article .img .cover .sponsor,
   .news-details .articles.older-news article .img .cover .sponsor {bottom: 0px\0/;}
@@ -711,11 +717,6 @@
     .form-input {width: 100%;}
     .search-result-proposal ul li:last-child {border-bottom: 0;}
     .load-more-container .btn-small-radius.brown:hover, .load-more-container .btn-radius.brown:hover, .load-more-container .btn-small-round.brown:hover { background: transparent!important; color: #b3955f;}
-    .search .bar-filter-form .six.columns.h2 a:hover {color: #b3955f; border-color: #b3955f; background-color: transparent!important;}
-    .search .bar-filter-form .six.columns.h2 a.active,
-    .search .bar-filter-form .six.columns.h2 a.active:hover {background-color: #b3955f!important; color: #faf3e1!important;}
-    .search .bar-filter-form .six.columns.h2 a.disabled-search,
-    .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {color: #ddd !important; background-color: #99998f !important; border: none!important;}
     .loader-search-page.mobile {position: absolute; left: 48%; top: 65px;}
     .search-bar-mobile {height: 200%!important;}
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
