@@ -66,7 +66,7 @@
                                     {% endif %}
                                         <ul class="checkbox-container">
                                             {% for tag in tags.tags %}
-                                                <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name|escape }}" {% if queryTag and queryTag == tag.name %} checked {% endif %}/><b></b>{{ tag.name }}</label>
+                                                <li><label><input type="checkbox" name="{{ tags.csName }}[]" value="{{ tag.name }}" {% if queryTag and queryTag == tag.name %} checked {% endif %}/><b></b>{{ tag.name }}</label>
                                                 </li>
                                             {% endfor %}
                                         </ul>
