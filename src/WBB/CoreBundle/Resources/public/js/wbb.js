@@ -131,6 +131,13 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
+                    $('#fos_user_registration_form_country').find('option').each(function() {
+                        if ($(this).text().trim() === country) {
+                            $(this).attr('selected', 'selected').change();
+                        }
+                    });
                     $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
@@ -140,7 +147,13 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
-
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
+                    $('#fos_user_registration_form_country').find('option').each(function() {
+                        if ($(this).text().trim() === country) {
+                            $(this).attr('selected', 'selected').change();
+                        }
+                    });
                     $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
                     $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
                     $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
@@ -211,9 +224,6 @@ function initRegisterLoginForms() {
                                 $('#register-form .country-dropdown .ui-dropdown').addClass('error');
                                 break;
                             case 'birthdate':
-                                $('#register-form .date-birthday .ui-dropdown').addClass('error');
-                                break;
-                            case 'birthday':
                                 $('#register-form .date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
@@ -335,10 +345,10 @@ jQuery(document).ready(function($) {
                     for (var i = 0; i < fields.length; i++) {
 
                         switch (fields[i]) {
-                            case 'birthdate':
-                                $('.date-birthday .ui-dropdown').addClass('error');
+                            case 'country':
+                                $('.country-dropdown .ui-dropdown').addClass('error');
                                 break;
-                            case 'birthday':
+                            case 'birthdate':
                                 $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
@@ -372,6 +382,9 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
+        var html = '<div id="success" class="min-height"><div class="text-align-center padding-top-100"><div class="subtitle">CONGRATULATIONS&nbsp;!</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p><p>The "100 Bars" best of has been added to your favorites.</p><p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></div>';
+        $('.popin-block').html(html);
+        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
@@ -389,8 +402,8 @@ jQuery(document).ready(function($) {
 
 // Animate the scroll to focus on PopIn
 function animateToPopIn(){
-    if ( ismobile )
-        $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+    // if ( ismobile )
+    $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
 }
 
 
