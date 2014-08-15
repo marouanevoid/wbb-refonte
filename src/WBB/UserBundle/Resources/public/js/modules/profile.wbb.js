@@ -157,6 +157,7 @@ wbb.LoadProfile = function() {
         });
 
         var descrimentFunction = function(cible){
+            cible = $(cible).find('span');
             var str = $(cible).html(),
                 arr = str.split(')'),
                 cstr = arr[0].substr(1),
