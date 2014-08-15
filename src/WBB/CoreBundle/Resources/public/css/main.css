@@ -7,6 +7,7 @@
   input[type="text"], input[type="password"], input[type="email"] {
     color: #818a8c;
   }
+  #landscape-mobile {display: none; visibility: hidden;}
   input[type="text"]::-webkit-input-placeholder, 
   input[type="password"]::-webkit-input-placeholder, 
   input[type="email"]::-webkit-input-placeholder{
@@ -57,7 +58,7 @@
   .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
-    .mask {width: 100%; height: auto; min-height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 200%; height: 200%; min-height: 100%; position: fixed; top: -50%; left: -50%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
     .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
@@ -184,7 +185,7 @@
   .popup .ui a:hover,
   .popup .ui .btn {text-decoration: none;}
   body.error {background-color: #333333;}
-  
+
   /* Error */
     .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
@@ -207,7 +208,7 @@
   .ui.wrap {width: 100%; height: 100%;}
   .ui.register .title {width: 60%;}
   .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 45px 0 50px;}
-  .ui.register #account a {color: #818a8c;}
+  .ui.register #account .forgot-password {color: #818a8c;}
   .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center; text-indent: 0;}
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
@@ -542,6 +543,8 @@
   .ui-radio.collapsed:last-of-type {border-radius: 0 3em 3em 0;}
   .tags a {color: #818a8c;}
   #search input[type="text"] {color: #b3955f;}
+  .search-result-proposal {z-index: 100000;}
+  header.desktop .logged {z-index: 100002;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -591,6 +594,10 @@
     header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
+
+  /* ERROR */
+    #error .subtitle {font-size: 3em;}
+    #error p {font-size: 2em;}
   }
 
 /* Tablets (landscape) ----------- */
@@ -663,7 +670,7 @@
     
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 20px;}
-    #error {position: relative; top: 100px;}
+    #error {position: relative; top: 60px;}
     #message {padding-left: 0;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
@@ -711,6 +718,8 @@
     .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {color: #ddd !important; background-color: #99998f !important; border: none!important;}
     .loader-search-page.mobile {position: absolute; left: 48%; top: 65px;}
     .search-bar-mobile {height: 200%!important;}
+    header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
+    .no-result {margin: 2%;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -763,13 +772,18 @@
     form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
+    #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
   }
 
 /* Smartphones (landscape) ----------- */
-@media screen and (max-width: 320px) and (orientation : landscape) { 
-  body {
-    background: url("../images/turn@2x.jpg") no-repeat center;
-    background-size: cover;
+@media screen and (min-device-width: 480px) and (orientation: landscape) { 
+  #landscape-mobile {
+      display: block; visibility: visible;
+      position: fixed; top: -50%; left: -50%;
+      width: 200%; height: 200%; min-height: 100%; 
+      background: url("../images/turn@2x.jpg") no-repeat center center #000;
+      background-size: contain;
+      z-index: 777777777;
   }
 }
 

@@ -300,5 +300,6 @@
         {% block footer %}
             {% include '::footer.html.twig' %}
         {% endblock %}
+        {% if is_mobile() and not is_tablet() %}<div id="landscape-mobile"></div>{% endif %}
     </body>
 </html>
