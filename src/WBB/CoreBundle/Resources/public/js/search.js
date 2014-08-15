@@ -163,41 +163,48 @@ meta.SearchPage = function() {
             // if there is News on The Results
 
             var replaceIntger = function(number , cible , nbbar, nbnews){
-                var str = cible.html();
-                    arr = str.split(')'),
-                    strl = arr[0].substr(1);
+                    var ccibleNew = $('.screen-compteur a[data-index=1]'),
+                    ccibleBar = $('.screen-compteur a[data-index=0]');
 
 
-                    if(nbbar <= 1){
-                        str = str.replace('Bars' , 'Bar');
-                        str = str.replace('BARS' , 'BAR');
+                // var str = cible.html();
+                //     arr = str.split(')'),
+                //     strl = arr[0].substr(1);
+
+
+                //     if(nbbar <= 1){
+                //         str = str.replace('Bars' , 'Bar');
+                //         str = str.replace('BARS' , 'BAR');
+                //     }else{
+                //         if(str.indexOf(') Bars<')<=-1 && str.indexOf(') BARS<')<=-1){
+                //             str = str.replace('Bar' , 'Bars');
+                //             str = str.replace('BAR' , 'BARS');
+                //         }
+                //     }
+
+                // cible.html(str.replace(strl , number));
+
+
+                if(nbbar <= 0){
+                    ccibleBar.find('span').text('NO BAR');
+                }else{
+                    if(nbbar == 1){
+                        ccibleBar.find('span').text('(1) BAR');
                     }else{
-                        if(str.indexOf(') Bars<')<=-1 && str.indexOf(') BARS<')<=-1){
-                            str = str.replace('Bar' , 'Bars');
-                            str = str.replace('BAR' , 'BARS');
-                        }
+                        ccibleBar.find('span').text('('+ nbbar +') BARS');
                     }
+                }
 
-                cible.html(str.replace(strl , number));
-                // if(nbbar <= 0){
-                //     ccibleBar.find('span').text('NO BAR');
-                // }else{
-                //     if(nbbar == 1){
-                //         ccibleBar.find('span').text('(1) BAR');
-                //     }else{
-                //         ccibleBar.find('span').text('('+ nbbar +') BARS');
-                //     }
-                // }
-
-                // if(nbnews <= 0){
-                //     ccibleNew.find('span').text('NO NEWS');
-                // }else{
-                //     if(nbnews == 1){
-                //         ccibleNew.find('span').text('(1) NEWS');
-                //     }else{
-                //         ccibleNew.find('span').text('('+ nbnews +') NEWS');
-                //     }
-                // }
+                if(nbnews <= 0){
+                    ccibleNew.find('span').text('NO NEWS');
+                }else{
+                    if(nbnews == 1){
+                        ccibleNew.find('span').text('(1) NEWS');
+                    }else{
+                        ccibleNew.find('span').text('('+ nbnews +') NEWS');
+                    }
+                }
+            
             }
 
 
@@ -599,7 +606,6 @@ meta.SearchPage = function() {
         // delete the@ on the end of string url
         formatedUrl = formatedUrl.substr(0,formatedUrl.length-1);
 
-        console.log('formated url ::' + formatedUrl);
     }
     
 
@@ -677,6 +683,18 @@ meta.SearchPage = function() {
                 that.clearContent();
                 that.goSearch();
 
+            }else{
+                // if is not mobile
+                // and if action is not comming on dispatch
+                // then start Ajax
+                if(!from_applay){
+                    limit = 0;
+                    formatedUrl = '';
+                    start = 0;
+                    formatedCity = '';
+                    that.clearContent();
+                    that.goSearch();
+                }
             }
 
 
@@ -702,7 +720,10 @@ meta.SearchPage = function() {
                 }, that.config.speed);
 
                 // uncheck all checkbox
-                $('#filter input[type=checkbox]').prop('checked', false);
+                // Empty the url format
+                if(!from_applay || (from_applay && from_applay != 'from_constracter')){
+                    $('#filter input[type=checkbox]').prop('checked', false);
+                }
             }
             if(ismobile)
                 return false;
@@ -853,8 +874,8 @@ meta.SearchPage = function() {
             that.clearContent();
             that.goSearch();
 
-            // hide form on the Mobile
-             that.context.$form_filter.find('input[type=reset]').click();
+            // // hide form on the Mobile
+            //  that.context.$form_filter.find('input[type=reset]').click();
             return false;
         });
 
@@ -917,6 +938,7 @@ meta.SearchPage = function() {
         that.context.$form_filter.on('change', 'input[type=radio]', function()
         {
             var $others = $(this).closest('form').find('input[name='+$(this).attr('name')+']');
+
             $others.parent().next().find('input[type=checkbox]').prop('checked', false);
         });
     };
@@ -964,9 +986,19 @@ meta.SearchPage = function() {
 
         setTimeout(function(){
              var checkedTagLength = that.context.$form_filter.find('input[type=checkbox]:checked').not('input[name=neigborhoods]');
-             if( checkedTagLength.length ){
+             //var checkedTagLength = that.context.$form_filter.find('input[type=checkbox]:checked').not('input[name=neigborhoods]');
+             var compteursCheck = 0,
+                selfttarget;
+             $('.filter-tags-check').each(function(){
+                if($(this).attr('checked')){
+                    compteursCheck++;
+                    selfttarget = $(this);
+                    $(this).prop('checked', true);
+                }
+             });
+             if( compteursCheck && selfttarget){
                 // Open the parent Accordien
-                $(checkedTagLength[0]).closest('li.grouped-fields-search').find('.drop-btn a').trigger('click' , [groupeCheckBoxOpened]);
+                selfttarget.closest('li.grouped-fields-search').find('.drop-btn a').trigger('click' , [groupeCheckBoxOpened]);
              }else{
                 searchByQuery();
                 that.goSearch();
