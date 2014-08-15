@@ -3,7 +3,7 @@
 
 {% block body %}
     <div class="full-cream">
-        <div id="page-standard" class="wrap">
+        <div id="page-standard" class="wrap {% if is_mobile() and not is_tablet() %}mobile{% endif %}">
             <div class="padding-top-50 padding-bottom-50 min-height">
                 <div class="title h1">World's Best Bars - What is it and how does it work?</div>
                 <div class="content">
@@ -16,7 +16,7 @@
 
                     <p>Look out for our new independent expert panel which comprises of leaders, entrepreneurs and influencers in the drinks industry with the most discerning palettes and a nose for the world's most happening venues.</p>
 
-                    <p>If you have any questions, comments or suggestions, please send us your thoughts by <a href="#mail">editor@worldsbestbars.com</a></p>
+                    <p>If you have any questions, comments or suggestions, please send us your thoughts by <a href="mailto:editor@worldsbestbars.com">editor@worldsbestbars.com</a></p>
 
                     <p>If you represent a bar that you would like to submit to us for consideration, <a href="mailto:editor@worldsbestbars.com">contact us</a></p>
                 </div>

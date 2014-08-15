@@ -395,6 +395,17 @@ body.search .search-bar-mobile{
     top:0 !important;
 }
 
+
+
+/*
+* Added by Jérome
+***/
+.search aside.filters form .submit input[type="reset"]{ padding: 0; width: 50%; height: 45px; margin-bottom: 2em }
+.android .search aside.filters form .drop-list label{ text-overflow: clip!important }
+/*
+end added by Jérome
+***/
+
 #floatingBarsG{
 position:relative;
 width:20px;
