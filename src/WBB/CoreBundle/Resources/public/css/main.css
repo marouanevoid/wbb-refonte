@@ -776,7 +776,7 @@
   }
 
 /* Smartphones (landscape) ----------- */
-@media screen and (min-device-width: 480px) and (orientation: landscape) { 
+@media screen and (min-width: 480px) and (orientation: landscape) { 
   #landscape-mobile {
       display: block; visibility: visible;
       position: fixed; top: -50%; left: -50%;
