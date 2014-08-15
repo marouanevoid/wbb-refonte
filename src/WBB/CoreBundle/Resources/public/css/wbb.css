@@ -395,8 +395,30 @@ body.search .search-bar-mobile{
     top:0 !important;
 }
 
+.file-name-selected-screen, .file-name-selected-screen-clear{
+    display: none;
+}
 
-
+.file-name-selected-screen p{
+    float: left;
+    position: relative;
+    left:20px;
+}
+.ie9-close-pic{
+    cursor: pointer;
+    line-height: 15px;
+    font-size: 14px;
+    position: relative;
+    left: 23px;
+    top:3px;
+}
+.ie9-close-pic:hover{
+    cursor: pointer;
+    color:#fff;
+    background-color:#818a8c;
+    padding-right: 4px;
+    padding-left: 4px;
+}
 /*
 * Added by Jérome
 ***/
