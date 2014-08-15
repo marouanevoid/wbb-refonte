@@ -594,8 +594,8 @@
 
     #register.page #create-account .form-text {width: 300px;}
     #register.page #create-account .form-text-without-label input {width: 300px;}
-    #editprofile #edit-account .form-text {width: 245px;}
-    #editprofile #edit-account .form-text-without-label input {width: 265px;}
+    #editprofile #edit-account .form-text {width: 300px;}
+    #editprofile #edit-account .form-text-without-label input {width: 300px;}
     header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;}
     header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
     #view-account .filter-profil {width: 590px;}
