@@ -45,7 +45,7 @@ meta.Radio = function(config){
     that.config = {
         $radios   : false,
         color     : false,
-        template  : '<a class="ui-radio btn-radius border %color% %class%">%name%</a>'
+        template  : '<a class="ui-radio btn-radius border %color% %class%"></a>'
     };
 
 
@@ -102,11 +102,14 @@ meta.Radio = function(config){
             var html = that.config.template.replace('%color%', that.config.color);
             html = html.replace('%class%', $(this).data('type')+' '+$(this).val()+' radio-'+($(this).hasClass('dark')?'dark':'light')+($(this).hasClass('with-icon')?' with-icon':''));
            
-           if ($(this).data("value"))
-            html = html.replace('%name%', $(this).data("value").replace(/_/g,' '));
-           else 
-            html = html.replace('%name%', $(this).val().replace(/_/g,' '));
+           var label;
 
+           if ($(this).data("value"))
+                label = $(this).data("value") ? $(this).data("value") : $(this).val().replace(/_/g,' ');
+           else 
+                label =  $(this).data('label') ? $(this).data('label') : $(this).val().replace(/_/g,' ');
+
+            html = html.replace('%name%', label);
             var $component = $(html);
             /*
             *    if is not the radio of the barfined Mood
@@ -116,6 +119,7 @@ meta.Radio = function(config){
             //}
 
             $(this).wrap( $component );
+            $(this).after('<span>'+label+'</span>');
         });
 
         that.config.$radios = that.config.$radios.parent();
