@@ -33,6 +33,16 @@ wbb.LoadProfile = function() {
         }
     };
 
+    /*
+    * Personalize the Scroll
+    */
+    that.PersonalizeScroll = function(){
+        $('.custom-scroll-profile').not('.jspNotScrollable').each(function()
+        {
+            //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
+            $(this).jScrollPane({hideFocus:true});
+        });
+    }
     that._setupEvents = function ()
     {
         //Load bars on first page load
@@ -238,13 +248,24 @@ wbb.LoadProfile = function() {
 
     that._request = function ($target, config)
     {
+        // Show Loader
+        $('.loader-profile-flux').show();
+
         var _url = Routing.generate('wbb_profile_filters', {'content': that.context.content, 'filter': that.context.filter, 'offset': config.offset, 'limit': config.limit, 'display': that.context.display});
         that.context.requestID = $.ajax({
             type: "GET",
             url: _url,
             dataType: "json",
             success: function(msg) {
+                // Hide Loader
+                $('.loader-profile-flux').hide();
+
                 $target.append(msg.htmldata);
+                /*
+                * Personalize SCroll on Tips
+                */
+                that.PersonalizeScroll();
+
                 if($target === that.context.$tipsTarget){
                     // SetUp events of tips
                     that.setpEventAfterAjax();

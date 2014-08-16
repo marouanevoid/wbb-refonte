@@ -520,6 +520,9 @@
                     $form : $('form#tips'),
                     onComplete:function($form, data)
                     {
+                         // Show Loader
+                         $('article.tip .form form input[type="submit"]').removeClass('loading');
+                         $('article.tip .form form input[type="submit"]').removeAttr('disabled');
                         var $count = $form.find(".count");
                         var count = $count.text();
 
