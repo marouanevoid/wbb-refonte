@@ -36,6 +36,9 @@
         {% block stylesheets %}
 
             {% stylesheets filter="cssrewrite"
+                "bundles/wbbcore/css/select2-bootstrap.css"
+                "bundles/wbbcore/css/select2.css"
+                "bundles/wbbcore/css/custom.select2.css"
                 "bundles/wbbcore/css/front.css"
                 "bundles/wbbcore/css/wbb.css"
                 "bundles/wbbcore/css/main.css"
@@ -76,6 +79,7 @@
         {% endblock %}
 
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.transform3d.js') }}"></script>

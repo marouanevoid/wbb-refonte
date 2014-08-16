@@ -60,7 +60,7 @@
                     </div> <!-- .block-top -->
                     <div class="clear"></div>
                     <!-- Filter -->
-                    <div class="filter-profil wrap padding-top-20 {% if is_mobile() and not is_tablet() %}padding-bottom-40 {% else %}padding-bottom-20{% endif %}">
+                    <div class="filter-profil wrap profile-filter-parent-wrapper padding-top-20 {% if is_mobile() and not is_tablet() %}padding-bottom-40 {% else %}padding-bottom-20{% endif %}">
                         <div class="{% if not is_mobile() and is_tablet() %}margin-top-20{% endif %}">
                             <div class="disableClick"></div>
                             {% set favBars = user.favoriteBars|length %}
@@ -89,6 +89,7 @@
                                         <option value="city" data-type="criteria">City</option>
                                     </select>
                                 </div>
+                                <div class="loader-profile-flux"></div>
                             </div> <!-- .sort-by -->
                             <div class="filter-view">
                                 <div class="right">

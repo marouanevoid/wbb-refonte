@@ -710,7 +710,11 @@ meta.SearchPage = function() {
                 that.context.$form_filter.find('.drop-btn a.minus').click();
 
                 // hide the select
-                $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                // $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                $("select.select2-dropdown").select2('val' , '');
+                $("select.select2-dropdown").select2('data', null);
+                $("select.select2-dropdown").select2({ placeholder : 'Choose a City', allowClear : true});
+
                 $('.city-drop-down').val('');
                 setTimeout(function()
                 {
@@ -742,7 +746,11 @@ meta.SearchPage = function() {
                 that.context.$form_filter.find('.drop-btn a.minus').click();
 
                 // hide the select
-                $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                //$('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                // Select 2
+                 $("select.select2-dropdown").select2('val' , '');
+                 $("select.select2-dropdown").select2('data', null);
+                 $("select.select2-dropdown").select2({ placeholder : 'Choose a City', allowClear : true});
                 $('.city-drop-down').val('');
                 setTimeout(function()
                 {
@@ -1049,6 +1057,12 @@ $(document).ready(function()
 {
     if( !$('form#filter').length ) return;
     new meta.SearchPage();
+
+    // on city select
+    $("select.select2-dropdown").select2({
+        placeholder : 'Choose a City',
+        allowClear: true
+    });
 });
 
 function getBaseURL() {
