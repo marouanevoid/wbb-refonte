@@ -82,6 +82,7 @@ $(document).ready(function() {
     }
 
     $('.email-share').on('click', function(e) {
+        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).data('href');
@@ -238,6 +239,11 @@ function initRegisterLoginForms() {
                     for (var i = 0; i < errors.length; i++) {
                         $('#register-form #message').find('ul').append('<li>' + errors[i] + '</li>');
                     }
+                    // if(ismobile){
+                    //     // scroll to error if there is erroes
+                    //     animateToPopIn($('.forgot-password').offset().top);
+                    //     //animateToPopIn($('#register-form #message').offset().top);
+                    // }
                 } else {
                     if (addFavorite.indexOf('favorite') > -1) {
                         $.cookie('light_action', 'favorite');
@@ -401,9 +407,9 @@ jQuery(document).ready(function($) {
 
 
 // Animate the scroll to focus on PopIn
-function animateToPopIn(){
+function animateToPopIn(par){
     // if ( ismobile )
-    $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+    $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
 }
 
 

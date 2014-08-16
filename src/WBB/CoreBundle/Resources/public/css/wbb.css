@@ -314,8 +314,38 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     top: 1px;
 }
 
+/*
+* Profile
+Loader flux
+*/ 
+#editprofile .filter-content .sort-by{
+    position: relative;
+}
+.loader-profile-flux, .mobile.ipad .loader-profile-flux{
+    background: url(../images/gif-load.gif) no-repeat center;
+    height:36px;
+    width:36px;
+    position: absolute;
+    top: 7%;
+    left: 102%;
+    display: none;
+}
 
-  .min-height-block-mobile{min-height: 600px;}
+.mobile .loader-profile-flux {
+    left: 100%;
+}
+
+.min-height-block-mobile{min-height: 600px;}
+
+
+article.tip .form form input[type="submit"].loading{
+    background: url(../images/gif-load.gif) no-repeat center !important;;
+     text-indent: -119px;
+     background-color: transparent !important;
+     cursor: default;
+     border: none;
+    height: 30px;
+}
 /*.popin-loader-gif{
     width: 54px;
     height: 55px;
@@ -395,8 +425,30 @@ body.search .search-bar-mobile{
     top:0 !important;
 }
 
+.file-name-selected-screen, .file-name-selected-screen-clear{
+    display: none;
+}
 
-
+.file-name-selected-screen p{
+    float: left;
+    position: relative;
+    left:20px;
+}
+.ie9-close-pic{
+    cursor: pointer;
+    line-height: 15px;
+    font-size: 14px;
+    position: relative;
+    left: 23px;
+    top:3px;
+}
+.ie9-close-pic:hover{
+    cursor: pointer;
+    color:#fff;
+    background-color:#818a8c;
+    padding-right: 4px;
+    padding-left: 4px;
+}
 /*
 * Added by Jérome
 ***/
