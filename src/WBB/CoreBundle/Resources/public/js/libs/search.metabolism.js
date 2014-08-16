@@ -24,7 +24,7 @@ var meta = meta || {};
 meta.Search = function(config){
 
     var that = this;
-
+    var ajaxRequeseted;
     /* Public */
 
     that.config = {
@@ -102,13 +102,16 @@ meta.Search = function(config){
         if(data && data.hits){
             if(data.hits.hit && data.hits.hit.length > 0){
 
+                // show list
+                if(ismobile) 
+                    $('header.mobile .search-result-proposal').show();
                 var values  = data.hits.hit;
                 $.each(values, function(index, value)
                 {
                     var searchType = value.id,
                         result ="",
                         wrapB = function(str,istr){
-                            return str.replace(new RegExp(istr , 'ig'), '<b>'+istr+'</b>');
+                            return str.replace(new RegExp(istr , 'ig'), '<span>'+istr+'</span>');
                         };
 
                     if(searchType.indexOf('City') >-1){
@@ -116,40 +119,55 @@ meta.Search = function(config){
                         if(value.fields.name){
                             result = wrapB(value.fields.name , q);
                         }else{
-                            if(value.fields.title){
-                                result = wrapB(value.fields.title , q);
-                            } 
+                            
                         }
                     }
-                    if(searchType.indexOf('Bar') >-1){
+                    if(searchType.indexOf('Bar') >-1 || searchType.indexOf('BestOf') >-1){
                         // TODO : Type of Search is Bar
                         if(value.fields.name){
-                            result = wrapB(value.fields.name , q);
-                        }else{
-                            if(value.fields.title){
-                                result = wrapB(value.fields.title , q);
-                            }  
+                            var wword = value.fields.name ;
+                            if(value.fields.city){
+                                if($.isArray(value.fields.city)){
+                                    if(value.fields.city.length > 1){
+                                        wword =  "World's " + wword;
+                                    }else{
+                                        wword = wword + " in " + value.fields.city[0];
+                                    }
+                                }else{
+                                        wword = wword + " in " + value.fields.city;
+                                }
+                            }else{
+                                wword =  "World's " + wword;
+                            }
+                            result = wrapB(wword , q);
                         }
                     }
                     if(searchType.indexOf('News')>-1){
                         // TODO : Type of search is News
-                        if(value.fields.title){
-                            result = wrapB(value.fields.title , q);
-                        }else{
-                            if(value.fields.name){
-                                result = wrapB(value.fields.name , q);
+                        if(value.fields.name){
+                            var wword = value.fields.name ;
+                            if(value.fields.cities && value.fields.cities.length){
+                                if(value.fields.cities.length > 1){
+                                    wword =  "World - " + wword;
+                                }else{
+                                    wword = value.fields.cities[0] + " - " + wword;
+                                }
+                            }else{
+                                wword =  "World - " + wword;
                             }
+                            result = wrapB(wword , q);
                         }
-                    }else{
-                        // TODO : Type of search is News
-                        if(value.fields.title){
-                            result = wrapB(value.fields.title , q);
-                        }else{
-                            if(value.fields.name){
-                                result = wrapB(value.fields.name , q);
-                            }
-                        } 
                     }
+                    // }else{
+                    //     // TODO : Type of search is News
+                    //     if(value.fields.title){
+                    //         result = wrapB(value.fields.title , q);
+                    //     }else{
+                    //         if(value.fields.name){
+                    //             result = wrapB(value.fields.name , q);
+                    //         }
+                    //     } 
+                    // }
                     
                     if( $(window).width() < 640 ){
                         html += that.config.template_mobile.replace('%s', result);
@@ -166,6 +184,9 @@ meta.Search = function(config){
             }else{
                 // TODO : On no results
                 that.context.$result.html('');
+                // hide the list
+                if(ismobile)
+                    $('header.mobile .search-result-proposal').hide();
             }
         }else{
                 // TODO : On no results
@@ -196,7 +217,7 @@ meta.Search = function(config){
 
         // show loader 
         $('.bar-finder .search-mode .btn-round.close').addClass('loading');
-        $.ajax({
+       ajaxRequeseted =  $.ajax({
             type: 'GET',
             url: getBaseURL() + URL_MODE + '/search?limit=20&start=0',
             async: true,
@@ -210,8 +231,11 @@ meta.Search = function(config){
             // Hide Loader 
             $('.bar-finder .search-mode .btn-round.close').removeClass('loading');
             that.searchResult(data , q);
+        },
+        beforeSend : function(){
+            if(ajaxRequeseted)
+                ajaxRequeseted.abort();
         }
-
         });
 
 
@@ -320,7 +344,7 @@ meta.Search = function(config){
             that._hideForm();
         });
 
-        that.context.$input.on('keypress', function(){
+        that.context.$input.on('keyup', function(){
             clearInterval(that.search_timeout);
             that.search_timeout = setTimeout(function(){ that._search() }, that.config.throttle);
 
@@ -372,7 +396,6 @@ meta.Search = function(config){
             }
             that.context.$form.submit();
 
-            console.log('advanced-search:::');
             return false;
         });
 

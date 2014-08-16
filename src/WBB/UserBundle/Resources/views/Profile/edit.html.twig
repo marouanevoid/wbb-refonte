@@ -6,7 +6,7 @@
     <div class="full-white">
         <div id="editprofile" class="page {% if is_mobile() and not is_tablet() %}mobile {% endif %}wrap padding-bottom-20">
             <div  class="ui wrap">
-                <div class="margin-top-20">
+                <div class="padding-top-20">
                     <div id="edit-account">
                         <form id="edit_profile_form" action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
                             <div class="block-top wrap">
@@ -59,6 +59,8 @@
                                             <div class="file-image wrap">
                                                 {{ form_widget(form.avatar, { 'attr' : { 'class': 'form-file no-text' } }) }}
                                             </div>
+                                            <div class="file-name-selected-screen clear"><p class="subtitle small"></p><span class='ie9-close-pic'>X</span></div>
+                                            <div class='file-name-selected-screen-clear clear'></div>
                                             <p class="subtitle small">Upload you profile picture (Accepted Formats : Png, Jpg)</p>
                                         </div>
                                     </div> <!-- .subgroup.right -->
@@ -215,7 +217,7 @@
                             </div>
                             <div class="clear"></div>
                             {% if errors.messages|length > 0 %}
-                                <div id="message" class="margin-top-20 right show">
+                                <div id="message" class="margin-top-20 wrap show">
                                     <div>
                                         <ul>
                                             {% for error in errors.messages %}

@@ -224,8 +224,11 @@
                         {% if resetting_form is defined %}
                             {{ resetting_form|raw }}
                         {% endif %}
-                        {% if app.request.query.get('emailPopin', 0) == 1%}
+                        {% if app.request.query.get('emailPopin', 0) == 1 %}
                             {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
+                        {% endif %}
+                        {% if app.request.query.get('confirmed', 0) == 1 %}
+                            {{ include('WBBUserBundle:Registration:confirm.html.twig') }}
                         {% endif %}
                     </div>
                     <div>
@@ -297,5 +300,6 @@
         {% block footer %}
             {% include '::footer.html.twig' %}
         {% endblock %}
+        {% if is_mobile() and not is_tablet() %}<div id="landscape-mobile"></div>{% endif %}
     </body>
 </html>

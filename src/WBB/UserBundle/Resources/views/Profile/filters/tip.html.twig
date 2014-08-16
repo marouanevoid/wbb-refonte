@@ -2,27 +2,29 @@
     <li class="three columns box margin-bottom-30 item-tips">
         <article class="tip">
             <table class="content expert">
-                <tbody><tr class="excerpt">
-                    <td colspan="2">
-                        <div class="scroll custom-scroll">
-                            <span itemprop="description">
-                                "{{ tip.description|raw }}"
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <hr class="s-margin-bottom">
-                    </td>
-                </tr>
-                <tr class="author">
-                    <td colspan="2">
-                        <img src="{{ showImage(user.avatar, 'av_small') }}" alt="user" width="40" height="40">
-                        <b>{{ user.userRole }}</b>
-                        {{ user.firstname }} {{ user.lastname }}
-                    </td>
-                </tr>
+                <tbody>
+                    <tr class="excerpt">
+                        <td colspan="2">
+                            {#<div class="scroll custom-scroll">#}
+                            <div class="">
+                                <span itemprop="description">
+                                    "{{ tip.description|raw }}"
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr class="s-margin-bottom">
+                        </td>
+                    </tr>
+                    <tr class="author">
+                        <td colspan="2">
+                            <img src="{{ showImage(user.avatar, 'av_small') }}" alt="user" width="40" height="40">
+                            <b>{{ user.userRole }}</b>
+                            {{ user.firstname }} {{ user.lastname }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         <a data-type="tip" data-id="{{ tip.id }}" href="#" class="close remove-tip no-text">Close</a>

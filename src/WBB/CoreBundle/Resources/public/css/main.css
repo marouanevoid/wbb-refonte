@@ -7,6 +7,12 @@
   input[type="text"], input[type="password"], input[type="email"] {
     color: #818a8c;
   }
+  #landscape-mobile {display: none; visibility: hidden;}
+  input[type="text"]::-webkit-input-placeholder, 
+  input[type="password"]::-webkit-input-placeholder, 
+  input[type="email"]::-webkit-input-placeholder{
+    color: #818a8c;
+  }
 /* Globale Libs */
     form .icheckbox_flat {display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
     form .icheckbox_flat {background-position: 0 0;}
@@ -47,12 +53,12 @@
   .select-two .ui-dropdown-container {width: 100%!important;}
 
   /* Popup */
-  .popup .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
+  .popup .btn-close {background: url("../images/UI/close.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 14px; right: 14px;}
   .popup .btn-close:hover {background-image: url("../images/UI/close_rollover.png");}
   .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
-    .mask {width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 200%; height: 200%; min-height: 100%; position: fixed; top: -50%; left: -50%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
     .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
@@ -171,14 +177,15 @@
   .ui .title {font-size: 28px; text-align: center; color: #000; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .ui .block {width: 300px;}
   .ui .btn {width: 100%; height: 60px; color: #faf3e1; font-family: "Avenir", Helvetica, Arial, sans-serif; text-transform: uppercase; text-decoration: none;}
-  .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px; padding: 0;*/ max-width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
+  .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px;*/ padding: 0; max-width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
   .popup .ui a {font-size: 16px; text-decoration: underline;}
   .popup .ui a:hover,
   .popup .ui .btn {text-decoration: none;}
-  
+  body.error {background-color: #333333;}
+
   /* Error */
     .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
@@ -201,6 +208,7 @@
   .ui.wrap {width: 100%; height: 100%;}
   .ui.register .title {width: 60%;}
   .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 45px 0 50px;}
+  .ui.register #account .forgot-password {color: #818a8c;}
   .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center; text-indent: 0;}
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
@@ -221,7 +229,7 @@
   #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
   #message li:only-of-type {margin-top: 20px;}
   .page #message {width: 300px; padding: 0; position: relative; left: 9px;}
-  #editprofile #message {left: 13%;}
+  .profile #message {left: 13%;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   #success {position: static; top: 0;}
@@ -320,7 +328,7 @@
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
-  #register.page.mobile #create-account .form-text {max-width: 100%; margin: 0 0 10px;}
+  #register.page.mobile #create-account .form-text {width: 98%; margin: 0 0 10px;}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -336,11 +344,13 @@
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
   #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
+  #register.page.mobile .select-two {margin-bottom: 20px; overflow: hidden;}
 
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
   #register.mobile .ui #success .subtitle {padding: 0; font-size: 26px; width: 100%;}
-  .form-input {width: 270px;}
+  .form-input {/*width: 270px;*/}
+
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
   #editprofile .ui {top: 0; width: 530px; background-color: #fff;}
   #editprofile .ui .form-text {background-color: #fff;}
@@ -349,7 +359,7 @@
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
   #editprofile .avatar-profil {z-index: 11; position: relative; overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
-  #editprofile .avatar-profil img {height: 99%; width: 99%; position: relative; border-radius: 10em;}
+  #editprofile .avatar-profil img {height: 100%; width: 100%; position: relative; border-radius: 10em;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
   #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
@@ -392,7 +402,7 @@
   #editprofile.mobile .ui .avatar-profil img {margin: 0 auto; z-index: 1;}
   #editprofile.mobile .ui #edit-account label {visibility: visible; width: 100%; text-align: center;}
   #editprofile.mobile .ui #edit-account .checkbox label {text-align: left;}
-  #editprofile.mobile .ui #edit-account .form-text {width: 90%; margin: 0;}
+  #editprofile.mobile .ui #edit-account .form-text {width: 98%; margin: 0;}
   #editprofile.mobile .ui #edit-account .group-actions {float: none; margin: auto;}
   #editprofile.mobile .ui #edit-account .form-submit {/*margin: 0 20px; width: 90%;*/}
   #editprofile.mobile .ui #date-birthday .select-wrap {margin-right: 9px; width: 90px;}
@@ -402,7 +412,7 @@
   #editprofile #view-account.mobile {width: 100%; padding-right: 0; padding-left: 0;}
 
   #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
-  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 15px; padding-top: 20px; white-space: pre-line; padding-bottom: 40px;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 15px; padding-top: 15px; white-space: pre-line; padding-bottom: 40px;}
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
@@ -529,7 +539,14 @@
   .ui-dropdown-container .ui-dropdown .choice ul li {/*padding-bottom: 1.2em;*/}
   .search .bar-filter-form .six.columns.h2 a.disabled-search,
   .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {border: none!important;}
-  
+  .ui-radio.collapsed:first-of-type {border-radius: 3em 0 0 3em;}
+  .ui-radio.collapsed:last-of-type {border-radius: 0 3em 3em 0;}
+  .tags a {color: #818a8c;}
+  #search input[type="text"] {color: #b3955f;}
+  .search-result-proposal {z-index: 100000;}
+  header.desktop .logged {z-index: 100002;}
+  .popin-block .form-text {width: 100%;}
+
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
     .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
@@ -551,7 +568,15 @@
   .mobile section.bar-finder .ui-radio.btn-radius.with-icon.active:hover {color: #ffe4af!important;}
   .mobile .bar-finder .ui-radio.btn-radius.with-icon:hover:after {background-position: -92px -200px;} 
   .mobile .bar-finder .ui-radio.btn-radius.with-icon.active:after {background-position: -52px -240px;}
-
+  .mobile .search aside.filters form .btn-round.plus:hover:after {background-position: -80px -40px;}
+  .mobile .search aside.filters form .btn-round.minus:hover:after {background-position: 0px -400px;}
+  .mobile .search aside.filters form li .drop-btn .btn-round {background-color: transparent !important;}
+  .mobile .search .bar-filter-form .six.columns.h2 a:hover {color: #b3955f; border-color: #b3955f; background-color: transparent!important;}
+  .mobile .search .bar-filter-form .six.columns.h2 a.active,
+  .mobile .search .bar-filter-form .six.columns.h2 a.active:hover {background-color: #b3955f!important; color: #faf3e1!important;}
+  .mobile .search .bar-filter-form .six.columns.h2 a.disabled-search,
+  .mobile .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {color: #ddd !important; background-color: #99998f !important; border: none!important;}
+    
 /* IE9 */
   .articles article .img .cover .sponsor,
   .news-details .articles.older-news article .img .cover .sponsor {bottom: 0px\0/;}
@@ -568,13 +593,17 @@
       .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
 
     #register.page #create-account .form-text {width: 300px;}
-    #register.page #create-account .form-text-without-label input {width: 245px;}
-    #editprofile #edit-account .form-text {width: 245px;}
-    #editprofile #edit-account .form-text-without-label input {width: 265px;}
+    #register.page #create-account .form-text-without-label input {width: 300px;}
+    #editprofile #edit-account .form-text {width: 300px;}
+    #editprofile #edit-account .form-text-without-label input {width: 300px;}
     header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;}
     header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
+
+  /* ERROR */
+    #error .subtitle {font-size: 3em;}
+    #error p {font-size: 2em;}
   }
 
 /* Tablets (landscape) ----------- */
@@ -634,15 +663,20 @@
 
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
+    body {min-height: 100%;}
+    .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
+      padding: 0 0 0 2%;
+    }
+
   /* Thumbnails Size's */
     .search section.bar-filter .bar-w-pic,
     .profile section.bar-filter .bar-w-pic,
     .bar-details section.bar-filter .bar-w-pic,
-    .search section.bar-filter .bar-w-pic {min-height: 210px;}
+    .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
     
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 20px;}
-    #error {position: relative; top: 100px;}
+    #error {position: relative; top: 60px;}
     #message {padding-left: 0;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
@@ -683,11 +717,10 @@
     .form-input {width: 100%;}
     .search-result-proposal ul li:last-child {border-bottom: 0;}
     .load-more-container .btn-small-radius.brown:hover, .load-more-container .btn-radius.brown:hover, .load-more-container .btn-small-round.brown:hover { background: transparent!important; color: #b3955f;}
-    .search .bar-filter-form .six.columns.h2 a:hover {color: #b3955f; border-color: #b3955f; background-color: transparent!important;}
-    .search .bar-filter-form .six.columns.h2 a.active,
-    .search .bar-filter-form .six.columns.h2 a.active:hover {background-color: #b3955f!important; color: #faf3e1!important;}
-    .search .bar-filter-form .six.columns.h2 a.disabled-search,
-    .search .bar-filter-form .six.columns.h2 a.disabled-search:hover {color: #ddd !important; background-color: #99998f !important; border: none!important;}
+    .loader-search-page.mobile {position: absolute; left: 48%; top: 65px;}
+    .search-bar-mobile {height: 200%!important;}
+    header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
+    .no-result {margin: 2%;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -703,12 +736,20 @@
     .date-birthday .select-wrap {width: 105px; margin-right: 15px;}
     .ui.register #account .form-text {text-indent: 10px; border: 1px solid red;}
     .search-bar-mobile .container .form-text {padding-left: 15x!important;}
-
+    body {background-color: red;}
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
       .bar-details section.bar-filter .bar-w-pic,
       .bar-guides section.bar-filter .bar-w-pic {min-height: 100px;}
+  }
+
+  @media only screen and (max-width : 480px) {
+    /* Thumbnails Size's */
+      .search section.bar-filter .bar-w-pic,
+      .profile section.bar-filter .bar-w-pic,
+      .bar-details section.bar-filter .bar-w-pic,
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 120px!important;}
   }
 
 /* Smartphones (portrait) ----------- */
@@ -726,19 +767,24 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:first-of-type,
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
-    .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
+    .date-birthday .select-wrap {width: 97px; margin-right: 7px;}
     #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; /*text-align: right;*/}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
     form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
+    #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
   }
 
 /* Smartphones (landscape) ----------- */
-@media screen and (max-width: 320px) and (orientation : landscape) { 
-  body {
-    background: url("../images/turn@2x.jpg") no-repeat center;
-    background-size: cover;
+@media screen and (min-width: 480px) and (orientation: landscape) { 
+  #landscape-mobile {
+      display: block; visibility: visible;
+      position: fixed; top: -50%; left: -50%;
+      width: 200%; height: 200%; min-height: 100%; 
+      background: url("../images/turn@2x.jpg") no-repeat center center #000;
+      background-size: contain;
+      z-index: 777777777;
   }
 }
 

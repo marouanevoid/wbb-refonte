@@ -157,6 +157,7 @@ wbb.LoadProfile = function() {
         });
 
         var descrimentFunction = function(cible){
+            cible = $(cible).find('span');
             var str = $(cible).html(),
                 arr = str.split(')'),
                 cstr = arr[0].substr(1),
@@ -248,7 +249,7 @@ wbb.LoadProfile = function() {
                     // SetUp events of tips
                     that.setpEventAfterAjax();
                 }
-                if(msg.nbResults < config.limit)
+                if(msg.nbResults < config.limit || msg.difference == 0)
                     config.$more.hide();
 
                 $target.find('img[data-src]').each(function()

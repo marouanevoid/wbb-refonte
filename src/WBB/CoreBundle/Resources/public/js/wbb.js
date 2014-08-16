@@ -82,6 +82,7 @@ $(document).ready(function() {
     }
 
     $('.email-share').on('click', function(e) {
+        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).data('href');
@@ -131,6 +132,13 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
+                    $('#fos_user_registration_form_country').find('option').each(function() {
+                        if ($(this).text().trim() === country) {
+                            $(this).attr('selected', 'selected').change();
+                        }
+                    });
                     $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
@@ -140,7 +148,13 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
-
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
+                    $('#fos_user_registration_form_country').find('option').each(function() {
+                        if ($(this).text().trim() === country) {
+                            $(this).attr('selected', 'selected').change();
+                        }
+                    });
                     $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
                     $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
                     $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
@@ -225,6 +239,11 @@ function initRegisterLoginForms() {
                     for (var i = 0; i < errors.length; i++) {
                         $('#register-form #message').find('ul').append('<li>' + errors[i] + '</li>');
                     }
+                    // if(ismobile){
+                    //     // scroll to error if there is erroes
+                    //     animateToPopIn($('.forgot-password').offset().top);
+                    //     //animateToPopIn($('#register-form #message').offset().top);
+                    // }
                 } else {
                     if (addFavorite.indexOf('favorite') > -1) {
                         $.cookie('light_action', 'favorite');
@@ -332,6 +351,9 @@ jQuery(document).ready(function($) {
                     for (var i = 0; i < fields.length; i++) {
 
                         switch (fields[i]) {
+                            case 'country':
+                                $('.country-dropdown .ui-dropdown').addClass('error');
+                                break;
                             case 'birthdate':
                                 $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
@@ -385,9 +407,9 @@ jQuery(document).ready(function($) {
 
 
 // Animate the scroll to focus on PopIn
-function animateToPopIn(){
-    if ( ismobile )
-        $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+function animateToPopIn(par){
+    // if ( ismobile )
+    $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
 }
 
 

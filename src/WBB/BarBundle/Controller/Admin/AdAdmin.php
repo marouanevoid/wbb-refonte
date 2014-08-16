@@ -19,6 +19,8 @@ class AdAdmin extends Admin {
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('position')
+            ->add('countries')
+            ->add('createdAt')
             ->add('beginAt', null, array('editable' => true))
             ->add('endAt', null, array('editable' => true))
         ;
@@ -96,13 +98,13 @@ class AdAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->with('General')
-                ->add('name')
+                ->add('name', null, array('required' => true))
                 ->add('position', 'choice', array(
-                    'required' => false,
+                    'required' => true,
                     'choices'  => Ad::getAdsPositionArray()
                 ))
                 ->add('tag')
-                ->add('link')
+                ->add('link', null, array('required' => false))
                 ->add('image', 'sonata_type_model_list', array(
                         'required' => false
                     ), array(
