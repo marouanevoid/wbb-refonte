@@ -30,6 +30,9 @@
                                     $('#show-popin').click();
                                     // scroll to top
                                     $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+
+                                    // REmove desibled btn
+                                    $('article.tip .form form input[type="submit"]').removeAttr('disabled');
                                 }
                             });
                         }
