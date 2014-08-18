@@ -36,8 +36,12 @@
 
                             <div class="drop-list">
                                 {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
-
-                                <select class="ui-dropdown city-drop-down" name="city" data-class="city">
+                                {% if is_mobile() or is_tablet() %}
+                                    <select class="ui-dropdown city-drop-down" name="city" data-class="city">
+                                {% else %}
+                                     <select class="select2-dropdown country light city-drop-down" name="city" data-class="city" placeholder="Choose a City">
+                                     <option></option>
+                                {% endif %}
                                     <option value="" disabled="disabled">Choose a City</option>
                                     {% for city in cities %}
                                         <option value="{{ city.slug }}">{{ city.name }}</option>

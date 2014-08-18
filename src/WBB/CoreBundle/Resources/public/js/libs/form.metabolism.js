@@ -70,6 +70,9 @@ meta.Form = function(config){
             }else{
                 $("form#tips textarea").removeClass('error');
             }
+            // Show Loader
+            $('article.tip .form form input[type="submit"]').addClass('loading');
+            $('article.tip .form form input[type="submit"]').attr('disabled' , 'disabled');
 
             if( that.config.onSubmit )
             {
