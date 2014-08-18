@@ -293,6 +293,7 @@ class User extends BaseUser
         $this->setStayInformed(true);
         $this->tipsShouldBeModerated = true;
         $this->favoriteBars = new ArrayCollection();
+        $this->facebookId = null;
     }
 
     /**
@@ -1232,10 +1233,10 @@ class User extends BaseUser
     {
         if ($this->plainPassword) {
             if (strlen($this->plainPassword) < 6) {
-                $context->addViolationAt('plainPassword', 'Password is too short (minimum is 6 characters) and needs at least one number');
+                $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
             } else {
                 if (!ctype_alnum($this->plainPassword)) {
-                    $context->addViolationAt('plainPassword', 'Password is too short (minimum is 6 characters) and needs at least one number');
+                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
                 }
             }
         }
