@@ -338,7 +338,7 @@ Loader flux
 .min-height-block-mobile{min-height: 600px;}
 
 
-article.tip .form form input[type="submit"].loading{
+article.tip .form form input[type="submit"].loading, .ui .form-submit.loading{
     background: url(../images/gif-load.gif) no-repeat center !important;;
      text-indent: -119px;
      background-color: transparent !important;
