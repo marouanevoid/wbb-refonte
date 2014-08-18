@@ -779,6 +779,12 @@ meta.SearchPage = function() {
                 // uncheck all checkbox
                 $('#filter input[type=checkbox]').prop('checked', false);
 
+                // send the request
+                // Clear the content
+                // send the request Search
+                that.clearContent();
+                that.goSearch();
+
         });
 
         that.context.$form_filter.find('select[name=city]').change(function(){ that._selectCities( $(this).val() ) });
