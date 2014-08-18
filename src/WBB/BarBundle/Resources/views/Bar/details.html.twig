@@ -515,6 +515,8 @@
     </section>
 
     <script type="text/javascript">
+        // remove desibled 
+        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
         new meta.Form(
                 {
                     $form : $('form#tips'),
@@ -540,6 +542,8 @@
                     },
                     onError:function($form, message)
                     {
+                        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+
                         var $count = $form.find(".count");
                         var count = $count.text();
 
