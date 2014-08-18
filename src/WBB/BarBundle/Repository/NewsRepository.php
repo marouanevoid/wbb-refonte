@@ -17,9 +17,9 @@ class NewsRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias().', nm, m')
-            ->leftJoin($this->getAlias().'.medias', 'nm')
-            ->leftJoin('nm.media', 'm')
+//            ->select($this->getAlias().', nm, m')
+//            ->leftJoin($this->getAlias().'.medias', 'nm')
+//            ->leftJoin('nm.media', 'm')
             ->where($qb->expr()->eq(1, 1))
         ;
 
