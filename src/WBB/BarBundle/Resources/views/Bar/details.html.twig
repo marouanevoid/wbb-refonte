@@ -246,7 +246,7 @@
                     </td>
 
                     <td class="star-share">
-                        <a data-type="{{ entity_light_type(bar) }}" class="btn-round {% if is_favorite(app.user, bar) %}active changed{% else %}brown{% endif %} star" data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
+                        <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round {% if is_favorite(app.user, bar) %}active changed{% else %}brown{% endif %} star" data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
                         <a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
@@ -515,6 +515,8 @@
     </section>
 
     <script type="text/javascript">
+        // remove desibled 
+        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
         new meta.Form(
                 {
                     $form : $('form#tips'),
@@ -537,6 +539,8 @@
                     },
                     onError:function($form, message)
                     {
+                        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+
                         var $count = $form.find(".count");
                         var count = $count.text();
 

@@ -1,0 +1,15 @@
+{% set cookies = app.request.cookies %}
+
+{% if cookies.has('light_action') and cookies.has('light_from') %}
+    {% if cookies.get('light_action') == 'favorite' %}
+        {% if cookies.get('light_from') == 'login' %}
+            {{ include('WBBUserBundle:PostLogin:_favorite_login.html.twig') }}
+        {% elseif cookies.get('light_from') == 'register' %}
+            {{ include('WBBUserBundle:PostLogin:_favorite_register.html.twig') }}
+        {% endif %}
+    {% elseif cookies.get('light_action') == 'tip' %}
+        {% if cookies.get('light_from') == 'register' %}
+            {{ include('WBBUserBundle:PostLogin:_tips_register.html.twig') }}
+        {% endif %}
+    {% endif %}
+{% endif  %}
