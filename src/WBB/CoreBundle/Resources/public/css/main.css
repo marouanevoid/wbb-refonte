@@ -49,7 +49,7 @@
   .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .subtitle.small {font-size: 13px;}
-  .btn.gold:hover {background-color: #ffe4af; color: #b3955f;}
+  /*.btn.gold:hover {background-color: #ffe4af; color: #b3955f;}*/
   .select-two .ui-dropdown-container {width: 100%!important;}
 
   /* Popup */
@@ -298,7 +298,7 @@
   #register.mobile .btn {/*height: 120px; */font-size: 17px;}
   #register.mobile .ui {width: auto; padding: 0 10px; position: relative;}
   #register.mobile .ui .title {width: 100%;}
-  #register.mobile .ui .subtitle {font-size: 15px; padding: 0 20%;}
+  #register.mobile .ui .subtitle {font-size: 20px; padding: 0 20%;}
   #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); background-size: 40px 40px; top: -45px; right: 20px; display: block;}
   #register.mobile form .form-text {font-size: 15px; border-radius: 2em;}
   #register.mobile form .btn-facebook {background-image: url("../images/UI/icon_fb.jpg"); background-position: 25px center; line-height: 64px;}
