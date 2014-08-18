@@ -20,7 +20,7 @@ class FormFactory implements FactoryInterface
         $this->validationGroups = $validationGroups;
     }
 
-    public function createForm($light = false, $validationGroups = array('Registration', 'Default'))
+    public function createForm($light = false, $validationGroups = array('Registration', 'Default', 'registration_fb'))
     {
         if($light){
             return $this->formFactory->createNamed($this->name, $this->type.'_light', null, array('validation_groups' => $validationGroups));

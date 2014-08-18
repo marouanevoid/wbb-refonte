@@ -27,9 +27,7 @@
 
                 <div id="message" class="margin-top-20 {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
                     <div>
-                        <ul>
-                            <li>Please enter the same password</li>
-                        </ul>
+                        {{ form_errors(form.plainPassword.first) }}
                     </div>
                 </div> <!-- #message -->
             {% endif %}

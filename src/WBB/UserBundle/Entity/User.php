@@ -12,11 +12,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BestOf;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
  * @ORM\Table(name="wbb_user")
  * @JMS\ExclusionPolicy("all")
+ * @UniqueEntity("facebookId", message="This facebook account is already used", groups={"registration_fb"})
  */
 class User extends BaseUser
 {
@@ -1212,14 +1214,13 @@ class User extends BaseUser
     public function validateBirthday(ExecutionContextInterface $context)
     {
         $country = $this->getCountry();
-        $drinkingAge = 18;
         if ($this->birthdate) {
             $age = $this->birthdate->diff(new \DateTime('now'))->y;
             if ($country) {
                 $drinkingAge = $country->getDrinkingAge();
-            }
-            if ($drinkingAge > $age) {
-                $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+                if ($drinkingAge > $age) {
+                    $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+                }
             }
         }
     }

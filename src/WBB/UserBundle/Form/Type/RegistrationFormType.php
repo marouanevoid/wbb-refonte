@@ -61,7 +61,8 @@ class RegistrationFormType extends BaseType
                     'empty_value' => array('year' => 'YYYY', 'month' => 'MM', 'day' => 'DD'),
                     'years' => range(1914, date('Y')),
                     'required' => false,
-                    'error_bubbling' => true
+                    'error_bubbling' => true,
+                    'invalid_message'=> 'not.blank'
                 ))
                 ->add('country', null, array(
                     'error_bubbling' => true,
