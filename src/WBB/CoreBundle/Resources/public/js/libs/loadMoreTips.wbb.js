@@ -100,6 +100,7 @@ meta.LoadMoreTips = function(config) {
             url: url,
             dataType: "json",
             success: function(msg) {
+                // Remove loader
                 $target.append(msg.htmldata);
                 
                 if(parseInt(msg.difference)==0){
