@@ -152,11 +152,11 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias() . ', c, sbrb, bm, m')
+            ->select($this->getAlias() . ', c, sbrb')
             ->leftJoin($this->getAlias().'.city', 'c')
             ->leftJoin($this->getAlias().'.suburb', 'sbrb')
-            ->leftJoin($this->getAlias().'.medias', 'bm')
-            ->leftJoin('bm.media', 'm')
+//            ->leftJoin($this->getAlias().'.medias', 'bm')
+//            ->leftJoin('bm.media', 'm')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
@@ -203,11 +203,11 @@ class BarRepository extends EntityRepository
             $qb = $this->createQuerybuilder($this->getAlias());
 
             $qb
-                ->select($this->getAlias() . ', c, sbrb, bm, m')
+                ->select($this->getAlias() . ', c, sbrb')
                 ->innerJoin($this->getAlias().'.city', 'c')
                 ->leftJoin($this->getAlias().'.suburb', 'sbrb')
-                ->leftJoin($this->getAlias().'.medias', 'bm')
-                ->leftJoin('bm.media', 'm')
+//                ->leftJoin($this->getAlias().'.medias', 'bm')
+//                ->leftJoin('bm.media', 'm')
                 ->where($qb->expr()->notIn($this->getAlias().'.id', ':exceptBars'))
                 ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
                 ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
