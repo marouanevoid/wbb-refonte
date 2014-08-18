@@ -131,54 +131,19 @@
 
                 {% if app.user %}
                     $(document).ready(function() {
-                        if($.cookie) {
-                            if($.cookie('light_action') !== undefined) {
-                                var notShown = true;
-                                var favoriteUrl = $.cookie('light_url');
-                                console.log(favoriteUrl);
-                                var from = $.cookie('light_from');
-                                var action = $.cookie('light_action');
+                        var action = $.cookie('light_action');
 
-                                var html = '';
-                                if(action === 'favorite'){
-                                    $('.star').each(function() {
-                                        if (notShown) {
-                                            if ($(this).attr('href') === favoriteUrl) {
-                                                $(this).click();
-                                                if(from === 'login') {
-                                                    html = '<table id="success" class="min-height" width="100%"><tbody><tr><td valign="bottom" style="vertical-align: bottom"><p class="padding-top-40 text-align-center">The "' + $.cookie('light_name') +
-                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p></td></tr><tr><td align="center">' +
-                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></td></tr></tbody></table>';
-                                                } else {
-                                                    html = '<table id="success" class="min-height" width="100%"><tbody><tr><td valign="bottom" style="vertical-align: bottom"><div class="subtitle">CONGRATULATIONS !</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p></td></tr><tr><td align="center">' +
-                                                    '<p>The "' + $.cookie('light_name') +
-                                                    '" '+ $.cookie('light_type') +' has been added to your favorites.</p>' +
-                                                    '<p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></td></tr></tbody></table>';
-                                                }
-                                                $('.popin-block').html(html);
-                                                $('#show-popin').click();
-                                                notShown = false;
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    if(from !== 'login') {
-                                        var html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.<p>' +
-                                        '<p>Your tip has been posted and is currently being moderated.</p>' +
-                                        '<p>You will be able to find all your tips in your user profile.</p>';
-                                        $('.popin-block').html(html);
-                                        $('#show-popin').click();
-                                    }
-                                    $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
-                                    $('#tips_submit').click();
-                                }
+                        if (action === 'tip') {
+                            $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
+                            $('#tips_submit').click();
 
-                                $.removeCookie('light_action');
-                                $.removeCookie('light_url');
-                                $.removeCookie('light_favorite');
-                                $.removeCookie('light_from');
-                                $.removeCookie('light_name');
-                            }
+                            $.removeCookie('light_action');
+                            $.removeCookie('light_type');
+                            $.removeCookie('light_url');
+                            $.removeCookie('light_id');
+                            $.removeCookie('light_favorite');
+                            $.removeCookie('light_from');
+                            $.removeCookie('light_name');
                         }
                     });
                 {% endif %}
@@ -186,10 +151,13 @@
                 $(document).ready(function() {
                     if ($.cookie('just_loggedin') !== undefined) {
                         $('header.desktop .logged').mouseover();
+                        // if is ipad or Mobile
+                        $('header.desktop .logged .in-action').click();
                         $.removeCookie('just_loggedin');
                     }
                     $(window).on('scroll' , function(){
                         $('header.desktop .logged').mouseout();
+                        $('header.desktop .logged .in-action').click();
                     });
                 });
         </script>
@@ -234,6 +202,9 @@
                         {% if app.request.query.get('confirmed', 0) == 1 %}
                             {{ include('WBBUserBundle:Registration:confirm.html.twig') }}
                         {% endif %}
+                        {% if app.user %}
+                            {{ include('WBBUserBundle:PostLogin:popins.html.twig') }}
+                        {% endif %}
                     </div>
                     <div>
                         <a href="#close" class="btn btn-close">Close</a>
@@ -253,18 +224,7 @@
                         if (response.code === '400') {
                             window.location.href = "{{ path('fos_user_registration_register') }}";
                         } else {
-                            console.log(addFavorite);
-                            if (addFavorite != '0') {
-                                if (addFavorite.indexOf('favorite') > -1) {
-                                    $.cookie('light_action', 'favorite');
-                                } else {
-                                    $.cookie('light_action', 'tips');
-                                }
-                                $.cookie('light_type', window.lightType);
-                                $.cookie('light_url', addFavorite);
-                                $.cookie('light_from', 'login');
-                                $.cookie('light_name', window.lightName);
-                            }
+                            $.cookie('light_from', 'login');
 
                             $.cookie('just_loggedin', true);
                             window.location.reload();
