@@ -5,8 +5,6 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function () {
-
-
             // $('.ui-slide.loading').each(function(){
             //     var that_ = $(this);
             //     that_.find('img:nth-child(2)').each(function(){
@@ -87,16 +85,14 @@
                         </tr>
                     </table>
                 {% else %}
-                    <h1>{% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %}
-                                in {{ city }}
-                                {% endif %}
+                    <h1>
+                        {% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %} in {{ city }}{% endif %}
                     </h1>
                 {% endif %}
             </section>
         </div>
         <!-- LATEST NEWS -->
         <div class="container full">
-
             <section class="bars">
                 {% if not is_mobile() or is_tablet() %}
                 <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
@@ -120,7 +116,6 @@
     {% else %}
         {% include "WBBBarBundle:News/blocks:editors_pick_desktop.html.twig"  with { 'articles' : articles , 'interviews' : interviews, 'newsList' : newsList } %}
     {% endif %}
-    
         <div class="twelve columns align-center l-margin-bottom load-more-container">
             <a class="h4 btn-radius border load-more brown large" href="#0">Older news</a>
         </div>

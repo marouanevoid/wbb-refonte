@@ -219,7 +219,9 @@ class RegistrationController extends ContainerAware
 
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
-        $user->setTipsShouldBeModerated(false);
+        if($user->getFirstname() != '' && $user->getLastname() != ''){
+            $user->setTipsShouldBeModerated(false);
+        }
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);

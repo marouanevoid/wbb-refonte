@@ -10,19 +10,14 @@
                     <div id="edit-account">
                         <form id="edit_profile_form" action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
                             <div class="block-top wrap">
-                                
                                 <div class="avatar-profil {% if is_mobile() and not is_tablet() %}wrap margin-bottom-20{% else %}left{% endif %} radius-max" >
-                                    <img src="{{  showImage(user.avatar, 'av_large') }}" height="145" width="145" id="avatar-img">
+                                    <img src="{{  showImage(user.avatar, 'avatar_145_145') }}" height="145" width="145" id="avatar-img">
                                 </div>
-
                                 {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
-
                                 <div class="group left">
-                                    
                                     <div class="title text-transform-capitalize bold {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
                                         <h5>{{ user.username }}</h5>
                                     </div>
-
                                     <div class="subgroup margin-top-10 {% if is_mobile() and not is_tablet() %}margin-bottom-10{% else %}margin-bottom-40{% endif %} wrap">
                                         {% if city %}
                                             <div class="text-transform-capitalize text-align-center margin-top-20">

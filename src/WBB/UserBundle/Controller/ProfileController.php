@@ -83,6 +83,10 @@ class ProfileController extends ContainerAware
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
+                if($user->getFirstname() != '' && $user->getLastname() != ''){
+                    $user->setTipsShouldBeModerated(false);
+                }
+
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
