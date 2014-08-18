@@ -10,7 +10,15 @@
   #landscape-mobile {display: none; visibility: hidden;}
   input[type="text"]::-webkit-input-placeholder, 
   input[type="password"]::-webkit-input-placeholder, 
-  input[type="email"]::-webkit-input-placeholder{
+  input[type="email"]::-webkit-input-placeholder,
+  input[type="text"]:-moz-input-placeholder,
+  input[type="password"]:-ms-input-placeholder, 
+  input[type="email"]:-ms-input-placeholder{
+    color: #818a8c;
+  }
+  input[type="text"]::-moz-placeholder, 
+  input[type="password"]::-moz-placeholder, 
+  input[type="email"]::-moz-placeholder {
     color: #818a8c;
   }
 /* Globale Libs */
@@ -603,7 +611,6 @@
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
-    #error p {font-size: 2em;}
   }
 
 /* Tablets (landscape) ----------- */
