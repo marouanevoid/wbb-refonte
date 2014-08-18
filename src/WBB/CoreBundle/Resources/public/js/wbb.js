@@ -42,6 +42,7 @@ $(document).ready(function() {
             success: function(html) {
                 // Set the PopIn Loading Flag
                 PopIn.endLoading();
+                $.removeCookie('light_action');
 
                 $('.popin-block').html(html);
                 initializeDropdowns();
@@ -245,15 +246,7 @@ function initRegisterLoginForms() {
                     //     //animateToPopIn($('#register-form #message').offset().top);
                     // }
                 } else {
-                    if (addFavorite.indexOf('favorite') > -1) {
-                        $.cookie('light_action', 'favorite');
-                    } else {
-                        $.cookie('light_action', 'tips');
-                    }
-                    $.cookie('light_type', window.lightType);
-                    $.cookie('light_url', addFavorite);
                     $.cookie('light_from', 'register');
-                    $.cookie('light_name', window.lightName);
 
                     $.cookie('just_loggedin', true);
                     window.location.reload();
@@ -295,17 +288,7 @@ function initRegisterLoginForms() {
                         var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
                         errorsList.find('ul').append('<li>' + data.error + '</li>');
                     } else {
-                        if (addFavorite != 0) {
-                            if (addFavorite.indexOf('favorite') > -1) {
-                                $.cookie('light_action', 'favorite');
-                            } else {
-                                $.cookie('light_action', 'tips');
-                            }
-                            $.cookie('light_type', window.lightType);
-                            $.cookie('light_url', addFavorite);
-                            $.cookie('light_from', 'login');
-                            $.cookie('light_name', window.lightName);
-                        }
+                        $.cookie('light_from', 'login');
 
                         $.cookie('just_loggedin', true);
                         window.location.reload();
@@ -388,9 +371,6 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="min-height"><div class="text-align-center padding-top-100"><div class="subtitle">CONGRATULATIONS&nbsp;!</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p><p>The "100 Bars" best of has been added to your favorites.</p><p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></div>';
-        $('.popin-block').html(html);
-        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
@@ -472,8 +452,7 @@ $(document).ready(function() {
         e.preventDefault();
         var btn = $(this);
         var favUrl = $(this).attr('href');
-        window.lightName = $(this).attr('data-name');
-        window.lightType = $(this).attr('data-type');
+
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
             if(btn.hasClass('active')){
@@ -565,7 +544,10 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
+            var url = $('.btn-signin').attr('href');
+            $.cookie('light_name', $(this).attr('data-name'));
+            $.cookie('light_type', $(this).attr('data-type'));
+            $.cookie('light_id', $(this).attr('data-id'));
             popinFrom = 'favorite';
             // Set the PopIn Loading Flag
             PopIn.startLoading();
@@ -575,6 +557,7 @@ $(document).ready(function() {
                 success: function(html) {
                     // Set the PopIn Loading Flag
                     PopIn.endLoading();
+                    $.cookie('light_action', 'favorite');
 
                     html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
