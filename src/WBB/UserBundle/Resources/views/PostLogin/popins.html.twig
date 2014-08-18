@@ -1,19 +1,14 @@
 {% set cookies = app.request.cookies %}
 
 {% if cookies.has('light_action') and cookies.has('light_from') %}
-    <script>
-        $(document).ready(function() {
-            $('#show-popin').click();
-        });
-    </script>
     {% if cookies.get('light_action') == 'favorite' %}
         {% if cookies.get('light_from') == 'login' %}
             {{ include('WBBUserBundle:PostLogin:_favorite_login.html.twig') }}
-        {% else %}
+        {% elseif cookies.get('light_from') == 'register' %}
             {{ include('WBBUserBundle:PostLogin:_favorite_register.html.twig') }}
         {% endif %}
-    {% else %}
-        {% if cookies.get('light_from') != 'login' %}
+    {% elseif cookies.get('light_action') == 'tip' %}
+        {% if cookies.get('light_from') == 'register' %}
             {{ include('WBBUserBundle:PostLogin:_tips_register.html.twig') }}
         {% endif %}
     {% endif %}

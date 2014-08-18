@@ -1,3 +1,8 @@
+<script>
+    $(document).ready(function() {
+        $('#show-popin').click();
+    });
+</script>
 <div id="success" class="min-height">
     <div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">
         <p class="padding-top-40">The "{{ cookies.get('light_name') }}" {{ cookies.get('light_type') }} has been added to your favorites.</p>

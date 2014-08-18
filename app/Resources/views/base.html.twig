@@ -127,24 +127,16 @@
 
                 {% if app.user %}
                     $(document).ready(function() {
-                        if($.cookie('light_from') !== undefined) {
-                            var from = $.cookie('light_from');
-                            var action = $.cookie('light_action');
+                        var action = $.cookie('light_action');
 
-                            if (action !== 'favorite') {
-                                if (from !== 'login') {
-                                    var html = '<div id="success"><p class="padding-top-40">CONGRATULATIONS ! You are now registered on World’s Best Bars.<p>' +
-                                    '<p>Your tip has been posted and is currently being moderated.</p>' +
-                                    '<p>You will be able to find all your tips in your user profile.</p>';
-                                    $('.popin-block').html(html);
-                                    $('#show-popin').click();
-                                }
-                                $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
-                                $('#tips_submit').click();
-                            }
+                        if (action === 'tip') {
+                            $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
+                            $('#tips_submit').click();
 
                             $.removeCookie('light_action');
+                            $.removeCookie('light_type');
                             $.removeCookie('light_url');
+                            $.removeCookie('light_id');
                             $.removeCookie('light_favorite');
                             $.removeCookie('light_from');
                             $.removeCookie('light_name');

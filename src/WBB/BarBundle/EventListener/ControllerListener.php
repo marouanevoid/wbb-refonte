@@ -28,8 +28,6 @@ class ControllerListener
                 $id = $cookies->get('light_id');
 
                 $this->favoritesManager->addToFavorites($id, $type);
-            } elseif ($cookies->get('light_action') == 'tips') {
-                die('tips');
             }
         }
     }

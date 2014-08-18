@@ -28,6 +28,16 @@ function nodeToString(node) {
 }
 
 $(document).ready(function() {
+    if ($.cookie('light_action') === 'favorite') {
+        $.removeCookie('light_action');
+        $.removeCookie('light_type');
+        $.removeCookie('light_url');
+        $.removeCookie('light_id');
+        $.removeCookie('light_favorite');
+        $.removeCookie('light_from');
+        $.removeCookie('light_name');
+    }
+
     $('.btn-signin').on('click', function(e) {
         popinFrom = 'signin';
         e.preventDefault();
