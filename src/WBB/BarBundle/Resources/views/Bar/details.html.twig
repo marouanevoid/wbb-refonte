@@ -538,7 +538,7 @@
                             $('form#tips textarea').val("");
                             $count.removeClass('success').text("250 left");
 
-                        }, 2000);
+                        }, 1);
                     },
                     onError:function($form, message)
                     {
@@ -558,9 +558,9 @@
 
                         }, 2000);
                     }
-                });
+                }); 
 
-        $('form#tips textarea').keydown(function()
+        $('form#tips textarea').on('change input paste keyup', function()
         {
             var length = $(this).val().length;
             $('form#tips .count').text( 250-length+' left' );
