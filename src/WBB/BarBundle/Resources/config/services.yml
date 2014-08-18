@@ -245,7 +245,16 @@ services:
             - { name: doctrine.event_listener, event: prePersist, method: prePersist }
             - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
 
+    wbb.request.listener:
+        class: WBB\BarBundle\EventListener\ControllerListener
+        arguments: ["@wbb.favorites_manager"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
+    wbb.favorites_manager:
+        class: WBB\BarBundle\Manager\FavoritesManager
+        calls:
+            - [setContainer, ["@service_container"]]
 
     # Share Mail Service
     wbb_bar.share.mailer:
