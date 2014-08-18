@@ -79,8 +79,6 @@ wbb.LoadProfile = function() {
                 $("#tab-bestof").addClass("active");
                 $("#view-account").attr("class", "bestof-tab");
 
-                
-
                 that.context.content = 'bestofs';
                 $('.filter-view').find('.ui-radio.active').click();
 
@@ -110,11 +108,13 @@ wbb.LoadProfile = function() {
             that.context.display = $(this).val();
             if(that.context.content === 'bars'){
                 that.config.bars.offset = 0;
+                that.config.bars.$more.show();
                 that.context.$barsTarget.empty();
                 that._request(that.context.$barsTarget, that.config.bars);
                 that.config.bars.offset += that.config.bars.limit;
             }else{
                 that.config.bestofs.offset = 0;
+                that.config.bestofs.$more.show();
                 that.context.$bestofsTarget.empty();
                 that._request(that.context.$bestofsTarget, that.config.bestofs);
                 that.config.bestofs.offset += that.config.bestofs.limit;
@@ -127,11 +127,13 @@ wbb.LoadProfile = function() {
             that.context.filter = $(this).val();
             if(that.context.content === 'bars'){
                 that.config.bars.offset = 0;
+                that.config.bars.$more.show();
                 that.context.$barsTarget.empty();
                 that._request(that.context.$barsTarget, that.config.bars);
                 that.config.bars.offset += that.config.bars.limit;
             }else{
                 that.config.bestofs.offset = 0;
+                that.config.bestofs.$more.show();
                 that.context.$bestofsTarget.empty();
                 that._request(that.context.$bestofsTarget, that.config.bestofs);
                 that.config.bestofs.offset += that.config.bestofs.limit;
