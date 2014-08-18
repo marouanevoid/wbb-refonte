@@ -369,7 +369,6 @@
   #editprofile .avatar-profil {z-index: 11; position: relative; overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
   #editprofile .avatar-profil img {height: 100%; width: 100%; position: relative; border-radius: 10em;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
-  #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
   #editprofile #edit-account label {font-size: 15px;}
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
@@ -398,7 +397,6 @@
   #view-account.tips-tab .filter-content {display: none; visibility: hidden;}
 
   .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
-  .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
   .ui.tips {width: 100% !important;}
   .ui.tips .list-tips {background-color: #faf3e1;}
   .ui.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
@@ -608,6 +606,8 @@
     header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
+    #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
+    .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
@@ -625,7 +625,7 @@
     .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
     section.bar-filter .bar-w-pic {max-height: 180px;}
     .ui.register .title {width: 45%;}
-    .ui .form-text {text-indent: 0;}
+    /*.ui .form-text {text-indent: 0;}*/
     #editprofile .form-text {text-indent: 10px;}
     .page #message {left: 68px;}
     #register.page #message {left: 9px;}
@@ -693,7 +693,8 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 44%;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 11px;}
-    #register.mobile.popup .date-birthday .select-wrap {width: 105px; margin-right: 2%;}
+    #register.mobile.popup .date-birthday .select-wrap {width: 112px; margin-right: 2%;}
+    #register.mobile.popup .date-birthday .group-small-select {width: 150%;}
     #register.page .group-checkbox {left: 0; margin: 0;}
     #message ul {margin-left: 100px;}
     #success {padding: 0 20px;}
@@ -732,7 +733,8 @@
     .search-bar-mobile {height: 200%!important;}
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
     .no-result {margin: 2%;}
-    .orientation_landscape .logo img {border: 10px solid red;}
+    .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px;}
+    .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -787,18 +789,6 @@
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
   }
-
-/* Smartphones (landscape) ----------- */
-@media screen and (min-width: 480px) and (max-width: 724px) and (orientation: landscape) { 
-  /*#landscape-mobile {
-      display: block; visibility: visible;
-      position: fixed; top: -50%; left: -50%;
-      width: 200%; height: 200%; min-height: 100%; 
-      background: url("../images/turn@2x.jpg") no-repeat center center #000;
-      background-size: contain;
-      z-index: 777777777;
-  }*/
-}
 
 @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
   .search-bar-mobile .container input[type="reset"] {right: 41%;}
