@@ -1,0 +1,29 @@
+<article class="small {% if firstchild is defined and firstchild %} interview-frist-child{% endif %}">
+    <div class="title vcenter">
+        {% set margin_class = "" %}
+        {% if n.seoDescription is defined and n.seoDescription != '' or n.quoteText is not  defined or n.quoteText == '' %}
+            <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+        {% endif %}
+        <p class="m-margin">
+            {% if n.seoDescription %}
+                {{ n.seoDescription|truncate(60, true, '...') }}
+            {% else %}
+            {% if show_quote is defined %}
+            {% if n.quoteText is defined and n.quoteText and n.quoteText != '' %}
+                <h1>
+                    {% if become_url is defined and become_url %}
+                        <a  class="quote-cls" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">“{{ n.quoteText|truncate(60, true, '...') }}”</a>
+                    {% else %}
+                        “{{ n.quoteText|truncate(60, true, '...') }}”
+                    {% endif %}
+                </h1>
+                <p class="m-margin">{{ n.quoteAuthor|truncate(20, true, '...') }}</p>
+            {% else %}
+                {% set margin_class = "margin-top-15" %}
+            {% endif %}
+            {% endif %}
+            {% endif %}
+        </p>
+        <a class="plus-btn {{ margin_class }}" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
+    </div>
+</article>

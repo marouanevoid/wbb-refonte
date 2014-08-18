@@ -1,11 +1,11 @@
 <div class="line">
-{% for bar in bars %}
-    {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
+    {% for bar in bars %}
+        {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
         {% if distance is defined and distance %}
-            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar, 'distance': distance, 'latitude': distance.latitude, 'longitude': distance.longitude } %}
+            {% include "WBBBarBundle:Bar/items:bar_425_320.html.twig" with { 'b': bar, 'distance': distance } %}
         {% else %}
-            {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
+            {% include "WBBBarBundle:Bar/items:bar_425_320.html.twig" with { 'b': bar } %}
         {% endif %}
-    {% if not is_mobile() or is_tablet() %}</div>{% endif %}
-{% endfor %}
+        {% if not is_mobile() or is_tablet() %}</div>{% endif %}
+    {% endfor %}
 </div>

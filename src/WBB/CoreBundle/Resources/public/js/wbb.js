@@ -93,7 +93,7 @@ $(document).ready(function() {
     }
 
     $('.email-share').on('click', function(e) {
-        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
+//        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).data('href');
@@ -317,12 +317,15 @@ jQuery(document).ready(function($) {
     $('#register_form_full').on('submit', function(e) {
         e.preventDefault();
         var url = $(this).attr('action');
-
+        // 
+        // show the loder
+        $(' #register.page .group-actions').addClass('loading');
         $.ajax({
             url: url,
             method: 'POST',
             data: $(this).serialize(),
             success: function(data) {
+                $(' #register.page .group-actions').removeClass('loading');
                 if (data.code === 400) {
                     var errors = data.errors.messages;
                     var fields = data.errors.fields;
