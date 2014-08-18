@@ -111,7 +111,7 @@ sonata_admin:
     title:      "WBB - Administration"
     security:
             handler: sonata.admin.security.handler.role
-    #title_logo: /bundles/wwbcore/images/common/logo.png
+    title_logo: /bundles/wbbcore/images/common/logo-sonata.png
     dashboard:
         blocks:
             # display a dashboard block
