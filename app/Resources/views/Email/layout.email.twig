@@ -25,23 +25,29 @@
                 /* iPhone 4g styles */
                 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
                     .footer {width: 100%!important;}
-                    .copyright {text-align: center;}
+                    .firstsidebarFooter {text-align: center;}
+                    .secondsidebarFooter {text-align: center;}
+                    .copyright {text-align: center!important;}
                     .socials {margin-left: auto; margin-right: auto; width: 50%;}
                     .socials a {margin-right: 15px!important;}
                 }
 
                 /* Put CSS for low density (ldpi) Android layouts in here */
                 @media only screen and (-webkit-device-pixel-ratio:.75){
-                    .copyright {text-align: center;}
-                    .socials {margin-left: auto; margin-right: auto; width: 50%;}
+                    .firstsidebarFooter {text-align: center;}
+                    .secondsidebarFooter {text-align: center;}
+                    .copyright {text-align: center!important; background-color: red; width: 100%;}
+                    .socials {margin-left: auto; margin-right: auto; width: 100%;}
                     .socials a {margin-right: 15px!important;}
                 }
 
                 /* Put CSS for high density (hdpi) Android layouts in here */
                 @media only screen and (-webkit-device-pixel-ratio:1.5){
                     .footer {width: 100%!important;}
-                    .copyright {text-align: center;}
-                    .socials {margin-left: auto; margin-right: auto; width: 50%;}
+                    .firstsidebarFooter {text-align: center;}
+                    .secondsidebarFooter {text-align: center;}
+                    .copyright {text-align: center!important; background-color: orange; width: 100%;}
+                    .socials {margin-left: auto; margin-right: auto; width: 100%;}
                     .socials a {margin-right: 15px!important;}
                 }
 
@@ -103,58 +109,28 @@
                 <table class="wrap" bgcolor="#faf3e1" style="font-family: Verdana, Arial; width: 100%; background-color: #faf3e1;"><tr><td height="40"></td></tr></table>
 
                 <!-- FOOTER -->
-                <table class="wrap" bgcolor="#333333" border="0" cellpadding="0" cellspacing="0" style="font-family: Verdana, Arial;">
+                <table class="wrap" bgcolor="#333333" border="0" cellpadding="0" cellspacing="0" style="font-family: Verdana, Arial;" style="width: 100%;" width="100%">
                     <tr>
                         <td align="center" valign="top">
-                            <table class="footer" align="center" border="0" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; width: 60%;">
+                            <table class="footer" align="center" border="0" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; width: 50%;">
                                 <tr>
                                     <td valign="top" style="font-family: Verdana, Arial;">
                                         <table class="container" style="border-bottom-width: 1px; border-bottom-color: #49453f; border-bottom-style: solid; font-family: Verdana, Arial; display: block !important; clear: both !important; overflow: hidden; margin: 0 auto;" valign="top" cellpadding="0" cellspacing="0">
                                             
-                                            <!-- <tr>
-                                                <td valign="middle" align="center" style="font-family: Verdana, Arial; min-width: 260px">
-                                                    <p style="color: #fedf9f; font-size: 14px; margin-top: 5px; font-family: 'Myriad Pro', serif;">
-                                                        © {{ "now"|date("Y") }} World's Best Bars
-                                                    </p>
-                                                </td>
-                                                <td style="font-family: Verdana, Arial; min-width: 220px">
-                                                    <table style="border-left-width: 1px; border-left-color: #49453f; border-left-style: solid; font-family: Verdana, Arial;"
-                                                           height="90" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td width="20" style="font-family: Verdana, Arial;"></td>
-                                                            <td>
-                                                                <div class="socials" style="font-family: Verdana, Arial;">
-                                                                    <a href="https://www.facebook.com/worldsbestbars" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
-                                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg') }}"/>
-                                                                    </a>
-                                                                    <a href="https://twitter.com/WorldsBestBars" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
-                                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_twiter.jpg') }}"/>
-                                                                    </a>
-                                                                    <a href="http://instagram.com/worldsbestbars" style="font-family: Verdana, Arial; display: block; float: left; margin-right: 25px;">
-                                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_viadeo.jpg') }}"/>
-                                                                    </a>
-                                                                    <a href="http://www.pinterest.com/worldsbestbars" style="margin-right: 0; font-family: Verdana, Arial; display: block; float: left;">
-                                                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_pinterest.jpg') }}"/>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr> -->
-
                                             <tr>
                                                 <td>
-                                                    <table height="90" align="left" style="min-width: 300px">
+                                                    <table class="firstsidebarFooter" height="90" align="left" style="border-right:1px solid #49453f">
                                                         <tr>
                                                             <td>
-                                                                <p class="copyright" style="text-align: center; color: #fedf9f; font-size: 14px; margin-top: 5px; font-family: 'Myriad Pro', serif;">© {{ "now"|date("Y") }} World's Best Bars</p>
+                                                                <p class="copyright" style="text-align: right; color: #fedf9f; font-size: 14px; margin-top: 5px; margin-bottom: 0; font-family: 'Myriad Pro', serif;">© {{ "now"|date("Y") }} World's Best Bars</p>
                                                             </td>
+                                                            <td style="width:40px" width"40"></td>
                                                         </tr>
                                                     </table>
-                                                    <table height="90" align="left" style="min-width: 300px">
+                                                    <table class="secondsidebarFooter" height="90" align="left">
                                                         <tr>
-                                                            <td align="center">
+                                                            <td style="width:40px" width"40"></td>
+                                                            <td align="left">
                                                                 <div class="socials">
                                                                     <a href="https://www.facebook.com/worldsbestbars" style="margin-right: 25px;">
                                                                         <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg') }}"/>
