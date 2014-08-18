@@ -109,7 +109,8 @@ meta.Form = function(config){
                     
                     if(ismobile==1)
                     {
-                        $('.line .tips-area').prepend(data.tip);
+                        if(data.status!=0)
+                            $('.line .tips-area').prepend(data.tip);
                         if(nbItems>=3)
                         {
                             $('.line .tips-area:last-child .three:last-child').remove();
@@ -120,11 +121,12 @@ meta.Form = function(config){
                     {
                         if(nbItems==0)
                         {
-                            $('.line .tips-area').addClass('three').prepend(data.tip);
-                            $('#tipsForm').removeClass('six').addClass('three');
+                            if(data.status!=0){
+                                $('.line .tips-area').addClass('three').prepend(data.tip);
+                                $('#tipsForm').removeClass('six').addClass('three');
+                            }
                         }else
                         {
-
                                 $('.line .tips-area .three:first-child').before(data.tip);
                         }
                         if(nbItems>=3)
@@ -135,6 +137,8 @@ meta.Form = function(config){
                         }
                     }
 
+                    $('.popin-block').html(data.popinContent);
+                    $('#show-popin').click();
                         
                     $('.custom-scroll').not('.jspScrollable').each(function()
                     {
