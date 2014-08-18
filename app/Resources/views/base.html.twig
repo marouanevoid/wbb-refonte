@@ -186,10 +186,13 @@
                 $(document).ready(function() {
                     if ($.cookie('just_loggedin') !== undefined) {
                         $('header.desktop .logged').mouseover();
+                        // if is ipad or Mobile
+                        $('header.desktop .logged .in-action').click();
                         $.removeCookie('just_loggedin');
                     }
                     $(window).on('scroll' , function(){
                         $('header.desktop .logged').mouseout();
+                        $('header.desktop .logged .in-action').click();
                     });
                 });
         </script>
