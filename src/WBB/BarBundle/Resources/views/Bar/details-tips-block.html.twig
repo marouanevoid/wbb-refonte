@@ -12,11 +12,12 @@
                     $('#tips').on('submit', function(e) {
                         e.preventDefault();
                         $('.popin-block').html('');
-                        var url = $('.btn-signin').attr('href') + '?favorite=' + '{{ path('wbb_bar_tips_add') }}';
-                        window.lightType = 'tip';
-                        window.lightName = $('#wbb_barbundle_tip_description').val();
-                        console.log(window.lightType);
-                        console.log(window.lightName);
+                        var url = $('.btn-signin').attr('href');
+
+                        $.cookie('light_type', 'tip');
+                        $.cookie('light_action', 'tip');
+                        $.cookie('light_name', $('#wbb_barbundle_tip_description').val());
+
                         popinFrom = 'favorite';
                         if ($('#wbb_barbundle_tip_description').val().trim() !== ''){
                             $.ajax({
@@ -30,6 +31,9 @@
                                     $('#show-popin').click();
                                     // scroll to top
                                     $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+
+                                    // REmove desibled btn
+                                    $('article.tip .form form input[type="submit"]').removeAttr('disabled');
                                 }
                             });
                         }
