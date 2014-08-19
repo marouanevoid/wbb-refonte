@@ -200,9 +200,9 @@
                 title: '{{ bar.name }}' // Marker ALT Text
             });
 
-            // 	google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
-            //		window.location='http://www.snowdonrailway.co.uk/shop_and_cafe.php'; // URL to Link Marker to (i.e Google Places Listing)
-            // 	});
+            //  google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
+            //      window.location='http://www.snowdonrailway.co.uk/shop_and_cafe.php'; // URL to Link Marker to (i.e Google Places Listing)
+            //  });
 
             var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
                 content:"{{ bar.name }}" // HTML contents of the InfoWindow
@@ -522,9 +522,6 @@
                     $form : $('form#tips'),
                     onComplete:function($form, data)
                     {
-                         // Show Loader
-                         $('article.tip .form form input[type="submit"]').removeClass('loading');
-                         $('article.tip .form form input[type="submit"]').removeAttr('disabled');
                         var $count = $form.find(".count");
                         var count = $count.text();
 
@@ -570,6 +567,3 @@
 {% block footerAd %}
     {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_728x90' })) }}
 {% endblock %}
-
-
-
