@@ -23,14 +23,14 @@ class ChangePasswordFormType extends AbstractType
     {
         $builder->add('current_password', 'password', array(
             'label' => 'form.current_password',
-            'translation_domain' => 'FOSUserBundle',
+            'translation_domain' => 'WBBUserBundle',
             'mapped' => false,
             'required' => false,
-            'constraints' => new UserPassword(array('message'=> 'The entered password is invalid.')),
+            'constraints' => new UserPassword(array('message'=> 'Sorry this password is not valid.')),
         ));
         $builder->add('plainPassword', 'repeated', array(
             'type' => 'password',
-            'options' => array('translation_domain' => 'FOSUserBundle'),
+            'options' => array('translation_domain' => 'WBBUserBundle'),
             'first_options' => array('label' => 'form.new_password'),
             'second_options' => array('label' => 'form.new_password_confirmation'),
             'invalid_message' => 'fos_user.password.mismatch',

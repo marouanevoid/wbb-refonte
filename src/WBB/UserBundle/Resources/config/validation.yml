@@ -1,5 +1,9 @@
-#FOS\UserBundle\Model\User:
+#FOS\UserBundle\Form\Model\ChangePassword:
 #    properties:
-#        password:
-#            - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
-#                message: "The entered password is invalid."
+#        current:
+#            - NotBlank: { message: "3emerni", groups: [ChangePassword, Default]}
+
+#FOS\UserBundle\Form\Model\ChangePassword:
+#    properties:
+#        new:
+#            - Length: { min: 6, minMessage: "wa zid mazal", groups: [ChangePassword] }

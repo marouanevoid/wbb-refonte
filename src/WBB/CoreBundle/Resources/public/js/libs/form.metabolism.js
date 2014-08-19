@@ -112,7 +112,7 @@ meta.Form = function(config){
                     
                     if(ismobile==1)
                     {
-                        if(data.status!=0)
+                        if(data.status != 0)
                             $('.line .tips-area').prepend(data.tip);
                         if(nbItems>=3)
                         {
@@ -130,13 +130,17 @@ meta.Form = function(config){
                             }
                         }else
                         {
+                            if(data.status!=0){
                                 $('.line .tips-area .three:first-child').before(data.tip);
+                            }
                         }
                         if(nbItems>=3)
                         {
-                            $('.line .tips-area:last-child .three:last-child').remove();
-                            $(".load-more").show();
-                            $(".load-more").parent().show();
+                            if(data.status!=0){
+                                $('.line .tips-area:last-child .three:last-child').remove();
+                                $(".load-more").show();
+                                $(".load-more").parent().show();
+                            }
                         }
                     }
 
