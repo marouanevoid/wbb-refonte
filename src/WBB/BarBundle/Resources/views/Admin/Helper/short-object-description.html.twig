@@ -1,6 +1,8 @@
 <span class="inner-field-short-description">
     {% if object.providerName is defined and object.providerName == 'sonata.media.provider.image' %}
-        <a href="{{ admin.generateObjectUrl('show', object, link_parameters) }}" target="new">{% media object, 'small' %}</a>
+        <a href="{{ admin.generateObjectUrl('show', object, link_parameters) }}" target="new">
+            <img src="{{ showImage(object, 'preview') }}" />
+        </a>
     {% elseif object and admin.hasRoute('edit') and admin.isGranted('EDIT') %}
         <a href="{{ admin.generateObjectUrl('edit', object, link_parameters) }}" target="new">{{ description }}</a>
     {% else %}

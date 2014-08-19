@@ -18,9 +18,9 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Pseudo</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Pseudo' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -38,9 +38,9 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Firstname</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Firstname' } }) }}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -50,9 +50,9 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Lastname</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Lastname' } }) }}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -62,9 +62,9 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Email</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Email' } }) }}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -74,9 +74,9 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Password</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Password' } }) }}
+                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -86,9 +86,9 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Confirm Password</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Confirm Password' } }) }}
+                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -210,6 +210,24 @@
                             <div class="clear"></div>
                             <div class="group-actions margin-top-30 margin-bottom-50 wrap">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="CREATE YOUR ACCOUNT">
+                                    <div class="floatingBarsG">
+                                        <div class="blockG" id="rotateG_01">
+                                        </div>
+                                        <div class="blockG" id="rotateG_02">
+                                        </div>
+                                        <div class="blockG" id="rotateG_03">
+                                        </div>
+                                        <div class="blockG" id="rotateG_04">
+                                        </div>
+                                        <div class="blockG" id="rotateG_05">
+                                        </div>
+                                        <div class="blockG" id="rotateG_06">
+                                        </div>
+                                        <div class="blockG" id="rotateG_07">
+                                        </div>
+                                        <div class="blockG" id="rotateG_08">
+                                        </div>
+                                    </div>
                             </div>
                         </form>
                         <div class="clear"></div>

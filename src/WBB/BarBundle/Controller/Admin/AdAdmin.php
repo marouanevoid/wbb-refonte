@@ -109,7 +109,7 @@ class AdAdmin extends Admin {
                         'required' => false
                     ), array(
                         'link_parameters' => array(
-                            'context' => 'banner'
+                            'context' => 'ads'
                         )
                     )
                 )

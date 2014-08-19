@@ -95,7 +95,7 @@ class NewsAdmin extends Admin {
                     'help'      => 'Preferred size (width: 82px , height: 82px)'
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'sponsor_small'
+                        'context' => 'sponsor'
                     )
                 ))
             ->end()

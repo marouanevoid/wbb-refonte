@@ -215,20 +215,20 @@ class SemsoftController extends Controller
 
     private function setSocialMedia($ssBar, $data, $newBar)
     {
-        $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, $newBar));
-        $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, $newBar));
-        $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, $newBar));
-        $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, $newBar));
-        $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, $newBar));
-        $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, $newBar));
-        $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, $newBar));
-        $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, $newBar));
-        $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, $newBar));
-        $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, $newBar));
-        $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, $newBar));
-        $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
-        $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
-        $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
+        $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, true));
+        $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, true));
+        $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, true));
+        $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, true));
+        $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, true));
+        $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, true));
+        $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, true));
+        $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, true));
+        $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, true));
+        $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, true));
+        $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, true));
+        $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, true));
+        $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, true));
+        $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, true));
 
         return $ssBar;
     }
@@ -369,25 +369,33 @@ class SemsoftController extends Controller
 
     private function getOpenHoursArray($openHoursString, $day, SemsoftBar $ssBar)
     {
-        $hourRanges = explode(',', $openHoursString);
+//        if(empty($openHoursString) && $ssBar->getBar())
+//        {
+//            $bar = $ssBar->getBar();
+//            foreach($bar->getOpenings() as $op){
+//                if($op->getOpeningDay() == $day){
+//                    $bar->removeOpening($op);
+//                }
+//            }
+//        }else{
+            $hourRanges = explode(',', $openHoursString);
+            foreach($hourRanges as $hourRange)
+            {
+                $hours = explode('-', $hourRange);
+                if(count($hours) == 2){
+                    $fromHour   = explode(':', $hours[0]);
+                    $toHour     = explode(':', $hours[1]);
 
-        foreach($hourRanges as $hourRange)
-        {
-            $hours = explode('-', $hourRange);
-            if(count($hours) == 2){
-                $fromHour   = explode(':', $hours[0]);
-                $toHour     = explode(':', $hours[1]);
-
-                $opening = new BarOpening();
-                $opening
-                    ->setOpeningDay($day)
-                    ->setFromHour($fromHour[0])
-                    ->setToHour($toHour[0])
-                    ->setSemsoftBar($ssBar);
-
-                $ssBar->addOpening($opening);
+                    $opening = new BarOpening();
+                    $opening
+                        ->setOpeningDay($day)
+                        ->setFromHour($fromHour[0])
+                        ->setToHour($toHour[0])
+                        ->setSemsoftBar($ssBar);
+                    $ssBar->addOpening($opening);
+                }
             }
-        }
+//        }
 
         return $ssBar;
     }

@@ -7,10 +7,10 @@
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                     {% if b.medias|length>0 %}
                         {% for m in b.medias|slice(0,1) %}
-                            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'slider_large') }}"  alt="{{ b.name }}" width="290" height="214" />
+                            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'bar_425_320') }}"  alt="{{ b.name }}" width="290" height="214" />
                         {% endfor %}
                     {% else %}
-                        <img class="scale-with-grid" data-src="{{ showImage('', 'slider_large') }}" width="290" height="214" alt=""/>
+                        <img class="scale-with-grid" data-src="{{ showImage('', 'bar_425_320') }}" width="290" height="214" alt=""/>
                     {% endif %}
                 </div>
             </div>
