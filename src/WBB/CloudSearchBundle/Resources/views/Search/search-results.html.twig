@@ -1,145 +1,131 @@
 {% extends "::base.html.twig" %}
-    {% set queryTag = app.request.query.get('tag',null) %}
+{% set queryTag = app.request.query.get('tag',null) %}
 {% block bodyTag %}
-    <body class="search">
-
-    <script type="text/javascript">
-        var defaultImg = "{{ asset('bundles/wbbcore/images/default.jpg') }}";
-        {% if showAllBars %}
-        var queryestQ = "{{app.request.query.get('q', '*')}}";    
-        {% else %}
-        var queryestQ = "{{app.request.query.get('q', 'undefined')}}";
-        if(queryestQ == "")
-            queryestQ = "*";
-        {% endif %}
-    </script>
-    {% endblock %}
-
-    {% block body %}
-
-
-        <div class="container l-padding {% if is_mobile() and not is_tablet() %}margin-top-20{% endif %}">
+<body class="search">
+<script type="text/javascript">
+    var defaultImg = "{{ asset('bundles/wbbcore/images/default-search.jpg') }}";
+    {% if showAllBars %}
+    var queryestQ = "{{app.request.query.get('q', '*')}}";
+    {% else %}
+    var queryestQ = "{{app.request.query.get('q', 'undefined')}}";
+    if (queryestQ == "")
+        queryestQ = "*";
+    {% endif %}
+</script>
+{% endblock %}
+{% block body %}
+    <div class="container l-padding {% if is_mobile() and not is_tablet() %}margin-top-20{% endif %}">
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/search.js') }}"></script>
-
-            <aside class="three columns filters">
-                <form id="filter" class="{% if is_mobile() and not is_tablet() %}filter-from{% endif %}">
-                    <div class="reset m-margin-bottom">
-                        <h3>Filters</h3>
-                        <input type="reset" class="{% if is_mobile() and not is_tablet() %}mobile-reset{% endif %}" value="{% if is_mobile() and not is_tablet() %} {% else %}Reset{% endif %}"/>
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="drop-btn">
-                                <h3>Location</h3>
-                                <a class="btn-round plus brown"></a>
-                            </div>
-
-                            <div class="drop-list">
-                                {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
-                                {% if is_mobile() or is_tablet() %}
-                                    <select class="ui-dropdown city-drop-down" name="city" data-class="city">
-                                {% else %}
-                                     <select class="select2-dropdown country light city-drop-down" name="city" data-class="city" placeholder="Choose a City">
-                                     <option></option>
-                                {% endif %}
+        <aside class="three columns filters">
+            <form id="filter" class="{% if is_mobile() and not is_tablet() %}filter-from{% endif %}">
+                <div class="reset m-margin-bottom">
+                    <h3>Filters</h3>
+                    <input type="reset" class="{% if is_mobile() and not is_tablet() %}mobile-reset{% endif %}"
+                           value="{% if is_mobile() and not is_tablet() %} {% else %}Reset{% endif %}"/>
+                </div>
+                <ul>
+                    <li>
+                        <div class="drop-btn">
+                            <h3>Location</h3>
+                            <a class="btn-round plus brown"></a>
+                        </div>
+                        <div class="drop-list">
+                            {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
+                            {% if is_mobile() or is_tablet() %}
+                                <select class="ui-dropdown city-drop-down" name="city" data-class="city">
+                            {% else %}
+                                <select class="select2-dropdown country light city-drop-down" name="city" data-class="city" placeholder="Choose a City">
+                                    <option></option>
+                            {% endif %}
                                     <option value="" disabled="disabled">Choose a City</option>
                                     {% for city in cities %}
                                         <option value="{{ city.slug }}">{{ city.name }}</option>
                                     {% endfor %}
                                 </select>
-
                                 <div class="neigborhood">
                                     <label class="h3">Neighborhood</label>
                                     <ul></ul>
                                 </div>
-                            </div>
-                        </li>
-                        {% for tags in tagsByType %}
-                            {% if tags.tags|length > 0 %}
-                                <li class='grouped-fields-search'>
-                                    <div class="drop-btn">
-                                        <h3>{{ tags.name }}</h3>
-                                        <a class="btn-round plus brown"></a>
-                                    </div>
-
-                                    <div class="drop-list">
+                        </div>
+                    </li>
+                    {% for tags in tagsByType %}
+                        {% if tags.tags|length > 0 %}
+                            <li class='grouped-fields-search'>
+                                <div class="drop-btn">
+                                    <h3>{{ tags.name }}</h3>
+                                    <a class="btn-round plus brown"></a>
+                                </div>
+                                <div class="drop-list">
                                     {% if not is_mobile() or is_tablet() %}
-                    
                                     <div class="{% if tags.tags|length >= 7 %}custom-scroll{% else %} without-scroll {% endif %} margin-top-20">
-
-                                    {% endif %}
+                                        {% endif %}
                                         <ul class="checkbox-container">
                                             {% for tag in tags.tags %}
-                                                <li><label><input type="checkbox" class="filter-tags-check" name="{{ tags.csName }}[]" value="{{ tag.name }}"  {% if queryTag and queryTag == tag.name %} checked {% endif %} /><b></b>{{ tag.name }}</label>
+                                                <li>
+                                                    <label>
+                                                        <input type="checkbox" class="filter-tags-check" name="{{ tags.csName }}[]"
+                                                                  value="{{ tag.name }}"  {% if queryTag and queryTag == tag.name %} checked {% endif %} />
+                                                        <b></b>
+                                                        {{ tag.name }}
+                                                    </label>
                                                 </li>
                                             {% endfor %}
                                         </ul>
-                                    {% if not is_mobile() or is_tablet() %}
+                                        {% if not is_mobile() or is_tablet() %}
                                     </div>
                                     {% endif %}
-                                    </div>
+                                </div>
 
-                                    <div class='clear'></div>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-
-                    {% if  is_mobile() and not is_tablet() %}
+                                <div class='clear'></div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% if  is_mobile() and not is_tablet() %}
                     <div class="submit m-margin-top">
                         <input type="submit" class="apply-filters" id="applay-filter" value="Apply Filters"/>
                         <input type="reset" value="Cancel" class="large no-action-search-cancel"/>
                     </div>
-                    {% endif %}
-                </form>
-            </aside>
-
-            <div class="nine columns bar-filter-form">
-                {% if not is_mobile() or is_tablet() %}
-                    <h1>Search results</h1>
-                    <div class="six columns m-margin  search-box">
-                        <form id="search">
-                            <input type="text" id="city_search" name="city" {% if app.request.query.get('q') is defined and app.request.query.get('q') %} value="{{app.request.query.get('q')}}" {% endif %} placeholder="Start typing..."/>
-                            <input type="submit" class="search" value=" "/>
-                            <input type="reset" value=" " {% if app.request.query.get('q') is defined and app.request.query.get('q') %} style='display:inline;' {% endif %}/>
-                        </form>
-                    </div>
                 {% endif %}
-
-                <div class="six columns h2 screen-compteur">
-                    <input type="radio" name="filter" value="(0) Bar" data-type='Bar' checked="checked" class="ui-radio collapsed radio-from-for-search" data-color="brown" data-type="collapsed"/>
-                    <input type="radio" name="filter" value="(0) News" data-type='News' class="ui-radio radio-from-for-search" data-color="brown collapsed" data-type="collapsed"/>
+            </form>
+        </aside>
+        <div class="nine columns bar-filter-form">
+            {% if not is_mobile() or is_tablet() %}
+                <h1>Search results</h1>
+                <div class="six columns m-margin  search-box">
+                    <form id="search">
+                        <input type="text" id="city_search"
+                               name="city" {% if app.request.query.get('q') is defined and app.request.query.get('q') %} value="{{ app.request.query.get('q') }}" {% endif %}
+                               placeholder="Start typing..."/>
+                        <input type="submit" class="search" value=" "/>
+                        <input type="reset"
+                               value=" " {% if app.request.query.get('q') is defined and app.request.query.get('q') %} style='display:inline;' {% endif %}/>
+                    </form>
                 </div>
-
-                <div class="six columns sort-by h3">
-
-                        {% if  is_mobile() and not is_tablet() %}
-                        <a class="btn-radius border brown filter-btn search-mobile-filter-btn">Filters</a>
-                            <div class='loader-search-page mobile'></div>
-                        {% endif %}
-                    <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
-                    <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
-                    {% if not is_mobile() or is_tablet() %}
-                        <div class='loader-search-page'></div>
-                    {% endif %}
-                </div>
+            {% endif %}
+            <div class="six columns h2 screen-compteur">
+                <input type="radio" name="filter" value="(0) Bar" data-type='Bar' checked="checked"
+                       class="ui-radio collapsed radio-from-for-search" data-color="brown" data-type="collapsed"/>
+                <input type="radio" name="filter" value="(0) News" data-type='News'
+                       class="ui-radio radio-from-for-search" data-color="brown collapsed" data-type="collapsed"/>
             </div>
+            <div class="six columns sort-by h3">
+                {% if  is_mobile() and not is_tablet() %}
+                    <a class="btn-radius border brown filter-btn search-mobile-filter-btn">Filters</a>
+                    <div class='loader-search-page mobile'></div>
+                {% endif %}
+                <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown"
+                       checked="checked"/>
+                <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
+                {% if not is_mobile() or is_tablet() %}
+                    <div class='loader-search-page'></div>
+                {% endif %}
+            </div>
+        </div>
 
-            <section class="nine columns bar-filter m-margin-top min-height">
-                <div class='display-bar-width-picture-parent'>
-                    <div class="details-barlist bars-w-pic force-load  {% if is_mobile() and not is_tablet() %}m-margin-top{% endif %} load-container">
-                        <div class='dist-target'></div>
-                        <div class="load-target"></div>
-                    <div style='clear:both;'></div>
-                    <div class="twelve columns align-center m-margin load-more-container">
-                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="Load more bars" style='display:none'>Load more bars</a>
-                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="Load more news" style='display:none'> Load more news</a>
-                    </div>
-                    </div>
-                </div>
-
-                <div class='display-bar-width-list-parent'>
-                    <div class="bars-w-pic-list load-container">
+        <section class="nine columns bar-filter m-margin-top min-height">
+            <div class='display-bar-width-picture-parent'>
+                <div class="details-barlist bars-w-pic force-load  {% if is_mobile() and not is_tablet() %}m-margin-top{% endif %} load-container">
                     <div class='dist-target'></div>
                     <div class="load-target"></div>
                     <div style='clear:both;'></div>
@@ -149,61 +135,65 @@
                     </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
 
-        <script type="text/javascript">
-            $('input[name=view-type]').change(function()
-            {
-                if ($(this).val() == "grid")
-                {
+            <div class='display-bar-width-list-parent'>
+                <div class="bars-w-pic-list load-container">
+                    <div class='dist-target'></div>
+                    <div class="load-target"></div>
+                    <div style='clear:both;'></div>
+                    <div class="twelve columns align-center m-margin load-more-container">
+                        <a class="h4 btn-radius large border load-more- brown load-more-bars-btn loadmore-trigger " data-text="Load more bars" style='display:none'>Load more bars</a>
+                        <a class="h4 btn-radius large border load-more- brown load-more-news-btn loadmore-trigger" data-text="Load more news" style='display:none'> Load more news</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-                    var $elements = $('.bars-w-pic article');
-
-                    $elements.css({opacity:0, top:'6em', position:'relative'}).each(function(index) {
-
-                        $(this).delay(60 * (index + 1)).velocity({opacity: 1, top: 0}, 600, 'easeInOutCubic');
-                    });
-
-                }
-                else
-                {
-
-                    var $elements = $('.bars-w-pic-list article');
-
-                    $elements.css({opacity: 0, top: '6em', position: 'relative'}).each(function(index) {
-
-                        $(this).delay(100 * (index + 1)).velocity({opacity: 1, top: 0}, 600, 'easeInOutCubic');
-                    });
-
-                }
-            });
-
-            $('.filter-btn').click(function() {
-                $('.bar-filter-form, .bar-filter').hide();
-                // hide the serach Nav Bar
-                $('.search-bar-mobile.search-area').hide();
-                $('aside.filters').fadeIn();
-            });
-
-            $('aside.filters input[type=reset]').click(function(e) {
-
-                e.preventDefault();
-
-                $('.bar-filter-form, .bar-filter').fadeIn(function(){
-                    if ( ismobile )
-                        $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+    <script type="text/javascript">
+        $('input[name=view-type]').change(function () {
+            if ($(this).val() == "grid") {
+                var $elements = $('.bars-w-pic article');
+                $elements.css({opacity: 0, top: '6em', position: 'relative'}).each(function (index) {
+                    $(this).delay(60 * (index + 1)).velocity({opacity: 1, top: 0}, 600, 'easeInOutCubic');
                 });
-                // Show the serach Nav Bar
-                $('.search-bar-mobile.search-area').show();
+            }
+            else {
+                var $elements = $('.bars-w-pic-list article');
+                $elements.css({opacity: 0, top: '6em', position: 'relative'}).each(function (index) {
+                    $(this).delay(100 * (index + 1)).velocity({opacity: 1, top: 0}, 600, 'easeInOutCubic');
+                });
 
-                if ($(window).width() < 640)
-                    $('aside.filters').hide();
+            }
+        });
 
-                return false;
+        $('.filter-btn').click(function () {
+            $('.bar-filter-form, .bar-filter').hide();
+            // hide the serach Nav Bar
+            $('.search-bar-mobile.search-area').hide();
+            $('aside.filters').fadeIn();
+        });
+
+        $('aside.filters input[type=reset]').click(function (e) {
+
+            e.preventDefault();
+
+            $('.bar-filter-form, .bar-filter').fadeIn(function () {
+                if (ismobile)
+                    $('html, body').animate({scrollTop: 0}, 500, 'easeInOutCubic');
             });
-        </script>
-    {% endblock %}
+            // Show the serach Nav Bar
+            $('.search-bar-mobile.search-area').show();
+
+            if ($(window).width() < 640)
+                $('aside.filters').hide();
+
+            return false;
+        });
+    </script>
+{% endblock %}
 {% block footerAd %}
     {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'SR_728x90' })) }}
 {% endblock %}

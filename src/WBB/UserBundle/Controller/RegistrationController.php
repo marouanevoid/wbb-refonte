@@ -39,7 +39,9 @@ class RegistrationController extends ContainerAware
         if ($request->getMethod() == 'POST') {
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
-            $user->setFBData(array('id' => $facebookId));
+            if ($facebookId != 0) {
+                $user->setFBData(array('id' => $facebookId));
+            }
         }
 
         $event = new GetResponseUserEvent($user, $request);
@@ -118,7 +120,9 @@ class RegistrationController extends ContainerAware
         if ($request->getMethod() == 'POST') {
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
-            $user->setFBData(array('id' => $facebookId));
+            if ($facebookId != 0) {
+                $user->setFBData(array('id' => $facebookId));
+            }
         }
 
         $event = new GetResponseUserEvent($user, $request);
@@ -219,7 +223,9 @@ class RegistrationController extends ContainerAware
 
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
-        $user->setTipsShouldBeModerated(false);
+        if($user->getFirstname() != '' && $user->getLastname() != ''){
+            $user->setTipsShouldBeModerated(false);
+        }
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);

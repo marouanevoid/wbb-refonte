@@ -13,6 +13,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 use FOS\UserBundle\Model\UserManagerInterface;
+use WBB\UserBundle\Entity\User;
 
 class UserAdmin extends Admin
 {
@@ -161,8 +162,23 @@ class UserAdmin extends Admin
             $this->getContainer()->get('wbb_user.generate_password.mailer')->sendGeneratedPassword($data);
         }
 
+        if($user->hasRole('ROLE_BAR_EXPERT') || $user->hasRole('ROLE_BAR_EXPERT')){
+            $user->setTipsShouldBeModerated(false);
+        }
+
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($user)
+    {
+        if($user->hasRole('ROLE_BAR_EXPERT') || $user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $user->setTipsShouldBeModerated(false);
+        }
     }
 
     /**

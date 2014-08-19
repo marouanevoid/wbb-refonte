@@ -1,6 +1,7 @@
 <script>
     $(document).ready(function() {
         $('#show-popin').click();
+        $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
     });
 </script>
 <div id="success" class="min-height" {% if is_mobile() and not is_tablet() %}style="min-height: 300px"{% endif %}>

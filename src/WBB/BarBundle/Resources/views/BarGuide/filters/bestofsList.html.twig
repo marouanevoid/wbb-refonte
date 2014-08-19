@@ -1,25 +1,18 @@
 <div class="line">
 {% for b in bestofs %}
         <article class="bar-w-pic-list">
-
             <div class="three columns s-margin-top">
-
                 <div class="bar-w-pic list">
-
-                    <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
-
+                    <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}"
+                       class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
                     {% if b.city %}
                         <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
                     {% else %}
                         <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
                     {% endif %}
-
-                    {#<img class="scale-with-grid" data-src="{% filter showMedia %}{% path b.image, 'bestof_small' %}{% endfilter %}" alt="{{ b.name }}" width="570" height="428"/>#}
-                    <img class="scale-with-grid" data-src="{{ showImage(b.image, 'bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
-
+                    <img class="scale-with-grid" data-src="{{ showImage(b.image, 'bestof_285_215') }}" alt="{{ b.name }}" width="285" height="215"/>
                 </div>
             </div>
-
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top">
                     {% if b.city %}

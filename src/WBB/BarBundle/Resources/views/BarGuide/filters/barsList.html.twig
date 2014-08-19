@@ -1,26 +1,19 @@
 <div class="line">
 {% for b in bars %}
         <article class="bar-w-pic-list">
-
             <div class="three columns s-margin-top">
-
                 <div class="bar-w-pic list">
-
                     <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
-
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                     {% if b.medias|length>0 %}
                         {% for m in b.medias|slice(0,1) %}
-                            {#<img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.name }}" width="570" height="428"/>#}
-                            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'slider_large') }}"  alt="{{ b.name }}" width="570" height="428"/>
+                            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'bar_285_215') }}"  alt="{{ b.name }}" width="285" height="215"/>
                         {% endfor %}
                     {% else %}
-                        {#<img class="scale-with-grid" data-src="{% filter showMedia %}{% endfilter %}" width="570" height="428" alt=""/>#}
-                        <img class="scale-with-grid" data-src="{{ showImage(null, 'slider_large') }}" width="570" height="428" alt=""/>
+                        <img class="scale-with-grid" data-src="{{ showImage(null, 'bar_285_215') }}" width="285" height="215" alt=""/>
                     {% endif %}
                 </div>
             </div>
-
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top">
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">
