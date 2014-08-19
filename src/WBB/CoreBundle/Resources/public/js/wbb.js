@@ -129,6 +129,8 @@ function fillInForm(formId) {
         if (response.status === 'connected') {
             FB.api('/me', function(response) {
                 console.log(response);
+                var action = $(formId).attr('action');
+                $(formId).attr('action', action + '?fromFb=1');
                 if (formId === '#register_form_full') {
                     $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
                     $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
