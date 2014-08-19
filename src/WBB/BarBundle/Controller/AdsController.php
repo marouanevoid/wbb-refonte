@@ -35,11 +35,14 @@ class AdsController extends Controller
             $city = $this->container->get('city.repository')->findOneBySlug($slug);
         }
         $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city) ? $city->getCountry():null, true);
-//        if(!$ad){
+        if(!$ad){
 //            $format = Ad::WBB_ADS_NLP_300X250;
 //            $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city) ? $city->getCountry():null);
-//        }
-        $size = explode('_', $ad->getPosition());
+            $format = $ad->getPosition();
+        }else{
+            $format = Ad::WBB_ADS_NLP_300X250;
+        }
+        $size = explode('_', $format);
         return $this->render('WBBBarBundle:Ads:show.html.twig', array(
                 'ad'    => $ad,
                 'format' => $size[1]
