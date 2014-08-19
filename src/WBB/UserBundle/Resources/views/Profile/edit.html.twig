@@ -67,7 +67,7 @@
                                     <div class="select-two margin-top-10 gender">
                                         <label class="margin-right-20">Gender</label>
                                         <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}{% endif %}">
-                                            {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                            {{ form_widget(form.title, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                                         </div>
                                     </div>
                                     <div class="clear"></div>
@@ -102,13 +102,13 @@
                                         <label class="margin-right-20">Date of Birth</label>
                                         <div{% if is_mobile() and not is_tablet() %} class="date-width" style="width: 380px"{% endif %}>
                                             <div class="select-wrap left">
-                                                {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                                {{ form_widget(form.birthdate.month, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                                             </div>
                                             <div class="select-wrap left">
-                                                {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
+                                                {{ form_widget(form.birthdate.day, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown', 'placeholder': '' } }) }}
                                             </div>
                                             <div class="select-wrap left last">
-                                                {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                                {{ form_widget(form.birthdate.year, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                                             </div>
                                         </div>
                                     </div>
@@ -118,9 +118,9 @@
                                         <label class="margin-right-20">Country</label>
                                         <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
                                             {% if 'country' in errors.fields %}
-                                                {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown error' } }) }}
+                                                {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown error' : 'select2-dropdown error' } }) }}
                                             {% else %}
-                                                {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                                {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                                             {% endif %}
                                         </div>
                                     </div><!-- #countries -->
@@ -246,6 +246,17 @@
             $('.form-checkbox').iCheck({
                 checkboxClass: 'icheckbox_flat',
                 increaseArea: '20%' // optional
+            });
+
+
+            // init Select 2
+            $("select.select2-dropdown").select2({
+                minimumResultsForSearch: -1
+            });
+
+            // add the search
+            $('select#fos_user_profile_form_country').select2({
+                minimumResultsForSearch: 20
             });
 
         });
