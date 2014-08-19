@@ -38,9 +38,9 @@ class ShareController extends Controller
 
         if ($form->isValid()) {
             $data = array(
-                'fullName'  => $form["name"]->getData(),
+                'fullName'  => $form["firstName"]->getData().' '.$form["lastName"]->getData(),
                 'bar'       => $this->get('bar.repository')->findOneById($form["id"]->getData()),
-                'email'     => $form["email"]->getData(),
+                'email'     => $form["emailTo"]->getData(),
                 'message'   => $form["content"]->getData()
             );
 
@@ -61,9 +61,9 @@ class ShareController extends Controller
 
         if ($form->isValid()) {
             $data = array(
-                'fullName'  => $form["name"]->getData(),
+                'fullName'  => $form["firstName"]->getData().' '.$form["lastName"]->getData(),
                 'news'      => $this->get('news.repository')->findOneById($form["id"]->getData()),
-                'email'     => $form["email"]->getData(),
+                'email'     => $form["emailTo"]->getData(),
                 'message'   => $form["content"]->getData()
             );
 

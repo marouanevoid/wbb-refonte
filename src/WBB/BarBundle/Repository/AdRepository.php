@@ -14,18 +14,26 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class AdRepository extends EntityRepository
 {
-    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300X250, Country $country = null)
+    public function findOneByPositionAndCountry($position = Ad::WBB_ADS_HP_300X250, Country $country = null, $countains = false)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
-            ->where($qb->expr()->eq($this->getAlias().'.position', $qb->expr()->literal($position)))
+            ->select($this->getAlias());
+
+        if($countains){
+            $qb->where($qb->expr()->like($this->getAlias().'.position', $qb->expr()->literal($position.'%')));
+        }else{
+            $qb->where($qb->expr()->eq($this->getAlias().'.position', $qb->expr()->literal($position)));
+        }
+
+        $qb
             ->andWhere($qb->expr()->gte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.beginAt'))
             ->andWhere($qb->expr()->lte($qb->expr()->literal(date('Y-m-d')), $this->getAlias().'.endAt'))
             ->orderBy($this->getAlias().'.id', 'DESC')
             ->setMaxResults(1);
         ;
+
 
         if($country){
             $qb
