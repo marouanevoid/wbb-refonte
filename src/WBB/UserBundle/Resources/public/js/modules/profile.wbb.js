@@ -4,6 +4,7 @@ wbb.LoadProfile = function() {
 
     var that = this;
     var lastactivatedTab = "";
+    var _count = {}
     that.context = {
         requestID: null,
         $barsTarget: $('.list-bars'),
@@ -43,6 +44,15 @@ wbb.LoadProfile = function() {
             $(this).jScrollPane({hideFocus:true});
         });
     }
+
+    // init compteurs
+    that.compteurInitialize = function(){
+        _count.tips = $('[data-tab=tips]').attr('data-count');
+        _count.bestof = $('[data-tab=bestof]').attr('data-count');
+        _count.bars = $('[data-tab=bars]').attr('data-count');
+    }
+
+
     that._setupEvents = function ()
     {
         //Load bars on first page load
@@ -168,20 +178,56 @@ wbb.LoadProfile = function() {
             that.config.bars.offset += that.config.bars.limit;
         });
 
-        var descrimentFunction = function(cible){
-            cible = $(cible).find('span');
-            var str = $(cible).html(),
-                arr = str.split(')'),
-                cstr = arr[0].substr(1),
-                cint = Number(cstr),
-                ncint = cint;
-            cint--;
+        var descrimentFunction = function(cible,itype){
+            var stringTip = '',
+                stringBar = '',
+                stringBest = '';
 
-            str = str.replace(cstr , cint);
+            if ( itype == 'tip' ) {
+                _count.tips--;
+                if(_count.tips <= 0){
+                    stringTip = "no tip";
+                }else{
+                    if(_count.tips == 1){
+                        stringTip = "(1) Tip"
+                    }else{
+                        stringTip = "("+ _count.tips +") Tips";
+                    }
+                }
 
-            $(cible).html(str);
+                $(cible).find('span').text(stringTip);
+            } else {
+                if ( itype == 'bar' ){
+                    _count.bars--;
+                    if(_count.bars <= 0){
+                        stringBar = "No bar";
+                    }else{
+                        if(_count.bars == 1){
+                            stringBar = "(1) Bar"
+                        }else{
+                            stringBar = "("+ _count.bars +") Bars";
+                        }
+                    }
+                    $(cible).find('span').text(stringBar);
+                } else {
+                    if ( itype == 'best of' ){
+                        _count.bestof--;
+                        if(_count.bestof <= 0){
+                            stringBest = "No collection";
+                        }else{
+                            if(_count.bestof == 1){
+                                stringBest = "(1) collection"
+                            }else{
+                                stringBest = "("+ _count.bestof +") collections";
+                            }
+                        }
 
-            return cint;
+                        $(cible).find('span').text(stringBest);
+                    }
+                }
+            }
+
+
         }
         // Add listner on Remove Items 
         $(document).on('removeitem' , function(e){
@@ -191,8 +237,13 @@ wbb.LoadProfile = function() {
             //e.cible = window.cibleDeleted;
 
             if(e.cible.type =='bar'){
-                descrimentFunction(filterprof.find('.Bars'));
-                var itemToDelete = $('.list-bars').find("a[data-id= " + e.cible.id + "]").parents(".bar-w-pic").parent();
+                descrimentFunction(filterprof.find('.Bars'), e.cible.type);
+                var itemToDelete = $('.list-bars').find("a[data-id= " + e.cible.id + "]").parents(".bar-w-pic");
+                
+                if(! ismobile ){
+                    itemToDelete = itemToDelete.parent();
+                }
+
                 if (itemToDelete.parents(".bar-w-pic-list").length)
                     itemToDelete.parents(".bar-w-pic-list").remove();
                 else
@@ -201,14 +252,14 @@ wbb.LoadProfile = function() {
                 that._request(that.context.$barsTarget, {limit : 1 , offset : that.config.bars.offset-1 , filter : that.context.filter , display : that.context.display , $more : that.config.bars.$more});
             }
             if(e.cible.type =='best of'){
-                descrimentFunction(filterprof.find('.collections'));
+                descrimentFunction(filterprof.find('.collections'), e.cible.type);
 
                 $('.list-bestof').find("a[data-id= " + e.cible.id + "]").parents(".bestof-item-container").remove();
                 that.context.content = 'bestofs';
                 that._request(that.context.$bestofsTarget, {limit : 1 , offset : that.config.bestofs.offset-1 , filter : that.context.filter , display : that.context.display , $more : that.config.bestofs.$more});
             }
             if(e.cible.type == 'tip'){
-                descrimentFunction(filterprof.find('.tips'));
+                descrimentFunction(filterprof.find('.tips'), e.cible.type);
                 that.context.content = 'tips';
                 that._request(that.context.$tipsTarget, {limit : 1 , offset : that.config.tips.offset-1 , filter : 'date' , display : 'grid' , $more : that.config.tips.$more});
             }
@@ -296,6 +347,8 @@ wbb.LoadProfile = function() {
     that.__construct = function()
     {
         that._setupEvents();
+        that.compteurInitialize();
+
     };
 
     that.removeTip = function(id){};
