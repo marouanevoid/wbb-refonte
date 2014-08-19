@@ -56,7 +56,11 @@
   .popin-block {padding: 25px 40px;}
   .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
-  .subtitle.small {font-size: 13px;}
+  .subtitle.grey {color: #818a8c;}
+  .small {font-size: 13px;}
+  .medium {font-size: 22px;}
+  .big {font-size: 30px;}
+
   /*.btn.gold:hover {background-color: #ffe4af; color: #b3955f;}*/
   .select-two .ui-dropdown-container {width: 100%!important;}
 
@@ -458,7 +462,7 @@
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
   /* Mobile */
     .wrap-share.mobile {z-index: 9999999; top: 50%; height: 280px; background-color: transparent; width: 100%;}
-    .wrap-share.mobile .social-share {padding: 0 10px;}
+    .wrap-share.mobile .social-share {padding: 0 10px; border: none;}
     .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; left: 0; padding: 95px 90px 0;}
     .wrap-share.mobile .social-share li,
     .wrap-share.mobile .social-share li a {width: 106px; margin: 0 auto 9px; float: none;}
