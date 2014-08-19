@@ -36,7 +36,7 @@ class RegistrationController extends ContainerAware
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST' && $request->query->get('fromFb', null)) {
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
             if ($facebookId != 0) {
@@ -117,7 +117,7 @@ class RegistrationController extends ContainerAware
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST' && $request->query->get('fromFb', null)) {
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
             if ($facebookId != 0) {

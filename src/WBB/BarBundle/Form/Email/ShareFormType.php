@@ -20,8 +20,13 @@ class ShareFormType extends AbstractType
 
         $builder
             ->add('id', 'hidden', array('data' => $id))
-            ->add('name', 'text', array('attr' => array('placeholder' => 'Friend\'s name')))
-            ->add('email', 'email', array(
+            ->add('firstName', 'text', array('attr' => array('placeholder' => 'Friend\'s first name')))
+            ->add('lastName', 'text', array('attr' => array('placeholder' => 'Friend\'s last name')))
+            ->add('emailFrom', 'email', array(
+                    'constraints' => array(new Email(array('checkMX' => true))),
+                    'attr' => array('placeholder' => 'Your email')
+                )
+            )->add('emailTo', 'email', array(
                     'constraints' => array(new Email(array('checkMX' => true))),
                     'attr' => array('placeholder' => 'Friend\'s email')
                 )

@@ -103,7 +103,7 @@ class FeedController extends Controller
         $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit, true);
         $nbExpertTips = count($tips);
         if($nbExpertTips < $limit){
-            $normalTips   = $this->container->get('tip.repository')->findLatestTips($bar, ($offset + $nbExpertTips), ($limit - $nbExpertTips));
+            $normalTips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, ($limit - $nbExpertTips));
             $tips = array_merge($tips, $normalTips);
         }
         $all    = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);

@@ -37,9 +37,7 @@
                                                     <img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                                     {% if user.prefStartCity %}
                                                         {{ user.prefStartCity ~ ',' }}
-                                                    {% endif %}
-                                                    {% if user.country %}
-                                                        {{ user.country }}
+                                                        {{ user.prefStartCity.country }}
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -96,6 +94,10 @@
                                         {% else %}
                                             {{ form_widget(form.email, { 'attr' : { 'class': 'form-text'} }) }}
                                         {% endif %}
+                                        <div class="clear"></div>
+                                        {#<p id="" class="text-align-right">#}
+                                            {#<a href="#" id="resend-validation">An email is waiting for your confirmation</a>#}
+                                        {#</p>#}
                                         <div class="clear"></div>
                                     </div>
                                     <div class="{% if 'birthday' in errors.fields %}error{% endif %} date-birthday text-align-center margin-top-10">
