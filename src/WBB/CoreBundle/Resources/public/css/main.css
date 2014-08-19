@@ -198,7 +198,7 @@
     .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
-    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #b3955f;}
+    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #818a8c;}
 
     #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
     #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
@@ -237,7 +237,7 @@
   #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
   #message li:only-of-type {margin-top: 20px;}
   .page #message {width: 300px; padding: 0; position: relative; left: 9px;}
-  .profile #message {left: 13%;}
+  #edit_profile_form #message {left: 13%;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   /*#success {position: static; top: 0;}*/
@@ -452,6 +452,7 @@
   .wrap-share .social-share li {height: 41px; width: 89px; margin-right: 4px;}
   .wrap-share .social-share li:last-child {margin: 0;}
   .wrap-share .social-share li a {height: 41px; width: 90px; margin: 0;}
+  .wrap-share .social-share li a:hover {opacity: 0.8;}
   .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
@@ -515,6 +516,8 @@
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0;}
   .bar-details .content ul.trends {line-height: 1.6em;}
   .bar-details .content ul.trends li {line-height: 20px;}
+  .bar-details .content ul.trends a,
+  .bar-details .content ul.trends a:hover {color: #818a8c;}
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
@@ -539,7 +542,7 @@
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
-  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
+  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {/*border-width: 2px; */}
   article.bestof img.scale-with-grid {display: inline;}
   .bar-w-pic .txt .tags a {color: #faf3e1;}
   .ui-dropdown-container .ui-dropdown .choice ul li {/*padding-bottom: 1.2em;*/}
@@ -674,9 +677,13 @@
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
     body {min-height: 100%;}
-    .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
-      padding: 0 0 0 2%;
-    }
+    input[type="text"]::-webkit-input-placeholder, 
+    input[type="password"]::-webkit-input-placeholder, 
+    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
+    .ui .btn-create-with-fb {background-image: url("../images/UI/btn_fb-small@x2.jpg"); background-size: 119px 42px;}
+    .ui input[type="text"].form-text, 
+    .ui input[type="password"].form-text, 
+    .ui input[type="email"].form-text {padding: 0 0 0 2%;}
 
   /* Thumbnails Size's */
     .search section.bar-filter .bar-w-pic,
