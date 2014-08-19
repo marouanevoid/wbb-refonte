@@ -94,3 +94,8 @@ services:
         public: false
         calls:
             - [setContainer, [@service_container]]
+
+    #Twig Error Controller
+    wbb.twig.controller.exception:
+            class: WBB\CoreBundle\Controller\ExceptionController
+            arguments: [@twig, %kernel.debug%]

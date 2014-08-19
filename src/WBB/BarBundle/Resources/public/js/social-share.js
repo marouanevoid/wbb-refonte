@@ -1,5 +1,5 @@
-var title = encodeURIComponent(document.title);
-var url   = encodeURIComponent(document.location.href);
+var title = encodeURIComponent($('meta[property="og:title"]').attr("content"));
+var url   = encodeURIComponent($('meta[property="og:url"]').attr("content"));
 var image = encodeURIComponent($('meta[property="og:image"]').attr("content"));
 var description = encodeURIComponent($('meta[property="og:description"]').attr("content"));
 var descriptionTW = encodeURIComponent($('meta[name="twitter:description"]').attr("content"));
@@ -16,12 +16,12 @@ $(document).on('click', '.fb-share',function(e){
 });
 
 //Share Twitter
-if (descriptionTW.length > 90) {
-    descriptionTW = descriptionTW.substr(0,90)+'…  ';
+if (descriptionTW.length > 140) {
+    descriptionTW = descriptionTW.substr(0, 137)+'…';
 };
 $(document).on('click', '.twitter-share',function(e){
     e.preventDefault();
-    window.open('http://twitter.com/share?text='+descriptionTW + '&url='+url + '&via='+siteTW  , 'Share', 'toolbar=0,status=0,width=626,height=436');
+    window.open('http://twitter.com/share?text='+descriptionTW + '&url='+ url + '&via='+siteTW  , 'Share', 'toolbar=0,status=0,width=626,height=436');
 });
 
 $(document).ready(function(){

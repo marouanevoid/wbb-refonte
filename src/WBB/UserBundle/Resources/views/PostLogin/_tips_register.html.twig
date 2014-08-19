@@ -1,13 +1,14 @@
 <script>
     $(document).ready(function() {
         $('#show-popin').click();
+        $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
     });
 </script>
 <div id="success" class="min-height">
     <div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">
-        <div class="subtitle wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">CONGRATULATIONS&nbsp;!</div>
-        <p class="padding-top-40">You are now registered on World’s Best Bars.</p>
+        <div class="subtitle wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% endif %}">CONGRATULATIONS&nbsp;!</div>
+        <p class="padding-top-40 bold">You are now registered on World’s Best Bars.</p>
         <p>Your tip has been posted and is currently being moderated.</p>
-        <p class="padding-bottom-40">You will be able to find all your tips in your user profile.</p>
+        <p class="padding-bottom-40 bold">You will be able to find all your tips in your user profile.</p>
     </div>
 </div>

@@ -33,10 +33,10 @@ class BarMediaAdmin extends Admin
                     'required' => false
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'default'
+                        'context' => 'bar'
                     )
                 ))
-                ->add('alt', 'textarea', array('attr'=>array('cols'=>220, 'rows'=>6)))
+                ->add('alt', 'textarea', array( 'attr' => array('cols'=>220, 'rows'=>6)))
                 ->add('position', 'hidden')
             ->end();
     }

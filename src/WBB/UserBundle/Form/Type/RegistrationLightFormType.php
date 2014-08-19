@@ -37,7 +37,8 @@ class RegistrationLightFormType extends BaseType
                 ->add('birthdate', 'date', array(
                     'empty_value' => array('year' => 'YYYY', 'month' => 'MM', 'day' => 'DD'),
                     'years' => range(1914, date('Y')),
-                    'required' => false
+                    'required' => false,
+                    'invalid_message'=> 'not.blank'
                 ))
                 ->add('country', null, array(
                     'error_bubbling' => true,

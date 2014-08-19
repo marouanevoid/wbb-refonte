@@ -18,7 +18,6 @@
 
             initializeSliders();
         });
-
     {% if city is not defined %}
         window.homepage = true;
         if($.cookie('shown-nav')){
@@ -28,133 +27,128 @@
             $.cookie('shown-nav', true , 0)
         }
         $(window).unload( function () { $.cookie('shown-nav', null, {path:'/'})} );
-
     {% endif %}
     </script>
 {% endblock %}
+
 {% block bodyTag %}
-<body class="index">
+    <body class="index">
 {% endblock %}
+
 {% block body %}
-<div class="full-cream l-padding-bottom">
-    <!-- SUBHEADER -->
-    <div class="container">
-        <section class="sub-header">
-            {% if not is_mobile() or is_tablet() %}
-            <table>
-                <tr>
-                    <td>
-                         {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
-                    </td>
+    <div class="full-cream l-padding-bottom">
+        <!-- SUBHEADER -->
+        <div class="container">
+            <section class="sub-header">
+                {% if not is_mobile() or is_tablet() %}
+                <table>
+                    <tr>
+                        <td>
+                             {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
+                        </td>
 
-                    <td class="title">
-                        {% if city is defined %}
-                            <h1>Popular Bars in {{ city.name }}</h1>
-                        {% else %}
-                            <h1>Discover the World’s Best Bars</h1>
-                        {% endif %}
-                    </td>
+                        <td class="title">
+                            {% if city is defined %}
+                                <h1>Popular Bars in {{ city.name }}</h1>
+                            {% else %}
+                                <h1>Discover the World’s Best Bars</h1>
+                            {% endif %}
+                        </td>
 
-                    <td></td>
-                </tr>
-            </table>
-            {% else %}
-                {% if city is defined %}
-                    <h1>Popular Bars in {{ city.name }}</h1>
+                        <td></td>
+                    </tr>
+                </table>
                 {% else %}
-                    <h1>Discover the World’s Best Bars</h1>
-                {% endif %}
-            {% endif %}
-        </section>
-    </div>
-    <!-- BARS -->
-    <div class="container full">
-        <section class="bars">
-            {% if is_mobile() and not is_tablet() %}
-            <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
-            {% else %}
-            <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
-            {% endif %}
-            {% for b in topBars %}
-                <div class="ui-slide loading">
-                    {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
-                </div>
-            {% endfor %}
-            </div>
-        </section>
-    </div>
-    {% if city is not defined %}
-    <!-- CITIES -->
-    <div class="container">
-        <section class="cities">
-            <div class="twelve columns align-center l-margin-top m-margin-bottom">
-                <h1>Discover Bars from Top Cities</h1>
-                <h3 class="s-margin-top">Select your city</h3>
-            </div>
-            <div class="twelve columns">
-                {% if is_mobile() and not is_tablet() %}
-                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="8x3" data-display="3" style="display:none;">
-                {% else %}
-                    <div class="ui-slider type-cities has_sizer arrows dots" data-size="1x6" data-display="6" style="display:none;">
-                {% endif %}
-                {% for c in topCities %}
-                    <div class="ui-slide loading">
-                        <article class="city">
-                            <div class="txt">
-                                <h3> {{ c.name }} </h3>
-                                <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
-                            </div>
-                            <div class="overlay"></div>
-                            <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                            {#<img src="" class="scale-with-grid" data-src="{% filter showMedia %}{% path c.image, 'city_square' %}{% endfilter %}" alt="{{ c.name }}"/>#}
-                            <img src="" class="scale-with-grid" data-src="{{  showImage(c.image, 'city_square') }}" alt="{{ c.name }}"/>
-                        </article>
-                    </div>
-                {% endfor %}
-                </div>
-            </div>
-        </section>
-    </div>
-    {% endif %}
-
-    <!-- BEST OF -->
-    <div class="container">
-
-        <div class="twelve columns">
-
-            <section class="bestof">
-                <div class="align-center l-margin">
                     {% if city is defined %}
-                        <h1>Best of in {{ city.name }}</h1>
+                        <h1>Popular Bars in {{ city.name }}</h1>
                     {% else %}
-                        <h1>Latest Best Of</h1>
+                        <h1>Discover the World’s Best Bars</h1>
                     {% endif %}
-                </div>
-                {% if is_mobile() and not is_tablet() %}
-                    <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
-                {% else %}
-                        <div class="ui-slider type-bestof has_sizer arrows dots" data-size="3x3" data-display="3" style="display:none;">
                 {% endif %}
-
-                {% for b in topBestofs %}
-                    <div class="ui-slide">
-                        {% if city is defined %}
-                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'withCity': true } %}
-                        {% else %}
-                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'withCity': false } %}
-                        {% endif %}
+            </section>
+        </div>
+        <!-- BARS -->
+        <div class="container full">
+            <section class="bars">
+                {% if is_mobile() and not is_tablet() %}
+                <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
+                {% else %}
+                <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
+                {% endif %}
+                {% for b in topBars %}
+                    <div class="ui-slide loading">
+                        {% include "WBBBarBundle:Bar:items/bar_425_320.html.twig" with { 'b': b } %}
                     </div>
                 {% endfor %}
                 </div>
             </section>
         </div>
+        {% if city is not defined %}
+        <!-- CITIES -->
+        <div class="container">
+            <section class="cities">
+                <div class="twelve columns align-center l-margin-top m-margin-bottom">
+                    <h1>Discover Bars from Top Cities</h1>
+                    <h3 class="s-margin-top">Select your city</h3>
+                </div>
+                <div class="twelve columns">
+                    {% if is_mobile() and not is_tablet() %}
+                        <div class="ui-slider type-cities has_sizer arrows dots" data-size="8x3" data-display="3" style="display:none;">
+                    {% else %}
+                        <div class="ui-slider type-cities has_sizer arrows dots" data-size="1x6" data-display="6" style="display:none;">
+                    {% endif %}
+                    {% for c in topCities %}
+                        <div class="ui-slide loading">
+                            <article class="city">
+                                <div class="txt">
+                                    <h3> {{ c.name }} </h3>
+                                    <h4>{% if c.country %}{{ c.country.acronym }}{% endif %}</h4>
+                                </div>
+                                <div class="overlay"></div>
+                                <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
+                                <img src="" class="scale-with-grid" data-src="{{  showImage(c.image, 'city_170_175') }}" alt="{{ c.name }}"/>
+                            </article>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+        {% endif %}
+
+        <!-- BEST OF -->
+        <div class="container">
+            <div class="twelve columns">
+                <section class="bestof">
+                    <div class="align-center l-margin">
+                        {% if city is defined %}
+                            <h1>Best of in {{ city.name }}</h1>
+                        {% else %}
+                            <h1>Latest Best Of</h1>
+                        {% endif %}
+                    </div>
+                    {% if is_mobile() and not is_tablet() %}
+                        <div class="ui-slider type-bestof has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
+                    {% else %}
+                            <div class="ui-slider type-bestof has_sizer arrows dots" data-size="3x3" data-display="3" style="display:none;">
+                    {% endif %}
+
+                    {% for b in topBestofs %}
+                        <div class="ui-slide">
+                            {% if city is defined %}
+                                {% include "WBBBarBundle:BestOf/items:bestof_370_278.html.twig" with { 'b': b, 'withCity': true } %}
+                            {% else %}
+                                {% include "WBBBarBundle:BestOf/items:bestof_370_278.html.twig" with { 'b': b, 'withCity': false } %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
-
-</div>
-
     <!-- NEWS -->
     <div class="container l-margin-top {% if is_mobile() and not is_tablet() %}l{% else %}m{% endif %}-padding-bottom">
-
         <!-- LATEST ARTICLES -->
         <section class="articles eight columns">
 
@@ -165,66 +159,17 @@
             {% endif %}
                 Latest News
             </div>
-            {% if topNews|length>2 %}
-            {% for n in topNews|slice(0,1) %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'is_small' : 1, } %}
-                {# <article class="small">
-                    <div class="img">
-                        <a href="" class="cover">
-                            {% for m in n.medias|slice(0,1) %}
-                                <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
-                            {% endfor %}
-                        </a>
-                        <a class="plus-btn" href=""></a>
-                    </div>
-                    <div class="title vcenter">
-                        <h2><a href="">{{ n.title }}</a></h2>
-                    </div>
-                </article>
-                #}
-            {% endfor %}
-            {% for n in topNews|slice(1,1) %}
-                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_text' : 1 , 'is_small' : 1 , 'has_text' : 1} %}
-                {#
-
-
-                <article class="small">
-                    <div class="title vcenter">
-                        <h2><a href="">{{ n.title }}</a></h2>
-                        <p class="m-margin">
-                            {{ n.richDescription|truncate(200, true, '...')|striptags }}
-                        </p>
-                        <a class="plus-btn" href=""></a>
-                    </div>
-
-                </article>
-             #}
-            {% endfor %}
-            {% for n in topNews|slice(2,1) %}
-                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1} %}
-                {#
-                    <article class="large">
-                    <div class="img">
-                        <a href="" class="cover">
-                        {% for m in n.medias|slice(0,1) %}
-                            <img src="{% path m.media, 'slider_large' %}" width="600" height="400" alt="{{ n.title }}"/>
-                        {% endfor %}
-                        </a>
-                        <a class="plus-btn" href=""></a>
-                    </div>
-                    <div class="title vcenter">
-                        <h2><a href="">{{ n.title }}</a></h2>
-                        <p class="m-margin">
-                            {{ n.richDescription|truncate(200, true, '...')|striptags }}
-                        </p>
-                    </div>
-
-                </article>
-
-                 #}
-                
-            {% endfor %}
-            {% elseif topNews|length==2 %}
+            {% if topNews|length > 2 %}
+                {% for n in topNews|slice(0,1) %}
+                    {% include "WBBBarBundle:News/items:news_385_278.html.twig"  with { 'n' : n } %}
+                {% endfor %}
+                {% for n in topNews|slice(1,1) %}
+                     {% include "WBBBarBundle:News/items:news_without_image.html.twig"  with { 'n' : n } %}
+                {% endfor %}
+                {% for n in topNews|slice(2,1) %}
+                     {% include "WBBBarBundle:News/items:news_770_578.html.twig"  with { 'n' : n } %}
+                {% endfor %}
+            {% elseif topNews|length == 2 %}
                 {% for n in topNews|slice(0,1) %}
                     <article class="small">
                         <div class="img">
@@ -249,7 +194,6 @@
                             </p>
                             <a class="plus-btn" href=""></a>
                         </div>
-
                     </article>
                 {% endfor %}
             {% else %}
@@ -270,13 +214,11 @@
                                 {{ n.richDescription|truncate(200, true, '...')|striptags }}
                             </p>
                         </div>
-
                     </article>
                 {% endfor %}
             {% endif %}
             <a class="btn-radius border brown h4 s-margin-top" href="{{ city is defined ? path('wbb_news_landing_page_city',{citySlug:city.slug}) : path('wbb_news_landing_page') }}" style="clear: left; float:left;">See all news</a>
         </section>
-
         <!-- NEWLY ADDED BARS -->
         <aside class="four columns">
             {% if is_mobile() and not is_tablet() %}
@@ -302,7 +244,6 @@
         </aside>
     </div>
 {% endblock %}
-
 {% block footerAd %}
     {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'HP_728x90' })) }}
 {% endblock %}

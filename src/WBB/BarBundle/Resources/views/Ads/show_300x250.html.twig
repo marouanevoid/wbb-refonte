@@ -1,7 +1,7 @@
 <div class="block">
     <div class="side-ad xl-margin-top">
         <a href="{{ ad.link }}" target="_blank">
-            <img src="{% path ad.image, format %}" alt="{{ ad.name }}" width="300" height="250">
+            <img src="{{ showImage(ad.image, 'ads_300_250') }}" alt="{{ ad.name }}" width="300" height="250">
         </a>
         <div class="txt">Advertising</div>
     </div>

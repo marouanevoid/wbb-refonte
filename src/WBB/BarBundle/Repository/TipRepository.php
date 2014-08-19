@@ -12,7 +12,7 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TipRepository extends EntityRepository
 {
-    public function findLatestTips($bar, $offset = 0, $limit = 8)
+    public function findLatestTips($bar, $offset = 0, $limit = 8, $onlyExpert = false)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -22,6 +22,12 @@ class TipRepository extends EntityRepository
             ->andWhere($qb->expr()->eq($this->getAlias().'.bar', $bar->getId()))
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
         ;
+
+        if($onlyExpert){
+            $qb->innerJoin($this->getAlias() . '.user', 'u', 'WITH', 'u.roles like ' . $qb->expr()->literal('%ROLE_BAR_EXPERT%'));
+        }else{
+            $qb->innerJoin($this->getAlias() . '.user', 'u', 'WITH', 'u.roles not like ' . $qb->expr()->literal('%ROLE_BAR_EXPERT%'));
+        }
 
         if($limit > 0){
             $qb->setMaxResults($limit);

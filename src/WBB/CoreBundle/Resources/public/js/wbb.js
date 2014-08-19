@@ -93,7 +93,7 @@ $(document).ready(function() {
     }
 
     $('.email-share').on('click', function(e) {
-        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
+//        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).data('href');

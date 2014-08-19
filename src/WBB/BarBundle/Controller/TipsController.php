@@ -27,24 +27,25 @@ class TipsController extends Controller
         $user = $this->getUser();
         if (!$user) {
             return new JsonResponse(array(
-                'code' => 403,
-                '_message' => 'User not authenticated !'
+                'code'      => 403,
+                '_message'  => 'User not authenticated !'
             ));
         }
 
         $tip = new Tip();
         $tip->setUser($user);
-        if ($user->getTipsShouldBeModerated()) {
+        $popInContent = $this->renderView('WBBBarBundle:Tips/Popin:tipPending.html.twig');
+        if ($user->getTipsShouldBeModerated()){
             $tip->setStatus(0);
         } else {
             $tip->setStatus(1);
+            $popInContent = $this->renderView('WBBBarBundle:Tips/Popin:tipSubmited.html.twig');
         }
 
         $form = $this->createForm(new TipType(), $tip, array('em' => $this->container->get('doctrine.orm.entity_manager')));
 
         if ('POST' === $request->getMethod()) {
             $form->submit($request);
-
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tip);
@@ -57,9 +58,11 @@ class TipsController extends Controller
                 $tipHTML = $this->renderView('WBBBarBundle:Bar:tip.html.twig', array('tip' => $tip));
 
                 return new JsonResponse(array(
-                    'code'=>200,
-                    'message'=>'Tip submitted!',
-                    'tip' => $tipHTML
+                    'code'          => 200,
+                    'message'       => 'Tip submitted!',
+                    'tip'           => $tipHTML,
+                    'status'        => $tip->getStatus(),
+                    'popinContent'  => $popInContent
                 ));
             }
             else
@@ -75,9 +78,9 @@ class TipsController extends Controller
         $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit);
         $all    = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
 
-        $response['nbResults']= count($tips);
-        $response['difference']= count($all) - count($tips);
-        $response['htmldata'] = $this->renderView('WBBBarBundle:Bar:wbbTips.html.twig', array(
+        $response['nbResults']  = count($tips);
+        $response['difference'] = count($all) - count($tips);
+        $response['htmldata']   = $this->renderView('WBBBarBundle:Bar:wbbTips.html.twig', array(
                 'bar'       => $bar,
                 'tips'      => $tips,
                 'offset'    => $offset,
