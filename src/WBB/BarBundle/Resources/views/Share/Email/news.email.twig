@@ -28,10 +28,10 @@
                         <a hef="#URL" style="font-family: Verdana, Arial;">
                             {% if news.medias|length>0 %}
                                 {% for m in news.medias|slice(0,1) %}
-                                    <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(m.media, 'slider_large') }}"  alt="{{ news.title }}" width="285" height="214"/>
+                                    <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(m.media, 'news_425_320') }}"  alt="{{ news.title }}" width="285" height="214"/>
                                 {% endfor %}
                             {% else %}
-                                <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(null, 'slider_large') }}" alt="{{ news.title }}" width="285" height="214" alt=""/>
+                                <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(null, 'news_425_320') }}" alt="{{ news.title }}" width="285" height="214" alt=""/>
                             {% endif %}
                         </a>
                     </td>
