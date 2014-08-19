@@ -17,7 +17,7 @@ class ShareController extends Controller
         if($type==='bar'){
             $url = $this->get('router')->generate('wbb_share_email_bar_send', array('id' => $id));
             $bar = $this->get('bar.repository')->findOneById($id);
-            $text = "I just discovered {$bar->getName()} in {$bar->getCity()} thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+            $text = "I just discovered {$bar->getName()} in {$bar->getCity()} \nthanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
         }else{
             $url = $this->get('router')->generate('wbb_share_email_news_send', array('id' => $id));
             $news = $this->get('news.repository')->findOneById($id);

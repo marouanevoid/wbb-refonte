@@ -59,7 +59,7 @@ class ProfileFormType extends BaseType
             ))
             ->add('firstname',null, array('required' => false))
             ->add('lastname',null, array('required' => false))
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle', 'required' => false))
+            ->add('email', 'text', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle', 'required' => false))
             ->add('birthdate', 'date', array(
                 'years' => range(1900, date('Y'))
             ))

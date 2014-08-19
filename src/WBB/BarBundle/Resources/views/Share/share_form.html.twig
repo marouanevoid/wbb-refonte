@@ -18,7 +18,7 @@
                 <div class="clear"></div>
             </div>
             <div class="group-form margin-top-20">
-                {{ form_widget(form.content, {'value': text, 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
+                {{ form_widget(form.content, {'value': text|raw, 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
             </div>
             <div class="clear"></div>
             <div class="group-actions padding-top-20 wrap">

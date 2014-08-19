@@ -35,12 +35,12 @@ $(document).ready(function(){
     $(".wrap-share").hover(function() {
         $(".wrap-share").fadeIn("slow");
         if ($(this).hasClass("popup")) {
-            $(".mask").fadeIn("slow");
+            PopIn.dom.mask.show();
         }
     }, function() {
         $(".wrap-share").fadeOut("slow");
         if ($(this).hasClass("popup")) {
-            $(".mask").fadeOut("slow");
+            PopIn.dom.mask.hide();
         }
     });
     $("#close-pop").click(function(){
