@@ -38,9 +38,9 @@ class AdsController extends Controller
         if(!$ad){
 //            $format = Ad::WBB_ADS_NLP_300X250;
 //            $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city) ? $city->getCountry():null);
-            $format = $ad->getPosition();
-        }else{
             $format = Ad::WBB_ADS_NLP_300X250;
+        }else{
+            $format = $ad->getPosition();
         }
         $size = explode('_', $format);
         return $this->render('WBBBarBundle:Ads:show.html.twig', array(
