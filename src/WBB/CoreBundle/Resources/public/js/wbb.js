@@ -238,6 +238,7 @@ function initRegisterLoginForms() {
                                 $('#register-form .country-dropdown .ui-dropdown').addClass('error');
                                 break;
                             case 'birthdate':
+                            case 'birthday':
                                 $('#register-form .date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
@@ -350,6 +351,7 @@ jQuery(document).ready(function($) {
                                 $('.country-dropdown .ui-dropdown').addClass('error');
                                 break;
                             case 'birthdate':
+                            case 'birthday':
                                 $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
