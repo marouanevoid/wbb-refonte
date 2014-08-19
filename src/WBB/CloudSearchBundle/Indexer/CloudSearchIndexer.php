@@ -51,7 +51,7 @@ class CloudSearchIndexer implements IndexerInterface
                 if ($media->getPosition() == 1) {
                     echo 'Image for ' . $entity->getTitle() . "\n";
                     $this->logger->info('[CloudSearch][Indexer] : Image found for a News entity : ' . $entity->getTitle());
-                    $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_slider_large');
+                    $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'bar_286_210');
                 }
             }
         } elseif ($this->getEntityType($entity) == 'Bar') {
@@ -59,7 +59,7 @@ class CloudSearchIndexer implements IndexerInterface
             foreach ($medias as $media) {
                 if ($media->getPosition() == 1) {
                     $this->logger->info('[CloudSearch][Indexer] : Image found for a Bar entity : ' . $entity->getName());
-                    $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'default_big');
+                    $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'news_286_210');
                 }
             }
         }

@@ -496,7 +496,7 @@
 
 /* jQuery UI Autocomplete */
   ul.ui-autocomplete {background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
-  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: bold 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: lighter 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
 /* Override */
@@ -611,6 +611,7 @@
     #view-account .filter-profil a.ui-radio {width: 140px;}
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
     .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
+    img.scale-with-grid {box-sizing: initial!important;}
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
@@ -680,11 +681,15 @@
     input[type="text"]::-webkit-input-placeholder, 
     input[type="password"]::-webkit-input-placeholder, 
     input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
+
+    input[type="text"]::-webkit-input-placeholder, 
+    input[type="password"]::-webkit-input-placeholder, 
+    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
+
     .ui .btn-create-with-fb {background-image: url("../images/UI/btn_fb-small@x2.jpg"); background-size: 119px 42px;}
     .ui input[type="text"].form-text, 
     .ui input[type="password"].form-text, 
     .ui input[type="email"].form-text {padding: 0 0 0 2%;}
-
   /* Thumbnails Size's */
     .search section.bar-filter .bar-w-pic,
     .profile section.bar-filter .bar-w-pic,
@@ -742,6 +747,7 @@
     .no-result {margin: 2%;}
     .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px;}
     .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;}
+    ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {

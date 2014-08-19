@@ -11,7 +11,7 @@ fos_user:
         long: "[-Inf,Inf]The email is too long"
         invalid: Please enter a valid email address
     password:
-        blank: not.blank
+        blank: "Please enter a new password"
         short: "[-Inf,Inf]The password is too short"
         mismatch: Please enter the same password
     birthday:

@@ -5,6 +5,7 @@ namespace WBB\BarBundle\Manager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BestOf;
+use WBB\UserBundle\Entity\User;
 
 class FavoritesManager extends ContainerAware
 {
@@ -30,7 +31,7 @@ class FavoritesManager extends ContainerAware
                 $user = $token->getUser();
                 $em = $this->container->get('doctrine.orm.entity_manager');
 
-                if ($user && $entity) {
+                if ($user instanceof User && $entity) {
                     if ($entity instanceof Bar) {
                         if (!$user->getFavoriteBars()->contains($entity)) {
                             $entity->addUsersFavorite($user);
