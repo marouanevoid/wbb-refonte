@@ -495,7 +495,7 @@
   .page-form {padding: 0 3%;}
   .page-form label {line-height: 34px; width: 10%; font-size: 18px;}
   .page-form .form-text {width: 90%;}
-  .page-form .form-textarea {padding: 10px 10px 50px;}
+  .page-form .form-textarea {padding: 10px 10px 50px; background-color: transparent;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
 /* Rollover's */
@@ -632,7 +632,7 @@
     #editprofile .form-text {text-indent: 10px;}
     #register.page #message {left: 9px;}
     #message ul {margin: 15px 0px 10px 95px;}
-    
+
     /*.ui .form-text {text-indent: 0;}*/
     .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}
     .wrap-share .social-share {border-radius: 30px;}
