@@ -20,7 +20,7 @@
                                         {% if is_mobile() and not is_tablet() %}
                                             {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Pseudo' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -40,7 +40,7 @@
                                         {% if is_mobile() and not is_tablet() %}
                                             {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -52,7 +52,7 @@
                                         {% if is_mobile() and not is_tablet() %}
                                             {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -64,7 +64,7 @@
                                         {% if is_mobile() and not is_tablet() %}
                                             {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -76,7 +76,7 @@
                                         {% if is_mobile() and not is_tablet() %}
                                             {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
@@ -88,7 +88,7 @@
                                         {% if is_mobile() and not is_tablet() %}
                                             {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
                                         {% else %}
-                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': '' } }) }}
+                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div>
