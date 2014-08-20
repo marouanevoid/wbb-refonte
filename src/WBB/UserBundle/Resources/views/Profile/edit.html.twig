@@ -54,7 +54,7 @@
                                             </div>
                                             <div class="file-name-selected-screen clear"><p class="subtitle small"></p><span class='ie9-close-pic'>X</span></div>
                                             <div class='file-name-selected-screen-clear clear'></div>
-                                            <p class="subtitle small">Upload you profile picture (Accepted Formats : Png, Jpg)</p>
+                                            <p class="gray subtitle small">Upload you profile picture (Accepted Formats : Png, Jpg)</p>
                                         </div>
                                     </div> <!-- .subgroup.right -->
                                 </div> <!-- .group.right -->
@@ -95,9 +95,11 @@
                                             {{ form_widget(form.email, { 'attr' : { 'class': 'form-text'} }) }}
                                         {% endif %}
                                         <div class="clear"></div>
-                                        {#<p id="" class="text-align-right">#}
-                                            {#<a href="#" id="resend-validation">An email is waiting for your confirmation</a>#}
-                                        {#</p>#}
+                                        {% if user.confirmationToken %}
+                                            <p id="" class="text-align-right">
+                                                <a href="#" id="resend-validation">An email is waiting for your confirmation</a>
+                                            </p>
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
                                     <div class="{% if 'birthday' in errors.fields %}error{% endif %} date-birthday text-align-center margin-top-10">
@@ -205,7 +207,7 @@
                                     </div>
                                 </div>
                             {% else %}
-                                <div class="subtitle">To make further updates, use the desktop version.</div>
+                                <div class="subtitle grey">To make further updaphptes, use the desktop version.</div>
                             {% endif %}
                             <div class="clear"></div>
                             {{ form_widget(form._token) }}
