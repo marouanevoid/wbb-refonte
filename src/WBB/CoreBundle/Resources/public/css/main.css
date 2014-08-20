@@ -158,7 +158,7 @@
     .col-4 {width: 283px;}
 
 /* Globale form styles */
-  .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
+  .date-birthday .select-wrap {width: 96px; margin-right: 7px;}
   .date-birthday .ui-dropdown-container {width: 95px!important;}
 
 /* Globale Desktop style's */
@@ -192,6 +192,7 @@
   .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px;*/ padding: 0; max-width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
+  .ui .form-text.text-align-center {text-indent: 0;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
   .popup .ui a {font-size: 16px; text-decoration: underline;}
   .popup .ui a:hover,
@@ -201,8 +202,10 @@
   /* Error */
     .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
+    /*
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
     #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #818a8c;}
+    */
 
     #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
     #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
@@ -355,8 +358,8 @@
   #register.page.mobile .ui .connect-fb {line-height: normal; font-size: 15px;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
-  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
-  #register.page.mobile .select-two {margin-bottom: 20px; overflow: hidden;}
+  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 14px!important; line-height: 22px!important; letter-spacing: -1px;}
+  #register.page.mobile .select-two {margin-bottom: 10px; overflow: hidden;}
 
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
@@ -400,7 +403,7 @@
   #view-account.tips-tab .hr,
   #view-account.tips-tab .filter-content {display: none; visibility: hidden;}
 
-  .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
+  .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 27px; text-align: center; text-transform: capitalize;}
   .ui.tips {width: 100% !important;}
   .ui.tips .list-tips {background-color: #faf3e1;}
   .ui.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
@@ -626,6 +629,11 @@
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
+    #editprofile .form-text {text-indent: 10px;}
+    #register.page #message {left: 9px;}
+    #message ul {margin: 15px 0px 10px 95px;}
+    
+    /*.ui .form-text {text-indent: 0;}*/
     .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}
     .wrap-share .social-share {border-radius: 30px;}
     .wrap-share .social-share .share-label {display: none;}
@@ -633,10 +641,8 @@
     .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
     section.bar-filter .bar-w-pic {max-height: 180px;}
     .ui.register .title {width: 45%;}
-    /*.ui .form-text {text-indent: 0;}*/
-    #editprofile .form-text {text-indent: 10px;}
     .page #message {left: 68px;}
-    #register.page #message {left: 9px;}
+    .date-birthday .select-wrap {margin-right: 6px;}
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
