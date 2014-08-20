@@ -1,6 +1,6 @@
 <div id="success" class="min-height">
     <div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">
-        <div class="subtitle wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">Congratulations !</div>
+        <div class="subtitle wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-50{% endif %}" {% if is_mobile() and not is_tablet() %}style="min-height: 312px"{% endif %}>Congratulations !</div>
         <p class="padding-top-40">You are now registered on  World’s Best Bars.</p>
         <p class="padding-bottom-40">Check your mailbox to confirm your subscription.</p>
     </div>
