@@ -340,7 +340,7 @@
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
-  #register.page.mobile #create-account .form-text {width: 98%; margin: 0 0 10px;}
+  #register.page.mobile #create-account .form-text {width: 98%; /*margin: 0 0 10px;*/}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -750,8 +750,7 @@
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
     .no-result {margin: 2%;}
     .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px;}
-    .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;}
-    ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
+    /* .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;} */    ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -799,7 +798,7 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
     .date-birthday .select-wrap {width: 97px; margin-right: 7px;}
-    #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; /*text-align: right;*/}
+    #register.page.mobile #create-account .form-text {width: 278px; /*margin: 0 0 10px;*/ padding: 0 20px 0 0; /*text-align: right;*/}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
     form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
