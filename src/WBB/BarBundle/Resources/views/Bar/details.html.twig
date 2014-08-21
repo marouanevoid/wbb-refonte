@@ -23,8 +23,8 @@
     <meta property="fb:admins" content="149071961796732" />
 
     {% for m in bar.medias|slice(0,1) %}
-        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}">
-        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}" />
+        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}">
+        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}" />
     {% endfor %}
 
 {% endblock %}
@@ -517,6 +517,7 @@
     <script type="text/javascript">
         // remove desibled 
         $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+        $('article.tip .form form input[type="submit"]').removeClass('loading');
         new meta.Form(
                 {
                     $form : $('form#tips'),
@@ -525,6 +526,8 @@
                         var $count = $form.find(".count");
                         var count = $count.text();
 
+                        $('article.tip .form form input[type="submit"]').removeClass('loading');
+                        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
                         $count.addClass('success').text(data.message);
 
                         $form.get(0).reset();
@@ -541,10 +544,15 @@
                     {
                         $('article.tip .form form input[type="submit"]').removeAttr('disabled');
 
+                        $('article.tip .form form input[type="submit"]').removeClass('loading');
+
                         var $count = $form.find(".count");
                         var count = $count.text();
 
-                        $count.addClass('error').text(message);
+                        if(count != message &&  message ){
+                            $count.addClass('error').text(message);
+                        }
+
                         $form.find("textarea").addClass('error').focus();
 
                         setTimeout(function()

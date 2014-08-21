@@ -1235,7 +1235,7 @@ class User extends BaseUser
             if (strlen($this->plainPassword) < 6) {
                 $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
             } else {
-                if (!ctype_alnum($this->plainPassword)) {
+                if (!preg_match('/[A-Za-z]/', $this->plainPassword) || !preg_match('/[0-9]/', $this->plainPassword)) {
                     $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
                 }
             }

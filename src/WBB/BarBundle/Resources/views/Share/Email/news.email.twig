@@ -9,11 +9,11 @@
                 <tr>
                     <td align="center" style="font-family: Verdana, Arial;">
                         <p style="margin-bottom: 35px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
-                            Hi {{ fullName }}!,
+                            Hi {{ fullName }}!
                         </p>
 
                         <p style="margin-bottom: 35px; line-height: 24px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
-                            {{ message }}
+                            {{ message|nl2br }}
                         </p>
                     </td>
                 </tr>
@@ -25,19 +25,21 @@
             <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
                 <tr>
                     <td width="308" style="font-family: Verdana, Arial; vertical-align: top;" valign="top">
-                        <a hef="#URL" style="font-family: Verdana, Arial;">
+                        <a href="{{ path('wbb_news_details_page',{newsSlug: news.slug}) }}" style="font-family: Verdana, Arial; text-decoration: none;">
                             {% if news.medias|length>0 %}
                                 {% for m in news.medias|slice(0,1) %}
-                                    <img class="scale-with-grid" data-src="{{ app.request.schemeAndHttpHost}}{{ showImage(m.media, 'slider_large') }}"  alt="{{ news.title }}" width="285" height="214"/>
+                                    <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(m.media, 'news_425_320') }}"  alt="{{ news.title }}" width="285" height="214"/>
                                 {% endfor %}
                             {% else %}
-                                <img class="scale-with-grid" data-src="{{ app.request.schemeAndHttpHost}}{{ showImage(null, 'slider_large') }}" alt="{{ news.title }}" width="285" height="214" alt=""/>
+                                <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(null, 'news_425_320') }}" alt="{{ news.title }}" width="285" height="214" alt=""/>
                             {% endif %}
                         </a>
                     </td>
-                    <td>
+                    <td valign="top" style="vertical-align: top;">
                         <div class="name" style="font-size: 19px; font-family: Verdana, Arial; color: #b3955f; text-transform: uppercase;">
-                            {{ news.title }}
+                            <a href="{{ path('wbb_news_details_page',{newsSlug: news.slug}) }}" style="font-size: 19px; font-family: Verdana, Arial; color: #b3955f; text-transform: uppercase; text-decoration: none;">
+                                {{ news.title }}
+                            </a>
                         </div>
                         <p style="color: #818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">
                             {{ news.seoDescription|raw }}
