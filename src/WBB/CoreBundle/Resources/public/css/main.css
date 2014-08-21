@@ -10,7 +10,15 @@
   #landscape-mobile {display: none; visibility: hidden;}
   input[type="text"]::-webkit-input-placeholder, 
   input[type="password"]::-webkit-input-placeholder, 
-  input[type="email"]::-webkit-input-placeholder{
+  input[type="email"]::-webkit-input-placeholder,
+  input[type="text"]:-moz-input-placeholder,
+  input[type="password"]:-ms-input-placeholder, 
+  input[type="email"]:-ms-input-placeholder{
+    color: #818a8c;
+  }
+  input[type="text"]::-moz-placeholder, 
+  input[type="password"]::-moz-placeholder, 
+  input[type="email"]::-moz-placeholder {
     color: #818a8c;
   }
 /* Globale Libs */
@@ -48,8 +56,12 @@
   .popin-block {padding: 25px 40px;}
   .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
-  .subtitle.small {font-size: 13px;}
-  .btn.gold:hover {background-color: #ffe4af; color: #b3955f;}
+  .subtitle.grey {color: #818a8c;}
+  .small {font-size: 13px;}
+  .medium {font-size: 22px;}
+  .big {font-size: 30px;}
+
+  /*.btn.gold:hover {background-color: #ffe4af; color: #b3955f;}*/
   .select-two .ui-dropdown-container {width: 100%!important;}
 
   /* Popup */
@@ -146,7 +158,7 @@
     .col-4 {width: 283px;}
 
 /* Globale form styles */
-  .date-birthday .select-wrap {width: 95px; margin-right: 7px;}
+  .date-birthday .select-wrap {width: 96px; margin-right: 7px;}
   .date-birthday .ui-dropdown-container {width: 95px!important;}
 
 /* Globale Desktop style's */
@@ -180,6 +192,7 @@
   .ui .form-text {border: 1px solid #b3955f;  height: 38px; /*line-height: 30px;*/ padding: 0; max-width: 100%; text-indent: 10px; font-size: 17px; background-color: #faf3e1;}
   .ui .form-submit {background-color: #b3955f; font-size: 19px; font-weight: bold;}
   .ui .btn-facebook {background: url("../images/UI/icon_fb.jpg") no-repeat 20px 15px; background-color: #2960a3; font-size: 16px; text-decoration: none; line-height: 65px; text-indent: 10px;}
+  .ui .form-text.text-align-center {text-indent: 0;}
   .popup .ui .separator {background: url("../images/UI/separator_bg.jpg") no-repeat 0 0; height: 17px; width: 302px;}
   .popup .ui a {font-size: 16px; text-decoration: underline;}
   .popup .ui a:hover,
@@ -189,8 +202,10 @@
   /* Error */
     .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
 
+    /*
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
-    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #b3955f;}
+    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #818a8c;}
+    */
 
     #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
     #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
@@ -229,7 +244,7 @@
   #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
   #message li:only-of-type {margin-top: 20px;}
   .page #message {width: 300px; padding: 0; position: relative; left: 9px;}
-  .profile #message {left: 13%;}
+  #edit_profile_form #message {left: 13%;}
 
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   /*#success {position: static; top: 0;}*/
@@ -298,7 +313,7 @@
   #register.mobile .btn {/*height: 120px; */font-size: 17px;}
   #register.mobile .ui {width: auto; padding: 0 10px; position: relative;}
   #register.mobile .ui .title {width: 100%;}
-  #register.mobile .ui .subtitle {font-size: 15px; padding: 0 20%;}
+  #register.mobile .ui .subtitle {font-size: 20px; padding: 0 20%;}
   #register.mobile .ui .btn-close {background-image: url("../images/UI/close_vm.png"); background-size: 40px 40px; top: -45px; right: 20px; display: block;}
   #register.mobile form .form-text {font-size: 15px; border-radius: 2em;}
   #register.mobile form .btn-facebook {background-image: url("../images/UI/icon_fb.jpg"); background-position: 25px center; line-height: 64px;}
@@ -328,7 +343,7 @@
   #register.page.mobile .ui .title,
   #register.page.mobile .ui .subtitle {width: 100%; padding: 0;}
   #register.page.mobile #create-account {padding-top: 0;}
-  #register.page.mobile #create-account .form-text {width: 98%; margin: 0 0 10px;}
+  #register.page.mobile #create-account .form-text {width: 98%; /*margin: 0 0 10px;*/}
   #register.page.mobile .select-two .left,
   #register.page.mobile .select-two .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile .select-two label {display: none!important;}
@@ -343,8 +358,8 @@
   #register.page.mobile .ui .connect-fb {line-height: normal; font-size: 15px;}
   #register.page.mobile #create-account .btn-create-with-fb {line-height: 45px;}
   #register.page.mobile #create-account .form-text-without-label {margin: 0;}
-  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 16px!important;}
-  #register.page.mobile .select-two {margin-bottom: 20px; overflow: hidden;}
+  #register.page.mobile .group-checkbox label {text-align: left!important; font-size: 14px!important; line-height: 22px!important; letter-spacing: -1px;}
+  #register.page.mobile .select-two {margin-bottom: 10px; overflow: hidden;}
 
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
@@ -361,7 +376,6 @@
   #editprofile .avatar-profil {z-index: 11; position: relative; overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
   #editprofile .avatar-profil img {height: 100%; width: 100%; position: relative; border-radius: 10em;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
-  #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
   #editprofile #edit-account label {font-size: 15px;}
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
@@ -389,8 +403,7 @@
   #view-account.tips-tab .hr,
   #view-account.tips-tab .filter-content {display: none; visibility: hidden;}
 
-  .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 30px; text-align: center; text-transform: capitalize;}
-  .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
+  .ui .btn-editprofile .btn {font-size: 13px; border: 1px solid #b3955f; color: #b3955f; height: 27px; width: 111px; display: block; margin: 0 auto; line-height: 27px; text-align: center; text-transform: capitalize;}
   .ui.tips {width: 100% !important;}
   .ui.tips .list-tips {background-color: #faf3e1;}
   .ui.tips .list-tips * { font-family: "Avenir", Helvetica, Arial, sans-serif;}
@@ -446,12 +459,13 @@
   .wrap-share .social-share li {height: 41px; width: 89px; margin-right: 4px;}
   .wrap-share .social-share li:last-child {margin: 0;}
   .wrap-share .social-share li a {height: 41px; width: 90px; margin: 0;}
+  .wrap-share .social-share li a:hover {opacity: 0.8;}
   .wrap-share .social-share li .fb-share {background-image: url("../images/icon_fb-mobile.jpg");}
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
   /* Mobile */
     .wrap-share.mobile {z-index: 9999999; top: 50%; height: 280px; background-color: transparent; width: 100%;}
-    .wrap-share.mobile .social-share {padding: 0 10px;}
+    .wrap-share.mobile .social-share {padding: 0 10px; border: none;}
     .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; left: 0; padding: 95px 90px 0;}
     .wrap-share.mobile .social-share li,
     .wrap-share.mobile .social-share li a {width: 106px; margin: 0 auto 9px; float: none;}
@@ -481,7 +495,7 @@
   .page-form {padding: 0 3%;}
   .page-form label {line-height: 34px; width: 10%; font-size: 18px;}
   .page-form .form-text {width: 90%;}
-  .page-form .form-textarea {padding: 10px 10px 50px;}
+  .page-form .form-textarea {padding: 10px 10px 50px; background-color: transparent;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
 /* Rollover's */
@@ -489,7 +503,7 @@
 
 /* jQuery UI Autocomplete */
   ul.ui-autocomplete {background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
-  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: bold 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
+  ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: lighter 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
 /* Override */
@@ -509,6 +523,8 @@
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0;}
   .bar-details .content ul.trends {line-height: 1.6em;}
   .bar-details .content ul.trends li {line-height: 20px;}
+  .bar-details .content ul.trends a,
+  .bar-details .content ul.trends a:hover {color: #818a8c;}
   .bar-details .content .trends {margin-bottom: 0;}
   .bar-details .insider-tips .line .box {margin-top: 2.32% !important;}
   .best-of-details .bar-w-pic.best-of .txt .number {line-height: 22px;}
@@ -533,7 +549,7 @@
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
-  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px; }
+  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {/*border-width: 2px; */}
   article.bestof img.scale-with-grid {display: inline;}
   .bar-w-pic .txt .tags a {color: #faf3e1;}
   .ui-dropdown-container .ui-dropdown .choice ul li {/*padding-bottom: 1.2em;*/}
@@ -600,10 +616,12 @@
     header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
+    #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
+    .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
+    img.scale-with-grid {box-sizing: initial!important;}
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
-    #error p {font-size: 2em;}
   }
 
 /* Tablets (landscape) ----------- */
@@ -611,6 +629,11 @@
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
+    #editprofile .form-text {text-indent: 10px;}
+    #register.page #message {left: 9px;}
+    #message ul {margin: 15px 0px 10px 95px;}
+
+    /*.ui .form-text {text-indent: 0;}*/
     .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}
     .wrap-share .social-share {border-radius: 30px;}
     .wrap-share .social-share .share-label {display: none;}
@@ -618,10 +641,8 @@
     .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
     section.bar-filter .bar-w-pic {max-height: 180px;}
     .ui.register .title {width: 45%;}
-    .ui .form-text {text-indent: 0;}
-    #editprofile .form-text {text-indent: 10px;}
     .page #message {left: 68px;}
-    #register.page #message {left: 9px;}
+    .date-birthday .select-wrap {margin-right: 6px;}
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
@@ -667,10 +688,18 @@
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
     body {min-height: 100%;}
-    .ui input[type="text"].form-text, .ui input[type="password"].form-text, .ui input[type="email"].form-text {
-      padding: 0 0 0 2%;
-    }
+    input[type="text"]::-webkit-input-placeholder, 
+    input[type="password"]::-webkit-input-placeholder, 
+    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
 
+    input[type="text"]::-webkit-input-placeholder, 
+    input[type="password"]::-webkit-input-placeholder, 
+    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
+
+    .ui .btn-create-with-fb {background-image: url("../images/UI/btn_fb-small@x2.jpg"); background-size: 119px 42px;}
+    .ui input[type="text"].form-text, 
+    .ui input[type="password"].form-text, 
+    .ui input[type="email"].form-text {padding: 0 0 0 2%;}
   /* Thumbnails Size's */
     .search section.bar-filter .bar-w-pic,
     .profile section.bar-filter .bar-w-pic,
@@ -686,7 +715,8 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 28%;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 44%;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 11px;}
-    #register.mobile.popup .date-birthday .select-wrap {width: 105px; margin-right: 2%;}
+    #register.mobile.popup .date-birthday .select-wrap {width: 112px; margin-right: 2%;}
+    #register.mobile.popup .date-birthday .group-small-select {width: 150%;}
     #register.page .group-checkbox {left: 0; margin: 0;}
     #message ul {margin-left: 100px;}
     #success {padding: 0 20px;}
@@ -725,6 +755,8 @@
     .search-bar-mobile {height: 200%!important;}
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
     .no-result {margin: 2%;}
+    .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px;}
+    /* .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;} */    ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -772,25 +804,13 @@
     #editprofile.mobile #view-account .ui .ui-radio.collapsed:last-of-type {width: 80px;}
     #editprofile.mobile #view-account .ui .ui-radio.collapsed {width: 140px;}
     .date-birthday .select-wrap {width: 97px; margin-right: 7px;}
-    #register.page.mobile #create-account .form-text {width: 278px; margin: 0 0 10px; padding: 0 20px 0 0; /*text-align: right;*/}
+    #register.page.mobile #create-account .form-text {width: 278px; /*margin: 0 0 10px;*/ padding: 0 20px 0 0; /*text-align: right;*/}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
     form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
   }
-
-/* Smartphones (landscape) ----------- */
-@media screen and (min-width: 480px) and (orientation: landscape) { 
-  #landscape-mobile {
-      display: block; visibility: visible;
-      position: fixed; top: -50%; left: -50%;
-      width: 200%; height: 200%; min-height: 100%; 
-      background: url("../images/turn@2x.jpg") no-repeat center center #000;
-      background-size: contain;
-      z-index: 777777777;
-  }
-}
 
 @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
   .search-bar-mobile .container input[type="reset"] {right: 41%;}

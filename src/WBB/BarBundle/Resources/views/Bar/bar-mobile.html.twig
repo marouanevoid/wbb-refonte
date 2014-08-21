@@ -1,7 +1,5 @@
 <article class="bar-wo-pic">
-
-    <a data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %} nc"></a>
-
+    <a data-id={{ b.id }} data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %} nc"></a>
     <div class="txt">
         <h2>
             {% if is_mobile() and not is_tablet() %}
@@ -20,7 +18,5 @@
             {% if b.city %}{{ b.city.name|default('Unspecified')|truncate(15, true) }}{% endif %}
         </h3>
     </div>
-
     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
-
 </article>

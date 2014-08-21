@@ -2,23 +2,30 @@
     <div class="padding-top-20 padding-bottom-20">
         <form action="{{ url }}">
             <div class="group-form margin-top-20">
-                {#<label class="left">Friend Name</label>#}
-                {{ form_widget(form.name, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+                <div class="left" style="width: 50%">
+                    {{ form_widget(form.firstName, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+                </div>
+                <div class="left" style="width: 50%">
+                    {{ form_widget(form.lastName, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+                </div>
                 <div class="clear"></div>
             </div>
             <div class="group-form margin-top-10">
-                {#<label class="left">Friend Email</label>#}
-                {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+                <div class="left" style="width: 50%">
+                    {{ form_widget(form.emailFrom, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+                </div>
+                <div class="left" style="width: 50%">
+                    {{ form_widget(form.emailTo, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
+                </div>
                 <div class="clear"></div>
             </div>
-            <div class="group-form margin-top-10">
-                {#<label class="left">Message</label>#}
-                {{ form_widget(form.content, { 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
+            <div class="group-form margin-top-10" style="width: 107%">
+                {{ form_widget(form.content, {'value': text|raw, 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
             </div>
             <div class="clear"></div>
-            <div class="group-actions padding-top-20 wrap">
+            <div class="group-actions padding-top-40 wrap">
                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Send email">
-                {{ form_widget(form.content, { 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
+
                 {{ form_rest(form) }}
             </div>
         </form>

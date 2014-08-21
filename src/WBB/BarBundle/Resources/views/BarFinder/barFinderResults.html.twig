@@ -4,7 +4,6 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function(){
-
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
             {% else %}
@@ -23,46 +22,32 @@
                     $('.gridview').hide();
                 }
             });
-
             // OPEN THE FINDER
             $('header .finder').click();
-
-
             animate = function($target, $elements, callback ){
-
                 var target_height = $target.show().height();
-
                 $elements.css({opacity:0, top:'20em', position:'relative'}).each(function(index){
-
                     $(this).delay(100*(index+1)).velocity({opacity:1, top:0}, 500, 'easeInOutCubic');
                 });
-
                 setTimeout(function()
                 {
                     if(callback) callback();
-
                 }, 100*$elements.length+500);
             };
-
             /*
              * get Activate Tab
              **/
-
             var getTab = function(){
                 var cibleTab = $('.sort-by').find('.active');
                 return cibleTab.hasClass('grid') ? 'grid' : 'list';
-
             }
-
             var steelshowLoadMoreBtn = function(){
                 var ccible = ( getTab() == 'grid' ? '.line.gridview' : '.line.listview' );
-
                 if($(ccible + ':visible').length < $(ccible).length)
                     $('.loadmore-trigger').show();
                 else
                     $('.loadmore-trigger').hide();
             }
-
             // paginate load More
             var currentIndexToLoad = 1;
             var currentMode = 'grid';
@@ -70,12 +55,8 @@
              * Initalise Show item
              **/
             var initialiseShowItem = function(type){
-
             }
-
             $('.loadmore-trigger').hide();
-
-
             /*
              * initAnimate
              */
@@ -89,15 +70,12 @@
                     }
                 },delay ? 2000 : 0);
             }
-
             initAnimate( $(".line.gridview:lt(2)") ,  true , true);
-
             $('.sort-by a.grid').add('.sort-by a.list').on('click' , function(){
                $(".line.gridview").hide(); 
                $(".line.listview").hide();  
                 setTimeout(function(){
                     currentIndexToLoad = 1;
-
                     if(getTab() == 'grid'){
                         $(".line.gridview").hide();
                         $(".line.listview").hide();
@@ -107,25 +85,19 @@
                         $(".line.listview").hide();
                         initAnimate($(".line.listview").first().add( $($(".line.listview")[1]) ),false,true);
                     }
-
                     currentMode = getTab();
                 },100)
-
             });
-
-
             $('.loadmore-trigger').on('click' , function(){
                 currentIndexToLoad++;
                 var cibletag = ( currentMode == 'grid' ) ?  'gridview' :  'listview';
                 var currentCible = $($(".line." + cibletag )[currentIndexToLoad]);
                 currentCible.show();
                 initAnimate(currentCible,false,true);
-
                 steelshowLoadMoreBtn();
                 return false;
             });
         });
-
     </script>
 {% endblock %}
 {% block bodyTag %}
@@ -205,7 +177,7 @@
                             <td></td>
                             <td class="title margin-top-10">
                                 <h1 itemprop="name">Bar finder results</h1>
-                                <img src="{{ asset('bundles/wbbcore/') }}images/glass.png" width="103" style="margin: 60px 0" />
+                                <img src="{{ asset('bundles/wbbcore/images/glass.png') }}" width="103" style="margin: 60px 0" />
                                 <h3 class="padding-bottom-40">
                                     Sorry we didn’t find any bars that matched your request.<br>
                                     Please change your criteria or <a href='https://twitter.com/WorldsBestBars' target='_blank'>contact us</a> on Twitter<br>
@@ -234,12 +206,11 @@
                             {% set index = 8 %}
                             {% endif %}
                             {% if not is_mobile() or is_tablet() %}<div class="three columns m-margin-top">{% endif %}
-                                {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': bar } %}
+                                {% include "WBBBarBundle:Bar/items:bar_425_320.html.twig" with { 'b': bar } %}
                                 {% if not is_mobile() or is_tablet() %}</div>{% endif %}
                             {% set index = index - 1 %}
                             {% endfor %}
                         </div>
-
                         <div class="line listview" style="display: none;">
                             {% set index2 = 8 %}
                             {% for b in bars %}
@@ -252,14 +223,14 @@
                             <article class="bar-w-pic-list">
                                 <div class="three columns s-margin-top">
                                     <div class="bar-w-pic list">
-                                        <a data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
+                                        <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
                                         <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                                         {% if b.medias|length>0 %}
                                             {% for m in b.medias|slice(0,1) %}
-                                                <img class="scale-with-grid" data-src="{{ showImage(m.media, 'slider_large') }}"  alt="{{ b.name }}" width="570" height="428"/>
+                                                <img class="scale-with-grid" data-src="{{ showImage(m.media, 'bar_425_320') }}"  alt="{{ b.name }}"/>
                                             {% endfor %}
                                         {% else %}
-                                            <img class="scale-with-grid" data-src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="570" height="428" alt=""/>
+                                            <img class="scale-with-grid" data-src="{{ showImage(null, 'bar_425_320') }}" width="570" alt=""/>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -298,11 +269,8 @@
                     <div class="twelve columns align-center m-margin load-more-container">
                         <a class="h4 btn-radius large border load-more brown load-more-bars-btn loadmore-trigger " data-text="See more bars">Load more bars</a>
                     </div>
-
                 </div>
-
             </div>
-
         </section>
     {% endif %}
 {% endblock %}

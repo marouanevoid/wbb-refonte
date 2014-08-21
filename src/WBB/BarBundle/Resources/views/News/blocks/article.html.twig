@@ -1,32 +1,26 @@
 <article class="{% if is_small is defined %}small{% else %}large{% endif %} {% if firstchild is defined and firstchild %} interview-frist-child{% endif %}">
-
     {% if has_image is defined %}
         <div class="img">
             <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="cover">
                 {% if n.medias|length>0 %}
                     {% for m in n.medias|slice(0,1) %}
-                        {#<img src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}" width="600" height="400" alt="{{ n.title }}"/>#}
-                        <img src="{{ showImage(m.media, 'slider_large') }}" width="600" height="400" alt="{{ n.title }}"/>
+                        <img src="{{ showImage(m.media, 'news_770_578') }}" width="600" height="400" alt="{{ n.title }}"/>
                         {% if m.media.providerName == 'sonata.media.provider.youtube' %}
                             <span class="video"></span>
                         {% endif %}
                     {% endfor %}
                 {% else %}
-                    {#<img src="{{ asset('bundles/wbbcore/images/default.jpg') }}" width="600" height="400" alt="{{ n.title }}"/>#}
-                    <img src="{{ showImage(null, 'slider_large') }}" width="600" height="400" alt="{{ n.title }}"/>
+                    <img src="{{ showImage(null, 'news_770_578') }}" width="600" height="400" alt="{{ n.title }}"/>
                 {% endif %}
-
                 {% if n.sponsorImageSmall is defined and n.sponsorImageSmall != '' %}
                     <span class="sponsor">
-                            <img src="{% path n.sponsorImageSmall , 'small' %}" alt="sponsor"/>
+                        <img src="{% path n.sponsorImageSmall , 'small' %}" alt="sponsor"/>
                     </span>
                 {% endif %}
-
             </a>
             <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
         </div>
     {% endif %}
-
     <div class="title vcenter">
         {% set margin_class = "" %}
         {% if n.seoDescription is defined and n.seoDescription != '' or has_image is defined or n.quoteText is not  defined or n.quoteText == '' %}
@@ -54,7 +48,6 @@
                 {% endif %}
             </p>
         {% endif %}
-
         {% if has_image is not defined %}
             <a class="plus-btn {{ margin_class }}" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
         {% endif %}

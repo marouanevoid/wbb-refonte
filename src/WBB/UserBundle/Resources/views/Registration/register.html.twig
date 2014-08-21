@@ -18,7 +18,7 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Pseudo</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Pseudo' } }) }}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text', 'placeholder': 'Pseudo' } }) }}
                                         {% else %}
                                             {{ form_widget(form.username, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
@@ -29,7 +29,7 @@
                                 <div class="select-two margin-top-10 gender">
                                     <label class="margin-right-20 text-align-right unbold">Gender</label>
                                     <div class="left" style="width: 302px">
-                                        {{ form_widget(form.title, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                        {{ form_widget(form.title, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown'} }) }}
                                     </div>
                                 </div>
                                 <div class="clear"></div>
@@ -38,7 +38,7 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Firstname</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Firstname' } }) }}
+                                            {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Firstname' } }) }}
                                         {% else %}
                                             {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
@@ -50,7 +50,7 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Lastname</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Lastname' } }) }}
+                                            {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text', 'placeholder': 'Lastname' } }) }}
                                         {% else %}
                                             {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
@@ -62,7 +62,7 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Email</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Email' } }) }}
+                                            {{ form_widget(form.email, { 'attr' : { 'class': 'form-text', 'placeholder': 'Email' } }) }}
                                         {% else %}
                                             {{ form_widget(form.email, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
@@ -74,7 +74,7 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Password</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Password' } }) }}
+                                            {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text', 'placeholder': 'Password' } }) }}
                                         {% else %}
                                             {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
@@ -86,7 +86,7 @@
                                     <label class="margin-right-20 text-align-right unbold xs-hidden">Confirm Password</label>
                                     <div class="form-input left">
                                         {% if is_mobile() and not is_tablet() %}
-                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': 'Confirm Password' } }) }}
+                                            {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text', 'placeholder': 'Confirm Password' } }) }}
                                         {% else %}
                                             {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
@@ -99,13 +99,13 @@
                             <div class="date-birthday text-align-center ui-dropdown-list-form">
                                 <label class="margin-right-20 text-align-right unbold">Date of Birth</label>
                                 <div class="select-wrap left">
-                                    {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                    {{ form_widget(form.birthdate.month, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                                 </div>
                                 <div class="select-wrap left">
-                                    {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.birthdate.day, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown', 'placeholder': '' } }) }}
                                 </div>
                                 <div class="select-wrap left last">
-                                    {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                    {{ form_widget(form.birthdate.year, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                                 </div>
                             </div>
                             <div class="clear"></div>
@@ -113,7 +113,11 @@
                             <div class="select-two margin-top-10 ui-dropdown-list-form country-dropdown">
                                 <label class="margin-right-20 text-align-right unbold">Country</label>
                                 <div class="left" style="width: 302px">
-                                    {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                                    {% if is_mobile() and not is_tablet() %}
+                                        {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown country-select' } }) }}
+                                    {% else %}
+                                        {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' }, 'empty_value' : 'Please choose your country' }) }}
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="clear"></div>
@@ -193,12 +197,12 @@
                             <div class="group-checkbox">
                                 <div class="group-form checkbox margin-top-10">
                                     <label class="wrap">{{ form_widget(form.stayInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
-                                        Subscribe to our newsletters</label>
+                                        I would like to receive emails with offers <br/>and updates from World’s Best Bars and Pernod Ricard</label>
                                 </div>
 
                                 <div class="group-form checkbox margin-top-10">
                                     <label class="wrap">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
-                                        Subscribe to our partners newsletters</label>
+                                        I would like to receive emails with offers <br/>from Pernod Ricard’s business partners</label>
                                 </div>
                             </div>
 
@@ -206,6 +210,24 @@
                             <div class="clear"></div>
                             <div class="group-actions margin-top-30 margin-bottom-50 wrap">
                                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="CREATE YOUR ACCOUNT">
+                                    <div class="floatingBarsG">
+                                        <div class="blockG" id="rotateG_01">
+                                        </div>
+                                        <div class="blockG" id="rotateG_02">
+                                        </div>
+                                        <div class="blockG" id="rotateG_03">
+                                        </div>
+                                        <div class="blockG" id="rotateG_04">
+                                        </div>
+                                        <div class="blockG" id="rotateG_05">
+                                        </div>
+                                        <div class="blockG" id="rotateG_06">
+                                        </div>
+                                        <div class="blockG" id="rotateG_07">
+                                        </div>
+                                        <div class="blockG" id="rotateG_08">
+                                        </div>
+                                    </div>
                             </div>
                         </form>
                         <div class="clear"></div>
@@ -240,6 +262,16 @@
                 checkboxClass: 'icheckbox_flat',
                 increaseArea: '20%' // optional
             });
+
+            // init Select 2
+            $("select.select2-dropdown").select2({
+                minimumResultsForSearch: -1
+            });
+
+            // add the search
+            $('select#fos_user_registration_form_country').select2({
+                minimumResultsForSearch: 20
+            })
         });
     </script>
 {% endblock %}

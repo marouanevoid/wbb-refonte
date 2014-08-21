@@ -134,7 +134,7 @@ class BestOfAdmin extends Admin
                         'label'     => 'Best of visual *'
                     ), array(
                         'link_parameters' => array(
-                            'context' => 'simple_image'
+                            'context' => 'bestof'
                         )
                     ))
 //                ->add('sponsor')
@@ -145,7 +145,7 @@ class BestOfAdmin extends Admin
 //                        'label'     => 'Sponsor visual'
 //                    ), array(
 //                        'link_parameters' => array(
-//                            'context' => 'simple_image'
+//                            'context' => 'default'
 //                        )
 //                    ))
                 ->add('byTag', null, array('help'=> 'Create a best of with tag'))

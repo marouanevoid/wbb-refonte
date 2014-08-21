@@ -1,6 +1,6 @@
 {% if b %}
     <article class="bestof">
-        <a data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
+        <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
         <div class="txt vcenter">
             <div class="circle vcenter">
                 {% if city is defined %}
@@ -12,9 +12,8 @@
                 {% endif %}
             </div>
         </div>
-            {#<img src="{% if nolazyloading is defined %}{% filter showMedia %}{% path b.image, 'bestof_small' %}{% endfilter %}{% endif %}" class="scale-with-grid" data-src="{% filter showMedia %}{% path b.image, 'bestof_small' %}{% endfilter %}" alt="{{ b.name }}" width="570" height="428"/>#}
-            <img src="{% if nolazyloading is defined %}{{ showImage(b.image, 'bestof_small') }}{% endif %}"
-                 class="scale-with-grid" data-src="{{ showImage(b.image, 'bestof_small') }}" alt="{{ b.name }}" width="570" height="428"/>
+            <img src="{% if nolazyloading is defined %}{{ showImage(b.image, 'bestof_370_278') }}{% endif %}"
+                 class="scale-with-grid" data-src="{{ showImage(b.image, 'bestof_370_278') }}" alt="{{ b.name }}" width="570" height="428"/>
         {% if b.city %}
             <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
         {% else %}

@@ -116,6 +116,11 @@ PopIn.resize = function(target){
         "top": (($(window).height() - current_id.height()) / 2), //+ $(window).scrollTop(),
         "left": (($(window).width() - current_id.width()) / 2) //+ $(window).scrollLeft()
     });
+
+    // bonus 
+    // focus on the first input
+    $(PopIn.dom.popin).find('input:text').first().focus();
+
 }
 
 // init the Popin Loader

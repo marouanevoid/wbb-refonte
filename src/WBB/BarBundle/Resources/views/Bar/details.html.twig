@@ -8,17 +8,17 @@
     <meta name="description" content="{{ bar.seoDescription|slice(0, 150) }}" />
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@wbb">
+    <meta name="twitter:site" content="WorldsBestBars">
     <meta name="twitter:title" content="{{ bar.name }} | World Best Bars">
-    <meta name="twitter:description" content="{{ bar.seoDescription|slice(0, 150) }}">
-    <meta name="twitter:creator" content="@wbb">
+    <meta name="twitter:description" content="{{ bar.name ~ " is one of the @WorldsBestBars in #" ~ bar.city ~"! - "|slice(0, 140) }}">
+    <meta name="twitter:creator" content="WorldsBestBars">
     <meta property="twitter:url" content="{{ bitlyURL }}" />
 
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ bar.name }} | World Best Bars" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ bitlyURL }}" />
-    <meta property="og:description" content="{{ bar.seoDescription|slice(0, 200) }}" />
+    <meta property="og:description" content="{{ "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world" |slice(0, 200) }}" />
     <meta property="og:site_name" content="World Best Bars" />
     <meta property="fb:admins" content="149071961796732" />
 
@@ -246,7 +246,7 @@
                     </td>
 
                     <td class="star-share">
-                        <a data-type="{{ entity_light_type(bar) }}" class="btn-round {% if is_favorite(app.user, bar) %}active changed{% else %}brown{% endif %} star" data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
+                        <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round {% if is_favorite(app.user, bar) %}active changed{% else %}brown{% endif %} star" data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
                         <a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
@@ -507,7 +507,7 @@
                     {% if is_mobile() and not is_tablet() %}
                         {% include "WBBBarBundle:Bar:bar-mobile.html.twig" with { 'b': b } %}
                     {% else %}
-                        {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
+                        {% include "WBBBarBundle:Bar/items:bar_285_215.html.twig" with { 'b': b } %}
                     {% endif %}
                 </div>
             {% endfor %}
@@ -515,6 +515,9 @@
     </section>
 
     <script type="text/javascript">
+        // remove desibled 
+        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+        $('article.tip .form form input[type="submit"]').removeClass('loading');
         new meta.Form(
                 {
                     $form : $('form#tips'),
@@ -523,6 +526,8 @@
                         var $count = $form.find(".count");
                         var count = $count.text();
 
+                        $('article.tip .form form input[type="submit"]').removeClass('loading');
+                        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
                         $count.addClass('success').text(data.message);
 
                         $form.get(0).reset();
@@ -533,14 +538,21 @@
                             $('form#tips textarea').val("");
                             $count.removeClass('success').text("250 left");
 
-                        }, 2000);
+                        }, 1);
                     },
                     onError:function($form, message)
                     {
+                        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+
+                        $('article.tip .form form input[type="submit"]').removeClass('loading');
+
                         var $count = $form.find(".count");
                         var count = $count.text();
 
-                        $count.addClass('error').text(message);
+                        if(count != message &&  message ){
+                            $count.addClass('error').text(message);
+                        }
+
                         $form.find("textarea").addClass('error').focus();
 
                         setTimeout(function()
@@ -551,9 +563,9 @@
 
                         }, 2000);
                     }
-                });
+                }); 
 
-        $('form#tips textarea').keydown(function()
+        $('form#tips textarea').on('change input paste keyup', function()
         {
             var length = $(this).val().length;
             $('form#tips .count').text( 250-length+' left' );

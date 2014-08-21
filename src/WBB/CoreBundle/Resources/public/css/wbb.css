@@ -338,7 +338,7 @@ Loader flux
 .min-height-block-mobile{min-height: 600px;}
 
 
-article.tip .form form input[type="submit"].loading{
+article.tip .form form input[type="submit"].loading, .ui .form-submit.loading{
     background: url(../images/gif-load.gif) no-repeat center !important;;
      text-indent: -119px;
      background-color: transparent !important;
@@ -454,11 +454,30 @@ body.search .search-bar-mobile{
 ***/
 .search aside.filters form .submit input[type="reset"]{ padding: 0; width: 50%; height: 45px; margin-bottom: 2em }
 .android .search aside.filters form .drop-list label{ text-overflow: clip!important }
+
+article.tip .content.expert .excerpt td .scroll {
+max-height: 11.5em;
+}
 /*
 end added by Jérome
 ***/
 
-#floatingBarsG{
+
+ #register.page .group-actions.loading .form-submit,#register.page.mobile #create-account .group-actions.loading .form-submit{
+    display: none;
+}
+
+ #register.page .group-actions .floatingBarsG{
+    display: none;
+ }
+ 
+ #register.page .group-actions.loading .floatingBarsG{
+    left:44%;
+    display: block;
+ }
+
+
+#floatingBarsG, .floatingBarsG{
 position:relative;
 width:20px;
 height:25px}

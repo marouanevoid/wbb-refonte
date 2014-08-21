@@ -46,7 +46,7 @@ class CityAdmin extends Admin
                     'label'     => 'Main visual *'
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'simple_image'
+                        'context' => 'city'
                     )
                 ))
             ->end()

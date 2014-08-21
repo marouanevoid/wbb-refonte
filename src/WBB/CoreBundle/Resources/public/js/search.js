@@ -275,14 +275,29 @@ meta.SearchPage = function() {
                         chtml2 = chtml2.replace(', %country' , "");
                     }
                     // if there is tags
-                    if(curor.fields.tags_style && curor.fields.tags_style.length){
+                    // search key start by tags_...
+                    // and push it to array
+                    var tagsLength = 0,
+                        TagsArray = [];
+                    for(key in curor.fields){
+                        if(key.indexOf('tags_')>-1){
+                            if( $.isArray(curor.fields[key]) &&  curor.fields[key].length)
+                                TagsArray.push(curor.fields[key]);
+                        }
+                    }
+
+                    if(TagsArray && TagsArray.length){
                         // make tags url
                         var stringtag = "";
-                        for(var i=0,ln = curor.fields.tags_style.length ; i<ln ; i++ ){
-                           stringtag += "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + that.escapit(curor.fields.tags_style[i]) + "'>"+ curor.fields.tags_style[i]  + "</a> , " 
+                        for(var i=0,ln = TagsArray.length ; i<ln ; i++ ){
+                            for(var j=0, lin = TagsArray[i].length; j < lin ; j++){
+                                stringtag += "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + that.escapit(TagsArray[i][j]) + "'>"+ TagsArray[i][j]  + "</a> , " ;
+                            }
                         }
-                        chtml = chtml.replace('%tags' , stringtag.substr(0, stringtag.length-2) );
-                        chtml2 = chtml2.replace('%tags' , stringtag.substr(0, stringtag.length-2)  );
+
+                        stringtag = stringtag.substr(0, stringtag.length-2);
+                        chtml = chtml.replace('%tags' , stringtag );
+                        chtml2 = chtml2.replace('%tags' , stringtag );
 
                         // chtml = chtml.replace('%tags' , curor.fields.tags_style.join(', '));
                         // chtml2 = chtml2.replace('%tags' , curor.fields.tags_style.join(', '));
@@ -296,6 +311,8 @@ meta.SearchPage = function() {
                         chtml2 = chtml2.replace('%tag-non-founed' , "display-none");
 
                     }
+
+
                     if(curor.fields.wbb_media_url){
                         chtml = chtml.replace('%img' , curor.fields.wbb_media_url );
                         chtml2 = chtml2.replace('%img' ,curor.fields.wbb_media_url);
@@ -761,6 +778,12 @@ meta.SearchPage = function() {
 
                 // uncheck all checkbox
                 $('#filter input[type=checkbox]').prop('checked', false);
+
+                // send the request
+                // Clear the content
+                // send the request Search
+                that.clearContent();
+                that.goSearch();
 
         });
 

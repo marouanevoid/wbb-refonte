@@ -28,6 +28,16 @@ function nodeToString(node) {
 }
 
 $(document).ready(function() {
+    if ($.cookie('light_action') === 'favorite') {
+        $.removeCookie('light_action');
+        $.removeCookie('light_type');
+        $.removeCookie('light_url');
+        $.removeCookie('light_id');
+        $.removeCookie('light_favorite');
+        $.removeCookie('light_from');
+        $.removeCookie('light_name');
+    }
+
     $('.btn-signin').on('click', function(e) {
         popinFrom = 'signin';
         e.preventDefault();
@@ -42,6 +52,7 @@ $(document).ready(function() {
             success: function(html) {
                 // Set the PopIn Loading Flag
                 PopIn.endLoading();
+                $.removeCookie('light_action');
 
                 $('.popin-block').html(html);
                 initializeDropdowns();
@@ -82,7 +93,7 @@ $(document).ready(function() {
     }
 
     $('.email-share').on('click', function(e) {
-        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
+//        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).data('href');
@@ -118,6 +129,8 @@ function fillInForm(formId) {
         if (response.status === 'connected') {
             FB.api('/me', function(response) {
                 console.log(response);
+                var action = $(formId).attr('action');
+                $(formId).attr('action', action + '?fromFb=1');
                 if (formId === '#register_form_full') {
                     $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
                     $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
@@ -209,6 +222,11 @@ function initRegisterLoginForms() {
                     var fields = data.errors.fields;
 
                     $('#message').show();
+                    // scroll to message on Mobile
+                    if(ismobile)
+                        animateToPopIn( $('#message').offset().top );
+
+
                     $('#register_form').after($('#message'));
                     $('#register-form #message').find('ul').remove();
                     $('#register-form #message div').append('<ul></ul>').parent();
@@ -225,6 +243,7 @@ function initRegisterLoginForms() {
                                 $('#register-form .country-dropdown .ui-dropdown').addClass('error');
                                 break;
                             case 'birthdate':
+                            case 'birthday':
                                 $('#register-form .date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
@@ -245,15 +264,7 @@ function initRegisterLoginForms() {
                     //     //animateToPopIn($('#register-form #message').offset().top);
                     // }
                 } else {
-                    if (addFavorite.indexOf('favorite') > -1) {
-                        $.cookie('light_action', 'favorite');
-                    } else {
-                        $.cookie('light_action', 'tips');
-                    }
-                    $.cookie('light_type', window.lightType);
-                    $.cookie('light_url', addFavorite);
                     $.cookie('light_from', 'register');
-                    $.cookie('light_name', window.lightName);
 
                     $.cookie('just_loggedin', true);
                     window.location.reload();
@@ -294,18 +305,13 @@ function initRegisterLoginForms() {
                         $('#login_form #message').find('ul').remove();
                         var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
                         errorsList.find('ul').append('<li>' + data.error + '</li>');
+
+                        // scroll to message on Mobile
+                        if(ismobile)
+                            animateToPopIn( $('#message').offset().top );
+
                     } else {
-                        if (addFavorite != 0) {
-                            if (addFavorite.indexOf('favorite') > -1) {
-                                $.cookie('light_action', 'favorite');
-                            } else {
-                                $.cookie('light_action', 'tips');
-                            }
-                            $.cookie('light_type', window.lightType);
-                            $.cookie('light_url', addFavorite);
-                            $.cookie('light_from', 'login');
-                            $.cookie('light_name', window.lightName);
-                        }
+                        $.cookie('light_from', 'login');
 
                         $.cookie('just_loggedin', true);
                         window.location.reload();
@@ -324,12 +330,15 @@ jQuery(document).ready(function($) {
     $('#register_form_full').on('submit', function(e) {
         e.preventDefault();
         var url = $(this).attr('action');
-
+        // 
+        // show the loder
+        $(' #register.page .group-actions').addClass('loading');
         $.ajax({
             url: url,
             method: 'POST',
             data: $(this).serialize(),
             success: function(data) {
+                $(' #register.page .group-actions').removeClass('loading');
                 if (data.code === 400) {
                     var errors = data.errors.messages;
                     var fields = data.errors.fields;
@@ -341,6 +350,11 @@ jQuery(document).ready(function($) {
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
+
+                    // scroll to message on Mobile
+                    if(ismobile)
+                        animateToPopIn( $('#message').offset().top );
+
                     var idPrefix = '#fos_user_registration_form_';
                     $('#register_form_full input').each(function() {
                         $(this).removeClass('error');
@@ -355,6 +369,7 @@ jQuery(document).ready(function($) {
                                 $('.country-dropdown .ui-dropdown').addClass('error');
                                 break;
                             case 'birthdate':
+                            case 'birthday':
                                 $('.date-birthday .ui-dropdown').addClass('error');
                                 break;
                             case 'plainPassword':
@@ -388,9 +403,6 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="min-height"><div class="text-align-center padding-top-100"><div class="subtitle">CONGRATULATIONS&nbsp;!</div><p class="padding-top-40">You are now registered on World’s Best Bars.</p><p>The "100 Bars" best of has been added to your favorites.</p><p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p></div></div>';
-        $('.popin-block').html(html);
-        PopIn.resize($('#register'));
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
@@ -409,6 +421,7 @@ jQuery(document).ready(function($) {
 // Animate the scroll to focus on PopIn
 function animateToPopIn(par){
     // if ( ismobile )
+    console.log('go scroll to :' + par );
     $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
 }
 
@@ -424,7 +437,7 @@ function syncBarFav(cible,status){
         if($(this).attr('href') == currentTitle){
             // This bar is like favoried Bar
             // set the Class active
-            var artcileParent =  $(this).parents('article');
+            var artcileParent =  $(this).closest('article');
             if(status){
                 var btn = artcileParent.find('.star');
                 btn.hide();
@@ -472,8 +485,7 @@ $(document).ready(function() {
         e.preventDefault();
         var btn = $(this);
         var favUrl = $(this).attr('href');
-        window.lightName = $(this).attr('data-name');
-        window.lightType = $(this).attr('data-type');
+
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
             if(btn.hasClass('active')){
@@ -565,7 +577,10 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href') + '?favorite=' + favUrl;
+            var url = $('.btn-signin').attr('href');
+            $.cookie('light_name', $(this).attr('data-name'));
+            $.cookie('light_type', $(this).attr('data-type'));
+            $.cookie('light_id', $(this).attr('data-id'));
             popinFrom = 'favorite';
             // Set the PopIn Loading Flag
             PopIn.startLoading();
@@ -575,6 +590,7 @@ $(document).ready(function() {
                 success: function(html) {
                     // Set the PopIn Loading Flag
                     PopIn.endLoading();
+                    $.cookie('light_action', 'favorite');
 
                     html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);

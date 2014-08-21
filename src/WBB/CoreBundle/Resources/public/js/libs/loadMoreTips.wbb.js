@@ -124,7 +124,11 @@ meta.LoadMoreTips = function(config) {
                         //     // });
                         //  that._customScroll();
                         // },500)
-
+                        $('.custom-scroll').each(function()
+                                {
+                                    var api = $(this).data('jsp');
+                                    if( typeof(api) != "undefined" && $(this).is(':visible') ) api.reinitialise();
+                        }); 
                 });
             },
             error: function(e) {

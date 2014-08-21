@@ -6,8 +6,8 @@
     <div class="forgetpassword wrap padding-bottom-50">
         <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="margin-bottom-20">
             <div class="text-align-center">
-                <div><input type="text" name="username" class="form-text margin-top-30" placeholder="Your email"></div>
-                <input type="submit" class="form-submit btn margin-top-30 gold {% if is_mobile() and not is_tablet() %}margin-bottom-30{% endif %} bold" value="{{ 'resetting.request.submit'|trans }}">
+                <div><input type="text" name="username" class="form-text margin-top-30" placeholder="Your email" tabindex="1"></div>
+                <input type="submit" class="form-submit btn margin-top-30 gold {% if is_mobile() and not is_tablet() %}margin-bottom-30{% endif %} bold" value="{{ 'resetting.request.submit'|trans }}" tabindex="2">
             </div>
         </form>
         <div class="clear"></div>

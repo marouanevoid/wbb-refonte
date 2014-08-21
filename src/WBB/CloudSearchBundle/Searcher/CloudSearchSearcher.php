@@ -65,17 +65,9 @@ class CloudSearchSearcher
 
         $query->set('q', $q);
         $query->set('q.options', "{defaultOperator: 'or', fields: [" . implode(',', $this->suggestFields) . "]}");
-        $query->set('size', 10000);
+        $query->set('size', $parameters['size']);
 
         $response = $request->send()->json();
-
-        $cities = $this->getEntityResults($response['hits']['hit'], 'City');
-        $bestOfs = $this->getEntityResults($response['hits']['hit'], 'BestOf');
-        $news = $this->getEntityResults($response['hits']['hit'], 'News');
-        $bars = $this->getEntityResults($response['hits']['hit'], 'Bar');
-
-        $results = array_merge($cities, $bestOfs, $news, $bars);
-        $response['hits']['hit'] = array_slice($results, 0, $parameters['size']);
 
         return $response;
     }
