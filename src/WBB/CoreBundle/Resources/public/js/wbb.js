@@ -301,7 +301,11 @@ function initRegisterLoginForms() {
                     if (data.code === '400') {
                         $('#username').addClass('error');
                         $('#password').addClass('error');
-                        $('#facebook-signup').after($('#message'));
+                        if ($('.need-account').length > 0) {
+                            $('.need-account').after($('#message'));
+                        } else {
+                            $('#facebook-signup').after($('#message'));
+                        }
                         $('#login_form #message').find('ul').remove();
                         var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
                         errorsList.find('ul').append('<li>' + data.error + '</li>');
@@ -577,7 +581,7 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href');
+            var url = $('.btn-signin').attr('href') + '?light=1';
             $.cookie('light_name', $(this).attr('data-name'));
             $.cookie('light_type', $(this).attr('data-type'));
             $.cookie('light_id', $(this).attr('data-id'));
