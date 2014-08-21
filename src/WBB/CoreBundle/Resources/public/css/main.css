@@ -378,7 +378,7 @@
   #editprofile .block-top {width: 660px; overflow: hidden;}
   #view-account .filter-profil {width: 660px; font-size: 18px; clear: both;}
   #view-account .filter-profil a.ui-radio {text-align: center; width: 164px;}
-  #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
+  #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none!important; border-right: none!important;}
   #view-account .list-bars li {margin-bottom: 10px;}
   #view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
