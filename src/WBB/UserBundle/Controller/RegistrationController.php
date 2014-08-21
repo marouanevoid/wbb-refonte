@@ -26,6 +26,11 @@ class RegistrationController extends ContainerAware
 
     public function registerAction(Request $request)
     {
+        $securityContext = $this->container->get('security.context');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return new RedirectResponse($this->container->get('router')->generate('homepage'));
+        }
+
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
