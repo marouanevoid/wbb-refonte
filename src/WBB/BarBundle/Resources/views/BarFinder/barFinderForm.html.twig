@@ -104,12 +104,11 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td>
-                            <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown finder-city {% endif %} dark trigger-select-go" name="city" data-class="with-icon city">
+                        <td width="200">
+                            <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-city {% endif %} dark trigger-select-go" name="city" data-class="with-icon city">
                                 {% if not is_mobile() and not is_tablet() %} 
                                     <option></option>
                                 {% endif %}
-
                                 <option value="{{selected.city}}">
                                     {% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city}} {% else %} Choose a City {% endif %}
                                 </option>
