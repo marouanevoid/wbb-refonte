@@ -71,9 +71,16 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
      */
-    protected $facebookId;
+    private $facebookId;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="facebook_picture", type="string", nullable=true)
+     */
+    private $facebookPicture;
 
     /**
      * @var string
@@ -294,6 +301,7 @@ class User extends BaseUser
         $this->tipsShouldBeModerated = true;
         $this->favoriteBars = new ArrayCollection();
         $this->facebookId = null;
+        $this->facebookPicture = null;
     }
 
     /**
@@ -1073,8 +1081,10 @@ class User extends BaseUser
         if (isset($fbdata['id'])) {
             $this->setFacebookId($fbdata['id']);
         }
+        if (isset($fbdata['picture'])) {
+            $this->setFacebookPicture($fbdata['picture']);
+        }
     }
-
 
     /**
      * Add favoriteBars
@@ -1242,4 +1252,26 @@ class User extends BaseUser
         }
     }
 
+    /**
+     * Set facebookPicture
+     *
+     * @param string $facebookPicture
+     * @return User
+     */
+    public function setFacebookPicture($facebookPicture)
+    {
+        $this->facebookPicture = $facebookPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookPicture
+     *
+     * @return string 
+     */
+    public function getFacebookPicture()
+    {
+        return $this->facebookPicture;
+    }
 }

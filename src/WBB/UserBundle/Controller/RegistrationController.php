@@ -45,7 +45,11 @@ class RegistrationController extends ContainerAware
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
             if ($facebookId != 0) {
-                $user->setFBData(array('id' => $facebookId));
+                $data = $facebook->api('/me/picture?redirect=0&type=large');
+                $user->setFBData(array(
+                    'id' => $facebookId,
+                    'picture' => $data['data']['url']
+                ));
             }
         }
 
@@ -126,7 +130,11 @@ class RegistrationController extends ContainerAware
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
             if ($facebookId != 0) {
-                $user->setFBData(array('id' => $facebookId));
+                $data = $facebook->api('/me/picture?redirect=0&type=large');
+                $user->setFBData(array(
+                    'id' => $facebookId,
+                    'picture' => $data['data']['url']
+                ));
             }
         }
 
