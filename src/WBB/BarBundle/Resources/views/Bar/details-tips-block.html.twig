@@ -12,7 +12,7 @@
                     $('#tips').on('submit', function(e) {
                         e.preventDefault();
                         $('.popin-block').html('');
-                        var url = $('.btn-signin').attr('href');
+                        var url = $('.btn-signin').attr('href') + '?light=1';
 
                         $.cookie('light_type', 'tip');
                         $.cookie('light_action', 'tip');
