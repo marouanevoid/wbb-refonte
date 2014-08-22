@@ -196,3 +196,9 @@ wbb_share_email_news_send:
     defaults: { _controller: WBBBarBundle:Share:shareNews}
     options:
         expose: true
+
+wbb_share_email_bestof_send:
+    pattern: /ajax/share/send/email/bestof/{id}
+    defaults: { _controller: WBBBarBundle:Share:shareBestof}
+    options:
+        expose: true

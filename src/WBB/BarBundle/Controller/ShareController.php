@@ -12,16 +12,20 @@ class ShareController extends Controller
     public function shareFormAction($id, $type)
     {
         $form = $this->createForm(new ShareFormType(), null, array('id' => $id));
-        $url = null;
+        $url  = null;
         $text = '';
-        if($type==='bar'){
-            $url = $this->get('router')->generate('wbb_share_email_bar_send', array('id' => $id));
+        if($type === 'bar'){
             $bar = $this->get('bar.repository')->findOneById($id);
-            $text = "I just discovered {$bar->getName()} in {$bar->getCity()} thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
-        }else{
-            $url = $this->get('router')->generate('wbb_share_email_news_send', array('id' => $id));
+            $url = $this->get('router')->generate('wbb_share_email_bar_send', array('id' => $id));
+            $text = "I just discovered {$bar->getName()} in {$bar->getCity()} \nthanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+        }elseif($type === 'news'){
             $news = $this->get('news.repository')->findOneById($id);
+            $url = $this->get('router')->generate('wbb_share_email_news_send', array('id' => $id));
             $text = "I just read this on World’s Best Bars: {$news->getTitle()} - the ultimate resource for the best bars in the world ";
+        }else{
+            $bestof = $this->get('bestof.repository')->findOneById($id);
+            $url = $this->get('router')->generate('wbb_share_email_bestof_send', array('id' => $id));
+            $text = "I just discovered the best {$bestof->getName()} bars thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
         }
 
         return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
@@ -74,6 +78,29 @@ class ShareController extends Controller
         return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
             'form'  => $form->createView(),
             'url'   => $this->get('router')->generate('wbb_share_email_news_send', array('id' => $id))
+        ));
+    }
+
+    public function shareBestofAction($id, Request $request)
+    {
+        $form = $this->createForm(new ShareFormType(), null, array('id' => $id));
+        $form->submit($request);
+
+        if ($form->isValid()) {
+            $data = array(
+                'fullName'  => $form["firstName"]->getData().' '.$form["lastName"]->getData(),
+                'bestof'      => $this->get('bestof.repository')->findOneById($form["id"]->getData()),
+                'email'     => $form["emailTo"]->getData(),
+                'message'   => $form["content"]->getData()
+            );
+
+            $this->get('wbb_bar.share.mailer')->sendShareBestof($data);
+            return $this->render('WBBBarBundle:Share:share_done.html.twig');
+        }
+
+        return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
+            'form'  => $form->createView(),
+            'url'   => $this->get('router')->generate('wbb_share_email_bestof_send', array('id' => $id))
         ));
     }
 }
