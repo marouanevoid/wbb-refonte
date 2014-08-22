@@ -20,32 +20,32 @@
         </section>
 
         <!-- 4 COLS -->
-            <aside class="articles padding four columns">
-                <div class="margin-bottom-30">
-                    {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
-                </div>
-  {#               {% set bigAd = true %} #}
-                {%  if not bigAd %}
-                    {% for n in interviews|slice(1,1) %}
-                        {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
-                    {% endfor %}
-                {%  endif %}
-                {% for n in interviews|slice(2,1) %}
-                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 , firstchild : true } %}
-                    {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
+        <aside class="articles padding four columns">
+
+                {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
+            </div>
+{#               {% set bigAd = true %} #}
+            {%  if not bigAd %}
+                {% for n in interviews|slice(1,1) %}
+                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
                 {% endfor %}
-                {% for n in articles|slice(3,1) %}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
-                {% endfor %}
-                {% for n in interviews|slice(3,1) %}
-                    {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
-                {% endfor %}
-                {% for n in articles|slice(4,1) %}
-                    {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %} #}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
-                {% endfor %}
-            </aside>
+            {%  endif %}
+            {% for n in interviews|slice(2,1) %}
+            {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 , firstchild : true } %}
+                {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
+            {% endfor %}
+            {% for n in articles|slice(3,1) %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
+            {% endfor %}
+            {% for n in interviews|slice(3,1) %}
+                {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
+            {% endfor %}
+            {% for n in articles|slice(4,1) %}
+                {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %} #}
+                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
+            {% endfor %}
+        </aside>
     </div>
     <!-- AD -->
         {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'NLP_728x90' })) }}
