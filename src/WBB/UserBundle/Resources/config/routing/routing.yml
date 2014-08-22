@@ -31,3 +31,9 @@ wbb_profile_filters:
 wbb_simulate_errors:
     pattern: /errors/{code}
     defaults: { _controller: WBBUserBundle:User:simulateError }
+
+wbb_resend_email_confirmation:
+    pattern: /user/email/resend-confirmation-token
+    defaults: { _controller: WBBUserBundle:User:resendEmailConfirmationToken }
+    options:
+        expose: true

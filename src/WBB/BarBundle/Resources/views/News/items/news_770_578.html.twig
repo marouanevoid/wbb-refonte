@@ -11,7 +11,6 @@
             {% else %}
                 <img src="{{ showImage(null, 'news_770_578') }}" width="770" height="578" alt="{{ n.title }}"/>
             {% endif %}
-
             {% if n.sponsorImageSmall is defined and n.sponsorImageSmall != '' %}
                 <span class="sponsor">
                     <img src="{% path n.sponsorImageSmall , 'sponsor_82_82' %}" alt="sponsor"/>
@@ -20,7 +19,6 @@
         </a>
         <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
     </div>
-
     <div class="title vcenter">
         {% set margin_class = "" %}
         {% if n.seoDescription is defined and n.seoDescription != '' or n.quoteText is not  defined or n.quoteText == '' %}

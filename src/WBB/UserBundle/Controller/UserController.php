@@ -21,6 +21,23 @@ class UserController extends Controller
 
     }
 
+    public function resendEmailConfirmationTokenAction()
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(array(
+                'code' => 403,
+                'message' => 'User not authenticated !'
+            ));
+        }
+
+        $this->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
+        return new JsonResponse(array(
+            'code' => 200,
+            'message' => 'Confirmation email sent !'
+        ));
+    }
+
     public function loadProfileDataAction($content = 1, $filter = "date" , $offset = 0, $limit = 8, $display = 'grid')
     {
         $user = $this->getUser();
