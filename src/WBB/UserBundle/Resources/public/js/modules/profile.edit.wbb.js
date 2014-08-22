@@ -1,8 +1,23 @@
+jQuery.fn.resizeHeightMaintainRatio = function(newHeight){
+    var aspectRatio = $(this).data('aspectRatio');
+    if (aspectRatio == undefined) {
+        aspectRatio = $(this).width() / $(this).height();
+        $(this).data('aspectRatio', aspectRatio);
+    }
+    $(this).height(newHeight); 
+    $(this).width(parseInt(newHeight * aspectRatio));
+}
+
+
 function readImage(input) {
     if ( input.files && input.files[0] ) {
         var FR= new FileReader();
         FR.onload = function(e) {
             $('#avatar-img').attr("src", e.target.result );
+
+            setTimeout(function(){
+                $('#avatar-img').resizeHeightMaintainRatio(145);
+            },100);
         };
         FR.readAsDataURL( input.files[0] );
     }
