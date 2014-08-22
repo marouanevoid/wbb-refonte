@@ -64,23 +64,19 @@
     <div class="full-cream l-padding-bottom">
         <!-- SUBHEADER -->
         <div class="container  {% if is_mobile() and not is_tablet() %} mobile-device {% endif %}">
-
             <section class="sub-header">
-
                 {% if not is_mobile() or is_tablet() %}
                     <table>
                         <tr>
                             <td>
                                 {% include "WBBBarBundle:UI:citys_selector.html.twig"  with { 'from' : 'news' } %}
                             </td>
-
                             <td class="title">
                                 <h1>{% if not city %} The {% endif %} Latest News {% if city is defined and city != '' %}
                                 in {{ city }}
                                 {% endif %}
                                 </h1>
                             </td>
-
                             <td></td>
                         </tr>
                     </table>

@@ -70,6 +70,15 @@
                                     </div>
                                     <div class="clear"></div>
                                     <div class="group-form margin-top-10">
+                                        <label class="margin-right-20">Username</label>
+                                        {% if 'username' in errors.fields %}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text error'} }) }}
+                                        {% else %}
+                                            {{ form_widget(form.username, { 'attr' : { 'class': 'form-text'} }) }}
+                                        {% endif %}
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="group-form margin-top-10">
                                         <label class="margin-right-20">Firstname</label>
                                         {% if 'firstname' in errors.fields %}
                                             {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text error'} }) }}
@@ -97,7 +106,7 @@
                                         <div class="clear"></div>
                                         <!-- {% if user.confirmationToken %} -->
                                             <p class="block-help text-align-right margin-right-40">
-                                                <a href="#" id="resend-validation">An email is waiting for your confirmation</a>
+                                                <a id="resend-validation">An email is waiting for your confirmation</a>
                                             </p>
                                         <!-- {% endif %} -->
                                         <div class="clear"></div>
@@ -251,7 +260,6 @@
                 checkboxClass: 'icheckbox_flat',
                 increaseArea: '20%' // optional
             });
-
 
             // init Select 2
             $("select.select2-dropdown").select2({

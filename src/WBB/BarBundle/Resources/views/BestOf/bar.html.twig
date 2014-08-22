@@ -31,9 +31,11 @@
     <div class="color gray"></div>
     {% if b.media and b.media.media %}
         <img class="scale-with-grid" data-src="{{ showImage(b.media.media, 'bar_425_320') }}"  alt="{{ b.bar.name }}" width="570" height="428"/>
-    {% else %}
+    {% elseif b.bar.medias|length > 0 %}
         {% for m in b.bar.medias|slice(0,1) %}
             <img class="scale-with-grid" data-src="{{ showImage(m.media, 'bar_425_320') }}"  alt="{{ b.bar.name }}" width="570" height="428"/>
         {% endfor %}
+    {% else %}
+        <img class="scale-with-grid" data-src="{{ showImage(null, 'bar_425_320') }}"  alt="{{ b.bar.name }}" width="570" height="428"/>
     {% endif %}
 </article>
