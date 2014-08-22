@@ -330,7 +330,10 @@ function initRegisterLoginForms() {
 }
 
 jQuery(document).ready(function($) {
-    
+    $('#show-popin').on('click', function() {
+        $('html, body').animate({scrollTop: 0}, 500, 'easeInOutCubic');
+    });
+
     $('#register_form_full').on('submit', function(e) {
         e.preventDefault();
         var url = $(this).attr('action');
