@@ -5,14 +5,7 @@
             <span class="number h2">{{ loop.index }}</span>
         {% endif %}
         <h2>
-        {% if is_mobile() and not is_tablet() %}
-            {{ b.name|slice(0,25) }}
-            {% if b.name|length > 25 %}
-                ...
-            {% endif %}
-        {% else %}
-            {{ b.name }}
-        {% endif %}
+            {{ b.name|slice(0, 25) }}{% if b.name|length > 25 %}...{% endif %}
             {% if distance is defined and distance|length>0 and distance.city is not null %}
                 {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
             {% endif %}

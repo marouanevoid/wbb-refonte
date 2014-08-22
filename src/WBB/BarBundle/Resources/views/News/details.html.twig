@@ -226,33 +226,24 @@
                             </div>
                         {% endif %}
                     {% endif %}
-
-                    {%    set txt = news.richDescription|trim("<br>") %}
-
-                    {%   set paragraphs = txt|split('<br><br>') %}
+                    {% set txt = news.richDescription|trim("<br>") %}
+                    {% set paragraphs = txt|split('<br><br>') %}
                     <p>
                         {% if paragraphs|length>=3 %}
                         {% for p in paragraphs %}
                         {% if loop.index == 3 %}
-
                         {% if news.quoteText %}
-
                     </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
-
                 {% else %}
                 </p><p>
-                {%
-                    set init = random(news.bestofs|length - 1)
-                %}
+                {% set init = random(news.bestofs|length - 1) %}
                     {% for b in news.bestofs |slice(init,1) %}
-                    <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
-                        {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
-                    </div>
+                        <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
+                        </div>
                     {% endfor %}
                     </p><p>
-
                         {% endif %}
-
                         {% endif %}
                         {{ p|raw }}
                         {% if not loop.last %}<br><br>{% endif %}
