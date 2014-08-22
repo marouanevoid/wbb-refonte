@@ -18,7 +18,7 @@
     <meta property="og:title" content="{{ bar.name }} | World Best Bars" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ bitlyURL }}" />
-    <meta property="og:description" content="{{ "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world" |slice(0, 200) }}" />
+    <meta property="og:description" content="{{ bar.seoDescription |slice(0, 200) }}" />
     <meta property="og:site_name" content="World Best Bars" />
     <meta property="fb:admins" content="149071961796732" />
 

@@ -1,8 +1,23 @@
+jQuery.fn.resizeHeightMaintainRatio = function(newHeight){
+    var aspectRatio = $(this).data('aspectRatio');
+    if (aspectRatio == undefined) {
+        aspectRatio = $(this).width() / $(this).height();
+        $(this).data('aspectRatio', aspectRatio);
+    }
+    $(this).height(newHeight); 
+    $(this).width(parseInt(newHeight * aspectRatio));
+}
+
+
 function readImage(input) {
     if ( input.files && input.files[0] ) {
         var FR= new FileReader();
         FR.onload = function(e) {
             $('#avatar-img').attr("src", e.target.result );
+
+            setTimeout(function(){
+                $('#avatar-img').resizeHeightMaintainRatio(145);
+            },100);
         };
         FR.readAsDataURL( input.files[0] );
     }
@@ -35,6 +50,30 @@ $(function(){
             $('.file-name-selected-screen').show()
             $('.file-name-selected-screen-clear').show()
         }
+    });
+
+    // Resend email Verification token
+    $('#resend-validation').on('click', function()
+    {
+        var _that = $(this);
+        var requestID = $.ajax({
+            type: "GET",
+            url: Routing.generate('wbb_resend_email_confirmation'),
+            dataType: "json",
+            success: function(msg) {
+                if(msg.code === 200){
+                    _that.html("Confirmation email sent !");
+                    setTimeout(function() { _that.fadeOut("slow") }, 5000);
+                }
+            },
+            beforeSend: function()
+            {
+                if (requestID != null)
+                    requestID.abort();
+            },
+            error: function(e) {
+            }
+        });
     });
 
     // click on close picture
