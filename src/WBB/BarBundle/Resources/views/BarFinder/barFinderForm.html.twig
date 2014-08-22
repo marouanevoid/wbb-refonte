@@ -1,17 +1,32 @@
 <script type="text/javascript">
     $(function(){
 
+        $("select.select2-dropdown.finder-city").select2({
+            minimumResultsForSearch: 1
+        });
+
+        // if the page is not bar Finder Result
+        // Then clear the select
+        if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-city").length ){
+            $("select.select2-dropdown.finder-city").select2({
+                placeholder : 'Choose a City',
+                allowClear: true
+            });
+
+            $("select.select2-dropdown.finder-city").select2('val' , '');
+            $("select.select2-dropdown.finder-city").select2('data', null);
+        }
+
 
         toGoOutWith_selected = "{{selected.outWith}}";
         city_selected = "{{selected.city}}";
         mood_selected = "{{selected.mood}}";
 
-        var showGo = function(){
-
+        var showGo = function(targetSended){
            var totalSelectedMood =  $('.trigger-handler:checked').length;
                totalSelectedSelect = 0;
-           $('.trigger-select-go').each(function(){
-              if($(this).val()==""){
+           $('select.trigger-select-go').each(function(){
+              if( $(this).val() === "" ){
                 totalSelectedSelect++;
                 $(this).parent('.ui-dropdown-container').find('.ui-dropdown').removeClass('active');
               }else{
@@ -19,6 +34,7 @@
               }
            });
            
+           console.log('total slected ' + totalSelectedSelect);
            if(totalSelectedSelect < 2 || totalSelectedMood > 0){
                 $('.go').removeClass('disabled');
                 $('.go').removeAttr('disabled');
@@ -40,8 +56,8 @@
                 showGo();
        });
        
-       $('.trigger-select-go').on('change' , function(){
-            showGo();
+       $('select.trigger-select-go').on('change' , function(){
+            showGo(this);
         });
 
        $('.go').addClass('disabled');
@@ -89,7 +105,10 @@
                     </tr>
                     <tr>
                         <td width="200">
-                            <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
+                            <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown finder-city {% endif %} dark trigger-select-go" name="city" data-class="with-icon city">
+                                {% if not is_mobile() and not is_tablet() %} 
+                                    <option></option>
+                                {% endif %}
                                 <option value="{{selected.city}}">
                                     {% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city}} {% else %} Choose a City {% endif %}
                                 </option>
