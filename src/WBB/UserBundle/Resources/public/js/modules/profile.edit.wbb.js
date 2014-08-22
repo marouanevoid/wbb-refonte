@@ -52,6 +52,30 @@ $(function(){
         }
     });
 
+    // Resend email Verification token
+    $('#resend-validation').on('click', function()
+    {
+        var _that = $(this);
+        var requestID = $.ajax({
+            type: "GET",
+            url: Routing.generate('wbb_resend_email_confirmation'),
+            dataType: "json",
+            success: function(msg) {
+                if(msg.code === 200){
+                    _that.html("Confirmation email sent !");
+                    setTimeout(function() { _that.fadeOut("slow") }, 5000);
+                }
+            },
+            beforeSend: function()
+            {
+                if (requestID != null)
+                    requestID.abort();
+            },
+            error: function(e) {
+            }
+        });
+    });
+
     // click on close picture
     $('.ie9-close-pic').on('click',function(){
         $('.file-name-selected-screen').hide()

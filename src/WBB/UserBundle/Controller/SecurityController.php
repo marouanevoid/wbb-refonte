@@ -24,7 +24,7 @@ class SecurityController extends Controller
         return $this->loginAction($request);
     }
 
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, $light = false)
     {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirect($this->generateUrl('homepage', array('login' => 1)));
@@ -64,7 +64,8 @@ class SecurityController extends Controller
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error'         => $error,
-            'csrf_token' => $csrfToken,
+            'csrf_token'    => $csrfToken,
+            'light'         => $light
         ));
     }
 

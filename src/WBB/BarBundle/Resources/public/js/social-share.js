@@ -21,7 +21,7 @@ if (descriptionTW.length > 140) {
 };
 $(document).on('click', '.twitter-share',function(e){
     e.preventDefault();
-    window.open('http://twitter.com/share?text='+descriptionTW + '&url='+ url + '&via='+siteTW  , 'Share', 'toolbar=0,status=0,width=626,height=436');
+    window.open('http://twitter.com/share?text=' + descriptionTW + '&url=' + url + '&via='+siteTW  , 'Share', 'toolbar=0,status=0,width=626,height=436');
 });
 
 $(document).ready(function(){

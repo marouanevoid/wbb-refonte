@@ -9,7 +9,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="WorldsBestBars">
     <meta name="twitter:title" content="{{ news.title }} | World Best Bars">
-    <meta name="twitter:description" content="{{ news.title }} {{ bitlyURL }} on @WorldsBestBars !">
+    <meta name="twitter:description" content="{{ news.title }}">
     <meta name="twitter:creator" content="WorldsBestBars">
     <meta property="twitter:url" content="{{ bitlyURL }}" />
 
@@ -17,7 +17,7 @@
     <meta property="og:title" content="{{ news.title }} | World Best Bars" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ bitlyURL }}" />
-    <meta property="og:description" content="I just read this on World’s Best Bars: {{ news.title }} – the place for the latest news from the best bars in the world." />
+    <meta property="og:description" content="{{ news.seoDescription |slice(0, 200) }}" />
     <meta property="og:site_name" content="World Best Bars" />
     <meta property="fb:admins" content="149071961796732" />
     {% for m in news.medias|slice(0,1) %}
@@ -213,7 +213,7 @@
                     {% if m.media.providerName == 'sonata.media.provider.youtube' %}
                         <iframe width="100%" height="480" src="http://www.youtube.com/embed/{{ m.media.providerReference }}?autoplay=0&modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light&wmode=transparent" frameborder="0"  class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" allowfullscreen ></iframe>
                     {% else %}
-                        <img src="{% path m.media, 'slider_large' %}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
+                        <img src="{% path m.media, 'news_770_578' %}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
                     {% endif %}
                 {% endfor %}
                 {% if is_mobile() and not is_tablet() %}
@@ -222,37 +222,28 @@
                     {% if is_mobile() and not is_tablet() %}
                         {% if news.sponsorImage %}
                             <div class="block padding-top-10">
-                                <img src="{% path news.sponsorImage, 'slider_large' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
+                                <img src="{% path news.sponsorImage, 'sponsor_368_168' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
                             </div>
                         {% endif %}
                     {% endif %}
-
-                    {%    set txt = news.richDescription|trim("<br>") %}
-
-                    {%   set paragraphs = txt|split('<br><br>') %}
+                    {% set txt = news.richDescription|trim("<br>") %}
+                    {% set paragraphs = txt|split('<br><br>') %}
                     <p>
                         {% if paragraphs|length>=3 %}
                         {% for p in paragraphs %}
                         {% if loop.index == 3 %}
-
                         {% if news.quoteText %}
-
                     </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
-
                 {% else %}
                 </p><p>
-                {%
-                    set init = random(news.bestofs|length - 1)
-                %}
+                {% set init = random(news.bestofs|length - 1) %}
                     {% for b in news.bestofs |slice(init,1) %}
-                    <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
-                        {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
-                    </div>
+                        <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
+                        </div>
                     {% endfor %}
                     </p><p>
-
                         {% endif %}
-
                         {% endif %}
                         {{ p|raw }}
                         {% if not loop.last %}<br><br>{% endif %}
@@ -296,7 +287,7 @@
                     {% if not is_mobile() or is_tablet() %}
                         {% if news.sponsorImage %}
                             <div class="block">
-                                <img src="{% path news.sponsorImage, 'sponsor_sponsor_detail' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
+                                <img src="{% path news.sponsorImage, 'sponsor_368_168' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
                             </div>
                         {% endif %}
                     {% endif %}
