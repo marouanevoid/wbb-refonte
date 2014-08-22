@@ -84,7 +84,6 @@ class CustomResizer implements ResizerInterface
             throw new InvalidArgumentException('Invalid mode specified');
 
         $size = $media->getBox();
-
         $ratios = array(
             $settings['width'] / $size->getWidth(),
             $settings['height'] / $size->getHeight()

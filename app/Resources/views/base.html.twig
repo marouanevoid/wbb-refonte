@@ -121,6 +121,7 @@
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
                 var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
+                var fbPrefill = {{ app.request.query.get('prefill', 0) }};
                 var favoriteName = '';
 
                 var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
@@ -149,6 +150,7 @@
                 {% endif %}
 
                 $(document).ready(function() {
+                    var firstScrolled = false;
                     if ($.cookie('just_loggedin') !== undefined) {
                         $('header.desktop .logged').mouseover();
                         // if is ipad or Mobile
@@ -157,9 +159,14 @@
                         $.removeCookie('just_loggedin');
                     }
                     $(window).on('scroll' , function(){
-                        $('header.desktop .logged').mouseout();
-                        if( ismobile || istablet )
-                            $('header.desktop .logged .in-action').click();
+                        if( ismobile || istablet ){
+                            if(! firstScrolled ){
+                                $('header.desktop .logged .in-action').click();
+                                firstScrolled = true;                            
+                            }
+                        }else{
+                            $('header.desktop .logged').mouseout();
+                        }
                     });
                 });
         </script>
@@ -224,7 +231,7 @@
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            window.location.href = "{{ path('fos_user_registration_register') }}";
+                            window.location.href = "{{ path('fos_user_registration_register') }}" + '?prefill=1';
                         } else {
                             $.cookie('light_from', 'login');
 

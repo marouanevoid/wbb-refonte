@@ -211,7 +211,7 @@ meta.App = function() {
 
     that._customScroll = function()
     {
-        $('.custom-scroll').not('.jspNotScrollable').each(function()
+        $('.custom-scroll').not('.jspScrollable').not('.jspNotScrollable').each(function()
         {
             //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
             $(this).jScrollPane({hideFocus:true});
@@ -279,7 +279,7 @@ meta.App = function() {
 
         if( $('html').hasClass('mobile') )
         {
-            var options_are_visible = false;
+            options_are_visible = false;
 
             $('header.desktop .logged .in-action').click(function(e){
                 var _this = $(this).closest('.logged');
@@ -289,7 +289,7 @@ meta.App = function() {
                 else
                     $(_this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
                     {
-                        $(_this).hide();
+                        $(_this).find('.actions').hide();
                     });
 
                 options_are_visible = !options_are_visible;

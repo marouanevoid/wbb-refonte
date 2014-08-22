@@ -1,25 +1,46 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form id="login_form" action="{{ path("fos_user_security_check") }}" method="post" class="wrap">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+{% if light %}
+    <form id="login_form" action="{{ path("fos_user_security_check") }}" method="post" class="wrap">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <div class="text-align-center">
-        <input type="text" placeholder="Email" class="form-text margin-top-30" id="username" name="_username" value="{{ last_username }}" />
-        <input type="password" id="password" name="_password" class="form-text form-password margin-top-10" placeholder="Password"/>
-        <div id="login_error"></div>
-        <input type="submit" id="_submit" name="_submit" class="form-submit btn margin-top-30 bold" value="CONFIRM" />
+        <div class="text-align-center">
+            <input type="text" placeholder="Email" class="form-text margin-top-30" id="username" name="_username" value="{{ last_username }}" />
+            <input type="password" id="password" name="_password" class="form-text form-password margin-top-10" placeholder="Password"/>
+            <div id="login_error"></div>
+            <input type="submit" id="_submit" name="_submit" class="form-submit btn margin-top-30 bold" value="CONFIRM" />
+        </div>
+        <div class="clear"></div>
+        <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password">Forgot your password?</a> <!-- TODO Forgot ? -->
+        <div class="separator margin-top-40"></div>
+        <a href="#linktoAPIFacebook" id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30">Sign up with Facebook</a>
+    </form>
+{% else %}
+    <div class="block wrap">
+        <div class="title bold title-signin">SIGN IN</div>
+        <form id="login_form" action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            <div class="group-form-top">
+                <input type="text" class="form-text margin-top-30 text-align-center" placeholder="Email" id="username" name="_username" value="{{ last_username }}">
+                <input type="password" id="password" name="_password" class="form-text form-password margin-top-10 text-align-center" placeholder="Password">
+                <input type="submit" class="form-submit btn margin-top-30" value="Sign In">
+            </div>
+            <div class="clear"></div>
+            <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password">Forgot your password?</a>
+            <div class="separator margin-top-40"></div>
+            <a href="#linktoAPIFacebook" id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 radius-30">Sign up with Facebook</a>
+            <p class="text-align-center need-account margin-bottom-20 margin-top-20">Need an account? <a href="{{ path('fos_user_registration_register') }}">Register</a></p>
+        </form>
+        <div id="message"></div>
     </div>
-    <div class="clear"></div>
-    <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password">Forgot your password?</a> <!-- TODO Forgot ? -->
-    <div class="separator margin-top-40"></div>
-    <a href="#linktoAPIFacebook" id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30">Sign up with Facebook</a>
-</form>
+{% endif %}
 
 <script>
     $(document).ready(function() {
         $('.forgot-password').on('click', function(e) {
             e.preventDefault();
-            var url = $(this).attr('href'); 
+            var url = $(this).attr('href');
             // start loading of PopIn
             PopIn.startLoading();
 

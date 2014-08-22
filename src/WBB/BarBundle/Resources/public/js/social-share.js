@@ -21,28 +21,43 @@ if (descriptionTW.length > 140) {
 };
 $(document).on('click', '.twitter-share',function(e){
     e.preventDefault();
-    window.open('http://twitter.com/share?text='+descriptionTW + '&url='+ url + '&via='+siteTW  , 'Share', 'toolbar=0,status=0,width=626,height=436');
+    window.open('http://twitter.com/share?text=' + descriptionTW + '&url=' + url + '&via='+siteTW  , 'Share', 'toolbar=0,status=0,width=626,height=436');
 });
 
 $(document).ready(function(){
-    $("#share").hover(function() {
-        $(".wrap-share").fadeIn("slow");
-        if ($(this).hasClass("popup")) {
-            $(".mask").fadeIn("slow");
-        }
-    });
+    if(!ismobile && ! istablet){
+        $("#share").hover(function() {
+            $(".wrap-share").fadeIn("slow");
+            if ($(this).hasClass("popup")) {
+                $(".mask").fadeIn("slow");
+            }
+        });
 
-    $(".wrap-share").hover(function() {
-        $(".wrap-share").fadeIn("slow");
-        if ($(this).hasClass("popup")) {
-            PopIn.dom.mask.show();
-        }
-    }, function() {
-        $(".wrap-share").fadeOut("slow");
-        if ($(this).hasClass("popup")) {
-            PopIn.dom.mask.hide();
-        }
-    });
+        $(".wrap-share").hover(function() {
+            $(".wrap-share").fadeIn("slow");
+            if ($(this).hasClass("popup")) {
+                PopIn.dom.mask.show();
+            }
+        }, function() {
+            $(".wrap-share").fadeOut("slow");
+            if ($(this).hasClass("popup")) {
+                PopIn.dom.mask.hide();
+            }
+        });   
+    }else{
+
+        $("#share").click(function() {
+            $(".wrap-share").fadeIn("slow");
+                $(".mask").fadeIn("slow");
+        });
+
+        // $(".wrap-share").click(function() {
+        //     $(".wrap-share").fadeIn("slow");
+        //         PopIn.dom.mask.show();
+        // });
+
+    }
+
     $("#close-pop").click(function(){
         $("#share-pop").fadeOut("slow");
         $(".mask").fadeOut("slow");

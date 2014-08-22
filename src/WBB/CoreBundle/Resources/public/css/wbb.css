@@ -300,6 +300,9 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     overflow: auto;
 }
 
+.custom-scroll-profile{
+    word-wrap: break-word;
+}
 
 .loader-search-page {
     background: url(../images/gif-load.gif) no-repeat center;

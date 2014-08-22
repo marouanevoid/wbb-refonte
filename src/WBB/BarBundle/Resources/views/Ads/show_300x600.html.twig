@@ -1,8 +1,10 @@
-<div class="block">
-    <div class="side-ad margin-bottom-20">
-        {% if ad.link is not empty %}<a href="{{ ad.link }}" target="_blank">{% endif %}
-            <img src="{{ showImage(ad.image, 'ads_300_600') }}" alt="{{ ad.name }}" width="300" height="600">
-        {% if ad.link is not empty %}</a>{% endif %}
-        <div class="txt">Advertising</div>
+<div class="margin-bottom-30">
+    <div class="block">
+        <div class="side-ad margin-bottom-20">
+            {% if ad.link is not empty %}<a href="{{ ad.link }}" target="_blank">{% endif %}
+                <img src="{{ showImage(ad.image, 'ads_300_600') }}" alt="{{ ad.name }}" width="300" height="600">
+            {% if ad.link is not empty %}</a>{% endif %}
+            <div class="txt">Advertising</div>
+        </div>
     </div>
 </div>
