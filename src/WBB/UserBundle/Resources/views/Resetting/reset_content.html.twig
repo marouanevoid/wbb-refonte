@@ -1,5 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<div class="min-height {% if not is_mobile() and is_tablet() %}padding-top-20{% else %}padding-top-50{% endif %}">
+<div class="min-height {% if is_mobile() and not is_tablet() %}padding-top-30{% else %}padding-top-50{% endif %}">
     <div class="title margin-bottom-30 padding-top-30 wrap bold">Reset your password</div>
 
     <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
