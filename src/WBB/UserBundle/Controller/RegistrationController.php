@@ -28,7 +28,7 @@ class RegistrationController extends ContainerAware
     {
         $securityContext = $this->container->get('security.context');
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return new RedirectResponse($this->container->get('router')->generate('homepage'));
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
         }
 
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */

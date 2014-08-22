@@ -17,7 +17,7 @@
     </form>
 {% else %}
     <div class="block wrap">
-        <div class="title bold">SIGN IN</div>
+        <div class="title bold title-signin">SIGN IN</div>
         <form id="login_form" action="{{ path("fos_user_security_check") }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 

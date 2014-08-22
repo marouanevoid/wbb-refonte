@@ -192,13 +192,13 @@ function initRegisterLoginForms() {
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
                     console.log(response);
-                    setTimeout(securityCheck, 500);
+                    setTimeout(securityCheck, 250);
                 });
             } else {
                 FB.login(function(response) {
                     if (response.authResponse) {
                         console.log('Welcome!  Fetching your information.... ');
-                        setTimeout(securityCheck, 500);
+                        setTimeout(securityCheck, 250);
                     } else {
                         console.log('User cancelled login or did not fully authorize.');
                     }
@@ -418,6 +418,11 @@ jQuery(document).ready(function($) {
     }
     if(showLoginForm) {
         $('.btn-signin').click();
+    }
+    if (fbPrefill) {
+        setTimeout(function() {
+            $('.btn-create-with-fb').click();
+        }, 500);
     }
 });
 
