@@ -250,10 +250,9 @@
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   /*#success {position: static; top: 0;}*/
   #success p {color: #818a8c; font-size: 22px;}
-  #success .subtitle {font-size: 32px;}
-  .alert p {color: #818a8c; font-size: 1.9em; line-height: 28px;}
-  .alert {position: static; top: 0; min-height: 500px;}
-  .alert .subtitle {font-size: 32px;}
+  #alert p {color: #818a8c; font-size: 1.8em; line-height: 28px;}
+  #success .subtitle,
+  #alert .subtitle {font-size: 32px;}
 
     /* Popup */
     .popup #success p {margin: 0 0 20px; line-height: 22px; font-size: 20px; text-align: center;} 
