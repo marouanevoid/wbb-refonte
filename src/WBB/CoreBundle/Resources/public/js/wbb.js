@@ -418,9 +418,8 @@ jQuery(document).ready(function($) {
 
 // Animate the scroll to focus on PopIn
 function animateToPopIn(par){
-    // if ( ismobile )
-    console.log('go scroll to :' + par );
-    $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
+    if ( ismobile || istablet )
+        $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
 }
 
 
