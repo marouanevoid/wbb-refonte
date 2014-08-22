@@ -498,6 +498,9 @@
   .page-form .form-textarea {padding: 10px 10px 50px; background-color: transparent;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
+/* CHANGE-PASSWORD */
+  #change-password #message {left: 70px;}
+
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
 
@@ -618,7 +621,7 @@
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
-    .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
+    .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f; border: none;}
     img.scale-with-grid {box-sizing: initial!important;}
 
   /* ERROR */
