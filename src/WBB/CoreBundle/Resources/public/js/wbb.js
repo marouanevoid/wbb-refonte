@@ -192,13 +192,13 @@ function initRegisterLoginForms() {
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
                     console.log(response);
-                    setTimeout(securityCheck, 500);
+                    setTimeout(securityCheck, 250);
                 });
             } else {
                 FB.login(function(response) {
                     if (response.authResponse) {
                         console.log('Welcome!  Fetching your information.... ');
-                        setTimeout(securityCheck, 500);
+                        setTimeout(securityCheck, 250);
                     } else {
                         console.log('User cancelled login or did not fully authorize.');
                     }
@@ -223,8 +223,8 @@ function initRegisterLoginForms() {
 
                     $('#message').show();
                     // scroll to message on Mobile
-                    if(ismobile)
-                        animateToPopIn( $('#message').offset().top );
+                    // if(ismobile)
+                    animateToPopIn( $('#message').offset().top );
 
 
                     $('#register_form').after($('#message'));
@@ -301,14 +301,17 @@ function initRegisterLoginForms() {
                     if (data.code === '400') {
                         $('#username').addClass('error');
                         $('#password').addClass('error');
-                        $('#facebook-signup').after($('#message'));
+                        if ($('.need-account').length > 0) {
+                            $('.need-account').after($('#message'));
+                        } else {
+                            $('#facebook-signup').after($('#message'));
+                        }
                         $('#login_form #message').find('ul').remove();
                         var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
                         errorsList.find('ul').append('<li>' + data.error + '</li>');
 
                         // scroll to message on Mobile
-                        if(ismobile)
-                            animateToPopIn( $('#message').offset().top );
+                        animateToPopIn( $('#message').offset().top );
 
                     } else {
                         $.cookie('light_from', 'login');
@@ -352,8 +355,7 @@ jQuery(document).ready(function($) {
                     }
 
                     // scroll to message on Mobile
-                    if(ismobile)
-                        animateToPopIn( $('#message').offset().top );
+                    animateToPopIn( $('#message').offset().top );
 
                     var idPrefix = '#fos_user_registration_form_';
                     $('#register_form_full input').each(function() {
@@ -414,6 +416,11 @@ jQuery(document).ready(function($) {
     }
     if(showLoginForm) {
         $('.btn-signin').click();
+    }
+    if (fbPrefill) {
+        setTimeout(function() {
+            $('.btn-create-with-fb').click();
+        }, 500);
     }
 });
 
@@ -577,7 +584,7 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href');
+            var url = $('.btn-signin').attr('href') + '?light=1';
             $.cookie('light_name', $(this).attr('data-name'));
             $.cookie('light_type', $(this).attr('data-type'));
             $.cookie('light_id', $(this).attr('data-id'));

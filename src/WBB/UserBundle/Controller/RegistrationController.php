@@ -26,6 +26,11 @@ class RegistrationController extends ContainerAware
 
     public function registerAction(Request $request)
     {
+        $securityContext = $this->container->get('security.context');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
+        }
+
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -40,7 +45,11 @@ class RegistrationController extends ContainerAware
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
             if ($facebookId != 0) {
-                $user->setFBData(array('id' => $facebookId));
+                $data = $facebook->api('/me/picture?redirect=0&type=large');
+                $user->setFBData(array(
+                    'id' => $facebookId,
+                    'picture' => $data['data']['url']
+                ));
             }
         }
 
@@ -121,7 +130,11 @@ class RegistrationController extends ContainerAware
             $facebook = $this->container->get('fos_facebook.api');
             $facebookId = $facebook->getUser();
             if ($facebookId != 0) {
-                $user->setFBData(array('id' => $facebookId));
+                $data = $facebook->api('/me/picture?redirect=0&type=large');
+                $user->setFBData(array(
+                    'id' => $facebookId,
+                    'picture' => $data['data']['url']
+                ));
             }
         }
 
