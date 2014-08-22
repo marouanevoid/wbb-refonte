@@ -44,4 +44,22 @@ class ShareMailer extends BaseTwigSwiftMailer
             $data['email']
         );
     }
+
+    public function sendShareBestof($data)
+    {
+        $context = array(
+            'subject'   => "Check the best ". $data['bestof']->getName() ." bars via www.worldsbestbars.com",
+            'fullName'  => $data['fullName'],
+            'bestof'    => $data['bestof'],
+            'email'     => $data['email'],
+            'message'   => $data['message']
+        );
+
+        $this->sendMessage(
+            'WBBBarBundle:Share:Email/bestof.email.twig',
+            $context,
+            null,
+            $data['email']
+        );
+    }
 }
