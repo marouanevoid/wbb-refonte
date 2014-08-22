@@ -1,23 +1,26 @@
-jQuery.fn.resizeHeightMaintainRatio = function(newHeight){
-    var aspectRatio = $(this).data('aspectRatio');
-    if (aspectRatio == undefined) {
-        aspectRatio = $(this).width() / $(this).height();
-        $(this).data('aspectRatio', aspectRatio);
-    }
-    $(this).height(newHeight); 
-    $(this).width(parseInt(newHeight * aspectRatio));
-}
-
-
 function readImage(input) {
     if ( input.files && input.files[0] ) {
         var FR= new FileReader();
         FR.onload = function(e) {
-            $('#avatar-img').attr("src", e.target.result );
-
-            setTimeout(function(){
-                $('#avatar-img').resizeHeightMaintainRatio(145);
-            },100);
+            var tempImage = new Image();
+            tempImage.src = e.target.result;
+            var height = tempImage.height;
+            var width = tempImage.width;
+            if (height > 145) { // max height for our purposes is 145 pixels
+                width = width / (height / 145);
+                height = 145;
+            }
+            if (width > 145) { // max width for our purposes is 145 pixels
+                height = height / (width / 145);
+                width = 145;
+            }
+            var c = document.createElement('canvas');
+            c.width = width;
+            c.height = height;
+            var ctx = c.getContext("2d");
+            ctx.drawImage(tempImage, 0, 0, width, height);
+            var b64str = c.toDataURL("image/jpeg"); // grab a base64 copy of the resized image as a jpeg
+            $('#avatar-img').attr("src", b64str );
         };
         FR.readAsDataURL( input.files[0] );
     }
