@@ -57,9 +57,9 @@
   .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .subtitle.grey {color: #818a8c;}
-  .small {font-size: 13px;}
-  .medium {font-size: 22px;}
-  .big {font-size: 30px;}
+  .small-text {font-size: 13px;}
+  .medium-text {font-size: 22px;}
+  .big-text {font-size: 30px;}
 
   /*.btn.gold:hover {background-color: #ffe4af; color: #b3955f;}*/
   .select-two .ui-dropdown-container {width: 100%!important;}
@@ -251,7 +251,7 @@
   /*#success {position: static; top: 0;}*/
   #success p {color: #818a8c; font-size: 22px;}
   #success .subtitle {font-size: 32px;}
-  .alert p {color: #818a8c; font-size: 20px; line-height: 28px;}
+  .alert p {color: #818a8c; font-size: 1.9em; line-height: 28px;}
   .alert {position: static; top: 0; min-height: 500px;}
   .alert .subtitle {font-size: 32px;}
 
@@ -364,7 +364,7 @@
 
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
-  #register.mobile .ui #success .subtitle {padding: 0; font-size: 26px; width: 100%;}
+  #register.mobile .ui #success .subtitle {padding: 0; font-size: 24px; width: 100%;}
   .form-input {/*width: 270px;*/}
 
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
@@ -447,7 +447,8 @@
   #page-standard .content li {margin-bottom: 10px;}
   #page-standard .content ul {list-style: disc; padding: 0 0 0 40px; margin-bottom: 30px;}
   #page-standard .min-height {min-height: 450px;}
-  #page-standard .content .h3 {color: #b3955f;}
+  #page-standard .content .h3,
+  #page-standard .gold {color: #b3955f;}
     /* Mobile */
       #page-standard.mobile {width: 100%;}
       #page-standard.mobile .min-height {padding: 0 20px;}
@@ -607,6 +608,11 @@
 
 /* GLOBALE DESKTOP STYLES */
   @media only screen and (min-width: 768px) {
+    input[type="text"]::-webkit-input-placeholder, 
+    input[type="password"]::-webkit-input-placeholder, 
+    input[type="email"]::-webkit-input-placeholder {
+      color: #818a8c;
+    }
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
@@ -627,6 +633,7 @@
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
+    #error p {font-size: 1.9em;}
   }
 
 /* Tablets (landscape) ----------- */
@@ -634,7 +641,7 @@
     input[type="text"]::-webkit-input-placeholder, 
     input[type="password"]::-webkit-input-placeholder, 
     input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
-    
+
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
