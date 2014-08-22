@@ -223,8 +223,8 @@ function initRegisterLoginForms() {
 
                     $('#message').show();
                     // scroll to message on Mobile
-                    if(ismobile)
-                        animateToPopIn( $('#message').offset().top );
+                    // if(ismobile)
+                    animateToPopIn( $('#message').offset().top );
 
 
                     $('#register_form').after($('#message'));
@@ -307,8 +307,7 @@ function initRegisterLoginForms() {
                         errorsList.find('ul').append('<li>' + data.error + '</li>');
 
                         // scroll to message on Mobile
-                        if(ismobile)
-                            animateToPopIn( $('#message').offset().top );
+                        animateToPopIn( $('#message').offset().top );
 
                     } else {
                         $.cookie('light_from', 'login');
@@ -352,8 +351,7 @@ jQuery(document).ready(function($) {
                     }
 
                     // scroll to message on Mobile
-                    if(ismobile)
-                        animateToPopIn( $('#message').offset().top );
+                    animateToPopIn( $('#message').offset().top );
 
                     var idPrefix = '#fos_user_registration_form_';
                     $('#register_form_full input').each(function() {
