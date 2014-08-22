@@ -68,7 +68,7 @@ meta.LoadMoreTips = function(config) {
     };
        that._customScroll = function()
         {
-            $('.custom-scroll').not('.jspScrollable').each(function()
+            $('.custom-scroll').not('.jspNotScrollable').each(function()
             {
                 //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
                 $(this).jScrollPane({hideFocus:true});
