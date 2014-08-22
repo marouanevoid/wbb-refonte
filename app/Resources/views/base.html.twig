@@ -149,6 +149,7 @@
                 {% endif %}
 
                 $(document).ready(function() {
+                    var firstScrolled = false;
                     if ($.cookie('just_loggedin') !== undefined) {
                         $('header.desktop .logged').mouseover();
                         // if is ipad or Mobile
@@ -157,9 +158,14 @@
                         $.removeCookie('just_loggedin');
                     }
                     $(window).on('scroll' , function(){
-                        $('header.desktop .logged').mouseout();
-                        if( ismobile || istablet )
-                            $('header.desktop .logged .in-action').click();
+                        if( ismobile || istablet ){
+                            if(! firstScrolled ){
+                                $('header.desktop .logged .in-action').click();
+                                firstScrolled = true;                            
+                            }
+                        }else{
+                            $('header.desktop .logged').mouseout();
+                        }
                     });
                 });
         </script>

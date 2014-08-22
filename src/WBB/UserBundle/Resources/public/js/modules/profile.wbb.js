@@ -38,7 +38,7 @@ wbb.LoadProfile = function() {
     * Personalize the Scroll
     */
     that.PersonalizeScroll = function(){
-        $('.custom-scroll-profile').not('.jspNotScrollable').each(function()
+        $('.custom-scroll-profile').not('.jspNotScrollable').not('.jspScrollable').each(function()
         {
             //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
             $(this).jScrollPane({hideFocus:true});
@@ -113,7 +113,9 @@ wbb.LoadProfile = function() {
                 $("#tab-tips").fadeIn("slow");
                 $("#tab-tips").addClass("active");
                 $("#view-account").attr("class", "tips-tab");
-
+                // //// Update Scroll 
+                // $('.custom-scroll-profile').each(function() { var api = $(this).data('jsp'); if( typeof(api) != "undefined" && $(this).is(':visible') ) api.reinitialise(); });
+                // // end update scroll
                 that.context.content = 'tips';
                 if(that.config.tips.offset > 0)
                     return;
@@ -315,8 +317,9 @@ wbb.LoadProfile = function() {
 
                 $target.append(msg.htmldata);
                 /*
-                * Personalize SCroll on Tips
+                * Personalize Scroll on Tips
                 */
+
                 that.PersonalizeScroll();
 
                 if($target === that.context.$tipsTarget){
