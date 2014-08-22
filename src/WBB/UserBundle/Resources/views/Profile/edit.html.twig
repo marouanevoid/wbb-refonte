@@ -120,7 +120,7 @@
 
                                     <div class="country-dropdown select-two margin-top-10">
                                         <label class="margin-right-20">Country</label>
-                                        <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
+                                        <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 302px{% endif %}">
                                             {% if 'country' in errors.fields %}
                                                 {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown error' : 'select2-dropdown error' } }) }}
                                             {% else %}

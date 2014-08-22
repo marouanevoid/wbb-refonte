@@ -158,7 +158,7 @@
     .col-4 {width: 283px;}
 
 /* Globale form styles */
-  .date-birthday .select-wrap {width: 96px; margin-right: 7px;}
+  .date-birthday .select-wrap {width: 96px; margin-right: 6px;}
   .date-birthday .ui-dropdown-container {width: 95px!important;}
 
 /* Globale Desktop style's */
@@ -392,7 +392,7 @@
   #editprofile .block-top {width: 660px; overflow: hidden;}
   #view-account .filter-profil {width: 660px; font-size: 18px; clear: both;}
   #view-account .filter-profil a.ui-radio {text-align: center; width: 164px;}
-  #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none; border-right: none;}
+  #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none!important; border-right: none!important;}
   #view-account .list-bars li {margin-bottom: 10px;}
   #view-account .sort-by label {color: #333; font-size: 18px; line-height: 40px;}
   #view-account .sort-by .ui-dropdown-container .ui-dropdown.drop-light {font-size: 16px;}
@@ -498,6 +498,9 @@
   .page-form .form-textarea {padding: 10px 10px 50px; background-color: transparent;}
   .page-form .form-submit { background-color: #b3955f; font-size: 20px; color: #fff; margin: auto; display: block; max-width: 50%; min-width: 15%;}
 
+/* CHANGE-PASSWORD */
+  #change-password #message {left: 70px;}
+
 /* Rollover's */
   .popup .btn:hover {opacity: 0.8;}
 
@@ -562,6 +565,7 @@
   .search-result-proposal {z-index: 100000;}
   header.desktop .logged {z-index: 100002;}
   .popin-block .form-text {width: 98%;}
+  article.tip .content.expert .excerpt td .scroll {margin-top: 10px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -617,7 +621,7 @@
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
-    .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f;}
+    .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f; border: none;}
     img.scale-with-grid {box-sizing: initial!important;}
 
   /* ERROR */
