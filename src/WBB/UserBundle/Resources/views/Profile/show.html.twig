@@ -10,7 +10,7 @@
                     <!-- Profile -->
                     <div class="block-top wrap">
                         <div class="avatar-profil radius-max {% if is_mobile() and not is_tablet() %}wrap margin-bottom-20{% else %}left margin-left-30{% endif %}">
-                            <img src="{{ showImage(user.avatar, 'avatar_145_145') }}" height="145" width="145" class="radius-max">
+                            <img src="{{ showImage(user.avatar, 'avatar_145_145', user) }}" height="145" width="145" class="radius-max">
                         </div>
                         {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
                         <div class="group left margin-left-30">
