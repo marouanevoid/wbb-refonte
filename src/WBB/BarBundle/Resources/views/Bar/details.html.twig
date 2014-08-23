@@ -246,7 +246,7 @@
                     </td>
 
                     <td class="star-share">
-                        <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round brown star {% if is_favorite(app.user, bar) %}active changed{% endif %} " data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
+                        <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round star brown {% if is_favorite(app.user, bar) %}active changed{% endif %} " data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
                         <a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
@@ -257,7 +257,7 @@
                     <ul>
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
-                        {% if is_mobile() and not is_tablet() %}
+                        {% if is_mobile() and not is_tablet() and not is_ios() %}
                             {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL %}
                             <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
@@ -287,7 +287,7 @@
                         <div class="image">
                             <div class="content">
                                 <div class="overlay"></div>
-                                <img src="{% path m.media, 'slider_large' %}" />
+                                <img src="{% path m.media, 'bar_640_480' %}" />
                             </div>
                         </div>
                     {% endif %}
@@ -301,7 +301,7 @@
                             <div class="image">
                                 <div class="content">
                                     <div class="overlay"></div>
-                                    <img src="" data-src="{% path m.media, 'slider_small' %}" itemprop="photo"/>
+                                    <img src="" data-src="{% path m.media, 'bar_425_320' %}" itemprop="photo"/>
                                 </div>
                             </div>
                         {% endif %}

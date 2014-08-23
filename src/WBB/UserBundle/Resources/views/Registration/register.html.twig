@@ -10,7 +10,7 @@
                 <div class="margin-top-20">
                     <div id="create-account">
                         <div class="subtitle text-transform-uppercase margin-top-25 bold">Create an account now</div>
-                        <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a href="#linkto" onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
+                        <div class="connect-fb margin-top-20 text-align-center">Pre fill your profile with <a onclick="fillInForm('#register_form_full');" class="btn btn-create-with-fb radius-30">Facebook</a></div>
                         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="register_form_full">
                             <div class="text-align-left margin-bottom-10">
 

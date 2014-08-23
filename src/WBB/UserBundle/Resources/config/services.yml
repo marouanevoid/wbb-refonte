@@ -91,6 +91,12 @@ services:
         tags:
             - { name: 'kernel.event_subscriber' }
 
+    wbb_user_confirmation_listener:
+        class: WBB\UserBundle\EventListener\ConfirmationListener
+        arguments: ["@session"]
+        tags:
+            - { name: 'kernel.event_subscriber' }
+
     #Login Listener
     wbb_login_listener:
         class: 'WBB\UserBundle\EventListener\LoginListener'

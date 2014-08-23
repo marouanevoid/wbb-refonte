@@ -160,15 +160,22 @@ meta.Dropdown = function(config){
         {
             $dropdown.find('select').on('change', function()
             {
-                //$dropdown.css({width : $dropdown.width()});
-                    var ctext  = $($(this).find('option')[this.selectedIndex]).text(),
-                        cval = $($(this).find('option')[this.selectedIndex]).val();
-                alert('text : ' + ctext + ' : val : ' + cval );
+                var _this = $(this);
+                var ttext = "";
 
-                that.config.$dropdown_value.text("");
-                that.config.$dropdown_value.text( $(this).find('option:selected').text() );
+                setTimeout(function(){
+                    _this.find('option').each(function(index){
+                        if( $(this).is(':selected') ){
+                            ttext = $(this).text();
+                            _this.val($(this).val());
+                        }
+                    });
+                    that.config.$dropdown_value.text("");
+                    that.config.$dropdown_value.text( ttext );
 
-                that.checkSelected.apply([this]);
+                    that.checkSelected.apply([this]);
+
+                },10);
             });
         }
     };

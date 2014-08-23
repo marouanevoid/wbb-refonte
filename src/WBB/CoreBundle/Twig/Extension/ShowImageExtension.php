@@ -31,13 +31,14 @@ class ShowImageExtension extends \Twig_Extension
         );
     }
 
-    public function showImageFunction($media = null, $format)
+    public function showImageFunction($media, $format, $user = null)
     {
         $formatParts = explode('_', $format);
         if ($formatParts[0] == 'avatar' && !$media) {
-            $facebookPicture = $this->container->get('security.context')->getToken()->getUser()->getFacebookPicture();
-            if ($facebookPicture) {
-                return $facebookPicture;
+            if ($user) {
+                if ($user->getFacebookPicture()) {
+                    return $user->getFacebookPicture();
+                }
             }
         }
 
