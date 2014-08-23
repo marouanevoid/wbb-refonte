@@ -570,7 +570,7 @@
   .popin-block .form-text {width: 98%;}
   article.tip .content.expert .excerpt td .scroll {margin-top: 10px;}
   .title-signin {width: 100%!important;}
-
+  .btn-small-radius.dark, .btn-round.dark, .btn-radius.dark, .btn-small-round.dark {border-color: #333;}
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
     .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}
@@ -619,7 +619,7 @@
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
       .bar-details section.bar-filter .bar-w-pic,
-      .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 175px;}
 
     #register.page #create-account .form-text {width: 300px;}
     #register.page #create-account .form-text-without-label input {width: 300px;}
@@ -632,6 +632,7 @@
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
     .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f; border: none;}
     img.scale-with-grid {box-sizing: initial!important;}
+    .bar-w-pic img.scale-with-grid {border: none!important;}
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
