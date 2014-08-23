@@ -260,6 +260,13 @@ class User extends BaseUser
      * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
      */
     private $tipsShouldBeModerated;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="confirmed", type="boolean", nullable=true)
+     */
+    private $confirmed;
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
@@ -300,8 +307,10 @@ class User extends BaseUser
         $this->setStayInformed(true);
         $this->tipsShouldBeModerated = true;
         $this->favoriteBars = new ArrayCollection();
+        $this->favoriteBestOfs = new ArrayCollection();
         $this->facebookId = null;
         $this->facebookPicture = null;
+        $this->confirmed = false;
     }
 
     /**
@@ -1273,5 +1282,28 @@ class User extends BaseUser
     public function getFacebookPicture()
     {
         return $this->facebookPicture;
+    }
+
+    /**
+     * Set confirmed
+     *
+     * @param boolean $confirmed
+     * @return User
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmed
+     *
+     * @return boolean 
+     */
+    public function getConfirmed()
+    {
+        return $this->confirmed;
     }
 }

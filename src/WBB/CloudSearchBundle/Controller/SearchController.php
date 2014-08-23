@@ -32,7 +32,7 @@ class SearchController extends Controller
             $showAllBars = true;
         }
 
-        $cities = $em->getRepository('WBBCoreBundle:City')->findAll();
+        $cities = $em->getRepository('WBBCoreBundle:City')->findCitiesOrderedByName();
         $types = Tag::getTypeNames();
         $tagsByType = array();
         $csNames = CloudSearchSearcher::getCSTagsNames();

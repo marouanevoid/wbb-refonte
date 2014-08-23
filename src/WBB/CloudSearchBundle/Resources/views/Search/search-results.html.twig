@@ -93,10 +93,10 @@
             {% if not is_mobile() or is_tablet() %}
                 <h1>Search results</h1>
                 <div class="six columns m-margin  search-box">
-                    <form id="search">
+                    <form id="search" autocomplete="off">
                         <input type="text" id="city_search"
                                name="city" {% if app.request.query.get('q') is defined and app.request.query.get('q') %} value="{{ app.request.query.get('q') }}" {% endif %}
-                               placeholder="Start typing..."/>
+                               placeholder="Start typing..." autocomplete="off"/>
                         <input type="submit" class="search" value=" "/>
                         <input type="reset"
                                value=" " {% if app.request.query.get('q') is defined and app.request.query.get('q') %} style='display:inline;' {% endif %}/>

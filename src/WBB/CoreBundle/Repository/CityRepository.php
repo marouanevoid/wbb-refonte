@@ -25,6 +25,19 @@ class CityRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findCitiesOrderedByName()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias().', cn, ci')
+            ->leftJoin($this->getAlias().'.country', 'cn')
+            ->leftJoin($this->getAlias().'.image', 'ci')
+            ->orderBy($this->getAlias().'.name')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findBarFinderCities($geoCity = null)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
