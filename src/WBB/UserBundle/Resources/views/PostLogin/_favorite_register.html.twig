@@ -6,7 +6,7 @@
 </script>
 <div id="success" class="min-height" {% if is_mobile() and not is_tablet() %}style="min-height: 350px"{% endif %}>
     <div class="{% if is_mobile() and not is_tablet() %}padding-bottom-20 padding-top-20{% else %}padding-bottom-50 padding-top-100{% endif %}">
-        <div class="subtitle wrap bold margin-bottom-30">CONGRATULATIONS&nbsp;!</div>
+        <div class="subtitle wrap bold margin-bottom-30 {% if not is_mobile() %}margin-top-10{% endif %}">CONGRATULATIONS&nbsp;!</div>
         <p>You are now registered on World’s Best Bars.</p>
         <p>The "{{ cookies.get('light_name') }}" {{ cookies.get('light_type') }} has been added to your favorites.</p>
         <p>You can have a look at your favorite contents in your user profile.</p>

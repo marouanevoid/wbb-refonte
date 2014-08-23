@@ -4,15 +4,15 @@
 {% block title %}{{ subject|raw }}{% endblock %}
 {% block body_content %}
     <tr>
-        <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
-            <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
+        <td class="container" style="font-family: Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
+            <table class="wrap" style="font-family: Arial; width: 100%;">
                 <tr>
-                    <td align="center" style="font-family: Verdana, Arial;">
-                        <p style="margin-bottom: 35px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
+                    <td align="center" style="font-family: Arial;">
+                        <p style="margin-bottom: 35px; font-family: Arial; color: #818a8c; font-size: 15px;">
                             Hi {{ fullName }}!
                         </p>
 
-                        <p style="margin-bottom: 35px; line-height: 24px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
+                        <p style="margin-bottom: 35px; line-height: 24px; font-family: Arial; color: #818a8c; font-size: 15px;">
                             {{ message|nl2br }}
                         </p>
                     </td>
@@ -21,11 +21,11 @@
         </td>
     </tr><!-- [ DETAIL BAR ] -->
     <tr>
-        <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
-            <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
+        <td class="container" style="font-family: Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
+            <table class="wrap" style="font-family: Arial; width: 100%;">
                 <tr>
-                    <td width="308" style="font-family: Verdana, Arial; vertical-align: top;" valign="top">
-                        <a href="{{ url('wbb_bar_bestof_global',{bestOfSlug: bestof.slug}) }}" style="font-family: Verdana, Arial; text-decoration: none;">
+                    <td width="308" style="font-family: Arial; vertical-align: top;" valign="top">
+                        <a href="{{ url('wbb_bar_bestof_global',{bestOfSlug: bestof.slug}) }}" style="font-family: Arial; text-decoration: none;">
                             {% if bestof.image %}
                                 <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(bestof.image, 'bestof_370_278') }}"  alt="{{ bestof.name }}" width="285" height="214"/>
                             {% else %}
@@ -34,8 +34,8 @@
                         </a>
                     </td>
                     <td valign="top" style="vertical-align: top;">
-                        <div class="name" style="font-size: 19px; font-family: Verdana, Arial; color: #b3955f; text-transform: uppercase;">
-                            <a href="{{ url('wbb_bar_bestof_global',{bestOfSlug: bestof.slug}) }}" style="font-size: 19px; font-family: Verdana, Arial; color: #b3955f; text-transform: uppercase; text-decoration: none;">
+                        <div class="name" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase;">
+                            <a href="{{ url('wbb_bar_bestof_global',{bestOfSlug: bestof.slug}) }}" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase; text-decoration: none;">
                                 {{ bestof.name }}
                             </a>
                         </div>

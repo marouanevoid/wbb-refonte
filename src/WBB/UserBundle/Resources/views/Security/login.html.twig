@@ -44,8 +44,12 @@
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
             <div class="group-form-top">
-                <input type="text" class="form-text margin-top-30 text-align-center" placeholder="Email" id="username" name="_username" value="{{ last_username }}">
-                <input type="password" id="password" name="_password" class="form-text form-password margin-top-10 text-align-center" placeholder="Password">
+                <div class="group-form">
+                    <input type="text" class="form-text margin-top-30 text-align-center" placeholder="Email" id="username" name="_username" value="{{ last_username }}">
+                </div>
+                <div class="group-form">
+                    <input type="password" id="password" name="_password" class="form-text form-password margin-top-10 text-align-center" placeholder="Password">
+                </div>
                 <input type="submit" class="form-submit btn margin-top-30" value="Sign In">
             </div>
             <div class="clear"></div>

@@ -4,14 +4,14 @@
 {% block title %}{{ subject|raw }}{% endblock %}
 {% block body_content %}
     <tr>
-        <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
-            <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
+        <td class="container" style="font-family: Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
+            <table class="wrap" style="font-family: Arial; width: 100%;">
                 <tr>
-                    <td align="center" style="font-family: Verdana, Arial;">
-                        <p style="margin-bottom: 35px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
+                    <td align="center" style="font-family: Arial;">
+                        <p style="margin-bottom: 35px; font-family: Arial; color: #818a8c; font-size: 15px;">
                             Hi {{ fullName }}!
                         </p>
-                        <p style="margin-bottom: 35px; line-height: 24px; font-family: Verdana, Arial; color: #818a8c; font-size: 15px;">
+                        <p style="margin-bottom: 35px; line-height: 24px; font-family: Arial; color: #818a8c; font-size: 15px;">
                             {{ message |nl2br }}
                         </p>
                     </td>
@@ -20,11 +20,11 @@
         </td>
     </tr><!-- [ DETAIL BAR ] -->
     <tr>
-        <td class="container" style="font-family: Verdana, Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
-            <table class="wrap" style="font-family: Verdana, Arial; width: 100%;">
+        <td class="container" style="font-family: Arial; display: block !important; max-width: 700px !important; clear: both !important; overflow: hidden; margin: 0 auto;">
+            <table class="wrap" style="font-family: Arial; width: 100%;">
                 <tr>
-                    <td width="308" style="font-family: Verdana, Arial; vertical-align: top;" valign="top">
-                        <a href="{{ url('wbb_bar_details',{city: bar.city.slug, suburb: bar.suburb.slug, slug: bar.slug}) }}" style="font-family: Verdana, Arial;">
+                    <td width="308" style="font-family: Arial; vertical-align: top;" valign="top">
+                        <a href="{{ url('wbb_bar_details',{city: bar.city.slug, suburb: bar.suburb.slug, slug: bar.slug}) }}" style="font-family: Arial;">
                             {% if bar.medias|length>0 %}
                                 {% for m in bar.medias|slice(0,1) %}
                                     <img class="scale-with-grid" src="{{ app.request.schemeAndHttpHost}}{{ showImage(m.media, 'bar_425_320') }}"  alt="{{ bar.name }}" width="285" height="214"/>
@@ -35,19 +35,19 @@
                         </a>
                     </td>
                     <td valign="top" style="vertical-align: top;">
-                        <div class="name" style="font-size: 19px; font-family: Verdana, Arial; color: #b3955f; text-transform: uppercase;">
-                            <a href="{{ url('wbb_bar_details',{city: bar.city.slug, suburb: bar.suburb.slug, slug: bar.slug}) }}" style="font-size: 19px; font-family: Verdana, Arial; color: #b3955f; text-transform: uppercase; text-decoration: none;">
+                        <div class="name" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase;">
+                            <a href="{{ url('wbb_bar_details',{city: bar.city.slug, suburb: bar.suburb.slug, slug: bar.slug}) }}" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase; text-decoration: none;">
                                 {{ bar.name }}
                             </a>
                         </div>
-                        <div class="city" style="font-size: 16px; font-family: Verdana, Arial; color: #373736; margin-top: 5px;">
+                        <div class="city" style="font-size: 16px; font-family: Arial; color: #373736; margin-top: 5px;">
                             {{ bar.suburb }}, {{ bar.city }}
                         </div>
                         <p style="color: #818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">
                             {{ bar.seoDescription|raw|truncate(100) }}
                         </p>
-                        <p class="tags" style="font-family: Verdana, Arial; color: #818a8c; font-size: 15px; line-height: 30px; margin-top: 24px;">
-                            <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/tags.jpg') }}" style="padding-top: 9px; padding-right: 10px; display: block; float: left; font-family: Verdana, Arial;" align="left"/>
+                        <p class="tags" style="font-family: Arial; color: #818a8c; font-size: 15px; line-height: 30px; margin-top: 24px;">
+                            <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/tags.jpg') }}" style="padding-top: 9px; padding-right: 10px; display: block; float: left; font-family: Arial;" align="left"/>
                             {% for tr in bar.tagsToShow |slice(0, 5) %}
                                 {{ tr.name|capitalize }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
