@@ -143,10 +143,11 @@ meta.Form = function(config){
                             }
                         }
                     }
+                    if(data.showPopin){
+                        $('.popin-block').html(data.popinContent);
+                        $('#show-popin').click();
+                    }
 
-                    $('.popin-block').html(data.popinContent);
-                    $('#show-popin').click();
-                        
                     $('.custom-scroll').not('.jspNotScrollable').each(function()
                     {
                         $(this).jScrollPane({autoReinitialise: true, hideFocus:true});

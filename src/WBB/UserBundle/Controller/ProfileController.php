@@ -83,7 +83,9 @@ class ProfileController extends ContainerAware
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
-                if($user->getFirstname() != '' && $user->getLastname() != ''){
+                $confirmationToken = $user->getConfirmationToken();
+
+                if($user->getFirstname() != '' && $user->getLastname() != '' && empty($confirmationToken)){
                     $user->setTipsShouldBeModerated(false);
                 }
 
