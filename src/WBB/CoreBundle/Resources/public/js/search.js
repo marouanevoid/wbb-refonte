@@ -257,8 +257,8 @@ meta.SearchPage = function() {
                 //if(type == 'Bar'){
                     var nameString = curor.fields.name;
 
-                    chtml = chtml.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 50 : 25 ) )  );
-                    chtml2 = chtml2.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 60 : 30 ) ));
+                    chtml = chtml.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 25 : 25 ) )  );
+                    chtml2 = chtml2.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 35 : 35 ) ));
                     if(curor.fields.city){
                         chtml = chtml.replace('%city' , curor.fields.city);
                         chtml2 = chtml2.replace('%city' , curor.fields.city);
