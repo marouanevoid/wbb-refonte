@@ -116,7 +116,10 @@
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
                 
-                var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
+                var showConfirmed = 0;
+                {% for message in app.session.flashbag.get('wbb-user-confirmed') %}
+                    showConfirmed = 1;
+                {% endfor %}
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
@@ -216,7 +219,7 @@
                         {% endif %}
                     </div>
                     <div>
-                        <a href="#close" class="btn btn-close">Close</a>
+                        <a class="btn btn-close">Close</a>
                     </div>
                     <div class="clear"></div>
                 </div>

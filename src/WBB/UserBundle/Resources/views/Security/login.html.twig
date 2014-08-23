@@ -13,7 +13,7 @@
         <div class="clear"></div>
         <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password">Forgot your password?</a> <!-- TODO Forgot ? -->
         <div class="separator margin-top-40"></div>
-        <a href="#linktoAPIFacebook" id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30">Sign up with Facebook</a>
+        <a id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30">Sign up with Facebook</a>
     </form>
 {% else %}
     <div class="block wrap">
@@ -29,10 +29,10 @@
             <div class="clear"></div>
             <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password">Forgot your password?</a>
             <div class="separator margin-top-40"></div>
-            <a href="#linktoAPIFacebook" id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 radius-30">Sign up with Facebook</a>
+            <a id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 radius-30">Sign up with Facebook</a>
             <p class="text-align-center need-account margin-bottom-20 margin-top-20">Need an account? <a href="{{ path('fos_user_registration_register') }}">Register</a></p>
         </form>
-        <div id="message"></div>
+        <div id="message" class="margin-bottom-20"></div>
     </div>
 {% endif %}
 
