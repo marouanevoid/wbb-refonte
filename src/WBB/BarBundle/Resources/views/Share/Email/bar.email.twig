@@ -44,7 +44,7 @@
                             {{ bar.suburb }}, {{ bar.city }}
                         </div>
                         <p style="color: #818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">
-                            {{ bar.seoDescription|raw }}
+                            {{ bar.seoDescription|raw|truncate(100) }}
                         </p>
                         <p class="tags" style="font-family: Verdana, Arial; color: #818a8c; font-size: 15px; line-height: 30px; margin-top: 24px;">
                             <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/tags.jpg') }}" style="padding-top: 9px; padding-right: 10px; display: block; float: left; font-family: Verdana, Arial;" align="left"/>

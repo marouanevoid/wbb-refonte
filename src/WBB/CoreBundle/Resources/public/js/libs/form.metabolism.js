@@ -143,9 +143,12 @@ meta.Form = function(config){
                             }
                         }
                     }
-                    if(data.showPopin){
-                        $('.popin-block').html(data.popinContent);
-                        $('#show-popin').click();
+
+                    if(data.showPopin != false){
+                        if ($(".popin-block:contains('You are now registered')").length == 0) {
+                            $('.popin-block').html(data.popinContent);
+                            $('#show-popin').click();
+                        }
                     }
 
                     $('.custom-scroll').not('.jspNotScrollable').each(function()
