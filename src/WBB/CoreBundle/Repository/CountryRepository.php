@@ -10,5 +10,18 @@ namespace WBB\CoreBundle\Repository;
  */
 class CountryRepository extends EntityRepository
 {
+    public function findCountriesOrderedByName($onlyQueryBuilder = false)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias())
+            ->orderBy($this->getAlias().'.name', 'ASC')
+        ;
 
+        if($onlyQueryBuilder){
+            return $qb;
+        }else{
+            return $qb->getQuery()->getResult();
+        }
+    }
 } 

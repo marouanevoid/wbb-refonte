@@ -240,12 +240,12 @@
 
   /* Message's */
   #message {min-height: 100px; background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; overflow: hidden;}
-  #message ul {margin: 15px 10px 10px 90px; float: left;}
+  #message ul {padding: 30px 30px 30px 90px; float: left;}
   #message img {margin: 0 20px 0 0;}
   #message div {padding: 0 10px 0 0; line-height: 16px;}
   #message p,
   #message li {color: #faf3e1; font-size: 14px; line-height: 14px; margin-bottom: 7px;}
-  #message li:only-of-type {margin-top: 20px;}
+  #message li:only-of-type {/*margin-top: 20px;*/}
   .page #message {width: 300px; padding: 0; position: relative; left: 9px;}
   #edit_profile_form #message {left: 13%;}
 
@@ -547,7 +547,7 @@
   .bar-guides .entire-content .bar-filter {min-height: 550px;}
   .sub-header .title h3 {font-size: 2em; line-height: 30px;}
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark.active {background-color: #6f7072!important; border: none!important;}
-  .bar-details .gallery .loader {background-size: auto; background-color: #000;}
+  .bar-details .gallery .loader {/*background-size: auto; background-color: #000;*/}
   .ui .sort-by {margin-left: 0;}
   .gender .ui-dropdown-container .ui-dropdown .choice,
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
@@ -652,7 +652,7 @@
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
     #editprofile .form-text {text-indent: 10px;}
     #register.page #message {left: 9px;}
-    #message ul {margin: 15px 0px 10px 95px;}
+    #message ul {padding: 30px 30px 30px 90px;}
 
     /*.ui .form-text {text-indent: 0;}*/
     .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}

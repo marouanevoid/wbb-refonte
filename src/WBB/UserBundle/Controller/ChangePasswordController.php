@@ -24,77 +24,68 @@ class ChangePasswordController extends ContainerAware
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
-
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_INITIALIZE, $event);
-
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
-
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.change_password.form.factory');
-
         $form = $formFactory->createForm();
         $form->setData($user);
-
         if ($request->isMethod('POST')) {
             $form->bind($request);
-
             if ($form->isValid()) {
                 /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
                 $userManager = $this->container->get('fos_user.user_manager');
-
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_SUCCESS, $event);
-
                 $userManager->updateUser($user);
-
                 if (null === $response = $event->getResponse()) {
                     $url = $this->container->get('router')->generate('fos_user_profile_show');
                     $response = new RedirectResponse($url);
                 }
-
                 $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
                 return $response;
-            }else{
-                $formErrors = $this->container->get('validator')->validate($form, array('Default','ChangePassword'));
+            } else {
+                $formErrors = $this->container->get('validator')->validate($form, array('Default', 'ChangePassword'));
                 $fields = array();
                 $messages = array();
-
-                foreach($formErrors as $formError){
-                    $field  = str_replace('data.', '', $formError->getPropertyPath());
-                    $field  = str_replace('children[', '', $field);
-                    $field  = str_replace(']', '', $field);
-                    $field  = str_replace('.data', '', $field);
+                foreach ($formErrors as $formError) {
+                    $field = str_replace('data.', '', $formError->getPropertyPath());
+                    $field = str_replace('children[', '', $field);
+                    $field = str_replace(']', '', $field);
+                    $field = str_replace('.data', '', $field);
                     $fields[] = $field;
-
                     if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                         $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank' && $field == "current_password" && $form['current_password']->getData() == "") {
+                    } elseif ($formError->getMessage() != 'not.blank' && $field == "current_password" && $form['current_password']->getData() == "") {
                         $messages[] = 'Please enter your current password';
-                    }else{
+                    } else {
                         $messages[] = $formError->getMessage();
                     }
                 }
                 if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
                     $messages = array($messages[1]);
                 }
+
+                if (in_array('Please complete all required fields', $messages) && in_array('Please enter the same password', $messages)) {
+                    $key = array_search('Please complete all required fields', $messages);
+                    unset($messages[$key]);
+                    $messages = array_values($messages);
+                }
+
                 $errors = array(
                     'fields' => $fields,
                     'messages' => $messages
                 );
-
                 return new JsonResponse(array('code' => 400, 'errors' => $errors));
             }
         }
-
         return $this->container->get('templating')->renderResponse(
-            'FOSUserBundle:ChangePassword:changePassword.html.'.$this->container->getParameter('fos_user.template.engine'),
+            'FOSUserBundle:ChangePassword:changePassword.html.' . $this->container->getParameter('fos_user.template.engine'),
             array('form' => $form->createView())
         );
     }
