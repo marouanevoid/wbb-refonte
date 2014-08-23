@@ -40,6 +40,11 @@ PopIn.close = function(){
             current_popup.attr("class", "popup");
         };
     });
+
+    // hide the Share Popin 
+    if( $("#share-pop").length ){
+        $("#share-pop").fadeOut("slow");
+    }
 }
 
 // Set Up the Events
@@ -119,7 +124,11 @@ PopIn.resize = function(target){
 
     // bonus 
     // focus on the first input
+
     $(PopIn.dom.popin).find('input:text').first().focus();
+    if(PopIn.dom.popin.find('#fos_user_registration_form_username').length){
+        $('#fos_user_registration_form_username').focus();
+    }
 
 }
 

@@ -77,7 +77,7 @@ meta.SearchPage = function() {
                                 htmlT +='<a href="' + (getBaseURL() ) +  url_link + '" class="overlay-link"></a>' ;
                                 htmlT +='<div class="color gradient"></div>' ;
                                 htmlT +='<div class="color gray"></div>' ;
-                                htmlT +='<img src="%img" class="image-search-item scale-with-grid" data-src="%img" alt="%title" width="570" height="428"/>';
+                                htmlT +='<img src="%img" class="image-search-item scale-with-grid" data-src="%img" alt="%title"/>';
                                 htmlT +='</article>' + (!ismobile ? '</div>' : '');
 
                                 return htmlT;
@@ -94,7 +94,7 @@ meta.SearchPage = function() {
 
                             htmlT +='        <a href="' + (getBaseURL() ) + url_link + '" class="overlay-link"></a>';
 
-                            htmlT += '        <img class="scale-with-grid image-search-item" src="%img" alt="%title" width="570" height="428"/>' ;
+                            htmlT += '        <img class="scale-with-grid image-search-item" src="%img" alt="%title"/>' ;
                             htmlT += '    </div>' ;
                             htmlT += '</div>';
                             htmlT += ' <div class="nine columns s-margin-top">';
@@ -320,11 +320,11 @@ meta.SearchPage = function() {
 
 
                     if(curor.fields.wbb_media_url){
-                        chtml = chtml.replace('%img' , curor.fields.wbb_media_url );
-                        chtml2 = chtml2.replace('%img' ,curor.fields.wbb_media_url);
+                        chtml = chtml.replace( new RegExp('%img','ig') , curor.fields.wbb_media_url );
+                        chtml2 = chtml2.replace( new RegExp('%img','ig'),curor.fields.wbb_media_url);
                     }else{
-                        chtml = chtml.replace('%img' , defaultImg );
-                        chtml2 = chtml2.replace('%img' , defaultImg );
+                        chtml = chtml.replace(new RegExp('%img','ig')  , defaultImg );
+                        chtml2 = chtml2.replace(new RegExp('%img','ig')  , defaultImg );
                     }
                     if(curor.fields.slug){
                         chtml = chtml.replace(new RegExp('%link','ig') , curor.fields.slug);
@@ -769,7 +769,7 @@ meta.SearchPage = function() {
                 that.context.$form_filter.find('.drop-btn a.minus').click();
 
                 // hide the select
-                //$('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
                 // Select 2
                  $("select.select2-dropdown").select2('val' , '');
                  $("select.select2-dropdown").select2('data', null);

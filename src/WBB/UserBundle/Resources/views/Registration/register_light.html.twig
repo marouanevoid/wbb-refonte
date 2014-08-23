@@ -23,19 +23,19 @@
                 <label class="margin-bottom-15">Date of Birth</label>
                 <div class="group-small-select">
                     <div class="select-wrap left">
-                        {{ form_widget(form.birthdate.month, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                        {{ form_widget(form.birthdate.month, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                     </div>
                     <div class="select-wrap left">
-                        {{ form_widget(form.birthdate.day, { 'attr' : { 'class': 'ui-dropdown', 'placeholder': '' } }) }}
+                        {{ form_widget(form.birthdate.day, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown', 'placeholder': '' } }) }}
                     </div>
                     <div class="select-wrap left last">
-                        {{ form_widget(form.birthdate.year, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                        {{ form_widget(form.birthdate.year, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
                     </div>
                 </div>
             </div>
             <div class="clear"></div>
             <div class="select-two margin-top-10 ui-dropdown-list-form country-dropdown">
-                {{ form_widget(form.country, { 'attr' : { 'class': 'ui-dropdown' } }) }}
+                {{ form_widget(form.country, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
             </div>
 
             {{ form_rest(form) }}
@@ -52,6 +52,20 @@
 </div>
 
 <script type="text/javascript">
+
+
+    $(function(){
+        // init Select 2
+        $("select.select2-dropdown").select2({
+            minimumResultsForSearch: -1
+        });
+
+        // init Select 2
+        $("select.select2-dropdown#fos_user_registration_form_country").select2({
+            minimumResultsForSearch: 10
+        });
+    });
+
     $("#register-btn").click(function(e) {
         if (popinFrom !== 'signin') {
             e.preventDefault();
