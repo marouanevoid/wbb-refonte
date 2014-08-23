@@ -227,7 +227,7 @@ class CityController extends Controller
         $medias = $bar->getMedias();
         foreach($medias as $media)
         {
-            return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'default_slider_large');
+            return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'bar_640_480');
         }
         return null;
     }
