@@ -418,7 +418,7 @@ meta.SearchPage = function() {
 
             // hide Loader
             $('.loader-search-page').hide();
-            
+
             $('.load-more-bars-btn').hide();
             $('.load-more-news-btn').hide();
             $('.bars-w-pic-list .dist-target').empty();
@@ -522,9 +522,9 @@ meta.SearchPage = function() {
             limit = 12;
         }
 
-        var ccibleURLing = ( URL_MODE != '/app_dev.php' ? '/' : URL_MODE );
+        var ccibleURLing = ( URL_MODE != '/app_dev.php' ? '' : URL_MODE );
 
-        lastConsultedURL = ccibleURLing + '/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
+        lastConsultedURL = getBaseURL() +  ccibleURLing + '/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
                             formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) +
                             (formatedCity != '' ? formatedCity : '');
 
