@@ -96,7 +96,7 @@
 
                             </div>
 
-                            <div class="date-birthday text-align-center ui-dropdown-list-form">
+                            <div class="date-birthday text-align-center ui-dropdown-list-form {% if is_mobile() and not is_tablet() %}margin-top-30{% endif %}">
                                 <label class="margin-right-20 text-align-right unbold">Date of Birth</label>
                                 <div class="select-wrap left">
                                     {{ form_widget(form.birthdate.month, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
@@ -122,7 +122,7 @@
                             </div>
                             <div class="clear"></div>
 
-                            <div class="group-form margin-top-10">
+                            <div class="group-form {% if is_mobile() and not is_tablet() %}margin-top-30{% else %}margin-top-10{% endif %}">
                                 <label class="margin-right-20 text-align-right unbold">Cities you like to go</label>
                                 <div class="form-input left">
                                     {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
@@ -140,7 +140,7 @@
                                 <div class="clear"></div>
                             </div>
 
-                            <div class="group-form margin-top-10">
+                            <div class="group-form {% if is_mobile() and not is_tablet() %}margin-top-30{% else %}margin-top-10{% endif %}">
                                 <label class="margin-right-20 text-align-right unbold">Favorite Bars</label>
                                 <div class="form-input left">
                                     {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
@@ -158,7 +158,7 @@
                                 <div class="clear"></div>
                             </div>
 
-                            <div class="group-form margin-top-10">
+                            <div class="group-form {% if is_mobile() and not is_tablet() %}margin-top-30{% else %}margin-top-10{% endif %}">
                                 <label class="margin-right-20 text-align-right unbold">Drink brands</label>
                                 <div class="form-input left">
                                     {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
@@ -176,7 +176,7 @@
                                 <div class="clear"></div>
                             </div>
 
-                            <div class="group-form margin-top-10">
+                            <div class="group-form {% if is_mobile() and not is_tablet() %}margin-top-30{% else %}margin-top-10{% endif %}">
                                 <label class="margin-right-20 text-align-right unbold">Categories or cocktails</label>
                                 <div class="form-input left">
                                     {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
