@@ -258,7 +258,7 @@ meta.SearchPage = function() {
                     var nameString = curor.fields.name;
 
                     chtml = chtml.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 50 : 25 ) )  );
-                    chtml2 = chtml2.replace(new RegExp('%title','ig') , nameString);
+                    chtml2 = chtml2.replace(new RegExp('%title','ig') , that.shortName(nameString , ( currentFilter == 'News' ? 60 : 30 ) ));
                     if(curor.fields.city){
                         chtml = chtml.replace('%city' , curor.fields.city);
                         chtml2 = chtml2.replace('%city' , curor.fields.city);
