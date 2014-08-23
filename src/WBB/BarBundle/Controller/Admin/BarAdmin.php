@@ -137,10 +137,6 @@ class BarAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-//        if(is_object($this->getSubject())){
-//            $this->getSubject()->setUser($this->getUser());
-//        }
-        
         $formMapper
             ->with('General')
                 ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
@@ -161,7 +157,8 @@ class BarAdmin extends Admin
                 ))
             ->end()
             ->with('Bar Details');
-                if($this->getSecurityContext()->isGranted('ROLE_BAR_ID')){
+                if($this->getSecurityContext()->isGranted('ROLE_BAR_ID') ||
+                    ($this->getUser()->hasRole('ROLE_BAR_OWNER') && ($this->getSubject()->getUser() == $this->getUser()))){
                     $formMapper
                         ->add('latitude', 'hidden')
                         ->add('longitude', 'hidden')
