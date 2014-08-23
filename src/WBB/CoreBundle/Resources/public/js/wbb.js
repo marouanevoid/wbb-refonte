@@ -423,11 +423,6 @@ jQuery(document).ready(function($) {
     if(showLoginForm) {
         $('.btn-signin').click();
     }
-    if (fbPrefill) {
-        setTimeout(function() {
-            $('.btn-create-with-fb').click();
-        }, 500);
-    }
 });
 
 
