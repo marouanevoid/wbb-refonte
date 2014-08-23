@@ -4,7 +4,7 @@
             <div class="three columns s-margin-top">
                 <div class="bar-w-pic list">
                     <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}"
-                       class="btn-round star brown {% if is_favorite(app.user, b) %}active changed{% else %}dark{% endif %}"></a>
+                       class="btn-round star dark {% if is_favorite(app.user, b) %}active changed{% endif %}"></a>
                     {% if b.city %}
                         <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
                     {% else %}

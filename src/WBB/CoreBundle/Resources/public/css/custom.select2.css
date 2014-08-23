@@ -32,3 +32,12 @@
 .select2-container.with-icon .select2-chosen 					{text-align: left; padding-left: 25px;}
 .select2-container.with-icon .select2-chosen:before				{width: 16px !important; height: 40px !important; position: absolute; left: 10px; top: 0;background-image: url("../images/sprite@2x.png"); background-size: 256px 512px; z-index: 1; content: ''; display: block;}
 .select2-container.finder-city .select2-chosen:before			{background-position: -212px 0px;}
+.select2-container.finder-city .select2-chosen:before			{background-position: -212px 0px;}
+
+/* DARK STYLE */
+.select2-drop.dark.select2-drop-above.select2-drop-active		{border-color: #6f7072;}
+.select2-display-none.dark 										{background-color: #6f7072; color: #ffe4af; border-color: #6f7072;}
+.select2-drop.dark .select2-results li							{color: #ffe4af;}
+.select2-drop.dark .select2-results .select2-highlighted		{color: #fff;}
+.select2-drop.dark input[type="text"] 							{background-color: transparent; color: #fff;}
+.select2-container.select2-dropdown-open.dark .select2-choice 	{background-color: #6f7072;}
