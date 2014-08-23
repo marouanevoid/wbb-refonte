@@ -47,37 +47,39 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
-            {#{% javascripts#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.velocity.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.transform3d.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/modernizr.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.browser.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/app.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/wbb.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'#}
-            {#%}#}
-            {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
-            {#{% endjavascripts %}#}
+            {% javascripts
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/select2.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.velocity.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.transform3d.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/modernizr.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.browser.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
+                '@WBBCoreBundle/Resources/public/js/libs/popin.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/app.js'
+                '@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
+                '@WBBCoreBundle/Resources/public/js/wbb.js'
+                '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         {% endblock %}
-
+{#
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
@@ -105,7 +107,7 @@
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
-
+#}
         {% block javascripts %}
 
         {% endblock %}
@@ -129,6 +131,7 @@
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
                 var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
                 var fbPrefill = {{ app.request.query.get('prefill', 0) }};
+                var showProfilePopin = {{ app.request.query.get('profileMessage', 0) }};
                 var favoriteName = '';
 
                 var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
@@ -214,6 +217,9 @@
                         {% endif %}
                         {% if app.request.query.get('emailPopin', 0) == 1 %}
                             {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
+                        {% endif %}
+                        {% if app.request.query.get('profileMessage', 0) == 1 %}
+                            {{ include('WBBUserBundle:Profile:profile.popin.html.twig') }}
                         {% endif %}
                         {% if user_confirmed == true %}
                             {{ include('WBBUserBundle:Registration:confirm.html.twig') }}
