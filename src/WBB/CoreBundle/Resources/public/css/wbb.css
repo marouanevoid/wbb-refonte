@@ -317,6 +317,27 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     top: 1px;
 }
 
+
+/*
+* Loader login facebook
+**/
+#register-light #login_form.loading #facebook-signup{
+    display: none;
+
+}
+#register-light #login_form.loading .loading-login-fb{
+    display: block;
+}
+
+.loading-login-fb{
+    display: none;
+/*    left: 46%;
+    position: relative;
+    top: 10px;*/
+    margin-bottom: 10px;
+    margin-left: 46%;
+    margin-top: 3%;
+}
 /*
 * Profile
 Loader flux
@@ -480,7 +501,7 @@ end added by Jérome
  }
 
 
-#floatingBarsG, .floatingBarsG{
+#floatingBarsG, .floatingBarsG,.floatingBarsG_fb{
 position:relative;
 width:20px;
 height:25px}
