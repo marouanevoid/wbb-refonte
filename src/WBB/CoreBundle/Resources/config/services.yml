@@ -103,6 +103,6 @@ services:
             
     wbb.kernel.exception_listener:
         class: WBB\CoreBundle\EventListener\KernelExceptionListener
-        arguments: ["@router"]
+        arguments: ["@router", "@session"]
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
