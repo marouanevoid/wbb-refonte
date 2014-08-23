@@ -1,6 +1,10 @@
 <script type="text/javascript">
     $(function(){
 
+        /*
+        * Select Choose a city
+        **/
+
         $("select.select2-dropdown.finder-city").select2({
             minimumResultsForSearch: 1,
             dropdownCssClass : 'PUT_HERE_YOUR_CLASS'
@@ -16,6 +20,28 @@
 
             $("select.select2-dropdown.finder-city").select2('val' , '');
             $("select.select2-dropdown.finder-city").select2('data', null);
+        }        
+
+
+        /*
+        * Select Choose with Who
+        **/
+
+        $("select.select2-dropdown.finder-choose").select2({
+            minimumResultsForSearch: 1,
+            dropdownCssClass : 'PUT_HERE_YOUR_CLASS'
+        });
+
+        // if the page is not bar Finder Result
+        // Then clear the select
+        if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-choose").length ){
+            $("select.select2-dropdown.finder-choose").select2({
+                placeholder : 'Choose with who',
+                allowClear: true
+            });
+
+            $("select.select2-dropdown.finder-choose").select2('val' , '');
+            $("select.select2-dropdown.finder-choose").select2('data', null);
         }
 
 
@@ -111,13 +137,9 @@
                                 {% if not is_mobile() and not is_tablet() %} 
                                     <option></option>
                                 {% endif %}
-                                <option value="{{selected.city}}">
 
-                                    {% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city}} {% else %} Choose a City {% endif %}
-                                </option>
-                                {% if(selected.city != 'all') %}
-                                    <option class="cty0" value="all">All</option>
-                                {% endif %}
+                                    <option class="cty0" value="all" {% if(selected.city == 'all') %} selected="selected" {% endif %}>All</option>
+                                
                                 {% if city %}
                                     <option value="{{ city.slug }}">{{ city.name }}</option>
                                     {% for c in cities %}
@@ -138,14 +160,16 @@
                         </td>
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td>
-                            <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
-                                <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option>
-                                {% if(selected.outWith != 'all') %}
-                                     <option value="all">All</option>
+                            <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-choose {% endif %} dark trigger-select-go" name="go_out" data-class="with-icon friend">
+                                {# <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option> #}
+                               {% if not is_mobile() and not is_tablet() %} 
+                                    <option></option>
                                 {% endif %}
+                                     <option value="all" {% if(selected.outWith == 'all') %}  selected=" " {% endif %}>All</option>
+                                
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}"
-                                    {% if selected.outWith ==  tag.id %} selected {% endif %}
+                                    {% if selected.outWith ==  tag.id %} selected="selected"  {% endif %}
                                     >{{ tag.name }}</option>
                                 {% endfor %}
                             </select>
