@@ -40,6 +40,11 @@ PopIn.close = function(){
             current_popup.attr("class", "popup");
         };
     });
+
+    // hide the Share Popin 
+    if( $("#share-pop").length ){
+        $("#share-pop").fadeOut("slow");
+    }
 }
 
 // Set Up the Events

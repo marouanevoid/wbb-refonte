@@ -25,7 +25,7 @@ $(document).on('click', '.twitter-share',function(e){
 });
 
 $(document).ready(function(){
-    if(!ismobile && ! istablet){
+    if(!ismobile){
         $("#share").hover(function() {
             $(".wrap-share").fadeIn("slow");
             if ($(this).hasClass("popup")) {
@@ -48,7 +48,8 @@ $(document).ready(function(){
 
         $("#share").click(function() {
             $(".wrap-share").fadeIn("slow");
-                $(".mask").fadeIn("slow");
+            $(".mask").fadeIn("slow");
+            $('html, body').animate({scrollTop: $(".wrap-share").offset().top }, 500, 'easeInOutCubic');
         });
 
         // $(".wrap-share").click(function() {
