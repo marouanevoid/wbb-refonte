@@ -99,3 +99,10 @@ services:
     # wbb.twig.controller.exception:
     #         class: WBB\CoreBundle\Controller\ExceptionController
     #         arguments: [@twig, %kernel.debug%]
+
+            
+    wbb.kernel.exception_listener:
+        class: WBB\CoreBundle\EventListener\KernelExceptionListener
+        arguments: ["@router", "@session"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
