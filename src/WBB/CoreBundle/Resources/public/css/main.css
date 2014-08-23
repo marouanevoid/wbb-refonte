@@ -567,6 +567,7 @@
   header.desktop .logged {z-index: 100002;}
   .popin-block .form-text {width: 98%;}
   article.tip .content.expert .excerpt td .scroll {margin-top: 10px;}
+  .title-signin {width: 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
