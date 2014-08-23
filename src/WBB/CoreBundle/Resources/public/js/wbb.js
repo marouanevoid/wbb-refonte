@@ -410,6 +410,9 @@ jQuery(document).ready(function($) {
     if (showConfirmed) {
         $('#show-popin').click();
     }
+    if (showProfilePopin) {
+        $('#show-popin').click();
+    }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
     }

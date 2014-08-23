@@ -131,6 +131,7 @@
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
                 var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
                 var fbPrefill = {{ app.request.query.get('prefill', 0) }};
+                var showProfilePopin = {{ app.request.query.get('profileMessage', 0) }};
                 var favoriteName = '';
 
                 var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
@@ -216,6 +217,9 @@
                         {% endif %}
                         {% if app.request.query.get('emailPopin', 0) == 1 %}
                             {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
+                        {% endif %}
+                        {% if app.request.query.get('profileMessage', 0) == 1 %}
+                            {{ include('WBBUserBundle:Profile:profile.popin.html.twig') }}
                         {% endif %}
                         {% if user_confirmed == true %}
                             {{ include('WBBUserBundle:Registration:confirm.html.twig') }}
