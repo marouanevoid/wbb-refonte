@@ -12,10 +12,12 @@ $(function(){
 
     if($('#fos_user_profile_form_country').hasClass('error')){
         $('#edit_profile_form .country-dropdown .ui-dropdown').addClass('error');
+        $('#edit_profile_form .country-dropdown .select2-choice').addClass('error');
     }
 
     if($('.date-birthday').hasClass('error')){
         $('.date-birthday .ui-dropdown').addClass('error');
+        $('.date-birthday .select2-choice').addClass('error');
     }
 
     if($('#message').length && $('#message').hasClass('show'))
