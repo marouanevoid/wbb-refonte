@@ -568,7 +568,7 @@
   .search-result-proposal {z-index: 100000;}
   header.desktop .logged {z-index: 100002;}
   .popin-block .form-text {width: 98%;}
-  article.tip .content.expert .excerpt td .scroll {margin-top: 10px;}
+  article.tip .content.expert .excerpt td .scroll {/*margin-top: 10px;*/}
   .title-signin {width: 100%!important;}
   .btn-small-radius.dark, .btn-round.dark, .btn-radius.dark, .btn-small-round.dark {border-color: #333;}
   /* mobile */
