@@ -568,7 +568,7 @@
   .search-result-proposal {z-index: 100000;}
   header.desktop .logged {z-index: 100002;}
   .popin-block .form-text {width: 98%;}
-  article.tip .content.expert .excerpt td .scroll {margin-top: 10px;}
+  article.tip .content.expert .excerpt td .scroll {/*margin-top: 10px;*/}
   .title-signin {width: 100%!important;}
   .btn-small-radius.dark, .btn-round.dark, .btn-radius.dark, .btn-small-round.dark {border-color: #333;}
   /* mobile */
@@ -737,6 +737,7 @@
     #message ul {margin-left: 100px;}
     #success {padding: 0 20px;}
     #success p {font-weight: bold; font-size: 20px;}
+    #change-password #message {left: 0;}
 
   /* Globales Classes */
     .xs-hidden {display: none!important; visibility: hidden;}
