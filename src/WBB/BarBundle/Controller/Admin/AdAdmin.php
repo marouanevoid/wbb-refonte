@@ -98,24 +98,39 @@ class AdAdmin extends Admin {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->with('General')
-                ->add('name', null, array('required' => true))
+                ->add('name', null, array('required' => true, 'label'=>'Title of the Banner', 'help'=> 'MANDATORY'))
                 ->add('position', 'choice', array(
                     'required' => true,
-                    'choices'  => Ad::getAdsPositionArray()
+                    'choices'  => Ad::getAdsPositionArray(),
+                    'label'=> 'Select the place you want to display this banner',
+                    'help'=> 'MANDATORY'
                 ))
-                ->add('tag')
-                ->add('link', null, array('required' => false))
+                ->add('tag', null, array(
+                        'label'=> 'GA Label *',
+                        'help'=> 'RECOMMANDED - to select the label you want to find this banner information on GA. Example : Brand-HomePage-08/14-Paris'
+                    )
+                )
+                ->add('link', null, array('required' => false, 'label'=> 'Destination URL Link *', 'help'=> 'MANDATORY'))
                 ->add('image', 'sonata_type_model_list', array(
-                        'required' => false
+                        'required' => false,
+                        'label' => 'File upload *',
+                        'help'=> 'MANDATORY - File accepted .png & .jpg accepted'
                     ), array(
                         'link_parameters' => array(
                             'context' => 'ads'
                         )
                     )
                 )
-                ->add('beginAt', 'datePicker')
-                ->add('endAt', 'datePicker')
-                ->add('countries', null, array('multiple' => true, 'required' => false, 'by_reference' => false ))
+                ->add('beginAt', 'datePicker', array('label' => 'Display the banner from the :', 'help'=> 'MANDATORY'))
+                ->add('endAt', 'datePicker' , array('label' => 'To the :', 'help'=> 'MANDATORY'))
+                ->add('countries', null, array(
+                        'multiple'      => true,
+                        'required'      => false,
+                        'by_reference'  => false,
+                        'label'         => 'Select the country(ies) you want to display this banner',
+                        'help'          => 'FACULTORY - By default, the banner would be worldwide'
+                    )
+                )
             ->end()
         ;
     }
