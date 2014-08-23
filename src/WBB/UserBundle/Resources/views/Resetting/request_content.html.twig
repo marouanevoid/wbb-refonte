@@ -53,6 +53,10 @@
                         // Set the PopIn Loading Flag
                         PopIn.endLoading();
                         $('.popin-block').html(html);
+
+                        if(ismobile){
+                            $('html, body').animate( { scrollTop: 0 }, 500, 'easeInOutCubic');
+                        }
                     }
                 });
             } else {

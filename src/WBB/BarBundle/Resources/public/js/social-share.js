@@ -49,7 +49,7 @@ $(document).ready(function(){
         $("#share").click(function() {
             $(".wrap-share").fadeIn("slow");
             $(".mask").fadeIn("slow");
-            $('html, body').animate({scrollTop: $(".wrap-share").offset().top }, 500, 'easeInOutCubic');
+            // $('html, body').animate({scrollTop: $(".wrap-share").offset().top }, 500, 'easeInOutCubic');
         });
 
         // $(".wrap-share").click(function() {
