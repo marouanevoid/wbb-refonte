@@ -93,6 +93,7 @@ services:
 
     wbb_user_confirmation_listener:
         class: WBB\UserBundle\EventListener\ConfirmationListener
+        arguments: ["@session"]
         tags:
             - { name: 'kernel.event_subscriber' }
 

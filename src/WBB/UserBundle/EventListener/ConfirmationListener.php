@@ -5,9 +5,17 @@ namespace WBB\UserBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\GetResponseUserEvent;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ConfirmationListener implements EventSubscriberInterface
 {
+
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
 
     public static function getSubscribedEvents()
     {
@@ -20,6 +28,7 @@ class ConfirmationListener implements EventSubscriberInterface
     {
         $user = $event->getUser();
         $user->setConfirmed(true);
+        $this->session->getFlashBag()->add('wbb-user-confirmed', true);
     }
 
 }

@@ -246,9 +246,7 @@ class RegistrationController extends ContainerAware
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->container->get('router')->generate('homepage', array(
-                'confirmed' => true
-            ));
+            $url = $this->container->get('router')->generate('homepage');
             $response = new RedirectResponse($url);
         }
 
