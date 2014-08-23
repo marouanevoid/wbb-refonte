@@ -223,7 +223,7 @@
                             <article class="bar-w-pic-list">
                                 <div class="three columns s-margin-top">
                                     <div class="bar-w-pic list">
-                                        <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
+                                        <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star brown {% if is_favorite(app.user, b) %}active changed{% else %}dark{% endif %}"></a>
                                         <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                                         {% if b.medias|length>0 %}
                                             {% for m in b.medias|slice(0,1) %}

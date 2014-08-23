@@ -1,11 +1,11 @@
 <script>
     $(document).ready(function() {
         $('#show-popin').click();
-        $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
+        $('html, body').animate({scrollTop: 0}, 500, 'easeInOutCubic');
     });
 </script>
 <div id="success" class="min-height">
-    <div class="{% if is_mobile() and not is_tablet() %}padding-bottom-20 padding-top-20{% else %}padding-bottom-80 padding-top-80{% endif %}">
+    <div class="{% if is_mobile() and not is_tablet() %}padding-bottom-20 padding-top-20{% else %}padding-bottom-50 padding-top-100{% endif %}">
         <div class="subtitle wrap bold margin-bottom-30">CONGRATULATIONS&nbsp;!</div>
         <p class="padding-top-40">You are now registered on World’s Best Bars.</p>
         <p>The "{{ cookies.get('light_name') }}" {{ cookies.get('light_type') }} has been added to your favorites.</p>

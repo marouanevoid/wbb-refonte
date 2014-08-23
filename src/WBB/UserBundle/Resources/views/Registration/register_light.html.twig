@@ -2,7 +2,7 @@
 
 <div id="account" class="left">
     <div class="subtitle text-transform-uppercase bold">I already have an account</div>
-    {% render url('fos_user_security_login') %}
+    {{ render(controller('WBBUserBundle:Security:login',{'light':true})) }}
 </div> <!-- #account.block.wrap -->
 
 {% if is_mobile() and not is_tablet() %}<hr>{% endif %}
@@ -45,7 +45,7 @@
         </form>
 
         <div id="message" class="wrap margin-top-20 margin-bottom-20">
-            
+
             <div class="clear"></div>
         </div>
     </div> <!-- #register-form -->
@@ -58,12 +58,12 @@
             var $registerForm = $("#register-form");
             if ($registerForm.is(":visible")) {
                 $registerForm.fadeOut("slow");
-                $(".popup .title").fadeIn("slow", function(){
+                $(".popup .title").fadeIn("slow", function() {
                     PopIn.updatePopin();
                 });
             } else {
                 $registerForm.fadeIn("slow");
-                $(".popup .title").fadeOut("slow", function(){
+                $(".popup .title").fadeOut("slow", function() {
                     PopIn.updatePopin();
                 });
             }

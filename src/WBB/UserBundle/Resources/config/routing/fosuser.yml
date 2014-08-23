@@ -44,6 +44,8 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /your-profile
+    options:
+        expose: true
     
 fos_user_resetting_reset:
     pattern: /

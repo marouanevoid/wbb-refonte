@@ -147,7 +147,7 @@ meta.Form = function(config){
                     $('.popin-block').html(data.popinContent);
                     $('#show-popin').click();
                         
-                    $('.custom-scroll').not('.jspScrollable').each(function()
+                    $('.custom-scroll').not('.jspNotScrollable').each(function()
                     {
                         $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
                     });

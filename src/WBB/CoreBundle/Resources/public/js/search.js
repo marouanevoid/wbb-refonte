@@ -289,8 +289,14 @@ meta.SearchPage = function() {
                     if(TagsArray && TagsArray.length){
                         // make tags url
                         var stringtag = "";
+                        var limitBoucle = 0;
                         for(var i=0,ln = TagsArray.length ; i<ln ; i++ ){
                             for(var j=0, lin = TagsArray[i].length; j < lin ; j++){
+                                if(limitBoucle >= 5){
+                                    break;
+                                    return false;
+                                }
+                                limitBoucle++;
                                 stringtag += "<a href='" + Routing.generate('wbb_cloudsearch_searchresults')+'?tag=' + that.escapit(TagsArray[i][j]) + "'>"+ TagsArray[i][j]  + "</a> , " ;
                             }
                         }
@@ -763,7 +769,7 @@ meta.SearchPage = function() {
                 that.context.$form_filter.find('.drop-btn a.minus').click();
 
                 // hide the select
-                //$('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
                 // Select 2
                  $("select.select2-dropdown").select2('val' , '');
                  $("select.select2-dropdown").select2('data', null);
@@ -1084,7 +1090,23 @@ $(document).ready(function()
     // on city select
     $("select.select2-dropdown").select2({
         placeholder : 'Choose a City',
-        allowClear: true
+        allowClear: true,
+        minimumResultsForSearch: 5,
+        sortResults: function(results, container, query) {
+        if (query.term) {
+            // use the built in javascript sort function
+            return results.sort(function(a, b) {
+                if (a.text  > b.text) {
+                    return 1;
+                } else if (a.text < b.text) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+        }
+            return results;
+        }
     });
 });
 

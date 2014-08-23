@@ -18,8 +18,9 @@ class AdsController extends Controller
         }
         $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city)?$city->getCountry():null);
         return $this->render('WBBBarBundle:Ads:show.html.twig', array(
-                'ad'    => $ad,
-                'format' => $size[1]
+                'ad'     => $ad,
+                'format' => $size[1],
+                'NLP'    => false
             )
         );
     }
@@ -44,8 +45,9 @@ class AdsController extends Controller
         }
         $size = explode('_', $format);
         return $this->render('WBBBarBundle:Ads:show.html.twig', array(
-                'ad'    => $ad,
-                'format' => $size[1]
+                'ad'     => $ad,
+                'format' => $size[1],
+                'NLP'    => true
             )
         );
     }
