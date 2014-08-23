@@ -3,7 +3,7 @@
     <div class="title wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-100{% endif %}">FORGOT YOUR PASSWORD</div>
     <div class="subtitle text-transform-uppercase bold">Enter your email to create a new password</div>
 
-    <div class="forgetpassword wrap padding-bottom-50">
+    <div class="forgetpassword wrap {% if is_mobile() and not is_tablet() %}padding-bottom-5{% else %}padding-bottom-50{% endif %}">
         <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="margin-bottom-20">
             <div class="text-align-center">
                 <div><input type="text" name="username" class="form-text margin-top-30" placeholder="Your email" tabindex="1"></div>
