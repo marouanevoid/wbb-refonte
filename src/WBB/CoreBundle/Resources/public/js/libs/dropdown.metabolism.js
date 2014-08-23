@@ -164,7 +164,7 @@ meta.Dropdown = function(config){
                 var ttext = "";
                 setTimeout(function(){
                     _this.find('option').each(function(){
-                        if($(this).attr('selected')){
+                        if( $(this).is(':selected') ){
                             ttext = $(this).text();
                         }
                     });
