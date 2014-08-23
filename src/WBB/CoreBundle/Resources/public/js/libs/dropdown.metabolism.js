@@ -162,16 +162,20 @@ meta.Dropdown = function(config){
             {
                 var _this = $(this);
                 var ttext = "";
+
                 setTimeout(function(){
-                    _this.find('option').each(function(){
+                    _this.find('option').each(function(index){
                         if( $(this).is(':selected') ){
                             ttext = $(this).text();
+                            _this.val($(this).val());
                         }
                     });
                     that.config.$dropdown_value.text("");
                     that.config.$dropdown_value.text( ttext );
+
+                    that.checkSelected.apply([this]);
+
                 },10);
-                that.checkSelected.apply([this]);
             });
         }
     };

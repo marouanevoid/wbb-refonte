@@ -6,6 +6,7 @@
 
 namespace WBB\UserBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -66,6 +67,11 @@ class UserAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $isPasswordRequired = false;
+        if (!$this->id($this->getSubject())) {
+            $isPasswordRequired = true;
+        }
+
         $generatePasswordBtn = '<input type="button" id="pwd-generator" class="pwd-generator btn" value="Generate Password" />';
 
         $formMapper
@@ -83,19 +89,30 @@ class UserAdmin extends Admin
                 ))
                 ->add('username', null, array('help' => 'Mandatory'))
                 ->add('email', null, array('help' => 'Mandatory'))
-                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname', 'required' => false))
-                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname', 'required' => false))
+                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname *', 'required' => false))
+                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname *', 'required' => false))
                 ->add('birthdate', null, array('years' => range(1914, date('Y')), 'help' => 'Mandatory', 'label' => 'Birthdate'))
                 ->add('website')
-                ->add('country', null, array('help' => 'Mandatory', 'label' => 'Country'))
+                ->add('country', 'entity', array(
+                        'class'    => 'WBBCoreBundle:Country',
+                        'help'     => 'Mandatory',
+                        'label'     => 'Country',
+                        'required' => true,
+                        'property' => 'name',
+                        'empty_value' => false,
+                        'query_builder' => function (EntityRepository $er) {
+                                return $er->findCountriesOrderedByName(true);
+                            }
+                    )
+                )
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
                 ->add('plainPassword', 'text', array(
-                        'required' => false,
-                        'help' => $generatePasswordBtn.'Mandatory',
-                        'label' => 'Password *',
-                        'attr' => array(
+                        'required'  => $isPasswordRequired,
+                        'help'      => $generatePasswordBtn.'Mandatory',
+                        'label'     => ($isPasswordRequired)?'Password':'Password *',
+                        'attr'      => array(
                             'class' => 'span5 pwd-field'
                         )
                     )
@@ -138,7 +155,6 @@ class UserAdmin extends Admin
                             'ROLE_USER'             =>  'User'
                         )
                     ))
-                    ->add('locked', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
                     ->add('confirmed', null, array(
                         'read_only' => true,
@@ -166,23 +182,8 @@ class UserAdmin extends Admin
             $this->getContainer()->get('wbb_user.generate_password.mailer')->sendGeneratedPassword($data);
         }
 
-        if($user->hasRole('ROLE_BAR_EXPERT') || $user->hasRole('ROLE_BAR_EXPERT')){
-            $user->setTipsShouldBeModerated(false);
-        }
-
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prePersist($user)
-    {
-        if($user->hasRole('ROLE_BAR_EXPERT') || $user->hasRole('ROLE_SUPER_ADMIN'))
-        {
-            $user->setTipsShouldBeModerated(false);
-        }
     }
 
     /**

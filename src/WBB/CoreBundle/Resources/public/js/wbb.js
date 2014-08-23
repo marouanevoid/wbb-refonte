@@ -188,7 +188,13 @@ function fillInForm(formId) {
 // Register forms actions
 function initRegisterLoginForms() {
     $('#facebook-signup').on('click', function() {
+        // show the loader
+        $("#register-light #login_form").addClass('loading');
+
         FB.getLoginStatus(function(response) {
+            // Hide Loading
+            $("#register-light #login_form").removeClass('loading');
+
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
                     console.log(response);
@@ -212,6 +218,7 @@ function initRegisterLoginForms() {
         e.preventDefault();
         var form = $(this);
         var formUrl = form.attr('action');
+
         $.ajax({
             type: "POST",
             url: formUrl,
@@ -236,15 +243,20 @@ function initRegisterLoginForms() {
                     $('#register_form .ui-dropdown').each(function() {
                         $(this).removeClass('error');
                     });
+                    $('#register_form .select2-choice').each(function() {
+                        $(this).removeClass('error');
+                    });
                     var idPrefix = '#fos_user_registration_form_';
                     for (var i = 0; i < fields.length; i++) {
                         switch (fields[i]) {
                             case 'country':
                                 $('#register-form .country-dropdown .ui-dropdown').addClass('error');
+                                $('#register-form .country-dropdown .select2-choice').addClass('error');
                                 break;
                             case 'birthdate':
                             case 'birthday':
                                 $('#register-form .date-birthday .ui-dropdown').addClass('error');
+                                $('#register-form .date-birthday .select2-choice').addClass('error');
                                 break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
@@ -367,15 +379,20 @@ jQuery(document).ready(function($) {
                     $('#register_form_full .ui-dropdown').each(function() {
                         $(this).removeClass('error');
                     });
+                    $('#register_form_full .select2-choice').each(function() {
+                        $(this).removeClass('error');
+                    });
                     for (var i = 0; i < fields.length; i++) {
 
                         switch (fields[i]) {
                             case 'country':
                                 $('.country-dropdown .ui-dropdown').addClass('error');
+                                $('.country-dropdown .select2-choice').addClass('error');
                                 break;
                             case 'birthdate':
                             case 'birthday':
                                 $('.date-birthday .ui-dropdown').addClass('error');
+                                $('.date-birthday .select2-choice').addClass('error');
                                 break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
@@ -410,6 +427,9 @@ jQuery(document).ready(function($) {
     if (showConfirmed) {
         $('#show-popin').click();
     }
+    if (showProfilePopin) {
+        $('#show-popin').click();
+    }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
     }
@@ -419,11 +439,6 @@ jQuery(document).ready(function($) {
     }
     if(showLoginForm) {
         $('.btn-signin').click();
-    }
-    if (fbPrefill) {
-        setTimeout(function() {
-            $('.btn-create-with-fb').click();
-        }, 500);
     }
 });
 

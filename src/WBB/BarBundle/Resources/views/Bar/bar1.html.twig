@@ -34,9 +34,9 @@
     <div class="color gray"></div>
     {% if b.medias|length>0 %}
         {% for m in b.medias|slice(0,1) %}
-            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'slider_large') }}"  alt="{{ b.name }}" width="570" height="428"/>
+            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'bar_640_480') }}"  alt="{{ b.name }}" width="570" height="428"/>
         {% endfor %}
     {% else %}
-        <img class="scale-with-grid" data-src="{{ showImage( null, 'slider_large') }}" width="570" height="428" alt=""/>
+        <img class="scale-with-grid" data-src="{{ showImage( null, 'bar_640_480') }}" width="570" height="428" alt=""/>
     {% endif %}
 </article>  

@@ -161,8 +161,8 @@
                             </select>
                         </td>
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
-                        <td>
-                            <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-choose {% endif %} dark trigger-select-go" name="go_out" data-class="with-icon friend">
+                        <td width="200">
+                            <select class=" friend {% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-choose {% endif %} dark trigger-select-go" name="go_out" data-class="with-icon friend">
                                 {# <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option> #}
                                {% if not is_mobile() and not is_tablet() %} 
                                     <option></option>

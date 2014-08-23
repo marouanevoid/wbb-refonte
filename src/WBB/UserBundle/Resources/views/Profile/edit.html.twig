@@ -104,11 +104,11 @@
                                             {{ form_widget(form.email, { 'attr' : { 'class': 'form-text'} }) }}
                                         {% endif %}
                                         <div class="clear"></div>
-                                        <!-- {% if user.confirmationToken %} -->
+                                        {% if not user.confirmed %}
                                             <p class="block-help text-align-right margin-right-40">
                                                 <a id="resend-validation">An email is waiting for your confirmation</a>
                                             </p>
-                                        <!-- {% endif %} -->
+                                        {% endif %}
                                         <div class="clear"></div>
                                     </div>
                                     <div class="{% if 'birthday' in errors.fields %}error{% endif %} date-birthday text-align-center margin-top-10">
@@ -267,7 +267,7 @@
             });
 
             // add the search
-            $('select#fos_user_profile_form_country').select2({
+            $('select.select2-dropdown#fos_user_profile_form_country').select2({
                 minimumResultsForSearch: 20
             });
 

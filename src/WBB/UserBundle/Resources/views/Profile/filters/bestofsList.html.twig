@@ -19,7 +19,7 @@
                     {% else %}
                         <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
                     {% endif %}
-                        {{ b.name }}
+                        {{ b.name|slice(0, 25) }}{% if b.name|length > 25 %}...{% endif %}
                     </a>
                 </h2>
                 <h3 class="xs-margin-top"><a href="#0">{% if b.city %}{{ b.city.name }}{% endif %}</a></h3>
