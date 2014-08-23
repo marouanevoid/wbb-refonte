@@ -736,7 +736,7 @@
     #register.mobile.popup .date-birthday .select-wrap {width: 112px; margin-right: 2%;}
     #register.mobile.popup .date-birthday .group-small-select {width: 150%;}
     #register.page .group-checkbox {left: 0; margin: 0;}
-    #message ul {margin-left: 100px;}
+    /*#message ul {margin-left: 100px;}*/
     #success {padding: 0 20px;}
     #success p {font-weight: bold; font-size: 20px;}
     #change-password #message {left: 0;}
