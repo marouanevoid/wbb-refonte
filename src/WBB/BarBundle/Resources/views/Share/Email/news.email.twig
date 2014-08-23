@@ -42,7 +42,7 @@
                             </a>
                         </div>
                         <p style="color: #818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">
-                            {{ news.seoDescription|raw }}
+                            {{ news.seoDescription|raw|truncate(100) }}
                         </p>
                     </td>
                 </tr>
