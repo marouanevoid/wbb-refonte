@@ -27,7 +27,7 @@ class UserAdmin extends Admin
             ->addIdentifier('username')
             ->add('email')
             ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true))
+            ->add('confirmed')
         ;
     }
 
@@ -140,7 +140,11 @@ class UserAdmin extends Admin
                     ))
                     ->add('locked', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
-                ->end()
+                    ->add('confirmed', null, array(
+                        'read_only' => true,
+                        'disabled' => true
+                    ))
+                    ->end()
             ;
         }
     }
