@@ -39,6 +39,7 @@
 <script>
     $(document).ready(function() {
         $('.forgot-password').on('click', function(e) {
+            $('html, body').animate({scrollTop: 0}, 500, 'easeInOutCubic');
             e.preventDefault();
             var url = $(this).attr('href');
             // start loading of PopIn
