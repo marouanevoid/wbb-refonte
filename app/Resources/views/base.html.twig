@@ -117,9 +117,13 @@
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
                 
                 var showConfirmed = 0;
+                {% set user_confirmed = false %}
                 {% for message in app.session.flashbag.get('wbb-user-confirmed') %}
-                    showConfirmed = 1;
+                    {% set user_confirmed = true %}
                 {% endfor %}
+                {% if user_confirmed %}
+                    showConfirmed = 1;
+                {% endif %}
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
@@ -211,7 +215,7 @@
                         {% if app.request.query.get('emailPopin', 0) == 1 %}
                             {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
                         {% endif %}
-                        {% if app.request.query.get('confirmed', 0) == 1 %}
+                        {% if user_confirmed == true %}
                             {{ include('WBBUserBundle:Registration:confirm.html.twig') }}
                         {% endif %}
                         {% if app.user %}
