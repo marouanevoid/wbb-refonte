@@ -237,7 +237,7 @@
         </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
         {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
-        {{ facebook_initialize({'xfbml': true}) }}
+        {{ facebook_initialize({'xfbml': true}, 'WBBUserBundle:Facebook:initialize.html.twig') }}
         <script>
             function securityCheck() {
                 $.ajax({

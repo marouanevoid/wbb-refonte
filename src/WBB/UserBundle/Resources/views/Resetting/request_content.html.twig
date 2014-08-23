@@ -54,7 +54,7 @@
                         PopIn.endLoading();
                         $('.popin-block').html(html);
 
-                        if(ismobile){
+                        if(ismobile || istablet ){
                             $('html, body').animate( { scrollTop: 0 }, 500, 'easeInOutCubic');
                         }
                     }

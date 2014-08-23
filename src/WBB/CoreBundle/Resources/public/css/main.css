@@ -467,7 +467,7 @@
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
   /* Mobile */
-    .wrap-share.mobile {z-index: 9999999; top: 50%; height: 280px; background-color: transparent; width: 100%;}
+    .wrap-share.mobile {z-index: 9999999; top: 0; height: 280px; background-color: transparent; width: 100%;}
     .wrap-share.mobile .social-share {padding: 0 10px; border: none;}
     .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; left: 0; padding: 95px 90px 0;}
     .wrap-share.mobile .social-share li,
@@ -571,6 +571,8 @@
   article.tip .content.expert .excerpt td .scroll {/*margin-top: 10px;*/}
   .title-signin {width: 100%!important;}
   .btn-small-radius.dark, .btn-round.dark, .btn-radius.dark, .btn-small-round.dark {border-color: #333;}
+  .select2-results {margin-bottom: 15px;}
+
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
     .mobile .sub-header .star-share .btn-round.star:hover:after {opacity: 0;}

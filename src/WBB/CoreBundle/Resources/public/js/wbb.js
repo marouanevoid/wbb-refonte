@@ -188,7 +188,13 @@ function fillInForm(formId) {
 // Register forms actions
 function initRegisterLoginForms() {
     $('#facebook-signup').on('click', function() {
+        // show the loader
+        $("#register-light #login_form").addClass('loading');
+
         FB.getLoginStatus(function(response) {
+            // Hide Loading
+            $("#register-light #login_form").removeClass('loading');
+
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
                     console.log(response);
@@ -212,6 +218,13 @@ function initRegisterLoginForms() {
         e.preventDefault();
         var form = $(this);
         var formUrl = form.attr('action');
+
+
+
+        ///// TEMP /////
+        console.log('::::: serialize:::');
+        console.log(form.serialize());
+        /////////////////
         $.ajax({
             type: "POST",
             url: formUrl,
@@ -422,11 +435,6 @@ jQuery(document).ready(function($) {
     }
     if(showLoginForm) {
         $('.btn-signin').click();
-    }
-    if (fbPrefill) {
-        setTimeout(function() {
-            $('.btn-create-with-fb').click();
-        }, 500);
     }
 });
 
