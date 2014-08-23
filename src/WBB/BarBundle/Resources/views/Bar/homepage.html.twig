@@ -2,6 +2,11 @@
 {% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
 {% block title %}World Best Bars{% endblock %}
 
+{% set wbb_not_found = false %}
+{% for messages in app.session.flashbag.get('wbb-not-found') %}
+    {% set wbb_not_found = true %}
+{% endfor %}
+
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
@@ -37,8 +42,8 @@
 
 {% block body %}
     <div class="full-cream l-padding-bottom">
-        {% for messages in app.session.flashbag.get('wbb-not-found') %}
-            <div id="error" class="padding-top-100">
+        {% if wbb_not_found == true %}
+            <div id="error" class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-100{% endif %}">
                 <div class="wrap padding-bottom-40">
                     <div id="alert" class="text-align-center text-transform-uppercase">
                         <img src="{{ asset('bundles/wbbcore/images/404_desktop.png') }}">
@@ -49,54 +54,54 @@
                     <hr/>
                 </div>
             </div>
-        {% endfor %}
+        {% else %}
+            <!-- SUBHEADER -->
+            <div class="container">
+                <section class="sub-header">
+                    {% if not is_mobile() or is_tablet() %}
+                        <table>
+                            <tr>
+                                <td>
+                                    {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
+                                </td>
 
-        <!-- SUBHEADER -->
-        <div class="container">
-            <section class="sub-header">
-                {% if not is_mobile() or is_tablet() %}
-                <table>
-                    <tr>
-                        <td>
-                             {% include "WBBBarBundle:UI:citys_selector.html.twig" with { 'from' : 'home' }  %}
-                        </td>
+                                <td class="title">
+                                    {% if city is defined %}
+                                        <h1>Popular Bars in {{ city.name }}</h1>
+                                    {% else %}
+                                        <h1>Discover the World’s Best Bars</h1>
+                                    {% endif %}
+                                </td>
 
-                        <td class="title">
-                            {% if city is defined %}
-                                <h1>Popular Bars in {{ city.name }}</h1>
-                            {% else %}
-                                <h1>Discover the World’s Best Bars</h1>
-                            {% endif %}
-                        </td>
-
-                        <td></td>
-                    </tr>
-                </table>
-                {% else %}
-                    {% if city is defined %}
-                        <h1>Popular Bars in {{ city.name }}</h1>
+                                <td></td>
+                            </tr>
+                        </table>
                     {% else %}
-                        <h1>Discover the World’s Best Bars</h1>
+                        {% if city is defined %}
+                            <h1>Popular Bars in {{ city.name }}</h1>
+                        {% else %}
+                            <h1>Discover the World’s Best Bars</h1>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-            </section>
-        </div>
-        <!-- BARS -->
-        <div class="container full">
-            <section class="bars">
-                {% if is_mobile() and not is_tablet() %}
-                <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
-                {% else %}
-                <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
-                {% endif %}
-                {% for b in topBars %}
-                    <div class="ui-slide loading">
-                        {% include "WBBBarBundle:Bar:items/bar_425_320.html.twig" with { 'b': b } %}
-                    </div>
-                {% endfor %}
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
+            <!-- BARS -->
+            <div class="container full">
+                <section class="bars">
+                    {% if is_mobile() and not is_tablet() %}
+                        <div class="ui-slider type-bar has_sizer arrows dots" data-size="4x3" data-display="1" style="display:none;">
+                        {% else %}
+                            <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3" style="display:none;">
+                            {% endif %}
+                            {% for b in topBars %}
+                                <div class="ui-slide loading">
+                                    {% include "WBBBarBundle:Bar:items/bar_425_320.html.twig" with { 'b': b } %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                </section>
+            </div>
+        {% endif %}
         {% if city is not defined %}
         <!-- CITIES -->
         <div class="container">
