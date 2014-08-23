@@ -219,12 +219,6 @@ function initRegisterLoginForms() {
         var form = $(this);
         var formUrl = form.attr('action');
 
-
-
-        ///// TEMP /////
-        console.log('::::: serialize:::');
-        console.log(form.serialize());
-        /////////////////
         $.ajax({
             type: "POST",
             url: formUrl,

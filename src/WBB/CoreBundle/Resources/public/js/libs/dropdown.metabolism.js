@@ -163,18 +163,19 @@ meta.Dropdown = function(config){
                 var _this = $(this);
                 var ttext = "";
 
-                _this.find('option').each(function(index){
-                    if( $(this).is(':selected') ){
-                        ttext = $(this).text();
-                        // console.log('triggered>>>>' + index);
-                        _this.val($(this).val());
-                        _this[0].seleectedIndex = index;
-                    }
-                });
-                that.config.$dropdown_value.text("");
-                that.config.$dropdown_value.text( ttext );
+                setTimeout(function(){
+                    _this.find('option').each(function(index){
+                        if( $(this).is(':selected') ){
+                            ttext = $(this).text();
+                            _this.val($(this).val());
+                        }
+                    });
+                    that.config.$dropdown_value.text("");
+                    that.config.$dropdown_value.text( ttext );
 
-                that.checkSelected.apply([this]);
+                    that.checkSelected.apply([this]);
+
+                },10);
             });
         }
     };
