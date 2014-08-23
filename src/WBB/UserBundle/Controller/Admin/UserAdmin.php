@@ -6,6 +6,7 @@
 
 namespace WBB\UserBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -83,11 +84,22 @@ class UserAdmin extends Admin
                 ))
                 ->add('username', null, array('help' => 'Mandatory'))
                 ->add('email', null, array('help' => 'Mandatory'))
-                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname', 'required' => false))
-                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname', 'required' => false))
+                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname *', 'required' => false))
+                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname *', 'required' => false))
                 ->add('birthdate', null, array('years' => range(1914, date('Y')), 'help' => 'Mandatory', 'label' => 'Birthdate'))
                 ->add('website')
-                ->add('country', null, array('help' => 'Mandatory', 'label' => 'Country'))
+                ->add('country', 'entity', array(
+                        'class'    => 'WBBCoreBundle:Country',
+                        'help'     => 'Mandatory',
+                        'label'     => 'Country',
+                        'required' => true,
+                        'property' => 'name',
+                        'empty_value' => false,
+                        'query_builder' => function (EntityRepository $er) {
+                                return $er->findCountriesOrderedByName(true);
+                            }
+                    )
+                )
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
