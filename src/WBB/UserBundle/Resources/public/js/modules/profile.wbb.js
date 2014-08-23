@@ -38,7 +38,7 @@ wbb.LoadProfile = function() {
     * Personalize the Scroll
     */
     that.PersonalizeScroll = function(){
-        $('.custom-scroll-profile').not('.jspNotScrollable').not('.jspScrollable').each(function()
+        $('.custom-scroll').not('.jspNotScrollable').not('.jspScrollable').each(function()
         {
             //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
             $(this).jScrollPane({hideFocus:true});
