@@ -203,6 +203,8 @@
   /* Error */
     .ui-dropdown-container .ui-dropdown.error,
     .select2-container .select2-choice.error {box-shadow: 0 0 0 1px #b3955f !important; margin: 1px;}
+    .firefox .ui-dropdown-container .ui-dropdown.error,
+    .firefox .select2-container .select2-choice.error {border-width: 2px !important;}
 
     /*
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
@@ -567,7 +569,7 @@
   header.desktop .logged {z-index: 100002;}
   .popin-block .form-text {width: 98%;}
   article.tip .content.expert .excerpt td .scroll {margin-top: 10px;}
-  .title-signin {width: 100%;}
+  .title-signin {width: 100%!important;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -640,7 +642,7 @@
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     input[type="text"]::-webkit-input-placeholder, 
     input[type="password"]::-webkit-input-placeholder, 
-    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
+    input[type="email"]::-webkit-input-placeholder {color: #818a8c;}
 
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}

@@ -97,7 +97,9 @@ class CloudSearchSearcher
         $response = $this->doSearch($parameters);
 
         if ($parameters['favorites']) {
-            $response = $this->favorites($response);
+            if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                $response = $this->favorites($response);
+            }
         }
 
         $parameters['entity'] = 'Bar';
@@ -111,40 +113,26 @@ class CloudSearchSearcher
         return $response;
     }
 
-    private function getEntityResults($results, $entity)
-    {
-        $response = array();
-        foreach ($results as $result) {
-            if ($result['fields']['entity_type'] == $entity) {
-                $response[] = $result;
-            }
-        }
-
-        return $response;
-    }
-
     private function favorites($response)
     {
-        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $ext = $this->container->get('wbb.twig.favorite_extension');
-            $user = $this->container->get('security.context')->getToken()->getUser();
+        $ext = $this->container->get('wbb.twig.favorite_extension');
+        $user = $this->container->get('security.context')->getToken()->getUser();
 
-            $c = 0;
-            foreach ($response['hits']['hit'] as $bar) {
-                if (isset($bar['fields']['entity_type']) && $bar['fields']['entity_type'] === 'Bar') {
-                    $dbBar = $this->container->get('bar.repository')->find($bar['fields']['wbb_id']);
-                    if ($dbBar) {
-                        $bar['fields']['favorite'] = $ext->isFavorite($user, $dbBar);
-                        $bar['fields']['favorite_url'] = $ext->getFavoriteUrl($user, $dbBar);
-                    } else {
-                        $bar['fields']['favorite'] = false;
-                        $bar['fields']['favorite_url'] = '#';
-                    }
-
-                    $response['hits']['hit'][$c] = $bar;
+        $c = 0;
+        foreach ($response['hits']['hit'] as $bar) {
+            if (isset($bar['fields']['entity_type']) && $bar['fields']['entity_type'] === 'Bar') {
+                $dbBar = $this->container->get('bar.repository')->find($bar['fields']['wbb_id']);
+                if ($dbBar) {
+                    $bar['fields']['favorite'] = $ext->isFavorite($user, $dbBar);
+                    $bar['fields']['favorite_url'] = $ext->getFavoriteUrl($user, $dbBar);
+                } else {
+                    $bar['fields']['favorite'] = false;
+                    $bar['fields']['favorite_url'] = '#';
                 }
-                $c++;
+
+                $response['hits']['hit'][$c] = $bar;
             }
+            $c++;
         }
 
         return $response;
