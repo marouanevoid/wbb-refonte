@@ -1,6 +1,6 @@
 <div id="success" class="min-height">
-    <div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-50{% endif %}">
-        <div class="subtitle wrap bold margin-bottom-30 margin-top-80">Congratulations !</div>
+    <div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-50{% endif %}" {% if is_mobile() and not is_tablet() %}style="min-height: 345px"{% endif %}>
+        <div class="subtitle wrap bold margin-bottom-30 margin-top-80">CONGRATULATIONS !</div>
         <p class="bold margin-top-50">You have changed your password</p>
     </div>
 </div>

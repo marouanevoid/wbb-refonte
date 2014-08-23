@@ -35,7 +35,7 @@
             var display;   
             $(".load-more").click(function(){
                 display = $('.bars .four:visible').length+3;
-                $(".bars .four:lt("+display+")").fadeIn(500); 
+                $(".bars .four:lt("+divsplay+")").fadeIn(500); 
                 if($('.bars .four:hidden').length<=0){
                     $('.load-more-container').hide();
                 }
@@ -69,7 +69,7 @@
                         </h3>
                     </td>
                     <td class="star-share">
-                        <a data-id="{{ bestOf.id }}" data-type="{{ entity_light_type(bestOf) }}" data-name="{{ bestOf.name }}" href="{{ favorite_url(app.user, bestOf) }}" class="btn-round star {% if is_favorite(app.user, bestOf) %}active brown changed{% endif %}"></a>
+                        <a data-id="{{ bestOf.id }}" data-type="{{ entity_light_type(bestOf) }}" data-name="{{ bestOf.name }}" href="{{ favorite_url(app.user, bestOf) }}" class="btn-round star brown {% if is_favorite(app.user, bestOf) %}active changed{% endif %}"></a>
                         <a id="share" class="btn-round brown share" href=""></a>
                     </td>
                 </tr>

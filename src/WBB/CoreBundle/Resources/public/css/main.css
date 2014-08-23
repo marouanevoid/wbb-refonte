@@ -57,9 +57,9 @@
   .void-popup {}
   .subtitle {font-size: 20px; text-align: center; color: #b3955f; font-family: "Avenir", Helvetica, Arial, sans-serif;}
   .subtitle.grey {color: #818a8c;}
-  .small {font-size: 13px;}
-  .medium {font-size: 22px;}
-  .big {font-size: 30px;}
+  .small-text {font-size: 13px;}
+  .medium-text {font-size: 22px;}
+  .big-text {font-size: 30px;}
 
   /*.btn.gold:hover {background-color: #ffe4af; color: #b3955f;}*/
   .select-two .ui-dropdown-container {width: 100%!important;}
@@ -180,6 +180,7 @@
   .ui.mobile .col-4 {width: 237px;}
 
 /* UI REGISTER & USER PROFILE */
+  .forgot-password {color: #818a8c;}
   .ui {background-color: #faf3e1; position: relative; /*top: 145px;*/}
   .ui p a {color: #818a8c; font-size: 17px; text-decoration: underline;}
   .ui a.ui-radio {color: #b3955f; text-decoration: none;}
@@ -200,7 +201,8 @@
   body.error {background-color: #333333;}
 
   /* Error */
-    .ui-dropdown-container .ui-dropdown.error {box-shadow: 0 0 0 1px #b3955f !important;}
+    .ui-dropdown-container .ui-dropdown.error,
+    .select2-container .select2-choice.error {box-shadow: 0 0 0 1px #b3955f !important; margin: 1px;}
 
     /*
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
@@ -223,12 +225,11 @@
   .ui.wrap {width: 100%; height: 100%;}
   .ui.register .title {width: 60%;}
   .ui.register #account {width: 320px; float: left; border-right: 1px solid #babbb4; padding: 0 45px 0 50px;}
-  .ui.register #account .forgot-password {color: #818a8c;}
   .ui.register #account form {width: 300px;}
   .ui.register #account .form-text {text-align: center; text-indent: 0;}
   .ui.register #create-account {width: 300px; padding: 0 0 0 50px;}
   .ui.register #create-account .form-text {text-align: left; /*line-height: 40px;*/}
-  .ui.register .date-birthday label {color: #818a8c; font-size: 17px;}
+  .ui.register .date-birthday label {color: #818a8c; font-size: 17px; font-weight: lighter;}
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
   .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 15px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
@@ -249,10 +250,9 @@
 /* Register3 (Page) - PSDN : PSDs/login/desktop/register3.psd; */
   /*#success {position: static; top: 0;}*/
   #success p {color: #818a8c; font-size: 22px;}
-  #success .subtitle {font-size: 32px;}
-  .alert p {color: #818a8c; font-size: 20px; line-height: 28px;}
-  .alert {position: static; top: 0; min-height: 500px;}
-  .alert .subtitle {font-size: 32px;}
+  #alert p {color: #818a8c; font-size: 1.8em; line-height: 28px;}
+  #success .subtitle,
+  #alert .subtitle {font-size: 32px;}
 
     /* Popup */
     .popup #success p {margin: 0 0 20px; line-height: 22px; font-size: 20px; text-align: center;} 
@@ -363,7 +363,7 @@
 
 /* Register3 (Mobile) */
   /*#register.mobile .ui #success p {font-size: 20px; margin: 0 auto 20px; font-weight: bold;}*/
-  #register.mobile .ui #success .subtitle {padding: 0; font-size: 26px; width: 100%;}
+  #register.mobile .ui #success .subtitle {padding: 0; font-size: 24px; width: 100%;}
   .form-input {/*width: 270px;*/}
 
 /* EditProfile (Page) - PSDN : PSDs/userprofile/Desktop/EditProfile.psd; */
@@ -439,14 +439,15 @@
 /* Page standard */
   #page-standard {width: 770px;}
   #page-standard .title {margin-bottom: 25px;}
-  #page-standard .content p {margin-bottom: 15px;}
+  #page-standard .content p {margin-bottom: 15px; text-align: justify;}
   #page-standard .content p + div {margin-bottom: 7px;}
   #page-standard .content p,
   #page-standard .content li {line-height: 21px; font-size: 17px;}
   #page-standard .content li {margin-bottom: 10px;}
   #page-standard .content ul {list-style: disc; padding: 0 0 0 40px; margin-bottom: 30px;}
   #page-standard .min-height {min-height: 450px;}
-  #page-standard .content .h3 {color: #b3955f;}
+  #page-standard .content .h3,
+  #page-standard .gold {color: #b3955f;}
     /* Mobile */
       #page-standard.mobile {width: 100%;}
       #page-standard.mobile .min-height {padding: 0 20px;}
@@ -552,7 +553,7 @@
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
-  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {/*border-width: 2px; */}
+  .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px;}
   article.bestof img.scale-with-grid {display: inline;}
   .bar-w-pic .txt .tags a {color: #faf3e1;}
   .ui-dropdown-container .ui-dropdown .choice ul li {/*padding-bottom: 1.2em;*/}
@@ -566,6 +567,7 @@
   header.desktop .logged {z-index: 100002;}
   .popin-block .form-text {width: 98%;}
   article.tip .content.expert .excerpt td .scroll {margin-top: 10px;}
+  .title-signin {width: 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -606,6 +608,11 @@
 
 /* GLOBALE DESKTOP STYLES */
   @media only screen and (min-width: 768px) {
+    input[type="text"]::-webkit-input-placeholder, 
+    input[type="password"]::-webkit-input-placeholder, 
+    input[type="email"]::-webkit-input-placeholder {
+      color: #818a8c;
+    }
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
@@ -626,10 +633,15 @@
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
+    #error p {font-size: 1.9em;}
   }
 
 /* Tablets (landscape) ----------- */
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    input[type="text"]::-webkit-input-placeholder, 
+    input[type="password"]::-webkit-input-placeholder, 
+    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
+
     #register.page {width: 100%;}
     #register.page .ui {padding-left: 0; padding-right: 0;}
     #editprofile #view-account .ui section.bar-filter .bar-w-pic {height: 100%;}
@@ -649,10 +661,10 @@
     .date-birthday .select-wrap {margin-right: 6px;}
 
     /* Thumbnails Size's */
-      .search section.bar-filter .bar-w-pic,
+      /*.search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
       .bar-details section.bar-filter .bar-w-pic,
-      .bar-guides section.bar-filter .bar-w-pic {min-height: 175px;}
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 175px;}*/
   }
 
   /* iPad Only */
@@ -694,22 +706,19 @@
     body {min-height: 100%;}
     input[type="text"]::-webkit-input-placeholder, 
     input[type="password"]::-webkit-input-placeholder, 
-    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
-
-    input[type="text"]::-webkit-input-placeholder, 
-    input[type="password"]::-webkit-input-placeholder, 
-    input[type="email"]::-webkit-input-placeholder {color: #b3955f;}
+    input[type="email"]::-webkit-input-placeholder {color: #818a8c;}
 
     .ui .btn-create-with-fb {background-image: url("../images/UI/btn_fb-small@x2.jpg"); background-size: 119px 42px;}
     .ui input[type="text"].form-text, 
     .ui input[type="password"].form-text, 
     .ui input[type="email"].form-text {padding: 0 0 0 2%;}
+
   /* Thumbnails Size's */
-    .search section.bar-filter .bar-w-pic,
+    /*.search section.bar-filter .bar-w-pic,
     .profile section.bar-filter .bar-w-pic,
     .bar-details section.bar-filter .bar-w-pic,
-    .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}
-    .search section.bar-filter .bar-w-pic {height: 215px;}
+    .bar-guides section.bar-filter .bar-w-pic {min-height: 210px;}*/
+    /*.search section.bar-filter .bar-w-pic {height: 215px;}*/
     
   /* Globales ID's */
     #editprofile #edit-account {padding: 0 20px;}
