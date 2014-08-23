@@ -769,7 +769,7 @@ meta.SearchPage = function() {
                 that.context.$form_filter.find('.drop-btn a.minus').click();
 
                 // hide the select
-                //$('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
+                $('.city-drop-down').parent('.ui-dropdown-container').find('.selected').text('Choose a City');
                 // Select 2
                  $("select.select2-dropdown").select2('val' , '');
                  $("select.select2-dropdown").select2('data', null);

@@ -136,7 +136,7 @@
 
                         if (action === 'tip') {
                             $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
-                            $('#tips_submit').click();
+                            $('#tips').submit();
 
                             $.removeCookie('light_action');
                             $.removeCookie('light_type');

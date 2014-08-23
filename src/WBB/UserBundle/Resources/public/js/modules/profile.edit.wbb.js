@@ -88,22 +88,26 @@ $(function(){
 
     $(".auto-city").autocomplete({
         source: Routing.generate('wbb_cities_by_name'),
-        minLength: 2
+        minLength: 2,
+        select: function (event, ui) { }
     });
 
     $(".auto-bars").autocomplete({
         source: Routing.generate('wbb_bars_by_name'),
-        minLength: 2
+        minLength: 2,
+        select: function (event, ui) { }
     });
 
     $(".auto-brands").autocomplete({
         source: Routing.generate('wbb_tags_by_type_and_name', {'type': 6}),
-        minLength: 2
+        minLength: 2,
+        select: function (event, ui) { }
     });
 
     $(".auto-cocktails").autocomplete({
         source: Routing.generate('wbb_tags_by_type_and_name', {'type': 3}),
-        minLength: 2
+        minLength: 2,
+        select: function (event, ui) {  }
     });
 
 });
