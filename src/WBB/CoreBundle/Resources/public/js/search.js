@@ -36,7 +36,8 @@ meta.SearchPage = function() {
         currentFilterLoaded = "";
         currentQuery = "",
         from_loadMore = false,
-        currentTabActive = "Bar";
+        currentTabActive = "Bar",
+        totalLoadedImage = 0;
     that.config = {
         speed   : 500,
         easing  : 'easeInOutCubic',
@@ -77,7 +78,7 @@ meta.SearchPage = function() {
                                 htmlT +='<a href="' + (getBaseURL() ) +  url_link + '" class="overlay-link"></a>' ;
                                 htmlT +='<div class="color gradient"></div>' ;
                                 htmlT +='<div class="color gray"></div>' ;
-                                htmlT +='<img src="%img" class="image-search-item scale-with-grid" data-src="%img" alt="%title"/>';
+                                htmlT +='<img src="" class="image-search-item scale-with-grid" data-src="%img" alt="%title"/>';
                                 htmlT +='</article>' + (!ismobile ? '</div>' : '');
 
                                 return htmlT;
@@ -94,7 +95,7 @@ meta.SearchPage = function() {
 
                             htmlT +='        <a href="' + (getBaseURL() ) + url_link + '" class="overlay-link"></a>';
 
-                            htmlT += '        <img class="scale-with-grid image-search-item" src="%img" alt="%title"/>' ;
+                            htmlT += '        <img class="scale-with-grid image-search-item" src="" data-src="%img" alt="%title"/>' ;
                             htmlT += '    </div>' ;
                             htmlT += '</div>';
                             htmlT += ' <div class="nine columns s-margin-top">';
@@ -149,6 +150,24 @@ meta.SearchPage = function() {
         $('.screen-compteur').find('a').removeClass('active');
         $($('.screen-compteur').find('a')[cindex]).addClass('active');
     }
+
+    /*
+    * Image Loaded
+    */
+    that._imageLoaded = function ()
+    {
+        totalLoadedImage--;
+        $(this).removeAttr('data-src');
+        if (totalLoadedImage <= 0){
+
+            $('.loader-search-page').hide();
+
+            // Do Annimation
+            that._animate($(".load-target"), $('.dist-target .line:last-child').find('> *').not('br'));
+
+        }
+    }
+
     /*
     * Generate the Html list by response
     **/
@@ -358,10 +377,31 @@ meta.SearchPage = function() {
                 $(this).attr('src' , defaultImg);
             });
 
+
+            /*
+            * Load Image One By One
+            */
+            var imageToLoad =  $('.bars-w-pic-list').add('.details-barlist').find('img[data-src]');
+            totalLoadedImage = imageToLoad.length;
+
+            /*
+            * Hide All item on Start
+            */
+            $('.dist-target .line:last-child').find('> *').not('br').css({opacity:0, top:'6em', position:'relative'});
+
+            imageToLoad.each(function()
+            {
+                $(this).load(that._imageLoaded);
+                $(this).error(that._imageLoaded);
+                $(this).attr('src', $(this).data('src'));
+            });
+
+
+
             if(callbackHandler)
                 callbackHandler();
 
-               that._animate($(".load-target"), $('.dist-target .line:last-child').find('> *').not('br'));
+               //that._animate($(".load-target"), $('.dist-target .line:last-child').find('> *').not('br'));
 
             // disabled buttons compteurs
             var cursorIndex = 0;
@@ -375,6 +415,10 @@ meta.SearchPage = function() {
             // TODO : No results then show label no resluts
             // there is no more to loaded
             // hide buttons Load More
+
+            // hide Loader
+            $('.loader-search-page').hide();
+            
             $('.load-more-bars-btn').hide();
             $('.load-more-news-btn').hide();
             $('.bars-w-pic-list .dist-target').empty();
@@ -478,7 +522,9 @@ meta.SearchPage = function() {
             limit = 12;
         }
 
-        lastConsultedURL = '/app_dev.php/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
+        var ccibleURLing = ( URL_MODE != '/app_dev.php' ? '/' : URL_MODE );
+
+        lastConsultedURL = ccibleURLing + '/search?entity=' + currentFilter +'&' + q + (formatedUrl != '' ? ('&' + 
                             formatedUrl) : '')  + ( '&limit=' + limit) + ('&start=' + start) +
                             (formatedCity != '' ? formatedCity : '');
 
@@ -489,9 +535,6 @@ meta.SearchPage = function() {
        }
        // Then Load it
        globalAjaxCode =  $.get(lastConsultedURL, function(response){
-            //// ///////
-            $('.loader-search-page').hide();
-            ////// /////
             that.generateListByResults(response , callbackHandler);
         });
 
