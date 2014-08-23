@@ -2,7 +2,8 @@
     $(function(){
 
         $("select.select2-dropdown.finder-city").select2({
-            minimumResultsForSearch: 1
+            minimumResultsForSearch: 1,
+            dropdownCssClass : 'PUT_HERE_YOUR_CLASS'
         });
 
         // if the page is not bar Finder Result
@@ -104,16 +105,18 @@
                         <td></td>
                     </tr>
                     <tr>
+
                         <td width="200">
                             <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-city {% endif %} dark trigger-select-go" name="city" data-class="with-icon city">
                                 {% if not is_mobile() and not is_tablet() %} 
                                     <option></option>
                                 {% endif %}
                                 <option value="{{selected.city}}">
+
                                     {% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city}} {% else %} Choose a City {% endif %}
                                 </option>
                                 {% if(selected.city != 'all') %}
-                                    <option value="all">All</option>
+                                    <option class="cty0" value="all">All</option>
                                 {% endif %}
                                 {% if city %}
                                     <option value="{{ city.slug }}">{{ city.name }}</option>

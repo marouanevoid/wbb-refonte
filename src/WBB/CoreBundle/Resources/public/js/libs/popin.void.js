@@ -119,7 +119,11 @@ PopIn.resize = function(target){
 
     // bonus 
     // focus on the first input
+
     $(PopIn.dom.popin).find('input:text').first().focus();
+    if(PopIn.dom.popin.find('#fos_user_registration_form_username').length){
+        $('#fos_user_registration_form_username').focus();
+    }
 
 }
 
