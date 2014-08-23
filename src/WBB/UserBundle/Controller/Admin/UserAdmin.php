@@ -138,7 +138,6 @@ class UserAdmin extends Admin
                             'ROLE_USER'             =>  'User'
                         )
                     ))
-                    ->add('locked', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
                     ->add('confirmed', null, array(
                         'read_only' => true,
