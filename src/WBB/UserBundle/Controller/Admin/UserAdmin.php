@@ -67,6 +67,11 @@ class UserAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $isPasswordRequired = false;
+        if (!$this->id($this->getSubject())) {
+            $isPasswordRequired = true;
+        }
+
         $generatePasswordBtn = '<input type="button" id="pwd-generator" class="pwd-generator btn" value="Generate Password" />';
 
         $formMapper
@@ -104,10 +109,10 @@ class UserAdmin extends Admin
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
                 ->add('plainPassword', 'text', array(
-                        'required' => false,
-                        'help' => $generatePasswordBtn.'Mandatory',
-                        'label' => 'Password *',
-                        'attr' => array(
+                        'required'  => $isPasswordRequired,
+                        'help'      => $generatePasswordBtn.'Mandatory',
+                        'label'     => ($isPasswordRequired)?'Password':'Password *',
+                        'attr'      => array(
                             'class' => 'span5 pwd-field'
                         )
                     )
