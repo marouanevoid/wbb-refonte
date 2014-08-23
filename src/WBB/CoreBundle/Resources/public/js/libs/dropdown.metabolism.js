@@ -161,8 +161,9 @@ meta.Dropdown = function(config){
             $dropdown.find('select').on('change', function()
             {
                 //$dropdown.css({width : $dropdown.width()});
-
-                alert($(this).find('option:selected').text() );
+                    var ctext  = $($(this).find('option')[this.selectedIndex]).text(),
+                        cval = $($(this).find('option')[this.selectedIndex]).val();
+                alert('text : ' + ctext + ' : val : ' + cval );
 
                 that.config.$dropdown_value.text("");
                 that.config.$dropdown_value.text( $(this).find('option:selected').text() );
