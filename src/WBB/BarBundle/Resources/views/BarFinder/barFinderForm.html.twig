@@ -19,29 +19,6 @@
         $("select.select2-dropdown.finder-city").off('change').on('change' , function(){
                 $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
         });
-
-        // if the page is not bar Finder Result
-        // Then clear the select
-        // if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-city").length ){
-        //     $("select.select2-dropdown.finder-city").select2({
-        //         placeholder : 'Choose a City',
-        //         allowClear: true,
-        //         dropdownCssClass : 'select2-city dark'
-        //     });
-
-        //     $("select.select2-dropdown.finder-city").select2('val' , '');
-        //     $("select.select2-dropdown.finder-city").select2('data', null);
-
-        //             /*
-        //     * Add Class Active on Change
-        //     */
-
-        //     $("select.select2-dropdown.finder-city").off('change').on('change' , function(){
-        //             $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
-        //     });
-        // }        
-
-
         /*
         * Select Choose with Who
         **/
@@ -60,29 +37,6 @@
         $("select.select2-dropdown.finder-choose").off('change').on('change' , function(){
                 $($("select.select2-dropdown.finder-choose").select2("container")).addClass('active');
         });
-
-        // if the page is not bar Finder Result
-        // Then clear the select
-        // if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-choose").length ){
-        //     $("select.select2-dropdown.finder-choose").select2({
-        //         placeholder : 'Choose with who',
-        //         allowClear: true,
-        //         dropdownCssClass : 'select2-friends dark'
-        //     });
-
-        //     $("select.select2-dropdown.finder-choose").select2('val' , '');
-        //     $("select.select2-dropdown.finder-choose").select2('data', null);
-
-        //     /*
-        //     * Add Class Active on Change
-        //     */
-
-        //     $("select.select2-dropdown.finder-choose").off('change').on('change' , function(){
-        //             $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
-        //     });
-        // }
-
-
         // test if can add class Active
         if( $("select.select2-dropdown.finder-choose").val() != "" ){
             $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
