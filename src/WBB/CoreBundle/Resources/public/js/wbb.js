@@ -150,7 +150,11 @@ function fillInForm(formId) {
             FB.api('/me', function(response) {
                 console.log(response);
                 var action = $(formId).attr('action');
-                $(formId).attr('action', action + '?fromFb=1');
+                if (action.indexOf('fromFb') > -1) {
+                    $(formId).attr('action', action.replace('?fromFb=1', ''));
+                } else {
+                    $(formId).attr('action', action + '?fromFb=1');
+                }
                 if (formId === '#register_form_full') {
                     $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
                     $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
@@ -183,14 +187,45 @@ function fillInForm(formId) {
                     var year = (parseInt(birthdayParts[2]));
                     var locationParts = response.location.name.split(',');
                     var country = locationParts[1].trim();
-                    $('#fos_user_registration_form_country').find('option').each(function() {
-                        if ($(this).text().trim() === country) {
-                            $(this).attr('selected', 'selected').change();
-                        }
-                    });
-                    $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
-                    $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
-                    $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+
+                    var focusOnOption = function(sell , ooptionval,bytext){
+                        sell.find('option').each(function(){
+                            if(bytext){
+                                if($(this).text().trim() == ooptionval ) {
+                                    sell.val( $(this).val() );
+                                    sell.change();
+                                }
+                            }else{
+                                if($(this).val() == ooptionval ) {
+                                    sell.val($(this).val());
+                                    sell.change();
+                                }
+                            }
+                        });
+                    };
+
+                    if(ismobile || istablet){
+                        focusOnOption($('#fos_user_registration_form_country') , country , true);
+                    }else{
+                        $('#fos_user_registration_form_country').find('option').each(function() {
+                            if ($(this).text().trim() === country) {
+                                $(this).attr('selected', 'selected').change();
+                            }
+                        });
+
+
+                    }
+
+                    if(ismobile || istablet){
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_month') , month );
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_day') , day );
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_year') , year );
+
+                    }else{
+                        $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
+                        $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
+                        $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+                    }
                 }
             });
         } else {
