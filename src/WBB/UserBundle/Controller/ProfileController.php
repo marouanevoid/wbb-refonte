@@ -67,7 +67,7 @@ class ProfileController extends ContainerAware
         if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
             $form = $formFactory->createForm(false, array('Default', 'registration_full'));
         }else{
-            $form = $formFactory->createForm(true, array('no-validation'));
+            $form = $formFactory->createForm(true, array('profile_light'));
         }
 
         $form->setData($user);
@@ -102,7 +102,7 @@ class ProfileController extends ContainerAware
                 if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
                     $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
                 }else{
-                    $formErrors = $this->container->get('validator')->validate($form, array('Default'));
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default', 'profile_light'));
                 }
 
                 $fields = array();
@@ -112,7 +112,7 @@ class ProfileController extends ContainerAware
                     $fields[] = str_replace('data.', '', $formError->getPropertyPath());
                     if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                         $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank') {
+                    } elseif($formError->getMessage() != 'not.blank' && !in_array($formError->getMessage(), $messages)) {
                         $messages[] = $formError->getMessage();
                     }
                 }
