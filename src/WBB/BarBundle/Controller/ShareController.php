@@ -50,12 +50,34 @@ class ShareController extends Controller
 
             $this->get('wbb_bar.share.mailer')->sendShareBar($data);
             return $this->render('WBBBarBundle:Share:share_done.html.twig');
-        }
+        } else {
+            $formErrors = null;
+            $formErrors = $this->container->get('validator')->validate($form, array('Default'));
 
-        return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
-            'form'  => $form->createView(),
-            'url'   => $this->get('router')->generate('wbb_share_email_bar_send', array('id' => $id))
-        ));
+            $fields = array();
+            $messages = array();
+
+            foreach ($formErrors as $formError) {
+                $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                    $messages[] = 'Please complete all required fields';
+                } elseif($formError->getMessage() == 'Please enter a valid email address' && !in_array($formError->getMessage(), $messages)) {
+                    $messages[] = $formError->getMessage();
+                }
+            }
+
+            if (in_array('Please complete all required fields', $messages) && in_array('Please enter a valid email address', $messages)) {
+                $key = array_search('Please enter a valid email address', $messages);
+                unset($messages[$key]);
+                $messages = array_values($messages);
+            }
+
+            $errors = array(
+                'fields' => $fields,
+                'messages' => $messages
+            );
+            return new JsonResponse(array('code' => 400, 'errors' => $errors));
+        }
     }
 
     public function shareNewsAction($id, Request $request)
@@ -73,12 +95,34 @@ class ShareController extends Controller
 
             $this->get('wbb_bar.share.mailer')->sendShareNews($data);
             return $this->render('WBBBarBundle:Share:share_done.html.twig');
-        }
+        } else {
+            $formErrors = null;
+            $formErrors = $this->container->get('validator')->validate($form, array('Default'));
 
-        return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
-            'form'  => $form->createView(),
-            'url'   => $this->get('router')->generate('wbb_share_email_news_send', array('id' => $id))
-        ));
+            $fields = array();
+            $messages = array();
+
+            foreach ($formErrors as $formError) {
+                $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                    $messages[] = 'Please complete all required fields';
+                } elseif($formError->getMessage() == 'Please enter a valid email address' && !in_array($formError->getMessage(), $messages)) {
+                    $messages[] = $formError->getMessage();
+                }
+            }
+
+            if (in_array('Please complete all required fields', $messages) && in_array('Please enter a valid email address', $messages)) {
+                $key = array_search('Please enter a valid email address', $messages);
+                unset($messages[$key]);
+                $messages = array_values($messages);
+            }
+
+            $errors = array(
+                'fields' => $fields,
+                'messages' => $messages
+            );
+            return new JsonResponse(array('code' => 400, 'errors' => $errors));
+        }
     }
 
     public function shareBestofAction($id, Request $request)
@@ -96,11 +140,33 @@ class ShareController extends Controller
 
             $this->get('wbb_bar.share.mailer')->sendShareBestof($data);
             return $this->render('WBBBarBundle:Share:share_done.html.twig');
-        }
+        } else {
+            $formErrors = null;
+            $formErrors = $this->container->get('validator')->validate($form, array('Default'));
 
-        return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
-            'form'  => $form->createView(),
-            'url'   => $this->get('router')->generate('wbb_share_email_bestof_send', array('id' => $id))
-        ));
+            $fields = array();
+            $messages = array();
+
+            foreach ($formErrors as $formError) {
+                $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                    $messages[] = 'Please complete all required fields';
+                } elseif($formError->getMessage() == 'Please enter a valid email address' && !in_array($formError->getMessage(), $messages)) {
+                    $messages[] = $formError->getMessage();
+                }
+            }
+
+            if (in_array('Please complete all required fields', $messages) && in_array('Please enter a valid email address', $messages)) {
+                $key = array_search('Please enter a valid email address', $messages);
+                unset($messages[$key]);
+                $messages = array_values($messages);
+            }
+
+            $errors = array(
+                'fields' => $fields,
+                'messages' => $messages
+            );
+            return new JsonResponse(array('code' => 400, 'errors' => $errors));
+        }
     }
 }
