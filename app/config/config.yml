@@ -92,7 +92,7 @@ fos_user:
     profile:
         form:
             type: wbb_user_profile
-            validation_groups:  [Default, registration_full, Profile]
+            validation_groups:  [Default, registration_full, Profile, profile_light]
     change_password:
         form:
             type: wbb_user_change_password
