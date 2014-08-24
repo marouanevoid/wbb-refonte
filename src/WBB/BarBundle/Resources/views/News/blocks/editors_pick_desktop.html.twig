@@ -21,9 +21,9 @@
 
         <!-- 4 COLS -->
         <aside class="articles padding four columns">
-            {%  if not ads.bigAd and ads.smallAd%}<div class="margin-bottom-30">{% endif %}
-                {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
-            {%  if not ads.bigAd and ads.smallAd%}</div>{% endif %}
+            {%  if not ads.bigAd and ads.smallAd %}<div class="margin-bottom-30">{% endif %}
+                {% include 'WBBBarBundle:Ads:show.html.twig' with {'ad': ads.ad, 'format': ads.size, 'NLP': true } %}
+            {%  if not ads.bigAd and ads.smallAd %}</div>{% endif %}
 
             {%  if not ads.bigAd and ads.smallAd %}
                 {% for n in interviews|slice(1,1) %}
