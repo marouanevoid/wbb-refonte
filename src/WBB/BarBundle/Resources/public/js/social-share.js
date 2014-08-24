@@ -67,6 +67,13 @@ $(document).ready(function(){
         //         PopIn.dom.mask.show();
         // });
 
+        // close this popoin on mobile
+        // when we clicked on email share
+        $('#share-pop .email-share').on('click' , function(){
+            // trigger click on close popin
+            $("#share-pop").fadeOut("slow");
+        });
+
     }
 
     $("#close-pop").click(function(){
