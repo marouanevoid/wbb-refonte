@@ -6,8 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * ShareFormType
@@ -20,13 +22,15 @@ class ShareFormType extends AbstractType
 
         $builder
             ->add('id', 'hidden', array('data' => $id))
-            ->add('firstName', 'text', array('attr' => array('placeholder' => 'Friend\'s first name')))
-            ->add('lastName', 'text', array('attr' => array('placeholder' => 'Friend\'s last name')))
-            ->add('emailFrom', 'email', array(
+            ->add('firstName', 'text', array('required' => false,'attr' => array('placeholder' => 'Friend\'s first name')))
+            ->add('lastName', 'text', array('required' => false,'attr' => array('placeholder' => 'Friend\'s last name')))
+            ->add('emailFrom', 'text', array(
+                    'required'    => false,
                     'constraints' => array(new Email(array('checkMX' => true))),
                     'attr' => array('placeholder' => 'Your email')
                 )
-            )->add('emailTo', 'email', array(
+            )->add('emailTo', 'text', array(
+                    'required'    => false,
                     'constraints' => array(new Email(array('checkMX' => true))),
                     'attr' => array('placeholder' => 'Friend\'s email')
                 )
@@ -43,14 +47,35 @@ class ShareFormType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $constraintsCollection = new Collection(array(
+            'firstName' => array(
+                new NotBlank(array('message' => 'not.blank'))
+            ),
+            'lastName' => array(
+                new NotBlank(array('message' => 'not.blank'))
+            ),
+            'emailFrom' => array(
+            ),
+            'emailTo' => array(
+                new NotBlank(array('message' => 'Please enter a valid email address')),
+                new Email(array('message' => 'Please enter a valid email address'))
+            ),
+            'content' => array(
+                new NotBlank(array('message' => 'not.blank'))
+            ),'id' => array(
+                new NotBlank(array('message' => 'not.blank'))
+            )
+        ));
+
+
+
         $resolver
             ->setDefaults(array(
-            'label'       => false,
-            'translation_domain' => 'WBBBarBundle',
-            'constraints' => array(
-                    new NotBlank()
+                'label'       => false,
+                'translation_domain' => 'WBBBarBundle',
+                'constraints' => $constraintsCollection
                 )
-            ))
+            )
             ->setRequired(array(
                 'id',
             ))
