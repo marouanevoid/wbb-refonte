@@ -102,7 +102,9 @@
 <div class="container bars force-load">
     {% if not bars %}
         {% if not is_mobile() or is_tablet() %}
-            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
+            <div class="four columns offset-by-eight" style="display:none;">
+                {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
+            </div>
         {% endif %}
     {% endif %}
 
