@@ -180,13 +180,13 @@ class BestOfRepository extends EntityRepository
 
         if($user){
             $qb
-                ->addSelect('-c.name AS HIDDEN inverseNames')
+//                ->addSelect('-c.name AS HIDDEN inverseNames')
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
                 ->andWhere($qb->expr()->eq('uf.id', $user->getId()))
-                ->orderBy('inverseNames', 'DESC')
-                ->addOrderBy($this->getAlias().'.name', 'ASC')
-                ->groupBy($this->getAlias())
-                ->addGroupBy('c')
+//                ->orderBy('inverseNames', 'DESC')
+                ->addOrderBy('c.name', 'ASC')
+//                ->groupBy($this->getAlias())
+//                ->addGroupBy('c')
             ;
         }
 
