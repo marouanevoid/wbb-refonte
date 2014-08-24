@@ -19,6 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="wbb_user")
  * @JMS\ExclusionPolicy("all")
  * @UniqueEntity("facebookId", message="This facebook account is already used", groups={"registration_fb"})
+ * @UniqueEntity("username", message="Sorry, this username has already been taken", groups={"profile_light"})
  */
 class User extends BaseUser
 {
@@ -1254,8 +1255,13 @@ class User extends BaseUser
             if (strlen($this->plainPassword) < 6) {
                 $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
             } else {
-                if (!preg_match('/[A-Za-z]/', $this->plainPassword) || !preg_match('/[0-9]/', $this->plainPassword)) {
-                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
+                $chars = str_split($this->plainPassword);
+                foreach ($chars as $char) {
+                    $asciiCode = ord($char);
+                    if (!(($asciiCode >= 97 && $asciiCode <= 122) || ($asciiCode >= 65 && $asciiCode <= 90) || ($asciiCode >= 48 && $asciiCode <= 57))) {
+                        $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
+                        break;
+                    }
                 }
             }
         }

@@ -4,9 +4,9 @@ namespace WBB\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
-use WBB\BarBundle\Entity\Tag;
+use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileLightFormType extends BaseType
 {
@@ -29,7 +29,7 @@ class ProfileLightFormType extends BaseType
     {
         $resolver->setDefaults(array(
             'data_class' => $this->class,
-            'intention'  => 'profile',
+            'intention'  => 'profile'
         ));
     }
 
@@ -52,6 +52,7 @@ class ProfileLightFormType extends BaseType
                 'context'  => 'avatar',
                 'required' => false
             ))
+            ->add('username', null, array('required' => false))
         ;
     }
 }

@@ -130,13 +130,13 @@ wbb.LoadProfile = function() {
             that.context.display = $(this).val();
             if(that.context.content === 'bars'){
                 that.config.bars.offset = 0;
-                that.config.bars.$more.show();
+                //that.config.bars.$more.show();
                 that.context.$barsTarget.empty();
                 that._request(that.context.$barsTarget, that.config.bars);
                 that.config.bars.offset += that.config.bars.limit;
             }else{
                 that.config.bestofs.offset = 0;
-                that.config.bestofs.$more.show();
+                //that.config.bestofs.$more.show();
                 that.context.$bestofsTarget.empty();
                 that._request(that.context.$bestofsTarget, that.config.bestofs);
                 that.config.bestofs.offset += that.config.bestofs.limit;
@@ -149,13 +149,13 @@ wbb.LoadProfile = function() {
             that.context.filter = $(this).val();
             if(that.context.content === 'bars'){
                 that.config.bars.offset = 0;
-                that.config.bars.$more.show();
+                //that.config.bars.$more.show();
                 that.context.$barsTarget.empty();
                 that._request(that.context.$barsTarget, that.config.bars);
                 that.config.bars.offset += that.config.bars.limit;
             }else{
                 that.config.bestofs.offset = 0;
-                that.config.bestofs.$more.show();
+                //that.config.bestofs.$more.show();
                 that.context.$bestofsTarget.empty();
                 that._request(that.context.$bestofsTarget, that.config.bestofs);
                 that.config.bestofs.offset += that.config.bestofs.limit;
@@ -239,7 +239,7 @@ wbb.LoadProfile = function() {
             //e.cible = window.cibleDeleted;
 
             if(e.cible.type =='bar'){
-                descrimentFunction(filterprof.find('.Bars'), e.cible.type);
+                descrimentFunction(filterprof.find('.js-tab-show-bar').closest('a'), e.cible.type);
                 var itemToDelete = $('.list-bars').find("a[data-id= " + e.cible.id + "]").parents(".bar-w-pic");
                 
                 if(! ismobile ){
@@ -254,14 +254,14 @@ wbb.LoadProfile = function() {
                 that._request(that.context.$barsTarget, {limit : 1 , offset : that.config.bars.offset-1 , filter : that.context.filter , display : that.context.display , $more : that.config.bars.$more});
             }
             if(e.cible.type =='best of'){
-                descrimentFunction(filterprof.find('.collections'), e.cible.type);
+                descrimentFunction(filterprof.find('.js-tab-show-bestof').closest('a'), e.cible.type);
 
                 $('.list-bestof').find("a[data-id= " + e.cible.id + "]").parents(".bestof-item-container").remove();
                 that.context.content = 'bestofs';
                 that._request(that.context.$bestofsTarget, {limit : 1 , offset : that.config.bestofs.offset-1 , filter : that.context.filter , display : that.context.display , $more : that.config.bestofs.$more});
             }
             if(e.cible.type == 'tip'){
-                descrimentFunction(filterprof.find('.tips'), e.cible.type);
+                descrimentFunction(filterprof.find('.js-tab-show-tips').closest('a'), e.cible.type);
                 that.context.content = 'tips';
                 that._request(that.context.$tipsTarget, {limit : 1 , offset : that.config.tips.offset-1 , filter : 'date' , display : 'grid' , $more : that.config.tips.$more});
             }
@@ -328,7 +328,8 @@ wbb.LoadProfile = function() {
                 }
                 if(msg.nbResults < config.limit || msg.difference == 0)
                     config.$more.hide();
-
+                else
+                    config.$more.show();
                 $target.find('img[data-src]').each(function()
                 {
                     $(this).load(that._imageLoaded);

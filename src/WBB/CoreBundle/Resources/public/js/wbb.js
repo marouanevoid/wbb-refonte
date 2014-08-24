@@ -73,11 +73,32 @@ $(document).ready(function() {
             url: element.attr('action'),
             method: 'GET',
             data: element.serialize(),
-            success: function(html) {
-                // Set the PopIn Loading Flag
+            success: function(data) {
                 PopIn.endLoading();
-                $('.popin-block').html(html);
-                $('#show-popin').click();
+                if(data.code == 400){
+                    console.log('test log 400');
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+                    $('#message').show();
+                    $('#wbb_share_form #message').find('ul').remove();
+                    var errorsList = $('#wbb_share_form #message div').show().append('<ul></ul>').parent();
+                    for (var i = 0; i < errors.length; i++) {
+                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    // scroll to message on Mobile
+                    animateToPopIn( $('#message').offset().top );
+                    var idPrefix = '#wbb_barbundle_share_type_';
+                    $('#wbb_share_form input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    for (var i = 0; i < fields.length; i++) {
+                        $(idPrefix + fields[i]).addClass('error');
+                    }
+                }else{
+                    $('.popin-block').html(data);
+                    $('#show-popin').click();
+                }
+
                 // add listner on click send mail
                 $('.popin-block').find('form').off('submit').on('submit' , function (e) {
                         e.preventDefault();
@@ -93,7 +114,6 @@ $(document).ready(function() {
     }
 
     $('.email-share').on('click', function(e) {
-//        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).data('href');
@@ -130,7 +150,11 @@ function fillInForm(formId) {
             FB.api('/me', function(response) {
                 console.log(response);
                 var action = $(formId).attr('action');
-                $(formId).attr('action', action + '?fromFb=1');
+                if (action.indexOf('fromFb') > -1) {
+                    $(formId).attr('action', action.replace('?fromFb=1', ''));
+                } else {
+                    $(formId).attr('action', action + '?fromFb=1');
+                }
                 if (formId === '#register_form_full') {
                     $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
                     $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
@@ -163,14 +187,45 @@ function fillInForm(formId) {
                     var year = (parseInt(birthdayParts[2]));
                     var locationParts = response.location.name.split(',');
                     var country = locationParts[1].trim();
-                    $('#fos_user_registration_form_country').find('option').each(function() {
-                        if ($(this).text().trim() === country) {
-                            $(this).attr('selected', 'selected').change();
-                        }
-                    });
-                    $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
-                    $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
-                    $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+
+                    var focusOnOption = function(sell , ooptionval,bytext){
+                        sell.find('option').each(function(){
+                            if(bytext){
+                                if($(this).text().trim() == ooptionval ) {
+                                    sell.val( $(this).val() );
+                                    sell.change();
+                                }
+                            }else{
+                                if($(this).val() == ooptionval ) {
+                                    sell.val($(this).val());
+                                    sell.change();
+                                }
+                            }
+                        });
+                    };
+
+                    if(ismobile || istablet){
+                        focusOnOption($('#fos_user_registration_form_country') , country , true);
+                    }else{
+                        $('#fos_user_registration_form_country').find('option').each(function() {
+                            if ($(this).text().trim() === country) {
+                                $(this).attr('selected', 'selected').change();
+                            }
+                        });
+
+
+                    }
+
+                    if(ismobile || istablet){
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_month') , month );
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_day') , day );
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_year') , year );
+
+                    }else{
+                        $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
+                        $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
+                        $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+                    }
                 }
             });
         } else {
@@ -193,7 +248,7 @@ function initRegisterLoginForms() {
 
         FB.getLoginStatus(function(response) {
             // Hide Loading
-            $("#register-light #login_form").removeClass('loading');
+            //$("#register-light #login_form").removeClass('loading');
 
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
@@ -329,7 +384,11 @@ function initRegisterLoginForms() {
                         $.cookie('light_from', 'login');
 
                         $.cookie('just_loggedin', true);
-                        window.location.reload();
+                        if(loginBackUrl == '0') {
+                            window.location.reload();
+                        } else {
+                            window.location.href = loginBackUrl;
+                        }
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

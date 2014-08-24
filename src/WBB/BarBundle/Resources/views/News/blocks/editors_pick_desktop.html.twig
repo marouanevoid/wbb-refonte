@@ -21,12 +21,15 @@
 
         <!-- 4 COLS -->
         <aside class="articles padding four columns">
-            {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
-            {%  if not ads.bigAd and ads.smallAd%}
+            {%  if not ads.bigAd and ads.smallAd%}<div class="margin-bottom-30">{% endif %}
+                {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
+            {%  if not ads.bigAd and ads.smallAd%}</div>{% endif %}
+
+            {%  if not ads.bigAd and ads.smallAd %}
                 {% for n in interviews|slice(1,1) %}
                     {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
                 {% endfor %}
-            {% else %}
+            {% elseif not ads.bigAd %}
                 {% for n in interviews|slice(1,1) %}
                     {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 , firstchild : true } %}
                 {% endfor %}
@@ -65,8 +68,8 @@
                 {% set newsIndex = 0 %}
                 {% if ads.bigAd %}
                     {% for n in interviews|slice(1,1) %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true  } %}
-                        {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig" with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true  } %}
+                        {# {% include "WBBBarBundle:News/blocks:article.html.twig" with { 'n' : n } %} #}
                     {% endfor %}
                     {% set newsIndex = 1 %}
                     {% set cursorIndex = 0 %}

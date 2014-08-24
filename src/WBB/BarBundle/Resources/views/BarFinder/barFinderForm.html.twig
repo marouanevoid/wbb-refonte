@@ -7,20 +7,39 @@
 
         $("select.select2-dropdown.finder-city").select2({
             minimumResultsForSearch: 1,
-            dropdownCssClass : 'PUT_HERE_YOUR_CLASS'
+            placeholder : 'Choose a City',
+            allowClear: true,
+            dropdownCssClass : 'select2-city dark'
+        });
+
+        /*
+        * Add Class Active on Change
+        */
+
+        $("select.select2-dropdown.finder-city").off('change').on('change' , function(){
+                $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
         });
 
         // if the page is not bar Finder Result
         // Then clear the select
-        if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-city").length ){
-            $("select.select2-dropdown.finder-city").select2({
-                placeholder : 'Choose a City',
-                allowClear: true
-            });
+        // if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-city").length ){
+        //     $("select.select2-dropdown.finder-city").select2({
+        //         placeholder : 'Choose a City',
+        //         allowClear: true,
+        //         dropdownCssClass : 'select2-city dark'
+        //     });
 
-            $("select.select2-dropdown.finder-city").select2('val' , '');
-            $("select.select2-dropdown.finder-city").select2('data', null);
-        }        
+        //     $("select.select2-dropdown.finder-city").select2('val' , '');
+        //     $("select.select2-dropdown.finder-city").select2('data', null);
+
+        //             /*
+        //     * Add Class Active on Change
+        //     */
+
+        //     $("select.select2-dropdown.finder-city").off('change').on('change' , function(){
+        //             $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
+        //     });
+        // }        
 
 
         /*
@@ -29,19 +48,48 @@
 
         $("select.select2-dropdown.finder-choose").select2({
             minimumResultsForSearch: 1,
-            dropdownCssClass : 'PUT_HERE_YOUR_CLASS'
+            dropdownCssClass : 'select2-friends dark',
+            placeholder : 'Choose with who',
+            allowClear: true
+        });
+
+        /*
+        * Add Class Active on Change
+        */
+
+        $("select.select2-dropdown.finder-choose").off('change').on('change' , function(){
+                $($("select.select2-dropdown.finder-choose").select2("container")).addClass('active');
         });
 
         // if the page is not bar Finder Result
         // Then clear the select
-        if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-choose").length ){
-            $("select.select2-dropdown.finder-choose").select2({
-                placeholder : 'Choose with who',
-                allowClear: true
-            });
+        // if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-choose").length ){
+        //     $("select.select2-dropdown.finder-choose").select2({
+        //         placeholder : 'Choose with who',
+        //         allowClear: true,
+        //         dropdownCssClass : 'select2-friends dark'
+        //     });
 
-            $("select.select2-dropdown.finder-choose").select2('val' , '');
-            $("select.select2-dropdown.finder-choose").select2('data', null);
+        //     $("select.select2-dropdown.finder-choose").select2('val' , '');
+        //     $("select.select2-dropdown.finder-choose").select2('data', null);
+
+        //     /*
+        //     * Add Class Active on Change
+        //     */
+
+        //     $("select.select2-dropdown.finder-choose").off('change').on('change' , function(){
+        //             $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
+        //     });
+        // }
+
+
+        // test if can add class Active
+        if( $("select.select2-dropdown.finder-choose").val() != "" ){
+            $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
+        }
+
+        if( $("select.select2-dropdown.finder-city").val() != "" ){
+            $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
         }
 
 
@@ -112,6 +160,7 @@
         section.bar-finder .ui-dropdown.btn-radius.with-icon {width: 176px!important;}
     </style>
 {% endif %}
+
 <section class="bar-finder">
     <div class="container">
         <img class="finder-arrow" src="{{ asset('bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
@@ -134,11 +183,21 @@
 
                         <td width="200">
                             <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-city {% endif %} dark trigger-select-go" name="city" data-class="with-icon city">
+
+                                {% if is_tablet() %}
+                                    <option value="{{selected.outWith}}">{% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city  }} {% else %}Choose a city {% endif %}</option>
+                                {% endif %}
+
                                 {% if not is_mobile() and not is_tablet() %} 
                                     <option></option>
                                 {% endif %}
-
-                                    <option class="cty0" value="all" {% if(selected.city == 'all') %} selected="selected" {% endif %}>All</option>
+                                {% if is_tablet() and  selected.city !='all' %}
+                                    <option class="cty0" value="all" {% if selected.city == 'all' %} selected="selected" {% endif %}>All</option>
+                                {% else %}
+                                    {% if not is_tablet() and not is_mobile() %}
+                                    <option class="cty0" value="all" {% if selected.city == 'all' %} selected="selected" {% endif %}>All</option>
+                                    {% endif %}
+                                {% endif %}
                                 
                                 {% if city %}
                                     <option value="{{ city.slug }}">{{ city.name }}</option>
@@ -161,12 +220,20 @@
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
                         <td width="200">
                             <select class=" friend {% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-choose {% endif %} dark trigger-select-go" name="go_out" data-class="with-icon friend">
-                                {# <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option> #}
+                                {% if is_tablet() %}
+                                <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option>
+                                {% endif %}
                                {% if not is_mobile() and not is_tablet() %} 
                                     <option></option>
                                 {% endif %}
-                                     <option value="all" {% if(selected.outWith == 'all') %}  selected=" " {% endif %}>All</option>
-                                
+                                {% if is_tablet() and  selected.outWith !='all' %}
+                                    <option value="all" {% if selected.outWith == 'all' %}  selected="selected" {% endif %}>All</option>
+                                {% else %}
+                                    {% if not is_tablet() and not is_mobile() %}
+                                    <option value="all" {% if selected.outWith == 'all' %} selected="selected" {% endif %}>All</option>
+                                    {% endif %}
+                                {% endif %}
+
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}"
                                     {% if selected.outWith ==  tag.id %} selected="selected"  {% endif %}

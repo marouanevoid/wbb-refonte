@@ -1,6 +1,7 @@
 {% if b %}
     <article class="bestof">
-        <a data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star brown {% if is_favorite(app.user, b) %}active changed{% else %}dark{% endif %}"></a>
+        <h1>Hey there !</h1>
+        <a data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star dark {% if is_favorite(app.user, b) %}active changed{% endif %}"></a>
         <div class="txt vcenter">
             <div class="circle vcenter">
                 {% if city is defined %}
