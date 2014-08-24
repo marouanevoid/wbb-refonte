@@ -110,7 +110,9 @@
 
     {% for b in bars %}
         {% if loop.index==3 and (not is_mobile() or is_tablet()) %}
+            <div class="four columns" style="display:none;">
                 {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
+            </div>
         {% endif %}
         <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}
