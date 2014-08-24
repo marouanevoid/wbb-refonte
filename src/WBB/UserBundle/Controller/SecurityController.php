@@ -27,7 +27,10 @@ class SecurityController extends Controller
     public function loginAction(Request $request, $light = false)
     {
         if (!$request->isXmlHttpRequest()) {
-            return $this->redirect($this->generateUrl('homepage', array('login' => 1)));
+            return $this->redirect($this->generateUrl('homepage', array(
+                                'login' => 1,
+                                'back_url' => $request->getSession()->get('_security.main.target_path')
+            )));
         }
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
