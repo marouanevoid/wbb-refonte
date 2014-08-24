@@ -19,6 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="wbb_user")
  * @JMS\ExclusionPolicy("all")
  * @UniqueEntity("facebookId", message="This facebook account is already used", groups={"registration_fb"})
+ * @UniqueEntity("username", message="Sorry, this username has already been taken", groups={"profile_light"})
  */
 class User extends BaseUser
 {
