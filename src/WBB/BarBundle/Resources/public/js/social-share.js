@@ -28,7 +28,15 @@ $(document).on('click', '.twitter-share',function(e){
 
 $(document).ready(function(){
     if(!ismobile){
-        $("#share").hover(function() {
+        $("#share").hover(function(e) {
+            /*
+            var share_content = $(".wrap-share");
+            var Element_pageX = $(this).e.pageX;
+            var Element_pageY = $(this).e.pageY;
+
+            share_content.css('left', $Element_pageX);
+            share_content.css('top', $Element_pageY);
+            */
             $(".wrap-share").fadeIn("slow");
             if ($(this).hasClass("popup")) {
                 $(".mask").fadeIn("slow");

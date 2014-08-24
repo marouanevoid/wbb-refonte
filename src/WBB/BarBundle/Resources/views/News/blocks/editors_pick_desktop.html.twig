@@ -25,11 +25,11 @@
                 {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
             {%  if not ads.bigAd and ads.smallAd%}</div>{% endif %}
 
-            {%  if not ads.bigAd and ads.smallAd%}
+            {%  if not ads.bigAd and ads.smallAd %}
                 {% for n in interviews|slice(1,1) %}
                     {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
                 {% endfor %}
-            {% else %}
+            {% elseif not ads.bigAd %}
                 {% for n in interviews|slice(1,1) %}
                     {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 , firstchild : true } %}
                 {% endfor %}

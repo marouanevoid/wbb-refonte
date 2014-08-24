@@ -24,12 +24,7 @@ class ShareFormType extends AbstractType
             ->add('id', 'hidden', array('data' => $id))
             ->add('firstName', 'text', array('required' => false,'attr' => array('placeholder' => 'Friend\'s first name')))
             ->add('lastName', 'text', array('required' => false,'attr' => array('placeholder' => 'Friend\'s last name')))
-            ->add('emailFrom', 'text', array(
-                    'required'    => false,
-                    'constraints' => array(new Email(array('checkMX' => true))),
-                    'attr' => array('placeholder' => 'Your email')
-                )
-            )->add('emailTo', 'text', array(
+            ->add('emailTo', 'text', array(
                     'required'    => false,
                     'constraints' => array(new Email(array('checkMX' => true))),
                     'attr' => array('placeholder' => 'Friend\'s email')
@@ -53,8 +48,6 @@ class ShareFormType extends AbstractType
             ),
             'lastName' => array(
                 new NotBlank(array('message' => 'not.blank'))
-            ),
-            'emailFrom' => array(
             ),
             'emailTo' => array(
                 new NotBlank(array('message' => 'Please enter a valid email address')),
