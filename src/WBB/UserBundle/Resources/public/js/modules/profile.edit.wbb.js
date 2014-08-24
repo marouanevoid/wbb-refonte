@@ -49,6 +49,7 @@ $(function(){
             dataType: "json",
             success: function(msg) {
                 if(msg.code === 200){
+                    _that.attr('style', 'margin-right: 60px;');
                     _that.html("Confirmation email sent !");
                     setTimeout(function() { _that.fadeOut("slow") }, 5000);
                 }

@@ -1,6 +1,14 @@
 /* Begin : 04 / 07 / 2014; */
 /* End : -- / -- / 2014 */
 
+.btn-radius.with-icon.chill:before {
+    background-position: -52px -200px;
+}
+
+.btn-radius.with-icon.chill:after {
+    background-position: -52px -240px;
+}
+
 /* Light reset */
   * {padding: 0; margin: 0;}
 /* Globale Tags */
