@@ -11,17 +11,16 @@
                 <div class="clear"></div>
             </div>
             <div class="group-form margin-top-10">
-                <div class="left" style="width: 50%">
-                    {{ form_widget(form.emailFrom, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
-                </div>
-                <div class="left" style="width: 50%">
+                <div class="left" style="width: 101%">
                     {{ form_widget(form.emailTo, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
                 </div>
-                <div class="clear"></div>
             </div>
+            <div class="clear"></div>
+            
             <div class="group-form margin-top-10" style="width: 107%">
                 {{ form_widget(form.content, {'value': text|raw, 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
             </div>
+
             <div class="clear"></div>
             <div class="group-actions padding-top-40 wrap">
                 <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Send email">

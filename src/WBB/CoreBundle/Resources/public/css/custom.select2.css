@@ -15,7 +15,7 @@
 .select2-container.icon.country.select2-container-active .select2-chosen {color: #b3955f;}
 .select2-results 												{width: 94%;}
 .select2-results li 											{text-indent: 5px; font-size: 16px;}
-.select2-drop.select2-drop-above 								{border-radius: 20px 20px 0 0; box-shadow: none!important;}
+.select2-drop.select2-drop-above 								{border-radius: 20px 20px 0 0; box-shadow: none!important; padding-top: 10px;}
 .select2-container.select2-dropdown-open.select2-container-active.select2-drop-above .select2-choice {border-radius: 0 0 20px 20px;}
 .select2-choice > .select2-chosen 								{padding-left: 10px;}
 .select2-container.icon .select2-choice > .select2-chosen 		{padding-left: 25px;}
@@ -44,3 +44,4 @@
 .select2-drop.dark .select2-results .select2-highlighted		{color: #fff;}
 .select2-drop.dark input[type="text"] 							{background-color: transparent; color: #fff;}
 .select2-container.select2-dropdown-open.dark .select2-choice 	{background-color: #6f7072;}
+.select2-drop.dark .select2-results .select2-no-results	 		{background: transparent;}
