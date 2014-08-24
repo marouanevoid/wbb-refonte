@@ -139,7 +139,7 @@
                             <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-city {% endif %} dark trigger-select-go" name="city" data-class="with-icon city">
 
                                 {% if is_tablet() %}
-                                    <option value="{{selected.outWith}}">{% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city  }} {% else %}Choose a city {% endif %}</option>
+                                    <option value="{{selected.city}}">{% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city  }} {% else %}Choose a city {% endif %}</option>
                                 {% endif %}
 
                                 {% if not is_mobile() and not is_tablet() %} 
