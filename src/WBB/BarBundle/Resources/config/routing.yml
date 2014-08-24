@@ -177,3 +177,28 @@ wbb_favorite_bar_delete:
 wbb_favorite_bestof_delete:
     pattern: /ajax/favorite/delete/bestof/{bestOfId}
     defaults: { _controller: WBBBarBundle:Favorite:deleteBestOf }
+
+#Email Share Routes
+wbb_share_email_form:
+    pattern: /ajax/share/form/email/{type}/{id}
+    defaults: { _controller: WBBBarBundle:Share:shareForm, type: 'bar'}
+    options:
+        expose: true
+
+wbb_share_email_bar_send:
+    pattern: /ajax/share/send/email/bar/{id}
+    defaults: { _controller: WBBBarBundle:Share:shareBar}
+    options:
+        expose: true
+
+wbb_share_email_news_send:
+    pattern: /ajax/share/send/email/news/{id}
+    defaults: { _controller: WBBBarBundle:Share:shareNews}
+    options:
+        expose: true
+
+wbb_share_email_bestof_send:
+    pattern: /ajax/share/send/email/bestof/{id}
+    defaults: { _controller: WBBBarBundle:Share:shareBestof}
+    options:
+        expose: true

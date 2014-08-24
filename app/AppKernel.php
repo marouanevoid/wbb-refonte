@@ -59,8 +59,7 @@ class AppKernel extends Kernel
             //CSV Import Bundle
             new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
 
-            //Memcached
-            new Aequasi\Bundle\CacheBundle\AequasiCacheBundle(),
+//            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 
             //Bitly Bundle
             new Hpatoio\BitlyBundle\HpatoioBitlyBundle(),

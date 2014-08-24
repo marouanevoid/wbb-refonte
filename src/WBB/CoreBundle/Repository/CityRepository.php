@@ -16,9 +16,23 @@ class CityRepository extends EntityRepository
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
-            ->select($this->getAlias().', cn')
+            ->select($this->getAlias().', cn, ci')
             ->leftJoin($this->getAlias().'.country', 'cn')
+            ->leftJoin($this->getAlias().'.image', 'ci')
             ->where($qb->expr()->eq($this->getAlias().'.onTopCity', $qb->expr()->literal(true)))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findCitiesOrderedByName()
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+        $qb
+            ->select($this->getAlias().', cn, ci')
+            ->leftJoin($this->getAlias().'.country', 'cn')
+            ->leftJoin($this->getAlias().'.image', 'ci')
+            ->orderBy($this->getAlias().'.name')
         ;
 
         return $qb->getQuery()->getResult();
@@ -67,8 +81,7 @@ class CityRepository extends EntityRepository
             $qb->andWhere($qb->expr()->eq('c.id', $country->getId()));
         }
 
-//        return $qb->getQuery()->getOneOrNullResult();
-	return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getResult();
     }
 
     public function findNearestCity($latitude = 0, $longitude = 0, $maxDistance = 0, $offset = 0, $limit = 0)

@@ -4,7 +4,9 @@
         <div class="container align-center">
             <div class="twelve columns">
                 <hr/>
-                <img class="m-margin scale-with-grid" src="{% path ad.image, format %}" alt="{{ ad.name }}" width="728" height="90"/>
+                {% if ad.link is not empty %}<a href="{{ ad.link }}" target="_blank" rel="nofollow">{% endif %}
+                    <img class="m-margin scale-with-grid" src="{{ showImage(ad.image, 'ads_728_90') }}" alt="{{ ad.name }}" width="728" height="90"/>
+                {% if ad.link is not empty %}</a>{% endif %}
             </div>
         </div>
     </section>

@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class CityAdmin extends Admin
 {
@@ -27,7 +28,7 @@ class CityAdmin extends Admin
             ->add('suburbs', 'sonata_type_collection',
                 array(
                     'required'  => false,
-                    'help'      => 'Associate an area minimum to the city is mandatory'
+                    'help'      => 'Associate a neighborhood minimum to the city is mandatory'
                 ), array(
                     'edit' => 'inline',
                     'inline' => 'table'
@@ -45,7 +46,7 @@ class CityAdmin extends Admin
                     'label'     => 'Main visual *'
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'simple_image'
+                        'context' => 'city'
                     )
                 ))
             ->end()
@@ -70,7 +71,7 @@ class CityAdmin extends Admin
             ->add('country')
             ->add('seoDescription', null, array('label' => 'SEO Description'))
             ->add('nbAreas', 'string', array(
-                'label' => 'Districts',
+                'label' => 'Neighborhoods',
                 'template' => 'WBBCoreBundle:Admin:list\list_nb_areas.html.twig'
             ))
             ->add('nbBars', 'string', array(
@@ -109,7 +110,7 @@ class CityAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -125,7 +126,7 @@ class CityAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }

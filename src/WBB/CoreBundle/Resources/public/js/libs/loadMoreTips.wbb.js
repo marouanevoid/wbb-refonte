@@ -68,7 +68,7 @@ meta.LoadMoreTips = function(config) {
     };
        that._customScroll = function()
         {
-            $('.custom-scroll').not('.jspScrollable').each(function()
+            $('.custom-scroll').not('.jspNotScrollable').each(function()
             {
                 //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
                 $(this).jScrollPane({hideFocus:true});
@@ -100,6 +100,7 @@ meta.LoadMoreTips = function(config) {
             url: url,
             dataType: "json",
             success: function(msg) {
+                // Remove loader
                 $target.append(msg.htmldata);
                 
                 if(parseInt(msg.difference)==0){
@@ -123,7 +124,11 @@ meta.LoadMoreTips = function(config) {
                         //     // });
                         //  that._customScroll();
                         // },500)
-
+                        $('.custom-scroll').each(function()
+                                {
+                                    var api = $(this).data('jsp');
+                                    if( typeof(api) != "undefined" && $(this).is(':visible') ) api.reinitialise();
+                        }); 
                 });
             },
             error: function(e) {

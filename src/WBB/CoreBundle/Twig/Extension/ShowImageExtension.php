@@ -31,12 +31,21 @@ class ShowImageExtension extends \Twig_Extension
         );
     }
 
-    public function showImageFunction($media = null, $format)
+    public function showImageFunction($media, $format, $user = null)
     {
+        $formatParts = explode('_', $format);
+        if ($formatParts[0] == 'avatar' && !$media) {
+            if ($user) {
+                if ($user->getFacebookPicture()) {
+                    return $user->getFacebookPicture();
+                }
+            }
+        }
+
         $defaultSize = $format;
         $media = $this->getMedia($media);
         if (!$media) {
-            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpg');//return '';
+            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpeg');//return '';
         }
         $provider = $this->getMediaService()
             ->getProvider($media->getProviderName());
@@ -47,7 +56,7 @@ class ShowImageExtension extends \Twig_Extension
         $pathToCheck = realpath($this->container->get('kernel')->getRootDir() . '/../web/') . $path;
         // If the path does not exist, return the fallback image
         if (!@getimagesize($pathToCheck) || $path == "/"){
-            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpg');
+            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpeg');
         }
         // Return the real image
         return $this->container->get('templating.helper.assets')->getUrl($path);

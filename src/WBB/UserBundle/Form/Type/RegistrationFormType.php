@@ -6,6 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use WBB\BarBundle\Entity\Tag;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Registration Form Type
@@ -50,19 +51,27 @@ class RegistrationFormType extends BaseType
                 ))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
-                    'first_options' => array('attr' => array('placeholder' => 'form.password')),
-                    'second_options' => array('attr' => array('placeholder' => 'form.password_confirmation')),
+                    'first_options' => array('attr' => array('placeholder' => 'form.password'),'error_bubbling' => true),
+                    'second_options' => array('attr' => array('placeholder' => 'form.password_confirmation'),'error_bubbling' => true),
                     'invalid_message' => 'fos_user.password.mismatch',
                     'required' => false,
                     'error_bubbling' => true
                 ))
                 ->add('birthdate', 'date', array(
+                    'empty_value' => array('year' => 'YYYY', 'month' => 'MM', 'day' => 'DD'),
                     'years' => range(1914, date('Y')),
                     'required' => false,
-                    'error_bubbling' => true
+                    'error_bubbling' => true,
+                    'invalid_message'=> 'not.blank'
                 ))
                 ->add('country', null, array(
-                    'error_bubbling' => true
+                    'error_bubbling' => true,
+                    'empty_value' => 'Country',
+                    'required' => false,
+                    'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->orderBy('c.name', 'ASC');
+                    }
                 ))
                 ->add('prefCity1')
                 ->add('prefCity2')
@@ -76,6 +85,8 @@ class RegistrationFormType extends BaseType
                 ->add('prefCocktails1')
                 ->add('prefCocktails2')
                 ->add('prefCocktails3')
+                ->add('stayInformed')
+                ->add('stayBrandInformed')
         ;
     }
 

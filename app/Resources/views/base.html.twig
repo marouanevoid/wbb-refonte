@@ -25,7 +25,7 @@
                 window.isCity = true;
             {% endif %}
             var DEBUGMODE = "{{app.environment }}";
-            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '/');
+            var URL_MODE = ( DEBUGMODE == 'dev' ? '/app_dev.php' : '');
 
             // vars for fav actions
         </script>
@@ -36,6 +36,9 @@
         {% block stylesheets %}
 
             {% stylesheets filter="cssrewrite"
+                "bundles/wbbcore/css/select2-bootstrap.css"
+                "bundles/wbbcore/css/select2.css"
+                "bundles/wbbcore/css/custom.select2.css"
                 "bundles/wbbcore/css/front.css"
                 "bundles/wbbcore/css/wbb.css"
                 "bundles/wbbcore/css/main.css"
@@ -44,38 +47,41 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
-            {#{% javascripts#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.velocity.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.transform3d.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/modernizr.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.browser.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/app.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/wbb.js'#}
-                {#'@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'#}
-            {#%}#}
-            {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
-            {#{% endjavascripts %}#}
+            {% javascripts
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/select2.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.velocity.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.transform3d.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/modernizr.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.browser.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
+                '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
+                '@WBBCoreBundle/Resources/public/js/libs/popin.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/app.js'
+                '@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
+                '@WBBCoreBundle/Resources/public/js/wbb.js'
+                '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         {% endblock %}
-
+{#
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.transform3d.js') }}"></script>
@@ -101,7 +107,7 @@
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
-
+#}
         {% block javascripts %}
 
         {% endblock %}
@@ -112,21 +118,67 @@
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
                 
-                var showConfirmed = {{ app.request.query.get('confirmed', 0) }};
+                var showConfirmed = 0;
+                {% set user_confirmed = false %}
+                {% for message in app.session.flashbag.get('wbb-user-confirmed') %}
+                    {% set user_confirmed = true %}
+                {% endfor %}
+                {% if user_confirmed %}
+                    showConfirmed = 1;
+                {% endif %}
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
                 var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
+                var fbPrefill = {{ app.request.query.get('prefill', 0) }};
+                var showProfilePopin = {{ app.request.query.get('profileMessage', 0) }};
+                var favoriteName = '';
 
                 var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
                 var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var popinFrom = '';
+                {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                var currentPage = "{{ currentPath }}";
 
-                {% for flashMessage in app.session.flashbag.get('profileHover') %}
+                {% if app.user %}
                     $(document).ready(function() {
+                        var action = $.cookie('light_action');
+
+                        if (action === 'tip') {
+                            $('#wbb_barbundle_tip_description').val($.cookie('light_name'));
+                            $('#tips').submit();
+
+                            $.removeCookie('light_action');
+                            $.removeCookie('light_type');
+                            $.removeCookie('light_url');
+                            $.removeCookie('light_id');
+                            $.removeCookie('light_favorite');
+                            $.removeCookie('light_from');
+                            $.removeCookie('light_name');
+                        }
+                    });
+                {% endif %}
+
+                $(document).ready(function() {
+                    var firstScrolled = false;
+                    if ($.cookie('just_loggedin') !== undefined) {
                         $('header.desktop .logged').mouseover();
-                   });
-                {% endfor %}
+                        // if is ipad or Mobile
+                        if( ismobile || istablet )
+                            $('header.desktop .logged .in-action').click();
+                        $.removeCookie('just_loggedin');
+                    }
+                    $(window).on('scroll' , function(){
+                        if( ismobile || istablet ){
+                            if(! firstScrolled ){
+                                $('header.desktop .logged .in-action').click();
+                                firstScrolled = true;                            
+                            }
+                        }else{
+                            $('header.desktop .logged').mouseout();
+                        }
+                    });
+                });
         </script>
 
         {% if is_tablet() %}
@@ -163,9 +215,21 @@
                         {% if resetting_form is defined %}
                             {{ resetting_form|raw }}
                         {% endif %}
+                        {% if app.request.query.get('emailPopin', 0) == 1 %}
+                            {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
+                        {% endif %}
+                        {% if app.request.query.get('profileMessage', 0) == 1 %}
+                            {{ include('WBBUserBundle:Profile:profile.popin.html.twig') }}
+                        {% endif %}
+                        {% if user_confirmed == true %}
+                            {{ include('WBBUserBundle:Registration:confirm.html.twig') }}
+                        {% endif %}
+                        {% if app.user %}
+                            {{ include('WBBUserBundle:PostLogin:popins.html.twig') }}
+                        {% endif %}
                     </div>
                     <div>
-                        <a href="#close" class="btn btn-close">Close</a>
+                        <a class="btn btn-close">Close</a>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -173,22 +237,22 @@
         </div>
         <div data-show="register" class="lighbox" id="show-popin"></div>
         {#<div data-show="register-tips" class="lighbox" id="show-popin-tips"></div>#}
-        {{ facebook_initialize({'xfbml': true}) }}
+        {{ facebook_initialize({'xfbml': true}, 'WBBUserBundle:Facebook:initialize.html.twig') }}
         <script>
             function securityCheck() {
                 $.ajax({
                     url: '{{ path('_security_check') }}',
                     success: function(response) {
                         if (response.code === '400') {
-                            $('#facebook-signup').after($('#message'));
-                            $('#login_form #message').find('ul').remove();
-                            var errorsList = $('#login_form #message').show().find('img').after('<ul></ul>').parent();
-                            errorsList.find('ul').append('<li>Created an account please !</li>');
+                            window.location.href = "{{ path('fos_user_registration_register') }}" + '?prefill=1';
                         } else {
+                            $.cookie('light_from', 'login');
+
+                            $.cookie('just_loggedin', true);
                             window.location.reload();
                         }
                     }
-                })
+                });
             }
         </script>
         <script type="text/javascript">
@@ -222,5 +286,6 @@
         {% block footer %}
             {% include '::footer.html.twig' %}
         {% endblock %}
+        {% if is_mobile() and not is_tablet() %}<div id="landscape-mobile"></div>{% endif %}
     </body>
 </html>

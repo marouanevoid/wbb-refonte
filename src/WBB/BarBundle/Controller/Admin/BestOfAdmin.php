@@ -6,6 +6,8 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -65,7 +67,7 @@ class BestOfAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -81,7 +83,7 @@ class BestOfAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -132,7 +134,7 @@ class BestOfAdmin extends Admin
                         'label'     => 'Best of visual *'
                     ), array(
                         'link_parameters' => array(
-                            'context' => 'simple_image'
+                            'context' => 'bestof'
                         )
                     ))
 //                ->add('sponsor')
@@ -143,7 +145,7 @@ class BestOfAdmin extends Admin
 //                        'label'     => 'Sponsor visual'
 //                    ), array(
 //                        'link_parameters' => array(
-//                            'context' => 'simple_image'
+//                            'context' => 'default'
 //                        )
 //                    ))
                 ->add('byTag', null, array('help'=> 'Create a best of with tag'))
@@ -161,7 +163,7 @@ class BestOfAdmin extends Admin
                             'empty_value' => 'Please choose a mood',
                             'property' => 'name',
                             'help'  => 'Mandatory',
-                            'query_builder' => function ($er) {
+                            'query_builder' => function (EntityRepository $er) {
                                 return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
                             }
                         )
@@ -172,7 +174,7 @@ class BestOfAdmin extends Admin
                             'multiple' => true,
                             'by_reference' => false,
                             'label' => 'With Who',
-                            'query_builder' => function ($er) {
+                            'query_builder' => function (EntityRepository $er) {
                                     return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
                                 }
                         )

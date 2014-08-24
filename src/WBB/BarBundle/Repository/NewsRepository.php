@@ -17,7 +17,9 @@ class NewsRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+//            ->select($this->getAlias().', nm, m')
+//            ->leftJoin($this->getAlias().'.medias', 'nm')
+//            ->leftJoin('nm.media', 'm')
             ->where($qb->expr()->eq(1, 1))
         ;
 
@@ -53,7 +55,9 @@ class NewsRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', nm, m')
+            ->leftJoin($this->getAlias().'.medias', 'nm')
+            ->leftJoin('nm.media', 'm')
             ->where($qb->expr()->notIn($this->getAlias().'.id', $exceptIds))
             ->orderBy($this->getAlias().'.onTop', 'DESC')
         ;
@@ -83,7 +87,9 @@ class NewsRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', nm, m')
+            ->leftJoin($this->getAlias().'.medias', 'nm')
+            ->leftJoin('nm.media', 'm')
             ->innerJoin($this->getAlias().'.bars', 'b')
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->where($qb->expr()->eq('b.id', $bar->getId()))

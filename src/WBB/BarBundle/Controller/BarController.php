@@ -53,7 +53,7 @@ class BarController extends Controller
         $session = $this->container->get('session');
         $slug = $session->get('citySlug');
         if (!empty($slug))
-            return $this->cityHomeAction($session->get('citySlug'), $request);
+            return $this->cityHomeAction($session->get('citySlug'), $request, $resettingForm);
         $session->set('citySlug', "");
 
         $topCities = $this->container->get('city.repository')->findTopCities();
@@ -122,7 +122,7 @@ class BarController extends Controller
         ));
     }
 
-    public function cityHomeAction($slug, Request $request)
+    public function cityHomeAction($slug, Request $request,  $resettingForm = null)
     {
         $this->reGeolocate();
         $session = $this->container->get('session');
@@ -160,6 +160,9 @@ class BarController extends Controller
         $response['topNews']    = $this->container->get('news.repository')->findLatestNews($city);
         $response['latestBars'] = $this->container->get('bar.repository')->findLatestBars($city);
         $response['city']       = $city;
+        if ($resettingForm) {
+            $response['resetting_form'] = $resettingForm;
+        }
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
@@ -242,7 +245,7 @@ class BarController extends Controller
             $distance['city']         = $this->get('city.repository')->findOneBySlug($city);
         }
 
-        $bar = $this->container->get('bar.repository')->findOneBySlug($slug);
+        $bar = $this->container->get('bar.repository')->findBarBySlug($slug);
         if (!$bar) {
             throw $this->createNotFoundException('Object not found!');
         }
@@ -531,8 +534,8 @@ class BarController extends Controller
         }else{
             if($filter === "popularity"){
                 //TODO: Repository methode for popularity
-                $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, $limit, 'DESC');
-                $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0, 'DESC');
+                $response = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, $limit);
+                $all = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, 0);
             }elseif($filter === "alphabetical"){
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset ,$limit);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);

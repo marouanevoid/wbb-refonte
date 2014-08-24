@@ -1,53 +1,67 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="title margin-bottom-30 wrap bold">FORGOT YOUR PASSWORD</div>
-<div class="subtitle text-transform-uppercase bold">Enter your email to create a new password</div>
+    <div class="title wrap bold margin-bottom-30 {% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-100{% endif %}">FORGOT YOUR PASSWORD</div>
+    <div class="subtitle text-transform-uppercase bold">Enter your email to create a new password</div>
 
-<div class="forgetpassword wrap">
-    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST">
-        <div class="text-align-center">
-            <div><input type="text" name="username" class="form-text margin-top-30" placeholder="Your email"></div>
-            <input type="submit" class="form-submit btn margin-top-30 {% if is_mobile() %}margin-bottom-30{% endif %} bold" value="{{ 'resetting.request.submit'|trans }}">
-        </div>
-    </form>
-    <div class="clear"></div>
-
-    {% if invalid_username is defined %}
-        <script>
-            $(document).ready(function() {
-                $('.forgetpassword input[name="username"]').addClass('error');
-            });
-        </script>
-
-        <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20 {% if is_mobile() %}margin-bottom-20{% endif %}">
-            <div>
-                <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left" {% if is_mobile() %}class="margin-left-20"{% endif %}>
-                <ul><li>
-                        {% if invalid_username|trim != '' %}
-                            {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
-                        {% else %}
-                            Please complete all required fields
-                        {% endif %}
-                    </li>
-                </ul>
+    <div class="forgetpassword wrap {% if is_mobile() and not is_tablet() %}padding-bottom-5{% else %}padding-bottom-50{% endif %}">
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="margin-bottom-20">
+            <div class="text-align-center">
+                <div><input type="text" name="username" class="form-text margin-top-30" placeholder="Your email" tabindex="1"></div>
+                <input type="submit" class="form-submit btn margin-top-30 gold {% if is_mobile() and not is_tablet() %}margin-bottom-30{% endif %} bold" value="{{ 'resetting.request.submit'|trans }}" tabindex="2">
             </div>
-        </div> <!-- #message -->
-    {% endif %}
-</div>
+        </form>
+        <div class="clear"></div>
+
+        {% if invalid_username is defined %}
+            <script>
+                $(document).ready(function() {
+                    $('.forgetpassword input[name="username"]').addClass('error');
+                });
+            </script>
+
+
+            <div id="message" class="margin-top-20 {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
+                <div>
+                    <ul>
+                        <li>
+                            {% if invalid_username|trim != '' %}
+                                {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
+                            {% else %}
+                                Please complete all required fields
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div> <!-- #message -->
+        {% endif %}
+    </div>
 
 <script>
     $(document).ready(function() {
         $('.forgetpassword').find('form').on('submit', function(e) {
             e.preventDefault();
             var url = $(this).attr('action');
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: $(this).serialize(),
-                success: function(html) {
-                    $('.popin-block').html(html);
-                }
-            });
+            // Set the PopIn Loading Flag
+
+            if ($('.forgetpassword input[name="username"]').val().trim() !== '') {
+                PopIn.startLoading();
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(html) {
+                        // Set the PopIn Loading Flag
+                        PopIn.endLoading();
+                        $('.popin-block').html(html);
+
+                        if(ismobile || istablet ){
+                            $('html, body').animate( { scrollTop: 0 }, 500, 'easeInOutCubic');
+                        }
+                    }
+                });
+            } else {
+                $('.forgetpassword input[name="username"]').addClass('error');
+            }
         });
     });
 </script>

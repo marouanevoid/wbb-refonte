@@ -99,12 +99,15 @@ class FeedController extends Controller
     public function tipsAction($barID, $offset, $limit)
     {
         $bar    = $this->container->get('bar.repository')->findOneById($barID);
-
-        $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit);
-        $all    = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
-
+        $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit, true);
+        $allExpertTips   = $this->container->get('tip.repository')->findLatestTips($bar, 0, 0, true);
+        $nbExpertTips = count($tips);
+        if($nbExpertTips < $limit){
+            $normalTips   = $this->container->get('tip.repository')->findLatestTips($bar, ($offset + $nbExpertTips - count($allExpertTips)), ($limit - $nbExpertTips));
+            $tips = array_merge($tips, $normalTips);
+        }
+        $all = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
         $nbResults  = count($tips);
-
         $difference = count($all) - count($tips);
         $FsTips = array();
         if(($nbResults < $limit) && !is_null($bar->getFoursquare()) && $bar->getFoursquare() != ""){
@@ -134,13 +137,11 @@ class FeedController extends Controller
             }while(($index < ($limit - $nbResults)) && $recursive < 5);
             $nbResults += $index;
         }
-
         $htmldata = $this->renderView('WBBBarBundle:Bar:tips.html.twig', array(
                 'tips'      => $tips,
                 'FsTips'    => $FsTips
             )
         );
-
         return new JsonResponse(
             array(
                 'nbResults'  => $nbResults,

@@ -70,6 +70,9 @@ meta.Form = function(config){
             }else{
                 $("form#tips textarea").removeClass('error');
             }
+            // Show Loader
+            $('article.tip .form form input[type="submit"]').addClass('loading');
+            $('article.tip .form form input[type="submit"]').attr('disabled' , 'disabled');
 
             if( that.config.onSubmit )
             {
@@ -109,7 +112,8 @@ meta.Form = function(config){
                     
                     if(ismobile==1)
                     {
-                        $('.line .tips-area').prepend(data.tip);
+                        if(data.status != 0)
+                            $('.line .tips-area').prepend(data.tip);
                         if(nbItems>=3)
                         {
                             $('.line .tips-area:last-child .three:last-child').remove();
@@ -120,23 +124,34 @@ meta.Form = function(config){
                     {
                         if(nbItems==0)
                         {
-                            $('.line .tips-area').addClass('three').prepend(data.tip);
-                            $('#tipsForm').removeClass('six').addClass('three');
+                            if(data.status!=0){
+                                $('.line .tips-area').addClass('three').prepend(data.tip);
+                                $('#tipsForm').removeClass('six').addClass('three');
+                            }
                         }else
                         {
-
+                            if(data.status!=0){
                                 $('.line .tips-area .three:first-child').before(data.tip);
+                            }
                         }
                         if(nbItems>=3)
                         {
-                            $('.line .tips-area:last-child .three:last-child').remove();
-                            $(".load-more").show();
-                            $(".load-more").parent().show();
+                            if(data.status!=0){
+                                $('.line .tips-area:last-child .three:last-child').remove();
+                                $(".load-more").show();
+                                $(".load-more").parent().show();
+                            }
                         }
                     }
 
-                        
-                    $('.custom-scroll').not('.jspScrollable').each(function()
+                    if(data.showPopin != false){
+                        if ($(".popin-block:contains('You are now registered')").length == 0) {
+                            $('.popin-block').html(data.popinContent);
+                            $('#show-popin').click();
+                        }
+                    }
+
+                    $('.custom-scroll').not('.jspNotScrollable').each(function()
                     {
                         $(this).jScrollPane({autoReinitialise: true, hideFocus:true});
                     });

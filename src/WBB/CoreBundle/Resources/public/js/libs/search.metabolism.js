@@ -24,7 +24,7 @@ var meta = meta || {};
 meta.Search = function(config){
 
     var that = this;
-
+    var ajaxRequeseted;
     /* Public */
 
     that.config = {
@@ -89,7 +89,7 @@ meta.Search = function(config){
 
             $placeholder.on('click', function(){ that.context.$input.focus() });
             that.context.$input.on('keydown', function(){ $placeholder.hide() });
-            that.context.$input.on('keyup', function(){ if(that.context.$input.val() == "") $placeholder.show() });
+            that.context.$input.on('keypress', function(){ if(that.context.$input.val() == "") $placeholder.show() });
         }
     };
 
@@ -102,13 +102,16 @@ meta.Search = function(config){
         if(data && data.hits){
             if(data.hits.hit && data.hits.hit.length > 0){
 
+                // show list
+                if(ismobile) 
+                    $('header.mobile .search-result-proposal').show();
                 var values  = data.hits.hit;
                 $.each(values, function(index, value)
                 {
                     var searchType = value.id,
                         result ="",
                         wrapB = function(str,istr){
-                            return str.replace(new RegExp(istr , 'ig'), '<b>'+istr+'</b>');
+                            return str.replace(new RegExp(istr , 'ig'), '<span>'+istr+'</span>');
                         };
 
                     if(searchType.indexOf('City') >-1){
@@ -116,40 +119,55 @@ meta.Search = function(config){
                         if(value.fields.name){
                             result = wrapB(value.fields.name , q);
                         }else{
-                            if(value.fields.title){
-                                result = wrapB(value.fields.title , q);
-                            } 
+                            
                         }
                     }
-                    if(searchType.indexOf('Bar') >-1){
+                    if(searchType.indexOf('Bar') >-1 || searchType.indexOf('BestOf') >-1){
                         // TODO : Type of Search is Bar
                         if(value.fields.name){
-                            result = wrapB(value.fields.name , q);
-                        }else{
-                            if(value.fields.title){
-                                result = wrapB(value.fields.title , q);
-                            }  
+                            var wword = value.fields.name ;
+                            if(value.fields.city){
+                                if($.isArray(value.fields.city)){
+                                    if(value.fields.city.length > 1){
+                                        wword =  "World's " + wword;
+                                    }else{
+                                        wword = wword + " in " + value.fields.city[0];
+                                    }
+                                }else{
+                                        wword = wword + " in " + value.fields.city;
+                                }
+                            }else{
+                                wword =  "World's " + wword;
+                            }
+                            result = wrapB(wword , q);
                         }
                     }
                     if(searchType.indexOf('News')>-1){
                         // TODO : Type of search is News
-                        if(value.fields.title){
-                            result = wrapB(value.fields.title , q);
-                        }else{
-                            if(value.fields.name){
-                                result = wrapB(value.fields.name , q);
+                        if(value.fields.name){
+                            var wword = value.fields.name ;
+                            if(value.fields.cities && value.fields.cities.length){
+                                if(value.fields.cities.length > 1){
+                                    wword =  "World - " + wword;
+                                }else{
+                                    wword = value.fields.cities[0] + " - " + wword;
+                                }
+                            }else{
+                                wword =  "World - " + wword;
                             }
+                            result = wrapB(wword , q);
                         }
-                    }else{
-                        // TODO : Type of search is News
-                        if(value.fields.title){
-                            result = wrapB(value.fields.title , q);
-                        }else{
-                            if(value.fields.name){
-                                result = wrapB(value.fields.name , q);
-                            }
-                        } 
                     }
+                    // }else{
+                    //     // TODO : Type of search is News
+                    //     if(value.fields.title){
+                    //         result = wrapB(value.fields.title , q);
+                    //     }else{
+                    //         if(value.fields.name){
+                    //             result = wrapB(value.fields.name , q);
+                    //         }
+                    //     } 
+                    // }
                     
                     if( $(window).width() < 640 ){
                         html += that.config.template_mobile.replace('%s', result);
@@ -166,6 +184,9 @@ meta.Search = function(config){
             }else{
                 // TODO : On no results
                 that.context.$result.html('');
+                // hide the list
+                if(ismobile)
+                    $('header.mobile .search-result-proposal').hide();
             }
         }else{
                 // TODO : On no results
@@ -194,20 +215,27 @@ meta.Search = function(config){
             $('.entire-content').hide();
         }
 
-
-        $.ajax({
+        // show loader 
+        $('.bar-finder .search-mode .btn-round.close').addClass('loading');
+       ajaxRequeseted =  $.ajax({
             type: 'GET',
-            url: URL_MODE + '/search?entity=*&q='+q+'&limit=20&start=0',
+            url: getBaseURL() + URL_MODE + '/search?limit=20&start=0',
             async: true,
             contentType: "application/json",
             dataType: 'json',
         data : {
-            q : q
+            q : q,
+            suggest : true
         },
         success  :function(data){
+            // Hide Loader 
+            $('.bar-finder .search-mode .btn-round.close').removeClass('loading');
             that.searchResult(data , q);
+        },
+        beforeSend : function(){
+            if(ajaxRequeseted)
+                ajaxRequeseted.abort();
         }
-
         });
 
 
@@ -233,6 +261,8 @@ meta.Search = function(config){
         if(that.show_form) return;
 
         that.show_form = true;
+
+        that.context.$input.val('');
 
         if( $(window).width() > 640 )
         {
@@ -328,7 +358,9 @@ meta.Search = function(config){
         });
 
         that.context.$result.on('click', 'a', function(){
-            that.context.$input.val( $(this).text() );
+            
+           // that.context.$input.val( $(this).text() );
+           
             var _tthis = $(this),
                 data_target = _tthis.attr('data-target');
             that.context.$result.parent().velocity("slideUp", { duration: that.config.speed, easing:that.config.easing, complete:function()
@@ -364,7 +396,6 @@ meta.Search = function(config){
             }
             that.context.$form.submit();
 
-            console.log('advanced-search:::');
             return false;
         });
 
@@ -395,3 +426,25 @@ $(document).ready(function(){
     new meta.Search({});
 
 });
+
+function getBaseURL() {
+    var url = location.href;  // entire url including querystring - also: window.location.href;
+    var baseURL = url.substring(0, url.indexOf('/', 14));
+
+
+    if (baseURL.indexOf('http://localhost') != -1) {
+        // Base Url for localhost
+        var url = location.href;  // window.location.href;
+        var pathname = location.pathname;  // window.location.pathname;
+        var index1 = url.indexOf(pathname);
+        var index2 = url.indexOf("/", index1 + 1);
+        var baseLocalUrl = url.substr(0, index2);
+
+        return baseLocalUrl ;
+    }
+    else {
+        // Root Url for domain name
+        return baseURL ;
+    }
+
+}

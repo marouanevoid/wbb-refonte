@@ -1,0 +1,56 @@
+article.tip {
+
+  background-color: #fff; height: 29em; position: relative; @include lightScrollbar();
+
+  .content {
+    position: absolute; left: 8.3%; top: 8.3%; width: 83.4%; height: 83.4%;
+    h3 { color: $color-brown; }
+    h4 { color: $color-medium-gray; }
+    textarea { height: 9em }
+    .excerpt {
+      font-size: 1.4em; line-height: 130%; text-align: center; height: 100%;
+      td {
+        vertical-align: middle;
+        img { margin-bottom: 3%; }
+        .scroll{ max-height: 17em; overflow: auto }
+      }
+    }
+    &.expert .excerpt td .scroll{ max-height: 12em }
+    hr { border-color: #cdd0d1; }
+    .author { width: 100%;
+      td {
+        vertical-align: middle; line-height: 130%; font-size: 1.4em;
+        img{ margin-right: 1em; display: block }
+      }
+      td+td { width: 100% }
+      b{ display: block; color: $color-dark-gray }
+    }
+  }
+
+  .form form{
+    .count{ float: left; color: #999 }
+    .count.error{ color: $color-error }
+    .count.success{ color: $color-success }
+    textarea{ overflow: hidden }
+    input[type=submit]{ float: right }
+  }
+}
+
+.insider-tips .six.columns.box
+{
+  left: 25%;
+  article.tip{
+    textarea{ height: 6em }
+  }
+}
+
+
+  @media only screen and (max-width: $grid-breakpoint-mobile) {
+
+    article.tip {
+      height: auto; padding: 2em;
+      .content { position:  static; width: 100% }
+      hr{ margin-top: 15px }
+    }
+
+  }

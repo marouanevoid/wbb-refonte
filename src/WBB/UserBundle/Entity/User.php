@@ -10,11 +10,16 @@ use JMS\Serializer\Annotation as JMS;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\BestOf;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
  * @ORM\Table(name="wbb_user")
  * @JMS\ExclusionPolicy("all")
+ * @UniqueEntity("facebookId", message="This facebook account is already used", groups={"registration_fb"})
+ * @UniqueEntity("username", message="Sorry, this username has already been taken", groups={"profile_light"})
  */
 class User extends BaseUser
 {
@@ -67,9 +72,16 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
      */
-    protected $facebookId;
+    private $facebookId;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="facebook_picture", type="string", nullable=true)
+     */
+    private $facebookPicture;
 
     /**
      * @var string
@@ -106,20 +118,6 @@ class User extends BaseUser
      */
     private $prefHome;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-//     */
-//    private $prefCity1;
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-//     */
-//    private $prefCity2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\City")
-//     */
-//    private $prefCity3;
-
     /**
      * @var string
      *
@@ -140,21 +138,6 @@ class User extends BaseUser
      * @ORM\Column(name="pref_city3", type="string", length=255, nullable=true)
      */
     private $prefCity3;
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
-//     */
-//    private $prefBar1;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
-//     */
-//    private $prefBar2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Bar")
-//     */
-//    private $prefBar3;
 
     /**
      * @var string
@@ -177,21 +160,6 @@ class User extends BaseUser
      */
     private $prefBar3;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefDrinkBrand1;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefDrinkBrand2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefDrinkBrand3;
-
     /**
      * @var string
      *
@@ -212,21 +180,6 @@ class User extends BaseUser
      * @ORM\Column(name="pref_drink_brand_3", type="string", length=255, nullable=true)
      */
     private $prefDrinkBrand3;
-
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefCocktails1;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefCocktails2;
-//
-//    /**
-//     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag")
-//     */
-//    private $prefCocktails3;
 
     /**
      * @var string
@@ -271,7 +224,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="WBB\CoreBundle\Entity\Country", inversedBy="users")
-     * @Assert\NotBlank(message="not.blank")
+     * @Assert\NotBlank(message="not.blank", groups={"registration_full", "Registration", "Profile"})
      */
     private $country;
 
@@ -308,6 +261,13 @@ class User extends BaseUser
      * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
      */
     private $tipsShouldBeModerated;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="confirmed", type="boolean", nullable=true)
+     */
+    private $confirmed;
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
@@ -348,6 +308,10 @@ class User extends BaseUser
         $this->setStayInformed(true);
         $this->tipsShouldBeModerated = true;
         $this->favoriteBars = new ArrayCollection();
+        $this->favoriteBestOfs = new ArrayCollection();
+        $this->facebookId = null;
+        $this->facebookPicture = null;
+        $this->confirmed = false;
     }
 
     /**
@@ -455,10 +419,10 @@ class User extends BaseUser
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param Bar $bars
      * @return User
      */
-    public function addBar(\WBB\BarBundle\Entity\Bar $bars)
+    public function addBar(Bar $bars)
     {
         $this->bars[] = $bars;
 
@@ -468,11 +432,11 @@ class User extends BaseUser
     /**
      * Remove bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param Bar $bar
      */
-    public function removeBar(\WBB\BarBundle\Entity\Bar $bars)
+    public function removeBar(Bar $bar)
     {
-        $this->bars->removeElement($bars);
+        $this->bars->removeElement($bar);
     }
 
     /**
@@ -1127,16 +1091,18 @@ class User extends BaseUser
         if (isset($fbdata['id'])) {
             $this->setFacebookId($fbdata['id']);
         }
+        if (isset($fbdata['picture'])) {
+            $this->setFacebookPicture($fbdata['picture']);
+        }
     }
-
 
     /**
      * Add favoriteBars
      *
-     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @param Bar $favoriteBars
      * @return User
      */
-    public function addFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    public function addFavoriteBar(Bar $favoriteBars)
     {
         $this->favoriteBars[] = $favoriteBars;
         return $this;
@@ -1157,9 +1123,9 @@ class User extends BaseUser
     /**
      * Remove favoriteBars
      *
-     * @param \WBB\BarBundle\Entity\Bar $favoriteBars
+     * @param Bar $favoriteBars
      */
-    public function removeFavoriteBar(\WBB\BarBundle\Entity\Bar $favoriteBars)
+    public function removeFavoriteBar(Bar $favoriteBars)
     {
         $this->favoriteBars->removeElement($favoriteBars);
     }
@@ -1177,10 +1143,10 @@ class User extends BaseUser
     /**
      * Add favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      * @return User
      */
-    public function addFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function addFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs[] = $favoriteBestOfs;
 
@@ -1190,9 +1156,9 @@ class User extends BaseUser
     /**
      * Remove favoriteBestOfs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $favoriteBestOfs
+     * @param BestOf $favoriteBestOfs
      */
-    public function removeFavoriteBestOf(\WBB\BarBundle\Entity\BestOf $favoriteBestOfs)
+    public function removeFavoriteBestOf(BestOf $favoriteBestOfs)
     {
         $this->favoriteBestOfs->removeElement($favoriteBestOfs);
     }
@@ -1269,14 +1235,13 @@ class User extends BaseUser
     public function validateBirthday(ExecutionContextInterface $context)
     {
         $country = $this->getCountry();
-        $drinkingAge = 18;
         if ($this->birthdate) {
             $age = $this->birthdate->diff(new \DateTime('now'))->y;
             if ($country) {
                 $drinkingAge = $country->getDrinkingAge();
-            }
-            if ($drinkingAge > $age) {
-                $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+                if ($drinkingAge > $age) {
+                    $context->addViolationAt('birthday', 'fos_user.birthday.legal');
+                }
             }
         }
     }
@@ -1288,13 +1253,58 @@ class User extends BaseUser
     {
         if ($this->plainPassword) {
             if (strlen($this->plainPassword) < 6) {
-                $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+                $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
             } else {
-                if (!ctype_alnum($this->plainPassword)) {
-                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain a letter etc.)');
+                if (!preg_match('/[A-Za-z]/', $this->plainPassword) || !preg_match('/[0-9]/', $this->plainPassword)) {
+                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
                 }
             }
         }
     }
 
+    /**
+     * Set facebookPicture
+     *
+     * @param string $facebookPicture
+     * @return User
+     */
+    public function setFacebookPicture($facebookPicture)
+    {
+        $this->facebookPicture = $facebookPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookPicture
+     *
+     * @return string 
+     */
+    public function getFacebookPicture()
+    {
+        return $this->facebookPicture;
+    }
+
+    /**
+     * Set confirmed
+     *
+     * @param boolean $confirmed
+     * @return User
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmed
+     *
+     * @return boolean 
+     */
+    public function getConfirmed()
+    {
+        return $this->confirmed;
+    }
 }

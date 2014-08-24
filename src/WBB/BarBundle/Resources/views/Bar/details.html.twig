@@ -2,28 +2,29 @@
 
 {% block title %}{{ bar.name }} | World Best Bars{% endblock %}
 {% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set bitlyURL = currentPath| bitly %}
 
 {% block meta %}
     <meta name="description" content="{{ bar.seoDescription|slice(0, 150) }}" />
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@wbb">
+    <meta name="twitter:site" content="WorldsBestBars">
     <meta name="twitter:title" content="{{ bar.name }} | World Best Bars">
-    <meta name="twitter:description" content="{{ bar.seoDescription|slice(0, 150) }}">
-    <meta name="twitter:creator" content="@wbb">
-    <meta property="twitter:url" content="{{ currentPath| bitly }}" />
+    <meta name="twitter:description" content="{{ bar.name ~ " is one of the @WorldsBestBars in #" ~ bar.city ~"! - "|slice(0, 140) }}">
+    <meta name="twitter:creator" content="WorldsBestBars">
+    <meta property="twitter:url" content="{{ bitlyURL }}" />
 
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ bar.name }} | World Best Bars" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ currentPath| bitly }}" />
-    <meta property="og:description" content="{{ bar.seoDescription|slice(0, 200) }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ bitlyURL }}" />
+    <meta property="og:description" content="{{ bar.seoDescription |slice(0, 200) }}" />
     <meta property="og:site_name" content="World Best Bars" />
     <meta property="fb:admins" content="149071961796732" />
 
     {% for m in bar.medias|slice(0,1) %}
-        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}">
-        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}" />
+        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}">
+        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}" />
     {% endfor %}
 
 {% endblock %}
@@ -199,9 +200,9 @@
                 title: '{{ bar.name }}' // Marker ALT Text
             });
 
-            // 	google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
-            //		window.location='http://www.snowdonrailway.co.uk/shop_and_cafe.php'; // URL to Link Marker to (i.e Google Places Listing)
-            // 	});
+            //  google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
+            //      window.location='http://www.snowdonrailway.co.uk/shop_and_cafe.php'; // URL to Link Marker to (i.e Google Places Listing)
+            //  });
 
             var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
                 content:"{{ bar.name }}" // HTML contents of the InfoWindow
@@ -245,7 +246,8 @@
                     </td>
 
                     <td class="star-share">
-                        <a class="btn-round brown star" href="#0"></a><a id="share" class="btn-round brown share" href="#0"></a>
+                        <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round star brown {% if is_favorite(app.user, bar) %}active changed{% endif %} " data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
+                        <a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
             </table>
@@ -255,47 +257,21 @@
                     <ul>
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
-                        {% if is_mobile() and not is_tablet() %}
-                            <li class="left"><a href="#0" id="smsWindow" class="sms-share">SMS</a></li>
+                        {% if is_mobile() and not is_tablet() and not is_ios() %}
+                            {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL %}
+                            <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
-                            <li class="left"><a href="#0" class="email-share">Email</a></li>
+                            <li class="left">
+                                <a href="#0" data-href="{{ path('wbb_share_email_form', {id: bar.id, type: 'bar'}) }}" class="email-share">
+                                    Email
+                                </a>
+                            </li>
                         {% endif %}
                     </ul>
                     <div class="clear"></div>
                 </div>
                 {% if is_mobile() and not is_tablet() %}<a href="javascript:;" id="close-pop" class="close btn-close-brown no-text">close</a>{% endif %}
             </div>
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    $("#share").hover(function() {
-                        $(".wrap-share").fadeIn("slow");
-                        if ($(this).hasClass("popup")) {
-                            $(".mask").fadeIn("slow");
-                        }
-                    });
-
-                    $(".wrap-share").hover(function() {
-                        $(".wrap-share").fadeIn("slow");
-                        if ($(this).hasClass("popup")) {
-                            $(".mask").fadeIn("slow");
-                        }
-                    }, function() {
-                        $(".wrap-share").fadeOut("slow");
-                        if ($(this).hasClass("popup")) {
-                            $(".mask").fadeOut("slow");
-                        }
-                    });
-                    $("#close-pop").click(function(){
-                        $("#share-pop").fadeOut("slow");
-                        $(".mask").fadeOut("slow");
-                    })
-                    $('#smsWindow').click(function() {
-                        $(this).target = "_blank";
-                        window.open($(this).prop('href'));
-                        return false;
-                    });
-                })
-            </script>
         </section>
     </div>
     <!-- SLIDER -->
@@ -311,7 +287,7 @@
                         <div class="image">
                             <div class="content">
                                 <div class="overlay"></div>
-                                <img src="{% path m.media, 'slider_large' %}" />
+                                <img src="{% path m.media, 'bar_640_480' %}" />
                             </div>
                         </div>
                     {% endif %}
@@ -325,7 +301,7 @@
                             <div class="image">
                                 <div class="content">
                                     <div class="overlay"></div>
-                                    <img src="" data-src="{% path m.media, 'slider_small' %}" itemprop="photo"/>
+                                    <img src="" data-src="{% path m.media, 'bar_425_320' %}" itemprop="photo"/>
                                 </div>
                             </div>
                         {% endif %}
@@ -343,14 +319,12 @@
 
                     <ul class="trends margin-bottom-40">
                         <li>At a Glance :</li>
-                        {% if bar.energyLevel %}
-                            <li>{{ bar.energyLevel }}</li>
-                        {% endif %}
-                        {% for tr in bar.tags |slice(0, ((bar.energyLevel)? 4 : 5)) %}
-                            {% if tr.type != constant('\\WBB\\BarBundle\\Entity\\Tag::WBB_TAG_TYPE_BEST_COCKTAILS')%}
-                                <li>{{ tr.tag.name|capitalize }}</li>
-                            {% endif %}
-                        {% endfor%}
+                        {% for tr in bar.tagsToShow |slice(0, 5) %}
+                            <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
+                                {{ tr.name|capitalize }}
+                            </a>
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
                     </ul>
 
                     <p>
@@ -533,7 +507,7 @@
                     {% if is_mobile() and not is_tablet() %}
                         {% include "WBBBarBundle:Bar:bar-mobile.html.twig" with { 'b': b } %}
                     {% else %}
-                        {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
+                        {% include "WBBBarBundle:Bar/items:bar_285_215.html.twig" with { 'b': b } %}
                     {% endif %}
                 </div>
             {% endfor %}
@@ -541,6 +515,9 @@
     </section>
 
     <script type="text/javascript">
+        // remove desibled 
+        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+        $('article.tip .form form input[type="submit"]').removeClass('loading');
         new meta.Form(
                 {
                     $form : $('form#tips'),
@@ -549,6 +526,8 @@
                         var $count = $form.find(".count");
                         var count = $count.text();
 
+                        $('article.tip .form form input[type="submit"]').removeClass('loading');
+                        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
                         $count.addClass('success').text(data.message);
 
                         $form.get(0).reset();
@@ -559,14 +538,21 @@
                             $('form#tips textarea').val("");
                             $count.removeClass('success').text("250 left");
 
-                        }, 2000);
+                        }, 1);
                     },
                     onError:function($form, message)
                     {
+                        $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+
+                        $('article.tip .form form input[type="submit"]').removeClass('loading');
+
                         var $count = $form.find(".count");
                         var count = $count.text();
 
-                        $count.addClass('error').text(message);
+                        if(count != message &&  message ){
+                            $count.addClass('error').text(message);
+                        }
+
                         $form.find("textarea").addClass('error').focus();
 
                         setTimeout(function()
@@ -577,9 +563,9 @@
 
                         }, 2000);
                     }
-                });
+                }); 
 
-        $('form#tips textarea').keydown(function()
+        $('form#tips textarea').on('change input paste keyup', function()
         {
             var length = $(this).val().length;
             $('form#tips .count').text( 250-length+' left' );
@@ -589,6 +575,3 @@
 {% block footerAd %}
     {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BD_728x90' })) }}
 {% endblock %}
-
-
-

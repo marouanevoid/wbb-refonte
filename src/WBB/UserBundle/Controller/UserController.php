@@ -5,9 +5,39 @@ namespace WBB\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
+
+    public function simulateErrorAction($code)
+    {
+        if($code === '404')
+        {
+            throw new NotFoundHttpException;
+        }else{
+            throw new \Exception;
+        }
+
+    }
+
+    public function resendEmailConfirmationTokenAction()
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(array(
+                'code' => 403,
+                'message' => 'User not authenticated !'
+            ));
+        }
+
+        $this->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
+        return new JsonResponse(array(
+            'code' => 200,
+            'message' => 'Confirmation email sent !'
+        ));
+    }
+
     public function loadProfileDataAction($content = 1, $filter = "date" , $offset = 0, $limit = 8, $display = 'grid')
     {
         $user = $this->getUser();
@@ -23,8 +53,7 @@ class UserController extends Controller
         $nbResults          = null;
         $nbResultsRemaining = null;
         $html               = null;
-
-        $distance   = false;
+        $distance           = false;
 
         if($content == "bars"){
             $session = $this->container->get('session');

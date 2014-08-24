@@ -6,6 +6,7 @@
 
 namespace WBB\UserBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -13,6 +14,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 use FOS\UserBundle\Model\UserManagerInterface;
+use WBB\UserBundle\Entity\User;
 
 class UserAdmin extends Admin
 {
@@ -26,7 +28,7 @@ class UserAdmin extends Admin
             ->addIdentifier('username')
             ->add('email')
             ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true))
+            ->add('confirmed')
         ;
     }
 
@@ -65,6 +67,11 @@ class UserAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $isPasswordRequired = false;
+        if (!$this->id($this->getSubject())) {
+            $isPasswordRequired = true;
+        }
+
         $generatePasswordBtn = '<input type="button" id="pwd-generator" class="pwd-generator btn" value="Generate Password" />';
 
         $formMapper
@@ -75,38 +82,55 @@ class UserAdmin extends Admin
                     'multiple'  => false,
                     'required'  => true,
                     'label'     => 'Gender',
-                    'choices'   => array(
-                        'Mrs'   =>  'Madam',
-                        'Miss'  =>  'Miss',
-                        'Mr'    =>  'Mister'
+                    'choices'  => array(
+                        'F'   =>  'F',
+                        'M'   =>  'M'
                     )
                 ))
                 ->add('username', null, array('help' => 'Mandatory'))
                 ->add('email', null, array('help' => 'Mandatory'))
-                ->add('firstname', null, array('help' => 'Mandatory'))
-                ->add('lastname', null, array('help' => 'Mandatory'))
-                ->add('birthdate', null, array('help' => 'Mandatory'))
+                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname *', 'required' => false))
+                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname *', 'required' => false))
+                ->add('birthdate', null, array('years' => range(1914, date('Y')), 'help' => 'Mandatory', 'label' => 'Birthdate'))
                 ->add('website')
-                ->add('country', null, array('help' => 'Mandatory'))
+                ->add('country', 'entity', array(
+                        'class'    => 'WBBCoreBundle:Country',
+                        'help'     => 'Mandatory',
+                        'label'     => 'Country',
+                        'required' => true,
+                        'property' => 'name',
+                        'empty_value' => false,
+                        'query_builder' => function (EntityRepository $er) {
+                                return $er->findCountriesOrderedByName(true);
+                            }
+                    )
+                )
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
                 ->add('plainPassword', 'text', array(
-                        'required' => false,
-                        'help' => $generatePasswordBtn.'Mandatory',
-                        'label' => 'Password *',
-                        'attr' => array(
+                        'required'  => $isPasswordRequired,
+                        'help'      => $generatePasswordBtn.'Mandatory',
+                        'label'     => ($isPasswordRequired)?'Password':'Password *',
+                        'attr'      => array(
                             'class' => 'span5 pwd-field'
                         )
                     )
                 )
             ->end()
             ->with('Preferences')
-                ->add('prefWhen', null, array('read_only' => true, 'disabled'  => true))
-                ->add('prefHome', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefCity1', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefCity2', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefCity3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefBar1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefBar2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefBar3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefDrinkBrand1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefDrinkBrand2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefDrinkBrand3', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCocktails1', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCocktails2', null, array('read_only' => true, 'disabled'  => true))
+                ->add('prefCocktails3', null, array('read_only' => true, 'disabled'  => true))
                 ->add('prefStartCity', null, array('read_only' => true, 'disabled'  => true))
                 ->add('stayInformed')
                 ->add('stayBrandInformed')
@@ -131,9 +155,12 @@ class UserAdmin extends Admin
                             'ROLE_USER'             =>  'User'
                         )
                     ))
-                    ->add('locked', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
-                ->end()
+                    ->add('confirmed', null, array(
+                        'read_only' => true,
+                        'disabled' => true
+                    ))
+                    ->end()
             ;
         }
     }
@@ -143,15 +170,17 @@ class UserAdmin extends Admin
      */
     public function preUpdate($user)
     {
-        //Get the plain password before encryption and the rest of email data
-        $data =array(
-            'password'  => $user->getPlainPassword(),
-            'email'     => $user->getEmail(),
-            'gender'    => $user->getTitle(),
-            'fullName'  => $user->getFullName()
-        );
-        //Send Email containing the New Password
-        $this->getContainer()->get('wbb_user.generate_password.mailer')->sendGeneratedPassword($data);
+        if($user->getPlainPassword()){
+            //Get the plain password before encryption and the rest of email data
+            $data = array(
+                'password'  => $user->getPlainPassword(),
+                'email'     => $user->getEmail(),
+                'gender'    => $user->getTitle(),
+                'fullName'  => $user->getFullName()
+            );
+            //Send Email containing the New Password
+            $this->getContainer()->get('wbb_user.generate_password.mailer')->sendGeneratedPassword($data);
+        }
 
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);

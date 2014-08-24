@@ -28,19 +28,117 @@ function nodeToString(node) {
 }
 
 $(document).ready(function() {
+    if ($.cookie('light_action') === 'favorite') {
+        $.removeCookie('light_action');
+        $.removeCookie('light_type');
+        $.removeCookie('light_url');
+        $.removeCookie('light_id');
+        $.removeCookie('light_favorite');
+        $.removeCookie('light_from');
+        $.removeCookie('light_name');
+    }
+
     $('.btn-signin').on('click', function(e) {
         popinFrom = 'signin';
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).attr('href');
-        $.ajax({
+
+        // Set the PopIn Loading Flag
+        PopIn.startLoading();
+        window.ajaxRequest = $.ajax({
             url: url,
             method: 'GET',
             success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+                $.removeCookie('light_action');
+
                 $('.popin-block').html(html);
                 initializeDropdowns();
                 initRegisterLoginForms();
                 $('#show-popin').click();
+            },
+            beforeSend: function()
+            {
+                console.log(window.ajaxRequest);
+                if (window.ajaxRequest != null) window.ajaxRequest.abort();
+
+            }
+        });
+    });
+
+    function submitShareMail(element) {
+        window.shareRequest = $.ajax({
+            url: element.attr('action'),
+            method: 'GET',
+            data: element.serialize(),
+            success: function(data) {
+                PopIn.endLoading();
+                if(data.code == 400){
+                    console.log('test log 400');
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+                    $('#message').show();
+                    $('#wbb_share_form #message').find('ul').remove();
+                    var errorsList = $('#wbb_share_form #message div').show().append('<ul></ul>').parent();
+                    for (var i = 0; i < errors.length; i++) {
+                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    // scroll to message on Mobile
+                    animateToPopIn( $('#message').offset().top );
+                    var idPrefix = '#wbb_barbundle_share_type_';
+                    $('#wbb_share_form input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    for (var i = 0; i < fields.length; i++) {
+                        $(idPrefix + fields[i]).addClass('error');
+                    }
+                }else{
+                    $('.popin-block').html(data);
+                    $('#show-popin').click();
+                }
+
+                // add listner on click send mail
+                $('.popin-block').find('form').off('submit').on('submit' , function (e) {
+                        e.preventDefault();
+                        submitShareMail($(this));
+                    }
+                );
+            },
+            beforeSend: function()
+            {
+                if (window.shareRequest != null) window.shareRequest.abort();
+            }
+        });
+    }
+
+    $('.email-share').on('click', function(e) {
+        e.preventDefault();
+        $('.popin-block').html('');
+        var url = $(this).data('href');
+
+        // Set the PopIn Loading Flag
+        PopIn.startLoading();
+        window.ajaxRequest = $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(html) {
+                // Set the PopIn Loading Flag
+                PopIn.endLoading();
+                $('.popin-block').html(html);
+                $('#show-popin').click();
+
+                // add listner on click send mail
+                $('.popin-block').find('form').off('submit').on('submit' , function (e) {
+                        e.preventDefault();
+                        submitShareMail($(this));
+                    }
+                );
+            },
+            beforeSend: function()
+            {
+                if (window.ajaxRequest != null) window.ajaxRequest.abort();
             }
         });
     });
@@ -51,6 +149,12 @@ function fillInForm(formId) {
         if (response.status === 'connected') {
             FB.api('/me', function(response) {
                 console.log(response);
+                var action = $(formId).attr('action');
+                if (action.indexOf('fromFb') > -1) {
+                    $(formId).attr('action', action.replace('?fromFb=1', ''));
+                } else {
+                    $(formId).attr('action', action + '?fromFb=1');
+                }
                 if (formId === '#register_form_full') {
                     $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
                     $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
@@ -65,6 +169,13 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
+                    $('#fos_user_registration_form_country').find('option').each(function() {
+                        if ($(this).text().trim() === country) {
+                            $(this).attr('selected', 'selected').change();
+                        }
+                    });
                     $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
                     $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
@@ -74,10 +185,47 @@ function fillInForm(formId) {
                     var month = (parseInt(birthdayParts[0]));
                     var day = (parseInt(birthdayParts[1]));
                     var year = (parseInt(birthdayParts[2]));
+                    var locationParts = response.location.name.split(',');
+                    var country = locationParts[1].trim();
 
-                    $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
-                    $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
-                    $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+                    var focusOnOption = function(sell , ooptionval,bytext){
+                        sell.find('option').each(function(){
+                            if(bytext){
+                                if($(this).text().trim() == ooptionval ) {
+                                    sell.val( $(this).val() );
+                                    sell.change();
+                                }
+                            }else{
+                                if($(this).val() == ooptionval ) {
+                                    sell.val($(this).val());
+                                    sell.change();
+                                }
+                            }
+                        });
+                    };
+
+                    if(ismobile || istablet){
+                        focusOnOption($('#fos_user_registration_form_country') , country , true);
+                    }else{
+                        $('#fos_user_registration_form_country').find('option').each(function() {
+                            if ($(this).text().trim() === country) {
+                                $(this).attr('selected', 'selected').change();
+                            }
+                        });
+
+
+                    }
+
+                    if(ismobile || istablet){
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_month') , month );
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_day') , day );
+                         focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_year') , year );
+
+                    }else{
+                        $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
+                        $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
+                        $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+                    }
                 }
             });
         } else {
@@ -95,17 +243,23 @@ function fillInForm(formId) {
 // Register forms actions
 function initRegisterLoginForms() {
     $('#facebook-signup').on('click', function() {
+        // show the loader
+        $("#register-light #login_form").addClass('loading');
+
         FB.getLoginStatus(function(response) {
+            // Hide Loading
+            $("#register-light #login_form").removeClass('loading');
+
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
                     console.log(response);
-                    setTimeout(securityCheck, 500);
+                    setTimeout(securityCheck, 250);
                 });
             } else {
                 FB.login(function(response) {
                     if (response.authResponse) {
                         console.log('Welcome!  Fetching your information.... ');
-                        setTimeout(securityCheck, 500);
+                        setTimeout(securityCheck, 250);
                     } else {
                         console.log('User cancelled login or did not fully authorize.');
                     }
@@ -119,27 +273,68 @@ function initRegisterLoginForms() {
         e.preventDefault();
         var form = $(this);
         var formUrl = form.attr('action');
+
         $.ajax({
             type: "POST",
             url: formUrl,
             data: form.serialize(),
             success: function(data) {
-                if (data.code === '400') {
-                    var errors = data.errors;
+                if (data.code == '400') {
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+
+                    $('#message').show();
+                    // scroll to message on Mobile
+                    // if(ismobile)
+                    animateToPopIn( $('#message').offset().top );
+
+
                     $('#register_form').after($('#message'));
                     $('#register-form #message').find('ul').remove();
-                    var errorsList = $('#register-form #message').show().find('img').after('<ul></ul>').parent();
-                    for (var i = 0; i < errors.length; i++) {
-                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    $('#register-form #message div').append('<ul></ul>').parent();
+                    $('#register_form input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form .ui-dropdown').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form .select2-choice').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    var idPrefix = '#fos_user_registration_form_';
+                    for (var i = 0; i < fields.length; i++) {
+                        switch (fields[i]) {
+                            case 'country':
+                                $('#register-form .country-dropdown .ui-dropdown').addClass('error');
+                                $('#register-form .country-dropdown .select2-choice').addClass('error');
+                                break;
+                            case 'birthdate':
+                            case 'birthday':
+                                $('#register-form .date-birthday .ui-dropdown').addClass('error');
+                                $('#register-form .date-birthday .select2-choice').addClass('error');
+                                break;
+                            case 'plainPassword':
+                                $(idPrefix + fields[i] + '_first').addClass('error');
+                                $(idPrefix + fields[i] + '_second').addClass('error');
+                                break;
+                            default:
+                                $(idPrefix + fields[i]).addClass('error');
+                                break;
+                        }
                     }
+                    for (var i = 0; i < errors.length; i++) {
+                        $('#register-form #message').find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    // if(ismobile){
+                    //     // scroll to error if there is erroes
+                    //     animateToPopIn($('.forgot-password').offset().top);
+                    //     //animateToPopIn($('#register-form #message').offset().top);
+                    // }
                 } else {
-                    var html = '<div id="success" class="text-align-center padding-top-80">' +
-                            '<div class="subtitle text-transform-uppercase margin-top-80">Congratulations!</div>' +
-                            '<p class="margin-top-20 margin-bottom-20">You are now registered on  World’s Best Bars.</p>' +
-                            '<p>Check your mailbox <br />' +
-                            'to confirm your subscription.</p>' +
-                            '</div>';
-                    $('.popin-block').html(html);
+                    $.cookie('light_from', 'register');
+
+                    $.cookie('just_loggedin', true);
+                    window.location.reload();
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -152,41 +347,71 @@ function initRegisterLoginForms() {
         e.preventDefault();
         var form = $(this);
         var formUrl = form.attr('action');
-        $.ajax({
-            type: "POST",
-            url: formUrl,
-            data: form.serialize(),
-            success: function(data) {
-                console.log(data);
-                if (data.code === '400') {
-                    $('#username').addClass('error');
-                    $('#password').addClass('error');
-                    $('#facebook-signup').after($('#message'));
-                    $('#login_form #message').find('ul').remove();
-                    var errorsList = $('#login_form #message').show().append('<div><ul></ul></div>').parent();
-                    errorsList.find('ul').append('<li>' + data.error + '</li>');
-                } else {
-                    window.location.reload();
+        var error = false;
+        $('#username').removeClass('error');
+        $('#password').removeClass('error');
+        if ($('#username').val().trim() === '') {
+            error = true;
+            $('#username').addClass('error');
+        }
+        if ($('#password').val().trim() === '') {
+            error = true;
+            $('#password').addClass('error');
+        }
+        if (!error) {
+            $.ajax({
+                type: "POST",
+                url: formUrl,
+                data: form.serialize(),
+                success: function(data) {
+                    console.log(data);
+                    if (data.code === '400') {
+                        $('#username').addClass('error');
+                        $('#password').addClass('error');
+                        if ($('.need-account').length > 0) {
+                            $('.need-account').after($('#message'));
+                        } else {
+                            $('#facebook-signup').after($('#message'));
+                        }
+                        $('#login_form #message').find('ul').remove();
+                        var errorsList = $('#login_form #message').show().append('<ul></ul>').parent();
+                        errorsList.find('ul').append('<li>' + data.error + '</li>');
+
+                        // scroll to message on Mobile
+                        animateToPopIn( $('#message').offset().top );
+
+                    } else {
+                        $.cookie('light_from', 'login');
+
+                        $.cookie('just_loggedin', true);
+                        window.location.reload();
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    // Si erreur communication ?
                 }
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                // Si erreur communication ?
-            }
-        });
+            });
+        }
     });
 }
 
 jQuery(document).ready(function($) {
+    $('#show-popin').on('click', function() {
+        $('html, body').animate({scrollTop: 0}, 500, 'easeInOutCubic');
+    });
 
     $('#register_form_full').on('submit', function(e) {
         e.preventDefault();
         var url = $(this).attr('action');
-
+        // 
+        // show the loder
+        $(' #register.page .group-actions').addClass('loading');
         $.ajax({
             url: url,
             method: 'POST',
             data: $(this).serialize(),
             success: function(data) {
+                $(' #register.page .group-actions').removeClass('loading');
                 if (data.code === 400) {
                     var errors = data.errors.messages;
                     var fields = data.errors.fields;
@@ -198,12 +423,31 @@ jQuery(document).ready(function($) {
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
+
+                    // scroll to message on Mobile
+                    animateToPopIn( $('#message').offset().top );
+
                     var idPrefix = '#fos_user_registration_form_';
+                    $('#register_form_full input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form_full .ui-dropdown').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    $('#register_form_full .select2-choice').each(function() {
+                        $(this).removeClass('error');
+                    });
                     for (var i = 0; i < fields.length; i++) {
 
                         switch (fields[i]) {
+                            case 'country':
+                                $('.country-dropdown .ui-dropdown').addClass('error');
+                                $('.country-dropdown .select2-choice').addClass('error');
+                                break;
                             case 'birthdate':
-                                // birthday error
+                            case 'birthday':
+                                $('.date-birthday .ui-dropdown').addClass('error');
+                                $('.date-birthday .select2-choice').addClass('error');
                                 break;
                             case 'plainPassword':
                                 $(idPrefix + fields[i] + '_first').addClass('error');
@@ -236,20 +480,78 @@ jQuery(document).ready(function($) {
         });
     }
     if (showConfirmed) {
-        var html = '<div id="success" class="text-align-center padding-top-80">' +
-                '<p class="margin-top-20 margin-bottom-20">Your email is now confirmed. Welcome in the World’s Best Bars community!</p>' +
-                '<p>You can now save your favorite bars, leave tips and receive the latest news from World’s Best Bars</p>'+
-                '</div>';
-        $('.popin-block').html(html);
+        $('#show-popin').click();
+    }
+    if (showProfilePopin) {
         $('#show-popin').click();
     }
     if (showResettingForm !== "0") {
         $('#show-popin').click();
     }
     if(showEmailPopin) {
-        alert('Congrats');
+        $('#show-popin').click();
+        PopIn.resize($('#register'));
+    }
+    if(showLoginForm) {
+        $('.btn-signin').click();
     }
 });
+
+
+// Animate the scroll to focus on PopIn
+function animateToPopIn(par){
+    if ( ismobile || istablet )
+        $('html, body').animate({scrollTop: par ? par : 0}, 500, 'easeInOutCubic');
+}
+
+
+
+// syncronise Bar favorie
+function syncBarFav(cible,status){
+    var href = cible.attr('href'),
+        currentTitle = cible.parent('article').find('.overlay-link').attr('href');
+    // find the other Bar on dom 
+    // wich content the same name
+    $('.star').closest('article').find('.overlay-link').each(function(){
+        if($(this).attr('href') == currentTitle){
+            // This bar is like favoried Bar
+            // set the Class active
+            var artcileParent =  $(this).closest('article');
+            if(status){
+                var btn = artcileParent.find('.star');
+                btn.hide();
+                btn.removeClass('active');
+                if (btn.hasClass('changed')) {
+                    btn.removeClass('brown');
+                    btn.addClass('dark');
+                    btn.removeClass('changed');
+                }
+                if (btn.hasClass('nc')) {
+                    btn.addClass('force-disabled')
+                }
+                btn.show();
+            }
+            else{
+                var btn = artcileParent.find('.star');
+                btn.removeClass('active');
+                btn.hide();
+                btn.addClass('active');
+
+                if (btn.hasClass('dark')) {
+                    btn.addClass('changed');
+                    btn.addClass('brown');
+                    btn.removeClass('dark');
+                }
+                if (btn.hasClass('force-disabled')) {
+                    btn.removeClass('force-disabled')
+                }
+                btn.show();
+            }
+            // set the href url
+            artcileParent.find('.star').attr('href' , href);
+        }
+    });
+} 
 
 // Favorites star
 $(document).ready(function() {
@@ -261,18 +563,29 @@ $(document).ready(function() {
     $(document).on("click", ".star", function(e) {
         e.preventDefault();
         var btn = $(this);
-        var url = $(this).attr('href');
+        var favUrl = $(this).attr('href');
+
 //        var url = "/app_dev.php"; //comment this line if you want it to work
         if (window.userConnected) {
+            if(btn.hasClass('active')){
+                btn.addClass('loading-active');
+            }else{
+                btn.addClass('loading');
+            }
             $.ajax({
                 type: "POST",
-                url: url,
+                url: favUrl,
                 success: function(response) {
+                    btn.removeClass('loading');
+                    btn.removeClass('loading-active');
+
                     if (response.code === 200) {
                         btn.attr('href', response.href);
                         if (btn.hasClass('active')) {
                             btn.hide();
                             btn.removeClass('active');
+                            // search sync bars
+                            syncBarFav(btn,true);
                             if (btn.hasClass('changed')) {
                                 btn.removeClass('brown');
                                 btn.addClass('dark');
@@ -288,26 +601,42 @@ $(document).ready(function() {
 
                                 var TypeEvent = "removeitem",
                                         cible = "";
-                                if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length){
+                               /* if(btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').length || btn.parents('article').not('.bestof').length ){
                                     btn.parents('.three.columns.m-margin-top, #tab-bars .bar-w-pic-list').remove();
                                     cible = 'bars';
-                                }
-                                else{
-                                    if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length){
-                                        btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
-                                        cible = 'bestof';
+
+                                    if( btn.parents('article').not('.bestof').length ){
+                                        btn.parents('article').not('.bestof').remove();
                                     }
                                 }
+                                else{
+                                    if( btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').length || btn.parents('article.bestof').length ){
+                                        btn.parents('.best-of-container, #tab-bestof .bar-w-pic-list').remove();
+                                        cible = 'bestof';
 
+                                        if( btn.parents('article.bestof').length ){
+                                            btn.parents('article.bestof').remove();
+                                        }
+                                    }
+                                }*/
+                                // global var on window
+                                //window.cibleDeleted = cible;
                                 // dispatching Event removeitem
+
+                                var clickedItem = {type:  btn.data("type"), id:  btn.data("id")};
+
                                 $.event.trigger({
                                     type: "removeitem",
-                                    cible: cible
+                                    cible: clickedItem
                                 });
                             }
                         } else {
                             btn.hide();
                             btn.addClass('active');
+
+                            // search sync bars
+                            syncBarFav(btn,false);
+
                             if (btn.hasClass('dark')) {
                                 btn.addClass('changed');
                                 btn.addClass('brown');
@@ -318,6 +647,7 @@ $(document).ready(function() {
                             }
                             btn.show();
                         }
+                        favoriteName = response.message;
                         console.log(response.message);
                     } else {
 
@@ -326,17 +656,29 @@ $(document).ready(function() {
             });
         } else {
             $('.popin-block').html('');
-            var url = $('.btn-signin').attr('href');
+            var url = $('.btn-signin').attr('href') + '?light=1';
+            $.cookie('light_name', $(this).attr('data-name'));
+            $.cookie('light_type', $(this).attr('data-type'));
+            $.cookie('light_id', $(this).attr('data-id'));
             popinFrom = 'favorite';
+            // Set the PopIn Loading Flag
+            PopIn.startLoading();
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(html) {
+                    // Set the PopIn Loading Flag
+                    PopIn.endLoading();
+                    $.cookie('light_action', 'favorite');
+
                     html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
                     $('.popin-block').html(html);
                     initializeDropdowns();
                     initRegisterLoginForms();
                     $('#show-popin').click();
+
+                    // focus on Popin if is Mobile
+                    animateToPopIn();
                 }
             });
         }
