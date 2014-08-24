@@ -2,34 +2,36 @@
     <div class="padding-top-20 padding-bottom-20">
         <form id="wbb_share_form" action="{{ url }}">
             <div class="group-form margin-top-20">
-                <div class="left" style="width: 50%">
+                <div {% if is_mobile() and not is_tablet() %}class="clear" style="width: 100%"{% else %}class="left" style="width: 50%"{% endif %}>
                     {{ form_widget(form.firstName, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
                 </div>
-                <div class="left" style="width: 50%">
+                <div {% if is_mobile() and not is_tablet() %}class="clear padding-top-10" style="width: 100%"{% else %}class="left" style="width: 50%"{% endif %}>
                     {{ form_widget(form.lastName, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="group-form margin-top-10">
-                <div class="left" style="width: 101%">
+                <div class="left" {% if is_mobile() and not is_tablet() %}style="width: 100%"{% else %}style="width: 101%"{% endif %}>
                     {{ form_widget(form.emailTo, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
                 </div>
             </div>
             <div class="clear"></div>
             
-            <div class="group-form margin-top-10" style="width: 107%">
+            <div class="group-form margin-top-10" {% if is_mobile() and not is_tablet() %}style="width: 101%"{% else %}style="width: 107%"{% endif %}>
                 {{ form_widget(form.content, {'value': text|raw, 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
             </div>
 
             <div class="clear"></div>
             <div class="group-actions padding-top-40 wrap">
-                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Send email">
+                <input type="submit" class="form-submit btn btn-submit text-align-uppercase bold" value="Send email" {% if is_mobile() and not is_tablet() %}style="max-width: 100%;"{% endif %}>
 
                 {{ form_rest(form) }}
             </div>
             <div class="clear"></div>
-            <div id="message" class="margin-top-20 margin-bottom-40 wrap" style="display: none;">
-                <div>
+            <div style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 300px{% endif %}">
+                <div id="message" class="margin-top-20 margin-bottom-40 wrap" style="display: none;">
+                    <div>
+                    </div>
                 </div>
             </div>
             <div class="clear"></div>
