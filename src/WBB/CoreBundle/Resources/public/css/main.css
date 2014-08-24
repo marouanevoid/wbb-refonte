@@ -209,10 +209,9 @@
     /*
     #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
     #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #818a8c;}
-    */
-
     #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
     #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
+    */
 
   /* Version mobile */
     .ui.mobile {width: auto; /*padding: 80px 20px;*/ top: 80px;} /* Padding 0 for Userprofile  */
@@ -456,7 +455,7 @@
 
 /* SHARE Tooltips */
   .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
-  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px;}
+  .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px; background-color: #ffffff;}
   .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}
   .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
   .wrap-share .social-share li {height: 41px; width: 89px; margin-right: 4px;}
@@ -467,9 +466,9 @@
   .wrap-share .social-share li .twitter-share {background-image: url("../images/icon_tw-mobile.jpg");}
   .wrap-share .social-share li .email-share {background-image: url("../images/icon_email-mobile.jpg");}
   /* Mobile */
-    .wrap-share.mobile {z-index: 9999999; top: 0; height: 280px; background-color: transparent; width: 100%;}
-    .wrap-share.mobile .social-share {padding: 0 10px; border: none;}
-    .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; left: 0; padding: 95px 90px 0;}
+    .wrap-share.mobile {z-index: 9999999; top: 0; height: 280px; background-color: #fff; width: 100%;}
+    .wrap-share.mobile .social-share {padding: 0 10px; border: none; width: auto; margin: 0; background: transparent;}
+    .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; top: 0; left: 0; margin: 95px auto 0; width: 154px;}
     .wrap-share.mobile .social-share li,
     .wrap-share.mobile .social-share li a {width: 106px; margin: 0 auto 9px; float: none;}
     .wrap-share.mobile .social-share li a {display: inline-block; text-indent: -10000px; background-size: 106px 41px;}
@@ -478,6 +477,8 @@
     .wrap-share.mobile .social-share li .twitter-share {background-image: url("../images/UI/bar/icon_share-twitter.jpg");}
     .wrap-share.mobile .btn-close-brown {background-size: 40px 40px; top: 0;}
     .wrap-share.mobile .social-share .share-label {position: absolute; z-index: 77; text-align: center; width: 93%; margin: 0 auto; top: 50px; font-size: 26px;}
+
+    .social-share ul li .sms-share {background-image: url("../images/UI/bar/icon_share-sms.jpg"); background-size: 90px 40px; width: 90px; height: 41px; display: block;}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
@@ -513,12 +514,12 @@
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
 
 /* Override */
-   img.scale-with-grid {box-sizing: initial;}
+   img.scale-with-grid {box-sizing: initial; width: 100%;}
   .bar-w-pic .txt {z-index: 30;}
   .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .bar-finder .ui-radio.btn-radius.with-icon:after,
-  .bar-finder .ui-radio.btn-radius.with-icon:before {background-position: -92px -200px;}
+  .bar-finder .ui-radio.btn-radius.with-icon:before {/*background-position: -92px -200px;*/}
   .btn-radius.with-icon.city:after, .btn-radius.with-icon.map:after {background-position: -212px -42px;}
   .btn-radius.with-icon.friend:after {background-position: -12px -240px;}
   .btn-round.dark.star.active {color: #faf3e1; background-color: #b3955f !important; border-color: #b3955f;}
@@ -538,10 +539,10 @@
   section.bar-finder .ui-radio.btn-radius.with-icon {text-align: left; padding-left: 2em;}
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
   .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29; display: none;}
-  .bar-finder .ui-radio.btn-radius.with-icon:after {background-position: -52px -240px;}
+  .bar-finder .ui-radio.btn-radius.with-icon:after {/*background-position: -52px -240px;*/}
   .ui-radio.radio-dark:hover,
-  .ui-dropdown-container .ui-dropdown.drop-dark.active,
-  .ui-dropdown-container .ui-dropdown.drop-dark:hover {background-color: transparent!important; border-color: #ffe4af;}
+  .select2-container.active .select2-choice.dark,
+  .select2-container .select2-choice.dark:hover {background-color: transparent!important; border-color: #ffe4af;}
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark:hover {background-color: #6f7072!important; border-color: #6f7072 !important;}
   .ui-radio.radio-dark.active {background-color: transparent!important;}
   .bar-guides .entire-content .bar-filter {min-height: 550px;}
@@ -573,6 +574,10 @@
   .btn-small-radius.dark, .btn-round.dark, .btn-radius.dark, .btn-small-round.dark {border-color: #333;}
   .select2-results {margin-bottom: 15px;}
   .select2-container .select2-choice {text-decoration: none!important;}
+  .filters .select-search .select2-container .select2-choice:hover {background-color: #b3955f; color: #faf3e1!important; border: 1px solid #b3955f;}
+  .filters .select-search .select2-container .select2-choice:hover .select2-arrow b {background-position: -162px -41px;}
+  article.city img.scale-with-grid {border: none!important;}
+  header.desktop .logged img {border-radius: 2em;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -665,7 +670,7 @@
     .wrap-share .social-share .share-label {display: none;}
     .wrap-share .social-share ul {left: 0;}
     .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
-    section.bar-filter .bar-w-pic {max-height: 180px;}
+    section.bar-filter .bar-w-pic {/*max-height: 180px;*/}
     .ui.register .title {width: 45%;}
     .page #message {left: 68px;}
     .date-birthday .select-wrap {margin-right: 6px;}
@@ -745,6 +750,7 @@
     #success {padding: 0 20px;}
     #success p {font-weight: bold; font-size: 20px;}
     #change-password #message {left: 0;}
+    #edit_profile_form #message {left: 0;}
 
   /* Globales Classes */
     .xs-hidden {display: none!important; visibility: hidden;}
@@ -801,7 +807,7 @@
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
       .bar-details section.bar-filter .bar-w-pic,
-      .bar-guides section.bar-filter .bar-w-pic {min-height: 100px;}
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 120px;}
   }
 
   @media only screen and (max-width : 480px) {
@@ -809,7 +815,7 @@
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
       .bar-details section.bar-filter .bar-w-pic,
-      .bar-guides section.bar-filter .bar-w-pic {min-height: 120px!important;}
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 100px!important;}
   }
 
 /* Smartphones (portrait) ----------- */
@@ -818,7 +824,7 @@
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
       .bar-details section.bar-filter .bar-w-pic,
-      .bar-guides section.bar-filter .bar-w-pic {min-height: 120px!important;}
+      .bar-guides section.bar-filter .bar-w-pic {min-height: 90px!important;}
 
     #editprofile #edit-account {padding: 0 10px;}
     #bar-finder.mobile .form-radio {width: 93px; margin-right: 8px;}
