@@ -38,7 +38,7 @@
                     <td valign="top" style="vertical-align: top;">
                         <div class="name" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase;">
                             <a href="{{ url('wbb_news_details_page',{newsSlug: news.slug}) }}" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase; text-decoration: none;">
-                                {{ news.title }}
+                                {{ news.title|slice(0, 25) }}{% if news.title|length > 25 %}...{% endif %}
                             </a>
                         </div>
                         <p style="color: #818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">
