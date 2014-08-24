@@ -39,7 +39,7 @@ class AdsController extends Controller
         }
         $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, ($city) ? $city->getCountry():null, true);
         if($city && !$ad){
-            $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, null);
+            $ad = $this->get('ad.repository')->findOneByPositionAndCountry($format, null, true);
             $format = Ad::WBB_ADS_NLP_300X250;
         }elseif($ad){
             $format = $ad->getPosition();
