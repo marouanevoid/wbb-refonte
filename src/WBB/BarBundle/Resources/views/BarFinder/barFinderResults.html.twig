@@ -285,9 +285,13 @@
                                         {{ b.description|truncate(200, true, '...')|striptags }}
                                     </p>
                                     <div class="tags">
-                                        {% for tr in b.tags %}
-                                            {{ tr.tag.name|capitalize }}{% if not loop.last %}, {% endif %}
-                                        {% endfor%}
+                                        {% for tr in b.tags |slice(0, 5) %}
+                                            <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.tag.name }}" >
+                                                {{ tr.tag.name|capitalize }}
+                                            </a>
+                                            {% if not loop.last %}, {% endif %}
+                                        {% endfor %}
+
                                     </div>
                                 </div>
                                 <div class="separator"><hr/></div>
