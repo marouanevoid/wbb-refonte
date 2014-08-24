@@ -271,6 +271,11 @@
                 minimumResultsForSearch: 20
             });
 
+            // Scroll To Error
+            {% if errors.messages|length > 0 %}
+                if ( ismobile || istablet )
+                    $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
+            {% endif %}
         });
     </script>
 {% endblock %}

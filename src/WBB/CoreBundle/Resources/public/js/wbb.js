@@ -248,7 +248,7 @@ function initRegisterLoginForms() {
 
         FB.getLoginStatus(function(response) {
             // Hide Loading
-            $("#register-light #login_form").removeClass('loading');
+            //$("#register-light #login_form").removeClass('loading');
 
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
