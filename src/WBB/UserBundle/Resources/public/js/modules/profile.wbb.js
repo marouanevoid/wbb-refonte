@@ -130,13 +130,13 @@ wbb.LoadProfile = function() {
             that.context.display = $(this).val();
             if(that.context.content === 'bars'){
                 that.config.bars.offset = 0;
-                that.config.bars.$more.show();
+                //that.config.bars.$more.show();
                 that.context.$barsTarget.empty();
                 that._request(that.context.$barsTarget, that.config.bars);
                 that.config.bars.offset += that.config.bars.limit;
             }else{
                 that.config.bestofs.offset = 0;
-                that.config.bestofs.$more.show();
+                //that.config.bestofs.$more.show();
                 that.context.$bestofsTarget.empty();
                 that._request(that.context.$bestofsTarget, that.config.bestofs);
                 that.config.bestofs.offset += that.config.bestofs.limit;
@@ -149,13 +149,13 @@ wbb.LoadProfile = function() {
             that.context.filter = $(this).val();
             if(that.context.content === 'bars'){
                 that.config.bars.offset = 0;
-                that.config.bars.$more.show();
+                //that.config.bars.$more.show();
                 that.context.$barsTarget.empty();
                 that._request(that.context.$barsTarget, that.config.bars);
                 that.config.bars.offset += that.config.bars.limit;
             }else{
                 that.config.bestofs.offset = 0;
-                that.config.bestofs.$more.show();
+                //that.config.bestofs.$more.show();
                 that.context.$bestofsTarget.empty();
                 that._request(that.context.$bestofsTarget, that.config.bestofs);
                 that.config.bestofs.offset += that.config.bestofs.limit;
@@ -328,7 +328,8 @@ wbb.LoadProfile = function() {
                 }
                 if(msg.nbResults < config.limit || msg.difference == 0)
                     config.$more.hide();
-
+                else
+                    config.$more.show();
                 $target.find('img[data-src]').each(function()
                 {
                     $(this).load(that._imageLoaded);

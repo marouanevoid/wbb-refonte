@@ -3,6 +3,7 @@
 {% block title %}World Best Bars{% endblock %}
 {% block javascripts %}
     <script type="text/javascript">
+
         $(document).ready(function(){
             {% if city is defined %}
             $.cookie('city', '{{ path('city_homepage',{slug:city.slug}) }}', { path: '/' });
@@ -70,7 +71,23 @@
                     }
                 },delay ? 2000 : 0);
             }
-            initAnimate( $(".line.gridview:lt(2)") ,  true , true);
+
+
+            var totalLoadedImage = 0;
+            var CurrentimageLoaded = function ()
+            {
+                totalLoadedImage--;
+                $(this).removeAttr('data-src');
+                if (totalLoadedImage == 0){
+
+                    $('.loader-search-page').hide();
+
+                    // Start the annimation
+                    // and show items
+                    initAnimate( $(".line.gridview:lt(2)") ,  true , true);
+                }
+            }
+
             $('.sort-by a.grid').add('.sort-by a.list').on('click' , function(){
                $(".line.gridview").hide(); 
                $(".line.listview").hide();  
@@ -97,6 +114,19 @@
                 steelshowLoadMoreBtn();
                 return false;
             });
+
+
+            // Load les images 
+            // One By One
+            totalLoadedImage = $('.force-load-images').find('img[data-src]').length;
+            
+            $('.force-load-images').find('img[data-src]').each(function()
+            {
+                $(this).load(CurrentimageLoaded);
+                $(this).error(CurrentimageLoaded);
+                $(this).attr('src', $(this).data('src'));
+            });
+
         });
     </script>
 {% endblock %}
@@ -194,7 +224,7 @@
     {% if bars|length >0 %}
         <section class="bar-filter">
             <div class="container">
-                <div class="bars-w-pic force-load   load-container">
+                <div class="bars-w-pic force-load-images   load-container">
                     <div class="load-target">
                         <div class="line gridview" style="display: none;">
                             {% set index = 8 %}
@@ -255,9 +285,13 @@
                                         {{ b.description|truncate(200, true, '...')|striptags }}
                                     </p>
                                     <div class="tags">
-                                        {% for tr in b.tags %}
-                                            {{ tr.tag.name|capitalize }}{% if not loop.last %}, {% endif %}
-                                        {% endfor%}
+                                        {% for tr in b.tags |slice(0, 5) %}
+                                            <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.tag.name }}" >
+                                                {{ tr.tag.name|capitalize }}
+                                            </a>
+                                            {% if not loop.last %}, {% endif %}
+                                        {% endfor %}
+
                                     </div>
                                 </div>
                                 <div class="separator"><hr/></div>
