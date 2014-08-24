@@ -384,7 +384,11 @@ function initRegisterLoginForms() {
                         $.cookie('light_from', 'login');
 
                         $.cookie('just_loggedin', true);
-                        window.location.reload();
+                        if(loginBackUrl == '0') {
+                            window.location.reload();
+                        } else {
+                            window.location.href = loginBackUrl;
+                        }
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
