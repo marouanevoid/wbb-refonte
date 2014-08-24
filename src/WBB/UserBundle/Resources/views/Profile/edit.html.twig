@@ -16,7 +16,7 @@
                                 {% if is_mobile() and not is_tablet() %}<div class="clear"></div>{% endif %}
                                 <div class="group left">
                                     <div class="title text-transform-capitalize bold {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
-                                        <h5>{{ user.username }}</h5>
+                                        <h5>{{ username }}</h5>
                                     </div>
                                     <div class="subgroup margin-top-10 {% if is_mobile() and not is_tablet() %}margin-bottom-10{% else %}margin-bottom-40{% endif %} wrap">
                                         {% if city %}

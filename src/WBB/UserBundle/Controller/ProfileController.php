@@ -69,7 +69,7 @@ class ProfileController extends ContainerAware
         }else{
             $form = $formFactory->createForm(true, array('profile_light'));
         }
-
+        $currentUserName = $user->getUsername();
         $form->setData($user);
         $errors = array('fields' => array(), 'messages' => array());
 
@@ -130,10 +130,11 @@ class ProfileController extends ContainerAware
         return $this->container->get('templating')->renderResponse(
             'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
             array(
-                'form'   => $form->createView(),
-                'user'   => $user,
-                'city'   => $city,
-                'errors' => $errors
+                'form'      => $form->createView(),
+                'user'      => $user,
+                'username'  => $currentUserName,
+                'city'      => $city,
+                'errors'    => $errors
             )
         );
     }
