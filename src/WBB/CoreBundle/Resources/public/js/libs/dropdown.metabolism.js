@@ -161,7 +161,7 @@ meta.Dropdown = function(config){
             $dropdown.find('select').on('change', function()
             {
                 var _this = $(this);
-                var ttext = _this.find('option:selected').text();
+                var ttext = _this.find('option:selected').last().text();
                     that.config.$dropdown_value.text( ttext );
                     that.checkSelected.apply([this]);
 
