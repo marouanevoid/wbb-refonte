@@ -73,11 +73,32 @@ $(document).ready(function() {
             url: element.attr('action'),
             method: 'GET',
             data: element.serialize(),
-            success: function(html) {
-                // Set the PopIn Loading Flag
+            success: function(data) {
                 PopIn.endLoading();
-                $('.popin-block').html(html);
-                $('#show-popin').click();
+                if(data.code == 400){
+                    console.log('test log 400');
+                    var errors = data.errors.messages;
+                    var fields = data.errors.fields;
+                    $('#message').show();
+                    $('#wbb_share_form #message').find('ul').remove();
+                    var errorsList = $('#wbb_share_form #message div').show().append('<ul></ul>').parent();
+                    for (var i = 0; i < errors.length; i++) {
+                        errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    // scroll to message on Mobile
+                    animateToPopIn( $('#message').offset().top );
+                    var idPrefix = '#wbb_barbundle_share_type_';
+                    $('#wbb_share_form input').each(function() {
+                        $(this).removeClass('error');
+                    });
+                    for (var i = 0; i < fields.length; i++) {
+                        $(idPrefix + fields[i]).addClass('error');
+                    }
+                }else{
+                    $('.popin-block').html(data);
+                    $('#show-popin').click();
+                }
+
                 // add listner on click send mail
                 $('.popin-block').find('form').off('submit').on('submit' , function (e) {
                         e.preventDefault();
@@ -93,7 +114,6 @@ $(document).ready(function() {
     }
 
     $('.email-share').on('click', function(e) {
-//        return false; //TODO Remove this in order to get Share by email working again > 0.0.5
         e.preventDefault();
         $('.popin-block').html('');
         var url = $(this).data('href');
