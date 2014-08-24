@@ -71,10 +71,10 @@ class NewsController extends Controller
         shuffle($topCities);
 
         $ad = $this->get('ad.repository')->findOneByPositionAndCountry('NLP_300x', ($city) ? $city->getCountry():null, true);
-        $size = explode('_', $ad->getPosition());
+        $size = ($ad)?explode('_', $ad->getPosition()):null;
         $ads = array(
             'ad'        => $ad,
-            'size'      => $size[1],
+            'size'      => ($size)?$size[1]:null,
             'bigAd'     => ($ad && $ad->getPosition() == Ad::WBB_ADS_NLP_300X600)?true:null,
             'smallAd'   => ($ad && $ad->getPosition() == Ad::WBB_ADS_NLP_300X250)?true:null
         );
