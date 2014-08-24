@@ -29,8 +29,8 @@
                             <h3>Location</h3>
                             <a class="btn-round plus brown"></a>
                         </div>
-                        <div class="drop-list">
-                            {% if not is_mobile() or is_tablet() %}<label class="h3">City</label>{% endif %}
+                        <div class="drop-list select-search">
+                            {% if not is_mobile() or is_tablet() %}<label class="h3 margin-bottom-10">City</label>{% endif %}
                             {% if is_mobile() or is_tablet() %}
                                 <select class="ui-dropdown city-drop-down" name="city" data-class="city">
                             {% else %}

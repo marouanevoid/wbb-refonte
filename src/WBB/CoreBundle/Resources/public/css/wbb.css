@@ -501,6 +501,10 @@ end added by Jérome
  }
 
 
+.more-bars , .more-bestofs, .more-tips{
+    display: none;
+}
+
 #floatingBarsG, .floatingBarsG,.floatingBarsG_fb{
 position:relative;
 width:20px;

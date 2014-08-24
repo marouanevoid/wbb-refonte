@@ -1,10 +1,10 @@
 .select2-container 												{position: relative; width: 100%; font: 16px "Avenir", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;}
-.select2-drop 													{ z-index:99999999;}
-.select2-container .select2-choice 								{ filter: progid:none!important; background-color: transparent; background-image: none; color: #b3955f; border: 1px solid #b3955f; border-radius: 20px; height: 40px; line-height: 40px; -webkit-box-shadow: none; box-shadow: none; text-decoration: none;}
+.select2-drop 													{z-index:99999999;}
+.select2-container .select2-choice 								{filter: progid:none!important; background-color: transparent; background-image: none; color: #b3955f; border: 1px solid #b3955f; border-radius: 20px; height: 40px; line-height: 40px; -webkit-box-shadow: none; box-shadow: none; text-decoration: none;}
 .select2-container .select2-choice .select2-arrow 				{filter: progid:none!important; width: 40px; height: 40px; background: none; border: none;}
 .select2-container .select2-choice .select2-arrow b 			{background: url("../images/sprite.png") no-repeat; background-size: 256px 512px; background-position: -162px 0; width: 40px; height: 40px;}
 .select2-container.select2-dropdown-open .select2-choice 		{border-radius: 20px 20px 0 0; background-color: #fff; background-image: none; color: #b3955f; border-color: #6f7072;}
-.select2-display-none 											{background-color: #fff; color: #b3955f; border-color: #6f7072; border-radius: 0 0 20px 20px; border-top: none;}
+.select2-display-none 											{background-color: #faf3e1; color: #b3955f; border-color: #6f7072; border-radius: 0 0 20px 20px; border-top: none;}
 .select2-search 												{padding: 0 10px;}
 .select2-search input 											{text-indent: 10px; padding: 0; min-height: 30px; /*border-radius: 20px;*/ border: 1px solid #b3955f; line-height: 30px; height: 32px!important; color: #b3955f;}
 .select2-results .select2-result-label 							{line-height: 27px;}
@@ -26,8 +26,8 @@
 .select2-container.brown 										{}
 .select2-container .select2-choice .select2-arrow b 			{background-position: -162px 0;}
 .select2-container .select2-choice 								{color: #b3955f!important; border-color: #b3955f;}
-.select2-container.select2-dropdown-open .select2-choice 		{background-color: #fff; color: #b3955f; border-color: #6f7072;}
-.select2-display-none 											{background-color: #fff; color: #b3955f; border-color: #6f7072;}
+.select2-container.select2-dropdown-open .select2-choice 		{background-color: #faf3e1; color: #b3955f; border-color: #6f7072;}
+.select2-display-none 											{background-color: #faf3e1; color: #b3955f; border-color: #6f7072;}
 .select2-container.with-icon.finder-city						{}
 .select2-container.brown 										{}
 .select2-container.with-icon .select2-chosen 					{text-align: left; padding-left: 25px;}

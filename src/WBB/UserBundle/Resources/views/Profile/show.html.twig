@@ -84,7 +84,7 @@
                             </div> <!-- .sort-by -->
                             <div class="filter-view">
                                 <div class="right">
-                                    <div class="{% if is_mobile() %}margin-right-10{% endif %}">
+                                    <div class="{% if is_mobile() and not is_tablet() %}margin-right-10{% endif %}">
                                         <input type="radio" name="view-type" value="grid" class="ui-radio with-icon margin-right-20" data-color="brown" checked="checked"/>
                                         <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
                                     </div>
