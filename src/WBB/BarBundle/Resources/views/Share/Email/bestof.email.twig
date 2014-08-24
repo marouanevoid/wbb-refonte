@@ -36,7 +36,7 @@
                     <td valign="top" style="vertical-align: top;">
                         <div class="name" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase;">
                             <a href="{{ url('wbb_bar_bestof_global',{bestOfSlug: bestof.slug}) }}" style="font-size: 19px; font-family: Arial; color: #b3955f; text-transform: uppercase; text-decoration: none;">
-                                {{ bestof.name }}
+                                {{ bestof.name|slice(0, 25) }}{% if bestof.name|length > 25 %}...{% endif %}
                             </a>
                         </div>
                         <p style="color: #818a8c; font-size: 16px; font-family: arial, serif; line-height: 26px;">

@@ -21,7 +21,6 @@
     <meta property="og:site_name" content="World Best Bars" />
     <meta property="fb:admins" content="149071961796732" />
     <meta property="og:image" content="{{ websiteUrl }}{{ showImage(bestOf.image, 'bestof_370_278', true) }}" />
-
 {% endblock %}
 {% block title %}World Best Bars{% endblock %}
 {% block javascripts %}
@@ -103,7 +102,9 @@
 <div class="container bars force-load">
     {% if not bars %}
         {% if not is_mobile() or is_tablet() %}
-            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
+            <div class="four columns offset-by-eight" style="display:none;">
+                {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
+            </div>
         {% endif %}
     {% endif %}
 
