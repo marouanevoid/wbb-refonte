@@ -1,6 +1,6 @@
 <div class="page-form wrap">
     <div class="padding-top-20 padding-bottom-20">
-        <form action="{{ url }}">
+        <form id="wbb_share_form" action="{{ url }}">
             <div class="group-form margin-top-20">
                 <div class="left" style="width: 50%">
                     {{ form_widget(form.firstName, { 'attr' : { 'class': 'form-text text-align-center left' } }) }}
@@ -27,6 +27,12 @@
 
                 {{ form_rest(form) }}
             </div>
+            <div class="clear"></div>
+            <div id="message" class="margin-top-20 margin-bottom-40 wrap" style="display: none;">
+                <div>
+                </div>
+            </div>
+            <div class="clear"></div>
         </form>
     </div>
 </div>

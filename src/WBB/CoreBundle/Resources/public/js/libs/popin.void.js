@@ -16,7 +16,7 @@ PopIn.initContext = function(){
 		clsloader : 'popin-loader-gif',
 		mask : $('.mask'),
 		close : $(".btn-close"),
-        popin : $('.popup'),
+        popin : $('.popup').not('#share-pop'),
 		targetPopup : $('#register')
 	}
 
