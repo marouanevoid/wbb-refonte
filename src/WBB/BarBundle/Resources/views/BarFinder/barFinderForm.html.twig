@@ -7,7 +7,7 @@
 
         $("select.select2-dropdown.finder-city").select2({
             minimumResultsForSearch: 1,
-            dropdownCssClass : 'PUT_HERE_YOUR_CLASS'
+            dropdownCssClass : 'select2-city dark'
         });
 
         // if the page is not bar Finder Result
@@ -15,7 +15,8 @@
         if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-city").length ){
             $("select.select2-dropdown.finder-city").select2({
                 placeholder : 'Choose a City',
-                allowClear: true
+                allowClear: true,
+                dropdownCssClass : 'select2-city dark'
             });
 
             $("select.select2-dropdown.finder-city").select2('val' , '');
@@ -29,7 +30,7 @@
 
         $("select.select2-dropdown.finder-choose").select2({
             minimumResultsForSearch: 1,
-            dropdownCssClass : 'PUT_HERE_YOUR_CLASS'
+            dropdownCssClass : 'select2-friends dark'
         });
 
         // if the page is not bar Finder Result
@@ -37,7 +38,8 @@
         if( ! $('.bar-finder-results-container').length && $("select.select2-dropdown.finder-choose").length ){
             $("select.select2-dropdown.finder-choose").select2({
                 placeholder : 'Choose with who',
-                allowClear: true
+                allowClear: true,
+                dropdownCssClass : 'select2-friends dark'
             });
 
             $("select.select2-dropdown.finder-choose").select2('val' , '');
