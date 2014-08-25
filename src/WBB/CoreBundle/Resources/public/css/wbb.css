@@ -508,6 +508,12 @@ end added by Jérome
     display: none;
 }
 
+
+
+.select2-drop-mask.showingpopin {
+    z-index: 999999999;
+}
+
 #floatingBarsG, .floatingBarsG,.floatingBarsG_fb{
 position:relative;
 width:20px;

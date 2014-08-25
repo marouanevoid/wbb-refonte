@@ -45,6 +45,9 @@ PopIn.close = function(){
     if( $("#share-pop").length ){
         $("#share-pop").fadeOut("slow");
     }
+
+    // set the Z-index to fix the mask issues
+    $('.select2-drop-mask').removeClass('showingpopin');
 }
 
 // Set Up the Events
@@ -122,14 +125,8 @@ PopIn.resize = function(target){
         "left": (($(window).width() - current_id.width()) / 2) //+ $(window).scrollLeft()
     });
 
-    // bonus 
-    // focus on the first input
-
-    // $(PopIn.dom.popin).find('input:text').first().focus();
-    // if(PopIn.dom.popin.find('#fos_user_registration_form_username').length){
-    //     $('#fos_user_registration_form_username').focus();
-    // }
-
+    // set the Z-index to fix the mask issues
+    $('.select2-drop-mask').addClass('showingpopin');
 }
 
 // init the Popin Loader
