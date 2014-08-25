@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var textBtn = "";
     $('#change_password_form').on('submit', function(e){
         e.preventDefault();
         var form = $(this);
@@ -8,6 +9,7 @@ $(document).ready(function() {
             url: formUrl,
             data: form.serialize(),
             success: function(data) {
+                $('#change_password_form').find('input[type=submit]').val(textBtn);
                 if (data.code === 400) {
                     var fields = data.errors.fields;
                     var errors = data.errors.messages;
@@ -30,6 +32,8 @@ $(document).ready(function() {
                         $('#change_password_form #message').find('ul').append('<li>' + errors[i] + '</li>');
                     }
                     $('#change_password_form #message').show();
+                    // if ( ismobile || istablet )
+                    $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
                 }else{
                     window.location.href = Routing.generate('fos_user_profile_show');
                 }
@@ -38,12 +42,16 @@ $(document).ready(function() {
                 // Si erreur communication ?
             },
             beforeSend: function() {
-                if (requestID != null) {
+                textBtn = $('#change_password_form').find('input[type=submit]').val();
+                $('#change_password_form').find('input[type=submit]').val("Loading...");
+                if (requestID != null){
                     requestID.abort();
                 }
-                $('#change_password_form input').each(function() {
+
+                $('#change_password_form input').each(function(){
                     $(this).removeClass('error');
                 });
+
             }
         });
     })

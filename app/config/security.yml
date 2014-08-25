@@ -70,10 +70,13 @@ security:
 
         ROLE_BAR_OWNER:
             - ROLE_ADMIN
-            - ROLE_WBB_BAR_ALL
+            - ROLE_WBB_BAR_ADMIN_BAR_LIST
+            - ROLE_WBB_BAR_ADMIN_BAR_VIEW
+            - ROLE_WBB_BAR_ADMIN_BAR_EDIT
             - ROLE_WBB_BAR_MEDIA_ALL
-            - ROLE_WBB_BAR_TAG_ALL
-            - ROLE_WBB_BAR_FS_IMGS
+            - ROLE_WBB_BAR_OPENING_ALL
+            - ROLE_WBB_BAR_MEDIA_ALL
+            - ROLE_BAR_ID
 
         ROLE_BAR_EXPERT:
             - ROLE_ADMIN

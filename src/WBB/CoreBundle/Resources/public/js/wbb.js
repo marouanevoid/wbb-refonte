@@ -85,6 +85,11 @@ $(document).ready(function() {
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
                     }
+                    var idPrefix = '#wbb_barbundle_share_type_';
+                    for (var i = 0; i < fields.length; i++) {
+                        console.log(idPrefix + fields[i]);
+                        $(idPrefix + fields[i]).addClass('error');
+                    }
                     // scroll to message on Mobile
                     animateToPopIn( $('#message').offset().top );
                     var idPrefix = '#wbb_barbundle_share_type_';
@@ -95,8 +100,10 @@ $(document).ready(function() {
                         $(idPrefix + fields[i]).addClass('error');
                     }
                 }else{
+                    PopIn.startLoading();
                     $('.popin-block').html(data);
                     $('#show-popin').click();
+                    PopIn.endLoading();
                 }
 
                 // add listner on click send mail
@@ -109,6 +116,9 @@ $(document).ready(function() {
             beforeSend: function()
             {
                 if (window.shareRequest != null) window.shareRequest.abort();
+                $('#wbb_share_form input').each(function(){
+                    $(this).removeClass('error');
+                });
             }
         });
     }
@@ -150,71 +160,115 @@ function fillInForm(formId) {
             FB.api('/me', function(response) {
                 console.log(response);
                 var action = $(formId).attr('action');
+                var fillIn = false;
                 if (action.indexOf('fromFb') > -1) {
                     $(formId).attr('action', action.replace('?fromFb=1', ''));
                 } else {
+                    fillIn = true;
                     $(formId).attr('action', action + '?fromFb=1');
                 }
-                if (formId === '#register_form_full') {
-                    $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
-                    $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
-                    $(formId + ' #fos_user_registration_form_email').val(response.email);
-                    if (response.gender === 'male') {
-                        $('#fos_user_registration_form_title').find('option[value="M"]').attr('selected', 'selected').change();
-                    } else {
-                        $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected').change();
-                    }
+                if (fillIn) {
+                    if (formId === '#register_form_full') {
 
-                    var birthdayParts = response.birthday.split('/');
-                    var month = (parseInt(birthdayParts[0]));
-                    var day = (parseInt(birthdayParts[1]));
-                    var year = (parseInt(birthdayParts[2]));
-                    var locationParts = response.location.name.split(',');
-                    var country = locationParts[1].trim();
-                    $('#fos_user_registration_form_country').find('option').each(function() {
-                        if ($(this).text().trim() === country) {
-                            $(this).attr('selected', 'selected').change();
+                        var focusOnOption = function(sell , ooptionval,bytext){
+                        sell.find('option').each(function(){
+                            if(bytext){
+                                if($(this).text().trim() == ooptionval ) {
+                                    sell.val( $(this).val() );
+                                        sell.change();
+                                    }
+                            }else{
+                                if($(this).val() == ooptionval ) {
+                                        sell.val($(this).val());
+                                        sell.change();
+                                    }
+                                }
+                            });
+                        };
+
+
+                        $(formId + ' #fos_user_registration_form_firstname').val(response.first_name);
+                        $(formId + ' #fos_user_registration_form_lastname').val(response.last_name);
+                        $(formId + ' #fos_user_registration_form_email').val(response.email);
+
+                        if (response.gender === 'male') {
+                            if( ismobile || istablet ){
+                                focusOnOption( $('#fos_user_registration_form_title'), "M");
+                            }else{
+                                $('#fos_user_registration_form_title').find('option[value="M"]').attr('selected', 'selected').change();
+                            }
+                        } else {
+                            if( ismobile || istablet ){
+                                focusOnOption( $('#fos_user_registration_form_title'), "F");
+                            }else{
+                                $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected').change();
+                            }
                         }
-                    });
-                    $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
-                    $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
-                    $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
-                } else if (formId === '#register_form') {
-                    $(formId + ' #fos_user_registration_form_email').val(response.email);
-                    var birthdayParts = response.birthday.split('/');
-                    var month = (parseInt(birthdayParts[0]));
-                    var day = (parseInt(birthdayParts[1]));
-                    var year = (parseInt(birthdayParts[2]));
-                    var locationParts = response.location.name.split(',');
-                    var country = locationParts[1].trim();
+
+                        var birthdayParts = response.birthday.split('/');
+                        var month = (parseInt(birthdayParts[0]));
+                        var day = (parseInt(birthdayParts[1]));
+                        var year = (parseInt(birthdayParts[2]));
+                        var locationParts = response.location.name.split(',');
+                        var country = locationParts[1].trim();
+
+                        if( ismobile || istablet ){
+                            focusOnOption($('#fos_user_registration_form_country') ,country , true );
+                        }else{
+                            $('#fos_user_registration_form_country').find('option').each(function() {
+                                if ($(this).text().trim() === country) {
+                                    $(this).attr('selected', 'selected').change();
+                                }
+                            });
+                        }
+                        if( ismobile || istablet ){
+
+                            focusOnOption($('#fos_user_registration_form_birthdate_month') , month );
+                            focusOnOption($('#fos_user_registration_form_birthdate_day') , day );
+                            focusOnOption($('#fos_user_registration_form_birthdate_year') , year );
+
+                        }else{
+                            $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
+                            $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
+                            $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+                        }
+
+                    } else if (formId === '#register_form') {
+                        $(formId + ' #fos_user_registration_form_email').val(response.email);
+                        var birthdayParts = response.birthday.split('/');
+                        var month = (parseInt(birthdayParts[0]));
+                        var day = (parseInt(birthdayParts[1]));
+                        var year = (parseInt(birthdayParts[2]));
+                        var locationParts = response.location.name.split(',');
+                        var country = locationParts[1].trim();
 
                     var focusOnOption = function(sell , ooptionval,bytext){
                         sell.find('option').each(function(){
                             if(bytext){
                                 if($(this).text().trim() == ooptionval ) {
                                     sell.val( $(this).val() );
-                                    sell.change();
-                                }
+                                        sell.change();
+                                    }
                             }else{
                                 if($(this).val() == ooptionval ) {
-                                    sell.val($(this).val());
-                                    sell.change();
+                                        sell.val($(this).val());
+                                        sell.change();
+                                    }
                                 }
-                            }
-                        });
-                    };
+                            });
+                        };
 
                     if(ismobile || istablet){
                         focusOnOption($('#fos_user_registration_form_country') , country , true);
                     }else{
-                        $('#fos_user_registration_form_country').find('option').each(function() {
-                            if ($(this).text().trim() === country) {
-                                $(this).attr('selected', 'selected').change();
-                            }
-                        });
+                            $('#fos_user_registration_form_country').find('option').each(function() {
+                                if ($(this).text().trim() === country) {
+                                    $(this).attr('selected', 'selected').change();
+                                }
+                            });
 
 
-                    }
+                        }
 
                     if(ismobile || istablet){
                          focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_month') , month );
@@ -222,9 +276,10 @@ function fillInForm(formId) {
                          focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_year') , year );
 
                     }else{
-                        $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
-                        $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
-                        $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+                            $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
+                            $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
+                            $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
+                        }
                     }
                 }
             });
@@ -248,7 +303,7 @@ function initRegisterLoginForms() {
 
         FB.getLoginStatus(function(response) {
             // Hide Loading
-            $("#register-light #login_form").removeClass('loading');
+            //$("#register-light #login_form").removeClass('loading');
 
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
@@ -384,7 +439,11 @@ function initRegisterLoginForms() {
                         $.cookie('light_from', 'login');
 
                         $.cookie('just_loggedin', true);
-                        window.location.reload();
+                        if(loginBackUrl == '0') {
+                            window.location.reload();
+                        } else {
+                            window.location.href = loginBackUrl;
+                        }
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

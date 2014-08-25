@@ -80,7 +80,7 @@
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
                         {% if is_mobile() and not is_tablet() and not is_ios() %}
-                            {%  set smsBody = "I just discovered the best "~ bestOf.name ~" bars thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this Best of: [Best of Page]" ~ bitlyURL %}
+                            {%  set smsBody = "I just discovered the best "~ bestOf.name ~" bars thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world %0a Click here to check this Best of: " ~ bitlyURL %}
                             <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
                             <li class="left">
@@ -102,7 +102,7 @@
 <div class="container bars force-load">
     {% if not bars %}
         {% if not is_mobile() or is_tablet() %}
-            <div class="four columns offset-by-eight" style="display:none;">
+            <div class="offset-by-eight"></div>
                 {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
             </div>
         {% endif %}
@@ -110,9 +110,7 @@
 
     {% for b in bars %}
         {% if loop.index==3 and (not is_mobile() or is_tablet()) %}
-            <div class="four columns" style="display:none;">
-                {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
-            </div>
+            {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BOD_300x250' })) }}
         {% endif %}
         <div class="four columns" style="display:none;">
             {% if bestOf.byTag %}

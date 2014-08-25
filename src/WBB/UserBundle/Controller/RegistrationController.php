@@ -100,6 +100,9 @@ class RegistrationController extends ContainerAware
                 if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
                     $messages = array($messages[1]);
                 }
+                if (count($fields) == 0) {
+                    $messages = array('CSRF token is not valid. Please reload the page');
+                }
                 $errors = array(
                     'fields' => $fields,
                     'messages' => $messages
@@ -185,6 +188,9 @@ class RegistrationController extends ContainerAware
                 if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
                     $messages = array($messages[1]);
                 }
+                if (count($fields) == 0) {
+                    $messages = array('CSRF token is not valid. Please reload the page');
+                }
                 $errors = array(
                     'fields' => $fields,
                     'messages' => $messages
@@ -246,7 +252,11 @@ class RegistrationController extends ContainerAware
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->container->get('router')->generate('homepage');
+            if ($user->getFirstname() == '') {
+                $url = $this->container->get('router')->generate('fos_user_profile_edit');
+            } else {
+                $url = $this->container->get('router')->generate('homepage');
+            }
             $response = new RedirectResponse($url);
         }
 

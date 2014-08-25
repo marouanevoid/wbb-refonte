@@ -56,7 +56,7 @@ class TipsController extends Controller
                 $dispatcher = $this->get('event_dispatcher');
                 $dispatcher->dispatch(TipsEvents::TIP_CREATED, $event);
 
-                $tipHTML = $this->renderView('WBBBarBundle:Bar:tip.html.twig', array('tip' => $tip));
+                $tipHTML = $this->renderView('WBBBarBundle:Bar:tip.html.twig', array('tip' => $tip, 'temporary' => true));
 
                 return new JsonResponse(array(
                     'code'          => 200,

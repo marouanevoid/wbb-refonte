@@ -36,6 +36,7 @@
         var _bar = {{ bar.id }};
         var _offset = 0;
         var _limit = 3;
+        var _excluded = 0;
         var is_mobile = 0;
         {% if is_mobile() and not is_tablet() %}
         is_mobile = 1;
@@ -245,20 +246,20 @@
                         <h3>{{ bar.suburb.name|default('Unspecified') }}, {{ bar.city.name|default('Unspecified') }}</h3>
                     </td>
 
-                    <td class="star-share">
+                    <td valign="top" class="star-share" style="vertical-align: top">
                         <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round star brown {% if is_favorite(app.user, bar) %}active changed{% endif %} " data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
                         <a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
             </table>
             <div id="share-pop" class="wrap-share {% if is_mobile() and not is_tablet() %}mobile popup{% endif %}" style="display:none">
-                <div class="social-share radius-max">
+                <div class="social-share {% if is_mobile() and not is_tablet() %}no-radius-max{% else %}radius-max{% endif %}">
                     <div class="share-label left bold">SHARE</div>
                     <ul>
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
                         {% if is_mobile() and not is_tablet() and not is_ios() %}
-                            {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL %}
+                            {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world %0a Click here to check this bar: " ~ bitlyURL %}
                             <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
                             <li class="left">

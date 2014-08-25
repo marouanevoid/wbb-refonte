@@ -1,6 +1,10 @@
-<div class="">
-    <div class="text-align-center">
-        <div class="subtitle text-transform-uppercase bold margin-bottom-40 margin-top-80">Thank you!</div>
-        <p class="margin-bottom-40">Your friend will shortly receive your email.</p>
+<div id="success" class="padding-top-20 padding-bottom-20">
+    <div class="padding-bottom-20">
+        <div class="text-align-center">
+            <div class="subtitle text-transform-uppercase bold margin-bottom-40 {% if is_mobile() and not is_tablet() %}margin-top-20{% else %}margin-top-80{% endif %}">
+                Thank you!
+            </div>
+            <p class="margin-bottom-40">Your friend will shortly receive your email.</p>
+        </div>
     </div>
 </div>
