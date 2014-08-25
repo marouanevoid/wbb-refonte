@@ -101,6 +101,7 @@ meta.LoadMoreTips = function(config) {
             dataType: "json",
             success: function(msg) {
                 // Remove loader
+                $('.temporary').remove();
                 $target.append(msg.htmldata);
                 
                 if(parseInt(msg.difference)==0){
