@@ -34,7 +34,7 @@ class RegistrationListener implements EventSubscriberInterface
                     'user' => $user,
                     'profileUrl' => $profileUrl
                 ),
-                'fromEmail' => $this->container->getParameter('mailer_email'),
+                'fromEmail' => array($this->container->getParameter('mailer_email') => $this->container->getParameter('mailer_username')),
                 'toEmail' => $user->getEmail()
             );
 
