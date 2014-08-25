@@ -288,7 +288,7 @@
 
             // Scroll To Error
             {% if errors.messages|length > 0 %}
-                $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
+                $('html, body').delay(3000).animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
             {% endif %}
         });
     </script>
