@@ -136,11 +136,19 @@
                     showProfilePopin = 1;
                 {% endif %}
 
+                var showEmailPopin = 0;
+                {% set email_popin = false %}
+                {% for message in app.session.flashbag.get('wbb-check-email') %}
+                    {% set email_popin = true %}
+                {% endfor %}
+                {% if email_popin %}
+                    showProfilePopin = 1;
+                {% endif %}
+
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
                 var loginBackUrl = "{{ app.request.query.get('back_url', 0) }}";
-                var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
                 var fbPrefill = {{ app.request.query.get('prefill', 0) }};
                 
                 var favoriteName = '';
@@ -226,7 +234,7 @@
                         {% if resetting_form is defined %}
                             {{ resetting_form|raw }}
                         {% endif %}
-                        {% if app.request.query.get('emailPopin', 0) == 1 %}
+                        {% if email_popin == true %}
                             {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
                         {% endif %}
                         {% if profile_message == true %}

@@ -33,6 +33,11 @@ class ProfileController extends ContainerAware
         $session = $this->container->get('session');
         $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
 
+        if ($request->query->get('emailPopin', null)) {
+            $session->getFlashBag()->add('wbb-check-email', true);
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
+        }
+
         return $this->container->get('templating')->renderResponse('WBBUserBundle:Profile:show.html.twig', array(
                 'user'  => $user,
                 'city'  => $city
