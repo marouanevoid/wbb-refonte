@@ -100,6 +100,9 @@ class RegistrationController extends ContainerAware
                 if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
                     $messages = array($messages[1]);
                 }
+                if (count($fields) == 0) {
+                    $messages = array('CSRF token is not valid. Please reload the page');
+                }
                 $errors = array(
                     'fields' => $fields,
                     'messages' => $messages
@@ -184,6 +187,9 @@ class RegistrationController extends ContainerAware
                 }
                 if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
                     $messages = array($messages[1]);
+                }
+                if (count($fields) == 0) {
+                    $messages = array('CSRF token is not valid. Please reload the page');
                 }
                 $errors = array(
                     'fields' => $fields,
