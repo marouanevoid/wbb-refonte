@@ -1256,12 +1256,23 @@ class User extends BaseUser
                 $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
             } else {
                 $chars = str_split($this->plainPassword);
+                $characterFound = false;
+                $numberFound = false;
                 foreach ($chars as $char) {
                     $asciiCode = ord($char);
                     if (!(($asciiCode >= 97 && $asciiCode <= 122) || ($asciiCode >= 65 && $asciiCode <= 90) || ($asciiCode >= 48 && $asciiCode <= 57))) {
                         $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
                         break;
                     }
+                    if (($asciiCode >= 97 && $asciiCode <= 122) || ($asciiCode >= 65 && $asciiCode <= 90)) {
+                        $characterFound = true;
+                    }
+                    if (($asciiCode >= 48 && $asciiCode <= 57)) {
+                        $numberFound = true;
+                    }
+                }
+                if (!$numberFound || !$characterFound) {
+                    $context->addViolationAt('plainPassword', 'Please confirm a valid password (must contain at least 6 caracters, a number and a letter)');
                 }
             }
         }
