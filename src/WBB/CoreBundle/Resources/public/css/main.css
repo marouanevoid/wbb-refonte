@@ -78,7 +78,7 @@
   .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
-    .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -100%; left: -100%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 200%; height: 200%; min-height: 100%; position: fixed; top: -50%; left: -50%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
     .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
@@ -524,7 +524,7 @@
 /* Override */
    img.scale-with-grid {box-sizing: initial; width: 100%;}
   .bar-w-pic .txt {z-index: 30;}
-  .container .bar-w-pic .txt h2 {margin-bottom: 0;} /* Desktop//interligne [Page : http://wbb-dev.lapreprod.com/app_dev.php/bar-finder-results ] */
+  .container .bar-w-pic .txt h2 {margin-bottom: 0;}
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .bar-finder .ui-radio.btn-radius.with-icon:after,
   .bar-finder .ui-radio.btn-radius.with-icon:before {/*background-position: -92px -200px;*/}
@@ -548,10 +548,18 @@
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
   .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29; display: none;}
   .bar-finder .ui-radio.btn-radius.with-icon:after {/*background-position: -52px -240px;*/}
+  
   .ui-radio.radio-dark:hover,
-  .select2-container.active .select2-choice.dark,
-  .select2-container .select2-choice.dark:hover {background-color: transparent!important; border-color: #ffe4af;}
+  .select2-container.dark.active .select2-choice,
+  .select2-container.dark .select2-choice:hover {background-color: transparent!important; border-color: #ffe4af; color: #ffe4af!important;}
+  .select2-container.dark.active .select2-choice .select2-arrow b,
+  .select2-container.dark .select2-choice:hover .select2-arrow b {background-position: -162px -40px;}
   .ui-dropdown-container.dropdown-open .ui-dropdown.drop-dark:hover {background-color: #6f7072!important; border-color: #6f7072 !important;}
+  .select2-container.finder-city.active .select2-choice .select2-chosen:before,
+  .select2-container.finder-city .select2-choice:hover .select2-chosen:before {background-position: -212px -40px;}
+  .select2-container.friend.active .select2-choice .select2-chosen:before,
+  .select2-container.friend .select2-choice:hover .select2-chosen:before {background-position: -12px -240px;}
+
   .ui-radio.radio-dark.active {background-color: transparent!important;}
   .bar-guides .entire-content .bar-filter {min-height: 550px;}
   .sub-header .title h3 {font-size: 2em; line-height: 30px;}
@@ -859,6 +867,7 @@
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
+    .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -100%; left: -100%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
   }
 
 @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
