@@ -100,10 +100,15 @@ meta.LoadMoreTips = function(config) {
             url: url,
             dataType: "json",
             success: function(msg) {
-                // Remove loader
-                $('.temporary').remove();
+                // Remove duplicated tips
+                $("<div></div>").append(msg.htmldata).find(".wbbtip").each(function(){
+                    if($target.find(".temporary[data-id="+$(this).data("id") + "]").length){
+                        $target.find(".temporary[data-id="+$(this).data("id") + "]").remove();
+                    }
+                });
+
                 $target.append(msg.htmldata);
-                
+
                 if(parseInt(msg.difference)==0){
                     that.config.$button.hide();
                     if(is_mobile == 1)

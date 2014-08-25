@@ -1,7 +1,6 @@
-<div class="line">
 {% for tip in tips %}
-    <div class="three columns box">
-        <article class="tip"  itemprop="review" itemscope="" itemtype="http://schema.org/Review">
+    <div class="three columns box wbbtip" data-id="{{ tip.id }}">
+        <article class="tip" itemprop="review" itemscope="" itemtype="http://schema.org/Review">
             <table class="content expert">
                 <tr class="excerpt">
                     <td colspan="2">
@@ -46,4 +45,3 @@
         </article>
     </div>
 {% endfor %}
-</div>
