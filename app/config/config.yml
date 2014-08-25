@@ -98,8 +98,8 @@ fos_user:
             type: wbb_user_change_password
             validation_groups:  [ChangePassword, Default]
     from_email:
-        address:        myportal@pernod-ricard.com
-        sender_name:    WBB
+        address:        %mailer_email%
+        sender_name:    %mailer_username%
     resetting:
         email:
             template: WBBUserBundle:User:resetting.email.html.twig
