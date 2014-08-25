@@ -32,8 +32,8 @@ $(document).ready(function() {
                         $('#change_password_form #message').find('ul').append('<li>' + errors[i] + '</li>');
                     }
                     $('#change_password_form #message').show();
-                    if ( ismobile || istablet )
-                        $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
+                    // if ( ismobile || istablet )
+                    $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
                 }else{
                     window.location.href = Routing.generate('fos_user_profile_show');
                 }
