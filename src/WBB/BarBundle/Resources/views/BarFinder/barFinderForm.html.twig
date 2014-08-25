@@ -47,6 +47,13 @@
         }
 
 
+        // fix class to dropdown class dark
+        $( $("select.select2-dropdown.finder-city").select2("dropdown") ).addClass('select2-city');
+        $( $("select.select2-dropdown.finder-city").select2("dropdown") ).addClass('dark');
+        $( $("select.select2-dropdown.finder-choose").select2("dropdown") ).addClass('select2-friends');
+        $( $("select.select2-dropdown.finder-choose").select2("dropdown") ).addClass('dark');
+
+
         toGoOutWith_selected = "{{selected.outWith}}";
         city_selected = "{{selected.city}}";
         mood_selected = "{{selected.mood}}";

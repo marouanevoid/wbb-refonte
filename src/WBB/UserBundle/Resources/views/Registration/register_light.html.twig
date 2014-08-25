@@ -23,19 +23,19 @@
                 <label class="margin-bottom-15">Date of Birth</label>
                 <div class="group-small-select">
                     <div class="select-wrap left">
-                        {{ form_widget(form.birthdate.month, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown'  , 'tabindex' : '5'} }) }}
+                        {{ form_widget(form.birthdate.month, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown light'  , 'tabindex' : '5'} }) }}
                     </div>
                     <div class="select-wrap left">
-                        {{ form_widget(form.birthdate.day, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown', 'placeholder': '' , 'tabindex' : '6' } }) }}
+                        {{ form_widget(form.birthdate.day, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown light', 'placeholder': '' , 'tabindex' : '6' } }) }}
                     </div>
                     <div class="select-wrap left last">
-                        {{ form_widget(form.birthdate.year, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown'  , 'tabindex' : '7'} }) }}
+                        {{ form_widget(form.birthdate.year, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown light'  , 'tabindex' : '7'} }) }}
                     </div>
                 </div>
             </div>
             <div class="clear"></div>
             <div class="select-two margin-top-10 ui-dropdown-list-form country-dropdown">
-                {{ form_widget(form.country, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown'  , 'tabindex' : '8' } }) }}
+                {{ form_widget(form.country, { 'attr' : { 'class': is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown light'  , 'tabindex' : '8' } }) }}
             </div>
 
             {{ form_rest(form) }}
@@ -56,12 +56,12 @@
 
     $(function(){
         // init Select 2
-        $("select.select2-dropdown").select2({
+        $("select.select2-dropdown.light").select2({
             minimumResultsForSearch: -1
         });
 
         // init Select 2
-        $("select.select2-dropdown#fos_user_registration_form_country").select2({
+        $("select.select2-dropdown.light#fos_user_registration_form_country").select2({
             minimumResultsForSearch: 10
         });
     });

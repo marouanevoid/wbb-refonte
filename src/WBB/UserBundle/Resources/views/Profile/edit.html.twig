@@ -236,7 +236,7 @@
                             </div>
                             <div class="clear"></div>
                             {% if errors.messages|length > 0 %}
-                                <div id="message" class="margin-top-20 wrap show">
+                                <div id="message" class="margin-top-20 wrap show margin-bottom-40">
                                     <div>
                                         <ul>
                                             {% for error in errors.messages %}
@@ -284,8 +284,7 @@
 
             // Scroll To Error
             {% if errors.messages|length > 0 %}
-                if ( ismobile || istablet )
-                    $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
+                $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
             {% endif %}
         });
     </script>
