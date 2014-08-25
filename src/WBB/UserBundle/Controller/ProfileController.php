@@ -23,7 +23,7 @@ class ProfileController extends ContainerAware
     /**
      * Show the user
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -32,6 +32,11 @@ class ProfileController extends ContainerAware
 
         $session = $this->container->get('session');
         $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
+        
+        if ($request->query->get('profileMessage', null)) {
+            $session->getFlashBag()->add('wbb-complete-profile', true);
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
+        }
 
         return $this->container->get('templating')->renderResponse('WBBUserBundle:Profile:show.html.twig', array(
                 'user'  => $user,
@@ -67,9 +72,9 @@ class ProfileController extends ContainerAware
         if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
             $form = $formFactory->createForm(false, array('Default', 'registration_full'));
         }else{
-            $form = $formFactory->createForm(true, array('no-validation'));
+            $form = $formFactory->createForm(true, array('profile_light'));
         }
-
+        $currentUserName = $user->getUsername();
         $form->setData($user);
         $errors = array('fields' => array(), 'messages' => array());
 
@@ -102,7 +107,7 @@ class ProfileController extends ContainerAware
                 if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
                     $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
                 }else{
-                    $formErrors = $this->container->get('validator')->validate($form, array('Default'));
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default', 'profile_light'));
                 }
 
                 $fields = array();
@@ -112,7 +117,7 @@ class ProfileController extends ContainerAware
                     $fields[] = str_replace('data.', '', $formError->getPropertyPath());
                     if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                         $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank') {
+                    } elseif($formError->getMessage() != 'not.blank' && !in_array($formError->getMessage(), $messages)) {
                         $messages[] = $formError->getMessage();
                     }
                 }
@@ -130,10 +135,11 @@ class ProfileController extends ContainerAware
         return $this->container->get('templating')->renderResponse(
             'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
             array(
-                'form'   => $form->createView(),
-                'user'   => $user,
-                'city'   => $city,
-                'errors' => $errors
+                'form'      => $form->createView(),
+                'user'      => $user,
+                'username'  => $currentUserName,
+                'city'      => $city,
+                'errors'    => $errors
             )
         );
     }

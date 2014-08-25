@@ -186,7 +186,7 @@
                     <li class="left"><a href="#0" class="fb-share">Post</a></li>
                     <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
                     {% if is_mobile() and not is_tablet() and not is_ios() %}
-                        {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world Click here to check this news : " ~ bitlyURL  %}
+                        {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world %0a Click here to check this news : " ~ bitlyURL  %}
                         <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                     {% else %}
                         <li class="left">

@@ -487,6 +487,9 @@ end added by Jérome
 ***/
 
 
+.mobile .ui-dropdown-container .ui-dropdown.drop-dark:hover,.mobile .ui-dropdown-container .ui-dropdown.drop-dark.active{
+    background-color: transparent !important;
+}
  #register.page .group-actions.loading .form-submit,#register.page.mobile #create-account .group-actions.loading .form-submit{
     display: none;
 }
@@ -500,6 +503,10 @@ end added by Jérome
     display: block;
  }
 
+
+.more-bars , .more-bestofs, .more-tips{
+    display: none;
+}
 
 #floatingBarsG, .floatingBarsG,.floatingBarsG_fb{
 position:relative;

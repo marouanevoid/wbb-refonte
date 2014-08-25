@@ -158,7 +158,7 @@ meta.SearchPage = function() {
     {
         totalLoadedImage--;
         $(this).removeAttr('data-src');
-        if (totalLoadedImage <= 0){
+        if (totalLoadedImage == 0){
 
             $('.loader-search-page').hide();
 
@@ -383,7 +383,6 @@ meta.SearchPage = function() {
             */
             var imageToLoad =  $('.bars-w-pic-list').add('.details-barlist').find('img[data-src]');
             totalLoadedImage = imageToLoad.length;
-
             /*
             * Hide All item on Start
             */
