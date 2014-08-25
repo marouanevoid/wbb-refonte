@@ -515,7 +515,8 @@
   #change-password #message {left: 70px;}
 
 /* Rollover's */
-  .popup .btn:hover {opacity: 0.8;}
+  .popup .btn:hover,
+  .popup .btn:focus {opacity: 0.8;}
 
 /* jQuery UI Autocomplete */
   ul.ui-autocomplete {border-radius: 0!important; background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
