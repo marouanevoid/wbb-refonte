@@ -85,11 +85,11 @@ services:
         parent: wbb_core.mailer.twig_swift
         public: true
 
-    wbb_registration_succes_listener:
-        class: WBB\UserBundle\EventListener\RegistrationListener
-        arguments: ["@service_container"]
-        tags:
-            - { name: 'kernel.event_subscriber' }
+#    wbb_registration_succes_listener:
+#        class: WBB\UserBundle\EventListener\RegistrationListener
+#        arguments: ["@service_container"]
+#        tags:
+#            - { name: 'kernel.event_subscriber' }
 
     wbb_user_confirmation_listener:
         class: WBB\UserBundle\EventListener\ConfirmationListener

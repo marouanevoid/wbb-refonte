@@ -435,6 +435,7 @@
 
   #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
   #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 15px; padding-top: 15px; white-space: pre-line; padding-bottom: 40px;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio span {white-space: pre-line;}
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
@@ -517,9 +518,10 @@
   .popup .btn:hover {opacity: 0.8;}
 
 /* jQuery UI Autocomplete */
-  ul.ui-autocomplete {background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
+  ul.ui-autocomplete {border-radius: 0!important; background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
   ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: lighter 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
+  ul.ui-autocomplete.ui-menu .ui-widget-content a {color: #b3955f;}
 
 /* Override */
    img.scale-with-grid {box-sizing: initial; width: 100%;}
@@ -690,10 +692,8 @@
     .page #message {left: 68px;}
     .date-birthday .select-wrap {margin-right: 6px;}
     .ui-dropdown-container .ui-dropdown.drop-dark:hover, 
-    .ui-dropdown-container .ui-dropdown.drop-dark.active {
-      border-color: #ffe4af;
-      background-color: transparent!important;
-    }
+    .ui-dropdown-container .ui-dropdown.drop-dark.active {border-color: #ffe4af; background-color: transparent!important;}
+    input[type="text"] + input[type="submit"].search:hover {background-color: transparent; background-position: -82px -360px;}
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
