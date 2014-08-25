@@ -69,7 +69,6 @@ $(document).ready(function() {
     });
 
     function submitShareMail(element) {
-        PopIn.startLoading();
         window.shareRequest = $.ajax({
             url: element.attr('action'),
             method: 'GET',
@@ -101,8 +100,10 @@ $(document).ready(function() {
                         $(idPrefix + fields[i]).addClass('error');
                     }
                 }else{
+                    PopIn.startLoading();
                     $('.popin-block').html(data);
                     $('#show-popin').click();
+                    PopIn.endLoading();
                 }
 
                 // add listner on click send mail

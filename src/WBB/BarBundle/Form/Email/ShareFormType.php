@@ -50,7 +50,7 @@ class ShareFormType extends AbstractType
                 new NotBlank(array('message' => 'not.blank'))
             ),
             'emailTo' => array(
-                new NotBlank(array('message' => 'Please enter a valid email address')),
+                new NotBlank(array('message' => 'not.blank')),
                 new Email(array('message' => 'Please enter a valid email address'))
             ),
             'content' => array(
