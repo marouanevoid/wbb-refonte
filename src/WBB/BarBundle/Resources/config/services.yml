@@ -228,6 +228,7 @@ services:
     wbb.tips.event_listener:
         class: WBB\BarBundle\EventListener\TipsListener
         arguments:
+            - "@service_container"
             - "@swiftmailer.mailer.default"
             - "@router"
             - "@twig"
