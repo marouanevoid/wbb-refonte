@@ -1134,6 +1134,8 @@ $(document).ready(function()
         placeholder : 'Choose a City',
         allowClear: true,
         minimumResultsForSearch: 5,
+        dropdownCssClass : 'select2-search-filter white-style',
+        containerCssClass : 'select2-search-filter white-style',
         sortResults: function(results, container, query) {
         if (query.term) {
             // use the built in javascript sort function

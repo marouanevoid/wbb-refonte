@@ -58,7 +58,10 @@ class ShareController extends Controller
             $messages = array();
 
             foreach ($formErrors as $formError) {
-                $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                $field = str_replace('data.', '', $formError->getPropertyPath());
+                $field = str_replace('data[', '', $field);
+                $field = str_replace(']', '', $field);
+                $fields[] = $field;
                 if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                     $messages[] = 'Please complete all required fields';
                 } elseif($formError->getMessage() == 'Please enter a valid email address' && !in_array($formError->getMessage(), $messages)) {

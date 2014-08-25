@@ -274,12 +274,16 @@
 
             // init Select 2
             $("select.select2-dropdown").select2({
-                minimumResultsForSearch: -1
+                minimumResultsForSearch: -1,
+                dropdownCssClass : 'white-style',
+                containerCssClass : 'white-style'
             });
 
             // add the search
             $('select.select2-dropdown#fos_user_profile_form_country').select2({
-                minimumResultsForSearch: 20
+                minimumResultsForSearch: 20,
+                dropdownCssClass : 'select2-search-filter white-style',
+                containerCssClass : 'select2-search-filter white-style'
             });
 
             // Scroll To Error

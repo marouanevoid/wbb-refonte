@@ -69,6 +69,7 @@ $(document).ready(function() {
     });
 
     function submitShareMail(element) {
+        PopIn.startLoading();
         window.shareRequest = $.ajax({
             url: element.attr('action'),
             method: 'GET',
@@ -84,6 +85,11 @@ $(document).ready(function() {
                     var errorsList = $('#wbb_share_form #message div').show().append('<ul></ul>').parent();
                     for (var i = 0; i < errors.length; i++) {
                         errorsList.find('ul').append('<li>' + errors[i] + '</li>');
+                    }
+                    var idPrefix = '#wbb_barbundle_share_type_';
+                    for (var i = 0; i < fields.length; i++) {
+                        console.log(idPrefix + fields[i]);
+                        $(idPrefix + fields[i]).addClass('error');
                     }
                     // scroll to message on Mobile
                     animateToPopIn( $('#message').offset().top );
@@ -109,6 +115,9 @@ $(document).ready(function() {
             beforeSend: function()
             {
                 if (window.shareRequest != null) window.shareRequest.abort();
+                $('#wbb_share_form input').each(function(){
+                    $(this).removeClass('error');
+                });
             }
         });
     }
