@@ -69,6 +69,7 @@ $(document).ready(function() {
     });
 
     function submitShareMail(element) {
+        PopIn.startLoading();
         window.shareRequest = $.ajax({
             url: element.attr('action'),
             method: 'GET',
