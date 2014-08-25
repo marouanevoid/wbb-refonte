@@ -518,9 +518,10 @@
   .popup .btn:hover {opacity: 0.8;}
 
 /* jQuery UI Autocomplete */
-  ul.ui-autocomplete {background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
+  ul.ui-autocomplete {border-radius: 0!important; background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
   ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: lighter 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
+  ul.ui-autocomplete.ui-menu .ui-widget-content a {color: #b3955f;}
 
 /* Override */
    img.scale-with-grid {box-sizing: initial; width: 100%;}
