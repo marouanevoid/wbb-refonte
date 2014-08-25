@@ -29,6 +29,7 @@ class CloudSearchIndexer implements IndexerInterface
         if ($entity instanceof \WBB\CoreBundle\Entity\City) {
             if (!$entity->getOnTopCity() && $entity->getBars()->count() == 0) {
                 $this->logger->info('[CloudSearch][Indexer] : City not on top and does not have bars : ' . $entity->getName());
+
                 return;
             }
         }
@@ -49,7 +50,6 @@ class CloudSearchIndexer implements IndexerInterface
             $medias = $entity->getMedias();
             foreach ($medias as $media) {
                 if ($media->getPosition() == 1) {
-                    echo 'Image for ' . $entity->getTitle() . "\n";
                     $this->logger->info('[CloudSearch][Indexer] : Image found for a News entity : ' . $entity->getTitle());
                     $body[0]['fields']['wbb_media_url'] = $this->getMediaPublicUrl($media->getMedia(), 'news_286_210');
                 }
