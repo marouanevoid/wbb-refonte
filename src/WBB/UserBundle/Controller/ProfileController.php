@@ -127,6 +127,8 @@ class ProfileController extends ContainerAware
                     'fields' => $fields,
                     'messages' => $messages
                 );
+
+                $user->setUsername($currentUserName);
             }
         }
 
