@@ -28,7 +28,7 @@ PopIn.initContext = function(){
 PopIn.close = function(){
     // if the popin is not yet loaded
     // return 
-    if(PopIn.loading == true)
+    if( PopIn.loading == true || $('header.showing-search').length )
         return false;
 	var current_popup = $("body").find(".void-popup");
     current_popup.fadeOut("fast");

@@ -511,7 +511,21 @@ end added by Jérome
 
 
 .select2-drop-mask.showingpopin {
-    z-index: 999999999;
+    z-index: 99999997;
+}
+
+
+/* 
+Hide the mask added by gérome
+*/
+
+.mobile .search-bar-mobile.no-height{
+    height: 0 !important;
+    z-index: 99999999;
+}
+
+.mobile .showing-search{
+    z-index: 99999998; 
 }
 
 #floatingBarsG, .floatingBarsG,.floatingBarsG_fb{
