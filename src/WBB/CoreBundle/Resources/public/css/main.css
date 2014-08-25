@@ -435,6 +435,7 @@
 
   #editprofile.mobile #view-account .ui .btn-editprofile .btn {font-size: 16px;}
   #editprofile.mobile #view-account .ui .filter-profil a.ui-radio {font-size: 14px; line-height: 15px; padding-top: 15px; white-space: pre-line; padding-bottom: 40px;}
+  #editprofile.mobile #view-account .ui .filter-profil a.ui-radio span {white-space: pre-line;}
   #editprofile.mobile #view-account .ui .block-top {width: auto;}
   #editprofile.mobile #view-account .ui .sort-by label {display: none;}
   #editprofile.mobile #view-account .ui .sort-by.six.columns {width: 56.6667%; margin-left: 0;}
@@ -690,10 +691,8 @@
     .page #message {left: 68px;}
     .date-birthday .select-wrap {margin-right: 6px;}
     .ui-dropdown-container .ui-dropdown.drop-dark:hover, 
-    .ui-dropdown-container .ui-dropdown.drop-dark.active {
-      border-color: #ffe4af;
-      background-color: transparent!important;
-    }
+    .ui-dropdown-container .ui-dropdown.drop-dark.active {border-color: #ffe4af; background-color: transparent!important;}
+    input[type="text"] + input[type="submit"].search:hover {background-color: transparent; background-position: -82px -360px;}
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
