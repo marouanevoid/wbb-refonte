@@ -379,6 +379,21 @@ meta.App = function() {
             $(window).on('resize' , function(){
                 $('.mask.mobile-top-force').css({"width" : "220% !important" , "height" : "220% !important"});
             });
+
+
+            /*
+            * Lock to Orientation
+            ***/
+            $(window).on("orientationchange", function(){
+                var orientation = window.orientation;
+                if(orientation != 0){
+                    $('#landscape-mobile').show();
+                }else{
+                    $('#landscape-mobile').hide();
+                }
+            });
+
+            $(window).trigger("orientationchange");
         }
     };
 
