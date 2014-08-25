@@ -332,9 +332,9 @@ class BarController extends Controller
 
         $toGoOutWith    = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_WITH_WHO);
         $moods          = array(
-            'Chill Out',
-            'Casual',
-            'Party'
+            'chillout'  => 'Chill Out',
+            'casual'    => 'Casual',
+            'party'     => 'Party'
         );
 //        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
         $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
