@@ -813,7 +813,9 @@
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
     .no-result {margin: 2%;}
     .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px; width: 99.3%;}
-    /* .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;} */    ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
+    /* .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;} */    
+    ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
+    ul.ui-autocomplete {width: 92%!important;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
@@ -843,6 +845,7 @@
       .profile section.bar-filter .bar-w-pic,
       .bar-details section.bar-filter .bar-w-pic,
       .bar-guides section.bar-filter .bar-w-pic {min-height: 100px!important;}
+      ul.ui-autocomplete {width: 89%!important;}
   }
 
 /* Smartphones (portrait) ----------- */
@@ -868,6 +871,7 @@
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
     .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -100%; left: -100%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    ul.ui-autocomplete {width: 87%!important;}
   }
 
 @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
