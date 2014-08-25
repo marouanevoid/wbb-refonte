@@ -99,14 +99,14 @@ class FeedController extends Controller
     public function tipsAction($barID, $offset, $limit)
     {
         $bar    = $this->container->get('bar.repository')->findOneById($barID);
+        $all    = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
         $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit, true);
         $allExpertTips   = $this->container->get('tip.repository')->findLatestTips($bar, 0, 0, true);
         $nbExpertTips = count($tips);
         if($nbExpertTips < $limit){
-            $normalTips   = $this->container->get('tip.repository')->findLatestTips($bar, ($offset + $nbExpertTips - count($allExpertTips)), ($limit - $nbExpertTips));
+            $normalTips   = $this->container->get('tip.repository')->findLatestTips($bar, ($offset + $nbExpertTips - count($allExpertTips)), ($limit - $nbExpertTips), false, true);
             $tips = array_merge($tips, $normalTips);
         }
-        $all = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
         $nbResults  = count($tips);
         $difference = count($all) - count($tips);
         $FsTips = array();
@@ -147,6 +147,8 @@ class FeedController extends Controller
                 'nbResults'  => $nbResults,
                 'difference' => $difference,
                 'htmldata'   => $htmldata,
+                'npall'=> count($all),
+                'npTips'=> count($tips)
             )
         );
     }
