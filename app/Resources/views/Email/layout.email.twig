@@ -323,6 +323,9 @@
       table[class="body"] .hide-for-desktop {
         display: inherit !important;
       }
+      table[class="socials"] a {
+        display: inline-block!important;
+      }
     }
 </style>
     <table class="body" bgcolor="#faf3e1" style="font-family: Verdana, Arial; width: 100%; border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; height: 100%; color: #222222; font-weight: normal; line-height: 19px; font-size: 14px; background: #faf3e1; margin: 0; padding: 0;">
@@ -367,7 +370,7 @@
               
               <br /><!-- Break Tag for row -->
               
-                  <table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px;">
+                  <table class="row" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; padding: 0px; border-bottom: 1px solid #49453f;">
                     <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
                       
                       <td class="wrapper offset-by-two" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0;" align="left" valign="top">
@@ -383,26 +386,26 @@
                         </table>
                       </td>
 
-                      <td class="wrapper offset-by-two last hide-for-small" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px 100px;" align="left" valign="top">
+                      <td class="wrapper offset-by-two last" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px 100px;" align="left" valign="top">
                         <table class="six xs-six columns" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 280px; margin: 0 auto; padding: 0;"><tr style="vertical-align: top; text-align: left; padding: 0;" align="left"><td align="center" valign="middle" class="fix sub-columns" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0px 10px 10px 0px;">
                               
-                              <table align="center">
+                              <table class="socials" align="center">
                                 <tr>
                                     <td style="border-right-style: solid; border-right-width: 10px; border-right-color: #333333">
                                       <a href="https://www.facebook.com/worldsbestbars" style="float: left; display: inline; text-align: center; text-decoration: none; color: #fedf9f; border:none;">
-                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg') }}" style="border-right-width: 10px; float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
+                                        <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg') }}" style="float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
                                     </td>
                                     <td style="border-right-style: solid; border-right-width: 10px; border-right-color: #333333">
                                     <a href="https://twitter.com/WorldsBestBars" style="float: left; display: inline; text-align: center; text-decoration: none; color: #fedf9f; border:none;">
-                                      <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_twiter.jpg') }}" style="border-right-width: 10px; float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
+                                      <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_twiter.jpg') }}" style="float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
                                     </td>
                                     <td style="border-right-style: solid; border-right-width: 10px; border-right-color: #333333">
                                     <a href="http://instagram.com/worldsbestbars" style="float: left; display: inline; text-align: center; text-decoration: none; color: #fedf9f; border:none;">
-                                      <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_viadeo.jpg') }}" style="border-right-width: 10px; float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
+                                      <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_viadeo.jpg') }}" style="float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
                                     </td>
                                     <td style="border-right-style: solid; border-right-width: 10px; border-right-color: #333333">
                                     <a href="http://www.pinterest.com/worldsbestbars" style="float: left; display: inline; text-align: center; text-decoration: none; color: #fedf9f; border:none;">
-                                      <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_pinterest.jpg') }}" style="border-right-width: 10px; float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
+                                      <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_pinterest.jpg') }}" style="float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
                                     </td>
                                 </tr>
                               </table>
