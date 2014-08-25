@@ -43,6 +43,8 @@ class CloudSearchIndexerListener
             if ($entity instanceof Bar) {
                 if ($entity->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) {
                     $this->indexer->index($entity);
+                } else {
+                    $this->indexer->delete($entity);
                 }
             } else {
                 $this->indexer->index($entity);

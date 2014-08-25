@@ -246,7 +246,7 @@
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
   /* Message's */
-  #message {min-height: 100px; background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; overflow: hidden;}
+  #message {/*min-height: 100px;*/ background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; overflow: hidden;}
   #message ul {padding: 30px 30px 30px 90px; float: left;}
   #message img {margin: 0 20px 0 0;}
   #message div {padding: 0 10px 0 0; line-height: 16px;}
@@ -585,7 +585,6 @@
   .filters .select-search .select2-container .select2-choice:hover {background-color: #b3955f; color: #faf3e1!important; border: 1px solid #b3955f;}
   .filters .select-search .select2-container .select2-choice:hover .select2-arrow b {background-position: -162px -41px;}
   article.city img.scale-with-grid {border: none!important;}
-  header.desktop .logged img {border-radius: 2em; display: inline-block;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -682,6 +681,11 @@
     .ui.register .title {width: 45%;}
     .page #message {left: 68px;}
     .date-birthday .select-wrap {margin-right: 6px;}
+    .ui-dropdown-container .ui-dropdown.drop-dark:hover, 
+    .ui-dropdown-container .ui-dropdown.drop-dark.active {
+      border-color: #ffe4af;
+      background-color: transparent!important;
+    }
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
@@ -692,6 +696,13 @@
 
   /* iPad Only */
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+    header.desktop .logged img {
+      box-shadow: 0px 0px 0px 2px #fff;
+      -moz-border-radius: 60px; 
+      -webkit-border-radius: 60px; 
+      border-radius: 60px;
+      border: none!important;
+    }
     .social-share .fb-share {
       background-image: url("../images/fb@2x.png");
       background-size: 90px 40px;
@@ -793,7 +804,7 @@
     .search-bar-mobile {height: 200%!important;}
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
     .no-result {margin: 2%;}
-    .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px;}
+    .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px; width: 99.3%;}
     /* .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;} */    ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
   }
 
