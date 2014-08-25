@@ -191,13 +191,13 @@ wbb.LoadProfile = function() {
                     stringTip = "no tip";
                 }else{
                     if(_count.tips == 1){
-                        stringTip = "(1) Tip"
+                        stringTip = "(1) "+ ( ismobile ? ' <br> ' : '') + "Tip"
                     }else{
-                        stringTip = "("+ _count.tips +") Tips";
+                        stringTip = "("+ _count.tips +") "+ ( ismobile ? ' <br> ' : '') + "Tips";
                     }
                 }
 
-                $(cible).find('span').text(stringTip);
+                $(cible).find('span').html(stringTip);
             } else {
                 if ( itype == 'bar' ){
                     _count.bars--;
@@ -205,12 +205,12 @@ wbb.LoadProfile = function() {
                         stringBar = "No bar";
                     }else{
                         if(_count.bars == 1){
-                            stringBar = "(1) Bar"
+                            stringBar = "(1) "+ ( ismobile ? ' <br> ' : '') + "Bar"
                         }else{
-                            stringBar = "("+ _count.bars +") Bars";
+                            stringBar = "("+ _count.bars +") "+ ( ismobile ? ' <br> ' : '') + "Bars";
                         }
                     }
-                    $(cible).find('span').text(stringBar);
+                    $(cible).find('span').html(stringBar);
                 } else {
                     if ( itype == 'best of' ){
                         _count.bestof--;
@@ -218,13 +218,13 @@ wbb.LoadProfile = function() {
                             stringBest = "No collection";
                         }else{
                             if(_count.bestof == 1){
-                                stringBest = "(1) collection"
+                                stringBest = "(1) "+ ( ismobile ? ' <br> ' : '') + "collection"
                             }else{
-                                stringBest = "("+ _count.bestof +") collections";
+                                stringBest = "("+ _count.bestof +") "+ ( ismobile ? ' <br> ' : '') + "collections";
                             }
                         }
 
-                        $(cible).find('span').text(stringBest);
+                        $(cible).find('span').html(stringBest);
                     }
                 }
             }
