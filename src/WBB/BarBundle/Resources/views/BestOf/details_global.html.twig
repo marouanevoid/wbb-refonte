@@ -31,14 +31,14 @@
             $(".bars .four:lt(12)").show();
             if($('.bars .four').length>12)
                 $(".load-more-container").show();
-            var display;   
+            var display;
             $(".load-more").click(function(){
                 display = $('.bars .four:visible').length+3;
-                $(".bars .four:lt("+divsplay+")").fadeIn(500); 
+                $(".bars .four:lt("+divsplay+")").fadeIn(500);
                 if($('.bars .four:hidden').length<=0){
                     $('.load-more-container').hide();
                 }
-            });   
+            });
         });
     </script>
     <style type="text/css">

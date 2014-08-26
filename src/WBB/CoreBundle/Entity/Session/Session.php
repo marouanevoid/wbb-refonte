@@ -38,7 +38,7 @@ class Session
     /**
      * Set sessionId
      *
-     * @param string $sessionId
+     * @param  string  $sessionId
      * @return Session
      */
     public function setSessionId($sessionId)
@@ -51,7 +51,7 @@ class Session
     /**
      * Get sessionId
      *
-     * @return string 
+     * @return string
      */
     public function getSessionId()
     {
@@ -61,7 +61,7 @@ class Session
     /**
      * Set sessionValue
      *
-     * @param string $sessionValue
+     * @param  string  $sessionValue
      * @return Session
      */
     public function setSessionValue($sessionValue)
@@ -74,7 +74,7 @@ class Session
     /**
      * Get sessionValue
      *
-     * @return string 
+     * @return string
      */
     public function getSessionValue()
     {
@@ -84,7 +84,7 @@ class Session
     /**
      * Set sessionTime
      *
-     * @param integer $sessionTime
+     * @param  integer $sessionTime
      * @return Session
      */
     public function setSessionTime($sessionTime)
@@ -97,7 +97,7 @@ class Session
     /**
      * Get sessionTime
      *
-     * @return integer 
+     * @return integer
      */
     public function getSessionTime()
     {

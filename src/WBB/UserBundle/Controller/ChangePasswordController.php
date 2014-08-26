@@ -48,6 +48,7 @@ class ChangePasswordController extends ContainerAware
                     $response = new RedirectResponse($url);
                 }
                 $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
                 return $response;
             } else {
                 $formErrors = $this->container->get('validator')->validate($form, array('Default', 'ChangePassword'));
@@ -81,9 +82,11 @@ class ChangePasswordController extends ContainerAware
                     'fields' => $fields,
                     'messages' => $messages
                 );
+
                 return new JsonResponse(array('code' => 400, 'errors' => $errors));
             }
         }
+
         return $this->container->get('templating')->renderResponse(
             'FOSUserBundle:ChangePassword:changePassword.html.' . $this->container->getParameter('fos_user.template.engine'),
             array('form' => $form->createView())

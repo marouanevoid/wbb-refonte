@@ -22,7 +22,7 @@ class LoginListener
      * Constructor
      *
      * @param SecurityContext $securityContext
-     * @param Doctrine $doctrine
+     * @param Doctrine        $doctrine
      * @param $container
      */
     public function __construct(SecurityContext $securityContext, Doctrine $doctrine, $container)
@@ -48,7 +48,7 @@ class LoginListener
 
             $city = $this->container->get('city.repository')->findNearestCity($latitude, $longitude, 150, 0, 1);
 
-            if($city){
+            if ($city) {
                 $user->setPrefStartCity($city);
                 $user->setCountry($city->getCountry());
                 $user->setLatitude($latitude);

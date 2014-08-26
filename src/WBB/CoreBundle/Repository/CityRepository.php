@@ -2,8 +2,6 @@
 
 namespace WBB\CoreBundle\Repository;
 
-use WBB\CoreBundle\Repository\EntityRepository;
-
 /**
  * CityRepository
  *
@@ -47,7 +45,7 @@ class CityRepository extends EntityRepository
             ->addOrderBy($this->getAlias().'.name', 'ASC')
         ;
 
-        if($geoCity){
+        if ($geoCity) {
             $qb->where($qb->expr()->neq($this->getAlias().'.id', $geoCity->getId()));
         }
 
@@ -77,7 +75,7 @@ class CityRepository extends EntityRepository
             ->where($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($name)))
         ;
 
-        if($country){
+        if ($country) {
             $qb->andWhere($qb->expr()->eq('c.id', $country->getId()));
         }
 
@@ -97,17 +95,17 @@ class CityRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($maxDistance > 0){
+        if ($maxDistance > 0) {
             $qb->having($qb->expr()->lte('Distance', $maxDistance));
         }
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
         return $qb->getQuery()->getOneOrNullResult();
     }
-    
+
     public function findCitiesLike($name, $limit = false)
     {
         $qb = $this->createQueryBuilder($this->getAlias());
@@ -116,7 +114,7 @@ class CityRepository extends EntityRepository
             ->setParameter('name', "$name%")
             ;
 
-        if($limit){
+        if ($limit) {
             $qb->setMaxResults($limit);
         }
 
