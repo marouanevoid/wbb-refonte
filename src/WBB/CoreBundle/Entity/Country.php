@@ -87,11 +87,10 @@ class Country
      */
     private $semsoftBars;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -101,7 +100,7 @@ class Country
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string  $name
      * @return Country
      */
     public function setName($name)
@@ -114,7 +113,7 @@ class Country
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -131,13 +130,14 @@ class Country
     /**
      * Add city
      *
-     * @param \WBB\CoreBundle\Entity\City $city
+     * @param  \WBB\CoreBundle\Entity\City $city
      * @return Country
      */
     public function addCity(\WBB\CoreBundle\Entity\City $city)
     {
         $this->cities[] = $city;
         $city->setCountry($this);
+
         return $this;
     }
 
@@ -154,7 +154,7 @@ class Country
     /**
      * Get cities
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCities()
     {
@@ -169,7 +169,7 @@ class Country
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Country
      */
     public function setCreatedAt($createdAt)
@@ -182,7 +182,7 @@ class Country
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -192,7 +192,7 @@ class Country
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Country
      */
     public function setUpdatedAt($updatedAt)
@@ -205,7 +205,7 @@ class Country
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -215,7 +215,7 @@ class Country
     /**
      * Add bestofs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestofs
+     * @param  \WBB\BarBundle\Entity\BestOf $bestofs
      * @return Country
      */
     public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
@@ -238,7 +238,7 @@ class Country
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -248,7 +248,7 @@ class Country
     /**
      * Set acronym
      *
-     * @param string $acronym
+     * @param  string  $acronym
      * @return Country
      */
     public function setAcronym($acronym)
@@ -261,7 +261,7 @@ class Country
     /**
      * Get acronym
      *
-     * @return string 
+     * @return string
      */
     public function getAcronym()
     {
@@ -271,7 +271,7 @@ class Country
     /**
      * Add users
      *
-     * @param \WBB\UserBundle\Entity\User $users
+     * @param  \WBB\UserBundle\Entity\User $users
      * @return Country
      */
     public function addUser(\WBB\UserBundle\Entity\User $users)
@@ -294,7 +294,7 @@ class Country
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
@@ -304,7 +304,7 @@ class Country
     /**
      * Add semsoftBars
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @param  \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
      * @return Country
      */
     public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
@@ -327,7 +327,7 @@ class Country
     /**
      * Get semsoftBars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSemsoftBars()
     {
@@ -337,7 +337,7 @@ class Country
     /**
      * Set drinkingAge
      *
-     * @param integer $drinkingAge
+     * @param  integer $drinkingAge
      * @return Country
      */
     public function setDrinkingAge($drinkingAge)
@@ -350,7 +350,7 @@ class Country
     /**
      * Get drinkingAge
      *
-     * @return integer 
+     * @return integer
      */
     public function getDrinkingAge()
     {
@@ -360,7 +360,7 @@ class Country
     /**
      * Add ads
      *
-     * @param Ad $ads
+     * @param  Ad      $ads
      * @return Country
      */
     public function addAd(Ad $ads)
@@ -383,7 +383,7 @@ class Country
     /**
      * Get ads
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAds()
     {

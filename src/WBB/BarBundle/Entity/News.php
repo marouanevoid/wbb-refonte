@@ -93,8 +93,8 @@ class News implements IndexableEntity
     /**
      * @ORM\ManyToMany(targetEntity="Bar", mappedBy="news")
      */
-    private $bars; 
-    
+    private $bars;
+
     /**
      * @ORM\ManyToMany(targetEntity="WBB\CoreBundle\Entity\City", mappedBy="news")
      */
@@ -103,8 +103,8 @@ class News implements IndexableEntity
     /**
      * @ORM\ManyToMany(targetEntity="BestOf", mappedBy="news")
      */
-    private $bestOfs;     
-    
+    private $bestOfs;
+
     /**
      * @ORM\ManyToOne(targetEntity="WBB\UserBundle\Entity\User", inversedBy="news")
      * @ORM\JoinColumn(name="news_id", referencedColumnName="id")
@@ -153,7 +153,8 @@ class News implements IndexableEntity
     /**
      * Constructor
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->bars    = new ArrayCollection();
         $this->cities  = new ArrayCollection();
         $this->bestOfs = new ArrayCollection();
@@ -163,7 +164,8 @@ class News implements IndexableEntity
     /**
      * toString
      */
-    public function __toString(){
+    public function __toString()
+    {
         return $this->getTitle();
     }
 
@@ -172,18 +174,21 @@ class News implements IndexableEntity
      *
      * @return integer
      */
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return News
      */
-    public function setTitle($title){
+    public function setTitle($title)
+    {
         $this->title = $title;
+
         return $this;
     }
 
@@ -192,18 +197,21 @@ class News implements IndexableEntity
      *
      * @return string
      */
-    public function getTitle(){
+    public function getTitle()
+    {
         return $this->title;
     }
 
     /**
      * Set shareText
      *
-     * @param string $shareText
+     * @param  string $shareText
      * @return News
      */
-    public function setShareText($shareText){
+    public function setShareText($shareText)
+    {
         $this->shareText = $shareText;
+
         return $this;
     }
 
@@ -212,19 +220,21 @@ class News implements IndexableEntity
      *
      * @return string
      */
-    public function getShareText(){
+    public function getShareText()
+    {
         return $this->shareText;
     }
-
 
     /**
      * Set quoteAuthor
      *
-     * @param string $quoteAuthor
+     * @param  string $quoteAuthor
      * @return News
      */
-    public function setQuoteAuthor($quoteAuthor){
+    public function setQuoteAuthor($quoteAuthor)
+    {
         $this->quoteAuthor = $quoteAuthor;
+
         return $this;
     }
 
@@ -233,18 +243,21 @@ class News implements IndexableEntity
      *
      * @return string
      */
-    public function getQuoteAuthor(){
+    public function getQuoteAuthor()
+    {
         return $this->quoteAuthor;
     }
 
     /**
      * Set quoteText
      *
-     * @param string $quoteText
+     * @param  string $quoteText
      * @return News
      */
-    public function setQuoteText($quoteText){
+    public function setQuoteText($quoteText)
+    {
         $this->quoteText = $quoteText;
+
         return $this;
     }
 
@@ -253,18 +266,21 @@ class News implements IndexableEntity
      *
      * @return string
      */
-    public function getQuoteText(){
+    public function getQuoteText()
+    {
         return $this->quoteText;
     }
 
     /**
      * Set seoDescription
      *
-     * @param string $seoDescription
+     * @param  string $seoDescription
      * @return News
      */
-    public function setSeoDescription($seoDescription){
+    public function setSeoDescription($seoDescription)
+    {
         $this->seoDescription = $seoDescription;
+
         return $this;
     }
 
@@ -273,18 +289,21 @@ class News implements IndexableEntity
      *
      * @return string
      */
-    public function getSeoDescription(){
+    public function getSeoDescription()
+    {
         return $this->seoDescription;
     }
 
     /**
      * Set richDescription
      *
-     * @param string $richDescription
+     * @param  string $richDescription
      * @return News
      */
-    public function setRichDescription($richDescription){
+    public function setRichDescription($richDescription)
+    {
         $this->richDescription = $richDescription;
+
         return $this;
     }
 
@@ -293,18 +312,21 @@ class News implements IndexableEntity
      *
      * @return string
      */
-    public function getRichDescription(){
+    public function getRichDescription()
+    {
         return $this->richDescription;
     }
 
     /**
      * Set isAnInterview
      *
-     * @param boolean $isAnInterview
+     * @param  boolean $isAnInterview
      * @return News
      */
-    public function setInterview($isAnInterview){
+    public function setInterview($isAnInterview)
+    {
         $this->interview = $isAnInterview;
+
         return $this;
     }
 
@@ -313,19 +335,21 @@ class News implements IndexableEntity
      *
      * @return boolean
      */
-    public function isInterview(){
+    public function isInterview()
+    {
         return $this->interview;
     }
-
 
     /**
      * Set isOnTop
      *
-     * @param boolean $isOnTop
+     * @param  boolean $isOnTop
      * @return News
      */
-    public function setOnTop($isOnTop){
+    public function setOnTop($isOnTop)
+    {
         $this->onTop = $isOnTop;
+
         return $this;
     }
 
@@ -334,19 +358,22 @@ class News implements IndexableEntity
      *
      * @return boolean
      */
-    public function isOnTop(){
+    public function isOnTop()
+    {
         return $this->onTop;
     }
 
     /**
      * Add bar
      *
-     * @param Bar $bar
+     * @param  Bar  $bar
      * @return News
      */
-    public function addBar($bar){
+    public function addBar($bar)
+    {
         $bar->addNews($this);
         $this->bars[] = $bar;
+
         return $this;
     }
 
@@ -355,7 +382,8 @@ class News implements IndexableEntity
      *
      * @param Bar $bar
      */
-    public function removeBar($bar){
+    public function removeBar($bar)
+    {
         $this->bars->removeElement($bar);
         $bar->getNews()->removeElement($this);
     }
@@ -365,19 +393,22 @@ class News implements IndexableEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBars(){
+    public function getBars()
+    {
         return $this->bars;
     }
 
     /**
      * Add BestOf
      *
-     * @param BestOf $bestOf
+     * @param  BestOf $bestOf
      * @return News
      */
-    public function addBestOf($bestOf){
+    public function addBestOf($bestOf)
+    {
         $bestOf->addNews($this);
         $this->bestOfs[] = $bestOf;
+
         return $this;
     }
 
@@ -386,7 +417,8 @@ class News implements IndexableEntity
      *
      * @param BestOf $bestOf
      */
-    public function removeBestOf($bestOf){
+    public function removeBestOf($bestOf)
+    {
         $this->cities->removeElement($bestOf);
         $bestOf->getNews()->removeElement($this);
     }
@@ -396,18 +428,21 @@ class News implements IndexableEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBestOfs(){
+    public function getBestOfs()
+    {
         return $this->bestOfs;
-    }    
-    
+    }
+
     /**
      * Set user
      *
-     * @param User $user
+     * @param  User $user
      * @return Tip
      */
-    public function setUser($user){
+    public function setUser($user)
+    {
         $this->user = $user;
+
         return $this;
     }
 
@@ -416,18 +451,21 @@ class News implements IndexableEntity
      *
      * @return User
      */
-    public function getUser(){
+    public function getUser()
+    {
         return $this->user;
     }
 
     /**
      * Add media
      *
-     * @param BarMedia $media
+     * @param  BarMedia $media
      * @return News
      */
-    public function addMedia($media){
+    public function addMedia($media)
+    {
         $this->medias[] = $media;
+
         return $this;
     }
 
@@ -436,7 +474,8 @@ class News implements IndexableEntity
      *
      * @param NewsMedia $media
      */
-    public function removeMedia($media){
+    public function removeMedia($media)
+    {
         $this->medias->removeElement($media);
     }
 
@@ -445,58 +484,67 @@ class News implements IndexableEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getMedias(){
+    public function getMedias()
+    {
         return $this->medias;
     }
 
     /**
      * Set sponsor
      *
-     * @param string $sponsor
+     * @param  string $sponsor
      * @return News
      */
-    public function setSponsor($sponsor){
+    public function setSponsor($sponsor)
+    {
         $this->sponsor = $sponsor;
+
         return $this;
     }
 
     /**
      * Get sponsor
      *
-     * @return string 
+     * @return string
      */
-    public function getSponsor(){
+    public function getSponsor()
+    {
         return $this->sponsor;
     }
-    
+
     /**
      * Set sponsorImage
      *
-     * @param string $sponsorImage
+     * @param  string $sponsorImage
      * @return News
      */
-    public function setSponsorImage($sponsorImage){
+    public function setSponsorImage($sponsorImage)
+    {
         $this->sponsorImage = $sponsorImage;
+
         return $this;
     }
 
     /**
      * Get sponsorImage
      *
-     * @return Media 
+     * @return Media
      */
-    public function getSponsorImage(){
+    public function getSponsorImage()
+    {
         return $this->sponsorImage;
-    }    
-    
+    }
+
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Tip
      */
-    public function setCreatedAt($createdAt){
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -505,18 +553,21 @@ class News implements IndexableEntity
      *
      * @return \DateTime
      */
-    public function getCreatedAt(){
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Tip
      */
-    public function setUpdatedAt($updatedAt){
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -525,15 +576,15 @@ class News implements IndexableEntity
      *
      * @return \DateTime
      */
-    public function getUpdatedAt(){
+    public function getUpdatedAt()
+    {
         return $this->updatedAt;
     }
-
 
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return News
      */
     public function setSlug($slug)
@@ -546,7 +597,7 @@ class News implements IndexableEntity
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -556,9 +607,9 @@ class News implements IndexableEntity
     public function getFirstVideo()
     {
         $medias = $this->getMedias();
-        foreach($medias as $media)
-        {
+        foreach ($medias as $media) {
             if($media->getMedia()->getProviderName() === "sonata.media.provider.youtube")
+
                 return $media;
         }
 
@@ -570,9 +621,8 @@ class News implements IndexableEntity
         $count = 0;
         $city = null;
 
-        foreach($this->getCities() as $obj)
-        {
-            if($obj->getOnTopCity()){
+        foreach ($this->getCities() as $obj) {
+            if ($obj->getOnTopCity()) {
                 $count++;
                 $city = $obj;
             }
@@ -585,7 +635,7 @@ class News implements IndexableEntity
     {
         $ids = array();
 
-        foreach($this->getCities() as $city){
+        foreach ($this->getCities() as $city) {
             $ids[] = $city->getId();
         }
 
@@ -595,7 +645,7 @@ class News implements IndexableEntity
     /**
      * Set sponsorImageSmall
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall
      * @return News
      */
     public function setSponsorImageSmall(\Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall = null)
@@ -608,7 +658,7 @@ class News implements IndexableEntity
     /**
      * Get sponsorImageSmall
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getSponsorImageSmall()
     {
@@ -618,7 +668,7 @@ class News implements IndexableEntity
     /**
      * Add cities
      *
-     * @param City $city
+     * @param  City $city
      * @return News
      */
     public function addCity(City $city)
@@ -643,13 +693,13 @@ class News implements IndexableEntity
     /**
      * Get cities
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCities()
     {
         return $this->cities;
     }
-    
+
     public function getCloudSearchFields()
     {
         $cities = array();
@@ -706,7 +756,7 @@ class News implements IndexableEntity
     /**
      * Get interview
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getInterview()
     {
@@ -716,7 +766,7 @@ class News implements IndexableEntity
     /**
      * Get onTop
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnTop()
     {

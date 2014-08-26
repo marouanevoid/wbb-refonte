@@ -13,7 +13,7 @@ Application\Sonata\MediaBundle\Entity\Media:
         context: "simple_image"
         contentType: "image/png"
         size: 27018
-        
+
     mediadefault:
         name: chat-people-pic1.png
         description: "une description"
@@ -63,7 +63,7 @@ WBB\CoreBundle\Entity\Country:
         acronym: MA
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-            
+
     france:
         name: France
         acronym: FR
@@ -83,7 +83,7 @@ WBB\CoreBundle\Entity\City:
         country: @maroc
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-    
+
     agadir:
         name: Agadir
         latitude: 31.63
@@ -94,7 +94,7 @@ WBB\CoreBundle\Entity\City:
         country: @maroc
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-        
+
     paris:
         name: Paris
         latitude: 31.63
@@ -105,7 +105,7 @@ WBB\CoreBundle\Entity\City:
         country: @france
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-    
+
     nice:
         name: Nice
         latitude: 31.63
@@ -124,31 +124,31 @@ WBB\CoreBundle\Entity\CitySuburb:
         city: @marrakech
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-        
+
     daoudiate:
         name: Daoudiate
         city: @marrakech
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-        
+
     founty:
         name: Founty
         city: @agadir
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-        
+
     centre:
         name: Centre
         city: @paris
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-        
+
     sud:
         name: Sud
         city: @nice
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
-        
+
 #Bars
 WBB\BarBundle\Entity\Bar:
     chezzouhair:
@@ -177,7 +177,7 @@ WBB\BarBundle\Entity\Bar:
         user: @superadmin
         city: @marrakech
         suburb: @gueliz
-            
+
     boudha:
         name: Budha Bar
         latitude: 31.63
@@ -212,7 +212,7 @@ WBB\BarBundle\Entity\Collections\BarMedia:
         position: 0
         bar: @chezzouhair
         media: @mediadefault
-    
+
     boudhamedia1:
         alt: Un autre Alt
         position: 0
@@ -225,30 +225,30 @@ WBB\BarBundle\Entity\Tag:
         name: Tag1
         type: 1
         onTop: true
-    
+
     tag2:
         name: Tag2
         type: 2
         onTop: false
-        
+
 #Bar Tags
 WBB\BarBundle\Entity\Collections\BarTag:
     bartag1:
         position: 0
         bar: @chezzouhair
         tag: @tag1
-        
+
     bartag2:
         position: 0
         bar: @chezzouhair
         tag: @tag2
-        
+
     bartag3:
         position: 0
         bar: @boudha
         tag: @tag2
-        
-        
+
+
 #Bar Openings
 WBB\BarBundle\Entity\BarOpening:
     mondaychezzouhair:
@@ -256,7 +256,7 @@ WBB\BarBundle\Entity\BarOpening:
         fromHour: 1
         toHour: 4
         bar: @chezzouhair
-            
+
     sundaychezzouhair:
         openingDay: 7
         fromHour: 1
@@ -275,7 +275,7 @@ WBB\BarBundle\Entity\BestOf:
         byTag: true
         onTop: true
         ordered: false
-    
+
     bestof2:
         name: "Second best of"
         description: "a description"
@@ -295,14 +295,13 @@ WBB\BarBundle\Entity\Collections\BestOfTag:
         position: 0
         bestof: @bestof1
         tag: @tag1
-        
+
     bestof1tag2:
         position: 1
         bestof: @bestof1
         tag: @tag2
-        
+
     bestof2tag1:
         position: 0
         bestof: @bestof2
         tag: @tag1
-

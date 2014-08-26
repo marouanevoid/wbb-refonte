@@ -18,10 +18,10 @@ class CountryRepository extends EntityRepository
             ->orderBy($this->getAlias().'.name', 'ASC')
         ;
 
-        if($onlyQueryBuilder){
+        if ($onlyQueryBuilder) {
             return $qb;
-        }else{
+        } else {
             return $qb->getQuery()->getResult();
         }
     }
-} 
+}

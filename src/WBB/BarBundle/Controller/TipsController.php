@@ -36,7 +36,7 @@ class TipsController extends Controller
         $tip->setUser($user);
         $popInContent = $this->renderView('WBBBarBundle:Tips/Popin:tipPending.html.twig');
         $isBarExpert = ($this->get('security.context')->isGranted('ROLE_BAR_EXPERT'))?true:false;
-        if ($user->getTipsShouldBeModerated() && !$isBarExpert){
+        if ($user->getTipsShouldBeModerated() && !$isBarExpert) {
             $tip->setStatus(0);
         } else {
             $tip->setStatus(1);
@@ -66,12 +66,10 @@ class TipsController extends Controller
                     'showPopin'     => !$isBarExpert,
                     'popinContent'  => $popInContent
                 ));
-            }
-            else
-            {
+            } else {
                 return new JsonResponse(array('code'=>500, 'message'=>'Unknown Error!'));
             }
-        }else{
+        } else {
             return new JsonResponse(array('code'=>403, 'message'=>'You can\'t be here using get!'));
         }
     }

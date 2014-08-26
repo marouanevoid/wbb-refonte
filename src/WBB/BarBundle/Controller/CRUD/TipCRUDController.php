@@ -11,8 +11,7 @@ class TipCRUDController extends Controller
 {
     protected function batchActionEnabled(ProxyQueryInterface $selectedTipsQuery)
     {
-        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
-        {
+        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
             throw new AccessDeniedException();
         }
         $modelManager = $this->admin->getModelManager();
@@ -43,8 +42,7 @@ class TipCRUDController extends Controller
 
     protected function batchActionDisabled(ProxyQueryInterface $selectedTipsQuery)
     {
-        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
-        {
+        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
             throw new AccessDeniedException();
         }
         $modelManager = $this->admin->getModelManager();
@@ -75,8 +73,7 @@ class TipCRUDController extends Controller
 
     protected function batchActionPending(ProxyQueryInterface $selectedTipsQuery)
     {
-        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
-        {
+        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
             throw new AccessDeniedException();
         }
         $modelManager = $this->admin->getModelManager();

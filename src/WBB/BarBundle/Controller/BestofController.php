@@ -3,7 +3,6 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BestofController extends Controller
 {
@@ -20,8 +19,7 @@ class BestofController extends Controller
             $this->createNotFoundException('Not found !');
         }
 
-        foreach($bestOf->getBestofs() as $bo)
-        {
+        foreach ($bestOf->getBestofs() as $bo) {
             $bestOfs[] = $bo;
         }
 
@@ -30,31 +28,29 @@ class BestofController extends Controller
         if ($bestofsCount < 3) {
             $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount));
             $bestofsCount += count($bestOfsTmp);
-            foreach($bestOfsTmp as $bo)
-            {
+            foreach ($bestOfsTmp as $bo) {
                 $bestOfs[] = $bo;
             }
-            if($bestofsCount < 3){
+            if ($bestofsCount < 3) {
                 $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount), false, $bestOfsTmp);
-                foreach($bestOfsTmp as $bo)
-                {
+                foreach ($bestOfsTmp as $bo) {
                     $bestOfs[] = $bo;
                 }
             }
         }
 
-        if($bestOf->getByTag()){
+        if ($bestOf->getByTag()) {
             $barsTmp = $this->container->get('bar.repository')->findBarsByExactTags($bestOf);
-            foreach($barsTmp as $bar){
+            foreach ($barsTmp as $bar) {
                 $bars[] = $bar;
             }
-        }else{
-            foreach($bestOf->getBars() as $bar){
+        } else {
+            foreach ($bestOf->getBars() as $bar) {
                 $bars[] = $bar;
             }
         }
 
-        if(!$bestOf->getOrdered() && $bars){
+        if (!$bestOf->getOrdered() && $bars) {
             shuffle($bars);
         }
 
@@ -63,7 +59,7 @@ class BestofController extends Controller
         $longitude = $session->get('userLongitude');
         $distance = false;
 
-        if(!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))){
+        if (!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))) {
             $distance  = array(
                 'latitude'  => $latitude,
                 'longitude' => $longitude,

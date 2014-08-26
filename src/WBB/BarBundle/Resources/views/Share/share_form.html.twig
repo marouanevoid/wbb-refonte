@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="clear"></div>
-            
+
             <div class="group-form margin-top-10" {% if is_mobile() and not is_tablet() %}style="width: 101%"{% else %}style="width: 107%"{% endif %}>
                 {{ form_widget(form.content, {'value': text|raw, 'attr' : { 'class': 'form-textarea radius-20 left' } }) }}
             </div>

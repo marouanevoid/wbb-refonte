@@ -46,7 +46,7 @@ fos_user_change_password:
     prefix: /your-profile
     options:
         expose: true
-    
+
 fos_user_resetting_reset:
     pattern: /
     defaults: { _controller: WBBUserBundle:Bar:home, _method: GET|POST }

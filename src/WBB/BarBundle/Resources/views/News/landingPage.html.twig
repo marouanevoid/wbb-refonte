@@ -30,16 +30,16 @@
                 if($('.older-news article:hidden').length<=0){
                     $('.load-more-container').hide();
                 }
-                
+
                 UTILS._cover();
                 UTILS._resizeCover();
             });
             $(".footer-ad:eq(1)").css('display', 'none');
-            
+
                 {% if city is defined and city != '' %}
                     $('.sub-header .selected').text('{{city}}')
                 {% endif %}
-                
+
             });
     </script>
     <style type="text/css">
