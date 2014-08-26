@@ -108,11 +108,11 @@ wbb_bar_guide_filters:
 
 wbb_bar_bestof_global:
     pattern: /best-of/{bestOfSlug}
-    defaults: { _controller: WBBBarBundle:Bar:bestOf }
+    defaults: { _controller: WBBBarBundle:Bestof:bestOf }
 
 wbb_bar_bestof_local:
     pattern: /best-of/{citySlug}/{bestOfSlug}
-    defaults: { _controller: WBBBarBundle:Bar:bestOf }
+    defaults: { _controller: WBBBarBundle:Bestof:bestOf }
 
 wbb_bar_finder:
     pattern: /bar-finder

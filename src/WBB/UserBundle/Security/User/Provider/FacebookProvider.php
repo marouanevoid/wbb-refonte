@@ -53,7 +53,6 @@ class FacebookProvider implements UserProviderInterface
         $user = $this->findUserByFbId($username);
 
         if (count($this->validator->validate($user, 'Facebook'))) {
-            // TODO: the user was found obviously, but doesnt match our expectations, do something smart
             throw new UsernameNotFoundException('The facebook user could not be stored');
         }
 

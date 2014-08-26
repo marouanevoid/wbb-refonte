@@ -23,7 +23,6 @@ framework:
 
 # Twig Configuration
 twig:
-#    exception_controller:  wbb.twig.controller.exception:showAction
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:

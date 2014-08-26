@@ -42,7 +42,7 @@ class ShowImageExtension extends \Twig_Extension
         $defaultSize = $format;
         $media = $this->getMedia($media);
         if (!$media) {
-            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpeg');//return '';
+            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpeg');
         }
         $provider = $this->getMediaService()
             ->getProvider($media->getProviderName());

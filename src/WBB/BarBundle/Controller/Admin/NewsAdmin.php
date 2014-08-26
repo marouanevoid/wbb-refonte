@@ -75,7 +75,7 @@ class NewsAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('user', 'sonata_type_model', array('btn_add' => false))
+                ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
                 ->add('title', null, array('help'=> 'Mandatory', 'label'=> 'Title *'))
 //                ->add('shareText', null, array('help'=> 'Mandatory', 'label'=> 'Share text *'))
                 ->add('quoteAuthor')
