@@ -12,7 +12,7 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TipRepository extends EntityRepository
 {
-    public function findLatestTips($bar, $offset = 0, $limit = 8, $expertTips = false)
+    public function findLatestTips($bar, $offset = 0, $limit = 8, $expertTips = false, $noExpertTips = false)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -25,7 +25,7 @@ class TipRepository extends EntityRepository
 
         if($expertTips){
             $qb->innerJoin($this->getAlias() . '.user', 'u', 'WITH', 'u.roles like ' . $qb->expr()->literal('%ROLE_BAR_EXPERT%'));
-        }elseif($limit > 0){
+        }elseif($noExpertTips){
             $qb->innerJoin($this->getAlias() . '.user', 'u', 'WITH', 'u.roles not like ' . $qb->expr()->literal('%ROLE_BAR_EXPERT%'));
         }
 

@@ -36,6 +36,7 @@
         var _bar = {{ bar.id }};
         var _offset = 0;
         var _limit = 3;
+        var _excluded = 0;
         var is_mobile = 0;
         {% if is_mobile() and not is_tablet() %}
         is_mobile = 1;

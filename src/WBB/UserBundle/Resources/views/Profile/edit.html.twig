@@ -236,7 +236,7 @@
                             </div>
                             <div class="clear"></div>
                             {% if errors.messages|length > 0 %}
-                                <div id="message" class="margin-top-20 wrap show">
+                                <div id="message" class="margin-top-20 wrap show margin-bottom-40">
                                     <div>
                                         <ul>
                                             {% for error in errors.messages %}
@@ -263,6 +263,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/bundles/wbbcore/js/plugins/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="/bundles/wbbcore/js/plugins/icheck.min.js"></script>
     <script type="text/javascript" src="/bundles/wbbuser/js/modules/profile.edit.wbb.js"></script>
     <script type="text/javascript">
@@ -274,18 +275,21 @@
 
             // init Select 2
             $("select.select2-dropdown").select2({
-                minimumResultsForSearch: -1
+                minimumResultsForSearch: -1,
+                dropdownCssClass : 'white-style',
+                containerCssClass : 'white-style'
             });
 
             // add the search
             $('select.select2-dropdown#fos_user_profile_form_country').select2({
-                minimumResultsForSearch: 20
+                minimumResultsForSearch: 20,
+                dropdownCssClass : 'select2-search-filter white-style',
+                containerCssClass : 'select2-search-filter white-style'
             });
 
             // Scroll To Error
             {% if errors.messages|length > 0 %}
-                if ( ismobile || istablet )
-                    $('html, body').animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
+                $('html, body').delay(3000).animate({scrollTop: $('#message').offset().top }, 500, 'easeInOutCubic');
             {% endif %}
         });
     </script>

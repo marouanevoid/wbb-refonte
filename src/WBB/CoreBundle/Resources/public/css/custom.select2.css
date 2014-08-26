@@ -27,7 +27,7 @@
 .select2-container .select2-choice .select2-arrow b 			{background-position: -162px 0;}
 .select2-container .select2-choice 								{color: #b3955f!important; border-color: #b3955f;}
 .select2-container.select2-dropdown-open .select2-choice 		{background-color: #faf3e1; color: #b3955f; border-color: #6f7072;}
-.select2-display-none 											{background-color: #faf3e1; color: #b3955f; border-color: #6f7072;}
+.select2-display-none.white-style								{background-color: #faf3e1; color: #b3955f; border-color: #6f7072;}
 .select2-container.with-icon.finder-city						{}
 .select2-container.brown 										{}
 .select2-container.with-icon .select2-chosen 					{text-align: left; padding-left: 25px;}
@@ -45,3 +45,7 @@
 .select2-drop.dark input[type="text"] 							{background-color: transparent; color: #fff;}
 .select2-container.select2-dropdown-open.dark .select2-choice 	{background-color: #6f7072;}
 .select2-drop.dark .select2-results .select2-no-results	 		{background: transparent;}
+
+/* SEARCH STYLE */
+.select2-display-none.white-style ,
+.select2-container.select2-dropdown-open.white-style .select2-choice {background-color: #fff; border-color: #b3955f;}

@@ -32,9 +32,9 @@ class ProfileController extends ContainerAware
 
         $session = $this->container->get('session');
         $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
-        
-        if ($request->query->get('profileMessage', null)) {
-            $session->getFlashBag()->add('wbb-complete-profile', true);
+
+        if ($request->query->get('emailPopin', null)) {
+            $session->getFlashBag()->add('wbb-check-email', true);
             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
         }
 
@@ -53,6 +53,12 @@ class ProfileController extends ContainerAware
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $session = $this->container->get('session');
+        if ($request->query->get('profileMessage', null)) {
+            $session->getFlashBag()->add('wbb-complete-profile', true);
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
         }
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
@@ -126,10 +132,11 @@ class ProfileController extends ContainerAware
                     'fields' => $fields,
                     'messages' => $messages
                 );
+
+                $user->setUsername($currentUserName);
             }
         }
 
-        $session = $this->container->get('session');
         $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
 
         return $this->container->get('templating')->renderResponse(
