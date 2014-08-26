@@ -60,7 +60,7 @@ class AppKernel extends Kernel
             new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
 
             //Memcached
-            new Aequasi\Bundle\CacheBundle\AequasiCacheBundle(),
+//            new Aequasi\Bundle\CacheBundle\AequasiCacheBundle(),
 
 //            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 

@@ -334,30 +334,30 @@ fos_facebook:
 hpatoio_bitly:
     access_token: %bitly_access_token%
 
-aequasi_cache:
-    instances:
-        default:
-          persistent: true
-          namespace: mc
-          type: memcached
-          hosts:
-              - { host: wbb-staging.fkektq.0001.use1.cache.amazonaws.com, port: 11211 }
-
-    session:
-        enabled: true
-        instance: default
-        prefix: "session_"
-        ttl: 7200
-
-    doctrine:
-        enabled: true
-        metadata:
-            instance: default
-            entity_managers:   [ default ]
-            document_managers: [ default ]
-        result:
-            instance: default
-            entity_managers:   [ default ]
-        query:
-            instance: default
-            entity_managers: [ default ]
+#aequasi_cache:
+#    instances:
+#        default:
+#          persistent: true
+#          namespace: mc
+#          type: memcached
+#          hosts:
+#              - { host: wbb-staging.fkektq.0001.use1.cache.amazonaws.com, port: 11211 }
+#
+#    session:
+#        enabled: true
+#        instance: default
+#        prefix: "session_"
+#        ttl: 7200
+#
+#    doctrine:
+#        enabled: true
+#        metadata:
+#            instance: default
+#            entity_managers:   [ default ]
+#            document_managers: [ default ]
+#        result:
+#            instance: default
+#            entity_managers:   [ default ]
+#        query:
+#            instance: default
+#            entity_managers: [ default ]
