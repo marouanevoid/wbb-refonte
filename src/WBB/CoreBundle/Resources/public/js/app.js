@@ -358,6 +358,43 @@ meta.App = function() {
             if(ismobile)
                 $('header.mobile .search-result-proposal').hide();
          });
+
+        // add Event on Mobile
+        // for showing the Mask
+        if(ismobile && ! istablet){
+            $('.mobile .search-pin-icon a.search').on('click', function(){
+                // Show The mask
+                PopIn.dom.mask.show();
+                $('.search-bar-mobile').addClass('no-height');
+                $('header').addClass('showing-search');
+            });
+
+            $('.mobile .search-bar-mobile .close').on('click' , function(){
+                PopIn.dom.mask.hide();
+                $('.search-bar-mobile').removeClass('no-height');
+                $('header').removeClass('showing-search');
+            });
+
+            // Add event on resize
+            $(window).on('resize' , function(){
+                $('.mask.mobile-top-force').css({"width" : "220% !important" , "height" : "220% !important"});
+            });
+
+
+            /*
+            * Lock to Orientation
+            ***/
+            $(window).on("orientationchange", function(){
+                var orientation = window.orientation;
+                if(orientation != 0){
+                    $('#landscape-mobile').show();
+                }else{
+                    $('#landscape-mobile').hide();
+                }
+            });
+
+            $(window).trigger("orientationchange");
+        }
     };
 
 

@@ -8,15 +8,14 @@ use WBB\BarBundle\Entity\News;
 
 class NewsController extends Controller
 {
-    private function reGeolocate(){
-
+    private function reGeolocate()
+    {
         $session = $this->container->get('session');
         $cookies = $this->get('request')->cookies;
 
-        if($cookies->has('first_visite') == false || ( $cookies->has('first_visite') && $cookies->get('first_visite') != "false" ) ){
+        if ($cookies->has('first_visite') == false || ( $cookies->has('first_visite') && $cookies->get('first_visite') != "false" ) ) {
             $geoSlug = $session->get('citySlugGeo');
-            if(!empty($geoSlug))
-            {
+            if (!empty($geoSlug)) {
                 $session->set('citySlug', $geoSlug);
             }
         }
@@ -29,7 +28,7 @@ class NewsController extends Controller
         if ($citySlug == "world-wide")
             $session->set('citySlug', "");
 
-        if($citySlug != $session->get('citySlug') && $citySlug){
+        if ($citySlug != $session->get('citySlug') && $citySlug) {
             $session->set('citySlug', $citySlug);
             $session->set('userLatitude', '');
             $session->set('userLongitude', '');
@@ -38,9 +37,9 @@ class NewsController extends Controller
         $slug = $session->get('citySlug');
 
         $city = null;
-        if (!empty($slug)){
+        if (!empty($slug)) {
             $city = $this->get('city.repository')->findOneBySlug($slug);
-        }elseif($citySlug){
+        } elseif ($citySlug) {
             $city = ($citySlug)? $this->container->get('city.repository')->findOneBySlug($citySlug) : null;
         }
 
@@ -55,15 +54,14 @@ class NewsController extends Controller
         $nbArticles = 0;
         $nbInteviews = 0;
 
-        foreach($allNews as $news)
-        {
-            if($news->isInterview() && $nbInteviews < 4 ){
+        foreach ($allNews as $news) {
+            if ($news->isInterview() && $nbInteviews < 4 ) {
                 $interviews[] = $news;
                 $nbInteviews++;
-            }elseif(!$news->isInterview() && $nbArticles < 8){
+            } elseif (!$news->isInterview() && $nbArticles < 8) {
                 $articles[] = $news;
                 $nbArticles++;
-            }else{
+            } else {
                 $newsList[] = $news;
             }
         }
@@ -108,7 +106,7 @@ class NewsController extends Controller
         $tmp1 = $this->container->get('news.repository')->findRelatedNews($news->getCitiesAsArray(), 3, array($news->getId()));
         $ids = array($news->getId());
 
-        foreach($tmp1 as $tmp){
+        foreach ($tmp1 as $tmp) {
             $ids[] = $tmp->getId();
         }
 

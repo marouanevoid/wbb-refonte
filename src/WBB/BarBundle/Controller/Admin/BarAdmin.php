@@ -25,17 +25,24 @@ class BarAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->addIdentifier('name');
+        if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+            $listMapper
             ->add('city')
-            ->add('suburb')
-            ->add('website', 'string', array(
+            ->add('suburb');
+        }
+
+            $listMapper->add('website', 'string', array(
                 'template' => 'WBBBarBundle:Admin:Bar\list_bar_website_url.html.twig'
             ))
             ->add('createdAt')
             ->add('updatedAt')
             ->add('onTop', null, array('editable' => true))
-            ->add('status', 'status')
-            ->add('user')
+            ->add('status', 'status');
+            if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+                $listMapper->add('user');
+            }
+            $listMapper
             ->addIdentifier('_action', 'actions', array(
                 'field'   => 'name',
                 'label'    => 'Actions',
@@ -54,10 +61,13 @@ class BarAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $filterMapper)
     {
         $filterMapper
-            ->add('name')
-            ->add('city')
-            ->add('suburb')
-            ->add('onTop')
+                ->add('name');
+        if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+            $filterMapper
+                ->add('city')
+                ->add('suburb');
+        }
+            $filterMapper->add('onTop')
             ->add('status', 'doctrine_orm_string', array(), 'choice',
                 array('choices' => array(
                     Bar::BAR_STATUS_PENDING_VALUE   => 'Pending',
@@ -68,7 +78,7 @@ class BarAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -76,6 +86,7 @@ class BarAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
                             $queryBuilder->setParameter('createdAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -84,7 +95,7 @@ class BarAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -92,6 +103,7 @@ class BarAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
                             $queryBuilder->setParameter('updatedAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -137,26 +149,28 @@ class BarAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->with('General')
-                ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
-                ->add('name', null, array('label'=>'Name of the bar', 'help' => 'Mandatory'))
-                ->add('city', null, array('help' => 'Mandatory', 'required' => true))
-                ->add('suburb', null, array('help' => 'Mandatory', 'required' => true))
-                ->add('onTop')
-                ->add('status', 'choice', array(
-                    'required' => false,
-                    'help' => 'Keep the "Pending" status until the bar page is completely finished.',
-                    'choices'  => array(
-                        Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT,
-                        Bar::BAR_STATUS_ENABLED_VALUE  =>  Bar::BAR_STATUS_ENABLED_TEXT,
-                        Bar::BAR_STATUS_DISABLED_VALUE =>  Bar::BAR_STATUS_DISABLED_TEXT
-                    ),
-                    'empty_value' => false,
-                    'preferred_choices' => array(Bar::BAR_STATUS_PENDING_VALUE  =>  Bar::BAR_STATUS_PENDING_TEXT)
-                ))
-            ->end()
-            ->with('Bar Details');
+        if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+            $formMapper
+                    ->with('General')
+                    ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
+                    ->add('name', null, array('label' => 'Name of the bar', 'help' => 'Mandatory'))
+                    ->add('city', null, array('help' => 'Mandatory', 'required' => true))
+                    ->add('suburb', null, array('help' => 'Mandatory', 'required' => true))
+                    ->add('onTop')
+                    ->add('status', 'choice', array(
+                        'required' => false,
+                        'help' => 'Keep the "Pending" status until the bar page is completely finished.',
+                        'choices' => array(
+                            Bar::BAR_STATUS_PENDING_VALUE => Bar::BAR_STATUS_PENDING_TEXT,
+                            Bar::BAR_STATUS_ENABLED_VALUE => Bar::BAR_STATUS_ENABLED_TEXT,
+                            Bar::BAR_STATUS_DISABLED_VALUE => Bar::BAR_STATUS_DISABLED_TEXT
+                        ),
+                        'empty_value' => false,
+                        'preferred_choices' => array(Bar::BAR_STATUS_PENDING_VALUE => Bar::BAR_STATUS_PENDING_TEXT)
+                    ))
+                    ->end();
+        }
+        $formMapper->with('Bar Details');
                 if($this->getSecurityContext()->isGranted('ROLE_BAR_ID') ||
                     ($this->getUser()->hasRole('ROLE_BAR_OWNER') && ($this->getSubject()->getUser() == $this->getUser()))){
                     $formMapper
@@ -171,7 +185,7 @@ class BarAdmin extends Admin
                         ->add('facebook', null, array('help' => 'Example : buddhabarofficial'))
                         ->add('instagram', null, array('help' => 'Example : buddhabarparis'));
                 }
-
+         if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
         $formMapper
             ->add('creditCard')
             ->add('coatCheck')
@@ -197,7 +211,7 @@ class BarAdmin extends Admin
             ->add('reservation')
             ->add('reservationLink', null, array('help' => 'Example : http://www.url.com'));
 
-        if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
+        if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
             $formMapper
                 ->add('description', 'textarea', array('required' => false,'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
             ;
@@ -264,6 +278,7 @@ class BarAdmin extends Admin
                     ))
             ->end()
         ;
+        }
     }
 
     public function getBatchActions()
@@ -272,7 +287,7 @@ class BarAdmin extends Admin
         $actions = parent::getBatchActions();
 
         // check user permissions
-        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+        if ($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')) {
             $actions['export'] = array(
                 'label'            => 'Export',
                 'ask_confirmation' => false
@@ -297,31 +312,31 @@ class BarAdmin extends Admin
 
     public function prePersist($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setBar($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }
         }
 
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setBar($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }
         }
 
-        if($object->getOpenings()){
+        if ($object->getOpenings()) {
             foreach ($object->getOpenings() as $opening) {
-                if($opening && $opening->getOpeningDay()){
+                if ($opening && $opening->getOpeningDay()) {
                     $opening->setBar($object);
-                }else{
+                } else {
                     $object->removeOpening($opening);
                 }
             }
@@ -330,34 +345,49 @@ class BarAdmin extends Admin
 
     public function preUpdate($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setBar($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }
         }
 
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setBar($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }
         }
 
-        if($object->getOpenings()){
+        if ($object->getOpenings()) {
             foreach ($object->getOpenings() as $opening) {
-                if($opening && $opening->getOpeningDay()){
+                if ($opening && $opening->getOpeningDay()) {
                     $opening->setBar($object);
-                }else{
+                } else {
                     $object->removeOpening($opening);
                 }
             }
         }
     }
+
+    public function createQuery($context = 'list')
+    {
+        if ($this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+            $qb = parent::createQuery($context);
+            $alias = $qb->getRootAliases();
+
+            $qb->andWhere($alias[0] . '.user = ' . $this->getUser()->getId());
+
+            return $qb;
+        } else {
+            return parent::createQuery($context);
+        }
+    }
+
 }

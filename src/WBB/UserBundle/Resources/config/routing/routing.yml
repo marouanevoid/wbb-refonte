@@ -11,7 +11,7 @@ wbb_user_reset_success:
 wbb_user_favoris_add:
     pattern:  /favoris/add
     defaults: { _controller: WBBBarBundle:Favoris:add }
-    
+
 wbb_ajax_signin_popin:
     pattern: /ajax/signin-popin
     defaults:

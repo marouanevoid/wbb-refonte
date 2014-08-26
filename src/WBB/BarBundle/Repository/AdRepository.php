@@ -21,9 +21,9 @@ class AdRepository extends EntityRepository
         $qb
             ->select($this->getAlias());
 
-        if($countains){
+        if ($countains) {
             $qb->where($qb->expr()->like($this->getAlias().'.position', $qb->expr()->literal($position.'%')));
-        }else{
+        } else {
             $qb->where($qb->expr()->eq($this->getAlias().'.position', $qb->expr()->literal($position)));
         }
 
@@ -34,15 +34,13 @@ class AdRepository extends EntityRepository
             ->setMaxResults(1);
         ;
 
-
-        if($country){
+        if ($country) {
             $qb
                 ->addSelect('c')
                 ->leftJoin($this->getAlias().'.countries', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $country->getId()))
             ;
-        }
-        else{
+        } else {
             $qb
                 ->leftJoin($this->getAlias().'.countries', 'c')
                 ->groupBy($this->getAlias())
@@ -51,4 +49,4 @@ class AdRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
-} 
+}

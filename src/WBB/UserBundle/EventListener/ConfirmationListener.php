@@ -28,7 +28,11 @@ class ConfirmationListener implements EventSubscriberInterface
     {
         $user = $event->getUser();
         $user->setConfirmed(true);
-        $this->session->getFlashBag()->add('wbb-user-confirmed', true);
+        if ($user->getFirstname() == '') {
+            $this->session->getFlashBag()->add('wbb-complete-profile', true);
+        } else {
+            $this->session->getFlashBag()->add('wbb-user-confirmed', true);
+        }
     }
 
 }

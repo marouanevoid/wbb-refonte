@@ -20,7 +20,6 @@ class Tag
     const WBB_TAG_TYPE_ENERGY_LEVEL     = 5;
     const WBB_TAG_TYPE_DRINK_BRANDS     = 6;
 
-
     /**
      * @var integer
      *
@@ -102,7 +101,6 @@ class Tag
      */
     private $bestofOccasions;
 
-
     /**
      * Get id
      *
@@ -116,7 +114,7 @@ class Tag
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Tag
      */
     public function setName($name)
@@ -139,7 +137,7 @@ class Tag
     /**
      * Set onTop
      *
-     * @param boolean $onTop
+     * @param  boolean $onTop
      * @return Tag
      */
     public function setOnTop($onTop)
@@ -159,14 +157,15 @@ class Tag
         return $this->onTop;
     }
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->setOnTop(true);
     }
 
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Tag
      */
     public function setCreatedAt($createdAt)
@@ -189,7 +188,7 @@ class Tag
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Tag
      */
     public function setUpdatedAt($updatedAt)
@@ -209,14 +208,15 @@ class Tag
         return $this->updatedAt;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getName();
     }
 
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\Collections\BarTag $bars
+     * @param  \WBB\BarBundle\Entity\Collections\BarTag $bars
      * @return Tag
      */
     public function addBar(\WBB\BarBundle\Entity\Collections\BarTag $bars)
@@ -249,7 +249,7 @@ class Tag
     /**
      * Add bestofs
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfTag $bestofs
+     * @param  \WBB\BarBundle\Entity\Collections\BestOfTag $bestofs
      * @return Tag
      */
     public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfTag $bestofs)
@@ -279,7 +279,8 @@ class Tag
         return $this->bestofs;
     }
 
-    public static function getTypeNames(){
+    public static function getTypeNames()
+    {
         return array(
             Tag::WBB_TAG_TYPE_SPECIAL_FEATURES  => 'Special Features',
             Tag::WBB_TAG_TYPE_THEME             => 'Style',
@@ -293,7 +294,7 @@ class Tag
     /**
      * Set type
      *
-     * @param string $type
+     * @param  string $type
      * @return Tag
      */
     public function setType($type)
@@ -316,7 +317,7 @@ class Tag
     /**
      * Add barsLevel
      *
-     * @param \WBB\BarBundle\Entity\Bar $barsLevel
+     * @param  \WBB\BarBundle\Entity\Bar $barsLevel
      * @return Tag
      */
     public function addBarsLevel(\WBB\BarBundle\Entity\Bar $barsLevel)
@@ -349,7 +350,7 @@ class Tag
     /**
      * Add barOccasions
      *
-     * @param \WBB\BarBundle\Entity\Bar $barOccasions
+     * @param  \WBB\BarBundle\Entity\Bar $barOccasions
      * @return Tag
      */
     public function addBarOccasion(\WBB\BarBundle\Entity\Bar $barOccasions)
@@ -382,7 +383,7 @@ class Tag
     /**
      * Add bestofsLevel
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestofsLevel
+     * @param  \WBB\BarBundle\Entity\BestOf $bestofsLevel
      * @return Tag
      */
     public function addBestofsLevel(\WBB\BarBundle\Entity\BestOf $bestofsLevel)
@@ -415,7 +416,7 @@ class Tag
     /**
      * Add bestofOccasions
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestofOccasions
+     * @param  \WBB\BarBundle\Entity\BestOf $bestofOccasions
      * @return Tag
      */
     public function addBestofOccasion(\WBB\BarBundle\Entity\BestOf $bestofOccasions)
@@ -448,7 +449,7 @@ class Tag
     /**
      * Add semsoftBarsLevel
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel
+     * @param  \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel
      * @return Tag
      */
     public function addSemsoftBarsLevel(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBarsLevel)

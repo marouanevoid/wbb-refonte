@@ -191,9 +191,9 @@ wbb.LoadProfile = function() {
                     stringTip = "no tip";
                 }else{
                     if(_count.tips == 1){
-                        stringTip = "(1) "+ ( ismobile ? ' <br> ' : '') + "Tip"
+                        stringTip = "(1) "+ ( ismobile && ! istablet ? ' <br> ' : '') + "Tip"
                     }else{
-                        stringTip = "("+ _count.tips +") "+ ( ismobile ? ' <br> ' : '') + "Tips";
+                        stringTip = "("+ _count.tips +") "+ ( ismobile && ! istablet  ? ' <br> ' : '') + "Tips";
                     }
                 }
 
@@ -205,9 +205,9 @@ wbb.LoadProfile = function() {
                         stringBar = "No bar";
                     }else{
                         if(_count.bars == 1){
-                            stringBar = "(1) "+ ( ismobile ? ' <br> ' : '') + "Bar"
+                            stringBar = "(1) "+ ( ismobile && ! istablet ? ' <br> ' : '') + "Bar"
                         }else{
-                            stringBar = "("+ _count.bars +") "+ ( ismobile ? ' <br> ' : '') + "Bars";
+                            stringBar = "("+ _count.bars +") "+ ( ismobile && ! istablet ? ' <br> ' : '') + "Bars";
                         }
                     }
                     $(cible).find('span').html(stringBar);
@@ -218,9 +218,9 @@ wbb.LoadProfile = function() {
                             stringBest = "No collection";
                         }else{
                             if(_count.bestof == 1){
-                                stringBest = "(1) "+ ( ismobile ? ' <br> ' : '') + "collection"
+                                stringBest = "(1) "+ ( ismobile && ! istablet ? ' <br> ' : '') + "collection"
                             }else{
-                                stringBest = "("+ _count.bestof +") "+ ( ismobile ? ' <br> ' : '') + "collections";
+                                stringBest = "("+ _count.bestof +") "+ ( ismobile  && ! istablet ? ' <br> ' : '') + "collections";
                             }
                         }
 

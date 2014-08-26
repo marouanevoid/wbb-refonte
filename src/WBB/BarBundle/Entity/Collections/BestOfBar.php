@@ -67,11 +67,10 @@ class BestOfBar
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,7 +80,7 @@ class BestOfBar
     /**
      * Set position
      *
-     * @param integer $position
+     * @param  integer  $position
      * @return BarMedia
      */
     public function setPosition($position)
@@ -94,7 +93,7 @@ class BestOfBar
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -104,6 +103,7 @@ class BestOfBar
     public function __toString()
     {
         if($this->bar)
+
             return $this->bar->getName();
         else
             return "";
@@ -112,7 +112,7 @@ class BestOfBar
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return BarMedia
      */
     public function setCreatedAt($createdAt)
@@ -125,7 +125,7 @@ class BestOfBar
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -135,7 +135,7 @@ class BestOfBar
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return BarMedia
      */
     public function setUpdatedAt($updatedAt)
@@ -148,7 +148,7 @@ class BestOfBar
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -158,7 +158,7 @@ class BestOfBar
     /**
      * Set bestof
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestof
+     * @param  \WBB\BarBundle\Entity\BestOf $bestof
      * @return BestOfTag
      */
     public function setBestof(\WBB\BarBundle\Entity\BestOf $bestof = null)
@@ -181,7 +181,7 @@ class BestOfBar
     /**
      * Set bar
      *
-     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @param  \WBB\BarBundle\Entity\Bar $bar
      * @return BestOfBar
      */
     public function setBar(\WBB\BarBundle\Entity\Bar $bar = null)
@@ -194,7 +194,7 @@ class BestOfBar
     /**
      * Get bar
      *
-     * @return \WBB\BarBundle\Entity\Bar 
+     * @return \WBB\BarBundle\Entity\Bar
      */
     public function getBar()
     {
@@ -204,7 +204,7 @@ class BestOfBar
     /**
      * Set media
      *
-     * @param \WBB\BarBundle\Entity\Collections\BarMedia $media
+     * @param  \WBB\BarBundle\Entity\Collections\BarMedia $media
      * @return BestOfBar
      */
     public function setMedia(\WBB\BarBundle\Entity\Collections\BarMedia $media = null)
@@ -217,7 +217,7 @@ class BestOfBar
     /**
      * Get media
      *
-     * @return \WBB\BarBundle\Entity\Collections\BarMedia 
+     * @return \WBB\BarBundle\Entity\Collections\BarMedia
      */
     public function getMedia()
     {
@@ -227,7 +227,7 @@ class BestOfBar
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string    $description
      * @return BestOfBar
      */
     public function setDescription($description)
@@ -240,7 +240,7 @@ class BestOfBar
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {

@@ -5,15 +5,15 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
         <div class="text-align-center">
-            <input type="text" placeholder="Email" class="form-text margin-top-30" id="username" name="_username" value="{{ last_username }}" />
-            <input type="password" id="password" name="_password" class="form-text form-password margin-top-10" placeholder="Password"/>
+            <input type="text" placeholder="Email" class="form-text margin-top-30" id="username" name="_username" value="{{ last_username }}" tabindex="1"/>
+            <input type="password" id="password" name="_password" class="form-text form-password margin-top-10" placeholder="Password" tabindex="2"/>
             <div id="login_error"></div>
-            <input type="submit" id="_submit" name="_submit" class="form-submit btn margin-top-30 bold" value="CONFIRM" />
+            <input type="submit" id="_submit" name="_submit" class="form-submit btn margin-top-30 bold" value="CONFIRM" tabindex="3" />
         </div>
         <div class="clear"></div>
-        <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password">Forgot your password?</a> <!-- TODO Forgot ? -->
+        <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password" tabindex="4">Forgot your password?</a> <!-- TODO Forgot ? -->
         <div class="separator margin-top-40"></div>
-        <a id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30">Sign up with Facebook</a>
+        <a id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 margin-bottom-40 radius-30" tabindex="5">Sign up with Facebook</a>
 
             <div class="loading-login-fb">
                 <div class="floatingBarsG_fb">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            
+
     </form>
 {% else %}
     <div class="block wrap">
@@ -45,17 +45,17 @@
 
             <div class="group-form-top">
                 <div class="group-form">
-                    <input type="text" class="form-text margin-top-30 text-align-center" placeholder="Email" id="username" name="_username" value="{{ last_username }}">
+                    <input type="text" class="form-text margin-top-30 text-align-center" placeholder="Email" id="username" name="_username" value="{{ last_username }}" tabindex="1">
                 </div>
                 <div class="group-form">
-                    <input type="password" id="password" name="_password" class="form-text form-password margin-top-10 text-align-center" placeholder="Password">
+                    <input type="password" id="password" name="_password" class="form-text form-password margin-top-10 text-align-center" placeholder="Password" tabindex="2">
                 </div>
-                <input type="submit" class="form-submit btn margin-top-30" value="Sign In">
+                <input type="submit" class="form-submit btn margin-top-30" value="Sign In" tabindex="3">
             </div>
             <div class="clear"></div>
-            <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password">Forgot your password?</a>
+            <a href="{{ path('fos_user_resetting_request') }}" class="text-align-center margin-top-20 forgot-password" tabindex="4">Forgot your password?</a>
             <div class="separator margin-top-40"></div>
-            <a id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 radius-30">Sign up with Facebook</a>
+            <a id="facebook-signup" class="btn btn-facebook text-align-center margin-top-30 radius-30" tabindex="5">Sign up with Facebook</a>
             <div class="loading-login-fb">
                 <div class="floatingBarsG_fb">
                     <div class="blockG" id="rotateG_01">
@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-            <p class="text-align-center need-account margin-bottom-20 margin-top-20">Need an account? <a href="{{ path('fos_user_registration_register') }}">Register</a></p>
+            <p class="text-align-center need-account margin-bottom-20 margin-top-20">Need an account? <a href="{{ path('fos_user_registration_register') }}" tabindex="6">Register</a></p>
         </form>
         <div id="message" class="margin-bottom-20"></div>
     </div>

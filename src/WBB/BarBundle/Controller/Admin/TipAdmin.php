@@ -8,12 +8,13 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class TipAdmin extends Admin {
-
+class TipAdmin extends Admin
+{
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper){
+    protected function configureListFields(ListMapper $listMapper)
+    {
         $listMapper
             ->addIdentifier('id')
             ->add('user', null, array('editable' => true))
@@ -29,7 +30,8 @@ class TipAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper){
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
         $filterMapper
             ->add('id')
             ->add('description')
@@ -42,7 +44,8 @@ class TipAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper){
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
         $showMapper
             ->with('General')
                 ->add('id')
@@ -59,7 +62,8 @@ class TipAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper){
+    protected function configureFormFields(FormMapper $formMapper)
+    {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
@@ -85,7 +89,7 @@ class TipAdmin extends Admin {
         $actions = parent::getBatchActions();
 
         // check user permissions
-        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+        if ($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')) {
             $actions['enabled'] = array(
                 'label'            => 'Enabled',
                 'ask_confirmation' => false // If true, a confirmation will be asked before performing the action

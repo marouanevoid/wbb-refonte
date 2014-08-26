@@ -137,7 +137,7 @@ class UserAdmin extends Admin
             ->end()
         ;
 
-        if(!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->with('Management')
                     ->add('roles', 'choice', array(
@@ -170,7 +170,7 @@ class UserAdmin extends Admin
      */
     public function preUpdate($user)
     {
-        if($user->getPlainPassword()){
+        if ($user->getPlainPassword()) {
             //Get the plain password before encryption and the rest of email data
             $data = array(
                 'password'  => $user->getPlainPassword(),
@@ -194,8 +194,8 @@ class UserAdmin extends Admin
         return array(
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('firstname', 'show', 'label'))           => 'firstname',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'lastname',
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'birthdate',
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'country.name',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('birthdate', 'show', 'label'))           => 'birthdate',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('country', 'show', 'label'))             => 'country.name',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity1', 'show', 'label'))           => 'prefCity1',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity2', 'show', 'label'))           => 'prefCity2',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity3', 'show', 'label'))           => 'prefCity3',
