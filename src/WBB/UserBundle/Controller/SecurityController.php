@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SecurityController extends Controller
 {
-    
+
     public function facebookLoginAction(Request $request)
     {
         return $this->loginAction($request);
@@ -49,7 +49,7 @@ class SecurityController extends Controller
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
 
-            if($error == 'Bad credentials'){
+            if ($error == 'Bad credentials') {
                 $error = 'Your login or password is incorrect';
             }
 

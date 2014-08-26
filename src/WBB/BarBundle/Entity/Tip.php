@@ -15,8 +15,8 @@ use JMS\Serializer\Annotation as JMS;
  * @JMS\ExclusionPolicy("all")
  */
 
-class Tip {
-
+class Tip
+{
     /**
      * @var integer
      *
@@ -75,14 +75,15 @@ class Tip {
     /**
      * Constructor
      */
-    public function __construct(){
-
+    public function __construct()
+    {
     }
 
     /**
      * toString
      */
-    public function __toString(){
+    public function __toString()
+    {
         return $this->getDescription();
     }
 
@@ -91,18 +92,21 @@ class Tip {
      *
      * @return integer
      */
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * Set user
      *
-     * @param User $user
+     * @param  User $user
      * @return Tip
      */
-    public function setUser($user){
+    public function setUser($user)
+    {
         $this->user = $user;
+
         return $this;
     }
 
@@ -111,18 +115,21 @@ class Tip {
      *
      * @return User
      */
-    public function getUser(){
+    public function getUser()
+    {
         return $this->user;
     }
 
     /**
      * Set bar
      *
-     * @param Bar $bar
+     * @param  Bar $bar
      * @return Tip
      */
-    public function setBar($bar){
+    public function setBar($bar)
+    {
         $this->bar = $bar;
+
         return $this;
     }
 
@@ -131,18 +138,21 @@ class Tip {
      *
      * @return Bar
      */
-    public function getBar(){
+    public function getBar()
+    {
         return $this->bar;
     }
 
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Tip
      */
-    public function setDescription($description){
+    public function setDescription($description)
+    {
         $this->description = $description;
+
         return $this;
     }
 
@@ -151,19 +161,21 @@ class Tip {
      *
      * @return string
      */
-    public function getDescription(){
+    public function getDescription()
+    {
         return $this->description;
     }
-
 
     /**
      * Set status
      *
-     * @param boolean $status
+     * @param  boolean $status
      * @return Tip
      */
-    public function setStatus($status){
+    public function setStatus($status)
+    {
         $this->status = $status;
+
         return $this;
     }
 
@@ -172,18 +184,21 @@ class Tip {
      *
      * @return boolean
      */
-    public function getStatus(){
+    public function getStatus()
+    {
         return $this->status;
     }
 
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Tip
      */
-    public function setCreatedAt($createdAt){
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -192,18 +207,21 @@ class Tip {
      *
      * @return \DateTime
      */
-    public function getCreatedAt(){
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Tip
      */
-    public function setUpdatedAt($updatedAt){
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -212,11 +230,13 @@ class Tip {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt(){
+    public function getUpdatedAt()
+    {
         return $this->updatedAt;
     }
 
-    public function getStatusChoices(){
+    public function getStatusChoices()
+    {
         return array(
             0 => 'Pending',
             1 => 'Enabled',

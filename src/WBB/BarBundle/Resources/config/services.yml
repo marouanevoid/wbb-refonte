@@ -217,7 +217,7 @@ services:
     sonata.media.resizer.custom:
         class: WBB\BarBundle\Resizer\CustomResizer
         arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
-    
+
     wbb.twig.favorite_extension:
         class: WBB\BarBundle\Twig\Extension\FavoriteExtension
         arguments:

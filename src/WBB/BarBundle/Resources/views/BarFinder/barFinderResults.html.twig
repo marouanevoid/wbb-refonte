@@ -89,8 +89,8 @@
             }
 
             $('.sort-by a.grid').add('.sort-by a.list').on('click' , function(){
-               $(".line.gridview").hide(); 
-               $(".line.listview").hide();  
+               $(".line.gridview").hide();
+               $(".line.listview").hide();
                 setTimeout(function(){
                     currentIndexToLoad = 1;
                     if(getTab() == 'grid'){
@@ -116,10 +116,10 @@
             });
 
 
-            // Load les images 
+            // Load les images
             // One By One
             totalLoadedImage = $('.force-load-images').find('img[data-src]').length;
-            
+
             $('.force-load-images').find('img[data-src]').each(function()
             {
                 $(this).load(CurrentimageLoaded);

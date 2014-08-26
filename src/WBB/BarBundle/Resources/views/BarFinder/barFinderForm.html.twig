@@ -104,7 +104,7 @@
                 $(this).parent('.ui-dropdown-container').find('.ui-dropdown').addClass('active');
               }
            });
-           
+
            console.log('total slected ' + totalSelectedSelect);
            if(totalSelectedSelect < 2 || totalSelectedMood > 0){
                 $('.go').removeClass('disabled');
@@ -112,10 +112,10 @@
            }else{
             $('.go').addClass('disabled');
             $('.go').attr('disabled' , 'disabled');
-           }  
+           }
 
         };
-       
+
 
         // remove Class active on input if is not checked
        $('.trigger-handler').parent('a').on('click' , function(){
@@ -126,7 +126,7 @@
                 });
                 showGo();
        });
-       
+
        $('select.trigger-select-go').on('change' , function(){
             showGo(this);
         });
@@ -137,7 +137,7 @@
        $('.fake-go-item').remove();
 
 
-       // if already one filter is checked 
+       // if already one filter is checked
       //thene active Go button
 
 
@@ -184,7 +184,7 @@
                                     <option value="{{selected.city}}">{% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city  }} {% else %}Choose a city {% endif %}</option>
                                 {% endif %}
 
-                                {% if not is_mobile() and not is_tablet() %} 
+                                {% if not is_mobile() and not is_tablet() %}
                                     <option></option>
                                 {% endif %}
                                 {% if is_tablet() and  selected.city !='all' %}
@@ -194,7 +194,7 @@
                                     <option class="cty0" value="all" {% if selected.city == 'all' %} selected="selected" {% endif %}>All</option>
                                     {% endif %}
                                 {% endif %}
-                                
+
                                 {% if city %}
                                     <option value="{{ city.slug }}">{{ city.name }}</option>
                                     {% for c in cities %}
@@ -219,7 +219,7 @@
                                 {% if is_tablet() %}
                                 <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option>
                                 {% endif %}
-                               {% if not is_mobile() and not is_tablet() %} 
+                               {% if not is_mobile() and not is_tablet() %}
                                     <option></option>
                                 {% endif %}
                                 {% if is_tablet() and  selected.outWith !='all' %}
@@ -264,7 +264,7 @@
                     </tr>
                 </table>
 
-                <!-- 
+                <!--
                     SESSION :
                     mood > {{ selected.mood }}
                     selected.outWith > {{ selected.outWith }}

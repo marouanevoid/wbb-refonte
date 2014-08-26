@@ -8,12 +8,13 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class NewsAdmin extends Admin {
-
+class NewsAdmin extends Admin
+{
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper){
+    protected function configureListFields(ListMapper $listMapper)
+    {
         $listMapper
             ->addIdentifier('title')
 //            ->add('shareText', null, array('editable' => true))
@@ -30,7 +31,8 @@ class NewsAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper){
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
         $filterMapper
             ->add('id')
             ->add('title')
@@ -47,7 +49,8 @@ class NewsAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper){
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
         $showMapper
             ->with('General')
                 ->add('id')
@@ -68,7 +71,8 @@ class NewsAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper){
+    protected function configureFormFields(FormMapper $formMapper)
+    {
         $formMapper
             ->with('General')
                 ->add('user', 'sonata_type_model', array('btn_add' => false))
@@ -121,8 +125,9 @@ class NewsAdmin extends Admin {
             ->end()
         ;
     }
-    
-    public function getNewInstance(){
+
+    public function getNewInstance()
+    {
         $newInstance = parent::getNewInstance();
         $newInstance->setInterview(true);
         $newInstance->setOnTop(true);
@@ -132,11 +137,11 @@ class NewsAdmin extends Admin {
 
     public function prePersist($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setNews($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }
@@ -145,11 +150,11 @@ class NewsAdmin extends Admin {
 
     public function preUpdate($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setNews($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }

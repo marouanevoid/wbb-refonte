@@ -30,8 +30,8 @@ class FoursquareImgs implements FeedInterface
     /**
      * find
      *
-     * @param null $id
-     * @param int $next
+     * @param  null  $id
+     * @param  int   $next
      * @return array
      */
     public function find($id = null, $next = 0)
@@ -74,7 +74,7 @@ class FoursquareImgs implements FeedInterface
     /**
      * createFeed
      *
-     * @param string $hash
+     * @param string                    $hash
      * @param \WBB\BarBundle\Entity\Bar $bar
      *
      * @return Object
@@ -87,11 +87,11 @@ class FoursquareImgs implements FeedInterface
 
         return $bar;
     }
-    
+
     /**
      * createFeed
      *
-     * @param string $hash
+     * @param string                    $hash
      * @param \WBB\BarBundle\Entity\Bar $bar
      *
      * @return Object
@@ -107,10 +107,11 @@ class FoursquareImgs implements FeedInterface
 
     /**
      * listAll
-     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @param  \WBB\BarBundle\Entity\Bar $bar
      * @return array
      */
-    public function listAll(Bar $bar){
+    public function listAll(Bar $bar)
+    {
         return $bar->getFsSelectedImgs();
     }
 }

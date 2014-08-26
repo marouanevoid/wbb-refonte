@@ -9,8 +9,8 @@ interface FeedInterface
     /**
      * find
      *
-     * @param null $id
-     * @param int $next
+     * @param  null  $id
+     * @param  int   $next
      * @return array
      */
     public function find($id = null, $next = 0);
@@ -27,18 +27,18 @@ interface FeedInterface
     /**
      * createObject
      *
-     * @param string   $hash
-     * @param Bar $bar
+     * @param string $hash
+     * @param Bar    $bar
      *
      * @return Object
      */
     public function createObject($hash, Bar $bar = null);
-    
+
     /**
      * removeObject
      *
-     * @param string   $hash
-     * @param Bar $bar
+     * @param string $hash
+     * @param Bar    $bar
      *
      * @return Object
      */
@@ -46,7 +46,7 @@ interface FeedInterface
 
     /**
      * listAll
-     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @param  \WBB\BarBundle\Entity\Bar $bar
      * @return array
      */
     public function listAll(Bar $bar);

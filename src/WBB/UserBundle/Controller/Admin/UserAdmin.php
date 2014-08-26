@@ -137,7 +137,7 @@ class UserAdmin extends Admin
             ->end()
         ;
 
-        if(!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->with('Management')
                     ->add('roles', 'choice', array(
@@ -170,7 +170,7 @@ class UserAdmin extends Admin
      */
     public function preUpdate($user)
     {
-        if($user->getPlainPassword()){
+        if ($user->getPlainPassword()) {
             //Get the plain password before encryption and the rest of email data
             $data = array(
                 'password'  => $user->getPlainPassword(),

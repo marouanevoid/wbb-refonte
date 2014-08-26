@@ -23,28 +23,28 @@ class NewsRepository extends EntityRepository
             ->where($qb->expr()->eq(1, 1))
         ;
 
-        if($limit > 0)
-        {
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($onlyOnTop){
+        if ($onlyOnTop) {
             $qb
                 ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
                 ->orderBy($this->getAlias().'.createdAt', 'DESC');
-        }else{
+        } else {
             $qb
                 ->orderBy($this->getAlias().'.onTop', 'DESC')
                 ->addOrderBy($this->getAlias().'.createdAt', 'DESC');
         }
 
-        if($city){
+        if ($city) {
             $qb
                 ->leftJoin($this->getAlias().'.cities', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $city->getId()));
         }
 
         if($asArray)
+
             return $qb->getQuery()->getArrayResult();
         else
             return $qb->getQuery()->getResult();
@@ -62,12 +62,11 @@ class NewsRepository extends EntityRepository
             ->orderBy($this->getAlias().'.onTop', 'DESC')
         ;
 
-        if($limit > 0)
-        {
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($cities){
+        if ($cities) {
             $qb
                 ->addSelect('count(c.id) as HIDDEN nbCities')
                 ->leftjoin($this->getAlias().'.cities', 'c')
@@ -103,4 +102,4 @@ class NewsRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-} 
+}

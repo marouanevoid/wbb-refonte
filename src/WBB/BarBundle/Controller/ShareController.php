@@ -14,15 +14,15 @@ class ShareController extends Controller
         $form = $this->createForm(new ShareFormType(), null, array('id' => $id));
         $url  = null;
         $text = '';
-        if($type === 'bar'){
+        if ($type === 'bar') {
             $bar = $this->get('bar.repository')->findOneById($id);
             $url = $this->get('router')->generate('wbb_share_email_bar_send', array('id' => $id));
             $text = "I just discovered {$bar->getName()} in {$bar->getCity()} \nthanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
-        }elseif($type === 'news'){
+        } elseif ($type === 'news') {
             $news = $this->get('news.repository')->findOneById($id);
             $url = $this->get('router')->generate('wbb_share_email_news_send', array('id' => $id));
             $text = "I just read this on World’s Best Bars: {$news->getTitle()} - the ultimate resource for the best bars in the world ";
-        }else{
+        } else {
             $bestof = $this->get('bestof.repository')->findOneById($id);
             $url = $this->get('router')->generate('wbb_share_email_bestof_send', array('id' => $id));
             $text = "I just discovered the best {$bestof->getName()} bars thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
@@ -49,6 +49,7 @@ class ShareController extends Controller
             );
 
             $this->get('wbb_bar.share.mailer')->sendShareBar($data);
+
             return $this->render('WBBBarBundle:Share:share_done.html.twig');
         } else {
             return new JsonResponse(array('code' => 400, 'errors' => $this->validateForm($form)));
@@ -69,6 +70,7 @@ class ShareController extends Controller
             );
 
             $this->get('wbb_bar.share.mailer')->sendShareNews($data);
+
             return $this->render('WBBBarBundle:Share:share_done.html.twig');
         } else {
             return new JsonResponse(array('code' => 400, 'errors' => $this->validateForm($form)));
@@ -89,6 +91,7 @@ class ShareController extends Controller
             );
 
             $this->get('wbb_bar.share.mailer')->sendShareBestof($data);
+
             return $this->render('WBBBarBundle:Share:share_done.html.twig');
         } else {
             return new JsonResponse(array('code' => 400, 'errors' => $this->validateForm($form)));
@@ -110,7 +113,7 @@ class ShareController extends Controller
             $fields[] = $field;
             if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                 $messages[] = 'Please complete all required fields';
-            } elseif($formError->getMessage() == 'Please enter a valid email address' && !in_array($formError->getMessage(), $messages)) {
+            } elseif ($formError->getMessage() == 'Please enter a valid email address' && !in_array($formError->getMessage(), $messages)) {
                 $messages[] = $formError->getMessage();
             }
         }
