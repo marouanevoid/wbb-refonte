@@ -18,8 +18,8 @@ class CustomResizer implements ResizerInterface
     protected $metadata;
 
     /**
-     * @param ImagineInterface $adapter
-     * @param string $mode
+     * @param ImagineInterface                                      $adapter
+     * @param string                                                $mode
      * @param \Sonata\MediaBundle\Metadata\MetadataBuilderInterface $metadata
      */
     public function __construct(ImagineInterface $adapter, $mode, MetadataBuilderInterface $metadata)
@@ -74,7 +74,7 @@ class CustomResizer implements ResizerInterface
      * @throws InvalidArgumentException
      *
      * @param MediaInterface $media
-     * @param array $settings
+     * @param array          $settings
      *
      * @return Box
      */

@@ -108,6 +108,7 @@ meta.LoadMoreTips = function(config) {
                 });
 
                 $target.append(msg.htmldata);
+                _excluded = msg.excluded;
 
                 if(parseInt(msg.difference)==0){
                     that.config.$button.hide();

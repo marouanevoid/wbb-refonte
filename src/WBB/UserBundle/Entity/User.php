@@ -75,10 +75,10 @@ class User extends BaseUser
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
      */
     private $facebookId;
-    
+
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(name="facebook_picture", type="string", nullable=true)
      */
     private $facebookPicture;
@@ -261,7 +261,7 @@ class User extends BaseUser
      * @ORM\Column(name="tips_should_be_moderated", type="boolean", nullable=true)
      */
     private $tipsShouldBeModerated;
-    
+
     /**
      * @var boolean
      *
@@ -317,7 +317,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -327,7 +327,7 @@ class User extends BaseUser
     /**
      * Set firstname
      *
-     * @param string $firstname
+     * @param  string $firstname
      * @return User
      */
     public function setFirstname($firstname)
@@ -340,7 +340,7 @@ class User extends BaseUser
     /**
      * Get firstname
      *
-     * @return string 
+     * @return string
      */
     public function getFirstname()
     {
@@ -350,7 +350,7 @@ class User extends BaseUser
     /**
      * Set lastname
      *
-     * @param string $lastname
+     * @param  string $lastname
      * @return User
      */
     public function setLastname($lastname)
@@ -363,7 +363,7 @@ class User extends BaseUser
     /**
      * Get lastname
      *
-     * @return string 
+     * @return string
      */
     public function getLastname()
     {
@@ -373,7 +373,7 @@ class User extends BaseUser
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return User
      */
     public function setCreatedAt($createdAt)
@@ -386,7 +386,7 @@ class User extends BaseUser
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -396,7 +396,7 @@ class User extends BaseUser
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return User
      */
     public function setUpdatedAt($updatedAt)
@@ -409,7 +409,7 @@ class User extends BaseUser
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -419,7 +419,7 @@ class User extends BaseUser
     /**
      * Add bars
      *
-     * @param Bar $bars
+     * @param  Bar  $bars
      * @return User
      */
     public function addBar(Bar $bars)
@@ -442,7 +442,7 @@ class User extends BaseUser
     /**
      * Get bars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBars()
     {
@@ -452,11 +452,13 @@ class User extends BaseUser
     /**
      * Add tips
      *
-     * @param \WBB\BarBundle\Entity\Tip $tips
+     * @param  \WBB\BarBundle\Entity\Tip $tips
      * @return User
      */
-    public function addTip(\WBB\BarBundle\Entity\Tip $tips){
+    public function addTip(\WBB\BarBundle\Entity\Tip $tips)
+    {
         $this->tips[] = $tips;
+
         return $this;
     }
 
@@ -465,7 +467,8 @@ class User extends BaseUser
      *
      * @param \WBB\BarBundle\Entity\Tip $tips
      */
-    public function removeTip(\WBB\BarBundle\Entity\Tip $tips){
+    public function removeTip(\WBB\BarBundle\Entity\Tip $tips)
+    {
         $this->tips->removeElement($tips);
     }
 
@@ -474,18 +477,21 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTips(){
+    public function getTips()
+    {
         return $this->tips;
     }
 
     /**
      * Add news
      *
-     * @param \WBB\BarBundle\Entity\News $news
+     * @param  \WBB\BarBundle\Entity\News $news
      * @return User
      */
-    public function addNews(\WBB\BarBundle\Entity\News $news){
+    public function addNews(\WBB\BarBundle\Entity\News $news)
+    {
         $this->news[] = $news;
+
         return $this;
     }
 
@@ -494,7 +500,8 @@ class User extends BaseUser
      *
      * @param \WBB\BarBundle\Entity\News $news
      */
-    public function removeNews(\WBB\BarBundle\Entity\News $news){
+    public function removeNews(\WBB\BarBundle\Entity\News $news)
+    {
         $this->news->removeElement($news);
     }
 
@@ -503,14 +510,15 @@ class User extends BaseUser
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getNews(){
+    public function getNews()
+    {
         return $this->news;
-    }    
+    }
 
     /**
      * Set website
      *
-     * @param string $website
+     * @param  string $website
      * @return User
      */
     public function setWebsite($website)
@@ -523,7 +531,7 @@ class User extends BaseUser
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -533,7 +541,7 @@ class User extends BaseUser
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return User
      */
     public function setDescription($description)
@@ -546,7 +554,7 @@ class User extends BaseUser
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -556,7 +564,7 @@ class User extends BaseUser
     /**
      * Set latitude
      *
-     * @param string $latitude
+     * @param  string $latitude
      * @return User
      */
     public function setLatitude($latitude)
@@ -569,7 +577,7 @@ class User extends BaseUser
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
@@ -579,7 +587,7 @@ class User extends BaseUser
     /**
      * Set longitude
      *
-     * @param string $longitude
+     * @param  string $longitude
      * @return User
      */
     public function setLongitude($longitude)
@@ -592,7 +600,7 @@ class User extends BaseUser
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -602,23 +610,22 @@ class User extends BaseUser
     public function getUserRole()
     {
         $roles = $this->getRoles();
-        if(in_array('ROLE_SUPER_ADMIN',$roles)){
+        if (in_array('ROLE_SUPER_ADMIN',$roles)) {
             return 'Super Admin';
-        }elseif(in_array('ROLE_MODERATOR',$roles)){
+        } elseif (in_array('ROLE_MODERATOR',$roles)) {
             return 'Moderator';
-        }elseif(in_array('ROLE_PUBLISHER', $roles)){
+        } elseif (in_array('ROLE_PUBLISHER', $roles)) {
             return 'Publisher';
-        }elseif(in_array('ROLE_EDITORIAL_EXPERT',$roles)){
+        } elseif (in_array('ROLE_EDITORIAL_EXPERT',$roles)) {
             return 'Editorial Expert';
-        }elseif(in_array('ROLE_BAR_EXPERT',$roles)){
+        } elseif (in_array('ROLE_BAR_EXPERT',$roles)) {
             return 'Bar Expert';
-        }elseif(in_array('ROLE_BAR_OWNER',$roles)){
+        } elseif (in_array('ROLE_BAR_OWNER',$roles)) {
             return 'Bar Owner';
-        }else{
+        } else {
             return 'User';
         }
     }
-
 
     /**
      * @JMS\VirtualProperty
@@ -631,7 +638,7 @@ class User extends BaseUser
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return User
      */
     public function setTitle($title)
@@ -644,7 +651,7 @@ class User extends BaseUser
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -654,7 +661,7 @@ class User extends BaseUser
     /**
      * Set prefWhen
      *
-     * @param \DateTime $prefWhen
+     * @param  \DateTime $prefWhen
      * @return User
      */
     public function setPrefWhen($prefWhen)
@@ -667,7 +674,7 @@ class User extends BaseUser
     /**
      * Get prefWhen
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPrefWhen()
     {
@@ -677,7 +684,7 @@ class User extends BaseUser
     /**
      * Set prefHome
      *
-     * @param string $prefHome
+     * @param  string $prefHome
      * @return User
      */
     public function setPrefHome($prefHome)
@@ -690,7 +697,7 @@ class User extends BaseUser
     /**
      * Get prefHome
      *
-     * @return string 
+     * @return string
      */
     public function getPrefHome()
     {
@@ -700,7 +707,7 @@ class User extends BaseUser
     /**
      * Set prefStartCity
      *
-     * @param \WBB\CoreBundle\Entity\City $prefStartCity
+     * @param  \WBB\CoreBundle\Entity\City $prefStartCity
      * @return User
      */
     public function setPrefStartCity(\WBB\CoreBundle\Entity\City $prefStartCity = null)
@@ -713,7 +720,7 @@ class User extends BaseUser
     /**
      * Get prefStartCity
      *
-     * @return \WBB\CoreBundle\Entity\City 
+     * @return \WBB\CoreBundle\Entity\City
      */
     public function getPrefStartCity()
     {
@@ -723,7 +730,7 @@ class User extends BaseUser
     /**
      * Set stayInformed
      *
-     * @param boolean $stayInformed
+     * @param  boolean $stayInformed
      * @return User
      */
     public function setStayInformed($stayInformed)
@@ -736,7 +743,7 @@ class User extends BaseUser
     /**
      * Get stayInformed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getStayInformed()
     {
@@ -746,7 +753,7 @@ class User extends BaseUser
     /**
      * Set birthdate
      *
-     * @param \DateTime $birthdate
+     * @param  \DateTime $birthdate
      * @return User
      */
     public function setBirthdate($birthdate)
@@ -759,7 +766,7 @@ class User extends BaseUser
     /**
      * Get birthdate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getBirthdate()
     {
@@ -769,7 +776,7 @@ class User extends BaseUser
     /**
      * Set country
      *
-     * @param \WBB\CoreBundle\Entity\Country $country
+     * @param  \WBB\CoreBundle\Entity\Country $country
      * @return User
      */
     public function setCountry(\WBB\CoreBundle\Entity\Country $country = null)
@@ -782,7 +789,7 @@ class User extends BaseUser
     /**
      * Get country
      *
-     * @return \WBB\CoreBundle\Entity\Country 
+     * @return \WBB\CoreBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -792,7 +799,7 @@ class User extends BaseUser
     /**
      * Set prefCity1
      *
-     * @param string $prefCity1
+     * @param  string $prefCity1
      * @return User
      */
     public function setPrefCity1($prefCity1)
@@ -805,7 +812,7 @@ class User extends BaseUser
     /**
      * Get prefCity1
      *
-     * @return string 
+     * @return string
      */
     public function getPrefCity1()
     {
@@ -815,7 +822,7 @@ class User extends BaseUser
     /**
      * Set prefCity2
      *
-     * @param string $prefCity2
+     * @param  string $prefCity2
      * @return User
      */
     public function setPrefCity2($prefCity2)
@@ -828,7 +835,7 @@ class User extends BaseUser
     /**
      * Get prefCity2
      *
-     * @return string 
+     * @return string
      */
     public function getPrefCity2()
     {
@@ -838,7 +845,7 @@ class User extends BaseUser
     /**
      * Set prefCity3
      *
-     * @param string $prefCity3
+     * @param  string $prefCity3
      * @return User
      */
     public function setPrefCity3($prefCity3)
@@ -851,7 +858,7 @@ class User extends BaseUser
     /**
      * Get prefCity3
      *
-     * @return string 
+     * @return string
      */
     public function getPrefCity3()
     {
@@ -861,7 +868,7 @@ class User extends BaseUser
     /**
      * Set prefBar1
      *
-     * @param string $prefBar1
+     * @param  string $prefBar1
      * @return User
      */
     public function setPrefBar1($prefBar1)
@@ -874,7 +881,7 @@ class User extends BaseUser
     /**
      * Get prefBar1
      *
-     * @return string 
+     * @return string
      */
     public function getPrefBar1()
     {
@@ -884,7 +891,7 @@ class User extends BaseUser
     /**
      * Set prefBar2
      *
-     * @param string $prefBar2
+     * @param  string $prefBar2
      * @return User
      */
     public function setPrefBar2($prefBar2)
@@ -897,7 +904,7 @@ class User extends BaseUser
     /**
      * Get prefBar2
      *
-     * @return string 
+     * @return string
      */
     public function getPrefBar2()
     {
@@ -907,7 +914,7 @@ class User extends BaseUser
     /**
      * Set prefBar3
      *
-     * @param string $prefBar3
+     * @param  string $prefBar3
      * @return User
      */
     public function setPrefBar3($prefBar3)
@@ -920,7 +927,7 @@ class User extends BaseUser
     /**
      * Get prefBar3
      *
-     * @return string 
+     * @return string
      */
     public function getPrefBar3()
     {
@@ -930,7 +937,7 @@ class User extends BaseUser
     /**
      * Set prefDrinkBrand1
      *
-     * @param string $prefDrinkBrand1
+     * @param  string $prefDrinkBrand1
      * @return User
      */
     public function setPrefDrinkBrand1($prefDrinkBrand1)
@@ -943,7 +950,7 @@ class User extends BaseUser
     /**
      * Get prefDrinkBrand1
      *
-     * @return string 
+     * @return string
      */
     public function getPrefDrinkBrand1()
     {
@@ -953,7 +960,7 @@ class User extends BaseUser
     /**
      * Set prefDrinkBrand2
      *
-     * @param string $prefDrinkBrand2
+     * @param  string $prefDrinkBrand2
      * @return User
      */
     public function setPrefDrinkBrand2($prefDrinkBrand2)
@@ -966,7 +973,7 @@ class User extends BaseUser
     /**
      * Get prefDrinkBrand2
      *
-     * @return string 
+     * @return string
      */
     public function getPrefDrinkBrand2()
     {
@@ -976,7 +983,7 @@ class User extends BaseUser
     /**
      * Set prefDrinkBrand3
      *
-     * @param string $prefDrinkBrand3
+     * @param  string $prefDrinkBrand3
      * @return User
      */
     public function setPrefDrinkBrand3($prefDrinkBrand3)
@@ -989,7 +996,7 @@ class User extends BaseUser
     /**
      * Get prefDrinkBrand3
      *
-     * @return string 
+     * @return string
      */
     public function getPrefDrinkBrand3()
     {
@@ -999,7 +1006,7 @@ class User extends BaseUser
     /**
      * Set prefCocktails1
      *
-     * @param string $prefCocktails1
+     * @param  string $prefCocktails1
      * @return User
      */
     public function setPrefCocktails1($prefCocktails1)
@@ -1012,7 +1019,7 @@ class User extends BaseUser
     /**
      * Get prefCocktails1
      *
-     * @return string 
+     * @return string
      */
     public function getPrefCocktails1()
     {
@@ -1022,7 +1029,7 @@ class User extends BaseUser
     /**
      * Set prefCocktails2
      *
-     * @param string $prefCocktails2
+     * @param  string $prefCocktails2
      * @return User
      */
     public function setPrefCocktails2($prefCocktails2)
@@ -1035,7 +1042,7 @@ class User extends BaseUser
     /**
      * Get prefCocktails2
      *
-     * @return string 
+     * @return string
      */
     public function getPrefCocktails2()
     {
@@ -1045,7 +1052,7 @@ class User extends BaseUser
     /**
      * Set prefCocktails3
      *
-     * @param string $prefCocktails3
+     * @param  string $prefCocktails3
      * @return User
      */
     public function setPrefCocktails3($prefCocktails3)
@@ -1058,15 +1065,15 @@ class User extends BaseUser
     /**
      * Get prefCocktails3
      *
-     * @return string 
+     * @return string
      */
     public function getPrefCocktails3()
     {
         return $this->prefCocktails3;
     }
-    
+
     /**
-     * @param string $facebookId
+     * @param  string $facebookId
      * @return void
      */
     public function setFacebookId($facebookId)
@@ -1099,24 +1106,26 @@ class User extends BaseUser
     /**
      * Add favoriteBars
      *
-     * @param Bar $favoriteBars
+     * @param  Bar  $favoriteBars
      * @return User
      */
     public function addFavoriteBar(Bar $favoriteBars)
     {
         $this->favoriteBars[] = $favoriteBars;
+
         return $this;
     }
 
     /**
      * Set stayBrandInformed
      *
-     * @param boolean $stayBrandInformed
+     * @param  boolean $stayBrandInformed
      * @return User
      */
     public function setStayBrandInformed($stayBrandInformed)
     {
         $this->stayBrandInformed = $stayBrandInformed;
+
         return $this;
     }
 
@@ -1133,7 +1142,7 @@ class User extends BaseUser
     /**
      * Get favoriteBars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFavoriteBars()
     {
@@ -1143,7 +1152,7 @@ class User extends BaseUser
     /**
      * Add favoriteBestOfs
      *
-     * @param BestOf $favoriteBestOfs
+     * @param  BestOf $favoriteBestOfs
      * @return User
      */
     public function addFavoriteBestOf(BestOf $favoriteBestOfs)
@@ -1166,7 +1175,7 @@ class User extends BaseUser
     /**
      * Get favoriteBestOfs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFavoriteBestOfs()
     {
@@ -1176,7 +1185,7 @@ class User extends BaseUser
     /**
      * Set tipsShouldBeModerated
      *
-     * @param boolean $tipsShouldBeModerated
+     * @param  boolean $tipsShouldBeModerated
      * @return User
      */
     public function setTipsShouldBeModerated($tipsShouldBeModerated)
@@ -1189,7 +1198,7 @@ class User extends BaseUser
     /**
      * Get tipsShouldBeModerated
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getTipsShouldBeModerated()
     {
@@ -1199,7 +1208,7 @@ class User extends BaseUser
     /**
      * Get stayBrandInformed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getStayBrandInformed()
     {
@@ -1209,7 +1218,7 @@ class User extends BaseUser
     /**
      * Set avatar
      *
-     * @param Media $avatar
+     * @param  Media $avatar
      * @return User
      */
     public function setAvatar(Media $avatar = null)
@@ -1228,7 +1237,7 @@ class User extends BaseUser
     {
         return $this->avatar;
     }
-    
+
     /**
      * @Assert\Callback()
      */
@@ -1281,7 +1290,7 @@ class User extends BaseUser
     /**
      * Set facebookPicture
      *
-     * @param string $facebookPicture
+     * @param  string $facebookPicture
      * @return User
      */
     public function setFacebookPicture($facebookPicture)
@@ -1294,7 +1303,7 @@ class User extends BaseUser
     /**
      * Get facebookPicture
      *
-     * @return string 
+     * @return string
      */
     public function getFacebookPicture()
     {
@@ -1304,7 +1313,7 @@ class User extends BaseUser
     /**
      * Set confirmed
      *
-     * @param boolean $confirmed
+     * @param  boolean $confirmed
      * @return User
      */
     public function setConfirmed($confirmed)
@@ -1317,7 +1326,7 @@ class User extends BaseUser
     /**
      * Get confirmed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getConfirmed()
     {

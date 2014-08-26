@@ -4,7 +4,6 @@ namespace WBB\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
@@ -12,10 +11,9 @@ class UserController extends Controller
 
     public function simulateErrorAction($code)
     {
-        if($code === '404')
-        {
+        if ($code === '404') {
             throw new NotFoundHttpException;
-        }else{
+        } else {
             throw new \Exception;
         }
 
@@ -32,6 +30,7 @@ class UserController extends Controller
         }
 
         $this->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
+
         return new JsonResponse(array(
             'code' => 200,
             'message' => 'Confirmation email sent !'
@@ -55,7 +54,7 @@ class UserController extends Controller
         $html               = null;
         $distance           = false;
 
-        if($content == "bars"){
+        if ($content == "bars") {
             $session = $this->container->get('session');
             $latitude = $session->get('userLatitude' );
             $longitude = $session->get('userLongitude');
@@ -66,18 +65,18 @@ class UserController extends Controller
                     'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
                 );
 
-            if($filter === "alphabetical"){
+            if ($filter === "alphabetical") {
                 $response = $this->container->get('bar.repository')->findBarsOrderedByName(null, $offset, $limit, $user);
                 $all = $this->container->get('bar.repository')->findBarsOrderedByName(null, $offset, 0, $user);
-            }elseif($filter === "date"){
+            } elseif ($filter === "date") {
                 $response = $this->container->get('bar.repository')->findLatestBars(null, $limit, $offset, false, $user);
                 $all = $this->container->get('bar.repository')->findLatestBars(null, 0, $offset, false, $user);
-            }elseif($filter === "city"){
+            } elseif ($filter === "city") {
                 $response = $this->container->get('bar.repository')->findBarsOrderedByCityAndName($user, $offset, $limit);
                 $all = $this->container->get('bar.repository')->findBarsOrderedByCityAndName($user, $offset, 0);
             }
 
-            if($display=="grid"){
+            if ($display=="grid") {
                 $html = $this->renderView('WBBUserBundle:Profile:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
@@ -85,7 +84,7 @@ class UserController extends Controller
                         'distance' => $distance
                     )
                 );
-            }else{
+            } else {
                 $html = $this->renderView('WBBUserBundle:Profile:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
@@ -94,32 +93,32 @@ class UserController extends Controller
                 ));
             }
 
-        }elseif($content == "bestofs"){
+        } elseif ($content == "bestofs") {
 
-            if($filter === "city"){
+            if ($filter === "city") {
                 $response = $this->container->get('bestof.repository')->findBarsOrderedByCityAndName($user, $offset, $limit);
                 $all = $this->container->get('bestof.repository')->findBarsOrderedByCityAndName($user, $offset, 0);
-            }elseif($filter === "alphabetical"){
+            } elseif ($filter === "alphabetical") {
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset ,$limit, 'ASC', $user);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName(null, $offset , 0, 'ASC', $user);
-            }elseif($filter === "date"){
+            } elseif ($filter === "date") {
                 $response = $this->container->get('bestof.repository')->findLatestBestofs(null, $limit, $offset, false, $user);
                 $all = $this->container->get('bestof.repository')->findLatestBestofs(null, 0, $offset, false, $user);
             }
-            if($display=="grid"){
+            if ($display=="grid") {
                 $html = $this->renderView('WBBUserBundle:Profile/filters:bestofs.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
                 ));
-            }else{
+            } else {
                 $html = $this->renderView('WBBUserBundle:Profile/filters:bestofsList.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
                 ));
             }
-        }else{
+        } else {
 
             $response = $this->container->get('tip.repository')->findUserTips($user, $offset ,$limit);
             $all = $this->container->get('tip.repository')->findUserTips($user, $offset, 0);

@@ -1,11 +1,13 @@
 $(document).ready(function()
 {
     var loadData = function(){
+        _offset += _excluded;
         var _url = Routing.generate('homepage')+"bar/"+_bar+"/tips/"+_offset+"/"+_limit;
 
         var tips = new meta.LoadMoreTips({$button:$(".load-more"), url:_url});
         tips._updateContent();
         _offset += _limit;
+        console.log(_excluded);
     }
     $(".load-more").on('click', function()
     {

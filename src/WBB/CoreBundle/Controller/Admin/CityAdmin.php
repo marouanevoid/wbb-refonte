@@ -110,7 +110,7 @@ class CityAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -118,6 +118,7 @@ class CityAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
                             $queryBuilder->setParameter('createdAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -126,7 +127,7 @@ class CityAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -134,6 +135,7 @@ class CityAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
                             $queryBuilder->setParameter('updatedAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -160,11 +162,11 @@ class CityAdmin extends Admin
 
     public function prePersist($object)
     {
-        if($object->getSuburbs()){
+        if ($object->getSuburbs()) {
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb && $suburb->getName()){
+                if ($suburb && $suburb->getName()) {
                     $suburb->setCity($object);
-                }else{
+                } else {
                     $object->removeSuburb($suburb);
                 }
             }
@@ -173,11 +175,11 @@ class CityAdmin extends Admin
 
     public function preUpdate($object)
     {
-        if($object->getSuburbs()){
+        if ($object->getSuburbs()) {
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb && $suburb->getName()){
+                if ($suburb && $suburb->getName()) {
                     $suburb->setCity($object);
-                }else{
+                } else {
                     $object->removeSuburb($suburb);
                 }
             }

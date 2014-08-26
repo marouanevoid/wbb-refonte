@@ -5,7 +5,6 @@ namespace WBB\UserBundle\Controller;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -82,7 +81,6 @@ class RegistrationController extends ContainerAware
 
 //                $session = $this->container->get('session');
 //                $session->save();
-
                 return $response;
             } else {
                 $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
@@ -91,9 +89,9 @@ class RegistrationController extends ContainerAware
 
                 foreach ($formErrors as $formError) {
                     $fields[] = str_replace('data.', '', $formError->getPropertyPath());
-                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {                        
+                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                         $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank') {
+                    } elseif ($formError->getMessage() != 'not.blank') {
                         $messages[] = $formError->getMessage();
                     }
                 }
@@ -170,7 +168,6 @@ class RegistrationController extends ContainerAware
 
 //                $session = $this->container->get('session');
 //                $session->save();
-
                 return $response;
             } else {
                 $formErrors = $this->container->get('validator')->validate($form);
@@ -181,7 +178,7 @@ class RegistrationController extends ContainerAware
                     $fields[] = str_replace('data.', '', $formError->getPropertyPath());
                     if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                         $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank') {
+                    } elseif ($formError->getMessage() != 'not.blank') {
                         $messages[] = $formError->getMessage();
                     }
                 }
@@ -242,7 +239,7 @@ class RegistrationController extends ContainerAware
 
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
-        if($user->getFirstname() != '' && $user->getLastname() != ''){
+        if ($user->getFirstname() != '' && $user->getLastname() != '') {
             $user->setTipsShouldBeModerated(false);
         }
 

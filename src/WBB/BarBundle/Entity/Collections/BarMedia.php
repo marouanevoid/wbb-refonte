@@ -68,11 +68,10 @@ class BarMedia
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -82,7 +81,7 @@ class BarMedia
     /**
      * Set alt
      *
-     * @param string $alt
+     * @param  string   $alt
      * @return BarMedia
      */
     public function setAlt($alt)
@@ -95,7 +94,7 @@ class BarMedia
     /**
      * Get alt
      *
-     * @return string 
+     * @return string
      */
     public function getAlt()
     {
@@ -105,7 +104,7 @@ class BarMedia
     /**
      * Set position
      *
-     * @param integer $position
+     * @param  integer  $position
      * @return BarMedia
      */
     public function setPosition($position)
@@ -118,7 +117,7 @@ class BarMedia
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -128,7 +127,7 @@ class BarMedia
     /**
      * Set bar
      *
-     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @param  \WBB\BarBundle\Entity\Bar $bar
      * @return BarMedia
      */
     public function setBar(\WBB\BarBundle\Entity\Bar $bar = null)
@@ -151,7 +150,7 @@ class BarMedia
     /**
      * Set media
      *
-     * @param Media $media
+     * @param  Media    $media
      * @return BarMedia
      */
     public function setMedia(Media $media = null)
@@ -174,7 +173,7 @@ class BarMedia
     /**
      * Set video1
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $video1
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $video1
      * @return BarMedia
      */
     public function setVideo1(Media $video1 = null)
@@ -187,7 +186,7 @@ class BarMedia
     /**
      * Get video1
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getVideo1()
     {
@@ -197,7 +196,7 @@ class BarMedia
     /**
      * Set video2
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $video2
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $video2
      * @return BarMedia
      */
     public function setVideo2(Media $video2 = null)
@@ -210,7 +209,7 @@ class BarMedia
     /**
      * Get video2
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getVideo2()
     {
@@ -220,6 +219,7 @@ class BarMedia
     public function __toString()
     {
         if($this->alt)
+
             return $this->position.': '.$this->alt;
         else
             return '';
@@ -228,7 +228,7 @@ class BarMedia
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return BarMedia
      */
     public function setCreatedAt($createdAt)
@@ -241,7 +241,7 @@ class BarMedia
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -251,7 +251,7 @@ class BarMedia
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return BarMedia
      */
     public function setUpdatedAt($updatedAt)
@@ -264,7 +264,7 @@ class BarMedia
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -281,7 +281,7 @@ class BarMedia
     /**
      * Add bestofs
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     * @param  \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
      * @return BarMedia
      */
     public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
@@ -304,7 +304,7 @@ class BarMedia
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {

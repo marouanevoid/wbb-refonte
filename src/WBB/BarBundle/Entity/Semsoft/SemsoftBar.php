@@ -324,11 +324,10 @@ class SemsoftBar
      */
     private $openings;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -338,7 +337,7 @@ class SemsoftBar
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string     $name
      * @return SemsoftBar
      */
     public function setName($name)
@@ -351,11 +350,12 @@ class SemsoftBar
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         if($this->name)
+
             return $this->name;
         elseif($this->bar)
             return $this->bar->getName();
@@ -366,7 +366,7 @@ class SemsoftBar
     /**
      * Set postalCode
      *
-     * @param string $postalCode
+     * @param  string     $postalCode
      * @return SemsoftBar
      */
     public function setPostalCode($postalCode)
@@ -379,7 +379,7 @@ class SemsoftBar
     /**
      * Get postalCode
      *
-     * @return string 
+     * @return string
      */
     public function getPostalCode()
     {
@@ -389,7 +389,7 @@ class SemsoftBar
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string     $description
      * @return SemsoftBar
      */
     public function setDescription($description)
@@ -402,7 +402,7 @@ class SemsoftBar
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -412,7 +412,7 @@ class SemsoftBar
     /**
      * Set latitude
      *
-     * @param string $latitude
+     * @param  string     $latitude
      * @return SemsoftBar
      */
     public function setLatitude($latitude)
@@ -425,7 +425,7 @@ class SemsoftBar
     /**
      * Get latitude
      *
-     * @return string 
+     * @return string
      */
     public function getLatitude()
     {
@@ -435,7 +435,7 @@ class SemsoftBar
     /**
      * Set longitude
      *
-     * @param string $longitude
+     * @param  string     $longitude
      * @return SemsoftBar
      */
     public function setLongitude($longitude)
@@ -448,7 +448,7 @@ class SemsoftBar
     /**
      * Get longitude
      *
-     * @return string 
+     * @return string
      */
     public function getLongitude()
     {
@@ -458,7 +458,7 @@ class SemsoftBar
     /**
      * Set website
      *
-     * @param string $website
+     * @param  string     $website
      * @return SemsoftBar
      */
     public function setWebsite($website)
@@ -471,11 +471,12 @@ class SemsoftBar
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
         if($this->website)
+
             return $this->website;
         elseif($this->bar)
             return $this->bar->getWebsite();
@@ -486,7 +487,7 @@ class SemsoftBar
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string     $email
      * @return SemsoftBar
      */
     public function setEmail($email)
@@ -499,7 +500,7 @@ class SemsoftBar
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -509,7 +510,7 @@ class SemsoftBar
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param  string     $phone
      * @return SemsoftBar
      */
     public function setPhone($phone)
@@ -522,7 +523,7 @@ class SemsoftBar
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -532,7 +533,7 @@ class SemsoftBar
     /**
      * Set price
      *
-     * @param integer $price
+     * @param  integer    $price
      * @return SemsoftBar
      */
     public function setPrice($price)
@@ -545,7 +546,7 @@ class SemsoftBar
     /**
      * Get price
      *
-     * @return integer 
+     * @return integer
      */
     public function getPrice()
     {
@@ -555,7 +556,7 @@ class SemsoftBar
     /**
      * Get isCreditCard
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isCreditCard()
     {
@@ -565,7 +566,7 @@ class SemsoftBar
     /**
      * Set seoDescription
      *
-     * @param string $seoDescription
+     * @param  string     $seoDescription
      * @return SemsoftBar
      */
     public function setSeoDescription($seoDescription)
@@ -578,7 +579,7 @@ class SemsoftBar
     /**
      * Get seoDescription
      *
-     * @return string 
+     * @return string
      */
     public function getSeoDescription()
     {
@@ -588,7 +589,7 @@ class SemsoftBar
     /**
      * Set isOutDoorSeating
      *
-     * @param boolean $isOutDoorSeating
+     * @param  boolean    $isOutDoorSeating
      * @return SemsoftBar
      */
     public function setOutDoorSeating($isOutDoorSeating)
@@ -601,7 +602,7 @@ class SemsoftBar
     /**
      * Get isOutDoorSeating
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isOutDoorSeating()
     {
@@ -611,7 +612,7 @@ class SemsoftBar
     /**
      * Set isHappyHour
      *
-     * @param boolean $isHappyHour
+     * @param  boolean    $isHappyHour
      * @return SemsoftBar
      */
     public function setHappyHour($isHappyHour)
@@ -624,7 +625,7 @@ class SemsoftBar
     /**
      * Get isHappyHour
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isHappyHour()
     {
@@ -634,7 +635,7 @@ class SemsoftBar
     /**
      * Set isWiFi
      *
-     * @param boolean $isWiFi
+     * @param  boolean    $isWiFi
      * @return SemsoftBar
      */
     public function setWifi($isWiFi)
@@ -647,7 +648,7 @@ class SemsoftBar
     /**
      * Get isWiFi
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isWifi()
     {
@@ -657,7 +658,7 @@ class SemsoftBar
     /**
      * Set menu
      *
-     * @param string $menu
+     * @param  string     $menu
      * @return SemsoftBar
      */
     public function setMenu($menu)
@@ -670,7 +671,7 @@ class SemsoftBar
     /**
      * Get menu
      *
-     * @return string 
+     * @return string
      */
     public function getMenu()
     {
@@ -680,7 +681,7 @@ class SemsoftBar
     /**
      * Set reservation
      *
-     * @param boolean $reservation
+     * @param  boolean    $reservation
      * @return SemsoftBar
      */
     public function setReservation($reservation)
@@ -693,7 +694,7 @@ class SemsoftBar
     /**
      * Get reservation
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isReservation()
     {
@@ -703,7 +704,7 @@ class SemsoftBar
     /**
      * Set parkingType
      *
-     * @param string $parkingType
+     * @param  string     $parkingType
      * @return SemsoftBar
      */
     public function setParkingType($parkingType)
@@ -716,7 +717,7 @@ class SemsoftBar
     /**
      * Get parkingType
      *
-     * @return string 
+     * @return string
      */
     public function getParkingType()
     {
@@ -726,7 +727,7 @@ class SemsoftBar
     /**
      * Set facebookID
      *
-     * @param string $facebookID
+     * @param  string     $facebookID
      * @return SemsoftBar
      */
     public function setFacebookID($facebookID)
@@ -739,7 +740,7 @@ class SemsoftBar
     /**
      * Get facebookID
      *
-     * @return string 
+     * @return string
      */
     public function getFacebookID()
     {
@@ -749,7 +750,7 @@ class SemsoftBar
     /**
      * Set facebookUserPage
      *
-     * @param string $facebookUserPage
+     * @param  string     $facebookUserPage
      * @return SemsoftBar
      */
     public function setFacebookUserPage($facebookUserPage)
@@ -762,7 +763,7 @@ class SemsoftBar
     /**
      * Get facebookUserPage
      *
-     * @return string 
+     * @return string
      */
     public function getFacebookUserPage()
     {
@@ -772,7 +773,7 @@ class SemsoftBar
     /**
      * Set twitterName
      *
-     * @param string $twitterName
+     * @param  string     $twitterName
      * @return SemsoftBar
      */
     public function setTwitterName($twitterName)
@@ -785,7 +786,7 @@ class SemsoftBar
     /**
      * Get twitterName
      *
-     * @return string 
+     * @return string
      */
     public function getTwitterName()
     {
@@ -795,7 +796,7 @@ class SemsoftBar
     /**
      * Set twitterUserPage
      *
-     * @param string $twitterUserPage
+     * @param  string     $twitterUserPage
      * @return SemsoftBar
      */
     public function setTwitterUserPage($twitterUserPage)
@@ -808,7 +809,7 @@ class SemsoftBar
     /**
      * Get twitterUserPage
      *
-     * @return string 
+     * @return string
      */
     public function getTwitterUserPage()
     {
@@ -818,7 +819,7 @@ class SemsoftBar
     /**
      * Set instagramID
      *
-     * @param string $instagramID
+     * @param  string     $instagramID
      * @return SemsoftBar
      */
     public function setInstagramID($instagramID)
@@ -831,7 +832,7 @@ class SemsoftBar
     /**
      * Get instagramID
      *
-     * @return string 
+     * @return string
      */
     public function getInstagramID()
     {
@@ -841,7 +842,7 @@ class SemsoftBar
     /**
      * Set instagramUserPage
      *
-     * @param string $instagramUserPage
+     * @param  string     $instagramUserPage
      * @return SemsoftBar
      */
     public function setInstagramUserPage($instagramUserPage)
@@ -854,7 +855,7 @@ class SemsoftBar
     /**
      * Get instagramUserPage
      *
-     * @return string 
+     * @return string
      */
     public function getInstagramUserPage()
     {
@@ -864,7 +865,7 @@ class SemsoftBar
     /**
      * Set googlePlusUserPage
      *
-     * @param string $googlePlusUserPage
+     * @param  string     $googlePlusUserPage
      * @return SemsoftBar
      */
     public function setGooglePlusUserPage($googlePlusUserPage)
@@ -877,7 +878,7 @@ class SemsoftBar
     /**
      * Get googlePlusUserPage
      *
-     * @return string 
+     * @return string
      */
     public function getGooglePlusUserPage()
     {
@@ -887,7 +888,7 @@ class SemsoftBar
     /**
      * Set foursquareCheckIns
      *
-     * @param integer $foursquareCheckIns
+     * @param  integer    $foursquareCheckIns
      * @return SemsoftBar
      */
     public function setFoursquareCheckIns($foursquareCheckIns)
@@ -900,7 +901,7 @@ class SemsoftBar
     /**
      * Get foursquareCheckIns
      *
-     * @return integer 
+     * @return integer
      */
     public function getFoursquareCheckIns()
     {
@@ -910,7 +911,7 @@ class SemsoftBar
     /**
      * Set facebookCheckIns
      *
-     * @param integer $facebookCheckIns
+     * @param  integer    $facebookCheckIns
      * @return SemsoftBar
      */
     public function setFacebookCheckIns($facebookCheckIns)
@@ -923,7 +924,7 @@ class SemsoftBar
     /**
      * Get facebookCheckIns
      *
-     * @return integer 
+     * @return integer
      */
     public function getFacebookCheckIns()
     {
@@ -933,7 +934,7 @@ class SemsoftBar
     /**
      * Set foursquareLikes
      *
-     * @param integer $foursquareLikes
+     * @param  integer    $foursquareLikes
      * @return SemsoftBar
      */
     public function setFoursquareLikes($foursquareLikes)
@@ -946,7 +947,7 @@ class SemsoftBar
     /**
      * Get foursquareLikes
      *
-     * @return integer 
+     * @return integer
      */
     public function getFoursquareLikes()
     {
@@ -956,7 +957,7 @@ class SemsoftBar
     /**
      * Set facebookLikes
      *
-     * @param integer $facebookLikes
+     * @param  integer    $facebookLikes
      * @return SemsoftBar
      */
     public function setFacebookLikes($facebookLikes)
@@ -969,7 +970,7 @@ class SemsoftBar
     /**
      * Get facebookLikes
      *
-     * @return integer 
+     * @return integer
      */
     public function getFacebookLikes()
     {
@@ -979,7 +980,7 @@ class SemsoftBar
     /**
      * Set isPermanentlyClosed
      *
-     * @param boolean $isPermanentlyClosed
+     * @param  boolean    $isPermanentlyClosed
      * @return SemsoftBar
      */
     public function setPermanentlyClosed($isPermanentlyClosed)
@@ -992,7 +993,7 @@ class SemsoftBar
     /**
      * Get isPermanentlyClosed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isPermanentlyClosed()
     {
@@ -1002,7 +1003,7 @@ class SemsoftBar
     /**
      * Set businessFound
      *
-     * @param boolean $businessFound
+     * @param  boolean    $businessFound
      * @return SemsoftBar
      */
     public function setBusinessFound($businessFound)
@@ -1015,7 +1016,7 @@ class SemsoftBar
     /**
      * Get businessFound
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getBusinessFound()
     {
@@ -1025,7 +1026,7 @@ class SemsoftBar
     /**
      * Set overwrittenColumns
      *
-     * @param array $overwrittenColumns
+     * @param  array      $overwrittenColumns
      * @return SemsoftBar
      */
     public function setOverwrittenColumns($overwrittenColumns)
@@ -1038,7 +1039,7 @@ class SemsoftBar
     /**
      * Get overwrittenColumns
      *
-     * @return array 
+     * @return array
      */
     public function getOverwrittenColumns()
     {
@@ -1048,7 +1049,7 @@ class SemsoftBar
     /**
      * Set updatedColumns
      *
-     * @param array $updatedColumns
+     * @param  array      $updatedColumns
      * @return SemsoftBar
      */
     public function setUpdatedColumns($updatedColumns)
@@ -1071,7 +1072,7 @@ class SemsoftBar
     /**
      * Set county
      *
-     * @param string $county
+     * @param  string     $county
      * @return SemsoftBar
      */
     public function setCounty($county)
@@ -1084,7 +1085,7 @@ class SemsoftBar
     /**
      * Get county
      *
-     * @return string 
+     * @return string
      */
     public function getCounty()
     {
@@ -1102,7 +1103,7 @@ class SemsoftBar
     /**
      * Set city
      *
-     * @param City $city
+     * @param  City       $city
      * @return SemsoftBar
      */
     public function setCity(City $city = null)
@@ -1115,11 +1116,12 @@ class SemsoftBar
     /**
      * Get city
      *
-     * @return City 
+     * @return City
      */
     public function getCity()
     {
         if($this->city)
+
             return $this->city;
         elseif($this->bar)
             return $this->bar->getCity();
@@ -1130,7 +1132,7 @@ class SemsoftBar
     /**
      * Set suburb
      *
-     * @param CitySuburb $suburb
+     * @param  CitySuburb $suburb
      * @return SemsoftBar
      */
     public function setSuburb(CitySuburb $suburb = null)
@@ -1143,11 +1145,12 @@ class SemsoftBar
     /**
      * Get suburb
      *
-     * @return CitySuburb 
+     * @return CitySuburb
      */
     public function getSuburb()
     {
         if($this->suburb)
+
             return $this->suburb;
         elseif($this->bar)
             return $this->bar->getSuburb();
@@ -1158,7 +1161,7 @@ class SemsoftBar
     /**
      * Add tags
      *
-     * @param BarTag $tags
+     * @param  BarTag     $tags
      * @return SemsoftBar
      */
     public function addTag(BarTag $tags)
@@ -1181,7 +1184,7 @@ class SemsoftBar
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -1191,7 +1194,7 @@ class SemsoftBar
     /**
      * Add openings
      *
-     * @param BarOpening $openings
+     * @param  BarOpening $openings
      * @return SemsoftBar
      */
     public function addOpening(BarOpening $openings)
@@ -1214,7 +1217,7 @@ class SemsoftBar
     /**
      * Get openings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpenings()
     {
@@ -1224,7 +1227,7 @@ class SemsoftBar
     /**
      * Set address
      *
-     * @param string $address
+     * @param  string     $address
      * @return SemsoftBar
      */
     public function setAddress($address)
@@ -1237,7 +1240,7 @@ class SemsoftBar
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -1247,7 +1250,7 @@ class SemsoftBar
     /**
      * Set foursquareID
      *
-     * @param string $foursquareID
+     * @param  string     $foursquareID
      * @return SemsoftBar
      */
     public function setFoursquareID($foursquareID)
@@ -1260,7 +1263,7 @@ class SemsoftBar
     /**
      * Get foursquareID
      *
-     * @return string 
+     * @return string
      */
     public function getFoursquareID()
     {
@@ -1270,7 +1273,7 @@ class SemsoftBar
     /**
      * Set foursquareUserPage
      *
-     * @param string $foursquareUserPage
+     * @param  string     $foursquareUserPage
      * @return SemsoftBar
      */
     public function setFoursquareUserPage($foursquareUserPage)
@@ -1283,7 +1286,7 @@ class SemsoftBar
     /**
      * Get foursquareUserPage
      *
-     * @return string 
+     * @return string
      */
     public function getFoursquareUserPage()
     {
@@ -1293,7 +1296,7 @@ class SemsoftBar
     /**
      * Set foursquareTips
      *
-     * @param integer $foursquareTips
+     * @param  integer    $foursquareTips
      * @return SemsoftBar
      */
     public function setFoursquareTips($foursquareTips)
@@ -1306,7 +1309,7 @@ class SemsoftBar
     /**
      * Get foursquareTips
      *
-     * @return integer 
+     * @return integer
      */
     public function getFoursquareTips()
     {
@@ -1316,7 +1319,7 @@ class SemsoftBar
     /**
      * Set country
      *
-     * @param Country $country
+     * @param  Country    $country
      * @return SemsoftBar
      */
     public function setCountry(Country $country = null)
@@ -1339,7 +1342,7 @@ class SemsoftBar
     /**
      * Set bar
      *
-     * @param Bar $bar
+     * @param  Bar        $bar
      * @return SemsoftBar
      */
     public function setBar(Bar $bar = null)
@@ -1359,12 +1362,10 @@ class SemsoftBar
         return $this->bar;
     }
 
-
-
     /**
      * Set energyLevel
      *
-     * @param \WBB\BarBundle\Entity\Tag $energyLevel
+     * @param  \WBB\BarBundle\Entity\Tag $energyLevel
      * @return SemsoftBar
      */
     public function setEnergyLevel(\WBB\BarBundle\Entity\Tag $energyLevel = null)
@@ -1416,9 +1417,9 @@ class SemsoftBar
     public function getUpdatedBar()
     {
         $bar = null;
-        if($this->getBar()){
+        if ($this->getBar()) {
             $bar = $this->getBar();
-        }else{
+        } else {
             $bar = new Bar();
         }
 
@@ -1533,10 +1534,9 @@ class SemsoftBar
         if($this->getEnergyLevel())
             $bar->setEnergyLevel($this->getEnergyLevel());
 
-        if($this->getTags()){
+        if ($this->getTags()) {
             $tags = $this->getTags();
-            foreach($tags as $tag)
-            {
+            foreach ($tags as $tag) {
                 $tag->setBar($bar);
                 $bar->addTag($tag);
                 $this->removeTag($tag);
@@ -1544,10 +1544,9 @@ class SemsoftBar
             }
         }
 
-        if($this->getOpenings()){
+        if ($this->getOpenings()) {
             $ops = $this->getOpenings();
-            foreach($ops as $op)
-            {
+            foreach ($ops as $op) {
                 $op->setBar($bar);
                 $bar->addOpening($op);
                 $this->removeOpening($op);
@@ -1561,7 +1560,7 @@ class SemsoftBar
     /**
      * Set creditCard
      *
-     * @param boolean $creditCard
+     * @param  boolean    $creditCard
      * @return SemsoftBar
      */
     public function setCreditCard($creditCard)
@@ -1574,7 +1573,7 @@ class SemsoftBar
     /**
      * Get creditCard
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCreditCard()
     {
@@ -1584,7 +1583,7 @@ class SemsoftBar
     /**
      * Get outDoorSeating
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOutDoorSeating()
     {
@@ -1594,7 +1593,7 @@ class SemsoftBar
     /**
      * Get happyHour
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHappyHour()
     {
@@ -1604,7 +1603,7 @@ class SemsoftBar
     /**
      * Get wifi
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getWifi()
     {
@@ -1614,7 +1613,7 @@ class SemsoftBar
     /**
      * Get reservation
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getReservation()
     {
@@ -1624,7 +1623,7 @@ class SemsoftBar
     /**
      * Get permanentlyClosed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPermanentlyClosed()
     {

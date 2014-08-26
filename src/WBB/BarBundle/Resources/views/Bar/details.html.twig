@@ -36,6 +36,7 @@
         var _bar = {{ bar.id }};
         var _offset = 0;
         var _limit = 3;
+        var _excluded = 0;
         var is_mobile = 0;
         {% if is_mobile() and not is_tablet() %}
         is_mobile = 1;
@@ -515,7 +516,7 @@
     </section>
 
     <script type="text/javascript">
-        // remove desibled 
+        // remove desibled
         $('article.tip .form form input[type="submit"]').removeAttr('disabled');
         $('article.tip .form form input[type="submit"]').removeClass('loading');
         new meta.Form(
@@ -563,7 +564,7 @@
 
                         }, 2000);
                     }
-                }); 
+                });
 
         $('form#tips textarea').on('change input paste keyup', function()
         {

@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Collection;
@@ -59,8 +58,6 @@ class ShareFormType extends AbstractType
                 new NotBlank(array('message' => 'not.blank'))
             )
         ));
-
-
 
         $resolver
             ->setDefaults(array(

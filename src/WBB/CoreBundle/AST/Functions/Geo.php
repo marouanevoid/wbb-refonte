@@ -36,7 +36,7 @@ class Geo extends FunctionNode
     /**
      * Get SQL
      *
-     * @param SqlWalker $sqlWalker
+     * @param  SqlWalker $sqlWalker
      * @return string
      */
     public function getSql(SqlWalker $sqlWalker)

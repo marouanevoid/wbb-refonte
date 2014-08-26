@@ -45,7 +45,7 @@ class FavoriteExtension extends \Twig_Extension
     {
         if ($object instanceof Bar) {
             return $this->barFavoriteUrl($user, $object);
-        } else if ($object instanceof BestOf) {
+        } elseif ($object instanceof BestOf) {
             return $this->bestOfFavoriteUrl($user, $object);
         }
     }
@@ -54,7 +54,7 @@ class FavoriteExtension extends \Twig_Extension
     {
         if ($object instanceof Bar) {
             return $this->isBarFavorite($user, $object);
-        } else if ($object instanceof BestOf) {
+        } elseif ($object instanceof BestOf) {
             return $this->isBestOfFavorite($user, $object);
         }
     }
