@@ -387,9 +387,9 @@ meta.App = function() {
             $(window).on("orientationchange", function(){
                 var orientation = window.orientation;
                 if(orientation != 0){
-                    $('#landscape-mobile').show();
+                    $("body").addClass("landscape-mobile");
                 }else{
-                    $('#landscape-mobile').hide();
+                    $("body").removeClass("landscape-mobile");
                 }
             });
 
