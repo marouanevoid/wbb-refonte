@@ -473,14 +473,14 @@
     .wrap-share.mobile .social-share ul {background-color: #fff; height: 185px; top: 0; left: 0; margin: 95px auto 0; width: 154px;}
     .wrap-share.mobile .social-share li,
     .wrap-share.mobile .social-share li a {width: 106px; margin: 0 auto 9px; float: none;}
-    .wrap-share.mobile .social-share li a {display: inline-block; text-indent: -10000px; background-size: 106px 41px;}
+    .wrap-share.mobile .social-share li a {display: inline-block; text-indent: -10000px; font-size: 0; background-size: 106px 41px;}
     .wrap-share.mobile .social-share li .sms-share {background-image: url("../images/UI/bar/icon_share-sms.jpg");}
     .wrap-share.mobile .social-share li .fb-share {background-image: url("../images/UI/bar/Share_Mobile-facebook.jpg");}
     .wrap-share.mobile .social-share li .twitter-share {background-image: url("../images/UI/bar/icon_share-twitter.jpg");}
     .wrap-share.mobile .btn-close-brown {background-size: 40px 40px; top: 0;}
     .wrap-share.mobile .social-share .share-label {position: absolute; z-index: 77; text-align: center; width: 93%; margin: 0 auto; top: 50px; font-size: 26px;}
 
-    .social-share ul li .sms-share {background-image: url("../images/UI/bar/icon_share-sms.jpg"); background-size: 90px 40px; width: 90px; height: 41px; display: block;}
+    .social-share ul li .sms-share {background-image: url("../images/UI/bar/icon_share-sms.jpg"); background-size: 90px 40px; width: 90px; height: 41px; display: block; font-size: 0;}
 
 /* NEWS DETAIL */
   .share-btns .social-share ul li {margin: 0 0 0 -3px;}
