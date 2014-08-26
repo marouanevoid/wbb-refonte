@@ -594,7 +594,12 @@
   .filters .select-search .select2-container .select2-choice:hover {background-color: #b3955f; color: #faf3e1!important; border: 1px solid #b3955f;}
   .filters .select-search .select2-container .select2-choice:hover .select2-arrow b {background-position: -162px -41px;}
   article.city img.scale-with-grid {border: none!important;}
-  #landscape-mobile {display:none; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000; background-size: contain;z-index: 777777777;}
+  .landscape-mobile {background: url("../images/landscape_turn-device.jpg") no-repeat center center #000; background-size: cover;}
+  body.landscape-mobile * {display: none!important;}
+  article.city img.scale-with-grid {opacity: 1;}
+  article.city:hover img.scale-with-grid {opacity: 0.7;}
+  article.city .overlay {background: none;}
+  article.city:hover .overlay {background: url("../images/city.background-circle.png") no-repeat center; background-size: 100% 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -870,6 +875,7 @@
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
     .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -100%; left: -100%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     ul.ui-autocomplete {width: 87%!important;}
+    /*.landscape-mobile {background-image: url("../images/landscape_turn-device@x2.jpg"); background-size: 100% 100%;}*/
   }
 
 @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
