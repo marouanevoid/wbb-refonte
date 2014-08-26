@@ -29,7 +29,7 @@
 
             // vars for fav actions
         </script>
-            
+
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
@@ -117,7 +117,7 @@
                 var LANG = "en";
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
-                
+
                 var showConfirmed = 0;
                 {% set user_confirmed = false %}
                 {% for message in app.session.flashbag.get('wbb-user-confirmed') %}
@@ -126,12 +126,31 @@
                 {% if user_confirmed %}
                     showConfirmed = 1;
                 {% endif %}
+
+                var showProfilePopin = 0;
+                {% set profile_message = false %}
+                {% for message in app.session.flashbag.get('wbb-complete-profile') %}
+                    {% set profile_message = true %}
+                {% endfor %}
+                {% if profile_message %}
+                    showProfilePopin = 1;
+                {% endif %}
+
+                var showEmailPopin = 0;
+                {% set email_popin = false %}
+                {% for message in app.session.flashbag.get('wbb-check-email') %}
+                    {% set email_popin = true %}
+                {% endfor %}
+                {% if email_popin %}
+                    showProfilePopin = 1;
+                {% endif %}
+
                 var showNewPassword = {{ app.request.query.get('newpassword', 0) }};
                 var showResettingForm = "{{ app.request.query.get('token', 0) }}";
                 var showLoginForm = {{ app.request.query.get('login', 0) }};
-                var showEmailPopin = {{ app.request.query.get('emailPopin', 0) }};
+                var loginBackUrl = "{{ app.request.query.get('back_url', 0) }}";
                 var fbPrefill = {{ app.request.query.get('prefill', 0) }};
-                var showProfilePopin = {{ app.request.query.get('profileMessage', 0) }};
+
                 var favoriteName = '';
 
                 var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
@@ -172,7 +191,7 @@
                         if( ismobile || istablet ){
                             if(! firstScrolled ){
                                 $('header.desktop .logged .in-action').click();
-                                firstScrolled = true;                            
+                                firstScrolled = true;
                             }
                         }else{
                             $('header.desktop .logged').mouseout();
@@ -215,10 +234,10 @@
                         {% if resetting_form is defined %}
                             {{ resetting_form|raw }}
                         {% endif %}
-                        {% if app.request.query.get('emailPopin', 0) == 1 %}
+                        {% if email_popin == true %}
                             {{ include('WBBUserBundle:Registration:checkEmail.html.twig') }}
                         {% endif %}
-                        {% if app.request.query.get('profileMessage', 0) == 1 %}
+                        {% if profile_message == true %}
                             {{ include('WBBUserBundle:Profile:profile.popin.html.twig') }}
                         {% endif %}
                         {% if user_confirmed == true %}
@@ -249,7 +268,12 @@
                             $.cookie('light_from', 'login');
 
                             $.cookie('just_loggedin', true);
-                            window.location.reload();
+                            if(loginBackUrl == '0') {
+                                window.location.reload();
+                            } else {
+                                window.location.href = loginBackUrl;
+                            }
+
                         }
                     }
                 });

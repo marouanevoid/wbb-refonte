@@ -20,15 +20,14 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 class BarController extends Controller
 {
 
-    private function reGeolocate(){
-
+    private function reGeolocate()
+    {
         $session = $this->container->get('session');
         $cookies = $this->get('request')->cookies;
 
-        if($cookies->has('first_visite') == false || ( $cookies->has('first_visite') && $cookies->get('first_visite') != "false" ) ){
+        if ($cookies->has('first_visite') == false || ( $cookies->has('first_visite') && $cookies->get('first_visite') != "false" ) ) {
             $geoSlug = $session->get('citySlugGeo');
-            if(!empty($geoSlug))
-            {
+            if (!empty($geoSlug)) {
                 $session->set('citySlug', $geoSlug);
             }
         }
@@ -41,7 +40,7 @@ class BarController extends Controller
             $res = $this->resetAction($request, $request->query->get('token'));
             if (!is_array($res)) {
                 $resettingForm = $res->getContent();
-                if($request->isXmlHttpRequest()) {
+                if ($request->isXmlHttpRequest()) {
                     return $res;
                 }
             } else {
@@ -70,7 +69,7 @@ class BarController extends Controller
 
         return $this->render('WBBBarBundle:Bar:homepage.html.twig', $response);
     }
-    
+
     private function resetAction(Request $request, $token)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
@@ -126,12 +125,13 @@ class BarController extends Controller
     {
         $this->reGeolocate();
         $session = $this->container->get('session');
-        if ($slug == "world-wide"){
+        if ($slug == "world-wide") {
             $session->set('citySlug', "");
+
             return $this->homeAction($request);
         }
 
-        if($slug != $session->get('citySlug')){
+        if ($slug != $session->get('citySlug')) {
             $session->set('citySlug', $slug);
             $session->set('userLatitude', '');
             $session->set('userLongitude', '');
@@ -144,13 +144,13 @@ class BarController extends Controller
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
 
-        if(!empty($latitude) && !empty($longitude)){
+        if (!empty($latitude) && !empty($longitude)) {
             $response['distance']  = array(
                 'latitude'  => $latitude,
                 'longitude' => $longitude,
                 'city'      => $city
             );
-        }else{
+        } else {
             $response['distance'] = false;
         }
 
@@ -188,13 +188,13 @@ class BarController extends Controller
     {
         $this->reGeolocate();
         $session = $this->container->get('session');
-        if ($slug == "world-wide")
-        {
+        if ($slug == "world-wide") {
             $session->set('citySlug', "");
+
             return $this->barGuideAction();
         }
 
-        if($slug != $session->get('citySlug')){
+        if ($slug != $session->get('citySlug')) {
             $session->set('citySlug', $slug);
             $session->set('userLatitude', '');
             $session->set('userLongitude', '');
@@ -205,14 +205,14 @@ class BarController extends Controller
         $latitude = $session->get('userLatitude' );
         $longitude = $session->get('userLongitude');
 
-        if(!empty($latitude) && !empty($longitude) && !empty($slug)){
+        if (!empty($latitude) && !empty($longitude) && !empty($slug)) {
             $response['nearestBars'] = $this->container->get('bar.repository')->findNearestBars($city, $latitude, $longitude);
             $response['distance']  = array(
                 'latitude'  => $latitude,
                 'longitude' => $longitude,
                 'city'      => $city
             );
-        }else{
+        } else {
             $response['distance']  = false;
         }
 
@@ -239,7 +239,7 @@ class BarController extends Controller
         $latitude = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
 
-        if(!empty($city) && !empty($latitude) && !empty($longitude)){
+        if (!empty($city) && !empty($latitude) && !empty($longitude)) {
             $distance['latitude']   = $latitude;
             $distance['longitude']  = $longitude;
             $distance['city']         = $this->get('city.repository')->findOneBySlug($city);
@@ -325,7 +325,6 @@ class BarController extends Controller
             'outWith'   => $session->get('barfinder_tag')
         );
 
-
         $city = null;
         if (!empty($slug))
             $city = $this->get('city.repository')->findOneBySlug($slug);
@@ -355,23 +354,20 @@ class BarController extends Controller
         $tag = null;
 
         $session = $this->container->get('session');
-        if($request->request->get('mood') != "")
-        {
+        if ($request->request->get('mood') != "") {
             $mood  = $this->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, false, 1, $request->request->get('mood'));
             $session->set('barfinder_mood', $mood);
-        }else{
+        } else {
             $session->set('barfinder_mood', "empty");
         }
 
-        if($request->request->get('city') != "")
-        {
+        if ($request->request->get('city') != "") {
             if ($request->request->get('city') != 'all')
                 $city = $this->container->get('city.repository')->findOneBySlug($request->request->get('city'));
             $session->set('barfinder_city', $request->request->get('city'));
         }
 
-        if($request->request->get('go_out') != "")
-        {
+        if ($request->request->get('go_out') != "") {
             if ($request->request->get('go_out') != 'all')
                 $tag = $request->request->get('go_out');
             $session->set('barfinder_tag', $request->request->get('go_out'));
@@ -383,14 +379,13 @@ class BarController extends Controller
             'outWith'   => $session->get('barfinder_tag')
         );
 
-
         $bars = $this->container->get('bar.repository')->findBarFromFinder($city, $tag, $mood);
 
         $latitude  = $session->get('userLatitude');
         $longitude = $session->get('userLongitude');
         $distance = false;
 
-        if(!empty($latitude) && !empty($longitude)){
+        if (!empty($latitude) && !empty($longitude)) {
             $distance  = array(
                 'latitude'  => $latitude,
                 'longitude' => $longitude,
@@ -418,8 +413,7 @@ class BarController extends Controller
             $this->createNotFoundException('Not found !');
         }
 
-        foreach($bestOf->getBestofs() as $bo)
-        {
+        foreach ($bestOf->getBestofs() as $bo) {
             $bestOfs[] = $bo;
         }
 
@@ -428,31 +422,29 @@ class BarController extends Controller
         if ($bestofsCount < 3) {
             $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount));
             $bestofsCount += count($bestOfsTmp);
-            foreach($bestOfsTmp as $bo)
-            {
+            foreach ($bestOfsTmp as $bo) {
                 $bestOfs[] = $bo;
             }
-            if($bestofsCount < 3){
+            if ($bestofsCount < 3) {
                 $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount), false, $bestOfsTmp);
-                foreach($bestOfsTmp as $bo)
-                {
+                foreach ($bestOfsTmp as $bo) {
                     $bestOfs[] = $bo;
                 }
             }
         }
 
-        if($bestOf->getByTag()){
+        if ($bestOf->getByTag()) {
             $barsTmp = $this->container->get('bar.repository')->findBarsByExactTags($bestOf);
-            foreach($barsTmp as $bar){
+            foreach ($barsTmp as $bar) {
                 $bars[] = $bar;
             }
-        }else{
-            foreach($bestOf->getBars() as $bar){
+        } else {
+            foreach ($bestOf->getBars() as $bar) {
                 $bars[] = $bar;
             }
         }
 
-        if(!$bestOf->getOrdered() && $bars){
+        if (!$bestOf->getOrdered() && $bars) {
             shuffle($bars);
         }
 
@@ -461,7 +453,7 @@ class BarController extends Controller
         $longitude = $session->get('userLongitude');
         $distance = false;
 
-        if(!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))){
+        if (!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))) {
             $distance  = array(
                 'latitude'  => $latitude,
                 'longitude' => $longitude,
@@ -493,17 +485,17 @@ class BarController extends Controller
 
         $cityObject = $this->container->get('city.repository')->findOneById($city);
 
-        if($barsOnly){
-            if($filter === "popularity"){
+        if ($barsOnly) {
+            if ($filter === "popularity") {
                 $response = $this->container->get('bar.repository')->findPopularBars($cityObject, $limit, $offset);
                 $all = $this->container->get('bar.repository')->findPopularBars($cityObject, 0, $offset);
-            }elseif($filter === "alphabetical"){
+            } elseif ($filter === "alphabetical") {
                 $response = $this->container->get('bar.repository')->findBarsOrderedByName($cityObject, $offset ,$limit);
                 $all = $this->container->get('bar.repository')->findBarsOrderedByName($cityObject, $offset , 0);
-            }elseif($filter === "date"){
+            } elseif ($filter === "date") {
                 $response = $this->container->get('bar.repository')->findLatestBars($cityObject, $limit, $offset, false);
                 $all = $this->container->get('bar.repository')->findLatestBars($cityObject, 0, $offset, false);
-            }elseif($filter === "distance"){
+            } elseif ($filter === "distance") {
                 $session = $this->container->get('session');
                 $distance  = array(
                     'latitude'  => $session->get('userLatitude' ),
@@ -514,7 +506,7 @@ class BarController extends Controller
                 $all = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, 0);
             }
 
-            if($display=="grid"){
+            if ($display=="grid") {
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\bars.html.twig', array(
                         'bars'   => $response,
                         'offset' => $offset,
@@ -522,7 +514,7 @@ class BarController extends Controller
                         'distance' => $distance
                     )
                 );
-            }else{
+            } else {
                 $html = $this->renderView('WBBBarBundle:BarGuide:filters\barsList.html.twig', array(
                     'bars'   => $response,
                     'offset' => $offset,
@@ -531,25 +523,25 @@ class BarController extends Controller
                 ));
             }
 
-        }else{
-            if($filter === "popularity"){
+        } else {
+            if ($filter === "popularity") {
                 //TODO: Repository methode for popularity
                 $response = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, $limit);
                 $all = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, 0);
-            }elseif($filter === "alphabetical"){
+            } elseif ($filter === "alphabetical") {
                 $response = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset ,$limit);
                 $all = $this->container->get('bestof.repository')->findBestofOrderedByName($cityObject, $offset, 0);
-            }elseif($filter === "date"){
+            } elseif ($filter === "date") {
                 $response = $this->container->get('bestof.repository')->findLatestBestofs($cityObject, $limit, $offset, false);
                 $all = $this->container->get('bestof.repository')->findLatestBestofs($cityObject, 0, $offset, false);
             }
-            if($display=="grid"){
+            if ($display=="grid") {
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofs.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
                     'limit'   => $limit
                 ));
-            }else{
+            } else {
                 $html = $this->renderView('WBBBarBundle:BarGuide/filters:bestofsList.html.twig', array(
                     'bestofs' => $response,
                     'offset'  => $offset,
@@ -593,74 +585,69 @@ class BarController extends Controller
         $youMayAlsoLike = $this->container->get('bar.repository')->findYouMayAlsoLike($bar, BarRepository::BAR_LOCATION_CITY);
         $oneCity = true;
         $size = sizeof($youMayAlsoLike);
-        if($size < 4)
-        {
+        if ($size < 4) {
             //Get Bars OnTop + ByTags + InCountry
             $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
                 BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, true, true ,(4 - $size)
             );
-            if(sizeof($temp) > 0){
+            if (sizeof($temp) > 0) {
                 $oneCity = false;
-                foreach($temp as $tmp){
+                foreach ($temp as $tmp) {
                     $youMayAlsoLike[] = $tmp;
                 }
             }
 
             //Get Bars OnTop + ByTags + Worldwide
             $size += sizeof($temp);
-            if($size < 4)
-            {
+            if ($size < 4) {
                 $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
                     BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, true, true ,(4 - $size)
                 );
 
-                if(sizeof($temp)>0){
+                if (sizeof($temp)>0) {
                     $oneCity = false;
-                    foreach($temp as $tmp){
+                    foreach ($temp as $tmp) {
                         $youMayAlsoLike[] = $tmp;
                     }
                 }
 
                 //Get Bars OnTop + InCity
                 $size += sizeof($temp);
-                if($size < 4)
-                {
+                if ($size < 4) {
                     $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
                         BarRepository::BAR_LOCATION_CITY, $youMayAlsoLike, true, false ,(4 - $size)
                     );
 
-                    if(sizeof($temp) > 0){
-                        foreach($temp as $tmp){
+                    if (sizeof($temp) > 0) {
+                        foreach ($temp as $tmp) {
                             $youMayAlsoLike[] = $tmp;
                         }
                     }
 
                     //Get Bars OnTop + InCountry
                     $size += sizeof($temp);
-                    if($size < 4)
-                    {
+                    if ($size < 4) {
                         $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
                             BarRepository::BAR_LOCATION_COUNTRY, $youMayAlsoLike, true, false ,(4 - $size)
                         );
 
-                        if(sizeof($temp) > 0){
+                        if (sizeof($temp) > 0) {
                             $oneCity = false;
-                            foreach($temp as $tmp){
+                            foreach ($temp as $tmp) {
                                 $youMayAlsoLike[] = $tmp;
                             }
                         }
 
                         //Get Bars OnTop + InWorldwide
                         $size += sizeof($temp);
-                        if($size < 4)
-                        {
+                        if ($size < 4) {
                             $temp = $this->container->get('bar.repository')->findYouMayAlsoLike($bar,
                                 BarRepository::BAR_LOCATION_WORLDWIDE, $youMayAlsoLike, true, false ,(4 - $size)
                             );
 
-                            if(sizeof($temp) > 0){
+                            if (sizeof($temp) > 0) {
                                 $oneCity = false;
-                                foreach($temp as $tmp){
+                                foreach ($temp as $tmp) {
                                     $youMayAlsoLike[] = $tmp;
                                 }
                             }
@@ -680,7 +667,7 @@ class BarController extends Controller
     {
         $moodsFound = $this->container->get('tag.repository')->findBarFinderMoods();
         $moods = array();
-        foreach($moodsFound as $mood){
+        foreach ($moodsFound as $mood) {
             $moods[] = $mood['name'];
         }
 

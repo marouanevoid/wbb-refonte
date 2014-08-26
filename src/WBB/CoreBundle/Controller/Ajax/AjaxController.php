@@ -12,7 +12,7 @@ class AjaxController extends Controller
     {
         $html = "";
         $barObject = null;
-        if($bar > 0){
+        if ($bar > 0) {
             $barObject = $this->getDoctrine()->getRepository('WBBBarBundle:Bar')->find($bar);
         }
 
@@ -20,14 +20,13 @@ class AjaxController extends Controller
 
         $suburbs = $city->getSuburbs();
 
-        foreach($suburbs as $suburb){
-            if($suburbId > 0)
-            {
+        foreach ($suburbs as $suburb) {
+            if ($suburbId > 0) {
                 if($suburbId == $suburb->getId())
                     $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
                 else
                     $html .= '<option value="'.$suburb->getId().'" >'.$suburb->getName().'</option>';
-            }else{
+            } else {
                 if($barObject && $barObject->getSuburb() && $barObject->getSuburb()->getId() == $suburb->getId())
                     $html .= '<option value="'.$suburb->getId().'" selected>'.$suburb->getName().'</option>';
                 else
@@ -43,7 +42,7 @@ class AjaxController extends Controller
     {
         $html = "";
         $Object = null;
-        if($bestof > 0){
+        if ($bestof > 0) {
             $Object = $this->getDoctrine()->getRepository('WBBBarBundle:BestOf')->find($bestof);
         }
 
@@ -51,14 +50,13 @@ class AjaxController extends Controller
 
         $cities = $country->getCities();
 
-        foreach($cities as $city){
-            if($cityId > 0)
-            {
+        foreach ($cities as $city) {
+            if ($cityId > 0) {
                 if($cityId == $city->getId())
                     $html .= '<option value="'.$city->getId().'" selected>'.$city->getName().'</option>';
                 else
                     $html .= '<option value="'.$city->getId().'" >'.$city->getName().'</option>';
-            }else{
+            } else {
                 if($Object && $Object->getCity() && $Object->getCity()->getId() == $city->getId())
                     $html .= '<option value="'.$city->getId().'" selected>'.$city->getName().'</option>';
                 else
@@ -74,15 +72,15 @@ class AjaxController extends Controller
     {
         $html = "";
         $bar = null;
-        if($barID > 0){
+        if ($barID > 0) {
             $bar = $this->getDoctrine()->getRepository('WBBBarBundle:Bar')->find($barID);
-        }else{
+        } else {
             return new JsonResponse(array());
         }
 
         $medias = $bar->getMedias();
         $i = 1;
-        foreach($medias as $media){
+        foreach ($medias as $media) {
             if($mediaID == $media->getId())
                 $html .= '<option value="'.$media->getId().'" selected>'.$i.': '.$media->getAlt().'</option>';
             else

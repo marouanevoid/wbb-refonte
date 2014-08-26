@@ -183,7 +183,7 @@ class BestOf implements IndexableEntity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return BestOf
      */
     public function setName($name)
@@ -206,7 +206,7 @@ class BestOf implements IndexableEntity
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return BestOf
      */
     public function setDescription($description)
@@ -230,7 +230,7 @@ class BestOf implements IndexableEntity
     /**
      * Set sponsor
      *
-     * @param string $sponsor
+     * @param  string $sponsor
      * @return BestOf
      */
     public function setSponsor($sponsor)
@@ -253,7 +253,7 @@ class BestOf implements IndexableEntity
     /**
      * Set seoDescription
      *
-     * @param string $seoDescription
+     * @param  string $seoDescription
      * @return BestOf
      */
     public function setSeoDescription($seoDescription)
@@ -276,7 +276,7 @@ class BestOf implements IndexableEntity
     /**
      * Set byTag
      *
-     * @param boolean $byTag
+     * @param  boolean $byTag
      * @return BestOf
      */
     public function setByTag($byTag)
@@ -299,7 +299,7 @@ class BestOf implements IndexableEntity
     /**
      * Set onTop
      *
-     * @param boolean $onTop
+     * @param  boolean $onTop
      * @return BestOf
      */
     public function setOnTop($onTop)
@@ -322,7 +322,7 @@ class BestOf implements IndexableEntity
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return BestOf
      */
     public function setCreatedAt($createdAt)
@@ -345,7 +345,7 @@ class BestOf implements IndexableEntity
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return BestOf
      */
     public function setUpdatedAt($updatedAt)
@@ -368,7 +368,7 @@ class BestOf implements IndexableEntity
     /**
      * Set city
      *
-     * @param \WBB\CoreBundle\Entity\City $city
+     * @param  \WBB\CoreBundle\Entity\City $city
      * @return BestOf
      */
     public function setCity(\WBB\CoreBundle\Entity\City $city = null)
@@ -391,7 +391,7 @@ class BestOf implements IndexableEntity
     /**
      * Set country
      *
-     * @param \WBB\CoreBundle\Entity\Country $country
+     * @param  \WBB\CoreBundle\Entity\Country $country
      * @return BestOf
      */
     public function setCountry(\WBB\CoreBundle\Entity\Country $country = null)
@@ -416,7 +416,8 @@ class BestOf implements IndexableEntity
         return $this->getName();
     }
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->setOnTop(true);
         $this->setByTag(false);
         $this->setOrdered(true);
@@ -429,7 +430,7 @@ class BestOf implements IndexableEntity
     /**
      * Add tags
      *
-     * @param BestOfTag $tags
+     * @param  BestOfTag $tags
      * @return BestOf
      */
     public function addTag(BestOfTag $tags)
@@ -462,7 +463,7 @@ class BestOf implements IndexableEntity
     /**
      * Set ordered
      *
-     * @param boolean $ordered
+     * @param  boolean $ordered
      * @return BestOf
      */
     public function setOrdered($ordered)
@@ -485,11 +486,13 @@ class BestOf implements IndexableEntity
     /**
      * Set news
      *
-     * @param News $news
+     * @param  News   $news
      * @return BestOf
      */
-    public function setNews($news){
+    public function setNews($news)
+    {
         $this->news = $news;
+
         return $this;
     }
 
@@ -498,14 +501,15 @@ class BestOf implements IndexableEntity
      *
      * @return News
      */
-    public function getNews(){
+    public function getNews()
+    {
         return $this->news;
     }
 
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bars
+     * @param  \WBB\BarBundle\Entity\Collections\BestOfBar $bars
      * @return BestOf
      */
     public function addBar(\WBB\BarBundle\Entity\Collections\BestOfBar $bars)
@@ -538,7 +542,7 @@ class BestOf implements IndexableEntity
     /**
      * Add inBestofs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $inBestofs
+     * @param  \WBB\BarBundle\Entity\BestOf $inBestofs
      * @return BestOf
      */
     public function addInBestof(\WBB\BarBundle\Entity\BestOf $inBestofs)
@@ -571,7 +575,7 @@ class BestOf implements IndexableEntity
     /**
      * Add bestofs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestofs
+     * @param  \WBB\BarBundle\Entity\BestOf $bestofs
      * @return BestOf
      */
     public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
@@ -604,7 +608,7 @@ class BestOf implements IndexableEntity
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return BestOf
      */
     public function setSlug($slug)
@@ -627,7 +631,7 @@ class BestOf implements IndexableEntity
     /**
      * Add news
      *
-     * @param \WBB\BarBundle\Entity\News $news
+     * @param  \WBB\BarBundle\Entity\News $news
      * @return BestOf
      */
     public function addNews(\WBB\BarBundle\Entity\News $news)
@@ -687,7 +691,7 @@ class BestOf implements IndexableEntity
     /**
      * Set image
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
      * @return BestOf
      */
     public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
@@ -710,7 +714,7 @@ class BestOf implements IndexableEntity
     /**
      * Set sponsorImage
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $sponsorImage
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $sponsorImage
      * @return BestOf
      */
     public function setSponsorImage(\Application\Sonata\MediaBundle\Entity\Media $sponsorImage = null)
@@ -733,7 +737,7 @@ class BestOf implements IndexableEntity
     public function getCloudSearchFields()
     {
         $bars = array();
-        if($this->bars){
+        if ($this->bars) {
             foreach ($this->bars as $bar) {
                 if ($bar->getBar()) {
                     $bars[] = $bar->getBar()->getName();
@@ -779,11 +783,10 @@ class BestOf implements IndexableEntity
         );
     }
 
-
     /**
      * Set energyLevel
      *
-     * @param \WBB\BarBundle\Entity\Tag $energyLevel
+     * @param  \WBB\BarBundle\Entity\Tag $energyLevel
      * @return BestOf
      */
     public function setEnergyLevel(\WBB\BarBundle\Entity\Tag $energyLevel = null)
@@ -806,7 +809,7 @@ class BestOf implements IndexableEntity
     /**
      * Add toGoWith
      *
-     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     * @param  \WBB\BarBundle\Entity\Tag $toGoWith
      * @return BestOf
      */
     public function addToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
@@ -839,7 +842,7 @@ class BestOf implements IndexableEntity
     /**
      * Add usersFavorite
      *
-     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     * @param  \WBB\UserBundle\Entity\User $usersFavorite
      * @return BestOf
      */
     public function addUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
@@ -862,7 +865,7 @@ class BestOf implements IndexableEntity
     /**
      * Get usersFavorite
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsersFavorite()
     {

@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Collection;
@@ -26,7 +25,6 @@ class ShareFormType extends AbstractType
             ->add('lastName', 'text', array('required' => false,'attr' => array('placeholder' => 'Friend\'s last name')))
             ->add('emailTo', 'text', array(
                     'required'    => false,
-                    'constraints' => array(new Email(array('checkMX' => true))),
                     'attr' => array('placeholder' => 'Friend\'s email')
                 )
             )
@@ -51,7 +49,7 @@ class ShareFormType extends AbstractType
             ),
             'emailTo' => array(
                 new NotBlank(array('message' => 'not.blank')),
-                new Email(array('message' => 'Please enter a valid email address'))
+                new Email(array('message' => 'Please enter a valid email address', 'checkMX' => true))
             ),
             'content' => array(
                 new NotBlank(array('message' => 'not.blank'))
@@ -59,8 +57,6 @@ class ShareFormType extends AbstractType
                 new NotBlank(array('message' => 'not.blank'))
             )
         ));
-
-
 
         $resolver
             ->setDefaults(array(

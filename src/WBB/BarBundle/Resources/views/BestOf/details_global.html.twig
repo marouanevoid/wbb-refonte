@@ -8,7 +8,11 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="WorldsBestBars">
     <meta name="twitter:title" content="{{ bestOf.name }} | World Best Bars">
-    <meta name="twitter:description" content="{{ "Discover the best " ~ bestOf.name ~ " bars on @WorldsBestBars"|slice(0, 140) }}">
+    {% if bestOf.city %}
+        <meta name="twitter:description" content="{{ "Discover the best " ~ bestOf.name ~ " bars in #" ~ bestOf.city|replace(' ','')|trim ~ " on @WorldsBestBars"|slice(0, 140) }}">
+    {% else %}
+        <meta name="twitter:description" content="{{ "Discover the best " ~ bestOf.name ~ " bars on @WorldsBestBars"|slice(0, 140) }}">
+    {% endif %}
     <meta name="twitter:creator" content="WorldsBestBars">
     <meta property="twitter:url" content="{{ bitlyURL }}" />
     <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(bestOf.image, 'bestof_370_278', true) }}">
@@ -31,14 +35,14 @@
             $(".bars .four:lt(12)").show();
             if($('.bars .four').length>12)
                 $(".load-more-container").show();
-            var display;   
+            var display;
             $(".load-more").click(function(){
                 display = $('.bars .four:visible').length+3;
-                $(".bars .four:lt("+divsplay+")").fadeIn(500); 
+                $(".bars .four:lt("+divsplay+")").fadeIn(500);
                 if($('.bars .four:hidden').length<=0){
                     $('.load-more-container').hide();
                 }
-            });   
+            });
         });
     </script>
     <style type="text/css">
@@ -80,7 +84,11 @@
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
                         {% if is_mobile() and not is_tablet() and not is_ios() %}
-                            {%  set smsBody = "I just discovered the best "~ bestOf.name ~" bars thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world %0a Click here to check this Best of: " ~ bitlyURL %}
+                            {% if bestOf.city %}
+                                {%  set smsBody = "I just discovered the best "~ bestOf.name ~" bars in " ~ bestOf.city ~ " thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world %0a Click here to check this Best of: " ~ bitlyURL %}
+                            {% else %}
+                                {%  set smsBody = "I just discovered the best "~ bestOf.name ~" bars thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world %0a Click here to check this Best of: " ~ bitlyURL %}
+                            {% endif %}
                             <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
                             <li class="left">

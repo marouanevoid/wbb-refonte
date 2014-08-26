@@ -10,12 +10,13 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class AdAdmin extends Admin {
-
+class AdAdmin extends Admin
+{
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper){
+    protected function configureListFields(ListMapper $listMapper)
+    {
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('position')
@@ -29,7 +30,8 @@ class AdAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper){
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
         $filterMapper
             ->add('id')
             ->add('name')
@@ -40,7 +42,7 @@ class AdAdmin extends Admin {
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -48,6 +50,7 @@ class AdAdmin extends Admin {
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
                             $queryBuilder->setParameter('createdAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -56,7 +59,7 @@ class AdAdmin extends Admin {
             ->add('updatedAfter', 'doctrine_orm_callback',
             array(
                 'label' => 'Updated After',
-                'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                         if (!$value['value']) {
                             return;
                         }
@@ -64,6 +67,7 @@ class AdAdmin extends Admin {
                         $inputValue = date('Y-m-d', $time);
                         $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
                         $queryBuilder->setParameter('updatedAt', $inputValue);
+
                         return true;
                     },
                 'field_type' => 'text'
@@ -75,7 +79,8 @@ class AdAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper){
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
         $showMapper
             ->with('General')
                 ->add('id')
@@ -95,7 +100,8 @@ class AdAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper){
+    protected function configureFormFields(FormMapper $formMapper)
+    {
         $formMapper
             ->with('General')
                 ->add('name', null, array('required' => true, 'label'=>'Title of the Banner', 'help'=> 'MANDATORY'))

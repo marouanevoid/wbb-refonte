@@ -8,7 +8,6 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -35,6 +34,7 @@ class ProfileController extends ContainerAware
 
         if ($request->query->get('emailPopin', null)) {
             $session->getFlashBag()->add('wbb-check-email', true);
+
             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
         }
 
@@ -58,6 +58,7 @@ class ProfileController extends ContainerAware
         $session = $this->container->get('session');
         if ($request->query->get('profileMessage', null)) {
             $session->getFlashBag()->add('wbb-complete-profile', true);
+
             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
         }
 
@@ -75,9 +76,9 @@ class ProfileController extends ContainerAware
 
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('wbb_user.profile.form.factory');
-        if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
+        if (!$mobileDetector->isMobile() || $mobileDetector->isTablet()) {
             $form = $formFactory->createForm(false, array('Default', 'registration_full'));
-        }else{
+        } else {
             $form = $formFactory->createForm(true, array('profile_light'));
         }
         $currentUserName = $user->getUsername();
@@ -94,7 +95,7 @@ class ProfileController extends ContainerAware
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
-                if($user->getFirstname() != '' && $user->getLastname() != '' && $user->getConfirmed()){
+                if ($user->getFirstname() != '' && $user->getLastname() != '' && $user->getConfirmed()) {
                     $user->setTipsShouldBeModerated(false);
                 }
 
@@ -110,9 +111,9 @@ class ProfileController extends ContainerAware
                 return $response;
             } else {
                 $formErrors = null;
-                if(!$mobileDetector->isMobile() || $mobileDetector->isTablet()){
+                if (!$mobileDetector->isMobile() || $mobileDetector->isTablet()) {
                     $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
-                }else{
+                } else {
                     $formErrors = $this->container->get('validator')->validate($form, array('Default', 'profile_light'));
                 }
 
@@ -123,7 +124,7 @@ class ProfileController extends ContainerAware
                     $fields[] = str_replace('data.', '', $formError->getPropertyPath());
                     if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
                         $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank' && !in_array($formError->getMessage(), $messages)) {
+                    } elseif ($formError->getMessage() != 'not.blank' && !in_array($formError->getMessage(), $messages)) {
                         $messages[] = $formError->getMessage();
                     }
                 }

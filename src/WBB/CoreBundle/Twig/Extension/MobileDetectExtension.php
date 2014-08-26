@@ -15,7 +15,7 @@ class MobileDetectExtension extends BaseMobileDetectExtension
      * Constructor
      *
      * @param \SunCat\MobileDetectBundle\DeviceDetector\MobileDetector $mobileDetector
-     * @param \SunCat\MobileDetectBundle\Helper\DeviceView $deviceView
+     * @param \SunCat\MobileDetectBundle\Helper\DeviceView             $deviceView
      * @internal param \WBB\CoreBundle\Twig\Extension\Container $serviceContainer
      */
     public function __construct(MobileDetector $mobileDetector, DeviceView $deviceView)

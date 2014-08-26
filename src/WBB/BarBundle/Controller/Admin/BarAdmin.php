@@ -26,12 +26,12 @@ class BarAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name');
-        if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+        if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
             $listMapper
             ->add('city')
             ->add('suburb');
         }
-        
+
             $listMapper->add('website', 'string', array(
                 'template' => 'WBBBarBundle:Admin:Bar\list_bar_website_url.html.twig'
             ))
@@ -39,7 +39,7 @@ class BarAdmin extends Admin
             ->add('updatedAt')
             ->add('onTop', null, array('editable' => true))
             ->add('status', 'status');
-            if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+            if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
                 $listMapper->add('user');
             }
             $listMapper
@@ -62,7 +62,7 @@ class BarAdmin extends Admin
     {
         $filterMapper
                 ->add('name');
-        if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
+        if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
             $filterMapper
                 ->add('city')
                 ->add('suburb');
@@ -78,7 +78,7 @@ class BarAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -86,6 +86,7 @@ class BarAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
                             $queryBuilder->setParameter('createdAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -94,7 +95,7 @@ class BarAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function(ProxyQuery $queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -102,6 +103,7 @@ class BarAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
                             $queryBuilder->setParameter('updatedAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -209,7 +211,7 @@ class BarAdmin extends Admin
             ->add('reservation')
             ->add('reservationLink', null, array('help' => 'Example : http://www.url.com'));
 
-        if(!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')){
+        if (!$this->getSecurityContext()->isGranted('ROLE_BAR_OWNER')) {
             $formMapper
                 ->add('description', 'textarea', array('required' => false,'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
             ;
@@ -285,7 +287,7 @@ class BarAdmin extends Admin
         $actions = parent::getBatchActions();
 
         // check user permissions
-        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+        if ($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')) {
             $actions['export'] = array(
                 'label'            => 'Export',
                 'ask_confirmation' => false
@@ -310,31 +312,31 @@ class BarAdmin extends Admin
 
     public function prePersist($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setBar($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }
         }
 
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setBar($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }
         }
 
-        if($object->getOpenings()){
+        if ($object->getOpenings()) {
             foreach ($object->getOpenings() as $opening) {
-                if($opening && $opening->getOpeningDay()){
+                if ($opening && $opening->getOpeningDay()) {
                     $opening->setBar($object);
-                }else{
+                } else {
                     $object->removeOpening($opening);
                 }
             }
@@ -343,31 +345,31 @@ class BarAdmin extends Admin
 
     public function preUpdate($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setBar($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }
         }
 
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setBar($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }
         }
 
-        if($object->getOpenings()){
+        if ($object->getOpenings()) {
             foreach ($object->getOpenings() as $opening) {
-                if($opening && $opening->getOpeningDay()){
+                if ($opening && $opening->getOpeningDay()) {
                     $opening->setBar($object);
-                }else{
+                } else {
                     $object->removeOpening($opening);
                 }
             }
