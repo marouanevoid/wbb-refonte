@@ -14,7 +14,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 use FOS\UserBundle\Model\UserManagerInterface;
-use WBB\UserBundle\Entity\User;
 
 class UserAdmin extends Admin
 {

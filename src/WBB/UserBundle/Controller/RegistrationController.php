@@ -79,8 +79,6 @@ class RegistrationController extends ContainerAware
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-//                $session = $this->container->get('session');
-//                $session->save();
                 return $response;
             } else {
                 $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
@@ -166,8 +164,6 @@ class RegistrationController extends ContainerAware
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-//                $session = $this->container->get('session');
-//                $session->save();
                 return $response;
             } else {
                 $formErrors = $this->container->get('validator')->validate($form);
