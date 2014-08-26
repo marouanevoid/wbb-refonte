@@ -25,7 +25,12 @@ class ShareController extends Controller
         } else {
             $bestof = $this->get('bestof.repository')->findOneById($id);
             $url = $this->get('router')->generate('wbb_share_email_bestof_send', array('id' => $id));
-            $text = "I just discovered the best {$bestof->getName()} bars thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+
+            if ($bestof->getCity()) {
+                $text = "I just discovered the best {$bestof->getName()} bars in {$bestof->getCity()} thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+            } else {
+                $text = "I just discovered the best {$bestof->getName()} bars thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+            }
         }
 
         return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
@@ -109,6 +114,7 @@ class ShareController extends Controller
         foreach ($formErrors as $formError) {
             $field = str_replace('data.', '', $formError->getPropertyPath());
             $field = str_replace('data[', '', $field);
+            $field = str_replace('children[', '', $field);
             $field = str_replace(']', '', $field);
             $fields[] = $field;
             if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
@@ -116,12 +122,6 @@ class ShareController extends Controller
             } elseif ($formError->getMessage() == 'Please enter a valid email address' && !in_array($formError->getMessage(), $messages)) {
                 $messages[] = $formError->getMessage();
             }
-        }
-
-        if (in_array('Please complete all required fields', $messages) && in_array('Please enter a valid email address', $messages)) {
-            $key = array_search('Please enter a valid email address', $messages);
-            unset($messages[$key]);
-            $messages = array_values($messages);
         }
 
         return array(
