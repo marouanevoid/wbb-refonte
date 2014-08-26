@@ -15,7 +15,6 @@
   input[type="text"], input[type="password"], input[type="email"] {
     color: #818a8c;
   }
-  #landscape-mobile {display: none; visibility: hidden;}
   input[type="text"]::-webkit-input-placeholder, 
   input[type="password"]::-webkit-input-placeholder, 
   input[type="email"]::-webkit-input-placeholder,
@@ -30,7 +29,7 @@
     color: #818a8c;
   }
 /* Globale Libs */
-    form .icheckbox_flat {display: inline-block;*display: inline;vertical-align: middle;margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
+    form .icheckbox_flat {display: inline-block; vertical-align: middle; margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
     form .icheckbox_flat {background-position: 0 0;}
     form .icheckbox_flat.checked {background-position: 0 -20px;}
     form .icheckbox_flat.disabled {background-position: 0 0; cursor: default;}
@@ -214,13 +213,6 @@
     .firefox .ui-dropdown-container .ui-dropdown.error,
     .firefox .select2-container .select2-choice.error {border-width: 2px !important;}
 
-    /*
-    #register.page .ui-dropdown-container .ui-dropdown.btn-radius.border,
-    #editprofile #edit-account .ui-dropdown-container .ui-dropdown.btn-radius.border {border-color: #818a8c;}
-    #register.page .ui-dropdown-container.changed-ui-style .ui-dropdown, 
-    #editprofile #edit-account .ui-dropdown-container.changed-ui-style .ui-dropdown {color: #818a8c;}
-    */
-
   /* Version mobile */
     .ui.mobile {width: auto; /*padding: 80px 20px;*/ top: 80px;} /* Padding 0 for Userprofile  */
     .ui.mobile .form-text {height: 38px; border-radius: 2em;}
@@ -242,6 +234,7 @@
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
   .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 15px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
+  .ui .btn-create-with-fb:hover {opacity: 0.8;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
@@ -516,13 +509,18 @@
 
 /* Rollover's */
   .popup .btn:hover,
-  .popup .btn:focus {opacity: 0.8;}
+  .popup .btn:focus,
+  .group-actions .btn:hover,
+  .group-actions .btn:focus {opacity: 0.8;}
 
 /* jQuery UI Autocomplete */
   ul.ui-autocomplete {border-radius: 0!important; background-color: #faf3e1; padding: 10px; position: absolute; width: 283px!important; border: 1px solid #b3955f; margin: -15px 0 0 0!important;}
   ul.ui-autocomplete.ui-menu .ui-menu-item {color: #818a8c; font: lighter 16px/28px "Avenir", sans-serif; padding: 0; margin: 0; text-indent: 10px; background-color: transparent; border: none;}
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
-  ul.ui-autocomplete.ui-menu .ui-widget-content a {color: #b3955f;}
+  ul.ui-autocomplete.ui-menu li a {color: #b3955f;}
+  ul.ui-autocomplete.ui-menu li a.ui-state-focus {color: #b3955f; background: none; border: none; margin: 0; font-weight: lighter;}
+  .editprofile ul.ui-autocomplete {background-color: #fff;}
+  .editprofile ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: #fff;}
 
 /* Override */
    img.scale-with-grid {box-sizing: initial; width: 100%;}
@@ -596,6 +594,12 @@
   .filters .select-search .select2-container .select2-choice:hover {background-color: #b3955f; color: #faf3e1!important; border: 1px solid #b3955f;}
   .filters .select-search .select2-container .select2-choice:hover .select2-arrow b {background-position: -162px -41px;}
   article.city img.scale-with-grid {border: none!important;}
+  .landscape-mobile {background: url("../images/landscape_turn-device.jpg") no-repeat center center #000; background-size: cover;}
+  body.landscape-mobile * {display: none!important;}
+  article.city img.scale-with-grid {opacity: 1;}
+  article.city:hover img.scale-with-grid {opacity: 0.7;}
+  article.city .overlay {background: none;}
+  article.city:hover .overlay {background: url("../images/city.background-circle.png") no-repeat center; background-size: 100% 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -703,7 +707,7 @@
       .bar-guides section.bar-filter .bar-w-pic {min-height: 171px;}
   }
 
-  /* iPad Only */
+/* iPad Only */
   @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (-webkit-min-device-pixel-ratio: 2) {
     header.desktop .logged img {
       box-shadow: 0px 0px 0px 2px #fff;
@@ -743,7 +747,6 @@
     }
   }
   
-
 /* GLOBALE MOBILE STYLES */
   @media only screen and (max-width: 768px) {
     body {min-height: 100%;}
@@ -814,14 +817,13 @@
     header.mobile .search-result-proposal ul li a {white-space: pre-wrap;}
     .no-result {margin: 2%;}
     .select-two .ui-dropdown-container .ui-dropdown.error {margin-top: 1px; width: 99.3%;}
-    /* .orientation_landscape #landscape-mobile {display: block; visibility: visible;position: fixed; top: -50%; left: -50%;width: 200%; height: 200%; min-height: 100%; background: url("../images/turn@2x.jpg") no-repeat center center #000;background-size: contain;z-index: 777777777;} */    
     ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: transparent; color: #818a8c;}
     ul.ui-autocomplete {width: 92%!important;}
   }
 
   @media only screen and (min-width : 320px) and (max-width: 640px) {
     .date-birthday .date-width {width: 118%!important;}
-  } 
+  }
 
   /* iPhone < style's */
   @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
@@ -832,7 +834,7 @@
     .date-birthday .select-wrap {width: 105px; margin-right: 15px;}
     .ui.register #account .form-text {text-indent: 10px; border: 1px solid red;}
     .search-bar-mobile .container .form-text {padding-left: 15x!important;}
-    body {background-color: red;}
+
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
       .profile section.bar-filter .bar-w-pic,
@@ -867,12 +869,13 @@
     .date-birthday .select-wrap {width: 97px; margin-right: 7px;}
     #register.page.mobile #create-account .form-text {width: 278px; /*margin: 0 0 10px;*/ padding: 0 20px 0 0; /*text-align: right;*/}
     .search-bar-mobile .container input[type="reset"] {right: 43%;}
-    form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg");background-size: 20px 40px; background-position: 0 1px;}
+    form .icheckbox_flat {background-image: url("../images/UI/icon_checkbox@x2.jpg"); background-size: 20px 40px; background-position: 0 0; height: 20px;}
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
     .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -100%; left: -100%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     ul.ui-autocomplete {width: 87%!important;}
+    /*.landscape-mobile {background-image: url("../images/landscape_turn-device@x2.jpg"); background-size: 100% 100%;}*/
   }
 
 @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
