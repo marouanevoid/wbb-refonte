@@ -241,6 +241,7 @@
 
   .ui .btn-create-account {background-color: #b3955f; font-size: 22px; line-height: 65px;}
   .ui .btn-create-with-fb {border-radius: 0;  height: 42px; /*line-height: normal;  position: relative; top: -15px;*/ margin: 0 0 0 15px; background: url("../images/UI/btn_fb-small.jpg") no-repeat 0 0; width: 119px; height: 42px; display: inline-block; text-indent: -7777px;}
+  .ui .btn-create-with-fb:hover {opacity: 0.8;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
 
@@ -525,6 +526,8 @@
   ul.ui-autocomplete.ui-menu .ui-menu-item:hover {border: none; background-color: #faf3e1; color: #b3955f; font-size: 16px; cursor: pointer; letter-spacing: 0;}
   ul.ui-autocomplete.ui-menu li a {color: #b3955f;}
   ul.ui-autocomplete.ui-menu li a.ui-state-focus {color: #b3955f; background: none; border: none; margin: 0; font-weight: lighter;}
+  .editprofile ul.ui-autocomplete {background-color: #fff;}
+  .editprofile ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: #fff;}
 
 /* Override */
    img.scale-with-grid {box-sizing: initial; width: 100%;}
