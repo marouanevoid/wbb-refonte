@@ -5,6 +5,7 @@ namespace WBB\CloudSearchBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WBB\BarBundle\Entity\Bar;
 
 class IndexCommand extends ContainerAwareCommand
 {
@@ -28,6 +29,8 @@ class IndexCommand extends ContainerAwareCommand
                 if ($entity instanceof Bar) {
                     if ($entity->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) {
                         $indexer->index($entity);
+                    } else {
+                        $indexer->delete($entity);
                     }
                 } else {
                     $indexer->index($entity);

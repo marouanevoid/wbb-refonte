@@ -99,21 +99,25 @@ class FeedController extends Controller
     public function tipsAction($barID, $offset, $limit)
     {
         $bar    = $this->container->get('bar.repository')->findOneById($barID);
+        $allTips    = $this->container->get('tip.repository')->findLatestTips($bar, 0, 0);
+        $all    = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
         $tips   = $this->container->get('tip.repository')->findLatestTips($bar, $offset, $limit, true);
         $allExpertTips   = $this->container->get('tip.repository')->findLatestTips($bar, 0, 0, true);
         $nbExpertTips = count($tips);
         if($nbExpertTips < $limit){
-            $normalTips   = $this->container->get('tip.repository')->findLatestTips($bar, ($offset + $nbExpertTips - count($allExpertTips)), ($limit - $nbExpertTips));
+            $normalTips   = $this->container->get('tip.repository')->findLatestTips($bar, ($offset + $nbExpertTips - count($allExpertTips)), ($limit - $nbExpertTips), false, true);
             $tips = array_merge($tips, $normalTips);
         }
-        $all = $this->container->get('tip.repository')->findLatestTips($bar, $offset, 0);
         $nbResults  = count($tips);
         $difference = count($all) - count($tips);
         $FsTips = array();
+        $pass = false;
+        $excludedCount = 0;
         if(($nbResults < $limit) && !is_null($bar->getFoursquare()) && $bar->getFoursquare() != ""){
+
             $excluded = $bar->getFsExcludedTips();
             $index = 0;
-            $count = $offset;
+            $count = $offset - count($allTips);
             $recursive = 0;
             do{
                 $tab = $this->get("wbb.fstips.feed")->find($bar->getFoursquare(), $count);
@@ -130,6 +134,8 @@ class FeedController extends Controller
                     if(!in_array($FsTip['id'], $excluded)){
                         $FsTips[] = $tmp[$key];
                         ++$index;
+                    }else{
+                        $excludedCount++;
                     }
                 }
                 $count += $nbFsTips;
@@ -147,6 +153,7 @@ class FeedController extends Controller
                 'nbResults'  => $nbResults,
                 'difference' => $difference,
                 'htmldata'   => $htmldata,
+                'excluded'   => $excludedCount
             )
         );
     }

@@ -37,6 +37,37 @@
         $("select.select2-dropdown.finder-choose").off('change').on('change' , function(){
                 $($("select.select2-dropdown.finder-choose").select2("container")).addClass('active');
         });
+
+
+        // Add Event on Open Choose
+        $("select.select2-dropdown.finder-choose").on("select2-open", function(){
+            $($("select.select2-dropdown.finder-choose").select2("container")).removeClass('active');
+        });
+
+        // on Close Event Choose
+        $("select.select2-dropdown.finder-choose").on("select2-close", function(){
+            // test if can add class Active
+            if( $("select.select2-dropdown.finder-choose").val() != "" ){
+                $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
+            }
+        });
+
+
+        // Add Event on Open City
+        $("select.select2-dropdown.finder-city").on("select2-open", function(){
+            $($("select.select2-dropdown.finder-city").select2("container")).removeClass('active');
+        });
+
+        // on Close Event City
+        $("select.select2-dropdown.finder-city").on("select2-close", function(){
+            // test if can add class Active
+            if( $("select.select2-dropdown.finder-city").val() != "" ){
+                $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
+            }
+        });
+
+
+
         // test if can add class Active
         if( $("select.select2-dropdown.finder-choose").val() != "" ){
             $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
@@ -45,6 +76,17 @@
         if( $("select.select2-dropdown.finder-city").val() != "" ){
             $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
         }
+
+        // Event on remove Close
+        $("select.select2-dropdown.finder-choose").on("select2-close", function() {
+
+        });
+
+        // fix class to dropdown class dark
+        $( $("select.select2-dropdown.finder-city").select2("dropdown") ).addClass('select2-city');
+        $( $("select.select2-dropdown.finder-city").select2("dropdown") ).addClass('dark');
+        $( $("select.select2-dropdown.finder-choose").select2("dropdown") ).addClass('select2-friends');
+        $( $("select.select2-dropdown.finder-choose").select2("dropdown") ).addClass('dark');
 
 
         toGoOutWith_selected = "{{selected.outWith}}";

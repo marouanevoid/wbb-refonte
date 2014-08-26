@@ -13,7 +13,7 @@
             {% endif %}
             {% if n.sponsorImageSmall is defined and n.sponsorImageSmall != '' %}
                 <span class="sponsor">
-                    <img src="{% path n.sponsorImageSmall , 'sponsor_82_82' %}" alt="sponsor"/>
+                    <img src="{{ showImage(n.sponsorImageSmall, 'sponsor_82_82') }}" alt="sponsor"/>
                 </span>
             {% endif %}
         </a>
