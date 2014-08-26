@@ -70,14 +70,14 @@ class NewsController extends Controller
         $topCities = $this->container->get('city.repository')->findTopCities();
         shuffle($topCities);
 
-        $ads['bigAd'] = $this->get('ad.repository')->findOneByPositionAndCountry(Ad::WBB_ADS_NLP_300X600, ($city) ? $city->getCountry():null);
-        if(!$ads['bigAd']){
-            $ads['bigAd'] = $this->get('ad.repository')->findOneByPositionAndCountry(Ad::WBB_ADS_NLP_300X600, null);
-        }
-        $ads['smallAd'] = $this->get('ad.repository')->findOneByPositionAndCountry(Ad::WBB_ADS_NLP_300X250, ($city) ? $city->getCountry():null);
-        if(!$ads['smallAd']){
-            $ads['smallAd'] = $this->get('ad.repository')->findOneByPositionAndCountry(Ad::WBB_ADS_NLP_300X250, null);
-        }
+        $ad = $this->get('ad.repository')->findOneByPositionAndCountry('NLP_300x', ($city) ? $city->getCountry():null, true);
+        $size = ($ad)?explode('_', $ad->getPosition()):null;
+        $ads = array(
+            'ad'        => $ad,
+            'size'      => ($size)?$size[1]:null,
+            'bigAd'     => ($ad && $ad->getPosition() == Ad::WBB_ADS_NLP_300X600)?true:null,
+            'smallAd'   => ($ad && $ad->getPosition() == Ad::WBB_ADS_NLP_300X250)?true:null
+        );
 
         return $this->render('WBBBarBundle:News:landingPage.html.twig', array(
             'city'      => $city,
