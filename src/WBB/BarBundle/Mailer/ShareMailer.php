@@ -4,9 +4,6 @@ namespace WBB\BarBundle\Mailer;
 
 use WBB\CoreBundle\Mailer\TwigSwiftMailer as BaseTwigSwiftMailer;
 
-/**
- * HospitalisationMailer
- */
 class ShareMailer extends BaseTwigSwiftMailer
 {
     public function sendShareBar($data)
@@ -54,6 +51,10 @@ class ShareMailer extends BaseTwigSwiftMailer
             'email'     => $data['email'],
             'message'   => $data['message']
         );
+
+        if ($data['bestof']->getCity()) {
+            $context['subject'] = "Check the best " . $data['bestof']->getName() . " bars in " . $data['bestof']->getCity() . " via www.worldsbestbars.com";
+        }
 
         $this->sendMessage(
             'WBBBarBundle:Share:Email/bestof.email.twig',
