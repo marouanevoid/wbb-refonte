@@ -22,9 +22,9 @@ class FormFactory implements FactoryInterface
 
     public function createForm($light = false, $validationGroups = array('Registration', 'Default', 'registration_fb'))
     {
-        if($light){
+        if ($light) {
             return $this->formFactory->createNamed($this->name, $this->type.'_light', null, array('validation_groups' => $validationGroups));
-        }else{
+        } else {
             return $this->formFactory->createNamed($this->name, $this->type, null, array('validation_groups' => $this->validationGroups));
         }
     }

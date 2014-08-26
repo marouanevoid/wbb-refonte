@@ -13,8 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\AdRepository")
  */
 
-class Ad {
-
+class Ad
+{
     const WBB_ADS_HP_300X250    = "HP_300x250";
     const WBB_ADS_HP_728X90     = "HP_728x90";
     const WBB_ADS_BF_728X90     = "BF_728x90";
@@ -111,14 +111,16 @@ class Ad {
     /**
      * Constructor
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->countries = new ArrayCollection();
     }
 
     /**
      * toString
      */
-    public function __toString(){
+    public function __toString()
+    {
         return $this->getName();
     }
 
@@ -127,18 +129,21 @@ class Ad {
      *
      * @return integer
      */
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Ad
      */
-    public function setName($name){
+    public function setName($name)
+    {
         $this->name = $name;
+
         return $this;
     }
 
@@ -147,18 +152,21 @@ class Ad {
      *
      * @return string
      */
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * Set position
      *
-     * @param string $position
+     * @param  string $position
      * @return Ad
      */
-    public function setPosition($position){
+    public function setPosition($position)
+    {
         $this->position = $position;
+
         return $this;
     }
 
@@ -167,18 +175,21 @@ class Ad {
      *
      * @return string
      */
-    public function getPosition(){
+    public function getPosition()
+    {
         return $this->position;
     }
 
     /**
      * Set image
      *
-     * @param Media $image
+     * @param  Media $image
      * @return Ad
      */
-    public function setImage($image){
+    public function setImage($image)
+    {
         $this->image = $image;
+
         return $this;
     }
 
@@ -187,18 +198,21 @@ class Ad {
      *
      * @return Media
      */
-    public function getImage(){
+    public function getImage()
+    {
         return $this->image;
     }
 
     /**
      * Set tag
      *
-     * @param string $tag
+     * @param  string $tag
      * @return Ad
      */
-    public function setTag($tag){
+    public function setTag($tag)
+    {
         $this->tag = $tag;
+
         return $this;
     }
 
@@ -207,18 +221,21 @@ class Ad {
      *
      * @return string
      */
-    public function getTag(){
+    public function getTag()
+    {
         return $this->tag;
     }
 
     /**
      * Set link
      *
-     * @param string $link
+     * @param  string $link
      * @return Ad
      */
-    public function setLink($link){
+    public function setLink($link)
+    {
         $this->link = $link;
+
         return $this;
     }
 
@@ -227,18 +244,21 @@ class Ad {
      *
      * @return string
      */
-    public function getLink(){
+    public function getLink()
+    {
         return $this->link;
     }
 
     /**
      * Set beginAt
      *
-     * @param \DateTime $beginAt
+     * @param  \DateTime $beginAt
      * @return Ad
      */
-    public function setBeginAt($beginAt){
+    public function setBeginAt($beginAt)
+    {
         $this->beginAt = $beginAt;
+
         return $this;
     }
 
@@ -247,18 +267,21 @@ class Ad {
      *
      * @return \DateTime
      */
-    public function getBeginAt(){
+    public function getBeginAt()
+    {
         return $this->beginAt;
     }
 
     /**
      * Set endAt
      *
-     * @param \DateTime $endAt
+     * @param  \DateTime $endAt
      * @return Ad
      */
-    public function setEndAt($endAt){
+    public function setEndAt($endAt)
+    {
         $this->endAt = $endAt;
+
         return $this;
     }
 
@@ -267,18 +290,21 @@ class Ad {
      *
      * @return \DateTime
      */
-    public function getEndAt(){
+    public function getEndAt()
+    {
         return $this->endAt;
     }
 
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Ad
      */
-    public function setCreatedAt($createdAt){
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -287,18 +313,21 @@ class Ad {
      *
      * @return \DateTime
      */
-    public function getCreatedAt(){
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Ad
      */
-    public function setUpdatedAt($updatedAt){
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -307,11 +336,13 @@ class Ad {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt(){
+    public function getUpdatedAt()
+    {
         return $this->updatedAt;
     }
 
-    public static function getAdsPositionArray(){
+    public static function getAdsPositionArray()
+    {
         return array(
             Ad::WBB_ADS_HP_300X250    => "Home Page (300x250)",
             Ad::WBB_ADS_HP_728X90     => "Home Page (728x90)",
@@ -331,17 +362,17 @@ class Ad {
         );
     }
 
-
     /**
      * Add countries
      *
-     * @param \WBB\CoreBundle\Entity\Country $country
+     * @param  \WBB\CoreBundle\Entity\Country $country
      * @return Ad
      */
     public function addCountry(\WBB\CoreBundle\Entity\Country $country)
     {
         $this->countries[] = $country;
         $country->addAd($this);
+
         return $this;
     }
 
@@ -359,7 +390,7 @@ class Ad {
     /**
      * Get countries
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCountries()
     {

@@ -23,22 +23,21 @@ class TagRepository extends EntityRepository
             ->orderBy($this->getAlias().'.name', 'ASC')
         ;
 
-        if($limit > 0)
-        {
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($name){
+        if ($name) {
             $nameValue = $name;
             if(!$exacteName)$nameValue.='%';
             $qb->andWhere($qb->expr()->like($this->getAlias().'.name', $qb->expr()->literal($nameValue)));
         }
 
-        if($onlyQueryBuilder){
+        if ($onlyQueryBuilder) {
             return $qb;
-        }elseif($limit == 1){
+        } elseif ($limit == 1) {
             return $qb->getQuery()->getOneOrNullResult();
-        }else{
+        } else {
             return $qb->getQuery()->getResult();
         }
     }
@@ -63,4 +62,4 @@ class TagRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
 
     }
-} 
+}

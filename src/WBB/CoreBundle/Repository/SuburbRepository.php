@@ -32,11 +32,11 @@ class SuburbRepository extends EntityRepository
             ->setMaxResults(1)
         ;
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq('c.id', $city->getId()));
         }
 
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-} 
+}

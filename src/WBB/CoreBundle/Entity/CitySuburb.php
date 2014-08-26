@@ -66,11 +66,10 @@ class CitySuburb
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +79,7 @@ class CitySuburb
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string     $name
      * @return CitySuburb
      */
     public function setName($name)
@@ -93,7 +92,7 @@ class CitySuburb
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -103,7 +102,7 @@ class CitySuburb
     /**
      * Set city
      *
-     * @param \WBB\CoreBundle\Entity\City $city
+     * @param  \WBB\CoreBundle\Entity\City $city
      * @return CitySuburb
      */
     public function setCity(\WBB\CoreBundle\Entity\City $city = null)
@@ -116,7 +115,7 @@ class CitySuburb
     /**
      * Get city
      *
-     * @return \WBB\CoreBundle\Entity\City 
+     * @return \WBB\CoreBundle\Entity\City
      */
     public function getCity()
     {
@@ -138,7 +137,7 @@ class CitySuburb
     /**
      * Add bars
      *
-     * @param \WBB\BarBundle\Entity\Bar $bars
+     * @param  \WBB\BarBundle\Entity\Bar $bars
      * @return CitySuburb
      */
     public function addBar(\WBB\BarBundle\Entity\Bar $bars)
@@ -161,7 +160,7 @@ class CitySuburb
     /**
      * Get bars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBars()
     {
@@ -171,7 +170,7 @@ class CitySuburb
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime  $createdAt
      * @return CitySuburb
      */
     public function setCreatedAt($createdAt)
@@ -184,7 +183,7 @@ class CitySuburb
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -194,7 +193,7 @@ class CitySuburb
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime  $updatedAt
      * @return CitySuburb
      */
     public function setUpdatedAt($updatedAt)
@@ -207,7 +206,7 @@ class CitySuburb
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -217,7 +216,7 @@ class CitySuburb
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string     $slug
      * @return CitySuburb
      */
     public function setSlug($slug)
@@ -230,7 +229,7 @@ class CitySuburb
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -240,7 +239,7 @@ class CitySuburb
     /**
      * Add semsoftBars
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @param  \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
      * @return CitySuburb
      */
     public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
@@ -263,7 +262,7 @@ class CitySuburb
     /**
      * Get semsoftBars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSemsoftBars()
     {

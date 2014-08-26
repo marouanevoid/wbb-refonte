@@ -32,8 +32,8 @@ class SemsoftBarAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper){
-
+    protected function configureFormFields(FormMapper $formMapper)
+    {
         $formMapper
             ->with('General')
                 ->add('name', null)
@@ -139,7 +139,7 @@ class SemsoftBarAdmin extends Admin
         $actions = parent::getBatchActions();
 
         // check user permissions
-        if($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')){
+        if ($this->hasRoute('edit') && $this->isGranted('EDIT') && $this->hasRoute('delete') && $this->isGranted('DELETE')) {
             $actions['merge'] = array(
                 'label'            => 'Merge',
                 'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
@@ -151,11 +151,11 @@ class SemsoftBarAdmin extends Admin
 
     public function preUpdate($object)
     {
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setSemsoftBar($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }
@@ -164,11 +164,11 @@ class SemsoftBarAdmin extends Admin
 
     public function postUpdate($object)
     {
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setSemsoftBar($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }

@@ -43,7 +43,7 @@ class TagAdmin extends Admin
             ->addIdentifier('name', null, array('editable' => true))
             ->add('onTop', null, array('editable' => true))
         ;
-        if(!$this->hasParentFieldDescription()) {
+        if (!$this->hasParentFieldDescription()) {
             $listMapper
                 ->add('type', null, array(
                     'template' => 'WBBBarBundle:Admin:Tag\type_field.html.twig'

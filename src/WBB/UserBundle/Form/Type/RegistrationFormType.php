@@ -5,7 +5,6 @@ namespace WBB\UserBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
-use WBB\BarBundle\Entity\Tag;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -68,7 +67,7 @@ class RegistrationFormType extends BaseType
                     'error_bubbling' => true,
                     'empty_value' => 'Country',
                     'required' => false,
-                    'query_builder' => function(EntityRepository $er) {
+                    'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')
                             ->orderBy('c.name', 'ASC');
                     }

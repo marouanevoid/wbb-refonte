@@ -3,7 +3,6 @@
 namespace WBB\BarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use WBB\BarBundle\Entity\Bar;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -70,11 +69,10 @@ class BarOpening
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -84,7 +82,7 @@ class BarOpening
     /**
      * Set day
      *
-     * @param integer $day
+     * @param  integer    $day
      * @return BarOpening
      */
     public function setOpeningDay($day)
@@ -97,7 +95,7 @@ class BarOpening
     /**
      * Get day
      *
-     * @return integer 
+     * @return integer
      */
     public function getOpeningDay()
     {
@@ -107,7 +105,7 @@ class BarOpening
     /**
      * Set fromHour
      *
-     * @param integer $fromHour
+     * @param  integer    $fromHour
      * @return BarOpening
      */
     public function setFromHour($fromHour)
@@ -120,7 +118,7 @@ class BarOpening
     /**
      * Get fromHour
      *
-     * @return integer 
+     * @return integer
      */
     public function getFromHour()
     {
@@ -130,7 +128,7 @@ class BarOpening
     /**
      * Set toHour
      *
-     * @param integer $toHour
+     * @param  integer    $toHour
      * @return BarOpening
      */
     public function setToHour($toHour)
@@ -143,7 +141,7 @@ class BarOpening
     /**
      * Get toHour
      *
-     * @return integer 
+     * @return integer
      */
     public function getToHour()
     {
@@ -153,8 +151,7 @@ class BarOpening
     public static function getOpeningHours()
     {
         $hours = array();
-        for($i=0;$i<24;$i++)
-        {
+        for ($i=0;$i<24;$i++) {
             if($i<10)
                 $hours[$i] = "0$i";
             else
@@ -182,7 +179,7 @@ class BarOpening
     /**
      * Set bar
      *
-     * @param Bar $bar
+     * @param  Bar        $bar
      * @return BarOpening
      */
     public function setBar(Bar $bar = null)
@@ -205,7 +202,7 @@ class BarOpening
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime  $createdAt
      * @return BarOpening
      */
     public function setCreatedAt($createdAt)
@@ -218,7 +215,7 @@ class BarOpening
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -228,7 +225,7 @@ class BarOpening
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime  $updatedAt
      * @return BarOpening
      */
     public function setUpdatedAt($updatedAt)
@@ -241,7 +238,7 @@ class BarOpening
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -251,7 +248,7 @@ class BarOpening
     /**
      * Set semsoftBar
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar
+     * @param  \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar
      * @return BarOpening
      */
     public function setSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar = null)
@@ -264,7 +261,7 @@ class BarOpening
     /**
      * Get semsoftBar
      *
-     * @return \WBB\BarBundle\Entity\Semsoft\SemsoftBar 
+     * @return \WBB\BarBundle\Entity\Semsoft\SemsoftBar
      */
     public function getSemsoftBar()
     {
