@@ -253,9 +253,9 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/icheck.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.ui.touch-punch.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/icheck.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/wbbuser/js/modules/profile.edit.wbb.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {

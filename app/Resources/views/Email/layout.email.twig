@@ -325,6 +325,34 @@
       }
       table[class="socials"] a {
         display: inline-block!important;
+        border: 1px solid red;
+        width: 25px!important;
+      }
+      table[class="socials"] a[class="facebook"] {
+        margin-left: 25px!important;
+      }
+      td[class="bar-detail"] {
+        width: 100%!important;
+        display: block;
+        border: 1px solid red;  
+      }
+      td[class="bar-image"] {
+        width: 320px!important;
+        vertical-align: top;
+        text-align: center;
+        display: block; 
+        float: left!important;
+        clear: both!important;
+        margin: auto;
+      }
+      td[class="bar-image"] img {
+        display: block;
+        width: 100%!important;
+      }
+      td[class="bar-text-detail"] {
+        float: left;
+        display: block!important;
+        border-top: 30px!important;
       }
     }
 </style>
@@ -392,7 +420,7 @@
                               <table class="socials" align="center">
                                 <tr>
                                     <td style="border-right-style: solid; border-right-width: 10px; border-right-color: #333333">
-                                      <a href="https://www.facebook.com/worldsbestbars" style="float: left; display: inline; text-align: center; text-decoration: none; color: #fedf9f; border:none;">
+                                      <a href="https://www.facebook.com/worldsbestbars" style="float: left; display: inline; text-align: center; text-decoration: none; color: #fedf9f; border:none;" class="facebook">
                                         <img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/wbbcore/images/email/icon_fb.jpg') }}" style="float: left; display: inline-block; clear: none: !important; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%;" align="left" /></a>
                                     </td>
                                     <td style="border-right-style: solid; border-right-width: 10px; border-right-color: #333333">
