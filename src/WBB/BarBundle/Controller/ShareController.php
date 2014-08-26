@@ -25,7 +25,12 @@ class ShareController extends Controller
         } else {
             $bestof = $this->get('bestof.repository')->findOneById($id);
             $url = $this->get('router')->generate('wbb_share_email_bestof_send', array('id' => $id));
-            $text = "I just discovered the best {$bestof->getName()} bars thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+
+            if ($bestof->getCity()) {
+                $text = "I just discovered the best {$bestof->getName()} bars in {$bestof->getCity()} thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+            } else {
+                $text = "I just discovered the best {$bestof->getName()} bars thanks to www.worldsbestbars.com – the ultimate resource for the best bars in the world.";
+            }
         }
 
         return $this->render('WBBBarBundle:Share:share_form.html.twig', array(
