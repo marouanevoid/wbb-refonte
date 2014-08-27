@@ -57,7 +57,13 @@ meta.Slider = function(config){
         autoplay_delay  : 5000,
         autoplay        : false,
         animation       : 'latency',
-        use_3D          : false
+        use_3D          : false,
+        coumpteurCursor : 0,
+        autodefile : (! ismobile && ! istablet && $('body.news').length) ? true : false,
+        defileInterval : 0,
+        totalItem : 0,
+        defiledelay : 2000,
+        orientation : 'right'
     };
 
     that.context = {
@@ -135,7 +141,45 @@ meta.Slider = function(config){
 
     };
 
+    /*
+    * Auto defile
+    **/
+    that.startautoDefile = function(){
 
+        clearInterval(that.config.defileInterval );
+        if(that.config.autodefile){
+            that.config.defileInterval = setInterval(function(){
+
+                if(that.config.orientation == 'right'){
+                    that.config.coumpteurCursor++;
+                }else{
+                    that.config.coumpteurCursor--;
+                }
+                
+                if(that.config.coumpteurCursor > (that.config.totalItem - 3 )){
+                    that.config.coumpteurCursor = that.config.totalItem - 3 ;
+                    that.config.orientation = 'left';
+                }else{
+                    if(that.config.coumpteurCursor <= 0){
+                        that.config.orientation = 'right';
+                        that.config.coumpteurCursor++;
+                    }
+                }
+
+                // trigger click on corespond 
+                // btn
+                that.context.$arrows.filter("." + that.config.orientation).trigger('click' , [true]);
+
+            },that.config.defiledelay);
+        }
+    }
+
+    /*
+    * Stop auto defile
+    */
+    that.stopautoDefile = function(){
+         clearInterval(that.config.defileInterval );
+    }
 
     that._setupLayout = function() {
 
@@ -187,14 +231,40 @@ meta.Slider = function(config){
 
         if( that.config.has_arrows ){
 
-            that.context.$arrows.click(function(e)
+            that.context.$arrows.click(function(e , fromFn)
             {
                 e.preventDefault();
 
-                if( $(this).hasClass('disabled') ) return;
 
-                if( $(this).hasClass('left') ) that._slide('left');
-                else  that._slide('right');
+                clearInterval(that.config.defileInterval );
+                if( $(this).hasClass('disabled') ){
+                    console.log('disabled happend ==== ');
+                    that.startautoDefile();
+                    return;
+                } 
+
+                if( $(this).hasClass('left') ){
+                    if(!fromFn){
+                        that.config.coumpteurCursor--;
+                        that.config.orientation = 'left';
+                        console.log('real clickeeed ------- ');
+                    }
+                    that._slide('left');
+                } 
+                else {
+
+                    if(!fromFn){
+                        that.config.orientation = 'right';
+                        that.config.coumpteurCursor++;
+                    }
+                    that._slide('right');
+                } 
+
+                /*
+                * Start auto defile
+                */
+
+                that.startautoDefile();
             });
         }
 
@@ -251,6 +321,16 @@ meta.Slider = function(config){
 
         });
 
+
+        that.config.totalItem = that.config.$container.find('.ui-slide').length;
+        /*
+        * Start auto defile
+        */
+
+        that.startautoDefile();
+
+        // add listner on hover Slider
+        that.context.$slider.hover(that.stopautoDefile,that.startautoDefile);
     };
 
 
