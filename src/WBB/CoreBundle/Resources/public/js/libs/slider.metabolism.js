@@ -59,7 +59,7 @@ meta.Slider = function(config){
         animation       : 'latency',
         use_3D          : false,
         coumpteurCursor : 0,
-        autodefile : (! ismobile && ! istablet && $('body.news').length) ? true : false,
+        autodefile : (! ismobile && ! istablet && $('body.news').length) ? false : false,
         defileInterval : 0,
         totalItem : 0,
         defiledelay : 2000,
@@ -235,10 +235,10 @@ meta.Slider = function(config){
             {
                 e.preventDefault();
 
-
+                that.updateImageSrc();
+                
                 clearInterval(that.config.defileInterval );
                 if( $(this).hasClass('disabled') ){
-                    console.log('disabled happend ==== ');
                     that.startautoDefile();
                     return;
                 } 
@@ -247,7 +247,6 @@ meta.Slider = function(config){
                     if(!fromFn){
                         that.config.coumpteurCursor--;
                         that.config.orientation = 'left';
-                        console.log('real clickeeed ------- ');
                     }
                     that._slide('left');
                 } 
@@ -416,7 +415,13 @@ meta.Slider = function(config){
         }, delay);
     };
 
-
+    that.updateImageSrc = function(){
+        $('img[data-src]').each(function(){
+            if($(this).attr('img') == "" || !$(this).attr('img')){
+                $(this).attr('src' ,$(this).attr('data-src') );
+            }
+        });
+    }
 
     that._animateSlidesWithFade = function($current, $next, goto_left, callback)
     {
