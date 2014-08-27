@@ -378,6 +378,7 @@
   #editprofile .ui .form-text {background-color: #fff;}
   #editprofile .title h5 {color: #333; font-size: 30px; font-family: "Myriad Pro", sans-serif;}
   #editprofile .subgroup .city {color: #818a8c; font-size: 14px; height: 30px; line-height: 15px;}
+  #editprofile .subgroup .city {position: relative; top: 2px; right: 3px;}
   #editprofile .group.right {width: 410px;}
   #editprofile .subgroup.wrap {width: 211px;}
   #editprofile .avatar-profil {z-index: 11; position: relative; overflow: hidden; border: 3px solid #b3955f; padding: 2px; width: 140px; height: 140px;}
@@ -396,7 +397,7 @@
   .group-form.checkbox label {width: 367px; font-size: 13px; white-space: nowrap;}
 
 /* UserProfile */
-  #editprofile .block-top {width: 660px; overflow: hidden;}
+  #editprofile .block-top {width: 645px; overflow: hidden;}
   #view-account .filter-profil {width: 660px; font-size: 18px; clear: both;}
   #view-account .filter-profil a.ui-radio {text-align: center; width: 164px;}
   #view-account .filter-profil a + a:not(:last-of-type) {border-radius: 0px; border-left: none!important; border-right: none!important;}
@@ -831,7 +832,7 @@
     .search aside.filters form li .drop-list > .checkbox-container {overflow: hidden;}
     */
     .search aside.filters form .checkbox-container li {margin-left: 1%; width: 47%;}
-    
+
     /* retour client */
     section.bars .bar-w-pic .btn-round, section.bar-filter .bar-w-pic .btn-round {width: 30px; height: 30px;}
     section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {background-position: -75px -35px;}
