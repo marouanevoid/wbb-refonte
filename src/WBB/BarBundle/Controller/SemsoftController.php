@@ -174,7 +174,6 @@ class SemsoftController extends Controller
 
             if ($fullImport) {
                 fclose($outPut);
-
                 return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
             } else {
                 $content = stream_get_contents($outPut);

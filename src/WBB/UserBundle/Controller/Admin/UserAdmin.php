@@ -39,7 +39,6 @@ class UserAdmin extends Admin
         $filterMapper
             ->add('username')
             ->add('enabled')
-            ->add('locked')
             ->add('email')
         ;
     }

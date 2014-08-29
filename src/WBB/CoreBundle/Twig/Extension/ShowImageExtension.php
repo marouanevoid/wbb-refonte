@@ -50,7 +50,11 @@ class ShowImageExtension extends \Twig_Extension
         $path =  $provider->generatePublicUrl($media, $format);
 
         // Define the path to look for
-        $pathToCheck = realpath($this->container->get('kernel')->getRootDir() . '/../web/') . $path;
+        $pathToCheck = $path;
+        if(strpos($path, "http://") === false) {
+            $pathToCheck = realpath($this->container->get('kernel')->getRootDir() . '/../web/') . $path;
+        }
+
         // If the path does not exist, return the fallback image
         if (!@getimagesize($pathToCheck) || $path == "/") {
             return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpeg');

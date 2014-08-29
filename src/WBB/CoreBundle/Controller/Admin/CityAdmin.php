@@ -185,4 +185,11 @@ class CityAdmin extends Admin
             }
         }
     }
+
+    public function postPersist($object)
+    {
+        if($object->getBars()->count() <= 0) {
+            $this->getRequest()->getSession()->getFlashBag()->add("warning", "You have created a new city on World's Best Bars, now you can add new bars in this City");
+        }
+    }
 }
