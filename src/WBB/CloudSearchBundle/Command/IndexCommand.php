@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use WBB\BarBundle\Entity\Bar;
+use WBB\CoreBundle\Entity\City;
 
 class IndexCommand extends ContainerAwareCommand
 {
@@ -31,6 +32,10 @@ class IndexCommand extends ContainerAwareCommand
                         $indexer->index($entity);
                     } else {
                         $indexer->delete($entity);
+                    }
+                } elseif ($entity instanceof City) {
+                    if (!$entity->getOnTopCity() && $entity->getBars()->count() == 0) {
+                        $this->indexer->delete($entity);
                     }
                 } else {
                     $indexer->index($entity);
