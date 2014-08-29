@@ -35,7 +35,7 @@
 
         {% block stylesheets %}
 
-            {% stylesheets filter="cssrewrite"
+            {% stylesheets filter='uglifycss' filter="cssrewrite"
                 "bundles/wbbcore/css/select2-bootstrap.css"
                 "bundles/wbbcore/css/select2.css"
                 "bundles/wbbcore/css/custom.select2.css"
@@ -47,7 +47,7 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
-            {% javascripts
+            {% javascripts filter='uglifyjs2'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/select2.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'
