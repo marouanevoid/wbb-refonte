@@ -16,12 +16,15 @@ class SemsoftType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', 'file', array(
+            ->add('file', 'file');
+        /*
+            array(
                 'constraints' => array(
                     new File(array(
                             'mimeTypes' => array("text/csv")
                         )
-                    ))));
+                    )))
+         */
     }
 
     /**

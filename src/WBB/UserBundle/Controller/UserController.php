@@ -95,12 +95,13 @@ class UserController extends Controller
                         $userManager->updateUser($user, false);
                     }
 
+                    $em->flush();
+
                 }catch (\Exception $e){
                     fputcsv($outPut, $data, ',');
                     $fullImport = false;
                 }
             }
-            $em->flush();
 
             if($fullImport){
                 $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Users successfully imported');
