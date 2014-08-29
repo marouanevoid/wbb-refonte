@@ -601,7 +601,6 @@ wbb.CitiesPage = function () {
         if( that.context.$container.find('select[name=neighborhood]').length ) return;
 
         var html = '<select name="neighborhood" class="ui-dropdown">';
-        //var html = '<select name="neighborhood" class="' + ( ismobile || istablet ? 'ui-dropdown' : 'select2-dropdown city-page-select' ) + '">';
         html += '<option value="-1">All neighborhoods</option>';
         $.each(neighborhoods, function(index, neighborhood)
         {
