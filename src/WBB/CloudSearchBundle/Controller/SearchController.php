@@ -14,7 +14,7 @@ class SearchController extends Controller
     public function searchAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            //return $this->redirect($this->generateUrl(('homepage')));
+            return $this->redirect($this->generateUrl(('homepage')));
         }
 
         $entity = $request->query->get('entity', null);

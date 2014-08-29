@@ -2,9 +2,15 @@
 
 namespace WBB\UserBundle\Controller;
 
+use Ddeboer\DataImport\Reader\CsvReader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use WBB\BarBundle\Form\SemsoftType;
+use WBB\UserBundle\Entity\User;
 
 class UserController extends Controller
 {
@@ -17,6 +23,102 @@ class UserController extends Controller
             throw new \Exception;
         }
 
+    }
+
+    public function importFormAction()
+    {
+        $form = $this->createImportForm();
+
+        return $this->render('WBBBarBundle:Block:form.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    private function createImportForm()
+    {
+        $form = $this->createForm(new SemsoftType(), array(), array(
+            'action' => $this->generateUrl('wbb_users_import'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Import'));
+
+        return $form;
+    }
+
+    public function importAction(Request $request)
+    {
+        $form = $this->createImportForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $fullImport = true;
+
+            $em = $this->getDoctrine()->getManager();
+            $userManager = $this->container->get('fos_user.user_manager');
+            $file = $form->getData();
+
+            $file['file']->move('uploads/csv', 'users.csv');
+            $file = new \SplFileObject($this->container->getParameter('kernel.root_dir').'/../web/uploads/csv/users.csv');
+            $reader = new CsvReader($file, ',');
+            $outPut = $this->createOutPutStream();
+
+            $reader->setHeaderRowNumber(0);
+            foreach ($reader as $data)
+            {
+                try{
+                    $user = new User();
+
+                    $user
+                        ->setUsername($data['Pseudo'])
+                        ->setEmail($data['Email'])
+                        ->setBirthdate(new \DateTime($data['Birth Date']))
+                    ;
+
+                    if(trim($data['Password']) == '') {
+                        $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+                        $user->setConfirmationToken($tokenGenerator->generateToken());
+                        $data['Reset URL'] = $this->get('router')->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true);
+                        $user->setPassword($user->getConfirmationToken());
+                        $user->setPasswordRequestedAt(new \DateTime());
+                        fputcsv($outPut, $data, ',');
+                        $fullImport = false;
+                    }else{
+                        $user->setPassword($data['Password']);
+                    }
+
+                    $errors = $this->get('validator')->validate($user, array('wbb_user_import'));
+                    if(count($errors) > 0){
+                        fputcsv($outPut, $data, ',');
+                        $fullImport = false;
+                    }else{
+                        $userManager->updateUser($user, false);
+                    }
+
+                }catch (\Exception $e){
+                    fputcsv($outPut, $data, ',');
+                    $fullImport = false;
+                }
+            }
+            $em->flush();
+
+            if($fullImport){
+                $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Users successfully imported');
+                return new RedirectResponse($this->get('router')->generate('admin_wbb_user_user_list'));
+            }else{
+                $content = stream_get_contents($outPut);
+                fclose($outPut);
+
+                return new Response($content, 200, array(
+                    'Content-Type' => 'application/force-download',
+                    'Content-Disposition' => 'attachment; filename="export.csv"'
+                ));
+            }
+
+        }else{
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Errors during import : File not valid !');
+            return new RedirectResponse($this->get('router')->generate('sonata_admin_homepage'));
+        }
     }
 
     public function resendEmailConfirmationTokenAction()
@@ -140,5 +242,14 @@ class UserController extends Controller
                 'difference' => $nbResultsRemaining
             )
         );
+    }
+
+    private function createOutPutStream()
+    {
+        $handle = fopen('php://output', 'r+');
+
+        fputcsv($handle, array(
+            'Pseudo', 'Email', 'Password', 'Birth Date', 'Reset URL'), ',');
+        return $handle;
     }
 }
