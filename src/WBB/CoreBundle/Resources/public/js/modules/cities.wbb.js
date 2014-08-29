@@ -1,4 +1,3 @@
-
 /* The Namespace of the project */
 var wbb = wbb || {};
 
@@ -603,7 +602,7 @@ wbb.CitiesPage = function () {
 
         var html = '<select name="neighborhood" class="ui-dropdown">';
         //var html = '<select name="neighborhood" class="' + ( ismobile || istablet ? 'ui-dropdown' : 'select2-dropdown city-page-select' ) + '">';
-        html += '<option value="-1">All</option>';
+        html += '<option value="-1">All neighborhoods</option>';
         $.each(neighborhoods, function(index, neighborhood)
         {
             html += '<option value="'+neighborhood.slug+'">'+neighborhood.name+'</option>';
