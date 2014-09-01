@@ -5,7 +5,6 @@ namespace WBB\BarBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use WBB\BarBundle\Entity\Tip;
 use WBB\CoreBundle\Entity\City;
 use WBB\CoreBundle\Entity\CitySuburb;
 use WBB\UserBundle\Entity\User;
@@ -411,7 +410,6 @@ class Bar implements IndexableEntity
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
@@ -425,7 +423,7 @@ class Bar implements IndexableEntity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Bar
      */
     public function setName($name)
@@ -448,7 +446,7 @@ class Bar implements IndexableEntity
     /**
      * Set latitude
      *
-     * @param string $latitude
+     * @param  string $latitude
      * @return Bar
      */
     public function setLatitude($latitude)
@@ -471,7 +469,7 @@ class Bar implements IndexableEntity
     /**
      * Set longitude
      *
-     * @param string $longitude
+     * @param  string $longitude
      * @return Bar
      */
     public function setLongitude($longitude)
@@ -494,7 +492,7 @@ class Bar implements IndexableEntity
     /**
      * Set address
      *
-     * @param string $address
+     * @param  string $address
      * @return Bar
      */
     public function setAddress($address)
@@ -517,7 +515,7 @@ class Bar implements IndexableEntity
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param  string $phone
      * @return Bar
      */
     public function setPhone($phone)
@@ -540,7 +538,7 @@ class Bar implements IndexableEntity
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string $email
      * @return Bar
      */
     public function setEmail($email)
@@ -563,16 +561,14 @@ class Bar implements IndexableEntity
     /**
      * Set website
      *
-     * @param string $website
+     * @param  string $website
      * @return Bar
      */
     public function setWebsite($website)
     {
         if ((strpos($website,'http://') !== false) || (strpos($website,'https://') !== false)) {
             $this->website = $website;
-        }
-        else
-        {
+        } else {
             $this->website = 'http://'.$website;
         }
 
@@ -592,7 +588,7 @@ class Bar implements IndexableEntity
     /**
      * Set twitter
      *
-     * @param string $twitter
+     * @param  string $twitter
      * @return Bar
      */
     public function setTwitter($twitter)
@@ -615,7 +611,7 @@ class Bar implements IndexableEntity
     /**
      * Set facebook
      *
-     * @param string $facebook
+     * @param  string $facebook
      * @return Bar
      */
     public function setFacebook($facebook)
@@ -638,7 +634,7 @@ class Bar implements IndexableEntity
     /**
      * Set instagram
      *
-     * @param string $instagram
+     * @param  string $instagram
      * @return Bar
      */
     public function setInstagram($instagram)
@@ -661,7 +657,7 @@ class Bar implements IndexableEntity
     /**
      * Set isCreditCard
      *
-     * @param boolean $isCreditCard
+     * @param  boolean $isCreditCard
      * @return Bar
      */
     public function setCreditCard($isCreditCard)
@@ -684,7 +680,7 @@ class Bar implements IndexableEntity
     /**
      * Set isCoatCheck
      *
-     * @param boolean $isCoatCheck
+     * @param  boolean $isCoatCheck
      * @return Bar
      */
     public function setCoatCheck($isCoatCheck)
@@ -707,7 +703,7 @@ class Bar implements IndexableEntity
     /**
      * Set parking
      *
-     * @param string $parking
+     * @param  string $parking
      * @return Bar
      */
     public function setParking($parking)
@@ -730,7 +726,7 @@ class Bar implements IndexableEntity
     /**
      * Set price
      *
-     * @param integer $price
+     * @param  integer $price
      * @return Bar
      */
     public function setPrice($price)
@@ -753,16 +749,14 @@ class Bar implements IndexableEntity
     /**
      * Set menu
      *
-     * @param string $menu
+     * @param  string $menu
      * @return Bar
      */
     public function setMenu($menu)
     {
         if ((strpos($menu,'http://') !== false) || (strpos($menu,'https://') !== false)) {
             $this->menu = $menu;
-        }
-        else
-        {
+        } else {
             $this->menu = 'http://'.$menu;
         }
 
@@ -782,7 +776,7 @@ class Bar implements IndexableEntity
     /**
      * Set isReservation
      *
-     * @param boolean $isReservation
+     * @param  boolean $isReservation
      * @return Bar
      */
     public function setReservation($isReservation)
@@ -805,16 +799,14 @@ class Bar implements IndexableEntity
     /**
      * Set reservation
      *
-     * @param string $reservationLink
+     * @param  string $reservationLink
      * @return Bar
      */
     public function setReservationLink($reservationLink)
     {
         if ((strpos($reservationLink,'http://') !== false) || (strpos($reservationLink,'https://') !== false)) {
             $this->reservationLink = $reservationLink;
-        }
-        else
-        {
+        } else {
             $this->reservationLink = 'http://'.$reservationLink;
         }
 
@@ -828,13 +820,13 @@ class Bar implements IndexableEntity
      */
     public function getReservationLink()
     {
-        return $this->reservation;
+        return $this->reservationLink;
     }
 
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Bar
      */
     public function setDescription($description)
@@ -857,7 +849,7 @@ class Bar implements IndexableEntity
     /**
      * Set onTop
      *
-     * @param boolean $onTop
+     * @param  boolean $onTop
      * @return Bar
      */
     public function setOnTop($onTop)
@@ -880,7 +872,7 @@ class Bar implements IndexableEntity
     /**
      * Set status
      *
-     * @param integer $status
+     * @param  integer $status
      * @return Bar
      */
     public function setStatus($status)
@@ -903,7 +895,7 @@ class Bar implements IndexableEntity
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Bar
      */
     public function setCreatedAt($createdAt)
@@ -926,7 +918,7 @@ class Bar implements IndexableEntity
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Bar
      */
     public function setUpdatedAt($updatedAt)
@@ -949,7 +941,7 @@ class Bar implements IndexableEntity
     /**
      * Set user
      *
-     * @param User $user
+     * @param  User $user
      * @return Bar
      */
     public function setUser(User $user = null)
@@ -993,7 +985,7 @@ class Bar implements IndexableEntity
     /**
      * Add media
      *
-     * @param BarMedia $media
+     * @param  BarMedia $media
      * @return Bar
      */
     public function addMedia(BarMedia $media)
@@ -1028,7 +1020,7 @@ class Bar implements IndexableEntity
     /**
      * Set foursquare
      *
-     * @param string $foursquare
+     * @param  string $foursquare
      * @return Bar
      */
     public function setFoursquare($foursquare)
@@ -1051,7 +1043,7 @@ class Bar implements IndexableEntity
     /**
      * Set city
      *
-     * @param City $city
+     * @param  City $city
      * @return Bar
      */
     public function setCity(City $city = null)
@@ -1079,7 +1071,7 @@ class Bar implements IndexableEntity
     /**
      * Set seoDescription
      *
-     * @param string $seoDescription
+     * @param  string $seoDescription
      * @return Bar
      */
     public function setSeoDescription($seoDescription)
@@ -1102,7 +1094,7 @@ class Bar implements IndexableEntity
     /**
      * Set suburb
      *
-     * @param CitySuburb $suburb
+     * @param  CitySuburb $suburb
      * @return Bar
      */
     public function setSuburb(CitySuburb $suburb = null)
@@ -1125,7 +1117,7 @@ class Bar implements IndexableEntity
     /**
      * Set fsExcludedTips
      *
-     * @param array $fsExcludedTips
+     * @param  array $fsExcludedTips
      * @return Bar
      */
     public function setFsExcludedTips($fsExcludedTips)
@@ -1155,7 +1147,7 @@ class Bar implements IndexableEntity
 
     public function removeFsExcludedTips($hash)
     {
-        if(($key = array_search($hash, $this->fsExcludedTips)) !== false) {
+        if (($key = array_search($hash, $this->fsExcludedTips)) !== false) {
             unset($this->fsExcludedTips[$key]);
         }
     }
@@ -1193,7 +1185,7 @@ class Bar implements IndexableEntity
 
     public function removeFsSelectedImgs($hash)
     {
-        if(($key = array_search($hash, $this->fsSelectedImgs)) !== false) {
+        if (($key = array_search($hash, $this->fsSelectedImgs)) !== false) {
             unset($this->fsSelectedImgs[$key]);
         }
     }
@@ -1201,7 +1193,7 @@ class Bar implements IndexableEntity
     /**
      * Add openings
      *
-     * @param \WBB\BarBundle\Entity\BarOpening $openings
+     * @param  \WBB\BarBundle\Entity\BarOpening $openings
      * @return Bar
      */
     public function addOpening(\WBB\BarBundle\Entity\BarOpening $openings)
@@ -1234,7 +1226,7 @@ class Bar implements IndexableEntity
     /**
      * Add tips
      *
-     * @param \WBB\BarBundle\Entity\Tip $tips
+     * @param  \WBB\BarBundle\Entity\Tip $tips
      * @return Bar
      */
     public function addTip(\WBB\BarBundle\Entity\Tip $tips)
@@ -1257,17 +1249,18 @@ class Bar implements IndexableEntity
     /**
      * Get tips
      *
-     * @param bool $enabled
+     * @param  bool                                    $enabled
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTips($enabled = false)
     {
-        if($enabled){
+        if ($enabled) {
             $tips = array();
-            foreach($this->tips as $tip){
+            foreach ($this->tips as $tip) {
                 if($tip->getStatus() == 1)
                     $tips[] = $tip;
             }
+
             return $tips;
         }
 
@@ -1277,7 +1270,7 @@ class Bar implements IndexableEntity
     /**
      * Add tags
      *
-     * @param \WBB\BarBundle\Entity\Collections\BarTag $tags
+     * @param  \WBB\BarBundle\Entity\Collections\BarTag $tags
      * @return Bar
      */
     public function addTag(\WBB\BarBundle\Entity\Collections\BarTag $tags)
@@ -1310,7 +1303,7 @@ class Bar implements IndexableEntity
     /**
      * Set instagramExcludedImgs
      *
-     * @param array $instagramExcludedImgs
+     * @param  array $instagramExcludedImgs
      * @return Bar
      */
     public function setInstagramExcludedImgs($instagramExcludedImgs)
@@ -1340,7 +1333,7 @@ class Bar implements IndexableEntity
 
     public function removeInstagramExcludedImgs($hash)
     {
-        if(($key = array_search($hash, $this->instagramExcludedImgs)) !== false) {
+        if (($key = array_search($hash, $this->instagramExcludedImgs)) !== false) {
             unset($this->instagramExcludedImgs[$key]);
         }
     }
@@ -1348,13 +1341,13 @@ class Bar implements IndexableEntity
     public function getTagsIds()
     {
         $tags = array();
-        foreach($this->getTags() as $tag)
-        {
+        foreach ($this->getTags() as $tag) {
             if($tag->getTag())
                 $tags[] = $tag->getTag()->getId();
         }
 
         if(sizeof($tags)>0)
+
             return $tags;
         else
             return array(0);
@@ -1379,7 +1372,7 @@ class Bar implements IndexableEntity
     /**
      * Add bestofs
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     * @param  \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
      * @return Bar
      */
     public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
@@ -1412,7 +1405,7 @@ class Bar implements IndexableEntity
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Bar
      */
     public function setSlug($slug)
@@ -1460,6 +1453,7 @@ class Bar implements IndexableEntity
         }
 
         if($getMore)
+
             return $more;
         else
             return $init;
@@ -1478,7 +1472,7 @@ class Bar implements IndexableEntity
     /**
      * Add news
      *
-     * @param \WBB\BarBundle\Entity\News $news
+     * @param  \WBB\BarBundle\Entity\News $news
      * @return Bar
      */
     public function addNews(\WBB\BarBundle\Entity\News $news)
@@ -1503,14 +1497,15 @@ class Bar implements IndexableEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      **/
-    public function getNews(){
+    public function getNews()
+    {
         return $this->news;
     }
 
     /**
      * Add semsoftBars
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @param  \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
      * @return Bar
      */
     public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
@@ -1610,22 +1605,20 @@ class Bar implements IndexableEntity
         $dist = acos($dist);
         $dist = rad2deg($dist);
         $miles = $dist * 60 * 1.1515;
-        if($miles < 125){
+        if ($miles < 125) {
             $unit = strtoupper($unit);
             $response = " - ";
 
-            if($unit == "M" || $usCity){
+            if ($unit == "M" || $usCity) {
                 $response.= round($miles, 2)." Mi";
-            }
-            elseif($unit == "NM"){
+            } elseif ($unit == "NM") {
                 $response.= round(($miles * 0.8684), 2)." Nm";
-            }
-            else{
+            } else {
                 $response.= round(($miles * 1.609344), 2)." Km";
             }
 
             return $response;
-        }else{
+        } else {
             return '';
         }
     }
@@ -1637,11 +1630,10 @@ class Bar implements IndexableEntity
         return $result;
     }
 
-
     /**
      * Set energyLevel
      *
-     * @param Tag $energyLevel
+     * @param  Tag $energyLevel
      * @return Bar
      */
     public function setEnergyLevel($energyLevel)
@@ -1664,7 +1656,7 @@ class Bar implements IndexableEntity
     /**
      * Add toGoWith
      *
-     * @param \WBB\BarBundle\Entity\Tag $toGoWith
+     * @param  \WBB\BarBundle\Entity\Tag $toGoWith
      * @return Bar
      */
     public function addToGoWith(\WBB\BarBundle\Entity\Tag $toGoWith)
@@ -1697,7 +1689,7 @@ class Bar implements IndexableEntity
     /**
      * Set county
      *
-     * @param string $county
+     * @param  string $county
      * @return Bar
      */
     public function setCounty($county)
@@ -1720,7 +1712,7 @@ class Bar implements IndexableEntity
     /**
      * Set address2
      *
-     * @param string $address2
+     * @param  string $address2
      * @return Bar
      */
     public function setAddress2($address2)
@@ -1743,7 +1735,7 @@ class Bar implements IndexableEntity
     /**
      * Set googlePlus
      *
-     * @param string $googlePlus
+     * @param  string $googlePlus
      * @return Bar
      */
     public function setGooglePlus($googlePlus)
@@ -1766,7 +1758,7 @@ class Bar implements IndexableEntity
     /**
      * Set instagramId
      *
-     * @param string $instagramId
+     * @param  string $instagramId
      * @return Bar
      */
     public function setInstagramId($instagramId)
@@ -1789,7 +1781,7 @@ class Bar implements IndexableEntity
     /**
      * Set facebookCheckIns
      *
-     * @param integer $facebookCheckIns
+     * @param  integer $facebookCheckIns
      * @return Bar
      */
     public function setFacebookCheckIns($facebookCheckIns)
@@ -1812,7 +1804,7 @@ class Bar implements IndexableEntity
     /**
      * Set facebookLikes
      *
-     * @param integer $facebookLikes
+     * @param  integer $facebookLikes
      * @return Bar
      */
     public function setFacebookLikes($facebookLikes)
@@ -1835,7 +1827,7 @@ class Bar implements IndexableEntity
     /**
      * Set foursquareCheckIns
      *
-     * @param integer $foursquareCheckIns
+     * @param  integer $foursquareCheckIns
      * @return Bar
      */
     public function setFoursquareCheckIns($foursquareCheckIns)
@@ -1858,7 +1850,7 @@ class Bar implements IndexableEntity
     /**
      * Set foursquareLikes
      *
-     * @param integer $foursquareLikes
+     * @param  integer $foursquareLikes
      * @return Bar
      */
     public function setFoursquareLikes($foursquareLikes)
@@ -1881,7 +1873,7 @@ class Bar implements IndexableEntity
     /**
      * Set foursquareTips
      *
-     * @param integer $foursquareTips
+     * @param  integer $foursquareTips
      * @return Bar
      */
     public function setFoursquareTips($foursquareTips)
@@ -1904,7 +1896,7 @@ class Bar implements IndexableEntity
     /**
      * Set outDoorSeating
      *
-     * @param boolean $outDoorSeating
+     * @param  boolean $outDoorSeating
      * @return Bar
      */
     public function setOutDoorSeating($outDoorSeating)
@@ -1928,8 +1920,7 @@ class Bar implements IndexableEntity
     {
         $response = '';
 
-        for($i=1; $i <= $this->price; $i++)
-        {
+        for ($i=1; $i <= $this->price; $i++) {
             $response.= "$";
         }
 
@@ -1941,10 +1932,8 @@ class Bar implements IndexableEntity
         $openings = $this->getOpenings();
         $response = '';
 
-        foreach($openings as $op)
-        {
-            if($day == $op->getOpeningDay())
-            {
+        foreach ($openings as $op) {
+            if ($day == $op->getOpeningDay()) {
                 $response.= $op->getFromHour().'-'.$op->getToHour().',';
             }
         }
@@ -1952,17 +1941,17 @@ class Bar implements IndexableEntity
         return substr($response, 0, -1);
     }
 
-    private function getTagsByType($type){
+    private function getTagsByType($type)
+    {
         $tags = $this->getTags();
         $response = '';
 
-        foreach($tags as $tag)
-        {
-            if($tag->getType() == $type && $tag->getTag())
-            {
+        foreach ($tags as $tag) {
+            if ($tag->getType() == $type && $tag->getTag()) {
                 $response.= $tag->getTag()->getName().',';
             }
         }
+
         return substr($response, 0, -1);
     }
 
@@ -1998,8 +1987,8 @@ class Bar implements IndexableEntity
         $this->wifi = $wifi;
     }
 
-    private function prepareString($string){
-
+    private function prepareString($string)
+    {
         return str_replace(array("\r", "\n"), "", $string);
     }
 
@@ -2095,13 +2084,13 @@ class Bar implements IndexableEntity
     {
         $tags = array();
 
-        if($this->getEnergyLevel()){
+        if ($this->getEnergyLevel()) {
             $tags[] = $this->getEnergyLevel();
         }
         $tmps = $this->getTags();
 
-        foreach($tmps as $tmp){
-            if($tmp->getType() != Tag::WBB_TAG_TYPE_BEST_COCKTAILS){
+        foreach ($tmps as $tmp) {
+            if ($tmp->getType() != Tag::WBB_TAG_TYPE_BEST_COCKTAILS) {
                 $tags[] = $tmp->getTag();
             }
         }
@@ -2112,7 +2101,7 @@ class Bar implements IndexableEntity
     /**
      * Get creditCard
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCreditCard()
     {
@@ -2122,7 +2111,7 @@ class Bar implements IndexableEntity
     /**
      * Get coatCheck
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCoatCheck()
     {
@@ -2132,7 +2121,7 @@ class Bar implements IndexableEntity
     /**
      * Get reservation
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getReservation()
     {
@@ -2142,7 +2131,7 @@ class Bar implements IndexableEntity
     /**
      * Add usersFavorite
      *
-     * @param \WBB\UserBundle\Entity\User $usersFavorite
+     * @param  \WBB\UserBundle\Entity\User $usersFavorite
      * @return Bar
      */
     public function addUsersFavorite(\WBB\UserBundle\Entity\User $usersFavorite)
@@ -2165,7 +2154,7 @@ class Bar implements IndexableEntity
     /**
      * Get usersFavorite
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsersFavorite()
     {
@@ -2175,7 +2164,7 @@ class Bar implements IndexableEntity
     /**
      * Set ranking
      *
-     * @param integer $ranking
+     * @param  integer $ranking
      * @return Bar
      */
     public function setRanking($ranking)
@@ -2188,7 +2177,7 @@ class Bar implements IndexableEntity
     /**
      * Get ranking
      *
-     * @return integer 
+     * @return integer
      */
     public function getRanking()
     {

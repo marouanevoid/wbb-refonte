@@ -168,7 +168,7 @@ services:
 
     wbb.instagram.feed:
         class: %wbb_feed.instagram.class%
-        arguments: [ @service_container, @doctrine.orm.entity_manager, %feeds_limit% , %instagram_client_id%]
+        arguments: [ @doctrine.orm.entity_manager, %feeds_limit% , %instagram_client_id%]
 
     #Repositories
     bar.repository:
@@ -217,7 +217,7 @@ services:
     sonata.media.resizer.custom:
         class: WBB\BarBundle\Resizer\CustomResizer
         arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
-    
+
     wbb.twig.favorite_extension:
         class: WBB\BarBundle\Twig\Extension\FavoriteExtension
         arguments:
@@ -228,6 +228,7 @@ services:
     wbb.tips.event_listener:
         class: WBB\BarBundle\EventListener\TipsListener
         arguments:
+            - "@service_container"
             - "@swiftmailer.mailer.default"
             - "@router"
             - "@twig"

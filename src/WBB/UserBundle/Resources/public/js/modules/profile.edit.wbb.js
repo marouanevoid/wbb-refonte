@@ -2,25 +2,7 @@ function readImage(input) {
     if ( input.files && input.files[0] ) {
         var FR= new FileReader();
         FR.onload = function(e) {
-            var tempImage = new Image();
-            tempImage.src = e.target.result;
-            var height = tempImage.height;
-            var width = tempImage.width;
-            if (height > 145) { // max height for our purposes is 145 pixels
-                width = width / (height / 145);
-                height = 145;
-            }
-            if (width > 145) { // max width for our purposes is 145 pixels
-                height = height / (width / 145);
-                width = 145;
-            }
-            var c = document.createElement('canvas');
-            c.width = width;
-            c.height = height;
-            var ctx = c.getContext("2d");
-            ctx.drawImage(tempImage, 0, 0, width, height);
-            var b64str = c.toDataURL("image/jpeg"); // grab a base64 copy of the resized image as a jpeg
-            $('#avatar-img').attr("src", b64str );
+            $('#avatar-img').attr("src", e.target.result );
         };
         FR.readAsDataURL( input.files[0] );
     }
@@ -30,10 +12,12 @@ $(function(){
 
     if($('#fos_user_profile_form_country').hasClass('error')){
         $('#edit_profile_form .country-dropdown .ui-dropdown').addClass('error');
+        $('#edit_profile_form .country-dropdown .select2-choice').addClass('error');
     }
 
     if($('.date-birthday').hasClass('error')){
         $('.date-birthday .ui-dropdown').addClass('error');
+        $('.date-birthday .select2-choice').addClass('error');
     }
 
     if($('#message').length && $('#message').hasClass('show'))
@@ -65,6 +49,7 @@ $(function(){
             dataType: "json",
             success: function(msg) {
                 if(msg.code === 200){
+                    _that.attr('style', 'margin-right: 60px;');
                     _that.html("Confirmation email sent !");
                     setTimeout(function() { _that.fadeOut("slow") }, 5000);
                 }
@@ -88,26 +73,22 @@ $(function(){
 
     $(".auto-city").autocomplete({
         source: Routing.generate('wbb_cities_by_name'),
-        minLength: 2,
-        select: function (event, ui) { }
+        minLength: 2
     });
 
     $(".auto-bars").autocomplete({
         source: Routing.generate('wbb_bars_by_name'),
-        minLength: 2,
-        select: function (event, ui) { }
+        minLength: 2
     });
 
     $(".auto-brands").autocomplete({
         source: Routing.generate('wbb_tags_by_type_and_name', {'type': 6}),
-        minLength: 2,
-        select: function (event, ui) { }
+        minLength: 2
     });
 
     $(".auto-cocktails").autocomplete({
         source: Routing.generate('wbb_tags_by_type_and_name', {'type': 3}),
-        minLength: 2,
-        select: function (event, ui) {  }
+        minLength: 2
     });
 
 });

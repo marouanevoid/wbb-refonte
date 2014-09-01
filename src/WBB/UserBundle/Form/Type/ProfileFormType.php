@@ -4,9 +4,7 @@ namespace WBB\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
-use WBB\BarBundle\Entity\Tag;
 
 class ProfileFormType extends BaseType
 {
@@ -30,6 +28,7 @@ class ProfileFormType extends BaseType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention'  => 'profile',
+            'cascade_validation' => true
         ));
     }
 

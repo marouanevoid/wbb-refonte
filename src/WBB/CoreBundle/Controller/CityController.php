@@ -23,8 +23,7 @@ class CityController extends Controller
 
         $response = array();
 
-        foreach($cities as $city)
-        {
+        foreach ($cities as $city) {
             $response[] = array(
                 'id'        => $city->getId(),
                 'name'      => $city->getName() .', '. $city->getCountry(),
@@ -47,8 +46,7 @@ class CityController extends Controller
 
         $response = array();
 
-        foreach($city->getSuburbs() as $suburb)
-        {
+        foreach ($city->getSuburbs() as $suburb) {
             $response[] = array(
                 'id'        => $suburb->getId(),
                 'name'      => $suburb->getName(),
@@ -69,8 +67,7 @@ class CityController extends Controller
 
         $response = array();
 
-        foreach($cities as $city)
-        {
+        foreach ($cities as $city) {
             $response[$city->getName().'/'.$city->getCountry()] = $city->getName().'/'.$city->getCountry();
         }
 
@@ -103,9 +100,9 @@ class CityController extends Controller
         $session->set('userLatitude', $latitude);
         $session->set('userLongitude', $longitude);
 
-        if($city){
+        if ($city) {
             $user = $this->getUser();
-            if($user){
+            if ($user) {
                 $user->setPrefStartCity($city);
                 $user->setCountry($city->getCountry());
                 $user->setLatitude($latitude);
@@ -118,6 +115,7 @@ class CityController extends Controller
 
             $session->set('citySlug', $city->getSlug());
             $session->set('citySlugGeo', $city->getSlug());
+
             return new JsonResponse(array(
                 'id'        => $city->getId(),
                 'name'      => $city->getName(),
@@ -125,8 +123,7 @@ class CityController extends Controller
                 'latitude'  => $city->getLatitude(),
                 'longitude' => $city->getLongitude()
             ));
-        }
-        else{
+        } else {
             return new JsonResponse(array(
                 'message' => 'No near city found!'
             ));
@@ -139,14 +136,8 @@ class CityController extends Controller
     {
         if($suburbSlug=='undefined' || $suburbSlug == "-1")
             $suburbSlug= null;
-        if($citySlug != "")
-        {
+        if ($citySlug != "") {
             $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
-
-            //$suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
-            //if ($suburbID == 0)
-            //  $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
-            //else
             $suburb = null;
             if ($suburbSlug)
                 $suburb = $this->container->get('suburb.repository')->findOneBySlug($suburbSlug);
@@ -156,8 +147,7 @@ class CityController extends Controller
             $suburbs = $this->container->get('suburb.repository')->findByCityWithBars($city);
             $result = array('bars' => array(), 'suburbs' => array());
 
-            foreach($bars as $bar)
-            {
+            foreach ($bars as $bar) {
                 $address = $city->getName();
                 $suburbBar = $bar->getSuburb();
                 if (!empty($suburbBar))
@@ -186,8 +176,7 @@ class CityController extends Controller
                 );
             }
 
-            foreach($suburbs as $suburb)
-            {
+            foreach ($suburbs as $suburb) {
                 $result['suburbs'][] = array(
                     'id'    => $suburb->getId(),
                     'name'  => $suburb->getName(),
@@ -199,9 +188,9 @@ class CityController extends Controller
                 'code'          => 200,
                 'bars'          => $result['bars'],
                 'neighborhoods' => $result['suburbs'],
-                'city'      => array( "name" => $city->getName() .', '. $city->getCountry(), "id" => $city->getId()) 
+                'city'      => array( "name" => $city->getName() .', '. $city->getCountry(), "id" => $city->getId())
             ));
-        }else{
+        } else {
             return new JsonResponse(array(
                 'code'      => 500,
                 'message'   => 'City or Suburb not valide.'
@@ -213,11 +202,11 @@ class CityController extends Controller
     private function arrayTagsToString($tags)
     {
         $result = "";
-        foreach($tags as $tag)
-        {
+        foreach ($tags as $tag) {
             if($tag->getTag())
                 $result .= $tag->getTag()->getName().', ';
         }
+
         return substr($result, 0, -2);
     }
 
@@ -225,10 +214,10 @@ class CityController extends Controller
     {
         $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
         $medias = $bar->getMedias();
-        foreach($medias as $media)
-        {
-            return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'default_slider_large');
+        foreach ($medias as $media) {
+            return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'bar_640_480');
         }
+
         return null;
     }
 }

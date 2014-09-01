@@ -1,7 +1,7 @@
-#FOS\UserBundle\Form\Model\ChangePassword:
-#    properties:
-#        current:
-#            - NotBlank: { message: "3emerni", groups: [ChangePassword, Default]}
+WBB\UserBundle\Entity\User:
+    properties:
+        username:
+            - NotBlank: { message: "not.blank", groups: [profile_light]}
 
 #FOS\UserBundle\Form\Model\ChangePassword:
 #    properties:

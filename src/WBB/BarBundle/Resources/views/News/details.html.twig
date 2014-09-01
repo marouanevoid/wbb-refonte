@@ -161,7 +161,7 @@
         <table>
             <tr>
                 {% if not is_mobile() or is_tablet() %}
-                    <td>
+                    <td valign="top" style="vertical-align: top">
                         {% if oneTopCity %}
                             <div class="city-selector h3">
                                 You are in
@@ -174,19 +174,19 @@
                     <h1 itemprop="name">{{ news.title }}</h1>
                 </td>
 
-                <td class="star-share">
+                <td valign="top" class="star-share" style="vertical-align: top">
                     <a id="share" class="btn-round brown share" href="#0"></a>
                 </td>
             </tr>
         </table>
         <div id="share-pop" class="wrap-share {% if is_mobile() and not is_tablet() %}mobile popup{% endif %}" style="display:none">
-            <div class="social-share radius-max">
+            <div class="social-share {% if is_mobile() and not is_tablet() %}no-radius-max{% else %}radius-max{% endif %}">
                 <div class="share-label left bold">SHARE</div>
                 <ul>
                     <li class="left"><a href="#0" class="fb-share">Post</a></li>
                     <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
-                    {% if is_mobile() and not is_tablet() %}
-                        {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL  %}
+                    {% if is_mobile() and not is_tablet() and not is_ios() %}
+                        {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world %0a Click here to check this news : " ~ bitlyURL  %}
                         <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                     {% else %}
                         <li class="left">
@@ -213,7 +213,7 @@
                     {% if m.media.providerName == 'sonata.media.provider.youtube' %}
                         <iframe width="100%" height="480" src="http://www.youtube.com/embed/{{ m.media.providerReference }}?autoplay=0&modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light&wmode=transparent" frameborder="0"  class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" allowfullscreen ></iframe>
                     {% else %}
-                        <img src="{% path m.media, 'news_770_578' %}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
+                        <img src="{{ showImage(m.media, 'news_770_578') }}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
                     {% endif %}
                 {% endfor %}
                 {% if is_mobile() and not is_tablet() %}
@@ -222,7 +222,7 @@
                     {% if is_mobile() and not is_tablet() %}
                         {% if news.sponsorImage %}
                             <div class="block padding-top-10">
-                                <img src="{% path news.sponsorImage, 'sponsor_368_168' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
+                                <img src="{{ showImage(news.sponsorImage, 'sponsor_368_168') }}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
                             </div>
                         {% endif %}
                     {% endif %}
@@ -277,7 +277,12 @@
                             <ul>
                                 <li><a href="#0" class="fb-share">Post</a></li>
                                 <li><a href="#0" class="twitter-share">Tweet</a></li>
-                                <li><a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a></li>
+                                {% if is_mobile() and not is_tablet() and not is_ios() %}
+                                    {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world Click here to check this news : " ~ bitlyURL  %}
+                                    <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
+                                {% else %}
+                                    <li class="left"><a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -372,6 +377,11 @@
                         UTILS._resizeCover();
                     },1000);
                 });
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $
+                })
             </script>
         </div>
     </section>

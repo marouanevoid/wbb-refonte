@@ -11,7 +11,7 @@ class TipType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,7 +22,7 @@ class TipType extends AbstractType
                 'required' => false,
                 'attr' => array(
                     'class'         => 's-margin-top',
-                    'placeholder'   => 'Type a tip ...',
+                    'placeholder'   => 'Write your tip ...',
                     'maxlength'     => '250',
                     'minlength'     => '1'
                 )
@@ -30,7 +30,7 @@ class TipType extends AbstractType
             ->add($builder->create('bar', 'hidden')->addModelTransformer(new EntityToIDTransformer($em, 'WBBBarBundle', 'Bar')))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

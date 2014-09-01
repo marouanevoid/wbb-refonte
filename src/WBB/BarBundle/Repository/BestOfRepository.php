@@ -17,13 +17,11 @@ class BestOfRepository extends EntityRepository
     public function findYouMayAlsoLike(BestOf $bestof, $city = null, $limit = 3, $forceTags = true, $excluded = array())
     {
         $ids = array($bestof->getId());
-        foreach($bestof->getBestofs() as $excludedBestof)
-        {
+        foreach ($bestof->getBestofs() as $excludedBestof) {
             if($excludedBestof)
                 $ids[] = $excludedBestof->getId();
         }
-        foreach($excluded as $excludedBestof)
-        {
+        foreach ($excluded as $excludedBestof) {
             if($excludedBestof)
                 $ids[] = $excludedBestof->getId();
         }
@@ -43,7 +41,7 @@ class BestOfRepository extends EntityRepository
                 ->andWhere($qb->expr()->eq('c.id', $bestof->getCity()->getId()));
         }
 
-        if($bestof->getByTag() && $forceTags){
+        if ($bestof->getByTag() && $forceTags) {
             $qb
                 ->addSelect('(count(t.id) + count(tgw.id)) as HIDDEN nbTags')
                 ->leftjoin($this->getAlias().'.energyLevel', 'el')
@@ -86,11 +84,11 @@ class BestOfRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
@@ -111,19 +109,19 @@ class BestOfRepository extends EntityRepository
             ->orderBy($this->getAlias().'.onTop', 'DESC')
         ;
 
-        if($onlyOnTop){
+        if ($onlyOnTop) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($limit){
+        if ($limit) {
             $qb->setMaxResults($limit);
         }
 
-        if($favoris){
+        if ($favoris) {
             $qb
                 ->addSelect('COUNT(uf) as HIDDEN nbFavoris')
                 ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
@@ -145,15 +143,15 @@ class BestOfRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($user){
+        if ($user) {
             $qb
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
                 ->andWhere($qb->expr()->eq('uf.id', $user->getId()));
@@ -174,19 +172,19 @@ class BestOfRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($user){
+        if ($user) {
             $qb
-                ->addSelect('-c.name AS HIDDEN inverseNames')
+//                ->addSelect('-c.name AS HIDDEN inverseNames')
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
                 ->andWhere($qb->expr()->eq('uf.id', $user->getId()))
-                ->orderBy('inverseNames', 'DESC')
-                ->addOrderBy($this->getAlias().'.name', 'ASC')
-                ->groupBy($this->getAlias())
-                ->addGroupBy('c')
+//                ->orderBy('inverseNames', 'DESC')
+                ->addOrderBy('c.name', 'ASC')
+//                ->groupBy($this->getAlias())
+//                ->addGroupBy('c')
             ;
         }
 
@@ -204,19 +202,19 @@ class BestOfRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($onTop){
+        if ($onTop) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($user){
+        if ($user) {
             $qb
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
                 ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
@@ -247,4 +245,4 @@ class BestOfRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-} 
+}

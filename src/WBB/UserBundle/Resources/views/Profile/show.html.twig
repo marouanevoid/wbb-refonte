@@ -27,7 +27,7 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                {% elseif user.prefStartCity or user.country %}
+                                {% elseif user.prefStartCity %}
                                     <div class="text-transform-capitalize text-align-center margin-top-20">
                                         <div class="city"><img src="{{ asset('bundles/wbbcore/images/UI/icon_map.jpg') }}">
                                             {% if user.prefStartCity %}
@@ -57,12 +57,12 @@
                             {% set favBars = user.favoriteBars|length %}
                             {% set favBestofs = user.favoriteBestOfs|length %}
                             {% set favTips = user.tips|length %}
-                            <input type="radio" name="filter" data-count="{{ favBars }}" data-tab="bars" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"
-                                   value="{% if favBars > 0 %}({{ favBars }}) Bar{% if favBars > 1 %}s{% endif %}{% else %}No Bar{% endif %}" />
-                            <input type="radio" name="filter" data-count="{{ favBestofs }}" data-tab="bestof" class="ui-radio" data-color="brown" data-type="collapsed"
-                                   value="{% if favBestofs > 0 %}({{ favBestofs }}) collection{% if favBestofs > 1 %}s{% endif %}{% else %}No Collection{% endif %}" />
-                            <input type="radio" name="filter" data-count="{{ favTips }}" data-tab="tips" class="ui-radio" data-color="brown" data-type="collapsed"
-                                   value="{% if favTips > 0 %}({{ favTips }}) tip{% if favTips > 1 %}s{% endif %}{% else %}No Tip{% endif %}"/>
+                            <input type="radio" name="filter" data-count="{{ favBars }}" data-tab="bars" class="ui-radio js-tab-show-bar" data-color="brown" data-type="collapsed" checked="checked"
+                                   value="{% if favBars > 0 %}({{ favBars }}){% if is_mobile() and not is_tablet() %}<br/>{% endif %} Bar{% if favBars > 1 %}s{% endif %}{% else %}No Bar{% endif %}" />
+                            <input type="radio" name="filter" data-count="{{ favBestofs }}" data-tab="bestof" class="ui-radio js-tab-show-bestof" data-color="brown" data-type="collapsed"
+                                   value="{% if favBestofs > 0 %}({{ favBestofs }}){% if is_mobile() and not is_tablet() %}<br/>{% endif %} collection{% if favBestofs > 1 %}s{% endif %}{% else %}No Collection{% endif %}" />
+                            <input type="radio" name="filter" data-count="{{ favTips }}" data-tab="tips" class="ui-radio js-tab-show-tips" data-color="brown" data-type="collapsed"
+                                   value="{% if favTips > 0 %}({{ favTips }}){% if is_mobile() and not is_tablet() %}<br/>{% endif %}  tip{% if favTips > 1 %}s{% endif %}{% else %}No Tip{% endif %}"/>
                             <div class="clear"></div>
                         </div>
                     </div> <!-- .filter-profil -->
@@ -136,7 +136,7 @@
                                 <div class="container">
                                     <div>
                                         <ul class="list-tips padding-top-30">
-                                        </ul>   
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="clear"></div>

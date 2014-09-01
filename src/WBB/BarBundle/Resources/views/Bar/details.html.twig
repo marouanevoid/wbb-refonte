@@ -31,11 +31,12 @@
 
 
 {% block javascripts %}
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en"></script>
     <script type="text/javascript">
         var _bar = {{ bar.id }};
         var _offset = 0;
         var _limit = 3;
+        var _excluded = 0;
         var is_mobile = 0;
         {% if is_mobile() and not is_tablet() %}
         is_mobile = 1;
@@ -245,20 +246,20 @@
                         <h3>{{ bar.suburb.name|default('Unspecified') }}, {{ bar.city.name|default('Unspecified') }}</h3>
                     </td>
 
-                    <td class="star-share">
-                        <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round brown star {% if is_favorite(app.user, bar) %}active changed{% endif %} " data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
+                    <td valign="top" class="star-share" style="vertical-align: top">
+                        <a data-id="{{ bar.id }}" data-type="{{ entity_light_type(bar) }}" class="btn-round star brown {% if is_favorite(app.user, bar) %}active changed{% endif %} " data-name="{{ bar.name }}" href="{{ favorite_url(app.user, bar) }}"></a>
                         <a id="share" class="btn-round brown share" href="#0"></a>
                     </td>
                 </tr>
             </table>
             <div id="share-pop" class="wrap-share {% if is_mobile() and not is_tablet() %}mobile popup{% endif %}" style="display:none">
-                <div class="social-share radius-max">
+                <div class="social-share {% if is_mobile() and not is_tablet() %}no-radius-max{% else %}radius-max{% endif %}">
                     <div class="share-label left bold">SHARE</div>
                     <ul>
                         <li class="left"><a href="#0" class="fb-share">Post</a></li>
                         <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
-                        {% if is_mobile() and not is_tablet() %}
-                            {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world Click here to check this bar: " ~ bitlyURL %}
+                        {% if is_mobile() and not is_tablet() and not is_ios() %}
+                            {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world %0a Click here to check this bar: " ~ bitlyURL %}
                             <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
                             <li class="left">
@@ -287,7 +288,7 @@
                         <div class="image">
                             <div class="content">
                                 <div class="overlay"></div>
-                                <img src="{% path m.media, 'slider_large' %}" />
+                                <img src="{% path m.media, 'bar_640_480' %}" />
                             </div>
                         </div>
                     {% endif %}
@@ -301,7 +302,7 @@
                             <div class="image">
                                 <div class="content">
                                     <div class="overlay"></div>
-                                    <img src="" data-src="{% path m.media, 'slider_small' %}" itemprop="photo"/>
+                                    <img src="" data-src="{% path m.media, 'bar_425_320' %}" itemprop="photo"/>
                                 </div>
                             </div>
                         {% endif %}
@@ -313,11 +314,11 @@
     <div class="container">
         <section class="content">
             <!-- MAIN CONTENT -->
-            <article class="main">
-                {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 l-margin-top mobile-out">About the bar</div>{% endif %}
-                <div class="eight columns l-margin-top">
-
-                    <ul class="trends margin-bottom-40">
+            <article class="main l-margin-top">
+                <div class="eight columns">
+                    {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 mobile-out">About the bar</div>{% endif %}
+                    <div class="clear"></div>
+                    <ul class="trends margin-top-20 margin-bottom-20">
                         <li>At a Glance :</li>
                         {% for tr in bar.tagsToShow |slice(0, 5) %}
                             <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
@@ -378,9 +379,9 @@
                 </div>
                 <!-- ASIDE -->
                 <aside class="columns four">
-                    <div class="block informations">
+                    <div class="block informations margin-top-5">
                         <div class="contain">
-                            <div class="gmap" id="gmap" style="height:124px; width:100%;">
+                            <div class="gmap" id="gmap" style="height:154px; width:100%;">
 
                             </div>
                             <p>
@@ -515,7 +516,7 @@
     </section>
 
     <script type="text/javascript">
-        // remove desibled 
+        // remove desibled
         $('article.tip .form form input[type="submit"]').removeAttr('disabled');
         $('article.tip .form form input[type="submit"]').removeClass('loading');
         new meta.Form(
@@ -563,7 +564,7 @@
 
                         }, 2000);
                     }
-                }); 
+                });
 
         $('form#tips textarea').on('change input paste keyup', function()
         {

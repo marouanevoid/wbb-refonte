@@ -3,7 +3,7 @@
         <article class="bar-w-pic-list">
             <div class="three columns s-margin-top">
                 <div class="bar-w-pic list">
-                    <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star brown {% if is_favorite(app.user, b) %}active changed{% else %}dark{% endif %}"></a>
+                    <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star dark {% if is_favorite(app.user, b) %}active changed{% endif %}"></a>
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                     {% if b.medias|length>0 %}
                         {% for m in b.medias|slice(0,1) %}
@@ -17,7 +17,7 @@
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top">
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">
-                        {{ b.name }}
+                        {{ b.name|slice(0, 25) }}{% if b.name|length > 25 %}...{% endif %}
                         {% if distance is defined and distance|length>0 and distance.city is not null %}
                             {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
                         {% endif %}
@@ -42,4 +42,3 @@
         </article>
 {% endfor %}
 </div>
-

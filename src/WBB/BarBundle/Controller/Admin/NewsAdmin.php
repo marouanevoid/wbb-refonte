@@ -8,18 +8,18 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class NewsAdmin extends Admin {
-
+class NewsAdmin extends Admin
+{
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper){
+    protected function configureListFields(ListMapper $listMapper)
+    {
         $listMapper
             ->addIdentifier('title')
-//            ->add('shareText', null, array('editable' => true))
             ->add('quoteAuthor', null, array('editable' => true))
-            ->add('quoteText', null, array('editable' => true))
-            ->add('seoDescription', null, array('editable' => true))
+            ->add('quoteText', null, array('label'=> 'Quote', 'editable' => true))
+            ->add('seoDescription', null, array('label'=> 'Short description', 'editable' => true))
             ->add('interview', null, array('editable' => true))
             ->add('onTop', null, array('editable' => true))
             ->add('createdAt', null, array('editable' => true))
@@ -30,15 +30,15 @@ class NewsAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper){
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    {
         $filterMapper
             ->add('id')
             ->add('title')
-//            ->add('shareText')
             ->add('quoteAuthor')
-            ->add('quoteText')
-            ->add('seoDescription')
-            ->add('richDescription')
+            ->add('quoteText', null, array('label'=> 'Quote'))
+            ->add('seoDescription', null, array('label'=> 'Short description'))
+            ->add('richDescription', null, array('label'=> 'News content'))
             ->add('interview')
             ->add('onTop')
         ;
@@ -47,12 +47,12 @@ class NewsAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper){
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
         $showMapper
             ->with('General')
                 ->add('id')
                 ->add('title')
-//                ->add('shareText')
                 ->add('quoteAuthor')
                 ->add('quoteText')
                 ->add('seoDescription')
@@ -68,16 +68,16 @@ class NewsAdmin extends Admin {
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper){
+    protected function configureFormFields(FormMapper $formMapper)
+    {
         $formMapper
             ->with('General')
-                ->add('user', 'sonata_type_model', array('btn_add' => false))
+                ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
                 ->add('title', null, array('help'=> 'Mandatory', 'label'=> 'Title *'))
-//                ->add('shareText', null, array('help'=> 'Mandatory', 'label'=> 'Share text *'))
                 ->add('quoteAuthor')
-                ->add('quoteText')
-                ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
-                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
+                ->add('quoteText', null, array('label'=> 'Quote'))
+                ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'Short description *'))
+                ->add('richDescription', 'textarea', array('label'=>'News Content *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
                 ->add('interview', null, array('label' => 'Interview'))
                 ->add('onTop')
 
@@ -121,8 +121,9 @@ class NewsAdmin extends Admin {
             ->end()
         ;
     }
-    
-    public function getNewInstance(){
+
+    public function getNewInstance()
+    {
         $newInstance = parent::getNewInstance();
         $newInstance->setInterview(true);
         $newInstance->setOnTop(true);
@@ -132,11 +133,11 @@ class NewsAdmin extends Admin {
 
     public function prePersist($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setNews($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }
@@ -145,11 +146,11 @@ class NewsAdmin extends Admin {
 
     public function preUpdate($object)
     {
-        if($object->getMedias()){
+        if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if($media && $media->getMedia()){
+                if ($media && $media->getMedia()) {
                     $media->setNews($object);
-                }else{
+                } else {
                     $object->removeMedia($media);
                 }
             }

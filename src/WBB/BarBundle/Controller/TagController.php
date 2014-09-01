@@ -5,7 +5,6 @@ namespace WBB\BarBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use WBB\BarBundle\Entity\Tag;
 
 class TagController extends Controller
 {
@@ -13,14 +12,14 @@ class TagController extends Controller
     {
         $html = "";
         $tags = null;
-        if($typeID > 0){
+        if ($typeID > 0) {
             $tags = $this->get('tag.repository')->findByType($typeID);
-        }else{
+        } else {
             return new JsonResponse(array());
         }
 
         $i = 1;
-        foreach($tags as $tag){
+        foreach ($tags as $tag) {
             if($tagID == $tag->getId())
                 $html .= '<option value="'.$tag->getId().'" selected>'.$tag->getName().'</option>';
             else

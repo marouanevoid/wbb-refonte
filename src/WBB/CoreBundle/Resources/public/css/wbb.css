@@ -317,6 +317,27 @@ aside > article.interview-frist-child{ margin-top:0 !important; }
     top: 1px;
 }
 
+
+/*
+* Loader login facebook
+**/
+#register-light #login_form.loading #facebook-signup{
+    display: none;
+
+}
+#register-light #login_form.loading .loading-login-fb{
+    display: block;
+}
+
+.loading-login-fb{
+    display: none;
+/*    left: 46%;
+    position: relative;
+    top: 10px;*/
+    margin-bottom: 10px;
+    margin-left: 46%;
+    margin-top: 3%;
+}
 /*
 * Profile
 Loader flux
@@ -466,6 +487,9 @@ end added by Jérome
 ***/
 
 
+.mobile .ui-dropdown-container .ui-dropdown.drop-dark:hover,.mobile .ui-dropdown-container .ui-dropdown.drop-dark.active{
+    background-color: transparent !important;
+}
  #register.page .group-actions.loading .form-submit,#register.page.mobile #create-account .group-actions.loading .form-submit{
     display: none;
 }
@@ -480,7 +504,31 @@ end added by Jérome
  }
 
 
-#floatingBarsG, .floatingBarsG{
+.more-bars , .more-bestofs, .more-tips{
+    display: none;
+}
+
+
+
+.select2-drop-mask.showingpopin {
+    z-index: 99999997;
+}
+
+
+/* 
+Hide the mask added by gérome
+*/
+
+.mobile .search-bar-mobile.no-height{
+    height: 0 !important;
+    z-index: 99999999;
+}
+
+.mobile .showing-search{
+    z-index: 99999998; 
+}
+
+#floatingBarsG, .floatingBarsG,.floatingBarsG_fb{
 position:relative;
 width:20px;
 height:25px}

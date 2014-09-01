@@ -3,7 +3,7 @@
         <article class="bar-w-pic-list bestof-item-container">
             <div class="three columns s-margin-top">
                 <div class="bar-w-pic list">
-                    <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star brown {% if is_favorite(app.user, b) %}active changed{% else %}dark{% endif %}"></a>
+                    <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star dark {% if is_favorite(app.user, b) %}active changed{% endif %}"></a>
                     {% if b.city %}
                         <a href="{{ path('wbb_bar_bestof_local', {bestOfSlug: b.slug, citySlug: b.city.slug}) }}" class="overlay-link"></a>
                     {% else %}
@@ -19,7 +19,7 @@
                     {% else %}
                         <a href="{{ path('wbb_bar_bestof_global', {bestOfSlug: b.slug}) }}" class="overlay-link"></a>
                     {% endif %}
-                        {{ b.name }}
+                        {{ b.name|slice(0, 25) }}{% if b.name|length > 25 %}...{% endif %}
                     </a>
                 </h2>
                 <h3 class="xs-margin-top"><a href="#0">{% if b.city %}{{ b.city.name }}{% endif %}</a></h3>

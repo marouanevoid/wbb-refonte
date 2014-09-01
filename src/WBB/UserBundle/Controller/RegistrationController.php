@@ -5,7 +5,6 @@ namespace WBB\UserBundle\Controller;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,177 +25,12 @@ class RegistrationController extends ContainerAware
 
     public function registerAction(Request $request)
     {
-        $securityContext = $this->container->get('security.context');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
-        }
-
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->container->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
-
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
-
-        if ($request->getMethod() == 'POST' && $request->query->get('fromFb', null)) {
-            $facebook = $this->container->get('fos_facebook.api');
-            $facebookId = $facebook->getUser();
-            if ($facebookId != 0) {
-                $data = $facebook->api('/me/picture?redirect=0&type=large');
-                $user->setFBData(array(
-                    'id' => $facebookId,
-                    'picture' => $data['data']['url']
-                ));
-            }
-        }
-
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-
-        if (null !== $event->getResponse()) {
-            return $event->getResponse();
-        }
-
-        $form = $formFactory->createForm();
-        $form->setData($user);
-
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
-
-            if ($form->isValid()) {
-                $event = new FormEvent($form, $request);
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
-                $user->setEnabled(true);
-                $userManager->updateUser($user);
-
-                if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
-                    $response = new RedirectResponse($url);
-                }
-
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
-//                $session = $this->container->get('session');
-//                $session->save();
-
-                return $response;
-            } else {
-                $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
-                $fields = array();
-                $messages = array();
-
-                foreach ($formErrors as $formError) {
-                    $fields[] = str_replace('data.', '', $formError->getPropertyPath());
-                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {                        
-                        $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank') {
-                        $messages[] = $formError->getMessage();
-                    }
-                }
-                if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
-                    $messages = array($messages[1]);
-                }
-                $errors = array(
-                    'fields' => $fields,
-                    'messages' => $messages
-                );
-
-                return new JsonResponse(array('code' => 400, 'errors' => $errors));
-            }
-        }
-
-        return $this->container->get('templating')->renderResponse('WBBUserBundle:Registration:register.html.twig', array(
-                    'form' => $form->createView(),
-        ));
+        return $this->doRegister($request);
     }
 
     public function registerLightAction(Request $request)
     {
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->container->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
-
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
-
-        if ($request->getMethod() == 'POST' && $request->query->get('fromFb', null)) {
-            $facebook = $this->container->get('fos_facebook.api');
-            $facebookId = $facebook->getUser();
-            if ($facebookId != 0) {
-                $data = $facebook->api('/me/picture?redirect=0&type=large');
-                $user->setFBData(array(
-                    'id' => $facebookId,
-                    'picture' => $data['data']['url']
-                ));
-            }
-        }
-
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-
-        if (null !== $event->getResponse()) {
-            return $event->getResponse();
-        }
-
-        $form = $formFactory->createForm(true);
-        $form->setData($user);
-
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
-
-            if ($form->isValid()) {
-                $event = new FormEvent($form, $request);
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
-                $user->setEnabled(true);
-                $userManager->updateUser($user);
-
-                if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
-                    $response = new RedirectResponse($url);
-                }
-
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
-//                $session = $this->container->get('session');
-//                $session->save();
-
-                return $response;
-            } else {
-                $formErrors = $this->container->get('validator')->validate($form);
-                $fields = array();
-                $messages = array();
-
-                foreach ($formErrors as $formError) {
-                    $fields[] = str_replace('data.', '', $formError->getPropertyPath());
-                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
-                        $messages[] = 'Please complete all required fields';
-                    } elseif($formError->getMessage() != 'not.blank') {
-                        $messages[] = $formError->getMessage();
-                    }
-                }
-                if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
-                    $messages = array($messages[1]);
-                }
-                $errors = array(
-                    'fields' => $fields,
-                    'messages' => $messages
-                );
-
-                return new JsonResponse(array('code' => 400, 'errors' => $errors));
-            }
-        }
-
-        return $this->container->get('templating')->renderResponse('WBBUserBundle:Registration:register_light.html.twig', array(
-                    'form' => $form->createView(),
-        ));
+        return $this->doRegister($request, true);
     }
 
     /**
@@ -236,7 +70,7 @@ class RegistrationController extends ContainerAware
 
         $user->setConfirmationToken(null);
         $user->setEnabled(true);
-        if($user->getFirstname() != '' && $user->getLastname() != ''){
+        if ($user->getFirstname() != '' && $user->getLastname() != '') {
             $user->setTipsShouldBeModerated(false);
         }
 
@@ -246,7 +80,11 @@ class RegistrationController extends ContainerAware
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->container->get('router')->generate('homepage');
+            if ($user->getFirstname() == '') {
+                $url = $this->container->get('router')->generate('fos_user_profile_edit');
+            } else {
+                $url = $this->container->get('router')->generate('homepage');
+            }
             $response = new RedirectResponse($url);
         }
 
@@ -273,6 +111,122 @@ class RegistrationController extends ContainerAware
     protected function getEngine()
     {
         return $this->container->getParameter('fos_user.template.engine');
+    }
+
+    private function setFacebookData(Request $request, $user)
+    {
+        if ($request->getMethod() == 'POST' && $request->query->get('fromFb', null)) {
+            $facebook = $this->container->get('fos_facebook.api');
+            $facebookId = $facebook->getUser();
+            if ($facebookId != 0) {
+                $data = $facebook->api('/me/picture?redirect=0&type=large');
+                $user->setFBData(array(
+                    'id' => $facebookId,
+                    'picture' => $data['data']['url']
+                ));
+            }
+        }
+    }
+
+    private function getFormErrors($form, $light)
+    {
+        if ($light) {
+            $formErrors = $this->container->get('validator')->validate($form);
+        } else {
+            $formErrors = $this->container->get('validator')->validate($form, array('Default', 'registration_full'));
+        }
+        $fields = array();
+        $messages = array();
+
+        foreach ($formErrors as $formError) {
+            $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+            if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                $messages[] = 'Please complete all required fields';
+            } elseif ($formError->getMessage() != 'not.blank') {
+                $messages[] = $formError->getMessage();
+            }
+        }
+        if (count($fields) == 2 && $fields[0] == 'plainPassword' && $fields[1] == 'children[plainPassword]') {
+            $messages = array($messages[1]);
+        }
+        if (count($fields) == 0) {
+            $messages = array('CSRF token is not valid. Please reload the page');
+        }
+        $errors = array(
+            'fields' => $fields,
+            'messages' => $messages
+        );
+
+        return new JsonResponse(array('code' => 400, 'errors' => $errors));
+    }
+
+    private function doRegister(Request $request, $light = false)
+    {
+        if (!$light) {
+            $securityContext = $this->container->get('security.context');
+            if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
+            }
+        }
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('fos_user.registration.form.factory');
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->container->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
+
+        $this->setFacebookData($request, $user);
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        if ($light) {
+            $form = $formFactory->createForm(true);
+        } else {
+            $form = $formFactory->createForm();
+        }
+        $form->setData($user);
+
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
+                $user->setEnabled(true);
+                $userManager->updateUser($user);
+
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
+            } else {
+                return $this->getFormErrors($form, $light);
+            }
+        }
+
+        if ($light) {
+            $template = 'WBBUserBundle:Registration:register_light.html.twig';
+        } else {
+            $template = 'WBBUserBundle:Registration:register.html.twig';
+        }
+
+        return $this->container->get('templating')->renderResponse($template, array(
+                    'form' => $form->createView(),
+        ));
     }
 
 }

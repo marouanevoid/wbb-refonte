@@ -143,17 +143,19 @@ class City implements IndexableEntity
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return City
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
 
         return $this;
@@ -164,17 +166,19 @@ class City implements IndexableEntity
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * Set latitude
      *
-     * @param string $latitude
+     * @param  string $latitude
      * @return City
      */
-    public function setLatitude($latitude) {
+    public function setLatitude($latitude)
+    {
         $this->latitude = $latitude;
 
         return $this;
@@ -185,17 +189,19 @@ class City implements IndexableEntity
      *
      * @return string
      */
-    public function getLatitude() {
+    public function getLatitude()
+    {
         return $this->latitude;
     }
 
     /**
      * Set longitude
      *
-     * @param string $longitude
+     * @param  string $longitude
      * @return City
      */
-    public function setLongitude($longitude) {
+    public function setLongitude($longitude)
+    {
         $this->longitude = $longitude;
 
         return $this;
@@ -206,17 +212,19 @@ class City implements IndexableEntity
      *
      * @return string
      */
-    public function getLongitude() {
+    public function getLongitude()
+    {
         return $this->longitude;
     }
 
     /**
      * Set seoDescription
      *
-     * @param string $seoDescription
+     * @param  string $seoDescription
      * @return City
      */
-    public function setSeoDescription($seoDescription) {
+    public function setSeoDescription($seoDescription)
+    {
         $this->seoDescription = $seoDescription;
 
         return $this;
@@ -227,17 +235,19 @@ class City implements IndexableEntity
      *
      * @return string
      */
-    public function getSeoDescription() {
+    public function getSeoDescription()
+    {
         return $this->seoDescription;
     }
 
     /**
      * Set onTopCity
      *
-     * @param boolean $onTopCity
+     * @param  boolean $onTopCity
      * @return City
      */
-    public function setOnTopCity($onTopCity) {
+    public function setOnTopCity($onTopCity)
+    {
         $this->onTopCity = $onTopCity;
 
         return $this;
@@ -248,25 +258,29 @@ class City implements IndexableEntity
      *
      * @return boolean
      */
-    public function getOnTopCity() {
+    public function getOnTopCity()
+    {
         return $this->onTopCity;
     }
 
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->suburbs = new ArrayCollection();
         $this->news    = new ArrayCollection();
+        $this->bars    = new ArrayCollection();
     }
 
     /**
      * Set country
      *
-     * @param Country $country
+     * @param  Country $country
      * @return City
      */
-    public function setCountry(Country $country = null) {
+    public function setCountry(Country $country = null)
+    {
         $this->country = $country;
 
         return $this;
@@ -277,17 +291,19 @@ class City implements IndexableEntity
      *
      * @return Country
      */
-    public function getCountry() {
+    public function getCountry()
+    {
         return $this->country;
     }
 
     /**
      * Add suburb
      *
-     * @param CitySuburb $suburb
+     * @param  CitySuburb $suburb
      * @return City
      */
-    public function addSuburb(CitySuburb $suburb) {
+    public function addSuburb(CitySuburb $suburb)
+    {
         $this->suburbs[] = $suburb;
         $suburb->setCity($this);
 
@@ -299,7 +315,8 @@ class City implements IndexableEntity
      *
      * @param CitySuburb $suburbs
      */
-    public function removeSuburb(CitySuburb $suburbs) {
+    public function removeSuburb(CitySuburb $suburbs)
+    {
         $this->suburbs->removeElement($suburbs);
     }
 
@@ -308,17 +325,19 @@ class City implements IndexableEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSuburbs() {
+    public function getSuburbs()
+    {
         return $this->suburbs;
     }
 
     /**
      * Add bar
      *
-     * @param Bar $bar
+     * @param  Bar  $bar
      * @return City
      */
-    public function addBar(Bar $bar) {
+    public function addBar(Bar $bar)
+    {
         $this->bars[] = $bar;
         $bar->setCity($this);
 
@@ -330,7 +349,8 @@ class City implements IndexableEntity
      *
      * @param Bar $bars
      */
-    public function removeBar(Bar $bars) {
+    public function removeBar(Bar $bars)
+    {
         $this->bars->removeElement($bars);
     }
 
@@ -339,21 +359,24 @@ class City implements IndexableEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBars() {
+    public function getBars()
+    {
         return $this->bars;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getName();
     }
 
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return City
      */
-    public function setCreatedAt($createdAt) {
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -364,17 +387,19 @@ class City implements IndexableEntity
      *
      * @return \DateTime
      */
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return City
      */
-    public function setUpdatedAt($updatedAt) {
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -385,14 +410,15 @@ class City implements IndexableEntity
      *
      * @return \DateTime
      */
-    public function getUpdatedAt() {
+    public function getUpdatedAt()
+    {
         return $this->updatedAt;
     }
 
     /**
      * Add bestofs
      *
-     * @param CityBestOf $bestofs
+     * @param  CityBestOf $bestofs
      * @return City
      */
     public function addBestof(CityBestOf $bestofs)
@@ -425,7 +451,7 @@ class City implements IndexableEntity
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return City
      */
     public function setSlug($slug)
@@ -448,7 +474,7 @@ class City implements IndexableEntity
     /**
      * Add users
      *
-     * @param User $users
+     * @param  User $users
      * @return City
      */
     public function addUser(User $users)
@@ -496,7 +522,7 @@ class City implements IndexableEntity
     /**
      * Set image
      *
-     * @param Media $image
+     * @param  Media $image
      * @return City
      */
     public function setImage(Media $image = null)
@@ -519,7 +545,7 @@ class City implements IndexableEntity
     /**
      * Add semsoftBars
      *
-     * @param SemsoftBar $semsoftBars
+     * @param  SemsoftBar $semsoftBars
      * @return City
      */
     public function addSemsoftBar(SemsoftBar $semsoftBars)
@@ -552,7 +578,7 @@ class City implements IndexableEntity
     /**
      * Add news
      *
-     * @param News $news
+     * @param  News $news
      * @return City
      */
     public function addNews(News $news)
@@ -585,7 +611,7 @@ class City implements IndexableEntity
     /**
      * Add userHomes
      *
-     * @param User $userHomes
+     * @param  User $userHomes
      * @return City
      */
     public function addUserHome(User $userHomes)
@@ -618,7 +644,7 @@ class City implements IndexableEntity
     /**
      * Add userCities1
      *
-     * @param User $userCities1
+     * @param  User $userCities1
      * @return City
      */
     public function addUserCities1(User $userCities1)
@@ -651,7 +677,7 @@ class City implements IndexableEntity
     /**
      * Add userCities2
      *
-     * @param User $userCities2
+     * @param  User $userCities2
      * @return City
      */
     public function addUserCities2(User $userCities2)
@@ -705,7 +731,7 @@ class City implements IndexableEntity
     /**
      * Set postalCode
      *
-     * @param string $postalCode
+     * @param  string $postalCode
      * @return City
      */
     public function setPostalCode($postalCode)
@@ -727,9 +753,9 @@ class City implements IndexableEntity
 
     public function isUSCity()
     {
-        if($this->getCountry()->getAcronym() == 'US'){
+        if ($this->getCountry()->getAcronym() == 'US') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

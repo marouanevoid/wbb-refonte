@@ -55,11 +55,10 @@ class CityBestOf
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +68,7 @@ class CityBestOf
     /**
      * Set position
      *
-     * @param integer $position
+     * @param  integer  $position
      * @return BarMedia
      */
     public function setPosition($position)
@@ -82,7 +81,7 @@ class CityBestOf
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -92,6 +91,7 @@ class CityBestOf
     public function __toString()
     {
         if($this->bestof)
+
             return $this->bestof->getName();
         else
             return '';
@@ -100,7 +100,7 @@ class CityBestOf
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return BarMedia
      */
     public function setCreatedAt($createdAt)
@@ -113,7 +113,7 @@ class CityBestOf
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -123,7 +123,7 @@ class CityBestOf
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return BarMedia
      */
     public function setUpdatedAt($updatedAt)
@@ -136,7 +136,7 @@ class CityBestOf
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -146,7 +146,7 @@ class CityBestOf
     /**
      * Set city
      *
-     * @param \WBB\CoreBundle\Entity\City $city
+     * @param  \WBB\CoreBundle\Entity\City $city
      * @return CityTrend
      */
     public function setCity(\WBB\CoreBundle\Entity\City $city = null)
@@ -159,7 +159,7 @@ class CityBestOf
     /**
      * Get city
      *
-     * @return \WBB\CoreBundle\Entity\City 
+     * @return \WBB\CoreBundle\Entity\City
      */
     public function getCity()
     {
@@ -169,7 +169,7 @@ class CityBestOf
     /**
      * Set bestof
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestof
+     * @param  \WBB\BarBundle\Entity\BestOf $bestof
      * @return CityBestOf
      */
     public function setBestof(\WBB\BarBundle\Entity\BestOf $bestof = null)
@@ -182,7 +182,7 @@ class CityBestOf
     /**
      * Get bestof
      *
-     * @return \WBB\BarBundle\Entity\BestOf 
+     * @return \WBB\BarBundle\Entity\BestOf
      */
     public function getBestof()
     {

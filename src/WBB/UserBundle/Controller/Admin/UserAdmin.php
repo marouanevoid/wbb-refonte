@@ -6,6 +6,7 @@
 
 namespace WBB\UserBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -13,7 +14,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 use FOS\UserBundle\Model\UserManagerInterface;
-use WBB\UserBundle\Entity\User;
 
 class UserAdmin extends Admin
 {
@@ -39,7 +39,6 @@ class UserAdmin extends Admin
         $filterMapper
             ->add('username')
             ->add('enabled')
-            ->add('locked')
             ->add('email')
         ;
     }
@@ -66,6 +65,11 @@ class UserAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $isPasswordRequired = false;
+        if (!$this->id($this->getSubject())) {
+            $isPasswordRequired = true;
+        }
+
         $generatePasswordBtn = '<input type="button" id="pwd-generator" class="pwd-generator btn" value="Generate Password" />';
 
         $formMapper
@@ -83,19 +87,30 @@ class UserAdmin extends Admin
                 ))
                 ->add('username', null, array('help' => 'Mandatory'))
                 ->add('email', null, array('help' => 'Mandatory'))
-                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname', 'required' => false))
-                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname', 'required' => false))
+                ->add('firstname', null, array('help' => 'Mandatory', 'label' => 'Firstname *', 'required' => false))
+                ->add('lastname', null, array('help' => 'Mandatory', 'label' => 'Lastname *', 'required' => false))
                 ->add('birthdate', null, array('years' => range(1914, date('Y')), 'help' => 'Mandatory', 'label' => 'Birthdate'))
                 ->add('website')
-                ->add('country', null, array('help' => 'Mandatory', 'label' => 'Country'))
+                ->add('country', 'entity', array(
+                        'class'    => 'WBBCoreBundle:Country',
+                        'help'     => 'Mandatory',
+                        'label'     => 'Country',
+                        'required' => true,
+                        'property' => 'name',
+                        'empty_value' => false,
+                        'query_builder' => function (EntityRepository $er) {
+                                return $er->findCountriesOrderedByName(true);
+                            }
+                    )
+                )
                 ->add('latitude', 'hidden')
                 ->add('longitude', 'hidden')
                 ->add('description', 'textarea', array('required'=>false, 'attr' => array('class' => 'wysihtml5')))
                 ->add('plainPassword', 'text', array(
-                        'required' => false,
-                        'help' => $generatePasswordBtn.'Mandatory',
-                        'label' => 'Password *',
-                        'attr' => array(
+                        'required'  => $isPasswordRequired,
+                        'help'      => $generatePasswordBtn.'Mandatory',
+                        'label'     => ($isPasswordRequired)?'Password':'Password *',
+                        'attr'      => array(
                             'class' => 'span5 pwd-field'
                         )
                     )
@@ -120,7 +135,7 @@ class UserAdmin extends Admin
             ->end()
         ;
 
-        if(!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->with('Management')
                     ->add('roles', 'choice', array(
@@ -138,7 +153,6 @@ class UserAdmin extends Admin
                             'ROLE_USER'             =>  'User'
                         )
                     ))
-                    ->add('locked', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
                     ->add('confirmed', null, array(
                         'read_only' => true,
@@ -154,7 +168,7 @@ class UserAdmin extends Admin
      */
     public function preUpdate($user)
     {
-        if($user->getPlainPassword()){
+        if ($user->getPlainPassword()) {
             //Get the plain password before encryption and the rest of email data
             $data = array(
                 'password'  => $user->getPlainPassword(),
@@ -166,23 +180,8 @@ class UserAdmin extends Admin
             $this->getContainer()->get('wbb_user.generate_password.mailer')->sendGeneratedPassword($data);
         }
 
-        if($user->hasRole('ROLE_BAR_EXPERT') || $user->hasRole('ROLE_BAR_EXPERT')){
-            $user->setTipsShouldBeModerated(false);
-        }
-
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prePersist($user)
-    {
-        if($user->hasRole('ROLE_BAR_EXPERT') || $user->hasRole('ROLE_SUPER_ADMIN'))
-        {
-            $user->setTipsShouldBeModerated(false);
-        }
     }
 
     /**
@@ -193,8 +192,8 @@ class UserAdmin extends Admin
         return array(
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('firstname', 'show', 'label'))           => 'firstname',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'lastname',
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'birthdate',
-            $this->trans($this->getLabelTranslatorStrategy()->getLabel('lastname', 'show', 'label'))            => 'country.name',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('birthdate', 'show', 'label'))           => 'birthdate',
+            $this->trans($this->getLabelTranslatorStrategy()->getLabel('country', 'show', 'label'))             => 'country.name',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity1', 'show', 'label'))           => 'prefCity1',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity2', 'show', 'label'))           => 'prefCity2',
             $this->trans($this->getLabelTranslatorStrategy()->getLabel('prefCity3', 'show', 'label'))           => 'prefCity3',

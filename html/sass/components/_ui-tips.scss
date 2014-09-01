@@ -1,8 +1,0 @@
-.ui-tips{
-  position: relative; display: inline-block;
-  .tips{
-    position: absolute; left: 0; bottom: 100%; background: $color-brown; color:#fff; text-align: center;
-    padding: 0.6em 1.5em; border-radius: 2em; font-size: 90%; margin-bottom:0.6em; border-top: 1px solid #bfa37b; border-bottom: 1px solid #a18556; display: none;
-    b{ position: absolute; bottom: -8px; width: 9px; height: 8px; left: 50%; margin-left: -4px; background: url("../images/misc/ui-tips.png") no-repeat center; background-size: 100% auto }
-  }
-}

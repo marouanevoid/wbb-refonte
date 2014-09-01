@@ -160,15 +160,11 @@ meta.Dropdown = function(config){
         {
             $dropdown.find('select').on('change', function()
             {
-                //$dropdown.css({width : $dropdown.width()});
-                    var ctext  = $($(this).find('option')[this.selectedIndex]).text(),
-                        cval = $($(this).find('option')[this.selectedIndex]).val();
-                alert('text : ' + ctext + ' : val : ' + cval );
-
-                that.config.$dropdown_value.text("");
-                that.config.$dropdown_value.text( $(this).find('option:selected').text() );
-
+                var _this = $(this);
+                var ttext = _this.find('option:selected').text();
+                that.config.$dropdown_value.text( ttext );
                 that.checkSelected.apply([this]);
+
             });
         }
     };

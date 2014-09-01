@@ -16,7 +16,7 @@ PopIn.initContext = function(){
 		clsloader : 'popin-loader-gif',
 		mask : $('.mask'),
 		close : $(".btn-close"),
-        popin : $('.popup'),
+        popin : $('.popup').not('#share-pop'),
 		targetPopup : $('#register')
 	}
 
@@ -28,7 +28,7 @@ PopIn.initContext = function(){
 PopIn.close = function(){
     // if the popin is not yet loaded
     // return 
-    if(PopIn.loading == true)
+    if( PopIn.loading == true || $('header.showing-search').length )
         return false;
 	var current_popup = $("body").find(".void-popup");
     current_popup.fadeOut("fast");
@@ -45,6 +45,9 @@ PopIn.close = function(){
     if( $("#share-pop").length ){
         $("#share-pop").fadeOut("slow");
     }
+
+    // set the Z-index to fix the mask issues
+    $('.select2-drop-mask').removeClass('showingpopin');
 }
 
 // Set Up the Events
@@ -122,14 +125,8 @@ PopIn.resize = function(target){
         "left": (($(window).width() - current_id.width()) / 2) //+ $(window).scrollLeft()
     });
 
-    // bonus 
-    // focus on the first input
-
-    $(PopIn.dom.popin).find('input:text').first().focus();
-    if(PopIn.dom.popin.find('#fos_user_registration_form_username').length){
-        $('#fos_user_registration_form_username').focus();
-    }
-
+    // set the Z-index to fix the mask issues
+    $('.select2-drop-mask').addClass('showingpopin');
 }
 
 // init the Popin Loader

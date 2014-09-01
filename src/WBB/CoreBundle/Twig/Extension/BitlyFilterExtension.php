@@ -20,10 +20,11 @@ class BitlyFilterExtension extends \Twig_Extension
 
     public function bitlyFilter($path)
     {
-        try{
+        try {
             $response = $this->bitly->Shorten(array("longUrl" => $path));
+
             return $response['url'];
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $path;
         }
 

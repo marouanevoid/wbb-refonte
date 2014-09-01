@@ -10,7 +10,6 @@ use Guzzle\Http\Client;
  */
 class Instagram implements FeedInterface
 {
-    private $container;
     private $em;
     private $limit;
     private $client;
@@ -21,14 +20,12 @@ class Instagram implements FeedInterface
     /**
      * __construct
      *
-     * @param $container
      * @param $em
      * @param $limit
      * @param $clientId
      */
-    public function __construct($container, $em, $limit, $clientId)
+    public function __construct($em, $limit, $clientId)
     {
-        $this->container    = $container;
         $this->em           = $em;
         $this->limit        = $limit;
         $this->client       = new Client($this->baseUrl);
@@ -49,8 +46,8 @@ class Instagram implements FeedInterface
     /**
      * find
      *
-     * @param null $id
-     * @param int $next
+     * @param  null  $id
+     * @param  int   $next
      * @return array
      */
     public function find($id = null, $next = 0)
@@ -94,7 +91,7 @@ class Instagram implements FeedInterface
     /**
      * createFeed
      *
-     * @param string $hash
+     * @param string                    $hash
      * @param \WBB\BarBundle\Entity\Bar $bar
      *
      * @return Object
@@ -111,7 +108,7 @@ class Instagram implements FeedInterface
     /**
      * createFeed
      *
-     * @param string $hash
+     * @param string                    $hash
      * @param \WBB\BarBundle\Entity\Bar $bar
      *
      * @return Object
@@ -127,10 +124,11 @@ class Instagram implements FeedInterface
 
     /**
      * listAll
-     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @param  \WBB\BarBundle\Entity\Bar $bar
      * @return array
      */
-    public function listAll(Bar $bar){
+    public function listAll(Bar $bar)
+    {
         return $bar->getInstagramExcludedImgs();
     }
 }
