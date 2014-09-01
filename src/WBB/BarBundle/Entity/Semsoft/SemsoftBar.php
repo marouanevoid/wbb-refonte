@@ -1494,9 +1494,6 @@ class SemsoftBar
 
         if($this->isWifi())
             $bar->setWifi($this->isWifi());
-//
-//        if($this->getFacebookUserPage())
-//            $bar->setFacebookUserPage($this->getFacebookUserPage());
 
         if($this->getFacebookLikes())
             $bar->setFacebookLikes($this->getFacebookLikes());
@@ -1504,17 +1501,11 @@ class SemsoftBar
         if($this->getFacebookCheckIns())
             $bar->setFacebookCheckIns($this->getFacebookCheckIns());
 
-//        if($this->getTwitterUserPage())
-//            $bar->setTwitterUserPage($this->getTwitterUserPage());
-
         if($this->getInstagramUserPage())
             $bar->setInstagram($this->getInstagramUserPage());
 
         if($this->getGooglePlusUserPage())
             $bar->setGooglePlus($this->getGooglePlusUserPage());
-
-//        if($this->getFoursquareUserPage())
-//            $bar->setFoursquareUserPage($this->getFoursquareUserPage());
 
         if($this->getFoursquareCheckIns())
             $bar->setFoursquareCheckIns($this->getFoursquareCheckIns());

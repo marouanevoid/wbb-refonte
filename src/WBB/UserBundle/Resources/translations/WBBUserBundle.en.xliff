@@ -214,8 +214,93 @@
             </trans-unit>
 
             <trans-unit id="show.label_firstname">
-                <source>form.label_country</source>
-                <target>Country *</target>
+                <source>show.label_firstname</source>
+                <target>First name</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_lastname">
+                <source>show.label_lastname</source>
+                <target>Last name</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_birthdate">
+                <source>show.label_birthdate</source>
+                <target>Birth date</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_country">
+                <source>show.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_city1">
+                <source>show.label_pref_city1</source>
+                <target>Pref. City 1</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_city2">
+                <source>show.label_pref_city2</source>
+                <target>Pref. City 2</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_city3">
+                <source>show.label_pref_city3</source>
+                <target>Pref. City 3</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_bar1">
+                <source>show.label_pref_bar1</source>
+                <target>Pref. Bar 3</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_bar2">
+                <source>show.label_pref_bar2</source>
+                <target>Pref. Bar 3</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_bar3">
+                <source>show.label_pref_bar3</source>
+                <target>Pref. Bar 3</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_drink_brand1">
+                <source>show.label_pref_drink_brand1</source>
+                <target>Pref. Drink Brand 1</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_drink_brand2">
+                <source>show.label_pref_drink_brand2</source>
+                <target>Pref. Drink Brand 2</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_drink_brand3">
+                <source>show.label_pref_drink_brand3</source>
+                <target>Pref. Drink Brand 3</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_cocktails1">
+                <source>show.label_pref_cocktails1</source>
+                <target>Pref. Cocktails 1</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_cocktails2">
+                <source>show.label_pref_cocktails2</source>
+                <target>Pref. Cocktails 2</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_pref_cocktails3">
+                <source>show.label_pref_cocktails3</source>
+                <target>Pref. Cocktails 3</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_stay_informed">
+                <source>show.label_stay_informed</source>
+                <target>NL Subscriber</target>
+            </trans-unit>
+
+            <trans-unit id="show.label_stay_brand_informed">
+                <source>show.label_stay_brand_informed</source>
+                <target>NL Brand Subscriber</target>
             </trans-unit>
 
         </body>

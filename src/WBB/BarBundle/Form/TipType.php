@@ -22,7 +22,7 @@ class TipType extends AbstractType
                 'required' => false,
                 'attr' => array(
                     'class'         => 's-margin-top',
-                    'placeholder'   => 'Type a tip ...',
+                    'placeholder'   => 'Write your tip ...',
                     'maxlength'     => '250',
                     'minlength'     => '1'
                 )

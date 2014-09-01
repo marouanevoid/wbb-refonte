@@ -3,6 +3,7 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BestofController extends Controller
 {
@@ -15,8 +16,7 @@ class BestofController extends Controller
         $byCity = ($citySlug)? true : null;
 
         if (!$bestOf) {
-            // TODO Does not work !
-            $this->createNotFoundException('Not found !');
+            throw new NotFoundHttpException('Best of not found');
         }
 
         foreach ($bestOf->getBestofs() as $bo) {
