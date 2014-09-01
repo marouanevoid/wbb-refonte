@@ -820,7 +820,7 @@ class Bar implements IndexableEntity
      */
     public function getReservationLink()
     {
-        return $this->reservation;
+        return $this->reservationLink;
     }
 
     /**

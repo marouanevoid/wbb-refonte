@@ -3,7 +3,6 @@
 namespace WBB\BarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use WBB\BarBundle\Entity\Ad;
 
 class AdsController extends Controller
 {

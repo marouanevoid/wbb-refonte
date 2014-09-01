@@ -174,7 +174,6 @@ class SemsoftController extends Controller
 
             if ($fullImport) {
                 fclose($outPut);
-
                 return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
             } else {
                 $content = stream_get_contents($outPut);
@@ -367,15 +366,15 @@ class SemsoftController extends Controller
 
     private function getOpenHoursArray($openHoursString, $day, SemsoftBar $ssBar)
     {
-//        if(empty($openHoursString) && $ssBar->getBar())
+//        if ( empty ( $ open Hours String ) & & $ ssBar -> getBar () )
 //        {
-//            $bar = $ssBar->getBar();
-//            foreach ($bar->getOpenings() as $op) {
-//                if ($op->getOpeningDay() == $day) {
-//                    $bar->removeOpening($op);
+//            $ bar = $ ssBar -> getBar ();
+//            for each ( $ bar -> get Openings () as $ op ) {
+//                if ( $ op -> get Opening Day () = = $ day ) {
+//                    $ bar -> remove Opening ( $ op ) ;
 //                }
 //            }
-//        } else {
+//        } el se {
             $hourRanges = explode(',', $openHoursString);
             foreach ($hourRanges as $hourRange) {
                 $hours = explode('-', $hourRange);

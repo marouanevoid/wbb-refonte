@@ -46,7 +46,6 @@ class SecurityController extends Controller
         }
 
         if ($error) {
-            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
 
             if ($error == 'Bad credentials') {
