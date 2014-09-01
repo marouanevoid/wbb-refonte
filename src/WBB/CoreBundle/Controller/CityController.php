@@ -138,11 +138,6 @@ class CityController extends Controller
             $suburbSlug= null;
         if ($citySlug != "") {
             $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
-
-            //$suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
-            //if ($suburbID == 0)
-            //  $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
-            //else
             $suburb = null;
             if ($suburbSlug)
                 $suburb = $this->container->get('suburb.repository')->findOneBySlug($suburbSlug);

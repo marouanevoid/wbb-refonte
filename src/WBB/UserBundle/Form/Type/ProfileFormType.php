@@ -28,6 +28,7 @@ class ProfileFormType extends BaseType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention'  => 'profile',
+            'cascade_validation' => true
         ));
     }
 

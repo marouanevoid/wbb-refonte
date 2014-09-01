@@ -168,7 +168,7 @@ services:
 
     wbb.instagram.feed:
         class: %wbb_feed.instagram.class%
-        arguments: [ @service_container, @doctrine.orm.entity_manager, %feeds_limit% , %instagram_client_id%]
+        arguments: [ @doctrine.orm.entity_manager, %feeds_limit% , %instagram_client_id%]
 
     #Repositories
     bar.repository:

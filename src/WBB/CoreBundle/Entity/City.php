@@ -270,6 +270,7 @@ class City implements IndexableEntity
     {
         $this->suburbs = new ArrayCollection();
         $this->news    = new ArrayCollection();
+        $this->bars    = new ArrayCollection();
     }
 
     /**
