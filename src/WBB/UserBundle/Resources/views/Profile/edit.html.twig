@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="clear"></div>
                                     <div class="group-form margin-top-10">
-                                        <label class="margin-right-20">Pseudo</label>
+                                        <label class="margin-right-20">Pseudo *</label>
                                         {% if 'username' in errors.fields %}
                                             {{ form_widget(form.username, { 'attr' : { 'class': 'form-text error'} }) }}
                                         {% else %}
@@ -79,7 +79,7 @@
                                         <div class="clear"></div>
                                     </div>
                                     <div class="group-form margin-top-10">
-                                        <label class="margin-right-20">Firstname</label>
+                                        <label class="margin-right-20">Firstname *</label>
                                         {% if 'firstname' in errors.fields %}
                                             {{ form_widget(form.firstname, { 'attr' : { 'class': 'form-text error'} }) }}
                                         {% else %}
@@ -88,7 +88,7 @@
                                         <div class="clear"></div>
                                     </div>
                                     <div class="group-form margin-top-10">
-                                        <label class="margin-right-20">Lastname</label>
+                                        <label class="margin-right-20">Lastname *</label>
                                         {% if 'lastname' in errors.fields %}
                                             {{ form_widget(form.lastname, { 'attr' : { 'class': 'form-text error'} }) }}
                                         {% else %}
@@ -97,7 +97,7 @@
                                         <div class="clear"></div>
                                     </div>
                                     <div class="group-form margin-top-10">
-                                        <label class="margin-right-20">Email</label>
+                                        <label class="margin-right-20">Email *</label>
                                         {% if 'email' in errors.fields %}
                                             {{ form_widget(form.email, { 'attr' : { 'class': 'form-text error'} }) }}
                                         {% else %}
@@ -112,7 +112,7 @@
                                         <div class="clear"></div>
                                     </div>
                                     <div class="{% if 'birthday' in errors.fields %}error{% endif %} date-birthday text-align-center margin-top-10">
-                                        <label class="margin-right-20">Date of Birth</label>
+                                        <label class="margin-right-20">Date of Birth *</label>
                                         <div{% if is_mobile() and not is_tablet() %} class="date-width" style="width: 380px"{% endif %}>
                                             <div class="select-wrap left">
                                                 {{ form_widget(form.birthdate.month, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
@@ -128,7 +128,7 @@
                                     <div class="clear"></div>
 
                                     <div class="country-dropdown select-two margin-top-10">
-                                        <label class="margin-right-20">Country</label>
+                                        <label class="margin-right-20">Country *</label>
                                         <div class="left" style="{% if is_mobile() and not is_tablet() %}width: 100%{% else %}width: 302px{% endif %}">
                                             {% if 'country' in errors.fields %}
                                                 {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown error' : 'select2-dropdown error' } }) }}
@@ -142,83 +142,87 @@
 
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20">Cities you like to go</label>
-                                    {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefCity1, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Start typing the city name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefCity2, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Start typing the city name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefCity3, { 'attr' : { 'class': 'form-text auto-city', 'placeholder': 'Start typing the city name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20">Favorite Bars</label>
-                                    {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefBar1, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Start typing the bar name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefBar2, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Start typing the bar name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefBar3, { 'attr' : { 'class': 'form-text auto-bars', 'placeholder': 'Start typing the bar name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20">Drink brands</label>
-                                    {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefDrinkBrand1, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Start typing the brand name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefDrinkBrand2, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Start typing the brand name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefDrinkBrand3, { 'attr' : { 'class': 'form-text auto-brands', 'placeholder': 'Start typing the brand name' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10">
                                     <label class="margin-right-20">Categories or cocktails</label>
-                                    {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefCocktails1, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Start typing' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefCocktails2, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Start typing' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-form margin-top-10 form-text-without-label">
-                                    {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': '' } }) }}
+                                    {{ form_widget(form.prefCocktails3, { 'attr' : { 'class': 'form-text auto-cocktails', 'placeholder': 'Start typing' } }) }}
                                     <div class="clear"></div>
                                 </div>
 
                                 <div class="group-checkbox">
                                     <div class="group-form checkbox margin-top-10">
                                         <label class="wrap">{{ form_widget(form.stayInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
-                                            Subscribe to our newsletters</label>
+                                            I would like to receive emails with offers <br/>and updates from World’s Best Bars and Pernod Ricard</label>
                                     </div>
 
                                     <div class="group-form checkbox margin-top-10">
                                         <label class="wrap">{{ form_widget(form.stayBrandInformed,  {'attr': {'class': 'form-checkbox left'}}) }}
-                                            Subscribe to our partners newsletters</label>
+                                            I would like to receive emails with offers <br/>from Pernod Ricard’s business partners</label>
                                     </div>
                                 </div>
+                                <div class="clear"></div>
+                                <p class="wrap" style="width:27%">
+                                    * : Mandatory fields
+                                </p>
                             {% else %}
                                 <div class="margin-bottom-20">
                                     <div class="group-form margin-top-10">
-                                        <label class="margin-right-20">Pseudo</label>
+                                        <label class="margin-right-20">Pseudo *</label>
                                         {% if 'username' in errors.fields %}
                                             {{ form_widget(form.username, { 'attr' : { 'class': 'form-text error'} }) }}
                                         {% else %}
