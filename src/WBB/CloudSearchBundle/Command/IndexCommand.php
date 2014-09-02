@@ -35,13 +35,15 @@ class IndexCommand extends ContainerAwareCommand
                     }
                 } elseif ($entity instanceof City) {
                     if (!$entity->getOnTopCity() && $entity->getBars()->count() == 0) {
-                        $this->indexer->delete($entity);
+                        $indexer->delete($entity);
                     }
                 } else {
                     $indexer->index($entity);
                 }
             }
         }
+
+        $output->writeln('Done.');
     }
 
 }
