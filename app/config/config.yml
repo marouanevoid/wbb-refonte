@@ -29,6 +29,7 @@ twig:
         resources:
             - 'StnwDatePickerBundle:Form:fields.html.twig'
     globals:
+        ga_id: %google_analytics_id%
         feedsLimit: %feeds_limit%
         websiteUrl: %website_url%
 
