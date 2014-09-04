@@ -35,7 +35,7 @@
 
         {% block stylesheets %}
 
-            {% stylesheets filter='uglifycss' filter="cssrewrite"
+            {% stylesheets filter='cssmin' filter="cssrewrite" output='css/main.css'
                 "bundles/wbbcore/css/select2-bootstrap.css"
                 "bundles/wbbcore/css/select2.css"
                 "bundles/wbbcore/css/custom.select2.css"
@@ -47,67 +47,40 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
-            {% javascripts filter='uglifyjs2'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/select2.min.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.velocity.min.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.transform3d.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/modernizr.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.browser.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
-                '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
-                '@WBBCoreBundle/Resources/public/js/libs/popin.void.js'
-                '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/app.js'
-                '@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
-                '@WBBCoreBundle/Resources/public/js/wbb.js'
-                '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
-            %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
         {% endblock %}
-{#
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/select2.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.transform3d.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/modernizr.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.browser.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/placeholders.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.mousewheel.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/popin.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMore.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/dropdown.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/selector.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/radio.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/search.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/form.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/app.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/tips.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
-#}
+
+        {% javascripts filter='jsmin' output='js/main.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/select2.min.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.velocity.min.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.transform3d.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/modernizr.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.browser.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.touchSwipe.min.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/placeholders.min.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.mousewheel.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
+            '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
+            '@WBBCoreBundle/Resources/public/js/libs/popin.void.js'
+            '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/app.js'
+            '@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'
+            '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
+            '@WBBCoreBundle/Resources/public/js/wbb.js'
+            '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
         {% block javascripts %}
 
         {% endblock %}
