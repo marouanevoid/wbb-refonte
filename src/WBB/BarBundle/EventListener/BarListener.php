@@ -1,7 +1,6 @@
 <?php
     namespace WBB\BarBundle\EventListener;
 
-    use Doctrine\ORM\EntityManager;
     use Doctrine\ORM\Event\LifecycleEventArgs;
     use WBB\BarBundle\Entity\Bar;
 
