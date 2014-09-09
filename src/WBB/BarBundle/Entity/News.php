@@ -35,7 +35,7 @@ class News implements IndexableEntity
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, style="camel", separator="-")
+     * @Gedmo\Slug(fields={"title"}, separator="-")
      * @ORM\Column(unique=true)
      * @JMS\Expose
      */
