@@ -28,7 +28,7 @@
         </div>
     </div>
     {% if b.suburb %}
-        <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
+        <a href="{{ path('wbb_bar_details',{city: b.city.slug, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
