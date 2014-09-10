@@ -95,6 +95,10 @@ services:
         calls:
             - [setContainer, [@service_container]]
 
+    wbb_core.media_service:
+        class: WBB\CoreBundle\Services\MediaService
+        arguments: ['@service_container', ]
+
     #Twig Error Controller
     # wbb.twig.controller.exception:
     #         class: WBB\CoreBundle\Controller\ExceptionController

@@ -37,6 +37,7 @@ class AppKernel extends Kernel
 
             //MediaBundle
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
 
             //Foursquare
             new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),

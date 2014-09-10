@@ -37,3 +37,6 @@ _security_login:
 
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
