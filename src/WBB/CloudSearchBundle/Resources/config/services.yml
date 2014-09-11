@@ -21,10 +21,10 @@ services:
                 - "%aws_cloudsearch_key%"
                 - "%aws_cloudsearch_secret%"
 
-    cloudsearch.indexer.listener:
-        class: WBB\CloudSearchBundle\EventListener\CloudSearchIndexerListener
-        arguments: ['@cloudsearch.indexer']
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }
-            - { name: doctrine.event_listener, event: postUpdate }
-            - { name: doctrine.event_listener, event: preRemove }
+    # cloudsearch.indexer.listener:
+    #     class: WBB\CloudSearchBundle\EventListener\CloudSearchIndexerListener
+    #     arguments: ['@cloudsearch.indexer']
+    #     tags:
+    #         - { name: doctrine.event_listener, event: postPersist }
+    #         - { name: doctrine.event_listener, event: postUpdate }
+    #         - { name: doctrine.event_listener, event: preRemove }
