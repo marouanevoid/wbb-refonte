@@ -12,22 +12,17 @@
 /* Light reset */
   * {padding: 0; margin: 0;}
 /* Globale Tags */
-  input[type="text"], input[type="password"], input[type="email"] {
-    color: #818a8c;
-  }
+  input[type="text"], input[type="password"], input[type="email"] {color: #818a8c;}
   input[type="text"]::-webkit-input-placeholder, 
   input[type="password"]::-webkit-input-placeholder, 
   input[type="email"]::-webkit-input-placeholder,
   input[type="text"]:-moz-input-placeholder,
   input[type="password"]:-ms-input-placeholder, 
-  input[type="email"]:-ms-input-placeholder{
-    color: #818a8c;
-  }
+  input[type="email"]:-ms-input-placeholder{color: #818a8c;}
   input[type="text"]::-moz-placeholder, 
   input[type="password"]::-moz-placeholder, 
-  input[type="email"]::-moz-placeholder {
-    color: #818a8c;
-  }
+  input[type="email"]::-moz-placeholder {color: #818a8c;}
+  
 /* Globale Libs */
     form .icheckbox_flat {display: inline-block; vertical-align: middle; margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
     form .icheckbox_flat {background-position: 0 0;}
@@ -554,6 +549,8 @@
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
   .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29; display: none;}
   .bar-finder .ui-radio.btn-radius.with-icon:after {/*background-position: -52px -240px;*/}
+  .mobile .ui-dropdown-container .ui-dropdown.drop-dark:hover, 
+  .mobile .ui-dropdown-container .ui-dropdown.drop-dark.active {border-color: #ffe4af;}
   
   .ui-radio.radio-dark:hover,
   .select2-container.dark.active .select2-choice,
