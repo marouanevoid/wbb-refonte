@@ -15,7 +15,7 @@ use WBB\CoreBundle\Entity\UploadableEntity;
  * @ORM\Table(name="wbb_bestof")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestOfRepository")
  */
-class BestOf extends UploadableEntity implements IndexableEntity
+class BestOf implements IndexableEntity
 {
     /**
      * @var integer
