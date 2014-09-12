@@ -1,13 +1,13 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: bundles\services\services.yml }
-    - { resource: bundles\fos.yml }
-    - { resource: bundles\sonata.yml }
-    - { resource: bundles\sonata_media.yml }
-    - { resource: bundles\gaufrette.yml }
-    - { resource: bundles\liip.yml }
-    - { resource: bundles\vich.yml }
+    - { resource: bundles/services/services.yml }
+    - { resource: bundles/fos.yml }
+    - { resource: bundles/sonata.yml }
+    - { resource: bundles/sonata_media.yml }
+    - { resource: bundles/gaufrette.yml }
+    - { resource: bundles/liip.yml }
+    - { resource: bundles/vich.yml }
 
 framework:
     #esi:             ~
