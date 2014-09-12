@@ -1,0 +1,140 @@
+#Liip Imagine Configuration
+liip_imagine:
+  driver: gd
+  data_loader: ~
+  cache: resolver.amazon_s3
+  filter_sets:
+      cache: ~
+
+      city_preview:
+          data_loader: stream.cities_fs
+          filters:
+              thumbnail: { size: [100, 100], mode: outbound }
+
+      city_170_175:
+          data_loader: stream.cities_fs
+          filters:
+              thumbnail: { size: [170, 175], mode: outbound }
+
+      bar_preview:
+          data_loader: stream.bars_fs
+          filters:
+              thumbnail: { size: [100, 100], mode: outbound }
+
+      bar_286_210:
+          data_loader: stream.bars_fs
+          filters:
+              thumbnail: { size: [286, 210], mode: outbound }
+
+      bar_285_215:
+          data_loader: stream.bars_fs
+          filters:
+              thumbnail: { size: [285, 215], mode: outbound }
+
+      bar_425_320:
+          data_loader: stream.bars_fs
+          filters:
+              thumbnail: { size: [425, 320], mode: outbound }
+
+      bar_640_480:
+          data_loader: stream.bars_fs
+          filters:
+              thumbnail: { size: [640, 480], mode: outbound }
+
+      news_preview:
+          data_loader: stream.news_fs
+          filters:
+              thumbnail: { size: [100, 100], mode: outbound }
+
+      news_286_210:
+          data_loader: stream.news_fs
+          filters:
+              thumbnail: { size: [286, 210], mode: outbound }
+
+      news_385_278:
+          data_loader: stream.news_fs
+          filters:
+              thumbnail: { size: [385, 278], mode: outbound }
+
+      news_425_320:
+          data_loader: stream.news_fs
+          filters:
+              thumbnail: { size: [425, 320], mode: outbound }
+
+      news_770_578:
+          data_loader: stream.news_fs
+          filters:
+              thumbnail: { size: [770, 578], mode: outbound }
+
+      bestof_preview:
+          data_loader: stream.bestofs_fs
+          filters:
+              thumbnail: { size: [100, 100], mode: outbound }
+
+      bestof_370_278:
+          data_loader: stream.bestofs_fs
+          filters:
+              thumbnail: { size: [370, 278], mode: outbound }
+
+      bestof_285_215:
+          data_loader: stream.bestofs_fs
+          filters:
+              thumbnail: { size: [285, 215], mode: outbound }
+
+      bestof_384_280:
+          data_loader: stream.bestofs_fs
+          filters:
+              thumbnail: { size: [384, 280], mode: outbound }
+
+      ads_preview:
+          data_loader: stream.ads_fs
+          filters:
+              thumbnail: { size: [100, 100], mode: outbound }
+
+      ads_300_250:
+          data_loader: stream.ads_fs
+          filters:
+              thumbnail: { size: [300, 250], mode: outbound }
+
+      ads_300_600:
+          data_loader: stream.ads_fs
+          filters:
+              thumbnail: { size: [300, 600], mode: outbound }
+
+      ads_728_90:
+          data_loader: stream.ads_fs
+          filters:
+              thumbnail: { size: [728, 90], mode: outbound }
+
+      sponsor_preview:
+          data_loader: stream.sponsors_fs
+          filters:
+              thumbnail: { size: [100, 100], mode: outbound }
+
+      sponsor_82_82:
+          data_loader: stream.sponsors_fs
+          filters:
+              thumbnail: { size: [82, 82], mode: outbound }
+
+      sponsor_368_168:
+          data_loader: stream.sponsors_fs
+          filters:
+              thumbnail: { size: [368, 168], mode: outbound }
+
+      avatar_preview:
+          data_loader: stream.avatars_fs
+          filters:
+              thumbnail: { size: [100, 100], mode: outbound }
+
+      avatar_82_82:
+          data_loader: stream.avatars_fs
+          filters:
+              thumbnail: { size: [82, 82], mode: outbound }
+
+      avatar_145_145:
+          data_loader: stream.avatars_fs
+          filters:
+              thumbnail: { size: [145, 145], mode: outbound }
+
+web_profiler:
+    intercept_redirects: false

@@ -34,10 +34,11 @@ parameters:
         db_data_col: session_value
         db_time_col: session_time
 
-    #AWS
-    aws_bucket: staging.worldsbestbars.com
-    aws_key: AKIAJM6ZSVZZ3WLRHZIA
-    aws_secret: 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
+    #AWS S3 Parameters
+    aws_s3_bucket:  staging.worldsbestbars
+    aws_s3_key:     AKIAJM6ZSVZZ3WLRHZIA
+    aws_s3_secret:  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
+    aws_s3_acl:     bucket-owner-read
 
     aws_cloudsearch_domain_name:    bars
     aws_cloudsearch_domain_id:      dv6lxa6k65rwcpqkq7thta6d24

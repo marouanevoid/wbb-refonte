@@ -1,0 +1,70 @@
+services:
+#Image upload and thumbnail services (S3 using Gaufrette and LiipImagine Bundles)
+    amazon_storage:
+        class: Aws\S3\S3Client
+        factory_class: Aws\S3\S3Client
+        factory_method:  factory
+        arguments:
+            -
+                key: %aws_s3_key%
+                secret: %aws_s3_secret%
+
+    wbb.imagine.cache.resolver.amazon_s3:
+        class: Liip\ImagineBundle\Imagine\Cache\Resolver\AwsS3Resolver
+        arguments:
+            - @amazon_storage
+            - %aws_s3_bucket%
+            - 'bucket-owner-read'
+        tags:
+            - { name: 'liip_imagine.cache.resolver', resolver: 'resolver.amazon_s3' }
+
+    #Loaders
+
+    wbb.liip_imagine.binary.loader.stream.bars_fs:
+        class: "%liip_imagine.binary.loader.stream.class%"
+        arguments:
+            - 'gaufrette://bars_fs/'
+        tags:
+            - { name: 'liip_imagine.binary.loader', loader: 'stream.bars_fs' }
+
+    wbb.liip_imagine.binary.loader.stream.news_fs:
+        class: "%liip_imagine.binary.loader.stream.class%"
+        arguments:
+            - 'gaufrette://news_fs/'
+        tags:
+            - { name: 'liip_imagine.binary.loader', loader: 'stream.news_fs' }
+
+    wbb.liip_imagine.binary.loader.stream.ads_fs:
+        class: "%liip_imagine.binary.loader.stream.class%"
+        arguments:
+            - 'gaufrette://ads_fs/'
+        tags:
+            - { name: 'liip_imagine.binary.loader', loader: 'stream.ads_fs' }
+
+    wbb.liip_imagine.binary.loader.stream.avatars_fs:
+        class: "%liip_imagine.binary.loader.stream.class%"
+        arguments:
+            - 'gaufrette://avatars_fs/'
+        tags:
+            - { name: 'liip_imagine.binary.loader', loader: 'stream.avatars_fs' }
+
+    wbb.liip_imagine.binary.loader.stream.bestofs_fs:
+        class: "%liip_imagine.binary.loader.stream.class%"
+        arguments:
+            - 'gaufrette://bestofs_fs/'
+        tags:
+            - { name: 'liip_imagine.binary.loader', loader: 'stream.bestofs_fs' }
+
+    wbb.liip_imagine.binary.loader.stream.sponsors_fs:
+        class: "%liip_imagine.binary.loader.stream.class%"
+        arguments:
+            - 'gaufrette://sponsors_fs/'
+        tags:
+            - { name: 'liip_imagine.binary.loader', loader: 'stream.sponsors_fs' }
+
+    wbb.liip_imagine.binary.loader.stream.cities_fs:
+        class: "%liip_imagine.binary.loader.stream.class%"
+        arguments:
+            - 'gaufrette://cities_fs/'
+        tags:
+            - { name: 'liip_imagine.binary.loader', loader: 'stream.cities_fs' }

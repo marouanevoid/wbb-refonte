@@ -6,19 +6,23 @@ use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 use WBB\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * City
  *
  * @ORM\Table(name="wbb_city")
  * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\CityRepository")
+ * @Vich\Uploadable
  */
-class City implements IndexableEntity
+class City extends UploadableEntity implements IndexableEntity
 {
 
     /**
@@ -70,11 +74,6 @@ class City implements IndexableEntity
      * @ORM\Column(name="postal_code", type="string", length=10, nullable=true)
      */
     private $postalCode;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     */
-    private $image;
 
     /**
      * @var boolean
@@ -520,29 +519,6 @@ class City implements IndexableEntity
     }
 
     /**
-     * Set image
-     *
-     * @param  Media $image
-     * @return City
-     */
-    public function setImage(Media $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return Media
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Add semsoftBars
      *
      * @param  SemsoftBar $semsoftBars
@@ -759,4 +735,5 @@ class City implements IndexableEntity
             return false;
         }
     }
+
 }

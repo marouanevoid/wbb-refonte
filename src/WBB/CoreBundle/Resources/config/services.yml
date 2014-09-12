@@ -95,6 +95,10 @@ services:
         calls:
             - [setContainer, [@service_container]]
 
+    wbb_core.media_service:
+        class: WBB\CoreBundle\Services\MediaService
+        arguments: ['@service_container', %aws_s3_bucket%, %aws_s3_key%, %aws_s3_secret% ]
+
     #Twig Error Controller
     # wbb.twig.controller.exception:
     #         class: WBB\CoreBundle\Controller\ExceptionController

@@ -25,7 +25,34 @@ class ShowImageExtension extends \Twig_Extension
     {
         return array(
             new Twig_SimpleFunction('showImage', array($this, 'showImageFunction')),
+            new Twig_SimpleFunction('showImage2', array($this, 'showImage2Function')),
         );
+    }
+
+    public function showImage2Function($filename, $filter, $user = null)
+    {
+        $formatParts = explode('_', $filter);
+        if ($formatParts[0] == 'avatar' && !$filename) {
+            if ($user) {
+                if ($user->getFacebookPicture()) {
+                    return $user->getFacebookPicture();
+                }
+            }
+        }
+
+        if($filename){
+            $imagineService = $this->container->get('liip_imagine.cache.manager');
+            $path = $imagineService->getBrowserPath($filename, $filter);
+
+            // If the path does not exist, return the fallback image
+            if (!@getimagesize($path) || $path == "/") {
+                return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
+            }
+
+            return $path;
+        }
+
+        return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
     }
 
     public function showImageFunction($media, $format, $user = null)
