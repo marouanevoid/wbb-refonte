@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use WBB\BarBundle\Entity\Collections\BestOfTag;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use WBB\CoreBundle\Entity\UploadableEntity;
 
 /**
  * BestOf
@@ -14,7 +15,7 @@ use WBB\CloudSearchBundle\Indexer\IndexableEntity;
  * @ORM\Table(name="wbb_bestof")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestOfRepository")
  */
-class BestOf implements IndexableEntity
+class BestOf extends UploadableEntity implements IndexableEntity
 {
     /**
      * @var integer

@@ -19,10 +19,12 @@ class CityAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $imagineService = $this->getContainer()->get('liip_imagine.cache.manager');
+
         $imageOptions = array('required' => false, 'label' => 'Main visual *');
-        if (($object = $this->getSubject()) && $object->getImage()) {
-            $path = $object->getWebPath();
-            $imageOptions['help'] = 'Associate a visual is mandatory for top cities<br /><img width="250px" src="/' . $path . '" />';
+        if (($object = $this->getSubject()) && $object->getImageName()) {
+            $path = $imagineService->getBrowserPath($object->getImageName(), 'city_preview');
+            $imageOptions['help'] = 'Associate a visual is mandatory for top cities<br /><img width="100px" src="' . $path . '" />';
         }else{
             $imageOptions['help'] = 'Associate a visual is mandatory for top cities';
         }
@@ -46,7 +48,7 @@ class CityAdmin extends Admin
                 ->add('longitude', 'hidden')
             ->end()
             ->with('Media')
-                ->add('file', 'file', $imageOptions)
+                ->add('imageFile', 'file', $imageOptions)
 //                ->add('image', 'sonata_type_model_list',
 //                    array(
 //                        'required'  => false,
@@ -171,7 +173,6 @@ class CityAdmin extends Admin
 
     public function prePersist($object)
     {
-        $object->preUpload();
 
         if ($object->getSuburbs()) {
             foreach ($object->getSuburbs() as $suburb) {
@@ -186,7 +187,6 @@ class CityAdmin extends Admin
 
     public function preUpdate($object)
     {
-        $object->preUpload();
 
         if ($object->getSuburbs()) {
             foreach ($object->getSuburbs() as $suburb) {
@@ -202,17 +202,8 @@ class CityAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    public function postUpdate($object)
-    {
-        $object->upload();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function postPersist($object)
     {
-        $object->upload();
         if($object->getBars()->count() <= 0) {
             $this->getRequest()->getSession()->getFlashBag()->add("warning", "You have created a new city on World's Best Bars, now you can add new bars in this City");
         }
