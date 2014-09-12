@@ -110,3 +110,7 @@ services:
         arguments: ["@router", "@session"]
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    #FileUpload Namer
+    wbb_uploader.namer_my_origname:
+        class: WBB\CoreBundle\Naming\MyOrignameNamer
