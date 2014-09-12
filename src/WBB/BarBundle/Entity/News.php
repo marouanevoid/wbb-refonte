@@ -8,13 +8,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use WBB\CoreBundle\Entity\City;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * News
  *
  * @ORM\Table(name="wbb_news")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\NewsRepository")
+ * @Vich\Uploadable
  */
-
 class News implements IndexableEntity
 {
 
@@ -125,14 +127,122 @@ class News implements IndexableEntity
     private $sponsor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @Vich\UploadableField(mapping="sponsor_image", fileNameProperty="sponsorImageName")
+     *
+     * @var File $sponsorFile
      */
-    private $sponsorImage;
+    protected $sponsorFile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\Column(type="string", length=255, name="sponsor_image_name", nullable=true)
+     *
+     * @var string $sponsorImageName
      */
-    private $sponsorImageSmall;
+    protected $sponsorImageName;
+
+    /**
+     * @Vich\UploadableField(mapping="sponsor_small_image", fileNameProperty="sponsorSmallImageName")
+     *
+     * @var File $sponsorSmallFile
+     */
+    protected $sponsorSmallFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="sponsor_small_image_name", nullable=true)
+     *
+     * @var string $sponsorImageName
+     */
+    protected $sponsorSmallImageName;
+
+    /// Getters and Setter for image upload
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setSponsorFile(File $image)
+    {
+        $this->sponsorFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getSponsorFile()
+    {
+        return $this->sponsorFile;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setSponsorSmallFile(File $image)
+    {
+        $this->sponsorSmallFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getSponsorSmallFile()
+    {
+        return $this->sponsorSmallFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setSponsorImageName($imageName)
+    {
+        $this->sponsorImageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSponsorImageName()
+    {
+        return $this->sponsorImageName;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setSponsorSmallImageName($imageName)
+    {
+        $this->sponsorSmallImageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSponsorSmallImageName()
+    {
+        return $this->sponsorSmallImageName;
+    }
+    //// end getters and setters
 
     /**
      * @var \DateTime

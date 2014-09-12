@@ -34,6 +34,11 @@ vich_uploader:
             upload_destination: sponsors_fs
             namer: vich_uploader.namer_origname
 
+        sponsor_small_image:
+            uri_prefix:         /images/sponsors
+            upload_destination: sponsors_fs
+            namer: wbb_uploader.namer_my_origname
+
         avatar_image:
             uri_prefix:         /images/avatars
             upload_destination: avatars_fs
