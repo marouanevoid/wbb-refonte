@@ -1,0 +1,90 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+
+{#
+
+This code manage the one-to-many association field popup
+
+#}
+
+{% autoescape false %}
+
+<!-- edit one association -->
+
+<script type="text/javascript">
+
+    // handle the add link
+    var field_add_{{ id }} = function(event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var form = jQuery(this).closest('form');
+
+        var entityName = "{{sonata_admin.admin.root.code}}";
+        entityName = entityName.split('.');
+        entityName = entityName[entityName.length-1];
+
+        var spanID = '#field_widget_{{ id }}';
+        var indexRow = $(spanID).find('.sonata-ba-tbody').first().find('tr').length;
+
+        // the ajax post
+        jQuery(form).ajaxSubmit({
+            url: Routing.generate('get_sonata_collection_row', {'entity': entityName, 'adminID': '{{ sonata_admin.admin.root.uniqid }}', 'index': indexRow }),
+            type: "POST",
+            dataType: 'html',
+            data: { _xml_http_request: true },
+            success: function(html) {
+                html = $('<div></div>').append(html);
+                html = html.find('tbody').html();
+                if (!html.length) {
+                    return;
+                }
+                $(spanID).find('.sonata-ba-tbody').append(html);
+                Admin.setup_select2(jQuery('#field_container_{{ id }}'));
+
+                if(jQuery('input[type="file"]', form).length > 0) {
+                    jQuery(form).attr('enctype', 'multipart/form-data');
+                    jQuery(form).attr('encoding', 'multipart/form-data');
+                }
+                jQuery('#sonata-ba-field-container-{{ id }}').trigger('sonata.add_element');
+                jQuery('#field_container_{{ id }}').trigger('sonata.add_element');
+            }
+        });
+
+        return false;
+    };
+
+    var field_widget_{{ id }} = false;
+
+    // this function initialize the popup
+    // this can be only done this way has popup can be cascaded
+    function start_field_retrieve_{{ id }}(link) {
+
+        link.onclick = null;
+
+        // initialize component
+        field_widget_{{ id }} = jQuery("#field_widget_{{ id }}");
+
+        // add the jQuery event to the a element
+        jQuery(link)
+            .click(field_add_{{ id }})
+            .trigger('click')
+        ;
+
+        return false;
+    }
+</script>
+
+<!-- / edit one association -->
+
+{% endautoescape %}

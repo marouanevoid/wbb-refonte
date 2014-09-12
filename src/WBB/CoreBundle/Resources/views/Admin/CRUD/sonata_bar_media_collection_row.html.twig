@@ -1,0 +1,23 @@
+<table>
+<tr>
+    <td class="sonata-ba-td-{{ adminID }}_medias-_delete control-group">
+        <input type="checkbox" id="{{ adminID }}_medias_{{ index }}__delete" name="{{ adminID }}[medias][{{ index }}][_delete]" value="1">
+    </td>
+    <td class="sonata-ba-td-{{ adminID }}_medias-mediaFile control-group">
+        <input type="file" id="{{ adminID }}_medias_{{ index }}_mediaFile" name="{{ adminID }}[medias][{{ index }}][mediaFile]" class="">
+    </td>
+    <td class="sonata-ba-td-{{ adminID }}_medias-media control-group">
+        <input type="text" id="{{ adminID }}_medias_3_media" name="{{ adminID }}[medias][{{ index }}][media]" maxlength="255"
+               class="span5" value="">
+    </td>
+    <td class="sonata-ba-td-{{ adminID }}_medias-alt control-group">
+        <textarea id="{{ adminID }}_medias_{{ index }}_alt" name="{{ adminID }}[medias][{{ index }}][alt]" cols="220" rows="6" class="span5"></textarea>
+    </td>
+    <td class="sonata-ba-td-{{ adminID }}_medias-position control-group">
+        <input type="hidden" id="{{ adminID }}_medias_{{ index }}_position" name="{{ adminID }}[medias][{{ index }}][position]" class=""
+               value="{{ index }}" style="display: none;">
+        <span class="sonata-ba-sortable-handler ui-icon ui-icon-grip-solid-horizontal">
+        </span>
+    </td>
+</tr>
+</table>

@@ -76,11 +76,11 @@ class Admin extends BaseAdmin
     protected function getImageOptions($imageName, $filter, $options = array())
     {
         $imagineService = $this->getContainer()->get('liip_imagine.cache.manager');
-
         $imageOptions = $options;
         if ($imageName) {
             $path = $imagineService->getBrowserPath($imageName, $filter);
             $imageOptions['help'] = $imageOptions['help'].'<br /><img width="100px" src="' . $path . '" />';
+//            die($imageOptions['help']);
         }
 
         return $imageOptions;

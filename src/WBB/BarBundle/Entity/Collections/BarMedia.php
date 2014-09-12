@@ -3,14 +3,21 @@
 namespace WBB\BarBundle\Entity\Collections;
 
 use Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Collections\BestOfBar;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * BarMedia
  *
  * @ORM\Table(name="wbb_bar_media")
  * @ORM\Entity
+ * @Vich\Uploadable
+ *
  */
 class BarMedia
 {
@@ -48,9 +55,66 @@ class BarMedia
     private $bestofs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", fetch="EAGER")
+    **
+    * @Vich\UploadableField(mapping="bar_image", fileNameProperty="media")
+    *
+    * @var File $mediaFile
+    */
+    protected $mediaFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="media_name", nullable=true)
+     *
+     * @var string $media
      */
-    private $media;
+    protected $media;
+
+    ////////// Media getters and setters
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setMediaFile(File $image)
+    {
+        $this->mediaFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getMediaFile()
+    {
+        return $this->mediaFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setMedia($imageName)
+    {
+        $this->media = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    //////////End Media Getters and setters
 
     /**
      * @var \DateTime
@@ -127,10 +191,10 @@ class BarMedia
     /**
      * Set bar
      *
-     * @param  \WBB\BarBundle\Entity\Bar $bar
+     * @param  Bar $bar
      * @return BarMedia
      */
-    public function setBar(\WBB\BarBundle\Entity\Bar $bar = null)
+    public function setBar(Bar $bar = null)
     {
         $this->bar = $bar;
 
@@ -140,80 +204,11 @@ class BarMedia
     /**
      * Get bar
      *
-     * @return \WBB\BarBundle\Entity\Bar
+     * @return Bar
      */
     public function getBar()
     {
         return $this->bar;
-    }
-
-    /**
-     * Set media
-     *
-     * @param  Media    $media
-     * @return BarMedia
-     */
-    public function setMedia(Media $media = null)
-    {
-        $this->media = $media;
-
-        return $this;
-    }
-
-    /**
-     * Get media
-     *
-     * @return Media
-     */
-    public function getMedia()
-    {
-        return $this->media;
-    }
-
-    /**
-     * Set video1
-     *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $video1
-     * @return BarMedia
-     */
-    public function setVideo1(Media $video1 = null)
-    {
-        $this->video1 = $video1;
-
-        return $this;
-    }
-
-    /**
-     * Get video1
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getVideo1()
-    {
-        return $this->video1;
-    }
-
-    /**
-     * Set video2
-     *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $video2
-     * @return BarMedia
-     */
-    public function setVideo2(Media $video2 = null)
-    {
-        $this->video2 = $video2;
-
-        return $this;
-    }
-
-    /**
-     * Get video2
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getVideo2()
-    {
-        return $this->video2;
     }
 
     public function __toString()
@@ -275,16 +270,16 @@ class BarMedia
      */
     public function __construct()
     {
-        $this->bestofs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bestofs = new ArrayCollection();
     }
 
     /**
      * Add bestofs
      *
-     * @param  \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     * @param  BestOfBar $bestofs
      * @return BarMedia
      */
-    public function addBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
+    public function addBestof(BestOfBar $bestofs)
     {
         $this->bestofs[] = $bestofs;
 
@@ -294,9 +289,9 @@ class BarMedia
     /**
      * Remove bestofs
      *
-     * @param \WBB\BarBundle\Entity\Collections\BestOfBar $bestofs
+     * @param BestOfBar $bestofs
      */
-    public function removeBestof(\WBB\BarBundle\Entity\Collections\BestOfBar $bestofs)
+    public function removeBestof(BestOfBar $bestofs)
     {
         $this->bestofs->removeElement($bestofs);
     }
