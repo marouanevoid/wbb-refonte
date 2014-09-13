@@ -36,20 +36,39 @@ This code manage the one-to-many association field popup
 
         var spanID = '#field_widget_{{ id }}';
         var indexRow = $(spanID).find('.sonata-ba-tbody').first().find('tr').length;
+        var url = '{{ url('sonata_admin_append_form_element', {'code': sonata_admin.admin.root.code, 'elementId': id, 'objectId':  sonata_admin.admin.root.id(sonata_admin.admin.root.subject),
+                        'uniqid':    sonata_admin.admin.root.uniqid } + sonata_admin.field_description.getOption('link_parameters', {})) }}';
+
+        if(indexRow && spanID.indexOf("medias") != -1){
+            alert('i was here!');
+            url = Routing.generate('get_sonata_collection_row', {'entity': entityName, 'adminID': '{{ sonata_admin.admin.root.uniqid }}', 'index': indexRow });
+        }
 
         // the ajax post
         jQuery(form).ajaxSubmit({
-            url: Routing.generate('get_sonata_collection_row', {'entity': entityName, 'adminID': '{{ sonata_admin.admin.root.uniqid }}', 'index': indexRow }),
+            url: url,
             type: "POST",
             dataType: 'html',
             data: { _xml_http_request: true },
             success: function(html) {
-                html = $('<div></div>').append(html);
-                html = html.find('tbody').html();
                 if (!html.length) {
                     return;
                 }
-                $(spanID).find('.sonata-ba-tbody').append(html);
+                var spanID = '#field_widget_{{ id }}';
+                var indexRow = $(spanID).find('.sonata-ba-tbody').first().find('tr').length;
+
+                if(indexRow && spanID.indexOf("medias") != -1){
+//                    url = Routing.generate('get_sonata_collection_row', {'entity': entityName, 'adminID': '{{ sonata_admin.admin.root.uniqid }}', 'index': indexRow });
+                    html = $('<div></div>').append(html);
+                    html = html.find('tbody').html();
+                    if (!html.length) {
+                        return;
+                    }
+                    $(spanID).find('.sonata-ba-tbody').append(html);
+                }else{
+                    jQuery('#field_container_{{ id }}').replaceWith(html); // replace the html
+                }
+
                 Admin.setup_select2(jQuery('#field_container_{{ id }}'));
 
                 if(jQuery('input[type="file"]', form).length > 0) {
@@ -77,8 +96,8 @@ This code manage the one-to-many association field popup
 
         // add the jQuery event to the a element
         jQuery(link)
-            .click(field_add_{{ id }})
-            .trigger('click')
+                .click(field_add_{{ id }})
+                .trigger('click')
         ;
 
         return false;

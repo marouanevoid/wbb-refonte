@@ -314,12 +314,7 @@ class BarAdmin extends Admin
     {
         if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if ($media && $media->getMedia()) {
-                    $media->setBar($object);
-                    die('tested');
-                } else {
-                    $object->removeMedia($media);
-                }
+                $media->setBar($object);
             }
         }
 

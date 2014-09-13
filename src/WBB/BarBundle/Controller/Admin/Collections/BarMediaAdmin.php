@@ -28,7 +28,7 @@ class BarMediaAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('mediaFile', 'file', $this->getImageOptions($this->getSubject()->getMedia(), 'bar_preview', array(
+                ->add('mediaFile', 'file', $this->getImageOptions(($this->getSubject())?$this->getSubject()->getMedia():false, 'bar_preview', array(
                     'required'  => false,
                     'label'     => 'Media',
                     'help'      => ''
