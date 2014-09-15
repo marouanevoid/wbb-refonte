@@ -28,14 +28,12 @@ class BarMediaAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('media', 'sonata_type_model_list', array(
-                    'btn_list' => false,
-                    'required' => false
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'bar'
-                    )
-                ))
+                ->add('mediaFile', 'file', $this->getImageOptions(($this->getSubject())?$this->getSubject()->getMedia():false, 'bar_preview', array(
+                    'required'  => false,
+                    'label'     => 'Media',
+                    'help'      => ''
+                )))
+                ->add('media')
                 ->add('alt', 'textarea', array( 'attr' => array('cols'=>220, 'rows'=>6)))
                 ->add('position', 'hidden')
             ->end();
