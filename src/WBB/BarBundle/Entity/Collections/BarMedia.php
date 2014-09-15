@@ -2,14 +2,13 @@
 
 namespace WBB\BarBundle\Entity\Collections;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use WBB\BarBundle\Entity\Bar;
-use WBB\BarBundle\Entity\Collections\BestOfBar;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * BarMedia
@@ -57,7 +56,9 @@ class BarMedia
     /**
     **
     * @Vich\UploadableField(mapping="bar_image", fileNameProperty="media")
-    *
+    *  @Assert\Image(
+    *     mimeTypes={"image/jpg","image/png"}
+    * )
     * @var File $mediaFile
     */
     protected $mediaFile;

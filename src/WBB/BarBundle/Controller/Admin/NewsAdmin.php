@@ -85,14 +85,14 @@ class NewsAdmin extends Admin
 
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
                 ->add('sponsorFile', 'file',
-                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorImageName():false, 'sponsor_preview', array(
+                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorImage():false, 'sponsor_preview', array(
                         'required'  => false,
                         'help'      => 'Preferred size (width: 640px , height: 480px)',
                         'label'     => 'Sponsor image'
                     ))
                 )
                 ->add('sponsorSmallFile', 'file',
-                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorSmallImageName():false, 'sponsor_preview', array(
+                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorImageSmall():false, 'sponsor_preview', array(
                         'required'  => false,
                         'help'      => 'Preferred size (width: 82px , height: 82px)',
                         'label'     => 'Small sponsor image'

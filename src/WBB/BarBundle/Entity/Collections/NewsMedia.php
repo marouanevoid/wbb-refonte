@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * NewsMedia
@@ -64,7 +65,9 @@ class NewsMedia
 
     /**
      * @Vich\UploadableField(mapping="news_image", fileNameProperty="media")
-     *
+     * @Assert\Image(
+     *     mimeTypes={"image/jpg","image/png"}
+     * )
      * @var File $imageFile
      */
     protected $imageFile;

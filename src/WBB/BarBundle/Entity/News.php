@@ -10,6 +10,7 @@ use WBB\CoreBundle\Entity\City;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * News
  *
@@ -128,7 +129,9 @@ class News implements IndexableEntity
 
     /**
      * @Vich\UploadableField(mapping="sponsor_image", fileNameProperty="sponsorImage")
-     *
+     * @Assert\Image(
+     *     mimeTypes={"image/jpg","image/png"}
+     * )
      * @var File $sponsorFile
      */
     protected $sponsorFile;
@@ -142,7 +145,9 @@ class News implements IndexableEntity
 
     /**
      * @Vich\UploadableField(mapping="sponsor_small_image", fileNameProperty="sponsorImageSmall")
-     *
+     * @Assert\Image(
+     *     mimeTypes={"image/jpg","image/png"}
+     * )
      * @var File $sponsorSmallFile
      */
     protected $sponsorSmallFile;

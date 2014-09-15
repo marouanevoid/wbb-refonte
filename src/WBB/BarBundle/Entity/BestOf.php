@@ -9,6 +9,7 @@ use WBB\BarBundle\Entity\Collections\BestOfTag;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * BestOf
@@ -158,7 +159,9 @@ class BestOf implements IndexableEntity
 
     /**
      * @Vich\UploadableField(mapping="bestof_image", fileNameProperty="image")
-     *
+     * @Assert\Image(
+     *     mimeTypes={"image/jpg","image/png"}
+     * )
      * @var File $imageFile
      */
     protected $imageFile;

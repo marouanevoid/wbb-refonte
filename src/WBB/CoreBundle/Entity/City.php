@@ -2,7 +2,6 @@
 
 namespace WBB\CoreBundle\Entity;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,6 +13,7 @@ use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 use WBB\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * City
@@ -139,7 +139,9 @@ class City implements IndexableEntity
 
     /**
      * @Vich\UploadableField(mapping="city_image", fileNameProperty="imageName")
-     *
+     * @Assert\Image(
+     *     mimeTypes={"image/jpg","image/png"}
+     * )
      * @var File $imageFile
      */
     protected $imageFile;

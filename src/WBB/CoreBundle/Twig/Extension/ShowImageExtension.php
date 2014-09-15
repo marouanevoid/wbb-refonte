@@ -103,10 +103,10 @@ class ShowImageExtension extends \Twig_Extension
             $imagineService = $this->container->get('liip_imagine.cache.manager');
             $path = $imagineService->getBrowserPath($filename, $filter);
 
-            // If the path does not exist, return the fallback image
-            if (!@getimagesize($path) || $path == "/") {
-                return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
-            }
+//            // If the path does not exist, return the fallback image
+//            if (!@getimagesize($path) || $path == "/") {
+//                return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
+//            }
 
             return $path;
         }

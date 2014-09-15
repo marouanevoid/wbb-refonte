@@ -292,7 +292,7 @@
                     {% if not is_mobile() or is_tablet() %}
                         {% if news.sponsorImage %}
                             <div class="block">
-                                <img src="{% path news.sponsorImage, 'sponsor_368_168' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
+                                <img src="{{  showImage(news.sponsorImage, 'sponsor_368_168') }}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
                             </div>
                         {% endif %}
                     {% endif %}
