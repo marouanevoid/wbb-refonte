@@ -124,16 +124,19 @@ liip_imagine:
       avatar_preview:
           data_loader: stream.avatars_fs
           filters:
+              auto_rotate: ~
               thumbnail: { size: [100, 100], mode: outbound }
 
       avatar_82_82:
           data_loader: stream.avatars_fs
           filters:
+              auto_rotate: ~
               thumbnail: { size: [82, 82], mode: outbound }
 
       avatar_145_145:
           data_loader: stream.avatars_fs
           filters:
+              auto_rotate: ~
               thumbnail: { size: [145, 145], mode: outbound }
 
 web_profiler:
