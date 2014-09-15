@@ -42,7 +42,7 @@ class City implements IndexableEntity
     private $name;
 
     /**
-     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @Gedmo\Slug(fields={"name"}, separator="-")
      * @ORM\Column(unique=true)
      */
     private $slug;
