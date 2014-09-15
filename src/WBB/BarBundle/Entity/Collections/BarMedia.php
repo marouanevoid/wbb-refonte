@@ -69,6 +69,13 @@ class BarMedia
      */
     protected $media;
 
+    /**
+     * @ORM\Column(type="string", length=20, name="youtube", nullable=true)
+     *
+     * @var string $youtube
+     */
+    protected $youtube;
+
     ////////// Media getters and setters
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -304,5 +311,28 @@ class BarMedia
     public function getBestofs()
     {
         return $this->bestofs;
+    }
+
+    /**
+     * Set youtube
+     *
+     * @param string $youtube
+     * @return BarMedia
+     */
+    public function setYoutube($youtube)
+    {
+        $this->youtube = $youtube;
+
+        return $this;
+    }
+
+    /**
+     * Get youtube
+     *
+     * @return string 
+     */
+    public function getYoutube()
+    {
+        return $this->youtube;
     }
 }

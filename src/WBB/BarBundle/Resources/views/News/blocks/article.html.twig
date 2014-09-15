@@ -5,9 +5,9 @@
                 {% if n.medias|length>0 %}
                     {% for m in n.medias|slice(0,1) %}
                         <img src="{{ showImage(m.media, 'news_770_578') }}" width="600" height="400" alt="{{ n.title }}"/>
-                        {% if m.media.providerName == 'sonata.media.provider.youtube' %}
-                            <span class="video"></span>
-                        {% endif %}
+                        {#{% if m.media.providerName == 'sonata.media.provider.youtube' %}#}
+                            {#<span class="video"></span>#}
+                        {#{% endif %}#}
                     {% endfor %}
                 {% else %}
                     <img src="{{ showImage(null, 'news_770_578') }}" width="600" height="400" alt="{{ n.title }}"/>

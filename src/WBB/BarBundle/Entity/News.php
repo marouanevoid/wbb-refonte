@@ -127,7 +127,7 @@ class News implements IndexableEntity
     private $sponsor;
 
     /**
-     * @Vich\UploadableField(mapping="sponsor_image", fileNameProperty="sponsorImageName")
+     * @Vich\UploadableField(mapping="sponsor_image", fileNameProperty="sponsorImage")
      *
      * @var File $sponsorFile
      */
@@ -138,10 +138,10 @@ class News implements IndexableEntity
      *
      * @var string $sponsorImageName
      */
-    protected $sponsorImageName;
+    protected $sponsorImage;
 
     /**
-     * @Vich\UploadableField(mapping="sponsor_small_image", fileNameProperty="sponsorSmallImageName")
+     * @Vich\UploadableField(mapping="sponsor_small_image", fileNameProperty="sponsorImageSmall")
      *
      * @var File $sponsorSmallFile
      */
@@ -152,7 +152,7 @@ class News implements IndexableEntity
      *
      * @var string $sponsorImageName
      */
-    protected $sponsorSmallImageName;
+    protected $sponsorImageSmall;
 
     /// Getters and Setter for image upload
     /**
@@ -214,33 +214,33 @@ class News implements IndexableEntity
     /**
      * @param string $imageName
      */
-    public function setSponsorImageName($imageName)
+    public function setSponsorImage($imageName)
     {
-        $this->sponsorImageName = $imageName;
+        $this->sponsorImage = $imageName;
     }
 
     /**
      * @return string
      */
-    public function getSponsorImageName()
+    public function getSponsorImage()
     {
-        return $this->sponsorImageName;
+        return $this->sponsorImage;
     }
 
     /**
      * @param string $imageName
      */
-    public function setSponsorSmallImageName($imageName)
+    public function setSponsorImageSmall($imageName)
     {
-        $this->sponsorSmallImageName = $imageName;
+        $this->sponsorImageSmall = $imageName;
     }
 
     /**
      * @return string
      */
-    public function getSponsorSmallImageName()
+    public function getSponsorImageSmall()
     {
-        return $this->sponsorSmallImageName;
+        return $this->sponsorImageSmall;
     }
     //// end getters and setters
 
@@ -623,29 +623,6 @@ class News implements IndexableEntity
     }
 
     /**
-     * Set sponsorImage
-     *
-     * @param  string $sponsorImage
-     * @return News
-     */
-    public function setSponsorImage($sponsorImage)
-    {
-        $this->sponsorImage = $sponsorImage;
-
-        return $this;
-    }
-
-    /**
-     * Get sponsorImage
-     *
-     * @return Media
-     */
-    public function getSponsorImage()
-    {
-        return $this->sponsorImage;
-    }
-
-    /**
      * Set createdAt
      *
      * @param  \DateTime $createdAt
@@ -718,8 +695,7 @@ class News implements IndexableEntity
     {
         $medias = $this->getMedias();
         foreach ($medias as $media) {
-            if($media->getMedia()->getProviderName() === "sonata.media.provider.youtube")
-
+            if($media->getYoutube())
                 return $media;
         }
 
@@ -750,29 +726,6 @@ class News implements IndexableEntity
         }
 
         return $ids;
-    }
-
-    /**
-     * Set sponsorImageSmall
-     *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall
-     * @return News
-     */
-    public function setSponsorImageSmall(\Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall = null)
-    {
-        $this->sponsorImageSmall = $sponsorImageSmall;
-
-        return $this;
-    }
-
-    /**
-     * Get sponsorImageSmall
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getSponsorImageSmall()
-    {
-        return $this->sponsorImageSmall;
     }
 
     /**

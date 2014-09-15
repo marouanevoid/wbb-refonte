@@ -40,7 +40,6 @@ This code manage the one-to-many association field popup
                         'uniqid':    sonata_admin.admin.root.uniqid } + sonata_admin.field_description.getOption('link_parameters', {})) }}';
 
         if(indexRow && spanID.indexOf("medias") != -1){
-            alert('i was here!');
             url = Routing.generate('get_sonata_collection_row', {'entity': entityName, 'adminID': '{{ sonata_admin.admin.root.uniqid }}', 'index': indexRow });
         }
 

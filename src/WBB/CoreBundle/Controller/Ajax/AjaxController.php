@@ -97,7 +97,7 @@ class AjaxController extends Controller
     {
         $template = "WBBCoreBundle:Admin/CRUD:sonata_bar_media_collection_row.html.twig";
         if($entity == 'news'){
-            //TODO : Overwrite the $template variable to contain News Collection Template
+            $template = "WBBCoreBundle:Admin/CRUD:sonata_news_media_collection_row.html.twig";
         }
 
         return $this->render($template, array(
