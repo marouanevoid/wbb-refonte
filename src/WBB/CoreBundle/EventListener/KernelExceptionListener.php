@@ -29,15 +29,19 @@ class KernelExceptionListener
 
         if ($exception instanceof HttpExceptionInterface) {
             if ($exception->getStatusCode() == 404) {
-                $url = $event->getRequest()->getPathInfo();
+                $request = $event->getRequest();
+                $url = $request->getPathInfo();
                 $matched = $this->urlMatcher->match($url);
 
                 if ($matched) {
-                    // redirect to the matched URL
-                }
+                    $url = $request->getBaseUrl() . $matched->getDestinationCanonical();
+                    $statusCode = $matched->getRedirect();
 
-                $response = new RedirectResponse($this->router->generate('homepage'));
-                $this->session->getFlashbag()->add('wbb-not-found', true);
+                    $response = new RedirectResponse($url, $statusCode);
+                } else {
+                    $response = new RedirectResponse($this->router->generate('homepage'));
+                    $this->session->getFlashbag()->add('wbb-not-found', true);
+                }
 
                 $event->setResponse($response);
             }

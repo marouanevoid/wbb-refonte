@@ -3,14 +3,16 @@
 namespace WBB\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * RedirectUrl
  *
  * @ORM\Table(name="wbb_redirect_url")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("source")
  */
 class RedirectUrl
@@ -35,6 +37,13 @@ class RedirectUrl
     private $source;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="source_canonical", type="string", length=255)
+     */
+    private $sourceCanonical;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="redirect", type="integer")
@@ -50,6 +59,13 @@ class RedirectUrl
      * @Assert\Url()
      */
     private $destination;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="destination_canonical", type="string", length=255)
+     */
+    private $destinationCanonical;
 
     /**
      * Get id
@@ -128,6 +144,93 @@ class RedirectUrl
     public function getDestination()
     {
         return $this->destination;
+    }
+
+    /**
+     * Set sourceCanonical
+     *
+     * @param string $sourceCanonical
+     * @return RedirectUrl
+     */
+    public function setSourceCanonical($sourceCanonical)
+    {
+        $this->sourceCanonical = $sourceCanonical;
+
+        return $this;
+    }
+
+    /**
+     * Get sourceCanonical
+     *
+     * @return string 
+     */
+    public function getSourceCanonical()
+    {
+        return $this->sourceCanonical;
+    }
+
+    /**
+     * Set destinationCanonical
+     *
+     * @param string $destinationCanonical
+     * @return RedirectUrl
+     */
+    public function setDestinationCanonical($destinationCanonical)
+    {
+        $this->destinationCanonical = $destinationCanonical;
+
+        return $this;
+    }
+
+    /**
+     * Get destinationCanonical
+     *
+     * @return string 
+     */
+    public function getDestinationCanonical()
+    {
+        return $this->destinationCanonical;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateDifferentUrls(ExecutionContextInterface $context)
+    {
+        $sourceC = $this->canonicalizeUrl($this->source);
+        $destinationC = $this->canonicalizeUrl($this->destination);
+        if (trim($sourceC) == trim($destinationC)) {
+            $context->addViolationAt('source', 'The source and destination must have different URLs.');
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->canonicalize();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->canonicalize();
+    }
+
+    private function canonicalize()
+    {
+        $this->sourceCanonical = $this->canonicalizeUrl($this->source);
+        $this->destinationCanonical = $this->canonicalizeUrl($this->destination);
+    }
+
+    private function canonicalizeUrl($url)
+    {
+        $urlCanonical = str_replace(array('http://', 'www.', 'worldsbestbars.com'), '', $url);
+
+        return trim($urlCanonical);
     }
 
 }

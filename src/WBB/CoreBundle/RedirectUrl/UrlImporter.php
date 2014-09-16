@@ -31,6 +31,10 @@ class UrlImporter
     {
         $path = $file->getPath() . '/' . $file->getFilename();
         $reader = new CsvReader(new \SplFileObject($path));
+        $nb = 0;
+
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '1024M');
 
         $reader->setHeaderRowNumber(0);
         foreach ($reader as $data) {
@@ -41,10 +45,15 @@ class UrlImporter
 
             $errors = $this->validator->validate($url);
             if (count($errors) > 0) {
-                echo 'Not valid ! ';
+                //echo 'Not valid ! ';
             } else {
                 $this->em->persist($url);
             }
+            if ($nb % 100 == 0) {
+                $this->em->flush();
+                $this->em->clear();
+            }
+            $nb++;
         }
 
         $this->em->flush();

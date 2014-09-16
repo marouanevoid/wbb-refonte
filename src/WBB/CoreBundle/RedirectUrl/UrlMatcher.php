@@ -21,12 +21,10 @@ class UrlMatcher
     {
         $repo = $this->em->getRepository('WBBCoreBundle:RedirectUrl');
         $matched = $repo->findOneBy(array(
-            'source' => $url
+            'sourceCanonical' => $url
         ));
-        if ($matched) {
-            echo 'yes !';
-        }
-        die();
+
+        return $matched;
     }
 
 }
