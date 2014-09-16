@@ -103,7 +103,7 @@ services:
 
     wbb.kernel.exception_listener:
         class: WBB\CoreBundle\EventListener\KernelExceptionListener
-        arguments: ["@router", "@session", "@wbb.url.matcher"]
+        arguments: ["@router", "@session", "@wbb.url.matcher", "@wbb.bar.controller"]
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
@@ -114,3 +114,13 @@ services:
     wbb.url.matcher:
         class: WBB\CoreBundle\RedirectUrl\UrlMatcher
         arguments: ["@doctrine.orm.entity_manager"]
+
+    wbb.url.checker:
+        class: WBB\CoreBundle\RedirectUrl\UrlChecker
+        arguments: ["@kernel"]
+
+    wbb.bar.controller:
+        class: WBB\BarBundle\Controller\BarController
+        calls:
+            - [setContainer, [@service_container]]
+        

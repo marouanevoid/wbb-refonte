@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WBB\CoreBundle\RedirectUrl\UrlMatcher;
+use WBB\BarBundle\Controller\BarController;
 
 class KernelExceptionListener
 {
@@ -15,12 +16,14 @@ class KernelExceptionListener
     private $router;
     private $session;
     private $urlMatcher;
+    private $barController;
 
-    public function __construct(RouterInterface $router, SessionInterface $session, UrlMatcher $urlMatcher)
+    public function __construct(RouterInterface $router, SessionInterface $session, UrlMatcher $urlMatcher, BarController $barController)
     {
         $this->router = $router;
         $this->session = $session;
         $this->urlMatcher = $urlMatcher;
+        $this->barController = $barController;
     }
 
     public function onKernelException(GetResponseForExceptionEvent $event)
@@ -39,8 +42,8 @@ class KernelExceptionListener
 
                     $response = new RedirectResponse($url, $statusCode);
                 } else {
-                    $response = new RedirectResponse($this->router->generate('homepage'));
                     $this->session->getFlashbag()->add('wbb-not-found', true);
+                    $response = $this->barController->homeAction($request);
                 }
 
                 $event->setResponse($response);

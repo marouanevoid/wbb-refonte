@@ -156,7 +156,11 @@
                 var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
                 var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var popinFrom = '';
+                {% if app.request.attributes.get('_route') != '' %}
                 {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                {% else %}
+                {% set currentPath = '' %}
+                {% endif %}
                 var currentPage = "{{ currentPath }}";
 
                 {% if app.user %}
