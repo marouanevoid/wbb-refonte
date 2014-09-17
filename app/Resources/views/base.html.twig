@@ -1,3 +1,4 @@
+{% set wbb_not_found = app.session.get('wbb-not-found') %}
 <!DOCTYPE html>
 <html lang="fr" class="utf8">
     <head>
@@ -117,7 +118,12 @@
                 var LANG = "en";
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
-
+                
+                {% if wbb_not_found %}
+                    $(document).ready(function(){
+                        $('.star').hide();
+                    });
+                {% endif %}
                 var showConfirmed = 0;
                 {% set user_confirmed = false %}
                 {% for message in app.session.flashbag.get('wbb-user-confirmed') %}

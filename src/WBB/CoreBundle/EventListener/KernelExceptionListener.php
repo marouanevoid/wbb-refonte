@@ -42,8 +42,9 @@ class KernelExceptionListener
 
                     $response = new RedirectResponse($url, $statusCode);
                 } else {
-                    $this->session->getFlashbag()->add('wbb-not-found', true);
+                    $this->session->set('wbb-not-found', true);
                     $response = $this->barController->homeAction($request);
+                    $this->session->remove('wbb-not-found');
                 }
 
                 $event->setResponse($response);
