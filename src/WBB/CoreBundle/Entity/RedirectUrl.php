@@ -30,7 +30,7 @@ class RedirectUrl
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string", length=255)
+     * @ORM\Column(name="source", type="string", length=255, unique=true)
      * @Assert\NotBlank()
      * @Assert\Url()
      */
@@ -85,7 +85,7 @@ class RedirectUrl
      */
     public function setSource($source)
     {
-        $this->source = $source;
+        $this->source = str_replace('www.', '', $source);
 
         return $this;
     }
@@ -131,7 +131,7 @@ class RedirectUrl
      */
     public function setDestination($destination)
     {
-        $this->destination = $destination;
+        $this->destination = str_replace('www.', '', $destination);
 
         return $this;
     }

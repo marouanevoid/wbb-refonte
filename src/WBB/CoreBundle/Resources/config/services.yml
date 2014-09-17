@@ -109,7 +109,7 @@ services:
 
     wbb.url.importer:
         class: WBB\CoreBundle\RedirectUrl\UrlImporter
-        arguments: ["@doctrine.orm.entity_manager", "@validator"]
+        arguments: ["@doctrine.orm.entity_manager", "@validator", "@wbb.redirect_url.logger"]
 
     wbb.url.matcher:
         class: WBB\CoreBundle\RedirectUrl\UrlMatcher
@@ -117,10 +117,13 @@ services:
 
     wbb.url.checker:
         class: WBB\CoreBundle\RedirectUrl\UrlChecker
-        arguments: ["@kernel"]
+        arguments: ["%website_url%"]
 
     wbb.bar.controller:
         class: WBB\BarBundle\Controller\BarController
         calls:
             - [setContainer, [@service_container]]
-        
+
+    wbb.redirect_url.logger:
+        class: WBB\CoreBundle\RedirectUrl\Logger
+        arguments: ["@logger"]

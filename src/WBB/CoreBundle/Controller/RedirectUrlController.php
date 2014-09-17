@@ -21,8 +21,12 @@ class RedirectUrlController extends Controller
 
             if ($file instanceof UploadedFile) {
                 $urlsImporter = $this->get('wbb.url.importer');
-                $urlsImporter->import($file);
-                $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Url redirects successfully imported');
+                $error = $urlsImporter->import($file);
+                if ($error) {
+                    $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Some url redirects have been imported, check the log file for errors.');
+                } else {
+                    $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Url redirects successfully imported');
+                }
 
                 return new RedirectResponse($this->get('router')->generate('sonata_admin_homepage'));
             }

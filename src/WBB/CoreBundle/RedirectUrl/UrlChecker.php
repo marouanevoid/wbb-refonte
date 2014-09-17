@@ -2,38 +2,43 @@
 
 namespace WBB\CoreBundle\RedirectUrl;
 
+use Guzzle\Http\Client;
+use Guzzle\Http\Exception\ClientErrorResponseException;
 use WBB\CoreBundle\Entity\RedirectUrl;
-use Symfony\Component\HttpKernel\Client;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 class UrlChecker
 {
 
     /**
-     * @var KernelInterface
+     * @var string
      */
-    private $kernel;
+    private $webSiteUrl;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct($webSiteUrl)
     {
-        $this->kernel = $kernel;
+        $this->webSiteUrl = $webSiteUrl;
     }
 
     public function exists(RedirectUrl $url)
     {
         $destinationC = $url->getDestinationCanonical();
 
-        $client = new Client($this->kernel);
-        $client->request('GET', $destinationC);
+        $client = new Client($this->webSiteUrl);
+        $request = $client->get($destinationC);
 
-        $statusCode = $client->getResponse()->getStatusCode();
-        $client->restart();
+        try {
+            $statusCode = $request->send()->getStatusCode();
+        } catch (ClientErrorResponseException $e) {
+            $statusCode = $e->getResponse()->getStatusCode();
+        }
 
-        if ($statusCode == 404) {
+        if ($statusCode == 200) {
+            return true;
+        } else if ($statusCode == 404) {
             return false;
         }
 
-        return true;
+        throw new \Exception("The page '$url' returned ");
     }
 
 }
