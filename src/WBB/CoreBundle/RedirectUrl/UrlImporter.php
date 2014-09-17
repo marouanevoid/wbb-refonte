@@ -50,9 +50,12 @@ class UrlImporter
 
         $reader->setHeaderRowNumber(0);
         foreach ($reader as $data) {
-            $url = new RedirectUrl();
+            $url = $this->em->getRepository('WBBCoreBundle:RedirectUrl')->findOneBy(array('source' => $data['From']));
+            if ($url == null) {
+                $url = new RedirectUrl();
+                $url->setSource($data['From']);
+            }
             $url->setDestination($data['Destination']);
-            $url->setSource($data['From']);
             $url->setRedirect($data['Redirect']);
 
             $errors = $this->validator->validate($url);
