@@ -1,11 +1,11 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    database_host: wbb-staging.cbwtwwqvaohk.us-east-1.rds.amazonaws.com
+    database_host: wbb-prod.cbwtwwqvaohk.us-east-1.rds.amazonaws.com
     database_port: null
     database_name: worldsbestbar
-    database_user: wbbstaging
-    database_password: DyWuFragcoocyel
+    database_user: wbbprod
+    database_password: TatyitAlfocnegeo
 
     mailer_transport:  smtp
     mailer_host:       email-smtp.eu-west-1.amazonaws.com
@@ -34,16 +34,17 @@ parameters:
         db_data_col: session_value
         db_time_col: session_time
 
-    #AWS
-    aws_bucket: staging.worldsbestbars.com
-    aws_key: AKIAJM6ZSVZZ3WLRHZIA
-    aws_secret: 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
+    #AWS S3 Parameters
+    aws_s3_bucket:  staging.worldsbestbars
+    aws_s3_key:     AKIAJM6ZSVZZ3WLRHZIA
+    aws_s3_secret:  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
+    aws_s3_acl:     bucket-owner-read
 
-    aws_cloudsearch_domain_name: wbb-staging
-    aws_cloudsearch_domain_id: svdnkahdyrn476zs6yw6jsecxm
-    aws_cloudsearch_region: us-east-1
-    aws_cloudsearch_key: AKIAI5NTFO366CXWTQWA
-    aws_cloudsearch_secret: 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
+    aws_cloudsearch_domain_name:    bars
+    aws_cloudsearch_domain_id:      dv6lxa6k65rwcpqkq7thta6d24
+    aws_cloudsearch_region:         eu-west-1
+    aws_cloudsearch_key:            AKIAJ6WSWPZUXSICYDPQ
+    aws_cloudsearch_secret:         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
 
     facebook_app_id:        444821895657717
     facebook_app_secret:    81b3c56cefb95cba10460d136270736e

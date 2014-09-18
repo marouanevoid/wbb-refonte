@@ -2,7 +2,6 @@
 
 namespace WBB\UserBundle\Entity;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -13,6 +12,8 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\BestOf;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="WBB\UserBundle\Repository\UserRepository")
@@ -20,9 +21,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @JMS\ExclusionPolicy("all")
  * @UniqueEntity("facebookId", message="This facebook account is already used", groups={"registration_fb"})
  * @UniqueEntity("username", message="Sorry, this username has already been taken", groups={"profile_light"})
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -270,11 +273,6 @@ class User extends BaseUser
     private $confirmed;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
-     */
-    private $avatar;
-
-    /**
      * @var datetime
      *
      * @Gedmo\Timestampable(on="create")
@@ -289,6 +287,66 @@ class User extends BaseUser
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @Vich\UploadableField(mapping="avatar_image", fileNameProperty="avatar")
+     * @Assert\Image(
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
+     * )
+     * @var File $imageFile
+     */
+    protected $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
+     *
+     * @var string $imageName
+     */
+    protected $avatar;
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setImageFile(File $image)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
 
     public function serialize()
     {
@@ -610,17 +668,17 @@ class User extends BaseUser
     public function getUserRole()
     {
         $roles = $this->getRoles();
-        if (in_array('ROLE_SUPER_ADMIN',$roles)) {
+        if (in_array('ROLE_SUPER_ADMIN', $roles)) {
             return 'Super Admin';
-        } elseif (in_array('ROLE_MODERATOR',$roles)) {
+        } elseif (in_array('ROLE_MODERATOR', $roles)) {
             return 'Moderator';
         } elseif (in_array('ROLE_PUBLISHER', $roles)) {
             return 'Publisher';
-        } elseif (in_array('ROLE_EDITORIAL_EXPERT',$roles)) {
+        } elseif (in_array('ROLE_EDITORIAL_EXPERT', $roles)) {
             return 'Editorial Expert';
-        } elseif (in_array('ROLE_BAR_EXPERT',$roles)) {
+        } elseif (in_array('ROLE_BAR_EXPERT', $roles)) {
             return 'Bar Expert';
-        } elseif (in_array('ROLE_BAR_OWNER',$roles)) {
+        } elseif (in_array('ROLE_BAR_OWNER', $roles)) {
             return 'Bar Owner';
         } else {
             return 'User';
@@ -632,7 +690,7 @@ class User extends BaseUser
      */
     public function getFullName()
     {
-        return $this->getFirstname().' '.$this->getLastname();
+        return $this->getFirstname() . ' ' . $this->getLastname();
     }
 
     /**
@@ -1216,29 +1274,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set avatar
-     *
-     * @param  Media $avatar
-     * @return User
-     */
-    public function setAvatar(Media $avatar = null)
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return Media
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
      * @Assert\Callback()
      */
     public function validateBirthday(ExecutionContextInterface $context)
@@ -1332,4 +1367,5 @@ class User extends BaseUser
     {
         return $this->confirmed;
     }
+
 }

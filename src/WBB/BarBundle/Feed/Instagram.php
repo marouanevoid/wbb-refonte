@@ -10,7 +10,6 @@ use Guzzle\Http\Client;
  */
 class Instagram implements FeedInterface
 {
-    private $container;
     private $em;
     private $limit;
     private $client;
@@ -21,14 +20,12 @@ class Instagram implements FeedInterface
     /**
      * __construct
      *
-     * @param $container
      * @param $em
      * @param $limit
      * @param $clientId
      */
-    public function __construct($container, $em, $limit, $clientId)
+    public function __construct($em, $limit, $clientId)
     {
-        $this->container    = $container;
         $this->em           = $em;
         $this->limit        = $limit;
         $this->client       = new Client($this->baseUrl);

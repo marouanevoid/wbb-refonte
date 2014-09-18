@@ -6,6 +6,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use WBB\CloudSearchBundle\Indexer\IndexerInterface;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 use WBB\BarBundle\Entity\Bar;
+use WBB\CoreBundle\Entity\City;
 use WBB\BarBundle\Entity\Collections\BarMedia;
 use WBB\BarBundle\Entity\Collections\NewsMedia;
 
@@ -44,6 +45,10 @@ class CloudSearchIndexerListener
                 if ($entity->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) {
                     $this->indexer->index($entity);
                 } else {
+                    $this->indexer->delete($entity);
+                }
+            } elseif ($entity instanceof City) {
+                if (!$entity->getOnTopCity() && $entity->getBars()->count() == 0) {
                     $this->indexer->delete($entity);
                 }
             } else {

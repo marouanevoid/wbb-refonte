@@ -28,6 +28,7 @@ class ProfileFormType extends BaseType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention'  => 'profile',
+            'cascade_validation' => true
         ));
     }
 
@@ -77,9 +78,7 @@ class ProfileFormType extends BaseType
             ->add('prefCocktails3')
             ->add('stayInformed')
             ->add('stayBrandInformed')
-            ->add('avatar', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context'  => 'avatar',
+            ->add('imageFile', 'file', array(
                 'required' => false
             ))
         ;
