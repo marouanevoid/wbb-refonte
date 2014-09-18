@@ -66,7 +66,7 @@ class NewsMedia
     /**
      * @Vich\UploadableField(mapping="news_image", fileNameProperty="media")
      * @Assert\Image(
-     *     mimeTypes={"image/jpg","image/png"}
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
      * )
      * @var File $imageFile
      */

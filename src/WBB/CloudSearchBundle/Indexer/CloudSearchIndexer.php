@@ -18,9 +18,9 @@ class CloudSearchIndexer implements IndexerInterface
         $this->logger = $this->container->get('logger');
         $this->router = $container->get('router');
         $this->cloudSearchClient = CloudSearchDomainClient::factory(array(
-                    'base_url' => 'http://doc-' . $parameters[0] . '-' . $parameters[1] . '.' . $parameters[2] . '.cloudsearch.amazonaws.com/2013-01-01',
-                    'key' => $parameters[3],
-                    'secret' => $parameters[4]
+            'base_url' => 'http://doc-' . $parameters[0] . '-' . $parameters[1] . '.' . $parameters[2] . '.cloudsearch.amazonaws.com/2013-01-01',
+            'key' => $parameters[3],
+            'secret' => $parameters[4]
         ));
     }
 
@@ -38,9 +38,9 @@ class CloudSearchIndexer implements IndexerInterface
 
         $id = $this->generateEntityId($entity);
         $body = array(array(
-                'type' => 'add',
-                'id' => $id,
-                'fields' => $entity->getCloudSearchFields()
+            'type' => 'add',
+            'id' => $id,
+            'fields' => $entity->getCloudSearchFields()
         ));
 
         $body[0]['fields']['entity_type'] = $this->getEntityType($entity);
@@ -76,8 +76,8 @@ class CloudSearchIndexer implements IndexerInterface
         $request->setHeader('content-type', 'application/json');
 
         $body = array(array(
-                'type' => 'delete',
-                'id' => $id
+            'type' => 'delete',
+            'id' => $id
         ));
 
         $this->logger->info('[CloudSearch][Indexer] : Trying to deleteById the entity : ' . $id);
@@ -93,8 +93,8 @@ class CloudSearchIndexer implements IndexerInterface
 
         $id = $this->generateEntityId($entity);
         $body = array(array(
-                'type' => 'delete',
-                'id' => $id
+            'type' => 'delete',
+            'id' => $id
         ));
 
         $this->logger->info('[CloudSearch][Indexer] : Trying to delete the entity : ' . $id);
@@ -105,9 +105,9 @@ class CloudSearchIndexer implements IndexerInterface
 
     private function getMediaPublicUrl($media, $format)
     {
-        $provider = $this->container->get($media->getProviderName());
+        $imagineService = $this->container->get('liip_imagine.cache.manager');
 
-        return $provider->generatePublicUrl($media, $format);
+        return $imagineService->getBrowserPath($media, $format);
     }
 
     private function getEntityType($entity)
@@ -122,28 +122,28 @@ class CloudSearchIndexer implements IndexerInterface
     {
         if ($entity instanceof \WBB\BarBundle\Entity\Bar) {
             return $this->router->generate('wbb_bar_details', array(
-                        'city' => $entity->getCity()->getSlug(),
-                        'suburb' => $entity->getSuburb()->getSlug(),
-                        'slug' => $entity->getSlug()
+                'city' => $entity->getCity()->getSlug(),
+                'suburb' => $entity->getSuburb()->getSlug(),
+                'slug' => $entity->getSlug()
             ));
         } elseif ($entity instanceof \WBB\BarBundle\Entity\News) {
             return $this->router->generate('wbb_news_details_page', array(
-                        'newsSlug' => $entity->getSlug()
+                'newsSlug' => $entity->getSlug()
             ));
         } elseif ($entity instanceof \WBB\CoreBundle\Entity\City) {
             if ($entity->getOnTopCity()) {
                 return $this->router->generate('city_homepage', array(
-                            'slug' => $entity->getSlug()
+                    'slug' => $entity->getSlug()
                 ));
             } else {
                 return $this->router->generate('wbb_cities_city', array(
-                            'slug' => $entity->getSlug(),
-                            'suburb' => null
+                    'slug' => $entity->getSlug(),
+                    'suburb' => null
                 ));
             }
         } elseif ($entity instanceof \WBB\BarBundle\Entity\BestOf) {
             return $this->router->generate('wbb_bar_bestof_global', array(
-                        'bestOfSlug' => $entity->getSlug()
+                'bestOfSlug' => $entity->getSlug()
             ));
         }
     }

@@ -2,12 +2,11 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: bundles/services/services.yml }
-    - { resource: bundles/fos.yml }
-    - { resource: bundles/sonata.yml }
-    - { resource: bundles/sonata_media.yml }
-    - { resource: bundles/gaufrette.yml }
-    - { resource: bundles/liip.yml }
-    - { resource: bundles/vich.yml }
+    - { resource: bundles/config/fos.yml }
+    - { resource: bundles/config/sonata.yml }
+    - { resource: bundles/config/gaufrette.yml }
+    - { resource: bundles/config/liip.yml }
+    - { resource: bundles/config/vich.yml }
 
 framework:
     #esi:             ~
@@ -35,6 +34,7 @@ twig:
     form:
         resources:
             - 'StnwDatePickerBundle:Form:fields.html.twig'
+            - ':Form:fields.html.twig'
     globals:
         feedsLimit: %feeds_limit%
         websiteUrl: %website_url%
@@ -74,7 +74,7 @@ doctrine:
                     numeric_functions:
                         geo: WBB\CoreBundle\AST\Functions\Geo
                 mappings:
-                    SonataMediaBundle: ~
+#                    SonataMediaBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -119,3 +119,31 @@ fos_facebook:
 
 hpatoio_bitly:
     access_token: %bitly_access_token%
+
+aequasi_cache:
+    instances:
+        default:
+          persistent: true
+          namespace: mc
+          type: memcached
+          hosts:
+              - { host: wbb-prod.fkektq.cfg.use1.cache.amazonaws.com, port: 11211 }
+
+    session:
+        enabled: true
+        instance: default
+        prefix: "session_"
+        ttl: 7200
+
+    doctrine:
+        enabled: true
+        metadata:
+            instance: default
+            entity_managers:   [ default ]
+            document_managers: [ default ]
+        result:
+            instance: default
+            entity_managers:   [ default ]
+        query:
+            instance: default
+            entity_managers: [ default ]

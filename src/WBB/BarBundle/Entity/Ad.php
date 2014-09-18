@@ -109,7 +109,7 @@ class Ad
     /**
      * @Vich\UploadableField(mapping="ads_image", fileNameProperty="image")
      * @Assert\Image(
-     *     mimeTypes={"image/jpg","image/png"}
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
      * )
      * @var File $imageFile
      */

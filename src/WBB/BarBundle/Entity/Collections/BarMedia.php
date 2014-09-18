@@ -57,7 +57,7 @@ class BarMedia
     **
     * @Vich\UploadableField(mapping="bar_image", fileNameProperty="media")
     *  @Assert\Image(
-    *     mimeTypes={"image/jpg","image/png"}
+    *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
     * )
     * @var File $mediaFile
     */

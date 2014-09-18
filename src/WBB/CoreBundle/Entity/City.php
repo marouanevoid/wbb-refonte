@@ -140,7 +140,7 @@ class City implements IndexableEntity
     /**
      * @Vich\UploadableField(mapping="city_image", fileNameProperty="imageName")
      * @Assert\Image(
-     *     mimeTypes={"image/jpg","image/png"}
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
      * )
      * @var File $imageFile
      */

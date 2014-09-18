@@ -1,11 +1,11 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    database_host: wbb-staging.cbwtwwqvaohk.us-east-1.rds.amazonaws.com
+    database_host: wbb-prod.cbwtwwqvaohk.us-east-1.rds.amazonaws.com
     database_port: null
     database_name: worldsbestbar
-    database_user: wbbstaging
-    database_password: DyWuFragcoocyel
+    database_user: wbbprod
+    database_password: TatyitAlfocnegeo
 
     mailer_transport:  smtp
     mailer_host:       email-smtp.eu-west-1.amazonaws.com

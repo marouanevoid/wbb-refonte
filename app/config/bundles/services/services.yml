@@ -68,3 +68,14 @@ services:
             - 'gaufrette://cities_fs/'
         tags:
             - { name: 'liip_imagine.binary.loader', loader: 'stream.cities_fs' }
+
+    #Preview Image Form Type as a service
+    wbb.form.type.bar_image_preview:
+        class: WBB\CoreBundle\Form\Type\BarImagePreviewType
+        tags:
+            - { name: form.type, alias: bar_image_preview }
+
+    wbb.form.type.news_image_preview:
+            class: WBB\CoreBundle\Form\Type\NewsImagePreviewType
+            tags:
+                - { name: form.type, alias: news_image_preview }

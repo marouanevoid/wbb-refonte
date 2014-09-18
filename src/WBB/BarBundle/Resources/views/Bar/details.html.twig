@@ -23,8 +23,13 @@
     <meta property="fb:admins" content="149071961796732" />
 
     {% for m in bar.medias|slice(0,1) %}
-        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}">
-        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}" />
+        {% if m.youtube %}
+            <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}">
+            <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'bar_640_480', true) }}" />
+        {% else %}
+            <meta name="twitter:image" content="http://img.youtube.com/vi/{{ m.youtube }}/0.jpg">
+            <meta property="og:image" content="http://img.youtube.com/vi/{{ m.youtube }}/0.jpg" />
+        {% endif %}
     {% endfor %}
 
 {% endblock %}
@@ -263,7 +268,7 @@
                             <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
                             <li class="left">
-                                <a href="#0" data-href="{{ path('wbb_share_email_form', {id: bar.id, type: 'bar'}) }}" class="email-share">
+                                <a href="#0" data-href="{% if bar.id %}{{ path('wbb_share_email_form', {id: bar.id, type: 'bar'}) }}{% endif %}" class="email-share">
                                     Email
                                 </a>
                             </li>
@@ -298,7 +303,7 @@
                 <div class="loader"></div>
                 <div class="ui-slide" style="display:none">
                     {% for m in bar.medias %}
-                        {% if not loop.first %}
+                        {% if not loop.first and not m.youtube %}
                             <div class="image">
                                 <div class="content">
                                     <div class="overlay"></div>

@@ -160,7 +160,7 @@ class BestOf implements IndexableEntity
     /**
      * @Vich\UploadableField(mapping="bestof_image", fileNameProperty="image")
      * @Assert\Image(
-     *     mimeTypes={"image/jpg","image/png"}
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
      * )
      * @var File $imageFile
      */

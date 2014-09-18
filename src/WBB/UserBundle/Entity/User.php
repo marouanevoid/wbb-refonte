@@ -291,7 +291,7 @@ class User extends BaseUser
     /**
      * @Vich\UploadableField(mapping="avatar_image", fileNameProperty="avatar")
      * @Assert\Image(
-     *     mimeTypes={"image/jpg","image/png"}
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
      * )
      * @var File $imageFile
      */

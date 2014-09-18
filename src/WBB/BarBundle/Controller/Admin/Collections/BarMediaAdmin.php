@@ -6,8 +6,11 @@
 
 namespace WBB\BarBundle\Controller\Admin\Collections;
 
+use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Collections\BarMedia;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
+use WBB\CoreBundle\Form\Type\ImagePreviewType;
 
 class BarMediaAdmin extends Admin
 {
@@ -28,12 +31,13 @@ class BarMediaAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('mediaFile', 'file', $this->getImageOptions(($this->getSubject())?$this->getSubject()->getMedia():false, 'bar_preview', array(
+                ->add('mediaFile', 'file', array(
                     'required'  => false,
                     'label'     => 'Media',
                     'help'      => ''
-                )))
-                ->add('media')
+                ))
+                ->add('media', 'bar_image_preview')
+                ->add('youtube', null, array('help'=> 'Youtube ID (ex: OK4fJhbRL1g )', 'attr' => array('style' => "min-width: 150px;")))
                 ->add('alt', 'textarea', array( 'attr' => array('cols'=>220, 'rows'=>6)))
                 ->add('position', 'hidden')
             ->end();

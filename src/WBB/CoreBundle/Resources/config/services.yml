@@ -77,7 +77,7 @@ services:
 
     wbb.twig.show_image_extension:
         class: WBB\CoreBundle\Twig\Extension\ShowImageExtension
-        arguments: ['@sonata.media.pool', '@sonata.media.manager.media', '@service_container']
+        arguments: ['@service_container']
         tags:
           - { name: twig.extension }
 

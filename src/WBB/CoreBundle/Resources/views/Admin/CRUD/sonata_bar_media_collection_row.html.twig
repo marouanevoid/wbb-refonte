@@ -7,8 +7,13 @@
         <input type="file" id="{{ adminID }}_medias_{{ index }}_mediaFile" name="{{ adminID }}[medias][{{ index }}][mediaFile]" class="">
     </td>
     <td class="sonata-ba-td-{{ adminID }}_medias-media control-group">
-        <input type="text" id="{{ adminID }}_medias_3_media" name="{{ adminID }}[medias][{{ index }}][media]" maxlength="255"
+        <input type="hidden" id="{{ adminID }}_medias_{{ index }}_media" name="{{ adminID }}[medias][{{ index }}][media]" maxlength="255"
                class="span5" value="">
+        <img src="{{ showImage('','bar_preview') }}" width="100px">
+    </td>
+    <td class="sonata-ba-td-{{ adminID }}_medias-media control-group">
+        <input type="text" id="{{ adminID }}_medias_{{ index }}_youtube" name="{{ adminID }}[medias][{{ index }}][youtube]" style="min-width: 150px;"
+               class="span5">
     </td>
     <td class="sonata-ba-td-{{ adminID }}_medias-alt control-group">
         <textarea id="{{ adminID }}_medias_{{ index }}_alt" name="{{ adminID }}[medias][{{ index }}][alt]" cols="220" rows="6" class="span5"></textarea>

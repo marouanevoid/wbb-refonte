@@ -130,7 +130,7 @@ class News implements IndexableEntity
     /**
      * @Vich\UploadableField(mapping="sponsor_image", fileNameProperty="sponsorImage")
      * @Assert\Image(
-     *     mimeTypes={"image/jpg","image/png"}
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
      * )
      * @var File $sponsorFile
      */
@@ -146,7 +146,7 @@ class News implements IndexableEntity
     /**
      * @Vich\UploadableField(mapping="sponsor_small_image", fileNameProperty="sponsorImageSmall")
      * @Assert\Image(
-     *     mimeTypes={"image/jpg","image/png"}
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
      * )
      * @var File $sponsorSmallFile
      */
