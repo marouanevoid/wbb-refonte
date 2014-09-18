@@ -131,4 +131,29 @@ class Instagram implements FeedInterface
     {
         return $bar->getInstagramExcludedImgs();
     }
+
+    /**
+     * showList
+     * @param  \WBB\BarBundle\Entity\Bar $bar
+     * @param $limit
+     * @return array
+     */
+    public function showList(Bar $bar, $limit)
+    {
+//        $excluded = $bar->getInstagramExcludedImgs();
+//
+//        $imgs = array();
+//        $index = 0;
+//        $next = 0;
+//
+//        do {
+//            $instaImgsList = $this->find($bar->getInstagram(), $next);
+//
+//            foreach($instaImgsList['data'] as $img){
+//                if($img->)
+//            }
+//        } while (($index < ($limit - $nbResults)) && $recursive < 5);
+//
+//        return $imgs;
+    }
 }

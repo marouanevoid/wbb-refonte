@@ -115,4 +115,15 @@ class FoursquareTips implements FeedInterface
     {
         return $bar->getFsExcludedTips();
     }
+
+    /**
+     * showList
+     * @param  \WBB\BarBundle\Entity\Bar $bar
+     * @param $limit
+     * @return array
+     */
+    public function showList(Bar $bar, $limit)
+    {
+        // TODO: Implement showList() method.
+    }
 }

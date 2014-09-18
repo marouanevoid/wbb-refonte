@@ -114,4 +114,22 @@ class FoursquareImgs implements FeedInterface
     {
         return $bar->getFsSelectedImgs();
     }
+
+    /**
+     * showList
+     * @param  \WBB\BarBundle\Entity\Bar $bar
+     * @param $limit
+     * @return array
+     */
+    public function showList(Bar $bar, $limit)
+    {
+        $selected = $bar->getFsSelectedImgs();
+        $imgs = array();
+        foreach($selected as $hash)
+        {
+            $imgs[] = $this->findByHash($hash);
+        }
+
+        return $imgs;
+    }
 }

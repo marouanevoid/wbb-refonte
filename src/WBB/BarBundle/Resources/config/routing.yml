@@ -58,6 +58,12 @@ wbb_bar_feeds_find:
     options:
         expose: true
 
+wbb_bar_feeds_show:
+    pattern:  /feed/show/{type}/{barSlug}/{offset}
+    defaults: { _controller: WBBBarBundle:Feed:find, offset: 0 }
+    options:
+        expose: true
+
 wbb_bar_feed_find_hash:
     pattern:  /feed/hash/{type}/{hash}
     defaults: { _controller: WBBBarBundle:Feed:find}

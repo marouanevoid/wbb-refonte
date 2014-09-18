@@ -11,6 +11,26 @@ use WBB\BarBundle\Entity\Bar;
  */
 class FeedController extends Controller
 {
+
+    /**
+     * showAction
+     *
+     * @param $type
+     * @param $barSlug
+     * @param  int $offset
+     *
+     * @return JsonResponse
+     */
+    public function showAction($type, $barSlug, $offset = 0)
+    {
+        $bar = $this->get('bar.repository')->findOneBySlug($barSlug);
+        if (!$bar) {
+            return new JsonResponse(null);
+        } else {
+            return new JsonResponse($this->get("wbb.{$type}.feed")->showList($bar, $offset));
+        }
+    }
+
     /**
      * findAction
      *
@@ -22,7 +42,6 @@ class FeedController extends Controller
      */
     public function findAction($type, $id, $offset = 0)
     {
-
         if (is_numeric($id) && $id==0) {
             return new JsonResponse(null);
         } else {
