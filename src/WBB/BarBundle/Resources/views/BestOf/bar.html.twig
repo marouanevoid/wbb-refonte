@@ -1,39 +1,48 @@
 <article class="bar-w-pic best-of">
-    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
+    <a data-id="{{ b.bar.id }}" data-type="{{ entity_light_type(b.bar) }}" data-name="{{ b.bar.name }}" href="{{ favorite_url(app.user, b.bar) }}" class="btn-round star dark {% if is_favorite(app.user, b.bar) %}active changed{% endif %}"></a>
     <div class="txt">
         {% if bestof.ordered %}
             <span class="number h2">{{ loop.index }}</span>
         {% endif %}
-        <h2>{{ b.bar.name }}</h2>
-        <h3>
-            {% if b.bar.suburb %}{{ b.bar.suburb.name|default('Unspecified') }}, {% endif %}
-            {% if b.bar.city %} {{ b.bar.city.name|default('Unspecified') }} {% endif %}
-        </h3>
+        <a href="{{ path('wbb_bar_details',{ city: b.bar.city.slug, suburb: b.bar.suburb.slug, slug: b.bar.slug }) }}">
+            <h2>{{ b.bar.name }}</h2>
+            <h3>
+                {% if b.bar.suburb %}{{ b.bar.suburb.name|default('Unspecified') }}, {% endif %}
+                {% if b.bar.city %} {{ b.bar.city.name|default('Unspecified') }} {% endif %}
+            </h3>
+        </a>
         <div class="hover">
             <div class="tags">
-                {% for tr in b.bar.tags %}
-                    {{ tr.tag }}{% if not loop.last %}, {% endif %}
-                {% endfor%}
+                {% for tr in b.bar.tags |slice(0, 5) %}
+                    <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.tag }}" >
+                        {{ tr.tag|capitalize }}
+                    </a>
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
             </div>
-            <div class="description">
-                {% if b.description is empty %}
-                    {{ b.bar.description|truncate(150, true)|striptags }}
-                {% else %}
-                    {{ b.description|truncate(150, true)|striptags }}
-                {% endif %}
-            </div>
+            <a href="{{ path('wbb_bar_details',{ city: b.bar.city.slug, suburb: b.bar.suburb.slug, slug: b.bar.slug }) }}">
+                <div class="description">
+                    {% if b.description is empty %}
+                        {{ b.bar.description|truncate(150, true)|striptags }}
+                    {% else %}
+                        {{ b.description|truncate(150, true)|striptags }}
+                    {% endif %}
+                </div>
+            </a>
         </div>
     </div>
     {% if b.bar.suburb and b.bar.city %}
-        <a href="{{ path('wbb_bar_details',{ city: b.bar.city, suburb: b.bar.suburb.slug, slug: b.bar.slug }) }}" class="overlay-link"></a>
+        <a href="{{ path('wbb_bar_details',{ city: b.bar.city.slug, suburb: b.bar.suburb.slug, slug: b.bar.slug }) }}" class="overlay-link"></a>
     {% endif %}
     <div class="color gradient"></div>
     <div class="color gray"></div>
     {% if b.media and b.media.media %}
-        <img class="scale-with-grid" data-src="{% filter showMedia %}{% path b.media.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
-    {% else %}
+        <img class="scale-with-grid" data-src="{{ showImage(b.media.media, 'bar_425_320') }}"  alt="{{ b.bar.name }}" width="570" height="428"/>
+    {% elseif b.bar.medias|length > 0 %}
         {% for m in b.bar.medias|slice(0,1) %}
-            <img class="scale-with-grid" data-src="{% filter showMedia %}{% path m.media, 'slider_large' %}{% endfilter %}"  alt="{{ b.bar.name }}" width="570" height="428"/>
+            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'bar_425_320') }}"  alt="{{ b.bar.name }}" width="570" height="428"/>
         {% endfor %}
+    {% else %}
+        <img class="scale-with-grid" data-src="{{ showImage(null, 'bar_425_320') }}"  alt="{{ b.bar.name }}" width="570" height="428"/>
     {% endif %}
 </article>

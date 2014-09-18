@@ -9,13 +9,15 @@ use WBB\BarBundle\TipsEvents;
 class TipsListener implements EventSubscriberInterface
 {
 
+    private $container;
     private $mailer;
     private $router;
     private $twig;
     private $em;
 
-    public function __construct($mailer, $router, $twig, $em)
+    public function __construct($container, $mailer, $router, $twig, $em)
     {
+        $this->container = $container;
         $this->mailer = $mailer;
         $this->router = $router;
         $this->twig = $twig;
@@ -35,7 +37,7 @@ class TipsListener implements EventSubscriberInterface
                         'user' => $admin,
                         'tipUrl' => $tipUrl
                     ),
-                    'fromEmail' => 'myportal@pernod-ricard.com',
+                    'fromEmail' => array($this->container->getParameter('mailer_email') => $this->container->getParameter('mailer_username')),
                     'toEmail' => $admin->getEmail()
                 );
 

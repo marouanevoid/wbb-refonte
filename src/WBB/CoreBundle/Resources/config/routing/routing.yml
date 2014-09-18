@@ -67,3 +67,34 @@ wbb_cities:
     defaults: { _controller: WBBCoreBundle:City:cities }
     options:
         expose: true
+
+#Static pages
+wbb_about_us:
+    path: /about
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'WBBCoreBundle:Static:about.html.twig'
+
+wbb_privacy_policy:
+    path: /privacy-policy
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'WBBCoreBundle:Static:privacy.html.twig'
+
+wbb_cookies_policy:
+    path: /cookie-policy
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'WBBCoreBundle:Static:cookies.html.twig'
+
+wbb_responsible_drinking:
+    path: /responsible-drinking
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'WBBCoreBundle:Static:responsable-drinking.html.twig'
+
+wbb_terms_and_conditions:
+    path: /terms-and-conditions
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'WBBCoreBundle:Static:terms.html.twig'

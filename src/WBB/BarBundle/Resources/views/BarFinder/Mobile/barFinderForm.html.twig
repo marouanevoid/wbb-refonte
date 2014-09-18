@@ -76,6 +76,7 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <div class="clear"></div>
             </div>
             <div class="group-form margin-bottom-40">
                 <input type="submit" id="go-submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold go disabled">
@@ -96,14 +97,14 @@
                         $(this).parent('.ui-dropdown-container').find('.ui-dropdown').addClass('active');
                       }
                    });
-                   
+
                    if(totalSelectedSelect < 2 || totalSelectedMood > 0){
                         $('.go').removeClass('disabled');
                         $('.go').removeAttr('disabled');
                    }else{
                     $('.go').addClass('disabled');
                     $('.go').attr('disabled' , 'disabled');
-                   }  
+                   }
 
                 };
 
@@ -112,7 +113,7 @@
                 var objDropdown = $("select.ui-dropdown");
                 objDropdown.each(function(){
                     $(this).change(function() {
- 
+
                         showGo();
                     })
                 })

@@ -65,6 +65,17 @@ meta.Dropdown = function(config){
 
     /* Private. */
 
+
+    that.checkSelected = function(){
+        var _this = $(this);
+        if(_this.val() == ''){
+            _this.parent('.ui-dropdown-container').addClass('changed-ui-style');
+        }else{
+            _this.parent('.ui-dropdown-container').removeClass('changed-ui-style');
+        }
+    }
+
+
     /**
      *
      */
@@ -111,7 +122,7 @@ meta.Dropdown = function(config){
                 $options.eq( index ).prop('selected', true);
 
                 $dropdown.find('.choice li').show();
-                $(this).hide();
+               // $(this).hide();
                 
                 //$options.eq( index ).attr('selected', 'selected');
 
@@ -142,14 +153,18 @@ meta.Dropdown = function(config){
             $dropdown.find('select').on('change', function()
             {
                 that.config.$dropdown_value.text( $(this).find('option:selected').text() );
+                that.checkSelected.apply([this]);
             });
         }
         else
         {
             $dropdown.find('select').on('change', function()
             {
-                //$dropdown.css({width : $dropdown.width()});
-                that.config.$dropdown_value.text( $(this).find('option:selected').text() );
+                var _this = $(this);
+                var ttext = _this.find('option:selected').text();
+                that.config.$dropdown_value.text( ttext );
+                that.checkSelected.apply([this]);
+
             });
         }
     };

@@ -1,7 +1,4 @@
-
-
 <div class="container l-margin-top m-padding-bottom">
-
         <div class="twelve columns h1 m-margin-bottom color-brown">
             Editor's Picks
         </div>
@@ -15,62 +12,47 @@
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
             {% endfor %}
             {% for n in interviews|slice(0,1) %}
-                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , 'has_quote' : 1, become_url : true , show_quote : 1  } %}
+                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , 'has_quote' : 1, 'become_url' : true , 'show_quote' : 1  } %}
             {% endfor %}
             {% for n in articles|slice(2,1) %}
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1, 'has_text' : 1 } %}
             {% endfor %}
-
         </section>
 
         <!-- 4 COLS -->
-            <aside class="articles padding four columns">
-                {{ render(controller('WBBBarBundle:Ads:showNLPRightBanner')) }}
+        <aside class="articles padding four columns">
+            {% include 'WBBBarBundle:Ads:show.html.twig' with {'ad': ads.ad, 'format': ads.size, 'NLP': true } %}
 
-  {#               {% set bigAd = true %} #}
-                {%  if not bigAd %}
-                    {% for n in interviews|slice(1,1) %}
-                        {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
-                        {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
-                    {% endfor %}
-                {%  endif %}
-
-                {% for n in interviews|slice(2,1) %}
+            {%  if not ads.bigAd and ads.smallAd %}
+                {% for n in interviews|slice(1,1) %}
+                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n , first : true } %}
+                {% endfor %}
+            {% elseif not ads.bigAd %}
+                {% for n in interviews|slice(1,1) %}
+                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 , firstchild : true } %}
+                {% endfor %}
+            {% endif %}
+            {% for n in interviews|slice(2,1) %}
                 {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 , firstchild : true } %}
-                    {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
-                {% endfor %}
-
-                {% for n in articles|slice(3,1) %}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
-                {% endfor %}
-
-                {% for n in interviews|slice(3,1) %}
-                    {# {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %} #}
-                    {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
-                {% endfor %}
-
-                {% for n in articles|slice(4,1) %}
-                    {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %} #}
-                    {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
-                {% endfor %}
-
-
-            </aside>
+            {% endfor %}
+            {% for n in articles|slice(3,1) %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
+            {% endfor %}
+            {% for n in interviews|slice(3,1) %}
+                {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'has_image' : 1 } %}
+            {% endfor %}
+            {% for n in articles|slice(4,1) %}
+                {% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : n } %}
+            {% endfor %}
+        </aside>
     </div>
-
-
     <!-- AD -->
-    {% block footerAd %}
         {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'NLP_728x90' })) }}
-    {% endblock %}
-
-  
     <div class="load-container">
         <!-- OLDER NEWS -->
         <div class="container m-margin-top">
             <!-- 12 COLS -->
             <div class="articles older-news twelve columns">
-
                 {% for n in articles|slice(5,3) %}
                     {% if loop.index == 2 %}
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true } %}
@@ -78,20 +60,16 @@
                         {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1  } %}
                     {%  endif %}
                 {% endfor %}
-
                 {% set newsIndex = 0 %}
-                {%  if bigAd %}
+                {% if ads.bigAd %}
                     {% for n in interviews|slice(1,1) %}
-                        {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true  } %}
-                        {# {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n } %} #}
+                        {% include "WBBBarBundle:News/blocks:article.html.twig" with { 'n' : n , 'is_small' : 1, 'has_text' : 1 , show_quote : 1 , become_url : true  } %}
                     {% endfor %}
                     {% set newsIndex = 1 %}
                     {% set cursorIndex = 0 %}
                 {%  else %}
                     {% set cursorIndex = 1 %}
                 {% endif %}
-
-                
                 {% for n in newsList %}
                     {% if cursorIndex % 2 == 0 %}
                             {% include "WBBBarBundle:News/blocks:article.html.twig"  with { 'n' : n , 'is_small' : 1, 'has_image' : 1 } %}
@@ -104,6 +82,4 @@
                 {% endfor %}
             </div>
         </div>
-
-        
     </div>

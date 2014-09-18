@@ -22,7 +22,7 @@ class ProfileController extends ContainerAware
     /**
      * Show the user
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -31,6 +31,12 @@ class ProfileController extends ContainerAware
 
         $session = $this->container->get('session');
         $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
+
+        if ($request->query->get('emailPopin', null)) {
+            $session->getFlashBag()->add('wbb-check-email', true);
+
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
+        }
 
         return $this->container->get('templating')->renderResponse('WBBUserBundle:Profile:show.html.twig', array(
                 'user'  => $user,
@@ -49,6 +55,13 @@ class ProfileController extends ContainerAware
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $session = $this->container->get('session');
+        if ($request->query->get('profileMessage', null)) {
+            $session->getFlashBag()->add('wbb-complete-profile', true);
+
+            return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+        }
+
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
 
@@ -59,11 +72,18 @@ class ProfileController extends ContainerAware
             return $event->getResponse();
         }
 
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.profile.form.factory');
+        $mobileDetector = $this->container->get('mobile_detect.mobile_detector');
 
-        $form = $formFactory->createForm();
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('wbb_user.profile.form.factory');
+        if (!$mobileDetector->isMobile() || $mobileDetector->isTablet()) {
+            $form = $formFactory->createForm(false, array('Default', 'registration_full'));
+        } else {
+            $form = $formFactory->createForm(true, array('profile_light'));
+        }
+        $currentUserName = $user->getUsername();
         $form->setData($user);
+        $errors = array('fields' => array(), 'messages' => array());
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
@@ -75,6 +95,10 @@ class ProfileController extends ContainerAware
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
+                if ($user->getFirstname() != '' && $user->getLastname() != '' && $user->getConfirmed()) {
+                    $user->setTipsShouldBeModerated(false);
+                }
+
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
@@ -85,18 +109,45 @@ class ProfileController extends ContainerAware
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
                 return $response;
+            } else {
+                $formErrors = null;
+                if (!$mobileDetector->isMobile() || $mobileDetector->isTablet()) {
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default','registration_full'));
+                } else {
+                    $formErrors = $this->container->get('validator')->validate($form, array('Default', 'profile_light'));
+                }
+
+                $fields = array();
+                $messages = array();
+
+                foreach ($formErrors as $formError) {
+                    $fields[] = str_replace('data.', '', $formError->getPropertyPath());
+                    if ($formError->getMessage() == 'not.blank' && !in_array('Please complete all required fields', $messages)) {
+                        $messages[] = 'Please complete all required fields';
+                    } elseif ($formError->getMessage() != 'not.blank' && !in_array($formError->getMessage(), $messages)) {
+                        $messages[] = $formError->getMessage();
+                    }
+                }
+
+                $errors = array(
+                    'fields' => $fields,
+                    'messages' => $messages
+                );
+
+                $user->setUsername($currentUserName);
             }
         }
 
-        $session = $this->container->get('session');
         $city = $this->container->get('city.repository')->findOneBySlug($session->get('citySlug'));
 
         return $this->container->get('templating')->renderResponse(
             'WBBUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
             array(
-                'form' => $form->createView(),
-                'user' => $user,
-                'city' => $city
+                'form'      => $form->createView(),
+                'user'      => $user,
+                'username'  => $currentUserName,
+                'city'      => $city,
+                'errors'    => $errors
             )
         );
     }

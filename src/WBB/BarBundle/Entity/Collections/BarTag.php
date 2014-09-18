@@ -47,7 +47,7 @@ class BarTag
     private $semsoftBar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bars", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="WBB\BarBundle\Entity\Tag", inversedBy="bars", cascade={"persist"})
      */
     private $tag;
 
@@ -67,11 +67,10 @@ class BarTag
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,7 +80,7 @@ class BarTag
     /**
      * Set position
      *
-     * @param integer $position
+     * @param  integer  $position
      * @return BarMedia
      */
     public function setPosition($position)
@@ -94,7 +93,7 @@ class BarTag
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -104,7 +103,7 @@ class BarTag
     /**
      * Set bar
      *
-     * @param \WBB\BarBundle\Entity\Bar $bar
+     * @param  \WBB\BarBundle\Entity\Bar $bar
      * @return BarMedia
      */
     public function setBar(\WBB\BarBundle\Entity\Bar $bar = null)
@@ -132,7 +131,7 @@ class BarTag
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return BarMedia
      */
     public function setCreatedAt($createdAt)
@@ -145,7 +144,7 @@ class BarTag
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -155,7 +154,7 @@ class BarTag
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return BarMedia
      */
     public function setUpdatedAt($updatedAt)
@@ -168,7 +167,7 @@ class BarTag
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -178,7 +177,7 @@ class BarTag
     /**
      * Set tag
      *
-     * @param \WBB\BarBundle\Entity\Tag $tag
+     * @param  \WBB\BarBundle\Entity\Tag $tag
      * @return BarTag
      */
     public function setTag(\WBB\BarBundle\Entity\Tag $tag = null)
@@ -201,7 +200,7 @@ class BarTag
     /**
      * Set semsoftBar
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar
+     * @param  \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar
      * @return BarTag
      */
     public function setSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBar = null)
@@ -214,7 +213,7 @@ class BarTag
     /**
      * Get semsoftBar
      *
-     * @return \WBB\BarBundle\Entity\Semsoft\SemsoftBar 
+     * @return \WBB\BarBundle\Entity\Semsoft\SemsoftBar
      */
     public function getSemsoftBar()
     {
@@ -224,7 +223,7 @@ class BarTag
     /**
      * Set type
      *
-     * @param string $type
+     * @param  string $type
      * @return BarTag
      */
     public function setType($type)
@@ -237,7 +236,7 @@ class BarTag
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {

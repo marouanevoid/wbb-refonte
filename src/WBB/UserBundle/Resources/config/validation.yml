@@ -1,0 +1,9 @@
+WBB\UserBundle\Entity\User:
+    properties:
+        username:
+            - NotBlank: { message: "not.blank", groups: [profile_light]}
+
+#FOS\UserBundle\Form\Model\ChangePassword:
+#    properties:
+#        new:
+#            - Length: { min: 6, minMessage: "wa zid mazal", groups: [ChangePassword] }

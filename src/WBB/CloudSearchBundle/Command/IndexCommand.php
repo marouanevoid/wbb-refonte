@@ -5,6 +5,7 @@ namespace WBB\CloudSearchBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WBB\BarBundle\Entity\Bar;
 
 class IndexCommand extends ContainerAwareCommand
 {
@@ -19,13 +20,21 @@ class IndexCommand extends ContainerAwareCommand
         $output->writeln('Updating the AWS CloudSearch index...');
 
         $indexer = $this->getContainer()->get('cloudsearch.indexer');
-        $repos = array('bar.repository', 'bestof.repository');
+        $repos = array('bar.repository', 'bestof.repository', 'news.repository', 'city.repository');
 
         foreach ($repos as $repo) {
             $entities = $this->getContainer()->get($repo)->findAll();
 
             foreach ($entities as $entity) {
-                $indexer->index($entity);
+                if ($entity instanceof Bar) {
+                    if ($entity->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) {
+                        $indexer->index($entity);
+                    } else {
+                        $indexer->delete($entity);
+                    }
+                } else {
+                    $indexer->index($entity);
+                }
             }
         }
     }

@@ -5,6 +5,7 @@ namespace WBB\UserBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Registration Form Type
@@ -19,7 +20,7 @@ class RegistrationLightFormType extends BaseType
     {
         $builder
                 ->add('username', null, array('error_bubbling' => true, 'required' => false))
-                ->add('email', 'email', array(
+                ->add('email', 'text', array(
                     'error_bubbling' => true,
                     'required' => false,
                     'label' => 'form.email',
@@ -34,11 +35,19 @@ class RegistrationLightFormType extends BaseType
                     'invalid_message' => 'fos_user.password.mismatch'
                 ))
                 ->add('birthdate', 'date', array(
+                    'empty_value' => array('year' => 'YYYY', 'month' => 'MM', 'day' => 'DD'),
                     'years' => range(1914, date('Y')),
-                    'required' => false
+                    'required' => false,
+                    'invalid_message'=> 'not.blank'
                 ))
                 ->add('country', null, array(
-                    'required' => false
+                    'error_bubbling' => true,
+                    'empty_value' => 'Country',
+                    'required' => false,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->orderBy('c.name', 'ASC');
+                    }
                 ))
         ;
     }

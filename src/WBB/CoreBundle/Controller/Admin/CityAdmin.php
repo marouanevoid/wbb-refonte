@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class CityAdmin extends Admin
 {
@@ -27,7 +28,7 @@ class CityAdmin extends Admin
             ->add('suburbs', 'sonata_type_collection',
                 array(
                     'required'  => false,
-                    'help'      => 'Associate an area minimum to the city is mandatory'
+                    'help'      => 'Associate a neighborhood minimum to the city is mandatory'
                 ), array(
                     'edit' => 'inline',
                     'inline' => 'table'
@@ -45,7 +46,7 @@ class CityAdmin extends Admin
                     'label'     => 'Main visual *'
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'simple_image'
+                        'context' => 'city'
                     )
                 ))
             ->end()
@@ -70,7 +71,7 @@ class CityAdmin extends Admin
             ->add('country')
             ->add('seoDescription', null, array('label' => 'SEO Description'))
             ->add('nbAreas', 'string', array(
-                'label' => 'Districts',
+                'label' => 'Neighborhoods',
                 'template' => 'WBBCoreBundle:Admin:list\list_nb_areas.html.twig'
             ))
             ->add('nbBars', 'string', array(
@@ -109,7 +110,7 @@ class CityAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -117,6 +118,7 @@ class CityAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
                             $queryBuilder->setParameter('createdAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -125,7 +127,7 @@ class CityAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -133,6 +135,7 @@ class CityAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
                             $queryBuilder->setParameter('updatedAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -159,11 +162,11 @@ class CityAdmin extends Admin
 
     public function prePersist($object)
     {
-        if($object->getSuburbs()){
+        if ($object->getSuburbs()) {
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb && $suburb->getName()){
+                if ($suburb && $suburb->getName()) {
                     $suburb->setCity($object);
-                }else{
+                } else {
                     $object->removeSuburb($suburb);
                 }
             }
@@ -172,11 +175,11 @@ class CityAdmin extends Admin
 
     public function preUpdate($object)
     {
-        if($object->getSuburbs()){
+        if ($object->getSuburbs()) {
             foreach ($object->getSuburbs() as $suburb) {
-                if($suburb && $suburb->getName()){
+                if ($suburb && $suburb->getName()) {
                     $suburb->setCity($object);
-                }else{
+                } else {
                     $object->removeSuburb($suburb);
                 }
             }

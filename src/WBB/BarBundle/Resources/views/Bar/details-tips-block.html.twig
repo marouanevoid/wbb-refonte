@@ -11,7 +11,33 @@
                 $(document).ready(function() {
                     $('#tips').on('submit', function(e) {
                         e.preventDefault();
-                        $('#show-popin').click();
+                        $('.popin-block').html('');
+                        var url = $('.btn-signin').attr('href') + '?light=1';
+
+                        $.cookie('light_type', 'tip');
+                        $.cookie('light_action', 'tip');
+                        $.cookie('light_name', $('#wbb_barbundle_tip_description').val());
+
+                        popinFrom = 'favorite';
+                        if ($('#wbb_barbundle_tip_description').val().trim() !== ''){
+                            $.ajax({
+                                url: url,
+                                method: 'GET',
+                                success: function(html) {
+                                    html = '<div class="title margin-bottom-30 wrap bold">You need to create a profile to favourite a bar or leave a tip</div>' + html;
+                                    $('.popin-block').html(html);
+                                    initializeDropdowns();
+                                    initRegisterLoginForms();
+                                    $('#show-popin').click();
+                                    // scroll to top
+                                    $('html, body').animate({scrollTop:0}, 500, 'easeInOutCubic');
+
+                                    // REmove desibled btn
+                                    $('article.tip .form form input[type="submit"]').removeAttr('disabled');
+                                    $('article.tip .form form input[type="submit"]').removeClass('loading');
+                                }
+                            });
+                        }
                     });
                 });
             </script>

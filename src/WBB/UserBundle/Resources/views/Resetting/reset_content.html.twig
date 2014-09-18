@@ -1,39 +1,39 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<div class="min-height {% if is_mobile() and not is_tablet() %}padding-top-30{% else %}padding-top-80{% endif %}">
+    <div class="title margin-bottom-30 padding-top-30 wrap bold">RESET YOUR PASSWORD</div>
 
-<div class="title margin-bottom-30 wrap bold">Reset password</div>
-<div class="subtitle text-transform-uppercase bold">Enter your new password and confirm to sign in</div>
-
-<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
-    <div class="forgetpassword wrap">
-        <form>
-            <div class="text-align-center">
-                <div>
-                    {{ form_widget(form.plainPassword.first, { 'required':false, 'attr' : {'class':'form-text margin-top-30', 'placeholder' : 'New password'} }) }}
-                    {{ form_widget(form.plainPassword.second, { 'required':false, 'attr' : {'class':'form-text margin-top-30', 'placeholder' : 'Confirm new password'} }) }}
+    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+        <div class="forgetpassword wrap">
+            <form>
+                <div class="text-align-center">
+                    <div>
+                        {{ form_widget(form.plainPassword.first, { 'required':false, 'attr' : {'class':'form-text margin-top-30', 'placeholder' : 'New password'} }) }}
+                        {{ form_widget(form.plainPassword.second, { 'required':false, 'attr' : {'class':'form-text margin-top-30', 'placeholder' : 'Confirm new password'} }) }}
+                    </div>
+                    <input type="submit" class="form-submit btn margin-top-30 margin-bottom-30 bold" value="Confirm">
+                    {{ form_rest(form) }}
                 </div>
-                <input type="submit" class="form-submit btn margin-top-30 bold" value="Confirm">
-                {{ form_rest(form) }}
-            </div>
-        </form>
-        <div class="clear"></div>
+            </form>
+            <div class="clear"></div>
 
-        {% if not form.vars.valid %}
-            <script>
-                $(document).ready(function() {
-                    $('.forgetpassword .form-text').each(function() {
-                        $(this).addClass('error');
+            {% if not form.vars.valid %}
+                <script>
+                    $(document).ready(function() {
+                        $('.forgetpassword .form-text').each(function() {
+                            $(this).addClass('error');
+                        });
                     });
-                });
-            </script>
-            <div id="message" class="margin-top-20 padding-top-20 padding-bottom-20">
-                <p>
-                    <img src="{{ asset('bundles/wbbcore/images/UI/warning_msg.png') }}" align="left">
-                    Please enter the same password
-                </p>
-            </div> <!-- #message -->
-        {% endif %}
-    </div>
-</form>
+                </script>
+
+                <div id="message" class="margin-top-20 {% if is_mobile() and not is_tablet() %}margin-bottom-20{% endif %}">
+                    <div>
+                        {{ form_errors(form.plainPassword.first) }}
+                    </div>
+                </div> <!-- #message -->
+            {% endif %}
+        </div>
+    </form>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -55,6 +55,7 @@
                     data: $(this).serialize(),
                     success: function(html) {
                         $('.popin-block').html(html);
+                        PopIn.updatePopin();
                         $('#close').on('click', function() {
                             location.href = "{{ path('homepage') }}";
                         });

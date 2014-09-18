@@ -12,7 +12,7 @@ use WBB\CoreBundle\Repository\EntityRepository;
  */
 class TipRepository extends EntityRepository
 {
-    public function findLatestTips($bar, $offset = 0, $limit = 8)
+    public function findLatestTips($bar, $offset = 0, $limit = 8, $expertTips = false, $noExpertTips = false)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
@@ -23,11 +23,17 @@ class TipRepository extends EntityRepository
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
         ;
 
-        if($limit > 0){
+        if ($expertTips) {
+            $qb->innerJoin($this->getAlias() . '.user', 'u', 'WITH', 'u.roles like ' . $qb->expr()->literal('%ROLE_BAR_EXPERT%'));
+        } elseif ($noExpertTips) {
+            $qb->innerJoin($this->getAlias() . '.user', 'u', 'WITH', 'u.roles not like ' . $qb->expr()->literal('%ROLE_BAR_EXPERT%'));
+        }
+
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($offset > 0){
+        if ($offset > 0) {
             $qb->setFirstResult($offset);
         }
 
@@ -44,14 +50,14 @@ class TipRepository extends EntityRepository
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($offset > 0){
+        if ($offset > 0) {
             $qb->setFirstResult($offset);
         }
 
         return $qb->getQuery()->getResult();
     }
-} 
+}

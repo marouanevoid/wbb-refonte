@@ -211,7 +211,7 @@ meta.App = function() {
 
     that._customScroll = function()
     {
-        $('.custom-scroll').not('.jspScrollable').each(function()
+        $('.custom-scroll').not('.jspScrollable').not('.jspNotScrollable').each(function()
         {
             //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
             $(this).jScrollPane({hideFocus:true});
@@ -279,31 +279,40 @@ meta.App = function() {
 
         if( $('html').hasClass('mobile') )
         {
-            var options_are_visible = false;
+            options_are_visible = false;
 
-            $('header.desktop .logged').click(function(){
-
+            $('header.desktop .logged .in-action').click(function(e){
+                var _this = $(this).closest('.logged');
+                e.preventDefault();
                 if( !options_are_visible )
-                    $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing);
+                    $(_this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing);
                 else
-                    $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
+                    $(_this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
                     {
-                        $(this).hide();
+                        $(_this).find('.actions').hide();
                     });
 
                 options_are_visible = !options_are_visible;
+                return false;
             });
         }
         else
         {
             $('header.desktop .logged').hover(function(){
-
-                $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing)
+                var _this = $(this);
+                if(_this.hasClass('opened'))
+                    return false;
+                $(this).find('.actions').css({opacity:0.01, display:'block', top:'80%'}).stop().animate({opacity:1, top:'100%'}, 300, that.config.easing , function(){
+                    _this.addClass('opened');
+                });
 
             }, function()
             {
+                var _this = $(this);
+
                 $(this).find('.actions').stop().animate({opacity:0.01, top:'80%'}, 300, that.config.easing, function()
                 {
+                    _this.removeClass('opened');
                     $(this).hide();
                 })
             });
@@ -323,6 +332,69 @@ meta.App = function() {
             that._customScroll();
             setTimeout(that._resizeCustomScroll, 600);
         });
+
+
+        // Add the Event Resize for Search Bar
+        $(window).on('resize' , function(){
+            $('.search-bar-mobile').css({'top'  : '0 !important'});
+            $('.search-bar-mobile').addClass('top-important-0');
+        });
+        // dispatch resize
+        $(window).resize();
+
+        // add the event on serach
+        $('.search-bar-mobile').find('.form-text').on('keyup' , function(){
+            var lentext = $(this).val();
+            if(lentext){
+                $('.search-bar-mobile').find('.form-submit').show();
+            }else{
+                 $('.search-bar-mobile').find('.form-submit').hide();
+            }
+        });
+
+        // hide the submit on rest
+         $('.search-bar-mobile').find('input[type=reset]').on('click',function(){
+            $('.search-bar-mobile').find('.form-submit').hide();
+            if(ismobile)
+                $('header.mobile .search-result-proposal').hide();
+         });
+
+        // add Event on Mobile
+        // for showing the Mask
+        if(ismobile && ! istablet){
+            $('.mobile .search-pin-icon a.search').on('click', function(){
+                // Show The mask
+                PopIn.dom.mask.show();
+                $('.search-bar-mobile').addClass('no-height');
+                $('header').addClass('showing-search');
+            });
+
+            $('.mobile .search-bar-mobile .close').on('click' , function(){
+                PopIn.dom.mask.hide();
+                $('.search-bar-mobile').removeClass('no-height');
+                $('header').removeClass('showing-search');
+            });
+
+            // Add event on resize
+            $(window).on('resize' , function(){
+                $('.mask.mobile-top-force').css({"width" : "220% !important" , "height" : "220% !important"});
+            });
+
+
+            /*
+            * Lock to Orientation
+            ***/
+            $(window).on("orientationchange", function(){
+                var orientation = window.orientation;
+                if(orientation != 0){
+                    $("body").addClass("landscape-mobile");
+                }else{
+                    $("body").removeClass("landscape-mobile");
+                }
+            });
+
+            $(window).trigger("orientationchange");
+        }
     };
 
 
@@ -363,23 +435,23 @@ meta.App = function() {
     // Script Injection for Select UI
     ////////
     //$('.ui-dropdown-container').each(function(){})
-    $('select').on('change',function(){
-       var  $target = $(this),
-            parent  = $target.parent('.ui-dropdown-container'),
-            li = parent.find('li')
-            selected = parent.find('.selected').text();
+    // $('select').on('change',function(){
+    //    var  $target = $(this),
+    //         parent  = $target.parent('.ui-dropdown-container'),
+    //         li = parent.find('li')
+    //         selected = parent.find('.selected').text();
 
-            li.show();
+    //         li.show();
 
-            li.each(function(){
-                if($(this).text().toLowerCase().indexOf(selected.toLowerCase())>-1 || ($(this).text().indexOf('Choose with who')>-1 || $(this).text().indexOf('Choose a City')>-1 ))
-                    $(this).hide();
-            });
+    //         li.each(function(){
+    //             if($(this).text().toLowerCase().indexOf(selected.toLowerCase())>-1 || ($(this).text().indexOf('Choose with who')>-1 || $(this).text().indexOf('Choose a City')>-1 ))
+    //                 $(this).hide();
+    //         });
 
-    });
+    // });
 
     // Trigger change on select
-    $('select').change();
+    //$('select').change();
 
 };
 

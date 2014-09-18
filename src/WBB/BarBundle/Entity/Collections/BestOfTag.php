@@ -62,11 +62,10 @@ class BestOfTag
      */
     private $updatedAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,7 +75,7 @@ class BestOfTag
     /**
      * Set position
      *
-     * @param integer $position
+     * @param  integer  $position
      * @return BarMedia
      */
     public function setPosition($position)
@@ -89,7 +88,7 @@ class BestOfTag
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -107,7 +106,7 @@ class BestOfTag
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return BarMedia
      */
     public function setCreatedAt($createdAt)
@@ -120,7 +119,7 @@ class BestOfTag
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -130,7 +129,7 @@ class BestOfTag
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return BarMedia
      */
     public function setUpdatedAt($updatedAt)
@@ -143,7 +142,7 @@ class BestOfTag
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -153,7 +152,7 @@ class BestOfTag
     /**
      * Set tag
      *
-     * @param \WBB\BarBundle\Entity\Tag $tag
+     * @param  \WBB\BarBundle\Entity\Tag $tag
      * @return BarTag
      */
     public function setTag(\WBB\BarBundle\Entity\Tag $tag = null)
@@ -176,7 +175,7 @@ class BestOfTag
     /**
      * Set bestof
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestof
+     * @param  \WBB\BarBundle\Entity\BestOf $bestof
      * @return BestOfTag
      */
     public function setBestof(\WBB\BarBundle\Entity\BestOf $bestof = null)
@@ -199,7 +198,7 @@ class BestOfTag
     /**
      * Set type
      *
-     * @param string $type
+     * @param  string    $type
      * @return BestOfTag
      */
     public function setType($type)

@@ -1,0 +1,28 @@
+<article class="large {% if firstchild is defined and firstchild %} interview-frist-child{% endif %}">
+    <div class="img">
+        <a href="{{ path('wbb_news_details_page',{ newsSlug: n.slug }) }}" class="cover">
+            {% if n.medias|length>0 %}
+                {% for m in n.medias|slice(0,1) %}
+                    <img src="{{ showImage(m.media, 'news_770_578') }}" width="770" height="578" alt="{{ n.title }}"/>
+                    {% if m.media.providerName == 'sonata.media.provider.youtube' %}
+                        <span class="video"></span>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <img src="{{ showImage(null, 'news_770_578') }}" width="770" height="578" alt="{{ n.title }}"/>
+            {% endif %}
+            {% if n.sponsorImageSmall is defined and n.sponsorImageSmall != '' %}
+                <span class="sponsor">
+                    <img src="{{ showImage(n.sponsorImageSmall, 'sponsor_82_82') }}" alt="sponsor"/>
+                </span>
+            {% endif %}
+        </a>
+        <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"><span></span></a>
+    </div>
+    <div class="title vcenter">
+        {% set margin_class = "" %}
+        {% if n.seoDescription is defined and n.seoDescription != '' or n.quoteText is not  defined or n.quoteText == '' %}
+            <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title|truncate(30, true, '...') }}</a></h2>
+        {% endif %}
+    </div>
+</article>

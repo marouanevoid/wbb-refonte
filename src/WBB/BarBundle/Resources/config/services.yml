@@ -217,7 +217,7 @@ services:
     sonata.media.resizer.custom:
         class: WBB\BarBundle\Resizer\CustomResizer
         arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]
-    
+
     wbb.twig.favorite_extension:
         class: WBB\BarBundle\Twig\Extension\FavoriteExtension
         arguments:
@@ -228,6 +228,7 @@ services:
     wbb.tips.event_listener:
         class: WBB\BarBundle\EventListener\TipsListener
         arguments:
+            - "@service_container"
             - "@swiftmailer.mailer.default"
             - "@router"
             - "@twig"
@@ -238,8 +239,26 @@ services:
     wbb.mailer:
         class: WBB\BarBundle\Mailer\TipsMailer
 
-    # ForumMailer
-#    wbb_bar.mailer:
-#        class:  WBB\BarBundle\Mailer\BarMailer
-#        parent: bmwi_core.mailer.twig_swift
-#        public: false
+    #Bar Persist Listener
+    wbb.bar.listener:
+        class: WBB\BarBundle\EventListener\BarListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
+
+    wbb.request.listener:
+        class: WBB\BarBundle\EventListener\ControllerListener
+        arguments: ["@wbb.favorites_manager"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    wbb.favorites_manager:
+        class: WBB\BarBundle\Manager\FavoritesManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    # Share Mail Service
+    wbb_bar.share.mailer:
+        class:  WBB\BarBundle\Mailer\ShareMailer
+        parent: wbb_core.mailer.twig_swift
+        public: true

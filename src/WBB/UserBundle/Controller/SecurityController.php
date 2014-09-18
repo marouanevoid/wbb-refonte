@@ -18,16 +18,19 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SecurityController extends Controller
 {
-    
+
     public function facebookLoginAction(Request $request)
     {
         return $this->loginAction($request);
     }
 
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, $light = false)
     {
         if (!$request->isXmlHttpRequest()) {
-            return $this->redirect($this->generateUrl('homepage', array('login' => 1)));
+            return $this->redirect($this->generateUrl('homepage', array(
+                                'login' => 1,
+                                'back_url' => $request->getSession()->get('_security.main.target_path')
+            )));
         }
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -46,7 +49,7 @@ class SecurityController extends Controller
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
 
-            if($error == 'Bad credentials'){
+            if ($error == 'Bad credentials') {
                 $error = 'Your login or password is incorrect';
             }
 
@@ -64,7 +67,8 @@ class SecurityController extends Controller
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error'         => $error,
-            'csrf_token' => $csrfToken,
+            'csrf_token'    => $csrfToken,
+            'light'         => $light
         ));
     }
 

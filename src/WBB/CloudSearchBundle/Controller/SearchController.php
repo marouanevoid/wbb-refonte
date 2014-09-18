@@ -32,7 +32,7 @@ class SearchController extends Controller
             $showAllBars = true;
         }
 
-        $cities = $em->getRepository('WBBCoreBundle:City')->findAll();
+        $cities = $em->getRepository('WBBCoreBundle:City')->findCitiesOrderedByName();
         $types = Tag::getTypeNames();
         $tagsByType = array();
         $csNames = CloudSearchSearcher::getCSTagsNames();
@@ -57,27 +57,40 @@ class SearchController extends Controller
     private function getSearchResults(Request $request, $entity = 'Bar')
     {
         $q = $request->query->get('q', null);
-        $size = $request->query->get('size', 12);
+        $tag = $request->query->get('tag', null);
+        $size = $request->query->get('limit', 12);
         $start = $request->query->get('start', 0);
         $city = $request->query->get('city', null);
         $style = $request->query->get('style', null);
         $mood = $request->query->get('mood', null);
         $occasion = $request->query->get('occasion', null);
         $cocktails = $request->query->get('cocktails', null);
+        $special = $request->query->get('special', null);
         $district = $request->query->get('district', null);
+        $suggest = $request->query->get('suggest', false);
 
-        $results = $this->get('cloudsearch.searcher')->search(array(
-            'q' => $q,
-            'start' => $start,
-            'size' => $size,
-            'entity' => $entity,
-            'city' => $city,
-            'style' => $style,
-            'mood' => $mood,
-            'occasion' => $occasion,
-            'cocktails' => $cocktails,
-            'district' => $district
-        ));
+        if ($suggest) {
+            $results = $this->get('cloudsearch.searcher')->suggest(array(
+                'q' => $q,
+                'size' => $size
+            ));
+        } else {
+            $results = $this->get('cloudsearch.searcher')->search(array(
+                'q' => $q,
+                'tag' => $tag,
+                'start' => $start,
+                'size' => $size,
+                'entity' => $entity,
+                'city' => $city,
+                'style' => $style,
+                'mood' => $mood,
+                'occasion' => $occasion,
+                'cocktails' => $cocktails,
+                'special' => $special,
+                'district' => $district,
+                'favorites' => true
+            ));
+        }
 
         return $results;
     }

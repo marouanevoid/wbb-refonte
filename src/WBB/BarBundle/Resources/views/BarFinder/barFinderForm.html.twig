@@ -1,34 +1,121 @@
 <script type="text/javascript">
     $(function(){
 
+        /*
+        * Select Choose a city
+        **/
+
+        $("select.select2-dropdown.finder-city").select2({
+            minimumResultsForSearch: 1,
+            placeholder : 'Choose a City',
+            allowClear: true,
+            dropdownCssClass : 'select2-city dark'
+        });
+
+        /*
+        * Add Class Active on Change
+        */
+
+        $("select.select2-dropdown.finder-city").off('change').on('change' , function(){
+                $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
+        });
+        /*
+        * Select Choose with Who
+        **/
+
+        $("select.select2-dropdown.finder-choose").select2({
+            minimumResultsForSearch: 1,
+            dropdownCssClass : 'select2-friends dark',
+            placeholder : 'Choose with who',
+            allowClear: true
+        });
+
+        /*
+        * Add Class Active on Change
+        */
+
+        $("select.select2-dropdown.finder-choose").off('change').on('change' , function(){
+                $($("select.select2-dropdown.finder-choose").select2("container")).addClass('active');
+        });
+
+
+        // Add Event on Open Choose
+        $("select.select2-dropdown.finder-choose").on("select2-open", function(){
+            $($("select.select2-dropdown.finder-choose").select2("container")).removeClass('active');
+        });
+
+        // on Close Event Choose
+        $("select.select2-dropdown.finder-choose").on("select2-close", function(){
+            // test if can add class Active
+            if( $("select.select2-dropdown.finder-choose").val() != "" ){
+                $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
+            }
+        });
+
+
+        // Add Event on Open City
+        $("select.select2-dropdown.finder-city").on("select2-open", function(){
+            $($("select.select2-dropdown.finder-city").select2("container")).removeClass('active');
+        });
+
+        // on Close Event City
+        $("select.select2-dropdown.finder-city").on("select2-close", function(){
+            // test if can add class Active
+            if( $("select.select2-dropdown.finder-city").val() != "" ){
+                $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
+            }
+        });
+
+
+
+        // test if can add class Active
+        if( $("select.select2-dropdown.finder-choose").val() != "" ){
+            $( $("select.select2-dropdown.finder-choose").select2("container") ).addClass('active');
+        }
+
+        if( $("select.select2-dropdown.finder-city").val() != "" ){
+            $( $("select.select2-dropdown.finder-city").select2("container") ).addClass('active');
+        }
+
+        // Event on remove Close
+        $("select.select2-dropdown.finder-choose").on("select2-close", function() {
+
+        });
+
+        // fix class to dropdown class dark
+        $( $("select.select2-dropdown.finder-city").select2("dropdown") ).addClass('select2-city');
+        $( $("select.select2-dropdown.finder-city").select2("dropdown") ).addClass('dark');
+        $( $("select.select2-dropdown.finder-choose").select2("dropdown") ).addClass('select2-friends');
+        $( $("select.select2-dropdown.finder-choose").select2("dropdown") ).addClass('dark');
+
 
         toGoOutWith_selected = "{{selected.outWith}}";
         city_selected = "{{selected.city}}";
         mood_selected = "{{selected.mood}}";
 
-        var showGo = function(){
-
+        var showGo = function(targetSended){
            var totalSelectedMood =  $('.trigger-handler:checked').length;
                totalSelectedSelect = 0;
-           $('.trigger-select-go').each(function(){
-              if($(this).val()==""){
+           $('select.trigger-select-go').each(function(){
+              if( $(this).val() === "" ){
                 totalSelectedSelect++;
                 $(this).parent('.ui-dropdown-container').find('.ui-dropdown').removeClass('active');
               }else{
                 $(this).parent('.ui-dropdown-container').find('.ui-dropdown').addClass('active');
               }
            });
-           
+
+           console.log('total slected ' + totalSelectedSelect);
            if(totalSelectedSelect < 2 || totalSelectedMood > 0){
                 $('.go').removeClass('disabled');
                 $('.go').removeAttr('disabled');
            }else{
             $('.go').addClass('disabled');
             $('.go').attr('disabled' , 'disabled');
-           }  
+           }
 
         };
-       
+
 
         // remove Class active on input if is not checked
        $('.trigger-handler').parent('a').on('click' , function(){
@@ -39,9 +126,9 @@
                 });
                 showGo();
        });
-       
-       $('.trigger-select-go').on('change' , function(){
-            showGo();
+
+       $('select.trigger-select-go').on('change' , function(){
+            showGo(this);
         });
 
        $('.go').addClass('disabled');
@@ -50,7 +137,7 @@
        $('.fake-go-item').remove();
 
 
-       // if already one filter is checked 
+       // if already one filter is checked
       //thene active Go button
 
 
@@ -69,6 +156,7 @@
         section.bar-finder .ui-dropdown.btn-radius.with-icon {width: 176px!important;}
     </style>
 {% endif %}
+
 <section class="bar-finder">
     <div class="container">
         <img class="finder-arrow" src="{{ asset('bundles/wbbcore/images/misc/finder.arrow.png') }}" alt="finder.arrow" width="32" height="15"/>
@@ -88,14 +176,25 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td>
-                            <select class="ui-dropdown dark trigger-select-go" name="city" data-class="with-icon city">
-                                <option value="{{selected.city}}">
-                                    {% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city}} {% else %} Choose a City {% endif %}
-                                </option>
-                                {% if(selected.city != 'all') %}
-                                    <option value="all">All</option>
+
+                        <td width="200">
+                            <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-city {% endif %} dark trigger-select-go" name="city" data-class="with-icon city">
+
+                                {% if is_tablet() %}
+                                    <option value="{{selected.city}}">{% if selected.city !='' %}  {{selected.city == 'all' ? 'All' : selected.city  }} {% else %}Choose a city {% endif %}</option>
                                 {% endif %}
+
+                                {% if not is_mobile() and not is_tablet() %}
+                                    <option></option>
+                                {% endif %}
+                                {% if is_tablet() and  selected.city !='all' %}
+                                    <option class="cty0" value="all" {% if selected.city == 'all' %} selected="selected" {% endif %}>All</option>
+                                {% else %}
+                                    {% if not is_tablet() and not is_mobile() %}
+                                    <option class="cty0" value="all" {% if selected.city == 'all' %} selected="selected" {% endif %}>All</option>
+                                    {% endif %}
+                                {% endif %}
+
                                 {% if city %}
                                     <option value="{{ city.slug }}">{{ city.name }}</option>
                                     {% for c in cities %}
@@ -115,15 +214,25 @@
                             </select>
                         </td>
                         <td><img src="{{ asset('bundles/wbbcore/images/misc/chevron.png') }}" alt="chevron" width="8" height="13"/></td>
-                        <td>
-                            <select class="ui-dropdown dark trigger-select-go" name="go_out" data-class="with-icon friend">
+                        <td width="200">
+                            <select class=" friend {% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown brown with-icon finder-choose {% endif %} dark trigger-select-go" name="go_out" data-class="with-icon friend">
+                                {% if is_tablet() %}
                                 <option value="{{selected.outWith}}">{% if selected.outWith !='' %}  {{selected.outWith == 'all' ? 'All' : selected.outWith  }} {% else %}Choose with who {% endif %}</option>
-                                {% if(selected.outWith != 'all') %}
-                                     <option value="all">All</option>
                                 {% endif %}
+                               {% if not is_mobile() and not is_tablet() %}
+                                    <option></option>
+                                {% endif %}
+                                {% if is_tablet() and  selected.outWith !='all' %}
+                                    <option value="all" {% if selected.outWith == 'all' %}  selected="selected" {% endif %}>All</option>
+                                {% else %}
+                                    {% if not is_tablet() and not is_mobile() %}
+                                    <option value="all" {% if selected.outWith == 'all' %} selected="selected" {% endif %}>All</option>
+                                    {% endif %}
+                                {% endif %}
+
                                 {% for tag in firstTags %}
                                     <option value="{{ tag.id }}"
-                                    {% if selected.outWith ==  tag.id %} selected {% endif %}
+                                    {% if selected.outWith ==  tag.id %} selected="selected"  {% endif %}
                                     >{{ tag.name }}</option>
                                 {% endfor %}
                             </select>
@@ -134,10 +243,10 @@
                         </div>
 
                         {% set curostIndex = 0 %}
-                        {% for mood in moods %}
-                        {% set curostIndex  = curostIndex + 1 %}
+                        {% for moodSlug, mood in moods %}
+                            {% set curostIndex  = curostIndex + 1 %}
                             <td>
-                                <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood |lower }}" value="{{ mood }}" class="mood-item trigger-handler ui-radio dark with-icon" data-color="brown"
+                                <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood |lower }}" value="{{ mood |lower }}" class="mood-item {{ moodSlug |lower }} trigger-handler ui-radio dark with-icon" data-color="brown"
                                  {% if selected.mood|lower ==  mood|lower %} checked="checked" {% endif %}
                                 />
                             </td>
@@ -155,7 +264,7 @@
                     </tr>
                 </table>
 
-                <!-- 
+                <!--
                     SESSION :
                     mood > {{ selected.mood }}
                     selected.outWith > {{ selected.outWith }}

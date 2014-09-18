@@ -12,8 +12,7 @@ class SemsoftCRUDController extends Controller
 {
     protected function batchActionMerge(ProxyQueryInterface $selected)
     {
-        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
-        {
+        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
             throw new AccessDeniedException();
         }
         $modelManager = $this->admin->getModelManager();
@@ -25,11 +24,10 @@ class SemsoftCRUDController extends Controller
         try {
             foreach ($ssBars as $ssBar) {
                 $bar = $ssBar->getUpdatedBar();
-                if($bar->getCity() and $bar->getSuburb())
-                {
+                if ($bar->getCity() && $bar->getSuburb()) {
                     $modelManager->update($bar);
                     $modelManager->delete($ssBar);
-                }else{
+                } else {
                     $allMerged = false;
                 }
             }
@@ -42,9 +40,9 @@ class SemsoftCRUDController extends Controller
             );
         }
 
-        if($allMerged){
+        if ($allMerged) {
             $this->addFlash('sonata_flash_success', 'Merge Successful !');
-        }else{
+        } else {
             $this->addFlash('sonata_flash_error', 'Merge incomplete : City or suburb missing from some bars!');
         }
 
@@ -55,8 +53,7 @@ class SemsoftCRUDController extends Controller
 
     protected function batchActionExport(ProxyQueryInterface $selected)
     {
-        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
-        {
+        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
             throw new AccessDeniedException();
         }
 
@@ -64,7 +61,7 @@ class SemsoftCRUDController extends Controller
 
         // the export process works here
         try {
-            $response = new StreamedResponse(function() use($bars) {
+            $response = new StreamedResponse(function () use ($bars) {
 
                 $handle = fopen('php://output', 'r+');
 

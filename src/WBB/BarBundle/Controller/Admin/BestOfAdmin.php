@@ -6,6 +6,8 @@
 
 namespace WBB\BarBundle\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use WBB\BarBundle\Entity\Tag;
 use WBB\CoreBundle\Controller\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -65,7 +67,7 @@ class BestOfAdmin extends Admin
             ->add('createdAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Created After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -73,6 +75,7 @@ class BestOfAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.createdAt >= :createdAt");
                             $queryBuilder->setParameter('createdAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -81,7 +84,7 @@ class BestOfAdmin extends Admin
             ->add('updatedAfter', 'doctrine_orm_callback',
                 array(
                     'label' => 'Updated After',
-                    'callback' => function($queryBuilder, $alias, $field, $value) {
+                    'callback' => function (ProxyQuery $queryBuilder, $alias, $field, $value) {
                             if (!$value['value']) {
                                 return;
                             }
@@ -89,6 +92,7 @@ class BestOfAdmin extends Admin
                             $inputValue = date('Y-m-d', $time);
                             $queryBuilder->andWhere("$alias.updatedAt >= :updatedAt");
                             $queryBuilder->setParameter('updatedAt', $inputValue);
+
                             return true;
                         },
                     'field_type' => 'text'
@@ -132,7 +136,7 @@ class BestOfAdmin extends Admin
                         'label'     => 'Best of visual *'
                     ), array(
                         'link_parameters' => array(
-                            'context' => 'simple_image'
+                            'context' => 'bestof'
                         )
                     ))
 //                ->add('sponsor')
@@ -143,7 +147,7 @@ class BestOfAdmin extends Admin
 //                        'label'     => 'Sponsor visual'
 //                    ), array(
 //                        'link_parameters' => array(
-//                            'context' => 'simple_image'
+//                            'context' => 'default'
 //                        )
 //                    ))
                 ->add('byTag', null, array('help'=> 'Create a best of with tag'))
@@ -151,7 +155,7 @@ class BestOfAdmin extends Admin
                 ->add('ordered', null, array('label' => 'Order from bar tab'))
             ->end();
 
-        if($object->getByTag()){
+        if ($object->getByTag()) {
             $formMapper
                 ->with('Tags')
                     ->add('energyLevel', 'entity', array(
@@ -161,7 +165,7 @@ class BestOfAdmin extends Admin
                             'empty_value' => 'Please choose a mood',
                             'property' => 'name',
                             'help'  => 'Mandatory',
-                            'query_builder' => function ($er) {
+                            'query_builder' => function (EntityRepository $er) {
                                 return $er->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, true);
                             }
                         )
@@ -172,7 +176,7 @@ class BestOfAdmin extends Admin
                             'multiple' => true,
                             'by_reference' => false,
                             'label' => 'With Who',
-                            'query_builder' => function ($er) {
+                            'query_builder' => function (EntityRepository $er) {
                                     return $er->findByType(Tag::WBB_TAG_TYPE_WITH_WHO, true);
                                 }
                         )
@@ -189,7 +193,7 @@ class BestOfAdmin extends Admin
                             'sortable'  => 'position'
                         ))
                 ->end();
-        }else{
+        } else {
             $formMapper
                 ->with('Bars')
                 ->add('bars', 'sonata_type_collection',
@@ -223,7 +227,7 @@ class BestOfAdmin extends Admin
     {
         $qb = parent::createQuery($context);
         $alias = $qb->getRootAlias();
-        if($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT')){
+        if ($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT')) {
             $qb->andWhere($qb->expr()->isNotNull("$alias.city"));
         }
 
@@ -245,17 +249,17 @@ class BestOfAdmin extends Admin
 
     public function prePersist($object)
     {
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setBestof($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }
         }
 
-        if($object->getBars()){
+        if ($object->getBars()) {
             foreach ($object->getBars() as $bar) {
                 $bar->setBestof($object);
             }
@@ -264,17 +268,17 @@ class BestOfAdmin extends Admin
 
     public function preUpdate($object)
     {
-        if($object->getTags()){
+        if ($object->getTags()) {
             foreach ($object->getTags() as $tag) {
-                if($tag->getTag() && $tag->getTag()->getName()){
+                if ($tag->getTag() && $tag->getTag()->getName()) {
                     $tag->setBestof($object);
-                }else{
+                } else {
                     $object->removeTag($tag);
                 }
             }
         }
 
-        if($object->getBars()){
+        if ($object->getBars()) {
             foreach ($object->getBars() as $bar) {
                 $bar->setBestof($object);
             }

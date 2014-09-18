@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field%}
+    {% if admin.datagrid.results|length >= 1 %}
+        <div>
+            {% if object.website is not empty %}
+                <strong><a href="{{ object.website }}" target="_blank">Open Link</a></strong>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -3,21 +3,21 @@
         <article class="bar-w-pic-list">
             <div class="three columns s-margin-top">
                 <div class="bar-w-pic list">
-                    <a href="{{ favorite_url(app.user, b) }}" class="btn-round star {% if is_favorite(app.user, b) %}active brown changed{% else %}dark{% endif %}"></a>
+                    <a data-id="{{ b.id }}" data-type="{{ entity_light_type(b) }}" data-name="{{ b.name }}" href="{{ favorite_url(app.user, b) }}" class="btn-round star dark {% if is_favorite(app.user, b) %}active changed{% endif %}"></a>
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
                     {% if b.medias|length>0 %}
                         {% for m in b.medias|slice(0,1) %}
-                            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'slider_large') }}"  alt="{{ b.name }}" width="570" height="428"/>
+                            <img class="scale-with-grid" data-src="{{ showImage(m.media, 'bar_425_320') }}"  alt="{{ b.name }}" width="290" height="214" />
                         {% endfor %}
                     {% else %}
-                        <img class="scale-with-grid" data-src="{{ showImage('', 'bestof_small') }}" width="282" height="210" alt=""/>
+                        <img class="scale-with-grid" data-src="{{ showImage('', 'bar_425_320') }}" width="290" height="214" alt=""/>
                     {% endif %}
                 </div>
             </div>
             <div class="nine columns s-margin-top">
                 <h2 class="s-margin-top">
                     <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}">
-                        {{ b.name }}
+                        {{ b.name|slice(0, 25) }}{% if b.name|length > 25 %}...{% endif %}
                         {% if distance is defined and distance|length>0 and distance.city is not null %}
                             {{ b.calculateDistance(distance.latitude, distance.longitude, distance.city.isUSCity) }}
                         {% endif %}
@@ -31,7 +31,10 @@
                 </p>
                 <div class="tags">
                     {% for tr in b.tagsToShow |slice(0, 5) %}
-                        {{ tr.name }}{% if not loop.last %}, {% endif %}
+                        <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
+                            {{ tr.name|capitalize }}
+                        </a>
+                        {% if not loop.last %}, {% endif %}
                     {% endfor%}
                 </div>
             </div>
@@ -39,4 +42,3 @@
         </article>
 {% endfor %}
 </div>
-

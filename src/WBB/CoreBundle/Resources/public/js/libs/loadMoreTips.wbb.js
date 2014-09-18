@@ -68,7 +68,7 @@ meta.LoadMoreTips = function(config) {
     };
        that._customScroll = function()
         {
-            $('.custom-scroll').not('.jspScrollable').each(function()
+            $('.custom-scroll').not('.jspNotScrollable').each(function()
             {
                 //$(this).jScrollPane({autoReinitialise: true, hideFocus:true});
                 $(this).jScrollPane({hideFocus:true});
@@ -100,8 +100,16 @@ meta.LoadMoreTips = function(config) {
             url: url,
             dataType: "json",
             success: function(msg) {
+                // Remove duplicated tips
+                $("<div></div>").append(msg.htmldata).find(".wbbtip").each(function(){
+                    if($target.find(".temporary[data-id="+$(this).data("id") + "]").length){
+                        $target.find(".temporary[data-id="+$(this).data("id") + "]").remove();
+                    }
+                });
+
                 $target.append(msg.htmldata);
-                
+                _excluded = msg.excluded;
+
                 if(parseInt(msg.difference)==0){
                     that.config.$button.hide();
                     if(is_mobile == 1)
@@ -123,7 +131,11 @@ meta.LoadMoreTips = function(config) {
                         //     // });
                         //  that._customScroll();
                         // },500)
-
+                        $('.custom-scroll').each(function()
+                                {
+                                    var api = $(this).data('jsp');
+                                    if( typeof(api) != "undefined" && $(this).is(':visible') ) api.reinitialise();
+                        }); 
                 });
             },
             error: function(e) {

@@ -59,14 +59,13 @@ class SemsoftController extends Controller
 
         $bar = $ssBar->getUpdatedBar();
 
-        if($bar->getCity() and $bar->getSuburb())
-        {
+        if ($bar->getCity() && $bar->getSuburb()) {
             $em->persist($bar);
             $em->remove($ssBar);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Merge Successful !');
-        }else{
+        } else {
             $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Merge incomplete : City or suburb missing !');
         }
 
@@ -99,10 +98,10 @@ class SemsoftController extends Controller
             $fullImport = true;
 
             $reader->setHeaderRowNumber(0);
-            foreach ($reader as $data)
-            {
-                if(!isset($data['Id'])){
+            foreach ($reader as $data) {
+                if (!isset($data['Id'])) {
                     $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Errors during import : File not valid !');
+
                     return new RedirectResponse($this->get('router')->generate('admin_wbb_bar_semsoft_semsoftbar_list'));
                 }
 
@@ -110,21 +109,21 @@ class SemsoftController extends Controller
                 $bar = null;
                 $newBar = true;
 
-                if($data['Id'] && is_numeric($data['Id'])){
+                if ($data['Id'] && is_numeric($data['Id'])) {
                     $bar = $this->get('bar.repository')->findOneById($data['Id']);
 
-                    if($bar){
+                    if ($bar) {
                         $ssBar->hydrateByBar($bar);
                         $newBar = false;
                     }
                 }
 
                 $country = $this->getCountry($data['Country']);
-//                if($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))){
-                if(($bar && (!empty($data['Updated Columns']) || (!empty($data['Overwritten Columns'])))) || !empty($data['Name'])){
+//                if ($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))) {
+                if (($bar && (!empty($data['Updated Columns']) || (!empty($data['Overwritten Columns'])))) || !empty($data['Name'])) {
                     set_time_limit(0);
                     $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
-                    $suburb = $this->getSuburb($data['District'], $city);
+                    $suburb = $this->getSuburb($data['District'], ($city)?$city:null);
                     $ssBar->setCity(($city)?$city:null);
                     $ssBar->setSuburb(($suburb)?$suburb:null);
                     $ssBar->setCountry(($country)?$country:null);
@@ -165,7 +164,7 @@ class SemsoftController extends Controller
                     $ssBar = $this->getOpenings($ssBar, $data);
 
                     $em->persist($ssBar);
-                }else{
+                } else {
                     fputcsv($outPut, $data, ',');
                     $fullImport = false;
                 }
@@ -173,10 +172,11 @@ class SemsoftController extends Controller
 
             $em->flush();
 
-            if($fullImport){
+            if ($fullImport) {
                 fclose($outPut);
+
                 return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
-            }else{
+            } else {
                 $content = stream_get_contents($outPut);
                 fclose($outPut);
 
@@ -187,13 +187,14 @@ class SemsoftController extends Controller
             }
         }
         $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Errors during import : Form not valid !');
+
         return $this->redirect($this->generateUrl('admin_wbb_bar_semsoft_semsoftbar_list'));
     }
 
     public function exportAction()
     {
         $container = $this->container;
-        $response = new StreamedResponse(function() use($container) {
+        $response = new StreamedResponse(function () use ($container) {
 
             $em = $container->get('doctrine')->getManager();
             $results = $em->getRepository('WBBBarBundle:Bar')->getExportQuery()->iterate();
@@ -215,20 +216,20 @@ class SemsoftController extends Controller
 
     private function setSocialMedia($ssBar, $data, $newBar)
     {
-        $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, $newBar));
-        $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, $newBar));
-        $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, $newBar));
-        $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, $newBar));
-        $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, $newBar));
-        $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, $newBar));
-        $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, $newBar));
-        $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, $newBar));
-        $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, $newBar));
-        $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, $newBar));
-        $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, $newBar));
-        $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, $newBar));
-        $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, $newBar));
-        $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, $newBar));
+        $ssBar->setFacebookID($this->setFieldValue('FacebookId', $data, null, true));
+        $ssBar->setFacebookUserPage($this->setFieldValue('FacebookUserPage', $data, null, true));
+        $ssBar->setFacebookCheckIns($this->setFieldValue('FacebookCheckins', $data, null, true));
+        $ssBar->setFacebookLikes($this->setFieldValue('FacebookLikes', $data, null, true));
+        $ssBar->setFoursquareID($this->setFieldValue('FoursquareId', $data, null, true));
+        $ssBar->setFoursquareUserPage($this->setFieldValue('FoursquareUserPage', $data, null, true));
+        $ssBar->setFoursquareCheckIns($this->setFieldValue('FoursquareCheckIns', $data, null, true));
+        $ssBar->setFoursquareLikes($this->setFieldValue('FoursquareLikes', $data, null, true));
+        $ssBar->setFoursquareTips($this->setFieldValue('FoursquareTips', $data, null, true));
+        $ssBar->setTwitterName($this->setFieldValue('TwitterName', $data, null, true));
+        $ssBar->setTwitterUserPage($this->setFieldValue('TwitterUserPage', $data, null, true));
+        $ssBar->setInstagramID($this->setFieldValue('InstagramId', $data, null, true));
+        $ssBar->setInstagramUserPage($this->setFieldValue('InstagramUserPage', $data, null, true));
+        $ssBar->setGooglePlusUserPage($this->setFieldValue('GooglePlusUserPage', $data, null, true));
 
         return $ssBar;
     }
@@ -248,20 +249,20 @@ class SemsoftController extends Controller
 
     private function setFieldValue($fieldName, $data, $value = null, $forceUpdate = false)
     {
-        if($forceUpdate)
-        {
+        if ($forceUpdate) {
             if($value != null)
+
                 return $value;
             else
                 return $data[$fieldName];
-        }else{
+        } else {
             if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) || in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
                 if($value != null)
+
                     return $value;
                 else
                     return $data[$fieldName];
-            }
-            else{
+            } else {
                 return null;
             }
         }
@@ -283,13 +284,13 @@ class SemsoftController extends Controller
     {
         $coordinates = explode(",", $data);
 
-        if(count($coordinates) == 2){
+        if (count($coordinates) == 2) {
             if($latitude)
+
                 return $coordinates[0];
             else
                 return $coordinates[1];
-        }else
-        {
+        } else {
             return null;
         }
     }
@@ -297,6 +298,7 @@ class SemsoftController extends Controller
     private function getPriceValue($price)
     {
         if(strlen($price) && str_replace('$','',$price)=="")
+
             return strlen($price);
         else
             return null;
@@ -308,10 +310,8 @@ class SemsoftController extends Controller
 
         $methods = explode(',', $methodsString);
 
-        foreach($methods as $method)
-        {
-            if(in_array($method, $cards))
-            {
+        foreach ($methods as $method) {
+            if (in_array($method, $cards)) {
                 return true;
             }
         }
@@ -326,24 +326,19 @@ class SemsoftController extends Controller
 
     private function getCity($cityName, $country, $postalCode)
     {
-//        $em = $this->getDoctrine()->getManager();
-
-//        $city = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
-	$cities = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
+        $cities = $this->container->get('city.repository')->findByNameAndCountry($cityName, ($country)?$country:null);
         $city = null;
-        if(count($cities)>0){
+        if (count($cities)>0) {
             $city = $cities[0];
         }
 
-        if(!$city and !empty($cityName)){
+        if (!$city && !empty($cityName)) {
             $city = new City();
             $city
                 ->setName($cityName)
                 ->setCountry($country)
                 ->setPostalCode($postalCode)
             ;
-//            $em->persist($city);
-//            $em->flush();
         }
 
         return $city;
@@ -351,53 +346,53 @@ class SemsoftController extends Controller
 
     private function getSuburb($suburbName, $city)
     {
-        if(empty($suburbName)){
+        if (empty($suburbName)) {
             $suburbName = 'City-Center';
         }
 
-//        $em = $this->getDoctrine()->getManager();
-	$suburb = null;
-        if($city instanceof City && $city->getId()){
+        $suburb = null;
+        if ($city instanceof City && $city->getId()) {
             $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
         }
-//        $suburb = $this->container->get('suburb.repository')->findByNameAndCity($suburbName, $city);
 
-        if(!$suburb && !empty($suburbName))
-        {
+        if (!$suburb && !empty($suburbName) && $city instanceof City) {
             $suburb = new CitySuburb();
             $suburb
                 ->setName($suburbName)
                 ->setCity($city);
-//            $em->persist($suburb);
-//            $em->flush();
         }
-
 
         return $suburb;
     }
 
     private function getOpenHoursArray($openHoursString, $day, SemsoftBar $ssBar)
     {
-        $hourRanges = explode(',', $openHoursString);
+//        if(empty($openHoursString) && $ssBar->getBar())
+//        {
+//            $bar = $ssBar->getBar();
+//            foreach ($bar->getOpenings() as $op) {
+//                if ($op->getOpeningDay() == $day) {
+//                    $bar->removeOpening($op);
+//                }
+//            }
+//        } else {
+            $hourRanges = explode(',', $openHoursString);
+            foreach ($hourRanges as $hourRange) {
+                $hours = explode('-', $hourRange);
+                if (count($hours) == 2) {
+                    $fromHour   = explode(':', $hours[0]);
+                    $toHour     = explode(':', $hours[1]);
 
-        foreach($hourRanges as $hourRange)
-        {
-            $hours = explode('-', $hourRange);
-            if(count($hours) == 2){
-                $fromHour   = explode(':', $hours[0]);
-                $toHour     = explode(':', $hours[1]);
-
-                $opening = new BarOpening();
-                $opening
-                    ->setOpeningDay($day)
-                    ->setFromHour($fromHour[0])
-                    ->setToHour($toHour[0])
-                    ->setSemsoftBar($ssBar);
-
-                $ssBar->addOpening($opening);
+                    $opening = new BarOpening();
+                    $opening
+                        ->setOpeningDay($day)
+                        ->setFromHour($fromHour[0])
+                        ->setToHour($toHour[0])
+                        ->setSemsoftBar($ssBar);
+                    $ssBar->addOpening($opening);
+                }
             }
-        }
-
+//        }
         return $ssBar;
     }
 
@@ -411,22 +406,25 @@ class SemsoftController extends Controller
 
     private function getTagsFromString($tags, $type, SemsoftBar $ssBar)
     {
+        $em = $this->getDoctrine()->getManager();
         $tagNames = explode(',', $tags);
-        if($tagNames){
-            foreach($tagNames as $tagName){
-                if($tagName != ""){
+        if ($tagNames) {
+            foreach ($tagNames as $tagName) {
+                if ($tagName != "") {
                     $tagName = ucfirst($tagName);
                     $tag = $this->get('tag.repository')->findOneByName($tagName);
-                    if(!$tag){
+                    if (!$tag) {
                         $tag = new Tag();
                         $tag
                             ->setName($tagName)
                             ->setType($type);
                     }
+                    $em->persist($tag);
+                    $em->flush();
 
-                    if($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL){
+                    if ($type == Tag::WBB_TAG_TYPE_ENERGY_LEVEL) {
                         $ssBar->setEnergyLevel($tag);
-                    }elseif($type == Tag::WBB_TAG_TYPE_THEME || $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES){
+                    } elseif ($type == Tag::WBB_TAG_TYPE_THEME || $type == Tag::WBB_TAG_TYPE_SPECIAL_FEATURES) {
                         $barTag = new BarTag();
                         $barTag
                             ->setType($type)
@@ -434,6 +432,9 @@ class SemsoftController extends Controller
                             ->setTag($tag);
                         $ssBar->addTag($barTag);
                         $tag->addBar($barTag);
+                        $em->persist($barTag);
+                        $em->persist($ssBar);
+                        $em->flush();
                     }
                 }
             }

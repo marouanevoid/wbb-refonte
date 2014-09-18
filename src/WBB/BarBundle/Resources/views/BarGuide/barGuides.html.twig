@@ -34,7 +34,7 @@
     {% if is_mobile() and not is_tablet() %}
         section.bar-filter .sort-by .btn-radius:last-of-type {
             margin-left: 0px;
-        }   
+        }
     {% endif %}
     {#{% if not distance %}
         .bar-filter .ui-dropdown.drop-light {
@@ -69,29 +69,22 @@
 
     <!-- BARS -->
     <div class="container full">
-
         <section class="bars">
-
             {% if is_mobile() and not is_tablet() %}
-
-            <div class="force-load">
-                {% for b in popularBars|slice(0,5) %}
-                    {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
-                {% endfor %}
-            </div>
-
+                <div class="force-load">
+                    {% for b in popularBars|slice(0,5) %}
+                        {% include "WBBBarBundle:Bar:items/bar_425_320.html.twig" with { 'b': b } %}
+                    {% endfor %}
+                </div>
             {% else %}
-
-            <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
-                {% for b in popularBars %}
-                    <div class="ui-slide">
-                       {% include "WBBBarBundle:Bar:bar1.html.twig" with { 'b': b } %}
-                    </div>
-                {% endfor %}
-            </div>
-
+                <div class="ui-slider type-bar has_sizer arrows dots" data-size="12x3" data-display="3">
+                    {% for b in popularBars %}
+                        <div class="ui-slide">
+                           {% include "WBBBarBundle:Bar:items/bar_425_320.html.twig" with { 'b': b } %}
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
-
         </section>
     </div>
 
@@ -111,7 +104,7 @@
                 {% endif %}
                     {% for b in topBestofs %}
                         <div class="ui-slide">
-                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b } %}
+                            {% include "WBBBarBundle:BestOf/items:bestof_370_278.html.twig" with { 'b': b } %}
                         </div>
                     {% endfor %}
                 </div>
@@ -122,23 +115,19 @@
     <!-- BAR FILTER -->
 
     <section class="bar-filter">
-
         <div class="container s-margin-bottom">
             <form name="filter" autocomplete="off">
             <div class="twelve columns">
                 <hr class="l-margin-top m-margin-bottom"/>
             </div>
-
             <div class="six columns h2 filters">
                 <div class="disableClick"></div>
                 <input type="radio" name="filter" value="bar_list" class="ui-radio" data-color="brown" data-type="collapsed" checked="checked"/>
                 <input type="radio" name="filter" value="best_of" class="ui-radio" data-color="brown" data-type="collapsed"/>
             </div>
-
             <div class="six columns sort-by h3 filters">
                 <div class="disableClick"></div>
                 <span class="sort">Sort by :</span>
-
                 <select class="ui-dropdown light filter-distance" name="criteria" id="criteria" style="{% if not distance %}height:110px !important;{% endif %}">
                     {% if distance is defined and distance %}
                     <option value="distance" data-type="criteria">Distance</option>
@@ -147,13 +136,11 @@
                     <option value="date" data-type="criteria">Date</option>
                     <option value="alphabetical" data-type="criteria">Alphabetical order</option>
                 </select>
-
                 <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
                 <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
             </div>
             </form>
         </div>
-
         <div class="container">
             <div class="bars-w-pic force-load   load-container">
                 <div class="load-target"></div>
@@ -161,12 +148,8 @@
                     <a class="h4 btn-radius large border load-more brown" href="#0">See more Bars</a>
                 </div>
             </div>
-
         </div>
-
     </section>
-
-
 {% endblock %}
 {% block footerAd %}
     {{ render(controller('WBBBarBundle:Ads:show', { 'format': 'BG_728x90' })) }}

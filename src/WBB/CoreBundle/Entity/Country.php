@@ -4,6 +4,7 @@ namespace WBB\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use WBB\BarBundle\Entity\Ad;
 
 /**
  * Country
@@ -73,20 +74,23 @@ class Country
     private $bestofs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\WBB\BarBundle\Entity\Ad", inversedBy="countries")
-     */
-    private $ad;
+     * @ORM\ManyToMany(targetEntity="\WBB\BarBundle\Entity\Ad", inversedBy="countries", cascade={"all"})
+     * @ORM\JoinTable(name="wbb_ads_countries",
+     *      joinColumns={@ORM\JoinColumn(name="country_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="ad_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $ads;
 
     /**
      * @ORM\OneToMany(targetEntity="WBB\BarBundle\Entity\Semsoft\SemsoftBar", mappedBy="country", cascade={"all"})
      */
     private $semsoftBars;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -96,7 +100,7 @@ class Country
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string  $name
      * @return Country
      */
     public function setName($name)
@@ -109,7 +113,7 @@ class Country
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -126,13 +130,14 @@ class Country
     /**
      * Add city
      *
-     * @param \WBB\CoreBundle\Entity\City $city
+     * @param  \WBB\CoreBundle\Entity\City $city
      * @return Country
      */
     public function addCity(\WBB\CoreBundle\Entity\City $city)
     {
         $this->cities[] = $city;
         $city->setCountry($this);
+
         return $this;
     }
 
@@ -149,7 +154,7 @@ class Country
     /**
      * Get cities
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCities()
     {
@@ -164,7 +169,7 @@ class Country
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Country
      */
     public function setCreatedAt($createdAt)
@@ -177,7 +182,7 @@ class Country
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -187,7 +192,7 @@ class Country
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Country
      */
     public function setUpdatedAt($updatedAt)
@@ -200,7 +205,7 @@ class Country
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -210,7 +215,7 @@ class Country
     /**
      * Add bestofs
      *
-     * @param \WBB\BarBundle\Entity\BestOf $bestofs
+     * @param  \WBB\BarBundle\Entity\BestOf $bestofs
      * @return Country
      */
     public function addBestof(\WBB\BarBundle\Entity\BestOf $bestofs)
@@ -233,7 +238,7 @@ class Country
     /**
      * Get bestofs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBestofs()
     {
@@ -241,32 +246,9 @@ class Country
     }
 
     /**
-     * Set ad
-     *
-     * @param \WBB\BarBundle\Entity\Ad $ad
-     * @return Country
-     */
-    public function setAd(\WBB\BarBundle\Entity\Ad $ad = null)
-    {
-        $this->ad = $ad;
-
-        return $this;
-    }
-
-    /**
-     * Get ad
-     *
-     * @return \WBB\BarBundle\Entity\Ad 
-     */
-    public function getAd()
-    {
-        return $this->ad;
-    }
-
-    /**
      * Set acronym
      *
-     * @param string $acronym
+     * @param  string  $acronym
      * @return Country
      */
     public function setAcronym($acronym)
@@ -279,7 +261,7 @@ class Country
     /**
      * Get acronym
      *
-     * @return string 
+     * @return string
      */
     public function getAcronym()
     {
@@ -289,7 +271,7 @@ class Country
     /**
      * Add users
      *
-     * @param \WBB\UserBundle\Entity\User $users
+     * @param  \WBB\UserBundle\Entity\User $users
      * @return Country
      */
     public function addUser(\WBB\UserBundle\Entity\User $users)
@@ -312,7 +294,7 @@ class Country
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
@@ -322,7 +304,7 @@ class Country
     /**
      * Add semsoftBars
      *
-     * @param \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
+     * @param  \WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars
      * @return Country
      */
     public function addSemsoftBar(\WBB\BarBundle\Entity\Semsoft\SemsoftBar $semsoftBars)
@@ -345,7 +327,7 @@ class Country
     /**
      * Get semsoftBars
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSemsoftBars()
     {
@@ -355,7 +337,7 @@ class Country
     /**
      * Set drinkingAge
      *
-     * @param integer $drinkingAge
+     * @param  integer $drinkingAge
      * @return Country
      */
     public function setDrinkingAge($drinkingAge)
@@ -368,10 +350,43 @@ class Country
     /**
      * Get drinkingAge
      *
-     * @return integer 
+     * @return integer
      */
     public function getDrinkingAge()
     {
         return $this->drinkingAge;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param  Ad      $ads
+     * @return Country
+     */
+    public function addAd(Ad $ads)
+    {
+        $this->ads[] = $ads;
+
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param Ad $ads
+     */
+    public function removeAd(Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }

@@ -17,32 +17,34 @@ class NewsRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+//            ->select($this->getAlias().', nm, m')
+//            ->leftJoin($this->getAlias().'.medias', 'nm')
+//            ->leftJoin('nm.media', 'm')
             ->where($qb->expr()->eq(1, 1))
         ;
 
-        if($limit > 0)
-        {
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($onlyOnTop){
+        if ($onlyOnTop) {
             $qb
                 ->where($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)))
                 ->orderBy($this->getAlias().'.createdAt', 'DESC');
-        }else{
+        } else {
             $qb
                 ->orderBy($this->getAlias().'.onTop', 'DESC')
                 ->addOrderBy($this->getAlias().'.createdAt', 'DESC');
         }
 
-        if($city){
+        if ($city) {
             $qb
                 ->leftJoin($this->getAlias().'.cities', 'c')
                 ->andWhere($qb->expr()->eq('c.id', $city->getId()));
         }
 
         if($asArray)
+
             return $qb->getQuery()->getArrayResult();
         else
             return $qb->getQuery()->getResult();
@@ -53,17 +55,18 @@ class NewsRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', nm, m')
+            ->leftJoin($this->getAlias().'.medias', 'nm')
+            ->leftJoin('nm.media', 'm')
             ->where($qb->expr()->notIn($this->getAlias().'.id', $exceptIds))
             ->orderBy($this->getAlias().'.onTop', 'DESC')
         ;
 
-        if($limit > 0)
-        {
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($cities){
+        if ($cities) {
             $qb
                 ->addSelect('count(c.id) as HIDDEN nbCities')
                 ->leftjoin($this->getAlias().'.cities', 'c')
@@ -83,7 +86,9 @@ class NewsRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', nm, m')
+            ->leftJoin($this->getAlias().'.medias', 'nm')
+            ->leftJoin('nm.media', 'm')
             ->innerJoin($this->getAlias().'.bars', 'b')
             ->orderBy($this->getAlias().'.createdAt', 'DESC')
             ->where($qb->expr()->eq('b.id', $bar->getId()))
@@ -97,4 +102,4 @@ class NewsRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-} 
+}

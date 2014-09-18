@@ -1,7 +1,6 @@
-<div class="line">
 {% for tip in tips %}
-    <div class="three columns box">
-        <article class="tip"  itemprop="review" itemscope="" itemtype="http://schema.org/Review">
+    <div class="three columns box wbbtip" data-id="{{ tip.id }}">
+        <article class="tip" itemprop="review" itemscope="" itemtype="http://schema.org/Review">
             <table class="content expert">
                 <tr class="excerpt">
                     <td colspan="2">
@@ -19,7 +18,7 @@
                 </tr>
                 <tr class="author">
                     <td colspan="2">
-                        <img src="{{ asset('bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                        <img src="{{ showImage(tip.user.avatar, 'avatar_82_82', tip.user) }}" alt="user" width="40" height="40"/>
                         <b>{{ tip.user.getUserRole }}</b>
                         {{ tip.user.fullname }}
                     </td>
@@ -46,4 +45,3 @@
         </article>
     </div>
 {% endfor %}
-</div>

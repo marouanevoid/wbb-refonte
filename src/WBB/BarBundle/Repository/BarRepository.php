@@ -18,6 +18,24 @@ class BarRepository extends EntityRepository
     const BAR_LOCATION_COUNTRY = 2;
     const BAR_LOCATION_WORLDWIDE = 3;
 
+    public function findBarBySlug($slug)
+    {
+        $qb = $this->createQuerybuilder($this->getAlias());
+
+        $qb
+            ->select($this->getAlias().", c, su, bm, m, ops")
+            ->leftJoin($this->getAlias().'.city', 'c')
+            ->leftJoin($this->getAlias().'.suburb', 'su')
+            ->leftJoin($this->getAlias().'.medias', 'bm')
+            ->leftJoin('bm.media', 'm')
+            ->leftJoin($this->getAlias().'.openings', 'ops')
+            ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
+            ->andWhere($qb->expr()->like($this->getAlias().'.slug', $qb->expr()->literal($slug)))
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     /* Find Bars By City and Suburb Id */
     public function findAllEnabled($city = null, $suburb = null)
     {
@@ -30,11 +48,11 @@ class BarRepository extends EntityRepository
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
         ;
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($suburb){
+        if ($suburb) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.suburb', $suburb->getId()));
         }
 
@@ -52,41 +70,48 @@ class BarRepository extends EntityRepository
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'));
 
-        if($citySlug){
+        if ($citySlug) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city.slug', $qb->expr()->literal($citySlug)));
         }
 
-        if($suburbSlug){
+        if ($suburbSlug) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.suburb.slug', $qb->expr()->literal($suburbSlug)));
         }
 
         return $qb->getQuery()->getResult();
     }
 
-
     public function findBestBars($city = null, $limit = 6)
     {
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips, c, su")
+            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips, COUNT(uf) as HIDDEN nbFavoris, c, su, bm, m")
             ->leftJoin($this->getAlias().'.city', 'c')
             ->leftJoin($this->getAlias().'.suburb', 'su')
+            ->leftJoin($this->getAlias().'.medias', 'bm')
+            ->leftJoin('bm.media', 'm')
             ->leftJoin($this->getAlias().'.tips', 'tp', 'WITH', 'tp.status ='. $qb->expr()->literal(1))
+            ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
+            ->addSelect('el, tgw')
+            ->leftjoin($this->getAlias().'.energyLevel', 'el')
+            ->leftjoin($this->getAlias().'.toGoWith', 'tgw')
+//            ->leftjoin($this->getAlias().'.tags', 'bt')
+//            ->leftjoin('bt.tag', 't')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
             ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy('nbFavoris', 'DESC')
+            ->addOrderBy($this->getAlias().'.ranking', 'DESC')
             ->addOrderBy('nbTips', 'DESC')
             ->setMaxResults($limit)
         ;
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
-
-        //TODO : Add Favoris count
 
         return $qb->getQuery()->getResult();
 
@@ -97,24 +122,26 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+            ->select($this->getAlias().', COUNT(uf) as HIDDEN nbFavoris')
+            ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
+            ->groupBy($this->getAlias())
             ->orderBy($this->getAlias().'.onTop', 'DESC')
+            ->addOrderBy('nbFavoris', 'DESC')
+            ->addOrderBy($this->getAlias().'.ranking', 'DESC')
             ->addOrderBy($this->getAlias().'.createdAt', 'DESC')
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
-
-        //TODO : Add Favoris count
 
         return $qb->getQuery()->getResult();
 
@@ -125,9 +152,11 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias().', c, su')
+            ->select($this->getAlias() . ', c, sbrb')
             ->leftJoin($this->getAlias().'.city', 'c')
-            ->leftJoin($this->getAlias().'.suburb', 'su')
+            ->leftJoin($this->getAlias().'.suburb', 'sbrb')
+//            ->leftJoin($this->getAlias().'.medias', 'bm')
+//            ->leftJoin('bm.media', 'm')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
@@ -135,22 +164,23 @@ class BarRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($onTop){
+        if ($onTop) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($user){
+        if ($user) {
             $qb
+                ->addSelect('uf')
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
-                ->andWhere($qb->expr()->eq('uf.id',$user->getId()));
+                ->andWhere($qb->expr()->eq('uf.id', $user->getId()));
         }
 
         return $qb->getQuery()->getResult();
@@ -158,13 +188,10 @@ class BarRepository extends EntityRepository
 
     public function findYouMayAlsoLike($bar, $location, $exceptBars = null, $onTop = true, $tags = true, $limit = 4)
     {
-        if($bar)
-        {
+        if ($bar) {
             $ids = array($bar->getId());
-            if($exceptBars != null)
-            {
-                foreach($exceptBars as $exBar)
-                {
+            if ($exceptBars != null) {
+                foreach ($exceptBars as $exBar) {
                     if($exBar)
                         $ids[] = $exBar->getId();
                 }
@@ -173,8 +200,11 @@ class BarRepository extends EntityRepository
             $qb = $this->createQuerybuilder($this->getAlias());
 
             $qb
-                ->select($this->getAlias())
-                ->innerjoin($this->getAlias().'.city', 'c')
+                ->select($this->getAlias() . ', c, sbrb')
+                ->innerJoin($this->getAlias().'.city', 'c')
+                ->leftJoin($this->getAlias().'.suburb', 'sbrb')
+//                ->leftJoin($this->getAlias().'.medias', 'bm')
+//                ->leftJoin('bm.media', 'm')
                 ->where($qb->expr()->notIn($this->getAlias().'.id', ':exceptBars'))
                 ->andWhere($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
                 ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
@@ -182,15 +212,16 @@ class BarRepository extends EntityRepository
                 ->setParameter('exceptBars', $ids)
             ;
 
-            if($onTop == true){
+            if ($onTop == true) {
                 $qb
                     ->andWhere($qb->expr()->eq($this->getAlias().'.onTop', $qb->expr()->literal(true)));
             }
 
-            if($tags == true){
+            if ($tags == true) {
                 $qb
                     ->addSelect('count(t.id) as HIDDEN nbTags')
                     ->addSelect('count(tgw.id) as HIDDEN nbWiths')
+                    ->addSelect('el, tgw, bt, t')
                     ->leftjoin($this->getAlias().'.energyLevel', 'el')
                     ->leftjoin($this->getAlias().'.toGoWith', 'tgw')
                     ->leftjoin($this->getAlias().'.tags', 'bt')
@@ -212,15 +243,13 @@ class BarRepository extends EntityRepository
                 ;
             }
 
-            if($location == BarRepository::BAR_LOCATION_CITY && !is_null($bar->getCity()))
-            {
+            if ($location == BarRepository::BAR_LOCATION_CITY && !is_null($bar->getCity())) {
                 $qb
                     ->andWhere($qb->expr()->eq($this->getAlias().'.city', ':city'))
                     ->setParameter('city', $bar->getCity());
             }
 
-            if($location == BarRepository::BAR_LOCATION_COUNTRY && !is_null($bar->getCity()) && !is_null($bar->getCity()->getCountry()))
-            {
+            if ($location == BarRepository::BAR_LOCATION_COUNTRY && !is_null($bar->getCity()) && !is_null($bar->getCity()->getCountry())) {
                 $qb
                     ->andWhere($qb->expr()->eq('c.country', ':country'))
                     ->setParameter('country', $bar->getCity()->getCountry());
@@ -231,8 +260,7 @@ class BarRepository extends EntityRepository
                 ->setMaxResults($limit);
 
             return $qb->getQuery()->getResult();
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -252,11 +280,11 @@ class BarRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
@@ -268,7 +296,13 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+//            ->select($this->getAlias() . ', c, sbrb, bm, m, bt, t ')
+//            ->leftJoin($this->getAlias().'.city', 'c')
+//            ->leftJoin($this->getAlias().'.suburb', 'sbrb')
+//            ->leftJoin($this->getAlias().'.medias', 'bm')
+//            ->leftJoin('bm.media', 'm')
+//            ->leftJoin($this->getAlias().'.tags', 'bt')
+//            ->leftJoin('bt.tag', 't')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
@@ -276,22 +310,22 @@ class BarRepository extends EntityRepository
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($user){
+        if ($user) {
             $qb
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
                 ->andWhere($qb->expr()->eq('uf.id',$user->getId()));
         }
 
-        if($orderBy){
-            foreach($orderBy as $field => $order){
+        if ($orderBy) {
+            foreach ($orderBy as $field => $order) {
                 $qb
                     ->addOrderBy($field, $order)
                 ;
@@ -306,22 +340,26 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias())
+//            ->select($this->getAlias() . ', c, sbrb, bm, m')
+            ->leftJoin($this->getAlias().'.city', 'c')
+//            ->leftJoin($this->getAlias().'.suburb', 'sbrb')
+//            ->leftJoin($this->getAlias().'.medias', 'bm')
+//            ->leftJoin('bm.media', 'm')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.city'))
             ->andWhere($qb->expr()->isNotNull($this->getAlias().'.suburb'))
             ->setFirstResult($offset)
         ;
 
-        if($limit > 0){
+        if ($limit > 0) {
             $qb->setMaxResults($limit);
         }
 
-        if($user){
+        if ($user) {
             $qb
+//                ->addSelect('uf')
                 ->innerJoin($this->getAlias().'.usersFavorite', 'uf')
-                ->leftJoin($this->getAlias().'.city', 'c')
-                ->andWhere($qb->expr()->eq('uf.id',$user->getId()))
+                ->andWhere($qb->expr()->eq('uf.id', $user->getId()))
                 ->orderBy('c.name', 'ASC')
                 ->addOrderBy($this->getAlias().'.name', 'ASC')
             ;
@@ -345,7 +383,7 @@ class BarRepository extends EntityRepository
             ->andWhere($qb->expr()->in('t.id', ':tags'))
             ->setParameter('tags', $bestof->getTagsIds());
 
-        if($bestof->getEnergyLevel()){
+        if ($bestof->getEnergyLevel()) {
             $qb
                 ->innerjoin($this->getAlias().'.energyLevel', 'el')
                 ->andWhere($qb->expr()->eq('el.id', $bestof->getEnergyLevel()->getId()));
@@ -361,7 +399,7 @@ class BarRepository extends EntityRepository
             ->andHaving($qb->expr()->gte('nbWiths', count($bestof->getGoWithIds())))
         ;
 
-        if($bestof->getCity()){
+        if ($bestof->getCity()) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $bestof->getCity()->getId()));
         }
 
@@ -380,18 +418,18 @@ class BarRepository extends EntityRepository
             ->orderBy($this->getAlias().'.name', 'ASC')
         ;
 
-        if($city){
+        if ($city) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.city', $city->getId()));
         }
 
-        if($tag){
+        if ($tag) {
             $qb
                 ->innerjoin($this->getAlias().'.toGoWith', 'tgw')
                 ->andWhere($qb->expr()->in('tgw.id', $tag))
             ;
         }
 
-        if($mood){
+        if ($mood) {
             $qb->andWhere($qb->expr()->eq($this->getAlias().'.energyLevel', $mood->getId()));
         }
 
@@ -406,7 +444,7 @@ class BarRepository extends EntityRepository
             ->where($qb->expr()->like('c.name', ':name'))
             ->setParameter('name', "$name%");
 
-        if($limit){
+        if ($limit) {
             $qb->setMaxResults($limit);
         }
 
@@ -418,5 +456,14 @@ class BarRepository extends EntityRepository
         $qb = $this->createQueryBuilder($this->getAlias());
 
         return $qb->getQuery();
+    }
+
+    public function findMaxValueOf($field)
+    {
+        $query = $this->createQueryBuilder($this->getAlias())
+            ->select("MAX(".$this->getAlias().".".$field.")")
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
     }
 }

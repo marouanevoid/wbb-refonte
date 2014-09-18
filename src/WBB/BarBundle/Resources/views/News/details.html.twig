@@ -1,27 +1,28 @@
 {% extends "::base.html.twig" %}
 {% block title %}{{ news.title }} | World Best Bars{% endblock %}
 {% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set bitlyURL = currentPath| bitly %}
 
 {% block meta %}
     <meta name="description" content="{{ news.seoDescription|slice(0, 150) }}" />
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@wbb">
+    <meta name="twitter:site" content="WorldsBestBars">
     <meta name="twitter:title" content="{{ news.title }} | World Best Bars">
-    <meta name="twitter:description" content="{{ news.seoDescription|slice(0, 150) }}">
-    <meta name="twitter:creator" content="@wbb">
-    <meta property="twitter:url" content="{{ currentPath| bitly }}" />
+    <meta name="twitter:description" content="{{ news.title }}">
+    <meta name="twitter:creator" content="WorldsBestBars">
+    <meta property="twitter:url" content="{{ bitlyURL }}" />
 
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ news.title }} | World Best Bars" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ currentPath| bitly }}" />
-    <meta property="og:description" content="{{ news.seoDescription|slice(0, 200) }}" />
+    <meta property="og:url" content="{{ bitlyURL }}" />
+    <meta property="og:description" content="{{ news.seoDescription |slice(0, 200) }}" />
     <meta property="og:site_name" content="World Best Bars" />
     <meta property="fb:admins" content="149071961796732" />
     {% for m in news.medias|slice(0,1) %}
-        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}">
-        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'slider_large', true) }}" />
+        <meta name="twitter:image" content="{{ websiteUrl }}{{ showImage(m.media, 'news_770_578', true) }}">
+        <meta property="og:image" content="{{ websiteUrl }}{{ showImage(m.media, 'news_770_578', true) }}" />
     {% endfor %}
 {% endblock %}
 
@@ -160,7 +161,7 @@
         <table>
             <tr>
                 {% if not is_mobile() or is_tablet() %}
-                    <td>
+                    <td style="vertical-align: top">
                         {% if oneTopCity %}
                             <div class="city-selector h3">
                                 You are in
@@ -173,11 +174,32 @@
                     <h1 itemprop="name">{{ news.title }}</h1>
                 </td>
 
-                <td class="star-share">
-                    <a class="btn-round brown share" href="#0"></a>
+                <td valign="top" class="star-share" style="vertical-align: top">
+                    <a id="share" class="btn-round brown share" href="#0"></a>
                 </td>
             </tr>
         </table>
+        <div id="share-pop" class="wrap-share {% if is_mobile() and not is_tablet() %}mobile popup{% endif %}" style="display:none">
+            <div class="social-share {% if is_mobile() and not is_tablet() %}no-radius-max{% else %}radius-max{% endif %}">
+                <div class="share-label left bold">SHARE</div>
+                <ul>
+                    <li class="left"><a href="#0" class="fb-share">Post</a></li>
+                    <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
+                    {% if is_mobile() and not is_tablet() and not is_ios() %}
+                        {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world %0a Click here to check this news : " ~ bitlyURL  %}
+                        <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
+                    {% else %}
+                        <li class="left">
+                            <a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">
+                                Email
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div class="clear"></div>
+            </div>
+            {% if is_mobile() and not is_tablet() %}<a href="javascript:;" id="close-pop" class="close btn-close-brown no-text">close</a>{% endif %}
+        </div>
     </section>
 </div>
 <div class="container">
@@ -191,7 +213,7 @@
                     {% if m.media.providerName == 'sonata.media.provider.youtube' %}
                         <iframe width="100%" height="480" src="http://www.youtube.com/embed/{{ m.media.providerReference }}?autoplay=0&modestbranding=1&rel=0&showinfo=0&autohide=1&color=white&theme=light&wmode=transparent" frameborder="0"  class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" allowfullscreen ></iframe>
                     {% else %}
-                        <img src="{% path m.media, 'slider_large' %}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
+                        <img src="{{ showImage(m.media, 'news_770_578') }}" class="{% if not is_mobile() or is_tablet() %}l-margin-bottom{% else %}s-margin-bottom{% endif %}" width="100%" alt="{{ news.title }}"/>
                     {% endif %}
                 {% endfor %}
                 {% if is_mobile() and not is_tablet() %}
@@ -200,37 +222,28 @@
                     {% if is_mobile() and not is_tablet() %}
                         {% if news.sponsorImage %}
                             <div class="block padding-top-10">
-                                <img src="{% path news.sponsorImage, 'slider_large' %}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
+                                <img src="{{ showImage(news.sponsorImage, 'sponsor_368_168') }}" class="s-margin-bottom sponsor-img" alt="{{ news.sponsor }}" width="100%" />
                             </div>
                         {% endif %}
                     {% endif %}
-
-                    {%    set txt = news.richDescription|trim("<br>") %}
-
-                    {%   set paragraphs = txt|split('<br><br>') %}
+                    {% set txt = news.richDescription|trim("<br>") %}
+                    {% set paragraphs = txt|split('<br><br>') %}
                     <p>
                         {% if paragraphs|length>=3 %}
                         {% for p in paragraphs %}
                         {% if loop.index == 3 %}
-
                         {% if news.quoteText %}
-
                     </p><p>{% include "WBBBarBundle:News/blocks:interview.html.twig"  with { 'n' : news , 'has_quote' : 1, 'is_simple_quote' : 1 } %}</p><p>
-
                 {% else %}
                 </p><p>
-                {%
-                set init = random(news.bestofs|length - 1)
-                %}
+                {% set init = random(news.bestofs|length - 1) %}
                     {% for b in news.bestofs |slice(init,1) %}
-                    <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
-                        {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
-                    </div>
+                        <div class="five margin-best-of-list columns {% if is_mobile() or not is_tablet() %}margin-bottom-20 margin-top-20{% endif %} {% if is_simple_quote is defined %} description{% endif %}" style="min-height: 210px">
+                            {% include "WBBBarBundle:Bar:bestof.html.twig" with { 'b': b, 'nolazyloading':true } %}
+                        </div>
                     {% endfor %}
                     </p><p>
-
                         {% endif %}
-
                         {% endif %}
                         {{ p|raw }}
                         {% if not loop.last %}<br><br>{% endif %}
@@ -251,7 +264,7 @@
                             <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} margin-top-20">
                                 <a href="#0" class="fb-share">Post</a>
                                 <a href="#0" class="twitter-share">Tweet</a>
-                                <a href="#0" class="email-share">Email</a>
+                                <a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a>
                             </div>
                         </div>
                     {% endif %}
@@ -264,7 +277,12 @@
                             <ul>
                                 <li><a href="#0" class="fb-share">Post</a></li>
                                 <li><a href="#0" class="twitter-share">Tweet</a></li>
-                                <li><a href="#0" class="email-share">Email</a></li>
+                                {% if is_mobile() and not is_tablet() and not is_ios() %}
+                                    {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world Click here to check this news : " ~ bitlyURL  %}
+                                    <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
+                                {% else %}
+                                    <li class="left"><a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -274,7 +292,7 @@
                     {% if not is_mobile() or is_tablet() %}
                         {% if news.sponsorImage %}
                             <div class="block">
-                                <img src="{% path news.sponsorImage, 'sponsor_sponsor_detail' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
+                                <img src="{% path news.sponsorImage, 'sponsor_368_168' %}" alt="{{ news.sponsor }}" class=" sponsor-img" width="100%" />
                             </div>
                         {% endif %}
                     {% endif %}
@@ -359,6 +377,11 @@
                         UTILS._resizeCover();
                     },1000);
                 });
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $
+                })
             </script>
         </div>
     </section>

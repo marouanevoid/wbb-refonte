@@ -6,6 +6,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use WBB\CloudSearchBundle\Indexer\IndexerInterface;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 use WBB\BarBundle\Entity\Bar;
+use WBB\BarBundle\Entity\Collections\BarMedia;
+use WBB\BarBundle\Entity\Collections\NewsMedia;
 
 class CloudSearchIndexerListener
 {
@@ -19,12 +21,12 @@ class CloudSearchIndexerListener
 
     public function postPersist(LifecycleEventArgs $args)
     {
-        $this->index($args);
+        $this->index($args->getEntity());
     }
 
     public function postUpdate(LifecycleEventArgs $args)
     {
-        $this->index($args);
+        $this->index($args->getEntity());
     }
 
     public function preRemove(LifecycleEventArgs $args)
@@ -35,17 +37,22 @@ class CloudSearchIndexerListener
         }
     }
 
-    private function index(LifecycleEventArgs $args)
+    private function index($entity)
     {
-        $entity = $args->getEntity();
         if ($entity instanceof IndexableEntity) {
             if ($entity instanceof Bar) {
                 if ($entity->getStatus() == Bar::BAR_STATUS_ENABLED_VALUE) {
                     $this->indexer->index($entity);
+                } else {
+                    $this->indexer->delete($entity);
                 }
             } else {
                 $this->indexer->index($entity);
             }
+        } elseif ($entity instanceof NewsMedia) {
+            $this->index($entity->getNews());
+        } elseif ($entity instanceof BarMedia) {
+            $this->index($entity->getBar());
         }
     }
 

@@ -18,7 +18,7 @@ class NewsMediaAdmin extends Admin
                     'required' => false
                 ), array(
                     'link_parameters' => array(
-                        'context' => 'default'
+                        'context' => 'news'
                     )
                 ))
                 ->add('alt', 'textarea', array('attr'=>array('cols'=>220, 'rows'=>6)))

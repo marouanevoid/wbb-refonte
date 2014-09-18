@@ -1,0 +1,12 @@
+<script>
+    $(document).ready(function() {
+        $('#show-popin').click();
+        $('html, body').animate({scrollTop: 0}, 500, 'easeInOutCubic');
+    });
+</script>
+<div id="success" class="min-height" {% if is_mobile() and not is_tablet() %}style="min-height: 300px"{% endif %}>
+    <div class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-100{% endif %}">
+        <p class="{% if is_mobile() and not is_tablet() %}padding-top-20{% else %}padding-top-80{% endif %}">The "{{ cookies.get('light_name') }}" {{ cookies.get('light_type') }} has been added to your favorites.</p>
+        <p class="padding-bottom-40">You can have a look at your favorite contents in your user profile.</p>
+    </div>
+</div>

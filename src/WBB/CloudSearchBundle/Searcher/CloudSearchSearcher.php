@@ -10,14 +10,39 @@ class CloudSearchSearcher
 
     private $cloudSearchClient;
     private $container;
+    private $suggestFields = array(
+        "'name^50'",
+        "'title^50'",
+        "'bestofs'",
+        "'bars'",
+        "'slug'",
+        "'address'",
+        "'cities'",
+        "'city'",
+        "'country'",
+        "'description'",
+        "'district'",
+        "'districts'",
+        "'quote'",
+        "'quote_author'",
+        "'seo_description'",
+        "'tags_cocktails'",
+        "'tags_food'",
+        "'tags_mood'",
+        "'tags_occasion'",
+        "'tags_special'",
+        "'tags_style'",
+        "'text'",
+        "'website'"
+    );
 
     public static function getCSTagsNames()
     {
         return array(
-            Tag::WBB_TAG_TYPE_BEST_COCKTAILS => 'cocktails',
             Tag::WBB_TAG_TYPE_ENERGY_LEVEL => 'mood',
             Tag::WBB_TAG_TYPE_WITH_WHO => 'occasion',
-            Tag::WBB_TAG_TYPE_THEME => 'style'
+            Tag::WBB_TAG_TYPE_THEME => 'style',
+            Tag::WBB_TAG_TYPE_SPECIAL_FEATURES => 'special'
         );
     }
 
@@ -31,9 +56,51 @@ class CloudSearchSearcher
         ));
     }
 
+    public function suggest(array $parameters)
+    {
+        $request = $this->cloudSearchClient->get('search');
+        $query = $request->getQuery();
+
+        $q = "{$parameters['q']}* {$parameters['q']}";
+
+        $query->set('q', $q);
+        $query->set('q.options', "{defaultOperator: 'or', fields: [" . implode(',', $this->suggestFields) . "]}");
+        $query->set('size', $parameters['size']);
+
+        $response = $request->send()->json();
+
+        return $response;
+    }
+
+    public function findAll()
+    {
+        $parameters = array(
+            'q' => '-thisconnotbefoundincloudsearchever',
+            'start' => 0,
+            'size' => 10000,
+            'entity' => null,
+            'city' => null,
+            'style' => null,
+            'mood' => null,
+            'occasion' => null,
+            'cocktails' => null,
+            'special' => null,
+            'district' => null,
+            'favorites' => false
+        );
+
+        return $this->doSearch($parameters);
+    }
+
     public function search(array $parameters)
     {
-        $response = $this->favorites($this->doSearch($parameters));
+        $response = $this->doSearch($parameters);
+
+        if ($parameters['favorites']) {
+            if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                $response = $this->favorites($response);
+            }
+        }
 
         $parameters['entity'] = 'Bar';
         $barResponse = $this->doSearch($parameters);
@@ -48,26 +115,24 @@ class CloudSearchSearcher
 
     private function favorites($response)
     {
-        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $ext = $this->container->get('wbb.twig.favorite_extension');
-            $user = $this->container->get('security.context')->getToken()->getUser();
+        $ext = $this->container->get('wbb.twig.favorite_extension');
+        $user = $this->container->get('security.context')->getToken()->getUser();
 
-            $c = 0;
-            foreach ($response['hits']['hit'] as $bar) {
-                if (isset($bar['fields']['entity_type']) && $bar['fields']['entity_type'] === 'Bar') {
-                    $dbBar = $this->container->get('bar.repository')->find($bar['fields']['wbb_id']);
-                    if ($dbBar) {
-                        $bar['fields']['favorite'] = $ext->isFavorite($user, $dbBar);
-                        $bar['fields']['favorite_url'] = $ext->getFavoriteUrl($user, $dbBar);
-                    } else {
-                        $bar['fields']['favorite'] = false;
-                        $bar['fields']['favorite_url'] = '#';
-                    }
-
-                    $response['hits']['hit'][$c] = $bar;
+        $c = 0;
+        foreach ($response['hits']['hit'] as $bar) {
+            if (isset($bar['fields']['entity_type']) && $bar['fields']['entity_type'] === 'Bar') {
+                $dbBar = $this->container->get('bar.repository')->find($bar['fields']['wbb_id']);
+                if ($dbBar) {
+                    $bar['fields']['favorite'] = $ext->isFavorite($user, $dbBar);
+                    $bar['fields']['favorite_url'] = $ext->getFavoriteUrl($user, $dbBar);
+                } else {
+                    $bar['fields']['favorite'] = false;
+                    $bar['fields']['favorite_url'] = '#';
                 }
-                $c++;
+
+                $response['hits']['hit'][$c] = $bar;
             }
+            $c++;
         }
 
         return $response;
@@ -93,7 +158,8 @@ class CloudSearchSearcher
             'style',
             'mood',
             'cocktails',
-            'occasion'
+            'occasion',
+            'special'
         );
 
         foreach ($tagsTypes as $tagType) {
@@ -114,10 +180,14 @@ class CloudSearchSearcher
 
         $q = $q . ")";
 
-        $query->set('q', $q);
-        $query->set('q.parser', 'structured');
+        if ($q == '(and \'-thisconnotbefoundincloudsearchever*\' )') {
+            $q = '(and -thisconnotbefoundincloudsearchever )';
+        } else {
+            $query->set('q.parser', 'structured');
+        }
         $query->set('size', $parameters['size']);
         $query->set('start', $parameters['start']);
+        $query->set('q', $q);
 
         $response = $request->send()->json();
 

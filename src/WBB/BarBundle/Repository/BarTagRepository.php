@@ -14,13 +14,10 @@ class BarTagRepository extends EntityRepository
 {
     public function findYouMayAlsoLike($bar, $location, $exceptBars = null, $onTop = true, $tags = true, $limit = 4)
     {
-        if($bar)
-        {
+        if ($bar) {
             $ids = array($bar->getId());
-            if($exceptBars != null)
-            {
-                foreach($exceptBars as $exBar)
-                {
+            if ($exceptBars != null) {
+                foreach ($exceptBars as $exBar) {
                     if($exBar && $exBar->getBar())
                         $ids[] = $exBar->getBar()->getId();
                 }
@@ -36,27 +33,25 @@ class BarTagRepository extends EntityRepository
                 ->setParameter('exceptBars', $ids)
             ;
 
-            if($onTop == true){
+            if ($onTop == true) {
                 $qb
                     ->andWhere($qb->expr()->eq('b.onTop', $qb->expr()->literal(true)));
             }
 
-            if($tags == true){
+            if ($tags == true) {
                 $qb
                     ->innerjoin($this->getAlias().'.tag', 't')
                     ->andWhere($qb->expr()->in('t.id',':tags'))
                     ->setParameter('tags', $bar->getTagsIds());
             }
 
-            if($location == BarRepository::BAR_LOCATION_CITY && !is_null($bar->getCity()))
-            {
+            if ($location == BarRepository::BAR_LOCATION_CITY && !is_null($bar->getCity())) {
                 $qb
                     ->andWhere($qb->expr()->eq('b.city', ':city'))
                     ->setParameter('city', $bar->getCity());
             }
 
-            if($location == BarRepository::BAR_LOCATION_COUNTRY && !is_null($bar->getCity()) && !is_null($bar->getCity()->getCountry()))
-            {
+            if ($location == BarRepository::BAR_LOCATION_COUNTRY && !is_null($bar->getCity()) && !is_null($bar->getCity()->getCountry())) {
                 $qb
                     ->andWhere($qb->expr()->eq('c.country', ':country'))
                     ->setParameter('country', $bar->getCity()->getCountry());
@@ -67,9 +62,8 @@ class BarTagRepository extends EntityRepository
                 ->setMaxResults($limit);
 
             return $qb->getQuery()->getResult();
-        }
-        else{
+        } else {
             return null;
         }
     }
-} 
+}

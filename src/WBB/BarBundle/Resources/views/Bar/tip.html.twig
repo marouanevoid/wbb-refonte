@@ -1,4 +1,4 @@
-<div class="three columns box">
+<div class="three columns box {% if temporary is defined %}temporary{% endif %}" data-id="{{ tip.id }}">
     <article class="tip">
         <table class="content expert">
             <tr class="excerpt">
@@ -17,7 +17,7 @@
             </tr>
             <tr class="author">
                 <td colspan="2">
-                    <img src="{{ asset('bundles/wbbcore/images/tmp/user.ryan.png') }}" alt="user" width="40" height="40"/>
+                    <img src="{{ showImage(tip.user.avatar, 'avatar_82_82', tip.user) }}" alt="user" width="40" height="40"/>
                     <b>{{ tip.user.getUserRole }}</b>
                     {{ tip.user.fullname }}
                 </td>

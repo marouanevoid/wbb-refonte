@@ -60,6 +60,8 @@ $(document).ready(function()
        }
        $('.disableClick').show();
        loadData();
+
+       return false;
    });
    $("#criteria, input[name=view-type]").change(function(){
        if(istablet==1)

@@ -13,8 +13,8 @@ use Application\Sonata\MediaBundle\Entity\Media;
  * @ORM\Entity
  */
 
-class NewsMedia {
-
+class NewsMedia
+{
     /**
      * @var integer
      *
@@ -68,15 +68,15 @@ class NewsMedia {
     /**
      * Constructor
      */
-    public function __construct(){
-
+    public function __construct()
+    {
     }
 
     /**
      * toString
      */
-    public function __toString(){
-
+    public function __toString()
+    {
     }
 
     /**
@@ -84,15 +84,15 @@ class NewsMedia {
      *
      * @return integer
      */
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
-
 
     /**
      * Set alt
      *
-     * @param string $alt
+     * @param  string   $alt
      * @return BarMedia
      */
     public function setAlt($alt)
@@ -105,21 +105,23 @@ class NewsMedia {
     /**
      * Get alt
      *
-     * @return string 
+     * @return string
      */
     public function getAlt()
     {
         return $this->alt;
-    }    
-    
+    }
+
     /**
      * Set news
      *
-     * @param \WBB\BarBundle\Entity\News $news
+     * @param  \WBB\BarBundle\Entity\News $news
      * @return NewsMedia
      */
-    public function setNews($news){
+    public function setNews($news)
+    {
         $this->news = $news;
+
         return $this;
     }
 
@@ -128,18 +130,21 @@ class NewsMedia {
      *
      * @return \WBB\BarBundle\Entity\News
      */
-    public function getNews(){
+    public function getNews()
+    {
         return $this->news;
     }
 
     /**
      * Set media
      *
-     * @param Media $media
+     * @param  Media     $media
      * @return NewsMedia
      */
-    public function setMedia($media){
+    public function setMedia($media)
+    {
         $this->media = $media;
+
         return $this;
     }
 
@@ -148,18 +153,21 @@ class NewsMedia {
      *
      * @return Media
      */
-    public function getMedia(){
+    public function getMedia()
+    {
         return $this->media;
     }
 
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return NewsMedia
      */
-    public function setCreatedAt($createdAt){
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -168,18 +176,21 @@ class NewsMedia {
      *
      * @return \DateTime
      */
-    public function getCreatedAt(){
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return NewsMedia
      */
-    public function setUpdatedAt($updatedAt){
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -188,15 +199,15 @@ class NewsMedia {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt(){
+    public function getUpdatedAt()
+    {
         return $this->updatedAt;
     }
-
 
     /**
      * Set position
      *
-     * @param integer $position
+     * @param  integer   $position
      * @return NewsMedia
      */
     public function setPosition($position)
@@ -209,7 +220,7 @@ class NewsMedia {
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {

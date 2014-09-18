@@ -11,7 +11,7 @@ wbb_user_reset_success:
 wbb_user_favoris_add:
     pattern:  /favoris/add
     defaults: { _controller: WBBBarBundle:Favoris:add }
-    
+
 wbb_ajax_signin_popin:
     pattern: /ajax/signin-popin
     defaults:
@@ -25,5 +25,15 @@ wbb_user_ajax_cities:
 wbb_profile_filters:
     pattern: /profile/filter/{content}/{filter}/{offset}/{limit}/{display}
     defaults: { _controller: WBBUserBundle:User:loadProfileData, content: bars, filter: date, offset: 0, limit: 8, display: grid }
+    options:
+        expose: true
+
+wbb_simulate_errors:
+    pattern: /errors/{code}
+    defaults: { _controller: WBBUserBundle:User:simulateError }
+
+wbb_resend_email_confirmation:
+    pattern: /user/email/resend-confirmation-token
+    defaults: { _controller: WBBUserBundle:User:resendEmailConfirmationToken }
     options:
         expose: true
