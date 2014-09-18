@@ -70,6 +70,8 @@ class NewsAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $object = $this->getSubject();
+
         $formMapper
             ->with('General')
                 ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
@@ -82,22 +84,20 @@ class NewsAdmin extends Admin
                 ->add('onTop')
 
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
-                ->add('sponsorImage', 'sonata_type_model_list', array(
-                    'required' => false,
-                    'help'      => 'Preferred size (width: 640px , height: 480px)'
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'sponsor'
-                    )
-                ))
-                ->add('sponsorImageSmall', 'sonata_type_model_list', array(
-                    'required'  => false,
-                    'help'      => 'Preferred size (width: 82px , height: 82px)'
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'sponsor'
-                    )
-                ))
+                ->add('sponsorFile', 'file',
+                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorImage():false, 'sponsor_preview', array(
+                        'required'  => false,
+                        'help'      => 'Preferred size (width: 640px , height: 480px)',
+                        'label'     => 'Sponsor image'
+                    ))
+                )
+                ->add('sponsorSmallFile', 'file',
+                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorImageSmall():false, 'sponsor_preview', array(
+                        'required'  => false,
+                        'help'      => 'Preferred size (width: 82px , height: 82px)',
+                        'label'     => 'Small sponsor image'
+                    ))
+                )
             ->end()
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection',
@@ -135,11 +135,7 @@ class NewsAdmin extends Admin
     {
         if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if ($media && $media->getMedia()) {
-                    $media->setNews($object);
-                } else {
-                    $object->removeMedia($media);
-                }
+                $media->setNews($object);
             }
         }
     }
@@ -148,13 +144,8 @@ class NewsAdmin extends Admin
     {
         if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if ($media && $media->getMedia()) {
-                    $media->setNews($object);
-                } else {
-                    $object->removeMedia($media);
-                }
+                $media->setNews($object);
             }
         }
     }
-
 }

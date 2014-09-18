@@ -18,5 +18,5 @@
             {% if b.city %}{{ b.city.name|default('Unspecified')|truncate(15, true) }}{% endif %}
         </h3>
     </div>
-    <a href="{{ path('wbb_bar_details',{city: b.city, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
+    <a href="{{ path('wbb_bar_details',{city: b.city.slug, suburb: b.suburb.slug, slug: b.slug}) }}" class="overlay-link"></a>
 </article>

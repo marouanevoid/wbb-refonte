@@ -1,6 +1,13 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: bundles/services/services.yml }
+    - { resource: bundles/config/fos.yml }
+    - { resource: bundles/config/sonata.yml }
+    - { resource: bundles/config/gaufrette.yml }
+    - { resource: bundles/config/liip.yml }
+    - { resource: bundles/config/vich.yml }
+    - { resource: bundles/config/aequasi_cache.yml }
 
 framework:
     #esi:             ~
@@ -23,11 +30,13 @@ framework:
 
 # Twig Configuration
 twig:
+#    exception_controller:  wbb.twig.controller.exception:showAction
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
         resources:
             - 'StnwDatePickerBundle:Form:fields.html.twig'
+            - ':Form:fields.html.twig'
     globals:
         ga_id: %google_analytics_id%
         feedsLimit: %feeds_limit%
@@ -72,7 +81,7 @@ doctrine:
                     numeric_functions:
                         geo: WBB\CoreBundle\AST\Functions\Geo
                 mappings:
-                    SonataMediaBundle: ~
+#                    SonataMediaBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -83,198 +92,6 @@ swiftmailer:
     encryption: "%mailer_encryption%"
     #spool:     { type: memory }
 
-# FOS UserBundle config
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: WBB\UserBundle\Entity\User
-    registration:
-        confirmation: { enabled: true, template: WBBUserBundle:User:confirmation.email.html.twig }
-        form:
-            type: wbb_user_registration
-            validation_groups:  [Registration, Default, registration_full, registration_fb]
-    profile:
-        form:
-            type: wbb_user_profile
-            validation_groups:  [Default, registration_full, Profile, profile_light]
-    change_password:
-        form:
-            type: wbb_user_change_password
-            validation_groups:  [ChangePassword, Default]
-    from_email:
-        address:        %mailer_email%
-        sender_name:    %mailer_username%
-    resetting:
-        email:
-            template: WBBUserBundle:User:resetting.email.html.twig
-    service:
-        mailer: fos_user.mailer.twig_swift
-
-# Sonata Admin bundle
-sonata_admin:
-    title:      "WBB - Administration"
-    security:
-            handler: sonata.admin.security.handler.role
-    title_logo: /bundles/wbbcore/images/common/logo-sonata.png
-    dashboard:
-        blocks:
-            # display a dashboard block
-            -
-                position: left
-                type: sonata.block.service.text
-                settings:
-                    content: >
-                        <h2>Bienvenue sur votre espace d'administration WBB</h2>
-                        <p>Cette interface vous permet de mettre à jour le contenu du site WBB. <br />
-                        Vous aurez la possibilité de gérer les utilisateurs,
-                        les informations relatives aux bars, tips, et villes. </p><br /><br />
-            - { position: left, type: sonata.admin.block.admin_list }
-            - { position: right, type: wbb.block.service.semsoft.import }
-
-        groups:
-            wbb_location: ~
-            wbb_bar: ~
-            wbb_user: ~
-    templates:
-        dashboard: SonataAdminBundle:Core:dashboard.html.twig
-        layout: SonataAdminBundle::layout.html.twig
-        short_object_description: WBBBarBundle:Admin:Helper/short-object-description.html.twig
-
-sonata_doctrine_orm_admin:
-    templates:
-        types:
-            list:
-                status: SonataAdminBundle:CRUD/Type/List:status.html.twig
-
-# Sonata Blocks
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.admin.block.admin_list:
-        sonata.admin.block.search_result:
-            contexts:   [admin]
-        sonata.block.service.text:
-        wbb.block.service.semsoft.import: ~
-        sonata.block.service.rss:
-
-#Sonata Media Bundle
-sonata_media:
-    default_context: bar
-    db_driver: doctrine_orm
-    contexts: #Add default context
-        bar:
-            download:
-                strategy: sonata.media.security.connected_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.youtube
-                - sonata.media.provider.image
-            formats:
-                preview : { width: 100 , height: 100, quality: 100 }
-                286_210 : { width: 286 , height: 210, quality: 100 }
-                285_215 : { width: 285 , height: 215, quality: 100 }
-                425_320 : { width: 425 , height: 320, quality: 100 }
-                640_480 : { width: 640 , height: 480, quality: 100 }
-        news:
-            download:
-                strategy: sonata.media.security.connected_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.youtube
-                - sonata.media.provider.image
-            formats:
-                preview : { width: 100 , height: 100, quality: 100 }
-                286_210 : { width: 286 , height: 210, quality: 100 }
-                385_278 : { width: 385 , height: 278, quality: 100 }
-                425_320 : { width: 425 , height: 320, quality: 100 }
-                770_578 : { width: 770 , height: 578, quality: 100 }
-
-        city:
-            download:
-                strategy: sonata.media.security.connected_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.image
-            formats:
-                preview : { width: 100 , height: 100, quality: 100 }
-                170_175 : { width: 170 , height: 175, quality: 100 }
-
-        bestof:
-            download:
-                strategy: sonata.media.security.connected_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.image
-            formats:
-                preview : { width: 100 , height: 100, quality: 100 }
-                370_278 : { width: 370 , height: 278, quality: 100 }
-                285_215 : { width: 285 , height: 215, quality: 100 }
-                384_280 : { width: 384 , height: 280, quality: 100 }
-
-        ads:
-            download:
-                strategy: sonata.media.security.connected_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.image
-            formats:
-                preview :   { width: 100 , height: 100, quality: 100 }
-                300_250 :   { width: 300 , height: 250, quality: 100 }
-                300_600 :   { width: 300 , height: 600, quality: 100 }
-                728_90  :   { width: 728 , height: 90, quality: 100 }
-
-        sponsor:
-            download:
-                strategy: sonata.media.security.connected_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.image
-            formats:
-                preview : { width: 100 , height: 100, quality: 100 }
-                82_82   : { width:  82 , height:  82, quality: 100 }
-                368_168 : { width: 368 , height: 168, quality: 100 }
-
-        avatar:
-            download:
-                strategy: sonata.media.security.connected_strategy
-                mode: http
-            providers:
-                - sonata.media.provider.image
-            formats:
-                preview :   { width: 100, height: 100, quality: 100}
-                82_82   :   { width:  82, height:  82, quality: 100}
-                145_145 :   { width: 145, height: 145, quality: 100}
-
-    cdn:
-        server:
-#            path: /uploads/media
-            path: http://wbb-bucket.s3-website-us-east-1.amazonaws.com #http://staging.worldsbestbars.com.s3-website-eu-west-1.amazonaws.com
-
-    filesystem:
-#        local:
-#            directory:  %kernel.root_dir%/../web/uploads/media
-#            create:     true
-        s3:
-            bucket: wbb-bucket
-            accessKey: AKIAJ6WSWPZUXSICYDPQ #AKIAJM6ZSVZZ3WLRHZIA
-            secretKey: 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 #Sw9IbIoSTjfQIamFAFWqljY/tNhQmDBnChYzSC9T
-            create: true
-#            region:         s3-website-us-east-1.amazonaws.com #s3-website-eu-west-1.amazonaws.com # change if not using US Standard region
-#            storage: standard # can be one of: standard or reduced
-#            acl: public # can be one of: public, private, open, auth_read, owner_read, owner_full_control
-#            encryption:     aes256 # can be aes256 or not set
-#            cache_control:  max-age=86400 # or any other
-#            meta:
-#                key1:       value1 #any amount of metas(s ent as x-amz-meta-key1 = value1)
-
-    providers:
-        image:
-            filesystem: sonata.media.filesystem.s3
-            resizer: sonata.media.resizer.custom #sonata.media.resizer.custom
-            cdn: sonata.media.cdn.server
-            allowed_extensions: ['jpg', 'png', 'jpeg']
-            allowed_mime_types: ['image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png']
-
 #Fake Data Generator
 hautelook_alice:
     locale: fr_FR
@@ -284,36 +101,6 @@ hautelook_alice:
 jcroll_foursquare_api:
     client_id:     %foursquare_client_id%
     client_secret: %foursquare_client_secret%
-
-sonata_formatter:
-    formatters:
-        markdown:
-            service: sonata.formatter.text.markdown
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-                - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
-        text:
-            service: sonata.formatter.text.text
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-                - sonata.media.formatter.twig
-        rawhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-                - sonata.media.formatter.twig
-        richhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-                - sonata.media.formatter.twig
-        twig:
-            service: sonata.formatter.text.twigengine
-            extensions: [] # Twig formatter cannot have extensions
 
 mobile_detect:
     redirect:
