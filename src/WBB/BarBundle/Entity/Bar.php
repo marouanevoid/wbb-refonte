@@ -11,6 +11,7 @@ use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
 use JMS\Serializer\Annotation as JMS;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Bar
@@ -19,6 +20,7 @@ use WBB\CloudSearchBundle\Indexer\IndexableEntity;
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BarRepository")
  *
  * @JMS\ExclusionPolicy("all")
+ * @Vich\Uploadable
  */
 class Bar implements IndexableEntity
 {
@@ -51,7 +53,7 @@ class Bar implements IndexableEntity
     private $name;
 
     /**
-     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @Gedmo\Slug(fields={"name"}, separator="-")
      * @ORM\Column(unique=true)
      * @JMS\Expose
      */

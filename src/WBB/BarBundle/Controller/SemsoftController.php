@@ -332,12 +332,15 @@ class SemsoftController extends Controller
         }
 
         if (!$city && !empty($cityName)) {
+            $em = $this->getDoctrine()->getManager();
             $city = new City();
             $city
                 ->setName($cityName)
                 ->setCountry($country)
                 ->setPostalCode($postalCode)
             ;
+            $em->persist($city);
+            $em->flush($city);
         }
 
         return $city;
@@ -355,10 +358,13 @@ class SemsoftController extends Controller
         }
 
         if (!$suburb && !empty($suburbName) && $city instanceof City) {
+            $em = $this->getDoctrine()->getManager();
             $suburb = new CitySuburb();
             $suburb
                 ->setName($suburbName)
                 ->setCity($city);
+            $em->persist($suburb);
+            $em->flush($suburb);
         }
 
         return $suburb;

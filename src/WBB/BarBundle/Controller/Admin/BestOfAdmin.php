@@ -26,7 +26,6 @@ class BestOfAdmin extends Admin
             ->addIdentifier('name')
             ->add('country')
             ->add('city')
-            ->add('sponsor', null, array('editable' => true))
             ->add('nbBars', 'string', array(
                 'label' => 'Bars',
                 'template' => 'WBBCoreBundle:Admin:list\list_nb_bars.html.twig'
@@ -40,7 +39,6 @@ class BestOfAdmin extends Admin
                 'field'   => 'name',
                 'label'    => 'Actions',
                 'actions' => array(
-//                    'show'   => array('template' => 'WBBBarBundle:Admin/Bar:linkShowBar.html.twig'),
                     'edit'   => array(),
                     'delete' => array(),
                 )
@@ -57,7 +55,6 @@ class BestOfAdmin extends Admin
             ->add('name')
             ->add('country')
             ->add('city')
-            ->add('sponsor')
             ->add('seoDescription')
             ->add('byTag')
             ->add('ordered')
@@ -120,6 +117,14 @@ class BestOfAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $object = $this->getSubject();
+        $imagineService = $this->getContainer()->get('liip_imagine.cache.manager');
+        $imageOptions = array('required' => false, 'label' => 'Best of visual *');
+        if (($object) && $object->getImage()) {
+            $path = $imagineService->getBrowserPath($object->getImage(), 'bestof_preview');
+            $imageOptions['help'] = 'Mandatory<br /><img width="100px" src="' . $path . '" />';
+        }else{
+            $imageOptions['help'] = 'Mandatory';
+        }
 
         $formMapper
             ->with('General')
@@ -128,28 +133,7 @@ class BestOfAdmin extends Admin
                 ->add('city', null, array('required' => ($this->getSecurityContext()->isGranted('ROLE_BAR_EXPERT'))?true:false))
                 ->add('description', 'textarea', array('required' => false, 'label'=>'Best of description *', 'help' => 'Mandatory', 'attr' => array('class'=>'wysihtml5')))
                 ->add('seoDescription', 'textarea', array('label' => 'SEO description *', 'help' => 'Mandatory', 'required'=> false))
-                ->add('image', 'sonata_type_model_list',
-                    array(
-                        'required'  => false,
-                        'btn_list'  => false,
-                        'help'      => 'Mandatory',
-                        'label'     => 'Best of visual *'
-                    ), array(
-                        'link_parameters' => array(
-                            'context' => 'bestof'
-                        )
-                    ))
-//                ->add('sponsor')
-//                ->add('sponsorImage', 'sonata_type_model_list',
-//                    array(
-//                        'required'  => false,
-//                        'btn_list'  => false,
-//                        'label'     => 'Sponsor visual'
-//                    ), array(
-//                        'link_parameters' => array(
-//                            'context' => 'default'
-//                        )
-//                    ))
+                ->add('imageFile', 'file', $imageOptions)
                 ->add('byTag', null, array('help'=> 'Create a best of with tag'))
                 ->add('onTop')
                 ->add('ordered', null, array('label' => 'Order from bar tab'))

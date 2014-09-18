@@ -117,15 +117,11 @@ class AdAdmin extends Admin
                     )
                 )
                 ->add('link', null, array('required' => false, 'label'=> 'Destination URL Link *', 'help'=> 'MANDATORY'))
-                ->add('image', 'sonata_type_model_list', array(
+                ->add('imageFile', 'file', $this->getImageOptions($this->getSubject()->getImage(), 'ads_preview', array(
                         'required' => false,
                         'label' => 'File upload *',
                         'help'=> 'MANDATORY - File accepted .png & .jpg accepted'
-                    ), array(
-                        'link_parameters' => array(
-                            'context' => 'ads'
-                        )
-                    )
+                    ))
                 )
                 ->add('beginAt', 'datePicker', array('label' => 'Display the banner from the :', 'help'=> 'MANDATORY'))
                 ->add('endAt', 'datePicker' , array('label' => 'To the :', 'help'=> 'MANDATORY'))
