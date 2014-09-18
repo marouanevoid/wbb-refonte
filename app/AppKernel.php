@@ -28,7 +28,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
             // DataFixtures
@@ -36,7 +35,9 @@ class AppKernel extends Kernel
             new Hautelook\AliceBundle\HautelookAliceBundle(),
 
             //MediaBundle
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
             //Foursquare
             new Jcroll\FoursquareApiBundle\JcrollFoursquareApiBundle(),
@@ -44,12 +45,6 @@ class AppKernel extends Kernel
             //Mobile Detecte
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
 
-            // sonata formatter
-            new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
-            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new Sonata\FormatterBundle\SonataFormatterBundle(),
-            
             // sonata datepiker
             new Stnw\DatePickerBundle\StnwDatePickerBundle(),
 
@@ -61,6 +56,12 @@ class AppKernel extends Kernel
 
 //            new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 
+//            Memcached
+            new Aequasi\Bundle\CacheBundle\AequasiCacheBundle(),
+
+            //Ladydebug
+            new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
+
             //Bitly Bundle
             new Hpatoio\BitlyBundle\HpatoioBitlyBundle(),
 
@@ -69,7 +70,7 @@ class AppKernel extends Kernel
             new WBB\CoreBundle\WBBCoreBundle(),
             new WBB\BarBundle\WBBBarBundle(),
             new WBB\CloudSearchBundle\WBBCloudSearchBundle(),
-            
+
             new FOS\FacebookBundle\FOSFacebookBundle(),
         );
 

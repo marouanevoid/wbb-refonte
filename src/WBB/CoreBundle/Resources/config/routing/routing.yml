@@ -8,6 +8,12 @@ get_suburbs_from_city:
     options:
         expose: true
 
+get_sonata_collection_row:
+    pattern: /ajax/get-sonata-collection-row/{entity}/{adminID}/{index}
+    defaults: {_controller: WBBCoreBundle:Ajax\Ajax:addCollectionRow, index: 1}
+    options:
+        expose: true
+
 get_cities_from_country:
     pattern: /ajax/get-cities-from-country/{bestof}/{countryId}/{cityId}
     defaults: {_controller: WBBCoreBundle:Ajax\Ajax:getCitiesFromCountry, bestof: 0, cityId: 0}

@@ -209,6 +209,16 @@
 
             <trans-unit id="form.label_media">
                 <source>form.label_media</source>
+                <target>Media Preview</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_youtube">
+                <source>form.label_youtube</source>
+                <target>Youtube</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_image_file">
+                <source>form.label_image_file</source>
                 <target>Media</target>
             </trans-unit>
 

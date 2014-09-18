@@ -14,14 +14,6 @@ wbb_cloudsearch:
     resource: "@WBBCloudSearchBundle/Resources/config/routing.yml"
     prefix:   /
 
-gallery:
-    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
-    prefix: /media/gallery
-
-media:
-    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
-    prefix: /media
-
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
@@ -37,3 +29,6 @@ _security_login:
 
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
