@@ -17,10 +17,9 @@ class NewsAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
-//            ->add('shareText', null, array('editable' => true))
             ->add('quoteAuthor', null, array('editable' => true))
-            ->add('quoteText', null, array('editable' => true))
-            ->add('seoDescription', null, array('editable' => true))
+            ->add('quoteText', null, array('label'=> 'Quote', 'editable' => true))
+            ->add('seoDescription', null, array('label'=> 'Short description', 'editable' => true))
             ->add('interview', null, array('editable' => true))
             ->add('onTop', null, array('editable' => true))
             ->add('createdAt', null, array('editable' => true))
@@ -36,11 +35,10 @@ class NewsAdmin extends Admin
         $filterMapper
             ->add('id')
             ->add('title')
-//            ->add('shareText')
             ->add('quoteAuthor')
-            ->add('quoteText')
-            ->add('seoDescription')
-            ->add('richDescription')
+            ->add('quoteText', null, array('label'=> 'Quote'))
+            ->add('seoDescription', null, array('label'=> 'Short description'))
+            ->add('richDescription', null, array('label'=> 'News content'))
             ->add('interview')
             ->add('onTop')
         ;
@@ -55,7 +53,6 @@ class NewsAdmin extends Admin
             ->with('General')
                 ->add('id')
                 ->add('title')
-//                ->add('shareText')
                 ->add('quoteAuthor')
                 ->add('quoteText')
                 ->add('seoDescription')
@@ -73,35 +70,34 @@ class NewsAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $object = $this->getSubject();
+
         $formMapper
             ->with('General')
                 ->add('user', null, array('help' => 'Optional', 'required' => false, 'empty_value' => 'Choose a user'))
                 ->add('title', null, array('help'=> 'Mandatory', 'label'=> 'Title *'))
-//                ->add('shareText', null, array('help'=> 'Mandatory', 'label'=> 'Share text *'))
                 ->add('quoteAuthor')
-                ->add('quoteText')
-                ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'SEO Description *'))
-                ->add('richDescription', 'textarea', array('label'=>'News Description *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
+                ->add('quoteText', null, array('label'=> 'Quote'))
+                ->add('seoDescription', null, array('help'=> 'Mandatory', 'label'=> 'Short description *'))
+                ->add('richDescription', 'textarea', array('label'=>'News Content *','help'=>'Mandatory', 'required' => false,'attr'=>array('class'=>'wysihtml5')))
                 ->add('interview', null, array('label' => 'Interview'))
                 ->add('onTop')
 
                 ->add('sponsor', null, array('help'=> 'Mandatory', 'label'=> 'Sponsor Name'))
-                ->add('sponsorImage', 'sonata_type_model_list', array(
-                    'required' => false,
-                    'help'      => 'Preferred size (width: 640px , height: 480px)'
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'sponsor'
-                    )
-                ))
-                ->add('sponsorImageSmall', 'sonata_type_model_list', array(
-                    'required'  => false,
-                    'help'      => 'Preferred size (width: 82px , height: 82px)'
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'sponsor'
-                    )
-                ))
+                ->add('sponsorFile', 'file',
+                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorImage():false, 'sponsor_preview', array(
+                        'required'  => false,
+                        'help'      => 'Preferred size (width: 640px , height: 480px)',
+                        'label'     => 'Sponsor image'
+                    ))
+                )
+                ->add('sponsorSmallFile', 'file',
+                    $this->getImageOptions(($this->getSubject())?$this->getSubject()->getSponsorImageSmall():false, 'sponsor_preview', array(
+                        'required'  => false,
+                        'help'      => 'Preferred size (width: 82px , height: 82px)',
+                        'label'     => 'Small sponsor image'
+                    ))
+                )
             ->end()
             ->with('Medias')
                 ->add('medias', 'sonata_type_collection',
@@ -139,11 +135,7 @@ class NewsAdmin extends Admin
     {
         if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if ($media && $media->getMedia()) {
-                    $media->setNews($object);
-                } else {
-                    $object->removeMedia($media);
-                }
+                $media->setNews($object);
             }
         }
     }
@@ -152,13 +144,8 @@ class NewsAdmin extends Admin
     {
         if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if ($media && $media->getMedia()) {
-                    $media->setNews($object);
-                } else {
-                    $object->removeMedia($media);
-                }
+                $media->setNews($object);
             }
         }
     }
-
 }

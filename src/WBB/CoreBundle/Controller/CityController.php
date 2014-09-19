@@ -138,11 +138,6 @@ class CityController extends Controller
             $suburbSlug= null;
         if ($citySlug != "") {
             $city = $this->container->get('city.repository')->findOneBySlug($citySlug);
-
-            //$suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
-            //if ($suburbID == 0)
-            //  $suburb = $this->container->get('suburb.repository')->findOneById($suburbID);
-            //else
             $suburb = null;
             if ($suburbSlug)
                 $suburb = $this->container->get('suburb.repository')->findOneBySlug($suburbSlug);
@@ -217,10 +212,9 @@ class CityController extends Controller
 
     private function barFirstImage($bar, Request $request)
     {
-        $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
         $medias = $bar->getMedias();
         foreach ($medias as $media) {
-            return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'bar_640_480');
+            return $this->get('liip_imagine.cache.manager')->getBrowserPath($media->getMedia(), 'bar_640_480');
         }
 
         return null;

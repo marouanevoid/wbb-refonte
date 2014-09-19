@@ -1,4 +1,3 @@
-
 /* The Namespace of the project */
 var wbb = wbb || {};
 
@@ -26,6 +25,18 @@ wbb.CitiesPage = function () {
     that.max_zoom_level_for_bars = 11;
     that.timer = false;
 
+    /*
+        Resize Scroll
+    */
+    that.updateScroll = function(){
+        if( ismobile || istablet )
+            return;
+        $('.custom-scroll').each(function() {
+            var api = $(this).data('jsp');
+            if (typeof(api) != "undefined" && $(this).is(':visible')) api.reinitialise();
+        });
+    }
+
     /* Search the bars after submitting */
     that._searchBars = function( city_slug, neighborhood_id )
     {
@@ -50,9 +61,13 @@ wbb.CitiesPage = function () {
                                             {
                                                 if(data.code == 200 && callback)
                                                     callback(data.neighborhoods, data.bars, data.city);
+                                                    that.updateScroll();
                                             },
                                             beforeSend: function()
                                             {
+                                                // update scroll
+                                                that.updateScroll();
+
                                                 if (that.context.ajaxRequest != null)
                                                     that.context.ajaxRequest.abort();
                                             }
@@ -92,7 +107,19 @@ wbb.CitiesPage = function () {
                 $scrollBars.find('ul').html(html);
             else
                 $scrollBars.find('ul').html("No results");
-            /////api.scrollToY(0, false);
+            //api.scrollToY(0, false);
+
+            /*
+            * update Scroll
+            ***/
+            $('.custom-scroll').each(function() {
+                var api = $(this).data('jsp');
+                if (typeof(api) != "undefined" && $(this).is(':visible')) api.reinitialise();
+            });
+
+            /*
+            * end update Scroll
+            **/
 
 
             //$scrollBars.velocity('fadeIn', { duration: that.config.speed});
@@ -294,7 +321,13 @@ wbb.CitiesPage = function () {
 
 
         that.context.$container.find('form input[type=reset]').click(function(e)
-        {
+        {   
+            //// added by Khalid 
+            /// rest the neighborhood_id to -1
+            // When we back to cities
+            that.context.neighborhood_id = -1
+            /// end added by Khalid //
+
             that._backToCities(true);
             window.router_app.navigate( "/" , {trigger : false});
         });
@@ -500,8 +533,11 @@ wbb.CitiesPage = function () {
                                             {
                                                 if(data.code == 200 && callback)
                                                     callback(query, data.cities);
+                                                    that.updateScroll();
                                             }, beforeSend: function()
                                             {
+                                                // update scroll
+                                                that.updateScroll();
                                                 if (that.context.ajaxRequest != null)
                                                     that.context.ajaxRequest.abort();
                                             }
@@ -565,7 +601,7 @@ wbb.CitiesPage = function () {
         if( that.context.$container.find('select[name=neighborhood]').length ) return;
 
         var html = '<select name="neighborhood" class="ui-dropdown">';
-        html += '<option value="-1">All</option>';
+        html += '<option value="-1">All neighborhoods</option>';
         $.each(neighborhoods, function(index, neighborhood)
         {
             html += '<option value="'+neighborhood.slug+'">'+neighborhood.name+'</option>';
@@ -575,6 +611,13 @@ wbb.CitiesPage = function () {
         that.context.$container.find('form').append(html);
 
         initializeDropdowns();
+
+
+        // update select 2 on desktop
+        // $('select.select2-dropdown.city-page-select').select2({
+        //      minimumResultsForSearch: -1
+        // });
+        // end update select 2
 
         // Initialize Selector  on drop down list
         // Script Injection for Select UI

@@ -314,11 +314,7 @@ class BarAdmin extends Admin
     {
         if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if ($media && $media->getMedia()) {
-                    $media->setBar($object);
-                } else {
-                    $object->removeMedia($media);
-                }
+                $media->setBar($object);
             }
         }
 
@@ -345,13 +341,10 @@ class BarAdmin extends Admin
 
     public function preUpdate($object)
     {
+
         if ($object->getMedias()) {
             foreach ($object->getMedias() as $media) {
-                if ($media && $media->getMedia()) {
-                    $media->setBar($object);
-                } else {
-                    $object->removeMedia($media);
-                }
+                $media->setBar($object);
             }
         }
 

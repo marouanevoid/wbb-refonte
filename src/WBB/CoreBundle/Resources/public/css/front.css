@@ -3990,7 +3990,8 @@ article.bar-wo-pic .gradient, article.bar-wo-pic .tags, article.bar-wo-pic img.s
 @media only screen and (max-width: 768px) {
   /* line 35, ../sass/components/_bar-w-pic.scss */
   .bar-w-pic .btn-round.star.active:before {
-    background-position: -80px -120px;
+    /*background-position: -80px -120px;*/
+    background-position: -160px -240px;
   }
 }
 

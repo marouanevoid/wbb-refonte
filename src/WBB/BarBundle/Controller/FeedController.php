@@ -112,7 +112,6 @@ class FeedController extends Controller
         $nbResults  = count($tips);
         $difference = count($all) - count($tips);
         $FsTips = array();
-        $pass = false;
         $excludedCount = 0;
         if (($nbResults < $limit) && !is_null($bar->getFoursquare()) && $bar->getFoursquare() != "") {
 

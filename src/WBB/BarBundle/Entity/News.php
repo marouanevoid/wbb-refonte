@@ -8,13 +8,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use WBB\CoreBundle\Entity\City;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * News
  *
  * @ORM\Table(name="wbb_news")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\NewsRepository")
+ * @Vich\Uploadable
  */
-
 class News implements IndexableEntity
 {
 
@@ -125,14 +128,126 @@ class News implements IndexableEntity
     private $sponsor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @Vich\UploadableField(mapping="sponsor_image", fileNameProperty="sponsorImage")
+     * @Assert\Image(
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
+     * )
+     * @var File $sponsorFile
      */
-    private $sponsorImage;
+    protected $sponsorFile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\Column(type="string", length=255, name="sponsor_image_name", nullable=true)
+     *
+     * @var string $sponsorImageName
      */
-    private $sponsorImageSmall;
+    protected $sponsorImage;
+
+    /**
+     * @Vich\UploadableField(mapping="sponsor_small_image", fileNameProperty="sponsorImageSmall")
+     * @Assert\Image(
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
+     * )
+     * @var File $sponsorSmallFile
+     */
+    protected $sponsorSmallFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="sponsor_small_image_name", nullable=true)
+     *
+     * @var string $sponsorImageName
+     */
+    protected $sponsorImageSmall;
+
+    /// Getters and Setter for image upload
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setSponsorFile(File $image)
+    {
+        $this->sponsorFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getSponsorFile()
+    {
+        return $this->sponsorFile;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setSponsorSmallFile(File $image)
+    {
+        $this->sponsorSmallFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getSponsorSmallFile()
+    {
+        return $this->sponsorSmallFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setSponsorImage($imageName)
+    {
+        $this->sponsorImage = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSponsorImage()
+    {
+        return $this->sponsorImage;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setSponsorImageSmall($imageName)
+    {
+        $this->sponsorImageSmall = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSponsorImageSmall()
+    {
+        return $this->sponsorImageSmall;
+    }
+    //// end getters and setters
 
     /**
      * @var \DateTime
@@ -513,29 +628,6 @@ class News implements IndexableEntity
     }
 
     /**
-     * Set sponsorImage
-     *
-     * @param  string $sponsorImage
-     * @return News
-     */
-    public function setSponsorImage($sponsorImage)
-    {
-        $this->sponsorImage = $sponsorImage;
-
-        return $this;
-    }
-
-    /**
-     * Get sponsorImage
-     *
-     * @return Media
-     */
-    public function getSponsorImage()
-    {
-        return $this->sponsorImage;
-    }
-
-    /**
      * Set createdAt
      *
      * @param  \DateTime $createdAt
@@ -608,8 +700,7 @@ class News implements IndexableEntity
     {
         $medias = $this->getMedias();
         foreach ($medias as $media) {
-            if($media->getMedia()->getProviderName() === "sonata.media.provider.youtube")
-
+            if($media->getYoutube())
                 return $media;
         }
 
@@ -640,29 +731,6 @@ class News implements IndexableEntity
         }
 
         return $ids;
-    }
-
-    /**
-     * Set sponsorImageSmall
-     *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall
-     * @return News
-     */
-    public function setSponsorImageSmall(\Application\Sonata\MediaBundle\Entity\Media $sponsorImageSmall = null)
-    {
-        $this->sponsorImageSmall = $sponsorImageSmall;
-
-        return $this;
-    }
-
-    /**
-     * Get sponsorImageSmall
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getSponsorImageSmall()
-    {
-        return $this->sponsorImageSmall;
     }
 
     /**

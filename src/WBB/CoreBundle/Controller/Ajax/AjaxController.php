@@ -91,4 +91,18 @@ class AjaxController extends Controller
 
         return new JsonResponse($html);
     }
+
+    //Add a row to Medias Collections
+    public function addCollectionRowAction($entity, $adminID, $index)
+    {
+        $template = "WBBCoreBundle:Admin/CRUD:sonata_bar_media_collection_row.html.twig";
+        if($entity == 'news'){
+            $template = "WBBCoreBundle:Admin/CRUD:sonata_news_media_collection_row.html.twig";
+        }
+
+        return $this->render($template, array(
+            'index'     => $index,
+            'adminID'   => $adminID
+        ));
+    }
 }

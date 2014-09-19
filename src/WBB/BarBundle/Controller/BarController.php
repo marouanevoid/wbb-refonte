@@ -335,7 +335,7 @@ class BarController extends Controller
             'casual'    => 'Casual',
             'party'     => 'Party'
         );
-//        $moods          = $this->container->get('tag.repository')->findByType(Tag::WBB_TAG_TYPE_ENERGY_LEVEL, null, 3);
+
         $cities         = $this->container->get('city.repository')->findBarFinderCities($city);
 
         return $this->render('WBBBarBundle:BarFinder:barFinderForm.html.twig', array(
@@ -400,76 +400,6 @@ class BarController extends Controller
         ));
     }
 
-    public function bestOfAction($bestOfSlug, $citySlug = false)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $bestOf = $em->getRepository('WBBBarBundle:BestOf')->findOneBySlug($bestOfSlug);
-        $bestOfs = array();
-        $bars = null;
-        $byCity = ($citySlug)? true : null;
-
-        if (!$bestOf) {
-            // TODO Does not work !
-            $this->createNotFoundException('Not found !');
-        }
-
-        foreach ($bestOf->getBestofs() as $bo) {
-            $bestOfs[] = $bo;
-        }
-
-        $bestofsCount = count($bestOfs);
-
-        if ($bestofsCount < 3) {
-            $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount));
-            $bestofsCount += count($bestOfsTmp);
-            foreach ($bestOfsTmp as $bo) {
-                $bestOfs[] = $bo;
-            }
-            if ($bestofsCount < 3) {
-                $bestOfsTmp = $this->get('bestof.repository')->findYouMayAlsoLike($bestOf, $byCity, (3 - $bestofsCount), false, $bestOfsTmp);
-                foreach ($bestOfsTmp as $bo) {
-                    $bestOfs[] = $bo;
-                }
-            }
-        }
-
-        if ($bestOf->getByTag()) {
-            $barsTmp = $this->container->get('bar.repository')->findBarsByExactTags($bestOf);
-            foreach ($barsTmp as $bar) {
-                $bars[] = $bar;
-            }
-        } else {
-            foreach ($bestOf->getBars() as $bar) {
-                $bars[] = $bar;
-            }
-        }
-
-        if (!$bestOf->getOrdered() && $bars) {
-            shuffle($bars);
-        }
-
-        $session = $this->container->get('session');
-        $latitude  = $session->get('userLatitude');
-        $longitude = $session->get('userLongitude');
-        $distance = false;
-
-        if (!empty($latitude) && !empty($longitude) && ($citySlug != $session->get('citySlug'))) {
-            $distance  = array(
-                'latitude'  => $latitude,
-                'longitude' => $longitude,
-                'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
-            );
-        }
-
-        return $this->render('WBBBarBundle:BestOf:details_global.html.twig',
-            array(
-                'bestOf'    => $bestOf,
-                'bestofs'   => $bestOfs,
-                'bars'      => $bars,
-                'distance'  => $distance
-            ));
-    }
-
     // Returns a list of filtred bars or bestofs (used also for "see more bars/bestofs")
     public function barGuideFilterAction($barsOnly = 1, $city = 0, $filter = "popularity" , $offset = 0, $limit = 8, $display = 'grid')
     {
@@ -525,7 +455,6 @@ class BarController extends Controller
 
         } else {
             if ($filter === "popularity") {
-                //TODO: Repository methode for popularity
                 $response = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, $limit);
                 $all = $this->container->get('bestof.repository')->findPopularBestofs($cityObject, $offset, 0);
             } elseif ($filter === "alphabetical") {
@@ -661,16 +590,5 @@ class BarController extends Controller
             'bars'      =>  $youMayAlsoLike,
             'oneCity'   =>  $oneCity
         );
-    }
-
-    private function getBarFinderMoods()
-    {
-        $moodsFound = $this->container->get('tag.repository')->findBarFinderMoods();
-        $moods = array();
-        foreach ($moodsFound as $mood) {
-            $moods[] = $mood['name'];
-        }
-
-        return $moods;
     }
 }

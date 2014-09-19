@@ -43,7 +43,7 @@ class FavoriteExtension extends \Twig_Extension
 
     public function getFavoriteUrl($user, $object)
     {
-        if ($object instanceof Bar) {
+        if ($object instanceof Bar && $object->getId()) {
             return $this->barFavoriteUrl($user, $object);
         } elseif ($object instanceof BestOf) {
             return $this->bestOfFavoriteUrl($user, $object);
@@ -52,7 +52,7 @@ class FavoriteExtension extends \Twig_Extension
 
     public function isFavorite($user, $object)
     {
-        if ($object instanceof Bar) {
+        if ($object instanceof Bar && $object->getId()) {
             return $this->isBarFavorite($user, $object);
         } elseif ($object instanceof BestOf) {
             return $this->isBestOfFavorite($user, $object);
