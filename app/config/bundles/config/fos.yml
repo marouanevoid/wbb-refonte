@@ -1,0 +1,26 @@
+# FOS UserBundle config
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: WBB\UserBundle\Entity\User
+    registration:
+        confirmation: { enabled: true, template: WBBUserBundle:User:confirmation.email.html.twig }
+        form:
+            type: wbb_user_registration
+            validation_groups:  [Registration, Default, registration_full, registration_fb]
+    profile:
+        form:
+            type: wbb_user_profile
+            validation_groups:  [Default, registration_full, Profile, profile_light]
+    change_password:
+        form:
+            type: wbb_user_change_password
+            validation_groups:  [ChangePassword, Default]
+    from_email:
+        address:        %mailer_email%
+        sender_name:    %mailer_username%
+    resetting:
+        email:
+            template: WBBUserBundle:User:resetting.email.html.twig
+    service:
+        mailer: fos_user.mailer.twig_swift

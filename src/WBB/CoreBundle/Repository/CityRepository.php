@@ -14,9 +14,9 @@ class CityRepository extends EntityRepository
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
-            ->select($this->getAlias().', cn, ci')
+            ->select($this->getAlias().', cn')
             ->leftJoin($this->getAlias().'.country', 'cn')
-            ->leftJoin($this->getAlias().'.image', 'ci')
+//            ->leftJoin($this->getAlias().'.image', 'ci')
             ->where($qb->expr()->eq($this->getAlias().'.onTopCity', $qb->expr()->literal(true)))
         ;
 
@@ -27,9 +27,9 @@ class CityRepository extends EntityRepository
     {
         $qb = $this->createQuerybuilder($this->getAlias());
         $qb
-            ->select($this->getAlias().', cn, ci')
+            ->select($this->getAlias().', cn')
             ->leftJoin($this->getAlias().'.country', 'cn')
-            ->leftJoin($this->getAlias().'.image', 'ci')
+//            ->leftJoin($this->getAlias().'.image', 'ci')
             ->orderBy($this->getAlias().'.name')
         ;
 

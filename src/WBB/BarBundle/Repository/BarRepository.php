@@ -23,11 +23,12 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias().", c, su, bm, m, ops")
+//            ->select($this->getAlias().", c, su, bm, m, ops")
+            ->select($this->getAlias().", c, su, ops")
             ->leftJoin($this->getAlias().'.city', 'c')
             ->leftJoin($this->getAlias().'.suburb', 'su')
-            ->leftJoin($this->getAlias().'.medias', 'bm')
-            ->leftJoin('bm.media', 'm')
+//            ->leftJoin($this->getAlias().'.medias', 'bm')
+//            ->leftJoin('bm.media', 'm')
             ->leftJoin($this->getAlias().'.openings', 'ops')
             ->where($qb->expr()->eq($this->getAlias().'.status', $qb->expr()->literal(Bar::BAR_STATUS_ENABLED_VALUE)))
             ->andWhere($qb->expr()->like($this->getAlias().'.slug', $qb->expr()->literal($slug)))
@@ -86,11 +87,12 @@ class BarRepository extends EntityRepository
         $qb = $this->createQuerybuilder($this->getAlias());
 
         $qb
-            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips, COUNT(uf) as HIDDEN nbFavoris, c, su, bm, m")
+//            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips, COUNT(uf) as HIDDEN nbFavoris, c, su, bm, m")
+            ->select($this->getAlias().", COUNT(tp) AS HIDDEN nbTips, COUNT(uf) as HIDDEN nbFavoris, c, su")
             ->leftJoin($this->getAlias().'.city', 'c')
             ->leftJoin($this->getAlias().'.suburb', 'su')
-            ->leftJoin($this->getAlias().'.medias', 'bm')
-            ->leftJoin('bm.media', 'm')
+//            ->leftJoin($this->getAlias().'.medias', 'bm')
+//            ->leftJoin('bm.media', 'm')
             ->leftJoin($this->getAlias().'.tips', 'tp', 'WITH', 'tp.status ='. $qb->expr()->literal(1))
             ->leftJoin($this->getAlias().'.usersFavorite', 'uf')
             ->addSelect('el, tgw')
