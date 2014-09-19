@@ -229,6 +229,7 @@ meta.Search = function(config){
         },
         success  :function(data){
             // Hide Loader 
+            _gaq.push(['_trackEvent', 'Search', 'Search Query', q]);
             $('.bar-finder .search-mode .btn-round.close').removeClass('loading');
             that.searchResult(data , q);
         },

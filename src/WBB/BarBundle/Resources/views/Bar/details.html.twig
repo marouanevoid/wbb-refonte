@@ -219,7 +219,7 @@
             });
 
             google.maps.event.addDomListener(window, 'resize', function() { map.setCenter(myLatlng); }); // Keeps the Pin Central when resizing the browser on responsive sites
-            $('#gmap').append('<div class="get-directions h4"><a href="https://www.google.fr/maps/dir//{{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a></div>')
+            $('#gmap').append('<div class="get-directions h4"><a onclick="_gaq.push([\'_trackEvent\', \'Bar Contact\', \'Get Directions\', \'{{ bar.name }}\']);" href="https://www.google.fr/maps/dir//{{ bar.latitude }},{{ bar.longitude }}" class="btn-small-radius border brown" target="_blank">Get Directions</a></div>')
         }
         google.maps.event.addDomListener(window, 'load', initialise); // Execute our 'initialise' function once the page has loaded.
     </script>
@@ -261,14 +261,14 @@
                 <div class="social-share {% if is_mobile() and not is_tablet() %}no-radius-max{% else %}radius-max{% endif %}">
                     <div class="share-label left bold">SHARE</div>
                     <ul>
-                        <li class="left"><a href="#0" class="fb-share">Post</a></li>
-                        <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
+                        <li class="left"><a onclick="_gaq.push(['_trackEvent', 'Share', 'Facebook share', '{{ bar.name }}']);" href="#0" class="fb-share">Post</a></li>
+                        <li class="left"><a onclick="_gaq.push(['_trackEvent', 'Share', 'Twitter Share', '{{ bar.name }}']);" href="#0" class="twitter-share">Tweet</a></li>
                         {% if is_mobile() and not is_tablet() and not is_ios() %}
                             {%  set smsBody = "I just discovered "~ bar.name ~" in "~ bar.city ~" thanks to www.worldsbestbars.com - the ultimate resource for the best bars in the world %0a Click here to check this bar: " ~ bitlyURL %}
                             <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                         {% else %}
                             <li class="left">
-                                <a href="#0" data-href="{% if bar.id %}{{ path('wbb_share_email_form', {id: bar.id, type: 'bar'}) }}{% endif %}" class="email-share">
+                                <a onclick="_gaq.push(['_trackEvent', 'Share', 'Email Share', '{{ bar.name }}']);" href="#0" data-href="{% if bar.id %}{{ path('wbb_share_email_form', {id: bar.id, type: 'bar'}) }}{% endif %}" class="email-share">
                                     Email
                                 </a>
                             </li>
@@ -452,9 +452,9 @@
                                 Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                                 Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                                 {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
-                                Price: <span itemprop="priceRange">{% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %}</span> {% if bar.menu %}<a href="{{ bar.menu }}" itemprop="menu" target="_blank">(View menu)</a>{% endif %}<br/>
+                                Price: <span itemprop="priceRange">{% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %}</span> {% if bar.menu %}<a onclick="_gaq.push(['_trackEvent', 'Bar Contact', 'View Menu', '{{ bar.name }}']);" href="{{ bar.menu }}" itemprop="menu" target="_blank">(View menu)</a>{% endif %}<br/>
                                 Reservation: <span itemprop="acceptsReservations">{% if bar.isReservation %}Yes{% else %}No{% endif %}</span><br/>
-                                {% if bar.reservation %}<a href="{{ bar.reservation }}" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
+                                {% if bar.reservation %}<a href="{{ bar.reservation }}" onclick="_gaq.push(['_trackEvent', 'Bar Contact', 'Make a reservation', '{{ bar.name }}']);" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
                             </div>
                         </div>
                     </div>

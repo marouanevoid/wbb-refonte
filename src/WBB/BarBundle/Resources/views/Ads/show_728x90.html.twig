@@ -4,7 +4,7 @@
         <div class="container align-center">
             <div class="twelve columns">
                 <hr/>
-                {% if ad.link is not empty %}<a href="{{ ad.link }}" target="_blank" rel="nofollow">{% endif %}
+                {% if ad.link is not empty %}<a onclick="_gaq.push(['_trackEvent', 'Ads', 'Ads click', '{{ ad.tag }}']);" href="{{ ad.link }}" target="_blank" rel="nofollow">{% endif %}
                     <img class="m-margin" src="{{ showImage(ad.image, 'ads_728_90') }}" alt="{{ ad.name }}" width="728" height="90"/>
                 {% if ad.link is not empty %}</a>{% endif %}
             </div>

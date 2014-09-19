@@ -183,14 +183,14 @@
             <div class="social-share {% if is_mobile() and not is_tablet() %}no-radius-max{% else %}radius-max{% endif %}">
                 <div class="share-label left bold">SHARE</div>
                 <ul>
-                    <li class="left"><a href="#0" class="fb-share">Post</a></li>
-                    <li class="left"><a href="#0" class="twitter-share">Tweet</a></li>
+                    <li class="left"><a onclick="_gaq.push(['_trackEvent', 'Share', 'Facebook share', '{{ news.title }}']);" href="#0" class="fb-share">Post</a></li>
+                    <li class="left"><a onclick="_gaq.push(['_trackEvent', 'Share', 'Twitter Share', '{{ news.title }}']);" href="#0" class="twitter-share">Tweet</a></li>
                     {% if is_mobile() and not is_tablet() and not is_ios() %}
                         {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world %0a Click here to check this news : " ~ bitlyURL  %}
                         <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                     {% else %}
                         <li class="left">
-                            <a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">
+                            <a href="#0" onclick="_gaq.push(['_trackEvent', 'Share', 'Email Share', '{{ news.title }}']);" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">
                                 Email
                             </a>
                         </li>
@@ -262,9 +262,9 @@
                             <hr />
                             <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
                             <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} margin-top-20">
-                                <a href="#0" class="fb-share">Post</a>
-                                <a href="#0" class="twitter-share">Tweet</a>
-                                <a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a>
+                                <a href="#0" onclick="_gaq.push(['_trackEvent', 'Share', 'Facebook share', '{{ news.title }}']);" class="fb-share">Post</a>
+                                <a href="#0" onclick="_gaq.push(['_trackEvent', 'Share', 'Twitter Share', '{{ news.title }}']);" class="twitter-share">Tweet</a>
+                                <a href="#0" onclick="_gaq.push(['_trackEvent', 'Share', 'Email Share', '{{ news.title }}']);" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a>
                             </div>
                         </div>
                     {% endif %}
@@ -275,13 +275,13 @@
                         <h2 class="m-margin-top {% if is_mobile() and not is_tablet() %}align-center{% endif %} bold">SHARE THIS NEWS</h2>
                         <div class="social-share {% if is_mobile() and not is_tablet() %}align-center{% endif %} s-margin-top">
                             <ul>
-                                <li><a href="#0" class="fb-share">Post</a></li>
-                                <li><a href="#0" class="twitter-share">Tweet</a></li>
+                                <li><a href="#0" onclick="_gaq.push(['_trackEvent', 'Share', 'Facebook share', '{{ news.title }}']);" class="fb-share">Post</a></li>
+                                <li><a href="#0" onclick="_gaq.push(['_trackEvent', 'Share', 'Twitter Share', '{{ news.title }}']);" class="twitter-share">Tweet</a></li>
                                 {% if is_mobile() and not is_tablet() and not is_ios() %}
                                     {%  set smsBody = "I just read this on World’s Best Bars:  "~ news.title ~" - the ultimate resource for the best bars in the world Click here to check this news : " ~ bitlyURL  %}
                                     <li class="left"><a href="sms:?body={{ smsBody }}" id="smsWindow" class="sms-share">SMS</a></li>
                                 {% else %}
-                                    <li class="left"><a href="#0" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a></li>
+                                    <li class="left"><a href="#0" onclick="_gaq.push(['_trackEvent', 'Share', 'Email Share', '{{ news.title }}']);" data-href="{{ path('wbb_share_email_form', {id: news.id, type: 'news'}) }}" class="email-share">Email</a></li>
                                 {% endif %}
                             </ul>
                         </div>

@@ -120,7 +120,7 @@
                             <a href="{{ path('wbb_cities') }}">
                                 <img src="{{ asset('bundles/wbbcore/images/icons/pin.border.png') }}" alt="pin.border" width="12" height="16"/>
                             </a>
-                            <a class="search" href="#0">
+                            <a onclick="_gaq.push(['_trackEvent', 'Search', 'Open Search', '']);" class="search" href="#0">
                                 <img src="{{ asset('bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
                             </a>
                         </td>
@@ -175,7 +175,7 @@
                                     Bar Finder
                                 </a>
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
-                                <a class="search" href="#0">
+                                <a onclick="_gaq.push(['_trackEvent', 'Search', 'Open Search', '']);" class="search" href="#0">
                                     <img src="{{ asset('bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
                                 </a>
                             </div>
