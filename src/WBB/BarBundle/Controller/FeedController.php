@@ -18,16 +18,17 @@ class FeedController extends Controller
      * @param $type
      * @param $barSlug
      * @param  int $offset
+     * @param int $limit
      *
      * @return JsonResponse
      */
-    public function showAction($type, $barSlug, $offset = 0)
+    public function showAction($type, $barSlug, $offset = 0, $limit = 5)
     {
         $bar = $this->get('bar.repository')->findOneBySlug($barSlug);
         if (!$bar) {
             return new JsonResponse(null);
         } else {
-            return new JsonResponse($this->get("wbb.{$type}.feed")->showList($bar, $offset));
+            return new JsonResponse(array('data'=>$this->get("wbb.{$type}.feed")->showList($bar, $offset)));
         }
     }
 

@@ -59,8 +59,8 @@ wbb_bar_feeds_find:
         expose: true
 
 wbb_bar_feeds_show:
-    pattern:  /feed/show/{type}/{barSlug}/{offset}
-    defaults: { _controller: WBBBarBundle:Feed:find, offset: 0 }
+    pattern:  /feed/show/{type}/{barSlug}/{offset}/{limit}
+    defaults: { _controller: WBBBarBundle:Feed:show, offset: 0, limit: 5 }
     options:
         expose: true
 

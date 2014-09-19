@@ -54,10 +54,11 @@ interface FeedInterface
     /**
      * showList
      * @param  \WBB\BarBundle\Entity\Bar $bar
-     * @param $limit
+     * @param $offset
+     * @param int $limit
      * @return array
      */
-    public function showList(Bar $bar, $limit);
+    public function showList(Bar $bar, $offset, $limit = 5);
 
 
 }

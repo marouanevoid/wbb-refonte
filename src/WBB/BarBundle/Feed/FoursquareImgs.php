@@ -118,18 +118,30 @@ class FoursquareImgs implements FeedInterface
     /**
      * showList
      * @param  \WBB\BarBundle\Entity\Bar $bar
-     * @param $limit
+     * @param $offset
+     * @param int $limit
      * @return array
      */
-    public function showList(Bar $bar, $limit)
+    public function showList(Bar $bar, $offset, $limit = 5)
     {
         $selected = $bar->getFsSelectedImgs();
-        $imgs = array();
-        foreach($selected as $hash)
-        {
-            $imgs[] = $this->findByHash($hash);
-        }
 
+        $imgs = array();
+        $index = 0;
+        $next = 0;
+        $recursive = 0;
+
+        do {
+            $fsImgsList = $this->find($bar->getFoursquare(), $next);
+            foreach($fsImgsList['data'] as $img){
+                if(in_array($img['id'], $selected)){
+                    $imgs[] = $img;
+                    $index++;
+                }
+            }
+            $recursive++;
+            $next = 30 * $recursive;
+        } while (($index < $limit) && $recursive < 5);
         return $imgs;
     }
 }
