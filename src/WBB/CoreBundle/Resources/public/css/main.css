@@ -1,5 +1,5 @@
 /* Begin : 04 / 07 / 2014; */
-/* End : -- / -- / 2014 */
+/* End : -- / 09 / 2014 */
 
 .btn-radius.with-icon.chill:before {
     background-position: -52px -200px;
@@ -457,7 +457,7 @@
       #page-standard.mobile .min-height {padding: 0 20px;}
 
 /* SHARE Tooltips */
-  .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
+  .wrap-share {width: 388px; position: absolute; top: 25px; right: 0; background-color: #ffffff; z-index: 77;}
   .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px; background-color: #ffffff;}
   .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}
   .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
@@ -606,6 +606,7 @@
   .bar-details .ui-slider.type-bar-detail .arrows a {border: 1px solid #b3955f;}
   .bar-details .ui-slider.type-bar-detail .arrows a.right {border-left: none!important;}
   .bar-details .ui-slider .arrows a.disabled {opacity: 0.7;}
+  .bar-w-pic .txt .hover .tags:before {background-size: 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -661,8 +662,21 @@
     #register.page #create-account .form-text-without-label input {width: 300px;}
     #editprofile #edit-account .form-text {width: 300px;}
     #editprofile #edit-account .form-text-without-label input {width: 300px;}
-    header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;}
-    header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
+    header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;
+      -webkit-transition: webkit-transform .5s;
+      -moz-transition: moz-transform .5s;
+      -o-transition: o-transform .5s;
+      transition: transform .5s;
+    }
+    header.desktop .bar-finder .normal-mode .search:hover {display: inline-block;
+      -webkit-transition: transform .5s;
+      -moz-transition: transform .5s;
+      -o-transition: transform .5s;
+      transition: transform .5s;
+      -webkit-transform: -webkit-scale(1.2); 
+      -moz-transform: -moz-scale(1.2);
+      -o-transform: -o-scale(1.2);
+      transform: scale(1.2); }
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}

@@ -37,14 +37,15 @@
 /* SPRITES */
 .select2-container.finder-city .select2-chosen:before			{background-position: -212px 0px;}
 .select2-container.with-icon.friend .select2-chosen:before 		{background-position: -12px -200px;}			
+.select2-container.select2-dropdown-open .select2-chosen:before {background-position: -212px -40px;}			
 
 /* DARK STYLE */
 .select2-drop.dark.select2-drop-above.select2-drop-active		{border-color: #6f7072;}
 .select2-display-none.dark 										{background-color: #6f7072; color: #ffe4af; border-color: #6f7072;}
 .select2-drop.dark .select2-results li							{color: #ffe4af;}
 .select2-drop.dark .select2-results .select2-highlighted		{color: #fff;}
-.select2-drop.dark input[type="text"] 							{background-color: transparent; color: #fff;}
-.select2-container.select2-dropdown-open.dark .select2-choice 	{background-color: #6f7072; border-color: transparent;}
+.select2-drop.dark input[type="text"] 							{background-color: transparent; color: #ffe4af; border-color: #ffe4af;}
+.select2-container.select2-dropdown-open.dark .select2-choice 	{color: #ffe4af!important; background-color: #6f7072; border-color: transparent;}
 .select2-drop.dark .select2-results .select2-no-results	 		{background: transparent;}
 
 /* SEARCH STYLE */
