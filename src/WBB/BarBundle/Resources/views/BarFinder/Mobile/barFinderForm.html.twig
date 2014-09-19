@@ -67,12 +67,8 @@
                         {% for moodSlug, mood in moods %}
                             <li class="left">
                                 <div class="form-radio">
-                                    <input type="radio" name="mood" data-value="{{ mood |lower }}" value="{{ mood }}"
-                                           class="ui-radio {{ moodSlug |lower }} dark with-icon text-transform-capitalize trigger-handler"
-                                            {% if selected.mood|lower ==  mood|lower %} checked="checked" {% endif %}
-                                           data-color="brown">
 
-                                    <input type="radio" name="mood" data-index="{{ curostIndex }}" data-value="{{ mood |lower }}"
+                                    <input type="radio" name="mood" data-index="{{ loop.index }}" data-value="{{ mood |lower }}"
                                            value="{{ mood |lower }}" class="mood-item {{ moodSlug |lower }} trigger-handler ui-radio dark with-icon"
                                            data-color="brown"
                                             {% if selected.mood|lower ==  mood|lower %} checked="checked" {% endif %}
