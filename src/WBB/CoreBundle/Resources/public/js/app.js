@@ -1,13 +1,7 @@
 /**
  * Application
  *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
- *
- * License: GPL
- * Version: 1.0
- *
+ * Copyright (c) 2014 - VOID
  * Requires:
  *   - jQuery
  *
