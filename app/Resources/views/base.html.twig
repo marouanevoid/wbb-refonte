@@ -62,17 +62,17 @@
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
                 '@WBBCoreBundle/Resources/public/js/libs/popin.void.js'
-                '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/utils.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/slider.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/ratio.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/loadMore.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/dropdown.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/selector.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/radio.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/search.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/form.void.js'
                 '@WBBCoreBundle/Resources/public/js/app.js'
-                '@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/tips.void.js'
                 '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
                 '@WBBCoreBundle/Resources/public/js/wbb.js'
                 '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
@@ -94,17 +94,17 @@
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/popin.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMore.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/dropdown.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/selector.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/radio.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/search.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/form.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMore.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/dropdown.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/selector.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/radio.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/search.void.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/form.void.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/app.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/tips.metabolism.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/tips.void.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
@@ -321,5 +321,13 @@
             {% include '::footer.html.twig' %}
         {% endblock %}
         {% if is_mobile() and not is_tablet() %}<div id="landscape-mobile"></div>{% endif %}
+
+        <!-- Tag Manager -->
+        <noscript>
+            <iframe src='http://dmp.pernod-ricard.com/JScript/iframe.php?container=TEROCwEHTEhdUEdR' height='0' width='0' style='display:none;visibility:hidden'>
+            </iframe>
+        </noscript>
+        <script>(function(d, s,id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'http://dmp.pernod-ricard.com/JScript/pernod-ricard-api.js?container=TEROCwEHTEhdUEdR'; fjs.parentNode.insertBefore(js, fjs.nextSibling); }(document, 'script','pdrd_'+new Date().getTime()));</script>
+        <!-- End Tag Manager -->
     </body>
 </html>

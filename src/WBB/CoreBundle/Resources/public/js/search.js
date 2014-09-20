@@ -1,9 +1,7 @@
 /**
  * Search
  *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
+ * Copyright (c) 2014 - VOID Maroc
  *
  * License: GPL
  * Version: 1.0
