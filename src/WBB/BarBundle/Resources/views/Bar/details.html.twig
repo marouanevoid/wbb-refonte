@@ -452,7 +452,7 @@
                                 Accepts <span itemprop="paymentAccepted">Credit Cards</span>: {% if bar.isCreditCard %}Yes{% else %}No{% endif %}<br/>
                                 Coat Check: {% if bar.isCoatCheck %}Yes{% else %}No{% endif %}<br/>
                                 {% if bar.parking %}Parking: {{ bar.parking }}<br/>{% endif %}
-                                Price: <span itemprop="priceRange">{% for i in 1..4 %}<span {% if i <= bar.price|number_format %}style="color:#b3955f"{% endif %}>$</span>{% endfor %}</span> {% if bar.menu %}<a onclick="_gaq.push(['_trackEvent', 'Bar Contact', 'View Menu', '{{ bar.name }}']);" href="{{ bar.menu }}" itemprop="menu" target="_blank">(View menu)</a>{% endif %}<br/>
+                                Price: <span itemprop="priceRange">{% for i in 1..4 %}{% if i <= bar.price|number_format %}<span style="color:#b3955f">$</span>{% endif %}{% endfor %}</span> {% if bar.menu %}<a onclick="_gaq.push(['_trackEvent', 'Bar Contact', 'View Menu', '{{ bar.name }}']);" href="{{ bar.menu }}" itemprop="menu" target="_blank">(View menu)</a>{% endif %}<br/>
                                 Reservation: <span itemprop="acceptsReservations">{% if bar.isReservation %}Yes{% else %}No{% endif %}</span><br/>
                                 {% if bar.reservation %}<a href="{{ bar.reservation }}" onclick="_gaq.push(['_trackEvent', 'Bar Contact', 'Make a reservation', '{{ bar.name }}']);" class="btn-small-radius border brown" target="_blank">Make a Reservation</a>{% endif %}
                             </div>

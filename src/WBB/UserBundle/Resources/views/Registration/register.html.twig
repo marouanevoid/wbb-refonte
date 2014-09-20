@@ -78,6 +78,9 @@
                                         {% else %}
                                             {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text text-align-center', 'placeholder': '' } }) }}
                                         {% endif %}
+                                        <div class="clear"></div>
+                                        <p class="block-help">Your password must contain at least a letter and a number, 6 caracters min.</p>
+
                                     </div>
                                     <div class="clear"></div>
                                 </div>
