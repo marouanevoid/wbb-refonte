@@ -36,7 +36,7 @@
 
         {% block stylesheets %}
 
-            {% stylesheets filter='uglifycss' filter="cssrewrite"
+            {% stylesheets filter='cssmin' filter="cssrewrite" output='css/main.css'
                 "bundles/wbbcore/css/select2-bootstrap.css"
                 "bundles/wbbcore/css/select2.css"
                 "bundles/wbbcore/css/custom.select2.css"
@@ -48,7 +48,7 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
-            {% javascripts filter='uglifyjs2'
+            {% javascripts filter='jsmin' output='js/main.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/select2.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'
@@ -80,35 +80,7 @@
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
-{#
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/select2.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.transform3d.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/modernizr.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.browser.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/placeholders.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.mousewheel.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/popin.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMore.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/dropdown.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/selector.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/radio.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/search.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/form.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/app.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/tips.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
-#}
+        
         {% block javascripts %}
 
         {% endblock %}

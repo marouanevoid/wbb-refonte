@@ -50,8 +50,9 @@
         "aws/aws-sdk-php": "2.6.12",
         "aequasi/cache-bundle": "2.3.*",
         "raulfraile/ladybug-plugin-symfony2": "dev-master",
-        "raulfraile/ladybug-bundle": "1.0"
-
+        "raulfraile/ladybug-bundle": "1.0",
+        "mrclay/minify": "2.2.0",
+        "natxet/CssMin": "3.0.2"
     },
     "scripts": {
         "post-install-cmd": [
