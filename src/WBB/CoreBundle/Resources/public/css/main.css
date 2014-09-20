@@ -237,6 +237,8 @@
   .ui .btn-create-with-fb:hover {opacity: 0.8;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
+  #create-account .block-help {font-size: 14px;}
+  #register .block-help {width: 300px;}
 
   /* Message's */
   #message {/*min-height: 100px;*/ background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; overflow: hidden;}
@@ -607,6 +609,7 @@
   .bar-details .ui-slider.type-bar-detail .arrows a.right {border-left: none!important;}
   .bar-details .ui-slider .arrows a.disabled {opacity: 0.7;}
   .bar-w-pic .txt .hover .tags:before {background-size: 100%;}
+  .bar-details .content aside .informations .contain .gmap .get-directions {margin-top: 40px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -663,16 +666,16 @@
     #editprofile #edit-account .form-text {width: 300px;}
     #editprofile #edit-account .form-text-without-label input {width: 300px;}
     header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;
-      -webkit-transition: webkit-transform .5s;
-      -moz-transition: moz-transform .5s;
-      -o-transition: o-transform .5s;
-      transition: transform .5s;
+      -webkit-transition: webkit-transform .5s ease;
+      -moz-transition: moz-transform .5s ease;
+      -o-transition: o-transform .5s ease;
+      transition: transform .5s ease;
     }
     header.desktop .bar-finder .normal-mode .search:hover {display: inline-block;
-      -webkit-transition: transform .5s;
-      -moz-transition: transform .5s;
-      -o-transition: transform .5s;
-      transition: transform .5s;
+      -webkit-transition: transform .5s ease;
+      -moz-transition: transform .5s ease;
+      -o-transition: transform .5s ease;
+      transition: transform .5s ease;
       -webkit-transform: -webkit-scale(1.2); 
       -moz-transform: -moz-scale(1.2);
       -o-transform: -o-scale(1.2);
