@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4201fd4dbe5d2e15a7c2f2e60ccad1fe",
+    "hash": "8880be8fc46356f0cbd737c444f5f31d",
     "packages": [
         {
             "name": "aequasi/cache-bundle",
@@ -5581,7 +5581,6 @@
         "knplabs/knp-gaufrette-bundle": 20,
         "raulfraile/ladybug-plugin-symfony2": 20
     },
-    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },
