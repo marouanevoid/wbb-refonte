@@ -488,7 +488,7 @@ meta.SearchPage = function() {
      ** Send the Request To the Server
      ***/
     that.getSearchResult = function(q, callbackHandler) {
-
+        
         // test if Result is aleady Loaded
         // By Filter
         // if(currentFilterLoaded == currentFilter){
@@ -832,6 +832,7 @@ meta.SearchPage = function() {
         });
 
         that.context.$form_filter.find('select[name=city]').change(function() {
+            _gaq.push(['_trackEvent', 'Search Details', 'City selection', $(this).find(':selected').text()]);
             that._selectCities($(this).val())
         });
 
@@ -970,6 +971,31 @@ meta.SearchPage = function() {
                 // Set the default the flag of already Loaded
                 currentFilterLoaded = "";
                 that._filterResults();
+                var type  = $(this).attr('name');
+                var val = $(this).val();
+                var vals  = [];
+                $('input[name="'+type+'"]:checked').each(function(){
+                    vals.push($(this).val());
+                });
+                var values = vals.join(' + ');
+
+                switch(type) {
+                    case 'district[]':
+                        _gaq.push(['_trackEvent', 'Search Details', 'Neigborhood selection', val]);
+                        break;
+                    case 'special[]':
+                        _gaq.push(['_trackEvent', 'Search Details', 'Special features selection', values]);
+                        break;
+                    case 'style[]':
+                        _gaq.push(['_trackEvent', 'Search Details', 'Style selection', values]);
+                        break;
+                    case 'mood[]':
+                        _gaq.push(['_trackEvent', 'Search Details', 'Mood selection', val]);
+                        break;
+                    case 'occasion[]':
+                        _gaq.push(['_trackEvent', 'Search Details', 'With Who selection', val]);
+                        break;
+                }
             }
             //$('.checkbox-container').find('label').off('click',handler).on('click' , handler);
         that.context.$form_filter.find('input[type=checkbox]').not('input[name=neigborhoods]').off('change').on('change', handler);
