@@ -157,6 +157,7 @@ meta.App = function() {
             if ($container.is(':visible')) $bar_finder.find('.finder-close').click();
             else {
                 $is_animating = true;
+                _gaq.push(['_trackEvent', 'Search', 'Open Bar Finder', '']);
 
                 $bar_finder.find('table').animate({
                     opacity: '1'
@@ -176,6 +177,7 @@ meta.App = function() {
 
         $bar_finder.find('.finder-close').click(function() {
             if ($is_animating) return;
+            _gaq.push(['_trackEvent', 'Search', 'Close Bar Finder', '']);
 
             $is_animating = true;
 

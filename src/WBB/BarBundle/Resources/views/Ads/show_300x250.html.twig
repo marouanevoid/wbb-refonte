@@ -1,7 +1,7 @@
 {% if ad.position == "BOD_300x250" %}<div class="four columns" style="display:none;">{% endif %}
     <div class="block">
-        <div class="side-ad">
-            {% if ad.link is not empty %}<a href="{{ ad.link }}" target="_blank" rel="nofollow">{% endif %}
+        <div class="side-ad" data-ad-tag="{{ ad.tag }}">
+            {% if ad.link is not empty %}<a href="{{ ad.link }}" onclick="_gaq.push(['_trackEvent', 'Ads', 'Ads click', '{{ ad.tag }}']);" target="_blank" rel="nofollow">{% endif %}
                 <img src="{{ showImage(ad.image, 'ads_300_250') }}" alt="{{ ad.name }}" width="300" height="250">
             {% if ad.link is not empty %}</a>{% endif %}
             <div class="txt">Advertising</div>
