@@ -56,7 +56,7 @@ class AppKernel extends Kernel
             //new Cybernox\AmazonWebServicesBundle\CybernoxAmazonWebServicesBundle(),
 
             //Memcached
-            new Aequasi\Bundle\CacheBundle\AequasiCacheBundle(),
+            // new Aequasi\Bundle\CacheBundle\AequasiCacheBundle(),
 
             //Ladydebug
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),

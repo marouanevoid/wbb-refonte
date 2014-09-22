@@ -11,10 +11,12 @@ use Twig_SimpleFunction;
 class ShowImageExtension extends \Twig_Extension
 {
     private $container;
+    private $bucket;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, $bucket)
     {
         $this->container = $container;
+        $this->bucket = $bucket;
     }
 
     public function getFunctions()
@@ -39,10 +41,12 @@ class ShowImageExtension extends \Twig_Extension
             $imagineService = $this->container->get('liip_imagine.cache.manager');
             $path = $imagineService->getBrowserPath($filename, $filter);
 
-//            // If the path does not exist, return the fallback image
-//            if (!@getimagesize($path) || $path == "/") {
-//                return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
-//            }
+            $originalFilePath = 'https://s3.amazonaws.com/'.$this->bucket.'/uploads/'.$this->getOriginalUploadDir($filter).'/'.$filename;
+
+            // If the path does not exist, return the fallback image
+            if (!@getimagesize($originalFilePath) || $path == "/") {
+                return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
+            }
 
             return $path;
         }
@@ -53,5 +57,42 @@ class ShowImageExtension extends \Twig_Extension
     public function getName()
     {
         return 'showImage';
+    }
+
+    private function getOriginalUploadDir($filter)
+    {
+        $formatParts = explode('_', $filter);
+
+        switch ($formatParts[0]) {
+            case "avatar":
+                return 'avatars';
+                break;
+
+            case "bar":
+                return "bars";
+                break;
+
+            case "city":
+                return "cities";
+                break;
+
+            case "bestof":
+                return "bestofs";
+                break;
+
+            case "news":
+                return "news";
+                break;
+
+            case "ads":
+                return "ads";
+                break;
+
+            case "sponsor":
+                return "sponsors";
+                break;
+        }
+
+        return '';
     }
 }

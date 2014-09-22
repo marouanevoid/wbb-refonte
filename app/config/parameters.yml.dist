@@ -50,3 +50,5 @@ parameters:
     facebook_app_secret:    81b3c56cefb95cba10460d136270736e
 
     bitly_access_token: 2dc4e633c58b8a735d59724a667ccaacc0c9b11e
+
+    google_analytics_id: UA-54115117-1

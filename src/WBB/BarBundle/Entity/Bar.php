@@ -1612,11 +1612,11 @@ class Bar implements IndexableEntity
             $response = " - ";
 
             if ($unit == "M" || $usCity) {
-                $response.= round($miles, 2)." Mi";
+                $response.= round($miles, 1)." Mi";
             } elseif ($unit == "NM") {
-                $response.= round(($miles * 0.8684), 2)." Nm";
+                $response.= round(($miles * 0.8684), 1)." Nm";
             } else {
-                $response.= round(($miles * 1.609344), 2)." Km";
+                $response.= round(($miles * 1.609344), 1)." Km";
             }
 
             return $response;

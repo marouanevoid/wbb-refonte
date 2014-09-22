@@ -1,9 +1,7 @@
 /**
  * Dropdown
  *
- * Copyright (c) 2014 - Metabolism
- * Author:
- *   - Jérome Barbato <jerome@metabolism.fr>
+ * Copyright (c) 2014 - VOID Maroc
  *
  * License: GPL
  * Version: 1.0
@@ -14,7 +12,7 @@
  **/
 
 /**
- * metabolism namespace.
+ * meta namespace.
  */
 var meta = meta || {};
 
