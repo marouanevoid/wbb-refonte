@@ -1,4 +1,4 @@
-
+<?php
 namespace WBB\BarBundle\Form\Email;
 
 use Symfony\Component\Form\AbstractType;
