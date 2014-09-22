@@ -45,9 +45,7 @@ class ProfileLightFormType extends BaseType
     protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('avatar', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context'  => 'avatar',
+            ->add('imageFile', 'file', array(
                 'required' => false
             ))
             ->add('username', null, array('required' => false))

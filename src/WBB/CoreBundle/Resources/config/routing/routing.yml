@@ -98,3 +98,7 @@ wbb_terms_and_conditions:
     defaults:
         _controller:  FrameworkBundle:Template:template
         template:     'WBBCoreBundle:Static:terms.html.twig'
+
+wbb_import_urls:
+    pattern: /admin/urls/csv/import
+    defaults: { _controller: WBBCoreBundle:RedirectUrl:importUrls }

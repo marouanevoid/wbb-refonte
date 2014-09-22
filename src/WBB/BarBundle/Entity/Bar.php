@@ -11,6 +11,7 @@ use WBB\UserBundle\Entity\User;
 use WBB\BarBundle\Entity\Collections\BarMedia;
 use JMS\Serializer\Annotation as JMS;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Bar
@@ -19,6 +20,7 @@ use WBB\CloudSearchBundle\Indexer\IndexableEntity;
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BarRepository")
  *
  * @JMS\ExclusionPolicy("all")
+ * @Vich\Uploadable
  */
 class Bar implements IndexableEntity
 {
@@ -51,7 +53,7 @@ class Bar implements IndexableEntity
     private $name;
 
     /**
-     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @Gedmo\Slug(fields={"name"}, separator="-")
      * @ORM\Column(unique=true)
      * @JMS\Expose
      */
@@ -1610,11 +1612,11 @@ class Bar implements IndexableEntity
             $response = " - ";
 
             if ($unit == "M" || $usCity) {
-                $response.= round($miles, 2)." Mi";
+                $response.= round($miles, 1)." Mi";
             } elseif ($unit == "NM") {
-                $response.= round(($miles * 0.8684), 2)." Nm";
+                $response.= round(($miles * 0.8684), 1)." Nm";
             } else {
-                $response.= round(($miles * 1.609344), 2)." Km";
+                $response.= round(($miles * 1.609344), 1)." Km";
             }
 
             return $response;

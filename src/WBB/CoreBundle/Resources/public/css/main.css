@@ -1,5 +1,5 @@
 /* Begin : 04 / 07 / 2014; */
-/* End : -- / -- / 2014 */
+/* End : -- / 09 / 2014 */
 
 .btn-radius.with-icon.chill:before {
     background-position: -52px -200px;
@@ -12,22 +12,17 @@
 /* Light reset */
   * {padding: 0; margin: 0;}
 /* Globale Tags */
-  input[type="text"], input[type="password"], input[type="email"] {
-    color: #818a8c;
-  }
+  input[type="text"], input[type="password"], input[type="email"] {color: #818a8c;}
   input[type="text"]::-webkit-input-placeholder, 
   input[type="password"]::-webkit-input-placeholder, 
   input[type="email"]::-webkit-input-placeholder,
   input[type="text"]:-moz-input-placeholder,
   input[type="password"]:-ms-input-placeholder, 
-  input[type="email"]:-ms-input-placeholder{
-    color: #818a8c;
-  }
+  input[type="email"]:-ms-input-placeholder{color: #818a8c;}
   input[type="text"]::-moz-placeholder, 
   input[type="password"]::-moz-placeholder, 
-  input[type="email"]::-moz-placeholder {
-    color: #818a8c;
-  }
+  input[type="email"]::-moz-placeholder {color: #818a8c;}
+  
 /* Globale Libs */
     form .icheckbox_flat {display: inline-block; vertical-align: middle; margin: 0;padding: 0; width: 20px; height: 21px; background: url("../images/UI/icon_checkbox.jpg") no-repeat;border: none;cursor: pointer;}
     form .icheckbox_flat {background-position: 0 0;}
@@ -242,6 +237,8 @@
   .ui .btn-create-with-fb:hover {opacity: 0.8;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
+  #create-account .block-help {font-size: 14px;}
+  #register .block-help {width: 300px;}
 
   /* Message's */
   #message {/*min-height: 100px;*/ background: url("../images/UI/warning_msg.png") no-repeat 10px center #818a8c; width: 100%; overflow: hidden;}
@@ -462,7 +459,7 @@
       #page-standard.mobile .min-height {padding: 0 20px;}
 
 /* SHARE Tooltips */
-  .wrap-share {width: 388px; position: absolute; top: 38px; right: 0; background-color: #ffffff; z-index: 77;}
+  .wrap-share {width: 388px; position: absolute; top: 25px; right: 0; background-color: #ffffff; z-index: 77;}
   .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px; background-color: #ffffff;}
   .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}
   .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
@@ -554,6 +551,8 @@
   .sub-header .title h3 {margin-top: 0; margin-bottom: 0.25em; line-height: 24px;}
   .go.disabled {background-color: #ccc !important; color: #999999; opacity: 0.29; display: none;}
   .bar-finder .ui-radio.btn-radius.with-icon:after {/*background-position: -52px -240px;*/}
+  .mobile .ui-dropdown-container .ui-dropdown.drop-dark:hover, 
+  .mobile .ui-dropdown-container .ui-dropdown.drop-dark.active {border-color: #ffe4af;}
   
   .ui-radio.radio-dark:hover,
   .select2-container.dark.active .select2-choice,
@@ -609,6 +608,8 @@
   .bar-details .ui-slider.type-bar-detail .arrows a {border: 1px solid #b3955f;}
   .bar-details .ui-slider.type-bar-detail .arrows a.right {border-left: none!important;}
   .bar-details .ui-slider .arrows a.disabled {opacity: 0.7;}
+  .bar-w-pic .txt .hover .tags:before {background-size: 100%;}
+  .bar-details .content aside .informations .contain .gmap .get-directions {margin-top: 40px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -664,8 +665,21 @@
     #register.page #create-account .form-text-without-label input {width: 300px;}
     #editprofile #edit-account .form-text {width: 300px;}
     #editprofile #edit-account .form-text-without-label input {width: 300px;}
-    header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;}
-    header.desktop .bar-finder .normal-mode .search:hover {transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); display: inline-block; }
+    header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;
+      -webkit-transition: webkit-transform .5s ease;
+      -moz-transition: moz-transform .5s ease;
+      -o-transition: o-transform .5s ease;
+      transition: transform .5s ease;
+    }
+    header.desktop .bar-finder .normal-mode .search:hover {display: inline-block;
+      -webkit-transition: transform .5s ease;
+      -moz-transition: transform .5s ease;
+      -o-transition: transform .5s ease;
+      transition: transform .5s ease;
+      -webkit-transform: -webkit-scale(1.2); 
+      -moz-transform: -moz-scale(1.2);
+      -o-transform: -o-scale(1.2);
+      transform: scale(1.2); }
     #view-account .filter-profil {width: 590px;}
     #view-account .filter-profil a.ui-radio {width: 140px;}
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}

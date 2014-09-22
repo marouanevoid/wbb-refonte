@@ -38,6 +38,18 @@ $(document).ready(function() {
         $.removeCookie('light_name');
     }
 
+    $('.side-ad').each(function() {
+        if ($(this).is(':visible')) {
+            _gaq.push(['_trackEvent', 'Ads', 'Ads impression', $(this).data('ad-tag')]);
+        }
+    });
+
+    $('.footer-ad').each(function() {
+        if ($(this).is(':visible')) {
+            _gaq.push(['_trackEvent', 'Ads', 'Ads impression', $(this).data('ad-tag')]);
+        }
+    });
+
     $('.btn-signin').on('click', function(e) {
         popinFrom = 'signin';
         e.preventDefault();
