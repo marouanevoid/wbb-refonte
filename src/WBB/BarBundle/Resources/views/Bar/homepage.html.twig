@@ -2,11 +2,6 @@
 {% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
 {% block title %}World Best Bars{% endblock %}
 
-{% set wbb_not_found = false %}
-{% for messages in app.session.flashbag.get('wbb-not-found') %}
-    {% set wbb_not_found = true %}
-{% endfor %}
-
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
@@ -125,7 +120,7 @@
                                 </div>
                                 <div class="overlay"></div>
                                 <a href="{{ path('city_homepage',{slug:c.slug}) }}" class="overlay-link"></a>
-                                <img src="" class="scale-with-grid" data-src="{{  showImage(c.image, 'city_170_175') }}" alt="{{ c.name }}"/>
+                                <img src="" class="scale-with-grid" data-src="{{  showImage(c.imageName, 'city_170_175') }}" alt="{{ c.name }}"/>
                             </article>
                         </div>
                     {% endfor %}
@@ -194,7 +189,7 @@
                         <div class="img">
                             <a href="" class="cover">
                                 {% for m in n.medias|slice(0,1) %}
-                                    <img src="{% path m.media, 'bar_640_480' %}" width="600" height="400" alt="{{ n.title }}"/>
+                                    <img src="{{ showImage( m.media, 'bar_640_480') }}" width="600" height="400" alt="{{ n.title }}"/>
                                 {% endfor %}
                             </a>
                             <a class="plus-btn" href=""></a>
@@ -222,7 +217,7 @@
                             <a href="" class="cover">
                                 {# dump(n.medias) #}
                                 {% for m in n.medias|slice(0,1) %}
-                                    <img src="{% path m.media, 'bar_640_480' %}" width="600" height="400" alt="{{ n.title }}"/>
+                                    <img src="{{ showImage(m.media, 'bar_640_480') }}" width="600" height="400" alt="{{ n.title }}"/>
                                 {% endfor %}
                             </a>
                             <a class="plus-btn" href=""></a>

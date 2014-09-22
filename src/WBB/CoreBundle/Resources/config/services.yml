@@ -77,7 +77,7 @@ services:
 
     wbb.twig.show_image_extension:
         class: WBB\CoreBundle\Twig\Extension\ShowImageExtension
-        arguments: ['@sonata.media.pool', '@sonata.media.manager.media', '@service_container']
+        arguments: ['@service_container', %aws_s3_bucket%]
         tags:
           - { name: twig.extension }
 
@@ -95,14 +95,33 @@ services:
         calls:
             - [setContainer, [@service_container]]
 
-    #Twig Error Controller
-    # wbb.twig.controller.exception:
-    #         class: WBB\CoreBundle\Controller\ExceptionController
-    #         arguments: [@twig, %kernel.debug%]
-
+    #FileUpload Namer
+    wbb_uploader.namer_my_origname:
+        class: WBB\CoreBundle\Naming\MyOrignameNamer
 
     wbb.kernel.exception_listener:
         class: WBB\CoreBundle\EventListener\KernelExceptionListener
-        arguments: ["@router", "@session"]
+        arguments: ["@router", "@session", "@wbb.url.matcher", "@wbb.bar.controller"]
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    wbb.url.importer:
+        class: WBB\CoreBundle\RedirectUrl\UrlImporter
+        arguments: ["@doctrine.orm.entity_manager", "@validator", "@wbb.redirect_url.logger"]
+
+    wbb.url.matcher:
+        class: WBB\CoreBundle\RedirectUrl\UrlMatcher
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    wbb.url.checker:
+        class: WBB\CoreBundle\RedirectUrl\UrlChecker
+        arguments: ["%website_url%"]
+
+    wbb.bar.controller:
+        class: WBB\BarBundle\Controller\BarController
+        calls:
+            - [setContainer, [@service_container]]
+
+    wbb.redirect_url.logger:
+        class: WBB\CoreBundle\RedirectUrl\Logger
+        arguments: ["@logger"]

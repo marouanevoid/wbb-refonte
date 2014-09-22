@@ -1,0 +1,13 @@
+{% block bar_image_preview_widget %}
+    {% spaceless %}
+        <input type="hidden" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <img src="{{ showImage(value, 'bar_preview') }}" width="100px"/>
+    {% endspaceless %}
+{% endblock %}
+
+{% block news_image_preview_widget %}
+    {% spaceless %}
+        <input type="hidden" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <img src="{{ showImage(value, 'news_preview') }}" width="100px"/>
+    {% endspaceless %}
+{% endblock %}

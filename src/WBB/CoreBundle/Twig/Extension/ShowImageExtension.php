@@ -11,14 +11,12 @@ use Twig_SimpleFunction;
 class ShowImageExtension extends \Twig_Extension
 {
     private $container;
-    private $mediaService;
-    private $mediaManager;
+    private $bucket;
 
-    public function __construct(Pool $mediaService, ManagerInterface $mediaManager, ContainerInterface $container)
+    public function __construct(ContainerInterface $container, $bucket)
     {
         $this->container = $container;
-        $this->mediaService = $mediaService;
-        $this->mediaManager = $mediaManager;
+        $this->bucket = $bucket;
     }
 
     public function getFunctions()
@@ -28,10 +26,10 @@ class ShowImageExtension extends \Twig_Extension
         );
     }
 
-    public function showImageFunction($media, $format, $user = null)
+    public function showImageFunction($filename, $filter, $user = null)
     {
-        $formatParts = explode('_', $format);
-        if ($formatParts[0] == 'avatar' && !$media) {
+        $formatParts = explode('_', $filter);
+        if ($formatParts[0] == 'avatar' && !$filename) {
             if ($user) {
                 if ($user->getFacebookPicture()) {
                     return $user->getFacebookPicture();
@@ -39,28 +37,21 @@ class ShowImageExtension extends \Twig_Extension
             }
         }
 
-        $defaultSize = $format;
-        $media = $this->getMedia($media);
-        if (!$media) {
-            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpeg');
-        }
-        $provider = $this->getMediaService()
-            ->getProvider($media->getProviderName());
-        $format = $provider->getFormatName($media, $format);
-        $path =  $provider->generatePublicUrl($media, $format);
+        if($filename){
+            $imagineService = $this->container->get('liip_imagine.cache.manager');
+            $path = $imagineService->getBrowserPath($filename, $filter);
 
-        // Define the path to look for
-        $pathToCheck = $path;
-        if(strpos($path, "http://") === false) {
-            $pathToCheck = realpath($this->container->get('kernel')->getRootDir() . '/../web/') . $path;
+            $originalFilePath = 'https://s3.amazonaws.com/'.$this->bucket.'/uploads/'.$this->getOriginalUploadDir($filter).'/'.$filename;
+
+            // If the path does not exist, return the fallback image
+            if (!@getimagesize($originalFilePath) || $path == "/") {
+                return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
+            }
+
+            return $path;
         }
 
-        // If the path does not exist, return the fallback image
-        if (!@getimagesize($pathToCheck) || $path == "/") {
-            return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$defaultSize.'.jpeg');
-        }
-        // Return the real image
-        return $this->container->get('templating.helper.assets')->getUrl($path);
+        return $this->container->get('templating.helper.assets')->getUrl('bundles/wbbcore/images/default/default_'.$filter.'.jpeg');
     }
 
     public function getName()
@@ -68,35 +59,40 @@ class ShowImageExtension extends \Twig_Extension
         return 'showImage';
     }
 
-    /**
-     * @return \Sonata\MediaBundle\Provider\Pool
-     */
-    public function getMediaService()
+    private function getOriginalUploadDir($filter)
     {
-        return $this->mediaService;
-    }
+        $formatParts = explode('_', $filter);
 
-    /**
-     * @param mixed $media
-     *
-     * @return null|\Sonata\MediaBundle\Model\MediaInterface
-     */
-    private function getMedia($media)
-    {
-        if (!$media instanceof MediaInterface && strlen($media) > 0) {
-            $media = $this->mediaManager->findOneBy(array(
-                'id' => $media
-            ));
+        switch ($formatParts[0]) {
+            case "avatar":
+                return 'avatars';
+                break;
+
+            case "bar":
+                return "bars";
+                break;
+
+            case "city":
+                return "cities";
+                break;
+
+            case "bestof":
+                return "bestofs";
+                break;
+
+            case "news":
+                return "news";
+                break;
+
+            case "ads":
+                return "ads";
+                break;
+
+            case "sponsor":
+                return "sponsors";
+                break;
         }
 
-        if (!$media instanceof MediaInterface) {
-            return false;
-        }
-
-        if ($media->getProviderStatus() !== MediaInterface::STATUS_OK) {
-            return false;
-        }
-
-        return $media;
+        return '';
     }
 }

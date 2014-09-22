@@ -119,7 +119,6 @@ class SemsoftController extends Controller
                 }
 
                 $country = $this->getCountry($data['Country']);
-//                if ($country && $data['City'] &&($bar || !empty($data['Name'])) && (!empty($data['Updated Columns']) || !empty($data['Overwritten Columns']))) {
                 if (($bar && (!empty($data['Updated Columns']) || (!empty($data['Overwritten Columns'])))) || !empty($data['Name'])) {
                     set_time_limit(0);
                     $city   = $this->getCity($data['City'], $country, $data['PostalCode']);
@@ -250,7 +249,6 @@ class SemsoftController extends Controller
     {
         if ($forceUpdate) {
             if($value != null)
-
                 return $value;
             else
                 return $data[$fieldName];
@@ -332,12 +330,15 @@ class SemsoftController extends Controller
         }
 
         if (!$city && !empty($cityName)) {
+            $em = $this->getDoctrine()->getManager();
             $city = new City();
             $city
                 ->setName($cityName)
                 ->setCountry($country)
                 ->setPostalCode($postalCode)
             ;
+            $em->persist($city);
+            $em->flush($city);
         }
 
         return $city;
@@ -355,10 +356,13 @@ class SemsoftController extends Controller
         }
 
         if (!$suburb && !empty($suburbName) && $city instanceof City) {
+            $em = $this->getDoctrine()->getManager();
             $suburb = new CitySuburb();
             $suburb
                 ->setName($suburbName)
                 ->setCity($city);
+            $em->persist($suburb);
+            $em->flush($suburb);
         }
 
         return $suburb;

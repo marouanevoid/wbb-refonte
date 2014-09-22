@@ -18,6 +18,7 @@
                 {{ form_widget(form.email, { 'attr' : { 'class': 'form-text margin-top-10', 'placeholder': 'Email'  , 'tabindex' : '7' } }) }}
                 {{ form_widget(form.plainPassword.first, { 'attr' : { 'class': 'form-text margin-top-10', 'placeholder': 'Password' , 'tabindex' : '8'} }) }}
                 {{ form_widget(form.plainPassword.second, { 'attr' : { 'class': 'form-text margin-top-10', 'placeholder': 'Confirm Password'  , 'tabindex' : '9' } }) }}
+                <p class="block-help">Your password must contain at least a letter and a number, 6 caracters min.</p>
             </div>
             <div class="select-two date-birthday text-align-center ui-dropdown-list-form">
                 <label class="margin-bottom-15">Date of Birth</label>

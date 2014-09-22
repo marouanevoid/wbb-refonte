@@ -2,21 +2,25 @@
 
 namespace WBB\CoreBundle\Entity;
 
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WBB\BarBundle\Entity\Bar;
 use WBB\BarBundle\Entity\News;
 use WBB\BarBundle\Entity\Semsoft\SemsoftBar;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
 use WBB\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * City
  *
  * @ORM\Table(name="wbb_city")
  * @ORM\Entity(repositoryClass="WBB\CoreBundle\Repository\CityRepository")
+ * @Vich\Uploadable
  */
 class City implements IndexableEntity
 {
@@ -70,11 +74,6 @@ class City implements IndexableEntity
      * @ORM\Column(name="postal_code", type="string", length=10, nullable=true)
      */
     private $postalCode;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     */
-    private $image;
 
     /**
      * @var boolean
@@ -137,6 +136,66 @@ class City implements IndexableEntity
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @Vich\UploadableField(mapping="city_image", fileNameProperty="imageName")
+     * @Assert\Image(
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
+     * )
+     * @var File $imageFile
+     */
+    protected $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
+     *
+     * @var string $imageName
+     */
+    protected $imageName;
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setImageFile(File $image)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
 
     /**
      * Get id
@@ -520,29 +579,6 @@ class City implements IndexableEntity
     }
 
     /**
-     * Set image
-     *
-     * @param  Media $image
-     * @return City
-     */
-    public function setImage(Media $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return Media
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Add semsoftBars
      *
      * @param  SemsoftBar $semsoftBars
@@ -759,4 +795,5 @@ class City implements IndexableEntity
             return false;
         }
     }
+
 }

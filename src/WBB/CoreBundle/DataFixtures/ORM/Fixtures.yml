@@ -67,7 +67,6 @@ WBB\CoreBundle\Entity\Country:
     france:
         name: France
         acronym: FR
-        ad: @ad1
         createdAt: <dateTime('now')>
         updatedAt: <dateTime('now')>
 
@@ -78,7 +77,6 @@ WBB\CoreBundle\Entity\City:
         latitude: 31.63
         longitude: -8.008888999999954
         seoDescription:
-        image:
         onTopCity: true
         country: @maroc
         createdAt: <dateTime('now')>
@@ -89,7 +87,6 @@ WBB\CoreBundle\Entity\City:
         latitude: 31.63
         longitude: -8.008888999999954
         seoDescription:
-        image:
         onTopCity: true
         country: @maroc
         createdAt: <dateTime('now')>
@@ -100,7 +97,6 @@ WBB\CoreBundle\Entity\City:
         latitude: 31.63
         longitude: -8.008888999999954
         seoDescription:
-        image:
         onTopCity: true
         country: @france
         createdAt: <dateTime('now')>
@@ -111,7 +107,6 @@ WBB\CoreBundle\Entity\City:
         latitude: 31.63
         longitude: -8.008888999999954
         seoDescription:
-        image:
         onTopCity:
         country: @france
         createdAt: <dateTime('now')>
