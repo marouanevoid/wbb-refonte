@@ -52,8 +52,8 @@ class ProfileFormType extends BaseType
                 'required' => false,
                 'empty_value' => ' ',
                 'choices'  => array(
-                    'F'   =>  'F',
-                    'M'   =>  'M'
+                    'F'   =>  'Female',
+                    'M'   =>  'Male'
                 )
             ))
             ->add('username', null, array('required' => false))
