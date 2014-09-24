@@ -82,6 +82,9 @@
             </div>
             <div class="group-form margin-bottom-40">
                 <input type="submit" id="go-submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold go disabled">
+                <span class="h4">
+                    <a href="#" class="linktToAdvancedPage margin-top-10">Advanced search</a>
+                </span>
             </div>
         </form>
         <script type="text/javascript">
@@ -103,9 +106,11 @@
                    if(totalSelectedSelect < 2 || totalSelectedMood > 0){
                         $('.go').removeClass('disabled');
                         $('.go').removeAttr('disabled');
-                   }else{
-                    $('.go').addClass('disabled');
-                    $('.go').attr('disabled' , 'disabled');
+                        $(".linktToAdvancedPage").show();
+                   } else {
+                        $('.go').addClass('disabled');
+                        $('.go').attr('disabled' , 'disabled');
+                        $(".linktToAdvancedPage").hide();
                    }
 
                 };
