@@ -607,6 +607,9 @@
   .bar-w-pic .txt .hover .tags:before {background-size: 100%;}
   .bar-details .content aside .informations .contain .gmap .get-directions {margin-top: 40px;}
   .sub-header .city-selector .ui-selector {margin-left: 1em;}
+  .actions-finders {position: relative;}
+  .actions-finders .linktToAdvancedPage {position: absolute; left: 5px;}
+  .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
