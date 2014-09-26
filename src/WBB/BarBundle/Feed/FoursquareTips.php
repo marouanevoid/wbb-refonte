@@ -115,4 +115,37 @@ class FoursquareTips implements FeedInterface
     {
         return $bar->getFsExcludedTips();
     }
+
+    /**
+     * showList
+     * @param  \WBB\BarBundle\Entity\Bar $bar
+     * @param $offset
+     * @param int $limit
+     * @return array
+     */
+    public function showList(Bar $bar, $offset, $limit = 5)
+    {
+        $excluded = $bar->getFsExcludedTips();
+
+        $tips = array();
+        $index = 0;
+        $next = 0;
+        $recursive = 0;
+
+        do {
+            $fsTipsList = $this->find($bar->getFoursquare(), $next);
+
+            foreach($fsTipsList['data'] as $tip){
+                if(!in_array($tip['id'], $excluded)){
+                    $tips[] = $tip;
+                    $index++;
+                }
+                $next = $tip['id'];
+            }
+
+            $recursive++;
+        } while (($index < $limit) && $recursive < 5);
+
+        return $tips;
+    }
 }
