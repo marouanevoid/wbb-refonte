@@ -620,8 +620,8 @@
   .actions-finders {position: relative;}
   .actions-finders .linktToAdvancedPage {position: absolute; left: 5px;}
   .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
-  .search-result-proposal {position: absolute; left: 208px;}
-  .search-result-proposal ul li .twelve.columns a {padding-left: 0;}
+  .container .search-result-proposal {position: absolute; left: 208px;}
+  .container .search-result-proposal ul li .twelve.columns a {padding-left: 0;}
   #wbb_barbundle_tip_description,
   #wbb_barbundle_tip_description::-webkit-input-placeholder,
   #wbb_barbundle_tip_description:-moz-input-placeholder,
@@ -739,7 +739,7 @@
     .ui-dropdown-container .ui-dropdown.drop-dark:hover, 
     .ui-dropdown-container .ui-dropdown.drop-dark.active {border-color: #ffe4af; background-color: transparent!important;}
     input[type="text"] + input[type="submit"].search:hover {background-color: transparent; background-position: -82px -360px;}
-    .search-result-proposal {left: 177px;}
+    .container .search-result-proposal {left: 177px;}
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
