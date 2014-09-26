@@ -616,6 +616,7 @@
   .bar-details .ui-slider.type-bar-detail .arrows a {border: 1px solid #b3955f;}
   .bar-details .ui-slider.type-bar-detail .arrows a.right {border-left: none!important;}
   .bar-details .ui-slider .arrows a.disabled {opacity: 0.7;}
+  .ui-slider .arrows {bottom: 1px;}
   .bar-w-pic .txt .hover .tags:before {background-size: 100%;}
   .bar-details .content aside .informations .contain .gmap .get-directions {margin-top: 40px;}
   .sub-header .city-selector .ui-selector a,
