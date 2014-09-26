@@ -204,6 +204,7 @@
 
   /* Error */
     .ui-dropdown-container .ui-dropdown.error,
+    .select2-container.error .select2-choice,
     .select2-container .select2-choice.error {box-shadow: 0 0 0 1px #b3955f !important; margin: 1px;}
     .firefox .ui-dropdown-container .ui-dropdown.error,
     .firefox .select2-container .select2-choice.error {border-width: 2px !important;}
@@ -455,7 +456,7 @@
       #page-standard.mobile .min-height {padding: 0 20px;}
 
 /* SHARE Tooltips */
-  .wrap-share {width: 388px; position: absolute; top: 30px; right: 0; background-color: #ffffff; z-index: 77;}
+  .wrap-share {width: 388px; position: absolute; top: 25px; right: -3px; background-color: #ffffff; z-index: 77;}
   .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px; background-color: #ffffff;}
   .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}
   .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
@@ -610,6 +611,12 @@
   .actions-finders {position: relative;}
   .actions-finders .linktToAdvancedPage {position: absolute; left: 5px;}
   .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
+  .search-result-proposal {position: absolute; left: 208px;}
+  .search-result-proposal ul li .twelve.columns a {padding-left: 0;}
+  #wbb_barbundle_tip_description,
+  #wbb_barbundle_tip_description::-webkit-input-placeholder,
+  #wbb_barbundle_tip_description:-moz-input-placeholder,
+  article.tip .form form .count {color: #6c706f;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
