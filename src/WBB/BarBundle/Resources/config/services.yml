@@ -257,3 +257,11 @@ services:
         class:  WBB\BarBundle\Mailer\ShareMailer
         parent: wbb_core.mailer.twig_swift
         public: true
+
+    wbb.legal_age.importer:
+        class: WBB\BarBundle\Importer\LegalAgeImporter
+        arguments: ["@doctrine.orm.entity_manager", "@validator", "@wbb.legal_age.logger"]
+
+    wbb.legal_age.logger:
+        class: WBB\BarBundle\Logger\LegalAgeLogger
+        arguments: ["@logger"]

@@ -202,3 +202,7 @@ wbb_share_email_bestof_send:
     defaults: { _controller: WBBBarBundle:Share:shareBestof}
     options:
         expose: true
+
+wbb_import_legal_age:
+    pattern: /admin/legal-age/csv/import
+    defaults: { _controller: WBBBarBundle:Country:import }
