@@ -50,12 +50,13 @@ class LegalAgeImporter
 
             if ($country) {
                 $country->setDrinkingAge($data['MinAge']);
+                $this->em->persist($country);
             } else {
                 $importError = true;
                 $this->logger->info('The country with ShortISO : "' . $data['ShortISO'] . '" does not exist in the database');
             }
         }
-        $this->em->flush($country);
+        $this->em->flush();
 
         return $importError;
     }
