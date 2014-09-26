@@ -482,6 +482,17 @@ body.search .search-bar-mobile{
 article.tip .content.expert .excerpt td .scroll {
 max-height: 11.5em;
 }
+
+
+
+@media only screen and (max-width: 768px) {
+ /*line 35, ../sass/components/_bar-w-pic.scss */
+.bar-w-pic .btn-round.star.active:before {
+background-position: -80px -119px;
+}
+}
+
+
 /*
 end added by Jérome
 ***/
