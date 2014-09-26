@@ -237,7 +237,16 @@
                 </table>
             </div>
         </div>
-        <div class="search-result-proposal"><ul></ul></div>
+        {% if is_mobile() and not is_tablet() %}
+            <div class="search-result-proposal {% if is_tablet() %}seven{% else %}eight{% endif %} columns">
+                <ul></ul>
+            </div>
+        {% else %}
+            <div class="container">
+                <div class="search-result-proposal {% if is_tablet() %}seven{% else %}eight{% endif %} columns">    <ul></ul>
+                </div>
+            </div>
+        {% endif %}
     </header>
     {% if not is_mobile() or is_tablet() %}
         {{ render(controller('WBBBarBundle:Bar:barFinderForm')) }}
