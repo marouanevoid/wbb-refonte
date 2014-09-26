@@ -52,3 +52,4 @@
 /* SEARCH STYLE */
 .select2-display-none.white-style ,
 .select2-container.select2-dropdown-open.white-style .select2-choice {background-color: #fff; border-color: #b3955f;}
+.select2-container.select2-dropdown-open.white-style .select2-choice .select2-arrow b {background-position: -162px 0;}
