@@ -203,9 +203,17 @@
   body.error {background-color: #333333;}
 
   /* Error */
+    /*
     .ui-dropdown-container .ui-dropdown.error,
     .select2-container.error .select2-choice,
     .select2-container .select2-choice.error {box-shadow: 0 0 0 1px #b3955f !important; margin: 1px;}
+    */
+    .ui-dropdown-container .ui-dropdown.error,
+    .select2-container.error .select2-choice,
+    .select2-container .select2-choice.error {box-shadow: 0 0 0 1px #e48474 !important; border-color: #e48474; margin: 1px;}
+      
+    input[type="text"].error, input[type="password"].error, input[type="email"].error, textarea.error {box-shadow: 0 0 0 1px #e48474 !important; border-color: #e48474;}
+
     .firefox .ui-dropdown-container .ui-dropdown.error,
     .firefox .select2-container .select2-choice.error {border-width: 2px !important;}
 
@@ -675,16 +683,16 @@
     #editprofile #edit-account .form-text {width: 300px;}
     #editprofile #edit-account .form-text-without-label input {width: 300px;}
     header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;
-      -webkit-transition: webkit-transform .5s ease;
-      -moz-transition: moz-transform .5s ease;
-      -o-transition: o-transform .5s ease;
-      transition: transform .5s ease;
+      -webkit-transition: webkit-transform .5s linear;
+      -moz-transition: moz-transform .5s linear;
+      -o-transition: o-transform .5s linear;
+      transition: transform .5s linear;
     }
     header.desktop .bar-finder .normal-mode .search:hover {display: inline-block;
-      -webkit-transition: transform .5s ease;
-      -moz-transition: transform .5s ease;
-      -o-transition: transform .5s ease;
-      transition: transform .5s ease;
+      -webkit-transition: transform .5s linear;
+      -moz-transition: transform .5s linear;
+      -o-transition: transform .5s linear;
+      transition: transform .5s linear;
       -webkit-transform: -webkit-scale(1.2); 
       -moz-transform: -moz-scale(1.2);
       -o-transform: -o-scale(1.2);
