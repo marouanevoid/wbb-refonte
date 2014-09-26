@@ -466,6 +466,8 @@
 
 /* SHARE Tooltips */
   .wrap-share {width: 388px; position: absolute; top: 25px; right: -3px; background-color: #ffffff; z-index: 77;}
+  .news-details .wrap-share,
+  .best-of-details .wrap-share {top: 30px;}
   .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px; background-color: #ffffff;}
   .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}
   .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
@@ -614,9 +616,12 @@
   .bar-details .ui-slider.type-bar-detail .arrows a {border: 1px solid #b3955f;}
   .bar-details .ui-slider.type-bar-detail .arrows a.right {border-left: none!important;}
   .bar-details .ui-slider .arrows a.disabled {opacity: 0.7;}
+  .ui-slider .arrows {bottom: 1px;}
   .bar-w-pic .txt .hover .tags:before {background-size: 100%;}
   .bar-details .content aside .informations .contain .gmap .get-directions {margin-top: 40px;}
-  .sub-header .city-selector .ui-selector {margin-left: 1em;}
+  .sub-header .city-selector .ui-selector a,
+  .sub-header .city-selector a {margin-left: 1em;}
+  .sub-header .city-selector .ui-selector {margin-left: 0;}
   .actions-finders {position: relative;}
   .actions-finders .linktToAdvancedPage {position: absolute; left: 5px;}
   .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
