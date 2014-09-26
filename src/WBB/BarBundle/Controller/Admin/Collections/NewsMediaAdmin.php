@@ -14,14 +14,11 @@ class NewsMediaAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('media', 'sonata_type_model_list', array(
+                ->add('imageFile', 'file', array(
                     'required' => false
-                ), array(
-                    'link_parameters' => array(
-                        'context' => 'news'
-                    )
                 ))
-                ->add('alt', 'textarea', array('attr'=>array('cols'=>220, 'rows'=>6)))
+                ->add('media', 'news_image_preview')
+                ->add('alt', 'textarea', array( 'attr' => array( 'cols' => 220, 'rows' => 6)))
                 ->add('position', 'hidden')
             ->end();
     }

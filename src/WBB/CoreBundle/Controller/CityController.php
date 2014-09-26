@@ -94,7 +94,6 @@ class CityController extends Controller
     public function nearestCityAction($latitude, $longitude)
     {
         $session = $this->container->get('session');
-
         $city = $this->get('city.repository')->findNearestCity($latitude, $longitude, 150, 0, 1);
 
         $session->set('userLatitude', $latitude);
@@ -212,10 +211,9 @@ class CityController extends Controller
 
     private function barFirstImage($bar, Request $request)
     {
-        $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
         $medias = $bar->getMedias();
         foreach ($medias as $media) {
-            return $baseUrl.$this->container->get($media->getMedia()->getProviderName())->generatePublicUrl($media->getMedia(), 'bar_640_480');
+            return $this->get('liip_imagine.cache.manager')->getBrowserPath($media->getMedia(), 'bar_640_480');
         }
 
         return null;

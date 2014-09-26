@@ -52,8 +52,8 @@ class ProfileFormType extends BaseType
                 'required' => false,
                 'empty_value' => ' ',
                 'choices'  => array(
-                    'F'   =>  'F',
-                    'M'   =>  'M'
+                    'F'   =>  'Female',
+                    'M'   =>  'Male'
                 )
             ))
             ->add('username', null, array('required' => false))
@@ -78,9 +78,7 @@ class ProfileFormType extends BaseType
             ->add('prefCocktails3')
             ->add('stayInformed')
             ->add('stayBrandInformed')
-            ->add('avatar', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context'  => 'avatar',
+            ->add('imageFile', 'file', array(
                 'required' => false
             ))
         ;

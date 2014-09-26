@@ -73,8 +73,9 @@
                         <div class="margin-top-20">
                             <div class="sort-by six columns">
                                 <label class="sort left text-transform-uppercase unbold">Sort by :</label>
-                                <div class="four columns">
-                                    <select class="ui-dropdown light" name="criteria" id="criteria">
+                               {#  <div class="{% if is_mobile() or is_tablet() %} four {% else %} five {% endif %} columns"> #}
+                                <div class="five columns">
+                                    <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown show-profile{% endif %} light" name="criteria" id="criteria">
                                         <option value="date" data-type="criteria" selected="selected">Date</option>
                                         <option value="alphabetical" data-type="criteria">Alphabetical order</option>
                                         <option value="city" data-type="criteria">City</option>
@@ -161,6 +162,13 @@
         $(document).ready(function(){
             new wbb.LoadProfile();
             console.clear();
+
+            // insert select 2
+            $("select.select2-dropdown.show-profile").select2({
+                minimumResultsForSearch: -1,
+                dropdownCssClass : 'white-style',
+                containerCssClass : 'white-style'
+            });
         });
     </script>
 {% endblock %}

@@ -1,3 +1,4 @@
+{% set wbb_not_found = app.session.get('wbb-not-found') %}
 <!DOCTYPE html>
 <html lang="fr" class="utf8">
     <head>
@@ -35,7 +36,7 @@
 
         {% block stylesheets %}
 
-            {% stylesheets filter="cssrewrite"
+            {% stylesheets filter='cssmin' filter="cssrewrite" output='css/main.css'
                 "bundles/wbbcore/css/select2-bootstrap.css"
                 "bundles/wbbcore/css/select2.css"
                 "bundles/wbbcore/css/custom.select2.css"
@@ -47,7 +48,7 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
 
-            {% javascripts
+            {% javascripts filter='jsmin' output='js/main.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/select2.min.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.easing.js'
@@ -61,17 +62,17 @@
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.jscrollpane.js'
                 '@WBBCoreBundle/Resources/public/js/plugins/jquery.cookie.js'
                 '@WBBCoreBundle/Resources/public/js/libs/popin.void.js'
-                '@WBBCoreBundle/Resources/public/js/libs/utils.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/slider.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/ratio.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/loadMore.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/dropdown.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/selector.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/radio.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/search.metabolism.js'
-                '@WBBCoreBundle/Resources/public/js/libs/form.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/utils.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/slider.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/ratio.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/loadMore.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/dropdown.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/selector.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/radio.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/search.void.js'
+                '@WBBCoreBundle/Resources/public/js/libs/form.void.js'
                 '@WBBCoreBundle/Resources/public/js/app.js'
-                '@WBBCoreBundle/Resources/public/js/libs/tips.metabolism.js'
+                '@WBBCoreBundle/Resources/public/js/libs/tips.void.js'
                 '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
                 '@WBBCoreBundle/Resources/public/js/wbb.js'
                 '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
@@ -79,45 +80,39 @@
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
-{#
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/select2.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.easing.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.velocity.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.transform3d.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/modernizr.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.browser.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.touchSwipe.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/placeholders.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.mousewheel.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.jscrollpane.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/plugins/jquery.cookie.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/popin.void.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/utils.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/slider.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/ratio.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/loadMore.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/dropdown.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/selector.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/radio.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/search.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/form.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/app.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/tips.metabolism.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/geolocalisation.wbb.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/wbb.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wbbcore/js/libs/translate.wbb.js') }}"></script>
-#}
+        
         {% block javascripts %}
 
         {% endblock %}
 
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+        <link rel="stylesheet" type="text/css" href="http://assets.cookieconsent.silktide.com/current/style.min.css"/>
+        <script type="text/javascript" src="http://assets.cookieconsent.silktide.com/current/plugin.min.js"></script>
+        <script type="text/javascript">
+        // <![CDATA[
+        cc.initialise({
+                cookies: {
+                        necessary: {}
+                },
+                settings: {
+                        consenttype: "implicit",
+                        hideprivacysettingstab: true
+                }
+        });
+        // ]]>
+        </script>
+        <!-- End Cookie Consent plugin -->
         <script type="text/javascript">
                 var MARKET = "US";
                 var LANG = "en";
                 var BASEURL = "{{ asset('bundles/wbbcore/') }}";
                 window.userConnected = {% if app.user%}true{% else %}false{% endif %};
-
+                
+                {% if wbb_not_found %}
+                    $(document).ready(function(){
+                        $('.star').hide();
+                    });
+                {% endif %}
                 var showConfirmed = 0;
                 {% set user_confirmed = false %}
                 {% for message in app.session.flashbag.get('wbb-user-confirmed') %}
@@ -156,7 +151,11 @@
                 var profileWithPopinUrl = "{{ path('fos_user_profile_show', { emailPopin: 1}) }}";
                 var newPasswordUrl = "{{ path('fos_user_resetting_request') }}";
                 var popinFrom = '';
+                {% if app.request.attributes.get('_route') != '' %}
                 {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                {% else %}
+                {% set currentPath = '' %}
+                {% endif %}
                 var currentPage = "{{ currentPath }}";
 
                 {% if app.user %}
@@ -220,6 +219,7 @@
                 }
             </style>
         {% endif %}
+        {{ include('::analytics.html.twig') }}
     </head>
 
     {% block bodyTag %}
@@ -311,5 +311,13 @@
             {% include '::footer.html.twig' %}
         {% endblock %}
         {% if is_mobile() and not is_tablet() %}<div id="landscape-mobile"></div>{% endif %}
+
+        <!-- Tag Manager -->
+        <noscript>
+            <iframe src='http://dmp.pernod-ricard.com/JScript/iframe.php?container=TEROCwEHTEhdUEdR' height='0' width='0' style='display:none;visibility:hidden'>
+            </iframe>
+        </noscript>
+        <script>(function(d, s,id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'http://dmp.pernod-ricard.com/JScript/pernod-ricard-api.js?container=TEROCwEHTEhdUEdR'; fjs.parentNode.insertBefore(js, fjs.nextSibling); }(document, 'script','pdrd_'+new Date().getTime()));</script>
+        <!-- End Tag Manager -->
     </body>
 </html>
