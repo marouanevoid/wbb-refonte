@@ -42,7 +42,7 @@ class RegistrationLightFormType extends BaseType
                 ))
                 ->add('country', null, array(
                     'error_bubbling' => true,
-                    'empty_value' => 'Country',
+                    'empty_value' => 'Country *',
                     'required' => false,
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')

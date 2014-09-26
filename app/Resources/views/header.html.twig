@@ -12,25 +12,27 @@
             </tr>
             <tr class="signin {% if app.user %}logged{% endif %}">
                 <td>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <span class="logged h3">
-                            <a href="{{ path('fos_user_profile_show') }}">
-                                <img src="{{  showImage(app.user.avatar, 'avatar_82_82', app.user) }}" alt="{{ app.user.username }}" width="40" height="40"/>
-                                <span>{{ app.user.username }}</span>
-                            </a>
-                            <span class="actions">
-                                <a href="{{ path('fos_user_profile_show') }}">My profile</a>
-                                <a href="{{ path('fos_user_profile_edit') }}">Settings</a>
-                                <a href="{{ path('fos_user_change_password') }}">Change password</a>
-                                <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                    {% if wbb_not_found == false %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <span class="logged h3">
+                                <a href="{{ path('fos_user_profile_show') }}">
+                                    <img src="{{  showImage(app.user.avatar, 'avatar_82_82', app.user) }}" alt="{{ app.user.username }}" width="40" height="40"/>
+                                    <span>{{ app.user.username }}</span>
+                                </a>
+                                <span class="actions">
+                                    <a href="{{ path('fos_user_profile_show') }}">My profile</a>
+                                    <a href="{{ path('fos_user_profile_edit') }}">Settings</a>
+                                    <a href="{{ path('fos_user_change_password') }}">Change password</a>
+                                    <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                                </span>
                             </span>
-                        </span>
-                    {% else %}
-                        <span class="register h4">
-                            <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
-                            or
-                            <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
-                        </span>
+                        {% else %}
+                            <span class="register h4">
+                                <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
+                                or
+                                <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                            </span>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -45,7 +47,7 @@
             </tr>
             <tr class="links">
                 <td>
-                    <a href="{{ path('wbb_bar_finder') }}" class="finder h3">
+                    <a onclick="_gaq.push(['_trackEvent', 'Search', 'Open Bar Finder', '']);" href="{{ path('wbb_bar_finder') }}" class="finder h3">
                         <img src="{{ asset('bundles/wbbcore/images/icons/glass.png') }}" alt="glass" width="10" height="16"/>
                         Bar Finder
                     </a>
@@ -118,7 +120,7 @@
                             <a href="{{ path('wbb_cities') }}">
                                 <img src="{{ asset('bundles/wbbcore/images/icons/pin.border.png') }}" alt="pin.border" width="12" height="16"/>
                             </a>
-                            <a class="search" href="#0">
+                            <a onclick="_gaq.push(['_trackEvent', 'Search', 'Open Search', '']);" class="search" href="#0">
                                 <img src="{{ asset('bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
                             </a>
                         </td>
@@ -152,7 +154,11 @@
                             </a>
                         </td>
                         <td class="nav">
+                            {% if app.request.attributes.get('_route') != '' %}
                             {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                            {% else %}
+                            {% set currentPath = '' %}
+                            {% endif %}
                             <nav class="h3">
                                 <a href="{{ path('wbb_cities') }}" {% if app.request.attributes.get('_route') == "wbb_cities" %} class="active"{% endif %}>Cities</a>
                                 <a href="{{ path('wbb_bar_guides') }}" {% if app.request.attributes.get('_route') == "wbb_bar_guides" or app.request.attributes.get('_route') == "wbb_bar_guides_city" %} class="active"{% endif %}>Bar Guides</a>
@@ -169,7 +175,7 @@
                                     Bar Finder
                                 </a>
                                 <img class="separator" src="{{ asset('bundles/wbbcore/images/misc/border.brown.png') }}" alt="border" width="1" height="40"/>
-                                <a class="search" href="#0">
+                                <a onclick="_gaq.push(['_trackEvent', 'Search', 'Open Search', '']);" class="search" href="#0">
                                     <img src="{{ asset('bundles/wbbcore/images/icons/search.png') }}" alt="search" width="16" height="16"/>
                                 </a>
                             </div>
@@ -204,25 +210,27 @@
                             </div>
                         </td>
                         <td>
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <span class="logged h3">
-                                    <a class='in-action' href="{{ path('fos_user_profile_show') }}">
-                                        <img src="{{ showImage(app.user.avatar, 'avatar_82_82', app.user) }}" alt="{{ app.user.username }}" width="40" height="40"/>
-                                        <span>{{ app.user.username }}</span>
-                                    </a>
-                                    <span class="actions">
-                                        <a href="{{ path('fos_user_profile_show') }}">My profile</a>
-                                        <a href="{{ path('fos_user_profile_edit') }}">Settings</a>
-                                        <a href="{{ path('fos_user_change_password') }}">Change password</a>
-                                        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                            {% if wbb_not_found == false %}
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <span class="logged h3">
+                                        <a class='in-action' href="{{ path('fos_user_profile_show') }}">
+                                            <img src="{{ showImage(app.user.avatar, 'avatar_82_82', app.user) }}" alt="{{ app.user.username }}" width="40" height="40"/>
+                                            <span>{{ app.user.username }}</span>
+                                        </a>
+                                        <span class="actions">
+                                            <a href="{{ path('fos_user_profile_show') }}">My profile</a>
+                                            <a href="{{ path('fos_user_profile_edit') }}">Settings</a>
+                                            <a href="{{ path('fos_user_change_password') }}">Change password</a>
+                                            <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                                        </span>
                                     </span>
-                                </span>
-                            {% else %}
-                                <span class="register h4">
-                                    <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
-                                    or
-                                    <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
-                                </span>
+                                {% else %}
+                                    <span class="register h4">
+                                        <a class="lighbox btn-signin" href="{{ path('wbb_ajax_signin_popin') }}">Sign in</a>
+                                        or
+                                        <a class="btn-radius" href="{{ path('fos_user_registration_register') }}">Register</a>
+                                    </span>
+                                {% endif %}
                             {% endif %}
                         </td>
                     </tr>

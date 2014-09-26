@@ -7,12 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use WBB\BarBundle\Entity\Collections\BestOfTag;
 use WBB\CloudSearchBundle\Indexer\IndexableEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * BestOf
  *
  * @ORM\Table(name="wbb_bestof")
  * @ORM\Entity(repositoryClass="WBB\BarBundle\Repository\BestOfRepository")
+ * @Vich\Uploadable
  */
 class BestOf implements IndexableEntity
 {
@@ -33,7 +37,7 @@ class BestOf implements IndexableEntity
     private $name;
 
     /**
-     * @Gedmo\Slug(fields={"name"}, style="camel", separator="-")
+     * @Gedmo\Slug(fields={"name"}, separator="-")
      * @ORM\Column(unique=true)
      */
     private $slug;
@@ -44,23 +48,6 @@ class BestOf implements IndexableEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     */
-    private $image;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="sponsor", type="string", length=255, nullable=true)
-     */
-    private $sponsor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     */
-    private $sponsorImage;
 
     /**
      * @var string
@@ -171,6 +158,66 @@ class BestOf implements IndexableEntity
     private $updatedAt;
 
     /**
+     * @Vich\UploadableField(mapping="bestof_image", fileNameProperty="image")
+     * @Assert\Image(
+     *     mimeTypes={"image/jpeg", "image/jpg", "image/png"}
+     * )
+     * @var File $imageFile
+     */
+    protected $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="image_name", nullable=true)
+     *
+     * @var string $imageName
+     */
+    protected $image;
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setImageFile(File $image)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImage($imageName)
+    {
+        $this->image = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -225,29 +272,6 @@ class BestOf implements IndexableEntity
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set sponsor
-     *
-     * @param  string $sponsor
-     * @return BestOf
-     */
-    public function setSponsor($sponsor)
-    {
-        $this->sponsor = $sponsor;
-
-        return $this;
-    }
-
-    /**
-     * Get sponsor
-     *
-     * @return string
-     */
-    public function getSponsor()
-    {
-        return $this->sponsor;
     }
 
     /**
@@ -686,52 +710,6 @@ class BestOf implements IndexableEntity
         } else {
             return array(0);
         }
-    }
-
-    /**
-     * Set image
-     *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
-     * @return BestOf
-     */
-    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set sponsorImage
-     *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $sponsorImage
-     * @return BestOf
-     */
-    public function setSponsorImage(\Application\Sonata\MediaBundle\Entity\Media $sponsorImage = null)
-    {
-        $this->sponsorImage = $sponsorImage;
-
-        return $this;
-    }
-
-    /**
-     * Get sponsorImage
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getSponsorImage()
-    {
-        return $this->sponsorImage;
     }
 
     public function getCloudSearchFields()

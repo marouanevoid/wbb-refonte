@@ -1,0 +1,46 @@
+# Sonata Admin bundle
+sonata_admin:
+    title:      "WBB - Administration"
+    security:
+            handler: sonata.admin.security.handler.role
+    title_logo: /bundles/wbbcore/images/common/logo-sonata.png
+    dashboard:
+        blocks:
+            # display a dashboard block
+            -
+                position: left
+                type: sonata.block.service.text
+                settings:
+                    content: >
+                        <h2>Bienvenue sur votre espace d'administration WBB</h2>
+                        <p>Cette interface vous permet de mettre à jour le contenu du site WBB. <br />
+                        Vous aurez la possibilité de gérer les utilisateurs,
+                        les informations relatives aux bars, tips, et villes. </p><br /><br />
+            - { position: left, type: sonata.admin.block.admin_list }
+            - { position: right, type: wbb.block.service.semsoft.import }
+
+        groups:
+            wbb_location: ~
+            wbb_bar: ~
+            wbb_user: ~
+    templates:
+        dashboard: SonataAdminBundle:Core:dashboard.html.twig
+        layout: SonataAdminBundle::layout.html.twig
+        short_object_description: WBBBarBundle:Admin:Helper/short-object-description.html.twig
+
+sonata_doctrine_orm_admin:
+    templates:
+        types:
+            list:
+                status: SonataAdminBundle:CRUD/Type/List:status.html.twig
+
+# Sonata Blocks
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+        sonata.admin.block.search_result:
+            contexts:   [admin]
+        sonata.block.service.text:
+        wbb.block.service.semsoft.import: ~
+        sonata.block.service.rss:
