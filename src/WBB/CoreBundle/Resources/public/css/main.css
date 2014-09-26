@@ -203,8 +203,17 @@
   body.error {background-color: #333333;}
 
   /* Error */
+    /*
     .ui-dropdown-container .ui-dropdown.error,
+    .select2-container.error .select2-choice,
     .select2-container .select2-choice.error {box-shadow: 0 0 0 1px #b3955f !important; margin: 1px;}
+    */
+    .ui-dropdown-container .ui-dropdown.error,
+    .select2-container.error .select2-choice,
+    .select2-container .select2-choice.error {box-shadow: 0 0 0 1px #e48474 !important; border-color: #e48474; margin: 1px;}
+      
+    input[type="text"].error, input[type="password"].error, input[type="email"].error, textarea.error {box-shadow: 0 0 0 1px #e48474 !important; border-color: #e48474;}
+
     .firefox .ui-dropdown-container .ui-dropdown.error,
     .firefox .select2-container .select2-choice.error {border-width: 2px !important;}
 
@@ -232,7 +241,8 @@
   .ui .btn-create-with-fb:hover {opacity: 0.8;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
-  #create-account .block-help {font-size: 14px;}
+  #create-account .block-help,
+  .ui .block-help {font-size: 14px;}
   #register .block-help {width: 300px;}
   .block-help.changepassword {width: 300px; float: right; margin-right: 32px;}
 
@@ -455,7 +465,7 @@
       #page-standard.mobile .min-height {padding: 0 20px;}
 
 /* SHARE Tooltips */
-  .wrap-share {width: 388px; position: absolute; top: 30px; right: 0; background-color: #ffffff; z-index: 77;}
+  .wrap-share {width: 388px; position: absolute; top: 25px; right: -3px; background-color: #ffffff; z-index: 77;}
   .wrap-share .social-share {border:1px solid #b3955f; padding: 10px 20px 10px 17px; background-color: #ffffff;}
   .wrap-share .social-share .share-label {font-size: 17px; line-height: 28px; margin: 10px 10px 0 5px; color: #000;}
   .wrap-share .social-share ul {overflow: hidden; position: relative; left: 5px;}
@@ -610,6 +620,13 @@
   .actions-finders {position: relative;}
   .actions-finders .linktToAdvancedPage {position: absolute; left: 5px;}
   .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
+  .search-result-proposal {position: absolute; left: 208px;}
+  .search-result-proposal ul li .twelve.columns a {padding-left: 0;}
+  #wbb_barbundle_tip_description,
+  #wbb_barbundle_tip_description::-webkit-input-placeholder,
+  #wbb_barbundle_tip_description:-moz-input-placeholder,
+  article.tip .form form .count {color: #6c706f;}
+  #editprofile #change-password #edit-account label {width: 166px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -666,16 +683,16 @@
     #editprofile #edit-account .form-text {width: 300px;}
     #editprofile #edit-account .form-text-without-label input {width: 300px;}
     header.desktop .bar-finder .normal-mode .search {position: relative; padding: 5px;
-      -webkit-transition: webkit-transform .5s ease;
-      -moz-transition: moz-transform .5s ease;
-      -o-transition: o-transform .5s ease;
-      transition: transform .5s ease;
+      -webkit-transition: webkit-transform .5s linear;
+      -moz-transition: moz-transform .5s linear;
+      -o-transition: o-transform .5s linear;
+      transition: transform .5s linear;
     }
     header.desktop .bar-finder .normal-mode .search:hover {display: inline-block;
-      -webkit-transition: transform .5s ease;
-      -moz-transition: transform .5s ease;
-      -o-transition: transform .5s ease;
-      transition: transform .5s ease;
+      -webkit-transition: transform .5s linear;
+      -moz-transition: transform .5s linear;
+      -o-transition: transform .5s linear;
+      transition: transform .5s linear;
       -webkit-transform: -webkit-scale(1.2); 
       -moz-transform: -moz-scale(1.2);
       -o-transform: -o-scale(1.2);
