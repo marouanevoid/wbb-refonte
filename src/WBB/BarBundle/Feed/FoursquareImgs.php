@@ -114,4 +114,34 @@ class FoursquareImgs implements FeedInterface
     {
         return $bar->getFsSelectedImgs();
     }
+
+    /**
+     * showList
+     * @param  \WBB\BarBundle\Entity\Bar $bar
+     * @param $offset
+     * @param int $limit
+     * @return array
+     */
+    public function showList(Bar $bar, $offset, $limit = 5)
+    {
+        $selected = $bar->getFsSelectedImgs();
+
+        $imgs = array();
+        $index = 0;
+        $next = 0;
+        $recursive = 0;
+
+        do {
+            $fsImgsList = $this->find($bar->getFoursquare(), $next);
+            foreach($fsImgsList['data'] as $img){
+                if(in_array($img['id'], $selected)){
+                    $imgs[] = $img;
+                    $index++;
+                }
+            }
+            $recursive++;
+            $next = 30 * $recursive;
+        } while (($index < $limit) && $recursive < 5);
+        return $imgs;
+    }
 }
