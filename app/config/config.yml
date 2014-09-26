@@ -7,7 +7,7 @@ imports:
     - { resource: bundles/config/gaufrette.yml }
     - { resource: bundles/config/liip.yml }
     - { resource: bundles/config/vich.yml }
-    # - { resource: bundles/config/aequasi_cache.yml }
+    - { resource: bundles/config/aequasi_cache.yml }
 
 framework:
     #esi:             ~
