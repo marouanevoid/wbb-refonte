@@ -632,6 +632,8 @@
   article.tip textarea:-moz-placeholder {color: #6c706f;}
   article.tip .form form .count {color: #6c706f;}
   #editprofile #change-password #edit-account label {width: 166px;}
+  .news .full-cream.padding-bottom-55 {padding-bottom: 62px!important;}
+  .index .bar-w-pic .color {width: 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
