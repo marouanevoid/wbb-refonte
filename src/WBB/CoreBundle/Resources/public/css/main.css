@@ -388,10 +388,10 @@
   #editprofile .avatar-profil img {height: 100%; width: 100%; position: relative; border-radius: 10em;}
   #editprofile .file-image {position: relative; height: 32px; width: 147px; background-image: url("../images/UI/edit_avatar@x2.gif"); background-repeat: no-repeat; background-position: 0 0; background-size: 147px 31px;}
   #editprofile .file-image input[type="file"] {position: absolute; height: 100%; width: 100%; opacity: 0; display: block;}
-  #editprofile #edit-account label {font-size: 15px;}
   #editprofile #edit-account .file-image label {display: none; visibility: hidden;}
   #editprofile #edit-account {position: relative;}
-  #editprofile #edit-account label {display: block; text-align: right; float: left; width: 165px; line-height: 35px; font-weight: lighter;}
+  #editprofile #edit-account label {display: block; text-align: right; font-weight: lighter; float: left; width: 165px; line-height: 35px; font-size: 15px;}
+  #editprofile #edit-account .group-checkbox label {font-weight: bold; font-size: 13px;}
   #editprofile #edit-account .form-text {float: left;}
   #editprofile #edit-account .form-text-without-label {margin: 0 0 0 185px;}
   #editprofile #edit-account .group.left {width: 345px;}
@@ -627,11 +627,13 @@
   .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
   .container .search-result-proposal {position: absolute; left: 208px;}
   .container .search-result-proposal ul li .twelve.columns a {padding-left: 0;}
-  #wbb_barbundle_tip_description,
-  #wbb_barbundle_tip_description::-webkit-input-placeholder,
-  #wbb_barbundle_tip_description:-moz-input-placeholder,
+  article.tip textarea,
+  article.tip textarea::-webkit-input-placeholder {color: #6c706f;}
+  article.tip textarea:-moz-placeholder {color: #6c706f;}
   article.tip .form form .count {color: #6c706f;}
   #editprofile #change-password #edit-account label {width: 166px;}
+  .news .full-cream.padding-bottom-55 {padding-bottom: 62px!important;}
+  .index .bar-w-pic .color {width: 100%;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -732,11 +734,13 @@
     #message ul {padding: 30px 30px 30px 90px;}
 
     /*.ui .form-text {text-indent: 0;}*/
+    /*
     .wrap-share {top: 45px; width: 130px; z-index: 777; border-radius: 30px;}
     .wrap-share .social-share {border-radius: 30px;}
     .wrap-share .social-share .share-label {display: none;}
     .wrap-share .social-share ul {left: 0;}
     .wrap-share .social-share li {float: none; margin: 0 auto 10px;}
+    */
     section.bar-filter .bar-w-pic {/*max-height: 180px;*/}
     .ui.register .title {width: 45%;}
     .page #message {left: 68px;}

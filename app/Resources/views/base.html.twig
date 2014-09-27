@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta charset="utf-8"/>
 
-        <title>{% block title %}{{ "World Best Bars"|trans }}{% endblock %}</title>
+        <title>{% block title %}{{ "World's Best Bars"|trans }}{% endblock %}</title>
         {% block meta %}
             <meta name="description" content="{% block mDescription %}World Best Bars{% endblock %}" />
         {% endblock %}
@@ -76,6 +76,7 @@
                 '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
                 '@WBBCoreBundle/Resources/public/js/wbb.js'
                 '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
+                '@WBBCoreBundle/Resources/public/js/cookie-consent.js'
             %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
@@ -87,7 +88,7 @@
 
         <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
         <link rel="stylesheet" type="text/css" href="http://assets.cookieconsent.silktide.com/current/style.min.css"/>
-        <script type="text/javascript" src="http://assets.cookieconsent.silktide.com/current/plugin.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/wbbcore/css/cookieconsent.css') }}"/>
         <script type="text/javascript">
         // <![CDATA[
         cc.initialise({
@@ -96,7 +97,11 @@
                 },
                 settings: {
                         consenttype: "implicit",
-                        hideprivacysettingstab: true
+                        hideprivacysettingstab: true,
+                },
+                strings: {
+                        customCookie: "This site uses cookies. By continuing to browse the site, you are agreeing to our use of cookies",
+                        seeDetailsImplicit: "Read more"
                 }
         });
         // ]]>

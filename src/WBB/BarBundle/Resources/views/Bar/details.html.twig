@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}{{ bar.name }} | World Best Bars{% endblock %}
+{% block title %}{{ bar.name }} | {{ parent() }}{% endblock %}
 {% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 {% set bitlyURL = currentPath| bitly %}
 
@@ -335,8 +335,8 @@
                     <!-- ALSO APPEARS -->
                     {% if not is_mobile() or is_tablet() %}
                         <div class="also-appears">
-                            <hr class="l-margin"/>
-                            <div class="m-margin-top h2">This bar appears also in</div>
+                            <hr class="margin-top-30"/>
+                            <div class="margin-top-25 h2">This bar appears also in</div>
                             <div class="m-margin-top h3">
                                 <ul>
                                     {% for r in related |slice(0, 5) %}

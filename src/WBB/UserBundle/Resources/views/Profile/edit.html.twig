@@ -1,4 +1,5 @@
 {% extends '::base.html.twig' %}
+{% block title %}Settings | {{ parent() }}{% endblock %}
 {% block bodyTag %}
 <body class="editprofile">
 {% endblock %}
@@ -232,7 +233,7 @@
                                     </div>
                                 </div>
                                 <div class="subtitle grey">To make further updates, use the desktop version.</div>
-                                <p class="wrap">
+                                <p class="wrap margin-top-20">
                                     * Mandatory field
                                 </p>
                             {% endif %}
