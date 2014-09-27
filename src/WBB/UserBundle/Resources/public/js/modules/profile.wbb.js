@@ -215,12 +215,12 @@ wbb.LoadProfile = function() {
                     if ( itype == 'best of' ){
                         _count.bestof--;
                         if(_count.bestof <= 0){
-                            stringBest = "No collection";
+                            stringBest = "No best of";
                         }else{
                             if(_count.bestof == 1){
-                                stringBest = "(1) "+ ( ismobile && ! istablet ? ' <br> ' : '') + "collection"
+                                stringBest = "(1) "+ ( ismobile && ! istablet ? ' <br> ' : '') + "best of"
                             }else{
-                                stringBest = "("+ _count.bestof +") "+ ( ismobile  && ! istablet ? ' <br> ' : '') + "collections";
+                                stringBest = "("+ _count.bestof +") "+ ( ismobile  && ! istablet ? ' <br> ' : '') + "best ofs";
                             }
                         }
 
