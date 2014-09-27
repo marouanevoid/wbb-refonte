@@ -58,6 +58,12 @@ wbb_bar_feeds_find:
     options:
         expose: true
 
+wbb_bar_feeds_show:
+    pattern:  /feed/show/{type}/{barSlug}/{offset}/{limit}
+    defaults: { _controller: WBBBarBundle:Feed:show, offset: 0, limit: 5 }
+    options:
+        expose: true
+
 wbb_bar_feed_find_hash:
     pattern:  /feed/hash/{type}/{hash}
     defaults: { _controller: WBBBarBundle:Feed:find}
@@ -202,3 +208,7 @@ wbb_share_email_bestof_send:
     defaults: { _controller: WBBBarBundle:Share:shareBestof}
     options:
         expose: true
+
+wbb_import_legal_age:
+    pattern: /admin/legal-age/csv/import
+    defaults: { _controller: WBBBarBundle:Country:import }

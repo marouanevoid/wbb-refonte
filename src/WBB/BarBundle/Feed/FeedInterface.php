@@ -50,4 +50,15 @@ interface FeedInterface
      * @return array
      */
     public function listAll(Bar $bar);
+
+    /**
+     * showList
+     * @param  \WBB\BarBundle\Entity\Bar $bar
+     * @param $offset
+     * @param int $limit
+     * @return array
+     */
+    public function showList(Bar $bar, $offset, $limit = 5);
+
+
 }
