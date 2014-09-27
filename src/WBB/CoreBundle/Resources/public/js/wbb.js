@@ -38,6 +38,15 @@ $(document).ready(function() {
         $.removeCookie('light_name');
     }
 
+    $.expr[':'].external = function(obj) {
+        return !obj.href.match(/^mailto\:/)
+                && (obj.hostname !== location.hostname)
+                && !obj.href.match(/^javascript\:/)
+                && !obj.href.match(/^$/);
+    };
+
+    $('a:external').attr('target', '_blank');
+
     setTimeout(function() {
         $('.side-ad').each(function() {
             if ($(this).is(':visible')) {

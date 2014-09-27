@@ -1,5 +1,5 @@
 {% extends "::base.html.twig" %}
-{% block title %}{{ news.title }} | World Best Bars{% endblock %}
+{% block title %}{{ news.title }} | {{ parent() }}{% endblock %}
 {% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 {% set bitlyURL = currentPath| bitly %}
 

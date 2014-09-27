@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 {% block meta %}<meta name="description" content="World Best Bars" />{% endblock %}
-{% block title %}World Best Bars{% endblock %}
+{% block title %}Bar Finder | {{ parent() }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
@@ -83,7 +83,7 @@
             <div class="group-form margin-bottom-40">
                 <input type="submit" id="go-submit" value="Go" class="form-submit radius-30 text-transform-uppercase bold go disabled">
                 <span class="h4">
-                    <a href="{{ path('wbb_cloudsearch_searchresults') }}" class="linktToAdvancedPage margin-top-10">Advanced search</a>
+                    <a href="{{ path('wbb_cloudsearch_searchresults') }}" class="linktToAdvancedPage margin-top-40">Advanced search</a>
                 </span>
             </div>
         </form>

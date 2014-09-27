@@ -46,7 +46,7 @@
 .select2-drop.dark .select2-results li							{color: #ffe4af;}
 .select2-drop.dark .select2-results .select2-highlighted		{color: #fff;}
 .select2-drop.dark input[type="text"] 							{background-color: transparent; color: #ffe4af; border-color: #ffe4af; width: 100%;}
-.select2-container.select2-dropdown-open.dark .select2-choice 	{color: #ffe4af!important; background-color: #6f7072; border-color: transparent;}
+.select2-container.select2-dropdown-open.dark .select2-choice 	{color: #ffe4af!important; background-color: #6f7072; border-color: #6f7072;}
 .select2-drop.dark .select2-results .select2-no-results	 		{background: transparent;}
 
 /* SEARCH STYLE */

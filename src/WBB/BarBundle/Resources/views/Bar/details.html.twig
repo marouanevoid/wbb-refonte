@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}{{ bar.name }} | World Best Bars{% endblock %}
+{% block title %}{{ bar.name }} | {{ parent() }}{% endblock %}
 {% set currentPath = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 {% set bitlyURL = currentPath| bitly %}
 
@@ -56,14 +56,15 @@
         /**
          * TODO : Créer des fonctions JS pour gérer cette partie
          */
-        var barId = "{{ bar.id }}",
-                venue  = "{{ bar.foursquare }}",
-                insta = "{{ bar.instagram }}",
-                imgs = [],
-                i, m, n, reste, lastImages,
-                fsq = [],
-                ins = [],
-                html = "";
+        var barId   = "{{ bar.id }}",
+            slug    = "{{ bar.slug }}",
+            venue   = "{{ bar.foursquare }}",
+            insta   = "{{ bar.instagram }}",
+            imgs    = [],
+            i, m, n, reste, lastImages,
+            fsq     = [],
+            ins     = [],
+            html    = "";
         $(document).ready(function(){
             $('#showOpenings').click(function(){
                 var link = $(this);
@@ -77,97 +78,77 @@
                 link.show();
                 $('#showOpenings').show();
             });
+
             $.ajax({
                 type: "POST",
-                url:  Routing.generate('wbb_bar_feeds_list',
-                        { type: "fsimgs", bar: barId }),
+                url:  Routing.generate('wbb_bar_feeds_show',
+                        { type: "fsimgs", barSlug: slug }),
                 dataType: 'json',
-                success: function(r) {
+                success: function(response) {
+                    i = 0;
+                    if (typeof response.data != 'undefined') {
+                        $.each(response.data, function(key, feed){
+                            if(i < 5) {
+                                fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="" data-src="'+feed.prefix+"640x480"+feed.suffix+'" itemprop="photo" /></div></div>');
+                                i++;
+                            }
+                        });
+                    }
+
                     $.ajax({
                         type: "POST",
-                        url:  Routing.generate('wbb_bar_feeds_find',
-                                { type: "fsimgs", id: venue }),
+                        url:  Routing.generate('wbb_bar_feeds_show',
+                                { type: "instagram", barSlug: slug}),
                         dataType: 'json',
                         success: function(response) {
                             i = 0;
                             if (typeof response.data != 'undefined') {
                                 $.each(response.data, function(key, feed){
-                                    if(in_array(feed.id, r) && i<5) {
-                                        fsq.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round foursquare dark"></a><img src="" data-src="'+feed.prefix+"640x480"+feed.suffix+'" itemprop="photo" /></div></div>');
+                                    if( i < 5 ) {
+                                        ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="" data-src="'+feed.images.standard_resolution.url+'" itemprop="photo"/></div></div>');
                                         i++;
                                     }
                                 });
                             }
-                            $.ajax({
-                                type: "POST",
-                                url:  Routing.generate('wbb_bar_feeds_list',
-                                        { type: "instagram", bar: barId}),
-                                dataType: 'json',
-                                success: function(r) {
-                                    $.ajax({
-                                        type: "POST",
-                                        url:  Routing.generate('wbb_bar_feeds_find',
-                                                { type: "instagram", id: insta}),
-                                        dataType: 'json',
-                                        success: function(response) {
-                                            i = 0;
-                                            if (typeof response.data != 'undefined') {
-                                                $.each(response.data.data, function(key, feed){
-                                                    if(!in_array(feed.id, r) && i<5) {
-                                                        ins.push('<div class="image"><div class="content"><div class="overlay"></div><a class="btn-round instagram dark"></a><img src="" data-src="'+feed.images.standard_resolution.url+'" itemprop="photo"/></div></div>');
-                                                        i++;
-                                                    }
-                                                });
-                                            }
-                                            for(i=0; i<=4; i+=2){
-                                                if(typeof ins[i] != 'undefined') { html+=ins[i]; }
-                                                if(typeof ins[i+1] != 'undefined') { html+=ins[i+1]; }
-                                                if(typeof fsq[i] != 'undefined') { html+=fsq[i]; }
-                                                if(typeof fsq[i+1] != 'undefined') { html+=fsq[i+1]; }
-                                            }
-                                            $('.ui-slide').append(html);
-                                            imgs = $('.ui-slide .image');
-                                            $('.ui-slide').remove();
-                                            html = "";
-                                            for(n=0; n<Math.ceil(imgs.length/4); n++){
-                                                html+='<div class="ui-slide">';
-                                                for(m=n*4; m<(n+1)*4; m++){
-                                                    if(imgs[m]){
-                                                        html+=nodeToString(imgs[m]);
-                                                    }
-                                                }
-                                                html+='</div>';
-                                            }
-                                            $(".loader").css('display','none');
-                                            $('.ui-slider').append(html);
-                                            reste  = 4-$('.ui-slide .image').length%4;
-                                            lastImages = $('.ui-slide .image').slice(0,reste);
-                                            i=1;
-                                            if($('.ui-slide .image').length>1){
-                                                $.each(lastImages, function(key, element){
-                                                    if(i<=reste){
-                                                        $('.ui-slide:last-child').append('<div class="image">'+element.innerHTML+'</div>');
-                                                    }
-                                                    i++;
-                                                });
-                                            }
-                                            initializeSliders();
-                                        },
-                                        error: function(e) {
-                                            console.log(e);
-                                        }
-                                    });
-                                },
-                                error: function(e) {
-                                    console.log(e);
+                            for(i=0; i<=4; i+=2){
+                                if(typeof ins[i] != 'undefined') { html+=ins[i]; }
+                                if(typeof ins[i+1] != 'undefined') { html+=ins[i+1]; }
+                                if(typeof fsq[i] != 'undefined') { html+=fsq[i]; }
+                                if(typeof fsq[i+1] != 'undefined') { html+=fsq[i+1]; }
+                            }
+                            $('.ui-slide').append(html);
+                            imgs = $('.ui-slide .image');
+                            $('.ui-slide').remove();
+                            html = "";
+                            for(n=0; n<Math.ceil(imgs.length/4); n++){
+                                html+='<div class="ui-slide">';
+                                for(m=n*4; m<(n+1)*4; m++){
+                                    if(imgs[m]){
+                                        html+=nodeToString(imgs[m]);
+                                    }
                                 }
-                            });
-
+                                html+='</div>';
+                            }
+                            $(".loader").css('display','none');
+                            $('.ui-slider').append(html);
+                            reste  = 4-$('.ui-slide .image').length%4;
+                            lastImages = $('.ui-slide .image').slice(0,reste);
+                            i=1;
+                            if($('.ui-slide .image').length>1){
+                                $.each(lastImages, function(key, element){
+                                    if(i<=reste){
+                                        $('.ui-slide:last-child').append('<div class="image">'+element.innerHTML+'</div>');
+                                    }
+                                    i++;
+                                });
+                            }
+                            initializeSliders();
                         },
                         error: function(e) {
                             console.log(e);
                         }
                     });
+
                 },
                 error: function(e) {
                     console.log(e);
@@ -354,8 +335,8 @@
                     <!-- ALSO APPEARS -->
                     {% if not is_mobile() or is_tablet() %}
                         <div class="also-appears">
-                            <hr class="l-margin"/>
-                            <div class="m-margin-top h2">This bar appears also in</div>
+                            <hr class="margin-top-30"/>
+                            <div class="margin-top-25 h2">This bar appears also in</div>
                             <div class="m-margin-top h3">
                                 <ul>
                                     {% for r in related |slice(0, 5) %}
@@ -384,7 +365,7 @@
                 </div>
                 <!-- ASIDE -->
                 <aside class="columns four">
-                    <div class="block informations margin-top-5">
+                    <div class="block informations">
                         <div class="contain">
                             <div class="gmap" id="gmap" style="height:154px; width:100%;">
 
