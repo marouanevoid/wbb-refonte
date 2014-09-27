@@ -66,14 +66,14 @@ class SemsoftBar
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="decimal", nullable=true)
+     * @ORM\Column(name="latitude", type="string", length=30, nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal", nullable=true)
+     * @ORM\Column(name="longitude", type="string", length=30, nullable=true)
      */
     private $longitude;
 
