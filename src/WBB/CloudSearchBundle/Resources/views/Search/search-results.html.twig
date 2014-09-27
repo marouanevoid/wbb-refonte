@@ -1,5 +1,6 @@
 {% extends "::base.html.twig" %}
 {% set queryTag = app.request.query.get('tag',null) %}
+{% block title %}Search Results | {{ parent() }}{% endblock %}
 {% block bodyTag %}
 <body class="search">
 <script type="text/javascript">

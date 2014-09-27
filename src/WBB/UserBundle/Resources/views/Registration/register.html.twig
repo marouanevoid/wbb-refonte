@@ -2,6 +2,8 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block title %}Register | {{ parent() }}{% endblock %}
+
 {% block body %}
     <div class="full-cream">
         <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap">
