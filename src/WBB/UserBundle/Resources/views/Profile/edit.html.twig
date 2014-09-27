@@ -116,13 +116,13 @@
                                         <label class="margin-right-20">Date of Birth *</label>
                                         <div{% if is_mobile() and not is_tablet() %} class="date-width" style="width: 380px"{% endif %}>
                                             <div class="select-wrap left">
-                                                {{ form_widget(form.birthdate.month, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
+                                                {{ form_widget(form.birthdate.month, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown gold-style' } }) }}
                                             </div>
                                             <div class="select-wrap left">
-                                                {{ form_widget(form.birthdate.day, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown', 'placeholder': '' } }) }}
+                                                {{ form_widget(form.birthdate.day, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown gold-style', 'placeholder': '' } }) }}
                                             </div>
                                             <div class="select-wrap left last">
-                                                {{ form_widget(form.birthdate.year, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
+                                                {{ form_widget(form.birthdate.year, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown gold-style' } }) }}
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                                             {% if 'country' in errors.fields %}
                                                 {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown error' : 'select2-dropdown error' } }) }}
                                             {% else %}
-                                                {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown' } }) }}
+                                                {{ form_widget(form.country, { 'attr' : { 'class':  is_mobile() or is_tablet() ?  'ui-dropdown' : 'select2-dropdown gold-style' } }) }}
                                             {% endif %}
                                         </div>
                                     </div><!-- #countries -->

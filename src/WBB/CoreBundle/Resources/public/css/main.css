@@ -836,7 +836,7 @@
   /* Globales Classes */
     .xs-hidden {display: none!important; visibility: hidden;}
     section.bar-filter .bar-w-pic .btn-round:before {background-size: 128px 256px; background-position: -80px -40px;}
-    section.bar-filter .bar-w-pic .btn-round.active:before {background-position: -80px -120px!important;}
+    section.bar-filter .bar-w-pic .btn-round.active:before {/*  */}
     section.bar-filter .bar-w-pic .btn-round { width: 20px; height: 20px; right: 0.5em; top: 0.5em;}
     section.bars .bar-w-pic .txt, section.bar-filter .bar-w-pic .txt {font-size: 80%!important;}
     .social-share .fb-share, .social-share .twitter-share, .social-share .email-share {background-repeat: no-repeat; background-size: 90px 40px;}
@@ -878,6 +878,7 @@
     section.bars .bar-w-pic .btn-round, section.bar-filter .bar-w-pic .btn-round {width: 30px; height: 30px;}
     section.bars .bar-w-pic .btn-round:before, section.bar-filter .bar-w-pic .btn-round:before {background-position: -75px -35px;}
     .bar-w-pic .btn-round.star.active:before {background-position: -75px -114px;}
+    .best-of-details .bar-w-pic .btn-round.star.active:before {background-position: -160px -240px;}
     .block-help.changepassword {margin: 0; text-align: left!important;}
   }
 
