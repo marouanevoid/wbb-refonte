@@ -1,0 +1,30 @@
+#cc-notification ul.cc-notification-buttons li a, #cc-notification ul.cc-notification-buttons li {
+    background-color: #b3955f !important;
+    color: #ffffff !important;
+    font-size: 0.9em !important;
+    margin-top: 5px !important;
+    border-radius: 2em !important;
+}
+
+#cc-notification ul.cc-notification-buttons li a:hover, 
+#cc-notification ul.cc-notification-buttons li a:active, 
+#cc-notification ul.cc-notification-buttons li #cc-approve-button-allsites:hover, 
+#cc-notification ul.cc-notification-buttons li #cc-approve-button-allsites:active {
+    background-color: #ffe4af !important;
+    color: #b3955f !important;
+}
+
+#cc-notification a, #cc-notification a:visited {
+    color: #b3955f !important;
+    font-size: 12pt !important;
+}
+
+#cc-notification a:hover {
+    color: #ffe4af !important;
+    text-decoration: none !important;
+}
+
+#cc-notification h2 span, #cc-notification h2 {
+    color: #ffe4af !important;
+    font-size: 12pt !important;
+}

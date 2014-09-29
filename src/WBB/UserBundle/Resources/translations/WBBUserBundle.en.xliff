@@ -250,12 +250,12 @@
 
             <trans-unit id="show.label_pref_bar1">
                 <source>show.label_pref_bar1</source>
-                <target>Pref. Bar 3</target>
+                <target>Pref. Bar 1</target>
             </trans-unit>
 
             <trans-unit id="show.label_pref_bar2">
                 <source>show.label_pref_bar2</source>
-                <target>Pref. Bar 3</target>
+                <target>Pref. Bar 2</target>
             </trans-unit>
 
             <trans-unit id="show.label_pref_bar3">

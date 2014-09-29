@@ -26,7 +26,7 @@
     <meta property="fb:admins" content="149071961796732" />
     <meta property="og:image" content="{{ websiteUrl }}{{ showImage(bestOf.image, 'bestof_370_278', true) }}" />
 {% endblock %}
-{% block title %}World Best Bars{% endblock %}
+{% block title %}{{ bestOf.name }} | {{ parent() }}{% endblock %}
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/wbbbar/js/social-share.js') }}"></script>
     <script type="text/javascript">

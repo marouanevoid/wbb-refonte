@@ -255,7 +255,6 @@ class SemsoftController extends Controller
         } else {
             if (in_array($fieldName, $this->strToArray($data['Updated Columns'])) || in_array($fieldName, $this->strToArray($data['Overwritten Columns']))) {
                 if($value != null)
-
                     return $value;
                 else
                     return $data[$fieldName];
@@ -283,7 +282,6 @@ class SemsoftController extends Controller
 
         if (count($coordinates) == 2) {
             if($latitude)
-
                 return $coordinates[0];
             else
                 return $coordinates[1];
