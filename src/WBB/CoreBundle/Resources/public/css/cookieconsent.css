@@ -26,7 +26,7 @@
 #cc-notification.cc-mobile ul.cc-notification-buttons li a, 
 #cc-notification.cc-mobile ul.cc-notification-buttons li a:visited {
     display: block;
-    width: 225px !important;
+    width: 94% !important;
     text-align: center !important;
     color: #faf3e1 !important;
     font-size: 20px!important;
