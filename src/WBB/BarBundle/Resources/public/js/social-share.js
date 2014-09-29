@@ -27,20 +27,31 @@ $(document).on('click', '.twitter-share',function(e){
 });
 
 $(document).ready(function(){
+
+    // add the listner on dom to hide tab on iPad click outside block wrap-share
+    var  closesharepopin = function(e){
+            if( ! $(e.target).closest(".wrap-share").length && ! $(e.target).hasClass("wrap-share") ){
+                $(".wrap-share").fadeOut("slow");
+                if ($(".wrap-share").hasClass("popup")) {
+                    PopIn.dom.mask.hide();
+                }   
+                $(document).off('click' , closesharepopin);
+            }else{
+
+            }
+
+
+    }
+
     if(!ismobile){
         $("#share").hover(function(e) {
-            /*
-            var share_content = $(".wrap-share");
-            var Element_pageX = $(this).e.pageX;
-            var Element_pageY = $(this).e.pageY;
 
-            share_content.css('left', $Element_pageX);
-            share_content.css('top', $Element_pageY);
-            */
             $(".wrap-share").fadeIn("slow");
             if ($(this).hasClass("popup")) {
                 $(".mask").fadeIn("slow");
             }
+
+            $(document).off('click').on('click' , closesharepopin );
         });
 
         $(".wrap-share").hover(function() {
@@ -48,11 +59,15 @@ $(document).ready(function(){
             if ($(this).hasClass("popup")) {
                 PopIn.dom.mask.show();
             }
+
+            $(document).off('click').on('click' , closesharepopin );
         }, function() {
             $(".wrap-share").fadeOut("slow");
             if ($(this).hasClass("popup")) {
                 PopIn.dom.mask.hide();
             }
+
+            // $(document).off('click' , closesharepopin );
         });   
     }else{
 

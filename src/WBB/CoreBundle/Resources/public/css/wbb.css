@@ -492,7 +492,9 @@ background-position: -80px -119px;
 }
 }
 
-
+.btn-radius.drop-dark.with-icon.city:after{
+background-position: -212px -362px;
+}
 /*
 end added by Jérome
 ***/
