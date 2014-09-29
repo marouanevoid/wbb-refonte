@@ -405,13 +405,13 @@ class BarController extends Controller
     {
         $response           = null;
         $all                = null;
-        $nbResults          = null;
-        $nbResultsRemaining = null;
         $html               = null;
-
-        $latitude   = null;
-        $longitude  = null;
-        $distance   = false;
+        $session = $this->container->get('session');
+        $distance  = array(
+            'latitude'  => $session->get('userLatitude' ),
+            'longitude' => $session->get('userLongitude'),
+            'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
+        );
 
         $cityObject = $this->container->get('city.repository')->findOneById($city);
 
@@ -426,14 +426,8 @@ class BarController extends Controller
                 $response = $this->container->get('bar.repository')->findLatestBars($cityObject, $limit, $offset, false);
                 $all = $this->container->get('bar.repository')->findLatestBars($cityObject, 0, $offset, false);
             } elseif ($filter === "distance") {
-                $session = $this->container->get('session');
-                $distance  = array(
-                    'latitude'  => $session->get('userLatitude' ),
-                    'longitude' => $session->get('userLongitude'),
-                    'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
-                );
-                $response = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, $limit);
-                $all = $this->container->get('bar.repository')->findNearestBars($cityObject, $latitude, $longitude, $offset, 0);
+                $response = $this->container->get('bar.repository')->findNearestBars($cityObject, $distance['latitude'], $distance['longitude'], $offset, $limit);
+                $all = $this->container->get('bar.repository')->findNearestBars($cityObject, $distance['latitude'], $distance['longitude'], $offset, 0);
             }
 
             if ($display=="grid") {
