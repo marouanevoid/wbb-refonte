@@ -1,17 +1,10 @@
+.landscape-mobile #cc-notification {display: none!important;}
 #cc-notification ul.cc-notification-buttons li a, #cc-notification ul.cc-notification-buttons li {
     background-color: #b3955f !important;
     color: #ffffff !important;
     font-size: 0.9em !important;
     margin-top: 5px !important;
     border-radius: 2em !important;
-}
-
-#cc-notification ul.cc-notification-buttons li a:hover, 
-#cc-notification ul.cc-notification-buttons li a:active, 
-#cc-notification ul.cc-notification-buttons li #cc-approve-button-allsites:hover, 
-#cc-notification ul.cc-notification-buttons li #cc-approve-button-allsites:active {
-    background-color: #ffe4af !important;
-    color: #b3955f !important;
 }
 
 #cc-notification a, #cc-notification a:visited {
@@ -27,4 +20,29 @@
 #cc-notification h2 span, #cc-notification h2 {
     color: #ffe4af !important;
     font-size: 12pt !important;
+}
+
+#cc-notification.cc-mobile ul.cc-notification-buttons li,
+#cc-notification.cc-mobile ul.cc-notification-buttons li a, 
+#cc-notification.cc-mobile ul.cc-notification-buttons li a:visited {
+    display: block;
+    width: 94% !important;
+    text-align: center !important;
+    color: #faf3e1 !important;
+    font-size: 20px!important;
+    background-color: #b3955f !important;
+    line-height: 42px !important;
+    font-weight: bold !important;
+    border-radius: 3em !important;
+    -webkit-border-radius: 3em !important;
+    -moz-border-radius: 3em !important;
+    -o-border-radius: 3em !important;
+}
+
+#cc-notification ul.cc-notification-buttons li a:hover, 
+#cc-notification ul.cc-notification-buttons li a:active, 
+#cc-notification ul.cc-notification-buttons li #cc-approve-button-allsites:hover, 
+#cc-notification ul.cc-notification-buttons li #cc-approve-button-allsites:active {
+    background-color: #ffe4af !important;
+    color: #b3955f !important;
 }

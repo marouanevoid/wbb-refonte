@@ -604,7 +604,7 @@
   .filters .select-search .select2-container .select2-choice:hover {background-color: #b3955f; color: #faf3e1!important; border: 1px solid #b3955f;}
   .filters .select-search .select2-container .select2-choice:hover .select2-arrow b {background-position: -162px -41px;}
   article.city img.scale-with-grid {border: none!important;}
-  .landscape-mobile {background: url("../images/landscape_turn-device.jpg") no-repeat center center #000; background-size: cover;}
+  .landscape-mobile {background: url("../images/landscape_turn-device.jpg") no-repeat center center #000!important; background-size: cover!important;}
   body.landscape-mobile * {display: none!important;}
   article.city img.scale-with-grid {opacity: 1;}
   article.city:hover img.scale-with-grid {opacity: 0.7;}
