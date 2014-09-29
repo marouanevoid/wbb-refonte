@@ -2,6 +2,8 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block title %}Register | {{ parent() }}{% endblock %}
+
 {% block body %}
     <div class="full-cream">
         <div id="register" class="page {% if is_mobile() and not is_tablet() %}mobile{% endif %} wrap">
@@ -210,7 +212,7 @@
                             </div>
 
                             <div class="clear"></div>
-                            <p class="wrap" {% if not is_mobile() %}style="width:36%"{% endif %}>
+                            <p class="wrap mandatory-fields margin-top-20" {% if not is_mobile() and is_tablet() %}style="width:36%"{% else %}style="width:36%"{% endif %}>
                                 * Mandatory field
                             </p>
 

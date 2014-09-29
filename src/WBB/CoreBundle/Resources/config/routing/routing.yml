@@ -86,6 +86,8 @@ wbb_cookies_policy:
     defaults:
         _controller:  FrameworkBundle:Template:template
         template:     'WBBCoreBundle:Static:cookies.html.twig'
+    options:
+        expose: true
 
 wbb_responsible_drinking:
     path: /responsible-drinking
