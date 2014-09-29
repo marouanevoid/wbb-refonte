@@ -1,5 +1,5 @@
 /* Begin : 04 / 07 / 2014; */
-/* End : 27 / 09 / 2014 */
+/* End : 1 / 10 / 2014 */
 
 .btn-radius.with-icon.chill:before {background-position: -52px -200px;}
 .btn-radius.with-icon.chill:after {background-position: -52px -240px;}
@@ -241,8 +241,6 @@
   .ui .btn-create-with-fb:hover {opacity: 0.8;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
-  #create-account .block-help,
-  .ui .block-help {font-size: 14px;}
   #register .block-help {width: 300px;}
   .block-help.changepassword {width: 300px; float: right; margin-right: 32px;}
 
@@ -627,13 +625,16 @@
   .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
   .container .search-result-proposal {position: absolute; left: 208px;}
   .container .search-result-proposal ul li .twelve.columns a {padding-left: 0;}
-  article.tip textarea,
+  article.tip textarea {color: #6c706f;}
   article.tip textarea::-webkit-input-placeholder {color: #6c706f;}
-  article.tip textarea:-moz-placeholder {color: #6c706f;}
+  article.tip textarea:-moz-input-placeholder {color: #6c706f;}
+  article.tip textarea::-moz-placeholder {color: #000;}
   article.tip .form form .count {color: #6c706f;}
   #editprofile #change-password #edit-account label {width: 166px;}
-  .news .full-cream.padding-bottom-55 {padding-bottom: 62px!important;}
+  .news .full-cream.padding-bottom-55 {padding-bottom: 63px!important;}
   .index .bar-w-pic .color {width: 100%;}
+  .404 section.bar-finder .finder-arrow {right: 10.5em;}
+  .mandatory-fields {font-size: 14px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -713,7 +714,7 @@
       .wrap-share {margin-top: 5px;}
       .wrap-share .social-share li a {font-size: 0; display: block;}
     */
-    .news .ui-slides .bar-w-pic .txt {bottom: 0; top: 25em;}
+    .news .ui-slides .bar-w-pic .txt {bottom: 0; top: 249px;}
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
