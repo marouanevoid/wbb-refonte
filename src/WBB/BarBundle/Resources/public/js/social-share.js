@@ -68,7 +68,11 @@ $(document).ready(function(){
             }
 
             // $(document).off('click' , closesharepopin );
-        });   
+        });  
+
+        if(istablet){
+             $(document).off('click' , closesharepopin);
+        } 
     }else{
 
         $("#share").click(function() {
