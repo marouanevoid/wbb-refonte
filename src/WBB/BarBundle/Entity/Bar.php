@@ -62,14 +62,14 @@ class Bar implements IndexableEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="string", length=30, nullable=true)
+     * @ORM\Column(name="latitude", type="float", nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="string", length=30, nullable=true)
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
     private $longitude;
 
