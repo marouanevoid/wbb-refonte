@@ -71,7 +71,7 @@ $(document).ready(function(){
         });  
 
         if(istablet){
-             $(document).off('click' , closesharepopin);
+             $(document).off('click').on('click' , closesharepopin );
         } 
     }else{
 
