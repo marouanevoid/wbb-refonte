@@ -30,7 +30,7 @@ $(document).ready(function(){
 
     // add the listner on dom to hide tab on iPad click outside block wrap-share
     var  closesharepopin = function(e){
-            if( ! $(e.target).closest(".wrap-share").length && ! $(e.target).hasClass("wrap-share") ){
+            if( ! $(e.target).closest(".wrap-share").length && ! $(e.target).hasClass("wrap-share") && ! $(e.target).hasClass("share") && ! $(e.target).closest("#share").length ){
                 $(".wrap-share").fadeOut("slow");
                 if ($(".wrap-share").hasClass("popup")) {
                     PopIn.dom.mask.hide();
@@ -39,20 +39,21 @@ $(document).ready(function(){
             }else{
 
             }
-
-
     }
 
     if(!ismobile){
-        $("#share").hover(function(e) {
+        if(!istablet){
+            $("#share").hover(function(e) {
 
-            $(".wrap-share").fadeIn("slow");
-            if ($(this).hasClass("popup")) {
-                $(".mask").fadeIn("slow");
-            }
+                $(".wrap-share").fadeIn("slow");
+                if ($(this).hasClass("popup")) {
+                    $(".mask").fadeIn("slow");
+                }
 
-            $(document).off('click').on('click' , closesharepopin );
-        });
+                $(document).off('click').on('click' , closesharepopin );
+            });
+
+
 
         $(".wrap-share").hover(function() {
             $(".wrap-share").fadeIn("slow");
@@ -69,6 +70,17 @@ $(document).ready(function(){
 
             // $(document).off('click' , closesharepopin );
         });  
+
+        }else{
+            $("#share").on('click',function(){
+                    $(".wrap-share").fadeIn("slow");
+                    if ($(this).hasClass("popup")) {
+                        $(".mask").fadeIn("slow");
+                    }
+                $(document).off('click').on('click' , closesharepopin );
+            });
+        }
+
 
         if(istablet){
              $(document).off('click').on('click' , closesharepopin );
