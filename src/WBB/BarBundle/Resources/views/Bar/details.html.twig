@@ -304,7 +304,7 @@
                 <div class="eight columns">
                     {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 mobile-out">About the bar</div>{% endif %}
                     <div class="clear"></div>
-                    <ul class="trends margin-top-20 margin-bottom-20">
+                    <ul class="trends margin-top-25 margin-bottom-25">
                         <li>At a Glance :</li>
                         {% for tr in bar.tagsToShow |slice(0, 5) %}
                             <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
