@@ -39,7 +39,7 @@
 .select2-container.with-icon.friend .select2-chosen:before 		{background-position: -12px -200px;}			
 .select2-container.with-icon.friend.select2-dropdown-open .select2-chosen:before {background-position: -12px -240px;}			
 .select2-container.select2-dropdown-open .select2-chosen:before {background-position: -212px -40px;}			
-.select2-container.select2-dropdown-open .select2-choice .select2-arrow b {background-position: -162px -40px;}
+.select2-container.dark.select2-dropdown-open .select2-choice .select2-arrow b {background-position: -162px -40px;}
 
 /* GOLD STYLE */
 .select2-container.gold-style.select2-dropdown-open .select2-choice .select2-arrow b {background-position: -162px 0;}
