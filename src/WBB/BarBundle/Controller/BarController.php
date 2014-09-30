@@ -408,8 +408,8 @@ class BarController extends Controller
         $html               = null;
         $session = $this->container->get('session');
         $distance  = array(
-            'latitude'  => $session->get('userLatitude' ),
-            'longitude' => $session->get('userLongitude'),
+            'latitude'  => (float) $session->get('userLatitude' ),
+            'longitude' => (float) $session->get('userLongitude'),
             'city'      => $this->get('city.repository')->findOneBySlug($session->get('citySlug'))
         );
 

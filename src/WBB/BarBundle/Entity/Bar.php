@@ -1936,7 +1936,7 @@ class Bar implements IndexableEntity
 
         foreach ($openings as $op) {
             if ($day == $op->getOpeningDay()) {
-                $response.= $op->getFromHour().'-'.$op->getToHour().',';
+                $response.= $op->getFromHour()->format('H:i') . '-' . $op->getToHour()->format('H:i') . ',';
             }
         }
 

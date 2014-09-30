@@ -638,7 +638,8 @@
   .index .bar-w-pic .color {/*width: 100%;*/}
   .bar-w-pic .color {top: 0; left: 0; right: 0; bottom: 0;}
   .404 section.bar-finder .finder-arrow {right: 10.5em;}
-  .mandatory-fields {font-size: 13px;}
+  .mandatory-fields,
+  .block-help {font-size: 14px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -713,7 +714,7 @@
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
     .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f; border: none;}
     img.scale-with-grid {box-sizing: initial!important;}
-    .bar-w-pic img.scale-with-grid {border: none!important;}
+    .bar-w-pic img.scale-with-grid {/*border: none!important;*/}
     /*
       .wrap-share {margin-top: 5px;}
       .wrap-share .social-share li a {font-size: 0; display: block;}
