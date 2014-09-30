@@ -941,7 +941,7 @@
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
-    .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -150%; left: -150%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -150%; left: -150%; right: 0; bottom: 0; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     ul.ui-autocomplete {width: 87%!important;}
     /*.landscape-mobile {background-image: url("../images/landscape_turn-device@x2.jpg"); background-size: 100% 100%;}*/
   }
