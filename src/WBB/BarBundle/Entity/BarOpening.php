@@ -30,16 +30,16 @@ class BarOpening
     private $openingDay;
 
     /**
-     * @var integer
+     * @var \DateTime
      *
-     * @ORM\Column(name="from_hour", type="smallint")
+     * @ORM\Column(name="from_hour", type="time")
      */
     private $fromHour;
 
     /**
-     * @var integer
+     * @var \DateTime
      *
-     * @ORM\Column(name="to_hour", type="smallint")
+     * @ORM\Column(name="to_hour", type="time")
      */
     private $toHour;
 
@@ -105,7 +105,7 @@ class BarOpening
     /**
      * Set fromHour
      *
-     * @param  integer    $fromHour
+     * @param  \DateTime   $fromHour
      * @return BarOpening
      */
     public function setFromHour($fromHour)
@@ -118,7 +118,7 @@ class BarOpening
     /**
      * Get fromHour
      *
-     * @return integer
+     * @return \DateTime
      */
     public function getFromHour()
     {
@@ -128,7 +128,7 @@ class BarOpening
     /**
      * Set toHour
      *
-     * @param  integer    $toHour
+     * @param  \DateTime   $toHour
      * @return BarOpening
      */
     public function setToHour($toHour)
@@ -141,7 +141,7 @@ class BarOpening
     /**
      * Get toHour
      *
-     * @return integer
+     * @return \DateTime
      */
     public function getToHour()
     {
