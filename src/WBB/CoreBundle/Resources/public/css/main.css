@@ -547,7 +547,8 @@
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 9px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0;}
   .bar-details .content ul.trends {line-height: 1.6em;}
-  .bar-details .content ul.trends.margin-bottom-25 {margin-bottom: 28px!important;}
+  .bar-details .content ul.trends.margin-top-25 {margin-top: 26px !important;}
+  .bar-details .content ul.trends.margin-bottom-25 {margin-bottom: 26px !important;}
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content ul.trends a,
   .bar-details .content ul.trends a:hover {color: #818a8c;}
