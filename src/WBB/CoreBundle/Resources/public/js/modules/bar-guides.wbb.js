@@ -131,7 +131,8 @@ $(document).ready(function()
         }
         else
         {
-            // if(istablet || ismobile ){
+            //$('#criteria')._instance._remove('popularity');
+            if(istablet || ismobile ){
               var optionDistance = $('#criteria').find('option[value=distance]');
               if($('#criteria').val() == 'distance'){
                 // dispatch click on popularity
@@ -142,15 +143,15 @@ $(document).ready(function()
                   optionDistance.remove();
               }
                 
-            // }else{
-            //   $('li.distance').css('display','none');
-            //   if($('#criteria').val()=='distance')
-            //   {
-            //       $('.jspPane li.popularity').trigger("click");
-            //       $('#criteria').val('popularity');
-            //       $('li.popularity').css('display','block');
-            //   } 
-            // }
+            }else{
+              $('li.distance').css('display','none');
+              if($('#criteria').val()=='distance')
+              {
+                  $('.jspPane li.popularity').trigger("click");
+                  $('#criteria').val('popularity');
+                  $('li.popularity').css('display','block');
+              } 
+            }
 
             _limit = bestofLimit;
         }
