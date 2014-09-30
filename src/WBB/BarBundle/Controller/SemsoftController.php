@@ -234,13 +234,21 @@ class SemsoftController extends Controller
 
     private function getOpenings($ssBar, $data)
     {
-        $ssBar = $this->getOpenHoursArray($data['MondayOpenHours'], 1, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['TuesdayOpenHours'], 2, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['WednesdayOpenHours'], 3, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['ThursdayOpenHours'], 4, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['FridayOpenHours'], 5, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['SaturdayOpenHours'], 6, $ssBar);
-        $ssBar = $this->getOpenHoursArray($data['SundayOpenHours'], 7, $ssBar);
+        $daysColumns = array(
+            1 => 'MondayOpenHours',
+            2 => 'TuesdayOpenHours',
+            3 => 'WednesdayOpenHours',
+            4 => 'ThursdayOpenHours',
+            5 => 'FridayOpenHours',
+            6 => 'SaturdayOpenHours',
+            7 => 'SundayOpenHours'
+        );
+
+        foreach ($daysColumns as $key => $column) {
+            if (empty($data['Id']) || (in_array($column, $this->strToArray($data['Updated Columns'])) || in_array($column, $this->strToArray($data['Overwritten Columns'])))) {
+                $ssBar = $this->getOpenHoursArray($data[$column], $key, $ssBar);
+            }
+        }
 
         return $ssBar;
     }
@@ -368,32 +376,23 @@ class SemsoftController extends Controller
 
     private function getOpenHoursArray($openHoursString, $day, SemsoftBar $ssBar)
     {
-//        if ( empty ( $ open Hours String ) & & $ ssBar -> getBar () )
-//        {
-//            $ bar = $ ssBar -> getBar ();
-//            for each ( $ bar -> get Openings () as $ op ) {
-//                if ( $ op -> get Opening Day () = = $ day ) {
-//                    $ bar -> remove Opening ( $ op ) ;
-//                }
-//            }
-//        } el se {
-            $hourRanges = explode(',', $openHoursString);
-            foreach ($hourRanges as $hourRange) {
-                $hours = explode('-', $hourRange);
-                if (count($hours) == 2) {
-                    $fromHour   = explode(':', $hours[0]);
-                    $toHour     = explode(':', $hours[1]);
+        $hourRanges = explode(',', $openHoursString);
+        foreach ($hourRanges as $hourRange) {
+            $hours = explode('-', $hourRange);
+            if (count($hours) == 2) {
+                $fromHour = new \DateTime($hours[0]);
+                $toHour = new \DateTime($hours[1]);
 
-                    $opening = new BarOpening();
-                    $opening
+                $opening = new BarOpening();
+                $opening
                         ->setOpeningDay($day)
-                        ->setFromHour($fromHour[0])
-                        ->setToHour($toHour[0])
+                        ->setFromHour($fromHour)
+                        ->setToHour($toHour)
                         ->setSemsoftBar($ssBar);
-                    $ssBar->addOpening($opening);
-                }
+                $ssBar->addOpening($opening);
             }
-//        }
+        }
+
         return $ssBar;
     }
 

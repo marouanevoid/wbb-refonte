@@ -19,18 +19,16 @@ class BarOpeningAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('openingDay', 'choice', array(
-                    'required' => false,
-                    'choices'  => BarOpening::getOpeningDays()
-                ))
-                ->add('fromHour', 'choice', array(
-                    'required' => false,
-                    'choices'  => BarOpening::getOpeningHours()
-                ))
-                ->add('toHour', 'choice', array(
-                    'required' => false,
-                    'choices'  => BarOpening::getOpeningHours()
-                ))
-            ->end();
+            ->add('openingDay', 'choice', array(
+                'required' => false,
+                'choices' => BarOpening::getOpeningDays()
+            ))
+            ->add('fromHour', null, array(
+                'required' => false
+            ))
+            ->add('toHour', null, array(
+                'required' => false
+            ))
+        ->end();
     }
 }
