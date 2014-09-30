@@ -714,7 +714,7 @@
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
     .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f; border: none;}
     img.scale-with-grid {box-sizing: initial!important;}
-    .bar-w-pic img.scale-with-grid {border: none!important;}
+    .bar-w-pic img.scale-with-grid {/*border: none!important;*/}
     /*
       .wrap-share {margin-top: 5px;}
       .wrap-share .social-share li a {font-size: 0; display: block;}
