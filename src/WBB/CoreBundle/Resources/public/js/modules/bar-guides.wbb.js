@@ -1,5 +1,16 @@
 $(document).ready(function()
 {
+    /*
+    * Select 2 sort by bar guide
+    */
+    if( $('.select2-dropdown.sort-bar-guide').length){
+                  // insert select 2
+        $('.select2-dropdown.sort-bar-guide').select2({
+            minimumResultsForSearch: -1,
+            dropdownCssClass : 'white-style',
+            containerCssClass : 'white-style'
+        });
+    }
     var barsLimit = 8;
     var bestofLimit = 9;
     var haveDistance = $('#criteria').find('option[value=distance]').length;
