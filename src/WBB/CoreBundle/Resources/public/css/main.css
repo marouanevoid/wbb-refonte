@@ -638,7 +638,8 @@
   .index .bar-w-pic .color {/*width: 100%;*/}
   .bar-w-pic .color {top: 0; left: 0; right: 0; bottom: 0;}
   .404 section.bar-finder .finder-arrow {right: 10.5em;}
-  .mandatory-fields {font-size: 13px;}
+  .mandatory-fields,
+  .block-help {font-size: 14px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
