@@ -35,7 +35,7 @@ $(document).ready(function(){
                 if ($(".wrap-share").hasClass("popup")) {
                     PopIn.dom.mask.hide();
                 }   
-                $(document).off('click' , closesharepopin);
+                $(document).off('click touchstart' , closesharepopin);
             }else{
 
             }
@@ -77,13 +77,13 @@ $(document).ready(function(){
                     if ($(this).hasClass("popup")) {
                         $(".mask").fadeIn("slow");
                     }
-                $(document).off('click').on('click' , closesharepopin );
+                $(document).off('click touchstart').on('click touchstart' , closesharepopin );
             });
         }
 
 
         if(istablet){
-             $(document).off('click').on('click' , closesharepopin );
+             $(document).off('click touchstart').on('click touchstart' , closesharepopin );
         } 
     }else{
 
