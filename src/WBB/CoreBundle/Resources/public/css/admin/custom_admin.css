@@ -49,3 +49,4 @@ thead a {text-transform: uppercase;}
 .sonata-bc th.sonata-ba-list-field-header-order-asc a:hover:before,
 .sonata-bc th.sonata-ba-list-field-header-order-asc.sonata-ba-list-field-order-active a:before, 
 .sonata-bc th.sonata-ba-list-field-header-order-desc.sonata-ba-list-field-order-active a:hover:before {border-color: #fff;}
+.wbb-datetime-hour .select2-container {width: 90px!important;}

@@ -27,33 +27,64 @@ $(document).on('click', '.twitter-share',function(e){
 });
 
 $(document).ready(function(){
-    if(!ismobile){
-        $("#share").hover(function(e) {
-            /*
-            var share_content = $(".wrap-share");
-            var Element_pageX = $(this).e.pageX;
-            var Element_pageY = $(this).e.pageY;
 
-            share_content.css('left', $Element_pageX);
-            share_content.css('top', $Element_pageY);
-            */
-            $(".wrap-share").fadeIn("slow");
-            if ($(this).hasClass("popup")) {
-                $(".mask").fadeIn("slow");
+    // add the listner on dom to hide tab on iPad click outside block wrap-share
+    var  closesharepopin = function(e){
+            if( ! $(e.target).closest(".wrap-share").length && ! $(e.target).hasClass("wrap-share") && ! $(e.target).hasClass("share") && ! $(e.target).closest("#share").length ){
+                $(".wrap-share").fadeOut("slow");
+                if ($(".wrap-share").hasClass("popup")) {
+                    PopIn.dom.mask.hide();
+                }   
+                $(document).off('click touchstart' , closesharepopin);
+            }else{
+
             }
-        });
+    }
+
+    if(!ismobile){
+        if(!istablet){
+            $("#share").hover(function(e) {
+
+                $(".wrap-share").fadeIn("slow");
+                if ($(this).hasClass("popup")) {
+                    $(".mask").fadeIn("slow");
+                }
+
+                $(document).off('click').on('click' , closesharepopin );
+            });
+
+
 
         $(".wrap-share").hover(function() {
             $(".wrap-share").fadeIn("slow");
             if ($(this).hasClass("popup")) {
                 PopIn.dom.mask.show();
             }
+
+            $(document).off('click').on('click' , closesharepopin );
         }, function() {
             $(".wrap-share").fadeOut("slow");
             if ($(this).hasClass("popup")) {
                 PopIn.dom.mask.hide();
             }
-        });   
+
+            // $(document).off('click' , closesharepopin );
+        });  
+
+        }else{
+            $("#share").on('click',function(){
+                    $(".wrap-share").fadeIn("slow");
+                    if ($(this).hasClass("popup")) {
+                        $(".mask").fadeIn("slow");
+                    }
+                $(document).off('click touchstart').on('click touchstart' , closesharepopin );
+            });
+        }
+
+
+        if(istablet){
+             $(document).off('click touchstart').on('click touchstart' , closesharepopin );
+        } 
     }else{
 
         $("#share").click(function() {

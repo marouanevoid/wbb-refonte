@@ -300,11 +300,11 @@
     <div class="container">
         <section class="content">
             <!-- MAIN CONTENT -->
-            <article class="main l-margin-top">
+            <article class="main margin-top-40">
                 <div class="eight columns">
-                    {% if not is_mobile() or is_tablet() %}<div class="twelve columns h1 mobile-out">About the bar</div>{% endif %}
+                    {% if not is_mobile() or is_tablet() %}<div class="h1 mobile-out">About the bar</div>{% endif %}
                     <div class="clear"></div>
-                    <ul class="trends margin-top-20 margin-bottom-20">
+                    <ul class="trends margin-top-25 margin-bottom-25">
                         <li>At a Glance :</li>
                         {% for tr in bar.tagsToShow |slice(0, 5) %}
                             <a href="{{ path('wbb_cloudsearch_searchresults') }}?tag={{ tr.name }}" >
@@ -396,17 +396,9 @@
                                     {% for opening in bar.openings %}
                                         {% if opening.openingDay == "now"|date("N") %}
                                             Today
-                                            {% if opening.fromHour|number_format<=12 %}
-                                                {{ opening.fromHour }}:00 am
-                                            {% else %}
-                                                {{ (opening.fromHour|number_format)-12 }}:00 pm
-                                            {% endif %}
+                                                {{ opening.fromHour|date('h:i a') }}
                                             -
-                                            {% if opening.toHour|number_format<=12 %}
-                                                {{ opening.toHour }}:00 am
-                                            {% else %}
-                                                {{ (opening.toHour|number_format)-12 }}:00 pm
-                                            {% endif %}
+                                                {{ opening.toHour|date('h:i a') }}
                                         {% endif %}
                                     {% endfor%}
                                     <a href="#0" id="showOpenings">(See all)</a><br/>
@@ -414,17 +406,9 @@
                                         {% set days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] %}
                                         {% for opening in bar.openings %}
                                             {{ days[opening.openingDay-1] }} :
-                                            {% if opening.fromHour|number_format<=12 %}
-                                                {{ opening.fromHour }}:00 am
-                                            {% else %}
-                                                {{ (opening.fromHour|number_format)-12 }}:00 pm
-                                            {% endif %}
+                                                {{ opening.fromHour|date('h:i a') }}
                                             -
-                                            {% if opening.toHour|number_format<=12 %}
-                                                {{ opening.toHour }}:00 am
-                                            {% else %}
-                                                {{ (opening.toHour|number_format)-12 }}:00 pm
-                                            {% endif %}
+                                                {{ opening.toHour|date('h:i a') }}
                                             <br />
                                         {% endfor%}
                                         <a href="#0" id="hideOpenings" style="float: left; width: 100%; margin-bottom: 20px;">(Show less)</a>

@@ -215,7 +215,7 @@ wbb.LoadProfile = function() {
                     if ( itype == 'best of' ){
                         _count.bestof--;
                         if(_count.bestof <= 0){
-                            stringBest = "No best of";
+                            stringBest = "No "+ ( ismobile && ! istablet ? ' <br> ' : '') +"best of";
                         }else{
                             if(_count.bestof == 1){
                                 stringBest = "(1) "+ ( ismobile && ! istablet ? ' <br> ' : '') + "best of"

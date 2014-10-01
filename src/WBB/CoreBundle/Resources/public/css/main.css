@@ -1,5 +1,5 @@
 /* Begin : 04 / 07 / 2014; */
-/* End : 27 / 09 / 2014 */
+/* End : 1 / 10 / 2014 */
 
 .btn-radius.with-icon.chill:before {background-position: -52px -200px;}
 .btn-radius.with-icon.chill:after {background-position: -52px -240px;}
@@ -105,6 +105,7 @@
       .margin-bottom-10 {margin-bottom: 10px!important; display: block;}
       .margin-bottom-15 {margin-bottom: 15px!important; display: block;}
       .margin-bottom-20 {margin-bottom: 20px!important; display: block;}
+      .margin-bottom-25 {margin-bottom: 25px!important; display: block;}
       .margin-bottom-30 {margin-bottom: 30px!important; display: block;}
       .margin-bottom-40 {margin-bottom: 40px!important; display: block;}
       .margin-bottom-50 {margin-bottom: 50px!important; display: block;}
@@ -241,8 +242,6 @@
   .ui .btn-create-with-fb:hover {opacity: 0.8;}
   .ui .connect-fb {line-height: 42px; font-size: 15px;}
   .popup .register .date-birthday .select-wrap.last {margin-right: 0!important;}
-  #create-account .block-help,
-  .ui .block-help {font-size: 14px;}
   #register .block-help {width: 300px;}
   .block-help.changepassword {width: 300px; float: right; margin-right: 32px;}
 
@@ -361,7 +360,7 @@
   #register.page.mobile .date-birthday .select-wrap {width: 30%; margin-right: 10px;}
   #register.page.mobile .date-birthday .ui-dropdown-container {width: 100% !important;}
   #register.page.mobile #create-account label {/*margin: 20px 0 20px;*/ float: none; text-align: center; width: 100%; color: #818a8c; visibility: initial; font-size: 18px; font-weight: lighter;}
-  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 20px auto 0; /*width: 77%*/; display: block;}
+  #register.page.mobile #create-account .form-submit {font-size: 16px; margin: 0 auto; /*width: 77%*/; display: block;}
   #register.page.mobile .group-form {overflow: visible; width: 100%;}
   #register.page.mobile .group-actions {width: 100%; left: 0;}
   #register.page.mobile .ui-dropdown-container .ui-dropdown span {/* text-align: right; text-indent: 55px;*/}
@@ -548,6 +547,8 @@
   #bar-finder.mobile .group-form.radio ul li:nth-child(2) a {text-indent: 9px;}
   #bar-finder.mobile .group-form.radio ul li:last-child a {text-indent: 0;}
   .bar-details .content ul.trends {line-height: 1.6em;}
+  .bar-details .content ul.trends.margin-top-25 {margin-top: 26px !important;}
+  .bar-details .content ul.trends.margin-bottom-25 {margin-bottom: 26px !important;}
   .bar-details .content ul.trends li {line-height: 20px;}
   .bar-details .content ul.trends a,
   .bar-details .content ul.trends a:hover {color: #818a8c;}
@@ -584,7 +585,7 @@
   .ui-dropdown-container .ui-dropdown span {height: 37px;}
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
-  .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
+  .popin-loader-gif {background: url("../images/31.gif") no-repeat center center; position: fixed;left: 0;top: 0;height: 100%;width: 100%;z-index: 999999;display:none;}
   .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px;}
   article.bestof img.scale-with-grid {display: inline;}
   .bar-w-pic .txt .tags a {color: #faf3e1;}
@@ -606,7 +607,7 @@
   .filters .select-search .select2-container .select2-choice:hover {background-color: #b3955f; color: #faf3e1!important; border: 1px solid #b3955f;}
   .filters .select-search .select2-container .select2-choice:hover .select2-arrow b {background-position: -162px -41px;}
   article.city img.scale-with-grid {border: none!important;}
-  .landscape-mobile {background: url("../images/landscape_turn-device.jpg") no-repeat center center #000; background-size: cover;}
+  .landscape-mobile {background: url("../images/landscape_turn-device.jpg") no-repeat center center #000!important; background-size: cover!important;}
   body.landscape-mobile * {display: none!important;}
   article.city img.scale-with-grid {opacity: 1;}
   article.city:hover img.scale-with-grid {opacity: 0.7;}
@@ -627,13 +628,18 @@
   .actions-finders .linktToAdvancedPage:hover {color: #ffe4af;}
   .container .search-result-proposal {position: absolute; left: 208px;}
   .container .search-result-proposal ul li .twelve.columns a {padding-left: 0;}
-  article.tip textarea,
+  article.tip textarea {color: #6c706f;}
   article.tip textarea::-webkit-input-placeholder {color: #6c706f;}
-  article.tip textarea:-moz-placeholder {color: #6c706f;}
+  article.tip textarea:-moz-input-placeholder {color: #6c706f;}
+  article.tip textarea::-moz-placeholder {color: #000;}
   article.tip .form form .count {color: #6c706f;}
-  #editprofile #change-password #edit-account label {width: 166px;}
-  .news .full-cream.padding-bottom-55 {padding-bottom: 62px!important;}
-  .index .bar-w-pic .color {width: 100%;}
+  #editprofile #change-password #edit-account label {width: 166px; text-align: left;}
+  .news .full-cream.padding-bottom-55 {padding-bottom: 64px!important;}
+  .index .bar-w-pic .color {/*width: 100%;*/}
+  .bar-w-pic .color {top: 0; left: 0; right: 0; bottom: 0;}
+  .404 section.bar-finder .finder-arrow {right: 10.5em;}
+  .mandatory-fields,
+  .block-help {font-size: 14px;}
 
   /* mobile */
     .mobile .sub-header .star-share .btn-round.star.active {background-color: #b3955f!important;}
@@ -708,12 +714,12 @@
     #editprofile .file-image:hover {display: block; cursor: pointer; background-image: url("../images/UI/edit_avatar_rollover@x2.gif"); background-size: 147px 31px;}
     .ui .btn-editprofile .btn:hover {border-color: #fff; color: #fff; background-color: #b3955f; border: none;}
     img.scale-with-grid {box-sizing: initial!important;}
-    .bar-w-pic img.scale-with-grid {border: none!important;}
+    .bar-w-pic img.scale-with-grid {/*border: none!important;*/}
     /*
       .wrap-share {margin-top: 5px;}
       .wrap-share .social-share li a {font-size: 0; display: block;}
     */
-    .news .ui-slides .bar-w-pic .txt {bottom: 0; top: 25em;}
+    .news .ui-slides .bar-w-pic .txt {bottom: 0; top: 248px;}
 
   /* ERROR */
     #error .subtitle {font-size: 3em;}
@@ -749,6 +755,7 @@
     .ui-dropdown-container .ui-dropdown.drop-dark.active {border-color: #ffe4af; background-color: transparent!important;}
     input[type="text"] + input[type="submit"].search:hover {background-color: transparent; background-position: -82px -360px;}
     .container .search-result-proposal {left: 177px;}
+    .news .ui-slides .bar-w-pic .txt {top: 200px;}
 
     /* Thumbnails Size's */
       .search section.bar-filter .bar-w-pic,
@@ -934,7 +941,7 @@
     #register.mobile.popup .date-birthday {width: 305px; overflow: hidden;}
     #register.mobile.popup .date-birthday .select-wrap {width: 92px; margin-right: 11px;}
     #register.page.mobile .date-birthday .select-wrap {margin-right: 10px;}
-    .mask {width: 400%; height: 400%; min-height: 100%; position: fixed; top: -100%; left: -100%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 1000%; height: 1000%; min-height: 100%; position: fixed; top: -100%; left: -100%; right: -100%; bottom: -100%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     ul.ui-autocomplete {width: 87%!important;}
     /*.landscape-mobile {background-image: url("../images/landscape_turn-device@x2.jpg"); background-size: 100% 100%;}*/
   }

@@ -140,11 +140,11 @@ PopIn.initPopinLoader = function(){
 // Show Loader
 PopIn.showLoader = function(status){
     if(status){
-        //PopIn.dom.loader.show();
-        PopIn.dom.mask.addClass(PopIn.dom.clsloader);
+        PopIn.dom.loader.show();
+        //PopIn.dom.mask.addClass(PopIn.dom.clsloader);
     }else{
-        //PopIn.dom.loader.hide();
-        PopIn.dom.mask.removeClass(PopIn.dom.clsloader);
+        PopIn.dom.loader.hide();
+        //PopIn.dom.mask.removeClass(PopIn.dom.clsloader);
     }
 }
 
@@ -180,5 +180,5 @@ PopIn.endLoading = function(){
 
 $(function(){
 	// On  dom is Ready
-	PopIn.init();
+	PopIn.init();    
 });

@@ -62,14 +62,14 @@ class Bar implements IndexableEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="string", length=30, nullable=true)
+     * @ORM\Column(name="latitude", type="float", nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="string", length=30, nullable=true)
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
     private $longitude;
 
@@ -1936,7 +1936,7 @@ class Bar implements IndexableEntity
 
         foreach ($openings as $op) {
             if ($day == $op->getOpeningDay()) {
-                $response.= $op->getFromHour().'-'.$op->getToHour().',';
+                $response.= $op->getFromHour()->format('H:i') . '-' . $op->getToHour()->format('H:i') . ',';
             }
         }
 
