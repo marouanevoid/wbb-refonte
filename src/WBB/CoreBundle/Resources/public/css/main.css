@@ -585,7 +585,7 @@
   .ui-dropdown-container .ui-dropdown span {height: 37px;}
   .jspDrag {min-height: 10px!important;}
   .btn-small-radius.brown:hover, 
-  .popin-loader-gif {background: url("../images/31.gif") no-repeat center center #666;}
+  .popin-loader-gif {background: url("../images/31.gif") no-repeat center center; position: fixed;left: 0;top: 0;height: 100%;width: 100%;z-index: 999999;display:none;}
   .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px;}
   article.bestof img.scale-with-grid {display: inline;}
   .bar-w-pic .txt .tags a {color: #faf3e1;}
