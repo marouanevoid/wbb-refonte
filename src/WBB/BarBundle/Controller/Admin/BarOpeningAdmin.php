@@ -21,13 +21,24 @@ class BarOpeningAdmin extends Admin
             ->with('General')
             ->add('openingDay', 'choice', array(
                 'required' => false,
-                'choices' => BarOpening::getOpeningDays()
+                'choices' => BarOpening::getOpeningDays(),
+                'attr' => array(
+                    'style' => 'width: 250px !important;'
+                )
             ))
             ->add('fromHour', null, array(
-                'required' => false
+                'required' => false,
+                'invalid_message' => 'Please select the hour and minutes in the From hour for openings',
+                'attr' => array(
+                    'class' => 'wbb-datetime-hour'
+                )
             ))
             ->add('toHour', null, array(
-                'required' => false
+                'required' => false,
+                'invalid_message' => 'Please select the hour and minutes in the To hour for openings',
+                'attr' => array(
+                    'class' => 'wbb-datetime-hour'
+                )
             ))
         ->end();
     }
