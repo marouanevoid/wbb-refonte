@@ -128,14 +128,21 @@
             <div class="six columns sort-by h3 filters">
                 <div class="disableClick"></div>
                 <span class="sort">Sort by :</span>
-                <select class="ui-dropdown light filter-distance" name="criteria" id="criteria" style="{% if not distance %}height:110px !important;{% endif %}">
-                    {% if distance is defined and distance %}
-                    <option value="distance" data-type="criteria">Distance</option>
-                    {% endif %}
-                    <option value="popularity" data-type="criteria">Popularity</option>
-                    <option value="date" data-type="criteria">Date</option>
-                    <option value="alphabetical" data-type="criteria">Alphabetical order</option>
-                </select>
+                {% if not is_mobile() and not is_tablet() %}
+                <div style="width: 203px">
+                {% endif %}
+                     <select class="{% if is_mobile() or is_tablet() %} ui-dropdown {% else %} select2-dropdown sort-bar-guide{% endif %}  light filter-distance text-align-left" name="criteria" id="criteria">
+                                        {% if distance is defined and distance %}
+                                        <option value="distance" data-type="criteria">Distance</option>
+                                        {% endif %}
+                                        <option value="popularity" data-type="criteria">Popularity</option>
+                                        <option value="date" data-type="criteria">Date</option>
+                                        <option value="alphabetical" data-type="criteria">Alphabetical order</option>
+                                    </select>
+                {% if not is_mobile() and not is_tablet() %}
+                </div>
+                {% endif %}
+               
                 <input type="radio" name="view-type" value="grid" class="ui-radio with-icon" data-color="brown" checked="checked"/>
                 <input type="radio" name="view-type" value="list" class="ui-radio with-icon" data-color="brown"/>
             </div>

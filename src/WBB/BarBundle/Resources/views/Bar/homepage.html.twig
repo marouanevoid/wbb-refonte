@@ -186,26 +186,26 @@
                 {% for n in topNews|slice(0,1) %}
                     <article class="small">
                         <div class="img">
-                            <a href="" class="cover">
+                            <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="cover">
                                 {% for m in n.medias|slice(0,1) %}
                                     <img src="{{ showImage( m.media, 'bar_640_480') }}" width="600" height="400" alt="{{ n.title }}"/>
                                 {% endfor %}
                             </a>
-                            <a class="plus-btn" href=""></a>
+                            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
                         </div>
                         <div class="title vcenter">
-                            <h2><a href="">{{ n.title }}</a></h2>
+                            <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title }}</a></h2>
                         </div>
                     </article>
                 {% endfor %}
                 {% for n in topNews|slice(1,1) %}
                     <article class="small">
                         <div class="title vcenter">
-                            <h2><a href="">{{ n.title }}</a></h2>
+                            <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title }}</a></h2>
                             <p class="m-margin">
                                 {{ n.richDescription|truncate(200, true, '...')|striptags }}
                             </p>
-                            <a class="plus-btn" href=""></a>
+                            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
                         </div>
                     </article>
                 {% endfor %}
@@ -213,16 +213,16 @@
                 {% for n in topNews|slice(0,1) %}
                     <article class="large">
                         <div class="img">
-                            <a href="" class="cover">
+                            <a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}" class="cover">
                                 {# dump(n.medias) #}
                                 {% for m in n.medias|slice(0,1) %}
                                     <img src="{{ showImage(m.media, 'bar_640_480') }}" width="600" height="400" alt="{{ n.title }}"/>
                                 {% endfor %}
                             </a>
-                            <a class="plus-btn" href=""></a>
+                            <a class="plus-btn" href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}"></a>
                         </div>
                         <div class="title vcenter">
-                            <h2><a href="">{{ n.title }}</a></h2>
+                            <h2><a href="{{ path('wbb_news_details_page',{newsSlug:n.slug}) }}">{{ n.title }}</a></h2>
                             <p class="m-margin">
                                 {{ n.richDescription|truncate(200, true, '...')|striptags }}
                             </p>

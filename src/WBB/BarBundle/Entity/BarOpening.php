@@ -4,6 +4,7 @@ namespace WBB\BarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * BarOpening
@@ -26,20 +27,23 @@ class BarOpening
      * @var integer
      *
      * @ORM\Column(name="opening_day", type="smallint")
+     * @Assert\NotBlank(message="Please select an opening day")
      */
     private $openingDay;
 
     /**
-     * @var integer
+     * @var \DateTime
      *
-     * @ORM\Column(name="from_hour", type="smallint")
+     * @ORM\Column(name="from_hour", type="time")
+     * @Assert\NotBlank(message="Please select an opening from hour")
      */
     private $fromHour;
 
     /**
-     * @var integer
+     * @var \DateTime
      *
-     * @ORM\Column(name="to_hour", type="smallint")
+     * @ORM\Column(name="to_hour", type="time")
+     * @Assert\NotBlank(message="Please select an opening to hour")
      */
     private $toHour;
 
@@ -68,6 +72,12 @@ class BarOpening
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        $this->fromHour = new \DateTime('00:00');
+        $this->toHour = new \DateTime('00:00');
+    }
 
     /**
      * Get id
@@ -105,7 +115,7 @@ class BarOpening
     /**
      * Set fromHour
      *
-     * @param  integer    $fromHour
+     * @param  \DateTime   $fromHour
      * @return BarOpening
      */
     public function setFromHour($fromHour)
@@ -118,7 +128,7 @@ class BarOpening
     /**
      * Get fromHour
      *
-     * @return integer
+     * @return \DateTime
      */
     public function getFromHour()
     {
@@ -128,7 +138,7 @@ class BarOpening
     /**
      * Set toHour
      *
-     * @param  integer    $toHour
+     * @param  \DateTime   $toHour
      * @return BarOpening
      */
     public function setToHour($toHour)
@@ -141,7 +151,7 @@ class BarOpening
     /**
      * Get toHour
      *
-     * @return integer
+     * @return \DateTime
      */
     public function getToHour()
     {
