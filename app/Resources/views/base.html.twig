@@ -76,7 +76,6 @@
                 '@WBBCoreBundle/Resources/public/js/geolocalisation.wbb.js'
                 '@WBBCoreBundle/Resources/public/js/wbb.js'
                 '@WBBCoreBundle/Resources/public/js/libs/translate.wbb.js'
-                '@WBBCoreBundle/Resources/public/js/cookie-consent.js'
             %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
@@ -86,27 +85,31 @@
 
         {% endblock %}
 
-        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-        <link rel="stylesheet" type="text/css" href="http://assets.cookieconsent.silktide.com/current/style.min.css"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/wbbcore/css/cookieconsent.css') }}"/>
-        <script type="text/javascript">
-        // <![CDATA[
-        cc.initialise({
-                cookies: {
-                        necessary: {}
-                },
-                settings: {
-                        consenttype: "implicit",
-                        hideprivacysettingstab: true,
-                },
-                strings: {
-                        customCookie: "This site uses cookies. By continuing to browse the site, you are agreeing to our use of cookies",
-                        seeDetailsImplicit: "Read more"
-                }
-        });
-        // ]]>
-        </script>
-        <!-- End Cookie Consent plugin -->
+        {% if app.request.attributes.get('_route') != 'wbb_cookies_policy' %}
+            <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+            <script src="{{ asset('bundles/wbbcore/js/cookie-consent.js') }}"></script>
+            <link rel="stylesheet" type="text/css" href="http://assets.cookieconsent.silktide.com/current/style.min.css"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/wbbcore/css/cookieconsent.css') }}"/>
+            <script type="text/javascript">
+            // <![CDATA[
+            cc.initialise({
+                    cookies: {
+                            necessary: {}
+                    },
+                    settings: {
+                            consenttype: "implicit",
+                            hideprivacysettingstab: true,
+                            bannerPosition: "push"
+                    },
+                    strings: {
+                            customCookie: "This site uses cookies. By continuing to browse the site, you are agreeing to our use of cookies",
+                            seeDetailsImplicit: "Read more"
+                    }
+            });
+            // ]]>
+            </script>
+            <!-- End Cookie Consent plugin -->
+        {% endif %}
         <script type="text/javascript">
                 var MARKET = "US";
                 var LANG = "en";
