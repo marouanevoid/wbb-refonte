@@ -1,6 +1,6 @@
 {% set wbb_not_found = app.session.get('wbb-not-found') %}
 <!DOCTYPE html>
-<html lang="fr" class="utf8">
+<html lang="fr" class="utf8 {% if wbb_not_found != false %}error-404{% endif %}">
     <head>
         <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, initial-scale=1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
