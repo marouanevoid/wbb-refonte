@@ -534,7 +534,7 @@
   .editprofile ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: #fff;}
 
 /* Override */
-   img.scale-with-grid {box-sizing: initial; width: 100%;}
+   img.scale-with-grid {/*box-sizing: initial; width: 100%;*/}
   .bar-w-pic .txt {z-index: 30;}
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .bar-finder .ui-radio.btn-radius.with-icon:after,
@@ -611,7 +611,6 @@
   .landscape-mobile {background: url("../images/landscape_turn-device.jpg") no-repeat center center #000!important; background-size: cover!important;}
   body.landscape-mobile * {display: none!important;}
   article.city img.scale-with-grid {opacity: 1;}
-  article.city:hover img.scale-with-grid {opacity: 0.7;}
   article.city .overlay {background: none;}
   article.city:hover .overlay {background: url("../images/city.background-circle.png") no-repeat center; background-size: 100% 100%;}
   .bar-details .sub-header {padding-top: 35px; padding-bottom: 28px;}
