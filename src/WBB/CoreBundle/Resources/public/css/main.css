@@ -524,7 +524,6 @@
   .editprofile ul.ui-autocomplete.ui-menu .ui-menu-item:hover {background-color: #fff;}
 
 /* Override */
-   img.scale-with-grid {box-sizing: initial; width: 100%;}
   .bar-w-pic .txt {z-index: 30;}
   .mobile .sub-header .star-share {margin-top: 1.5em;}
   .bar-finder .ui-radio.btn-radius.with-icon:after,
