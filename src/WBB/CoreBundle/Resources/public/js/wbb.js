@@ -215,17 +215,10 @@ function fillInForm(formId) {
                         $(formId + ' #fos_user_registration_form_email').val(response.email);
 
                         if (response.gender === 'male') {
-                            if( ismobile || istablet ){
-                                focusOnOption( $('#fos_user_registration_form_title'), "M");
-                            }else{
-                                $('#fos_user_registration_form_title').find('option[value="M"]').attr('selected', 'selected').change();
-                            }
+                            focusOnOption( $('#fos_user_registration_form_title'), "M");
+
                         } else {
-                            if( ismobile || istablet ){
-                                focusOnOption( $('#fos_user_registration_form_title'), "F");
-                            }else{
-                                $('#fos_user_registration_form_title').find('option[value="F"]').attr('selected', 'selected').change();
-                            }
+                            focusOnOption( $('#fos_user_registration_form_title'), "F");
                         }
 
                         var birthdayParts = response.birthday.split('/');
@@ -235,26 +228,14 @@ function fillInForm(formId) {
                         var locationParts = response.location.name.split(',');
                         var country = locationParts[1].trim();
 
-                        if( ismobile || istablet ){
+
                             focusOnOption($('#fos_user_registration_form_country') ,country , true );
-                        }else{
-                            $('#fos_user_registration_form_country').find('option').each(function() {
-                                if ($(this).text().trim() === country) {
-                                    $(this).attr('selected', 'selected').change();
-                                }
-                            });
-                        }
-                        if( ismobile || istablet ){
+
 
                             focusOnOption($('#fos_user_registration_form_birthdate_month') , month );
                             focusOnOption($('#fos_user_registration_form_birthdate_day') , day );
                             focusOnOption($('#fos_user_registration_form_birthdate_year') , year );
 
-                        }else{
-                            $('#fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
-                            $('#fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
-                            $('#fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
-                        }
 
                     } else if (formId === '#register_form') {
                         $(formId + ' #fos_user_registration_form_email').val(response.email);
@@ -281,28 +262,11 @@ function fillInForm(formId) {
                             });
                         };
 
-                    if(ismobile || istablet){
                         focusOnOption($('#fos_user_registration_form_country') , country , true);
-                    }else{
-                            $('#fos_user_registration_form_country').find('option').each(function() {
-                                if ($(this).text().trim() === country) {
-                                    $(this).attr('selected', 'selected').change();
-                                }
-                            });
 
-
-                        }
-
-                    if(ismobile || istablet){
                          focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_month') , month );
                          focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_day') , day );
                          focusOnOption( $(formId + ' #fos_user_registration_form_birthdate_year') , year );
-
-                    }else{
-                            $(formId + ' #fos_user_registration_form_birthdate_month').find('option[value="' + month + '"]').attr('selected', 'selected').change();
-                            $(formId + ' #fos_user_registration_form_birthdate_day').find('option[value="' + day + '"]').attr('selected', 'selected').change();
-                            $(formId + ' #fos_user_registration_form_birthdate_year').find('option[value="' + year + '"]').attr('selected', 'selected').change();
-                        }
                     }
                 }
             });
