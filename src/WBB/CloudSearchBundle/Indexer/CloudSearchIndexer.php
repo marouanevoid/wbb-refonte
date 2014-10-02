@@ -107,7 +107,15 @@ class CloudSearchIndexer implements IndexerInterface
     {
         $imagineService = $this->container->get('liip_imagine.cache.manager');
 
-        return $imagineService->getBrowserPath($media, $format);
+        $url = $imagineService->getBrowserPath($media, $format);
+        $parsed = parse_url($url);
+        if (isset($parsed['host']) && strpos($parsed['host'], 'amazonaws') !== false) {
+            return $url;
+        } else if (isset($parsed['path'])) {
+            return $parsed['path'];
+        }
+
+        return null;
     }
 
     private function getEntityType($entity)

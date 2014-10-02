@@ -67,7 +67,7 @@
   .popup .btn-close-brown {background: url("../images/UI/close_vm.png") no-repeat 0 0; height: 40px; width: 40px!important; display: block; text-indent: -7777px; position: absolute; top: 30px; right: 30px;}
 
   /* TEMPS */
-    .mask {width: 200%; height: 200%; min-height: 100%; position: fixed; top: -50%; left: -50%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
+    .mask {width: 1000%; height: 1000%; min-height: 100%; position: fixed; top: -50%; left: -50%; background-color: #666; opacity: 0.6; z-index: 999999; display: none;}
     .mask.brown {background-color: #4b4d4e;}
     .group-form {/*overflow: hidden;*/}
     .separator-top {border-top: 1px solid #818a8c;}
@@ -584,8 +584,8 @@
   .sort-by .ui-dropdown-container .ui-dropdown .choice {height: 48px;}
   .ui-dropdown-container .ui-dropdown span {height: 37px;}
   .jspDrag {min-height: 10px!important;}
-  .btn-small-radius.brown:hover, 
   .popin-loader-gif {background: url("../images/31.gif") no-repeat center center; position: fixed;left: 0;top: 0;height: 100%;width: 100%;z-index: 999999;display:none;}
+  .btn-small-radius.brown:hover, 
   .firefox input.error[type="text"], .firefox input.error[type="password"], .firefox input.error[type="email"], textarea.error {border-width: 2px;}
   article.bestof img.scale-with-grid {display: inline;}
   .bar-w-pic .txt .tags a {color: #faf3e1;}
